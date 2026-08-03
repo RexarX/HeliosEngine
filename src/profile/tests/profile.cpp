@@ -200,7 +200,7 @@ struct LargeBackend final : public Backend {
 }  // namespace
 
 TEST_SUITE("helios::profile::PlotFormat") {
-  TEST_CASE("PlotFormat values") {
+  TEST_CASE("helios::profile::PlotFormat values") {
     SUBCASE("Enum members are distinct") {
       CHECK_NE(PlotFormat::kNumber, PlotFormat::kMemory);
       CHECK_NE(PlotFormat::kMemory, PlotFormat::kPercentage);
@@ -220,7 +220,7 @@ TEST_SUITE("helios::profile::PlotFormat") {
 }
 
 TEST_SUITE("helios::profile::ZoneSpec") {
-  TEST_CASE("ZoneSpec::ctor") {
+  TEST_CASE("helios::profile::ZoneSpec::ctor") {
     SUBCASE("Default-constructed ZoneSpec has empty name") {
       const ZoneSpec spec;
       CHECK(spec.name.empty());
@@ -259,7 +259,7 @@ TEST_SUITE("helios::profile::ZoneSpec") {
 }
 
 TEST_SUITE("helios::profile::Backend") {
-  TEST_CASE("Backend::ZoneStorageSize") {
+  TEST_CASE("helios::profile::Backend::ZoneStorageSize") {
     SUBCASE("MockBackend returns expected size") {
       const MockBackend backend;
       CHECK_EQ(backend.ZoneStorageSize(), sizeof(int));
@@ -271,7 +271,7 @@ TEST_SUITE("helios::profile::Backend") {
     }
   }
 
-  TEST_CASE("Backend::BeginZone / EndZone") {
+  TEST_CASE("helios::profile::Backend::BeginZone / EndZone") {
     SUBCASE("BeginZone and EndZone are called in pairs") {
       MockBackend backend;
       ZoneSpec spec{.name = "zone1", .color = 0x00FF00};
@@ -295,7 +295,7 @@ TEST_SUITE("helios::profile::Backend") {
     }
   }
 
-  TEST_CASE("Backend::zone annotations") {
+  TEST_CASE("helios::profile::Backend::zone annotations") {
     SUBCASE("ZoneText forwards text") {
       MockBackend backend;
       std::array<std::byte, 256> storage{};
@@ -332,7 +332,7 @@ TEST_SUITE("helios::profile::Backend") {
     }
   }
 
-  TEST_CASE("Backend::frame operations") {
+  TEST_CASE("helios::profile::Backend: frame operations") {
     SUBCASE("FrameMark is called") {
       MockBackend backend;
       backend.FrameMark();
@@ -369,7 +369,7 @@ TEST_SUITE("helios::profile::Backend") {
     }
   }
 
-  TEST_CASE("Backend::message / thread") {
+  TEST_CASE("helios::profile::Backend::Message") {
     SUBCASE("Message forwards text and color") {
       MockBackend backend;
       backend.Message("Event!", 0x00FF00);
@@ -384,7 +384,9 @@ TEST_SUITE("helios::profile::Backend") {
       CHECK_EQ(backend.message_calls, 1);
       CHECK_EQ(backend.last_message_color, 0);
     }
+  }
 
+  TEST_CASE("helios::profile::Backend::SetThreadName") {
     SUBCASE("SetThreadName forwards name") {
       MockBackend backend;
       backend.SetThreadName("Worker-3");
@@ -393,7 +395,7 @@ TEST_SUITE("helios::profile::Backend") {
     }
   }
 
-  TEST_CASE("Backend::plot") {
+  TEST_CASE("helios::profile::Backend::Plot") {
     SUBCASE("Plot forwards name and value") {
       MockBackend backend;
       backend.Plot("FPS", 60.0);
@@ -413,7 +415,7 @@ TEST_SUITE("helios::profile::Backend") {
     }
   }
 
-  TEST_CASE("Backend::memory operations") {
+  TEST_CASE("helios::profile::Backend: memory operations") {
     SUBCASE("Alloc forwards pointer, size, and name") {
       MockBackend backend;
       int dummy = 0;
@@ -455,7 +457,7 @@ TEST_SUITE("helios::profile::Backend") {
     }
   }
 
-  TEST_CASE("Backend::Startup / Shutdown") {
+  TEST_CASE("helios::profile::Backend::Startup / Shutdown") {
     SUBCASE("Startup is called once") {
       MockBackend backend;
       backend.Startup();
@@ -477,7 +479,7 @@ TEST_SUITE("helios::profile::Backend") {
     }
   }
 
-  TEST_CASE("Backend::Name") {
+  TEST_CASE("helios::profile::Backend::Name") {
     SUBCASE("MockBackend returns \"mock\"") {
       const MockBackend backend;
       CHECK_EQ(backend.Name(), "mock");
@@ -492,13 +494,13 @@ TEST_SUITE("helios::profile::Backend") {
 }
 
 TEST_SUITE("helios::profile::Profiler") {
-  TEST_CASE("Profiler::Instance") {
+  TEST_CASE("helios::profile::Profiler::Instance") {
     SUBCASE("Instance returns the same pointer each time") {
       CHECK_EQ(&Profiler::Instance(), &Profiler::Instance());
     }
   }
 
-  TEST_CASE("Profiler::ctor") {
+  TEST_CASE("helios::profile::Profiler::ctor") {
     SUBCASE("Profiler starts with zero backends") {
       Profiler::Instance().Clear();
       CHECK_EQ(Profiler::Instance().BackendCount(), 0);
@@ -510,7 +512,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::AddBackend") {
+  TEST_CASE("helios::profile::Profiler::AddBackend") {
     SUBCASE("AddBackend increases BackendCount") {
       Profiler::Instance().Clear();
       Profiler::Instance().AddBackend<MockBackend>();
@@ -534,7 +536,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::Finalize") {
+  TEST_CASE("helios::profile::Profiler::Finalize") {
     SUBCASE("Finalize sets finalized flag") {
       Profiler::Instance().Clear();
       Profiler::Instance().AddBackend<MockBackend>();
@@ -574,7 +576,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::Clear") {
+  TEST_CASE("helios::profile::Profiler::Clear") {
     SUBCASE("Clear resets BackendCount to zero") {
       Profiler::Instance().Clear();
       Profiler::Instance().AddBackend<MockBackend>();
@@ -601,7 +603,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::Get / TryGet") {
+  TEST_CASE("helios::profile::Profiler::Get / TryGet") {
     SUBCASE("Get returns registered backend") {
       Profiler::Instance().Clear();
       Profiler::Instance().AddBackend<MockBackend>();
@@ -633,7 +635,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::Contains") {
+  TEST_CASE("helios::profile::Profiler::Contains") {
     SUBCASE("Contains returns false for unregistered backend") {
       Profiler::Instance().Clear();
       CHECK_FALSE(Profiler::Instance().Contains<MockBackend>());
@@ -647,7 +649,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::BackendCount") {
+  TEST_CASE("helios::profile::Profiler::BackendCount") {
     SUBCASE("BackendCount is zero initially") {
       Profiler::Instance().Clear();
       CHECK_EQ(Profiler::Instance().BackendCount(), 0);
@@ -663,7 +665,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::Startup / Shutdown") {
+  TEST_CASE("helios::profile::Profiler::Startup / Shutdown") {
     SUBCASE("Startup calls Startup on all backends") {
       Profiler::Instance().Clear();
       auto& mock = Profiler::Instance().AddBackend<MockBackend>();
@@ -691,7 +693,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::BeginZone / EndZone") {
+  TEST_CASE("helios::profile::Profiler::BeginZone / EndZone") {
     SUBCASE("BeginZone dispatches to all backends") {
       Profiler::Instance().Clear();
       auto& mock = Profiler::Instance().AddBackend<MockBackend>();
@@ -737,7 +739,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::ZoneText / ZoneValue / ZoneName") {
+  TEST_CASE("helios::profile::Profiler::ZoneText / ZoneValue / ZoneName") {
     SUBCASE("ZoneText dispatches to all backends") {
       Profiler::Instance().Clear();
       auto& mock = Profiler::Instance().AddBackend<MockBackend>();
@@ -778,7 +780,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::FrameMark") {
+  TEST_CASE("helios::profile::Profiler::FrameMark") {
     SUBCASE("FrameMark dispatches to all backends") {
       Profiler::Instance().Clear();
       auto& mock = Profiler::Instance().AddBackend<MockBackend>();
@@ -818,7 +820,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::Message / SetThreadName") {
+  TEST_CASE("helios::profile::Profiler::Message") {
     SUBCASE("Message dispatches text and color") {
       Profiler::Instance().Clear();
       auto& mock = Profiler::Instance().AddBackend<MockBackend>();
@@ -831,7 +833,9 @@ TEST_SUITE("helios::profile::Profiler") {
 
       Profiler::Instance().Clear();
     }
+  }
 
+  TEST_CASE("helios::profile::Profiler::SetThreadName") {
     SUBCASE("SetThreadName dispatches to all backends") {
       Profiler::Instance().Clear();
       auto& mock = Profiler::Instance().AddBackend<MockBackend>();
@@ -845,7 +849,7 @@ TEST_SUITE("helios::profile::Profiler") {
     }
   }
 
-  TEST_CASE("Profiler::Plot / PlotConfig") {
+  TEST_CASE("helios::profile::Profiler::Plot") {
     SUBCASE("Plot dispatches name and value") {
       Profiler::Instance().Clear();
       auto& mock = Profiler::Instance().AddBackend<MockBackend>();
@@ -859,267 +863,270 @@ TEST_SUITE("helios::profile::Profiler") {
       Profiler::Instance().Clear();
     }
 
-    SUBCASE("PlotConfig dispatches all parameters") {
-      Profiler::Instance().Clear();
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
+    TEST_CASE("helios::profile::Profiler::PlotConfig") {
+      SUBCASE("PlotConfig dispatches all parameters") {
+        Profiler::Instance().Clear();
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
 
-      Profiler::Instance().PlotConfig("FPS", PlotFormat::kNumber, true, false,
-                                      0xFF);
-      CHECK_EQ(mock.plot_config_calls, 1);
-      CHECK_EQ(mock.last_plot_format, PlotFormat::kNumber);
-      CHECK(mock.last_plot_step);
-      CHECK_FALSE(mock.last_plot_fill);
+        Profiler::Instance().PlotConfig("FPS", PlotFormat::kNumber, true, false,
+                                        0xFF);
+        CHECK_EQ(mock.plot_config_calls, 1);
+        CHECK_EQ(mock.last_plot_format, PlotFormat::kNumber);
+        CHECK(mock.last_plot_step);
+        CHECK_FALSE(mock.last_plot_fill);
 
-      Profiler::Instance().Clear();
+        Profiler::Instance().Clear();
+      }
+    }
+
+    TEST_CASE("helios::profile::Profiler::Alloc") {
+      SUBCASE("Alloc dispatches to all backends") {
+        Profiler::Instance().Clear();
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
+
+        int dummy = 0;
+        Profiler::Instance().Alloc(&dummy, 128, "Heap", 1,
+                                   std::source_location::current());
+        CHECK_EQ(mock.alloc_calls, 1);
+        CHECK_EQ(mock.last_alloc_size, 128);
+        CHECK_EQ(mock.last_alloc_name, "Heap");
+
+        Profiler::Instance().Clear();
+      }
+    }
+
+    TEST_CASE("helios::profile::Profiler::Free") {
+      SUBCASE("Free dispatches to all backends") {
+        Profiler::Instance().Clear();
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
+
+        int dummy = 0;
+        Profiler::Instance().Free(&dummy, std::nullopt, 0,
+                                  std::source_location::current());
+        CHECK_EQ(mock.free_calls, 1);
+
+        Profiler::Instance().Clear();
+      }
+    }
+
+    TEST_CASE("helios::profile::Profiler::MemoryDiscard") {
+      SUBCASE("MemoryDiscard without depth dispatches correctly") {
+        Profiler::Instance().Clear();
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
+
+        Profiler::Instance().MemoryDiscard("FrameArena");
+        CHECK_EQ(mock.memory_discard_calls, 1);
+        CHECK_EQ(mock.last_discard_name, "FrameArena");
+
+        Profiler::Instance().Clear();
+      }
+
+      SUBCASE("MemoryDiscard with depth dispatches correctly") {
+        Profiler::Instance().Clear();
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
+
+        Profiler::Instance().MemoryDiscard("Pool", 3);
+        CHECK_EQ(mock.memory_discard_depth_calls, 1);
+        CHECK_EQ(mock.last_discard_name, "Pool");
+        CHECK_EQ(mock.last_discard_depth, 3);
+
+        Profiler::Instance().Clear();
+      }
+    }
+
+    TEST_CASE("helios::profile::Profiler dispatch is no-op before finalize") {
+      SUBCASE("BeginZone before finalize is no-op") {
+        Profiler::Instance().Clear();
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        std::array<std::byte, 256> storage{};
+        Profiler::Instance().BeginZone(ZoneSpec{}, storage);
+        CHECK_EQ(mock.begin_zone_calls, 0);
+        Profiler::Instance().Clear();
+      }
+
+      SUBCASE("EndZone before finalize is no-op") {
+        Profiler::Instance().Clear();
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        std::array<std::byte, 256> storage{};
+        Profiler::Instance().EndZone(storage);
+        CHECK_EQ(mock.end_zone_calls, 0);
+        Profiler::Instance().Clear();
+      }
+
+      SUBCASE("Message before finalize is no-op") {
+        Profiler::Instance().Clear();
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Message("test", 0);
+        CHECK_EQ(mock.message_calls, 0);
+        Profiler::Instance().Clear();
+      }
+
+      SUBCASE("FrameMark before finalize is no-op") {
+        Profiler::Instance().Clear();
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().FrameMark();
+        CHECK_EQ(mock.frame_mark_calls, 0);
+        Profiler::Instance().Clear();
+      }
     }
   }
 
-  TEST_CASE("Profiler::Alloc / Free") {
-    SUBCASE("Alloc dispatches to all backends") {
+  TEST_SUITE("helios::profile free functions") {
+    TEST_CASE("FrameMark") {
       Profiler::Instance().Clear();
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
 
-      int dummy = 0;
-      Profiler::Instance().Alloc(&dummy, 128, "Heap", 1,
-                                 std::source_location::current());
-      CHECK_EQ(mock.alloc_calls, 1);
-      CHECK_EQ(mock.last_alloc_size, 128);
-      CHECK_EQ(mock.last_alloc_name, "Heap");
+      SUBCASE("FrameMark dispatches through Profiler") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
 
-      Profiler::Instance().Clear();
+        FrameMark();
+        CHECK_EQ(mock.frame_mark_calls, 1);
+
+        Profiler::Instance().Clear();
+      }
     }
 
-    SUBCASE("Free dispatches to all backends") {
+    TEST_CASE("FrameMarkNamed") {
       Profiler::Instance().Clear();
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
 
-      int dummy = 0;
-      Profiler::Instance().Free(&dummy, std::nullopt, 0,
-                                std::source_location::current());
-      CHECK_EQ(mock.free_calls, 1);
+      SUBCASE("FrameMarkNamed dispatches named frame mark") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
 
-      Profiler::Instance().Clear();
-    }
-  }
+        FrameMarkNamed("Render");
+        CHECK_EQ(mock.frame_mark_named_calls, 1);
+        CHECK_EQ(mock.last_frame_name, "Render");
 
-  TEST_CASE("Profiler::MemoryDiscard") {
-    SUBCASE("MemoryDiscard without depth dispatches correctly") {
-      Profiler::Instance().Clear();
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      Profiler::Instance().MemoryDiscard("FrameArena");
-      CHECK_EQ(mock.memory_discard_calls, 1);
-      CHECK_EQ(mock.last_discard_name, "FrameArena");
-
-      Profiler::Instance().Clear();
+        Profiler::Instance().Clear();
+      }
     }
 
-    SUBCASE("MemoryDiscard with depth dispatches correctly") {
+    TEST_CASE("FrameMarkStart / FrameMarkEnd") {
       Profiler::Instance().Clear();
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
 
-      Profiler::Instance().MemoryDiscard("Pool", 3);
-      CHECK_EQ(mock.memory_discard_depth_calls, 1);
-      CHECK_EQ(mock.last_discard_name, "Pool");
-      CHECK_EQ(mock.last_discard_depth, 3);
+      SUBCASE("FrameMarkStart and FrameMarkEnd dispatch correctly") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
 
-      Profiler::Instance().Clear();
-    }
-  }
+        FrameMarkStart("Start");
+        CHECK_EQ(mock.frame_mark_start_calls, 1);
 
-  TEST_CASE("Profiler dispatch is no-op before finalize") {
-    SUBCASE("BeginZone before finalize is no-op") {
-      Profiler::Instance().Clear();
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      std::array<std::byte, 256> storage{};
-      Profiler::Instance().BeginZone(ZoneSpec{}, storage);
-      CHECK_EQ(mock.begin_zone_calls, 0);
-      Profiler::Instance().Clear();
+        FrameMarkEnd("End");
+        CHECK_EQ(mock.frame_mark_end_calls, 1);
+
+        Profiler::Instance().Clear();
+      }
     }
 
-    SUBCASE("EndZone before finalize is no-op") {
+    TEST_CASE("Message / SetThreadName") {
       Profiler::Instance().Clear();
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      std::array<std::byte, 256> storage{};
-      Profiler::Instance().EndZone(storage);
-      CHECK_EQ(mock.end_zone_calls, 0);
-      Profiler::Instance().Clear();
+
+      SUBCASE("Message dispatches through Profiler") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
+
+        Message("Hello World", 0xFF);
+        CHECK_EQ(mock.message_calls, 1);
+        CHECK_EQ(mock.last_message, "Hello World");
+        CHECK_EQ(mock.last_message_color, 0xFF);
+
+        Profiler::Instance().Clear();
+      }
+
+      SUBCASE("SetThreadName dispatches through Profiler") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
+
+        SetThreadName("Worker");
+        CHECK_EQ(mock.set_thread_name_calls, 1);
+        CHECK_EQ(mock.last_thread_name, "Worker");
+
+        Profiler::Instance().Clear();
+      }
     }
 
-    SUBCASE("Message before finalize is no-op") {
+    TEST_CASE("Plot / PlotConfig") {
       Profiler::Instance().Clear();
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Message("test", 0);
-      CHECK_EQ(mock.message_calls, 0);
-      Profiler::Instance().Clear();
+
+      SUBCASE("Plot dispatches through Profiler") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
+
+        Plot("Delta", 0.016);
+        CHECK_EQ(mock.plot_calls, 1);
+        CHECK_EQ(mock.last_plot_name, "Delta");
+        CHECK_EQ(doctest::Approx(mock.last_plot_value), 0.016);
+
+        Profiler::Instance().Clear();
+      }
+
+      SUBCASE("PlotConfig dispatches through Profiler") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
+
+        PlotConfig("Mem", PlotFormat::kMemory, false, true, 0x00FF00);
+        CHECK_EQ(mock.plot_config_calls, 1);
+        CHECK_EQ(mock.last_plot_format, PlotFormat::kMemory);
+        CHECK_FALSE(mock.last_plot_step);
+        CHECK(mock.last_plot_fill);
+
+        Profiler::Instance().Clear();
+      }
     }
 
-    SUBCASE("FrameMark before finalize is no-op") {
+    TEST_CASE("Alloc / Free / MemoryDiscard") {
       Profiler::Instance().Clear();
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().FrameMark();
-      CHECK_EQ(mock.frame_mark_calls, 0);
-      Profiler::Instance().Clear();
-    }
-  }
-}
 
-TEST_SUITE("helios::profile free functions") {
-  TEST_CASE("FrameMark") {
-    Profiler::Instance().Clear();
+      SUBCASE("Alloc dispatches through Profiler") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
 
-    SUBCASE("FrameMark dispatches through Profiler") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
+        int dummy = 0;
+        Alloc(&dummy, 256, "Pool", 0);
+        CHECK_EQ(mock.alloc_calls, 1);
+        CHECK_EQ(mock.last_alloc_size, 256);
+        CHECK_EQ(mock.last_alloc_name, "Pool");
 
-      FrameMark();
-      CHECK_EQ(mock.frame_mark_calls, 1);
+        Profiler::Instance().Clear();
+      }
 
-      Profiler::Instance().Clear();
-    }
-  }
+      SUBCASE("Free dispatches through Profiler") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
 
-  TEST_CASE("FrameMarkNamed") {
-    Profiler::Instance().Clear();
+        int dummy = 0;
+        Free(&dummy, std::nullopt, 0);
+        CHECK_EQ(mock.free_calls, 1);
 
-    SUBCASE("FrameMarkNamed dispatches named frame mark") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
+        Profiler::Instance().Clear();
+      }
 
-      FrameMarkNamed("Render");
-      CHECK_EQ(mock.frame_mark_named_calls, 1);
-      CHECK_EQ(mock.last_frame_name, "Render");
+      SUBCASE("MemoryDiscard dispatches through Profiler") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
 
-      Profiler::Instance().Clear();
-    }
-  }
+        MemoryDiscard("Arena");
+        CHECK_EQ(mock.memory_discard_calls, 1);
+        CHECK_EQ(mock.last_discard_name, "Arena");
 
-  TEST_CASE("FrameMarkStart / FrameMarkEnd") {
-    Profiler::Instance().Clear();
+        Profiler::Instance().Clear();
+      }
 
-    SUBCASE("FrameMarkStart and FrameMarkEnd dispatch correctly") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
+      SUBCASE("MemoryDiscardS dispatches through Profiler") {
+        auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+        Profiler::Instance().Finalize();
 
-      FrameMarkStart("Start");
-      CHECK_EQ(mock.frame_mark_start_calls, 1);
+        MemoryDiscardS("Arena", 2);
+        CHECK_EQ(mock.memory_discard_depth_calls, 1);
+        CHECK_EQ(mock.last_discard_name, "Arena");
+        CHECK_EQ(mock.last_discard_depth, 2);
 
-      FrameMarkEnd("End");
-      CHECK_EQ(mock.frame_mark_end_calls, 1);
-
-      Profiler::Instance().Clear();
-    }
-  }
-
-  TEST_CASE("Message / SetThreadName") {
-    Profiler::Instance().Clear();
-
-    SUBCASE("Message dispatches through Profiler") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      Message("Hello World", 0xFF);
-      CHECK_EQ(mock.message_calls, 1);
-      CHECK_EQ(mock.last_message, "Hello World");
-      CHECK_EQ(mock.last_message_color, 0xFF);
-
-      Profiler::Instance().Clear();
-    }
-
-    SUBCASE("SetThreadName dispatches through Profiler") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      SetThreadName("Worker");
-      CHECK_EQ(mock.set_thread_name_calls, 1);
-      CHECK_EQ(mock.last_thread_name, "Worker");
-
-      Profiler::Instance().Clear();
+        Profiler::Instance().Clear();
+      }
     }
   }
-
-  TEST_CASE("Plot / PlotConfig") {
-    Profiler::Instance().Clear();
-
-    SUBCASE("Plot dispatches through Profiler") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      Plot("Delta", 0.016);
-      CHECK_EQ(mock.plot_calls, 1);
-      CHECK_EQ(mock.last_plot_name, "Delta");
-      CHECK_EQ(doctest::Approx(mock.last_plot_value), 0.016);
-
-      Profiler::Instance().Clear();
-    }
-
-    SUBCASE("PlotConfig dispatches through Profiler") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      PlotConfig("Mem", PlotFormat::kMemory, false, true, 0x00FF00);
-      CHECK_EQ(mock.plot_config_calls, 1);
-      CHECK_EQ(mock.last_plot_format, PlotFormat::kMemory);
-      CHECK_FALSE(mock.last_plot_step);
-      CHECK(mock.last_plot_fill);
-
-      Profiler::Instance().Clear();
-    }
-  }
-
-  TEST_CASE("Alloc / Free / MemoryDiscard") {
-    Profiler::Instance().Clear();
-
-    SUBCASE("Alloc dispatches through Profiler") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      int dummy = 0;
-      Alloc(&dummy, 256, "Pool", 0);
-      CHECK_EQ(mock.alloc_calls, 1);
-      CHECK_EQ(mock.last_alloc_size, 256);
-      CHECK_EQ(mock.last_alloc_name, "Pool");
-
-      Profiler::Instance().Clear();
-    }
-
-    SUBCASE("Free dispatches through Profiler") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      int dummy = 0;
-      Free(&dummy, std::nullopt, 0);
-      CHECK_EQ(mock.free_calls, 1);
-
-      Profiler::Instance().Clear();
-    }
-
-    SUBCASE("MemoryDiscard dispatches through Profiler") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      MemoryDiscard("Arena");
-      CHECK_EQ(mock.memory_discard_calls, 1);
-      CHECK_EQ(mock.last_discard_name, "Arena");
-
-      Profiler::Instance().Clear();
-    }
-
-    SUBCASE("MemoryDiscardS dispatches through Profiler") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      MemoryDiscardS("Arena", 2);
-      CHECK_EQ(mock.memory_discard_depth_calls, 1);
-      CHECK_EQ(mock.last_discard_name, "Arena");
-      CHECK_EQ(mock.last_discard_depth, 2);
-
-      Profiler::Instance().Clear();
-    }
-  }
-}

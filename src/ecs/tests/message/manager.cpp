@@ -47,7 +47,7 @@ struct AsyncEvent {
 }  // namespace
 
 TEST_SUITE("helios::ecs::MessageManager") {
-  TEST_CASE("ecs::MessageManager::ctor") {
+  TEST_CASE("helios::ecs::MessageManager::ctor") {
     SUBCASE("Default ctor produces empty manager") {
       const MessageManager manager;
       CHECK_EQ(manager.RegisteredMessageCount(), 0);
@@ -67,7 +67,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::operator=") {
+  TEST_CASE("helios::ecs::MessageManager::operator=") {
     SUBCASE("Move assignment") {
       MessageManager original;
 
@@ -82,7 +82,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::Clear") {
+  TEST_CASE("helios::ecs::MessageManager::Clear") {
     SUBCASE("Clear on empty manager is a no-op") {
       MessageManager manager;
 
@@ -118,7 +118,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::ClearAllQueues") {
+  TEST_CASE("helios::ecs::MessageManager::ClearAllQueues") {
     SUBCASE("ClearAllQueues empties messages but preserves registrations") {
       MessageManager manager;
 
@@ -145,7 +145,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::Update (no consumed)") {
+  TEST_CASE("helios::ecs::MessageManager::Update (no consumed)") {
     SUBCASE(
         "Messages written this frame are readable from previous queue after "
         "one Update") {
@@ -212,7 +212,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::Update (with consumed registry)") {
+  TEST_CASE("helios::ecs::MessageManager::Update (with consumed registry)") {
     SUBCASE("Consumed previous message is removed after Update") {
       MessageManager manager;
 
@@ -280,7 +280,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::ApplyConsumed") {
+  TEST_CASE("helios::ecs::MessageManager::ApplyConsumed") {
     SUBCASE(
         "ApplyConsumed removes consumed messages from both queues without "
         "buffer swap") {
@@ -382,7 +382,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::Register") {
+  TEST_CASE("helios::ecs::MessageManager::Register") {
     SUBCASE("Register single sync type") {
       MessageManager manager;
 
@@ -455,7 +455,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::Write") {
+  TEST_CASE("helios::ecs::MessageManager::Write") {
     SUBCASE("Write single message into current queue") {
       MessageManager manager;
 
@@ -492,7 +492,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::WriteAsync") {
+  TEST_CASE("helios::ecs::MessageManager::WriteAsync") {
     SUBCASE("WriteAsync enqueues message to async queue") {
       MessageManager manager;
 
@@ -503,7 +503,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::WriteBulk") {
+  TEST_CASE("helios::ecs::MessageManager::WriteBulk") {
     SUBCASE("WriteBulk enqueues all messages in the range") {
       MessageManager manager;
 
@@ -525,7 +525,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::WriteAsyncBulk") {
+  TEST_CASE("helios::ecs::MessageManager::WriteAsyncBulk") {
     SUBCASE("WriteAsyncBulk enqueues all async messages") {
       MessageManager manager;
 
@@ -537,7 +537,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::ManualClear") {
+  TEST_CASE("helios::ecs::MessageManager::ManualClear") {
     SUBCASE("ManualClear removes messages from both queues for sync type") {
       MessageManager manager;
 
@@ -564,7 +564,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::ManualAsyncClear") {
+  TEST_CASE("helios::ecs::MessageManager::ManualAsyncClear") {
     SUBCASE(
         "ManualAsyncClear removes messages from both queues for async type") {
       MessageManager manager;
@@ -592,7 +592,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::MergeLocalMessages") {
+  TEST_CASE("helios::ecs::MessageManager::MergeLocalMessages") {
     SUBCASE(
         "Const lvalue local queue is merged into current queue without "
         "modifying source") {
@@ -644,7 +644,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::IsRegistered") {
+  TEST_CASE("helios::ecs::MessageManager::IsRegistered") {
     SUBCASE("Returns false for unregistered type") {
       const MessageManager manager;
       CHECK_FALSE(manager.IsRegistered<Position>());
@@ -669,7 +669,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::HasMessages (global)") {
+  TEST_CASE("helios::ecs::MessageManager::HasMessages (global)") {
     SUBCASE("Returns false when no messages exist") {
       MessageManager manager;
       manager.Register<Position>();
@@ -706,7 +706,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::HasMessages (by type)") {
+  TEST_CASE("helios::ecs::MessageManager::HasMessages (by type)") {
     SUBCASE("Returns false for unregistered type") {
       const MessageManager manager;
       CHECK_FALSE(manager.HasMessages<Position>());
@@ -728,7 +728,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::HasAsyncMessages") {
+  TEST_CASE("helios::ecs::MessageManager::HasAsyncMessages") {
     SUBCASE("Returns false for unregistered type") {
       const MessageManager manager;
       CHECK_FALSE(manager.HasMessages<Position>());
@@ -750,7 +750,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::PreviousMessages") {
+  TEST_CASE("helios::ecs::MessageManager::PreviousMessages") {
     SUBCASE("Empty before any Update") {
       MessageManager manager;
       manager.Register<Position>();
@@ -772,7 +772,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::CurrentMessages") {
+  TEST_CASE("helios::ecs::MessageManager::CurrentMessages") {
     SUBCASE("Contains written messages before Update") {
       MessageManager manager;
 
@@ -795,7 +795,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::Metadata") {
+  TEST_CASE("helios::ecs::MessageManager::Metadata") {
     SUBCASE("Returns nullptr for unregistered type") {
       const MessageManager manager;
       CHECK(manager.Metadata<Position>() == nullptr);
@@ -812,7 +812,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::RegisteredMessageCount") {
+  TEST_CASE("helios::ecs::MessageManager::RegisteredMessageCount") {
     SUBCASE("Zero initially") {
       const MessageManager manager;
       CHECK_EQ(manager.RegisteredMessageCount(), 0);
@@ -842,7 +842,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::CurrentQueue") {
+  TEST_CASE("helios::ecs::MessageManager::CurrentQueue") {
     SUBCASE("Returns reference to current queue") {
       MessageManager manager;
 
@@ -854,7 +854,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::PreviousQueue") {
+  TEST_CASE("helios::ecs::MessageManager::PreviousQueue") {
     SUBCASE("Returns reference to previous queue, empty before any Update") {
       MessageManager manager;
 
@@ -875,7 +875,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::AsyncQueue") {
+  TEST_CASE("helios::ecs::MessageManager::AsyncQueue") {
     SUBCASE("Non-const AsyncQueue returns mutable reference") {
       MessageManager manager;
 
@@ -898,7 +898,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
     }
   }
 
-  TEST_CASE("ecs::MessageManager::lifecycle") {
+  TEST_CASE("helios::ecs::MessageManager::lifecycle") {
     SUBCASE("Full double-buffer cycle with automatic clear") {
       MessageManager manager;
 

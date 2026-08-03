@@ -12,7 +12,7 @@ using namespace helios::ecs;
 using namespace helios::ecs::schedule_test;
 
 TEST_SUITE("helios::ecs::SystemSetHandle") {
-  TEST_CASE("ecs::SystemSetHandle::ctor") {
+  TEST_CASE("helios::ecs::SystemSetHandle::ctor") {
     SUBCASE("Constructing with id and schedule is valid") {
       Schedule schedule;
       const auto handle = schedule.Set(SetOne{});
@@ -38,7 +38,7 @@ TEST_SUITE("helios::ecs::SystemSetHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemSetHandle::operator=") {
+  TEST_CASE("helios::ecs::SystemSetHandle::operator=") {
     SUBCASE("Move assignment transfers identity") {
       Schedule schedule;
       auto source = schedule.Set(SetOne{});
@@ -51,7 +51,7 @@ TEST_SUITE("helios::ecs::SystemSetHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemSetHandle::Before") {
+  TEST_CASE("helios::ecs::SystemSetHandle::Before") {
     SUBCASE("Before with SystemId marks schedule dirty") {
       Schedule schedule;
       auto handle = schedule.Set(SetOne{});
@@ -119,7 +119,7 @@ TEST_SUITE("helios::ecs::SystemSetHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemSetHandle::After") {
+  TEST_CASE("helios::ecs::SystemSetHandle::After") {
     SUBCASE("After with SystemId marks schedule dirty") {
       Schedule schedule;
       auto handle = schedule.Set(SetOne{});
@@ -187,7 +187,7 @@ TEST_SUITE("helios::ecs::SystemSetHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemSetHandle::RunIf") {
+  TEST_CASE("helios::ecs::SystemSetHandle::RunIf") {
     SUBCASE("RunIf with predicate marks schedule dirty") {
       Schedule schedule;
       auto handle = schedule.Set(SetOne{});
@@ -223,7 +223,7 @@ TEST_SUITE("helios::ecs::SystemSetHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemSetHandle::Sequence") {
+  TEST_CASE("helios::ecs::SystemSetHandle::Sequence") {
     SUBCASE("Sequence marks the set as sequential") {
       Schedule schedule;
       auto handle = schedule.Set(SetOne{});
@@ -234,7 +234,7 @@ TEST_SUITE("helios::ecs::SystemSetHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemSetHandle::Done") {
+  TEST_CASE("helios::ecs::SystemSetHandle::Done") {
     SUBCASE("Done returns reference to the parent schedule") {
       Schedule schedule;
       auto handle = schedule.Set(SetOne{});
@@ -245,7 +245,7 @@ TEST_SUITE("helios::ecs::SystemSetHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemSetHandle::Id") {
+  TEST_CASE("helios::ecs::SystemSetHandle::Id") {
     SUBCASE("Id returns the set id") {
       Schedule schedule;
       constexpr auto set_id = SystemSetId::From<SetOne>();

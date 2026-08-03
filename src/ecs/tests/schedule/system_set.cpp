@@ -29,7 +29,7 @@ struct SystemZ {
 }  // namespace
 
 TEST_SUITE("helios::ecs::SystemSetId") {
-  TEST_CASE("ecs::SystemSetId::From") {
+  TEST_CASE("helios::ecs::SystemSetId::From") {
     SUBCASE("Same set type produces same id") {
       constexpr auto id1 = SystemSetId::From<SetA>();
       constexpr auto id2 = SystemSetId::From<SetA>();
@@ -60,7 +60,7 @@ TEST_SUITE("helios::ecs::SystemSetId") {
     }
   }
 
-  TEST_CASE("ecs::SystemSetId::operator<=>") {
+  TEST_CASE("helios::ecs::SystemSetId::operator<=>") {
     SUBCASE("Equal ids compare equal") {
       constexpr auto id1 = SystemSetId::From<SetA>();
       constexpr auto id2 = SystemSetId::From<SetA>();
@@ -76,7 +76,7 @@ TEST_SUITE("helios::ecs::SystemSetId") {
 }
 
 TEST_SUITE("helios::ecs::SystemSet") {
-  TEST_CASE("ecs::SystemSet::ctor") {
+  TEST_CASE("helios::ecs::SystemSet::ctor") {
     SUBCASE("Constructs with the given id") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -94,7 +94,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::operator=") {
+  TEST_CASE("helios::ecs::SystemSet::operator=") {
     SUBCASE("Move assignment transfers state") {
       SystemSet source(SystemSetId::From<SetA>());
       source.Before(SystemId::From<SystemX>());
@@ -106,7 +106,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::Before") {
+  TEST_CASE("helios::ecs::SystemSet::Before") {
     SUBCASE("Before with SystemId adds a target") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -143,7 +143,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::After") {
+  TEST_CASE("helios::ecs::SystemSet::After") {
     SUBCASE("After with SystemId adds a target") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -180,7 +180,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::RunIf") {
+  TEST_CASE("helios::ecs::SystemSet::RunIf") {
     SUBCASE("RunIf with a simple predicate adds a condition") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -216,7 +216,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::Sequence") {
+  TEST_CASE("helios::ecs::SystemSet::Sequence") {
     SUBCASE("Sequence marks the set as a sequence") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -227,7 +227,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::TakeConditions") {
+  TEST_CASE("helios::ecs::SystemSet::TakeConditions") {
     SUBCASE("TakeConditions moves out all conditions") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -245,7 +245,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::IsSequence") {
+  TEST_CASE("helios::ecs::SystemSet::IsSequence") {
     SUBCASE("New set is not a sequence") {
       SystemSet set(SystemSetId::From<SetA>());
       CHECK_FALSE(set.IsSequence());
@@ -258,7 +258,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::Id") {
+  TEST_CASE("helios::ecs::SystemSet::Id") {
     SUBCASE("Id returns the set id") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -267,7 +267,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::BeforeTargets") {
+  TEST_CASE("helios::ecs::SystemSet::BeforeTargets") {
     SUBCASE("BeforeTargets returns correct references") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -284,7 +284,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::AfterTargets") {
+  TEST_CASE("helios::ecs::SystemSet::AfterTargets") {
     SUBCASE("AfterTargets returns correct references") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -301,7 +301,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::BeforeSetTargets") {
+  TEST_CASE("helios::ecs::SystemSet::BeforeSetTargets") {
     SUBCASE("BeforeSetTargets returns correct references") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -315,7 +315,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::AfterSetTargets") {
+  TEST_CASE("helios::ecs::SystemSet::AfterSetTargets") {
     SUBCASE("AfterSetTargets returns correct references") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -329,7 +329,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
     }
   }
 
-  TEST_CASE("ecs::SystemSet::Conditions") {
+  TEST_CASE("helios::ecs::SystemSet::Conditions") {
     SUBCASE("Conditions returns correct references") {
       constexpr auto set_id = SystemSetId::From<SetA>();
       SystemSet set(set_id);
@@ -346,7 +346,7 @@ TEST_SUITE("helios::ecs::SystemSet") {
 }
 
 TEST_SUITE("helios::ecs::SystemSetTrait") {
-  TEST_CASE("ecs::SystemSetTrait::concept") {
+  TEST_CASE("helios::ecs::SystemSetTrait::concept") {
     SUBCASE("Empty structs satisfy SystemSetTrait") {
       CHECK_UNARY(SystemSetTrait<SetA>);
       CHECK_UNARY(SystemSetTrait<SetB>);
@@ -362,7 +362,7 @@ TEST_SUITE("helios::ecs::SystemSetTrait") {
 }
 
 TEST_SUITE("helios::ecs::SystemSetWithNameTrait") {
-  TEST_CASE("ecs::SystemSetWithNameTrait::concept") {
+  TEST_CASE("helios::ecs::SystemSetWithNameTrait::concept") {
     SUBCASE("Empty struct with kName satisfies") {
       CHECK_UNARY(SystemSetWithNameTrait<NamedSet>);
     }
@@ -374,7 +374,7 @@ TEST_SUITE("helios::ecs::SystemSetWithNameTrait") {
 }
 
 TEST_SUITE("helios::ecs::SystemSetNameOf") {
-  TEST_CASE("ecs::SystemSetNameOf::basic") {
+  TEST_CASE("helios::ecs::SystemSetNameOf::basic") {
     SUBCASE("Named set returns its kName") {
       constexpr auto name = SystemSetNameOf<NamedSet>();
       CHECK_EQ(name, "NamedSet");

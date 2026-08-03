@@ -25,7 +25,7 @@ struct Timer {
 }  // namespace
 
 TEST_SUITE("helios::ecs::WorldCmdBuffer") {
-  TEST_CASE("ecs::WorldCmdBuffer::ctor") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::ctor") {
     SUBCASE("Custom allocator ctor") {
       PmrCmdQueue queue(std::pmr::get_default_resource());
       WorldCmdBuffer buf(queue, std::pmr::get_default_resource());
@@ -42,7 +42,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer::Clear") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::Clear") {
     SUBCASE("Clear removes all pending commands") {
       PmrCmdQueue queue(std::pmr::get_default_resource());
       WorldCmdBuffer buf(queue, std::pmr::get_default_resource());
@@ -59,7 +59,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer::Reserve") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::Reserve") {
     SUBCASE("Reserve does not add commands") {
       PmrCmdQueue queue(std::pmr::get_default_resource());
       WorldCmdBuffer buf(queue, std::pmr::get_default_resource());
@@ -81,7 +81,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer::InsertResource") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::InsertResource") {
     SUBCASE("Inserts resource into world after execution") {
       World world;
       PmrCmdQueue queue(std::pmr::get_default_resource());
@@ -121,7 +121,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer::TryInsertResource") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::TryInsertResource") {
     SUBCASE("Inserts resource when absent") {
       World world;
       PmrCmdQueue queue(std::pmr::get_default_resource());
@@ -161,7 +161,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer::RemoveResource") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::RemoveResource") {
     SUBCASE("Removes existing resource after execution") {
       World world;
       world.InsertResources(Score{1});
@@ -187,7 +187,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer::TryRemoveResource") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::TryRemoveResource") {
     SUBCASE("Removes resource when present") {
       World world;
       world.InsertResources(Score{1});
@@ -227,7 +227,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer::DeferredUpdate") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::DeferredUpdate") {
     SUBCASE("Executes lambda with world reference after flush") {
       World world;
       bool called = false;
@@ -269,7 +269,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer::Empty") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::Empty") {
     SUBCASE("Buffer is empty initially") {
       PmrCmdQueue queue(std::pmr::get_default_resource());
       WorldCmdBuffer buf(queue, std::pmr::get_default_resource());
@@ -295,7 +295,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer::Size") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::Size") {
     SUBCASE("Size is zero initially") {
       PmrCmdQueue queue(std::pmr::get_default_resource());
       WorldCmdBuffer buf(queue, std::pmr::get_default_resource());
@@ -325,7 +325,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer::GetAllocator") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer::GetAllocator") {
     SUBCASE("Returns allocator used at construction") {
       auto* resource = std::pmr::get_default_resource();
       PmrCmdQueue queue(resource);
@@ -337,7 +337,8 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer: destructor flushes commands into queue") {
+  TEST_CASE(
+      "helios::ecs::WorldCmdBuffer: destructor flushes commands into queue") {
     SUBCASE("Commands are in queue after buffer is destroyed") {
       World world;
       PmrCmdQueue queue(std::pmr::get_default_resource());
@@ -358,7 +359,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer: commands execute in enqueue order") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer: commands execute in enqueue order") {
     SUBCASE(
         "InsertResource followed by RemoveResource results in absent "
         "resource") {
@@ -377,7 +378,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::WorldCmdBuffer: method chaining") {
+  TEST_CASE("helios::ecs::WorldCmdBuffer: method chaining") {
     SUBCASE("Multiple operations can be chained") {
       World world;
       PmrCmdQueue queue(std::pmr::get_default_resource());
@@ -397,7 +398,7 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::PmrWorldCmdBuffer: alias works correctly") {
+  TEST_CASE("helios::ecs::PmrWorldCmdBuffer: alias works correctly") {
     SUBCASE("PmrWorldCmdBuffer inserts resource") {
       World world;
       PmrCmdQueue queue(std::pmr::get_default_resource());

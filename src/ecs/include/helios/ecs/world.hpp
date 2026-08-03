@@ -96,6 +96,7 @@ public:
    * @warning Triggers assertion in next cases:
    * - Entity is invalid.
    * - World does not own entity.
+   * - Reserved entities have not been flushed (`NeedsFlush()`).
    * @param entity Entity to destroy
    */
   void DestroyEntity(Entity entity);
@@ -103,7 +104,8 @@ public:
   /**
    * @brief Tries to destroy entity if it exists in the world.
    * @note Not thread-safe.
-   * @warning Triggers assertion if entity is invalid.
+   * @warning Triggers assertion if entity is invalid, or if reserved entities
+   * have not been flushed (`NeedsFlush()`).
    * @param entity Entity to destroy
    */
   void TryDestroyEntity(Entity entity);
@@ -114,6 +116,7 @@ public:
    * @warning Triggers assertion in next cases:
    * - Any entity is invalid.
    * - Any entity does not exist in the world.
+   * - Reserved entities have not been flushed (`NeedsFlush()`).
    * @tparam R Range type containing `Entity` elements
    * @param entities Entities to destroy
    */
@@ -124,8 +127,9 @@ public:
   /**
    * @brief Tries to destroy entities if they exist in the world.
    * @note Not thread-safe.
-   * @warning Triggers assertion only if any entity is invalid (non-existing
-   * entities are skipped).
+   * @warning Triggers assertion if any entity is invalid, or if reserved
+   * entities have not been flushed (`NeedsFlush()`). Non-existing entities are
+   * skipped.
    * @tparam R Range type containing `Entity` elements
    * @param entities Entities to destroy
    */
@@ -984,6 +988,8 @@ inline Entity World::CreateEntity() {
 }
 
 inline void World::DestroyEntity(Entity entity) {
+  HELIOS_ASSERT(!entity_manager_.NeedsFlush(),
+                "Flush reserved entities before destruction!");
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
   HELIOS_ASSERT(entity_manager_.Validate(entity),
                 "World does not own entity '{}'!", entity);
@@ -994,6 +1000,8 @@ inline void World::DestroyEntity(Entity entity) {
 }
 
 inline void World::TryDestroyEntity(Entity entity) {
+  HELIOS_ASSERT(!entity_manager_.NeedsFlush(),
+                "Flush reserved entities before destruction!");
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
   if (!entity_manager_.Validate(entity)) {
     return;
@@ -1007,6 +1015,8 @@ inline void World::TryDestroyEntity(Entity entity) {
 template <std::ranges::input_range R>
   requires std::same_as<std::ranges::range_value_t<R>, Entity>
 inline void World::DestroyEntities(const R& entities) {
+  HELIOS_ASSERT(!entity_manager_.NeedsFlush(),
+                "Flush reserved entities before destruction!");
   for (const auto& entity : entities) {
     HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
     HELIOS_ASSERT(entity_manager_.Validate(entity),
@@ -1018,6 +1028,8 @@ inline void World::DestroyEntities(const R& entities) {
 template <std::ranges::input_range R>
   requires std::same_as<std::ranges::range_value_t<R>, Entity>
 inline void World::TryDestroyEntities(const R& entities) {
+  HELIOS_ASSERT(!entity_manager_.NeedsFlush(),
+                "Flush reserved entities before destruction!");
   for (const auto& entity : entities) {
     TryDestroyEntity(entity);
   }

@@ -31,7 +31,7 @@ concept HasResourceAssignment =
 }  // namespace
 
 TEST_SUITE("helios::ecs::Local") {
-  TEST_CASE("ecs::Local::ctor") {
+  TEST_CASE("helios::ecs::Local::ctor") {
     SUBCASE("Constructor stores resource reference") {
       Counter counter{42};
 
@@ -51,7 +51,7 @@ TEST_SUITE("helios::ecs::Local") {
     }
   }
 
-  TEST_CASE("ecs::Local::copy") {
+  TEST_CASE("helios::ecs::Local::copy") {
     SUBCASE("Copy constructor creates a wrapper for the same resource") {
       Counter counter{42};
       const Local<Counter> original(counter);
@@ -76,7 +76,7 @@ TEST_SUITE("helios::ecs::Local") {
     }
   }
 
-  TEST_CASE("ecs::Local::move") {
+  TEST_CASE("helios::ecs::Local::move") {
     SUBCASE("Move constructor transfers the resource reference") {
       Counter counter{99};
       Local<Counter> original(counter);
@@ -101,7 +101,7 @@ TEST_SUITE("helios::ecs::Local") {
     }
   }
 
-  TEST_CASE("ecs::Local::operator=") {
+  TEST_CASE("helios::ecs::Local::operator=") {
     SUBCASE("Assignment with lvalue replaces the referenced resource value") {
       Counter counter{0};
       Counter replacement{10};
@@ -138,7 +138,7 @@ TEST_SUITE("helios::ecs::Local") {
     }
   }
 
-  TEST_CASE("ecs::Local::operator*") {
+  TEST_CASE("helios::ecs::Local::operator*") {
     SUBCASE("operator* returns reference to stored resource") {
       Counter counter{5};
       const Local<Counter> local(counter);
@@ -161,7 +161,7 @@ TEST_SUITE("helios::ecs::Local") {
     }
   }
 
-  TEST_CASE("ecs::Local::operator->") {
+  TEST_CASE("helios::ecs::Local::operator->") {
     SUBCASE("operator-> returns pointer to stored resource") {
       Counter counter{3};
       const Local<Counter> local(counter);
@@ -182,7 +182,7 @@ TEST_SUITE("helios::ecs::Local") {
     }
   }
 
-  TEST_CASE("ecs::Local::Get") {
+  TEST_CASE("helios::ecs::Local::Get") {
     SUBCASE("Get returns reference to stored resource") {
       Counter counter{9};
       const Local<Counter> local(counter);
@@ -200,7 +200,7 @@ TEST_SUITE("helios::ecs::Local") {
     }
   }
 
-  TEST_CASE("ecs::Local::removed manager methods") {
+  TEST_CASE("helios::ecs::Local::removed manager methods") {
     SUBCASE("Insert is not part of the Local API") {
       CHECK_FALSE(HasInsert<Local<Counter>>);
     }

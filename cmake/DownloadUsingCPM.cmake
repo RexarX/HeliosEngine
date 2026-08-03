@@ -3,6 +3,7 @@
 
 include_guard(GLOBAL)
 include(Primitives)
+include(TargetUtils)
 
 # CPM configuration options
 set(CPM_DOWNLOAD_VERSION 0.40.2 CACHE STRING "CPM version to download")
@@ -207,9 +208,14 @@ macro(helios_cpm_add_package)
     endif()
 
     message(STATUS "Downloaded ${CPM_ARG_NAME} via CPM")
+  endif()
 
-    # Note: SYSTEM marking is deferred; use helios_mark_system_includes().
-    # after the package is fully processed to mark specific targets as system includes
+  if(DEFINED ${CPM_ARG_NAME}_BINARY_DIR)
+    helios_suppress_warnings_in_binary_dir("${${CPM_ARG_NAME}_BINARY_DIR}")
+  endif()
+  if(TARGET ${CPM_ARG_NAME})
+    helios_target_suppress_warnings(${CPM_ARG_NAME})
+    helios_mark_system_includes(${CPM_ARG_NAME})
   endif()
 
   unset(_cpm_args)

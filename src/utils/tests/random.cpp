@@ -10,7 +10,7 @@
 using namespace helios::utils;
 
 TEST_SUITE("helios::utils::Random") {
-  TEST_CASE("utils::RandomEngine: concept validation") {
+  TEST_CASE("helios::utils::RandomEngine: concept validation") {
     SUBCASE("DefaultRandomEngine satisfies concept") {
       CHECK(RandomEngine<DefaultRandomEngine>);
     }
@@ -26,7 +26,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomDeviceSeed: seed generation") {
+  TEST_CASE("helios::utils::RandomDeviceSeed: seed generation") {
     SUBCASE("Generates non-zero seed") {
       uint64_t seed = RandomDeviceSeed();
       // While technically 0 is possible, it's astronomically unlikely
@@ -43,7 +43,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::MakeDefaultEngine: engine creation") {
+  TEST_CASE("helios::utils::MakeDefaultEngine: engine creation") {
     SUBCASE("Creates valid engine") {
       auto engine = MakeDefaultEngine();
       // Engine should produce valid output
@@ -65,7 +65,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::MakeFastEngine: engine creation") {
+  TEST_CASE("helios::utils::MakeFastEngine: engine creation") {
     SUBCASE("Creates valid engine") {
       auto engine = MakeFastEngine();
       auto value = engine();
@@ -74,7 +74,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::DefaultEngine: thread-local engine") {
+  TEST_CASE("helios::utils::DefaultEngine: thread-local engine") {
     SUBCASE("Returns reference to engine") {
       auto& engine1 = DefaultEngine();
       auto& engine2 = DefaultEngine();
@@ -89,7 +89,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::FastEngineInstance: thread-local fast engine") {
+  TEST_CASE("helios::utils::FastEngineInstance: thread-local fast engine") {
     SUBCASE("Returns reference to engine") {
       auto& engine1 = FastEngineInstance();
       auto& engine2 = FastEngineInstance();
@@ -104,7 +104,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomGenerator::ctor: construction") {
+  TEST_CASE("helios::utils::RandomGenerator::ctor: construction") {
     SUBCASE("Construction from engine reference") {
       auto engine = MakeDefaultEngine();
       RandomGenerator<DefaultRandomEngine> generator(engine);
@@ -126,7 +126,8 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomGenerator::Next: distribution-based generation") {
+  TEST_CASE(
+      "helios::utils::RandomGenerator::Next: distribution-based generation") {
     auto engine = MakeDefaultEngine();
     RandomGenerator<DefaultRandomEngine> generator(engine);
 
@@ -145,7 +146,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomGenerator::Value: type-based generation") {
+  TEST_CASE("helios::utils::RandomGenerator::Value: type-based generation") {
     auto engine = MakeDefaultEngine();
     RandomGenerator<DefaultRandomEngine> generator(engine);
 
@@ -185,7 +186,9 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomGenerator::ValueFromRange: range-based generation") {
+  TEST_CASE(
+      "helios::utils::RandomGenerator::ValueFromRange: range-based "
+      "generation") {
     auto engine = MakeDefaultEngine();
     RandomGenerator<DefaultRandomEngine> generator(engine);
 
@@ -233,7 +236,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomGenerator::EngineRef: engine access") {
+  TEST_CASE("helios::utils::RandomGenerator::EngineRef: engine access") {
     auto engine = MakeDefaultEngine();
     RandomGenerator<DefaultRandomEngine> generator(engine);
 
@@ -247,7 +250,7 @@ TEST_SUITE("helios::utils::Random") {
     CHECK_NE(value_before, value_after);
   }
 
-  TEST_CASE("utils::RandomDefault: thread-local default generator") {
+  TEST_CASE("helios::utils::RandomDefault: thread-local default generator") {
     SUBCASE("Returns same generator instance") {
       auto& gen1 = RandomDefault();
       auto& gen2 = RandomDefault();
@@ -263,7 +266,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomFast: thread-local fast generator") {
+  TEST_CASE("helios::utils::RandomFast: thread-local fast generator") {
     SUBCASE("Returns same generator instance") {
       auto& gen1 = RandomFast();
       auto& gen2 = RandomFast();
@@ -278,7 +281,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomValue: convenience function") {
+  TEST_CASE("helios::utils::RandomValue: convenience function") {
     SUBCASE("Integer type") {
       auto value = RandomValue<int>();
       CHECK_GE(value, std::numeric_limits<int>::min());
@@ -302,7 +305,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomValueFromRange: convenience function") {
+  TEST_CASE("helios::utils::RandomValueFromRange: convenience function") {
     SUBCASE("Integer range") {
       for (int i = 0; i < 100; ++i) {
         auto value = RandomValueFromRange(1, 6);
@@ -320,7 +323,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomFastValue: convenience function") {
+  TEST_CASE("helios::utils::RandomFastValue: convenience function") {
     SUBCASE("Integer type") {
       auto value = RandomFastValue<int>();
       CHECK_GE(value, std::numeric_limits<int>::min());
@@ -336,7 +339,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomFastValueFromRange: convenience function") {
+  TEST_CASE("helios::utils::RandomFastValueFromRange: convenience function") {
     SUBCASE("Integer range") {
       for (int i = 0; i < 100; ++i) {
         auto value = RandomFastValueFromRange(100, 200);
@@ -354,7 +357,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::Random: statistical distribution") {
+  TEST_CASE("helios::utils::Random: statistical distribution") {
     // Very basic statistical test - values should be roughly uniformly
     // distributed
     SUBCASE("Integer range distribution is reasonable") {
@@ -397,7 +400,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::Random: type aliases") {
+  TEST_CASE("helios::utils::Random: type aliases") {
     SUBCASE("DefaultRandomGenerator is correct alias") {
       CHECK(std::is_same_v<DefaultRandomGenerator,
                            RandomGenerator<DefaultRandomEngine>>);
@@ -409,7 +412,7 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("utils::RandomGenerator: different arithmetic types") {
+  TEST_CASE("helios::utils::RandomGenerator: different arithmetic types") {
     auto engine = MakeDefaultEngine();
     RandomGenerator<DefaultRandomEngine> generator(engine);
 

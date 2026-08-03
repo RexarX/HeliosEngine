@@ -31,7 +31,7 @@ struct alignas(16) Vec3 {
 }  // namespace
 
 TEST_SUITE("helios::mem::FixedPoolAllocator") {
-  TEST_CASE("mem::FixedPoolAllocator::ctor") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::ctor") {
     SUBCASE("BlockSize is at least the requested block size") {
       const FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       CHECK_GE(pool.BlockSize(), kBlockSize);
@@ -68,7 +68,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::ctor(FixedPoolAllocator&&)") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::ctor(FixedPoolAllocator&&)") {
     SUBCASE("Moved-into pool carries allocation state") {
       FixedPoolAllocator source(kBlockSize, kBlockCount, kAlign);
       std::ignore = source.allocate(kBlockSize, kAlign);
@@ -98,7 +98,8 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::operator=(FixedPoolAllocator&&)") {
+  TEST_CASE(
+      "helios::mem::FixedPoolAllocator::operator=(FixedPoolAllocator&&)") {
     SUBCASE("Target acquires source allocation state") {
       FixedPoolAllocator source(kBlockSize, kBlockCount, kAlign);
       std::ignore = source.allocate(kBlockSize, kAlign);
@@ -131,7 +132,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::Reset") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       std::ignore = pool.allocate(kBlockSize, kAlign);
@@ -175,7 +176,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::Full") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::Full") {
     SUBCASE("Returns false on fresh pool") {
       const FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       CHECK_FALSE(pool.Full());
@@ -211,7 +212,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::Empty") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::Empty") {
     SUBCASE("Returns true on fresh pool") {
       const FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       CHECK(pool.Empty());
@@ -244,7 +245,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::Owns") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::Owns") {
     SUBCASE("Returns true for pointer from this pool") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       void* const ptr = pool.allocate(kBlockSize, kAlign);
@@ -281,7 +282,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::Stats") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::Stats") {
     SUBCASE("All relevant fields are zero on fresh pool") {
       const FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
 
@@ -341,7 +342,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::BlockSize") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::BlockSize") {
     SUBCASE("Is at least the requested configured block size") {
       const FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       CHECK_GE(pool.BlockSize(), kBlockSize);
@@ -359,7 +360,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::Alignment") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::Alignment") {
     SUBCASE("Returns the configured alignment value") {
       const FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       CHECK_EQ(pool.Alignment(), kAlign);
@@ -372,7 +373,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::InitialBlockCount") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::InitialBlockCount") {
     SUBCASE("Returns the configured block count") {
       const FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       CHECK_EQ(pool.InitialBlockCount(), kBlockCount);
@@ -385,7 +386,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::BlockCount") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::BlockCount") {
     SUBCASE("Equals the configured block count after construction") {
       const FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       CHECK_EQ(pool.BlockCount(), kBlockCount);
@@ -406,7 +407,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::FreeBlockCount") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::FreeBlockCount") {
     SUBCASE("Equals BlockCount on fresh pool") {
       const FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       CHECK_EQ(pool.FreeBlockCount(), kBlockCount);
@@ -438,7 +439,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::UsedBlockCount") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::UsedBlockCount") {
     SUBCASE("Is zero on fresh pool") {
       const FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       CHECK_EQ(pool.UsedBlockCount(), 0);
@@ -483,7 +484,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::allocate") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::allocate") {
     SUBCASE("Returns non-null pointer") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       CHECK_NE(pool.allocate(kBlockSize, kAlign), nullptr);
@@ -525,7 +526,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator::deallocate") {
+  TEST_CASE("helios::mem::FixedPoolAllocator::deallocate") {
     SUBCASE("Freed block is returned to free list") {
       FixedPoolAllocator pool(kBlockSize, 2, kAlign);
 
@@ -562,7 +563,8 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedPoolAllocator thread-safety: concurrent allocate") {
+  TEST_CASE(
+      "helios::mem::FixedPoolAllocator thread-safety: concurrent allocate") {
     SUBCASE("All threads receive valid non-null pointers") {
       FixedPoolAllocator pool(64, 512, 64);
 

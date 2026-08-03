@@ -9,10 +9,44 @@
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/world.hpp>
 
+#include <chrono>
 #include <cstddef>
-#include <thread>
 
 namespace helios::app {
+
+void Scheduler::Clear() {
+  HELIOS_ASSERT(async_loops_running_.load(std::memory_order_acquire) == 0,
+                "Cannot clear scheduler while async update loops are running! "
+                "Call Stop() or Shutdown() first.");
+  HELIOS_ASSERT(async_loop_futures_.empty(),
+                "Cannot clear scheduler while async loop futures remain! Call "
+                "Stop() or Shutdown() first.");
+  HELIOS_ASSERT(overlapping_update_futures_.empty(),
+                "Cannot clear scheduler while overlapping updates remain! Call "
+                "Stop() or Shutdown() first.");
+
+  for (const SubAppFrameState& state : sub_app_states_) {
+    HELIOS_ASSERT(!state.sub_app.get().IsUpdating(),
+                  "Cannot clear scheduler while sub-apps are updating! Call "
+                  "Stop() or Shutdown() first.");
+  }
+
+  HELIOS_ASSERT(!blocking_update_future_.has_value(),
+                "Cannot clear scheduler while blocking sub-app updates are in "
+                "flight! Call Stop() or Shutdown() first.");
+
+  startup_graph_.Clear();
+  blocking_update_graph_.Clear();
+  shutdown_graph_.Clear();
+  sub_app_states_.clear();
+  blocking_update_future_.reset();
+}
+
+void Scheduler::Stop(async::Executor& /*executor*/) {
+  StopAsyncUpdateLoops();
+  WaitForOverlappingUpdates();
+  WaitForSubApps();
+}
 
 void Scheduler::Build(App& app) {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::Scheduler::Build");
@@ -69,7 +103,7 @@ void Scheduler::RunStartup(App& app) {
 
   if (!app.sub_apps_.empty()) {
     executor.Run(startup_graph_).Wait();
-    StartAsyncUpdateLoops(app, executor);
+    StartAsyncUpdateLoops(app);
   }
 }
 
@@ -85,14 +119,16 @@ void Scheduler::RunFrame(App& app) {
 
   RunUpdateStage(main, executor);
   RunExtractStage(main, executor);
-  LaunchSubAppUpdates(app, executor);
+  LaunchSubAppUpdates(app);
   WaitForSubApps();
 }
 
 void Scheduler::Shutdown(App& app) {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::Scheduler::Shutdown");
 
-  StopAsyncUpdateLoops();
+  StopAsyncLoops(app);
+  WaitForOverlappingUpdates();
+  WaitForSubApps();
 
   auto& main = app.GetMainSubApp();
   auto& executor = app.GetExecutor();
@@ -110,6 +146,16 @@ void Scheduler::Shutdown(App& app) {
   }
 
   RunMainShutdown(main, executor);
+}
+
+void Scheduler::StopAsyncLoops(App& app) {
+  for (auto&& [index, sub_app] : app.sub_apps_) {
+    if (sub_app.IsAsync()) {
+      sub_app.RequestAsyncLoopStop();
+    }
+  }
+
+  StopAsyncUpdateLoops();
 }
 
 void Scheduler::WaitForSubApps() {
@@ -150,14 +196,18 @@ void Scheduler::RunExtractStage(SubApp& main, async::Executor& executor) {
   }
 }
 
-void Scheduler::LaunchSubAppUpdates(App& app, async::Executor& executor) {
+void Scheduler::LaunchSubAppUpdates(App& app) {
   if (app.sub_apps_.empty()) {
     return;
   }
 
+  auto& executor = app.GetExecutor();
+
   if (blocking_update_graph_.TaskCount() > 0) {
     blocking_update_future_ = executor.Run(blocking_update_graph_);
   }
+
+  PruneCompletedOverlappingUpdates();
 
   for (SubAppFrameState& state : sub_app_states_) {
     if (state.mode != SubAppMode::kOverlapping ||
@@ -166,12 +216,14 @@ void Scheduler::LaunchSubAppUpdates(App& app, async::Executor& executor) {
     }
 
     SubApp& sub_app = state.sub_app.get();
-    executor.SilentAsync(
-        [&sub_app, &executor]() { sub_app.RunUpdatePass(executor); });  // +
+    overlapping_update_futures_.push_back(executor.Async(
+        [&sub_app, &executor]() { sub_app.RunUpdatePass(executor); }));
   }
 }
 
-void Scheduler::StartAsyncUpdateLoops(App& app, async::Executor& executor) {
+void Scheduler::StartAsyncUpdateLoops(App& app) {
+  auto& executor = app.GetExecutor();
+
   for (auto&& [index, sub_app] : app.sub_apps_) {
     if (!sub_app.IsAsync()) {
       continue;
@@ -180,14 +232,23 @@ void Scheduler::StartAsyncUpdateLoops(App& app, async::Executor& executor) {
     sub_app.ResetAsyncLoopStop();
     async_loops_running_.fetch_add(1, std::memory_order_acq_rel);
 
-    executor.SilentAsync([&sub_app, &executor, this]() {  // +
+    async_loop_futures_.push_back(executor.Async([&sub_app, &executor, this]() {
+      struct LoopGuard {
+        Scheduler& self;
+
+        ~LoopGuard() {
+          self.async_loops_running_.fetch_sub(1, std::memory_order_acq_rel);
+        }
+      } guard{*this};
+
       sub_app.RunUpdatePass(executor);
-      async_loops_running_.fetch_sub(1, std::memory_order_acq_rel);
-    });
+    }));
   }
 }
 
 void Scheduler::StopAsyncUpdateLoops() {
+  HELIOS_APP_PROFILE_SCOPE_N("helios::app::Scheduler::StopAsyncUpdateLoops");
+
   for (SubAppFrameState& state : sub_app_states_) {
     if (state.mode != SubAppMode::kAsync) {
       continue;
@@ -196,9 +257,32 @@ void Scheduler::StopAsyncUpdateLoops() {
     state.sub_app.get().RequestAsyncLoopStop();
   }
 
-  while (async_loops_running_.load(std::memory_order_acquire) > 0) {
-    std::this_thread::yield();
+  for (auto& future : async_loop_futures_) {
+    if (future.valid()) {
+      future.wait();
+    }
   }
+  async_loop_futures_.clear();
+  async_loops_running_.store(0, std::memory_order_release);
+}
+
+void Scheduler::WaitForOverlappingUpdates() {
+  HELIOS_APP_PROFILE_SCOPE_N(
+      "helios::app::Scheduler::WaitForOverlappingUpdates");
+
+  for (auto& future : overlapping_update_futures_) {
+    if (future.valid()) {
+      future.wait();
+    }
+  }
+  overlapping_update_futures_.clear();
+}
+
+void Scheduler::PruneCompletedOverlappingUpdates() {
+  std::erase_if(overlapping_update_futures_, [](std::future<void>& future) {
+    return !future.valid() || future.wait_for(std::chrono::seconds{0}) ==
+                                  std::future_status::ready;
+  });
 }
 
 void Scheduler::ExtractSubApp(SubAppFrameState& state,

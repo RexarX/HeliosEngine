@@ -42,7 +42,7 @@ struct Qux {};
 }  // namespace
 
 TEST_SUITE("helios::utils::TypeIndex") {
-  TEST_CASE("utils::TypeIndex::ctor") {
+  TEST_CASE("helios::utils::TypeIndex::ctor") {
     SUBCASE("Default ctor produces empty TypeIndex") {
       constexpr TypeIndex idx;
       CHECK(idx.Empty());
@@ -74,7 +74,7 @@ TEST_SUITE("helios::utils::TypeIndex") {
     }
   }
 
-  TEST_CASE("utils::TypeIndex::operator=") {
+  TEST_CASE("helios::utils::TypeIndex::operator=") {
     SUBCASE("Copy assignment preserves value") {
       constexpr auto index = TypeIndex::From<Foo>();
 
@@ -94,7 +94,7 @@ TEST_SUITE("helios::utils::TypeIndex") {
     }
   }
 
-  TEST_CASE("utils::TypeIndex::From") {
+  TEST_CASE("helios::utils::TypeIndex::From") {
     SUBCASE("From<T>() produces non-empty TypeIndex") {
       constexpr auto idx = TypeIndex::From<Foo>();
       CHECK_FALSE(idx.Empty());
@@ -126,7 +126,7 @@ TEST_SUITE("helios::utils::TypeIndex") {
     }
   }
 
-  TEST_CASE("utils::TypeIndex::FromHash") {
+  TEST_CASE("helios::utils::TypeIndex::FromHash") {
     SUBCASE("FromHash reproduces TypeIndex from an existing hash") {
       constexpr auto expected = TypeIndex::From<Foo>();
       const auto idx = TypeIndex::FromHash(expected.Hash());
@@ -149,7 +149,7 @@ TEST_SUITE("helios::utils::TypeIndex") {
     }
   }
 
-  TEST_CASE("utils::TypeIndex::Empty") {
+  TEST_CASE("helios::utils::TypeIndex::Empty") {
     SUBCASE("Default-constructed TypeIndex is empty") {
       constexpr TypeIndex idx;
       CHECK(idx.Empty());
@@ -161,7 +161,7 @@ TEST_SUITE("helios::utils::TypeIndex") {
     }
   }
 
-  TEST_CASE("utils::TypeIndex::Hash") {
+  TEST_CASE("helios::utils::TypeIndex::Hash") {
     SUBCASE("Default-constructed TypeIndex has hash 0") {
       constexpr TypeIndex idx;
       CHECK_EQ(idx.Hash(), 0);
@@ -184,14 +184,14 @@ TEST_SUITE("helios::utils::TypeIndex") {
     }
   }
 
-  TEST_CASE("utils::TypeIndex::operator size_t") {
+  TEST_CASE("helios::utils::TypeIndex::operator size_t") {
     SUBCASE("Explicit conversion to size_t equals Hash()") {
       constexpr auto idx = TypeIndex::From<Foo>();
       CHECK_EQ(static_cast<size_t>(idx), idx.Hash());
     }
   }
 
-  TEST_CASE("utils::TypeIndex::operator<=>") {
+  TEST_CASE("helios::utils::TypeIndex::operator<=>") {
     SUBCASE("TypeIndex is equal to itself") {
       constexpr auto idx = TypeIndex::From<Foo>();
       CHECK_EQ(idx, idx);
@@ -223,7 +223,7 @@ TEST_SUITE("helios::utils::TypeIndex") {
 }
 
 TEST_SUITE("helios::utils::TypeId") {
-  TEST_CASE("utils::TypeId::ctor") {
+  TEST_CASE("helios::utils::TypeId::ctor") {
     SUBCASE("Default ctor produces empty TypeId") {
       constexpr TypeId id;
 
@@ -251,7 +251,7 @@ TEST_SUITE("helios::utils::TypeId") {
     }
   }
 
-  TEST_CASE("utils::TypeId::operator=") {
+  TEST_CASE("helios::utils::TypeId::operator=") {
     SUBCASE("Copy assignment preserves value") {
       constexpr auto id1 = TypeId::From<Foo>();
 
@@ -271,7 +271,7 @@ TEST_SUITE("helios::utils::TypeId") {
     }
   }
 
-  TEST_CASE("utils::TypeId::From") {
+  TEST_CASE("helios::utils::TypeId::From") {
     SUBCASE("From<T>() produces non-empty TypeId") {
       constexpr auto id = TypeId::From<Foo>();
       CHECK_FALSE(id.Empty());
@@ -296,7 +296,7 @@ TEST_SUITE("helios::utils::TypeId") {
     }
   }
 
-  TEST_CASE("utils::TypeId::FromExported") {
+  TEST_CASE("helios::utils::TypeId::FromExported") {
     SUBCASE("FromExported round-trips hash and qualified name") {
       constexpr auto original = TypeId::From<Foo>();
       const auto restored = TypeId::FromExported(original.Index().Hash(),
@@ -320,7 +320,7 @@ TEST_SUITE("helios::utils::TypeId") {
     }
   }
 
-  TEST_CASE("utils::TypeId::Empty") {
+  TEST_CASE("helios::utils::TypeId::Empty") {
     SUBCASE("Default-constructed TypeId is empty") {
       constexpr TypeId id;
       CHECK(id.Empty());
@@ -332,7 +332,7 @@ TEST_SUITE("helios::utils::TypeId") {
     }
   }
 
-  TEST_CASE("utils::TypeId::Name") {
+  TEST_CASE("helios::utils::TypeId::Name") {
     SUBCASE("Returns unqualified type name") {
       constexpr auto id = TypeId::From<Foo>();
       CHECK_EQ(id.Name(), "Foo");
@@ -349,7 +349,7 @@ TEST_SUITE("helios::utils::TypeId") {
     }
   }
 
-  TEST_CASE("utils::TypeId::QualifiedName") {
+  TEST_CASE("helios::utils::TypeId::QualifiedName") {
     SUBCASE("Contains type name") {
       constexpr auto id = TypeId::From<Foo>();
       CHECK_FALSE(id.QualifiedName().empty());
@@ -370,7 +370,7 @@ TEST_SUITE("helios::utils::TypeId") {
     }
   }
 
-  TEST_CASE("utils::TypeId::Index") {
+  TEST_CASE("helios::utils::TypeId::Index") {
     SUBCASE("Index matches TypeIndex::From<T>()") {
       constexpr auto id = TypeId::From<Foo>();
       CHECK_EQ(id.Index(), TypeIndex::From<Foo>());
@@ -382,7 +382,7 @@ TEST_SUITE("helios::utils::TypeId") {
     }
   }
 
-  TEST_CASE("utils::TypeId::operator<=>") {
+  TEST_CASE("helios::utils::TypeId::operator<=>") {
     SUBCASE("TypeId is equal to itself") {
       constexpr auto id = TypeId::From<Foo>();
       CHECK_EQ(id, id);
@@ -447,7 +447,7 @@ TEST_SUITE(
 }
 
 TEST_SUITE("helios::utils::TypeNameOf") {
-  TEST_CASE("utils::TypeNameOf (template)") {
+  TEST_CASE("helios::utils::TypeNameOf (template)") {
     SUBCASE("Returns unqualified name for simple type") {
       constexpr std::string_view name = TypeNameOf<Foo>();
       CHECK_EQ(name, "Foo");
@@ -464,7 +464,7 @@ TEST_SUITE("helios::utils::TypeNameOf") {
     }
   }
 
-  TEST_CASE("utils::TypeNameOf (instance overload)") {
+  TEST_CASE("helios::utils::TypeNameOf (instance overload)") {
     SUBCASE("Returns unqualified name from instance") {
       constexpr std::string_view name = TypeNameOf(Foo{});
       CHECK_EQ(name, "Foo");
@@ -473,7 +473,7 @@ TEST_SUITE("helios::utils::TypeNameOf") {
 }
 
 TEST_SUITE("helios::utils::QualifiedTypeNameOf") {
-  TEST_CASE("utils::QualifiedTypeNameOf (template)") {
+  TEST_CASE("helios::utils::QualifiedTypeNameOf (template)") {
     SUBCASE("Contains type name for simple type") {
       constexpr std::string_view name = QualifiedTypeNameOf<Foo>();
       CHECK_NE(name.find("Foo"), std::string_view::npos);
@@ -496,7 +496,7 @@ TEST_SUITE("helios::utils::QualifiedTypeNameOf") {
     }
   }
 
-  TEST_CASE("utils::QualifiedTypeNameOf (instance overload)") {
+  TEST_CASE("helios::utils::QualifiedTypeNameOf (instance overload)") {
     SUBCASE("Returns qualified name from instance") {
       constexpr std::string_view name = QualifiedTypeNameOf(outer::Baz{});
       CHECK_NE(name.find("Baz"), std::string_view::npos);
@@ -506,7 +506,7 @@ TEST_SUITE("helios::utils::QualifiedTypeNameOf") {
 }
 
 TEST_SUITE("helios::utils::FunctionNameOf") {
-  TEST_CASE("utils::FunctionNameOf (template)") {
+  TEST_CASE("helios::utils::FunctionNameOf (template)") {
     SUBCASE("Returns unqualified name for global function") {
       constexpr std::string_view name =
           FunctionNameOf<TypeInfoGlobalFunctionProbe>();
@@ -534,7 +534,7 @@ TEST_SUITE("helios::utils::FunctionNameOf") {
 }
 
 TEST_SUITE("helios::utils::QualifiedFunctionNameOf") {
-  TEST_CASE("utils::QualifiedFunctionNameOf (template)") {
+  TEST_CASE("helios::utils::QualifiedFunctionNameOf (template)") {
     SUBCASE("Returns global function name") {
       constexpr std::string_view name =
           QualifiedFunctionNameOf<TypeInfoGlobalFunctionProbe>();

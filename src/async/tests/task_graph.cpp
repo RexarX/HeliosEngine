@@ -17,7 +17,7 @@
 using namespace helios::async;
 
 TEST_SUITE("helios::async::TaskGraph") {
-  TEST_CASE("async::TaskGraph: construction and basic properties") {
+  TEST_CASE("helios::async::TaskGraph: construction and basic properties") {
     SUBCASE("Default construction") {
       TaskGraph graph;
 
@@ -62,7 +62,7 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
   }
 
-  TEST_CASE("async::TaskGraph: task creation") {
+  TEST_CASE("helios::async::TaskGraph: task creation") {
     TaskGraph graph("TaskCreationGraph");
     Executor executor(2);
 
@@ -151,7 +151,8 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
   }
 
-  TEST_CASE("async::TaskGraph: basic parallel operations - simplified") {
+  TEST_CASE(
+      "helios::async::TaskGraph: basic parallel operations - simplified") {
     TaskGraph graph("ParallelOpsGraph");
     Executor executor(4);
 
@@ -240,7 +241,7 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
   }
 
-  TEST_CASE("async::TaskGraph: actual parallel algorithms") {
+  TEST_CASE("helios::async::TaskGraph: actual parallel algorithms") {
     TaskGraph graph("ActualParallelOpsGraph");
     Executor executor(4);
 
@@ -350,7 +351,7 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
   }
 
-  TEST_CASE("async::TaskGraph::Linearize") {
+  TEST_CASE("helios::async::TaskGraph::Linearize") {
     TaskGraph graph("LinearGraph");
     Executor executor(2);
     std::vector<int> execution_order;
@@ -403,7 +404,7 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
   }
 
-  TEST_CASE("async::TaskGraph: task management") {
+  TEST_CASE("helios::async::TaskGraph: task management") {
     TaskGraph graph("ManagementGraph");
     Executor executor(2);
 
@@ -448,7 +449,7 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
   }
 
-  TEST_CASE("async::TaskGraph: composition") {
+  TEST_CASE("helios::async::TaskGraph: composition") {
     TaskGraph main_graph("MainGraph");
     TaskGraph composed_graph("ComposedGraph");
     Executor executor(2);
@@ -518,7 +519,7 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
   }
 
-  TEST_CASE("async::TaskGraph: visitor pattern") {
+  TEST_CASE("helios::async::TaskGraph: visitor pattern") {
     TaskGraph graph("VisitorGraph");
 
     SUBCASE("Visit all tasks") {
@@ -544,7 +545,7 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
   }
 
-  TEST_CASE("async::TaskGraph: utility operations") {
+  TEST_CASE("helios::async::TaskGraph: utility operations") {
     TaskGraph graph("UtilityGraph");
 
     SUBCASE("Clear graph") {
@@ -566,7 +567,7 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
   }
 
-  TEST_CASE("async::TaskGraph: complex dependency patterns") {
+  TEST_CASE("helios::async::TaskGraph: complex dependency patterns") {
     TaskGraph graph("ComplexGraph");
     Executor executor(4);
 
@@ -665,7 +666,7 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
   }
 
-  TEST_CASE("async::TaskGraph: performance characteristics") {
+  TEST_CASE("helios::async::TaskGraph: performance characteristics") {
     TaskGraph graph("PerformanceGraph");
     Executor executor(std::thread::hardware_concurrency());
 

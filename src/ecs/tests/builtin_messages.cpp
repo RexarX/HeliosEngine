@@ -33,7 +33,7 @@ template <MessageTrait T>
 }  // namespace
 
 TEST_SUITE("helios::ecs::EntityAddedMsg") {
-  TEST_CASE("ecs::EntityAddedMsg::GetEntity") {
+  TEST_CASE("helios::ecs::EntityAddedMsg::GetEntity") {
     SUBCASE("Stores and returns the entity it was constructed with") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -64,7 +64,7 @@ TEST_SUITE("helios::ecs::EntityAddedMsg") {
     }
   }
 
-  TEST_CASE("ecs::EntityAddedMsg: emitted by World::CreateEntity") {
+  TEST_CASE("helios::ecs::EntityAddedMsg: emitted by World::CreateEntity") {
     SUBCASE("One message is emitted per created entity") {
       World world;
       world.AddMessage<EntityAddedMsg>();
@@ -112,7 +112,7 @@ TEST_SUITE("helios::ecs::EntityAddedMsg") {
     }
   }
 
-  TEST_CASE("ecs::EntityAddedMsg: static trait members") {
+  TEST_CASE("helios::ecs::EntityAddedMsg: static trait members") {
     SUBCASE("kName is EntityAddedMsg") {
       CHECK_EQ(EntityAddedMsg::kName, "EntityAddedMsg");
     }
@@ -163,7 +163,8 @@ TEST_SUITE("ecs::EntityDestroyedMsg") {
     }
   }
 
-  TEST_CASE("ecs::EntityDestroyedMsg: emitted by World::DestroyEntity") {
+  TEST_CASE(
+      "helios::ecs::EntityDestroyedMsg: emitted by World::DestroyEntity") {
     SUBCASE("One message is emitted per destroyed entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -203,7 +204,7 @@ TEST_SUITE("ecs::EntityDestroyedMsg") {
     }
   }
 
-  TEST_CASE("ecs::EntityDestroyedMsg: static trait members") {
+  TEST_CASE("helios::ecs::EntityDestroyedMsg: static trait members") {
     SUBCASE("kName is EntityDestroyedMsg") {
       CHECK_EQ(EntityDestroyedMsg::kName, "EntityDestroyedMsg");
     }
@@ -224,7 +225,7 @@ TEST_SUITE("ecs::EntityDestroyedMsg") {
 }
 
 TEST_SUITE("helios::ecs::ComponentAddedMsg") {
-  TEST_CASE("ecs::ComponentAddedMsg::GetEntity") {
+  TEST_CASE("helios::ecs::ComponentAddedMsg::GetEntity") {
     SUBCASE("Stores and returns the entity it was constructed with") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -255,7 +256,7 @@ TEST_SUITE("helios::ecs::ComponentAddedMsg") {
     }
   }
 
-  TEST_CASE("ecs::ComponentAddedMsg: emitted by World::AddComponent") {
+  TEST_CASE("helios::ecs::ComponentAddedMsg: emitted by World::AddComponent") {
     SUBCASE("One message is emitted when a component is added") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -296,7 +297,7 @@ TEST_SUITE("helios::ecs::ComponentAddedMsg") {
     }
   }
 
-  TEST_CASE("ecs::ComponentAddedMsg: static trait members") {
+  TEST_CASE("helios::ecs::ComponentAddedMsg: static trait members") {
     SUBCASE("kName is ComponentAddedMsg") {
       CHECK_EQ(ComponentAddedMsg<Position>::kName, "ComponentAddedMsg");
     }
@@ -317,7 +318,7 @@ TEST_SUITE("helios::ecs::ComponentAddedMsg") {
 }
 
 TEST_SUITE("helios::ecs::ComponentRemovedMsg") {
-  TEST_CASE("ecs::ComponentRemovedMsg::GetEntity") {
+  TEST_CASE("helios::ecs::ComponentRemovedMsg::GetEntity") {
     SUBCASE("Stores and returns the entity it was constructed with") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -348,7 +349,8 @@ TEST_SUITE("helios::ecs::ComponentRemovedMsg") {
     }
   }
 
-  TEST_CASE("ecs::ComponentRemovedMsg: emitted by World::RemoveComponent") {
+  TEST_CASE(
+      "helios::ecs::ComponentRemovedMsg: emitted by World::RemoveComponent") {
     SUBCASE("One message is emitted when a component is removed") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -392,7 +394,7 @@ TEST_SUITE("helios::ecs::ComponentRemovedMsg") {
     }
   }
 
-  TEST_CASE("ecs::ComponentRemovedMsg: static trait members") {
+  TEST_CASE("helios::ecs::ComponentRemovedMsg: static trait members") {
     SUBCASE("kName is ComponentRemovedMsg") {
       CHECK_EQ(ComponentRemovedMsg<Position>::kName, "ComponentRemovedMsg");
     }
@@ -413,7 +415,7 @@ TEST_SUITE("helios::ecs::ComponentRemovedMsg") {
 }
 
 TEST_SUITE("helios::ecs::ComponentsClearedMsg") {
-  TEST_CASE("ecs::ComponentsClearedMsg::GetEntity") {
+  TEST_CASE("helios::ecs::ComponentsClearedMsg::GetEntity") {
     SUBCASE("Stores and returns the entity it was constructed with") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -444,7 +446,8 @@ TEST_SUITE("helios::ecs::ComponentsClearedMsg") {
     }
   }
 
-  TEST_CASE("ecs::ComponentsClearedMsg: emitted by World::ClearComponents") {
+  TEST_CASE(
+      "helios::ecs::ComponentsClearedMsg: emitted by World::ClearComponents") {
     SUBCASE("One message is emitted per cleared entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -494,7 +497,7 @@ TEST_SUITE("helios::ecs::ComponentsClearedMsg") {
     }
   }
 
-  TEST_CASE("ecs::ComponentsClearedMsg: static trait members") {
+  TEST_CASE("helios::ecs::ComponentsClearedMsg: static trait members") {
     SUBCASE("kName is ComponentsClearedMsg") {
       CHECK_EQ(ComponentsClearedMsg::kName, "ComponentsClearedMsg");
     }
@@ -515,7 +518,8 @@ TEST_SUITE("helios::ecs::ComponentsClearedMsg") {
 }
 
 TEST_SUITE("helios::ecs::ResourceInsertedMsg") {
-  TEST_CASE("ecs::ResourceInsertedMsg: emitted by World::InsertResource") {
+  TEST_CASE(
+      "helios::ecs::ResourceInsertedMsg: emitted by World::InsertResource") {
     SUBCASE("One message is emitted when a resource is inserted") {
       World world;
       world.AddMessage<ResourceInsertedMsg<Score>>();
@@ -564,7 +568,8 @@ TEST_SUITE("helios::ecs::ResourceInsertedMsg") {
     }
   }
 
-  TEST_CASE("ecs::ResourceInsertedMsg: emitted by World::TryInsertResource") {
+  TEST_CASE(
+      "helios::ecs::ResourceInsertedMsg: emitted by World::TryInsertResource") {
     SUBCASE("Message is emitted on successful insertion") {
       World world;
       world.AddMessage<ResourceInsertedMsg<Score>>();
@@ -589,7 +594,7 @@ TEST_SUITE("helios::ecs::ResourceInsertedMsg") {
     }
   }
 
-  TEST_CASE("ecs::ResourceInsertedMsg: static trait members") {
+  TEST_CASE("helios::ecs::ResourceInsertedMsg: static trait members") {
     SUBCASE("kName is ResourceInsertedMsg") {
       CHECK_EQ(ResourceInsertedMsg<Score>::kName, "ResourceInsertedMsg");
     }
@@ -610,7 +615,8 @@ TEST_SUITE("helios::ecs::ResourceInsertedMsg") {
 }
 
 TEST_SUITE("helios::ecs::ResourceRemovedMsg") {
-  TEST_CASE("ecs::ResourceRemovedMsg: emitted by World::RemoveResource") {
+  TEST_CASE(
+      "helios::ecs::ResourceRemovedMsg: emitted by World::RemoveResource") {
     SUBCASE("One message is emitted when a resource is removed") {
       World world;
       world.AddMessage<ResourceRemovedMsg<Score>>();
@@ -655,7 +661,8 @@ TEST_SUITE("helios::ecs::ResourceRemovedMsg") {
     }
   }
 
-  TEST_CASE("ecs::ResourceRemovedMsg: emitted by World::TryRemoveResource") {
+  TEST_CASE(
+      "helios::ecs::ResourceRemovedMsg: emitted by World::TryRemoveResource") {
     SUBCASE("Message is emitted on successful removal") {
       World world;
       world.AddMessage<ResourceRemovedMsg<Score>>();
@@ -680,7 +687,7 @@ TEST_SUITE("helios::ecs::ResourceRemovedMsg") {
     }
   }
 
-  TEST_CASE("ecs::ResourceRemovedMsg: static trait members") {
+  TEST_CASE("helios::ecs::ResourceRemovedMsg: static trait members") {
     SUBCASE("kName is ResourceRemovedMsg") {
       CHECK_EQ(ResourceRemovedMsg<Score>::kName, "ResourceRemovedMsg");
     }

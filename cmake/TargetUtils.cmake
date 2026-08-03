@@ -67,11 +67,63 @@ function(helios_target_set_warnings TARGET)
   target_compile_options(${TARGET} PRIVATE
       # MSVC and clang-cl (MSVC frontend) use MSVC-style warnings
       $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:${MSVC_WARNINGS}>
-      # Clang on Unix-like systems
-      $<$<AND:$<CXX_COMPILER_ID:Clang>,$<NOT:$<PLATFORM_ID:Windows>>>:${CLANG_WARNINGS}>
+      # Clang / AppleClang on Unix-like systems
+      $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>:${CLANG_WARNINGS}>
       # GCC
       $<$<CXX_COMPILER_ID:GNU>:${GCC_WARNINGS}>
   )
+endfunction()
+
+#[[
+    helios_target_suppress_warnings(<target>)
+
+    Disables compiler warnings for third-party or generated targets.
+]]
+function(helios_target_suppress_warnings TARGET)
+  if(NOT TARGET ${TARGET})
+    return()
+  endif()
+
+  _helios_resolve_alias_target(${TARGET} _actual_target)
+
+  get_target_property(_imported ${_actual_target} IMPORTED)
+  if(_imported)
+    return()
+  endif()
+
+  get_target_property(_type ${_actual_target} TYPE)
+  if(_type STREQUAL "INTERFACE_LIBRARY" OR _type STREQUAL "UTILITY")
+    return()
+  endif()
+
+  target_compile_options(${_actual_target} PRIVATE
+      $<$<OR:$<CXX_COMPILER_ID:GNU>,$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>>:-w>
+      $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:/W0>
+  )
+endfunction()
+
+#[[
+    helios_suppress_warnings_in_binary_dir(<dir>)
+
+    Suppresses warnings for all targets registered in a CMake binary directory.
+    Used for CPM-fetched dependencies compiled as part of the build tree.
+]]
+function(helios_suppress_warnings_in_binary_dir DIR)
+  if(NOT IS_DIRECTORY "${DIR}")
+    return()
+  endif()
+
+  get_directory_property(_targets DIRECTORY "${DIR}" BUILDSYSTEM_TARGETS)
+  if(NOT _targets)
+    return()
+  endif()
+
+  foreach(_target IN LISTS _targets)
+    if(TARGET ${_target})
+      helios_target_suppress_warnings(${_target})
+      helios_mark_system_includes(${_target})
+    endif()
+  endforeach()
 endfunction()
 
 #[[
@@ -84,9 +136,28 @@ function(helios_target_set_test_warnings TARGET)
 
   # doctest SUBCASE blocks routinely shadow outer locals; suppress in tests only.
   target_compile_options(${TARGET} PRIVATE
-      $<$<OR:$<CXX_COMPILER_ID:GNU>,$<AND:$<CXX_COMPILER_ID:Clang>,$<NOT:$<PLATFORM_ID:Windows>>>>:-Wno-shadow>
+      $<$<OR:$<CXX_COMPILER_ID:GNU>,$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>>:
+          -Wno-shadow
+          -Wno-unused-variable
+          -Wno-unused-const-variable
+      >
       $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:/wd4456>
   )
+
+  # Clang-only: doctest uses __COUNTER__ (c2y) and emits #warning for <ciso646>.
+  # SHELL keeps -Wno-#warnings as a single argv; without it CMake/# quoting breaks
+  # the flag into a useless '"-Wno-#warnings"' token that Clang ignores.
+  # Extra Clang diagnostics that GCC does not emit (or emits far less) in tests.
+  if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32)
+    target_compile_options(${TARGET} PRIVATE
+        -Wno-c2y-extensions
+        "SHELL:-Wno-#warnings"
+        -Wno-unused-lambda-capture
+        -Wno-unneeded-internal-declaration
+        -Wno-self-assign-overloaded
+        -Wno-tautological-pointer-compare
+    )
+  endif()
 endfunction()
 
 # ============================================================================
@@ -103,16 +174,29 @@ function(helios_target_set_optimization TARGET)
       # MSVC and clang-cl (MSVC frontend)
       $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
           /Zc:preprocessor
-          $<$<CONFIG:Debug>:/Od /Zi /RTC1>
+          /MP
+          $<$<CONFIG:Debug>:/Od /Zi /RTC1 /MDd>
           $<$<CONFIG:RelWithDebInfo>:/O2 /Zi /DNDEBUG>
           $<$<CONFIG:Release>:/O2 /Ob2 /DNDEBUG>
       >
       # GCC and Clang on Unix-like systems
-      $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>,$<NOT:$<PLATFORM_ID:Windows>>>:
-          $<$<CONFIG:Debug>:-O0 -g3 -ggdb>
+      $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:
+          $<$<CONFIG:Debug>:-Og -g3 -ggdb>
           $<$<CONFIG:RelWithDebInfo>:-O2 -g -DNDEBUG>
           $<$<CONFIG:Release>:-O3 -DNDEBUG>
       >
+  )
+
+  target_link_options(${TARGET} PRIVATE
+      $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:
+          $<$<CONFIG:Debug>:
+              -rdynamic
+          >
+          $<$<CONFIG:RelWithDebInfo>:
+              -rdynamic
+          >
+      >
+      # Windows: No special linker flags needed for debugging (PDB is handled by /Zi)
   )
 
   # Enable incremental linking for Debug builds on MSVC

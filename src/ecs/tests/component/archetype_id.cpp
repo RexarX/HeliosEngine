@@ -34,7 +34,7 @@ constexpr auto tag_index = ComponentTypeIndex::From<Tag>();
 }  // namespace
 
 TEST_SUITE("helios::ecs::ArchetypeId") {
-  TEST_CASE("ecs::ArchetypeId::ctor") {
+  TEST_CASE("helios::ecs::ArchetypeId::ctor") {
     SUBCASE("Default ctor creates empty archetype") {
       ArchetypeId id;
 
@@ -138,7 +138,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::assignment") {
+  TEST_CASE("helios::ecs::ArchetypeId::assignment") {
     SUBCASE("Copy assignment") {
       const auto original = ArchetypeId::From<Position, Velocity>();
       ArchetypeId assigned;
@@ -172,7 +172,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::With") {
+  TEST_CASE("helios::ecs::ArchetypeId::With") {
     SUBCASE("With template method adds new component") {
       const auto id = ArchetypeId::From<Position>();
       const auto with_velocity = id.With<Velocity>();
@@ -223,7 +223,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::Without") {
+  TEST_CASE("helios::ecs::ArchetypeId::Without") {
     SUBCASE("Without template method removes existing component") {
       const auto id = ArchetypeId::From<Position, Velocity>();
       const auto without_velocity = id.Without<Velocity>();
@@ -286,7 +286,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::Contains") {
+  TEST_CASE("helios::ecs::ArchetypeId::Contains") {
     SUBCASE("Contains template method with existing component") {
       const auto id = ArchetypeId::From<Position, Velocity>();
       CHECK(id.Contains<Position>());
@@ -311,7 +311,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::ContainsAll") {
+  TEST_CASE("helios::ecs::ArchetypeId::ContainsAll") {
     SUBCASE("ContainsAll with all components present") {
       const auto id = ArchetypeId::From<Position, Velocity, Health>();
       const std::vector<ComponentTypeIndex> subset = {pos_index, vel_index};
@@ -344,7 +344,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::ContainsAny") {
+  TEST_CASE("helios::ecs::ArchetypeId::ContainsAny") {
     SUBCASE("ContainsAny with some components present") {
       const auto id = ArchetypeId::From<Position, Velocity>();
       const std::vector<ComponentTypeIndex> types = {pos_index, health_index};
@@ -370,7 +370,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::ContainsNone") {
+  TEST_CASE("helios::ecs::ArchetypeId::ContainsNone") {
     SUBCASE("ContainsNone with no components present") {
       const auto id = ArchetypeId::From<Position>();
       const std::vector<ComponentTypeIndex> types = {vel_index, health_index};
@@ -402,7 +402,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::Types") {
+  TEST_CASE("helios::ecs::ArchetypeId::Types") {
     SUBCASE("Types returns empty span for empty archetype") {
       const ArchetypeId empty;
       const auto types = empty.Types();
@@ -437,7 +437,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::Hash") {
+  TEST_CASE("helios::ecs::ArchetypeId::Hash") {
     SUBCASE("Hash of empty archetype is zero") {
       const ArchetypeId empty;
       CHECK_EQ(empty.Hash(), 0);
@@ -479,7 +479,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::Empty") {
+  TEST_CASE("helios::ecs::ArchetypeId::Empty") {
     SUBCASE("Empty returns true for default constructed archetype") {
       const ArchetypeId id;
       CHECK(id.Empty());
@@ -502,7 +502,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::Size") {
+  TEST_CASE("helios::ecs::ArchetypeId::Size") {
     SUBCASE("Size returns 0 for empty archetype") {
       const ArchetypeId empty;
       CHECK_EQ(empty.Size(), 0);
@@ -536,7 +536,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::operator==") {
+  TEST_CASE("helios::ecs::ArchetypeId::operator==") {
     SUBCASE("Equal archetypes") {
       const auto id1 = ArchetypeId::From<Position, Velocity>();
       const auto id2 = ArchetypeId::From<Position, Velocity>();
@@ -556,7 +556,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::operator!=") {
+  TEST_CASE("helios::ecs::ArchetypeId::operator!=") {
     SUBCASE("Equal archetypes") {
       const auto id1 = ArchetypeId::From<Position>();
       const auto id2 = ArchetypeId::From<Position>();
@@ -570,7 +570,7 @@ TEST_SUITE("helios::ecs::ArchetypeId") {
     }
   }
 
-  TEST_CASE("ecs::ArchetypeId::operator<") {
+  TEST_CASE("helios::ecs::ArchetypeId::operator<") {
     SUBCASE("Provides consistent ordering") {
       const auto id1 = ArchetypeId::From<Position>();
       const auto id2 = ArchetypeId::From<Velocity>();

@@ -12,22 +12,32 @@ namespace helios::ecs {
  * recycling.
  * @details Entity uses a combination of index and generation to provide stable
  * references even when entities are destroyed and their indices are recycled.
- * The generation counter ensures that old entity references become invalid when
- * the index is reused.
+ *
+ * Generations encode both a 31-bit reuse counter and a liveness bit:
+ * - bit 31 (`kAliveBit`) is set when the slot is living;
+ * - bits 0–30 hold the counter.
  *
  * Memory layout: 32-bit index + 32-bit generation = 64-bit total
  *
- * @note This class is thread-safe for all operations.
+ * @note Individual Entity value objects are safe to copy freely. Concurrent
+ * mutation of the same Entity instance is not synchronized.
  */
 class Entity {
 public:
   using IndexType = uint32_t;
   using GenerationType = uint32_t;
 
-  static constexpr IndexType kInvalidIndex =
-      std::numeric_limits<IndexType>::max();
-  static constexpr GenerationType kInvalidGeneration =
+  static constexpr auto kInvalidIndex = std::numeric_limits<IndexType>::max();
+  /// Unreachable sentinel: counter mask with the alive bit set.
+  static constexpr auto kInvalidGeneration =
       std::numeric_limits<GenerationType>::max();
+  /// Top bit: set when the generation represents a living entity.
+  static constexpr GenerationType kAliveBit = 0x8000'0000U;
+  /// Low 31 bits: reuse counter. `kCounterMask` itself is reserved so that
+  /// `kInvalidGeneration` (`kCounterMask | kAliveBit`) stays unreachable.
+  static constexpr GenerationType kCounterMask = 0x7FFF'FFFFU;
+  /// Initial alive generation assigned to brand-new entity indices.
+  static constexpr GenerationType kInitialAliveGeneration = kAliveBit | 1U;
 
   /**
    * @brief Constructs an invalid entity.
@@ -37,8 +47,6 @@ public:
 
   /**
    * @brief Constructs entity with specific index and generation.
-   * @details Private constructor used by entity manager to create valid
-   * entities.
    * @param index The entity index
    * @param generation The entity generation
    */
@@ -56,14 +64,25 @@ public:
   constexpr bool operator<(const Entity& other) const noexcept;
 
   /**
-   * @brief Checks if the entity is valid.
-   * @details An entity is valid if both its index and generation are not the
-   * reserved invalid values.
-   * @return True if entity has valid index and generation, false otherwise
+   * @brief Checks if the entity handle is structurally valid.
+   * @details An entity is structurally valid if both its index and generation
+   * are not the reserved invalid sentinels. This does **not** mean the entity
+   * is currently alive in an `EntityManager` — use
+   * `EntityManager::Validate()` for that.
+   * @return True if entity has usable index and generation fields
    */
   [[nodiscard]] constexpr bool Valid() const noexcept {
     return index_ != kInvalidIndex && generation_ != kInvalidGeneration;
   }
+
+  /**
+   * @brief Checks whether the generation encodes a living entity.
+   * @details Uses the alive bit in the generation encoding. This reflects the
+   * handle's generation value, not whether the entity is currently alive in an
+   * `EntityManager` — use `EntityManager::Validate()` for that.
+   * @return True if generation is alive-encoded and not the invalid sentinel
+   */
+  [[nodiscard]] constexpr bool Alive() const noexcept;
 
   /**
    * @brief Generates a hash value for this entity.
@@ -83,8 +102,8 @@ public:
 
   /**
    * @brief Gets the generation component of the entity.
-   * @details The generation counter prevents use of stale entity references
-   * after recycling.
+   * @details Returns the bit-encoded generation (alive bit + counter), not a
+   * raw reuse count. Stale handles keep their old encoding after recycling.
    * @return Entity generation, or `kInvalidGeneration` if entity is invalid
    */
   [[nodiscard]] constexpr GenerationType Generation() const noexcept {
@@ -94,7 +113,7 @@ public:
 private:
   IndexType index_ = kInvalidIndex;  ///< Entity index for storage lookup
   GenerationType generation_ =
-      kInvalidGeneration;  ///< Generation counter for recycling safety
+      kInvalidGeneration;  ///< Encoded generation (alive bit + counter)
 };
 
 constexpr bool Entity::operator<(const Entity& other) const noexcept {
@@ -111,9 +130,52 @@ constexpr size_t Entity::Hash() const noexcept {
 
   auto hash = static_cast<size_t>(index_);
   hash ^= static_cast<size_t>(generation_) +
-          static_cast<size_t>(0x9e3779b97f4a7c15ULL) + (hash << 6) +
-          (hash >> 2);
+          static_cast<size_t>(0x9e3779b97f4a7c15ULL) + (hash << 6U) +
+          (hash >> 2U);
   return hash == 0 ? 1 : hash;
+}
+
+/**
+ * @brief Checks if generation is considered alive.
+ * @details Requires the alive bit and rejects the unreachable invalid
+ * sentinel.
+ * @param gen Generation encoding to check
+ * @return True if generation is alive and not invalid
+ */
+[[nodiscard]] constexpr bool IsAliveGeneration(
+    Entity::GenerationType gen) noexcept {
+  return (gen & Entity::kAliveBit) != 0U && gen != Entity::kInvalidGeneration;
+}
+
+constexpr bool Entity::Alive() const noexcept {
+  return IsAliveGeneration(generation_);
+}
+
+/**
+ * @brief Advances a generation toward the requested liveness state.
+ * @details One counter increment occurs per full reuse cycle, on the
+ * alive->free transition. Free->alive only sets the alive bit so a reserved
+ * handle can carry the future alive value while storage still holds the free
+ * encoding (making pre-`Flush` validation fail).
+ *
+ * The reserved counter value `kCounterMask` is skipped so
+ * `kInvalidGeneration` stays unreachable.
+ *
+ * @param gen Current generation encoding
+ * @param alive Target liveness (`true` = free->alive, `false` = alive->free)
+ * @return Next generation encoding for the requested state
+ */
+[[nodiscard]] constexpr Entity::GenerationType NextGeneration(
+    Entity::GenerationType gen, bool alive) noexcept {
+  if (alive) {
+    return (gen & Entity::kCounterMask) | Entity::kAliveBit;
+  }
+
+  auto counter = (gen & Entity::kCounterMask) + 1U;
+  if (counter == Entity::kCounterMask) {
+    counter = 0U;
+  }
+  return counter & Entity::kCounterMask;
 }
 
 }  // namespace helios::ecs

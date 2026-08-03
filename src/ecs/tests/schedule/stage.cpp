@@ -26,7 +26,7 @@ public:
 }  // namespace
 
 TEST_SUITE("helios::ecs::StageTrait") {
-  TEST_CASE("ecs::StageTrait::concept") {
+  TEST_CASE("helios::ecs::StageTrait::concept") {
     SUBCASE("Empty structs satisfy StageTrait") {
       CHECK_UNARY(StageTrait<EmptyStage>);
       CHECK_UNARY(StageTrait<NamedStage>);
@@ -43,7 +43,7 @@ TEST_SUITE("helios::ecs::StageTrait") {
 }
 
 TEST_SUITE("helios::ecs::StageWithNameTrait") {
-  TEST_CASE("ecs::StageWithNameTrait::concept") {
+  TEST_CASE("helios::ecs::StageWithNameTrait::concept") {
     SUBCASE("Empty struct with kName satisfies StageWithNameTrait") {
       CHECK_UNARY(StageWithNameTrait<NamedStage>);
     }
@@ -55,7 +55,7 @@ TEST_SUITE("helios::ecs::StageWithNameTrait") {
 }
 
 TEST_SUITE("helios::ecs::StageNameOf") {
-  TEST_CASE("ecs::StageNameOf::basic") {
+  TEST_CASE("helios::ecs::StageNameOf::basic") {
     SUBCASE("Named stage returns its kName") {
       constexpr auto name = StageNameOf<NamedStage>();
       CHECK_EQ(name, "NamedStage");

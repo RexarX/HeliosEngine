@@ -68,7 +68,7 @@ struct PluginTypeExport {
    */
   template <typename T>
   [[nodiscard]] static constexpr PluginTypeExport From(
-      const T& plugin) noexcept {
+      const T& /*plugin*/) noexcept {
     return From<std::remove_cvref_t<T>>();
   }
 };
@@ -328,15 +328,13 @@ public:
    * @brief Gets reference to the underlying dynamic library.
    * @return Reference to `DynamicLibrary`
    */
-  [[nodiscard]] helios::utils::DynamicLibrary& Library() noexcept {
-    return library_;
-  }
+  [[nodiscard]] utils::DynamicLibrary& Library() noexcept { return library_; }
 
   /**
    * @brief Gets const reference to the underlying dynamic library.
    * @return Const reference to `DynamicLibrary`
    */
-  [[nodiscard]] const helios::utils::DynamicLibrary& Library() const noexcept {
+  [[nodiscard]] const utils::DynamicLibrary& Library() const noexcept {
     return library_;
   }
 

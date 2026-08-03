@@ -25,7 +25,7 @@ struct Velocity {
 }  // namespace
 
 TEST_SUITE("helios::ecs::SparseComponentStorage") {
-  TEST_CASE("ecs::SparseComponentStorage::Clear") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::Clear") {
     const Entity e1{1, 0};
     const Position pos1{.x = 1.0F, .y = 2.0F};
     const Position pos2{.x = 3.0F, .y = 4.0F};
@@ -68,7 +68,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::Remove") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::Remove") {
     const Entity e1{1, 0};
 
     SUBCASE("Remove decrements size") {
@@ -104,7 +104,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::TryRemove") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::TryRemove") {
     const Entity entity{1, 0};
 
     SUBCASE("Returns true and removes existing component") {
@@ -135,7 +135,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::Set") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::Set") {
     const Entity e1{1, 0};
     const Position pos1{.x = 1.0F, .y = 2.0F};
     const Position pos2{.x = 3.0F, .y = 4.0F};
@@ -188,7 +188,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::TrySet") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::TrySet") {
     const Entity entity{1, 0};
     const Position pos1{.x = 1.0F, .y = 2.0F};
     const Position pos2{.x = 3.0F, .y = 4.0F};
@@ -231,7 +231,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::Emplace") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::Emplace") {
     const Entity entity{1, 0};
 
     SUBCASE("Entity has component after Emplace") {
@@ -271,7 +271,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::TryEmplace") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::TryEmplace") {
     const Entity entity{1, 0};
     const Position pos{.x = 1.0F, .y = 2.0F};
 
@@ -312,7 +312,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::Get") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::Get") {
     const Entity entity{1, 0};
     const Position pos{.x = 1.0F, .y = 2.0F};
 
@@ -352,7 +352,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::TryGet") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::TryGet") {
     const Entity entity{1, 0};
     const Position pos{.x = 1.0F, .y = 2.0F};
 
@@ -413,7 +413,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::Contains") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::Contains") {
     const Entity entity{1, 0};
 
     SUBCASE("Returns false for empty storage") {
@@ -462,7 +462,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::Size") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::Size") {
     const Entity e1{1, 0};
     const Entity e2{2, 0};
 
@@ -502,7 +502,7 @@ TEST_SUITE("helios::ecs::SparseComponentStorage") {
     }
   }
 
-  TEST_CASE("ecs::SparseComponentStorage::Data") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::Data") {
     const Entity e1{1, 0};
     const Entity e2{3, 0};
     const Position pos1{.x = 1.0F, .y = 2.0F};

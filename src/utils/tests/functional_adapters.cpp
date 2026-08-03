@@ -54,7 +54,8 @@ private:
 }  // namespace
 
 TEST_SUITE("helios::utils::FunctionalAdapters") {
-  TEST_CASE("utils::FunctionalAdapters::FilterAdapter: basic filtering") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::FilterAdapter: basic filtering") {
     std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     SUBCASE("Filter even numbers") {
@@ -120,7 +121,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::FilterAdapter: chained filtering") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::FilterAdapter: chained filtering") {
     std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 
     const auto filtered = FilterAdapter(data, [](int value) {
@@ -135,7 +137,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     CHECK_EQ(result, std::vector<int>{4, 6, 8, 10, 12});
   }
 
-  TEST_CASE("utils::FunctionalAdapters::MapAdapter: basic transformation") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::MapAdapter: basic transformation") {
     std::vector<int> data = {1, 2, 3, 4, 5};
 
     SUBCASE("Double values") {
@@ -185,7 +188,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::MapAdapter: tuple unpacking") {
+  TEST_CASE("helios::utils::FunctionalAdapters::MapAdapter: tuple unpacking") {
     std::vector<std::tuple<int, int>> data = {{1, 10}, {2, 20}, {3, 30}};
 
     const auto mapped =
@@ -199,7 +202,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     CHECK_EQ(result, std::vector<int>{11, 22, 33});
   }
 
-  TEST_CASE("utils::FunctionalAdapters::FilterAdapter: tuple unpacking") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::FilterAdapter: tuple unpacking") {
     std::vector<std::tuple<int, int>> data = {
         {1, 10}, {2, 20}, {3, 30}, {4, 40}, {5, 50}};
 
@@ -233,7 +237,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::TakeWhileAdapter: tuple unpacking") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::TakeWhileAdapter: tuple unpacking") {
     std::vector<std::tuple<int, int>> data = {
         {1, 10}, {2, 20}, {3, 30}, {4, 40}, {5, 50}};
 
@@ -252,7 +257,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::SkipWhileAdapter: tuple unpacking") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::SkipWhileAdapter: tuple unpacking") {
     std::vector<std::tuple<int, int>> data = {
         {1, 10}, {2, 20}, {3, 30}, {4, 40}, {5, 50}};
 
@@ -270,7 +276,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::InspectAdapter: tuple unpacking") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::InspectAdapter: tuple unpacking") {
     std::vector<std::tuple<int, int>> data = {{1, 10}, {2, 20}, {3, 30}};
 
     SUBCASE("Inspect with tuple unpacking") {
@@ -293,7 +300,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::TakeAdapter: limit elements") {
+  TEST_CASE("helios::utils::FunctionalAdapters::TakeAdapter: limit elements") {
     std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     SUBCASE("Take 5 elements") {
@@ -363,7 +370,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::SkipAdapter: skip elements") {
+  TEST_CASE("helios::utils::FunctionalAdapters::SkipAdapter: skip elements") {
     std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     SUBCASE("Skip 3 elements") {
@@ -433,7 +440,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::TakeWhileAdapter: conditional take") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::TakeWhileAdapter: conditional take") {
     std::vector<int> data = {1, 2, 3, 4, 5, 4, 3, 2, 1};
 
     FilterAdapter filter(data, [](int value) { return value < 5; });
@@ -486,7 +494,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::SkipWhileAdapter: conditional skip") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::SkipWhileAdapter: conditional skip") {
     std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8};
 
     SUBCASE("Skip while less than 5") {
@@ -536,7 +545,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::EnumerateAdapter: add indices") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::EnumerateAdapter: add indices") {
     std::vector<std::string> data = {"a", "b", "c", "d"};
 
     auto enumerated = EnumerateAdapter(data);
@@ -568,7 +578,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::InspectAdapter: side effects") {
+  TEST_CASE("helios::utils::FunctionalAdapters::InspectAdapter: side effects") {
     std::vector<int> data = {1, 2, 3, 4, 5};
 
     int sum = 0;
@@ -597,7 +607,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::StepByAdapter: sample elements") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::StepByAdapter: sample elements") {
     std::vector<int> data = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     SUBCASE("Step by 2") {
@@ -667,7 +678,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::ChainAdapter: combine sequences") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::ChainAdapter: combine sequences") {
     std::vector<int> data1 = {1, 2, 3};
     std::vector<int> data2 = {4, 5, 6};
 
@@ -692,7 +704,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Complex adapter chains") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Complex adapter chains") {
     std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 
     SUBCASE("Filter + Map + Take") {
@@ -754,7 +766,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Adapter: iterator operations") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Adapter: iterator operations") {
     std::vector<int> data = {1, 2, 3, 4, 5};
 
     SUBCASE("Pre-increment") {
@@ -788,7 +800,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Adapter: empty sequences") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Adapter: empty sequences") {
     std::vector<int> empty_data;
 
     SUBCASE("Filter empty") {
@@ -843,7 +855,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Const iterator support: MapAdapter") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::Const iterator support: MapAdapter") {
     const std::vector<int> data = {1, 2, 3, 4, 5};
 
     SUBCASE("Double values from const range") {
@@ -870,7 +883,9 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Const iterator support: TakeAdapter") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::Const iterator support: "
+      "TakeAdapter") {
     const std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     SUBCASE("Take first 5 from const range") {
@@ -896,7 +911,9 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Const iterator support: SkipAdapter") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::Const iterator support: "
+      "SkipAdapter") {
     const std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     SUBCASE("Skip first 5 from const range") {
@@ -1047,7 +1064,9 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Const iterator support: ChainAdapter") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::Const iterator support: "
+      "ChainAdapter") {
     const std::vector<int> data1 = {1, 2, 3};
     const std::vector<int> data2 = {4, 5, 6};
 
@@ -1131,7 +1150,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Terminal operations: ForEach") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Terminal operations: ForEach") {
     std::vector<int> data = {1, 2, 3, 4, 5};
 
     SUBCASE("ForEach accumulates values") {
@@ -1171,7 +1190,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Terminal operations: Fold") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Terminal operations: Fold") {
     std::vector<int> data = {1, 2, 3, 4, 5};
 
     SUBCASE("Fold sums values") {
@@ -1217,7 +1236,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Terminal operations: Any") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Terminal operations: Any") {
     std::vector<int> data = {1, 2, 3, 4, 5};
 
     SUBCASE("Any finds matching element") {
@@ -1239,7 +1258,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Terminal operations: All") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Terminal operations: All") {
     std::vector<int> data = {2, 4, 6, 8, 10};
 
     SUBCASE("All returns true when all match") {
@@ -1265,7 +1284,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Terminal operations: None") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Terminal operations: None") {
     std::vector<int> data = {1, 3, 5, 7, 9};
 
     SUBCASE("None returns true when none match") {
@@ -1291,7 +1310,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Terminal operations: Find") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Terminal operations: Find") {
     std::vector<int> data = {1, 2, 3, 4, 5};
 
     SUBCASE("Find returns first matching element") {
@@ -1335,7 +1354,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Terminal operations: CountIf") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Terminal operations: CountIf") {
     std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     SUBCASE("CountIf counts matching elements") {
@@ -1365,7 +1384,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Terminal operations: Collect") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Terminal operations: Collect") {
     std::vector<int> data = {1, 2, 3, 4, 5};
 
     SUBCASE("Collect gathers all elements") {
@@ -1419,7 +1438,9 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Terminal operations: allocator-aware") {
+  TEST_CASE(
+      "helios::utils::FunctionalAdapters::Terminal operations: "
+      "allocator-aware") {
     std::vector<int> data = {1, 2, 3, 4, 5, 6};
 
     auto* resource = std::pmr::get_default_resource();
@@ -1563,7 +1584,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::ReverseAdapter") {
+  TEST_CASE("helios::utils::FunctionalAdapters::ReverseAdapter") {
     SUBCASE("Basic reverse iteration") {
       std::vector<int> data = {1, 2, 3, 4, 5};
       auto reversed = ReverseAdapter(data);
@@ -1606,7 +1627,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::JoinAdapter") {
+  TEST_CASE("helios::utils::FunctionalAdapters::JoinAdapter") {
     SUBCASE("Basic join") {
       std::vector<std::vector<int>> nested = {{1, 2}, {3, 4}, {5}};
       auto joined = JoinAdapter(nested);
@@ -1647,7 +1668,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::SlideAdapter") {
+  TEST_CASE("helios::utils::FunctionalAdapters::SlideAdapter") {
     SUBCASE("Basic sliding window") {
       std::vector<int> data = {1, 2, 3, 4, 5};
       auto windows = SlideAdapter(data, 3);
@@ -1700,7 +1721,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::StrideAdapter") {
+  TEST_CASE("helios::utils::FunctionalAdapters::StrideAdapter") {
     SUBCASE("Basic stride") {
       std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
       auto strided = StrideAdapter(data, 3);
@@ -1750,7 +1771,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::ZipAdapter") {
+  TEST_CASE("helios::utils::FunctionalAdapters::ZipAdapter") {
     SUBCASE("Basic zip") {
       std::vector<int> first = {1, 2, 3};
       std::vector<int> second = {10, 20, 30};
@@ -1842,7 +1863,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("utils::FunctionalAdapters::Complex adapter chains") {
+  TEST_CASE("helios::utils::FunctionalAdapters::Complex adapter chains") {
     SUBCASE("Reverse -> Filter -> Map") {
       std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
       auto result = ReverseAdapter(data)

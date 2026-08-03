@@ -96,8 +96,12 @@ namespace {
 namespace helios::log {
 
 void Logger::FlushAll() noexcept {
+  if (shut_down_.load(std::memory_order_acquire)) [[unlikely]] {
+    return;
+  }
+
   const std::shared_lock lock(loggers_mutex_);
-  for (const auto& [_, logger] : loggers_) {
+  for (const auto& [index, logger] : loggers_) {
     if (logger) [[likely]] {
       try {
         logger->flush();
@@ -108,7 +112,44 @@ void Logger::FlushAll() noexcept {
   }
 }
 
+void Logger::Shutdown() noexcept {
+  if (shut_down_.exchange(true, std::memory_order_acq_rel)) {
+    return;
+  }
+
+  decltype(loggers_) loggers;
+  {
+    const std::scoped_lock lock(loggers_mutex_);
+    loggers.swap(loggers_);
+    logger_configs_.clear();
+    logger_levels_.clear();
+  }
+
+  for (const auto& [index, logger] : loggers) {
+    if (!logger) [[unlikely]] {
+      continue;
+    }
+    try {
+      logger->flush();
+    } catch (...) {
+      // Silently ignore flush errors
+    }
+    DropLoggerFromSpdlog(logger);
+  }
+  loggers.clear();
+
+  try {
+    spdlog::shutdown();
+  } catch (...) {
+    // Silently ignore shutdown errors
+  }
+}
+
 void Logger::FlushImpl(LoggerTypeIndex logger_index) noexcept {
+  if (shut_down_.load(std::memory_order_acquire)) [[unlikely]] {
+    return;
+  }
+
   if (const auto logger = GetLogger(logger_index)) [[likely]] {
     try {
       logger->flush();

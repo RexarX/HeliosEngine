@@ -34,7 +34,7 @@ struct HealthMsg {
 }  // namespace
 
 TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
-  TEST_CASE("ecs::ConsumedMessagesRegistry::ctor") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::ctor") {
     SUBCASE("Default construction produces an empty registry") {
       const ConsumedMessagesRegistry registry;
       CHECK(registry.Empty());
@@ -88,7 +88,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::operator=") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::operator=") {
     SUBCASE("Copy assignment replicates entries") {
       ConsumedMessagesRegistry src;
       ConsumedMessagesRegistry dst;
@@ -111,7 +111,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::MarkConsumed (typed)") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::MarkConsumed (typed)") {
     SUBCASE("A marked index is reported as consumed") {
       ConsumedMessagesRegistry registry;
       registry.MarkConsumed<PositionMsg>(0);
@@ -196,7 +196,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::MergeFrom") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::MergeFrom") {
     SUBCASE("Const lvalue source merges without modifying source") {
       ConsumedMessagesRegistry dst;
       ConsumedMessagesRegistry src_mut;
@@ -333,7 +333,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::Clear (all)") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::Clear (all)") {
     SUBCASE("All entries are removed after Clear") {
       ConsumedMessagesRegistry registry;
 
@@ -352,7 +352,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::Clear (typed)") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::Clear (typed)") {
     SUBCASE("Clears only entries for the specified type") {
       ConsumedMessagesRegistry registry;
 
@@ -374,7 +374,8 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::Clear (runtime type index)") {
+  TEST_CASE(
+      "helios::ecs::ConsumedMessagesRegistry::Clear (runtime type index)") {
     SUBCASE("Runtime Clear removes only the targeted type") {
       ConsumedMessagesRegistry registry;
 
@@ -387,7 +388,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::IsConsumed (typed)") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::IsConsumed (typed)") {
     SUBCASE("Returns true for a marked index") {
       ConsumedMessagesRegistry registry;
       registry.MarkConsumed<PositionMsg>(10);
@@ -406,7 +407,9 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::IsConsumed (runtime type index)") {
+  TEST_CASE(
+      "helios::ecs::ConsumedMessagesRegistry::IsConsumed (runtime type "
+      "index)") {
     SUBCASE("Returns true for a marked index via runtime type index") {
       ConsumedMessagesRegistry registry;
       registry.MarkConsumed<PositionMsg>(4);
@@ -427,7 +430,8 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::ConsumedIndicesFor (typed)") {
+  TEST_CASE(
+      "helios::ecs::ConsumedMessagesRegistry::ConsumedIndicesFor (typed)") {
     SUBCASE("Returns a sorted span of consumed indices for the type") {
       ConsumedMessagesRegistry registry;
 
@@ -486,7 +490,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::Empty") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::Empty") {
     SUBCASE("Returns true for a freshly default-constructed registry") {
       const ConsumedMessagesRegistry registry;
       CHECK(registry.Empty());
@@ -508,7 +512,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::HasConsumed (typed)") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::HasConsumed (typed)") {
     SUBCASE("Returns false for an unregistered type") {
       const ConsumedMessagesRegistry registry;
       CHECK_FALSE(registry.HasConsumed<PositionMsg>());
@@ -530,7 +534,9 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::HasConsumed (runtime type index)") {
+  TEST_CASE(
+      "helios::ecs::ConsumedMessagesRegistry::HasConsumed (runtime type "
+      "index)") {
     SUBCASE("Returns false for an unregistered type") {
       const ConsumedMessagesRegistry registry;
       CHECK_FALSE(registry.HasConsumed(MessageTypeIndex::From<PositionMsg>()));
@@ -543,7 +549,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::TotalConsumedCount") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::TotalConsumedCount") {
     SUBCASE("Returns zero for an empty registry") {
       const ConsumedMessagesRegistry registry;
       CHECK_EQ(registry.TotalConsumedCount(), 0);
@@ -569,7 +575,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::ConsumedCount (typed)") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::ConsumedCount (typed)") {
     SUBCASE("Returns zero for an unregistered type") {
       const ConsumedMessagesRegistry registry;
       CHECK_EQ(registry.ConsumedCount<PositionMsg>(), 0);
@@ -625,7 +631,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
     }
   }
 
-  TEST_CASE("ecs::ConsumedMessagesRegistry::Data") {
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::Data") {
     SUBCASE("Returns a const reference to the underlying map") {
       ConsumedMessagesRegistry registry;
 

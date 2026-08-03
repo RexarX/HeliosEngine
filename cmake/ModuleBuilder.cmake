@@ -116,7 +116,7 @@ function(_helios_expand_compiler_shorthands RAW_OPTS OUT_VAR)
       set(_keyword "${CMAKE_MATCH_1}")
       set(_body "${CMAKE_MATCH_2}")
       if(_keyword STREQUAL "CLANG")
-        list(APPEND _expanded "$<$<CXX_COMPILER_ID:Clang>:${_body}>")
+        list(APPEND _expanded "$<$<CXX_COMPILER_ID:Clang,AppleClang>:${_body}>")
       elseif(_keyword STREQUAL "GCC")
         list(APPEND _expanded "$<$<CXX_COMPILER_ID:GNU>:${_body}>")
       elseif(_keyword STREQUAL "MSVC")
@@ -439,7 +439,7 @@ function(_helios_module_apply_interface TARGET TARGET_SCOPE DEFAULT_VISIBILITY M
     foreach(_warn IN LISTS MODULE_SUPPRESS_WARNINGS)
       target_compile_options(${TARGET} PRIVATE
           $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:/wd${_warn}>
-          $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>,$<NOT:$<PLATFORM_ID:Windows>>>:-Wno-${_warn}>
+          $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:-Wno-${_warn}>
       )
     endforeach()
   endif()

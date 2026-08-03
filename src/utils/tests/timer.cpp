@@ -9,7 +9,7 @@
 using namespace helios::utils;
 
 TEST_SUITE("helios::utils::Timer") {
-  TEST_CASE("utils::Timer::ctor: Default clock") {
+  TEST_CASE("helios::utils::Timer::ctor: Default clock") {
     Timer timer;
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
     const auto elapsed_ms = timer.ElapsedMilliSec();
@@ -20,7 +20,7 @@ TEST_SUITE("helios::utils::Timer") {
     CHECK_GE(timer.ElapsedMilliSec(), 5.0);
   }
 
-  TEST_CASE("utils::Timer::ElapsedDuration: Custom types and units") {
+  TEST_CASE("helios::utils::Timer::ElapsedDuration: Custom types and units") {
     Timer timer;
 
     std::this_thread::sleep_for(std::chrono::milliseconds(1));
@@ -51,7 +51,7 @@ TEST_SUITE("helios::utils::Timer") {
     }
   }
 
-  TEST_CASE("utils::Timer::Elapsed: Convenience helpers") {
+  TEST_CASE("helios::utils::Timer::Elapsed: Convenience helpers") {
     Timer timer;
 
     std::this_thread::sleep_for(std::chrono::milliseconds(2));
@@ -87,7 +87,7 @@ TEST_SUITE("helios::utils::Timer") {
 
   }  // namespace
 
-  TEST_CASE("utils::Timer::ctor: Custom clock type") {
+  TEST_CASE("helios::utils::Timer::ctor: Custom clock type") {
     using CustomTimer = Timer<TestClock>;
 
     TestClock::now_value = TestClock::time_point(TestClock::duration(0));

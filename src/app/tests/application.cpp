@@ -177,7 +177,7 @@ struct TestDynamicPlugin;
 }
 
 TEST_SUITE("helios::app::App") {
-  TEST_CASE("app::App::ctor") {
+  TEST_CASE("helios::app::App::ctor") {
     SUBCASE("Default-constructed app is not initialized or running") {
       App app;
       CHECK_FALSE(app.IsInitialized());
@@ -196,7 +196,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::Clear") {
+  TEST_CASE("helios::app::App::Clear") {
     SUBCASE("Clear removes resources, systems state, and initialization flag") {
       App app;
       app.InsertResources(CounterResource{});
@@ -215,7 +215,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::Initialize") {
+  TEST_CASE("helios::app::App::Initialize") {
     SUBCASE("Initialize runs startup systems on main sub-app") {
       App app;
       app.InsertResources(CounterResource{});
@@ -261,30 +261,65 @@ TEST_SUITE("helios::app::App") {
     }
 
     SUBCASE("Initialize starts background updates for async sub-apps") {
-      App app(4);
+      std::atomic<int> updates{0};
+
+      struct CountingAtomicSystem {
+        std::atomic<int>* counter = nullptr;
+
+        void operator()() const {
+          if (counter != nullptr) {
+            counter->fetch_add(1, std::memory_order_relaxed);
+          }
+        }
+      };
+
+      App app(2);
 
       SubApp sound;
       sound.SetRunner(RunDefaultSubApp);
-      sound.InsertResources(UpdateCountResource{});
-      sound.AddSystem(kUpdate, CountingUpdateSystem{});
+      sound.AddSystem(kUpdate, CountingAtomicSystem{.counter = &updates});
 
       app.InsertSubApp(AsyncSoundSubAppLabel{}, std::move(sound));
       app.Initialize();
 
       std::this_thread::sleep_for(std::chrono::milliseconds{100});
-
-      CHECK_GE(app.GetSubApp<AsyncSoundSubAppLabel>()
-                   .GetWorld()
-                   .ReadResource<UpdateCountResource>()
-                   .value,
-               1);
-
       app.GetScheduler().Shutdown(app);
+
+      CHECK_GE(updates.load(std::memory_order_relaxed), 1);
       CHECK_FALSE(app.GetSubApp<AsyncSoundSubAppLabel>().IsUpdating());
+    }
+
+    SUBCASE("Destructor stops async sub-app loops without explicit Shutdown") {
+      std::atomic<int> observed{0};
+
+      struct CountingAtomicSystem {
+        std::atomic<int>* counter = nullptr;
+
+        void operator()() const {
+          if (counter != nullptr) {
+            counter->fetch_add(1, std::memory_order_relaxed);
+          }
+        }
+      };
+
+      {
+        App app(2);
+
+        SubApp sound;
+        sound.SetRunner(RunDefaultSubApp);
+        sound.AddSystem(kUpdate, CountingAtomicSystem{.counter = &observed});
+
+        app.InsertSubApp(AsyncSoundSubAppLabel{}, std::move(sound));
+        app.Initialize();
+
+        std::this_thread::sleep_for(std::chrono::milliseconds{50});
+      }
+
+      CHECK_GE(observed.load(std::memory_order_relaxed), 1);
     }
   }
 
-  TEST_CASE("app::App::Update") {
+  TEST_CASE("helios::app::App::Update") {
     SUBCASE("Update runs update-stage systems on initialized app") {
       App app;
       app.InsertResources(CounterResource{});
@@ -426,7 +461,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::Run") {
+  TEST_CASE("helios::app::App::Run") {
     SUBCASE(
         "Run initializes, invokes runner, cleans up, and returns exit code") {
       App app;
@@ -466,7 +501,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::NotifyPluginReadinessChanged") {
+  TEST_CASE("helios::app::App::NotifyPluginReadinessChanged") {
     SUBCASE("Wakes WaitForPluginsReady so async plugin can finish Initialize") {
       App app(2);
       app.AddPlugins(AsyncReadyPlugin{});
@@ -475,7 +510,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::AddPlugin") {
+  TEST_CASE("helios::app::App::AddPlugin") {
     SUBCASE("Single plugin registers and runs Build on Initialize") {
       App app;
       constexpr auto type_id = PluginTypeId::From<NamedTestPlugin>();
@@ -498,7 +533,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::EmplacePlugin") {
+  TEST_CASE("helios::app::App::EmplacePlugin") {
     SUBCASE("Single plugin registers and runs Build on Initialize") {
       App app;
 
@@ -519,7 +554,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::AddPlugins") {
+  TEST_CASE("helios::app::App::AddPlugins") {
     SUBCASE("Single plugin registers and runs Build on Initialize") {
       App app;
       app.AddPlugins(NamedTestPlugin{});
@@ -544,7 +579,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::AddPluginGroups") {
+  TEST_CASE("helios::app::App::AddPluginGroups") {
     SUBCASE("Single plugin group registers contained plugin") {
       App app;
       app.AddPluginGroups(NamedTestPluginGroup{});
@@ -570,7 +605,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::AddDynamicPlugin") {
+  TEST_CASE("helios::app::App::AddDynamicPlugin") {
     SUBCASE("Unloaded plugin is not registered") {
       App app;
       DynamicPlugin dyn;
@@ -597,7 +632,7 @@ TEST_SUITE("helios::app::App") {
 #endif
   }
 
-  TEST_CASE("app::App::InsertSubApp") {
+  TEST_CASE("helios::app::App::InsertSubApp") {
     SUBCASE("InsertSubApp registers sub-app retrievable by label") {
       App app;
       SubApp sub;
@@ -649,7 +684,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::RemoveSubApp") {
+  TEST_CASE("helios::app::App::RemoveSubApp") {
     SUBCASE("RemoveSubApp erases registered sub-app") {
       App app;
       app.InsertSubApp(RenderSubAppLabel{}, SubApp{});
@@ -663,7 +698,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::AddSchedule") {
+  TEST_CASE("helios::app::App::AddSchedule") {
     SUBCASE("AddSchedule registers custom schedule on main sub-app") {
       App app;
       ecs::Schedule custom;
@@ -695,7 +730,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::InitSchedule") {
+  TEST_CASE("helios::app::App::InitSchedule") {
     SUBCASE("InitSchedule creates empty schedule when missing") {
       App app;
       app.InitSchedule(CustomSchedule{});
@@ -703,7 +738,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::EditSchedule") {
+  TEST_CASE("helios::app::App::EditSchedule") {
     SUBCASE("EditSchedule adds systems and marks scheduler dirty") {
       App app;
       app.InitSchedule(CustomSchedule{});
@@ -714,7 +749,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::AddSystem") {
+  TEST_CASE("helios::app::App::AddSystem") {
     SUBCASE("AddSystem runs on Update after Initialize") {
       App app;
       app.InsertResources(CounterResource{});
@@ -725,7 +760,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::AddSystems") {
+  TEST_CASE("helios::app::App::AddSystems") {
     SUBCASE("AddSystems registers both systems in the same schedule") {
       App app;
       app.InsertResources(CounterResource{});
@@ -760,7 +795,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::ConfigureSet") {
+  TEST_CASE("helios::app::App::ConfigureSet") {
     SUBCASE("ConfigureSet marks main sub-app scheduler dirty") {
       App app;
       [[maybe_unused]] const auto set = app.ConfigureSet(kUpdate, SetOne{});
@@ -768,7 +803,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::InsertResources") {
+  TEST_CASE("helios::app::App::InsertResources") {
     SUBCASE("InsertResources replaces existing resource values") {
       App app;
       app.InsertResources(CounterResource{10});
@@ -776,7 +811,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::TryInsertResources") {
+  TEST_CASE("helios::app::App::TryInsertResources") {
     SUBCASE("TryInsertResources keeps first value when resource exists") {
       App app;
       app.InsertResources(CounterResource{1});
@@ -791,7 +826,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::AddMessages") {
+  TEST_CASE("helios::app::App::AddMessages") {
     SUBCASE("AddMessages registers message type on main world") {
       App app;
       app.AddMessages<AppExit>();
@@ -799,7 +834,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::SetRunner") {
+  TEST_CASE("helios::app::App::SetRunner") {
     SUBCASE("SetRunner replaces default runner used by Run") {
       App app;
       app.SetRunner([](App& /*application*/) { return ExitCode::kSuccess; });
@@ -808,7 +843,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::ShouldExit") {
+  TEST_CASE("helios::app::App::ShouldExit") {
     SUBCASE("Returns nullopt without AppExit message") {
       App app;
       app.Initialize();
@@ -832,7 +867,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::IsInitialized") {
+  TEST_CASE("helios::app::App::IsInitialized") {
     SUBCASE("False before Initialize, true after") {
       App app;
       CHECK_FALSE(app.IsInitialized());
@@ -841,7 +876,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::IsRunning") {
+  TEST_CASE("helios::app::App::IsRunning") {
     SUBCASE("False before and after Run completes") {
       App app;
       CHECK_FALSE(app.IsRunning());
@@ -851,7 +886,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::HasPlugin") {
+  TEST_CASE("helios::app::App::HasPlugin") {
     SUBCASE("HasPlugin returns true for registered static plugin") {
       App app;
       app.AddPlugins(NamedTestPlugin{});
@@ -864,7 +899,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::HasPlugins") {
+  TEST_CASE("helios::app::App::HasPlugins") {
     SUBCASE("HasPlugins reports each plugin registration state") {
       App app;
       app.AddPlugins(NamedTestPlugin{}, SecondTestPlugin{});
@@ -875,7 +910,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::HasSubApp") {
+  TEST_CASE("helios::app::App::HasSubApp") {
     SUBCASE("HasSubApp reflects InsertSubApp state") {
       App app;
       CHECK_FALSE(app.HasSubApp<RenderSubAppLabel>());
@@ -884,7 +919,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::GetMainSubApp") {
+  TEST_CASE("helios::app::App::GetMainSubApp") {
     SUBCASE("GetMainSubApp shares world with GetWorld") {
       App app;
       app.InsertResources(CounterResource{11});
@@ -895,7 +930,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::GetSubApp") {
+  TEST_CASE("helios::app::App::GetSubApp") {
     SUBCASE("GetSubApp returns inserted sub-app by label") {
       App app;
       app.InsertSubApp(RenderSubAppLabel{}, SubApp{});
@@ -906,7 +941,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::TryGetSchedule") {
+  TEST_CASE("helios::app::App::TryGetSchedule") {
     SUBCASE("TryGetSchedule returns built-in update schedule") {
       App app;
       CHECK_NE(app.TryGetSchedule(kUpdate), nullptr);
@@ -919,7 +954,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::GetExecutor") {
+  TEST_CASE("helios::app::App::GetExecutor") {
     SUBCASE("GetExecutor returns same executor instance") {
       App app(2);
       CHECK_EQ(&app.GetExecutor(), &app.GetExecutor());
@@ -927,7 +962,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::GetWorld") {
+  TEST_CASE("helios::app::App::GetWorld") {
     SUBCASE("GetWorld aliases main sub-app world") {
       App app;
       app.InsertResources(CounterResource{4});
@@ -938,7 +973,7 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
-  TEST_CASE("app::App::GetScheduler") {
+  TEST_CASE("helios::app::App::GetScheduler") {
     SUBCASE(
         "GetScheduler returns stable application frame scheduler reference") {
       App app;

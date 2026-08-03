@@ -20,7 +20,7 @@ struct CustomSchedule {
 }  // namespace
 
 TEST_SUITE("helios::app::RegisterBuiltinSchedules") {
-  TEST_CASE("app::RegisterBuiltinSchedules") {
+  TEST_CASE("helios::app::RegisterBuiltinSchedules") {
     SUBCASE("Registers all built-in schedules on empty scheduler") {
       ecs::Scheduler scheduler;
       RegisterBuiltinSchedules(scheduler);
@@ -77,7 +77,7 @@ TEST_SUITE("helios::app::RegisterBuiltinSchedules") {
 }
 
 TEST_SUITE("helios::app::RegisterBuiltinSubAppSchedules") {
-  TEST_CASE("app::RegisterBuiltinSubAppSchedules") {
+  TEST_CASE("helios::app::RegisterBuiltinSubAppSchedules") {
     SUBCASE("Registers sub-app schedules without extract stage") {
       ecs::Scheduler scheduler;
       RegisterBuiltinSubAppSchedules(scheduler);

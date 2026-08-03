@@ -28,7 +28,7 @@ struct CounterSystem {
 }  // namespace
 
 TEST_SUITE("helios::ecs::SystemStorage") {
-  TEST_CASE("ecs::SystemStorage::ctor") {
+  TEST_CASE("helios::ecs::SystemStorage::ctor") {
     SUBCASE("Constructing from members creates valid storage") {
       auto storage = SystemStorage::From(
           "TestSystem",
@@ -40,7 +40,7 @@ TEST_SUITE("helios::ecs::SystemStorage") {
     }
   }
 
-  TEST_CASE("ecs::SystemStorage::From") {
+  TEST_CASE("helios::ecs::SystemStorage::From") {
     SUBCASE("From with explicit name and callable creates valid storage") {
       auto storage = SystemStorage::From(
           "TestSystem",
@@ -86,7 +86,7 @@ TEST_SUITE("helios::ecs::SystemStorage") {
     }
   }
 
-  TEST_CASE("ecs::SystemStorage::FromParam") {
+  TEST_CASE("helios::ecs::SystemStorage::FromParam") {
     SUBCASE("FromParam with a simple system deduces id and name") {
       auto storage = SystemStorage::FromParam(SimpleSystem{});
 

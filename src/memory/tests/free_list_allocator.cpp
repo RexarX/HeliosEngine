@@ -27,7 +27,7 @@ constexpr FreeListAllocatorOptions GrowingOptions(size_t cap = kMinCap) {
 }  // namespace
 
 TEST_SUITE("helios::mem::FreeListAllocator") {
-  TEST_CASE("mem::FreeListAllocator::ctor(FreeListAllocatorOptions)") {
+  TEST_CASE("helios::mem::FreeListAllocator::ctor(FreeListAllocatorOptions)") {
     SUBCASE("Capacity is at least initial_capacity") {
       const FreeListAllocator alloc(
           FreeListAllocatorOptions{.initial_capacity = kMinCap});
@@ -60,7 +60,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::ctor(size_t)") {
+  TEST_CASE("helios::mem::FreeListAllocator::ctor(size_t)") {
     SUBCASE("Capacity is at least the requested size") {
       const FreeListAllocator alloc(kMinCap);
       CHECK_GE(alloc.Capacity(), kMinCap);
@@ -78,7 +78,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::ctor(FreeListAllocator&&)") {
+  TEST_CASE("helios::mem::FreeListAllocator::ctor(FreeListAllocator&&)") {
     SUBCASE("Moved-into allocator carries allocation state") {
       FreeListAllocator source(kMinCap);
       std::ignore = source.allocate(32, kAlign);
@@ -104,7 +104,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::operator=(FreeListAllocator&&)") {
+  TEST_CASE("helios::mem::FreeListAllocator::operator=(FreeListAllocator&&)") {
     SUBCASE("Target acquires source state") {
       FreeListAllocator source(kMinCap);
       std::ignore = source.allocate(32, kAlign);
@@ -135,7 +135,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::Reset") {
+  TEST_CASE("helios::mem::FreeListAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       FreeListAllocator alloc(kMinCap);
       std::ignore = alloc.allocate(32, kAlign);
@@ -190,7 +190,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::Empty") {
+  TEST_CASE("helios::mem::FreeListAllocator::Empty") {
     SUBCASE("Returns true on fresh allocator") {
       const FreeListAllocator alloc(kMinCap);
       CHECK(alloc.Empty());
@@ -219,7 +219,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::Owns") {
+  TEST_CASE("helios::mem::FreeListAllocator::Owns") {
     SUBCASE("Returns true for pointer allocated from this allocator") {
       FreeListAllocator alloc(kMinCap);
       void* const ptr = alloc.allocate(32, kAlign);
@@ -254,7 +254,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::Stats") {
+  TEST_CASE("helios::mem::FreeListAllocator::Stats") {
     SUBCASE("All fields are zero on fresh allocator") {
       const FreeListAllocator alloc(kMinCap);
 
@@ -310,7 +310,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::Capacity") {
+  TEST_CASE("helios::mem::FreeListAllocator::Capacity") {
     SUBCASE("Is at least initial_capacity on construction") {
       const FreeListAllocator alloc(
           FreeListAllocatorOptions{.initial_capacity = kMinCap});
@@ -332,7 +332,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::UsedMemory") {
+  TEST_CASE("helios::mem::FreeListAllocator::UsedMemory") {
     SUBCASE("Is zero on fresh allocator") {
       const FreeListAllocator alloc(kMinCap);
       CHECK_EQ(alloc.UsedMemory(), 0);
@@ -366,7 +366,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::FreeMemory") {
+  TEST_CASE("helios::mem::FreeListAllocator::FreeMemory") {
     SUBCASE("Is positive on fresh allocator") {
       const FreeListAllocator alloc(kMinCap);
       CHECK_GT(alloc.FreeMemory(), 0);
@@ -397,7 +397,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::FreeBlockCount") {
+  TEST_CASE("helios::mem::FreeListAllocator::FreeBlockCount") {
     SUBCASE("Is 1 on fresh allocator (one contiguous free region)") {
       const FreeListAllocator alloc(kMinCap);
       CHECK_EQ(alloc.FreeBlockCount(), 1);
@@ -431,7 +431,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::AllocationCount") {
+  TEST_CASE("helios::mem::FreeListAllocator::AllocationCount") {
     SUBCASE("Is zero on fresh allocator") {
       const FreeListAllocator alloc(kMinCap);
       CHECK_EQ(alloc.AllocationCount(), 0);
@@ -458,7 +458,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::Growth") {
+  TEST_CASE("helios::mem::FreeListAllocator::Growth") {
     SUBCASE("Returns geometric policy for size_t ctor") {
       const FreeListAllocator alloc(kMinCap);
       CHECK_EQ(alloc.Growth().max_capacity,
@@ -481,7 +481,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::allocate") {
+  TEST_CASE("helios::mem::FreeListAllocator::allocate") {
     SUBCASE("Returns non-null pointer") {
       FreeListAllocator alloc(kMinCap);
       CHECK_NE(alloc.allocate(32, kAlign), nullptr);
@@ -530,7 +530,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator::deallocate") {
+  TEST_CASE("helios::mem::FreeListAllocator::deallocate") {
     SUBCASE("Freed memory is reusable for first subsequent allocation") {
       FreeListAllocator alloc(kMinCap);
 
@@ -564,7 +564,8 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator thread-safety: concurrent allocate") {
+  TEST_CASE(
+      "helios::mem::FreeListAllocator thread-safety: concurrent allocate") {
     SUBCASE("All threads receive valid non-null pointers") {
       FreeListAllocator alloc(GrowingOptions(65536));
 
@@ -616,7 +617,9 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FreeListAllocator thread-safety: concurrent alloc+dealloc") {
+  TEST_CASE(
+      "helios::mem::FreeListAllocator thread-safety: concurrent "
+      "alloc+dealloc") {
     SUBCASE("Allocator is empty after paired alloc/dealloc across threads") {
       FreeListAllocator alloc(GrowingOptions(65536));
 

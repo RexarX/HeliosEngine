@@ -74,7 +74,7 @@ int PolymorphicArgumentFunction(const Derived& base) {
 }  // namespace
 
 TEST_SUITE("helios::Delegate") {
-  TEST_CASE("Delegate::ctor: Construction and basic state") {
+  TEST_CASE("helios::Delegate::ctor: Construction and basic state") {
     SUBCASE("Default construction creates empty delegate") {
       Delegate<int(int)> delegate;
       CHECK_FALSE(delegate.Valid());
@@ -114,7 +114,7 @@ TEST_SUITE("helios::Delegate") {
     }
   }
 
-  TEST_CASE("Delegate::From: Free function binding") {
+  TEST_CASE("helios::Delegate::From: Free function binding") {
     SUBCASE("Single parameter free function") {
       auto delegate = Delegate<int(int)>::From<&free_function_double>();
       CHECK(delegate.Valid());
@@ -154,7 +154,7 @@ TEST_SUITE("helios::Delegate") {
     }
   }
 
-  TEST_CASE("Delegate::From: Member function binding") {
+  TEST_CASE("helios::Delegate::From: Member function binding") {
     SUBCASE("Non-const member function with no parameters") {
       Counter counter{10};
       auto delegate = Delegate<void()>::From<&Counter::increment>(counter);
@@ -213,7 +213,7 @@ TEST_SUITE("helios::Delegate") {
     }
   }
 
-  TEST_CASE("Delegate::From: Overloaded member functions") {
+  TEST_CASE("helios::Delegate::From: Overloaded member functions") {
     OverloadedStruct obj{10};
 
     SUBCASE("Zero-argument overload") {
@@ -237,7 +237,7 @@ TEST_SUITE("helios::Delegate") {
     }
   }
 
-  TEST_CASE("Delegate::From: Virtual function dispatch") {
+  TEST_CASE("helios::Delegate::From: Virtual function dispatch") {
     SUBCASE("Virtual function called through base reference") {
       DerivedVirtual derived;
       BaseVirtual& base = derived;
@@ -260,7 +260,7 @@ TEST_SUITE("helios::Delegate") {
     }
   }
 
-  TEST_CASE("Delegate::Invoke: Empty delegate behavior") {
+  TEST_CASE("helios::Delegate::Invoke: Empty delegate behavior") {
     SUBCASE("Empty delegate with int return type returns default value") {
       Delegate<int(int)> delegate;
       CHECK_FALSE(delegate.Valid());
@@ -285,7 +285,7 @@ TEST_SUITE("helios::Delegate") {
     }
   }
 
-  TEST_CASE("Delegate::operator==: Comparison operators") {
+  TEST_CASE("helios::Delegate::operator==: Comparison operators") {
     SUBCASE("Same free function delegates are equal") {
       auto delegate1 = Delegate<int(int, int)>::From<&free_function_sum>();
       auto delegate2 = Delegate<int(int, int)>::From<&free_function_sum>();
@@ -328,7 +328,7 @@ TEST_SUITE("helios::Delegate") {
     }
   }
 
-  TEST_CASE("Delegate::Reset") {
+  TEST_CASE("helios::Delegate::Reset") {
     SUBCASE("Reset free function delegate") {
       auto delegate = Delegate<int(int, int)>::From<&free_function_sum>();
       CHECK(delegate.Valid());
@@ -402,7 +402,8 @@ TEST_SUITE("helios::Delegate") {
     }
   }
 
-  TEST_CASE("Delegate::From: Explicit signature for overload resolution") {
+  TEST_CASE(
+      "helios::Delegate::From: Explicit signature for overload resolution") {
     SUBCASE("Explicit signature for free function") {
       using Signature = int (*)(int, int);
       constexpr Signature func_ptr = &free_function_sum;
@@ -446,7 +447,7 @@ TEST_SUITE("helios::Delegate") {
     }
   }
 
-  TEST_CASE("Delegate::Invoke: Polymorphic conversion") {
+  TEST_CASE("helios::Delegate::Invoke: Polymorphic conversion") {
     SUBCASE("Derived to base conversion in arguments") {
       Derived derived;
       auto delegate =

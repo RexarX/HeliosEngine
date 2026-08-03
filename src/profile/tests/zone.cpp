@@ -83,7 +83,7 @@ struct MockBackend final : public Backend {
 }  // namespace
 
 TEST_SUITE("helios::profile::ScopedZone") {
-  TEST_CASE("ScopedZone with active spec") {
+  TEST_CASE("helios::profile::ScopedZone with active spec") {
     Profiler::Instance().Clear();
 
     SUBCASE("Active ScopedZone triggers BeginZone on backends") {
@@ -114,7 +114,7 @@ TEST_SUITE("helios::profile::ScopedZone") {
     }
   }
 
-  TEST_CASE("ScopedZone with inactive spec") {
+  TEST_CASE("helios::profile::ScopedZone with inactive spec") {
     Profiler::Instance().Clear();
 
     SUBCASE("Inactive ScopedZone does not trigger BeginZone") {
@@ -145,7 +145,7 @@ TEST_SUITE("helios::profile::ScopedZone") {
     }
   }
 
-  TEST_CASE("ScopedZone::SetText / SetValue / SetName") {
+  TEST_CASE("helios::profile::ScopedZone::SetText") {
     Profiler::Instance().Clear();
 
     SUBCASE("SetText on active zone forwards to backends") {
@@ -158,36 +158,6 @@ TEST_SUITE("helios::profile::ScopedZone") {
         zone.SetText("hello");
         CHECK_EQ(mock.zone_text_calls, 1);
         CHECK_EQ(mock.last_zone_text, "hello");
-      }
-
-      Profiler::Instance().Clear();
-    }
-
-    SUBCASE("SetValue on active zone forwards to backends") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      {
-        const ZoneSpec spec{.name = "zone"};
-        ScopedZone zone(spec);
-        zone.SetValue(999);
-        CHECK_EQ(mock.zone_value_calls, 1);
-        CHECK_EQ(mock.last_zone_value, 999);
-      }
-
-      Profiler::Instance().Clear();
-    }
-
-    SUBCASE("SetName on active zone forwards to backends") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      Profiler::Instance().Finalize();
-
-      {
-        const ZoneSpec spec{.name = "zone"};
-        ScopedZone zone(spec);
-        zone.SetName("renamed_zone");
-        CHECK_EQ(mock.zone_name_calls, 1);
-        CHECK_EQ(mock.last_zone_rename, "renamed_zone");
       }
 
       Profiler::Instance().Clear();
@@ -208,67 +178,106 @@ TEST_SUITE("helios::profile::ScopedZone") {
     }
   }
 
-  TEST_CASE("ScopedZone::CurrentZoneStorage") {
+  TEST_CASE("helios::profile::ScopedZone::SetValue") {
     Profiler::Instance().Clear();
 
-    SUBCASE("CurrentZoneStorage returns non-empty span inside active zone") {
-      (void)Profiler::Instance().AddBackend<MockBackend>();
+    SUBCASE("SetValue on active zone forwards to backends") {
+      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
       Profiler::Instance().Finalize();
 
       {
         const ZoneSpec spec{.name = "zone"};
         ScopedZone zone(spec);
-        const auto storage = ScopedZone::CurrentZoneStorage();
-        CHECK_FALSE(storage.empty());
+        zone.SetValue(999);
+        CHECK_EQ(mock.zone_value_calls, 1);
+        CHECK_EQ(mock.last_zone_value, 999);
       }
 
       Profiler::Instance().Clear();
     }
-
-    SUBCASE("CurrentZoneStorage returns empty span outside any zone") {
-      const auto storage = ScopedZone::CurrentZoneStorage();
-      CHECK(storage.empty());
-    }
   }
 
-  TEST_CASE("ScopedZone nested zones") {
+  TEST_CASE("helios::profile::ScopedZone::SetName") {
     Profiler::Instance().Clear();
 
-    SUBCASE("Inner zone storage is restored after outer zone destruction") {
+    SUBCASE("SetName on active zone forwards to backends") {
       auto& mock = Profiler::Instance().AddBackend<MockBackend>();
       Profiler::Instance().Finalize();
 
       {
-        const ZoneSpec spec{.name = "outer"};
-        ScopedZone outer(spec);
-        CHECK_EQ(mock.begin_zone_calls, 1);
-
-        {
-          const ZoneSpec inner_spec{.name = "inner"};
-          ScopedZone inner(inner_spec);
-          CHECK_EQ(mock.begin_zone_calls, 2);
-        }
-        CHECK_EQ(mock.end_zone_calls, 1);
+        const ZoneSpec spec{.name = "zone"};
+        ScopedZone zone(spec);
+        zone.SetName("renamed_zone");
+        CHECK_EQ(mock.zone_name_calls, 1);
+        CHECK_EQ(mock.last_zone_rename, "renamed_zone");
       }
-      CHECK_EQ(mock.end_zone_calls, 2);
 
       Profiler::Instance().Clear();
     }
   }
+}
 
-  TEST_CASE("ScopedZone without finalization") {
-    Profiler::Instance().Clear();
+TEST_CASE("helios::profile::ScopedZone::CurrentZoneStorage") {
+  Profiler::Instance().Clear();
 
-    SUBCASE("ScopedZone is inactive when profiler is not finalized") {
-      auto& mock = Profiler::Instance().AddBackend<MockBackend>();
-      const ZoneSpec spec{.name = "early_zone"};
+  SUBCASE("CurrentZoneStorage returns non-empty span inside active zone") {
+    Profiler::Instance().AddBackend<MockBackend>();
+    Profiler::Instance().Finalize();
+
+    {
+      const ZoneSpec spec{.name = "zone"};
       ScopedZone zone(spec);
-      CHECK_EQ(mock.begin_zone_calls, 0);
-
       const auto storage = ScopedZone::CurrentZoneStorage();
-      CHECK(storage.empty());
-
-      Profiler::Instance().Clear();
+      CHECK_FALSE(storage.empty());
     }
+
+    Profiler::Instance().Clear();
   }
+
+  SUBCASE("CurrentZoneStorage returns empty span outside any zone") {
+    const auto storage = ScopedZone::CurrentZoneStorage();
+    CHECK(storage.empty());
+  }
+}
+
+TEST_CASE("helios::profile::ScopedZone: nested zones") {
+  Profiler::Instance().Clear();
+
+  SUBCASE("Inner zone storage is restored after outer zone destruction") {
+    auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+    Profiler::Instance().Finalize();
+
+    {
+      const ZoneSpec spec{.name = "outer"};
+      ScopedZone outer(spec);
+      CHECK_EQ(mock.begin_zone_calls, 1);
+
+      {
+        const ZoneSpec inner_spec{.name = "inner"};
+        ScopedZone inner(inner_spec);
+        CHECK_EQ(mock.begin_zone_calls, 2);
+      }
+      CHECK_EQ(mock.end_zone_calls, 1);
+    }
+    CHECK_EQ(mock.end_zone_calls, 2);
+
+    Profiler::Instance().Clear();
+  }
+}
+
+TEST_CASE("helios::profile::ScopedZone: without finalization") {
+  Profiler::Instance().Clear();
+
+  SUBCASE("ScopedZone is inactive when profiler is not finalized") {
+    auto& mock = Profiler::Instance().AddBackend<MockBackend>();
+    const ZoneSpec spec{.name = "early_zone"};
+    ScopedZone zone(spec);
+    CHECK_EQ(mock.begin_zone_calls, 0);
+
+    const auto storage = ScopedZone::CurrentZoneStorage();
+    CHECK(storage.empty());
+
+    Profiler::Instance().Clear();
+  }
+}
 }

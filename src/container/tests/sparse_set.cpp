@@ -22,7 +22,7 @@ struct TestValue {
 }  // namespace
 
 TEST_SUITE("helios::container::SparseSet") {
-  TEST_CASE("container::SparseSet::ctor: default construction") {
+  TEST_CASE("helios::container::SparseSet::ctor: default construction") {
     SparseSet<int> set;
     const auto& const_set = set;
 
@@ -36,7 +36,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(const_set.crbegin(), const_set.crend());
   }
 
-  TEST_CASE("container::SparseSet::ctor: allocator construction") {
+  TEST_CASE("helios::container::SparseSet::ctor: allocator construction") {
     std::allocator<int> alloc;
     SparseSet<int> set(alloc);
 
@@ -45,7 +45,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK(set.GetAllocator() == alloc);
   }
 
-  TEST_CASE("container::SparseSet::ctor: copy semantics") {
+  TEST_CASE("helios::container::SparseSet::ctor: copy semantics") {
     SparseSet<int> original;
 
     // Insert some values
@@ -79,7 +79,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(assigned.Get(2), 100);
   }
 
-  TEST_CASE("container::SparseSet::ctor: move semantics") {
+  TEST_CASE("helios::container::SparseSet::ctor: move semantics") {
     SparseSet<int> first_set;
 
     // Insert some values
@@ -136,7 +136,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_FALSE(third_set.Contains(100));  // Old element should be gone
   }
 
-  TEST_CASE("container::SparseSet::Insert: basic insert and contains") {
+  TEST_CASE("helios::container::SparseSet::Insert: basic insert and contains") {
     SparseSet<int> set;
 
     // Test basic insertion
@@ -165,7 +165,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_FALSE(set.Contains(43));
   }
 
-  TEST_CASE("container::SparseSet::Insert: duplicate insertion") {
+  TEST_CASE("helios::container::SparseSet::Insert: duplicate insertion") {
     SparseSet<int> set;
 
     // Insert element first time
@@ -202,7 +202,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(set.Get(20), 400);
   }
 
-  TEST_CASE("container::SparseSet::Insert: large sparse indices") {
+  TEST_CASE("helios::container::SparseSet::Insert: large sparse indices") {
     SparseSet<int> set;
 
     // Insert indices with large gaps
@@ -225,7 +225,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(set.Size(), 3);
   }
 
-  TEST_CASE("container::SparseSet::Remove: basic removal") {
+  TEST_CASE("helios::container::SparseSet::Remove: basic removal") {
     SparseSet<int> set;
 
     // Insert several elements
@@ -298,7 +298,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(set.GetByDenseIndex(1), 10000);  // Last element moved here
   }
 
-  TEST_CASE("container::SparseSet::Insert: move semantics") {
+  TEST_CASE("helios::container::SparseSet::Insert: move semantics") {
     SparseSet<std::string> set;
 
     std::string value1 = "Hello";
@@ -320,7 +320,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK(value2.empty());
   }
 
-  TEST_CASE("container::SparseSet::Emplace: constructs in place") {
+  TEST_CASE("helios::container::SparseSet::Emplace: constructs in place") {
     SparseSet<TestValue> set;
 
     const auto dense_idx1 = set.Emplace(10, 42, 3.14f);
@@ -341,7 +341,8 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(val2.y, 2.71f);
   }
 
-  TEST_CASE("container::SparseSet::begin: forward and reverse iteration") {
+  TEST_CASE(
+      "helios::container::SparseSet::begin: forward and reverse iteration") {
     SparseSet<int> set;
 
     set.Insert(10, 100);
@@ -372,7 +373,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(values[2], 100);
   }
 
-  TEST_CASE("container::SparseSet::Data: returns span to dense array") {
+  TEST_CASE("helios::container::SparseSet::Data: returns span to dense array") {
     SparseSet<int> set;
 
     set.Insert(10, 100);
@@ -396,7 +397,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(set.Get(10), 999);
   }
 
-  TEST_CASE("container::SparseSet::operator==: equality comparison") {
+  TEST_CASE("helios::container::SparseSet::operator==: equality comparison") {
     SparseSet<int> set1, set2;
 
     // Empty sets should be equal
@@ -426,7 +427,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_FALSE(set1 == set2);
   }
 
-  TEST_CASE("container::SparseSet::Reserve: reserves capacity") {
+  TEST_CASE("helios::container::SparseSet::Reserve: reserves capacity") {
     SparseSet<int> set;
 
     CHECK_EQ(set.Capacity(), 0);
@@ -450,7 +451,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK(set.Contains(999));
   }
 
-  TEST_CASE("container::SparseSet::ShrinkToFit: reduces capacity") {
+  TEST_CASE("helios::container::SparseSet::ShrinkToFit: reduces capacity") {
     SparseSet<int> set;
 
     // Insert elements requiring large sparse array
@@ -476,7 +477,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_GE(set.SparseCapacity(), 1001);
   }
 
-  TEST_CASE("container::SparseSet::Swap: swaps contents") {
+  TEST_CASE("helios::container::SparseSet::Swap: swaps contents") {
     SparseSet<int> set1, set2;
 
     set1.Insert(10, 100);
@@ -511,7 +512,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK(set2.Contains(30));
   }
 
-  TEST_CASE("container::SparseSet::Clear: removes all elements") {
+  TEST_CASE("helios::container::SparseSet::Clear: removes all elements") {
     SparseSet<int> set;
 
     set.Insert(10, 100);
@@ -536,7 +537,8 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(set.Get(40), 400);
   }
 
-  TEST_CASE("container::SparseSet::stress test with random operations") {
+  TEST_CASE(
+      "helios::container::SparseSet::stress test with random operations") {
     SparseSet<int> set;
     std::unordered_set<size_t> indices;
     std::mt19937 gen(42);
@@ -601,7 +603,7 @@ TEST_SUITE("helios::container::SparseSet") {
     }
   };
 
-  TEST_CASE("container::SparseSet::TryGet") {
+  TEST_CASE("helios::container::SparseSet::TryGet") {
     SparseSet<int> set;
 
     // Test with empty set
@@ -660,7 +662,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(*ptr30_after_removal, 300);
   }
 
-  TEST_CASE("container::SparseSet::TryGet: large indices") {
+  TEST_CASE("helios::container::SparseSet::TryGet: large indices") {
     SparseSet<int> set;
 
     // Test with large sparse indices
@@ -675,7 +677,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(set.TryGet(1000001), nullptr);
   }
 
-  TEST_CASE("container::SparseSet::TryGet: custom types") {
+  TEST_CASE("helios::container::SparseSet::TryGet: custom types") {
     SparseSet<TestValue> set;
 
     // Insert test values
@@ -706,7 +708,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(set.Get(1).y, 1.23f);
   }
 
-  TEST_CASE("container::SparseSet::custom allocator") {
+  TEST_CASE("helios::container::SparseSet::custom allocator") {
     SparseSet<int, size_t, TestAllocator<int>> set;
 
     set.Insert(10, 100);
@@ -725,7 +727,7 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(set.TryGet(999), nullptr);
   }
 
-  TEST_CASE("container::PmrSparseSet: works with memory_resource") {
+  TEST_CASE("helios::container::PmrSparseSet: works with memory_resource") {
     std::byte buffer[1024];
     std::pmr::monotonic_buffer_resource resource(buffer, sizeof(buffer));
 

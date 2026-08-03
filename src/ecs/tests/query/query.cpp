@@ -111,7 +111,7 @@ void AddSparseFlag(ComponentManager& mgr, Entity entity, SparseFlag flag) {
 }  // namespace
 
 TEST_SUITE("helios::ecs::BasicQuery") {
-  TEST_CASE("ecs::BasicQuery::Empty") {
+  TEST_CASE("helios::ecs::BasicQuery::Empty") {
     SUBCASE("Returns true for empty manager") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -144,7 +144,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Count") {
+  TEST_CASE("helios::ecs::BasicQuery::Count") {
     SUBCASE("Returns 0 for empty manager") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -198,7 +198,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::begin / end") {
+  TEST_CASE("helios::ecs::BasicQuery::begin / end") {
     SUBCASE("begin equals end for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -258,7 +258,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Collect") {
+  TEST_CASE("helios::ecs::BasicQuery::Collect") {
     SUBCASE("Returns empty vector when no entities match") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -296,7 +296,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::CollectWith") {
+  TEST_CASE("helios::ecs::BasicQuery::CollectWith") {
     SUBCASE("Returns empty container when no entities match") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -330,7 +330,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Into") {
+  TEST_CASE("helios::ecs::BasicQuery::Into") {
     SUBCASE("Writes nothing for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -351,7 +351,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::ForEach") {
+  TEST_CASE("helios::ecs::BasicQuery::ForEach") {
     SUBCASE("Not called for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -412,7 +412,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::ForEachWithEntity") {
+  TEST_CASE("helios::ecs::BasicQuery::ForEachWithEntity") {
     SUBCASE("Not called for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -450,7 +450,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Find") {
+  TEST_CASE("helios::ecs::BasicQuery::Find") {
     SUBCASE("Returns nullopt when no entities match") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -495,7 +495,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Any") {
+  TEST_CASE("helios::ecs::BasicQuery::Any") {
     SUBCASE("Returns false for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -519,7 +519,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::All") {
+  TEST_CASE("helios::ecs::BasicQuery::All") {
     SUBCASE("Returns true for empty result set (vacuous truth)") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -543,7 +543,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::None") {
+  TEST_CASE("helios::ecs::BasicQuery::None") {
     SUBCASE("Returns true for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -566,7 +566,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::CountIf") {
+  TEST_CASE("helios::ecs::BasicQuery::CountIf") {
     SUBCASE("Returns 0 for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -600,7 +600,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Fold") {
+  TEST_CASE("helios::ecs::BasicQuery::Fold") {
     SUBCASE("Returns init value for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -632,7 +632,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Partition") {
+  TEST_CASE("helios::ecs::BasicQuery::Partition") {
     SUBCASE("Both partitions empty for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -678,7 +678,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::MaxBy") {
+  TEST_CASE("helios::ecs::BasicQuery::MaxBy") {
     SUBCASE("Returns nullopt for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -709,7 +709,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::MinBy") {
+  TEST_CASE("helios::ecs::BasicQuery::MinBy") {
     SUBCASE("Returns nullopt for empty result set") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -730,7 +730,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Filter") {
+  TEST_CASE("helios::ecs::BasicQuery::Filter") {
     SUBCASE("Produces no elements when predicate never matches") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -760,7 +760,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Map") {
+  TEST_CASE("helios::ecs::BasicQuery::Map") {
     SUBCASE("Transforms each element") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 3.0F, .y = 0.0F});
@@ -776,7 +776,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Take") {
+  TEST_CASE("helios::ecs::BasicQuery::Take") {
     SUBCASE("Take(0) yields no elements") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});
@@ -818,7 +818,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Skip") {
+  TEST_CASE("helios::ecs::BasicQuery::Skip") {
     SUBCASE("Skip(0) yields all elements") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});
@@ -859,7 +859,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::TakeWhile") {
+  TEST_CASE("helios::ecs::BasicQuery::TakeWhile") {
     SUBCASE("Stops at first element failing predicate") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -893,7 +893,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::SkipWhile") {
+  TEST_CASE("helios::ecs::BasicQuery::SkipWhile") {
     SUBCASE("Skips leading elements satisfying predicate") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -924,7 +924,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Enumerate") {
+  TEST_CASE("helios::ecs::BasicQuery::Enumerate") {
     SUBCASE("Index starts at 0") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});
@@ -957,7 +957,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::StepBy") {
+  TEST_CASE("helios::ecs::BasicQuery::StepBy") {
     SUBCASE("StepBy(1) yields all elements") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});
@@ -988,7 +988,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Inspect") {
+  TEST_CASE("helios::ecs::BasicQuery::Inspect") {
     SUBCASE(
         "Inspector is called for every element without altering iteration") {
       ComponentManager mgr;
@@ -1009,7 +1009,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Reverse") {
+  TEST_CASE("helios::ecs::BasicQuery::Reverse") {
     SUBCASE("Produces elements in reverse order within a single archetype") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -1032,7 +1032,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery: Optional component") {
+  TEST_CASE("helios::ecs::BasicQuery: Optional component") {
     SUBCASE("Optional component is nullptr when entity lacks it") {
       ComponentManager mgr;
       // Entity has only Position, no Velocity
@@ -1073,7 +1073,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery — without-filter") {
+  TEST_CASE("helios::ecs::BasicQuery — without-filter") {
     SUBCASE("Excludes entities that have the unwanted component") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});         // Position only — included
@@ -1095,7 +1095,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery — read-only (const World)") {
+  TEST_CASE("helios::ecs::BasicQuery — read-only (const World)") {
     SUBCASE("ReadOnlyQuery iterates const data correctly") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 9.0F, .y = 0.0F});
@@ -1121,7 +1121,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::WithEntity") {
+  TEST_CASE("helios::ecs::BasicQuery::WithEntity") {
     SUBCASE("Returns BasicQueryWithEntity wrapping this query") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});
@@ -1137,7 +1137,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::Get") {
+  TEST_CASE("helios::ecs::BasicQuery::Get") {
     SUBCASE("Returns sparse + archetype components for matching entity") {
       ComponentManager mgr;
       constexpr Entity entity{10, 0};
@@ -1152,7 +1152,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::TryGet") {
+  TEST_CASE("helios::ecs::BasicQuery::TryGet") {
     SUBCASE("Returns value for sparse + archetype components") {
       ComponentManager mgr;
       constexpr Entity entity{11, 0};
@@ -1184,7 +1184,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery::TryGetFiltered") {
+  TEST_CASE("helios::ecs::BasicQuery::TryGetFiltered") {
     SUBCASE("Applies sparse with-filter") {
       ComponentManager mgr;
       constexpr Entity e_no_sparse{13, 0};
@@ -1214,7 +1214,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery — dynamic archetype refresh") {
+  TEST_CASE("helios::ecs::BasicQuery — dynamic archetype refresh") {
     SUBCASE("Query reflects entities added after construction") {
       ComponentManager mgr;
       const auto query = MakeQuery<const Position&>(mgr);
@@ -1241,7 +1241,7 @@ TEST_SUITE("helios::ecs::BasicQuery") {
 }
 
 TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
-  TEST_CASE("ecs::BasicQueryWithEntity::Collect") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Collect") {
     SUBCASE("Returns empty vector when no entities match") {
       ComponentManager mgr;
       auto query = MakeQuery<const Position&>(mgr);
@@ -1273,7 +1273,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::CollectWith") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::CollectWith") {
     SUBCASE("Returns empty container when no entities match") {
       ComponentManager mgr;
       auto query = MakeQuery<const Position&>(mgr);
@@ -1314,7 +1314,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::CollectEntities") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::CollectEntities") {
     SUBCASE("Returns empty vector when no entities match") {
       ComponentManager mgr;
       auto query = MakeQuery<const Position&>(mgr);
@@ -1341,7 +1341,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::CollectEntitiesWith") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::CollectEntitiesWith") {
     SUBCASE("Works with PMR allocator") {
       constexpr Entity e1{4, 0};
       ComponentManager mgr;
@@ -1357,7 +1357,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Into") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Into") {
     SUBCASE("Writes nothing for empty result set") {
       ComponentManager mgr;
       auto query = MakeQuery<const Position&>(mgr);
@@ -1383,7 +1383,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::ForEach") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::ForEach") {
     SUBCASE("Not called for empty result set") {
       ComponentManager mgr;
       auto query = MakeQuery<const Position&>(mgr);
@@ -1427,7 +1427,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Find") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Find") {
     SUBCASE("Returns nullopt when no entities match") {
       ComponentManager mgr;
       auto query = MakeQuery<const Position&>(mgr);
@@ -1451,7 +1451,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Any") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Any") {
     SUBCASE("Returns false for empty result set") {
       ComponentManager mgr;
       auto query = MakeQuery<const Position&>(mgr);
@@ -1471,7 +1471,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::All") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::All") {
     SUBCASE("Returns true for empty result set") {
       ComponentManager mgr;
       auto query = MakeQuery<const Position&>(mgr);
@@ -1491,7 +1491,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::None") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::None") {
     SUBCASE("Returns true when no result matches predicate") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -1513,7 +1513,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::CountIf") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::CountIf") {
     SUBCASE("Returns 0 when no result matches") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -1539,7 +1539,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Fold") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Fold") {
     SUBCASE("Returns init value for empty result set") {
       ComponentManager mgr;
       auto query = MakeQuery<const Position&>(mgr);
@@ -1567,7 +1567,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::MaxBy") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::MaxBy") {
     SUBCASE("Returns nullopt for empty result set") {
       ComponentManager mgr;
       auto query = MakeQuery<const Position&>(mgr);
@@ -1591,7 +1591,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::MinBy") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::MinBy") {
     SUBCASE("Returns result with smallest key") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 10.0F, .y = 0.0F});
@@ -1606,7 +1606,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Partition") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Partition") {
     SUBCASE("Splits correctly on entity-aware predicate") {
       constexpr Entity e1{1, 0};
       constexpr Entity e2{2, 0};
@@ -1623,7 +1623,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Filter") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Filter") {
     SUBCASE("Produces only elements matching predicate") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -1642,7 +1642,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Map") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Map") {
     SUBCASE("Transforms each element to a derived value") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 3.0F, .y = 0.0F});
@@ -1660,7 +1660,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Take") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Take") {
     SUBCASE("Take(1) yields only the first element") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});
@@ -1676,7 +1676,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Skip") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Skip") {
     SUBCASE("Skip(1) skips first element") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});
@@ -1693,7 +1693,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Enumerate") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Enumerate") {
     SUBCASE("Index starts at 0 and increments per element") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});
@@ -1712,7 +1712,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::StepBy") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::StepBy") {
     SUBCASE("StepBy(2) yields every other element") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});
@@ -1730,7 +1730,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::Inspect") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Inspect") {
     SUBCASE("Inspector called for every element without disrupting iteration") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {});
@@ -1751,7 +1751,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntity::GroupBy") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::GroupBy") {
     SUBCASE("Groups entities correctly by integer bucket") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -1780,7 +1780,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery - With filter") {
+  TEST_CASE("helios::ecs::BasicQuery - With filter") {
     SUBCASE("With<T> includes only entities that also have T") {
       ComponentManager mgr;
       // Entity 1: Position only — must be excluded
@@ -1927,7 +1927,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery - Without filter") {
+  TEST_CASE("helios::ecs::BasicQuery - Without filter") {
     SUBCASE("Without<T> excludes entities that have T") {
       ComponentManager mgr;
       // Entity 1: Position only — included
@@ -2105,7 +2105,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("ecs::BasicQuery - With and Without combined") {
+  TEST_CASE("helios::ecs::BasicQuery - With and Without combined") {
     SUBCASE("With<T> and Without<U> applied together") {
       ComponentManager mgr;
       // Entity 1: Position only — excluded (no Velocity)

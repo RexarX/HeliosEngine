@@ -31,7 +31,7 @@ struct RenderSettings {
 }  // namespace
 
 TEST_SUITE("helios::ecs::RegisterParamAccess") {
-  TEST_CASE("ecs::RegisterParamAccess matches BuildPolicyFromParams") {
+  TEST_CASE("helios::ecs::RegisterParamAccess matches BuildPolicyFromParams") {
     const auto from_register = [] {
       AccessPolicyBuilder builder;
       RegisterParamAccess<Query<const Position&, Velocity&>, Res<const Camera>,
@@ -57,7 +57,7 @@ TEST_SUITE("helios::ecs::RegisterParamAccess") {
         from_build.HasWriteResource(ResourceTypeIndex::From<RenderSettings>()));
   }
 
-  TEST_CASE("ecs::DeclareReadComponents and DeclareWriteComponents") {
+  TEST_CASE("helios::ecs::DeclareReadComponents and DeclareWriteComponents") {
     AccessPolicyBuilder builder;
     DeclareReadComponents<Position>(builder);
     DeclareWriteComponents<Velocity>(builder);
@@ -67,7 +67,7 @@ TEST_SUITE("helios::ecs::RegisterParamAccess") {
     CHECK(policy.HasWriteComponent(ComponentTypeIndex::From<Velocity>()));
   }
 
-  TEST_CASE("ecs::DeclareQueryAccess") {
+  TEST_CASE("helios::ecs::DeclareQueryAccess") {
     AccessPolicyBuilder builder;
     DeclareQueryAccess<const Camera&, RenderSettings&>(builder);
 

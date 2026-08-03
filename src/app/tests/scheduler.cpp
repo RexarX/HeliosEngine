@@ -35,6 +35,9 @@ struct SlowUpdateSystem {
 
 struct RenderSubAppLabel {};
 struct PhysicsSubAppLabel {};
+struct OverlappingStopSubAppLabel {
+  static constexpr bool kAllowOverlappingUpdates = true;
+};
 
 struct ParallelProbeSystem {
   static inline std::atomic<int> active{0};
@@ -65,7 +68,7 @@ struct OrderSystem {
 }  // namespace
 
 TEST_SUITE("helios::app::Scheduler") {
-  TEST_CASE("app::Scheduler::ctor") {
+  TEST_CASE("helios::app::Scheduler::ctor") {
     SUBCASE("Default-constructed scheduler can build and run frames") {
       App app(2);
       app.InsertResources(CounterResource{});
@@ -88,7 +91,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::operator=") {
+  TEST_CASE("helios::app::Scheduler::operator=") {
     SUBCASE("Move assignment transfers scheduler state") {
       App app(2);
       app.InsertResources(CounterResource{});
@@ -105,19 +108,99 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::Clear") {
-    SUBCASE("Clear resets sub-app tracking so WaitForSubApps is immediate") {
+  TEST_CASE("helios::app::Scheduler::Clear") {
+    SUBCASE("Clear on idle scheduler discards cached sub-app tracking") {
       App app(2);
       app.InsertSubApp(RenderSubAppLabel{}, SubApp{});
       app.Initialize();
       app.Update();
+      app.GetScheduler().WaitForSubApps();
       app.GetScheduler().Clear();
       app.GetScheduler().WaitForSubApps();
       CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
     }
   }
 
-  TEST_CASE("app::Scheduler::Build") {
+  TEST_CASE("helios::app::Scheduler::Stop") {
+    SUBCASE("Stop drains in-flight blocking sub-app updates") {
+      App app(2);
+      app.InsertSubApp(RenderSubAppLabel{}, SubApp{});
+      app.Initialize();
+      app.Update();
+      app.GetScheduler().Stop(app.GetExecutor());
+      app.GetScheduler().Clear();
+      CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
+    }
+
+    SUBCASE("Stop stops async update loops") {
+      App app(2);
+
+      SubApp render;
+      render.SetAsync(true);
+      render.SetRunner(RunDefaultSubApp);
+      render.AddSystem(kUpdate, SlowUpdateSystem{});
+      app.InsertSubApp(RenderSubAppLabel{}, std::move(render));
+      app.Initialize();
+
+      app.GetScheduler().Stop(app.GetExecutor());
+      app.GetScheduler().Clear();
+      CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
+    }
+
+    SUBCASE("Stop is idempotent for async sub-apps") {
+      App app(1);
+
+      SubApp render;
+      render.SetAsync(true);
+      render.SetRunner(RunDefaultSubApp);
+      render.AddSystem(kUpdate, SlowUpdateSystem{});
+      app.InsertSubApp(RenderSubAppLabel{}, std::move(render));
+      app.Initialize();
+
+      app.GetScheduler().Stop(app.GetExecutor());
+      app.GetScheduler().Stop(app.GetExecutor());
+      app.GetScheduler().Clear();
+      CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
+    }
+
+    SUBCASE("Stop joins multiple async sub-apps") {
+      App app(2);
+
+      SubApp render;
+      render.SetAsync(true);
+      render.SetRunner(RunDefaultSubApp);
+      render.AddSystem(kUpdate, SlowUpdateSystem{});
+
+      SubApp physics;
+      physics.SetAsync(true);
+      physics.SetRunner(RunDefaultSubApp);
+      physics.AddSystem(kUpdate, SlowUpdateSystem{});
+
+      app.InsertSubApp(RenderSubAppLabel{}, std::move(render));
+      app.InsertSubApp(PhysicsSubAppLabel{}, std::move(physics));
+      app.Initialize();
+
+      app.GetScheduler().Stop(app.GetExecutor());
+      CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
+      CHECK_FALSE(app.GetSubApp<PhysicsSubAppLabel>().IsUpdating());
+    }
+
+    SUBCASE("Stop waits for overlapping sub-app updates") {
+      App app(2);
+      app.InsertResources(CounterResource{1});
+
+      SubApp render;
+      render.AddSystem(kUpdate, SlowUpdateSystem{});
+      render.SetExtractFunction([](const World& /*main*/, World& /*sub*/) {});
+      app.InsertSubApp(OverlappingStopSubAppLabel{}, std::move(render));
+      app.Initialize();
+      app.Update();
+      app.GetScheduler().Stop(app.GetExecutor());
+      CHECK_FALSE(app.GetSubApp<OverlappingStopSubAppLabel>().IsUpdating());
+    }
+  }
+
+  TEST_CASE("helios::app::Scheduler::Build") {
     SUBCASE("Build wires sub-apps for parallel startup and updates") {
       App app(4);
       app.InsertSubApp(RenderSubAppLabel{}, SubApp{});
@@ -130,7 +213,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::RunStartup") {
+  TEST_CASE("helios::app::Scheduler::RunStartup") {
     SUBCASE("RunStartup executes startup systems on main sub-app") {
       App app(2);
       app.InsertResources(CounterResource{});
@@ -140,7 +223,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::RunFrame") {
+  TEST_CASE("helios::app::Scheduler::RunFrame") {
     SUBCASE("RunFrame executes update systems on main sub-app") {
       App app(2);
       app.InsertResources(CounterResource{});
@@ -203,7 +286,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::Shutdown") {
+  TEST_CASE("helios::app::Scheduler::Shutdown") {
     SUBCASE("Shutdown runs shutdown stage and leaves app initialized") {
       App app(2);
       app.InsertResources(CounterResource{});
@@ -213,7 +296,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::WaitForSubApps") {
+  TEST_CASE("helios::app::Scheduler::WaitForSubApps") {
     SUBCASE("WaitForSubApps joins in-flight blocking sub-app updates") {
       App app(4);
       SubApp render;

@@ -16,7 +16,7 @@ struct CounterSystem {
 }  // namespace
 
 TEST_SUITE("helios::ecs::MainThreadExecutor") {
-  TEST_CASE("ecs::MainThreadExecutor::Execute") {
+  TEST_CASE("helios::ecs::MainThreadExecutor::Execute") {
     SUBCASE(
         "Execute dispatches all systems in a built schedule to completion") {
       int counter = 0;

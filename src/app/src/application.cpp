@@ -39,14 +39,38 @@ App::App(size_t worker_thread_count)
   RegisterBuiltinSchedules(main_sub_app_.GetScheduler());
 }
 
+App::~App() {
+  // Ensure we're not running (should already be false if properly shut down)
+  is_running_.store(false, std::memory_order_release);
+
+  for (auto&& [_, sub_app] : sub_apps_) {
+    if (sub_app.IsAsync()) {
+      sub_app.RequestAsyncLoopStop();
+    }
+    sub_app.WaitUntilFullyIdle();
+  }
+
+  scheduler_.StopAsyncLoops(*this);
+  scheduler_.WaitForSubApps();
+  executor_.WaitForAll();
+}
+
 void App::Clear() {
   HELIOS_ASSERT(!IsRunning(), "Cannot clear app while it is running!");
 
-  is_initialized_ = false;
   is_running_.store(false, std::memory_order_relaxed);
+
+  // Stop background work before tearing down sub-apps / scheduler state.
+  if (is_initialized_) {
+    scheduler_.Shutdown(*this);
+  }
+
+  scheduler_.Stop(executor_);
+  scheduler_.Clear();
+
+  is_initialized_ = false;
   plugins_.clear();
   dynamic_plugins_.clear();
-  scheduler_.Clear();
   main_sub_app_.Clear();
   sub_apps_.clear();
 

@@ -9,7 +9,7 @@
 using namespace helios::utils;
 
 TEST_SUITE("helios::utils::Filesystem") {
-  TEST_CASE("utils::ReadFileToString::string_view overload") {
+  TEST_CASE("helios::utils::ReadFileToString::string_view overload") {
     constexpr std::string_view file_name = "helios_test_file.txt";
     constexpr std::string_view file_content = "Hello, Helios!";
     {
@@ -34,7 +34,7 @@ TEST_SUITE("helios::utils::Filesystem") {
     std::filesystem::remove(file_name);
   }
 
-  TEST_CASE("utils::ReadFileToString::filesystem::path overload") {
+  TEST_CASE("helios::utils::ReadFileToString::filesystem::path overload") {
     constexpr std::string_view file_name = "helios_test_file2.txt";
     constexpr std::string_view file_content = "Another test!";
     {
@@ -60,7 +60,7 @@ TEST_SUITE("helios::utils::Filesystem") {
     std::filesystem::remove(file_path);
   }
 
-  TEST_CASE("utils::Filesystem: GetFileName") {
+  TEST_CASE("helios::utils::Filesystem: GetFileName") {
     SUBCASE("Path with directories") {
       constexpr std::string_view path = "foo/bar/baz.txt";
       CHECK_EQ(GetFileName(path), "baz.txt");
@@ -77,7 +77,7 @@ TEST_SUITE("helios::utils::Filesystem") {
     }
   }
 
-  TEST_CASE("utils::Filesystem: GetFileExtension") {
+  TEST_CASE("helios::utils::Filesystem: GetFileExtension") {
     SUBCASE("Simple extension") {
       constexpr std::string_view path = "foo.txt";
       CHECK_EQ(GetFileExtension(path), ".txt");

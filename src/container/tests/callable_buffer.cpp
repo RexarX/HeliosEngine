@@ -129,20 +129,20 @@ void IncrementFn(int& value) {
 }  // namespace
 
 TEST_SUITE("helios::container::CallableBuffer") {
-  TEST_CASE("container::CallableBuffer::ctor: default construction") {
+  TEST_CASE("helios::container::CallableBuffer::ctor: default construction") {
     CallableBuffer<void()> buf;
 
     CHECK(buf.Empty());
   }
 
-  TEST_CASE("container::CallableBuffer::ctor: allocator construction") {
+  TEST_CASE("helios::container::CallableBuffer::ctor: allocator construction") {
     std::allocator<std::byte> alloc;
     CallableBuffer<std::allocator<std::byte>, void()> buf(alloc);
 
     CHECK(buf.Empty());
   }
 
-  TEST_CASE("container::CallableBuffer::ctor: move construction") {
+  TEST_CASE("helios::container::CallableBuffer::ctor: move construction") {
     InvocationTracker::Reset();
 
     CallableBuffer<void()> original;
@@ -158,7 +158,7 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 7);
   }
 
-  TEST_CASE("container::CallableBuffer::operator=: move assignment") {
+  TEST_CASE("helios::container::CallableBuffer::operator=: move assignment") {
     InvocationTracker::Reset();
 
     CallableBuffer<void()> original;
@@ -177,7 +177,9 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 42);
   }
 
-  TEST_CASE("container::CallableBuffer::operator=: self-assignment is no-op") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::operator=: self-assignment is "
+      "no-op") {
     InvocationTracker::Reset();
 
     CallableBuffer<void()> buf;
@@ -190,7 +192,8 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_FALSE(buf.Empty());
   }
 
-  TEST_CASE("container::CallableBuffer::Clear: destroys stored callable") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::Clear: destroys stored callable") {
     CountingCallable::Reset();
 
     CallableBuffer<void()> buf;
@@ -203,13 +206,14 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(CountingCallable::destruct_count, 2);
   }
 
-  TEST_CASE("container::CallableBuffer::Clear: on empty buffer is safe") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::Clear: on empty buffer is safe") {
     CallableBuffer<void()> buf;
     CHECK_NOTHROW(buf.Clear());
     CHECK(buf.Empty());
   }
 
-  TEST_CASE("container::CallableBuffer::Set: stores and replaces") {
+  TEST_CASE("helios::container::CallableBuffer::Set: stores and replaces") {
     SUBCASE("trivial callable via operator()") {
       InvocationTracker::Reset();
 
@@ -265,7 +269,7 @@ TEST_SUITE("helios::container::CallableBuffer") {
     }
   }
 
-  TEST_CASE("container::CallableBuffer::Set: custom methods") {
+  TEST_CASE("helios::container::CallableBuffer::Set: custom methods") {
     SUBCASE("single operation with custom method") {
       InvocationTracker::Reset();
 
@@ -296,7 +300,8 @@ TEST_SUITE("helios::container::CallableBuffer") {
     }
   }
 
-  TEST_CASE("container::CallableBuffer::Invoke: single signature no args") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::Invoke: single signature no args") {
     InvocationTracker::Reset();
 
     CallableBuffer<void()> buf;
@@ -307,7 +312,8 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 11);
   }
 
-  TEST_CASE("container::CallableBuffer::Invoke: single signature with args") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::Invoke: single signature with args") {
     InvocationTracker::Reset();
 
     CallableBuffer<void(int)> buf;
@@ -318,7 +324,8 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 15);
   }
 
-  TEST_CASE("container::CallableBuffer::Invoke: multi-signature indexed") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::Invoke: multi-signature indexed") {
     InvocationTracker::Reset();
 
     CallableBuffer<void(), void(int)> buf;
@@ -335,7 +342,8 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 207);  // 2 * 100 + 7
   }
 
-  TEST_CASE("container::CallableBuffer::Invoke: free function callable") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::Invoke: free function callable") {
     CallableBuffer<void(int&)> buf;
     buf.Set(&IncrementFn);
 
@@ -345,7 +353,7 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(value, 1);
   }
 
-  TEST_CASE("container::CallableBuffer::Invoke: stateful callable") {
+  TEST_CASE("helios::container::CallableBuffer::Invoke: stateful callable") {
     int counter = 0;
 
     CallableBuffer<void()> buf;
@@ -358,7 +366,7 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(counter, 3);
   }
 
-  TEST_CASE("container::CallableBuffer::Swap: swaps two buffers") {
+  TEST_CASE("helios::container::CallableBuffer::Swap: swaps two buffers") {
     InvocationTracker::Reset();
 
     CallableBuffer<void()> buf1;
@@ -380,7 +388,7 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 1);
   }
 
-  TEST_CASE("container::CallableBuffer::Swap: swap with empty buffer") {
+  TEST_CASE("helios::container::CallableBuffer::Swap: swap with empty buffer") {
     InvocationTracker::Reset();
 
     CallableBuffer<void()> buf1;
@@ -398,7 +406,7 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 5);
   }
 
-  TEST_CASE("container::CallableBuffer::swap: friend function") {
+  TEST_CASE("helios::container::CallableBuffer::swap: friend function") {
     InvocationTracker::Reset();
 
     CallableBuffer<void()> buf1;
@@ -414,7 +422,7 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 2);
   }
 
-  TEST_CASE("container::CallableBuffer::Empty: reflects state") {
+  TEST_CASE("helios::container::CallableBuffer::Empty: reflects state") {
     CallableBuffer<void()> buf;
     CHECK(buf.Empty());
 
@@ -425,7 +433,7 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK(buf.Empty());
   }
 
-  TEST_CASE("container::CallableBuffer::CapacityBytes: grows on Set") {
+  TEST_CASE("helios::container::CallableBuffer::CapacityBytes: grows on Set") {
     CallableBuffer<void()> buf;
     CHECK_EQ(buf.CapacityBytes(), 0);
 
@@ -433,7 +441,8 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_GT(buf.CapacityBytes(), 0);
   }
 
-  TEST_CASE("container::CallableBuffer::GetAllocator: returns allocator") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::GetAllocator: returns allocator") {
     std::allocator<std::byte> alloc;
     CallableBuffer<std::allocator<std::byte>, void()> buf(alloc);
 
@@ -454,7 +463,8 @@ TEST_SUITE("helios::container::CallableBuffer") {
              CountingCallable::destruct_count);
   }
 
-  TEST_CASE("container::CallableBuffer::multiple Set calls reuse storage") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::multiple Set calls reuse storage") {
     InvocationTracker::Reset();
 
     CallableBuffer<void()> buf;
@@ -469,7 +479,8 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 3);
   }
 
-  TEST_CASE("container::CallableBuffer::alias deduction: signatures only") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::alias deduction: signatures only") {
     InvocationTracker::Reset();
 
     CallableBuffer<void()> buf;
@@ -480,7 +491,9 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 20);
   }
 
-  TEST_CASE("container::CallableBuffer::alias deduction: multiple signatures") {
+  TEST_CASE(
+      "helios::container::CallableBuffer::alias deduction: multiple "
+      "signatures") {
     InvocationTracker::Reset();
 
     CallableBuffer<void(), void(int)> buf;
@@ -509,7 +522,8 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 8);
   }
 
-  TEST_CASE("container::PmrCallableBuffer: works with memory_resource") {
+  TEST_CASE(
+      "helios::container::PmrCallableBuffer: works with memory_resource") {
     InvocationTracker::Reset();
 
     auto* resource = std::pmr::get_default_resource();

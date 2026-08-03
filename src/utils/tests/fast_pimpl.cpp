@@ -56,7 +56,7 @@ std::string_view PimplTest::Str() const noexcept {
 }  // namespace
 
 TEST_SUITE("helios::utils::FastPimpl") {
-  TEST_CASE("utils::FastPimpl::ctor: basic usage") {
+  TEST_CASE("helios::utils::FastPimpl::ctor: basic usage") {
     PimplTest instance(42, "hello");
     CHECK_EQ(instance.Num(), 42);
     CHECK_EQ(instance.Str(), "hello");

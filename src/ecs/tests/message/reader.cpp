@@ -48,7 +48,7 @@ MessageManager MakeManager(const std::vector<Score>& prev_msgs,
 }  // namespace
 
 TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::ctor") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::ctor") {
     SUBCASE("Copy ctor preserves position") {
       ConsumedRegistry registry;
 
@@ -70,7 +70,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::assignment") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::assignment") {
     SUBCASE("Copy assignment preserves position") {
       ConsumedRegistry registry;
 
@@ -94,7 +94,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::operator*") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::operator*") {
     SUBCASE(
         "Dereference yields wrapper pointing to correct message in first "
         "span") {
@@ -126,7 +126,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::operator++ (pre)") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::operator++ (pre)") {
     SUBCASE("Pre-increment advances position by one") {
       ConsumedRegistry registry;
 
@@ -148,7 +148,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::operator++ (post)") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::operator++ (post)") {
     SUBCASE("Post-increment returns copy at old position") {
       ConsumedRegistry registry;
 
@@ -161,7 +161,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::operator-- (pre)") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::operator-- (pre)") {
     SUBCASE("Pre-decrement retreats position by one") {
       ConsumedRegistry registry;
 
@@ -183,7 +183,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::operator-- (post)") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::operator-- (post)") {
     SUBCASE("Post-decrement returns copy at old position") {
       ConsumedRegistry registry;
 
@@ -196,7 +196,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::operator==") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::operator==") {
     SUBCASE("Two iterators at the same position are equal") {
       ConsumedRegistry registry;
 
@@ -216,7 +216,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::operator!=") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::operator!=") {
     SUBCASE("Iterators at different positions compare not-equal") {
       ConsumedRegistry registry;
 
@@ -236,7 +236,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::operator<=>") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::operator<=>") {
     SUBCASE("Earlier position compares less than later position") {
       ConsumedRegistry registry;
 
@@ -264,7 +264,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::Position") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::Position") {
     SUBCASE("Returns the position supplied at construction") {
       ConsumedRegistry registry;
       const ConsumableMessageWrapperIter<Score> iter({}, {}, registry, 7);
@@ -272,7 +272,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapperIter::begin / end") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapperIter::begin / end") {
     SUBCASE("begin returns iterator at position 0") {
       ConsumedRegistry registry;
 
@@ -311,7 +311,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapperIter") {
 }
 
 TEST_SUITE("helios::ecs::ConsumableMessageReader") {
-  TEST_CASE("ecs::ConsumableMessageReader::ctor") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::ctor") {
     SUBCASE("Construct from explicit spans and registry") {
       ConsumedRegistry registry;
 
@@ -342,7 +342,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::operator=") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::operator=") {
     SUBCASE("Move assignment") {
       const auto manager = MakeManager({{}}, {{}});
       ConsumedRegistry registry;
@@ -357,7 +357,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::ConsumeAll") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::ConsumeAll") {
     SUBCASE("Marks every message as consumed") {
       const auto manager = MakeManager({{}, {}}, {{}});
       ConsumedRegistry registry;
@@ -378,7 +378,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::ConsumeIf") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::ConsumeIf") {
     SUBCASE("Marks matching messages as consumed and returns count") {
       const auto manager = MakeManager({{1}, {5}, {3}}, {{7}});
       ConsumedRegistry registry;
@@ -416,7 +416,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Collect") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Collect") {
     SUBCASE(
         "Collect returns all messages from previous and current as a vector") {
       const auto manager = MakeManager({{1}, {2}}, {{3}});
@@ -438,7 +438,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::CollectWith") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::CollectWith") {
     SUBCASE("CollectWith returns all messages using custom allocator") {
       const auto manager = MakeManager({{10}, {20}}, {});
       ConsumedRegistry registry;
@@ -452,7 +452,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::ReadInto") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::ReadInto") {
     SUBCASE("ReadInto copies all messages into output iterator") {
       const auto manager = MakeManager({{1}, {2}}, {{3}});
       ConsumedRegistry registry;
@@ -479,7 +479,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Filter") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Filter") {
     SUBCASE("Filter yields only matching wrappers") {
       const auto manager = MakeManager({{1}, {10}}, {{5}});
       ConsumedRegistry registry;
@@ -518,7 +518,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Map") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Map") {
     SUBCASE("Map transforms each wrapper") {
       const auto manager = MakeManager({{2}}, {{3}});
       ConsumedRegistry registry;
@@ -538,7 +538,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Take") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Take") {
     SUBCASE("Take limits number of yielded wrappers") {
       const auto manager = MakeManager({{}, {}, {}}, {});
       ConsumedRegistry registry;
@@ -570,7 +570,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Skip") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Skip") {
     SUBCASE("Skip skips the first N wrappers") {
       const auto manager = MakeManager({{}, {}, {}}, {});
       ConsumedRegistry registry;
@@ -602,7 +602,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::TakeWhile") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::TakeWhile") {
     SUBCASE("Stops yielding once predicate becomes false") {
       const auto manager = MakeManager({{1}, {2}, {10}, {3}}, {});
       ConsumedRegistry registry;
@@ -623,7 +623,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::SkipWhile") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::SkipWhile") {
     SUBCASE("Skips elements while predicate holds, then yields the rest") {
       const auto manager = MakeManager({{1}, {2}, {10}, {3}}, {});
       ConsumedRegistry registry;
@@ -644,7 +644,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Enumerate") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Enumerate") {
     SUBCASE("Enumerate pairs each wrapper with its zero-based index") {
       const auto manager = MakeManager({{}, {}}, {});
       ConsumedRegistry registry;
@@ -664,7 +664,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Inspect") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Inspect") {
     SUBCASE("Inspect calls side-effect without consuming the sequence") {
       const auto manager = MakeManager({{}, {}}, {});
       ConsumedRegistry registry;
@@ -688,7 +688,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::StepBy") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::StepBy") {
     SUBCASE("StepBy(1) yields all messages") {
       const auto manager = MakeManager({{}, {}, {}}, {});
       ConsumedRegistry registry;
@@ -720,7 +720,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Reverse") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Reverse") {
     SUBCASE("Reverse yields wrappers in reverse order") {
       const auto manager = MakeManager({{1}, {2}, {3}}, {});
       ConsumedRegistry registry;
@@ -740,7 +740,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Slide") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Slide") {
     SUBCASE("Slide yields windows of `window_size` wrappers") {
       const auto manager = MakeManager({{1}, {2}, {3}, {4}}, {});
       ConsumedRegistry registry;
@@ -767,7 +767,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Stride") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Stride") {
     SUBCASE("Stride yields every nth element") {
       const auto manager = MakeManager({{1}, {2}, {3}, {4}}, {});
       ConsumedRegistry registry;
@@ -780,7 +780,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Zip") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Zip") {
     const auto manager = MakeManager({{1}, {2}, {3}, {4}}, {});
     ConsumedRegistry registry;
     constexpr std::array expected = {0, 1, 2, 3};
@@ -818,7 +818,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Fold") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Fold") {
     SUBCASE("Fold accumulates all messages from previous and current") {
       const auto manager = MakeManager({{1}, {2}}, {{3}});
       ConsumedRegistry registry;
@@ -845,7 +845,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Find") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Find") {
     SUBCASE("Find returns pointer to the first matching message") {
       const auto manager = MakeManager({{3}, {7}}, {});
       ConsumedRegistry registry;
@@ -874,7 +874,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::CountIf") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::CountIf") {
     SUBCASE("CountIf returns number of matching messages across both spans") {
       const auto manager = MakeManager({{1}, {6}}, {{8}});
       ConsumedRegistry registry;
@@ -902,7 +902,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Partition") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Partition") {
     SUBCASE("Partition splits wrappers into matching and non-matching groups") {
       const auto manager = MakeManager({{1}, {7}}, {{3}, {9}});
       ConsumedRegistry registry;
@@ -936,7 +936,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::MaxBy") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::MaxBy") {
     SUBCASE("MaxBy returns wrapper with maximum key") {
       const auto manager = MakeManager({{2}, {11}}, {{5}});
       ConsumedRegistry registry;
@@ -964,7 +964,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::MinBy") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::MinBy") {
     SUBCASE("MinBy returns wrapper with minimum key") {
       const auto manager = MakeManager({{4}, {1}}, {{7}});
       ConsumedRegistry registry;
@@ -992,7 +992,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::GroupBy") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::GroupBy") {
     SUBCASE("GroupBy groups wrappers by extracted key") {
       const auto manager = MakeManager({{1}, {2}, {3}}, {{4}});
       ConsumedRegistry registry;
@@ -1026,7 +1026,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::ForEach") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::ForEach") {
     SUBCASE("ForEach visits all messages in previous then current order") {
       const auto manager = MakeManager({{1}, {2}}, {{3}});
       ConsumedRegistry registry;
@@ -1059,7 +1059,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Any") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Any") {
     SUBCASE("Returns true when at least one message matches") {
       const auto manager = MakeManager({{1}}, {{10}});
       ConsumedRegistry registry;
@@ -1099,7 +1099,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::All") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::All") {
     SUBCASE("Returns true when all messages match") {
       const auto manager = MakeManager({{5}, {6}}, {{7}});
       ConsumedRegistry registry;
@@ -1139,7 +1139,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::None") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::None") {
     SUBCASE("Returns true when no message matches") {
       const auto manager = MakeManager({{1}, {2}}, {});
       ConsumedRegistry registry;
@@ -1179,7 +1179,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Empty") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Empty") {
     SUBCASE("Returns true when both spans are empty") {
       ConsumedRegistry registry;
       const ConsumableMessageReader<Score> reader({}, {}, registry);
@@ -1208,7 +1208,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::Count") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Count") {
     SUBCASE("Returns zero for empty reader") {
       ConsumedRegistry registry;
       const ConsumableMessageReader<Score> reader({}, {}, registry);
@@ -1225,7 +1225,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::PreviousMessages") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::PreviousMessages") {
     SUBCASE("Returns span of previous-frame messages") {
       const auto manager = MakeManager({{10}, {20}}, {{30}});
       ConsumedRegistry registry;
@@ -1251,7 +1251,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::CurrentMessages") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::CurrentMessages") {
     SUBCASE("Returns span of current-frame messages") {
       const auto manager = MakeManager({}, {{5}, {6}});
       ConsumedRegistry registry;
@@ -1274,7 +1274,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageReader::begin / end") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::begin / end") {
     SUBCASE("begin returns iterator at position 0") {
       const auto manager = MakeManager({{}}, {});
       ConsumedRegistry registry;

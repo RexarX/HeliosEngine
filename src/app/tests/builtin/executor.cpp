@@ -6,13 +6,13 @@
 using namespace helios::app;
 
 TEST_SUITE("helios::app::Executor") {
-  TEST_CASE("app::Executor::kThreadSafe") {
+  TEST_CASE("helios::app::Executor::kThreadSafe") {
     SUBCASE("Executor is a thread-safe resource") {
       CHECK_EQ(helios::ecs::IsResourceThreadSafe<Executor>(), true);
     }
   }
 
-  TEST_CASE("app::Executor::operator*") {
+  TEST_CASE("helios::app::Executor::operator*") {
     SUBCASE("Dereferences wrapped executor") {
       App app(2);
       const Executor executor{app.GetExecutor()};
@@ -21,7 +21,7 @@ TEST_SUITE("helios::app::Executor") {
     }
   }
 
-  TEST_CASE("app::Executor::operator->") {
+  TEST_CASE("helios::app::Executor::operator->") {
     SUBCASE("Accesses wrapped executor") {
       App app(2);
       const Executor executor{app.GetExecutor()};
@@ -32,7 +32,7 @@ TEST_SUITE("helios::app::Executor") {
 }
 
 TEST_SUITE("helios::app::ExecutorPlugin") {
-  TEST_CASE("app::ExecutorPlugin::Build") {
+  TEST_CASE("helios::app::ExecutorPlugin::Build") {
     SUBCASE("Adds Executor resource on initialize") {
       App app(2);
       app.AddPlugins(ExecutorPlugin{});

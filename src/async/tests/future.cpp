@@ -12,7 +12,7 @@
 using namespace helios::async;
 
 TEST_SUITE("helios::async::Future") {
-  TEST_CASE("async::Future: construction and basic properties") {
+  TEST_CASE("helios::async::Future: construction and basic properties") {
     SUBCASE("Default construction") {
       Future<int> future;
       CHECK_FALSE(future.Valid());
@@ -55,7 +55,7 @@ TEST_SUITE("helios::async::Future") {
     }
   }
 
-  TEST_CASE("async::Future: result retrieval") {
+  TEST_CASE("helios::async::Future: result retrieval") {
     Executor executor(2);
 
     SUBCASE("Get with int return type") {
@@ -98,7 +98,7 @@ TEST_SUITE("helios::async::Future") {
     }
   }
 
-  TEST_CASE("async::Future: waiting functionality") {
+  TEST_CASE("helios::async::Future: waiting functionality") {
     Executor executor(2);
 
     SUBCASE("Wait for completion") {
@@ -199,7 +199,7 @@ TEST_SUITE("helios::async::Future") {
     }
   }
 
-  TEST_CASE("async::Future::Cancel") {
+  TEST_CASE("helios::async::Future::Cancel") {
     Executor executor(1);
 
     SUBCASE("Cancel before execution") {
@@ -254,7 +254,7 @@ TEST_SUITE("helios::async::Future") {
     }
   }
 
-  TEST_CASE("async::Future::Valid") {
+  TEST_CASE("helios::async::Future::Valid") {
     Executor executor(2);
 
     SUBCASE("Valid future lifecycle") {
@@ -296,7 +296,7 @@ TEST_SUITE("helios::async::Future") {
     }
   }
 
-  TEST_CASE("async::Future: multiple futures coordination") {
+  TEST_CASE("helios::async::Future: multiple futures coordination") {
     Executor executor(4);
 
     SUBCASE("Multiple independent futures") {
@@ -354,7 +354,7 @@ TEST_SUITE("helios::async::Future") {
     }
   }
 
-  TEST_CASE("async::Future: exception handling") {
+  TEST_CASE("helios::async::Future: exception handling") {
     Executor executor(2);
 
     SUBCASE("Future with throwing task") {

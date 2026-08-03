@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - dev
     paths:
       - ".github/workflows/linux-clang.yaml"
       - "cmake/**"
@@ -25,6 +24,10 @@ on:
       - "CMakeLists.txt"
       - "CMakePresets.json"
       - "!**.md"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -68,4 +71,4 @@ jobs:
         run: cmake --build --preset ${{ matrix.preset }}
 
       - name: Test (${{ matrix.preset }})
-        run: ctest --preset ${{ matrix.preset }} --output-on-failure
+        run: ctest --preset ${{ matrix.preset }} --output-on-failure --timeout 120

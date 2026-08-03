@@ -29,7 +29,7 @@ struct CounterMsg {
 }  // namespace
 
 TEST_SUITE("helios::ecs::AsyncMessageWrapper") {
-  TEST_CASE("ecs::AsyncMessageWrapper::ctor") {
+  TEST_CASE("helios::ecs::AsyncMessageWrapper::ctor") {
     SUBCASE("Explicit move constructor stores the message") {
       AsyncMessageWrapper<EventMsg> wrapper(EventMsg{42});
       CHECK_EQ(wrapper->id, 42);
@@ -51,7 +51,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWrapper::operator=") {
+  TEST_CASE("helios::ecs::AsyncMessageWrapper::operator=") {
     SUBCASE("Copy assignment replicates the message") {
       AsyncMessageWrapper<EventMsg> src(EventMsg{10});
       AsyncMessageWrapper<EventMsg> dst(EventMsg{0});
@@ -72,7 +72,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWrapper::operator->") {
+  TEST_CASE("helios::ecs::AsyncMessageWrapper::operator->") {
     SUBCASE("Mutable operator-> provides write access to the message") {
       AsyncMessageWrapper<EventMsg> wrapper(EventMsg{1});
       wrapper->id = 100;
@@ -85,7 +85,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWrapper::operator*") {
+  TEST_CASE("helios::ecs::AsyncMessageWrapper::operator*") {
     SUBCASE("Mutable dereference returns a reference to the message") {
       AsyncMessageWrapper<EventMsg> wrapper(EventMsg{3});
 
@@ -107,7 +107,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWrapper::Name") {
+  TEST_CASE("helios::ecs::AsyncMessageWrapper::Name") {
     SUBCASE("Returns the custom kName when the message type provides one") {
       const AsyncMessageWrapper<EventMsg> wrapper(EventMsg{});
       CHECK_EQ(wrapper.Name(), "EventMsg");
@@ -119,7 +119,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWrapper::TypeIndex") {
+  TEST_CASE("helios::ecs::AsyncMessageWrapper::TypeIndex") {
     SUBCASE("TypeIndex matches the free-function result for the same type") {
       const AsyncMessageWrapper<EventMsg> wrapper(EventMsg{});
       CHECK_EQ(wrapper.TypeIndex(), MessageTypeIndex::From<EventMsg>());
@@ -132,7 +132,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWrapper::Unwrap") {
+  TEST_CASE("helios::ecs::AsyncMessageWrapper::Unwrap") {
     SUBCASE("Mutable Unwrap returns a reference to the stored message") {
       AsyncMessageWrapper<EventMsg> wrapper(EventMsg{33});
 
@@ -154,7 +154,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWrapper::Take") {
+  TEST_CASE("helios::ecs::AsyncMessageWrapper::Take") {
     SUBCASE("Take returns the message with the correct value") {
       AsyncMessageWrapper<EventMsg> wrapper(EventMsg{88});
       const EventMsg taken = wrapper.Take();

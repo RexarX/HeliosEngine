@@ -17,7 +17,7 @@ struct MovementSet {};
 struct DiagnosticsSet {};
 
 TEST_SUITE("helios::ecs::SystemGroupHandle") {
-  TEST_CASE("ecs::SystemGroupHandle::ctor") {
+  TEST_CASE("helios::ecs::SystemGroupHandle::ctor") {
     SUBCASE("Adding multiple systems returns a group handle") {
       Schedule schedule;
 
@@ -46,7 +46,7 @@ TEST_SUITE("helios::ecs::SystemGroupHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemGroupHandle::operator=") {
+  TEST_CASE("helios::ecs::SystemGroupHandle::operator=") {
     SUBCASE("Move assignment transfers identity") {
       Schedule schedule;
       auto source = schedule.Add(IncrementSystem{}, SetFlagSystem{});
@@ -59,7 +59,7 @@ TEST_SUITE("helios::ecs::SystemGroupHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemGroupHandle::Before") {
+  TEST_CASE("helios::ecs::SystemGroupHandle::Before") {
     SUBCASE("Before with SystemId marks schedule dirty") {
       Schedule schedule;
       auto group = schedule.Add(IncrementSystem{}, SetFlagSystem{});
@@ -127,7 +127,7 @@ TEST_SUITE("helios::ecs::SystemGroupHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemGroupHandle::After") {
+  TEST_CASE("helios::ecs::SystemGroupHandle::After") {
     SUBCASE("After with SystemId marks schedule dirty") {
       Schedule schedule;
       auto group = schedule.Add(IncrementSystem{}, SetFlagSystem{});
@@ -195,7 +195,7 @@ TEST_SUITE("helios::ecs::SystemGroupHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemGroupHandle::RunIf") {
+  TEST_CASE("helios::ecs::SystemGroupHandle::RunIf") {
     SUBCASE("RunIf with predicate marks schedule dirty") {
       Schedule schedule;
       auto group = schedule.Add(IncrementSystem{}, SetFlagSystem{});
@@ -231,7 +231,7 @@ TEST_SUITE("helios::ecs::SystemGroupHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemGroupHandle::InSet") {
+  TEST_CASE("helios::ecs::SystemGroupHandle::InSet") {
     SUBCASE(
         "InSet with SystemSetId assigns all group members to the target set") {
       Schedule schedule;
@@ -285,7 +285,7 @@ TEST_SUITE("helios::ecs::SystemGroupHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemGroupHandle::Sequence") {
+  TEST_CASE("helios::ecs::SystemGroupHandle::Sequence") {
     SUBCASE("Sequence marks the group as sequential") {
       Schedule schedule;
 
@@ -327,7 +327,7 @@ TEST_SUITE("helios::ecs::SystemGroupHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemGroupHandle::Done") {
+  TEST_CASE("helios::ecs::SystemGroupHandle::Done") {
     SUBCASE("Done returns reference to the parent schedule") {
       Schedule schedule;
       auto group_handle = schedule.Add(IncrementSystem{}, SetFlagSystem{});
@@ -338,7 +338,7 @@ TEST_SUITE("helios::ecs::SystemGroupHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemGroupHandle::Id") {
+  TEST_CASE("helios::ecs::SystemGroupHandle::Id") {
     SUBCASE("Id returns the group id") {
       Schedule schedule;
 

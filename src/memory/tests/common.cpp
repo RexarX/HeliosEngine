@@ -10,26 +10,26 @@
 using namespace helios::mem;
 
 TEST_SUITE("helios::mem::CommonConstants") {
-  TEST_CASE("mem::CommonConstants::kDefaultAlignment") {
+  TEST_CASE("helios::mem::CommonConstants::kDefaultAlignment") {
     CHECK_GT(kDefaultAlignment, 0);
     CHECK(IsPowerOfTwo(kDefaultAlignment));
   }
 
-  TEST_CASE("mem::CommonConstants::kMinAlignment") {
+  TEST_CASE("helios::mem::CommonConstants::kMinAlignment") {
     CHECK_EQ(kMinAlignment, alignof(std::max_align_t));
     CHECK(IsPowerOfTwo(kMinAlignment));
   }
 }
 
 TEST_SUITE("helios::mem::GrowthMode") {
-  TEST_CASE("mem::GrowthMode::enumerators are distinct") {
+  TEST_CASE("helios::mem::GrowthMode::enumerators are distinct") {
     CHECK_NE(static_cast<int>(GrowthMode::kLinear),
              static_cast<int>(GrowthMode::kGeometric));
   }
 }
 
 TEST_SUITE("helios::mem::GrowthPolicy") {
-  TEST_CASE("mem::GrowthPolicy::Linear") {
+  TEST_CASE("helios::mem::GrowthPolicy::Linear") {
     const auto policy = GrowthPolicy::Linear(64, 4096);
 
     CHECK_EQ(policy.mode, GrowthMode::kLinear);
@@ -39,7 +39,7 @@ TEST_SUITE("helios::mem::GrowthPolicy") {
     CHECK_EQ(policy.geometric_denominator, 1);
   }
 
-  TEST_CASE("mem::GrowthPolicy::Geometric") {
+  TEST_CASE("helios::mem::GrowthPolicy::Geometric") {
     const GrowthPolicy policy = GrowthPolicy::Geometric(3, 2, 8192);
 
     CHECK_EQ(policy.mode, GrowthMode::kGeometric);
@@ -49,7 +49,7 @@ TEST_SUITE("helios::mem::GrowthPolicy") {
     CHECK_EQ(policy.linear_step, 0);
   }
 
-  TEST_CASE("mem::GrowthPolicy::NextCapacity") {
+  TEST_CASE("helios::mem::GrowthPolicy::NextCapacity") {
     SUBCASE("Returns current when already sufficient") {
       const auto policy = GrowthPolicy::Geometric();
       CHECK_EQ(policy.NextCapacity(256, 128), 256);
@@ -95,7 +95,7 @@ TEST_SUITE("helios::mem::GrowthPolicy") {
 }
 
 TEST_SUITE("helios::mem::AllocatorStats") {
-  TEST_CASE("mem::AllocatorStats::default initializes to zero") {
+  TEST_CASE("helios::mem::AllocatorStats::default initializes to zero") {
     const AllocatorStats stats{};
     CHECK_EQ(stats.total_allocated, 0);
     CHECK_EQ(stats.peak_usage, 0);
@@ -107,7 +107,7 @@ TEST_SUITE("helios::mem::AllocatorStats") {
 }
 
 TEST_SUITE("helios::mem::MemoryErrorToString") {
-  TEST_CASE("mem::MemoryErrorToString::maps each error to a message") {
+  TEST_CASE("helios::mem::MemoryErrorToString::maps each error to a message") {
     CHECK(MemoryErrorToString(MemoryError::kOutOfMemory) == "Out of memory");
     CHECK(MemoryErrorToString(MemoryError::kInvalidAlignment) ==
           "Invalid alignment");
@@ -120,7 +120,7 @@ TEST_SUITE("helios::mem::MemoryErrorToString") {
 }
 
 TEST_SUITE("helios::mem::IsPowerOfTwo") {
-  TEST_CASE("mem::IsPowerOfTwo::detects powers of two correctly") {
+  TEST_CASE("helios::mem::IsPowerOfTwo::detects powers of two correctly") {
     CHECK_FALSE(IsPowerOfTwo(0));
     CHECK(IsPowerOfTwo(1));
     CHECK(IsPowerOfTwo(2));
@@ -131,12 +131,12 @@ TEST_SUITE("helios::mem::IsPowerOfTwo") {
 }
 
 TEST_SUITE("helios::mem::SaturatingAdd") {
-  TEST_CASE("mem::SaturatingAdd::adds without overflow") {
+  TEST_CASE("helios::mem::SaturatingAdd::adds without overflow") {
     CHECK_EQ(SaturatingAdd(10, 20), 30);
     CHECK_EQ(SaturatingAdd(0, 42), 42);
   }
 
-  TEST_CASE("mem::SaturatingAdd::clamps on overflow") {
+  TEST_CASE("helios::mem::SaturatingAdd::clamps on overflow") {
     constexpr size_t kMax = std::numeric_limits<size_t>::max();
     CHECK_EQ(SaturatingAdd(kMax, 1), kMax);
     CHECK_EQ(SaturatingAdd(kMax - 5, 10), kMax);
@@ -144,12 +144,12 @@ TEST_SUITE("helios::mem::SaturatingAdd") {
 }
 
 TEST_SUITE("helios::mem::SaturatingMul") {
-  TEST_CASE("mem::SaturatingMul::multiplies without overflow") {
+  TEST_CASE("helios::mem::SaturatingMul::multiplies without overflow") {
     CHECK_EQ(SaturatingMul(3, 7), 21);
     CHECK_EQ(SaturatingMul(0, 99), 0);
   }
 
-  TEST_CASE("mem::SaturatingMul::clamps on overflow") {
+  TEST_CASE("helios::mem::SaturatingMul::clamps on overflow") {
     constexpr size_t kMax = std::numeric_limits<size_t>::max();
     CHECK_EQ(SaturatingMul(kMax, 2), kMax);
     CHECK_EQ(SaturatingMul((kMax / 2) + 1, 3), kMax);
@@ -157,21 +157,21 @@ TEST_SUITE("helios::mem::SaturatingMul") {
 }
 
 TEST_SUITE("helios::mem::AlignUp") {
-  TEST_CASE("mem::AlignUp::returns aligned value") {
+  TEST_CASE("helios::mem::AlignUp::returns aligned value") {
     CHECK_EQ(AlignUp(0, 8), 0);
     CHECK_EQ(AlignUp(1, 8), 8);
     CHECK_EQ(AlignUp(8, 8), 8);
     CHECK_EQ(AlignUp(9, 8), 16);
   }
 
-  TEST_CASE("mem::AlignUp::saturates on overflow") {
+  TEST_CASE("helios::mem::AlignUp::saturates on overflow") {
     constexpr size_t kMax = std::numeric_limits<size_t>::max();
     CHECK_EQ(AlignUp(kMax - 1, 8), kMax);
   }
 }
 
 TEST_SUITE("helios::mem::AlignUpPtr") {
-  TEST_CASE("mem::AlignUpPtr::returns aligned pointer") {
+  TEST_CASE("helios::mem::AlignUpPtr::returns aligned pointer") {
     std::array<std::byte, 128> buffer{};
 
     void* const raw = buffer.data() + 1;
@@ -184,7 +184,7 @@ TEST_SUITE("helios::mem::AlignUpPtr") {
 }
 
 TEST_SUITE("helios::mem::IsAligned") {
-  TEST_CASE("mem::IsAligned::detects pointer alignment") {
+  TEST_CASE("helios::mem::IsAligned::detects pointer alignment") {
     std::array<std::byte, 128> buffer{};
     void* const aligned = AlignUpPtr(buffer.data(), 32);
     CHECK(IsAligned(aligned, 32));
@@ -195,7 +195,7 @@ TEST_SUITE("helios::mem::IsAligned") {
 }
 
 TEST_SUITE("helios::mem::CalculatePadding") {
-  TEST_CASE("mem::CalculatePadding::returns required bytes") {
+  TEST_CASE("helios::mem::CalculatePadding::returns required bytes") {
     std::array<std::byte, 128> buffer{};
     const void* aligned = AlignUpPtr(buffer.data(), 16);
     CHECK_EQ(CalculatePadding(aligned, 16), 0);

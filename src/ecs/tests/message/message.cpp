@@ -95,7 +95,7 @@ struct NonCopyableNonMovableMessage {
 }  // namespace
 
 TEST_SUITE("helios::ecs::MessageTrait") {
-  TEST_CASE("ecs::MessageTrait::concept") {
+  TEST_CASE("helios::ecs::MessageTrait::concept") {
     SUBCASE("Regular message types satisfy MessageTrait") {
       CHECK(MessageTrait<SimpleMessage>);
       CHECK(MessageTrait<NamedMessage>);
@@ -123,7 +123,7 @@ TEST_SUITE("helios::ecs::MessageTrait") {
 }
 
 TEST_SUITE("helios::ecs::AsyncMessageTrait") {
-  TEST_CASE("ecs::AsyncMessageTrait::concept") {
+  TEST_CASE("helios::ecs::AsyncMessageTrait::concept") {
     SUBCASE("Types with kAsync = true satisfy AsyncMessageTrait") {
       CHECK(AsyncMessageTrait<AsyncMessage>);
       CHECK(AsyncMessageTrait<NamedAsyncMessage>);
@@ -147,7 +147,7 @@ TEST_SUITE("helios::ecs::AsyncMessageTrait") {
 }
 
 TEST_SUITE("helios::ecs::AnyMessageTrait") {
-  TEST_CASE("ecs::AnyMessageTrait::concept") {
+  TEST_CASE("helios::ecs::AnyMessageTrait::concept") {
     SUBCASE("Regular messages satisfy AnyMessageTrait") {
       CHECK(AnyMessageTrait<SimpleMessage>);
       CHECK(AnyMessageTrait<NamedMessage>);
@@ -166,7 +166,7 @@ TEST_SUITE("helios::ecs::AnyMessageTrait") {
 }
 
 TEST_SUITE("helios::ecs::MessageWithNameTrait") {
-  TEST_CASE("ecs::MessageWithNameTrait::concept") {
+  TEST_CASE("helios::ecs::MessageWithNameTrait::concept") {
     SUBCASE("Messages with kName satisfy MessageWithNameTrait") {
       CHECK(MessageWithNameTrait<NamedMessage>);
       CHECK(MessageWithNameTrait<NamedAsyncMessage>);
@@ -182,7 +182,7 @@ TEST_SUITE("helios::ecs::MessageWithNameTrait") {
 }
 
 TEST_SUITE("helios::ecs::MessageWithClearPolicy") {
-  TEST_CASE("ecs::MessageWithClearPolicy::concept") {
+  TEST_CASE("helios::ecs::MessageWithClearPolicy::concept") {
     SUBCASE("Messages with kClearPolicy satisfy MessageWithClearPolicy") {
       CHECK(MessageWithClearPolicy<ManualClearMessage>);
       CHECK(MessageWithClearPolicy<CompleteMessage>);
@@ -198,7 +198,7 @@ TEST_SUITE("helios::ecs::MessageWithClearPolicy") {
 }
 
 TEST_SUITE("helios::ecs::MessageNameOf") {
-  TEST_CASE("ecs::MessageNameOf::basic") {
+  TEST_CASE("helios::ecs::MessageNameOf::basic") {
     SUBCASE("Message with custom name returns custom name") {
       constexpr auto name = MessageNameOf<NamedMessage>();
       CHECK_EQ(name, "NamedMessage");
@@ -241,7 +241,7 @@ TEST_SUITE("helios::ecs::MessageNameOf") {
 }
 
 TEST_SUITE("helios::ecs::MessageClearPolicyOf") {
-  TEST_CASE("ecs::MessageClearPolicyOf::basic") {
+  TEST_CASE("helios::ecs::MessageClearPolicyOf::basic") {
     SUBCASE("Message with custom clear policy returns custom policy") {
       constexpr auto policy = MessageClearPolicyOf<ManualClearMessage>();
       CHECK_EQ(policy, MessageClearPolicy::kManual);
@@ -279,7 +279,7 @@ TEST_SUITE("helios::ecs::MessageClearPolicyOf") {
 }
 
 TEST_SUITE("helios::ecs::Message: edge cases") {
-  TEST_CASE("ecs::Message::edge_cases") {
+  TEST_CASE("helios::ecs::Message::edge_cases") {
     SUBCASE("Message with all traits specified") {
       CHECK(MessageTrait<CompleteMessage>);
       CHECK(MessageWithNameTrait<CompleteMessage>);
@@ -329,7 +329,7 @@ TEST_SUITE("helios::ecs::Message: edge cases") {
 }
 
 TEST_SUITE("ecs::ConsumableMessageTrait") {
-  TEST_CASE("ecs::ConsumableMessageTrait::concept") {
+  TEST_CASE("helios::ecs::ConsumableMessageTrait::concept") {
     SUBCASE("Messages with kConsumable = true satisfy ConsumableMessageTrait") {
       CHECK(ConsumableMessageTrait<ConsumableMessage>);
       CHECK(ConsumableMessageTrait<ConsumableNamedMessage>);

@@ -18,7 +18,6 @@
 
 #include <compare>
 #include <memory>
-#include <memory_resource>
 #include <string>
 #include <vector>
 
@@ -28,7 +27,7 @@ using namespace helios::ecs;
 using namespace helios::ecs::schedule_test;
 
 TEST_SUITE("helios::ecs::ScheduleSystemId") {
-  TEST_CASE("ecs::ScheduleSystemId::operator==") {
+  TEST_CASE("helios::ecs::ScheduleSystemId::operator==") {
     SUBCASE("Default ids compare equal") {
       constexpr ScheduleSystemId id1;
       constexpr ScheduleSystemId id2;
@@ -49,7 +48,7 @@ TEST_SUITE("helios::ecs::ScheduleSystemId") {
     }
   }
 
-  TEST_CASE("ecs::ScheduleSystemId::operator<=>") {
+  TEST_CASE("helios::ecs::ScheduleSystemId::operator<=>") {
     SUBCASE("Ids with different slots are ordered") {
       constexpr ScheduleSystemId id1{.id = SystemId::From("A"), .slot = 0};
       constexpr ScheduleSystemId id2{.id = SystemId::From("A"), .slot = 1};
@@ -65,7 +64,7 @@ TEST_SUITE("helios::ecs::ScheduleSystemId") {
 }
 
 TEST_SUITE("helios::ecs::ScheduleSystemMetadata") {
-  TEST_CASE("ecs::ScheduleSystemMetadata::AddBefore(SystemId)") {
+  TEST_CASE("helios::ecs::ScheduleSystemMetadata::AddBefore(SystemId)") {
     SUBCASE("AddBefore with SystemId adds a target") {
       ScheduleSystemMetadata metadata;
       constexpr auto sys_id = SystemId::From<SystemAlpha>();
@@ -87,7 +86,7 @@ TEST_SUITE("helios::ecs::ScheduleSystemMetadata") {
     }
   }
 
-  TEST_CASE("ecs::ScheduleSystemMetadata::AddAfter(SystemId)") {
+  TEST_CASE("helios::ecs::ScheduleSystemMetadata::AddAfter(SystemId)") {
     SUBCASE("AddAfter with SystemId adds a target") {
       ScheduleSystemMetadata metadata;
       constexpr auto sys_id = SystemId::From<SystemAlpha>();
@@ -109,7 +108,7 @@ TEST_SUITE("helios::ecs::ScheduleSystemMetadata") {
     }
   }
 
-  TEST_CASE("ecs::ScheduleSystemMetadata::AddBefore(SystemSetId)") {
+  TEST_CASE("helios::ecs::ScheduleSystemMetadata::AddBefore(SystemSetId)") {
     SUBCASE("AddBefore with SystemSetId adds a set target") {
       ScheduleSystemMetadata metadata;
       constexpr auto set_id = SystemSetId::From<SetOne>();
@@ -131,7 +130,7 @@ TEST_SUITE("helios::ecs::ScheduleSystemMetadata") {
     }
   }
 
-  TEST_CASE("ecs::ScheduleSystemMetadata::AddAfter(SystemSetId)") {
+  TEST_CASE("helios::ecs::ScheduleSystemMetadata::AddAfter(SystemSetId)") {
     SUBCASE("AddAfter with SystemSetId adds a set target") {
       ScheduleSystemMetadata metadata;
       constexpr auto set_id = SystemSetId::From<SetOne>();
@@ -153,7 +152,7 @@ TEST_SUITE("helios::ecs::ScheduleSystemMetadata") {
     }
   }
 
-  TEST_CASE("ecs::ScheduleSystemMetadata::AppendUnique") {
+  TEST_CASE("helios::ecs::ScheduleSystemMetadata::AppendUnique") {
     SUBCASE("AppendUnique adds a value that is not yet present") {
       std::vector<int> vec;
       ScheduleSystemMetadata::AppendUnique(vec, 42);
@@ -180,7 +179,7 @@ struct UnnamedScheduleType {};
 constexpr UnnamedScheduleType kUnnamedSchedule{};
 
 TEST_SUITE("ecs::Schedule") {
-  TEST_CASE("ecs::Schedule::ctor") {
+  TEST_CASE("helios::ecs::Schedule::ctor") {
     SUBCASE("Default-constructed schedule is dirty with empty name") {
       const Schedule schedule;
       CHECK(schedule.IsDirty());
@@ -204,7 +203,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::From") {
+  TEST_CASE("helios::ecs::Schedule::From") {
     SUBCASE("From uses kName when ScheduleWithNameTrait is satisfied") {
       const Schedule schedule = Schedule::From(kNamedSchedule);
       CHECK_EQ(schedule.GetName(), "UpdateSchedule");
@@ -216,13 +215,13 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::SetName") {
+  TEST_CASE("helios::ecs::Schedule::SetName") {
     Schedule schedule;
     schedule.SetName("PostProcess");
     CHECK_EQ(schedule.GetName(), "PostProcess");
   }
 
-  TEST_CASE("ecs::Schedule::operator=") {
+  TEST_CASE("helios::ecs::Schedule::operator=") {
     SUBCASE("Move assignment transfers state and name") {
       Schedule source("RenderSchedule");
       source.Add(IncrementSystem{});
@@ -235,7 +234,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::Run") {
+  TEST_CASE("helios::ecs::Schedule::Run") {
     SUBCASE("Run with explicit executor executes systems") {
       Schedule schedule;
       schedule.Add(IncrementSystem{});
@@ -287,7 +286,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::RunAndWait") {
+  TEST_CASE("helios::ecs::Schedule::RunAndWait") {
     SUBCASE("RunAndWait with explicit executor executes systems") {
       Schedule schedule;
       schedule.Add(IncrementSystem{});
@@ -315,7 +314,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::Build") {
+  TEST_CASE("helios::ecs::Schedule::Build") {
     SUBCASE("Build on empty schedule succeeds") {
       Schedule schedule;
 
@@ -375,7 +374,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::Add") {
+  TEST_CASE("helios::ecs::Schedule::Add") {
     SUBCASE("Adding a param-style system returns a handle") {
       Schedule schedule;
 
@@ -397,7 +396,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::Set") {
+  TEST_CASE("helios::ecs::Schedule::Set") {
     SUBCASE("Set creates a set and returns a handle") {
       Schedule schedule;
       constexpr auto set_id = SystemSetId::From<SetOne>();
@@ -417,7 +416,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::SetExecutor") {
+  TEST_CASE("helios::ecs::Schedule::SetExecutor") {
     SUBCASE("New schedule has null executor") {
       const Schedule schedule;
       CHECK_EQ(schedule.GetExecutor(), nullptr);
@@ -431,7 +430,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::IsDirty") {
+  TEST_CASE("helios::ecs::Schedule::IsDirty") {
     SUBCASE("Newly constructed schedule is dirty") {
       Schedule schedule;
       CHECK(schedule.IsDirty());
@@ -458,7 +457,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::Settings") {
+  TEST_CASE("helios::ecs::Schedule::Settings") {
     SUBCASE("Default settings use kMultiThreaded executor") {
       const Schedule schedule;
       const auto& settings = schedule.Settings();
@@ -483,7 +482,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::GetExecutor") {
+  TEST_CASE("helios::ecs::Schedule::GetExecutor") {
     SUBCASE("Mutable GetExecutor returns stored executor") {
       Schedule schedule;
       schedule.SetExecutor(std::make_unique<MainThreadExecutor>());
@@ -504,7 +503,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule::integration_ordering") {
+  TEST_CASE("helios::ecs::Schedule::integration_ordering") {
     SUBCASE("Before constraint enforces execution order") {
       std::array<int, 3> order{};
       int call_index = 0;
@@ -556,7 +555,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule: run conditions") {
+  TEST_CASE("helios::ecs::Schedule: run conditions") {
     SUBCASE("System with passing run condition executes") {
       Schedule schedule;
       auto handle = schedule.Add(IncrementSystem{});
@@ -594,7 +593,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule: resources") {
+  TEST_CASE("helios::ecs::Schedule: resources") {
     SUBCASE("Systems with read-only resources run correctly") {
       Schedule schedule;
       schedule.Add(ReadOnlySystem{});
@@ -623,7 +622,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule: query") {
+  TEST_CASE("helios::ecs::Schedule: query") {
     SUBCASE(
         "Systems with read-only Query on same component execute without "
         "ordering") {
@@ -706,7 +705,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule: async resource") {
+  TEST_CASE("helios::ecs::Schedule: async resource") {
     SUBCASE("Systems with AsyncRes on same resource build without conflicts") {
       Schedule schedule;
       schedule.Add(AsyncResWriter{});
@@ -742,7 +741,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule: world view") {
+  TEST_CASE("helios::ecs::Schedule: world view") {
     SUBCASE("WorldView system runs and accesses world data") {
       Schedule schedule;
       schedule.Add(WorldViewSystem{});
@@ -775,7 +774,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule: messages") {
+  TEST_CASE("helios::ecs::Schedule: messages") {
     SUBCASE("Regular messages flow from writer to reader across Update") {
       World world;
       world.InsertResources(CounterResource{0});
@@ -828,7 +827,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule: combined") {
+  TEST_CASE("helios::ecs::Schedule: combined") {
     SUBCASE("Query with Res system executes correctly") {
       Schedule schedule;
       schedule.Add(QueryAndResSystem{});
@@ -897,7 +896,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule: run conditions persist across rebuilds") {
+  TEST_CASE("helios::ecs::Schedule: run conditions persist across rebuilds") {
     struct SetA {};
 
     SUBCASE("System run condition survives double Build") {
@@ -943,7 +942,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule: system-local commands flushed") {
+  TEST_CASE("helios::ecs::Schedule: system-local commands flushed") {
     SUBCASE(
         "Commands enqueued via Commands param are executed after RunAndWait") {
       Schedule schedule;
@@ -997,7 +996,7 @@ TEST_SUITE("ecs::Schedule") {
 
       const Entity entity{static_cast<Entity::IndexType>(
                               world.ReadResource<CounterResource>().value),
-                          1};
+                          Entity::kInitialAliveGeneration};
       CHECK_EQ(world.EntityCount(), 1);
       CHECK(world.HasComponent<Enemy>(entity));
       CHECK_EQ(world.ReadComponent<Lifetime>(entity).remaining,
@@ -1005,7 +1004,7 @@ TEST_SUITE("ecs::Schedule") {
     }
   }
 
-  TEST_CASE("ecs::Schedule: system-local messages flushed") {
+  TEST_CASE("helios::ecs::Schedule: system-local messages flushed") {
     SUBCASE(
         "Messages written via MessageWriter are in world after RunAndWait") {
       World world;

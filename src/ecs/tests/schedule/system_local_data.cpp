@@ -5,7 +5,7 @@
 using namespace helios::ecs;
 
 TEST_SUITE("helios::ecs::SystemLocalDataOptions") {
-  TEST_CASE("ecs::SystemLocalDataOptions::ctor") {
+  TEST_CASE("helios::ecs::SystemLocalDataOptions::ctor") {
     SUBCASE("Default-constructed options have preallocated size of 1024") {
       constexpr SystemLocalDataOptions options;
       CHECK_EQ(options.preallocated_size,
@@ -20,7 +20,7 @@ TEST_SUITE("helios::ecs::SystemLocalDataOptions") {
 }
 
 TEST_SUITE("helios::ecs::SystemLocalData") {
-  TEST_CASE("ecs::SystemLocalData::From") {
+  TEST_CASE("helios::ecs::SystemLocalData::From") {
     SUBCASE("From with default options creates valid data") {
       const auto data = SystemLocalData::From();
 
@@ -35,7 +35,7 @@ TEST_SUITE("helios::ecs::SystemLocalData") {
     }
   }
 
-  TEST_CASE("ecs::SystemLocalData::Clear") {
+  TEST_CASE("helios::ecs::SystemLocalData::Clear") {
     SUBCASE("Clear on fresh data is a no-op") {
       auto data = SystemLocalData::From();
       const size_t initial_capacity = data.allocator.TotalCapacity();
@@ -46,7 +46,7 @@ TEST_SUITE("helios::ecs::SystemLocalData") {
     }
   }
 
-  TEST_CASE("ecs::SystemLocalData::ResetArena") {
+  TEST_CASE("helios::ecs::SystemLocalData::ResetArena") {
     SUBCASE("ResetArena preserves the allocator capacity") {
       auto data = SystemLocalData::From();
       const size_t initial_capacity = data.allocator.TotalCapacity();
@@ -57,7 +57,7 @@ TEST_SUITE("helios::ecs::SystemLocalData") {
     }
   }
 
-  TEST_CASE("ecs::SystemLocalData::Update") {
+  TEST_CASE("helios::ecs::SystemLocalData::Update") {
     SUBCASE("Update resets the arena after execution") {
       auto data = SystemLocalData::From();
       World world;
@@ -68,7 +68,7 @@ TEST_SUITE("helios::ecs::SystemLocalData") {
     }
   }
 
-  TEST_CASE("ecs::SystemLocalData::ExecuteCommands") {
+  TEST_CASE("helios::ecs::SystemLocalData::ExecuteCommands") {
     SUBCASE("ExecuteCommands on empty queue is a no-op") {
       auto data = SystemLocalData::From();
       World world;
@@ -79,14 +79,14 @@ TEST_SUITE("helios::ecs::SystemLocalData") {
     }
   }
 
-  TEST_CASE("ecs::SystemLocalData::HasPendingWork") {
+  TEST_CASE("helios::ecs::SystemLocalData::HasPendingWork") {
     SUBCASE("Fresh local data has no pending work") {
       const auto data = SystemLocalData::From();
       CHECK_FALSE(data.HasPendingWork());
     }
   }
 
-  TEST_CASE("ecs::SystemLocalData::MergeMessages") {
+  TEST_CASE("helios::ecs::SystemLocalData::MergeMessages") {
     SUBCASE("MergeMessages on empty queue is a no-op") {
       auto data = SystemLocalData::From();
       World world;

@@ -146,14 +146,16 @@ void IncrementFn(int& value) {
 }  // namespace
 
 TEST_SUITE("helios::container::CallableBufferArray") {
-  TEST_CASE("container::CallableBufferArray::ctor: default construction") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::ctor: default construction") {
     CallableBufferArray<void()> arr;
 
     CHECK(arr.Empty());
     CHECK_EQ(arr.Size(), 0);
   }
 
-  TEST_CASE("container::CallableBufferArray::ctor: allocator construction") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::ctor: allocator construction") {
     std::allocator<std::byte> alloc;
     CallableBufferArray<std::allocator<std::byte>, void()> arr(alloc);
 
@@ -161,7 +163,7 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(arr.Size(), 0);
   }
 
-  TEST_CASE("container::CallableBufferArray::ctor: move construction") {
+  TEST_CASE("helios::container::CallableBufferArray::ctor: move construction") {
     InvocationTracker::Reset();
 
     CallableBufferArray<void()> original;
@@ -182,7 +184,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(InvocationTracker::call_order[1], 2);
   }
 
-  TEST_CASE("container::CallableBufferArray::operator=: move assignment") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::operator=: move assignment") {
     InvocationTracker::Reset();
 
     CallableBufferArray<void()> original;
@@ -215,7 +218,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(arr.Size(), 1);
   }
 
-  TEST_CASE("container::CallableBufferArray::Clear: destroys callables") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::Clear: destroys callables") {
     CountingCallable::Reset();
 
     CallableBufferArray<void()> arr;
@@ -233,13 +237,15 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(CountingCallable::destruct_count - destructs_before, 3);
   }
 
-  TEST_CASE("container::CallableBufferArray::Clear: on empty array is safe") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::Clear: on empty array is safe") {
     CallableBufferArray<void()> arr;
     CHECK_NOTHROW(arr.Clear());
     CHECK(arr.Empty());
   }
 
-  TEST_CASE("container::CallableBufferArray::Push: via default operator()") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::Push: via default operator()") {
     SUBCASE("single callable") {
       CallableBufferArray<void()> arr;
       arr.Push(SimpleCallable{1});
@@ -281,7 +287,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     }
   }
 
-  TEST_CASE("container::CallableBufferArray::Push: with custom methods") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::Push: with custom methods") {
     InvocationTracker::Reset();
 
     CallableBufferArray<void(), void(int)> arr;
@@ -373,7 +380,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(InvocationTracker::call_order[1], 205);
   }
 
-  TEST_CASE("container::CallableBufferArray::Invoke: empty array is safe") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::Invoke: empty array is safe") {
     InvocationTracker::Reset();
 
     CallableBufferArray<void()> arr;
@@ -417,7 +425,9 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(InvocationTracker::call_order.size(), 4);
   }
 
-  TEST_CASE("container::CallableBufferArray::Invoke: free function callable") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::Invoke: free function "
+      "callable") {
     CallableBufferArray<void(int&)> arr;
     arr.Push(&IncrementFn);
     arr.Push(&IncrementFn);
@@ -428,7 +438,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(value, 2);
   }
 
-  TEST_CASE("container::CallableBufferArray::Invoke: stateful callable") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::Invoke: stateful callable") {
     int counter = 0;
 
     CallableBufferArray<void()> arr;
@@ -441,7 +452,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(counter, 3);
   }
 
-  TEST_CASE("container::CallableBufferArray::Reserve: reserves capacity") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::Reserve: reserves capacity") {
     CallableBufferArray<void()> arr;
     arr.Reserve(10);
 
@@ -452,14 +464,15 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(arr.Size(), 10);
   }
 
-  TEST_CASE("container::CallableBufferArray::ReserveBytes: reserves bytes") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::ReserveBytes: reserves bytes") {
     CallableBufferArray<void()> arr;
     arr.ReserveBytes(1024);
 
     CHECK_GE(arr.CapacityBytes(), 1024);
   }
 
-  TEST_CASE("container::CallableBufferArray::Swap: swaps two arrays") {
+  TEST_CASE("helios::container::CallableBufferArray::Swap: swaps two arrays") {
     InvocationTracker::Reset();
 
     CallableBufferArray<void()> arr1;
@@ -486,7 +499,7 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(InvocationTracker::call_order[1], 2);
   }
 
-  TEST_CASE("container::CallableBufferArray::swap: friend function") {
+  TEST_CASE("helios::container::CallableBufferArray::swap: friend function") {
     InvocationTracker::Reset();
 
     CallableBufferArray<void()> arr1;
@@ -605,7 +618,7 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     }
   }
 
-  TEST_CASE("container::CallableBufferArray::Empty: reflects state") {
+  TEST_CASE("helios::container::CallableBufferArray::Empty: reflects state") {
     CallableBufferArray<void()> arr;
     CHECK(arr.Empty());
 
@@ -616,7 +629,7 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK(arr.Empty());
   }
 
-  TEST_CASE("container::CallableBufferArray::Size: tracks count") {
+  TEST_CASE("helios::container::CallableBufferArray::Size: tracks count") {
     CallableBufferArray<void()> arr;
     CHECK_EQ(arr.Size(), 0);
 
@@ -630,7 +643,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(arr.Size(), 0);
   }
 
-  TEST_CASE("container::CallableBufferArray::CapacityBytes: grows on Push") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::CapacityBytes: grows on Push") {
     CallableBufferArray<void()> arr;
     CHECK_EQ(arr.CapacityBytes(), 0);
 
@@ -638,7 +652,9 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_GT(arr.CapacityBytes(), 0);
   }
 
-  TEST_CASE("container::CallableBufferArray::GetAllocator: returns allocator") {
+  TEST_CASE(
+      "helios::container::CallableBufferArray::GetAllocator: returns "
+      "allocator") {
     std::allocator<std::byte> alloc;
     CallableBufferArray<std::allocator<std::byte>, void()> arr(alloc);
 
@@ -731,7 +747,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_EQ(InvocationTracker::call_order[0], 50);
   }
 
-  TEST_CASE("container::PmrCallableBufferArray: works with memory_resource") {
+  TEST_CASE(
+      "helios::container::PmrCallableBufferArray: works with memory_resource") {
     InvocationTracker::Reset();
 
     auto* resource = std::pmr::get_default_resource();

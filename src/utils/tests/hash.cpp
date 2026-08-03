@@ -8,13 +8,14 @@
 using namespace helios::utils;
 
 TEST_SUITE("helios::utils::Hash") {
-  TEST_CASE("utils::Hash::Fnv1aHash: constexpr evaluation with string_view") {
+  TEST_CASE(
+      "helios::utils::Hash::Fnv1aHash: constexpr evaluation with string_view") {
     constexpr auto hash = Fnv1aHash("hello");
     CHECK_NE(hash, 0);
     CHECK_NE(hash, kFnvBasis);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: consistency for same input") {
+  TEST_CASE("helios::utils::Hash::Fnv1aHash: consistency for same input") {
     constexpr auto hash1 = Fnv1aHash("test_string");
     constexpr auto hash2 = Fnv1aHash("test_string");
     CHECK_EQ(hash1, hash2);
@@ -35,12 +36,12 @@ TEST_SUITE("helios::utils::Hash") {
     CHECK_NE(hash_c, hash_d);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: empty string returns basis") {
+  TEST_CASE("helios::utils::Hash::Fnv1aHash: empty string returns basis") {
     constexpr auto hash = Fnv1aHash(std::string_view{});
     CHECK_EQ(hash, kFnvBasis);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: single character") {
+  TEST_CASE("helios::utils::Hash::Fnv1aHash: single character") {
     constexpr auto hash_a = Fnv1aHash("a");
     constexpr auto hash_b = Fnv1aHash("b");
 
@@ -57,20 +58,20 @@ TEST_SUITE("helios::utils::Hash") {
     CHECK_EQ(hash_sv, hash_arr);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: custom initial hash") {
+  TEST_CASE("helios::utils::Hash::Fnv1aHash: custom initial hash") {
     constexpr auto hash_default = Fnv1aHash("test");
     constexpr auto hash_custom = Fnv1aHash(std::string_view{"test"}, 42);
 
     CHECK_NE(hash_default, hash_custom);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: order sensitivity") {
+  TEST_CASE("helios::utils::Hash::Fnv1aHash: order sensitivity") {
     constexpr auto hash_ab = Fnv1aHash("ab");
     constexpr auto hash_ba = Fnv1aHash("ba");
     CHECK_NE(hash_ab, hash_ba);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: case sensitivity") {
+  TEST_CASE("helios::utils::Hash::Fnv1aHash: case sensitivity") {
     constexpr auto hash_lower = Fnv1aHash("hello");
     constexpr auto hash_upper = Fnv1aHash("HELLO");
     constexpr auto hash_mixed = Fnv1aHash("Hello");
@@ -91,7 +92,7 @@ TEST_SUITE("helios::utils::Hash") {
     CHECK_NE(hash1, hash3);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: long strings") {
+  TEST_CASE("helios::utils::Hash::Fnv1aHash: long strings") {
     constexpr auto hash_long = Fnv1aHash(
         "this is a reasonably long string to test the hash function with more "
         "data");
@@ -99,7 +100,8 @@ TEST_SUITE("helios::utils::Hash") {
     CHECK_NE(hash_long, kFnvBasis);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: runtime string_view matches constexpr") {
+  TEST_CASE(
+      "helios::utils::Hash::Fnv1aHash: runtime string_view matches constexpr") {
     constexpr auto compile_time_hash = Fnv1aHash("runtime_test");
 
     std::string runtime_str = "runtime_test";
@@ -108,7 +110,7 @@ TEST_SUITE("helios::utils::Hash") {
     CHECK_EQ(compile_time_hash, runtime_hash);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: known FNV-1a values") {
+  TEST_CASE("helios::utils::Hash::Fnv1aHash: known FNV-1a values") {
     // FNV-1a hash of empty string should equal the basis value
     constexpr auto empty_hash = Fnv1aHash(std::string_view{""});
     CHECK_EQ(empty_hash, kFnvBasis);
@@ -120,19 +122,20 @@ TEST_SUITE("helios::utils::Hash") {
 #endif
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: constants are valid") {
+  TEST_CASE("helios::utils::Hash::Fnv1aHash: constants are valid") {
     CHECK_NE(kFnvBasis, 0);
     CHECK_NE(kFnvPrime, 0);
     CHECK_NE(kFnvBasis, kFnvPrime);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: prefix and suffix strings differ") {
+  TEST_CASE(
+      "helios::utils::Hash::Fnv1aHash: prefix and suffix strings differ") {
     constexpr auto hash_prefix = Fnv1aHash("prefix_common");
     constexpr auto hash_suffix = Fnv1aHash("common_suffix");
     CHECK_NE(hash_prefix, hash_suffix);
   }
 
-  TEST_CASE("utils::Hash::Fnv1aHash: whitespace matters") {
+  TEST_CASE("helios::utils::Hash::Fnv1aHash: whitespace matters") {
     constexpr auto hash_no_space = Fnv1aHash("helloworld");
     constexpr auto hash_space = Fnv1aHash("hello world");
     constexpr auto hash_tab = Fnv1aHash("hello\tworld");

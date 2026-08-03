@@ -49,21 +49,21 @@ struct CountingUpdateSystem {
 }  // namespace
 
 TEST_SUITE("helios::app::FixedRunnerConfig") {
-  TEST_CASE("app::FixedRunnerConfig::FromFPS") {
+  TEST_CASE("helios::app::FixedRunnerConfig::FromFPS") {
     SUBCASE("60 FPS maps to ~16.67 ms interval") {
       constexpr auto config = FixedRunnerConfig::FromFPS(60);
       CHECK_EQ(config.update_interval.count(), 16'666'666);
     }
   }
 
-  TEST_CASE("app::FixedRunnerConfig::FromHz") {
+  TEST_CASE("helios::app::FixedRunnerConfig::FromHz") {
     SUBCASE("Positive Hz yields positive nanosecond interval") {
       constexpr auto config = FixedRunnerConfig::FromHz(30.0);
       CHECK_GT(config.update_interval.count(), 0);
     }
   }
 
-  TEST_CASE("app::FixedRunnerConfig::FromInterval") {
+  TEST_CASE("helios::app::FixedRunnerConfig::FromInterval") {
     SUBCASE("Milliseconds convert to nanoseconds") {
       constexpr auto config =
           FixedRunnerConfig::FromInterval(std::chrono::milliseconds{20});
@@ -73,7 +73,7 @@ TEST_SUITE("helios::app::FixedRunnerConfig") {
 }
 
 TEST_SUITE("helios::app::RunDefault") {
-  TEST_CASE("app::RunDefault") {
+  TEST_CASE("helios::app::RunDefault") {
     SUBCASE("Loops until AppExit and returns exit code") {
       App app;
       app.AddSystem(kFirst, ExitSystem{});
@@ -97,7 +97,7 @@ TEST_SUITE("helios::app::RunDefault") {
 }
 
 TEST_SUITE("helios::app::RunFixed") {
-  TEST_CASE("app::RunFixed") {
+  TEST_CASE("helios::app::RunFixed") {
     SUBCASE("Loops with fixed timestep until AppExit") {
       App app;
       app.AddSystem(kFirst, ExitSystem{});
@@ -111,7 +111,7 @@ TEST_SUITE("helios::app::RunFixed") {
 }
 
 TEST_SUITE("helios::app::RunOnce") {
-  TEST_CASE("app::RunOnce") {
+  TEST_CASE("helios::app::RunOnce") {
     SUBCASE("Returns success without AppExit after single frame") {
       App app;
       app.Initialize();
@@ -133,47 +133,61 @@ TEST_SUITE("helios::app::RunOnce") {
 }
 
 TEST_SUITE("helios::app::RunDefaultSubApp") {
-  TEST_CASE("app::RunDefaultSubApp") {
+  TEST_CASE("helios::app::RunDefaultSubApp") {
     SUBCASE("Runs update loop until owner app requests exit") {
-      App app(2);
+      std::atomic<int> updates{0};
 
-      struct CountAndExitMain {
-        App* owner = nullptr;
+      struct CountingAtomicSystem {
+        std::atomic<int>* counter = nullptr;
 
-        void operator()(Res<UpdateCountResource> counter) const {
-          ++counter->value;
-          if (counter->value >= 3 && owner != nullptr) {
-            owner->GetWorld().WriteMessages<AppExit>().Write(
-                AppExit::Success());
+        void operator()() const {
+          if (counter != nullptr) {
+            counter->fetch_add(1, std::memory_order_relaxed);
           }
         }
       };
 
+      App app(2);
+
       SubApp sub_app;
       sub_app.SetAsync(true);
       sub_app.SetRunner(RunDefaultSubApp);
-      sub_app.InsertResources(UpdateCountResource{});
-      sub_app.AddSystem(kUpdate, CountAndExitMain{.owner = &app});
+      sub_app.AddSystem(kUpdate, CountingAtomicSystem{.counter = &updates});
 
       app.InsertSubApp(RenderSubAppLabel{}, std::move(sub_app));
       app.Initialize();
 
-      std::this_thread::sleep_for(std::chrono::milliseconds{100});
+      const auto deadline =
+          std::chrono::steady_clock::now() + std::chrono::milliseconds{200};
+      while (updates.load(std::memory_order_relaxed) < 3 &&
+             std::chrono::steady_clock::now() < deadline) {
+        std::this_thread::sleep_for(std::chrono::milliseconds{1});
+      }
+
       app.GetScheduler().Shutdown(app);
 
-      CHECK_GE(app.GetSubApp<RenderSubAppLabel>()
-                   .GetWorld()
-                   .ReadResource<UpdateCountResource>()
-                   .value,
-               3);
+      CHECK_GE(updates.load(std::memory_order_relaxed), 3);
+      CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
     }
   }
 }
 
 TEST_SUITE("helios::app::RunFixedSubApp") {
-  TEST_CASE("app::RunFixedSubApp") {
+  TEST_CASE("helios::app::RunFixedSubApp") {
     SUBCASE("Background fixed loop increments update counter") {
-      App app(4);
+      std::atomic<int> updates{0};
+
+      struct CountingAtomicSystem {
+        std::atomic<int>* counter = nullptr;
+
+        void operator()() const {
+          if (counter != nullptr) {
+            counter->fetch_add(1, std::memory_order_relaxed);
+          }
+        }
+      };
+
+      App app(2);
 
       SubApp sub_app;
       sub_app.SetAsync(true);
@@ -182,8 +196,7 @@ TEST_SUITE("helios::app::RunFixedSubApp") {
             sa, ex,
             FixedRunnerConfig::FromInterval(std::chrono::milliseconds{1}));
       });
-      sub_app.InsertResources(UpdateCountResource{});
-      sub_app.AddSystem(kUpdate, CountingUpdateSystem{});
+      sub_app.AddSystem(kUpdate, CountingAtomicSystem{.counter = &updates});
 
       app.InsertSubApp(AsyncSoundSubAppLabel{}, std::move(sub_app));
       app.Initialize();
@@ -191,17 +204,14 @@ TEST_SUITE("helios::app::RunFixedSubApp") {
       std::this_thread::sleep_for(std::chrono::milliseconds{50});
       app.GetScheduler().Shutdown(app);
 
-      CHECK_GE(app.GetSubApp<AsyncSoundSubAppLabel>()
-                   .GetWorld()
-                   .ReadResource<UpdateCountResource>()
-                   .value,
-               1);
+      CHECK_GE(updates.load(std::memory_order_relaxed), 1);
+      CHECK_FALSE(app.GetSubApp<AsyncSoundSubAppLabel>().IsUpdating());
     }
   }
 }
 
 TEST_SUITE("helios::app::RunOnceSubApp") {
-  TEST_CASE("app::RunOnceSubApp") {
+  TEST_CASE("helios::app::RunOnceSubApp") {
     SUBCASE("Single update pass increments counter when invoked via runner") {
       App app(2);
       SubApp sub_app;

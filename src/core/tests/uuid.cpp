@@ -11,13 +11,13 @@
 using namespace helios;
 
 TEST_SUITE("helios::Uuid") {
-  TEST_CASE("Uuid::ctor: default construction creates invalid UUID") {
+  TEST_CASE("helios::Uuid::ctor: default construction creates invalid UUID") {
     Uuid uuid;
     CHECK_FALSE(uuid.Valid());
     CHECK_EQ(uuid.ToString(), "");
   }
 
-  TEST_CASE("Uuid::ctor: construction from valid string") {
+  TEST_CASE("helios::Uuid::ctor: construction from valid string") {
     SUBCASE("lowercase string") {
       Uuid uuid("550e8400-e29b-41d4-a716-446655440000");
       CHECK(uuid.Valid());
@@ -38,7 +38,7 @@ TEST_SUITE("helios::Uuid") {
     }
   }
 
-  TEST_CASE("Uuid::ctor: construction from invalid string") {
+  TEST_CASE("helios::Uuid::ctor: construction from invalid string") {
     SUBCASE("empty string") {
       Uuid uuid("");
       CHECK_FALSE(uuid.Valid());
@@ -73,7 +73,7 @@ TEST_SUITE("helios::Uuid") {
     }
   }
 
-  TEST_CASE("Uuid::ctor: construction from bytes") {
+  TEST_CASE("helios::Uuid::ctor: construction from bytes") {
     SUBCASE("valid 16-byte span") {
       std::array<std::byte, 16> bytes = {
           std::byte{0x55}, std::byte{0x0e}, std::byte{0x84}, std::byte{0x00},
@@ -92,7 +92,7 @@ TEST_SUITE("helios::Uuid") {
     }
   }
 
-  TEST_CASE("Uuid::ctor: copy and move semantics") {
+  TEST_CASE("helios::Uuid::ctor: copy and move semantics") {
     SUBCASE("copy construction") {
       Uuid original("550e8400-e29b-41d4-a716-446655440000");
       Uuid copy(original);
@@ -127,7 +127,7 @@ TEST_SUITE("helios::Uuid") {
     }
   }
 
-  TEST_CASE("Uuid::Generate: generates valid unique UUIDs") {
+  TEST_CASE("helios::Uuid::Generate: generates valid unique UUIDs") {
     SUBCASE("generated UUID is valid") {
       Uuid uuid = Uuid::Generate();
       CHECK(uuid.Valid());
@@ -160,7 +160,7 @@ TEST_SUITE("helios::Uuid") {
     }
   }
 
-  TEST_CASE("Uuid::ToString: string representation") {
+  TEST_CASE("helios::Uuid::ToString: string representation") {
     SUBCASE("valid UUID returns correct format") {
       Uuid uuid("550e8400-e29b-41d4-a716-446655440000");
       const std::string str = uuid.ToString();
@@ -175,7 +175,7 @@ TEST_SUITE("helios::Uuid") {
     }
   }
 
-  TEST_CASE("Uuid::AsBytes: byte representation") {
+  TEST_CASE("helios::Uuid::AsBytes: byte representation") {
     SUBCASE("valid UUID returns 16 bytes") {
       Uuid uuid("550e8400-e29b-41d4-a716-446655440000");
       auto bytes = uuid.AsBytes();
@@ -195,7 +195,7 @@ TEST_SUITE("helios::Uuid") {
     }
   }
 
-  TEST_CASE("Uuid::operator==: comparison operators") {
+  TEST_CASE("helios::Uuid::operator==: comparison operators") {
     SUBCASE("equal UUIDs") {
       Uuid uuid1("550e8400-e29b-41d4-a716-446655440000");
       Uuid uuid2("550e8400-e29b-41d4-a716-446655440000");
@@ -223,7 +223,7 @@ TEST_SUITE("helios::Uuid") {
     }
   }
 
-  TEST_CASE("Uuid::operator<: ordering") {
+  TEST_CASE("helios::Uuid::operator<: ordering") {
     SUBCASE("less than comparison") {
       Uuid uuid1("110e8400-e29b-41d4-a716-446655440000");
       Uuid uuid2("550e8400-e29b-41d4-a716-446655440000");
@@ -247,7 +247,7 @@ TEST_SUITE("helios::Uuid") {
     }
   }
 
-  TEST_CASE("Uuid::Hash: hashing") {
+  TEST_CASE("helios::Uuid::Hash: hashing") {
     SUBCASE("valid UUID has non-zero hash") {
       Uuid uuid("550e8400-e29b-41d4-a716-446655440000");
       CHECK_NE(uuid.Hash(), 0);
@@ -281,7 +281,7 @@ TEST_SUITE("helios::Uuid") {
     }
   }
 
-  TEST_CASE("Uuid::swap: swap functionality") {
+  TEST_CASE("helios::Uuid::swap: swap functionality") {
     Uuid uuid1("110e8400-e29b-41d4-a716-446655440000");
     Uuid uuid2("550e8400-e29b-41d4-a716-446655440000");
 

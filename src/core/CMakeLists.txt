@@ -75,10 +75,22 @@ else()
       if(TARGET helios::lib::boost::stacktrace_backtrace)
         target_link_libraries(helios_module_core PRIVATE helios::lib::boost::stacktrace_backtrace)
       endif()
-      get_filename_component(BACKTRACE_INCLUDE_DIR "${BACKTRACE_LIBRARY}" DIRECTORY)
-      get_filename_component(BACKTRACE_INCLUDE_DIR "${BACKTRACE_INCLUDE_DIR}/include" ABSOLUTE)
+      get_filename_component(BACKTRACE_LIB_DIR "${BACKTRACE_LIBRARY}" DIRECTORY)
+      get_filename_component(BACKTRACE_INCLUDE_DIR "${BACKTRACE_LIB_DIR}/include" ABSOLUTE)
       if(EXISTS "${BACKTRACE_INCLUDE_DIR}/backtrace.h")
-        target_include_directories(helios_module_core PRIVATE ${BACKTRACE_INCLUDE_DIR})
+        # GCC ships backtrace.h next to a stddef.h that breaks clang -stdlib=libc++
+        # when added via -I/-isystem. Expose only backtrace.h through a wrap dir.
+        set(_helios_bt_wrap_dir
+            "${CMAKE_CURRENT_BINARY_DIR}/helios_backtrace_include")
+        file(MAKE_DIRECTORY "${_helios_bt_wrap_dir}")
+        configure_file(
+            "${BACKTRACE_INCLUDE_DIR}/backtrace.h"
+            "${_helios_bt_wrap_dir}/backtrace.h"
+            COPYONLY
+        )
+        target_include_directories(
+            helios_module_core PRIVATE "${_helios_bt_wrap_dir}"
+        )
       endif()
       target_compile_definitions(helios_module_core PRIVATE BOOST_STACKTRACE_USE_BACKTRACE)
     else()
@@ -95,13 +107,5 @@ else()
     endif()
   elseif(WIN32)
     target_compile_definitions(helios_module_core PRIVATE BOOST_STACKTRACE_USE_WINDBG)
-  endif()
-endif()
-
-if(UNIX AND NOT APPLE)
-  if(NOT HELIOS_USE_STL_STACKTRACE)
-    target_link_options(helios_module_core INTERFACE
-        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:-rdynamic>
-    )
   endif()
 endif()

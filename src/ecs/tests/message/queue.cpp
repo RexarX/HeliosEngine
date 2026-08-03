@@ -49,7 +49,7 @@ struct MoveOnlyMsg {
 }  // namespace
 
 TEST_SUITE("helios::ecs::MessageQueue") {
-  TEST_CASE("ecs::MessageQueue::ctor") {
+  TEST_CASE("helios::ecs::MessageQueue::ctor") {
     SUBCASE("Default construction produces an empty queue") {
       const MessageQueue queue;
 
@@ -89,7 +89,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::operator=") {
+  TEST_CASE("helios::ecs::MessageQueue::operator=") {
     SUBCASE("Copy assignment replicates messages") {
       MessageQueue src;
       MessageQueue dst;
@@ -115,7 +115,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::Register") {
+  TEST_CASE("helios::ecs::MessageQueue::Register") {
     SUBCASE("Type is registered after Register<T>()") {
       MessageQueue queue;
       queue.Register<PositionMsg>();
@@ -164,7 +164,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::ClearAll") {
+  TEST_CASE("helios::ecs::MessageQueue::ClearAll") {
     SUBCASE(
         "All messages are gone after ClearAll but types remain registered") {
       MessageQueue queue;
@@ -191,7 +191,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::Clear (typed)") {
+  TEST_CASE("helios::ecs::MessageQueue::Clear (typed)") {
     SUBCASE("Clears only the specified type") {
       MessageQueue queue;
 
@@ -219,7 +219,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::ResetAll") {
+  TEST_CASE("helios::ecs::MessageQueue::ResetAll") {
     SUBCASE("ResetAll removes all types and all messages") {
       MessageQueue queue;
 
@@ -233,7 +233,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::Reset (typed)") {
+  TEST_CASE("helios::ecs::MessageQueue::Reset (typed)") {
     SUBCASE("Reset<T> unregisters the type and removes its messages") {
       MessageQueue queue;
 
@@ -249,7 +249,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::Merge") {
+  TEST_CASE("helios::ecs::MessageQueue::Merge") {
     SUBCASE("Const lvalue source appends messages without modifying source") {
       MessageQueue dst;
       MessageQueue src_mut;
@@ -298,7 +298,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::Enqueue") {
+  TEST_CASE("helios::ecs::MessageQueue::Enqueue") {
     SUBCASE("Enqueuing a message increments the count") {
       MessageQueue queue;
 
@@ -354,7 +354,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::EnqueueBulk") {
+  TEST_CASE("helios::ecs::MessageQueue::EnqueueBulk") {
     SUBCASE("All messages in a bulk range are enqueued") {
       MessageQueue queue;
 
@@ -394,7 +394,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::RemoveIndices") {
+  TEST_CASE("helios::ecs::MessageQueue::RemoveIndices") {
     SUBCASE("Single index is removed correctly") {
       MessageQueue queue;
       queue.Register<PositionMsg>();
@@ -473,7 +473,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::Swap") {
+  TEST_CASE("helios::ecs::MessageQueue::Swap") {
     SUBCASE("Swap exchanges messages between two queues") {
       MessageQueue q1;
       MessageQueue q2;
@@ -508,7 +508,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::IsRegistered") {
+  TEST_CASE("helios::ecs::MessageQueue::IsRegistered") {
     SUBCASE("Returns true for a registered type") {
       MessageQueue queue;
       queue.Register<PositionMsg>();
@@ -535,7 +535,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::HasMessages") {
+  TEST_CASE("helios::ecs::MessageQueue::HasMessages") {
     SUBCASE("Returns false when queue is empty") {
       MessageQueue queue;
       queue.Register<PositionMsg>();
@@ -570,7 +570,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::Messages") {
+  TEST_CASE("helios::ecs::MessageQueue::Messages") {
     const PositionMsg pos{.x = 1.0F, .y = 2.0F};
 
     SUBCASE("Returns empty span for unregistered type") {
@@ -608,7 +608,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::TypeCount") {
+  TEST_CASE("helios::ecs::MessageQueue::TypeCount") {
     SUBCASE("Returns zero for empty queue") {
       const MessageQueue queue;
       CHECK_EQ(queue.TypeCount(), 0);
@@ -624,7 +624,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::MessageQueue::MessageCount") {
+  TEST_CASE("helios::ecs::MessageQueue::MessageCount") {
     SUBCASE("Total MessageCount returns zero for empty queue") {
       const MessageQueue queue;
       CHECK_EQ(queue.MessageCount(), 0);
@@ -684,7 +684,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::PmrMessageQueue::works with memory_resource") {
+  TEST_CASE("helios::ecs::PmrMessageQueue::works with memory_resource") {
     std::byte buffer[2048];
     std::pmr::monotonic_buffer_resource resource(buffer, sizeof(buffer));
 

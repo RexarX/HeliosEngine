@@ -100,7 +100,7 @@ struct TrackingAllocator {
 }  // namespace
 
 TEST_SUITE("helios::container::TypedBuffer") {
-  TEST_CASE("container::TypedBuffer::ctor: default construction") {
+  TEST_CASE("helios::container::TypedBuffer::ctor: default construction") {
     TypedBuffer buf;
 
     CHECK(buf.Empty());
@@ -109,7 +109,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK(buf.Bytes().empty());
   }
 
-  TEST_CASE("container::TypedBuffer::ctor: allocator construction") {
+  TEST_CASE("helios::container::TypedBuffer::ctor: allocator construction") {
     std::allocator<std::byte> alloc;
     TypedBuffer buf(alloc);
 
@@ -117,7 +117,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_FALSE(buf.HasType());
   }
 
-  TEST_CASE("container::TypedBuffer::ctor: in_place construction (trivial)") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::ctor: in_place construction (trivial)") {
     TypedBuffer buf(std::in_place_type<int>, 42);
 
     CHECK_FALSE(buf.Empty());
@@ -137,7 +138,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Value<NonTrivial>().value, 7);
   }
 
-  TEST_CASE("container::TypedBuffer::ctor: in_place with allocator") {
+  TEST_CASE("helios::container::TypedBuffer::ctor: in_place with allocator") {
     std::allocator<std::byte> alloc;
     TypedBuffer buf(std::in_place_type<int>, alloc, 99);
 
@@ -145,7 +146,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Value<int>(), 99);
   }
 
-  TEST_CASE("container::TypedBuffer::ctor: copy construction (with value)") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::ctor: copy construction (with value)") {
     TypedBuffer original(std::in_place_type<int>, 123);
     TypedBuffer copy(original);
 
@@ -169,7 +171,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK(copy.IsType<int>());
   }
 
-  TEST_CASE("container::TypedBuffer::ctor: copy construction (no type)") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::ctor: copy construction (no type)") {
     TypedBuffer original;
     TypedBuffer copy(original);
 
@@ -177,7 +180,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_FALSE(copy.HasType());
   }
 
-  TEST_CASE("container::TypedBuffer::ctor: move construction") {
+  TEST_CASE("helios::container::TypedBuffer::ctor: move construction") {
     TypedBuffer original(std::in_place_type<int>, 42);
     TypedBuffer moved(std::move(original));
 
@@ -190,7 +193,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_FALSE(original.HasType());
   }
 
-  TEST_CASE("container::TypedBuffer::operator=: copy assignment") {
+  TEST_CASE("helios::container::TypedBuffer::operator=: copy assignment") {
     TypedBuffer original(std::in_place_type<int>, 55);
     TypedBuffer copy;
 
@@ -201,7 +204,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(original.Value<int>(), 55);
   }
 
-  TEST_CASE("container::TypedBuffer::operator=: move assignment") {
+  TEST_CASE("helios::container::TypedBuffer::operator=: move assignment") {
     TypedBuffer original(std::in_place_type<int>, 77);
     TypedBuffer moved;
 
@@ -212,7 +215,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK(original.Empty());
   }
 
-  TEST_CASE("container::TypedBuffer::ChangeType: sets type without value") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::ChangeType: sets type without value") {
     TypedBuffer buf;
 
     buf.ChangeType<int>();
@@ -222,7 +226,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK(buf.IsType<int>());
   }
 
-  TEST_CASE("container::TypedBuffer::ChangeType: destroys existing value") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::ChangeType: destroys existing value") {
     CountingType::Reset();
 
     TypedBuffer buf(std::in_place_type<CountingType>, 1);
@@ -235,7 +240,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK(buf.IsType<float>());
   }
 
-  TEST_CASE("container::TypedBuffer::Reset: clears value and type") {
+  TEST_CASE("helios::container::TypedBuffer::Reset: clears value and type") {
     TypedBuffer buf(std::in_place_type<int>, 99);
 
     buf.Reset();
@@ -244,7 +249,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_FALSE(buf.HasType());
   }
 
-  TEST_CASE("container::TypedBuffer::Reset: destroys non-trivial value") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::Reset: destroys non-trivial value") {
     CountingType::Reset();
 
     {
@@ -258,7 +264,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(CountingType::construct_count, CountingType::destruct_count);
   }
 
-  TEST_CASE("container::TypedBuffer::Set: set new value") {
+  TEST_CASE("helios::container::TypedBuffer::Set: set new value") {
     TypedBuffer buf;
 
     auto& ref = buf.Set<int>(42);
@@ -269,7 +275,9 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Value<int>(), 42);
   }
 
-  TEST_CASE("container::TypedBuffer::Set: replace existing value (same type)") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::Set: replace existing value (same "
+      "type)") {
     TypedBuffer buf(std::in_place_type<int>, 10);
 
     buf.Set<int>(20);
@@ -302,7 +310,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Value<CountingType>().value, 2);
   }
 
-  TEST_CASE("container::TypedBuffer::Set: non-trivial type with arguments") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::Set: non-trivial type with arguments") {
     TypedBuffer buf;
 
     buf.Set<NonTrivial>("world", 42);
@@ -312,7 +321,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Value<NonTrivial>().value, 42);
   }
 
-  TEST_CASE("container::TypedBuffer::Swap: swaps two buffers") {
+  TEST_CASE("helios::container::TypedBuffer::Swap: swaps two buffers") {
     TypedBuffer buf1(std::in_place_type<int>, 10);
     TypedBuffer buf2(std::in_place_type<int>, 20);
 
@@ -322,7 +331,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf2.Value<int>(), 10);
   }
 
-  TEST_CASE("container::TypedBuffer::Swap: swap with empty") {
+  TEST_CASE("helios::container::TypedBuffer::Swap: swap with empty") {
     TypedBuffer buf1(std::in_place_type<int>, 99);
     TypedBuffer buf2;
 
@@ -333,7 +342,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf2.Value<int>(), 99);
   }
 
-  TEST_CASE("container::TypedBuffer::swap friend function") {
+  TEST_CASE("helios::container::TypedBuffer::swap friend function") {
     TypedBuffer buf1(std::in_place_type<int>, 1);
     TypedBuffer buf2(std::in_place_type<int>, 2);
 
@@ -343,7 +352,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf2.Value<int>(), 1);
   }
 
-  TEST_CASE("container::TypedBuffer::Value: access stored value") {
+  TEST_CASE("helios::container::TypedBuffer::Value: access stored value") {
     TypedBuffer buf(std::in_place_type<int>, 123);
 
     CHECK_EQ(buf.Value<int>(), 123);
@@ -352,13 +361,13 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Value<int>(), 456);
   }
 
-  TEST_CASE("container::TypedBuffer::Value const: const access") {
+  TEST_CASE("helios::container::TypedBuffer::Value const: const access") {
     const TypedBuffer buf(std::in_place_type<int>, 77);
 
     CHECK_EQ(buf.Value<int>(), 77);
   }
 
-  TEST_CASE("container::TypedBuffer::Empty: empty check") {
+  TEST_CASE("helios::container::TypedBuffer::Empty: empty check") {
     TypedBuffer buf;
     CHECK(buf.Empty());
 
@@ -372,7 +381,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK(buf.Empty());
   }
 
-  TEST_CASE("container::TypedBuffer::HasType: type check") {
+  TEST_CASE("helios::container::TypedBuffer::HasType: type check") {
     TypedBuffer buf;
     CHECK_FALSE(buf.HasType());
 
@@ -383,7 +392,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_FALSE(buf.HasType());
   }
 
-  TEST_CASE("container::TypedBuffer::IsType: type comparison") {
+  TEST_CASE("helios::container::TypedBuffer::IsType: type comparison") {
     TypedBuffer buf;
     CHECK(buf.IsType<int>());
     CHECK(buf.IsType<float>());
@@ -393,7 +402,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_FALSE(buf.IsType<float>());
   }
 
-  TEST_CASE("container::TypedBuffer::StoredTypeId: returns type index") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::StoredTypeId: returns type index") {
     TypedBuffer buf(std::in_place_type<int>, 0);
 
     const auto stored_id = buf.StoredTypeId();
@@ -402,7 +412,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(stored_id, int_id);
   }
 
-  TEST_CASE("container::TypedBuffer::ElementSize: returns element size") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::ElementSize: returns element size") {
     TypedBuffer buf;
     CHECK_EQ(buf.ElementSize(), 0);
 
@@ -413,7 +424,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.ElementSize(), sizeof(double));
   }
 
-  TEST_CASE("container::TypedBuffer::Bytes: byte span") {
+  TEST_CASE("helios::container::TypedBuffer::Bytes: byte span") {
     TypedBuffer buf;
     CHECK(buf.Bytes().empty());
 
@@ -421,7 +432,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Bytes().size(), sizeof(int));
   }
 
-  TEST_CASE("container::TypedBuffer::non-trivial type lifetime management") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::non-trivial type lifetime management") {
     CountingType::Reset();
 
     {
@@ -432,7 +444,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(CountingType::destruct_count, 1);
   }
 
-  TEST_CASE("container::TypedBuffer::copy constructor copies non-trivial") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::copy constructor copies non-trivial") {
     CountingType::Reset();
 
     TypedBuffer original(std::in_place_type<CountingType>, 5);
@@ -443,7 +456,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(original.Value<CountingType>().value, 5);
   }
 
-  TEST_CASE("container::TypedBuffer::string storage") {
+  TEST_CASE("helios::container::TypedBuffer::string storage") {
     TypedBuffer buf;
     buf.Set<std::string>("hello world");
 
@@ -454,7 +467,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Value<std::string>(), "changed");
   }
 
-  TEST_CASE("container::TypedBuffer::custom allocator") {
+  TEST_CASE("helios::container::TypedBuffer::custom allocator") {
     using TrackingBuffer = TypedBuffer<TrackingAllocator<std::byte>>;
     TrackingAllocator<std::byte>::ResetCount();
 
@@ -467,7 +480,8 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(TrackingAllocator<std::byte>::allocation_count.load(), 0);
   }
 
-  TEST_CASE("container::TypedBuffer::multiple Set calls reuse storage") {
+  TEST_CASE(
+      "helios::container::TypedBuffer::multiple Set calls reuse storage") {
     TypedBuffer buf;
 
     buf.Set<int>(1);
@@ -478,7 +492,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_FALSE(buf.Empty());
   }
 
-  TEST_CASE("container::TypedBuffer::ChangeType then Set") {
+  TEST_CASE("helios::container::TypedBuffer::ChangeType then Set") {
     TypedBuffer buf;
 
     buf.ChangeType<float>();
@@ -490,7 +504,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Value<float>(), doctest::Approx(1.5f));
   }
 
-  TEST_CASE("container::PmrTypedBuffer: works with memory_resource") {
+  TEST_CASE("helios::container::PmrTypedBuffer: works with memory_resource") {
     std::byte buffer[256];
     std::pmr::monotonic_buffer_resource resource(buffer, sizeof(buffer));
 

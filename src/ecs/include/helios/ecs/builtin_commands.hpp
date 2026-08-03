@@ -77,7 +77,8 @@ FunctionCmd(G&&) -> FunctionCmd<std::remove_cvref_t<G>>;
  * @details Removes entity and all its components from the world during
  * execution.
  * @warning Will trigger assertion if the world does not own (entity
- * index/generation mismatch) the entity.
+ * index/generation mismatch) the entity, or if reserved entities have not been
+ * flushed (`NeedsFlush()`).
  */
 class DestroyEntityCmd {
 public:
@@ -101,7 +102,8 @@ public:
 
   /**
    * @brief Executes entity destruction.
-   * @warning Triggers assertion if the world does not own the entity.
+   * @warning Triggers assertion if the world does not own the entity, or if
+   * reserved entities have not been flushed (`NeedsFlush()`).
    * @param world World to remove entity from
    */
   void Execute(World& world) { world.DestroyEntity(entity_); }
@@ -114,7 +116,8 @@ private:
  * @brief Command to destroy multiple entities.
  * @details Efficiently destroys multiple entities in a single operation.
  * @warning Will assertion if any of the entities do not exist in the world
- * (when world updated).
+ * (when world updated), or if reserved entities have not been flushed
+ * (`NeedsFlush()`).
  * @tparam Alloc Allocator type
  */
 template <typename Alloc = std::allocator<Entity>>
@@ -143,7 +146,8 @@ public:
 
   /**
    * @brief Executes entities destruction.
-   * @warning Triggers assertion if any entity does not exist in the world.
+   * @warning Triggers assertion if any entity does not exist in the world, or
+   * if reserved entities have not been flushed (`NeedsFlush()`).
    * @param world World to remove entities from
    */
   void Execute(World& world) { world.DestroyEntities(entities_); }
@@ -155,6 +159,8 @@ private:
 /**
  * @brief Command to try destroy a single entity.
  * @details Will destroy the entity only if it exists in the world.
+ * @warning Triggers assertion if reserved entities have not been flushed
+ * (`NeedsFlush()`).
  */
 class TryDestroyEntityCmd {
 public:
@@ -179,6 +185,8 @@ public:
 
   /**
    * @brief Executes entity destruction if it exists.
+   * @warning Triggers assertion if reserved entities have not been flushed
+   * (`NeedsFlush()`).
    * @param world World to remove entity from
    */
   void Execute(World& world) { world.TryDestroyEntity(entity_); }
@@ -190,6 +198,8 @@ private:
 /**
  * @brief Command to try destroy multiple entities.
  * @details Will destroy entities only if they exist in the world.
+ * @warning Triggers assertion if reserved entities have not been flushed
+ * (`NeedsFlush()`).
  * @tparam Alloc Allocator type
  */
 template <typename Alloc = std::allocator<Entity>>
@@ -220,6 +230,8 @@ public:
 
   /**
    * @brief Executes entities destruction if they exist.
+   * @warning Triggers assertion if reserved entities have not been flushed
+   * (`NeedsFlush()`).
    * @param world World to remove entities from
    */
   void Execute(World& world) { world.TryDestroyEntities(entities_); }

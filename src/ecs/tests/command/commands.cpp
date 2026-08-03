@@ -42,7 +42,7 @@ struct SimpleCommand {
 }  // namespace
 
 TEST_SUITE("helios::ecs::Commands") {
-  TEST_CASE("ecs::Commands::Spawn") {
+  TEST_CASE("helios::ecs::Commands::Spawn") {
     SUBCASE("Returns a buffer for the new entity") {
       World world;
       PmrCmdQueue queue(std::pmr::get_default_resource());
@@ -98,7 +98,7 @@ TEST_SUITE("helios::ecs::Commands") {
     }
   }
 
-  TEST_CASE("ecs::Commands::Despawn") {
+  TEST_CASE("helios::ecs::Commands::Despawn") {
     SUBCASE("Enqueues destroy command; entity removed after execution") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -127,7 +127,7 @@ TEST_SUITE("helios::ecs::Commands") {
     }
   }
 
-  TEST_CASE("ecs::Commands::Entity") {
+  TEST_CASE("helios::ecs::Commands::Entity") {
     SUBCASE("Returns buffer for existing entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -156,7 +156,7 @@ TEST_SUITE("helios::ecs::Commands") {
     }
   }
 
-  TEST_CASE("ecs::Commands::World") {
+  TEST_CASE("helios::ecs::Commands::World") {
     SUBCASE("Returns a world command buffer") {
       World world;
       PmrCmdQueue queue(std::pmr::get_default_resource());
@@ -194,7 +194,7 @@ TEST_SUITE("helios::ecs::Commands") {
     }
   }
 
-  TEST_CASE("ecs::Commands::Enqueue") {
+  TEST_CASE("helios::ecs::Commands::Enqueue") {
     SUBCASE("Enqueues a single command that executes against the world") {
       World world;
       PmrCmdQueue queue(std::pmr::get_default_resource());
@@ -222,7 +222,7 @@ TEST_SUITE("helios::ecs::Commands") {
     }
   }
 
-  TEST_CASE("ecs::Commands::EnqueueBulk") {
+  TEST_CASE("helios::ecs::Commands::EnqueueBulk") {
     SUBCASE("Enqueues all commands in the range") {
       World world;
       PmrCmdQueue queue(std::pmr::get_default_resource());

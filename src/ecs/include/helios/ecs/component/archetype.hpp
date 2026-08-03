@@ -52,7 +52,7 @@ public:
   using size_type = size_t;
   using RowIndex = uint32_t;
 
-  static constexpr RowIndex kInvalidRow = std::numeric_limits<RowIndex>::max();
+  static constexpr auto kInvalidRow = std::numeric_limits<RowIndex>::max();
 
   /**
    * @brief Constructs an archetype for the given archetype id.
@@ -208,8 +208,8 @@ public:
    * @param index Component type index
    * @return Reference to the column
    */
-  [[nodiscard]] container::TypedBufferArray<>& Column(
-      ComponentTypeIndex index) noexcept;
+  [[nodiscard]] auto Column(ComponentTypeIndex index) noexcept
+      -> container::TypedBufferArray<>&;
 
   /**
    * @brief Gets a const raw column by component type index.
@@ -217,24 +217,24 @@ public:
    * @param index Component type index
    * @return Const reference to the column
    */
-  [[nodiscard]] const container::TypedBufferArray<>& Column(
-      ComponentTypeIndex index) const noexcept;
+  [[nodiscard]] auto Column(ComponentTypeIndex index) const noexcept
+      -> const container::TypedBufferArray<>&;
 
   /**
    * @brief Tries to get a raw column by component type index.
    * @param index Component type index
    * @return Pointer to column or `nullptr` if type index not found
    */
-  [[nodiscard]] container::TypedBufferArray<>* TryColumn(
-      ComponentTypeIndex index) noexcept;
+  [[nodiscard]] auto TryColumn(ComponentTypeIndex index) noexcept
+      -> container::TypedBufferArray<>*;
 
   /**
    * @brief Tries to get a const raw column by component type index.
    * @param index Component type index
    * @return Const pointer to column or `nullptr` if type index not found
    */
-  [[nodiscard]] const container::TypedBufferArray<>* TryColumn(
-      ComponentTypeIndex index) const noexcept;
+  [[nodiscard]] auto TryColumn(ComponentTypeIndex index) const noexcept
+      -> const container::TypedBufferArray<>*;
 
   /**
    * @brief Gets the row index for an entity.
@@ -339,22 +339,6 @@ private:
       entity_to_row_;  ///< Maps entity index -> row. Sparse by entity index.
 };
 
-inline Archetype::Archetype(ArchetypeId id) : id_(std::move(id)) {
-  const auto types = id_.Types();
-  columns_.resize(types.size());
-  for (size_type i = 0; i < types.size(); ++i) {
-    column_map_.emplace(types[i], i);
-  }
-}
-
-inline void Archetype::Clear() {
-  for (auto& col : columns_) {
-    col.Clear();
-  }
-  entities_.clear();
-  entity_to_row_.clear();
-}
-
 inline auto Archetype::AllocateRow(Entity entity) -> RowIndex {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
   HELIOS_ASSERT(!Contains(entity), "Entity '{}' already present in archetype!",
@@ -403,42 +387,6 @@ inline auto Archetype::Add(Entity entity, Ts&&... components) -> RowIndex {
    ...);
 
   return row;
-}
-
-inline Entity Archetype::Remove(Entity entity) {
-  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
-  HELIOS_ASSERT(Contains(entity), "Entity '{}' not present in archetype!",
-                entity);
-
-  const RowIndex row = entity_to_row_.at(entity.Index());
-  const auto last_row = static_cast<RowIndex>(entities_.size() - 1);
-  Entity swapped_entity;
-
-  if (row != last_row) {
-    swapped_entity = entities_[last_row];
-    // Swap entity in dense list.
-    entities_[row] = swapped_entity;
-    entity_to_row_[swapped_entity.Index()] = row;
-
-    // Swap component data in every column.
-    for (auto& col : columns_) {
-      if (!col.Empty()) {
-        col.Swap(static_cast<size_type>(row), static_cast<size_type>(last_row));
-      }
-    }
-  }
-
-  // Pop back.
-  entities_.pop_back();
-  entity_to_row_.erase(entity.Index());
-
-  for (auto& col : columns_) {
-    if (!col.Empty()) {
-      col.PopBack();
-    }
-  }
-
-  return swapped_entity;
 }
 
 template <ComponentTrait T>
@@ -653,15 +601,6 @@ inline Entity Archetype::EntityAt(RowIndex row) const {
 inline bool Archetype::Contains(Entity entity) const noexcept {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
   return entity_to_row_.contains(entity.Index());
-}
-
-inline auto Archetype::ColumnIndex(ComponentTypeIndex index) const noexcept
-    -> std::optional<size_type> {
-  const auto it = column_map_.find(index);
-  if (it == column_map_.end()) {
-    return std::nullopt;
-  }
-  return it->second;
 }
 
 }  // namespace helios::ecs

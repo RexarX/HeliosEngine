@@ -13,7 +13,7 @@
 using namespace helios::async;
 
 TEST_SUITE("helios::async::Task") {
-  TEST_CASE("async::Task::ctor: construction and basic properties") {
+  TEST_CASE("helios::async::Task::ctor: construction and basic properties") {
     SUBCASE("Default construction") {
       Task task;
 
@@ -63,7 +63,7 @@ TEST_SUITE("helios::async::Task") {
     }
   }
 
-  TEST_CASE("async::Task::Work: work assignment") {
+  TEST_CASE("helios::async::Task::Work: work assignment") {
     TaskGraph graph("WorkGraph");
     Executor executor(2);
 
@@ -128,7 +128,7 @@ TEST_SUITE("helios::async::Task") {
     }
   }
 
-  TEST_CASE("async::Task::Precede: dependency management") {
+  TEST_CASE("helios::async::Task::Precede: dependency management") {
     SUBCASE("Precede with single task") {
       TaskGraph graph("DependencyGraph");
       Executor executor(2);
@@ -338,7 +338,7 @@ TEST_SUITE("helios::async::Task") {
     }
   }
 
-  TEST_CASE("async::Task::Name: naming") {
+  TEST_CASE("helios::async::Task::Name: naming") {
     TaskGraph graph("NameGraph");
 
     SUBCASE("Name with valid name") {
@@ -372,7 +372,7 @@ TEST_SUITE("helios::async::Task") {
     }
   }
 
-  TEST_CASE("async::Task::Type: task type detection") {
+  TEST_CASE("helios::async::Task::Type: task type detection") {
     TaskGraph graph("TypeGraph");
 
     SUBCASE("Static task type") {
@@ -393,7 +393,7 @@ TEST_SUITE("helios::async::Task") {
     }
   }
 
-  TEST_CASE("async::Task::Reset: reset functionality") {
+  TEST_CASE("helios::async::Task::Reset: reset functionality") {
     TaskGraph graph("ResetGraph");
 
     SUBCASE("Reset task handle") {
@@ -417,7 +417,7 @@ TEST_SUITE("helios::async::Task") {
     }
   }
 
-  TEST_CASE("async::Task::operator==: equality and hashing") {
+  TEST_CASE("helios::async::Task::operator==: equality and hashing") {
     TaskGraph graph("EqualityGraph");
 
     SUBCASE("Task equality") {
@@ -447,7 +447,7 @@ TEST_SUITE("helios::async::Task") {
     }
   }
 
-  TEST_CASE("async::Task::SuccessorsCount: dependency counting") {
+  TEST_CASE("helios::async::Task::SuccessorsCount: dependency counting") {
     TaskGraph graph("CountGraph");
 
     SUBCASE("Complex dependency graph") {

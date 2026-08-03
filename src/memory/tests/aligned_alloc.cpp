@@ -6,8 +6,8 @@
 
 using namespace helios::mem;
 
-TEST_SUITE("AlignedAlloc") {
-  TEST_CASE("AlignedAlloc") {
+TEST_SUITE("helios::mem::AlignedAlloc") {
+  TEST_CASE("helios::mem::AlignedAlloc") {
     SUBCASE("Returns non-null for valid inputs") {
       void* const ptr = AlignedAlloc(16, 64);
       CHECK_NE(ptr, nullptr);
@@ -113,8 +113,8 @@ TEST_SUITE("AlignedAlloc") {
   }
 }
 
-TEST_SUITE("AlignedFree") {
-  TEST_CASE("AlignedFree") {
+TEST_SUITE("helios::mem::AlignedFree") {
+  TEST_CASE("helios::mem::AlignedFree") {
     SUBCASE("No-op on nullptr") {
       // Must not crash, assert, or invoke undefined behaviour.
       AlignedFree(nullptr);

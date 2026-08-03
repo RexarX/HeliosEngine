@@ -27,7 +27,7 @@ constexpr auto vel_idx = ComponentTypeIndex::From<Velocity>();
 }  // namespace
 
 TEST_SUITE("helios::ecs::Archetype") {
-  TEST_CASE("ecs::Archetype::ctor") {
+  TEST_CASE("helios::ecs::Archetype::ctor") {
     SUBCASE("Ctor with empty archetype id") {
       ArchetypeId id;
       Archetype archetype(id);
@@ -65,7 +65,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::operator=") {
+  TEST_CASE("helios::ecs::Archetype::operator=") {
     SUBCASE("Move assignment") {
       ArchetypeId id{pos_idx};
 
@@ -80,7 +80,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::Clear") {
+  TEST_CASE("helios::ecs::Archetype::Clear") {
     ArchetypeId id{pos_idx};
     Archetype archetype(std::move(id));
 
@@ -102,7 +102,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::AllocateRow") {
+  TEST_CASE("helios::ecs::Archetype::AllocateRow") {
     SUBCASE("Allocate row for entity") {
       ArchetypeId id{pos_idx};
       Archetype archetype(std::move(id));
@@ -137,7 +137,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::Add") {
+  TEST_CASE("helios::ecs::Archetype::Add") {
     const Position position{.x = 10.0F, .y = 20.0F};
     const Velocity velocity{.x = 1.0F, .y = 2.0F};
     const Entity entity{1, 0};
@@ -210,7 +210,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::Remove") {
+  TEST_CASE("helios::ecs::Archetype::Remove") {
     ArchetypeId id;
     Archetype archetype(std::move(id));
     const Entity entity{1, 0};
@@ -225,7 +225,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     CHECK(archetype.Empty());
   }
 
-  TEST_CASE("ecs::Archetype::Set") {
+  TEST_CASE("helios::ecs::Archetype::Set") {
     ArchetypeId id{pos_idx};
     Archetype archetype(std::move(id));
     const Entity entity{1, 0};
@@ -239,7 +239,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     CHECK_EQ(*pos, new_position);
   }
 
-  TEST_CASE("ecs::Archetype::Emplace") {
+  TEST_CASE("helios::ecs::Archetype::Emplace") {
     ArchetypeId id{pos_idx};
     Archetype archetype(std::move(id));
     const Entity entity{1, 0};
@@ -252,7 +252,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     CHECK_EQ(*pos, Position{.x = 10.0F, .y = 20.0F});
   }
 
-  TEST_CASE("ecs::Archetype::Get") {
+  TEST_CASE("helios::ecs::Archetype::Get") {
     ArchetypeId id{pos_idx};
     Archetype archetype(std::move(id));
     const Entity entity{1, 0};
@@ -264,7 +264,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     CHECK_EQ(pos, position);
   }
 
-  TEST_CASE("ecs::Archetype::TryGet") {
+  TEST_CASE("helios::ecs::Archetype::TryGet") {
     ArchetypeId id{pos_idx};
     Archetype archetype(std::move(id));
     const Entity entity{1, 0};
@@ -284,7 +284,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::ComponentColumn") {
+  TEST_CASE("helios::ecs::Archetype::ComponentColumn") {
     ArchetypeId id{pos_idx};
     Archetype archetype(std::move(id));
     const Position pos1{.x = 10.0F, .y = 20.0F};
@@ -307,7 +307,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::Column") {
+  TEST_CASE("helios::ecs::Archetype::Column") {
     ArchetypeId id{pos_idx};
     Archetype archetype(std::move(id));
     const Position pos1{.x = 10.0F, .y = 20.0F};
@@ -322,7 +322,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     CHECK_EQ(pos_column.At<Position>(1), pos2);
   }
 
-  TEST_CASE("ecs::Archetype::TryColumn") {
+  TEST_CASE("helios::ecs::Archetype::TryColumn") {
     ArchetypeId id{pos_idx};
     Archetype archetype(std::move(id));
     const Position pos1{.x = 10.0F, .y = 20.0F};
@@ -346,7 +346,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::Row") {
+  TEST_CASE("helios::ecs::Archetype::Row") {
     ArchetypeId id;
     Archetype archetype(std::move(id));
     const Entity entity{1, 0};
@@ -358,7 +358,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     CHECK_EQ(row, row_to_check);
   }
 
-  TEST_CASE("ecs::Archetype::EntityAt") {
+  TEST_CASE("helios::ecs::Archetype::EntityAt") {
     ArchetypeId id;
     Archetype archetype(std::move(id));
     const Entity entity{1, 0};
@@ -369,7 +369,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     CHECK_EQ(entity_at_row, entity);
   }
 
-  TEST_CASE("ecs::Archetype::Empty") {
+  TEST_CASE("helios::ecs::Archetype::Empty") {
     ArchetypeId id{pos_idx};
     Archetype archetype(std::move(id));
     const Entity entity{1, 0};
@@ -396,7 +396,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::Contains") {
+  TEST_CASE("helios::ecs::Archetype::Contains") {
     Entity entity{1, 0};
 
     SUBCASE("Archetype contains entity after AllocateRow") {
@@ -428,7 +428,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::HasColumn") {
+  TEST_CASE("helios::ecs::Archetype::HasColumn") {
     SUBCASE("Archetype has column") {
       ArchetypeId id{pos_idx};
       Archetype archetype(std::move(id));
@@ -451,7 +451,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::EntityCount") {
+  TEST_CASE("helios::ecs::Archetype::EntityCount") {
     const Entity entity{1, 0};
 
     SUBCASE("Archetype entity count equals zero initially") {
@@ -499,14 +499,14 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::ColumnCount") {
+  TEST_CASE("helios::ecs::Archetype::ColumnCount") {
     ArchetypeId id{pos_idx};
     const auto expected_cols = id.Size();
     Archetype archetype(std::move(id));
     CHECK_EQ(archetype.ColumnCount(), expected_cols);
   }
 
-  TEST_CASE("ecs::Archetype::Entities") {
+  TEST_CASE("helios::ecs::Archetype::Entities") {
     SUBCASE("Entities span is empty initially") {
       ArchetypeId id;
       Archetype archetype(std::move(id));
@@ -532,7 +532,7 @@ TEST_SUITE("helios::ecs::Archetype") {
     }
   }
 
-  TEST_CASE("ecs::Archetype::Id") {
+  TEST_CASE("helios::ecs::Archetype::Id") {
     SUBCASE("Archetype ID is correct") {
       ArchetypeId id{pos_idx, vel_idx};
       const auto expected_id = id;
