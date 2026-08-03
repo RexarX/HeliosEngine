@@ -1,5 +1,7 @@
 var NAVTREEINDEX20 =
 {
+"classhelios_1_1mem_1_1FixedArenaAllocator.html#a6b280c9c76c69b46ea01d2302d786941":[4,0,2,6,5,7],
+"classhelios_1_1mem_1_1FixedArenaAllocator.html#a87a06fbaf17b29fe300a28309dc8d25b":[2,0,6,7,5,6],
 "classhelios_1_1mem_1_1FixedArenaAllocator.html#a87a06fbaf17b29fe300a28309dc8d25b":[4,0,2,6,5,6],
 "classhelios_1_1mem_1_1FixedArenaAllocator.html#a8def16c9508172a89ee274cac57c9f3a":[2,0,6,7,5,11],
 "classhelios_1_1mem_1_1FixedArenaAllocator.html#a8def16c9508172a89ee274cac57c9f3a":[4,0,2,6,5,11],
@@ -247,7 +249,5 @@ var NAVTREEINDEX20 =
 "classhelios_1_1mem_1_1RcFromThis.html#ad71d06db93d0b8061ac866047bd07694":[4,0,2,6,17,3],
 "classhelios_1_1mem_1_1RcFromThis.html#ad731268ade4cbbe4e5c0e174cc9f8e26":[2,0,6,7,17,0],
 "classhelios_1_1mem_1_1RcFromThis.html#ad731268ade4cbbe4e5c0e174cc9f8e26":[4,0,2,6,17,0],
-"classhelios_1_1mem_1_1RefCounted.html":[2,0,6,7,18],
-"classhelios_1_1mem_1_1RefCounted.html":[4,0,2,6,18],
-"classhelios_1_1mem_1_1RefCounted.html#a11aa2c5715ce0d81501e47cfeae65ad7":[2,0,6,7,18,17]
+"classhelios_1_1mem_1_1RefCounted.html":[2,0,6,7,18]
 };

@@ -1,5 +1,7 @@
 var NAVTREEINDEX28 =
 {
+"functions_type_i.html":[4,3,3,8],
+"functions_type_m.html":[4,3,3,9],
 "functions_type_o.html":[4,3,3,10],
 "functions_type_p.html":[4,3,3,11],
 "functions_type_r.html":[4,3,3,12],
@@ -247,7 +249,5 @@ var NAVTREEINDEX28 =
 "namespacehelios.html#a2f8cda93d2cc7430b93197943023cb6b":[2,0,6,21],
 "namespacehelios.html#a353d3912bb7ad37d555a2d43f9fcd02f":[2,0,6,23],
 "namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4":[2,0,6,17],
-"namespacehelios.html#a5dd8e95e4cb808a93be15d4df228eb36":[2,0,6,30],
-"namespacehelios.html#a5e276a5c70bbb86023543f06d4c58d28":[2,0,6,25],
-"namespacehelios.html#a7982e4af7b9267b962018d6cfd53c165":[2,0,6,24]
+"namespacehelios.html#a5dd8e95e4cb808a93be15d4df228eb36":[2,0,6,30]
 };

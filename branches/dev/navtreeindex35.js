@@ -1,5 +1,7 @@
 var NAVTREEINDEX35 =
 {
+"structhelios_1_1log_1_1DefaultLogger.html#a571a9c81ab62eff30f6652b2f7a9c6c6":[2,0,6,6,2,0],
+"structhelios_1_1log_1_1DefaultLogger.html#a571a9c81ab62eff30f6652b2f7a9c6c6":[4,0,2,5,1,0],
 "structhelios_1_1log_1_1DefaultLogger.html#ad0bfeca11d53daed7a08ea3720a07b4c":[2,0,6,6,2,1],
 "structhelios_1_1log_1_1DefaultLogger.html#ad0bfeca11d53daed7a08ea3720a07b4c":[4,0,2,5,1,1],
 "structhelios_1_1mem_1_1AllocatorStats.html":[2,0,6,7,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX35 =
 "task__graph_8hpp.html":[5,0,2,1,0,0,0,7],
 "task__graph_8hpp_source.html":[5,0,2,1,0,0,0,7],
 "time_8hpp.html":[5,0,2,0,0,0,0,0,2],
-"time_8hpp_source.html":[5,0,2,0,0,0,0,0,2],
-"timer_8hpp.html":[5,0,2,10,0,0,0,10],
-"timer_8hpp_source.html":[5,0,2,10,0,0,0,10]
+"time_8hpp_source.html":[5,0,2,0,0,0,0,0,2]
 };
