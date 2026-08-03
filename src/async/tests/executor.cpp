@@ -13,7 +13,8 @@
 using namespace helios::async;
 
 TEST_SUITE("helios::async::Executor") {
-  TEST_CASE("async::Executor::ctor: construction and basic properties") {
+  TEST_CASE(
+      "helios::async::Executor::ctor: construction and basic properties") {
     SUBCASE("Single worker thread") {
       Executor executor(1);
 
@@ -41,7 +42,7 @@ TEST_SUITE("helios::async::Executor") {
     }
   }
 
-  TEST_CASE("async::Executor::Run: task graph execution") {
+  TEST_CASE("helios::async::Executor::Run: task graph execution") {
     Executor executor(2);
     std::atomic<int> execution_count{0};
 
@@ -103,7 +104,7 @@ TEST_SUITE("helios::async::Executor") {
     }
   }
 
-  TEST_CASE("async::Executor::RunN: multiple executions") {
+  TEST_CASE("helios::async::Executor::RunN: multiple executions") {
     Executor executor(2);
     std::atomic<int> execution_count{0};
     constexpr size_t run_count = 5;
@@ -164,7 +165,7 @@ TEST_SUITE("helios::async::Executor") {
     }
   }
 
-  TEST_CASE("async::Executor::RunUntil: predicate-based execution") {
+  TEST_CASE("helios::async::Executor::RunUntil: predicate-based execution") {
     Executor executor(2);
     std::atomic<int> execution_count{0};
 
@@ -229,7 +230,7 @@ TEST_SUITE("helios::async::Executor") {
     }
   }
 
-  TEST_CASE("async::Executor::Async: asynchronous task execution") {
+  TEST_CASE("helios::async::Executor::Async: asynchronous task execution") {
     Executor executor(4);
 
     SUBCASE("Async with return value") {
@@ -280,7 +281,7 @@ TEST_SUITE("helios::async::Executor") {
     }
   }
 
-  TEST_CASE("async::Executor::DependentAsync: dependent async tasks") {
+  TEST_CASE("helios::async::Executor::DependentAsync: dependent async tasks") {
     Executor executor(4);
 
     SUBCASE("DependentAsync with single dependency") {
@@ -343,7 +344,8 @@ TEST_SUITE("helios::async::Executor") {
     }
   }
 
-  TEST_CASE("async::Executor::IsWorkerThread: worker thread identification") {
+  TEST_CASE(
+      "helios::async::Executor::IsWorkerThread: worker thread identification") {
     Executor executor(2);
 
     SUBCASE("Worker thread identification from task") {
@@ -368,7 +370,7 @@ TEST_SUITE("helios::async::Executor") {
     }
   }
 
-  TEST_CASE("async::Executor::CoRun: cooperative execution") {
+  TEST_CASE("helios::async::Executor::CoRun: cooperative execution") {
     Executor executor(2);
 
     SUBCASE("CoRun from worker thread") {
@@ -404,7 +406,7 @@ TEST_SUITE("helios::async::Executor") {
     }
   }
 
-  TEST_CASE("async::Executor::WaitForAll: wait for all functionality") {
+  TEST_CASE("helios::async::Executor::WaitForAll: wait for all functionality") {
     Executor executor(4);
     std::atomic<int> completed_tasks{0};
     constexpr int total_tasks = 10;
@@ -440,7 +442,8 @@ TEST_SUITE("helios::async::Executor") {
     }
   }
 
-  TEST_CASE("async::Executor::IdleWorkerCount: idle and queue statistics") {
+  TEST_CASE(
+      "helios::async::Executor::IdleWorkerCount: idle and queue statistics") {
     Executor executor(4);
 
     SUBCASE("Idle worker count changes with work") {

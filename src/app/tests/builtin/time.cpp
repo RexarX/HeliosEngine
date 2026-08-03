@@ -9,7 +9,7 @@
 using namespace helios::app;
 
 TEST_SUITE("helios::app::Time") {
-  TEST_CASE("app::Time::ctor") {
+  TEST_CASE("helios::app::Time::ctor") {
     SUBCASE("Default construction starts at zero") {
       const Time time;
       CHECK_EQ(time.delta_time, Time::Duration{});
@@ -17,7 +17,7 @@ TEST_SUITE("helios::app::Time") {
     }
   }
 
-  TEST_CASE("app::Time::Update") {
+  TEST_CASE("helios::app::Time::Update") {
     SUBCASE("Updates public timing state") {
       Time time;
       time.last_update -= std::chrono::milliseconds{2};
@@ -29,7 +29,7 @@ TEST_SUITE("helios::app::Time") {
     }
   }
 
-  TEST_CASE("app::Time::Elapsed") {
+  TEST_CASE("helios::app::Time::Elapsed") {
     SUBCASE("Returns elapsed as custom arithmetic type and duration") {
       Time time;
       time.elapsed = std::chrono::milliseconds{1500};
@@ -40,7 +40,7 @@ TEST_SUITE("helios::app::Time") {
     }
   }
 
-  TEST_CASE("app::Time::ElapsedDuration") {
+  TEST_CASE("helios::app::Time::ElapsedDuration") {
     SUBCASE("Returns elapsed using custom duration") {
       Time time;
       time.elapsed = std::chrono::milliseconds{3};
@@ -49,7 +49,7 @@ TEST_SUITE("helios::app::Time") {
     }
   }
 
-  TEST_CASE("app::Time::Delta") {
+  TEST_CASE("helios::app::Time::Delta") {
     SUBCASE("Returns delta as custom arithmetic type and duration") {
       Time time;
       time.delta_time = std::chrono::milliseconds{2500};
@@ -60,7 +60,7 @@ TEST_SUITE("helios::app::Time") {
     }
   }
 
-  TEST_CASE("app::Time::DeltaDuration") {
+  TEST_CASE("helios::app::Time::DeltaDuration") {
     SUBCASE("Returns delta using custom duration") {
       Time time;
       time.delta_time = std::chrono::milliseconds{4};
@@ -69,7 +69,7 @@ TEST_SUITE("helios::app::Time") {
     }
   }
 
-  TEST_CASE("app::Time::convenience accessors") {
+  TEST_CASE("helios::app::Time::convenience accessors") {
     SUBCASE("Return elapsed and delta in common units") {
       Time time;
       time.elapsed = std::chrono::milliseconds{2};
@@ -88,7 +88,7 @@ TEST_SUITE("helios::app::Time") {
 }
 
 TEST_SUITE("helios::app::UpdateTime") {
-  TEST_CASE("app::UpdateTime::operator()") {
+  TEST_CASE("helios::app::UpdateTime::operator()") {
     SUBCASE("Updates delta time and elapsed time") {
       App app;
       app.InsertResources(Time{});
@@ -106,7 +106,7 @@ TEST_SUITE("helios::app::UpdateTime") {
 }
 
 TEST_SUITE("helios::app::TimePlugin") {
-  TEST_CASE("app::TimePlugin::Build") {
+  TEST_CASE("helios::app::TimePlugin::Build") {
     SUBCASE("Adds Time resource on initialize") {
       App app;
       app.AddPlugins(TimePlugin{});

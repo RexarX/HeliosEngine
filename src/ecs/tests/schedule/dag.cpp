@@ -14,7 +14,7 @@ namespace {
 }  // namespace
 
 TEST_SUITE("helios::ecs::Dag") {
-  TEST_CASE("ecs::Dag::ctor") {
+  TEST_CASE("helios::ecs::Dag::ctor") {
     SUBCASE("Default-constructed dag is empty") {
       const Dag dag;
       CHECK(dag.Nodes().empty());
@@ -30,7 +30,7 @@ TEST_SUITE("helios::ecs::Dag") {
     }
   }
 
-  TEST_CASE("ecs::Dag::operator=") {
+  TEST_CASE("helios::ecs::Dag::operator=") {
     SUBCASE("Move assignment transfers state") {
       Dag source;
       source.AddNode(MakeSystemId(1));
@@ -42,7 +42,7 @@ TEST_SUITE("helios::ecs::Dag") {
     }
   }
 
-  TEST_CASE("ecs::Dag::AddNode") {
+  TEST_CASE("helios::ecs::Dag::AddNode") {
     SUBCASE("Adding a node returns an increasing index") {
       Dag dag;
 
@@ -66,7 +66,7 @@ TEST_SUITE("helios::ecs::Dag") {
     }
   }
 
-  TEST_CASE("ecs::Dag::AddEdge") {
+  TEST_CASE("helios::ecs::Dag::AddEdge") {
     SUBCASE("Adding a valid edge returns success") {
       Dag dag;
 
@@ -108,7 +108,7 @@ TEST_SUITE("helios::ecs::Dag") {
     }
   }
 
-  TEST_CASE("ecs::Dag::Sort") {
+  TEST_CASE("helios::ecs::Dag::Sort") {
     SUBCASE("Sort on an empty dag returns an empty vector") {
       Dag dag;
 
@@ -192,7 +192,7 @@ TEST_SUITE("helios::ecs::Dag") {
     }
   }
 
-  TEST_CASE("ecs::Dag::IndexOf") {
+  TEST_CASE("helios::ecs::Dag::IndexOf") {
     SUBCASE("IndexOf returns the correct index for an existing node") {
       Dag dag;
 
@@ -213,7 +213,7 @@ TEST_SUITE("helios::ecs::Dag") {
     }
   }
 
-  TEST_CASE("ecs::Dag::HasCycle") {
+  TEST_CASE("helios::ecs::Dag::HasCycle") {
     SUBCASE("Empty dag has no cycle") {
       Dag dag;
       CHECK_FALSE(dag.HasCycle());
@@ -263,7 +263,7 @@ TEST_SUITE("helios::ecs::Dag") {
     }
   }
 
-  TEST_CASE("ecs::Dag::Nodes") {
+  TEST_CASE("helios::ecs::Dag::Nodes") {
     SUBCASE("Nodes returns empty span for empty dag") {
       const Dag dag;
       CHECK(dag.Nodes().empty());

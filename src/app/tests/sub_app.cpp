@@ -67,7 +67,7 @@ constexpr SetOne kSetOne{};
 }  // namespace
 
 TEST_SUITE("helios::app::SubAppNameOf") {
-  TEST_CASE("app::SubAppNameOf") {
+  TEST_CASE("helios::app::SubAppNameOf") {
     SUBCASE("Returns kName when SubAppWithNameTrait is satisfied") {
       CHECK_EQ(SubAppNameOf(kNamedSubApp), "RenderSubApp");
     }
@@ -78,7 +78,7 @@ TEST_SUITE("helios::app::SubAppNameOf") {
     }
   }
 
-  TEST_CASE("app::IsSubAppAllowsOverlappingUpdates") {
+  TEST_CASE("helios::app::IsSubAppAllowsOverlappingUpdates") {
     SUBCASE("True when kAllowOverlappingUpdates is set") {
       CHECK(IsSubAppAllowsOverlappingUpdates(kOverlappingSubApp));
     }
@@ -88,7 +88,7 @@ TEST_SUITE("helios::app::SubAppNameOf") {
     }
   }
 
-  TEST_CASE("app::SubAppMaxOverlappingUpdates") {
+  TEST_CASE("helios::app::SubAppMaxOverlappingUpdates") {
     SUBCASE("Returns kMaxOverlappingUpdates when specified on label") {
       CHECK_EQ(SubAppMaxOverlappingUpdates(kLimitedSkipSubApp), 2);
     }
@@ -98,7 +98,7 @@ TEST_SUITE("helios::app::SubAppNameOf") {
     }
   }
 
-  TEST_CASE("app::IsSubAppAsync") {
+  TEST_CASE("helios::app::IsSubAppAsync") {
     SUBCASE("True when kAsync is set on label") {
       CHECK(IsSubAppAsync(kAsyncSubApp));
     }
@@ -110,7 +110,7 @@ TEST_SUITE("helios::app::SubAppNameOf") {
 }
 
 TEST_SUITE("helios::app::SubApp::From") {
-  TEST_CASE("app::SubApp::From") {
+  TEST_CASE("helios::app::SubApp::From") {
     SUBCASE("From uses kName when SubAppWithNameTrait is satisfied") {
       SubApp sub_app = SubApp::From(kNamedSubApp);
       CHECK_EQ(sub_app.GetName(), "RenderSubApp");
@@ -124,7 +124,7 @@ TEST_SUITE("helios::app::SubApp::From") {
 }
 
 TEST_SUITE("helios::app::SubApp") {
-  TEST_CASE("app::SubApp::ctor") {
+  TEST_CASE("helios::app::SubApp::ctor") {
     SUBCASE(
         "Default-constructed sub-app has empty name and built-in schedules") {
       SubApp sub_app;
@@ -155,7 +155,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::operator=") {
+  TEST_CASE("helios::app::SubApp::operator=") {
     SUBCASE("Move assignment transfers world resources") {
       SubApp source("RenderSubApp");
       source.InsertResources(CounterResource{3});
@@ -165,7 +165,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::Clear") {
+  TEST_CASE("helios::app::SubApp::Clear") {
     SUBCASE("Clear removes resources and restores built-in schedules") {
       SubApp sub_app("RenderSubApp");
       sub_app.InsertResources(CounterResource{5});
@@ -175,7 +175,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::Extract") {
+  TEST_CASE("helios::app::SubApp::Extract") {
     SUBCASE("Extract invokes configured function and copies main-world data") {
       App app;
       app.InsertResources(CounterResource{42});
@@ -202,7 +202,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::WaitUntilFullyIdle") {
+  TEST_CASE("helios::app::SubApp::WaitUntilFullyIdle") {
     SUBCASE("Returns immediately when not updating") {
       SubApp sub_app("RenderSubApp");
       sub_app.WaitUntilFullyIdle();
@@ -210,7 +210,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::BuildScheduler") {
+  TEST_CASE("helios::app::SubApp::BuildScheduler") {
     SUBCASE("BuildScheduler clears dirty flag after build") {
       SubApp sub_app("RenderSubApp");
       sub_app.AddSystem(kUpdate, IncrementSystem{});
@@ -220,7 +220,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::AddSchedule") {
+  TEST_CASE("helios::app::SubApp::AddSchedule") {
     SUBCASE("AddSchedule registers custom schedule") {
       SubApp sub_app("RenderSubApp");
       ecs::Schedule custom;
@@ -230,7 +230,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::InitSchedule") {
+  TEST_CASE("helios::app::SubApp::InitSchedule") {
     SUBCASE("InitSchedule creates schedule when missing") {
       SubApp sub_app("RenderSubApp");
       sub_app.InitSchedule(kCustomSchedule);
@@ -245,7 +245,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::EditSchedule") {
+  TEST_CASE("helios::app::SubApp::EditSchedule") {
     SUBCASE("EditSchedule adds systems and marks scheduler dirty") {
       SubApp sub_app("RenderSubApp");
       sub_app.InitSchedule(kCustomSchedule);
@@ -256,7 +256,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::AddSystem") {
+  TEST_CASE("helios::app::SubApp::AddSystem") {
     SUBCASE("AddSystem marks scheduler dirty") {
       SubApp sub_app("RenderSubApp");
       sub_app.InsertResources(CounterResource{});
@@ -281,7 +281,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::AddSystems") {
+  TEST_CASE("helios::app::SubApp::AddSystems") {
     SUBCASE("AddSystems marks scheduler dirty") {
       SubApp sub_app("RenderSubApp");
       sub_app.InsertResources(CounterResource{});
@@ -307,7 +307,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::ConfigureSet") {
+  TEST_CASE("helios::app::SubApp::ConfigureSet") {
     SUBCASE("ConfigureSet marks scheduler dirty") {
       SubApp sub_app("RenderSubApp");
       [[maybe_unused]] const auto set = sub_app.ConfigureSet(kUpdate, kSetOne);
@@ -315,7 +315,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::InsertResources") {
+  TEST_CASE("helios::app::SubApp::InsertResources") {
     SUBCASE("InsertResources stores value in sub-app world") {
       SubApp sub_app("RenderSubApp");
       sub_app.InsertResources(CounterResource{9});
@@ -323,7 +323,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::TryInsertResources") {
+  TEST_CASE("helios::app::SubApp::TryInsertResources") {
     SUBCASE("TryInsertResources keeps first value when resource exists") {
       SubApp sub_app("RenderSubApp");
       sub_app.InsertResources(CounterResource{1});
@@ -332,7 +332,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::AddMessages") {
+  TEST_CASE("helios::app::SubApp::AddMessages") {
     SUBCASE("AddMessages registers message on sub-app world") {
       SubApp sub_app("RenderSubApp");
       sub_app.AddMessages<AppExit>();
@@ -340,7 +340,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::SetRunner") {
+  TEST_CASE("helios::app::SubApp::SetRunner") {
     SUBCASE("Custom runner is invoked during app frame update") {
       App app(2);
       std::atomic<int> runner_calls{0};
@@ -366,7 +366,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::SetExtractFunction") {
+  TEST_CASE("helios::app::SubApp::SetExtractFunction") {
     SUBCASE("SetExtractFunction is used by Extract") {
       App app;
       app.InsertResources(CounterResource{8});
@@ -384,7 +384,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::SetName") {
+  TEST_CASE("helios::app::SubApp::SetName") {
     SUBCASE("SetName updates GetName") {
       SubApp sub_app;
       sub_app.SetName("PhysicsSubApp");
@@ -392,7 +392,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::SetAllowOverlappingUpdates") {
+  TEST_CASE("helios::app::SubApp::SetAllowOverlappingUpdates") {
     SUBCASE("SetAllowOverlappingUpdates updates AllowsOverlappingUpdates") {
       SubApp sub_app("RenderSubApp");
       sub_app.SetAllowOverlappingUpdates(true);
@@ -408,7 +408,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::SetMaxExtractionSkips") {
+  TEST_CASE("helios::app::SubApp::SetMaxExtractionSkips") {
     SUBCASE("SetMaxExtractionSkips updates MaxExtractionSkips") {
       SubApp sub_app("RenderSubApp");
       sub_app.SetMaxExtractionSkips(2);
@@ -422,7 +422,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::SetAsync") {
+  TEST_CASE("helios::app::SubApp::SetAsync") {
     SUBCASE("SetAsync updates IsAsync") {
       SubApp sub_app("RenderSubApp");
       sub_app.SetAsync(true);
@@ -438,7 +438,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::SetUpdateStage") {
+  TEST_CASE("helios::app::SubApp::SetUpdateStage") {
     SUBCASE("SetUpdateStage changes which stage Update runs") {
       SubApp sub_app("RenderSubApp");
       sub_app.SetUpdateStage(kUpdateStage);
@@ -458,7 +458,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::TryGetSchedule") {
+  TEST_CASE("helios::app::SubApp::TryGetSchedule") {
     SUBCASE("TryGetSchedule returns built-in update schedule") {
       SubApp sub_app("RenderSubApp");
       CHECK_NE(sub_app.TryGetSchedule(kUpdate), nullptr);
@@ -466,7 +466,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::ShouldExit") {
+  TEST_CASE("helios::app::SubApp::ShouldExit") {
     SUBCASE("Returns false without owner app") {
       SubApp sub_app("RenderSubApp");
       CHECK_FALSE(sub_app.ShouldExit());
@@ -495,7 +495,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::IsUpdating") {
+  TEST_CASE("helios::app::SubApp::IsUpdating") {
     SUBCASE("False when idle after frame completes") {
       App app(2);
       SubApp sub_app("RenderSubApp");
@@ -510,7 +510,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::GetWorld") {
+  TEST_CASE("helios::app::SubApp::GetWorld") {
     SUBCASE("GetWorld returns mutable and const views of same world") {
       SubApp sub_app("RenderSubApp");
       sub_app.InsertResources(CounterResource{2});
@@ -523,7 +523,7 @@ TEST_SUITE("helios::app::SubApp") {
     }
   }
 
-  TEST_CASE("app::SubApp::GetScheduler") {
+  TEST_CASE("helios::app::SubApp::GetScheduler") {
     SUBCASE("GetScheduler returns ECS scheduler for this sub-app") {
       SubApp sub_app("RenderSubApp");
       CHECK_EQ(&sub_app.GetScheduler(), &sub_app.GetScheduler());

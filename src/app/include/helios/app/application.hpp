@@ -171,9 +171,7 @@ public:
    * so `WaitForPluginsReady` can resume without busy-waiting.
    * @note Not thread-safe.
    */
-  void NotifyPluginReadinessChanged() noexcept {
-    plugins_ready_cv_.notify_all();
-  }
+  void NotifyPluginReadinessChanged() noexcept;
 
   /**
    * @brief Adds a plugin instance, if a plugin of the same type is not already
@@ -731,14 +729,6 @@ private:
   friend class Scheduler;
 };
 
-inline App::~App() {
-  // Ensure we're not running (should already be false if properly shut down)
-  is_running_.store(false, std::memory_order_release);
-
-  // Wait for all pending executor tasks to complete
-  executor_.WaitForAll();
-}
-
 inline void App::Update() {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::Update");
 
@@ -746,6 +736,13 @@ inline void App::Update() {
   scheduler_.RunFrame(*this);
 
   HELIOS_APP_PROFILE_FRAME();
+}
+
+inline void App::NotifyPluginReadinessChanged() noexcept {
+  {
+    const std::scoped_lock lock(plugins_ready_mutex_);
+  }
+  plugins_ready_cv_.notify_all();
 }
 
 inline auto App::AddPlugin(this auto&& self, PluginTypeId id,

@@ -39,11 +39,36 @@ App::App(size_t worker_thread_count)
   RegisterBuiltinSchedules(main_sub_app_.GetScheduler());
 }
 
+App::~App() {
+  // Ensure we're not running (should already be false if properly shut down)
+  is_running_.store(false, std::memory_order_release);
+
+  // Async SilentAsync loops run until stop is requested. Skipping Shutdown
+  // leaves those tasks alive, and WaitForAll() below would hang indefinitely.
+  // Only stop loops here — full Shutdown may already have run and must stay
+  // idempotent for callers that shut down explicitly before destroy.
+  for (auto&& [_, sub_app] : sub_apps_) {
+    if (sub_app.IsAsync()) {
+      sub_app.RequestAsyncLoopStop();
+    }
+  }
+  scheduler_.StopAsyncLoops();
+  scheduler_.WaitForSubApps();
+
+  executor_.WaitForAll();
+}
+
 void App::Clear() {
   HELIOS_ASSERT(!IsRunning(), "Cannot clear app while it is running!");
 
-  is_initialized_ = false;
   is_running_.store(false, std::memory_order_relaxed);
+
+  // Stop background work before tearing down sub-apps / scheduler state.
+  if (is_initialized_) {
+    scheduler_.Shutdown(*this);
+  }
+
+  is_initialized_ = false;
   plugins_.clear();
   dynamic_plugins_.clear();
   scheduler_.Clear();

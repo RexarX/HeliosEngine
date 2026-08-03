@@ -55,7 +55,7 @@ struct SecondBackend final : public Backend {
 }  // namespace
 
 TEST_SUITE("helios::profile::FlamegraphBackendConfig") {
-  TEST_CASE("FlamegraphBackendConfig::ctor") {
+  TEST_CASE("helios::profile::FlamegraphBackendConfig::ctor") {
     SUBCASE("Default config has default output path") {
       const FlamegraphBackendConfig config;
       CHECK_FALSE(config.output_path.empty());
@@ -82,7 +82,7 @@ TEST_SUITE("helios::profile::FlamegraphBackendConfig") {
 }
 
 TEST_SUITE("helios::profile::FlamegraphBackend") {
-  TEST_CASE("FlamegraphBackend::Name") {
+  TEST_CASE("helios::profile::FlamegraphBackend::Name") {
     SUBCASE("Name returns \"flamegraph\"") {
       const FlamegraphBackend backend;
       CHECK_EQ(backend.Name(), "flamegraph");
@@ -95,7 +95,7 @@ TEST_SUITE("helios::profile::FlamegraphBackend") {
     }
   }
 
-  TEST_CASE("FlamegraphBackend::ZoneStorageSize") {
+  TEST_CASE("helios::profile::FlamegraphBackend::ZoneStorageSize") {
     SUBCASE("ZoneStorageSize returns a positive non-zero value") {
       const FlamegraphBackend backend;
       CHECK_GT(backend.ZoneStorageSize(), 0);
@@ -107,7 +107,7 @@ TEST_SUITE("helios::profile::FlamegraphBackend") {
     }
   }
 
-  TEST_CASE("FlamegraphBackend zone operations") {
+  TEST_CASE("helios::profile::FlamegraphBackend: zone operations") {
     SUBCASE("BeginZone and EndZone do not crash") {
       FlamegraphBackend backend;
       std::array<std::byte, 256> storage{};
@@ -144,7 +144,7 @@ TEST_SUITE("helios::profile::FlamegraphBackend") {
     }
   }
 
-  TEST_CASE("FlamegraphBackend frame operations") {
+  TEST_CASE("helios::profile::FlamegraphBackend: frame operations") {
     SUBCASE("FrameMark does not crash") {
       FlamegraphBackend backend;
       backend.FrameMark();
@@ -165,7 +165,7 @@ TEST_SUITE("helios::profile::FlamegraphBackend") {
     }
   }
 
-  TEST_CASE("FlamegraphBackend message / thread") {
+  TEST_CASE("helios::profile::FlamegraphBackend: message / thread") {
     SUBCASE("Message does not crash") {
       FlamegraphBackend backend;
       backend.Message("Hello", 0xFF0000);
@@ -193,7 +193,7 @@ TEST_SUITE("helios::profile::FlamegraphBackend") {
     }
   }
 
-  TEST_CASE("FlamegraphBackend memory operations") {
+  TEST_CASE("helios::profile::FlamegraphBackend: memory operations") {
     SUBCASE("Alloc is a no-op") {
       FlamegraphBackend backend;
       int dummy = 0;
@@ -217,7 +217,7 @@ TEST_SUITE("helios::profile::FlamegraphBackend") {
     }
   }
 
-  TEST_CASE("FlamegraphBackend::Startup / Shutdown") {
+  TEST_CASE("helios::profile::FlamegraphBackend::Startup / Shutdown") {
     const std::filesystem::path test_path = "helios_flamegraph_test.json";
     RemoveTestFile(test_path);
 
@@ -253,7 +253,7 @@ TEST_SUITE("helios::profile::FlamegraphBackend") {
     RemoveTestFile(test_path);
   }
 
-  TEST_CASE("FlamegraphBackend in Profiler") {
+  TEST_CASE("helios::profile::FlamegraphBackend: in Profiler") {
     Profiler::Instance().Clear();
 
     SUBCASE("FlamegraphBackend can be registered with Profiler") {

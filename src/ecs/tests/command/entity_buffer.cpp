@@ -41,7 +41,7 @@ using GameplayBundle = ComponentBundle<MotionBundle, Health>;
 }  // namespace
 
 TEST_SUITE("helios::ecs::EntityCmdBuffer") {
-  TEST_CASE("ecs::EntityCmdBuffer::ctor") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::ctor") {
     SUBCASE("Custom allocator ctor") {
       World world;
       const Entity entity = world.ReserveEntity();
@@ -65,7 +65,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::Clear") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::Clear") {
     SUBCASE("Clear removes all pending commands") {
       World world;
       const Entity entity = world.ReserveEntity();
@@ -84,7 +84,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::Reserve") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::Reserve") {
     SUBCASE("Reserve does not add commands") {
       World world;
       const Entity entity = world.ReserveEntity();
@@ -110,7 +110,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::Destroy") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::Destroy") {
     SUBCASE("Enqueues destroy and entity is removed after execution") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -139,7 +139,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::TryDestroy") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::TryDestroy") {
     SUBCASE("Enqueues try-destroy and entity is removed after execution") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -182,7 +182,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::AddComponents") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::AddComponents") {
     SUBCASE("Adds multiple components after execution") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -212,7 +212,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::AddBundle") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::AddBundle") {
     SUBCASE("Adds a nested bundle as one deferred command") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -283,7 +283,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::TryAddComponents") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::TryAddComponents") {
     SUBCASE("Adds only missing components") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -313,7 +313,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::TryAddBundle") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::TryAddBundle") {
     SUBCASE("Adds only missing components from bundle") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -346,7 +346,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::RemoveComponents") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::RemoveComponents") {
     SUBCASE("Removes multiple components after execution") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -377,7 +377,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::RemoveBundle") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::RemoveBundle") {
     SUBCASE("Removes a nested bundle as one deferred command") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -411,7 +411,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::TryRemoveComponents") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::TryRemoveComponents") {
     SUBCASE("Removes present components, ignores absent ones") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -441,7 +441,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::TryRemoveBundle") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::TryRemoveBundle") {
     SUBCASE("Removes only present components represented by bundle") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -473,7 +473,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::ClearComponents") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::ClearComponents") {
     SUBCASE("Removes all components after execution") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -504,7 +504,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::Empty") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::Empty") {
     SUBCASE("Buffer is empty initially") {
       World world;
       const Entity entity = world.ReserveEntity();
@@ -539,7 +539,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::GetEntity") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::GetEntity") {
     SUBCASE("Returns the entity passed at construction") {
       World world;
       const Entity entity = world.ReserveEntity();
@@ -551,7 +551,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::Size") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::Size") {
     SUBCASE("Size is zero initially") {
       World world;
       const Entity entity = world.ReserveEntity();
@@ -589,7 +589,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer::GetAllocator") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::GetAllocator") {
     SUBCASE("Returns the allocator used at construction") {
       World world;
       const Entity entity = world.ReserveEntity();
@@ -603,7 +603,8 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer: destructor flushes commands into queue") {
+  TEST_CASE(
+      "helios::ecs::EntityCmdBuffer: destructor flushes commands into queue") {
     SUBCASE("Commands are in queue after buffer is destroyed") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -625,7 +626,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::EntityCmdBuffer: method chaining") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer: method chaining") {
     SUBCASE("Multiple operations can be chained") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -645,7 +646,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("ecs::PmrEntityCmdBuffer: works with pmr resource") {
+  TEST_CASE("helios::ecs::PmrEntityCmdBuffer: works with pmr resource") {
     SUBCASE("PMR alias operates correctly") {
       World world;
       const Entity entity = world.CreateEntity();

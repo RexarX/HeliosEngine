@@ -18,7 +18,7 @@ struct CounterSystem {
 }  // namespace
 
 TEST_SUITE("helios::ecs::MultiThreadedExecutor") {
-  TEST_CASE("ecs::MultiThreadedExecutor::Execute") {
+  TEST_CASE("helios::ecs::MultiThreadedExecutor::Execute") {
     SUBCASE("Execute dispatches all systems in a built schedule") {
       async::Executor async_executor;
       int counter = 0;

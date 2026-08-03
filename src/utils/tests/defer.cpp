@@ -8,7 +8,7 @@
 #include <vector>
 
 TEST_SUITE("helios::utils::Defer") {
-  TEST_CASE("utils::DEFER::Basic inline execution") {
+  TEST_CASE("HELIOS_DEFER: Basic inline execution") {
     int x = 5;
     {
       HELIOS_DEFER {
@@ -19,7 +19,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(x, 7);
   }
 
-  TEST_CASE("utils::DEFER::Multiple statements in defer block") {
+  TEST_CASE("HELIOS_DEFER: Multiple statements in defer block") {
     int x = 0;
     std::string str = "Hello";
     {
@@ -34,7 +34,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(str, "Hello World");
   }
 
-  TEST_CASE("utils::DEFER::LIFO order with inline syntax") {
+  TEST_CASE("HELIOS_DEFER: LIFO order with inline syntax") {
     std::vector<int> order;
     {
       HELIOS_DEFER {
@@ -53,7 +53,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(order[2], 1);
   }
 
-  TEST_CASE("utils::DEFER::Automatic capture by reference") {
+  TEST_CASE("HELIOS_DEFER: Automatic capture by reference") {
     int x = 10;
     std::string str = "Test";
     {
@@ -68,7 +68,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(str, "Test?!");
   }
 
-  TEST_CASE("utils::DEFER::Resource cleanup with inline syntax") {
+  TEST_CASE("HELIOS_DEFER: Resource cleanup with inline syntax") {
     bool cleaned = false;
     {
       auto* ptr = new int(42);
@@ -82,7 +82,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK(cleaned);
   }
 
-  TEST_CASE("utils::DEFER::Nested scopes with inline syntax") {
+  TEST_CASE("HELIOS_DEFER: Nested scopes with inline syntax") {
     int counter = 0;
     {
       HELIOS_DEFER {
@@ -99,7 +99,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(counter, 11);
   }
 
-  TEST_CASE("utils::DEFER::Exception safety with inline syntax") {
+  TEST_CASE("HELIOS_DEFER: Exception safety with inline syntax") {
     bool cleanup_called = false;
     CHECK_THROWS_AS(
         [&cleanup_called]() {
@@ -112,7 +112,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK(cleanup_called);
   }
 
-  TEST_CASE("utils::DEFER::Complex resource management") {
+  TEST_CASE("HELIOS_DEFER: Complex resource management") {
     struct FileHandle {
       bool& closed;
       explicit FileHandle(bool& c) : closed(c) { closed = false; }
@@ -140,7 +140,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK(file2_closed);
   }
 
-  TEST_CASE("utils::DEFER::Conditional logic in defer block") {
+  TEST_CASE("HELIOS_DEFER: Conditional logic in defer block") {
     bool condition = true;
     int result = 0;
     {
@@ -156,7 +156,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(result, 200);  // condition changed before defer executes
   }
 
-  TEST_CASE("utils::DEFER::Loop in defer block") {
+  TEST_CASE("HELIOS_DEFER: Loop in defer block") {
     std::vector<int> vec;
     {
       HELIOS_DEFER {
@@ -172,7 +172,7 @@ TEST_SUITE("helios::utils::Defer") {
     }
   }
 
-  TEST_CASE("utils::DEFER_CALL::Basic execution on scope exit") {
+  TEST_CASE("HELIOS_DEFER_CALL: Basic execution on scope exit") {
     int x = 5;
     {
       auto lambda = [&x]() { x += 2; };
@@ -182,7 +182,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(x, 7);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Multiple defers execute in LIFO order") {
+  TEST_CASE("HELIOS_DEFER_CALL: Multiple defers execute in LIFO order") {
     float x = 5.0F;
     {
       auto defer1 = [&x]() { x += 2; };  // Executes second
@@ -193,7 +193,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(x, doctest::Approx(4.5F));
   }
 
-  TEST_CASE("utils::DEFER_CALL::LIFO execution order verification") {
+  TEST_CASE("HELIOS_DEFER_CALL: LIFO execution order verification") {
     std::vector<int> execution_order;
     {
       auto defer1 = [&execution_order]() { execution_order.push_back(1); };
@@ -209,7 +209,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(execution_order[2], 1);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Resource cleanup") {
+  TEST_CASE("HELIOS_DEFER_CALL: Resource cleanup") {
     bool resource_freed = false;
     {
       auto* ptr = new int(42);
@@ -224,7 +224,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK(resource_freed);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Nested scopes") {
+  TEST_CASE("HELIOS_DEFER_CALL: Nested scopes") {
     int counter = 0;
     {
       auto defer1 = [&counter]() { counter += 1; };
@@ -240,7 +240,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(counter, 11);  // Outer defer executed
   }
 
-  TEST_CASE("utils::DEFER_CALL::Capture by value") {
+  TEST_CASE("HELIOS_DEFER_CALL: Capture by value") {
     int x = 100;
     int result = 0;
     {
@@ -252,7 +252,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(x, 200);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Capture by reference") {
+  TEST_CASE("HELIOS_DEFER_CALL: Capture by reference") {
     int x = 100;
     int result = 0;
     {
@@ -264,7 +264,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(x, 200);
   }
 
-  TEST_CASE("utils::DEFER_CALL::String manipulation") {
+  TEST_CASE("HELIOS_DEFER_CALL: String manipulation") {
     std::string str = "Hello";
     {
       auto lambda = [&str]() { str += " World"; };
@@ -275,7 +275,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(str, "Hello, World");
   }
 
-  TEST_CASE("utils::DEFER_CALL::Multiple defers on same line") {
+  TEST_CASE("HELIOS_DEFER_CALL: Multiple defers on same line") {
     int a = 0;
     int b = 0;
     {
@@ -290,7 +290,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(b, 2);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Works with mutable lambda") {
+  TEST_CASE("HELIOS_DEFER_CALL: Works with mutable lambda") {
     int counter = 0;
     {
       int local = 5;
@@ -303,7 +303,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(counter, 10);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Exception safety") {
+  TEST_CASE("HELIOS_DEFER_CALL: Exception safety") {
     bool cleanup_called = false;
 
     SUBCASE("Defer executes even with exception") {
@@ -334,7 +334,7 @@ TEST_SUITE("helios::utils::Defer") {
     }
   }
 
-  TEST_CASE("utils::DEFER_CALL::Complex cleanup scenario") {
+  TEST_CASE("HELIOS_DEFER_CALL: Complex cleanup scenario") {
     struct Resource {
       bool& freed;
 
@@ -371,7 +371,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK(resource2_freed);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Stateful lambda") {
+  TEST_CASE("HELIOS_DEFER_CALL: Stateful lambda") {
     struct Counter {
       int count = 0;
 
@@ -390,7 +390,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(counter.count, 2);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Empty lambda") {
+  TEST_CASE("HELIOS_DEFER_CALL: Empty lambda") {
     int x = 5;
     {
       auto lambda = []() {};
@@ -400,7 +400,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(x, 10);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Conditional execution in lambda") {
+  TEST_CASE("HELIOS_DEFER_CALL: Conditional execution in lambda") {
     bool condition = true;
     int result = 0;
     {
@@ -416,7 +416,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(result, 0);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Lambda with std::function wrapper") {
+  TEST_CASE("HELIOS_DEFER_CALL: Lambda with std::function wrapper") {
     int x = 0;
     std::function<void()> func = [&x]() { x = 100; };
     {
@@ -426,7 +426,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(x, 100);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Functor object") {
+  TEST_CASE("HELIOS_DEFER_CALL: Functor object") {
     struct Incrementer {
       int& value;
 
@@ -443,7 +443,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(x, 15);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Function pointer with captured context") {
+  TEST_CASE("HELIOS_DEFER_CALL: Function pointer with captured context") {
     struct Context {
       int counter = 0;
 
@@ -460,7 +460,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(ctx.counter, 1);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Lambda wrapping function with arguments") {
+  TEST_CASE("HELIOS_DEFER_CALL: Lambda wrapping function with arguments") {
     auto add_to_value = [](int& target, int value) { target += value; };
 
     int x = 0;
@@ -472,7 +472,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(x, 10);
   }
 
-  TEST_CASE("utils::DEFER_CALL::Multiple callable types in LIFO order") {
+  TEST_CASE("HELIOS_DEFER_CALL: Multiple callable types in LIFO order") {
     auto add_value = [](int& target, int value) { target += value; };
 
     int counter = 0;
@@ -489,7 +489,7 @@ TEST_SUITE("helios::utils::Defer") {
     CHECK_EQ(counter, 111);
   }
 
-  TEST_CASE("utils::Mixed: DEFER_CALL and DEFER together") {
+  TEST_CASE("HELIOS_DEFER/HELIOS_DEFER_CALL: Mixed usage") {
     std::vector<int> order;
     {
       auto lambda = [&order]() { order.push_back(1); };

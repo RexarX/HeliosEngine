@@ -38,7 +38,7 @@ void TestAssertionHandler(std::string_view condition,
 }  // namespace
 
 TEST_SUITE("helios::Assert") {
-  TEST_CASE("SetAssertionHandler: custom handler registration") {
+  TEST_CASE("helios::SetAssertionHandler: custom handler registration") {
     SUBCASE("Set custom handler") {
       const auto previous = GetAssertionHandler();
       SetAssertionHandler(TestAssertionHandler);
@@ -69,7 +69,7 @@ TEST_SUITE("helios::Assert") {
     }
   }
 
-  TEST_CASE("HandleAssertion: handler invocation") {
+  TEST_CASE("helios::HandleAssertion: handler invocation") {
     const auto previous = GetAssertionHandler();
     SetAssertionHandler(TestAssertionHandler);
     g_tracker.Reset();
@@ -109,7 +109,7 @@ TEST_SUITE("helios::Assert") {
     g_tracker.Reset();
   }
 
-  TEST_CASE("FormatAssertionMessage: message formatting") {
+  TEST_CASE("helios::FormatAssertionMessage: message formatting") {
     SUBCASE("Includes condition and source location") {
       constexpr auto loc = std::source_location::current();
       const std::string formatted =
@@ -267,7 +267,7 @@ TEST_SUITE("helios::Assert") {
     }
   }
 
-  TEST_CASE("AssertionHandler: type validation") {
+  TEST_CASE("helios::AssertionHandler: type validation") {
     SUBCASE("AssertionHandler is a function pointer type") {
       CHECK(std::is_pointer_v<AssertionHandler>);
       CHECK(std::is_function_v<std::remove_pointer_t<AssertionHandler>>);

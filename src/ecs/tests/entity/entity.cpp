@@ -443,6 +443,15 @@ TEST_SUITE("helios::ecs::NextGeneration") {
       constexpr auto wrap_alive = NextGeneration(wrap_free, /*alive=*/true);
       CHECK_NE(wrap_alive, Entity::kInvalidGeneration);
     }
+
+    SUBCASE("Free generation never carries alive bit after increment") {
+      // Counter at mask without alive bit would overflow into kAliveBit without
+      // masking the return value.
+      constexpr auto free_gen =
+          NextGeneration(Entity::kCounterMask, /*alive=*/false);
+      CHECK_EQ(free_gen, 0U);
+      CHECK_FALSE(IsAliveGeneration(free_gen));
+    }
   }
 }
 

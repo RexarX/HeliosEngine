@@ -71,11 +71,11 @@ public:
 
   Scheduler& Done() noexcept { return scheduler_.get(); }
 
+  [[nodiscard]] size_t Hash() const noexcept { return hash_; }
+
 private:
   std::reference_wrapper<Scheduler> scheduler_;
   size_t hash_ = 0;
-
-  friend class Scheduler;
 };
 
 /// @brief Handle returned when adding a schedule to the scheduler for
@@ -132,6 +132,8 @@ public:
   Scheduler& Done() noexcept { return scheduler_.get(); }
 
 private:
+  [[nodiscard]] size_t Hash() const noexcept { return hash_; }
+
   std::reference_wrapper<Scheduler> scheduler_;
   size_t hash_ = 0;
 
@@ -297,7 +299,7 @@ inline auto StageOrdering::After(this auto&& self, StageTypeIndex index)
     -> decltype(std::forward<decltype(self)>(self)) {
   const size_t other_hash = index.Hash();
   auto& scheduler = self.scheduler_.get();
-  auto& entry = scheduler.GetStageEntry(self.hash_);
+  auto& entry = scheduler.GetStageEntry(self.Hash());
 
   if (std::ranges::find(entry.after_stages, other_hash) ==
       entry.after_stages.end()) {
@@ -311,7 +313,7 @@ inline auto StageOrdering::Before(this auto&& self, StageTypeIndex index)
     -> decltype(std::forward<decltype(self)>(self)) {
   const size_t other_hash = index.Hash();
   auto& scheduler = self.scheduler_.get();
-  auto& entry = scheduler.GetStageEntry(self.hash_);
+  auto& entry = scheduler.GetStageEntry(self.Hash());
 
   if (std::ranges::find(entry.before_stages, other_hash) ==
       entry.before_stages.end()) {
@@ -325,7 +327,7 @@ inline auto ScheduleOrdering::After(this auto&& self, ScheduleTypeIndex index)
     -> decltype(std::forward<decltype(self)>(self)) {
   const size_t other_hash = index.Hash();
   auto& scheduler = self.scheduler_.get();
-  auto& entry = scheduler.GetEntry(self.hash_);
+  auto& entry = scheduler.GetEntry(self.Hash());
 
   if (std::ranges::find(entry.after_schedules, other_hash) ==
       entry.after_schedules.end()) {
@@ -339,7 +341,7 @@ inline auto ScheduleOrdering::Before(this auto&& self, ScheduleTypeIndex index)
     -> decltype(std::forward<decltype(self)>(self)) {
   const size_t other_hash = index.Hash();
   auto& scheduler = self.scheduler_.get();
-  auto& entry = scheduler.GetEntry(self.hash_);
+  auto& entry = scheduler.GetEntry(self.Hash());
 
   if (std::ranges::find(entry.before_schedules, other_hash) ==
       entry.before_schedules.end()) {
@@ -352,7 +354,7 @@ inline auto ScheduleOrdering::Before(this auto&& self, ScheduleTypeIndex index)
 inline auto ScheduleOrdering::InStage(this auto&& self, StageTypeIndex stage)
     -> decltype(std::forward<decltype(self)>(self)) {
   auto& scheduler = self.scheduler_.get();
-  auto& entry = scheduler.GetEntry(self.hash_);
+  auto& entry = scheduler.GetEntry(self.Hash());
   entry.stage_hash = stage.Hash();
   scheduler.MarkDirty();
   return std::forward<decltype(self)>(self);

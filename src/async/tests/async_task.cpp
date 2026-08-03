@@ -11,7 +11,7 @@
 using namespace helios::async;
 
 TEST_SUITE("helios::async::AsyncTask") {
-  TEST_CASE("async::AsyncTask: default construction") {
+  TEST_CASE("helios::async::AsyncTask: default construction") {
     const AsyncTask task;
 
     CHECK_FALSE(task.Done());
@@ -21,7 +21,7 @@ TEST_SUITE("helios::async::AsyncTask") {
     CHECK_EQ(task.GetTaskType(), TaskType::kAsync);
   }
 
-  TEST_CASE("async::AsyncTask: copy and move semantics") {
+  TEST_CASE("helios::async::AsyncTask: copy and move semantics") {
     SUBCASE("Copy construction") {
       const AsyncTask original_task;
       AsyncTask copied_task = original_task;
@@ -58,7 +58,7 @@ TEST_SUITE("helios::async::AsyncTask") {
     }
   }
 
-  TEST_CASE("async::AsyncTask: equality operators") {
+  TEST_CASE("helios::async::AsyncTask: equality operators") {
     const AsyncTask task1;
     const AsyncTask task2;
 
@@ -72,7 +72,7 @@ TEST_SUITE("helios::async::AsyncTask") {
     }
   }
 
-  TEST_CASE("async::AsyncTask::Reset") {
+  TEST_CASE("helios::async::AsyncTask::Reset") {
     AsyncTask task;
 
     SUBCASE("Reset empty task") {
@@ -82,7 +82,7 @@ TEST_SUITE("helios::async::AsyncTask") {
     }
   }
 
-  TEST_CASE("async::AsyncTask: task completion checking") {
+  TEST_CASE("helios::async::AsyncTask: task completion checking") {
     Executor executor(2);
     std::atomic<bool> should_complete{false};
 
@@ -157,7 +157,7 @@ TEST_SUITE("helios::async::AsyncTask") {
     }
   }
 
-  TEST_CASE("async::AsyncTask::Hash") {
+  TEST_CASE("helios::async::AsyncTask::Hash") {
     const AsyncTask task1;
     const AsyncTask task2;
 
@@ -171,7 +171,7 @@ TEST_SUITE("helios::async::AsyncTask") {
     }
   }
 
-  TEST_CASE("async::AsyncTask::UseCount") {
+  TEST_CASE("helios::async::AsyncTask::UseCount") {
     const AsyncTask task;
 
     SUBCASE("Empty task use count") {
@@ -185,7 +185,7 @@ TEST_SUITE("helios::async::AsyncTask") {
     }
   }
 
-  TEST_CASE("async::AsyncTask::GetTaskType") {
+  TEST_CASE("helios::async::AsyncTask::GetTaskType") {
     AsyncTask task;
 
     CHECK_EQ(task.GetTaskType(), TaskType::kAsync);
@@ -195,7 +195,7 @@ TEST_SUITE("helios::async::AsyncTask") {
     CHECK_EQ(task.GetTaskType(), TaskType::kAsync);
   }
 
-  TEST_CASE("async::AsyncTask::Empty") {
+  TEST_CASE("helios::async::AsyncTask::Empty") {
     AsyncTask task;
 
     SUBCASE("Default constructed task is empty") {

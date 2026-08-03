@@ -45,7 +45,7 @@ struct LoggerWithoutName {
 }  // namespace
 
 TEST_SUITE("helios::log::Config") {
-  TEST_CASE("log::Config::ctor") {
+  TEST_CASE("helios::log::Config::ctor") {
     SUBCASE("Default constructor") {
       constexpr Config config;
 
@@ -73,7 +73,7 @@ TEST_SUITE("helios::log::Config") {
     }
   }
 
-  TEST_CASE("log::Config::operator=") {
+  TEST_CASE("helios::log::Config::operator=") {
     SUBCASE("Copy assignment") {
       constexpr Config original = {.log_directory = "test_logs",
                                    .enable_console = false};
@@ -94,7 +94,7 @@ TEST_SUITE("helios::log::Config") {
     }
   }
 
-  TEST_CASE("log::Config::Default: factory method") {
+  TEST_CASE("helios::log::Config::Default: factory method") {
     constexpr auto config = Config::Default();
 
     SUBCASE("Default log directory") {
@@ -139,7 +139,7 @@ TEST_SUITE("helios::log::Config") {
     }
   }
 
-  TEST_CASE("log::Config::ConsoleOnly: factory method") {
+  TEST_CASE("helios::log::Config::ConsoleOnly: factory method") {
     constexpr auto config = Config::ConsoleOnly();
 
     SUBCASE("Console is enabled") {
@@ -151,7 +151,7 @@ TEST_SUITE("helios::log::Config") {
     }
   }
 
-  TEST_CASE("log::Config::FileOnly: factory method") {
+  TEST_CASE("helios::log::Config::FileOnly: factory method") {
     constexpr auto config = Config::FileOnly();
 
     SUBCASE("Console is disabled") {
@@ -163,7 +163,7 @@ TEST_SUITE("helios::log::Config") {
     }
   }
 
-  TEST_CASE("log::Config::Debug: factory method") {
+  TEST_CASE("helios::log::Config::Debug: factory method") {
     constexpr auto config = Config::Debug();
 
     SUBCASE("Console is enabled") {
@@ -179,7 +179,7 @@ TEST_SUITE("helios::log::Config") {
     }
   }
 
-  TEST_CASE("log::Config::Release: factory method") {
+  TEST_CASE("helios::log::Config::Release: factory method") {
     constexpr auto config = Config::Release();
 
     SUBCASE("Console is disabled") {
@@ -197,7 +197,7 @@ TEST_SUITE("helios::log::Config") {
 }
 
 TEST_SUITE("helios::log::LoggerTrait") {
-  TEST_CASE("log::LoggerTrait::concept") {
+  TEST_CASE("helios::log::LoggerTrait::concept") {
     SUBCASE("Valid logger type satisfies LoggerTrait") {
       CHECK(LoggerTrait<TestLogger>);
       CHECK(LoggerTrait<AnotherTestLogger>);
@@ -215,7 +215,7 @@ TEST_SUITE("helios::log::LoggerTrait") {
 }
 
 TEST_SUITE("helios::log::LoggerWithConfigTrait") {
-  TEST_CASE("log::LoggerWithConfigTrait::concept") {
+  TEST_CASE("helios::log::LoggerWithConfigTrait::concept") {
     SUBCASE("Logger with GetConfig() satisfies LoggerWithConfigTrait") {
       CHECK(LoggerWithConfigTrait<LoggerWithConfig>);
       CHECK(LoggerWithConfigTrait<LoggerWithCustomConfig>);
@@ -230,7 +230,7 @@ TEST_SUITE("helios::log::LoggerWithConfigTrait") {
 }
 
 TEST_SUITE("helios::log::LoggerNameOf") {
-  TEST_CASE("log::LoggerNameOf: name retrieval") {
+  TEST_CASE("helios::log::LoggerNameOf: name retrieval") {
     SUBCASE("Returns correct name for TestLogger") {
       constexpr std::string_view name = LoggerNameOf<TestLogger>();
       CHECK_EQ(name, "TestLogger");
@@ -256,7 +256,7 @@ TEST_SUITE("helios::log::LoggerNameOf") {
 }
 
 TEST_SUITE("helios::log::LoggerConfigOf") {
-  TEST_CASE("log::LoggerConfigOf: config retrieval") {
+  TEST_CASE("helios::log::LoggerConfigOf: config retrieval") {
     SUBCASE("Logger without Config() returns Default") {
       constexpr Config config = LoggerConfigOf<TestLogger>();
       constexpr auto default_config = Config::Default();

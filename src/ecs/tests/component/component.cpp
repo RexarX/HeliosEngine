@@ -82,7 +82,7 @@ struct NonCopyableNonMovable {
 }  // namespace
 
 TEST_SUITE("helios::ecs::ComponentTrait") {
-  TEST_CASE("ecs::ComponentTrait::concept") {
+  TEST_CASE("helios::ecs::ComponentTrait::concept") {
     SUBCASE("Regular component types satisfy ComponentTrait") {
       CHECK(ComponentTrait<Position>);
       CHECK(ComponentTrait<Velocity>);
@@ -111,7 +111,7 @@ TEST_SUITE("helios::ecs::ComponentTrait") {
 }
 
 TEST_SUITE("helios::ecs::TagComponentTrait") {
-  TEST_CASE("ecs::TagComponentTrait::concept") {
+  TEST_CASE("helios::ecs::TagComponentTrait::concept") {
     SUBCASE("Empty types satisfy TagComponentTrait") {
       CHECK(TagComponentTrait<Tag>);
       CHECK(TagComponentTrait<NamedTag>);
@@ -131,7 +131,7 @@ TEST_SUITE("helios::ecs::TagComponentTrait") {
 }
 
 TEST_SUITE("helios::ecs::ArchetypeComponentTrait") {
-  TEST_CASE("ecs::ArchetypeComponentTrait::concept") {
+  TEST_CASE("helios::ecs::ArchetypeComponentTrait::concept") {
     SUBCASE(
         "Archetype storage is used by default, unless sparse storage is "
         "specified or type is tag") {
@@ -155,7 +155,7 @@ TEST_SUITE("helios::ecs::ArchetypeComponentTrait") {
 }
 
 TEST_SUITE("helios::ecs::SparseComponentTrait") {
-  TEST_CASE("ecs::SparseComponentTrait::concept") {
+  TEST_CASE("helios::ecs::SparseComponentTrait::concept") {
     SUBCASE(
         "Sparse storage used by default for tag components, other must "
         "explicitly specify sparse storage") {
@@ -171,7 +171,7 @@ TEST_SUITE("helios::ecs::SparseComponentTrait") {
 }
 
 TEST_SUITE("helios::ecs::ComponentWithNameTrait") {
-  TEST_CASE("ecs::ComponentWithNameTrait::concept") {
+  TEST_CASE("helios::ecs::ComponentWithNameTrait::concept") {
     SUBCASE("Components with kName satisfy ComponentWithNameTrait") {
       CHECK(ComponentWithNameTrait<Position>);
       CHECK(ComponentWithNameTrait<NamedTag>);
@@ -187,7 +187,7 @@ TEST_SUITE("helios::ecs::ComponentWithNameTrait") {
 }
 
 TEST_SUITE("helios::ecs::ComponentWithStorageTypeTrait") {
-  TEST_CASE("ecs::ComponentWithStorageTypeTrait::concept") {
+  TEST_CASE("helios::ecs::ComponentWithStorageTypeTrait::concept") {
     SUBCASE(
         "Components with kStorageType satisfy ComponentWithStorageTypeTrait") {
       CHECK(ComponentWithStorageTypeTrait<Sparse>);
@@ -205,7 +205,7 @@ TEST_SUITE("helios::ecs::ComponentWithStorageTypeTrait") {
 }
 
 TEST_SUITE("helios::ecs::ComponentNameOf") {
-  TEST_CASE("ecs::ComponentNameOf::basic") {
+  TEST_CASE("helios::ecs::ComponentNameOf::basic") {
     SUBCASE("Component with custom name returns custom name") {
       constexpr auto name = ComponentNameOf<Position>();
       CHECK_EQ(name, "Position");
@@ -242,7 +242,7 @@ TEST_SUITE("helios::ecs::ComponentNameOf") {
 }
 
 TEST_SUITE("helios::ecs::ComponentStorageTypeOf") {
-  TEST_CASE("ecs::ComponentStorageTypeOf::basic") {
+  TEST_CASE("helios::ecs::ComponentStorageTypeOf::basic") {
     SUBCASE("Component with custom storage type returns custom type") {
       constexpr auto storage = ComponentStorageTypeOf<Sparse>();
       CHECK_EQ(storage, ComponentStorageType::kSparseSet);
@@ -274,7 +274,7 @@ TEST_SUITE("helios::ecs::ComponentStorageTypeOf") {
 }
 
 TEST_SUITE("helios::ecs::ComponentTypeInfo") {
-  TEST_CASE("ecs::ComponentTypeInfo::From") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::From") {
     SUBCASE("From regular component type") {
       constexpr auto info = ComponentTypeInfo::From<Position>();
 
@@ -334,7 +334,7 @@ TEST_SUITE("helios::ecs::ComponentTypeInfo") {
     }
   }
 
-  TEST_CASE("ecs::ComponentTypeInfo::ctors") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::ctors") {
     SUBCASE("Copy ctor") {
       constexpr auto original = ComponentTypeInfo::From<Position>();
       constexpr auto copy = original;
@@ -358,7 +358,7 @@ TEST_SUITE("helios::ecs::ComponentTypeInfo") {
     }
   }
 
-  TEST_CASE("ecs::ComponentTypeInfo::assignment") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::assignment") {
     SUBCASE("Copy assignment") {
       constexpr auto original = ComponentTypeInfo::From<Position>();
       auto assigned = ComponentTypeInfo::From<Velocity>();
@@ -381,7 +381,7 @@ TEST_SUITE("helios::ecs::ComponentTypeInfo") {
     }
   }
 
-  TEST_CASE("ecs::ComponentTypeInfo::operator==") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::operator==") {
     SUBCASE("Same type") {
       constexpr auto info1 = ComponentTypeInfo::From<Position>();
       constexpr auto info2 = ComponentTypeInfo::From<Position>();
@@ -395,7 +395,7 @@ TEST_SUITE("helios::ecs::ComponentTypeInfo") {
     }
   }
 
-  TEST_CASE("ecs::ComponentTypeInfo::operator!=") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::operator!=") {
     SUBCASE("Same type") {
       constexpr auto info1 = ComponentTypeInfo::From<Position>();
       constexpr auto info2 = ComponentTypeInfo::From<Position>();
@@ -409,7 +409,7 @@ TEST_SUITE("helios::ecs::ComponentTypeInfo") {
     }
   }
 
-  TEST_CASE("ecs::ComponentTypeInfo::operator<") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::operator<") {
     SUBCASE("Consistent ordering") {
       constexpr auto info1 = ComponentTypeInfo::From<Position>();
       constexpr auto info2 = ComponentTypeInfo::From<Velocity>();
@@ -417,7 +417,7 @@ TEST_SUITE("helios::ecs::ComponentTypeInfo") {
     }
   }
 
-  TEST_CASE("ecs::ComponentTypeInfo::TypeIndex") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::TypeIndex") {
     SUBCASE("TypeIndex matches ComponentTypeIndex") {
       constexpr auto info = ComponentTypeInfo::From<Position>();
       constexpr auto type_index = ComponentTypeIndex::From<Position>();
@@ -431,7 +431,7 @@ TEST_SUITE("helios::ecs::ComponentTypeInfo") {
     }
   }
 
-  TEST_CASE("ecs::ComponentTypeInfo::Size") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::Size") {
     SUBCASE("Size matches sizeof for regular component") {
       constexpr auto info = ComponentTypeInfo::From<Position>();
       CHECK_EQ(info.Size(), sizeof(Position));
@@ -453,7 +453,7 @@ TEST_SUITE("helios::ecs::ComponentTypeInfo") {
     }
   }
 
-  TEST_CASE("ecs::ComponentTypeInfo::Alignment") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::Alignment") {
     SUBCASE("Alignment matches alignof for regular component") {
       constexpr auto info = ComponentTypeInfo::From<Position>();
       CHECK_EQ(info.Alignment(), alignof(Position));
@@ -471,7 +471,7 @@ TEST_SUITE("helios::ecs::ComponentTypeInfo") {
     }
   }
 
-  TEST_CASE("ecs::ComponentTypeInfo::StorageType") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::StorageType") {
     SUBCASE("StorageType for archetype component") {
       constexpr auto info = ComponentTypeInfo::From<Position>();
       CHECK_EQ(info.StorageType(), ComponentStorageType::kArchetype);
@@ -488,7 +488,7 @@ TEST_SUITE("helios::ecs::ComponentTypeInfo") {
     }
   }
 
-  TEST_CASE("ecs::ComponentTypeInfo::IsTag") {
+  TEST_CASE("helios::ecs::ComponentTypeInfo::IsTag") {
     SUBCASE("IsTag returns true for tag component") {
       constexpr auto info = ComponentTypeInfo::From<Tag>();
       CHECK(info.IsTag());

@@ -59,7 +59,7 @@ struct NoExecuteMethod {
 }  // namespace
 
 TEST_SUITE("helios::ecs::CommandTrait") {
-  TEST_CASE("ecs::CommandTrait::concept") {
+  TEST_CASE("helios::ecs::CommandTrait::concept") {
     SUBCASE("Regular command types satisfy CommandTrait") {
       CHECK_UNARY(CommandTrait<SimpleCommand>);
       CHECK_UNARY(CommandTrait<CommandWithData>);

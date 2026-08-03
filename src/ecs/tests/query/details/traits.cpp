@@ -70,7 +70,7 @@ TEST_SUITE("helios::ecs::details::ComponentTypeExtractor") {
 }
 
 TEST_SUITE("helios::ecs::details::IsConstAccess") {
-  TEST_CASE("ecs::details::IsConstAccess — const access specifiers") {
+  TEST_CASE("helios::ecs::details::IsConstAccess — const access specifiers") {
     SUBCASE("const T& is const access") {
       CHECK(IsConstAccess<const Position&>::value);
     }
@@ -88,7 +88,7 @@ TEST_SUITE("helios::ecs::details::IsConstAccess") {
     }
   }
 
-  TEST_CASE("ecs::details::IsConstAccess — mutable access specifiers") {
+  TEST_CASE("helios::ecs::details::IsConstAccess — mutable access specifiers") {
     SUBCASE("T& is NOT const access") {
       CHECK(!IsConstAccess<Position&>::value);
     }
@@ -102,7 +102,7 @@ TEST_SUITE("helios::ecs::details::IsConstAccess") {
     }
   }
 
-  TEST_CASE("ecs::details::kIsConstAccess variable template") {
+  TEST_CASE("helios::ecs::details::kIsConstAccess variable template") {
     SUBCASE("kIsConstAccess true for const T&") {
       CHECK(kIsConstAccess<const Position&>);
     }
@@ -114,7 +114,7 @@ TEST_SUITE("helios::ecs::details::IsConstAccess") {
 }
 
 TEST_SUITE("helios::ecs::details::kIsMutableAccess") {
-  TEST_CASE("ecs::details::kIsMutableAccess — mutable specifiers") {
+  TEST_CASE("helios::ecs::details::kIsMutableAccess — mutable specifiers") {
     SUBCASE("T& is mutable") {
       CHECK(kIsMutableAccess<Position&>);
     }
@@ -128,7 +128,7 @@ TEST_SUITE("helios::ecs::details::kIsMutableAccess") {
     }
   }
 
-  TEST_CASE("ecs::details::kIsMutableAccess — non-mutable specifiers") {
+  TEST_CASE("helios::ecs::details::kIsMutableAccess — non-mutable specifiers") {
     SUBCASE("const T& is not mutable") {
       CHECK(!kIsMutableAccess<const Position&>);
     }
@@ -144,7 +144,7 @@ TEST_SUITE("helios::ecs::details::kIsMutableAccess") {
 }
 
 TEST_SUITE("helios::ecs::details::IsRvalueAccess") {
-  TEST_CASE("ecs::details::IsRvalueAccess::value") {
+  TEST_CASE("helios::ecs::details::IsRvalueAccess::value") {
     SUBCASE("T&& is rvalue access") {
       CHECK(IsRvalueAccess<Position&&>::value);
     }
@@ -170,7 +170,7 @@ TEST_SUITE("helios::ecs::details::IsRvalueAccess") {
     }
   }
 
-  TEST_CASE("ecs::details::kIsRvalueAccess variable template") {
+  TEST_CASE("helios::ecs::details::kIsRvalueAccess variable template") {
     SUBCASE("kIsRvalueAccess true for T&&") {
       CHECK(kIsRvalueAccess<Position&&>);
     }
@@ -182,7 +182,7 @@ TEST_SUITE("helios::ecs::details::IsRvalueAccess") {
 }
 
 TEST_SUITE("helios::ecs::details::kAllComponentsConst") {
-  TEST_CASE("ecs::details::kAllComponentsConst — all const") {
+  TEST_CASE("helios::ecs::details::kAllComponentsConst — all const") {
     SUBCASE("Single const T& is all-const") {
       CHECK(kAllComponentsConst<const Position&>);
     }
@@ -201,7 +201,7 @@ TEST_SUITE("helios::ecs::details::kAllComponentsConst") {
     }
   }
 
-  TEST_CASE("ecs::details::kAllComponentsConst — not all const") {
+  TEST_CASE("helios::ecs::details::kAllComponentsConst — not all const") {
     SUBCASE("Single T& fails all-const") {
       CHECK(!kAllComponentsConst<Position&>);
     }
@@ -217,7 +217,9 @@ TEST_SUITE("helios::ecs::details::kAllComponentsConst") {
 }
 
 TEST_SUITE("helios::ecs::details::ComponentAccessType") {
-  TEST_CASE("ecs::details::ComponentAccessType::type — reference specifiers") {
+  TEST_CASE(
+      "helios::ecs::details::ComponentAccessType::type — reference "
+      "specifiers") {
     SUBCASE("T& yields T&") {
       CHECK(std::same_as<ComponentAccessType<Position&>::type, Position&>);
     }
@@ -232,7 +234,8 @@ TEST_SUITE("helios::ecs::details::ComponentAccessType") {
     }
   }
 
-  TEST_CASE("ecs::details::ComponentAccessType::type — value specifiers") {
+  TEST_CASE(
+      "helios::ecs::details::ComponentAccessType::type — value specifiers") {
     SUBCASE("T (plain value) yields T (value copy, cv stripped)") {
       CHECK(std::same_as<ComponentAccessType<Position>::type, Position>);
     }
@@ -242,7 +245,8 @@ TEST_SUITE("helios::ecs::details::ComponentAccessType") {
     }
   }
 
-  TEST_CASE("ecs::details::ComponentAccessType::type — pointer specifiers") {
+  TEST_CASE(
+      "helios::ecs::details::ComponentAccessType::type — pointer specifiers") {
     SUBCASE("T* yields T* (mutable pointer)") {
       CHECK(std::same_as<ComponentAccessType<Position*>::type, Position*>);
     }
@@ -253,7 +257,7 @@ TEST_SUITE("helios::ecs::details::ComponentAccessType") {
     }
   }
 
-  TEST_CASE("ecs::details::ComponentAccessType_t alias") {
+  TEST_CASE("helios::ecs::details::ComponentAccessType_t alias") {
     SUBCASE("ComponentAccessType_t<T&> is T&") {
       CHECK(std::same_as<ComponentAccessType_t<Position&>, Position&>);
     }
@@ -266,7 +270,7 @@ TEST_SUITE("helios::ecs::details::ComponentAccessType") {
 }
 
 TEST_SUITE("helios::ecs::details::kIsConstWorld") {
-  TEST_CASE("ecs::details::kIsConstWorld") {
+  TEST_CASE("helios::ecs::details::kIsConstWorld") {
     SUBCASE("Non-const World is not const world") {
       CHECK(!kIsConstWorld<World>);
       CHECK(!kIsConstWorld<World&>);
@@ -278,7 +282,7 @@ TEST_SUITE("helios::ecs::details::kIsConstWorld") {
     }
   }
 
-  TEST_CASE("ecs::details::ValidWorldComponentAccess concept") {
+  TEST_CASE("helios::ecs::details::ValidWorldComponentAccess concept") {
     SUBCASE("Non-const world allows mutable access") {
       CHECK(ValidWorldComponentAccess<World, Position&, const Velocity&>);
     }
@@ -304,7 +308,7 @@ TEST_SUITE("helios::ecs::details::kIsConstWorld") {
 }
 
 TEST_SUITE("helios::ecs::details::ValidComponentAccess") {
-  TEST_CASE("ecs::details::ValidComponentAccess") {
+  TEST_CASE("helios::ecs::details::ValidComponentAccess") {
     SUBCASE("Plain T satisfies ValidComponentAccess") {
       CHECK(ValidComponentAccess<Position>);
     }
@@ -328,7 +332,7 @@ TEST_SUITE("helios::ecs::details::ValidComponentAccess") {
 }
 
 TEST_SUITE("helios::ecs::details::kIsTagAccess") {
-  TEST_CASE("ecs::details::kIsTagAccess") {
+  TEST_CASE("helios::ecs::details::kIsTagAccess") {
     SUBCASE("Tag type is tag access") {
       CHECK(kIsTagAccess<TagA>);
       CHECK(kIsTagAccess<const TagA&>);
@@ -350,7 +354,9 @@ TEST_SUITE("helios::ecs::details::kIsTagAccess") {
 }
 
 TEST_SUITE("helios::ecs::details::ComponentTypeIndexFromAccess") {
-  TEST_CASE("ecs::details::ComponentTypeIndexFromAccess — consistent indices") {
+  TEST_CASE(
+      "helios::ecs::details::ComponentTypeIndexFromAccess — consistent "
+      "indices") {
     SUBCASE("T and T& and const T& all yield the same index") {
       constexpr auto idx_plain = ComponentTypeIndexFromAccess<Position>();
       constexpr auto idx_ref = ComponentTypeIndexFromAccess<Position&>();

@@ -6,7 +6,7 @@
 #include <string>
 
 TEST_SUITE("helios::utils::Macro") {
-  TEST_CASE("utils::HELIOS_BIT: bit shifting macro") {
+  TEST_CASE("helios::utils::HELIOS_BIT: bit shifting macro") {
     SUBCASE("Bit 0") {
       CHECK_EQ(HELIOS_BIT(0), 1);
     }
@@ -62,7 +62,7 @@ TEST_SUITE("helios::utils::Macro") {
     }
   }
 
-  TEST_CASE("utils::HELIOS_STRINGIFY: stringification macro") {
+  TEST_CASE("helios::utils::HELIOS_STRINGIFY: stringification macro") {
     SUBCASE("Stringify integer literal") {
       const char* str = HELIOS_STRINGIFY(42);
       CHECK_EQ(std::string(str), "42");
@@ -103,7 +103,7 @@ TEST_SUITE("helios::utils::Macro") {
     }
   }
 
-  TEST_CASE("utils::HELIOS_CONCAT: concatenation macro") {
+  TEST_CASE("helios::utils::HELIOS_CONCAT: concatenation macro") {
     SUBCASE("Concatenate identifiers to form variable name") {
       // HELIOS_CONCAT joins tokens together
       int HELIOS_CONCAT(test_, var) = 42;
@@ -131,7 +131,8 @@ TEST_SUITE("helios::utils::Macro") {
     }
   }
 
-  TEST_CASE("utils::HELIOS_ANONYMOUS_VAR: anonymous variable generation") {
+  TEST_CASE(
+      "helios::utils::HELIOS_ANONYMOUS_VAR: anonymous variable generation") {
     SUBCASE("Creates unique variables on different lines") {
       // Each HELIOS_ANONYMOUS_VAR on a different line should create a unique
       // variable
@@ -176,7 +177,7 @@ TEST_SUITE("helios::utils::Macro") {
     }
   }
 
-  TEST_CASE("utils::HELIOS_BIT: constexpr usage") {
+  TEST_CASE("helios::utils::HELIOS_BIT: constexpr usage") {
     SUBCASE("Can be used in constexpr context") {
       constexpr int bit0 = HELIOS_BIT(0);
       constexpr int bit5 = HELIOS_BIT(5);
@@ -219,7 +220,7 @@ TEST_SUITE("helios::utils::Macro") {
     }
   }
 
-  TEST_CASE("utils::Macro combinations") {
+  TEST_CASE("helios::utils::Macro combinations") {
     SUBCASE("STRINGIFY and CONCAT together") {
       const char* str = HELIOS_STRINGIFY(HELIOS_CONCAT(hello, _world));
       // The inner CONCAT should be expanded first
@@ -233,14 +234,14 @@ TEST_SUITE("helios::utils::Macro") {
     }
   }
 
-  TEST_CASE("utils::HELIOS_STRINGIFY_IMPL: direct usage") {
+  TEST_CASE("helios::utils::HELIOS_STRINGIFY_IMPL: direct usage") {
     SUBCASE("Stringify without macro expansion") {
       const char* str = HELIOS_STRINGIFY_IMPL(test);
       CHECK_EQ(std::string(str), "test");
     }
   }
 
-  TEST_CASE("utils::HELIOS_CONCAT_IMPL: direct usage") {
+  TEST_CASE("helios::utils::HELIOS_CONCAT_IMPL: direct usage") {
     SUBCASE("Concatenate directly") {
       int HELIOS_CONCAT_IMPL(direct_, concat) = 999;
       CHECK_EQ(direct_concat, 999);

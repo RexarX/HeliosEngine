@@ -9,7 +9,7 @@
 using namespace helios::utils;
 
 TEST_SUITE("helios::utils::StringHash") {
-  TEST_CASE("utils::StringHash::operator(): basic hashing") {
+  TEST_CASE("helios::utils::StringHash::operator(): basic hashing") {
     StringHash hasher;
 
     SUBCASE("Hash std::string") {
@@ -31,7 +31,9 @@ TEST_SUITE("helios::utils::StringHash") {
     }
   }
 
-  TEST_CASE("utils::StringHash::operator(): consistent hashing across types") {
+  TEST_CASE(
+      "helios::utils::StringHash::operator(): consistent hashing across "
+      "types") {
     StringHash hasher;
     std::string str = "test_string";
     std::string_view str_view = str;
@@ -60,7 +62,7 @@ TEST_SUITE("helios::utils::StringHash") {
     CHECK_NE(hash2, hash3);
   }
 
-  TEST_CASE("utils::StringHash::operator(): empty string") {
+  TEST_CASE("helios::utils::StringHash::operator(): empty string") {
     StringHash hasher;
 
     std::string empty_str;
@@ -75,7 +77,7 @@ TEST_SUITE("helios::utils::StringHash") {
     CHECK_EQ(hash_str, hash_cstr);
   }
 
-  TEST_CASE("utils::StringHash::operator(): special characters") {
+  TEST_CASE("helios::utils::StringHash::operator(): special characters") {
     StringHash hasher;
 
     SUBCASE("Newlines and tabs") {
@@ -95,7 +97,8 @@ TEST_SUITE("helios::utils::StringHash") {
     }
   }
 
-  TEST_CASE("utils::StringEqual::operator(): basic equality comparison") {
+  TEST_CASE(
+      "helios::utils::StringEqual::operator(): basic equality comparison") {
     StringEqual equal;
 
     SUBCASE("string_view comparison") {
@@ -126,7 +129,8 @@ TEST_SUITE("helios::utils::StringHash") {
     }
   }
 
-  TEST_CASE("utils::StringEqual::operator(): heterogeneous comparison") {
+  TEST_CASE(
+      "helios::utils::StringEqual::operator(): heterogeneous comparison") {
     StringEqual equal;
     std::string str = "hello";
     std::string_view view = str;
@@ -149,7 +153,7 @@ TEST_SUITE("helios::utils::StringHash") {
     }
   }
 
-  TEST_CASE("utils::StringEqual::operator(): empty strings") {
+  TEST_CASE("helios::utils::StringEqual::operator(): empty strings") {
     StringEqual equal;
 
     std::string empty_str;
@@ -161,7 +165,7 @@ TEST_SUITE("helios::utils::StringHash") {
     CHECK(equal(empty_str, empty_cstr));
   }
 
-  TEST_CASE("utils::StringEqual::operator(): case sensitivity") {
+  TEST_CASE("helios::utils::StringEqual::operator(): case sensitivity") {
     StringEqual equal;
 
     std::string lower = "hello";
@@ -219,7 +223,7 @@ TEST_SUITE("helios::utils::StringHash") {
     }
   }
 
-  TEST_CASE("utils::StringHash::operator(): deterministic") {
+  TEST_CASE("helios::utils::StringHash::operator(): deterministic") {
     StringHash hasher;
     std::string test_str = "deterministic";
 
@@ -249,7 +253,8 @@ TEST_SUITE("helios::utils::StringHash") {
     }
   }
 
-  TEST_CASE("utils::StringHash::operator(): performance characteristics") {
+  TEST_CASE(
+      "helios::utils::StringHash::operator(): performance characteristics") {
     StringHash hasher;
     StringEqual equal;
 
@@ -277,7 +282,7 @@ TEST_SUITE("helios::utils::StringHash") {
     }
   }
 
-  TEST_CASE("utils::StringHash::operator(): collision resistance") {
+  TEST_CASE("helios::utils::StringHash::operator(): collision resistance") {
     StringHash hasher;
     std::unordered_map<size_t, std::string> hash_map;
 

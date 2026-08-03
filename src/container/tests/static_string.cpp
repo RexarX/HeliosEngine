@@ -10,7 +10,8 @@
 using namespace helios::container;
 
 TEST_SUITE("helios::container::StaticString") {
-  TEST_CASE("container::StaticString::ctor: construction and assignment") {
+  TEST_CASE(
+      "helios::container::StaticString::ctor: construction and assignment") {
     SUBCASE("Default construction") {
       StaticString<32> str;
       CHECK(str.Empty());
@@ -86,19 +87,22 @@ TEST_SUITE("helios::container::StaticString") {
     }
   }
 
-  TEST_CASE("container::StaticString::operator=: assignment from string_view") {
+  TEST_CASE(
+      "helios::container::StaticString::operator=: assignment from "
+      "string_view") {
     StaticString<32> str = "Initial";
     str = std::string_view("New Value");
     CHECK_EQ(str.View(), "New Value");
   }
 
-  TEST_CASE("container::StaticString::operator=: assignment from C string") {
+  TEST_CASE(
+      "helios::container::StaticString::operator=: assignment from C string") {
     StaticString<32> str = "Initial";
     str = "C String";
     CHECK_EQ(str.View(), "C String");
   }
 
-  TEST_CASE("container::StaticString::At: element access") {
+  TEST_CASE("helios::container::StaticString::At: element access") {
     StaticString<32> str = "Hello";
     CHECK_EQ(str.At(0), 'H');
     CHECK_EQ(str.At(4), 'o');
@@ -107,7 +111,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.View(), "Jello");
   }
 
-  TEST_CASE("container::StaticString::operator[]: element access") {
+  TEST_CASE("helios::container::StaticString::operator[]: element access") {
     StaticString<32> str = "World";
     CHECK_EQ(str[0], 'W');
     CHECK_EQ(str[4], 'd');
@@ -116,7 +120,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.View(), "Morld");
   }
 
-  TEST_CASE("container::StaticString::Front/Back: element access") {
+  TEST_CASE("helios::container::StaticString::Front/Back: element access") {
     SUBCASE("Front read and write") {
       StaticString<32> str = "Test";
       CHECK_EQ(str.Front(), 'T');
@@ -134,7 +138,7 @@ TEST_SUITE("helios::container::StaticString") {
     }
   }
 
-  TEST_CASE("container::StaticString::Data: data access") {
+  TEST_CASE("helios::container::StaticString::Data: data access") {
     StaticString<32> str = "Data";
     CHECK_EQ(std::string_view(str.Data(), str.Size()), "Data");
 
@@ -143,12 +147,12 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.View(), "Mata");
   }
 
-  TEST_CASE("container::StaticString::Cstr: C string conversion") {
+  TEST_CASE("helios::container::StaticString::Cstr: C string conversion") {
     StaticString<32> str = "Data";
     CHECK_EQ(std::string(str.CStr()), "Data");
   }
 
-  TEST_CASE("container::StaticString::View: string_view conversion") {
+  TEST_CASE("helios::container::StaticString::View: string_view conversion") {
     StaticString<32> str = "Convert";
     std::string_view sv = str;
     CHECK_EQ(sv, "Convert");
@@ -156,7 +160,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.View(), "Convert");
   }
 
-  TEST_CASE("container::StaticString::Iterators: begin() and end()") {
+  TEST_CASE("helios::container::StaticString::Iterators: begin() and end()") {
     StaticString<32> str = "Iterate";
 
     std::string result;
@@ -166,7 +170,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(result, "Iterate");
   }
 
-  TEST_CASE("container::StaticString::Iterators: cbegin() and cend()") {
+  TEST_CASE("helios::container::StaticString::Iterators: cbegin() and cend()") {
     const StaticString<32> str = "Const";
 
     std::string result;
@@ -176,7 +180,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(result, "Const");
   }
 
-  TEST_CASE("container::StaticString::Iterators: rbegin() and rend()") {
+  TEST_CASE("helios::container::StaticString::Iterators: rbegin() and rend()") {
     StaticString<32> str = "Reverse";
 
     std::string result;
@@ -186,7 +190,8 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(result, "esreveR");
   }
 
-  TEST_CASE("container::StaticString::Iterators: crbegin() and crend()") {
+  TEST_CASE(
+      "helios::container::StaticString::Iterators: crbegin() and crend()") {
     const StaticString<32> str = "ConstRev";
 
     std::string result;
@@ -196,7 +201,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(result, "veRtsnoC");
   }
 
-  TEST_CASE("container::StaticString::Range-based for loop") {
+  TEST_CASE("helios::container::StaticString::Range-based for loop") {
     StaticString<32> str = "Range";
 
     std::string result;
@@ -206,7 +211,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(result, "Range");
   }
 
-  TEST_CASE("container::StaticString::Capacity: empty()") {
+  TEST_CASE("helios::container::StaticString::Capacity: empty()") {
     StaticString<32> str;
     CHECK(str.Empty());
 
@@ -217,24 +222,25 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK(str.Empty());
   }
 
-  TEST_CASE("container::StaticString::Capacity: size() and length()") {
+  TEST_CASE("helios::container::StaticString::Capacity: size() and length()") {
     StaticString<32> str = "Hello";
     CHECK_EQ(str.Size(), 5);
     CHECK_EQ(str.Length(), 5);
   }
 
-  TEST_CASE("container::StaticString::Capacity: max_size() and capacity()") {
+  TEST_CASE(
+      "helios::container::StaticString::Capacity: max_size() and capacity()") {
     StaticString<64> str;
     CHECK_EQ(str.MaxSize(), 64);
     CHECK_EQ(str.Capacity(), 64);
   }
 
-  TEST_CASE("container::StaticString::Capacity: remaining_capacity()") {
+  TEST_CASE("helios::container::StaticString::Capacity: remaining_capacity()") {
     StaticString<32> str = "Hello";
     CHECK_EQ(str.RemainingCapacity(), 27);
   }
 
-  TEST_CASE("container::StaticString::Modifiers: clear()") {
+  TEST_CASE("helios::container::StaticString::Modifiers: clear()") {
     StaticString<32> str = "To be cleared";
     CHECK_FALSE(str.Empty());
 
@@ -244,7 +250,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.CStr()[0], '\0');
   }
 
-  TEST_CASE("container::StaticString::Modifiers: push_back()") {
+  TEST_CASE("helios::container::StaticString::Modifiers: push_back()") {
     StaticString<32> str;
     str.PushBack('H');
     str.PushBack('i');
@@ -252,118 +258,125 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 2);
   }
 
-  TEST_CASE("container::StaticString::Modifiers: pop_back()") {
+  TEST_CASE("helios::container::StaticString::Modifiers: pop_back()") {
     StaticString<32> str = "Hello!";
     str.PopBack();
     CHECK_EQ(str.View(), "Hello");
     CHECK_EQ(str.Size(), 5);
   }
 
-  TEST_CASE("container::StaticString::Modifiers: append() string_view") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: append() string_view") {
     StaticString<32> str = "Hello";
     str.Append(std::string_view(", World!"));
     CHECK_EQ(str.View(), "Hello, World!");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: append() count and char") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: append() count and char") {
     StaticString<32> str = "AB";
     str.Append(3, 'C');
     CHECK_EQ(str.View(), "ABCCC");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: append() C string") {
+  TEST_CASE("helios::container::StaticString::Modifiers: append() C string") {
     StaticString<32> str = "Start";
     str.Append(" End");
     CHECK_EQ(str.View(), "Start End");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: operator+= string_view") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: operator+= string_view") {
     StaticString<32> str = "A";
     str += std::string_view("BC");
     CHECK_EQ(str.View(), "ABC");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: operator+= char") {
+  TEST_CASE("helios::container::StaticString::Modifiers: operator+= char") {
     StaticString<32> str = "AB";
     str += 'C';
     CHECK_EQ(str.View(), "ABC");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: operator+= C string") {
+  TEST_CASE("helios::container::StaticString::Modifiers: operator+= C string") {
     StaticString<32> str = "Hello";
     str += " World";
     CHECK_EQ(str.View(), "Hello World");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: assign() string_view") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: assign() string_view") {
     StaticString<32> str = "Old";
     str.Assign(std::string_view("New Value"));
     CHECK_EQ(str.View(), "New Value");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: assign() C string") {
+  TEST_CASE("helios::container::StaticString::Modifiers: assign() C string") {
     StaticString<32> str = "Old";
     str.Assign("New");
     CHECK_EQ(str.View(), "New");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: assign() count and char") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: assign() count and char") {
     StaticString<32> str = "Old";
     str.Assign(4, 'X');
     CHECK_EQ(str.View(), "XXXX");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: resize() expand") {
+  TEST_CASE("helios::container::StaticString::Modifiers: resize() expand") {
     StaticString<32> str = "Hi";
     str.Resize(5, 'x');
     CHECK_EQ(str.Size(), 5);
     CHECK_EQ(str.View(), "Hixxx");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: resize() shrink") {
+  TEST_CASE("helios::container::StaticString::Modifiers: resize() shrink") {
     StaticString<32> str = "Hello World";
     str.Resize(5);
     CHECK_EQ(str.Size(), 5);
     CHECK_EQ(str.View(), "Hello");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: erase() from position") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: erase() from position") {
     StaticString<32> str = "Hello World";
     str.Erase(5);
     CHECK_EQ(str.View(), "Hello");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: erase() with count") {
+  TEST_CASE("helios::container::StaticString::Modifiers: erase() with count") {
     StaticString<32> str = "Hello World";
     str.Erase(5, 1);  // Erase the space
     CHECK_EQ(str.View(), "HelloWorld");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: erase() from middle") {
+  TEST_CASE("helios::container::StaticString::Modifiers: erase() from middle") {
     StaticString<32> str = "ABCDEF";
     str.Erase(2, 2);  // Erase "CD"
     CHECK_EQ(str.View(), "ABEF");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: insert()") {
+  TEST_CASE("helios::container::StaticString::Modifiers: insert()") {
     StaticString<32> str = "HelloWorld";
     str.Insert(5, std::string_view(" "));
     CHECK_EQ(str.View(), "Hello World");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: insert() at beginning") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: insert() at beginning") {
     StaticString<32> str = "World";
     str.Insert(0, std::string_view("Hello "));
     CHECK_EQ(str.View(), "Hello World");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: insert() at end") {
+  TEST_CASE("helios::container::StaticString::Modifiers: insert() at end") {
     StaticString<32> str = "Hello";
     str.Insert(5, std::string_view(" World"));
     CHECK_EQ(str.View(), "Hello World");
   }
 
-  TEST_CASE("container::StaticString::Modifiers: replace()") {
+  TEST_CASE("helios::container::StaticString::Modifiers: replace()") {
     StaticString<32> str = "Hello World";
     str.Replace(6, 5, std::string_view("Universe"));
     CHECK_EQ(str.View(), "Hello Universe");
@@ -376,7 +389,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.View(), "Hello World");
   }
 
-  TEST_CASE("container::StaticString::Operations: copy()") {
+  TEST_CASE("helios::container::StaticString::Operations: copy()") {
     StaticString<32> str = "Hello, World!";
     char buffer[10] = {};
     auto copied = str.Copy(buffer, 5, 7);
@@ -384,19 +397,19 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(std::string_view(buffer, 5), "World");
   }
 
-  TEST_CASE("container::StaticString::Operations: substr()") {
+  TEST_CASE("helios::container::StaticString::Operations: substr()") {
     StaticString<32> str = "Hello, World!";
     auto sub = str.Substr(7, 5);
     CHECK_EQ(sub.View(), "World");
   }
 
-  TEST_CASE("container::StaticString::Operations: substr() to end") {
+  TEST_CASE("helios::container::StaticString::Operations: substr() to end") {
     StaticString<32> str = "Hello, World!";
     auto sub = str.Substr(7);
     CHECK_EQ(sub.View(), "World!");
   }
 
-  TEST_CASE("container::StaticString::Operations: compare()") {
+  TEST_CASE("helios::container::StaticString::Operations: compare()") {
     StaticString<32> str = "Hello";
 
     CHECK_EQ(str.Compare("Hello"), 0);
@@ -415,87 +428,89 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_LT(str1.Compare(str3), 0);
   }
 
-  TEST_CASE("container::StaticString::Search: starts_with() string_view") {
+  TEST_CASE(
+      "helios::container::StaticString::Search: starts_with() string_view") {
     StaticString<32> str = "Hello, World!";
     CHECK(str.StartsWith(std::string_view("Hello")));
     CHECK_FALSE(str.StartsWith(std::string_view("World")));
   }
 
-  TEST_CASE("container::StaticString::Search: starts_with() char") {
+  TEST_CASE("helios::container::StaticString::Search: starts_with() char") {
     StaticString<32> str = "Hello";
     CHECK(str.StartsWith('H'));
     CHECK_FALSE(str.StartsWith('W'));
   }
 
-  TEST_CASE("container::StaticString::Search: ends_with() string_view") {
+  TEST_CASE(
+      "helios::container::StaticString::Search: ends_with() string_view") {
     StaticString<32> str = "Hello, World!";
     CHECK(str.EndsWith(std::string_view("World!")));
     CHECK_FALSE(str.EndsWith(std::string_view("Hello")));
   }
 
-  TEST_CASE("container::StaticString::Search: ends_with() char") {
+  TEST_CASE("helios::container::StaticString::Search: ends_with() char") {
     StaticString<32> str = "Hello!";
     CHECK(str.EndsWith('!'));
     CHECK_FALSE(str.EndsWith('o'));
   }
 
-  TEST_CASE("container::StaticString::Search: contains() string_view") {
+  TEST_CASE("helios::container::StaticString::Search: contains() string_view") {
     StaticString<32> str = "Hello, World!";
     CHECK(str.Contains(std::string_view("World")));
     CHECK(str.Contains(std::string_view(", ")));
     CHECK_FALSE(str.Contains(std::string_view("foo")));
   }
 
-  TEST_CASE("container::StaticString::Search: contains() char") {
+  TEST_CASE("helios::container::StaticString::Search: contains() char") {
     StaticString<32> str = "Hello";
     CHECK(str.Contains('e'));
     CHECK_FALSE(str.Contains('z'));
   }
 
-  TEST_CASE("container::StaticString::Search: find() string_view") {
+  TEST_CASE("helios::container::StaticString::Search: find() string_view") {
     StaticString<32> str = "Hello, World!";
     CHECK_EQ(str.Find(std::string_view("World")), 7);
     CHECK_EQ(str.Find(std::string_view("foo")), StaticString<32>::npos);
   }
 
-  TEST_CASE("container::StaticString::Search: find() char") {
+  TEST_CASE("helios::container::StaticString::Search: find() char") {
     StaticString<32> str = "Hello";
     CHECK_EQ(str.Find('l'), 2);
     CHECK_EQ(str.Find('z'), StaticString<32>::npos);
   }
 
-  TEST_CASE("container::StaticString::Search: find() with position") {
+  TEST_CASE("helios::container::StaticString::Search: find() with position") {
     StaticString<32> str = "Hello Hello";
     CHECK_EQ(str.Find('H', 0), 0);
     CHECK_EQ(str.Find('H', 1), 6);
   }
 
-  TEST_CASE("container::StaticString::Search: rfind() string_view") {
+  TEST_CASE("helios::container::StaticString::Search: rfind() string_view") {
     StaticString<32> str = "Hello Hello";
     CHECK_EQ(str.RFind(std::string_view("Hello")), 6);
   }
 
-  TEST_CASE("container::StaticString::Search: rfind() char") {
+  TEST_CASE("helios::container::StaticString::Search: rfind() char") {
     StaticString<32> str = "Hello";
     CHECK_EQ(str.RFind('l'), 3);
   }
 
-  TEST_CASE("container::StaticString::Search: find_first_of()") {
+  TEST_CASE("helios::container::StaticString::Search: find_first_of()") {
     StaticString<32> str = "Hello, World!";
     CHECK_EQ(str.FindFirstOf(std::string_view("aeiou")), 1);  // 'e'
   }
 
-  TEST_CASE("container::StaticString::Search: find_last_of()") {
+  TEST_CASE("helios::container::StaticString::Search: find_last_of()") {
     StaticString<32> str = "Hello, World!";
     CHECK_EQ(str.FindLastOf(std::string_view("aeiou")), 8);  // 'o'
   }
 
-  TEST_CASE("container::StaticString::Search: find_first_not_of()") {
+  TEST_CASE("helios::container::StaticString::Search: find_first_not_of()") {
     StaticString<32> str = "aaabbbccc";
     CHECK_EQ(str.FindFirstNotOf(std::string_view("a")), 3);  // 'b'
   }
 
-  TEST_CASE("container::StaticString::Search: find_last_not_of()") {
+  TEST_CASE("helios::container::StaticString::Search: find_last_not_of()") {
     StaticString<32> str = "aaabbbccc";
     CHECK_EQ(str.FindLastNotOf(std::string_view("c")), 5);  // 'b'
   }
@@ -528,13 +543,14 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_FALSE(str == std::string_view("World"));
   }
 
-  TEST_CASE("container::StaticString::Comparison: operator== with C string") {
+  TEST_CASE(
+      "helios::container::StaticString::Comparison: operator== with C string") {
     StaticString<32> str = "Hello";
     CHECK(str == "Hello");
     CHECK_FALSE(str == "World");
   }
 
-  TEST_CASE("container::StaticString::Comparison: operator<=>") {
+  TEST_CASE("helios::container::StaticString::Comparison: operator<=>") {
     StaticString<32> str1 = "Apple";
     StaticString<32> str2 = "Banana";
     StaticString<32> str3 = "Apple";
@@ -590,38 +606,42 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(result.View(), "Hello World");
   }
 
-  TEST_CASE("container::StaticString::Different character types: wchar_t") {
+  TEST_CASE(
+      "helios::container::StaticString::Different character types: wchar_t") {
     StaticWString<32> str = L"Hello";
     CHECK_EQ(str.Size(), 5);
     CHECK_EQ(str.View(), L"Hello");
   }
 
-  TEST_CASE("container::StaticString::Different character types: char8_t") {
+  TEST_CASE(
+      "helios::container::StaticString::Different character types: char8_t") {
     StaticU8String<32> str(u8"Hello");
     CHECK_EQ(str.Size(), 5);
     CHECK_EQ(str.View(), u8"Hello");
   }
 
-  TEST_CASE("container::StaticString::Different character types: char16_t") {
+  TEST_CASE(
+      "helios::container::StaticString::Different character types: char16_t") {
     StaticU16String<32> str(u"Hello");
     CHECK_EQ(str.Size(), 5);
     CHECK_EQ(str.View(), u"Hello");
   }
 
-  TEST_CASE("container::StaticString::Different character types: char32_t") {
+  TEST_CASE(
+      "helios::container::StaticString::Different character types: char32_t") {
     StaticU32String<32> str(U"Hello");
     CHECK_EQ(str.Size(), 5);
     CHECK_EQ(str.View(), U"Hello");
   }
 
-  TEST_CASE("container::StaticString::Constexpr construction") {
+  TEST_CASE("helios::container::StaticString::Constexpr construction") {
     constexpr StaticString<32> str = "Constexpr";
     static_assert(str.Size() == 9);
     static_assert(str.Capacity() == 32);
     CHECK_EQ(str.View(), "Constexpr");
   }
 
-  TEST_CASE("container::StaticString::Constexpr operations") {
+  TEST_CASE("helios::container::StaticString::Constexpr operations") {
     constexpr auto make_string = []() {
       StaticString<32> str = "Hello";
       return str;
@@ -632,7 +652,8 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.View(), "Hello");
   }
 
-  TEST_CASE("container::StaticString::Edge case: Empty string operations") {
+  TEST_CASE(
+      "helios::container::StaticString::Edge case: Empty string operations") {
     StaticString<32> str;
 
     CHECK(str.Empty());
@@ -645,24 +666,24 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK(sub.Empty());
   }
 
-  TEST_CASE("container::StaticString::Edge case: Full capacity") {
+  TEST_CASE("helios::container::StaticString::Edge case: Full capacity") {
     StaticString<5> str = "Hello";
     CHECK_EQ(str.Size(), 5);
     CHECK_EQ(str.RemainingCapacity(), 0);
   }
 
-  TEST_CASE("container::StaticString::Edge case: Single character") {
+  TEST_CASE("helios::container::StaticString::Edge case: Single character") {
     StaticString<32> str(1, 'X');
     CHECK_EQ(str.Size(), 1);
     CHECK_EQ(str.Front(), 'X');
     CHECK_EQ(str.Back(), 'X');
   }
 
-  TEST_CASE("container::StaticString::npos value") {
+  TEST_CASE("helios::container::StaticString::npos value") {
     CHECK_EQ(StaticString<32>::npos, static_cast<size_t>(-1));
   }
 
-  TEST_CASE("container::StaticString::Null termination is maintained") {
+  TEST_CASE("helios::container::StaticString::Null termination is maintained") {
     StaticString<32> str = "Hello";
     CHECK_EQ(str.Data()[5], '\0');
 
@@ -676,7 +697,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Data()[0], '\0');
   }
 
-  TEST_CASE("container::StaticString::STL algorithm compatibility") {
+  TEST_CASE("helios::container::StaticString::STL algorithm compatibility") {
     StaticString<32> str = "dcba";
 
     std::sort(str.begin(), str.end());
@@ -690,7 +711,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(*it, 'c');
   }
 
-  TEST_CASE("container::StaticString::Type aliases exist") {
+  TEST_CASE("helios::container::StaticString::Type aliases exist") {
     StaticString<32> s1;
     StaticWString<32> s2;
     StaticU8String<32> s3;
@@ -704,7 +725,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK(s5.Empty());
   }
 
-  TEST_CASE("container::StaticString::Modifiers: AssignRange()") {
+  TEST_CASE("helios::container::StaticString::Modifiers: AssignRange()") {
     StaticString<32> str;
     std::string source = "Hello";
 
@@ -713,7 +734,8 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 5);
   }
 
-  TEST_CASE("container::StaticString::Modifiers: AssignRange() with vector") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: AssignRange() with vector") {
     StaticString<32> str("Initial");
     std::vector<char> chars = {'T', 'e', 's', 't'};
 
@@ -733,7 +755,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 3);
   }
 
-  TEST_CASE("container::StaticString::Modifiers: AppendRange()") {
+  TEST_CASE("helios::container::StaticString::Modifiers: AppendRange()") {
     StaticString<32> str("Hello");
     std::string suffix = " World";
 
@@ -742,7 +764,8 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 11);
   }
 
-  TEST_CASE("container::StaticString::Modifiers: AppendRange() with vector") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: AppendRange() with vector") {
     StaticString<32> str("Test");
     std::vector<char> chars = {'!', '!', '!'};
 
@@ -761,7 +784,9 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 5);
   }
 
-  TEST_CASE("container::StaticString::Modifiers: InsertRange() at beginning") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: InsertRange() at "
+      "beginning") {
     StaticString<32> str("World");
     std::string prefix = "Hello ";
 
@@ -770,7 +795,8 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 11);
   }
 
-  TEST_CASE("container::StaticString::Modifiers: InsertRange() in middle") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: InsertRange() in middle") {
     StaticString<32> str("Hello World");
     std::string insert = "Beautiful ";
 
@@ -779,7 +805,8 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 21);
   }
 
-  TEST_CASE("container::StaticString::Modifiers: InsertRange() at end") {
+  TEST_CASE(
+      "helios::container::StaticString::Modifiers: InsertRange() at end") {
     StaticString<32> str("Hello");
     std::vector<char> chars = {'!', '!', '!'};
 
@@ -798,7 +825,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 4);
   }
 
-  TEST_CASE("container::StaticString::Modifiers: ReplaceWithRange()") {
+  TEST_CASE("helios::container::StaticString::Modifiers: ReplaceWithRange()") {
     StaticString<32> str("Hello World");
     std::string replacement = "C++";
 
@@ -968,7 +995,9 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(large.Size(), 4);
   }
 
-  TEST_CASE("container::StaticString::Heterogeneous: copy with empty string") {
+  TEST_CASE(
+      "helios::container::StaticString::Heterogeneous: copy with empty "
+      "string") {
     StaticString<16> source;
     StaticString<32> dest("NotEmpty");
 
@@ -978,7 +1007,9 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(dest.Size(), 0);
   }
 
-  TEST_CASE("container::StaticString::Heterogeneous: move with empty string") {
+  TEST_CASE(
+      "helios::container::StaticString::Heterogeneous: move with empty "
+      "string") {
     StaticString<16> source;
     StaticString<32> dest("NotEmpty");
 
@@ -1014,14 +1045,17 @@ TEST_SUITE("helios::container::StaticString") {
 
   // === std::format Support ===
 
-  TEST_CASE("container::StaticString::Format: basic format with StaticString") {
+  TEST_CASE(
+      "helios::container::StaticString::Format: basic format with "
+      "StaticString") {
     StaticString<32> str("Hello");
     auto formatted = std::format("{}", str);
 
     CHECK_EQ(formatted, "Hello");
   }
 
-  TEST_CASE("container::StaticString::Format: StaticString with padding") {
+  TEST_CASE(
+      "helios::container::StaticString::Format: StaticString with padding") {
     StaticString<32> str("Hi");
     auto formatted = std::format("{:10}", str);
 
@@ -1052,7 +1086,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(formatted, "  Test  ");
   }
 
-  TEST_CASE("container::StaticString::Format: empty StaticString") {
+  TEST_CASE("helios::container::StaticString::Format: empty StaticString") {
     StaticString<32> str;
     auto formatted = std::format("{}", str);
 
@@ -1068,7 +1102,7 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(formatted, "Hello, World!");
   }
 
-  TEST_CASE("container::StaticString::Format: multiple StaticStrings") {
+  TEST_CASE("helios::container::StaticString::Format: multiple StaticStrings") {
     StaticString<16> first("First");
     StaticString<16> second("Second");
     auto formatted = std::format("{} and {}", first, second);
@@ -1121,7 +1155,8 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(formatted, "Convert");
   }
 
-  TEST_CASE("container::StaticString::Format: chained format operations") {
+  TEST_CASE(
+      "helios::container::StaticString::Format: chained format operations") {
     StaticString<16> greeting("Hello");
     StaticString<16> target("World");
     auto first = std::format("{}", greeting);
@@ -1141,7 +1176,9 @@ TEST_SUITE("helios::container::StaticString") {
 
   // === New Constructors: from_range_t ===
 
-  TEST_CASE("container::StaticString::Constructor: from_range_t with vector") {
+  TEST_CASE(
+      "helios::container::StaticString::Constructor: from_range_t with "
+      "vector") {
     std::vector<char> chars = {'H', 'e', 'l', 'l', 'o'};
     StaticString<32> str(std::from_range, chars);
 
@@ -1149,7 +1186,9 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 5);
   }
 
-  TEST_CASE("container::StaticString::Constructor: from_range_t with string") {
+  TEST_CASE(
+      "helios::container::StaticString::Constructor: from_range_t with "
+      "string") {
     std::string source = "Test";
     StaticString<32> str(std::from_range, source);
 
@@ -1177,14 +1216,16 @@ TEST_SUITE("helios::container::StaticString") {
 
   // === New Constructors: initializer_list ===
 
-  TEST_CASE("container::StaticString::Constructor: initializer_list basic") {
+  TEST_CASE(
+      "helios::container::StaticString::Constructor: initializer_list basic") {
     StaticString<32> str({'H', 'i', '!'});
 
     CHECK_EQ(str.View(), "Hi!");
     CHECK_EQ(str.Size(), 3);
   }
 
-  TEST_CASE("container::StaticString::Constructor: initializer_list empty") {
+  TEST_CASE(
+      "helios::container::StaticString::Constructor: initializer_list empty") {
     StaticString<32> str({});
 
     CHECK(str.Empty());
@@ -1260,7 +1301,9 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 5);
   }
 
-  TEST_CASE("container::StaticString::Constructor: substring copy with count") {
+  TEST_CASE(
+      "helios::container::StaticString::Constructor: substring copy with "
+      "count") {
     StaticString<32> source("HelloWorld");
     StaticString<32> str(source, 0, 5);
 
@@ -1277,7 +1320,9 @@ TEST_SUITE("helios::container::StaticString") {
     CHECK_EQ(str.Size(), 5);
   }
 
-  TEST_CASE("container::StaticString::Constructor: substring move with count") {
+  TEST_CASE(
+      "helios::container::StaticString::Constructor: substring move with "
+      "count") {
     StaticString<32> source("HelloWorld");
     StaticString<32> str(std::move(source), 0, 5);
 
@@ -1329,7 +1374,8 @@ TEST_SUITE("helios::container::StaticString") {
 
   // === nullptr deletion test ===
 
-  TEST_CASE("container::StaticString::Constructor: nullptr is deleted") {
+  TEST_CASE(
+      "helios::container::StaticString::Constructor: nullptr is deleted") {
     // This should not compile if uncommented:
     // StaticString<32> str(nullptr);
     // Just verify that the type exists and we can create strings normally

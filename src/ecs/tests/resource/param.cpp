@@ -27,7 +27,7 @@ struct DeltaTime {
 }  // namespace
 
 TEST_SUITE("helios::ecs::Res") {
-  TEST_CASE("ecs::Res::ctor") {
+  TEST_CASE("helios::ecs::Res::ctor") {
     SUBCASE("Constructor stores resource reference") {
       Counter cnt{42};
       const Res<Counter> res(cnt);
@@ -41,7 +41,7 @@ TEST_SUITE("helios::ecs::Res") {
     }
   }
 
-  TEST_CASE("ecs::Res::copy") {
+  TEST_CASE("helios::ecs::Res::copy") {
     SUBCASE("Copy constructor creates a valid copy") {
       Counter cnt{99};
       const Res<Counter> original(cnt);
@@ -59,7 +59,7 @@ TEST_SUITE("helios::ecs::Res") {
     }
   }
 
-  TEST_CASE("ecs::Res::move") {
+  TEST_CASE("helios::ecs::Res::move") {
     SUBCASE("Move constructor transfers the reference") {
       Counter cnt{5};
       Res<Counter> original(cnt);
@@ -77,7 +77,7 @@ TEST_SUITE("helios::ecs::Res") {
     }
   }
 
-  TEST_CASE("ecs::Res::operator-> (mutable)") {
+  TEST_CASE("helios::ecs::Res::operator-> (mutable)") {
     SUBCASE("operator-> returns pointer to stored resource") {
       Counter cnt{3};
       Res<Counter> res(cnt);
@@ -92,7 +92,7 @@ TEST_SUITE("helios::ecs::Res") {
     }
   }
 
-  TEST_CASE("ecs::Res::operator* (mutable)") {
+  TEST_CASE("helios::ecs::Res::operator* (mutable)") {
     SUBCASE("operator* returns reference to stored resource") {
       Counter cnt{9};
       Res<Counter> res(cnt);
@@ -107,7 +107,7 @@ TEST_SUITE("helios::ecs::Res") {
     }
   }
 
-  TEST_CASE("ecs::Res::operator-> (const)") {
+  TEST_CASE("helios::ecs::Res::operator-> (const)") {
     SUBCASE("operator-> returns const pointer to stored resource") {
       const Counter cnt{3};
       const Res<const Counter> res(cnt);
@@ -121,7 +121,7 @@ TEST_SUITE("helios::ecs::Res") {
     }
   }
 
-  TEST_CASE("ecs::Res::operator* (const)") {
+  TEST_CASE("helios::ecs::Res::operator* (const)") {
     SUBCASE("operator* returns const reference to stored resource") {
       const Counter cnt{9};
       const Res<const Counter> res(cnt);
@@ -137,7 +137,7 @@ TEST_SUITE("helios::ecs::Res") {
 }
 
 TEST_SUITE("helios::ecs::AsyncRes") {
-  TEST_CASE("ecs::AsyncRes — alias compiles and works") {
+  TEST_CASE("helios::ecs::AsyncRes — alias compiles and works") {
     SUBCASE("AsyncRes wraps an async resource") {
       DeltaTime dt{1.5F};
       const AsyncRes<DeltaTime> res(dt);

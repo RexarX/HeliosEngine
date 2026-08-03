@@ -62,7 +62,7 @@ struct NonThreadSafeData {
 }  // namespace
 
 TEST_SUITE("helios::ecs::AccessPolicy") {
-  TEST_CASE("ecs::AccessPolicy::ctor") {
+  TEST_CASE("helios::ecs::AccessPolicy::ctor") {
     SUBCASE("Default ctor produces empty policy") {
       const AccessPolicy policy;
       CHECK_FALSE(policy.HasComponents());
@@ -87,7 +87,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::operator=") {
+  TEST_CASE("helios::ecs::AccessPolicy::operator=") {
     SUBCASE("Copy assignment") {
       const AccessPolicy original =
           AccessPolicyBuilder().Query<const Position&>().Build();
@@ -109,7 +109,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::Merge") {
+  TEST_CASE("helios::ecs::AccessPolicy::Merge") {
     SUBCASE("Merge(const AccessPolicy&) unions components/resources") {
       AccessPolicy dst = AccessPolicyBuilder()
                              .Query<const Position&, Velocity&>()
@@ -144,7 +144,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::HasQueryConflictWith") {
+  TEST_CASE("helios::ecs::AccessPolicy::HasQueryConflictWith") {
     SUBCASE("Two empty policies do not conflict") {
       const AccessPolicy policy1;
       const AccessPolicy policy2;
@@ -227,7 +227,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::HasResourceConflictWith") {
+  TEST_CASE("helios::ecs::AccessPolicy::HasResourceConflictWith") {
     SUBCASE("Two empty policies do not conflict") {
       const AccessPolicy policy1;
       const AccessPolicy policy2;
@@ -289,7 +289,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::ConflictsWith") {
+  TEST_CASE("helios::ecs::AccessPolicy::ConflictsWith") {
     SUBCASE(
         "Returns false when neither component nor resource conflict exists") {
       const AccessPolicy policy1 =
@@ -328,7 +328,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::GetQueryConflictsWith") {
+  TEST_CASE("helios::ecs::AccessPolicy::GetQueryConflictsWith") {
     SUBCASE("Returns empty vector when no component conflict exists") {
       const AccessPolicy policy1 =
           AccessPolicyBuilder().Query<const Position&>().Build();
@@ -479,7 +479,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::GetResourceConflictsWith") {
+  TEST_CASE("helios::ecs::AccessPolicy::GetResourceConflictsWith") {
     SUBCASE("Returns empty vector when no resource conflict exists") {
       const AccessPolicy policy1 =
           AccessPolicyBuilder().ReadResources<Camera>().Build();
@@ -628,7 +628,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::HasComponents") {
+  TEST_CASE("helios::ecs::AccessPolicy::HasComponents") {
     SUBCASE("Returns false for default-constructed policy") {
       const AccessPolicy policy;
       CHECK_FALSE(policy.HasComponents());
@@ -659,7 +659,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::HasResources") {
+  TEST_CASE("helios::ecs::AccessPolicy::HasResources") {
     SUBCASE("Returns false for default-constructed policy") {
       const AccessPolicy policy;
       CHECK_FALSE(policy.HasResources());
@@ -684,7 +684,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::HasReadComponent") {
+  TEST_CASE("helios::ecs::AccessPolicy::HasReadComponent") {
     SUBCASE("Returns false for default-constructed policy") {
       const AccessPolicy policy;
       CHECK_FALSE(
@@ -724,7 +724,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::HasWriteComponent") {
+  TEST_CASE("helios::ecs::AccessPolicy::HasWriteComponent") {
     SUBCASE("Returns false for default-constructed policy") {
       const AccessPolicy policy;
       CHECK_FALSE(
@@ -753,7 +753,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::HasReadResource") {
+  TEST_CASE("helios::ecs::AccessPolicy::HasReadResource") {
     SUBCASE("Returns false for default-constructed policy") {
       const AccessPolicy policy;
       CHECK_FALSE(policy.HasReadResource(ResourceTypeIndex::From<Camera>()));
@@ -779,7 +779,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::HasWriteResource") {
+  TEST_CASE("helios::ecs::AccessPolicy::HasWriteResource") {
     SUBCASE("Returns false for default-constructed policy") {
       const AccessPolicy policy;
       CHECK_FALSE(policy.HasWriteResource(ResourceTypeIndex::From<Camera>()));
@@ -798,7 +798,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::GetReadComponents") {
+  TEST_CASE("helios::ecs::AccessPolicy::GetReadComponents") {
     SUBCASE("Empty policy returns empty span") {
       const AccessPolicy policy;
       CHECK(policy.GetReadComponents().empty());
@@ -843,7 +843,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::GetWriteComponents") {
+  TEST_CASE("helios::ecs::AccessPolicy::GetWriteComponents") {
     SUBCASE("Empty policy returns empty span") {
       const AccessPolicy policy;
       CHECK(policy.GetWriteComponents().empty());
@@ -887,7 +887,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::GetReadResources") {
+  TEST_CASE("helios::ecs::AccessPolicy::GetReadResources") {
     SUBCASE("Empty policy returns empty span") {
       const AccessPolicy policy;
       CHECK(policy.GetReadResources().empty());
@@ -917,7 +917,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicy::GetWriteResources") {
+  TEST_CASE("helios::ecs::AccessPolicy::GetWriteResources") {
     SUBCASE("Empty policy returns empty span") {
       const AccessPolicy policy;
       CHECK(policy.GetWriteResources().empty());
@@ -949,7 +949,7 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
 }
 
 TEST_SUITE("helios::ecs::AccessPolicyBuilder") {
-  TEST_CASE("ecs::AccessPolicyBuilder::ctor") {
+  TEST_CASE("helios::ecs::AccessPolicyBuilder::ctor") {
     SUBCASE("Default ctor produces builder that builds an empty policy") {
       const AccessPolicy policy = AccessPolicyBuilder().Build();
       CHECK_FALSE(policy.HasComponents());
@@ -977,7 +977,7 @@ TEST_SUITE("helios::ecs::AccessPolicyBuilder") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicyBuilder::operator=") {
+  TEST_CASE("helios::ecs::AccessPolicyBuilder::operator=") {
     SUBCASE("Copy assignment preserves accumulated state") {
       AccessPolicyBuilder original;
       original.Query<const Position&>();
@@ -999,7 +999,7 @@ TEST_SUITE("helios::ecs::AccessPolicyBuilder") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicyBuilder::Build") {
+  TEST_CASE("helios::ecs::AccessPolicyBuilder::Build") {
     SUBCASE(
         "Build produces a policy with the declared components and resources") {
       const AccessPolicy policy = AccessPolicyBuilder()
@@ -1028,7 +1028,7 @@ TEST_SUITE("helios::ecs::AccessPolicyBuilder") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicyBuilder::Query") {
+  TEST_CASE("helios::ecs::AccessPolicyBuilder::Query") {
     SUBCASE("Single read component is placed in the read set") {
       const AccessPolicy policy =
           AccessPolicyBuilder().Query<const Position&>().Build();
@@ -1112,7 +1112,7 @@ TEST_SUITE("helios::ecs::AccessPolicyBuilder") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicyBuilder::ReadResources") {
+  TEST_CASE("helios::ecs::AccessPolicyBuilder::ReadResources") {
     SUBCASE("Single resource is added to the read set") {
       const AccessPolicy policy =
           AccessPolicyBuilder().ReadResources<Camera>().Build();
@@ -1150,7 +1150,7 @@ TEST_SUITE("helios::ecs::AccessPolicyBuilder") {
     }
   }
 
-  TEST_CASE("ecs::AccessPolicyBuilder::WriteResources") {
+  TEST_CASE("helios::ecs::AccessPolicyBuilder::WriteResources") {
     SUBCASE("Single resource is added to the write set") {
       const AccessPolicy policy =
           AccessPolicyBuilder().WriteResources<RenderQueue>().Build();

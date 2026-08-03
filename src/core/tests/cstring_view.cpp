@@ -18,13 +18,12 @@ constexpr const char* kHelloWorld = "hello world";
 constexpr const char* kEmpty = "";
 constexpr const char* kAbc = "abc";
 constexpr const char* kDef = "def";
-constexpr const char* kAlpha = "abcdefghijklmnopqrstuvwxyz";
 constexpr const char* kRepeated = "abababab";
 
 }  // namespace
 
 TEST_SUITE("helios::CStringView") {
-  TEST_CASE("CStringView::npos: sentinel value") {
+  TEST_CASE("helios::CStringView::npos: sentinel value") {
     SUBCASE("npos equals size_t max") {
       CHECK_EQ(CStringView::npos, static_cast<size_t>(-1));
     }
@@ -35,7 +34,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::ctor: from std::string") {
+  TEST_CASE("helios::CStringView::ctor: from std::string") {
     SUBCASE("Constructs from non-empty string") {
       const std::string str = "test";
       const CStringView csv(str);
@@ -59,7 +58,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::ctor: from const char*") {
+  TEST_CASE("helios::CStringView::ctor: from const char*") {
     SUBCASE("Constructs from non-empty C string") {
       const CStringView csv(kHello);
       CHECK_EQ(csv.Size(), 5);
@@ -80,7 +79,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::ctor: copy and move") {
+  TEST_CASE("helios::CStringView::ctor: copy and move") {
     SUBCASE("Copy construction preserves data and size") {
       const CStringView original(kHello);
       const CStringView copy(original);
@@ -119,7 +118,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Assign") {
+  TEST_CASE("helios::CStringView::Assign") {
     SUBCASE("Assign from std::string") {
       CStringView csv(kHello);
       const std::string str = "replaced";
@@ -149,7 +148,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Copy") {
+  TEST_CASE("helios::CStringView::Copy") {
     SUBCASE("Copies entire string to buffer") {
       const CStringView csv(kHello);
       char buf[10] = {};
@@ -191,7 +190,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Swap") {
+  TEST_CASE("helios::CStringView::Swap") {
     SUBCASE("Member swap exchanges contents") {
       CStringView a(kHello);
       CStringView b(kWorld);
@@ -218,7 +217,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Compare") {
+  TEST_CASE("helios::CStringView::Compare") {
     SUBCASE("Equal strings return 0 when comparing CStringViews") {
       const CStringView a(kHello);
       const CStringView b(kHello);
@@ -265,7 +264,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Find") {
+  TEST_CASE("helios::CStringView::Find") {
     SUBCASE("Find substring at beginning") {
       const CStringView csv(kHelloWorld);
       CHECK_EQ(csv.Find(std::string_view("hello")), 0);
@@ -313,7 +312,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::RFind") {
+  TEST_CASE("helios::CStringView::RFind") {
     SUBCASE("RFind substring at end") {
       const CStringView csv(kRepeated);
       CHECK_EQ(csv.RFind(std::string_view("ab")), 6);
@@ -345,7 +344,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::FindFirstOf") {
+  TEST_CASE("helios::CStringView::FindFirstOf") {
     SUBCASE("Finds first of any character in set") {
       const CStringView csv(kHelloWorld);
       CHECK_EQ(csv.FindFirstOf(std::string_view("ow")), 4);
@@ -367,7 +366,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::FindLastOf") {
+  TEST_CASE("helios::CStringView::FindLastOf") {
     SUBCASE("Finds last of any character in set") {
       const CStringView csv(kHelloWorld);
       CHECK_EQ(csv.FindLastOf(std::string_view("ol")), 9);
@@ -384,7 +383,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::FindFirstNotOf") {
+  TEST_CASE("helios::CStringView::FindFirstNotOf") {
     SUBCASE("Finds first character not in set") {
       const CStringView csv(kAbc);
       CHECK_EQ(csv.FindFirstNotOf(std::string_view("a")), 1);
@@ -406,7 +405,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::FindLastNotOf") {
+  TEST_CASE("helios::CStringView::FindLastNotOf") {
     SUBCASE("Finds last character not in set") {
       const CStringView csv("abca");
       CHECK_EQ(csv.FindLastNotOf(std::string_view("a")), 2);
@@ -423,7 +422,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::operator[]") {
+  TEST_CASE("helios::CStringView::operator[]") {
     SUBCASE("Accesses character at valid position (mutable)") {
       CStringView csv(kHello);
       CHECK_EQ(csv[0], 'h');
@@ -443,7 +442,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::operator=: string and const char*") {
+  TEST_CASE("helios::CStringView::operator=: string and const char*") {
     SUBCASE("Assigns from std::string") {
       CStringView csv(kHello);
       const std::string str = "assigned";
@@ -470,7 +469,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::operator std::string_view") {
+  TEST_CASE("helios::CStringView::operator std::string_view") {
     SUBCASE("Implicit conversion to string_view produces correct content") {
       const CStringView csv(kHello);
       std::string_view sv = csv;
@@ -492,7 +491,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::operator<=>") {
+  TEST_CASE("helios::CStringView::operator<=>") {
     SUBCASE("Equal CStringViews return equal") {
       const CStringView a(kHello);
       const CStringView b(kHello);
@@ -535,7 +534,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Empty") {
+  TEST_CASE("helios::CStringView::Empty") {
     SUBCASE("Returns false for non-empty string") {
       const CStringView csv(kHello);
       CHECK_FALSE(csv.Empty());
@@ -547,7 +546,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::StartsWith") {
+  TEST_CASE("helios::CStringView::StartsWith") {
     SUBCASE("Returns true when starts with prefix string_view") {
       const CStringView csv(kHelloWorld);
       CHECK(csv.StartsWith(std::string_view("hello")));
@@ -584,7 +583,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::EndsWith") {
+  TEST_CASE("helios::CStringView::EndsWith") {
     SUBCASE("Returns true when ends with suffix string_view") {
       const CStringView csv(kHelloWorld);
       CHECK(csv.EndsWith(std::string_view("world")));
@@ -621,7 +620,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Contains") {
+  TEST_CASE("helios::CStringView::Contains") {
     SUBCASE("Returns true when contains substring") {
       const CStringView csv(kHelloWorld);
       CHECK(csv.Contains(std::string_view("lo w")));
@@ -648,7 +647,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Size and Length") {
+  TEST_CASE("helios::CStringView::Size and Length") {
     SUBCASE("Size returns correct value for non-empty string") {
       const CStringView csv(kHelloWorld);
       CHECK_EQ(csv.Size(), 11);
@@ -666,7 +665,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::At") {
+  TEST_CASE("helios::CStringView::At") {
     SUBCASE("At returns correct character at valid pos (mutable)") {
       CStringView csv(kHello);
       CHECK_EQ(csv.At(0), 'h');
@@ -685,7 +684,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Front") {
+  TEST_CASE("helios::CStringView::Front") {
     SUBCASE("Front returns first character (mutable)") {
       CStringView csv(kHello);
       CHECK_EQ(csv.Front(), 'h');
@@ -702,7 +701,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Back") {
+  TEST_CASE("helios::CStringView::Back") {
     SUBCASE("Back returns last character (mutable)") {
       CStringView csv(kHello);
       CHECK_EQ(csv.Back(), 'o');
@@ -719,7 +718,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Data") {
+  TEST_CASE("helios::CStringView::Data") {
     SUBCASE("Data returns pointer to underlying array (mutable)") {
       CStringView csv(kHello);
       CHECK_NE(csv.Data(), nullptr);
@@ -744,7 +743,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::CStr") {
+  TEST_CASE("helios::CStringView::CStr") {
     SUBCASE("CStr returns same pointer as Data") {
       const CStringView csv(kHello);
       CHECK_EQ(csv.CStr(), csv.Data());
@@ -756,7 +755,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::View") {
+  TEST_CASE("helios::CStringView::View") {
     SUBCASE("View returns string_view of correct size") {
       const CStringView csv(kHello);
       const auto sv = csv.View();
@@ -775,7 +774,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::Iterators") {
+  TEST_CASE("helios::CStringView::Iterators") {
     SUBCASE("begin/end iterate over characters") {
       const CStringView csv(kHello);
       std::string result;
@@ -834,7 +833,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::operator<<") {
+  TEST_CASE("helios::CStringView::operator<<") {
     SUBCASE("Stream insertion outputs string content") {
       const CStringView csv(kHello);
       std::ostringstream os;
@@ -858,7 +857,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::std::hash") {
+  TEST_CASE("helios::CStringView::std::hash") {
     SUBCASE("Same content produces same hash") {
       const CStringView a(kHello);
       const CStringView b(kHello);
@@ -881,7 +880,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::std::format") {
+  TEST_CASE("helios::CStringView::std::format") {
     SUBCASE("Formats string content correctly") {
       const CStringView csv(kHello);
       const std::string result = std::format("{}", csv);
@@ -901,7 +900,7 @@ TEST_SUITE("helios::CStringView") {
     }
   }
 
-  TEST_CASE("CStringView::type aliases") {
+  TEST_CASE("helios::CStringView::type aliases") {
     SUBCASE("CStringView is char") {
       CHECK(std::is_same_v<CStringView, BasicCStringView<char>>);
     }

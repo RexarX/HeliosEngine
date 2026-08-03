@@ -75,7 +75,7 @@ struct DestroyEntityCmd {
 }  // namespace
 
 TEST_SUITE("helios::ecs::World") {
-  TEST_CASE("ecs::World::Update") {
+  TEST_CASE("helios::ecs::World::Update") {
     SUBCASE("Update executes pending commands") {
       World world;
       world.EnqueueCommand(AddEntityCmd{});
@@ -109,7 +109,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::Flush") {
+  TEST_CASE("helios::ecs::World::Flush") {
     SUBCASE("Flush executes pending commands") {
       World world;
       world.EnqueueCommand(AddEntityCmd{});
@@ -144,7 +144,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::Clear") {
+  TEST_CASE("helios::ecs::World::Clear") {
     SUBCASE("Clear removes all entities") {
       World world;
       [[maybe_unused]] const auto e1 = world.CreateEntity();
@@ -176,7 +176,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ClearEntities") {
+  TEST_CASE("helios::ecs::World::ClearEntities") {
     SUBCASE("ClearEntities removes all entities") {
       World world;
       [[maybe_unused]] const auto e1 = world.CreateEntity();
@@ -201,7 +201,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::CreateEntity") {
+  TEST_CASE("helios::ecs::World::CreateEntity") {
     SUBCASE("CreateEntity returns a valid entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -229,7 +229,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ReserveEntity") {
+  TEST_CASE("helios::ecs::World::ReserveEntity") {
     SUBCASE("ReserveEntity returns a valid entity handle") {
       World world;
       const Entity entity = world.ReserveEntity();
@@ -274,7 +274,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::DestroyEntity") {
+  TEST_CASE("helios::ecs::World::DestroyEntity") {
     SUBCASE("DestroyEntity removes the entity from the world") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -298,7 +298,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryDestroyEntity") {
+  TEST_CASE("helios::ecs::World::TryDestroyEntity") {
     SUBCASE("TryDestroyEntity removes an existing entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -316,7 +316,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::DestroyEntities") {
+  TEST_CASE("helios::ecs::World::DestroyEntities") {
     SUBCASE("DestroyEntities removes all provided entities") {
       World world;
       const Entity e1 = world.CreateEntity();
@@ -346,7 +346,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryDestroyEntities") {
+  TEST_CASE("helios::ecs::World::TryDestroyEntities") {
     SUBCASE("TryDestroyEntities removes existing entities") {
       World world;
       const Entity e1 = world.CreateEntity();
@@ -377,7 +377,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::AddComponents") {
+  TEST_CASE("helios::ecs::World::AddComponents") {
     SUBCASE("AddComponents adds all provided components") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -421,7 +421,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryAddComponents") {
+  TEST_CASE("helios::ecs::World::TryAddComponents") {
     SUBCASE("TryAddComponents returns true for each component not present") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -465,7 +465,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::AddBundle") {
+  TEST_CASE("helios::ecs::World::AddBundle") {
     SUBCASE("AddBundle adds a flat bundle and stores its values") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -511,7 +511,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryAddBundle") {
+  TEST_CASE("helios::ecs::World::TryAddBundle") {
     SUBCASE("TryAddBundle returns results in flattened declaration order") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -553,7 +553,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::EmplaceComponent") {
+  TEST_CASE("helios::ecs::World::EmplaceComponent") {
     SUBCASE("EmplaceComponent adds a component constructed in-place") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -584,7 +584,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryEmplaceComponent") {
+  TEST_CASE("helios::ecs::World::TryEmplaceComponent") {
     SUBCASE("TryEmplaceComponent returns true and emplaces when absent") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -612,7 +612,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::RemoveComponents") {
+  TEST_CASE("helios::ecs::World::RemoveComponents") {
     SUBCASE("RemoveComponents removes all specified components") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -639,7 +639,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryRemoveComponents") {
+  TEST_CASE("helios::ecs::World::TryRemoveComponents") {
     SUBCASE(
         "TryRemoveComponents returns true for each component that was "
         "present") {
@@ -674,7 +674,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::RemoveBundle") {
+  TEST_CASE("helios::ecs::World::RemoveBundle") {
     SUBCASE("RemoveBundle removes every flattened leaf component") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -710,7 +710,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryRemoveBundle") {
+  TEST_CASE("helios::ecs::World::TryRemoveBundle") {
     SUBCASE("TryRemoveBundle returns results in flattened declaration order") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -747,7 +747,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ClearComponents") {
+  TEST_CASE("helios::ecs::World::ClearComponents") {
     SUBCASE("ClearComponents removes all components from the entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -776,7 +776,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::Query") {
+  TEST_CASE("helios::ecs::World::Query") {
     SUBCASE("Query with default allocator is valid") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -828,7 +828,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ReadOnlyQuery") {
+  TEST_CASE("helios::ecs::World::ReadOnlyQuery") {
     SUBCASE("ReadOnlyQuery with default allocator returns a valid builder") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -853,7 +853,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::WriteComponent") {
+  TEST_CASE("helios::ecs::World::WriteComponent") {
     SUBCASE("WriteComponent returns a mutable reference to the component") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -863,7 +863,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ReadComponent") {
+  TEST_CASE("helios::ecs::World::ReadComponent") {
     SUBCASE("ReadComponent returns a const reference to the component") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -873,7 +873,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryWriteComponent") {
+  TEST_CASE("helios::ecs::World::TryWriteComponent") {
     SUBCASE(
         "TryWriteComponent returns non-null pointer when component exists") {
       World world;
@@ -900,7 +900,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryReadComponent") {
+  TEST_CASE("helios::ecs::World::TryReadComponent") {
     SUBCASE(
         "TryReadComponent returns non-null const pointer when component "
         "exists") {
@@ -920,7 +920,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::InsertResources") {
+  TEST_CASE("helios::ecs::World::InsertResources") {
     SUBCASE("InsertResources adds a new resource") {
       World world;
       world.InsertResources(DeltaTime{0.016F});
@@ -948,7 +948,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryInsertResources") {
+  TEST_CASE("helios::ecs::World::TryInsertResources") {
     SUBCASE("TryInsertResources returns true and inserts when absent") {
       World world;
       const bool inserted = world.TryInsertResources(DeltaTime{1.0F});
@@ -980,7 +980,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::EmplaceResource") {
+  TEST_CASE("helios::ecs::World::EmplaceResource") {
     SUBCASE("EmplaceResource adds a resource constructed in-place") {
       World world;
       world.EmplaceResource<DeltaTime>(0.016F);
@@ -1001,7 +1001,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryEmplaceResource") {
+  TEST_CASE("helios::ecs::World::TryEmplaceResource") {
     SUBCASE("TryEmplaceResource returns true and emplaces when absent") {
       World world;
       const bool emplaced = world.TryEmplaceResource<DeltaTime>(0.5F);
@@ -1024,7 +1024,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::RemoveResource") {
+  TEST_CASE("helios::ecs::World::RemoveResource") {
     SUBCASE("RemoveResources removes the resource") {
       World world;
       world.InsertResources(DeltaTime{});
@@ -1040,7 +1040,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryRemoveResources") {
+  TEST_CASE("helios::ecs::World::TryRemoveResources") {
     SUBCASE(
         "TryRemoveResources returns true and removes an existing resource") {
       World world;
@@ -1067,7 +1067,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::WriteResource") {
+  TEST_CASE("helios::ecs::World::WriteResource") {
     SUBCASE("WriteResource returns a mutable reference to the resource") {
       World world;
       world.InsertResources(DeltaTime{1.0F});
@@ -1076,7 +1076,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ReadResource") {
+  TEST_CASE("helios::ecs::World::ReadResource") {
     SUBCASE("ReadResource returns the stored resource value") {
       World world;
       world.InsertResources(DeltaTime{0.5F});
@@ -1084,7 +1084,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryWriteResource") {
+  TEST_CASE("helios::ecs::World::TryWriteResource") {
     SUBCASE("TryWriteResource returns non-null pointer when resource exists") {
       World world;
       world.InsertResources(DeltaTime{1.0F});
@@ -1106,7 +1106,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::TryReadResource") {
+  TEST_CASE("helios::ecs::World::TryReadResource") {
     SUBCASE(
         "TryReadResource returns non-null const pointer when resource "
         "exists") {
@@ -1123,7 +1123,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::AddMessage") {
+  TEST_CASE("helios::ecs::World::AddMessage") {
     SUBCASE("AddMessage registers a message type") {
       World world;
       world.AddMessage<GameMsg>();
@@ -1145,7 +1145,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::AddMessages") {
+  TEST_CASE("helios::ecs::World::AddMessages") {
     SUBCASE("AddMessages registers all provided message types") {
       World world;
       world.AddMessages<GameMsg, AsyncGameMsg>();
@@ -1154,7 +1154,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ClearMessages (all queues)") {
+  TEST_CASE("helios::ecs::World::ClearMessages (all queues)") {
     SUBCASE("ClearMessages clears all queued messages without removing types") {
       World world;
       world.AddMessage<GameMsg>();
@@ -1166,7 +1166,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ClearMessages<T>") {
+  TEST_CASE("helios::ecs::World::ClearMessages<T>") {
     SUBCASE("ClearMessages<T> clears only the specified message type") {
       World world;
       world.AddMessage<GameMsg>();
@@ -1177,7 +1177,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ReadMessages") {
+  TEST_CASE("helios::ecs::World::ReadMessages") {
     SUBCASE(
         "ReadMessages returns all messages written in the previous update") {
       World world;
@@ -1208,7 +1208,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::WriteMessages") {
+  TEST_CASE("helios::ecs::World::WriteMessages") {
     SUBCASE("WriteMessages returns a writer that enqueues messages") {
       World world;
       world.AddMessage<GameMsg>();
@@ -1233,7 +1233,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ReadAsyncMessages") {
+  TEST_CASE("helios::ecs::World::ReadAsyncMessages") {
     SUBCASE("ReadAsyncMessages returns a reader for the async queue") {
       World world;
       world.AddMessage<AsyncGameMsg>();
@@ -1245,7 +1245,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::WriteAsyncMessages") {
+  TEST_CASE("helios::ecs::World::WriteAsyncMessages") {
     SUBCASE("WriteAsyncMessages returns a writer for the async queue") {
       World world;
       world.AddMessage<AsyncGameMsg>();
@@ -1260,7 +1260,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::ReserveCommands") {
+  TEST_CASE("helios::ecs::World::ReserveCommands") {
     SUBCASE("ReserveCommands does not change CommandCount") {
       World world;
       world.ReserveCommands(100);
@@ -1275,7 +1275,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::EnqueueCommand") {
+  TEST_CASE("helios::ecs::World::EnqueueCommand") {
     SUBCASE("EnqueueCommand adds a command to the queue") {
       World world;
       world.EnqueueCommand(AddEntityCmd{});
@@ -1298,7 +1298,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::EnqueueCommandBulk") {
+  TEST_CASE("helios::ecs::World::EnqueueCommandBulk") {
     SUBCASE("EnqueueCommandBulk enqueues all commands in the range") {
       World world;
       std::vector<AddEntityCmd> cmds(3);
@@ -1322,7 +1322,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::Exists") {
+  TEST_CASE("helios::ecs::World::Exists") {
     SUBCASE("Exists returns true for a living entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -1337,7 +1337,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::HasComponent") {
+  TEST_CASE("helios::ecs::World::HasComponent") {
     SUBCASE("HasComponent returns true when entity has the component") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -1362,7 +1362,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::HasComponents") {
+  TEST_CASE("helios::ecs::World::HasComponents") {
     SUBCASE(
         "HasComponents returns correct flags for present and absent types") {
       World world;
@@ -1383,7 +1383,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::HasResource") {
+  TEST_CASE("helios::ecs::World::HasResource") {
     SUBCASE("HasResource returns true when resource exists") {
       World world;
       world.InsertResources(DeltaTime{});
@@ -1403,7 +1403,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::HasMessage") {
+  TEST_CASE("helios::ecs::World::HasMessage") {
     SUBCASE("HasMessage returns true for a registered message type") {
       World world;
       world.AddMessage<GameMsg>();
@@ -1416,7 +1416,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::HasMessages") {
+  TEST_CASE("helios::ecs::World::HasMessages") {
     SUBCASE("HasMessages returns true when messages are present in the queue") {
       World world;
       world.AddMessage<GameMsg>();
@@ -1433,7 +1433,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::HasCommands") {
+  TEST_CASE("helios::ecs::World::HasCommands") {
     SUBCASE("HasCommands returns false when queue is empty") {
       World world;
       CHECK_FALSE(world.HasCommands());
@@ -1453,7 +1453,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::EntityCount") {
+  TEST_CASE("helios::ecs::World::EntityCount") {
     SUBCASE("EntityCount returns 0 for a fresh world") {
       World world;
       CHECK_EQ(world.EntityCount(), 0);
@@ -1474,7 +1474,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::CommandCount") {
+  TEST_CASE("helios::ecs::World::CommandCount") {
     SUBCASE("CommandCount returns 0 for a fresh world") {
       World world;
       CHECK_EQ(world.CommandCount(), 0);
@@ -1495,7 +1495,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::Entities") {
+  TEST_CASE("helios::ecs::World::Entities") {
     SUBCASE("Entities returns a mutable reference to the entity manager") {
       World world;
       [[maybe_unused]] const auto entity = world.CreateEntity();
@@ -1511,7 +1511,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::Components") {
+  TEST_CASE("helios::ecs::World::Components") {
     SUBCASE("Components returns a mutable reference to the component manager") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -1530,7 +1530,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World::Resources") {
+  TEST_CASE("helios::ecs::World::Resources") {
     SUBCASE("Resources returns a mutable reference to the resource manager") {
       World world;
       world.InsertResources(DeltaTime{1.0F});
@@ -1546,7 +1546,7 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 
-  TEST_CASE("ecs::World: message lifecycle") {
+  TEST_CASE("helios::ecs::World: message lifecycle") {
     SUBCASE(
         "Messages written in Update N-1 are readable in N and cleared in "
         "N+1") {

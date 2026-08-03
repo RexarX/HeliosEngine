@@ -16,6 +16,7 @@ include_guard(GLOBAL)
 
 cmake_policy(SET CMP0054 NEW)
 include(Primitives)
+include(TargetUtils)
 
 # ============================================================================
 # Global State
@@ -778,9 +779,15 @@ macro(_helios_dep_end)
     # Mark found targets as SYSTEM to suppress third-party warnings
     if(TARGET ${_PKG_NAME})
       helios_mark_system_includes(${_PKG_NAME})
+      helios_target_suppress_warnings(${_PKG_NAME})
     endif()
     if(TARGET ${_PKG_NAME}::${_PKG_NAME})
       helios_mark_system_includes(${_PKG_NAME}::${_PKG_NAME})
+      helios_target_suppress_warnings(${_PKG_NAME}::${_PKG_NAME})
+    endif()
+
+    if(_FOUND_VIA STREQUAL "CPM" AND DEFINED ${_PKG_NAME}_BINARY_DIR)
+      helios_suppress_warnings_in_binary_dir("${${_PKG_NAME}_BINARY_DIR}")
     endif()
 
     if(_required_vars AND NOT TARGET ${_PKG_NAME})

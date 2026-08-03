@@ -30,7 +30,7 @@ constexpr ArenaOptions GrowingOptions() {
 }  // namespace
 
 TEST_SUITE("helios::mem::ArenaAllocator") {
-  TEST_CASE("mem::ArenaAllocator::ctor(ArenaOptions)") {
+  TEST_CASE("helios::mem::ArenaAllocator::ctor(ArenaOptions)") {
     SUBCASE("Sets InitialCapacity from options") {
       const ArenaAllocator arena(ArenaOptions{.initial_capacity = 1024});
       CHECK_EQ(arena.InitialCapacity(), 1024);
@@ -59,7 +59,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::ctor(size_t)") {
+  TEST_CASE("helios::mem::ArenaAllocator::ctor(size_t)") {
     SUBCASE("Sets InitialCapacity correctly") {
       const ArenaAllocator arena(2048);
       CHECK_EQ(arena.InitialCapacity(), 2048);
@@ -78,7 +78,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::ctor(ArenaAllocator&&)") {
+  TEST_CASE("helios::mem::ArenaAllocator::ctor(ArenaAllocator&&)") {
     SUBCASE("Moved-into arena has same InitialCapacity") {
       ArenaAllocator source(1024);
       const ArenaAllocator moved(std::move(source));
@@ -108,7 +108,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::operator=(ArenaAllocator&&)") {
+  TEST_CASE("helios::mem::ArenaAllocator::operator=(ArenaAllocator&&)") {
     SUBCASE("Target acquires source InitialCapacity") {
       ArenaAllocator source(1024);
       ArenaAllocator target(128);
@@ -148,7 +148,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::Reset") {
+  TEST_CASE("helios::mem::ArenaAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       ArenaAllocator arena(1024);
       std::ignore = arena.allocate(128, kAlign);
@@ -205,7 +205,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::Empty") {
+  TEST_CASE("helios::mem::ArenaAllocator::Empty") {
     SUBCASE("Returns true on fresh arena") {
       const ArenaAllocator arena(256);
       CHECK(arena.Empty());
@@ -233,7 +233,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::Stats") {
+  TEST_CASE("helios::mem::ArenaAllocator::Stats") {
     SUBCASE("All fields are zero on fresh arena") {
       const ArenaAllocator arena(1024);
 
@@ -297,7 +297,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::TotalCapacity") {
+  TEST_CASE("helios::mem::ArenaAllocator::TotalCapacity") {
     SUBCASE("Equals initial_capacity immediately after construction") {
       const ArenaAllocator arena(ArenaOptions{.initial_capacity = 4096});
       CHECK_EQ(arena.TotalCapacity(), 4096);
@@ -324,7 +324,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::InitialCapacity") {
+  TEST_CASE("helios::mem::ArenaAllocator::InitialCapacity") {
     SUBCASE("Returns value from ArenaOptions ctor") {
       const ArenaAllocator arena(ArenaOptions{.initial_capacity = 999});
       CHECK_EQ(arena.InitialCapacity(), 999);
@@ -351,7 +351,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::BlockCount") {
+  TEST_CASE("helios::mem::ArenaAllocator::BlockCount") {
     SUBCASE("Is 1 after construction") {
       const ArenaAllocator arena(1024);
       CHECK_EQ(arena.BlockCount(), 1);
@@ -380,7 +380,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::Growth") {
+  TEST_CASE("helios::mem::ArenaAllocator::Growth") {
     SUBCASE("Returns geometric policy when constructed with size_t ctor") {
       const ArenaAllocator arena(256);
       CHECK_EQ(arena.Growth().max_capacity,
@@ -403,7 +403,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::allocate") {
+  TEST_CASE("helios::mem::ArenaAllocator::allocate") {
     SUBCASE("Returns non-null pointer") {
       ArenaAllocator arena(1024);
       CHECK_NE(arena.allocate(32, kAlign), nullptr);
@@ -454,7 +454,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator::deallocate") {
+  TEST_CASE("helios::mem::ArenaAllocator::deallocate") {
     SUBCASE("Is a no-op: subsequent allocation still returns valid pointer") {
       ArenaAllocator arena(1024);
 
@@ -484,7 +484,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator thread-safety: concurrent allocate") {
+  TEST_CASE("helios::mem::ArenaAllocator thread-safety: concurrent allocate") {
     SUBCASE("All threads receive valid non-null pointers") {
       // Growing arena so threads never exhaust capacity.
       ArenaAllocator arena(ArenaOptions{
@@ -612,7 +612,8 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::ArenaAllocator thread-safety: concurrent deallocate") {
+  TEST_CASE(
+      "helios::mem::ArenaAllocator thread-safety: concurrent deallocate") {
     SUBCASE("Concurrent deallocate increments total_deallocations correctly") {
       ArenaAllocator arena(ArenaOptions{
           .initial_capacity = 4096,

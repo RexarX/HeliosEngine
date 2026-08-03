@@ -6,14 +6,12 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <memory_resource>
 #include <vector>
 
 using namespace helios::mem;
 
 namespace {
 
-constexpr size_t kMinStackCapacity = sizeof(size_t) * 2 + 1;
 constexpr size_t kCapacity = 4096;
 constexpr size_t kSmallCapacity = 512;
 constexpr size_t kAlign = alignof(std::max_align_t);
@@ -22,7 +20,7 @@ constexpr size_t kHeaderSize = sizeof(size_t) * 2;
 }  // namespace
 
 TEST_SUITE("helios::mem::FixedStackAllocator") {
-  TEST_CASE("mem::FixedStackAllocator::ctor()") {
+  TEST_CASE("helios::mem::FixedStackAllocator::ctor()") {
     SUBCASE("InitialCapacity equals configured capacity") {
       const FixedStackAllocator stack(kCapacity);
       CHECK_EQ(stack.InitialCapacity(), kCapacity);
@@ -55,7 +53,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::ctor(FixedStackAllocator&&)") {
+  TEST_CASE("helios::mem::FixedStackAllocator::ctor(FixedStackAllocator&&)") {
     SUBCASE("Moved-into stack has same InitialCapacity") {
       FixedStackAllocator source(kCapacity);
       const FixedStackAllocator moved(std::move(source));
@@ -93,7 +91,8 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::operator=(FixedStackAllocator&&)") {
+  TEST_CASE(
+      "helios::mem::FixedStackAllocator::operator=(FixedStackAllocator&&)") {
     SUBCASE("Target acquires source allocation state") {
       FixedStackAllocator source(kCapacity);
       std::ignore = source.allocate(32, kAlign);
@@ -139,7 +138,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::RewindToMarker") {
+  TEST_CASE("helios::mem::FixedStackAllocator::RewindToMarker") {
     SUBCASE("Rewinds offset to captured marker") {
       FixedStackAllocator stack(kCapacity);
       const auto marker = stack.GetMarker();
@@ -182,7 +181,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::Reset") {
+  TEST_CASE("helios::mem::FixedStackAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       FixedStackAllocator stack(kCapacity);
       std::ignore = stack.allocate(128, kAlign);
@@ -219,7 +218,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::Empty") {
+  TEST_CASE("helios::mem::FixedStackAllocator::Empty") {
     SUBCASE("Returns true on fresh stack") {
       const FixedStackAllocator stack(kCapacity);
       CHECK(stack.Empty());
@@ -254,7 +253,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::Owns") {
+  TEST_CASE("helios::mem::FixedStackAllocator::Owns") {
     SUBCASE("Returns true for pointer from this stack") {
       FixedStackAllocator stack(kCapacity);
       void* const ptr = stack.allocate(64, kAlign);
@@ -295,7 +294,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::GetMarker") {
+  TEST_CASE("helios::mem::FixedStackAllocator::GetMarker") {
     SUBCASE("Returns zero offset on fresh stack") {
       const FixedStackAllocator stack(kCapacity);
       CHECK_EQ(stack.GetMarker().offset, 0);
@@ -327,7 +326,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::Stats") {
+  TEST_CASE("helios::mem::FixedStackAllocator::Stats") {
     SUBCASE("All fields are zero on fresh stack") {
       const FixedStackAllocator stack(kCapacity);
       const AllocatorStats stats = stack.Stats();
@@ -385,7 +384,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::InitialCapacity") {
+  TEST_CASE("helios::mem::FixedStackAllocator::InitialCapacity") {
     SUBCASE("Returns configured capacity template argument") {
       const FixedStackAllocator stack(1024);
       CHECK_EQ(stack.InitialCapacity(), 1024);
@@ -405,7 +404,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::TotalCapacity") {
+  TEST_CASE("helios::mem::FixedStackAllocator::TotalCapacity") {
     SUBCASE("Equals configured capacity immediately after construction") {
       const FixedStackAllocator stack(kCapacity);
       CHECK_EQ(stack.TotalCapacity(), kCapacity);
@@ -425,7 +424,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::allocate") {
+  TEST_CASE("helios::mem::FixedStackAllocator::allocate") {
     SUBCASE("Returns non-null pointer") {
       FixedStackAllocator stack(kCapacity);
       CHECK_NE(stack.allocate(32, kAlign), nullptr);
@@ -475,7 +474,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedStackAllocator::deallocate") {
+  TEST_CASE("helios::mem::FixedStackAllocator::deallocate") {
     SUBCASE("LIFO deallocate decrements allocation_count") {
       FixedStackAllocator stack(kCapacity);
       std::ignore = stack.allocate(64, kAlign);

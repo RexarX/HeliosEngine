@@ -29,7 +29,7 @@ struct GameMsg {
 }  // namespace
 
 TEST_SUITE("helios::ecs::WorldView") {
-  TEST_CASE("ecs::WorldView::ctor") {
+  TEST_CASE("helios::ecs::WorldView::ctor") {
     SUBCASE("Constructor stores world reference") {
       const World world;
       const WorldView view(world);
@@ -37,7 +37,7 @@ TEST_SUITE("helios::ecs::WorldView") {
     }
   }
 
-  TEST_CASE("ecs::WorldView::EntityExists") {
+  TEST_CASE("helios::ecs::WorldView::EntityExists") {
     SUBCASE("EntityExists returns true for a living entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -46,7 +46,7 @@ TEST_SUITE("helios::ecs::WorldView") {
     }
   }
 
-  TEST_CASE("ecs::WorldView::HasComponent") {
+  TEST_CASE("helios::ecs::WorldView::HasComponent") {
     SUBCASE("HasComponent returns true when entity has the component") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -72,7 +72,7 @@ TEST_SUITE("helios::ecs::WorldView") {
     }
   }
 
-  TEST_CASE("ecs::WorldView::HasComponents") {
+  TEST_CASE("helios::ecs::WorldView::HasComponents") {
     SUBCASE(
         "HasComponents returns correct flags for present and absent types") {
       World world;
@@ -95,7 +95,7 @@ TEST_SUITE("helios::ecs::WorldView") {
     }
   }
 
-  TEST_CASE("ecs::WorldView::HasResource") {
+  TEST_CASE("helios::ecs::WorldView::HasResource") {
     SUBCASE("HasResource returns true when resource exists") {
       World world;
       world.InsertResources(DeltaTime{0.016F});
@@ -118,7 +118,7 @@ TEST_SUITE("helios::ecs::WorldView") {
     }
   }
 
-  TEST_CASE("ecs::WorldView::HasMessage") {
+  TEST_CASE("helios::ecs::WorldView::HasMessage") {
     SUBCASE("HasMessage returns true for a registered built-in message type") {
       const World world;
       const WorldView view(world);
@@ -139,7 +139,7 @@ TEST_SUITE("helios::ecs::WorldView") {
     }
   }
 
-  TEST_CASE("ecs::WorldView::HasMessages") {
+  TEST_CASE("helios::ecs::WorldView::HasMessages") {
     SUBCASE("HasMessages returns true when messages are in the queue") {
       World world;
       const WorldView view(world);
@@ -158,7 +158,7 @@ TEST_SUITE("helios::ecs::WorldView") {
     }
   }
 
-  TEST_CASE("ecs::WorldView::EntityCount") {
+  TEST_CASE("helios::ecs::WorldView::EntityCount") {
     SUBCASE("EntityCount returns 0 for an empty world") {
       const World world;
       const WorldView view(world);
@@ -182,7 +182,7 @@ TEST_SUITE("helios::ecs::WorldView") {
     }
   }
 
-  TEST_CASE("ecs::WorldView::ResourceCount") {
+  TEST_CASE("helios::ecs::WorldView::ResourceCount") {
     SUBCASE("ResourceCount returns 0 for an empty world") {
       const World world;
       const WorldView view(world);

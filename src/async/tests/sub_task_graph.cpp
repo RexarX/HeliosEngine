@@ -71,7 +71,7 @@ TEST_SUITE("helios::async::SubTaskGraph") {
     }
   }
 
-  TEST_CASE("async::SubTaskGraph: task creation methods") {
+  TEST_CASE("helios::async::SubTaskGraph: task creation methods") {
     TaskGraph main_graph("TaskCreationGraph");
     Executor executor(4);
 
@@ -185,7 +185,8 @@ TEST_SUITE("helios::async::SubTaskGraph") {
     }
   }
 
-  TEST_CASE("async::SubTaskGraph: basic parallel operations - simplified") {
+  TEST_CASE(
+      "helios::async::SubTaskGraph: basic parallel operations - simplified") {
     TaskGraph main_graph("SubTaskParallelOpsGraph");
     Executor executor(4);
 
@@ -292,7 +293,7 @@ TEST_SUITE("helios::async::SubTaskGraph") {
     }
   }
 
-  TEST_CASE("async::SubTaskGraph: actual parallel algorithms") {
+  TEST_CASE("helios::async::SubTaskGraph: actual parallel algorithms") {
     TaskGraph main_graph("SubTaskActualParallelGraph");
     Executor executor(4);
 
@@ -431,7 +432,7 @@ TEST_SUITE("helios::async::SubTaskGraph") {
     }
   }
 
-  TEST_CASE("async::SubTaskGraph::Linearize") {
+  TEST_CASE("helios::async::SubTaskGraph::Linearize") {
     TaskGraph main_graph("SubTaskLinearGraph");
     Executor executor(2);
 
@@ -511,7 +512,7 @@ TEST_SUITE("helios::async::SubTaskGraph") {
     }
   }
 
-  TEST_CASE("async::SubTaskGraph: task management") {
+  TEST_CASE("helios::async::SubTaskGraph: task management") {
     TaskGraph main_graph("SubTaskManagementGraph");
     Executor executor(2);
 
@@ -571,7 +572,7 @@ TEST_SUITE("helios::async::SubTaskGraph") {
     }
   }
 
-  TEST_CASE("async::SubTaskGraph: complex dependency patterns") {
+  TEST_CASE("helios::async::SubTaskGraph: complex dependency patterns") {
     TaskGraph main_graph("SubTaskComplexGraph");
     Executor executor(4);
 
@@ -643,7 +644,7 @@ TEST_SUITE("helios::async::SubTaskGraph") {
     }
   }
 
-  TEST_CASE("async::SubTaskGraph: executor delegation methods") {
+  TEST_CASE("helios::async::SubTaskGraph: executor delegation methods") {
     TaskGraph main_graph("SubTaskExecutorDelegationGraph");
     Executor executor(4);
 
@@ -705,7 +706,7 @@ TEST_SUITE("helios::async::SubTaskGraph") {
     }
   }
 
-  TEST_CASE("async::SubTaskGraph: worker thread information") {
+  TEST_CASE("helios::async::SubTaskGraph: worker thread information") {
     TaskGraph main_graph("SubTaskWorkerInfoGraph");
     Executor executor(4);
 
@@ -735,7 +736,7 @@ TEST_SUITE("helios::async::SubTaskGraph") {
     }
   }
 
-  TEST_CASE("async::SubTaskGraph: error handling and edge cases") {
+  TEST_CASE("helios::async::SubTaskGraph: error handling and edge cases") {
     TaskGraph main_graph("SubTaskErrorHandlingGraph");
     Executor executor(2);
 

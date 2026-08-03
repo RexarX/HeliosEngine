@@ -38,7 +38,7 @@ struct alignas(16) Vec3 {
 }  // namespace
 
 TEST_SUITE("helios::mem::PoolAllocator") {
-  TEST_CASE("mem::PoolAllocator::ctor(PoolAllocatorOptions)") {
+  TEST_CASE("helios::mem::PoolAllocator::ctor(PoolAllocatorOptions)") {
     SUBCASE("BlockSize is at least the requested block_size") {
       const PoolAllocator pool(PoolAllocatorOptions{
           .block_size = kBlockSize, .block_count = kBlockCount});
@@ -91,7 +91,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::ctor(size_t, size_t, size_t)") {
+  TEST_CASE("helios::mem::PoolAllocator::ctor(size_t, size_t, size_t)") {
     SUBCASE("BlockSize is at least the requested value") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
       CHECK_GE(pool.BlockSize(), kBlockSize);
@@ -119,7 +119,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::ctor(PoolAllocator&&)") {
+  TEST_CASE("helios::mem::PoolAllocator::ctor(PoolAllocator&&)") {
     SUBCASE("Moved-into pool carries allocation state") {
       PoolAllocator source(kBlockSize, kBlockCount);
       std::ignore = source.allocate(kBlockSize, kAlign);
@@ -145,7 +145,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::operator=(PoolAllocator&&)") {
+  TEST_CASE("helios::mem::PoolAllocator::operator=(PoolAllocator&&)") {
     SUBCASE("Target acquires source allocation state") {
       PoolAllocator source(kBlockSize, kBlockCount);
       std::ignore = source.allocate(kBlockSize, kAlign);
@@ -176,7 +176,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::ForType") {
+  TEST_CASE("helios::mem::PoolAllocator::ForType") {
     SUBCASE("BlockSize is at least sizeof(T)") {
       const PoolAllocator pool = PoolAllocator::ForType<Vec3>(8);
       CHECK_GE(pool.BlockSize(), sizeof(Vec3));
@@ -193,7 +193,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::Reset") {
+  TEST_CASE("helios::mem::PoolAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       PoolAllocator pool(kBlockSize, kBlockCount);
       std::ignore = pool.allocate(kBlockSize, kAlign);
@@ -250,7 +250,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::Full") {
+  TEST_CASE("helios::mem::PoolAllocator::Full") {
     SUBCASE("Returns false on fresh pool") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
       CHECK_FALSE(pool.Full());
@@ -293,7 +293,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::Empty") {
+  TEST_CASE("helios::mem::PoolAllocator::Empty") {
     SUBCASE("Returns true on fresh pool") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
       CHECK(pool.Empty());
@@ -326,7 +326,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::Owns") {
+  TEST_CASE("helios::mem::PoolAllocator::Owns") {
     SUBCASE("Returns true for pointer from this pool") {
       PoolAllocator pool(kBlockSize, kBlockCount);
       void* const ptr = pool.allocate(kBlockSize, kAlign);
@@ -363,7 +363,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::Stats") {
+  TEST_CASE("helios::mem::PoolAllocator::Stats") {
     SUBCASE("All relevant fields are zero on fresh pool") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
 
@@ -423,7 +423,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::BlockSize") {
+  TEST_CASE("helios::mem::PoolAllocator::BlockSize") {
     SUBCASE("Is at least the requested value after construction") {
       const PoolAllocator pool(48, kBlockCount);
       CHECK_GE(pool.BlockSize(), 48);
@@ -441,7 +441,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::Alignment") {
+  TEST_CASE("helios::mem::PoolAllocator::Alignment") {
     SUBCASE("Returns kDefaultAlignment when not specified") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
       CHECK_EQ(pool.Alignment(), kDefaultAlignment);
@@ -453,7 +453,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::InitialBlockCount") {
+  TEST_CASE("helios::mem::PoolAllocator::InitialBlockCount") {
     SUBCASE("Returns block_count from options ctor") {
       const PoolAllocator pool(
           PoolAllocatorOptions{.block_size = kBlockSize, .block_count = 12});
@@ -476,7 +476,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::BlockCount") {
+  TEST_CASE("helios::mem::PoolAllocator::BlockCount") {
     SUBCASE("Equals initial block_count right after construction") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
       CHECK_EQ(pool.BlockCount(), kBlockCount);
@@ -506,7 +506,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::FreeBlockCount") {
+  TEST_CASE("helios::mem::PoolAllocator::FreeBlockCount") {
     SUBCASE("Equals BlockCount on fresh pool") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
       CHECK_EQ(pool.FreeBlockCount(), kBlockCount);
@@ -538,7 +538,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::UsedBlockCount") {
+  TEST_CASE("helios::mem::PoolAllocator::UsedBlockCount") {
     SUBCASE("Is zero on fresh pool") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
       CHECK_EQ(pool.UsedBlockCount(), 0);
@@ -583,7 +583,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::Growth") {
+  TEST_CASE("helios::mem::PoolAllocator::Growth") {
     SUBCASE("Returns geometric policy for size_t ctor") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
       CHECK_EQ(pool.Growth().max_capacity,
@@ -606,7 +606,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::allocate") {
+  TEST_CASE("helios::mem::PoolAllocator::allocate") {
     SUBCASE("Returns non-null pointer") {
       PoolAllocator pool(kBlockSize, kBlockCount);
       CHECK_NE(pool.allocate(kBlockSize, kAlign), nullptr);
@@ -652,7 +652,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator::deallocate") {
+  TEST_CASE("helios::mem::PoolAllocator::deallocate") {
     SUBCASE("Freed block is returned to free list") {
       PoolAllocator pool(
           PoolAllocatorOptions{.block_size = kBlockSize,
@@ -692,7 +692,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
   }
 
-  TEST_CASE("mem::PoolAllocator thread-safety: concurrent allocate") {
+  TEST_CASE("helios::mem::PoolAllocator thread-safety: concurrent allocate") {
     SUBCASE("All threads receive valid non-null pointers") {
       PoolAllocator pool(GrowingOptions(kBlockSize, 256));
 

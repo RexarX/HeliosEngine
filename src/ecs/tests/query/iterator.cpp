@@ -73,7 +73,7 @@ struct QueryFixture {
 }  // namespace
 
 TEST_SUITE("helios::ecs::BasicQueryIter") {
-  TEST_CASE("ecs::BasicQueryIter::Constructor") {
+  TEST_CASE("helios::ecs::BasicQueryIter::Constructor") {
     SUBCASE("Begin equals end for empty archetype list") {
       ComponentManager manager;
       std::vector<std::reference_wrapper<const Archetype>> empty;
@@ -109,7 +109,7 @@ TEST_SUITE("helios::ecs::BasicQueryIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryIter::operator*") {
+  TEST_CASE("helios::ecs::BasicQueryIter::operator*") {
     SUBCASE("Returns correct component value for single component") {
       QueryFixture fix;
       fix.AddPosEntity(Entity{1, 0}, {.x = 5.0F, .y = 6.0F});
@@ -203,7 +203,7 @@ TEST_SUITE("helios::ecs::BasicQueryIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryIter::operator++ (prefix)") {
+  TEST_CASE("helios::ecs::BasicQueryIter::operator++ (prefix)") {
     SUBCASE("Prefix increment advances to next entity") {
       QueryFixture fix;
       fix.AddPosEntity(Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -259,7 +259,7 @@ TEST_SUITE("helios::ecs::BasicQueryIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryIter::operator++ (postfix)") {
+  TEST_CASE("helios::ecs::BasicQueryIter::operator++ (postfix)") {
     SUBCASE("Postfix increment returns copy before advance") {
       QueryFixture fix;
       fix.AddPosEntity(Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -289,7 +289,7 @@ TEST_SUITE("helios::ecs::BasicQueryIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryIter::operator-- (prefix)") {
+  TEST_CASE("helios::ecs::BasicQueryIter::operator-- (prefix)") {
     SUBCASE("Prefix decrement moves back to previous entity") {
       QueryFixture fix;
       fix.AddPosEntity(Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -330,7 +330,7 @@ TEST_SUITE("helios::ecs::BasicQueryIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryIter::operator-- (postfix)") {
+  TEST_CASE("helios::ecs::BasicQueryIter::operator-- (postfix)") {
     SUBCASE("Postfix decrement returns copy before retreat") {
       QueryFixture fix;
       fix.AddPosEntity(Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -363,7 +363,7 @@ TEST_SUITE("helios::ecs::BasicQueryIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryIter::operator==") {
+  TEST_CASE("helios::ecs::BasicQueryIter::operator==") {
     SUBCASE("Two iterators at same position are equal") {
       QueryFixture fix;
       fix.AddPosEntity(Entity{1, 0}, {});
@@ -409,7 +409,7 @@ TEST_SUITE("helios::ecs::BasicQueryIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryIter::begin / end") {
+  TEST_CASE("helios::ecs::BasicQueryIter::begin / end") {
     SUBCASE("begin() returns copy pointing to first entity") {
       QueryFixture fix;
       fix.AddPosEntity(Entity{1, 0}, {.x = 3.0F, .y = 0.0F});
@@ -458,7 +458,7 @@ TEST_SUITE("helios::ecs::BasicQueryIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryIter — copy semantics") {
+  TEST_CASE("helios::ecs::BasicQueryIter — copy semantics") {
     SUBCASE("Copied iterator is independent of the original") {
       QueryFixture fix;
       fix.AddPosEntity(Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
@@ -488,7 +488,7 @@ TEST_SUITE("helios::ecs::BasicQueryIter") {
 }
 
 TEST_SUITE("helios::ecs::BasicQueryWithEntityIter") {
-  TEST_CASE("ecs::BasicQueryWithEntityIter::Constructor") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntityIter::Constructor") {
     SUBCASE("Begin equals end for empty archetype list") {
       ComponentManager manager;
       std::vector<std::reference_wrapper<const Archetype>> empty;
@@ -510,7 +510,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntityIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntityIter::operator*") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntityIter::operator*") {
     SUBCASE("First element of tuple is the correct Entity") {
       const Entity e1{1, 0};
       QueryFixture fix;
@@ -582,7 +582,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntityIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntityIter::operator++ (prefix)") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntityIter::operator++ (prefix)") {
     SUBCASE("Prefix increment advances to next entity") {
       const Entity e1{1, 0};
       const Entity e2{2, 0};
@@ -625,7 +625,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntityIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntityIter::operator++ (postfix)") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntityIter::operator++ (postfix)") {
     SUBCASE("Postfix increment returns copy before advance") {
       const Entity e1{1, 0};
       const Entity e2{2, 0};
@@ -646,7 +646,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntityIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntityIter::operator-- (prefix)") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntityIter::operator-- (prefix)") {
     SUBCASE("Prefix decrement moves back to previous entity") {
       const Entity e1{1, 0};
       const Entity e2{2, 0};
@@ -692,7 +692,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntityIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntityIter::operator-- (postfix)") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntityIter::operator-- (postfix)") {
     SUBCASE("Postfix decrement returns copy before retreat") {
       const Entity e1{1, 0};
       const Entity e2{2, 0};
@@ -714,7 +714,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntityIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntityIter::operator==") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntityIter::operator==") {
     SUBCASE("Two iterators at same position are equal") {
       QueryFixture fix;
       fix.AddPosEntity(Entity{1, 0}, {});
@@ -742,7 +742,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntityIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntityIter::begin / end") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntityIter::begin / end") {
     SUBCASE("Range-based for loop visits every entity with correct entity id") {
       const Entity e1{1, 0};
       const Entity e2{2, 0};
@@ -781,7 +781,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntityIter") {
     }
   }
 
-  TEST_CASE("ecs::BasicQueryWithEntityIter — copy semantics") {
+  TEST_CASE("helios::ecs::BasicQueryWithEntityIter — copy semantics") {
     SUBCASE("Copied iterator is independent of the original") {
       QueryFixture fix;
       fix.AddPosEntity(Entity{1, 0}, {.x = 1.0F, .y = 0.0F});

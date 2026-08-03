@@ -10,14 +10,14 @@
 using namespace helios::async;
 
 TEST_SUITE("helios::async::Common") {
-  TEST_CASE("async::Common: async::TaskType enum values") {
+  TEST_CASE("helios::async::Common: async::TaskType enum values") {
     CHECK_EQ(std::to_underlying(TaskType::kUndefined), 0);
     CHECK_EQ(std::to_underlying(TaskType::kStatic), 1);
     CHECK_EQ(std::to_underlying(TaskType::kSubTask), 2);
     CHECK_EQ(std::to_underlying(TaskType::kAsync), 3);
   }
 
-  TEST_CASE("async::Common: async::AsyncError enum values") {
+  TEST_CASE("helios::async::Common: async::AsyncError enum values") {
     CHECK_EQ(std::to_underlying(AsyncError::kInvalidTask), 0);
     CHECK_EQ(std::to_underlying(AsyncError::kExecutorShutdown), 1);
     CHECK_EQ(std::to_underlying(AsyncError::kTaskNotFound), 2);
@@ -27,7 +27,7 @@ TEST_SUITE("helios::async::Common") {
     CHECK_EQ(std::to_underlying(AsyncError::kThreadNotAvailable), 6);
   }
 
-  TEST_CASE("async::Common: async::ToString for AsyncError") {
+  TEST_CASE("helios::async::Common: async::ToString for AsyncError") {
     CHECK_EQ(ToString(AsyncError::kInvalidTask), "Invalid task");
     CHECK_EQ(ToString(AsyncError::kExecutorShutdown), "Executor is shutdown");
     CHECK_EQ(ToString(AsyncError::kTaskNotFound), "Task not found");
@@ -38,7 +38,7 @@ TEST_SUITE("helios::async::Common") {
     CHECK_EQ(ToString(AsyncError::kThreadNotAvailable), "Thread not available");
   }
 
-  TEST_CASE("async::Common: async::AsyncResult type alias") {
+  TEST_CASE("helios::async::Common: async::AsyncResult type alias") {
     SUBCASE("Success case") {
       AsyncResult<int> success_result = 42;
       CHECK(success_result.has_value());
@@ -57,7 +57,7 @@ TEST_SUITE("helios::async::Common") {
     }
   }
 
-  TEST_CASE("async::Common: async::StaticTask concept") {
+  TEST_CASE("helios::async::Common: async::StaticTask concept") {
     SUBCASE("Valid static tasks") {
       auto lambda_no_args = []() { /* void task */ };
       auto function_pointer = +[]() { /* void task */ };
@@ -75,7 +75,7 @@ TEST_SUITE("helios::async::Common") {
     }
   }
 
-  TEST_CASE("async::Common: async::SubTask concept") {
+  TEST_CASE("helios::async::Common: async::SubTask concept") {
     SUBCASE("Valid sub tasks") {
       auto sub_task_lambda = [](SubTaskGraph& graph) { graph.Join(); };
       auto sub_task_function = +[](SubTaskGraph& graph) { graph.Join(); };
@@ -95,7 +95,7 @@ TEST_SUITE("helios::async::Common") {
     }
   }
 
-  TEST_CASE("async::Common: async::AnyTask concept") {
+  TEST_CASE("helios::async::Common: async::AnyTask concept") {
     SUBCASE("Valid any tasks") {
       auto static_task = []() { /* void task */ };
       auto sub_task = [](SubTaskGraph& graph) { graph.Join(); };
@@ -110,7 +110,7 @@ TEST_SUITE("helios::async::Common") {
     }
   }
 
-  TEST_CASE("async::Common: async::details::ConvertTaskType") {
+  TEST_CASE("helios::async::Common: async::details::ConvertTaskType") {
     CHECK_EQ(details::ConvertTaskType(tf::TaskType::STATIC), TaskType::kStatic);
     CHECK_EQ(details::ConvertTaskType(tf::TaskType::SUBFLOW),
              TaskType::kSubTask);

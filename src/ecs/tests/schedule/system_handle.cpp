@@ -12,7 +12,7 @@ using namespace helios::ecs;
 using namespace helios::ecs::schedule_test;
 
 TEST_SUITE("helios::ecs::SystemHandle") {
-  TEST_CASE("ecs::SystemHandle::ctor") {
+  TEST_CASE("helios::ecs::SystemHandle::ctor") {
     SUBCASE("Constructing with id and schedule is valid") {
       Schedule schedule;
       const auto handle = schedule.Add(IncrementSystem{});
@@ -38,7 +38,7 @@ TEST_SUITE("helios::ecs::SystemHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemHandle::operator=") {
+  TEST_CASE("helios::ecs::SystemHandle::operator=") {
     SUBCASE("Move assignment transfers identity") {
       Schedule schedule;
       auto source = schedule.Add(IncrementSystem{});
@@ -51,7 +51,7 @@ TEST_SUITE("helios::ecs::SystemHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemHandle::Before") {
+  TEST_CASE("helios::ecs::SystemHandle::Before") {
     SUBCASE("Before with SystemId marks schedule dirty") {
       Schedule schedule;
       auto handle = schedule.Add(IncrementSystem{});
@@ -119,7 +119,7 @@ TEST_SUITE("helios::ecs::SystemHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemHandle::After") {
+  TEST_CASE("helios::ecs::SystemHandle::After") {
     SUBCASE("After with SystemId marks schedule dirty") {
       Schedule schedule;
       auto handle = schedule.Add(IncrementSystem{});
@@ -187,7 +187,7 @@ TEST_SUITE("helios::ecs::SystemHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemHandle::RunIf") {
+  TEST_CASE("helios::ecs::SystemHandle::RunIf") {
     SUBCASE("RunIf with predicate marks schedule dirty") {
       Schedule schedule;
       auto handle = schedule.Add(IncrementSystem{});
@@ -225,7 +225,7 @@ TEST_SUITE("helios::ecs::SystemHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemHandle::InSet") {
+  TEST_CASE("helios::ecs::SystemHandle::InSet") {
     SUBCASE("InSet with SystemSetId assigns the system to a set") {
       Schedule schedule;
       auto handle = schedule.Add(IncrementSystem{});
@@ -255,7 +255,7 @@ TEST_SUITE("helios::ecs::SystemHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemHandle::Done") {
+  TEST_CASE("helios::ecs::SystemHandle::Done") {
     SUBCASE("Done returns reference to the parent schedule") {
       Schedule schedule;
       auto handle = schedule.Add(IncrementSystem{});
@@ -266,7 +266,7 @@ TEST_SUITE("helios::ecs::SystemHandle") {
     }
   }
 
-  TEST_CASE("ecs::SystemHandle::Id") {
+  TEST_CASE("helios::ecs::SystemHandle::Id") {
     SUBCASE("Id returns the id provided at construction") {
       Schedule schedule;
       const auto handle = schedule.Add(IncrementSystem{});

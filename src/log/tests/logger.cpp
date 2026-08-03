@@ -38,7 +38,7 @@ struct ReleaseTestLogger {
 }  // namespace
 
 TEST_SUITE("helios::log::Logger") {
-  TEST_CASE("log::Logger::GetInstance: singleton pattern") {
+  TEST_CASE("helios::log::Logger::GetInstance: singleton pattern") {
     SUBCASE("Returns reference to same instance") {
       auto& instance1 = Logger::Instance();
       auto& instance2 = Logger::Instance();
@@ -46,7 +46,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::Logger::HasLogger: logger existence check") {
+  TEST_CASE("helios::log::Logger::HasLogger: logger existence check") {
     auto& logger = Logger::Instance();
 
     SUBCASE("Default logger always exists") {
@@ -60,7 +60,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::Logger::AddLogger: adding custom loggers") {
+  TEST_CASE("helios::log::Logger::AddLogger: adding custom loggers") {
     auto& logger = Logger::Instance();
 
     SUBCASE("Add new logger") {
@@ -99,7 +99,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::Logger::RemoveLogger: removing loggers") {
+  TEST_CASE("helios::log::Logger::RemoveLogger: removing loggers") {
     auto& logger = Logger::Instance();
 
     SUBCASE("Remove existing logger") {
@@ -124,7 +124,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::Logger::SetLevel: log level management") {
+  TEST_CASE("helios::log::Logger::SetLevel: log level management") {
     auto& logger = Logger::Instance();
 
     SUBCASE("Set level for default logger") {
@@ -154,7 +154,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::Logger::ShouldLog: log level filtering") {
+  TEST_CASE("helios::log::Logger::ShouldLog: log level filtering") {
     auto& logger = Logger::Instance();
 
     SUBCASE("ShouldLog respects level for default logger") {
@@ -187,7 +187,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::Logger::Log: logging messages") {
+  TEST_CASE("helios::log::Logger::Log: logging messages") {
     auto& logger = Logger::Instance();
 
     SUBCASE("Log string message with default logger") {
@@ -225,7 +225,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::Logger::Flush: flushing loggers") {
+  TEST_CASE("helios::log::Logger::Flush: flushing loggers") {
     auto& logger = Logger::Instance();
 
     SUBCASE("Flush default logger") {
@@ -249,7 +249,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::Logger::SetDefaultConfig: configuration management") {
+  TEST_CASE("helios::log::Logger::SetDefaultConfig: configuration management") {
     auto& logger = Logger::Instance();
 
     SUBCASE("Set and get default config") {
@@ -267,7 +267,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::DefaultLogger: default logger instance") {
+  TEST_CASE("helios::log::DefaultLogger: default logger instance") {
     SUBCASE("kDefaultLogger is constexpr") {
       constexpr auto logger = kDefaultLogger;
       CHECK_EQ(LoggerNameOf(logger), "HELIOS");
@@ -279,7 +279,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::LogAssertionViaLogger: integration") {
+  TEST_CASE("helios::log::LogAssertionViaLogger: integration") {
     SUBCASE("LogAssertionViaLogger doesn't crash") {
       CHECK_NOTHROW(details::LogAssertionViaLogger(
           "test_condition", std::source_location::current(), ""));
@@ -291,7 +291,7 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
-  TEST_CASE("log::Info: free function logging") {
+  TEST_CASE("helios::log::Info: free function logging") {
     SUBCASE("Info doesn't crash") {
       CHECK_NOTHROW(Info("Test info message"));
       CHECK_NOTHROW(Info("Value: {}", 42));

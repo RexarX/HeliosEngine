@@ -112,6 +112,10 @@ void Scheduler::Shutdown(App& app) {
   RunMainShutdown(main, executor);
 }
 
+void Scheduler::StopAsyncLoops() {
+  StopAsyncUpdateLoops();
+}
+
 void Scheduler::WaitForSubApps() {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::Scheduler::WaitForSubApps");
 
@@ -119,6 +123,17 @@ void Scheduler::WaitForSubApps() {
     blocking_update_future_->Wait();
     blocking_update_future_.reset();
   }
+}
+
+void Scheduler::Clear() {
+  StopAsyncUpdateLoops();
+
+  startup_graph_.Clear();
+  blocking_update_graph_.Clear();
+  shutdown_graph_.Clear();
+  sub_app_states_.clear();
+  blocking_update_future_.reset();
+  async_loops_running_.store(0, std::memory_order_release);
 }
 
 void Scheduler::RunMainStartup(SubApp& main, async::Executor& executor) {

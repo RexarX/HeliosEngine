@@ -60,7 +60,7 @@ struct Vec3 {
 }  // namespace
 
 TEST_SUITE("helios::ecs::ResourceManager") {
-  TEST_CASE("ecs::ResourceManager::ctor") {
+  TEST_CASE("helios::ecs::ResourceManager::ctor") {
     SUBCASE("Default-constructed manager is empty") {
       const ResourceManager manager;
       CHECK_EQ(manager.Count(), 0);
@@ -89,7 +89,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::operator=") {
+  TEST_CASE("helios::ecs::ResourceManager::operator=") {
     SUBCASE("Copy assignment replaces content with source resources") {
       ResourceManager source;
       source.Emplace<Counter>(99);
@@ -112,7 +112,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::Clear") {
+  TEST_CASE("helios::ecs::ResourceManager::Clear") {
     SUBCASE("Clear on empty manager is a no-op") {
       ResourceManager manager;
       manager.Clear();
@@ -142,7 +142,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::Insert") {
+  TEST_CASE("helios::ecs::ResourceManager::Insert") {
     SUBCASE("Insert stores the resource and makes it retrievable") {
       ResourceManager manager;
       manager.Insert(Counter{42});
@@ -184,7 +184,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::TryInsert") {
+  TEST_CASE("helios::ecs::ResourceManager::TryInsert") {
     SUBCASE("TryInsert succeeds and returns true when resource is absent") {
       ResourceManager manager;
 
@@ -226,7 +226,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::Emplace") {
+  TEST_CASE("helios::ecs::ResourceManager::Emplace") {
     SUBCASE("Emplace default-constructs a resource in-place") {
       ResourceManager manager;
       manager.Emplace<Counter>();
@@ -264,7 +264,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::TryEmplace") {
+  TEST_CASE("helios::ecs::ResourceManager::TryEmplace") {
     SUBCASE("TryEmplace succeeds and returns true when resource is absent") {
       ResourceManager manager;
 
@@ -295,7 +295,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::Remove") {
+  TEST_CASE("helios::ecs::ResourceManager::Remove") {
     SUBCASE("Remove eliminates the resource") {
       ResourceManager manager;
 
@@ -329,7 +329,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::TryRemove") {
+  TEST_CASE("helios::ecs::ResourceManager::TryRemove") {
     SUBCASE("TryRemove returns true and removes existing resource") {
       ResourceManager manager;
 
@@ -357,7 +357,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::Get (mutable)") {
+  TEST_CASE("helios::ecs::ResourceManager::Get (mutable)") {
     SUBCASE("Get returns mutable reference to stored resource") {
       ResourceManager manager;
 
@@ -390,7 +390,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::Get (const)") {
+  TEST_CASE("helios::ecs::ResourceManager::Get (const)") {
     SUBCASE("Const Get returns const reference") {
       ResourceManager manager;
 
@@ -412,7 +412,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::TryGet (mutable)") {
+  TEST_CASE("helios::ecs::ResourceManager::TryGet (mutable)") {
     SUBCASE("TryGet returns pointer to existing resource") {
       ResourceManager manager;
 
@@ -438,7 +438,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::TryGet (const)") {
+  TEST_CASE("helios::ecs::ResourceManager::TryGet (const)") {
     SUBCASE("Const TryGet returns const pointer to existing resource") {
       ResourceManager manager;
 
@@ -456,7 +456,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::Has") {
+  TEST_CASE("helios::ecs::ResourceManager::Has") {
     SUBCASE("Has returns false on empty manager") {
       const ResourceManager manager;
       CHECK_FALSE(manager.Has<Counter>());
@@ -487,7 +487,7 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     }
   }
 
-  TEST_CASE("ecs::ResourceManager::Count") {
+  TEST_CASE("helios::ecs::ResourceManager::Count") {
     SUBCASE("Count is zero for empty manager") {
       const ResourceManager manager;
       CHECK_EQ(manager.Count(), 0);

@@ -49,21 +49,21 @@ struct CountingUpdateSystem {
 }  // namespace
 
 TEST_SUITE("helios::app::FixedRunnerConfig") {
-  TEST_CASE("app::FixedRunnerConfig::FromFPS") {
+  TEST_CASE("helios::app::FixedRunnerConfig::FromFPS") {
     SUBCASE("60 FPS maps to ~16.67 ms interval") {
       constexpr auto config = FixedRunnerConfig::FromFPS(60);
       CHECK_EQ(config.update_interval.count(), 16'666'666);
     }
   }
 
-  TEST_CASE("app::FixedRunnerConfig::FromHz") {
+  TEST_CASE("helios::app::FixedRunnerConfig::FromHz") {
     SUBCASE("Positive Hz yields positive nanosecond interval") {
       constexpr auto config = FixedRunnerConfig::FromHz(30.0);
       CHECK_GT(config.update_interval.count(), 0);
     }
   }
 
-  TEST_CASE("app::FixedRunnerConfig::FromInterval") {
+  TEST_CASE("helios::app::FixedRunnerConfig::FromInterval") {
     SUBCASE("Milliseconds convert to nanoseconds") {
       constexpr auto config =
           FixedRunnerConfig::FromInterval(std::chrono::milliseconds{20});
@@ -73,7 +73,7 @@ TEST_SUITE("helios::app::FixedRunnerConfig") {
 }
 
 TEST_SUITE("helios::app::RunDefault") {
-  TEST_CASE("app::RunDefault") {
+  TEST_CASE("helios::app::RunDefault") {
     SUBCASE("Loops until AppExit and returns exit code") {
       App app;
       app.AddSystem(kFirst, ExitSystem{});
@@ -97,7 +97,7 @@ TEST_SUITE("helios::app::RunDefault") {
 }
 
 TEST_SUITE("helios::app::RunFixed") {
-  TEST_CASE("app::RunFixed") {
+  TEST_CASE("helios::app::RunFixed") {
     SUBCASE("Loops with fixed timestep until AppExit") {
       App app;
       app.AddSystem(kFirst, ExitSystem{});
@@ -111,7 +111,7 @@ TEST_SUITE("helios::app::RunFixed") {
 }
 
 TEST_SUITE("helios::app::RunOnce") {
-  TEST_CASE("app::RunOnce") {
+  TEST_CASE("helios::app::RunOnce") {
     SUBCASE("Returns success without AppExit after single frame") {
       App app;
       app.Initialize();
@@ -133,7 +133,7 @@ TEST_SUITE("helios::app::RunOnce") {
 }
 
 TEST_SUITE("helios::app::RunDefaultSubApp") {
-  TEST_CASE("app::RunDefaultSubApp") {
+  TEST_CASE("helios::app::RunDefaultSubApp") {
     SUBCASE("Runs update loop until owner app requests exit") {
       App app(2);
 
@@ -171,7 +171,7 @@ TEST_SUITE("helios::app::RunDefaultSubApp") {
 }
 
 TEST_SUITE("helios::app::RunFixedSubApp") {
-  TEST_CASE("app::RunFixedSubApp") {
+  TEST_CASE("helios::app::RunFixedSubApp") {
     SUBCASE("Background fixed loop increments update counter") {
       App app(4);
 
@@ -201,7 +201,7 @@ TEST_SUITE("helios::app::RunFixedSubApp") {
 }
 
 TEST_SUITE("helios::app::RunOnceSubApp") {
-  TEST_CASE("app::RunOnceSubApp") {
+  TEST_CASE("helios::app::RunOnceSubApp") {
     SUBCASE("Single update pass increments counter when invoked via runner") {
       App app(2);
       SubApp sub_app;

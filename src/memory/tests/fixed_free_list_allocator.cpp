@@ -4,7 +4,6 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <memory_resource>
 #include <tuple>
 #include <vector>
 
@@ -12,7 +11,6 @@ using namespace helios::mem;
 
 namespace {
 
-constexpr size_t kMinFreeListCapacity = sizeof(void*) * 4;
 constexpr size_t kCapacity = 4096;
 constexpr size_t kSmallCapacity = 512;
 constexpr size_t kAlign = alignof(std::max_align_t);
@@ -20,7 +18,7 @@ constexpr size_t kAlign = alignof(std::max_align_t);
 }  // namespace
 
 TEST_SUITE("helios::mem::FixedFreeListAllocator") {
-  TEST_CASE("mem::FixedFreeListAllocator::ctor()") {
+  TEST_CASE("helios::mem::FixedFreeListAllocator::ctor") {
     SUBCASE("InitialCapacity equals configured capacity") {
       const FixedFreeListAllocator alloc(kCapacity);
       CHECK_EQ(alloc.InitialCapacity(), kCapacity);
@@ -53,7 +51,8 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedFreeListAllocator::ctor(FixedFreeListAllocator&&)") {
+  TEST_CASE(
+      "helios::mem::FixedFreeListAllocator::ctor(FixedFreeListAllocator&&)") {
     SUBCASE("Moved-into allocator carries allocation state") {
       FixedFreeListAllocator source(kCapacity);
       std::ignore = source.allocate(64, kAlign);
@@ -127,7 +126,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedFreeListAllocator::Reset") {
+  TEST_CASE("helios::mem::FixedFreeListAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       FixedFreeListAllocator alloc(kCapacity);
       std::ignore = alloc.allocate(32, kAlign);
@@ -174,7 +173,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedFreeListAllocator::Empty") {
+  TEST_CASE("helios::mem::FixedFreeListAllocator::Empty") {
     SUBCASE("Returns true on fresh allocator") {
       const FixedFreeListAllocator alloc(kCapacity);
       CHECK(alloc.Empty());
@@ -203,7 +202,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedFreeListAllocator::Owns") {
+  TEST_CASE("helios::mem::FixedFreeListAllocator::Owns") {
     SUBCASE("Returns true for pointer from this allocator") {
       FixedFreeListAllocator alloc(kCapacity);
       void* const ptr = alloc.allocate(64, kAlign);
@@ -236,7 +235,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedFreeListAllocator::Stats") {
+  TEST_CASE("helios::mem::FixedFreeListAllocator::Stats") {
     SUBCASE("All fields are zero on fresh allocator") {
       const FixedFreeListAllocator alloc(kCapacity);
       const AllocatorStats stats = alloc.Stats();
@@ -306,7 +305,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedFreeListAllocator::InitialCapacity") {
+  TEST_CASE("helios::mem::FixedFreeListAllocator::InitialCapacity") {
     SUBCASE("Returns configured capacity template argument") {
       const FixedFreeListAllocator alloc(2048);
       CHECK_EQ(alloc.InitialCapacity(), 2048);
@@ -326,7 +325,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedFreeListAllocator::TotalCapacity") {
+  TEST_CASE("helios::mem::FixedFreeListAllocator::TotalCapacity") {
     SUBCASE("Equals configured capacity immediately after construction") {
       const FixedFreeListAllocator alloc(kCapacity);
       CHECK_EQ(alloc.TotalCapacity(), kCapacity);
@@ -346,7 +345,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedFreeListAllocator::FreeBlockCount") {
+  TEST_CASE("helios::mem::FixedFreeListAllocator::FreeBlockCount") {
     SUBCASE("Equals 1 on fresh allocator") {
       const FixedFreeListAllocator alloc(kCapacity);
       CHECK_EQ(alloc.FreeBlockCount(), 1);
@@ -388,7 +387,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedFreeListAllocator::allocate") {
+  TEST_CASE("helios::mem::FixedFreeListAllocator::allocate") {
     SUBCASE("Returns non-null pointer") {
       FixedFreeListAllocator alloc(kCapacity);
       CHECK_NE(alloc.allocate(32, kAlign), nullptr);
@@ -441,7 +440,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedFreeListAllocator::deallocate") {
+  TEST_CASE("helios::mem::FixedFreeListAllocator::deallocate") {
     SUBCASE("Freed memory becomes available for reallocation") {
       FixedFreeListAllocator alloc(kCapacity);
       void* const first = alloc.allocate(64, kAlign);

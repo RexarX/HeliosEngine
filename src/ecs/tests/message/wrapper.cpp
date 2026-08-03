@@ -31,7 +31,7 @@ struct SimpleMessage {
 }  // namespace
 
 TEST_SUITE("helios::ecs::MessageWrapper") {
-  TEST_CASE("ecs::MessageWrapper::ctor") {
+  TEST_CASE("helios::ecs::MessageWrapper::ctor") {
     SUBCASE("Construct from message and global index") {
       const SimpleMessage msg{42};
 
@@ -62,7 +62,7 @@ TEST_SUITE("helios::ecs::MessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::MessageWrapper::operators") {
+  TEST_CASE("helios::ecs::MessageWrapper::operators") {
     const SimpleMessage msg{42};
     const MessageWrapper<SimpleMessage> wrapper(msg, 3);
 
@@ -76,7 +76,7 @@ TEST_SUITE("helios::ecs::MessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::MessageWrapper::methods") {
+  TEST_CASE("helios::ecs::MessageWrapper::methods") {
     const SimpleMessage msg{55};
     const MessageWrapper<SimpleMessage> wrapper(msg, 7);
 
@@ -102,7 +102,7 @@ TEST_SUITE("helios::ecs::MessageWrapper") {
 }
 
 TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
-  TEST_CASE("ecs::ConsumableMessageWrapper::ctor") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapper::ctor") {
     SUBCASE("Construct from message, registry and global index") {
       ConsumedRegistry registry;
       const Position msg{1.0F, 2.0F};
@@ -139,7 +139,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapper::operators") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapper::operators") {
     ConsumedRegistry registry;
     const Position msg{10.0F, 20.0F};
     const ConsumableMessageWrapper<Position> wrapper(msg, registry, 2);
@@ -156,7 +156,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapper::Consume") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapper::Consume") {
     SUBCASE("Consume marks message as consumed") {
       ConsumedRegistry registry;
       const Position msg{};
@@ -181,7 +181,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapper::IsConsumed") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapper::IsConsumed") {
     SUBCASE("Initially not consumed") {
       ConsumedRegistry registry;
       const Position msg{};
@@ -201,7 +201,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapper::methods") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapper::methods") {
     ConsumedRegistry registry;
     const NamedMessage msg{42};
     const ConsumableMessageWrapper<NamedMessage> wrapper(msg, registry, 3);
@@ -225,7 +225,7 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
     }
   }
 
-  TEST_CASE("ecs::ConsumableMessageWrapper::assignment") {
+  TEST_CASE("helios::ecs::ConsumableMessageWrapper::assignment") {
     ConsumedRegistry registry;
     const Position msg1{1.0F, 2.0F};
     const Position msg2{3.0F, 4.0F};

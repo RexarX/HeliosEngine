@@ -6,7 +6,6 @@ helios_module(
     DESCRIPTION "Entity Component System module"
 
     HEADERS
-        include/helios/ecs/ecs.hpp
         include/helios/ecs/command/command.hpp
         include/helios/ecs/command/commands.hpp
         include/helios/ecs/command/entity_buffer.hpp
@@ -64,10 +63,13 @@ helios_module(
         include/helios/ecs/schedule/system_storage.hpp
         include/helios/ecs/builtin_commands.hpp
         include/helios/ecs/builtin_messages.hpp
+        include/helios/ecs/ecs.hpp
         include/helios/ecs/world.hpp
         include/helios/ecs/world_view.hpp
 
     SOURCES
+        src/component/archetype.cpp
+        src/component/manager.cpp
         src/schedule/executor/main_thread.cpp
         src/schedule/executor/multi_threaded.cpp
         src/schedule/executor/single_threaded.cpp

@@ -26,7 +26,7 @@ struct NamedAsync {
 }  // namespace
 
 TEST_SUITE("helios::ecs::AsyncMessageWriter") {
-  TEST_CASE("ecs::AsyncMessageWriter::ctor") {
+  TEST_CASE("helios::ecs::AsyncMessageWriter::ctor") {
     SUBCASE("Construct from MessageManager") {
       MessageManager manager;
 
@@ -59,7 +59,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWriter") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWriter::operator=") {
+  TEST_CASE("helios::ecs::AsyncMessageWriter::operator=") {
     SUBCASE("Move assignment") {
       MessageManager manager;
 
@@ -74,7 +74,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWriter") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWriter::Write (move)") {
+  TEST_CASE("helios::ecs::AsyncMessageWriter::Write (move)") {
     SUBCASE("Write single rvalue message is enqueued") {
       MessageManager manager;
 
@@ -113,7 +113,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWriter") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWriter::Write (copy)") {
+  TEST_CASE("helios::ecs::AsyncMessageWriter::Write (copy)") {
     SUBCASE("Write const lvalue message is enqueued") {
       MessageManager manager;
 
@@ -139,7 +139,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWriter") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWriter::WriteBulk") {
+  TEST_CASE("helios::ecs::AsyncMessageWriter::WriteBulk") {
     SUBCASE("WriteBulk enqueues all messages from range") {
       MessageManager manager;
 
@@ -177,7 +177,7 @@ TEST_SUITE("helios::ecs::AsyncMessageWriter") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageWriter::Emplace") {
+  TEST_CASE("helios::ecs::AsyncMessageWriter::Emplace") {
     SUBCASE("Emplace constructs and enqueues a message in-place") {
       MessageManager manager;
 

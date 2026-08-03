@@ -60,10 +60,14 @@ public:
    */
   void Shutdown(App& app);
 
+  /// @brief Requests async sub-app loops to exit and waits until they finish.
+  void StopAsyncLoops();
+
   /// @brief Waits until blocking sub-apps finish their frame update.
   void WaitForSubApps();
 
   /// @brief Clears cached task graphs and pending sub-app update state.
+  /// @details Stops async update loops before discarding tracking state.
   void Clear();
 
 private:
@@ -127,15 +131,6 @@ inline Scheduler& Scheduler::operator=(Scheduler&& other) noexcept {
       std::memory_order_release);
 
   return *this;
-}
-
-inline void Scheduler::Clear() {
-  startup_graph_.Clear();
-  blocking_update_graph_.Clear();
-  shutdown_graph_.Clear();
-  sub_app_states_.clear();
-  blocking_update_future_.reset();
-  async_loops_running_.store(0, std::memory_order_release);
 }
 
 }  // namespace helios::app

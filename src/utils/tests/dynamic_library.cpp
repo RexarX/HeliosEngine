@@ -10,7 +10,7 @@
 using namespace helios::utils;
 
 TEST_SUITE("helios::utils::DynamicLibrary") {
-  TEST_CASE("utils::DynamicLibrary::ctor: default construction") {
+  TEST_CASE("helios::utils::DynamicLibrary::ctor: default construction") {
     DynamicLibrary lib;
 
     CHECK_FALSE(lib.Loaded());
@@ -18,7 +18,9 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     CHECK(lib.Path().empty());
   }
 
-  TEST_CASE("utils::DynamicLibrary::GetPlatformExtension: platform extension") {
+  TEST_CASE(
+      "helios::utils::DynamicLibrary::GetPlatformExtension: platform "
+      "extension") {
     auto ext = DynamicLibrary::GetPlatformExtension();
 
 #if defined(HELIOS_PLATFORM_WINDOWS)
@@ -30,7 +32,8 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
 #endif
   }
 
-  TEST_CASE("utils::DynamicLibrary::GetPlatformPrefix: platform prefix") {
+  TEST_CASE(
+      "helios::utils::DynamicLibrary::GetPlatformPrefix: platform prefix") {
     auto prefix = DynamicLibrary::GetPlatformPrefix();
 
 #if defined(HELIOS_PLATFORM_WINDOWS)
@@ -40,7 +43,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
 #endif
   }
 
-  TEST_CASE("utils::DynamicLibrary::Load: non-existent library") {
+  TEST_CASE("helios::utils::DynamicLibrary::Load: non-existent library") {
     DynamicLibrary lib;
     auto result = lib.Load("/nonexistent/path/to/library.so");
 
@@ -49,7 +52,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     CHECK_FALSE(lib.Loaded());
   }
 
-  TEST_CASE("utils::DynamicLibrary::Unload: when not loaded") {
+  TEST_CASE("helios::utils::DynamicLibrary::Unload: when not loaded") {
     DynamicLibrary lib;
     auto result = lib.Unload();
 
@@ -57,7 +60,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     CHECK_EQ(result.error(), DynamicLibraryError::kNotLoaded);
   }
 
-  TEST_CASE("utils::DynamicLibrary::Reload: when not loaded") {
+  TEST_CASE("helios::utils::DynamicLibrary::Reload: when not loaded") {
     DynamicLibrary lib;
     auto result = lib.Reload();
 
@@ -65,7 +68,8 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     CHECK_EQ(result.error(), DynamicLibraryError::kNotLoaded);
   }
 
-  TEST_CASE("utils::DynamicLibrary::GetSymbolAddress: when not loaded") {
+  TEST_CASE(
+      "helios::utils::DynamicLibrary::GetSymbolAddress: when not loaded") {
     DynamicLibrary lib;
     auto result = lib.GetSymbolAddress("some_symbol");
 
@@ -73,7 +77,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     CHECK_EQ(result.error(), DynamicLibraryError::kNotLoaded);
   }
 
-  TEST_CASE("utils::DynamicLibrary::GetSymbol: typed version") {
+  TEST_CASE("helios::utils::DynamicLibrary::GetSymbol: typed version") {
     DynamicLibrary lib;
     using FnType = void (*)();
     auto result = lib.GetSymbol<FnType>("some_function");
@@ -82,7 +86,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     CHECK_EQ(result.error(), DynamicLibraryError::kNotLoaded);
   }
 
-  TEST_CASE("utils::DynamicLibrary::ctor: move construction") {
+  TEST_CASE("helios::utils::DynamicLibrary::ctor: move construction") {
     DynamicLibrary lib1;
     // Can't test with actual library, but can test the move mechanics
     DynamicLibrary lib2(std::move(lib1));
@@ -91,7 +95,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     CHECK_FALSE(lib1.Loaded());  // NOLINT(bugprone-use-after-move)
   }
 
-  TEST_CASE("utils::DynamicLibrary::operator=: move assignment") {
+  TEST_CASE("helios::utils::DynamicLibrary::operator=: move assignment") {
     DynamicLibrary lib1;
     DynamicLibrary lib2;
 
@@ -100,7 +104,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     CHECK_FALSE(lib2.Loaded());
   }
 
-  TEST_CASE("utils::DynamicLibraryErrorToString::error to string") {
+  TEST_CASE("helios::utils::DynamicLibraryErrorToString::error to string") {
     CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kFileNotFound),
              "Library file not found");
     CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kLoadFailed),
@@ -117,27 +121,30 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
              "Platform-specific error");
   }
 
-  TEST_CASE("utils::DynamicLibrary::GetLastErrorMessage: returns string") {
+  TEST_CASE(
+      "helios::utils::DynamicLibrary::GetLastErrorMessage: returns string") {
     // Just verify it doesn't crash and returns something
     std::string msg = DynamicLibrary::GetLastErrorMessage();
     // Message content varies by platform, just check it's callable
     CHECK_GE(msg.length(), 0);
   }
 
-  TEST_CASE("utils::DynamicLibrary::kInvalidHandle: is nullptr") {
+  TEST_CASE("helios::utils::DynamicLibrary::kInvalidHandle: is nullptr") {
     CHECK_EQ(DynamicLibrary::kInvalidHandle, nullptr);
   }
 
-  TEST_CASE("utils::DynamicLibrary::HandleType: is void pointer") {
+  TEST_CASE("helios::utils::DynamicLibrary::HandleType: is void pointer") {
     static_assert(std::same_as<DynamicLibrary::HandleType, void*>);
   }
 
-  TEST_CASE("utils::DynamicLibrary::Path: empty when not loaded") {
+  TEST_CASE("helios::utils::DynamicLibrary::Path: empty when not loaded") {
     DynamicLibrary lib;
     CHECK(lib.Path().empty());
   }
 
-  TEST_CASE("utils::DynamicLibrary::operator=: self move assignment is safe") {
+  TEST_CASE(
+      "helios::utils::DynamicLibrary::operator=: self move assignment is "
+      "safe") {
     DynamicLibrary lib;
 #ifdef __GNUC__
 #pragma GCC diagnostic push

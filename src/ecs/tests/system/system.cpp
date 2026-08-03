@@ -329,7 +329,7 @@ bool CounterIsPositive(Res<const FreeCounter> counter) {
 }  // namespace helios::ecs::free_function_system_test
 
 TEST_SUITE("helios::ecs::SystemTrait") {
-  TEST_CASE("ecs::SystemTrait::concept") {
+  TEST_CASE("helios::ecs::SystemTrait::concept") {
     SUBCASE("Functors with empty operator satisfy SystemTrait") {
       CHECK(SystemTrait<SimpleSystem>);
       CHECK(SystemTrait<NamedSystem>);
@@ -396,7 +396,7 @@ TEST_SUITE("helios::ecs::SystemTrait") {
     }
   }
 
-  TEST_CASE("ecs::SystemTrait::combinations") {
+  TEST_CASE("helios::ecs::SystemTrait::combinations") {
     SUBCASE("Query + Resource combination satisfies SystemTrait") {
       CHECK(SystemTrait<QueryResourceSystem>);
     }
@@ -426,7 +426,7 @@ TEST_SUITE("helios::ecs::SystemTrait") {
     }
   }
 
-  TEST_CASE("ecs::SystemTrait::const_operator") {
+  TEST_CASE("helios::ecs::SystemTrait::const_operator") {
     SUBCASE("Const operator() with Query param satisfies SystemTrait") {
       CHECK(SystemTrait<ConstOperatorSystem>);
     }
@@ -440,7 +440,7 @@ TEST_SUITE("helios::ecs::SystemTrait") {
     }
   }
 
-  TEST_CASE("ecs::SystemTrait::noexcept_operator") {
+  TEST_CASE("helios::ecs::SystemTrait::noexcept_operator") {
     SUBCASE("Noexcept operator() satisfies SystemTrait") {
       CHECK(SystemTrait<NoexceptSystem>);
     }
@@ -454,7 +454,7 @@ TEST_SUITE("helios::ecs::SystemTrait") {
     }
   }
 
-  TEST_CASE("ecs::SystemTrait::negative") {
+  TEST_CASE("helios::ecs::SystemTrait::negative") {
     SUBCASE("Polymorphic type does not satisfy SystemTrait") {
       CHECK_FALSE(SystemTrait<PolymorphicSystem>);
     }
@@ -482,7 +482,7 @@ TEST_SUITE("helios::ecs::SystemTrait") {
     }
   }
 
-  TEST_CASE("ecs::SystemTrait::free_functions") {
+  TEST_CASE("helios::ecs::SystemTrait::free_functions") {
     SUBCASE("Free function with no params satisfies SystemTrait") {
       CHECK(SystemTrait<decltype(&FreeFunctionNoParams)>);
     }
@@ -496,7 +496,7 @@ TEST_SUITE("helios::ecs::SystemTrait") {
     }
   }
 
-  TEST_CASE("ecs::SystemTrait::lambda") {
+  TEST_CASE("helios::ecs::SystemTrait::lambda") {
     SUBCASE("Lambda with Query param satisfies SystemTrait") {
       const auto lambda = [](Query<const Position&> /*query*/) {};
       CHECK(SystemTrait<decltype(lambda)>);
@@ -517,7 +517,7 @@ TEST_SUITE("helios::ecs::SystemTrait") {
 }
 
 TEST_SUITE("helios::ecs::SystemWithNameTrait") {
-  TEST_CASE("ecs::SystemWithNameTrait::concept") {
+  TEST_CASE("helios::ecs::SystemWithNameTrait::concept") {
     SUBCASE("Systems with kName satisfy SystemWithNameTrait") {
       CHECK(SystemWithNameTrait<NamedSystem>);
       CHECK(SystemWithNameTrait<ComplexSystem>);
@@ -532,7 +532,7 @@ TEST_SUITE("helios::ecs::SystemWithNameTrait") {
 }
 
 TEST_SUITE("helios::ecs::SystemNameOf") {
-  TEST_CASE("ecs::SystemNameOf::basic") {
+  TEST_CASE("helios::ecs::SystemNameOf::basic") {
     SUBCASE("System with custom name returns custom name") {
       constexpr auto name = SystemNameOf<NamedSystem>();
       CHECK_EQ(name, "NamedSystem");
@@ -573,7 +573,7 @@ TEST_SUITE("helios::ecs::SystemNameOf") {
     }
   }
 
-  TEST_CASE("ecs::System: edge cases") {
+  TEST_CASE("helios::ecs::System: edge cases") {
     SUBCASE("System with all traits specified") {
       CHECK(SystemTrait<ComplexSystem>);
       CHECK(SystemWithNameTrait<ComplexSystem>);
@@ -628,7 +628,7 @@ TEST_SUITE("helios::ecs::FreeFunctionSystem") {
   using FreeIncrementSystem =
       std::remove_cvref_t<decltype(kSystem<ff::IncrementCounter>)>;
 
-  TEST_CASE("ecs::FreeFunctionSystem::concept") {
+  TEST_CASE("helios::ecs::FreeFunctionSystem::concept") {
     SUBCASE("Wrapped free function satisfies functor system traits") {
       CHECK(SystemTrait<FreeIncrementSystem>);
       CHECK(FunctorSystemTrait<FreeIncrementSystem>);
@@ -645,7 +645,7 @@ TEST_SUITE("helios::ecs::FreeFunctionSystem") {
     }
   }
 
-  TEST_CASE("ecs::FreeFunctionSystem::kName") {
+  TEST_CASE("helios::ecs::FreeFunctionSystem::kName") {
     SUBCASE("Name contains namespace-qualified free function") {
       constexpr std::string_view name = SystemNameOf<FreeIncrementSystem>();
 
@@ -655,7 +655,7 @@ TEST_SUITE("helios::ecs::FreeFunctionSystem") {
     }
   }
 
-  TEST_CASE("ecs::FreeFunctionSystem::operator()") {
+  TEST_CASE("helios::ecs::FreeFunctionSystem::operator()") {
     SUBCASE("Wrapper directly invokes no-param free function") {
       ff::no_param_calls = 0;
 
@@ -665,7 +665,7 @@ TEST_SUITE("helios::ecs::FreeFunctionSystem") {
     }
   }
 
-  TEST_CASE("ecs::FreeFunctionSystem through Schedule::Add") {
+  TEST_CASE("helios::ecs::FreeFunctionSystem through Schedule::Add") {
     SUBCASE("Runs a wrapped free function system with resource params") {
       Schedule schedule;
       schedule.Add(kSystem<ff::IncrementCounter>);
@@ -711,7 +711,7 @@ TEST_SUITE("helios::ecs::FreeFunctionSystem") {
     }
   }
 
-  TEST_CASE("ecs::FreeFunctionSystem through grouped Schedule::Add") {
+  TEST_CASE("helios::ecs::FreeFunctionSystem through grouped Schedule::Add") {
     SUBCASE("Runs multiple wrapped free function systems as a group") {
       Schedule schedule;
       schedule.Add(kSystem<ff::IncrementCounter>,
@@ -728,7 +728,7 @@ TEST_SUITE("helios::ecs::FreeFunctionSystem") {
     }
   }
 
-  TEST_CASE("ecs::FreeFunctionSystem through RunIf") {
+  TEST_CASE("helios::ecs::FreeFunctionSystem through RunIf") {
     SUBCASE("Wrapped free function run condition can enable a system") {
       Schedule schedule;
       schedule.Add(kSystem<ff::IncrementCounter>)
@@ -762,7 +762,7 @@ TEST_SUITE("helios::ecs::FreeFunctionSystem") {
 }
 
 TEST_SUITE("helios::ecs::SystemId") {
-  TEST_CASE("ecs::SystemId::From(name)") {
+  TEST_CASE("helios::ecs::SystemId::From(name)") {
     SUBCASE("Same name produces same id") {
       constexpr auto id1 = SystemId::From("MovementSystem");
       constexpr auto id2 = SystemId::From("MovementSystem");
@@ -800,7 +800,7 @@ TEST_SUITE("helios::ecs::SystemId") {
     }
   }
 
-  TEST_CASE("ecs::SystemId::From(SystemTypeIndex)") {
+  TEST_CASE("helios::ecs::SystemId::From(SystemTypeIndex)") {
     SUBCASE("From type index produces non-zero id") {
       constexpr auto index = SystemTypeIndex::From<SimpleSystem>();
       constexpr auto id = SystemId::From(index);
@@ -815,7 +815,7 @@ TEST_SUITE("helios::ecs::SystemId") {
     }
   }
 
-  TEST_CASE("ecs::SystemId::From(SystemTypeId)") {
+  TEST_CASE("helios::ecs::SystemId::From(SystemTypeId)") {
     SUBCASE("From type id produces same as from type index") {
       constexpr auto type_id = SystemTypeId::From<SimpleSystem>();
       constexpr auto id1 = SystemId::From(type_id);
@@ -825,7 +825,7 @@ TEST_SUITE("helios::ecs::SystemId") {
     }
   }
 
-  TEST_CASE("ecs::SystemId::From<T>") {
+  TEST_CASE("helios::ecs::SystemId::From<T>") {
     SUBCASE("Same type produces same id") {
       constexpr auto id1 = SystemId::From<SimpleSystem>();
       constexpr auto id2 = SystemId::From<SimpleSystem>();
@@ -865,7 +865,7 @@ TEST_SUITE("helios::ecs::SystemId") {
     }
   }
 
-  TEST_CASE("ecs::SystemId::comparison") {
+  TEST_CASE("helios::ecs::SystemId::comparison") {
     SUBCASE("Default id is zero") {
       const SystemId default_id;
       CHECK_EQ(default_id.id, 0);
@@ -884,7 +884,7 @@ TEST_SUITE("helios::ecs::SystemId") {
     }
   }
 
-  TEST_CASE("ecs::SystemId::hash") {
+  TEST_CASE("helios::ecs::SystemId::hash") {
     SUBCASE("Hash of default id is zero") {
       const SystemId id;
       const auto hash = std::hash<SystemId>{}(id);

@@ -15,7 +15,7 @@ struct TestDynamicPlugin;
 }
 
 TEST_SUITE("helios::app::PluginTypeExport") {
-  TEST_CASE("app::PluginTypeExport::From") {
+  TEST_CASE("helios::app::PluginTypeExport::From") {
     SUBCASE("From PluginTypeId reproduces hash and name") {
       constexpr auto type_id = PluginTypeId::From<int>();
       constexpr auto export_info = PluginTypeExport::From(type_id);
@@ -35,7 +35,7 @@ TEST_SUITE("helios::app::PluginTypeExport") {
 }
 
 TEST_SUITE("helios::app::DynamicPluginErrorToString") {
-  TEST_CASE("app::DynamicPluginErrorToString") {
+  TEST_CASE("helios::app::DynamicPluginErrorToString") {
     CHECK_EQ(DynamicPluginErrorToString(DynamicPluginError::kLibraryLoadFailed),
              "Failed to load dynamic library");
     CHECK_EQ(
@@ -54,7 +54,7 @@ TEST_SUITE("helios::app::DynamicPluginErrorToString") {
 }
 
 TEST_SUITE("helios::app::DynamicPlugin") {
-  TEST_CASE("app::DynamicPlugin::ctor") {
+  TEST_CASE("helios::app::DynamicPlugin::ctor") {
     SUBCASE("Default construction is unloaded") {
       DynamicPlugin plugin;
       CHECK_FALSE(plugin.Loaded());
@@ -67,7 +67,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
     }
   }
 
-  TEST_CASE("app::DynamicPlugin::Load") {
+  TEST_CASE("helios::app::DynamicPlugin::Load") {
     SUBCASE("Invalid path returns kLibraryLoadFailed") {
       DynamicPlugin plugin;
       const auto result = plugin.Load(
@@ -99,7 +99,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
 #endif
   }
 
-  TEST_CASE("app::DynamicPlugin::Unload") {
+  TEST_CASE("helios::app::DynamicPlugin::Unload") {
 #ifdef HELIOS_TEST_PLUGIN_PATH
     DynamicPlugin plugin;
     REQUIRE(plugin.Load(std::filesystem::path{HELIOS_TEST_PLUGIN_PATH})
@@ -110,7 +110,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
 #endif
   }
 
-  TEST_CASE("app::DynamicPlugin::GetPlugin") {
+  TEST_CASE("helios::app::DynamicPlugin::GetPlugin") {
 #ifdef HELIOS_TEST_PLUGIN_PATH
     DynamicPlugin plugin;
     REQUIRE(plugin.Load(std::filesystem::path{HELIOS_TEST_PLUGIN_PATH})
@@ -120,7 +120,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
 #endif
   }
 
-  TEST_CASE("app::DynamicPlugin::ReleasePlugin") {
+  TEST_CASE("helios::app::DynamicPlugin::ReleasePlugin") {
 #ifdef HELIOS_TEST_PLUGIN_PATH
     DynamicPlugin plugin;
     REQUIRE(plugin.Load(std::filesystem::path{HELIOS_TEST_PLUGIN_PATH})
@@ -131,7 +131,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
 #endif
   }
 
-  TEST_CASE("app::DynamicPlugin::HasFileChanged") {
+  TEST_CASE("helios::app::DynamicPlugin::HasFileChanged") {
     SUBCASE("Returns false for unloaded plugin") {
       DynamicPlugin plugin;
       CHECK_FALSE(plugin.HasFileChanged());
@@ -147,7 +147,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
 #endif
   }
 
-  TEST_CASE("app::DynamicPlugin::UpdateFileTime") {
+  TEST_CASE("helios::app::DynamicPlugin::UpdateFileTime") {
     SUBCASE("UpdateFileTime on unloaded plugin is a no-op") {
       DynamicPlugin plugin;
       plugin.UpdateFileTime();
@@ -165,7 +165,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
 #endif
   }
 
-  TEST_CASE("app::DynamicPlugin::Library") {
+  TEST_CASE("helios::app::DynamicPlugin::Library") {
     SUBCASE("Unloaded plugin has unloaded library handle") {
       DynamicPlugin plugin;
       CHECK_FALSE(plugin.Library().Loaded());
@@ -181,7 +181,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
 #endif
   }
 
-  TEST_CASE("app::DynamicPlugin::Config") {
+  TEST_CASE("helios::app::DynamicPlugin::Config") {
     DynamicPluginConfig config{.create_symbol = "custom_create",
                                .plugin_type_id_symbol = "custom_id",
                                .auto_reload = true};
@@ -195,7 +195,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
     CHECK(plugin.Config().auto_reload);
   }
 
-  TEST_CASE("app::DynamicPlugin::Move construction") {
+  TEST_CASE("helios::app::DynamicPlugin::Move construction") {
 #ifdef HELIOS_TEST_PLUGIN_PATH
     DynamicPlugin source;
     REQUIRE(source.Load(std::filesystem::path{HELIOS_TEST_PLUGIN_PATH})
@@ -206,7 +206,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
 #endif
   }
 
-  TEST_CASE("app::DynamicPlugin::Move assignment") {
+  TEST_CASE("helios::app::DynamicPlugin::Move assignment") {
 #ifdef HELIOS_TEST_PLUGIN_PATH
     DynamicPlugin source;
     REQUIRE(source.Load(std::filesystem::path{HELIOS_TEST_PLUGIN_PATH})
@@ -218,7 +218,7 @@ TEST_SUITE("helios::app::DynamicPlugin") {
 #endif
   }
 
-  TEST_CASE("app::DynamicPlugin::ReloadIfChanged") {
+  TEST_CASE("helios::app::DynamicPlugin::ReloadIfChanged") {
 #ifdef HELIOS_TEST_PLUGIN_PATH
     DynamicPlugin plugin;
     REQUIRE(plugin.Load(std::filesystem::path{HELIOS_TEST_PLUGIN_PATH})

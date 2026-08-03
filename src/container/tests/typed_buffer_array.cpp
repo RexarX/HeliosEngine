@@ -126,7 +126,7 @@ struct TrackingAllocator {
 }  // namespace
 
 TEST_SUITE("helios::container::TypedBufferStorable") {
-  TEST_CASE("container::TypedBufferStorable: concept validation") {
+  TEST_CASE("helios::container::TypedBufferStorable: concept validation") {
     SUBCASE("Trivial types satisfy concept") {
       CHECK(TypedBufferStorable<int>);
       CHECK(TypedBufferStorable<float>);
@@ -149,7 +149,7 @@ TEST_SUITE("helios::container::TypedBufferStorable") {
 }
 
 TEST_SUITE("helios::container::TypedBufferArray") {
-  TEST_CASE("container::TypedBufferArray::ctor: default construction") {
+  TEST_CASE("helios::container::TypedBufferArray::ctor: default construction") {
     TypedBufferArray buffer;
 
     CHECK(buffer.Empty());
@@ -158,7 +158,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_FALSE(buffer.HasType());
   }
 
-  TEST_CASE("container::TypedBufferArray::ctor: count construction") {
+  TEST_CASE("helios::container::TypedBufferArray::ctor: count construction") {
     SUBCASE("Trivial type") {
       TypedBufferArray buffer(5, int{42});
 
@@ -194,7 +194,9 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK(buffer.IsType<int>());
   }
 
-  TEST_CASE("container::TypedBufferArray::ctor: iterator range construction") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::ctor: iterator range "
+      "construction") {
     SUBCASE("From vector") {
       std::vector<int> source = {1, 2, 3, 4, 5};
       TypedBufferArray buffer(source.begin(), source.end());
@@ -226,7 +228,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::ctor: copy construction") {
+  TEST_CASE("helios::container::TypedBufferArray::ctor: copy construction") {
     SUBCASE("Copy trivial type") {
       TypedBufferArray original(3, int{10});
       TypedBufferArray copy(original);
@@ -253,7 +255,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::ctor: move construction") {
+  TEST_CASE("helios::container::TypedBufferArray::ctor: move construction") {
     TypedBufferArray original(3, int{5});
     TypedBufferArray moved(std::move(original));
 
@@ -266,7 +268,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK(original.Empty());
   }
 
-  TEST_CASE("container::TypedBufferArray::operator=: copy assignment") {
+  TEST_CASE("helios::container::TypedBufferArray::operator=: copy assignment") {
     TypedBufferArray original(2, int{7});
     TypedBufferArray copy;
     copy = original;
@@ -278,7 +280,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::operator=: move assignment") {
+  TEST_CASE("helios::container::TypedBufferArray::operator=: move assignment") {
     TypedBufferArray original(2, int{7});
     TypedBufferArray moved;
     moved = std::move(original);
@@ -288,7 +290,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK(original.Empty());
   }
 
-  TEST_CASE("container::TypedBufferArray::ChangeType: changes stored type") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::ChangeType: changes stored type") {
     TypedBufferArray buffer(3, int{1});
     CHECK(buffer.IsType<int>());
     CHECK_EQ(buffer.Size(), 3);
@@ -300,7 +303,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_EQ(buffer.Size(), 0);
   }
 
-  TEST_CASE("container::TypedBufferArray::Reset: resets to empty state") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::Reset: resets to empty state") {
     TypedBufferArray buffer(3, int{1});
     buffer.Reset();
 
@@ -309,7 +313,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_EQ(buffer.Size(), 0);
   }
 
-  TEST_CASE("container::TypedBufferArray::PushBack: appending elements") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::PushBack: appending elements") {
     SUBCASE("Push trivial type") {
       TypedBufferArray buffer;
 
@@ -335,7 +340,9 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::EmplaceBack: in-place construction") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::EmplaceBack: in-place "
+      "construction") {
     SUBCASE("Emplace trivial") {
       TypedBufferArray buffer;
       auto& ref = buffer.EmplaceBack<int>(42);
@@ -368,7 +375,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_EQ(buffer.At<int>(2), 3);
   }
 
-  TEST_CASE("container::TypedBufferArray::Insert: inserting at position") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::Insert: inserting at position") {
     SUBCASE("Insert single value") {
       TypedBufferArray buffer;
       buffer.PushBack(1);
@@ -396,7 +404,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::AppendRange: appending a range") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::AppendRange: appending a range") {
     std::vector<int> to_append = {4, 5, 6};
     TypedBufferArray buffer;
     buffer.PushBack(1);
@@ -429,7 +438,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_EQ(buffer.At<int>(4), 5);
   }
 
-  TEST_CASE("container::TypedBufferArray::PopBack: removing last element") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::PopBack: removing last element") {
     TypedBufferArray buffer;
     buffer.PushBack(1);
     buffer.PushBack(2);
@@ -466,7 +476,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_EQ(buffer.At<int>(1), 5);
   }
 
-  TEST_CASE("container::TypedBufferArray::Clear: clearing all elements") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::Clear: clearing all elements") {
     TypedBufferArray buffer;
     buffer.PushBack(1);
     buffer.PushBack(2);
@@ -476,7 +487,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_EQ(buffer.Size(), 0);
   }
 
-  TEST_CASE("container::TypedBufferArray::Reserve: reserving capacity") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::Reserve: reserving capacity") {
     TypedBufferArray buffer;
     buffer.PushBack(1);
     buffer.Reserve(100);
@@ -485,7 +497,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_EQ(buffer.Size(), 1);
   }
 
-  TEST_CASE("container::TypedBufferArray::Resize: resizing storage") {
+  TEST_CASE("helios::container::TypedBufferArray::Resize: resizing storage") {
     SUBCASE("Resize larger (default-init)") {
       TypedBufferArray buffer;
       buffer.PushBack(1);
@@ -517,7 +529,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::At: element access") {
+  TEST_CASE("helios::container::TypedBufferArray::At: element access") {
     TypedBufferArray buffer;
     buffer.PushBack(10);
     buffer.PushBack(20);
@@ -542,7 +554,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_EQ(buffer.Back<int>(), 30);
   }
 
-  TEST_CASE("container::TypedBufferArray::Data: span access") {
+  TEST_CASE("helios::container::TypedBufferArray::Data: span access") {
     SUBCASE("Non-const span") {
       TypedBufferArray buffer;
       buffer.PushBack(1);
@@ -568,7 +580,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::Bytes: byte span access") {
+  TEST_CASE("helios::container::TypedBufferArray::Bytes: byte span access") {
     TypedBufferArray buffer;
     buffer.PushBack(1);
     buffer.PushBack(2);
@@ -577,7 +589,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_EQ(bytes.size(), 2 * sizeof(int));
   }
 
-  TEST_CASE("container::TypedBufferArray::iterators") {
+  TEST_CASE("helios::container::TypedBufferArray::iterators") {
     TypedBufferArray buffer;
     buffer.PushBack(1);
     buffer.PushBack(2);
@@ -611,7 +623,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::object lifecycle") {
+  TEST_CASE("helios::container::TypedBufferArray::object lifecycle") {
     SUBCASE("Destructor called on clear") {
       CountingType::Reset();
 
@@ -638,7 +650,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::erase and erase_if") {
+  TEST_CASE("helios::container::TypedBufferArray::erase and erase_if") {
     SUBCASE("erase removes matching elements") {
       TypedBufferArray buffer;
       buffer.PushBack(1);
@@ -669,7 +681,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::ShrinkToFit: reduces capacity") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::ShrinkToFit: reduces capacity") {
     TypedBufferArray buffer;
     buffer.ChangeType<int>();
     buffer.Reserve(100);
@@ -681,7 +694,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     CHECK_LE(buffer.Capacity(), 10);
   }
 
-  TEST_CASE("container::TypedBufferArray::large data stress test") {
+  TEST_CASE("helios::container::TypedBufferArray::large data stress test") {
     TypedBufferArray buffer;
     constexpr size_t kLargeCount = 10000;
     for (size_t i = 0; i < kLargeCount; ++i) {
@@ -778,7 +791,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::Swap: swapping contents") {
+  TEST_CASE("helios::container::TypedBufferArray::Swap: swapping contents") {
     SUBCASE("Swap with another buffer") {
       TypedBufferArray buffer1;
       buffer1.PushBack(1);
@@ -837,7 +850,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::type identity methods") {
+  TEST_CASE("helios::container::TypedBufferArray::type identity methods") {
     SUBCASE("StoredTypeId") {
       TypedBufferArray buffer;
       CHECK(buffer.StoredTypeId().Empty());
@@ -861,7 +874,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::allocator construction") {
+  TEST_CASE("helios::container::TypedBufferArray::allocator construction") {
     TypedBufferArray buffer;
     buffer.PushBack(1);
     buffer.PushBack(2);
@@ -888,7 +901,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::TypedBufferArray::Merge: cross-allocator merging") {
+  TEST_CASE(
+      "helios::container::TypedBufferArray::Merge: cross-allocator merging") {
     using DefaultBuffer = TypedBufferArray<std::allocator<std::byte>>;
     using TrackingBuffer = TypedBufferArray<TrackingAllocator<std::byte>>;
 
@@ -962,7 +976,8 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("container::PmrTypedBufferArray: works with memory_resource") {
+  TEST_CASE(
+      "helios::container::PmrTypedBufferArray: works with memory_resource") {
     std::byte buffer[512];
     std::pmr::monotonic_buffer_resource resource(buffer, sizeof(buffer));
 

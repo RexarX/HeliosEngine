@@ -65,7 +65,7 @@ struct OrderSystem {
 }  // namespace
 
 TEST_SUITE("helios::app::Scheduler") {
-  TEST_CASE("app::Scheduler::ctor") {
+  TEST_CASE("helios::app::Scheduler::ctor") {
     SUBCASE("Default-constructed scheduler can build and run frames") {
       App app(2);
       app.InsertResources(CounterResource{});
@@ -88,7 +88,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::operator=") {
+  TEST_CASE("helios::app::Scheduler::operator=") {
     SUBCASE("Move assignment transfers scheduler state") {
       App app(2);
       app.InsertResources(CounterResource{});
@@ -105,7 +105,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::Clear") {
+  TEST_CASE("helios::app::Scheduler::Clear") {
     SUBCASE("Clear resets sub-app tracking so WaitForSubApps is immediate") {
       App app(2);
       app.InsertSubApp(RenderSubAppLabel{}, SubApp{});
@@ -117,7 +117,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::Build") {
+  TEST_CASE("helios::app::Scheduler::Build") {
     SUBCASE("Build wires sub-apps for parallel startup and updates") {
       App app(4);
       app.InsertSubApp(RenderSubAppLabel{}, SubApp{});
@@ -130,7 +130,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::RunStartup") {
+  TEST_CASE("helios::app::Scheduler::RunStartup") {
     SUBCASE("RunStartup executes startup systems on main sub-app") {
       App app(2);
       app.InsertResources(CounterResource{});
@@ -140,7 +140,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::RunFrame") {
+  TEST_CASE("helios::app::Scheduler::RunFrame") {
     SUBCASE("RunFrame executes update systems on main sub-app") {
       App app(2);
       app.InsertResources(CounterResource{});
@@ -203,7 +203,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::Shutdown") {
+  TEST_CASE("helios::app::Scheduler::Shutdown") {
     SUBCASE("Shutdown runs shutdown stage and leaves app initialized") {
       App app(2);
       app.InsertResources(CounterResource{});
@@ -213,7 +213,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
   }
 
-  TEST_CASE("app::Scheduler::WaitForSubApps") {
+  TEST_CASE("helios::app::Scheduler::WaitForSubApps") {
     SUBCASE("WaitForSubApps joins in-flight blocking sub-app updates") {
       App app(4);
       SubApp render;

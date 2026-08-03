@@ -30,6 +30,32 @@ SubApp::SubApp(std::string name)
   RegisterBuiltinSubAppSchedules(scheduler_);
 }
 
+SubApp& SubApp::operator=(SubApp&& other) noexcept {
+  HELIOS_ASSERT(!IsUpdating(), "Cannot assign while updating!");
+  HELIOS_ASSERT(!other.IsUpdating(), "Cannot assign from updating sub-app!");
+
+  if (this == &other) [[unlikely]] {
+    return *this;
+  }
+
+  name_ = std::move(other.name_);
+  world_ = std::move(other.world_);
+  scheduler_ = std::move(other.scheduler_);
+  update_stage_ = other.update_stage_;
+  extract_fn_ = std::move(other.extract_fn_);
+  runner_ = std::move(other.runner_);
+  is_updating_.store(other.is_updating_.load(std::memory_order_acquire),
+                     std::memory_order_release);
+  async_loop_stop_.store(other.async_loop_stop_.load(std::memory_order_acquire),
+                         std::memory_order_release);
+  allow_overlapping_updates_ = other.allow_overlapping_updates_;
+  is_async_ = other.is_async_;
+  max_extraction_skips_ = other.max_extraction_skips_;
+  owner_app_ = other.owner_app_;
+
+  return *this;
+}
+
 void SubApp::Clear() {
   HELIOS_ASSERT(!IsUpdating(), "Cannot clear while sub-app is updating!");
 
@@ -94,6 +120,7 @@ void SubApp::RunUpdatePass(async::Executor& executor) {
   if (is_async_) {
     while (!ShouldExit()) {
       Update(executor);
+      std::this_thread::yield();
     }
     return;
   }

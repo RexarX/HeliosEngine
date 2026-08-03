@@ -101,7 +101,7 @@ struct PolymorphicResource {
 }  // namespace
 
 TEST_SUITE("helios::ecs::ResourceTrait") {
-  TEST_CASE("ecs::ResourceTrait — satisfied by valid resource types") {
+  TEST_CASE("helios::ecs::ResourceTrait — satisfied by valid resource types") {
     SUBCASE("plain struct with default members satisfies ResourceTrait") {
       CHECK(ResourceTrait<PlainResource>);
     }
@@ -119,7 +119,7 @@ TEST_SUITE("helios::ecs::ResourceTrait") {
     }
   }
 
-  TEST_CASE("ecs::ResourceTrait — not satisfied by invalid types") {
+  TEST_CASE("helios::ecs::ResourceTrait — not satisfied by invalid types") {
     SUBCASE("non-destructible type does not satisfy ResourceTrait") {
       CHECK(!ResourceTrait<NonDestructible>);
     }
@@ -137,14 +137,17 @@ TEST_SUITE("helios::ecs::ResourceTrait") {
 }
 
 TEST_SUITE("helios::ecs::ResourceWithNameTrait") {
-  TEST_CASE("ecs::ResourceWithNameTrait — satisfied when kName is present") {
+  TEST_CASE(
+      "helios::ecs::ResourceWithNameTrait — satisfied when kName is present") {
     SUBCASE(
         "type with static constexpr kName satisfies ResourceWithNameTrait") {
       CHECK(ResourceWithNameTrait<NamedResource>);
     }
   }
 
-  TEST_CASE("ecs::ResourceWithNameTrait — not satisfied when kName is absent") {
+  TEST_CASE(
+      "helios::ecs::ResourceWithNameTrait — not satisfied when kName is "
+      "absent") {
     SUBCASE(
         "plain resource without kName does not satisfy ResourceWithNameTrait") {
       CHECK(!ResourceWithNameTrait<PlainResource>);
@@ -249,7 +252,7 @@ TEST_SUITE("helios::ecs::ResourceWithRemovalCallbackTrait") {
 }
 
 TEST_SUITE("helios::ecs::ResourceNameOf") {
-  TEST_CASE("ecs::ResourceNameOf<T>() — type template overload") {
+  TEST_CASE("helios::ecs::ResourceNameOf<T>() — type template overload") {
     SUBCASE("returns kName when ResourceWithNameTrait is satisfied") {
       CHECK(ResourceNameOf<NamedResource>() == "MyNamedResource");
     }
@@ -261,7 +264,7 @@ TEST_SUITE("helios::ecs::ResourceNameOf") {
     }
   }
 
-  TEST_CASE("ecs::ResourceNameOf(instance) — instance overload") {
+  TEST_CASE("helios::ecs::ResourceNameOf(instance) — instance overload") {
     SUBCASE("returns the same value as the type overload for named resources") {
       NamedResource instance{};
       CHECK(ResourceNameOf(instance) == ResourceNameOf<NamedResource>());
@@ -276,7 +279,7 @@ TEST_SUITE("helios::ecs::ResourceNameOf") {
 }
 
 TEST_SUITE("helios::ecs::IsResourceThreadSafe") {
-  TEST_CASE("ecs::IsResourceThreadSafe<T>() — type template overload") {
+  TEST_CASE("helios::ecs::IsResourceThreadSafe<T>() — type template overload") {
     SUBCASE("returns true when kThreadSafe = true") {
       CHECK(IsResourceThreadSafe<ThreadSafeResource>());
     }
@@ -290,7 +293,7 @@ TEST_SUITE("helios::ecs::IsResourceThreadSafe") {
     }
   }
 
-  TEST_CASE("ecs::IsResourceThreadSafe(instance) — instance overload") {
+  TEST_CASE("helios::ecs::IsResourceThreadSafe(instance) — instance overload") {
     SUBCASE("returns same value as type overload for thread-safe resource") {
       ThreadSafeResource instance{};
       CHECK(IsResourceThreadSafe(instance) ==
@@ -311,7 +314,9 @@ TEST_SUITE("helios::ecs::IsResourceThreadSafe") {
 }
 
 TEST_SUITE("helios::ecs::ResourceCallOnInsert") {
-  TEST_CASE("ecs::ResourceCallOnInsert(instance, world) — instance overload") {
+  TEST_CASE(
+      "helios::ecs::ResourceCallOnInsert(instance, world) — instance "
+      "overload") {
     SUBCASE("delegates to the type overload") {
       CallbackTracker::Reset();
       World& world = DeclWorld();
@@ -329,7 +334,9 @@ TEST_SUITE("helios::ecs::ResourceCallOnInsert") {
 }
 
 TEST_SUITE("helios::ecs::ResourceCallOnRemove") {
-  TEST_CASE("ecs::ResourceCallOnRemove(instance, world) — instance overload") {
+  TEST_CASE(
+      "helios::ecs::ResourceCallOnRemove(instance, world) — instance "
+      "overload") {
     SUBCASE("delegates to the type overload") {
       CallbackTracker::Reset();
       World& world = DeclWorld();

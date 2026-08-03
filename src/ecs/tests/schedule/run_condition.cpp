@@ -102,7 +102,7 @@ struct QueryAndAsyncResRunCondition {
 }  // namespace
 
 TEST_SUITE("helios::ecs::RunConditionStorage") {
-  TEST_CASE("ecs::RunConditionStorage::ctor") {
+  TEST_CASE("helios::ecs::RunConditionStorage::ctor") {
     SUBCASE("Constructing from members creates valid storage") {
       auto storage = RunConditionStorage::From(
           RunCondition([](World& /*world*/, SystemLocalData& /*data*/) -> bool {
@@ -124,7 +124,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
     }
   }
 
-  TEST_CASE("ecs::RunConditionStorage::From") {
+  TEST_CASE("helios::ecs::RunConditionStorage::From") {
     SUBCASE("From with a predicate stores the callable") {
       auto storage = RunConditionStorage::From(
           RunCondition([](World& /*world*/, SystemLocalData& /*data*/) -> bool {
@@ -161,7 +161,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
     }
   }
 
-  TEST_CASE("ecs::RunConditionStorage::FromParam") {
+  TEST_CASE("helios::ecs::RunConditionStorage::FromParam") {
     SUBCASE("FromParam with always-true condition") {
       auto storage = RunConditionStorage::FromParam(AlwaysTrueCondition{});
 
@@ -194,7 +194,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
     }
   }
 
-  TEST_CASE("ecs::RunConditionStorage::FromParam Query") {
+  TEST_CASE("helios::ecs::RunConditionStorage::FromParam Query") {
     SUBCASE("FromParam with Query parameter creates valid storage") {
       auto storage =
           RunConditionStorage::FromParam(AlwaysTrueQueryRunCondition{});
@@ -215,7 +215,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
     }
   }
 
-  TEST_CASE("ecs::RunConditionStorage::FromParam AsyncRes") {
+  TEST_CASE("helios::ecs::RunConditionStorage::FromParam AsyncRes") {
     SUBCASE("FromParam with AsyncRes parameter creates valid storage") {
       auto storage = RunConditionStorage::FromParam(AsyncResRunCondition{});
 
@@ -234,7 +234,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
     }
   }
 
-  TEST_CASE("ecs::RunConditionStorage::FromParam WorldView") {
+  TEST_CASE("helios::ecs::RunConditionStorage::FromParam WorldView") {
     SUBCASE("FromParam with WorldView parameter creates valid storage") {
       auto storage = RunConditionStorage::FromParam(WorldViewRunCondition{});
 
@@ -253,7 +253,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
     }
   }
 
-  TEST_CASE("ecs::RunConditionStorage::FromParam message parameters") {
+  TEST_CASE("helios::ecs::RunConditionStorage::FromParam message parameters") {
     SUBCASE("FromParam with MessageReader creates valid storage") {
       auto storage =
           RunConditionStorage::FromParam(MessageReaderRunCondition{});
@@ -293,7 +293,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
     }
   }
 
-  TEST_CASE("ecs::RunConditionStorage::FromParam combined parameters") {
+  TEST_CASE("helios::ecs::RunConditionStorage::FromParam combined parameters") {
     SUBCASE("FromParam with Query and Res creates valid storage") {
       auto storage = RunConditionStorage::FromParam(CombinedRunCondition{});
 
@@ -331,7 +331,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
     }
   }
 
-  TEST_CASE("ecs::RunConditionStorage::FromParamNamed") {
+  TEST_CASE("helios::ecs::RunConditionStorage::FromParamNamed") {
     SUBCASE("FromParamNamed with lambda produces valid storage and name") {
       auto storage = RunConditionStorage::FromParamNamed(
           "LambdaCondition", [](Res<CounterResource>) -> bool { return true; });

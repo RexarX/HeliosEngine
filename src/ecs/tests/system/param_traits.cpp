@@ -61,7 +61,7 @@ concept HasRegisterAccess = requires(AccessPolicyBuilder& builder) {
 }  // namespace
 
 TEST_SUITE("helios::ecs::SystemParamTraits") {
-  TEST_CASE("ecs::SystemParamTraits::Query") {
+  TEST_CASE("helios::ecs::SystemParamTraits::Query") {
     SUBCASE("Query exists as a system parameter trait") {
       CHECK(HasSystemParamTraits<Query<const Position&>>);
       CHECK(HasSystemParamTraits<Query<Position&, const Velocity&>>);
@@ -108,7 +108,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::Resources") {
+  TEST_CASE("helios::ecs::SystemParamTraits::Resources") {
     SUBCASE("Res<const T> exists as a system parameter trait") {
       CHECK(HasSystemParamTraits<Res<const Camera>>);
       CHECK(HasRegisterAccess<Res<const Camera>>);
@@ -182,7 +182,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::Local") {
+  TEST_CASE("helios::ecs::SystemParamTraits::Local") {
     SUBCASE("Local<const T> exists as a system parameter trait") {
       CHECK(HasSystemParamTraits<Local<const Camera>>);
       CHECK(HasRegisterAccess<Local<const Camera>>);
@@ -257,7 +257,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::Commands") {
+  TEST_CASE("helios::ecs::SystemParamTraits::Commands") {
     SUBCASE("Commands exists as a system parameter trait") {
       CHECK(HasSystemParamTraits<Commands>);
       CHECK(HasRegisterAccess<Commands>);
@@ -273,7 +273,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::WorldView") {
+  TEST_CASE("helios::ecs::SystemParamTraits::WorldView") {
     SUBCASE("WorldView exists as a system parameter trait") {
       CHECK(HasSystemParamTraits<WorldView>);
       CHECK(HasRegisterAccess<WorldView>);
@@ -289,7 +289,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::Messages") {
+  TEST_CASE("helios::ecs::SystemParamTraits::Messages") {
     SUBCASE("MessageReader<T> exists as a system parameter trait") {
       CHECK(HasSystemParamTraits<MessageReader<MyMessage>>);
       CHECK(HasRegisterAccess<MessageReader<MyMessage>>);
@@ -364,7 +364,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::combination") {
+  TEST_CASE("helios::ecs::SystemParamTraits::combination") {
     SUBCASE("Multiple trait types coexist") {
       AccessPolicyBuilder builder;
       SystemParamTraits<Query<const Position&>>::RegisterAccess(builder);

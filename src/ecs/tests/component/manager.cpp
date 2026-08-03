@@ -88,7 +88,7 @@ using NestedBundle = ComponentBundle<MotionBundle, StateBundle>;
 }  // namespace
 
 TEST_SUITE("helios::ecs::ComponentManager") {
-  TEST_CASE("ecs::ComponentManager::ctor") {
+  TEST_CASE("helios::ecs::ComponentManager::ctor") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("ComponentManager can be default constructed") {
@@ -106,7 +106,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::operator=") {
+  TEST_CASE("helios::ecs::ComponentManager::operator=") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Move assignment") {
@@ -120,7 +120,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Clear") {
+  TEST_CASE("helios::ecs::ComponentManager::Clear") {
     SUBCASE("No entities are tracked after Clear") {
       ComponentManager mgr;
 
@@ -141,7 +141,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::ClearData") {
+  TEST_CASE("helios::ecs::ComponentManager::ClearData") {
     SUBCASE("No entities are tracked after ClearData") {
       ComponentManager mgr;
 
@@ -161,7 +161,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Register") {
+  TEST_CASE("helios::ecs::ComponentManager::Register") {
     SUBCASE("Register a single component type") {
       ComponentManager mgr;
       mgr.Register<Position>();
@@ -183,7 +183,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::RegisterAll") {
+  TEST_CASE("helios::ecs::ComponentManager::RegisterAll") {
     SUBCASE("Register multiple component types at once") {
       ComponentManager mgr;
 
@@ -205,7 +205,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::InitEntity") {
+  TEST_CASE("helios::ecs::ComponentManager::InitEntity") {
     const Entity e1{1, 0};
     const Entity e2{2, 0};
     const Entity e3{3, 0};
@@ -244,7 +244,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::RemoveEntity") {
+  TEST_CASE("helios::ecs::ComponentManager::RemoveEntity") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Entity is no longer tracked after removal") {
@@ -276,7 +276,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryRemoveEntity") {
+  TEST_CASE("helios::ecs::ComponentManager::TryRemoveEntity") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns true and removes tracked entity") {
@@ -296,7 +296,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Clear/entity") {
+  TEST_CASE("helios::ecs::ComponentManager::Clear/entity") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Entity remains tracked after Clear") {
@@ -332,7 +332,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::AddArchetypeComponents") {
+  TEST_CASE("helios::ecs::ComponentManager::AddArchetypeComponents") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Entity has components after add") {
@@ -394,7 +394,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryAddArchetypeComponents") {
+  TEST_CASE("helios::ecs::ComponentManager::TryAddArchetypeComponents") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns true when component is new") {
@@ -421,7 +421,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::EmplaceArchetypeComponent") {
+  TEST_CASE("helios::ecs::ComponentManager::EmplaceArchetypeComponent") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Component is present after emplace") {
@@ -443,7 +443,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryEmplaceArchetypeComponent") {
+  TEST_CASE("helios::ecs::ComponentManager::TryEmplaceArchetypeComponent") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns true when component is new") {
@@ -468,7 +468,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::RemoveArchetypeComponents") {
+  TEST_CASE("helios::ecs::ComponentManager::RemoveArchetypeComponents") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Components are absent after removal") {
@@ -497,7 +497,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryRemoveArchetypeComponents") {
+  TEST_CASE("helios::ecs::ComponentManager::TryRemoveArchetypeComponents") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns true and removes existing components") {
@@ -526,7 +526,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::AddSparseComponent") {
+  TEST_CASE("helios::ecs::ComponentManager::AddSparseComponent") {
     constexpr Entity entity{1, 0};
     const SparsePosition pos{.x = 1.0F, .y = 2.0F};
 
@@ -569,7 +569,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryAddSparseComponent") {
+  TEST_CASE("helios::ecs::ComponentManager::TryAddSparseComponent") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns true when component is new") {
@@ -592,7 +592,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::EmplaceSparseComponent") {
+  TEST_CASE("helios::ecs::ComponentManager::EmplaceSparseComponent") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Component is present after emplace") {
@@ -615,7 +615,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryEmplaceSparseComponent") {
+  TEST_CASE("helios::ecs::ComponentManager::TryEmplaceSparseComponent") {
     Entity entity{1, 0};
 
     SUBCASE("Returns true when component is new") {
@@ -640,7 +640,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::RemoveSparseComponent") {
+  TEST_CASE("helios::ecs::ComponentManager::RemoveSparseComponent") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Component is absent after removal") {
@@ -669,7 +669,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryRemoveSparseComponent") {
+  TEST_CASE("helios::ecs::ComponentManager::TryRemoveSparseComponent") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns true and removes existing component") {
@@ -693,7 +693,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Add") {
+  TEST_CASE("helios::ecs::ComponentManager::Add") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Archetype components") {
@@ -742,7 +742,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryAdd") {
+  TEST_CASE("helios::ecs::ComponentManager::TryAdd") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns correct bools for new components") {
@@ -828,7 +828,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::AddBundle") {
+  TEST_CASE("helios::ecs::ComponentManager::AddBundle") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Nested bundle is flattened in one operation") {
@@ -885,7 +885,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryAddBundle") {
+  TEST_CASE("helios::ecs::ComponentManager::TryAddBundle") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Results follow flattened declaration order") {
@@ -917,7 +917,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Emplace") {
+  TEST_CASE("helios::ecs::ComponentManager::Emplace") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Component is present after emplace") {
@@ -951,7 +951,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryEmplace") {
+  TEST_CASE("helios::ecs::ComponentManager::TryEmplace") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns true when emplacing a new component") {
@@ -976,7 +976,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Remove") {
+  TEST_CASE("helios::ecs::ComponentManager::Remove") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("All specified components are removed") {
@@ -1028,7 +1028,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryRemove") {
+  TEST_CASE("helios::ecs::ComponentManager::TryRemove") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns correct bools for mixed presence") {
@@ -1097,7 +1097,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::RemoveBundle") {
+  TEST_CASE("helios::ecs::ComponentManager::RemoveBundle") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Nested archetype and sparse components are removed") {
@@ -1114,7 +1114,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryRemoveBundle") {
+  TEST_CASE("helios::ecs::ComponentManager::TryRemoveBundle") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Results follow flattened declaration order") {
@@ -1145,7 +1145,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Get") {
+  TEST_CASE("helios::ecs::ComponentManager::Get") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns mutable reference") {
@@ -1194,7 +1194,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::TryGet") {
+  TEST_CASE("helios::ecs::ComponentManager::TryGet") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns pointer to existing component") {
@@ -1254,7 +1254,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Registered") {
+  TEST_CASE("helios::ecs::ComponentManager::Registered") {
     SUBCASE("Registered returns true for explicitly registered type") {
       ComponentManager mgr;
       mgr.Register<Position>();
@@ -1277,7 +1277,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Tracked") {
+  TEST_CASE("helios::ecs::ComponentManager::Tracked") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Tracked returns true for initialized entity") {
@@ -1301,7 +1301,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Has") {
+  TEST_CASE("helios::ecs::ComponentManager::Has") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns true after add") {
@@ -1350,7 +1350,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Has/multi") {
+  TEST_CASE("helios::ecs::ComponentManager::Has/multi") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Returns all true when entity has all components") {
@@ -1409,7 +1409,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::EntityArchetype") {
+  TEST_CASE("helios::ecs::ComponentManager::EntityArchetype") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("New entity is in the empty archetype") {
@@ -1454,7 +1454,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Archetypes") {
+  TEST_CASE("helios::ecs::ComponentManager::Archetypes") {
     const Entity e1{1, 0};
 
     SUBCASE("Empty archetype exists from the start") {
@@ -1504,7 +1504,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::StructuralVersion") {
+  TEST_CASE("helios::ecs::ComponentManager::StructuralVersion") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Version starts at zero") {
@@ -1546,7 +1546,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager::Metadata") {
+  TEST_CASE("helios::ecs::ComponentManager::Metadata") {
     SUBCASE("Metadata is accessible after explicit registration") {
       ComponentManager mgr;
 
@@ -1587,7 +1587,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
-  TEST_CASE("ecs::ComponentManager - multi-entity scenarios") {
+  TEST_CASE("helios::ecs::ComponentManager - multi-entity scenarios") {
     const Entity e1{1, 0};
     const Entity e2{2, 0};
     const Position pos1{.x = 1.0F, .y = 2.0F};

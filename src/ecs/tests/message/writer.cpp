@@ -29,7 +29,7 @@ MessageQueue<> MakeQueueWith() {
 }  // namespace
 
 TEST_SUITE("helios::ecs::BasicMessageWriter") {
-  TEST_CASE("ecs::BasicMessageWriter::ctor") {
+  TEST_CASE("helios::ecs::BasicMessageWriter::ctor") {
     SUBCASE("Writer can be constructed from a registered queue") {
       auto queue = MakeQueueWith();
       const BasicMessageWriter<PositionMsg> writer(queue);
@@ -48,7 +48,7 @@ TEST_SUITE("helios::ecs::BasicMessageWriter") {
     }
   }
 
-  TEST_CASE("ecs::BasicMessageWriter::operator=") {
+  TEST_CASE("helios::ecs::BasicMessageWriter::operator=") {
     SUBCASE("Move assignment transfers the queue reference") {
       auto queue = MakeQueueWith();
       auto queue2 = MakeQueueWith();
@@ -65,7 +65,7 @@ TEST_SUITE("helios::ecs::BasicMessageWriter") {
     }
   }
 
-  TEST_CASE("ecs::BasicMessageWriter::Write") {
+  TEST_CASE("helios::ecs::BasicMessageWriter::Write") {
     SUBCASE("Write enqueues a single message into the queue") {
       auto queue = MakeQueueWith();
 
@@ -112,7 +112,7 @@ TEST_SUITE("helios::ecs::BasicMessageWriter") {
     }
   }
 
-  TEST_CASE("ecs::BasicMessageWriter::WriteBulk") {
+  TEST_CASE("helios::ecs::BasicMessageWriter::WriteBulk") {
     SUBCASE("WriteBulk enqueues all messages in the range") {
       auto queue = MakeQueueWith();
 
@@ -162,7 +162,7 @@ TEST_SUITE("helios::ecs::BasicMessageWriter") {
     }
   }
 
-  TEST_CASE("ecs::BasicMessageWriter::Emplace") {
+  TEST_CASE("helios::ecs::BasicMessageWriter::Emplace") {
     SUBCASE("Emplace constructs and enqueues the message in-place") {
       auto queue = MakeQueueWith();
 
@@ -214,7 +214,7 @@ TEST_SUITE("helios::ecs::BasicMessageWriter") {
     }
   }
 
-  TEST_CASE("ecs::BasicMessageWriter - mixed operations") {
+  TEST_CASE("helios::ecs::BasicMessageWriter - mixed operations") {
     SUBCASE("Write, WriteBulk and Emplace all land in the same queue") {
       auto queue = MakeQueueWith();
 

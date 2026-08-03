@@ -16,7 +16,7 @@
 using namespace helios::ecs;
 
 TEST_SUITE("helios::ecs::EntityManager") {
-  TEST_CASE("ecs::EntityManager::ctor") {
+  TEST_CASE("helios::ecs::EntityManager::ctor") {
     SUBCASE("Default ctor") {
       const EntityManager manager;
       CHECK_EQ(manager.Count(), 0);
@@ -46,7 +46,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::assignment") {
+  TEST_CASE("helios::ecs::EntityManager::assignment") {
     SUBCASE("Copy assignment") {
       EntityManager original;
       [[maybe_unused]] auto e1 = original.Create();
@@ -80,7 +80,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::Clear") {
+  TEST_CASE("helios::ecs::EntityManager::Clear") {
     SUBCASE("Clear with no entities") {
       EntityManager manager;
       manager.Clear();
@@ -114,7 +114,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::Flush") {
+  TEST_CASE("helios::ecs::EntityManager::Flush") {
     SUBCASE("Flush with no reservations is a no-op") {
       EntityManager manager;
       manager.Flush();
@@ -153,7 +153,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::Reserve") {
+  TEST_CASE("helios::ecs::EntityManager::Reserve") {
     SUBCASE("Reserve capacity") {
       EntityManager manager;
       manager.Reserve(100);
@@ -172,7 +172,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::ReserveEntity") {
+  TEST_CASE("helios::ecs::EntityManager::ReserveEntity") {
     SUBCASE("Reserve single entity") {
       EntityManager manager;
       const auto reserved = manager.ReserveEntity();
@@ -282,7 +282,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::Create") {
+  TEST_CASE("helios::ecs::EntityManager::Create") {
     SUBCASE("Create single entity") {
       EntityManager manager;
 
@@ -347,7 +347,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::Create/batch") {
+  TEST_CASE("helios::ecs::EntityManager::Create/batch") {
     SUBCASE("Create multiple entities with back_inserter") {
       EntityManager manager;
       std::vector<Entity> entities;
@@ -426,7 +426,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::Destroy") {
+  TEST_CASE("helios::ecs::EntityManager::Destroy") {
     SUBCASE("Destroy single entity") {
       EntityManager manager;
       const auto entity = manager.Create();
@@ -527,7 +527,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::Validate") {
+  TEST_CASE("helios::ecs::EntityManager::Validate") {
     SUBCASE("Validate created entity") {
       EntityManager manager;
       const auto entity = manager.Create();
@@ -571,7 +571,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::NeedsFlush") {
+  TEST_CASE("helios::ecs::EntityManager::NeedsFlush") {
     SUBCASE("NeedsFlush is false initially") {
       const EntityManager manager;
       CHECK_FALSE(manager.NeedsFlush());
@@ -599,7 +599,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::Count") {
+  TEST_CASE("helios::ecs::EntityManager::Count") {
     SUBCASE("Count is zero initially") {
       const EntityManager manager;
       CHECK_EQ(manager.Count(), 0);
@@ -649,7 +649,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::GetGeneration") {
+  TEST_CASE("helios::ecs::EntityManager::GetGeneration") {
     SUBCASE("Out of range index returns invalid generation") {
       const EntityManager manager;
       CHECK_EQ(manager.GetGeneration(0), Entity::kInvalidGeneration);
@@ -690,7 +690,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::generation") {
+  TEST_CASE("helios::ecs::EntityManager::generation") {
     SUBCASE("Entity generation advances after destroy and recreate") {
       EntityManager manager;
 
@@ -728,7 +728,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::edge_cases") {
+  TEST_CASE("helios::ecs::EntityManager::edge_cases") {
     SUBCASE("Create and destroy many entities") {
       EntityManager manager;
       std::vector<Entity> entities;

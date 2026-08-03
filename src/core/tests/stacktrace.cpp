@@ -23,7 +23,7 @@ namespace {
 }  // namespace
 
 TEST_SUITE("helios::Stacktrace") {
-  TEST_CASE("Stacktrace::Capture: captures trace") {
+  TEST_CASE("helios::Stacktrace::Capture: captures trace") {
     const Stacktrace stacktrace = CaptureForTest();
     const std::string trace_text = stacktrace.ToString();
 
@@ -32,7 +32,8 @@ TEST_SUITE("helios::Stacktrace") {
     CHECK_NE(trace_text.find("Stack trace:"), std::string::npos);
   }
 
-  TEST_CASE("Stacktrace::Capture: contains source details when available") {
+  TEST_CASE(
+      "helios::Stacktrace::Capture: contains source details when available") {
     const Stacktrace stacktrace = CaptureForTest();
     const std::string trace_text = stacktrace.ToString();
 
@@ -50,7 +51,7 @@ TEST_SUITE("helios::Stacktrace") {
 #endif
   }
 
-  TEST_CASE("Stacktrace::Capture: max_frames respected") {
+  TEST_CASE("helios::Stacktrace::Capture: max_frames respected") {
     auto config =
         StacktraceConfig::FromSourceLocation(std::source_location::current());
     config.max_frames = 2;
@@ -61,7 +62,7 @@ TEST_SUITE("helios::Stacktrace") {
     CHECK_LE(stacktrace.Size(), 2);
   }
 
-  TEST_CASE("Stacktrace::Capture: include/exclude filtering") {
+  TEST_CASE("helios::Stacktrace::Capture: include/exclude filtering") {
     auto base_config =
         StacktraceConfig::FromSourceLocation(std::source_location::current());
     base_config.max_frames = 16;
@@ -86,7 +87,7 @@ TEST_SUITE("helios::Stacktrace") {
     CHECK_FALSE(contains_doctest);
   }
 
-  TEST_CASE("Stacktrace::ToString: header control") {
+  TEST_CASE("helios::Stacktrace::ToString: header control") {
     const auto stacktrace = CaptureForTest();
     const std::string with_header = stacktrace.ToString(true);
     const std::string without_header = stacktrace.ToString(false);

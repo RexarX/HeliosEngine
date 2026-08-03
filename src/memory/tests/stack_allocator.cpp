@@ -20,7 +20,7 @@ constexpr size_t kAlign = alignof(std::max_align_t);
 constexpr size_t kGrowCap = 128;
 
 constexpr StackAllocatorOptions GrowingOptions(size_t cap = kGrowCap) {
-  return StackAllocatorOptions{
+  return {
       .initial_capacity = cap,
       .growth = GrowthPolicy::Linear(cap, std::numeric_limits<size_t>::max())};
 }
@@ -28,7 +28,7 @@ constexpr StackAllocatorOptions GrowingOptions(size_t cap = kGrowCap) {
 }  // namespace
 
 TEST_SUITE("helios::mem::StackAllocator") {
-  TEST_CASE("mem::StackAllocator::ctor(StackAllocatorOptions)") {
+  TEST_CASE("helios::mem::StackAllocator::ctor(StackAllocatorOptions)") {
     SUBCASE("InitialCapacity is stored from options") {
       const StackAllocator stack(
           StackAllocatorOptions{.initial_capacity = 512});
@@ -61,7 +61,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::ctor(size_t)") {
+  TEST_CASE("helios::mem::StackAllocator::ctor(size_t)") {
     SUBCASE("InitialCapacity is stored") {
       const StackAllocator stack(2048);
       CHECK_EQ(stack.InitialCapacity(), 2048);
@@ -79,7 +79,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::ctor(StackAllocator&&)") {
+  TEST_CASE("helios::mem::StackAllocator::ctor(StackAllocator&&)") {
     SUBCASE("Moved-into stack has same InitialCapacity") {
       StackAllocator source(1024);
       const StackAllocator moved(std::move(source));
@@ -111,7 +111,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::operator=(StackAllocator&&)") {
+  TEST_CASE("helios::mem::StackAllocator::operator=(StackAllocator&&)") {
     SUBCASE("Target acquires source InitialCapacity") {
       StackAllocator source(1024);
       StackAllocator target(128);
@@ -151,7 +151,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::RewindToMarker") {
+  TEST_CASE("helios::mem::StackAllocator::RewindToMarker") {
     SUBCASE("Rewinding to zero-offset marker makes stack empty") {
       StackAllocator stack(1024);
 
@@ -203,7 +203,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::Reset") {
+  TEST_CASE("helios::mem::StackAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       StackAllocator stack(1024);
 
@@ -259,7 +259,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::Empty") {
+  TEST_CASE("helios::mem::StackAllocator::Empty") {
     SUBCASE("Returns true on fresh stack") {
       const StackAllocator stack(256);
       CHECK(stack.Empty());
@@ -290,7 +290,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::GetMarker") {
+  TEST_CASE("helios::mem::StackAllocator::GetMarker") {
     SUBCASE("Marker on fresh stack has offset zero") {
       const StackAllocator stack(512);
       const StackAllocator::Marker marker = stack.GetMarker();
@@ -326,7 +326,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::Stats") {
+  TEST_CASE("helios::mem::StackAllocator::Stats") {
     SUBCASE("All fields are zero on fresh stack") {
       const StackAllocator stack(1024);
 
@@ -397,7 +397,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::InitialCapacity") {
+  TEST_CASE("helios::mem::StackAllocator::InitialCapacity") {
     SUBCASE("Returns value from options ctor") {
       const StackAllocator stack(
           StackAllocatorOptions{.initial_capacity = 777});
@@ -425,7 +425,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::TotalCapacity") {
+  TEST_CASE("helios::mem::StackAllocator::TotalCapacity") {
     SUBCASE("Equals InitialCapacity right after construction") {
       const StackAllocator stack(
           StackAllocatorOptions{.initial_capacity = 4096});
@@ -453,7 +453,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::BlockCount") {
+  TEST_CASE("helios::mem::StackAllocator::BlockCount") {
     SUBCASE("Is 1 right after construction") {
       const StackAllocator stack(1024);
       CHECK_EQ(stack.BlockCount(), 1);
@@ -479,7 +479,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::Growth") {
+  TEST_CASE("helios::mem::StackAllocator::Growth") {
     SUBCASE("Returns geometric policy for size_t ctor") {
       const StackAllocator stack(256);
       CHECK_EQ(stack.Growth().max_capacity,
@@ -502,7 +502,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::allocate") {
+  TEST_CASE("helios::mem::StackAllocator::allocate") {
     SUBCASE("Returns non-null pointer") {
       StackAllocator stack(1024);
       CHECK_NE(stack.allocate(32, kAlign), nullptr);
@@ -554,7 +554,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator::deallocate") {
+  TEST_CASE("helios::mem::StackAllocator::deallocate") {
     SUBCASE(
         "LIFO deallocation rewinds the offset and clears allocation_count") {
       StackAllocator stack(1024);
@@ -600,7 +600,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator thread-safety: concurrent allocate") {
+  TEST_CASE("helios::mem::StackAllocator thread-safety: concurrent allocate") {
     SUBCASE("All threads receive valid non-null pointers") {
       StackAllocator stack(StackAllocatorOptions{
           .initial_capacity = 65536,
@@ -725,7 +725,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
   }
 
-  TEST_CASE("mem::StackAllocator thread-safety: concurrent deallocate") {
+  TEST_CASE(
+      "helios::mem::StackAllocator thread-safety: concurrent deallocate") {
     SUBCASE("LIFO deallocations from multiple threads update stats correctly") {
       // Give each thread its own exclusive region by pre-allocating serially.
       StackAllocator stack(StackAllocatorOptions{

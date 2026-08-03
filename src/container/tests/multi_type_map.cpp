@@ -139,14 +139,14 @@ using CountingMap = MultiTypeMap<CountingStorage>;
 }  // namespace
 
 TEST_SUITE("helios::container::MultiTypeMap") {
-  TEST_CASE("container::MultiTypeMap::ctor: default construction") {
+  TEST_CASE("helios::container::MultiTypeMap::ctor: default construction") {
     SimpleMap map;
 
     CHECK(map.EmptyAll());
     CHECK_EQ(map.TypeCount(), 0);
   }
 
-  TEST_CASE("container::MultiTypeMap::ctor: allocator construction") {
+  TEST_CASE("helios::container::MultiTypeMap::ctor: allocator construction") {
     std::allocator<std::byte> alloc;
     SimpleMap map(alloc);
 
@@ -154,7 +154,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.TypeCount(), 0);
   }
 
-  TEST_CASE("container::MultiTypeMap::ctor: copy construction") {
+  TEST_CASE("helios::container::MultiTypeMap::ctor: copy construction") {
     SimpleMap original;
     original.Ensure<int>().Set(10);
     original.Ensure<float>().Set(20);
@@ -168,7 +168,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(copy.Get<float>().value, 20);
   }
 
-  TEST_CASE("container::MultiTypeMap::ctor: move construction") {
+  TEST_CASE("helios::container::MultiTypeMap::ctor: move construction") {
     SimpleMap original;
     original.Ensure<int>().Set(42);
     original.Ensure<float>().Set(7);
@@ -183,7 +183,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK(original.EmptyAll());
   }
 
-  TEST_CASE("container::MultiTypeMap::operator=: copy assignment") {
+  TEST_CASE("helios::container::MultiTypeMap::operator=: copy assignment") {
     SimpleMap original;
     original.Ensure<int>().Set(100);
     original.Ensure<double>().Set(99);
@@ -200,7 +200,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(copy.Get<int>().value, 100);
   }
 
-  TEST_CASE("container::MultiTypeMap::operator=: move assignment") {
+  TEST_CASE("helios::container::MultiTypeMap::operator=: move assignment") {
     SimpleMap original;
     original.Ensure<int>().Set(55);
 
@@ -215,7 +215,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(original.TypeCount(), 0);
   }
 
-  TEST_CASE("container::MultiTypeMap::TypeIndexOf: type ID generation") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::TypeIndexOf: type ID generation") {
     SUBCASE("Same type returns same ID") {
       constexpr auto id1 = SimpleMap::TypeIndexOf<int>();
       constexpr auto id2 = SimpleMap::TypeIndexOf<int>();
@@ -239,7 +240,9 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     }
   }
 
-  TEST_CASE("container::MultiTypeMap::Ensure: creates storage on first call") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Ensure: creates storage on first "
+      "call") {
     SimpleMap map;
 
     CHECK_FALSE(map.Contains<int>());
@@ -265,7 +268,9 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(s2.value, 42);
   }
 
-  TEST_CASE("container::MultiTypeMap::Ensure: multiple types are independent") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Ensure: multiple types are "
+      "independent") {
     SimpleMap map;
 
     map.Ensure<int>().Set(1);
@@ -307,7 +312,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(s2.value, 7);
   }
 
-  TEST_CASE("container::MultiTypeMap::Emplace: inserts new entry by copy") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Emplace: inserts new entry by copy") {
     SimpleMap map;
 
     SimpleStorage val;
@@ -340,7 +346,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.Get<int>().value, 1);
   }
 
-  TEST_CASE("container::MultiTypeMap::Emplace: move semantics") {
+  TEST_CASE("helios::container::MultiTypeMap::Emplace: move semantics") {
     SimpleMap map;
 
     SimpleStorage val;
@@ -388,7 +394,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(it->first, SimpleMap::TypeIndexOf<int>());
   }
 
-  TEST_CASE("container::MultiTypeMap::TryEmplace: inserts when key absent") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::TryEmplace: inserts when key absent") {
     SimpleMap map;
 
     SimpleStorage val;
@@ -418,7 +425,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.TypeCount(), 1);
   }
 
-  TEST_CASE("container::MultiTypeMap::TryEmplace: move semantics") {
+  TEST_CASE("helios::container::MultiTypeMap::TryEmplace: move semantics") {
     SimpleMap map;
 
     SimpleStorage val;
@@ -495,7 +502,9 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.Get<int>().value, 100);
   }
 
-  TEST_CASE("container::MultiTypeMap::Get: const access to existing storage") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Get: const access to existing "
+      "storage") {
     SimpleMap map;
     map.Ensure<int>().Set(7);
 
@@ -504,7 +513,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(storage.value, 7);
   }
 
-  TEST_CASE("container::MultiTypeMap::Get(TypeIndex): non-const access") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Get(TypeIndex): non-const access") {
     SimpleMap map;
     map.Ensure<int>().Set(13);
 
@@ -513,7 +523,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(storage.value, 13);
   }
 
-  TEST_CASE("container::MultiTypeMap::Get(TypeIndex): const access") {
+  TEST_CASE("helios::container::MultiTypeMap::Get(TypeIndex): const access") {
     SimpleMap map;
     map.Ensure<int>().Set(21);
 
@@ -541,7 +551,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(ptr->value, 5);
   }
 
-  TEST_CASE("container::MultiTypeMap::TryGet: const version") {
+  TEST_CASE("helios::container::MultiTypeMap::TryGet: const version") {
     SimpleMap map;
     map.Ensure<float>().Set(8);
 
@@ -571,7 +581,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(ptr->value, 15);
   }
 
-  TEST_CASE("container::MultiTypeMap::TryGet(TypeIndex): const version") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::TryGet(TypeIndex): const version") {
     SimpleMap map;
     map.Ensure<float>().Set(33);
 
@@ -595,7 +606,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.TryGet(float_id), nullptr);
   }
 
-  TEST_CASE("container::MultiTypeMap::Remove: removes existing type") {
+  TEST_CASE("helios::container::MultiTypeMap::Remove: removes existing type") {
     SimpleMap map;
     map.Ensure<int>().Set(1);
     map.Ensure<float>().Set(2);
@@ -616,7 +627,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_FALSE(map.Remove<int>());
   }
 
-  TEST_CASE("container::MultiTypeMap::Remove: double removal returns false") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Remove: double removal returns false") {
     SimpleMap map;
     map.Ensure<int>().Set(1);
 
@@ -624,7 +636,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_FALSE(map.Remove<int>());
   }
 
-  TEST_CASE("container::MultiTypeMap::Remove(TypeIndex): removes by ID") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Remove(TypeIndex): removes by ID") {
     SimpleMap map;
     map.Ensure<int>().Set(5);
 
@@ -660,13 +673,14 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.Size<float>(), 1);
   }
 
-  TEST_CASE("container::MultiTypeMap::Clear: no-op on non-existent type") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Clear: no-op on non-existent type") {
     SimpleMap map;
     map.Clear<int>();  // must not crash
     CHECK_EQ(map.TypeCount(), 0);
   }
 
-  TEST_CASE("container::MultiTypeMap::Clear(TypeIndex): clears by ID") {
+  TEST_CASE("helios::container::MultiTypeMap::Clear(TypeIndex): clears by ID") {
     SimpleMap map;
     map.Ensure<int>().Set(10);
 
@@ -697,14 +711,16 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK(map.Empty<double>());
   }
 
-  TEST_CASE("container::MultiTypeMap::ClearAll: no-op on empty map") {
+  TEST_CASE("helios::container::MultiTypeMap::ClearAll: no-op on empty map") {
     SimpleMap map;
     map.ClearAll();
     CHECK_EQ(map.TypeCount(), 0);
     CHECK(map.EmptyAll());
   }
 
-  TEST_CASE("container::MultiTypeMap::Reset: removes entry for specific type") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Reset: removes entry for specific "
+      "type") {
     SimpleMap map;
     map.Ensure<int>().Set(1);
     map.Ensure<float>().Set(2);
@@ -716,13 +732,16 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK(map.Contains<float>());
   }
 
-  TEST_CASE("container::MultiTypeMap::Reset: no-op on non-existent type") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Reset: no-op on non-existent type") {
     SimpleMap map;
     map.Reset<int>();  // must not crash
     CHECK_EQ(map.TypeCount(), 0);
   }
 
-  TEST_CASE("container::MultiTypeMap::Reset(TypeIndex): removes entry by ID") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Reset(TypeIndex): removes entry by "
+      "ID") {
     SimpleMap map;
     map.Ensure<int>().Set(9);
 
@@ -733,7 +752,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.TypeCount(), 0);
   }
 
-  TEST_CASE("container::MultiTypeMap::ResetAll: removes all entries") {
+  TEST_CASE("helios::container::MultiTypeMap::ResetAll: removes all entries") {
     SimpleMap map;
     map.Ensure<int>().Set(1);
     map.Ensure<float>().Set(2);
@@ -748,31 +767,32 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_FALSE(map.Contains<double>());
   }
 
-  TEST_CASE("container::MultiTypeMap::ResetAll: no-op on empty map") {
+  TEST_CASE("helios::container::MultiTypeMap::ResetAll: no-op on empty map") {
     SimpleMap map;
     map.ResetAll();
     CHECK_EQ(map.TypeCount(), 0);
   }
 
-  TEST_CASE("container::MultiTypeMap::Contains: false before insertion") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Contains: false before insertion") {
     SimpleMap map;
     CHECK_FALSE(map.Contains<int>());
   }
 
-  TEST_CASE("container::MultiTypeMap::Contains: true after Ensure") {
+  TEST_CASE("helios::container::MultiTypeMap::Contains: true after Ensure") {
     SimpleMap map;
     [[maybe_unused]] auto& _ = map.Ensure<int>();
     CHECK(map.Contains<int>());
   }
 
-  TEST_CASE("container::MultiTypeMap::Contains: false after Remove") {
+  TEST_CASE("helios::container::MultiTypeMap::Contains: false after Remove") {
     SimpleMap map;
     [[maybe_unused]] auto& _ = map.Ensure<int>();
     map.Remove<int>();
     CHECK_FALSE(map.Contains<int>());
   }
 
-  TEST_CASE("container::MultiTypeMap::Contains(TypeIndex): by ID") {
+  TEST_CASE("helios::container::MultiTypeMap::Contains(TypeIndex): by ID") {
     SimpleMap map;
     constexpr auto id = SimpleMap::TypeIndexOf<int>();
 
@@ -793,7 +813,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.Contains<float>(), map.Contains(float_id));
   }
 
-  TEST_CASE("container::MultiTypeMap::Empty: non-existent type is empty") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Empty: non-existent type is empty") {
     SimpleMap map;
     CHECK(map.Empty<int>());
   }
@@ -806,20 +827,21 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK(map.Empty<int>());
   }
 
-  TEST_CASE("container::MultiTypeMap::Empty: false after setting a value") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Empty: false after setting a value") {
     SimpleMap map;
     map.Ensure<int>().Set(5);
     CHECK_FALSE(map.Empty<int>());
   }
 
-  TEST_CASE("container::MultiTypeMap::Empty: true after Clear") {
+  TEST_CASE("helios::container::MultiTypeMap::Empty: true after Clear") {
     SimpleMap map;
     map.Ensure<int>().Set(5);
     map.Clear<int>();
     CHECK(map.Empty<int>());
   }
 
-  TEST_CASE("container::MultiTypeMap::Empty(TypeIndex): by ID") {
+  TEST_CASE("helios::container::MultiTypeMap::Empty(TypeIndex): by ID") {
     SimpleMap map;
     constexpr auto id = SimpleMap::TypeIndexOf<int>();
 
@@ -828,12 +850,13 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_FALSE(map.Empty(id));
   }
 
-  TEST_CASE("container::MultiTypeMap::EmptyAll: true when map is empty") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::EmptyAll: true when map is empty") {
     SimpleMap map;
     CHECK(map.EmptyAll());
   }
 
-  TEST_CASE("container::MultiTypeMap::EmptyAll: true after ClearAll") {
+  TEST_CASE("helios::container::MultiTypeMap::EmptyAll: true after ClearAll") {
     SimpleMap map;
     map.Ensure<int>().Set(1);
     map.ClearAll();
@@ -856,7 +879,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK(map.EmptyAll());
   }
 
-  TEST_CASE("container::MultiTypeMap::Size: total size across all types") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Size: total size across all types") {
     SimpleMap map;
     map.Ensure<int>().Set(1);
     map.Ensure<float>().Set(2);
@@ -865,12 +889,12 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.Size(), 2);
   }
 
-  TEST_CASE("container::MultiTypeMap::Size: zero for empty map") {
+  TEST_CASE("helios::container::MultiTypeMap::Size: zero for empty map") {
     SimpleMap map;
     CHECK_EQ(map.Size(), 0);
   }
 
-  TEST_CASE("container::MultiTypeMap::Size<T>: per-type size") {
+  TEST_CASE("helios::container::MultiTypeMap::Size<T>: per-type size") {
     SimpleMap map;
     map.Ensure<int>().Set(5);
 
@@ -878,7 +902,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.Size<float>(), 0);
   }
 
-  TEST_CASE("container::MultiTypeMap::Size(TypeIndex): by ID") {
+  TEST_CASE("helios::container::MultiTypeMap::Size(TypeIndex): by ID") {
     SimpleMap map;
     map.Ensure<int>().Set(8);
 
@@ -918,7 +942,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(data.size(), 1);
   }
 
-  TEST_CASE("container::MultiTypeMap::Data: returns underlying map (const)") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Data: returns underlying map (const)") {
     SimpleMap map;
     map.Ensure<int>().Set(3);
     map.Ensure<float>().Set(6);
@@ -928,7 +953,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(data.size(), 2);
   }
 
-  TEST_CASE("container::MultiTypeMap::begin/end: empty map iteration") {
+  TEST_CASE("helios::container::MultiTypeMap::begin/end: empty map iteration") {
     SimpleMap map;
     CHECK_EQ(map.begin(), map.end());
     CHECK_EQ(map.cbegin(), map.cend());
@@ -966,7 +991,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(count, 2);
   }
 
-  TEST_CASE("container::MultiTypeMap::cbegin/cend: const iteration") {
+  TEST_CASE("helios::container::MultiTypeMap::cbegin/cend: const iteration") {
     SimpleMap map;
     map.Ensure<int>().Set(5);
     map.Ensure<double>().Set(6);
@@ -978,7 +1003,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(count, 2);
   }
 
-  TEST_CASE("container::MultiTypeMap::begin/end: mutation through iterator") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::begin/end: mutation through iterator") {
     SimpleMap map;
     map.Ensure<int>().Set(1);
 
@@ -1015,7 +1041,9 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK(saw_float);
   }
 
-  TEST_CASE("container::MultiTypeMap::begin/end: std::ranges algorithms work") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::begin/end: std::ranges algorithms "
+      "work") {
     SimpleMap map;
     map.Ensure<int>().Set(1);
     [[maybe_unused]] auto& _f = map.Ensure<float>();  // empty
@@ -1036,7 +1064,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK(retrieved == alloc);
   }
 
-  TEST_CASE("container::MultiTypeMap::Swap: swaps contents of two maps") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Swap: swaps contents of two maps") {
     SimpleMap map1;
     map1.Ensure<int>().Set(1);
     map1.Ensure<float>().Set(2);
@@ -1057,7 +1086,9 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map2.TypeCount(), 2);
   }
 
-  TEST_CASE("container::MultiTypeMap::swap: ADL free function swaps contents") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::swap: ADL free function swaps "
+      "contents") {
     SimpleMap map1;
     map1.Ensure<int>().Set(10);
 
@@ -1189,7 +1220,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK(map2.EmptyAll());
   }
 
-  TEST_CASE("container::MultiTypeMap::Merge: into empty destination") {
+  TEST_CASE("helios::container::MultiTypeMap::Merge: into empty destination") {
     MergeMap map1;
 
     MergeMap map2;
@@ -1207,7 +1238,9 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map2.TypeCount(), 0);
   }
 
-  TEST_CASE("container::MultiTypeMap::Merge: merging empty source is a no-op") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Merge: merging empty source is a "
+      "no-op") {
     MergeMap map1;
     map1.Ensure<int>().Push(42);
 
@@ -1220,7 +1253,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map1.Get<int>().items[0], 42);
   }
 
-  TEST_CASE("container::MultiTypeMap::Merge: source is cleared after merge") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Merge: source is cleared after merge") {
     MergeMap map1;
     MergeMap map2;
     map2.Ensure<int>().Push(1);
@@ -1269,7 +1303,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK(map2.EmptyAll());
   }
 
-  TEST_CASE("container::MultiTypeMap::Merge: object lifetimes are balanced") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Merge: object lifetimes are balanced") {
     CountingStorage::Reset();
 
     {
@@ -1288,7 +1323,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(CountingStorage::construct_count, CountingStorage::destruct_count);
   }
 
-  TEST_CASE("container::MultiTypeMap::Clear: delegates to Storage::Clear()") {
+  TEST_CASE(
+      "helios::container::MultiTypeMap::Clear: delegates to Storage::Clear()") {
     MergeMap map;
     map.Ensure<int>().Push(1);
     map.Ensure<int>().Push(2);
@@ -1395,7 +1431,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.TryGet<float>(), map.TryGet(float_id));
   }
 
-  TEST_CASE("container::PmrMultiTypeMap: works with memory_resource") {
+  TEST_CASE("helios::container::PmrMultiTypeMap: works with memory_resource") {
     std::byte buffer[1024];
     std::pmr::monotonic_buffer_resource resource(buffer, sizeof(buffer));
 

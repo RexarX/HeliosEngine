@@ -139,7 +139,7 @@ static_assert(
                  AccessPolicy>);
 
 TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
-  TEST_CASE("ecs::BuildPolicyFromParams::Query") {
+  TEST_CASE("helios::ecs::BuildPolicyFromParams::Query") {
     SUBCASE("Read-only query produces read component policy") {
       const auto policy = BuildPolicyFromParamsManual<Query<const Position&>>();
       CHECK(policy.HasReadComponent(ComponentTypeIndex::From<Position>()));
@@ -170,7 +170,7 @@ TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
     }
   }
 
-  TEST_CASE("ecs::BuildPolicyFromParams::Resources") {
+  TEST_CASE("helios::ecs::BuildPolicyFromParams::Resources") {
     SUBCASE("Res<const T> produces read resource policy") {
       const auto policy = BuildPolicyFromParamsManual<Res<const Camera>>();
       CHECK(policy.HasReadResource(ResourceTypeIndex::From<Camera>()));
@@ -201,7 +201,7 @@ TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
     }
   }
 
-  TEST_CASE("ecs::BuildPolicyFromParams::Local") {
+  TEST_CASE("helios::ecs::BuildPolicyFromParams::Local") {
     SUBCASE("Local<T> produces empty policy") {
       const auto policy = BuildPolicyFromParamsManual<Local<Camera>>();
       CHECK_FALSE(policy.HasComponents());
@@ -215,7 +215,7 @@ TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
     }
   }
 
-  TEST_CASE("ecs::BuildPolicyFromParams::Commands") {
+  TEST_CASE("helios::ecs::BuildPolicyFromParams::Commands") {
     SUBCASE("Commands produces empty policy") {
       const auto policy = BuildPolicyFromParamsManual<Commands>();
       CHECK_FALSE(policy.HasComponents());
@@ -223,7 +223,7 @@ TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
     }
   }
 
-  TEST_CASE("ecs::BuildPolicyFromParams::WorldView") {
+  TEST_CASE("helios::ecs::BuildPolicyFromParams::WorldView") {
     SUBCASE("WorldView produces empty policy") {
       const auto policy = BuildPolicyFromParamsManual<WorldView>();
       CHECK_FALSE(policy.HasComponents());
@@ -231,7 +231,7 @@ TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
     }
   }
 
-  TEST_CASE("ecs::BuildPolicyFromParams::Messages") {
+  TEST_CASE("helios::ecs::BuildPolicyFromParams::Messages") {
     SUBCASE("MessageReader produces empty policy") {
       const auto policy =
           BuildPolicyFromParamsManual<MessageReader<MyMessage>>();
@@ -268,7 +268,7 @@ TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
     }
   }
 
-  TEST_CASE("ecs::BuildPolicyFromParams::mixed") {
+  TEST_CASE("helios::ecs::BuildPolicyFromParams::mixed") {
     SUBCASE(
         "Query and Res params produce combined component and resource "
         "policy") {
@@ -322,7 +322,7 @@ TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
 }
 
 TEST_SUITE("helios::ecs::SystemParamTraits::RegisterAccess") {
-  TEST_CASE("ecs::SystemParamTraits::RegisterAccess::Query") {
+  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::Query") {
     SUBCASE("Query-only system produces component policy") {
       AccessPolicyBuilder builder;
       using Args = details::MemberFnArgs<
@@ -339,7 +339,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits::RegisterAccess") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::RegisterAccess::Resources") {
+  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::Resources") {
     SUBCASE("Resource-only system produces resource policy") {
       AccessPolicyBuilder builder;
       using Args = details::MemberFnArgs<
@@ -356,7 +356,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits::RegisterAccess") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::RegisterAccess::Local") {
+  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::Local") {
     SUBCASE("Local-only system produces empty policy") {
       AccessPolicyBuilder builder;
       using Args = details::MemberFnArgs<
@@ -372,7 +372,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits::RegisterAccess") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::RegisterAccess::Commands") {
+  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::Commands") {
     SUBCASE("Commands-only system produces empty policy") {
       AccessPolicyBuilder builder;
       using Args = details::MemberFnArgs<
@@ -388,7 +388,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits::RegisterAccess") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::RegisterAccess::WorldView") {
+  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::WorldView") {
     SUBCASE("WorldView-only system produces empty policy") {
       AccessPolicyBuilder builder;
       using Args = details::MemberFnArgs<
@@ -404,7 +404,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits::RegisterAccess") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::RegisterAccess::Messages") {
+  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::Messages") {
     SUBCASE("MessageReader-only system produces empty policy") {
       AccessPolicyBuilder builder;
       using Args = details::MemberFnArgs<
@@ -420,7 +420,7 @@ TEST_SUITE("helios::ecs::SystemParamTraits::RegisterAccess") {
     }
   }
 
-  TEST_CASE("ecs::SystemParamTraits::RegisterAccess::mixed") {
+  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::mixed") {
     SUBCASE("Mixed Query and Resource system produces combined policy") {
       AccessPolicyBuilder builder;
       using Args = details::MemberFnArgs<

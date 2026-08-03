@@ -6,7 +6,9 @@
 #include <helios/async/task_graph.hpp>
 #include <helios/ecs/schedule/executor/executor.hpp>
 
+#include <chrono>
 #include <functional>
+#include <future>
 #include <optional>
 #include <vector>
 
@@ -44,6 +46,11 @@ public:
    */
   void Execute(Schedule& schedule, World& world) override;
 
+  /**
+   * @brief Executes the schedule and waits for completion.
+   * @param schedule The schedule to execute
+   * @param world The world context for system execution
+   */
   void ExecuteAndWait(Schedule& schedule, World& world) override;
 
   /**
@@ -65,7 +72,17 @@ inline void SingleThreadedExecutor::Wait() {
   if (!future_.has_value()) [[unlikely]] {
     return;
   }
-  future_->Wait();
+
+  if (executor_.get().IsWorkerThread()) {
+    async::Future<void>& future = *future_;
+    executor_.get().CoRunUntil([&future]() {
+      return future.WaitFor(std::chrono::seconds{0}) ==
+             std::future_status::ready;
+    });
+  } else {
+    future_->Wait();
+  }
+
   future_.reset();
 }
 

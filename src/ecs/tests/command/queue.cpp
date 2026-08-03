@@ -27,7 +27,7 @@ struct MultipleExecuteCommand {
 }  // namespace
 
 TEST_SUITE("helios::ecs::CmdQueue") {
-  TEST_CASE("ecs::CmdQueue::ctor") {
+  TEST_CASE("helios::ecs::CmdQueue::ctor") {
     SUBCASE("Default ctor") {
       CmdQueue queue;
 
@@ -53,7 +53,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     }
   }
 
-  TEST_CASE("ecs::CmdQueue::operator=") {
+  TEST_CASE("helios::ecs::CmdQueue::operator=") {
     SUBCASE("Move assignment") {
       CmdQueue queue1;
       queue1.Enqueue(SimpleCommand{99});
@@ -66,7 +66,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     }
   }
 
-  TEST_CASE("ecs::CmdQueue::Clear") {
+  TEST_CASE("helios::ecs::CmdQueue::Clear") {
     CmdQueue queue;
 
     queue.Enqueue(SimpleCommand{1});
@@ -81,7 +81,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     }
   }
 
-  TEST_CASE("ecs::CmdQueue::Reserve") {
+  TEST_CASE("helios::ecs::CmdQueue::Reserve") {
     SUBCASE("Reserve doesn't add commands") {
       CmdQueue queue;
 
@@ -102,7 +102,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     }
   }
 
-  TEST_CASE("ecs::CmdQueue::Enqueue") {
+  TEST_CASE("helios::ecs::CmdQueue::Enqueue") {
     SUBCASE("Enqueue single command") {
       CmdQueue queue;
 
@@ -138,7 +138,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     }
   }
 
-  TEST_CASE("ecs::CmdQueue::EnqueueBulk") {
+  TEST_CASE("helios::ecs::CmdQueue::EnqueueBulk") {
     SUBCASE("EnqueueBulk with vector of commands") {
       CmdQueue queue;
       std::vector<SimpleCommand> commands = {{1}, {2}, {3}};
@@ -155,7 +155,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     }
   }
 
-  TEST_CASE("ecs::CmdQueue::ExecuteAll") {
+  TEST_CASE("helios::ecs::CmdQueue::ExecuteAll") {
     World world;
 
     SUBCASE("Execute single command") {
@@ -204,7 +204,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     }
   }
 
-  TEST_CASE("ecs::CmdQueue::Empty") {
+  TEST_CASE("helios::ecs::CmdQueue::Empty") {
     SUBCASE("Default queue is empty") {
       CmdQueue queue;
       CHECK(queue.Empty());
@@ -225,7 +225,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     }
   }
 
-  TEST_CASE("ecs::CmdQueue::Size") {
+  TEST_CASE("helios::ecs::CmdQueue::Size") {
     SUBCASE("Size is zero initially") {
       CmdQueue queue;
       CHECK_EQ(queue.Size(), 0);
@@ -252,7 +252,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     }
   }
 
-  TEST_CASE("ecs::CmdQueue::GetAllocator") {
+  TEST_CASE("helios::ecs::CmdQueue::GetAllocator") {
     std::allocator<std::byte> alloc;
     CmdQueue<std::allocator<std::byte>> queue{alloc};
 
@@ -260,7 +260,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     CHECK_EQ(retrieved_alloc, alloc);
   }
 
-  TEST_CASE("ecs::PmrCmdQueue::works with memory_resource") {
+  TEST_CASE("helios::ecs::PmrCmdQueue::works with memory_resource") {
     auto* resource = std::pmr::get_default_resource();
 
     PmrCmdQueue queue{resource};
@@ -274,7 +274,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     CHECK(queue.Empty());
   }
 
-  TEST_CASE("ecs::CmdQueue::Merge: rvalue ref") {
+  TEST_CASE("helios::ecs::CmdQueue::Merge: rvalue ref") {
     CmdQueue queue1;
     queue1.Enqueue(SimpleCommand{1});
     queue1.Enqueue(SimpleCommand{2});
@@ -294,7 +294,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     CHECK_EQ(execute_count, 10);  // 1+2+3+4
   }
 
-  TEST_CASE("ecs::CmdQueue::Merge: empty other queue") {
+  TEST_CASE("helios::ecs::CmdQueue::Merge: empty other queue") {
     CmdQueue queue1;
     queue1.Enqueue(SimpleCommand{10});
 
@@ -311,7 +311,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     CHECK_EQ(execute_count, 10);
   }
 
-  TEST_CASE("ecs::CmdQueue::Merge: self merge is no-op") {
+  TEST_CASE("helios::ecs::CmdQueue::Merge: self merge is no-op") {
     CmdQueue queue;
     queue.Enqueue(SimpleCommand{5});
     queue.Enqueue(SimpleCommand{10});
@@ -326,7 +326,7 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     CHECK_EQ(execute_count, 15);
   }
 
-  TEST_CASE("ecs::CmdQueue::Merge: preserves execution order") {
+  TEST_CASE("helios::ecs::CmdQueue::Merge: preserves execution order") {
     CmdQueue queue1;
     queue1.Enqueue(MultipleExecuteCommand{1});
     queue1.Enqueue(MultipleExecuteCommand{2});

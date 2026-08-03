@@ -47,7 +47,7 @@ struct NonPluginGroup {};
 }  // namespace
 
 TEST_SUITE("helios::app::PluginGroup") {
-  TEST_CASE("app::PluginGroup::Configure") {
+  TEST_CASE("helios::app::PluginGroup::Configure") {
     SUBCASE("Configured plugin is added instead of default plugin") {
       App app;
       app.AddPluginGroups(ValuePluginGroup{}.Configure(ValuePlugin{5}));
@@ -68,7 +68,7 @@ TEST_SUITE("helios::app::PluginGroup") {
     }
   }
 
-  TEST_CASE("app::PluginGroup::Disable") {
+  TEST_CASE("helios::app::PluginGroup::Disable") {
     SUBCASE("Disabled plugin is not added") {
       App app;
       app.AddPluginGroups(ValuePluginGroup{}.Disable<ValuePlugin>());
@@ -85,7 +85,7 @@ TEST_SUITE("helios::app::PluginGroup") {
     }
   }
 
-  TEST_CASE("app::PluginGroup::Build") {
+  TEST_CASE("helios::app::PluginGroup::Build") {
     SUBCASE("Default plugin is added when no override exists") {
       App app;
       app.AddPluginGroups(ValuePluginGroup{});
@@ -107,7 +107,7 @@ TEST_SUITE("helios::app::PluginGroup") {
 }
 
 TEST_SUITE("helios::app::PluginGroupTrait") {
-  TEST_CASE("app::PluginGroupTrait: concept validation") {
+  TEST_CASE("helios::app::PluginGroupTrait: concept validation") {
     SUBCASE("Concrete mutable derived types satisfy trait") {
       CHECK(PluginGroupTrait<ValuePluginGroup>);
       CHECK(PluginGroupTrait<ValuePluginGroup&>);

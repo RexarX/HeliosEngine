@@ -175,7 +175,7 @@ constexpr bool Entity::Alive() const noexcept {
   if (counter == Entity::kCounterMask) {
     counter = 0U;
   }
-  return counter;
+  return counter & Entity::kCounterMask;
 }
 
 }  // namespace helios::ecs

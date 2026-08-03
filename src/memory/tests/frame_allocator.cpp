@@ -32,7 +32,7 @@ constexpr FrameAllocatorOptions GrowingOptions(size_t cap = kCap) {
 }  // namespace
 
 TEST_SUITE("helios::mem::FrameAllocator") {
-  TEST_CASE("mem::FrameAllocator::ctor(FrameAllocatorOptions)") {
+  TEST_CASE("helios::mem::FrameAllocator::ctor(FrameAllocatorOptions)") {
     SUBCASE("InitialCapacity is stored from options") {
       const FrameAllocator<2> alloc(BasicOptions());
       CHECK_EQ(alloc.InitialCapacity(), kCap);
@@ -66,7 +66,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::ctor(size_t)") {
+  TEST_CASE("helios::mem::FrameAllocator::ctor(size_t)") {
     SUBCASE("InitialCapacity matches argument") {
       const FrameAllocator<1> alloc(512);
       CHECK_EQ(alloc.InitialCapacity(), 512);
@@ -84,7 +84,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::ctor(FrameAllocator&&)") {
+  TEST_CASE("helios::mem::FrameAllocator::ctor(FrameAllocator&&)") {
     SUBCASE("Moved-into allocator has same InitialCapacity") {
       FrameAllocator<2> source(BasicOptions());
       const FrameAllocator<2> moved(std::move(source));
@@ -107,7 +107,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::operator=(FrameAllocator&&)") {
+  TEST_CASE("helios::mem::FrameAllocator::operator=(FrameAllocator&&)") {
     SUBCASE("Target acquires source InitialCapacity") {
       FrameAllocator<2> source(BasicOptions());
       FrameAllocator<2> target(FrameAllocatorOptions{.initial_capacity = 128});
@@ -147,7 +147,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::Advance") {
+  TEST_CASE("helios::mem::FrameAllocator::Advance") {
     SUBCASE("FrameIndex increments by one per call") {
       FrameAllocator<3> alloc(BasicOptions());
 
@@ -199,7 +199,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::Reset") {
+  TEST_CASE("helios::mem::FrameAllocator::Reset") {
     SUBCASE("FrameIndex returns to zero after Reset") {
       FrameAllocator<3> alloc(BasicOptions());
       alloc.Advance();
@@ -235,7 +235,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::Empty") {
+  TEST_CASE("helios::mem::FrameAllocator::Empty") {
     SUBCASE("Returns true on fresh allocator") {
       const FrameAllocator<2> alloc(BasicOptions());
       CHECK(alloc.Empty());
@@ -262,7 +262,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::Stats") {
+  TEST_CASE("helios::mem::FrameAllocator::Stats") {
     SUBCASE("All fields zero on fresh current frame") {
       const FrameAllocator<2> alloc(BasicOptions());
 
@@ -289,7 +289,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::AggregateStats") {
+  TEST_CASE("helios::mem::FrameAllocator::AggregateStats") {
     SUBCASE("Returns all-zero on fresh allocator") {
       const FrameAllocator<3> alloc(BasicOptions());
 
@@ -336,7 +336,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::FrameIndex") {
+  TEST_CASE("helios::mem::FrameAllocator::FrameIndex") {
     SUBCASE("Is zero on construction") {
       const FrameAllocator<4> alloc(BasicOptions());
       CHECK_EQ(alloc.FrameIndex(), 0);
@@ -372,7 +372,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::FrameCount") {
+  TEST_CASE("helios::mem::FrameAllocator::FrameCount") {
     SUBCASE("Returns 1 for FrameAllocator<1>") {
       CHECK_EQ(FrameAllocator<1>::FrameCount(), 1);
     }
@@ -393,7 +393,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::InitialCapacity") {
+  TEST_CASE("helios::mem::FrameAllocator::InitialCapacity") {
     SUBCASE("Returns value from FrameAllocatorOptions ctor") {
       const FrameAllocator<2> alloc(
           FrameAllocatorOptions{.initial_capacity = 2048});
@@ -427,7 +427,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::Growth") {
+  TEST_CASE("helios::mem::FrameAllocator::Growth") {
     SUBCASE("Returns geometric policy for size_t ctor") {
       const FrameAllocator<2> alloc(512);
       CHECK_EQ(alloc.Growth().max_capacity,
@@ -450,7 +450,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::TotalCapacity") {
+  TEST_CASE("helios::mem::FrameAllocator::TotalCapacity") {
     SUBCASE("Equals InitialCapacity on construction") {
       const FrameAllocator<2> alloc(BasicOptions());
       CHECK_EQ(alloc.TotalCapacity(), kCap);
@@ -474,7 +474,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::BlockCount") {
+  TEST_CASE("helios::mem::FrameAllocator::BlockCount") {
     SUBCASE("Is 1 for fresh current frame") {
       const FrameAllocator<2> alloc(BasicOptions());
       CHECK_EQ(alloc.BlockCount(), 1);
@@ -500,7 +500,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::Arena (mutable)") {
+  TEST_CASE("helios::mem::FrameAllocator::Arena (mutable)") {
     SUBCASE("Returns mutable reference to the correct arena by index") {
       FrameAllocator<3> alloc(BasicOptions());
 
@@ -523,7 +523,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::Arena (const)") {
+  TEST_CASE("helios::mem::FrameAllocator::Arena (const)") {
     SUBCASE("Const Arena returns correct Stats for each frame") {
       FrameAllocator<2> alloc(BasicOptions());
 
@@ -542,7 +542,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::allocate") {
+  TEST_CASE("helios::mem::FrameAllocator::allocate") {
     SUBCASE("Returns non-null pointer") {
       FrameAllocator<2> alloc(BasicOptions());
       CHECK_NE(alloc.allocate(32, kAlign), nullptr);
@@ -587,7 +587,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator::deallocate") {
+  TEST_CASE("helios::mem::FrameAllocator::deallocate") {
     SUBCASE("Is a no-op on current arena; subsequent allocation still works") {
       FrameAllocator<2> alloc(BasicOptions());
 
@@ -608,7 +608,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator alias") {
+  TEST_CASE("helios::mem::FrameAllocator alias") {
     SUBCASE("FrameCount is 1") {
       CHECK_EQ(FrameAllocator<1>::FrameCount(), 1);
     }
@@ -623,7 +623,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator<> alias") {
+  TEST_CASE("helios::mem::FrameAllocator<> alias") {
     SUBCASE("FrameCount is 2") {
       CHECK_EQ(FrameAllocator<>::FrameCount(), 2);
     }
@@ -639,7 +639,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator thread-safety: concurrent allocate") {
+  TEST_CASE("helios::mem::FrameAllocator thread-safety: concurrent allocate") {
     SUBCASE("All threads receive valid non-null pointers from current frame") {
       FrameAllocator<2> alloc(FrameAllocatorOptions{
           .initial_capacity = 65536,
@@ -733,7 +733,8 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     }
   }
 
-  TEST_CASE("mem::FrameAllocator thread-safety: concurrent deallocate") {
+  TEST_CASE(
+      "helios::mem::FrameAllocator thread-safety: concurrent deallocate") {
     SUBCASE("Concurrent deallocates increment total_deallocations correctly") {
       FrameAllocator<2> alloc(FrameAllocatorOptions{
           .initial_capacity = 65536,

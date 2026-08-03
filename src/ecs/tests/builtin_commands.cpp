@@ -40,7 +40,7 @@ using GameplayBundle = ComponentBundle<MotionBundle, Health>;
 }  // namespace
 
 TEST_SUITE("helios::ecs::FunctionCmd") {
-  TEST_CASE("ecs::FunctionCmd::Execute") {
+  TEST_CASE("helios::ecs::FunctionCmd::Execute") {
     SUBCASE("Executes lambda with world reference") {
       World world;
       bool called = false;
@@ -99,7 +99,7 @@ TEST_SUITE("helios::ecs::FunctionCmd") {
 }
 
 TEST_SUITE("helios::ecs::DestroyEntityCmd") {
-  TEST_CASE("ecs::DestroyEntityCmd::Execute") {
+  TEST_CASE("helios::ecs::DestroyEntityCmd::Execute") {
     SUBCASE("Destroys existing entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -135,7 +135,7 @@ TEST_SUITE("helios::ecs::DestroyEntityCmd") {
 }
 
 TEST_SUITE("helios::ecs::DestroyEntitiesCmd") {
-  TEST_CASE("ecs::DestroyEntitiesCmd::Execute") {
+  TEST_CASE("helios::ecs::DestroyEntitiesCmd::Execute") {
     SUBCASE("Destroys multiple existing entities") {
       World world;
       const Entity e1 = world.CreateEntity();
@@ -161,7 +161,7 @@ TEST_SUITE("helios::ecs::DestroyEntitiesCmd") {
 }
 
 TEST_SUITE("helios::ecs::TryDestroyEntityCmd") {
-  TEST_CASE("ecs::TryDestroyEntityCmd::Execute") {
+  TEST_CASE("helios::ecs::TryDestroyEntityCmd::Execute") {
     SUBCASE("Destroys existing entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -185,7 +185,7 @@ TEST_SUITE("helios::ecs::TryDestroyEntityCmd") {
 }
 
 TEST_SUITE("helios::ecs::TryDestroyEntitiesCmd") {
-  TEST_CASE("ecs::TryDestroyEntitiesCmd::Execute") {
+  TEST_CASE("helios::ecs::TryDestroyEntitiesCmd::Execute") {
     SUBCASE("Destroys only existing entities") {
       World world;
       const Entity e1 = world.CreateEntity();
@@ -207,7 +207,7 @@ TEST_SUITE("helios::ecs::TryDestroyEntitiesCmd") {
 }
 
 TEST_SUITE("helios::ecs::AddComponentsCmd") {
-  TEST_CASE("ecs::AddComponentsCmd::Execute") {
+  TEST_CASE("helios::ecs::AddComponentsCmd::Execute") {
     SUBCASE("Adds multiple components to entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -234,7 +234,7 @@ TEST_SUITE("helios::ecs::AddComponentsCmd") {
 }
 
 TEST_SUITE("helios::ecs::AddBundleCmd") {
-  TEST_CASE("ecs::AddBundleCmd::Execute") {
+  TEST_CASE("helios::ecs::AddBundleCmd::Execute") {
     SUBCASE("Adds a nested component bundle to entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -266,7 +266,7 @@ TEST_SUITE("helios::ecs::AddBundleCmd") {
 }
 
 TEST_SUITE("helios::ecs::TryAddComponentsCmd") {
-  TEST_CASE("ecs::TryAddComponentsCmd::Execute") {
+  TEST_CASE("helios::ecs::TryAddComponentsCmd::Execute") {
     SUBCASE("Adds only missing components") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -284,7 +284,7 @@ TEST_SUITE("helios::ecs::TryAddComponentsCmd") {
 }
 
 TEST_SUITE("helios::ecs::TryAddBundleCmd") {
-  TEST_CASE("ecs::TryAddBundleCmd::Execute") {
+  TEST_CASE("helios::ecs::TryAddBundleCmd::Execute") {
     SUBCASE("Adds only missing components from bundle") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -301,7 +301,7 @@ TEST_SUITE("helios::ecs::TryAddBundleCmd") {
 }
 
 TEST_SUITE("helios::ecs::RemoveComponentsCmd") {
-  TEST_CASE("ecs::RemoveComponentsCmd::Execute") {
+  TEST_CASE("helios::ecs::RemoveComponentsCmd::Execute") {
     SUBCASE("Removes multiple existing components") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -317,7 +317,7 @@ TEST_SUITE("helios::ecs::RemoveComponentsCmd") {
 }
 
 TEST_SUITE("helios::ecs::RemoveBundleCmd") {
-  TEST_CASE("ecs::RemoveBundleCmd::Execute") {
+  TEST_CASE("helios::ecs::RemoveBundleCmd::Execute") {
     SUBCASE("Removes every component represented by a nested bundle") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -334,7 +334,7 @@ TEST_SUITE("helios::ecs::RemoveBundleCmd") {
 }
 
 TEST_SUITE("helios::ecs::TryRemoveComponentsCmd") {
-  TEST_CASE("ecs::TryRemoveComponentsCmd::Execute") {
+  TEST_CASE("helios::ecs::TryRemoveComponentsCmd::Execute") {
     SUBCASE("Removes only present components") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -350,7 +350,7 @@ TEST_SUITE("helios::ecs::TryRemoveComponentsCmd") {
 }
 
 TEST_SUITE("helios::ecs::TryRemoveBundleCmd") {
-  TEST_CASE("ecs::TryRemoveBundleCmd::Execute") {
+  TEST_CASE("helios::ecs::TryRemoveBundleCmd::Execute") {
     SUBCASE("Removes only present components represented by bundle") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -366,7 +366,7 @@ TEST_SUITE("helios::ecs::TryRemoveBundleCmd") {
 }
 
 TEST_SUITE("helios::ecs::ClearComponentsCmd") {
-  TEST_CASE("ecs::ClearComponentsCmd::Execute") {
+  TEST_CASE("helios::ecs::ClearComponentsCmd::Execute") {
     SUBCASE("Removes all components from entity") {
       World world;
       const Entity entity = world.CreateEntity();
@@ -393,7 +393,7 @@ TEST_SUITE("helios::ecs::ClearComponentsCmd") {
 }
 
 TEST_SUITE("helios::ecs::InsertResourceCmd") {
-  TEST_CASE("ecs::InsertResourceCmd::Execute") {
+  TEST_CASE("helios::ecs::InsertResourceCmd::Execute") {
     SUBCASE("Inserts resource into world") {
       World world;
       Score score{42};
@@ -417,7 +417,7 @@ TEST_SUITE("helios::ecs::InsertResourceCmd") {
 }
 
 TEST_SUITE("helios::ecs::TryInsertResourceCmd") {
-  TEST_CASE("ecs::TryInsertResourceCmd::Execute") {
+  TEST_CASE("helios::ecs::TryInsertResourceCmd::Execute") {
     SUBCASE("Inserts resource when absent") {
       World world;
 
@@ -440,7 +440,7 @@ TEST_SUITE("helios::ecs::TryInsertResourceCmd") {
 }
 
 TEST_SUITE("helios::ecs::RemoveResourceCmd") {
-  TEST_CASE("ecs::RemoveResourceCmd::Execute") {
+  TEST_CASE("helios::ecs::RemoveResourceCmd::Execute") {
     SUBCASE("Removes existing resource") {
       World world;
       world.InsertResources(Score{1});
@@ -453,7 +453,7 @@ TEST_SUITE("helios::ecs::RemoveResourceCmd") {
 }
 
 TEST_SUITE("helios::ecs::TryRemoveResourceCmd") {
-  TEST_CASE("ecs::TryRemoveResourceCmd::Execute") {
+  TEST_CASE("helios::ecs::TryRemoveResourceCmd::Execute") {
     SUBCASE("Removes resource when present") {
       World world;
       world.InsertResources(Score{1});

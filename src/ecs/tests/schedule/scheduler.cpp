@@ -98,7 +98,7 @@ struct CheckEntitySystem {
 }  // namespace
 
 TEST_SUITE("helios::ecs::ScheduleOrdering") {
-  TEST_CASE("ecs::ScheduleOrdering::ctor") {
+  TEST_CASE("helios::ecs::ScheduleOrdering::ctor") {
     SUBCASE("Constructing with scheduler and hash is valid") {
       Scheduler scheduler;
       Schedule schedule;
@@ -116,7 +116,7 @@ TEST_SUITE("helios::ecs::ScheduleOrdering") {
     }
   }
 
-  TEST_CASE("ecs::ScheduleOrdering::After") {
+  TEST_CASE("helios::ecs::ScheduleOrdering::After") {
     SUBCASE("After marks schedule to run after the given label") {
       Scheduler scheduler;
       Schedule schedule;
@@ -139,7 +139,7 @@ TEST_SUITE("helios::ecs::ScheduleOrdering") {
     }
   }
 
-  TEST_CASE("ecs::ScheduleOrdering::Before") {
+  TEST_CASE("helios::ecs::ScheduleOrdering::Before") {
     SUBCASE("Before marks schedule to run before the given label") {
       Scheduler scheduler;
       Schedule schedule;
@@ -162,7 +162,7 @@ TEST_SUITE("helios::ecs::ScheduleOrdering") {
     }
   }
 
-  TEST_CASE("ecs::ScheduleOrdering::Done") {
+  TEST_CASE("helios::ecs::ScheduleOrdering::Done") {
     SUBCASE("Done returns a reference to the parent scheduler") {
       Scheduler scheduler;
       Schedule schedule;
@@ -176,14 +176,14 @@ TEST_SUITE("helios::ecs::ScheduleOrdering") {
 }
 
 TEST_SUITE("helios::ecs::Scheduler") {
-  TEST_CASE("ecs::Scheduler::ctor") {
+  TEST_CASE("helios::ecs::Scheduler::ctor") {
     SUBCASE("Default-constructed scheduler is dirty") {
       const Scheduler scheduler;
       CHECK(scheduler.IsDirty());
     }
   }
 
-  TEST_CASE("ecs::Scheduler::operator=") {
+  TEST_CASE("helios::ecs::Scheduler::operator=") {
     SUBCASE("Move assignment transfers state") {
       Scheduler source;
       source.Add(MyFirstLabel{}, Schedule{});
@@ -196,7 +196,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler::Build") {
+  TEST_CASE("helios::ecs::Scheduler::Build") {
     SUBCASE("Building an empty scheduler succeeds") {
       Scheduler scheduler;
       scheduler.Build();
@@ -234,7 +234,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler::Run") {
+  TEST_CASE("helios::ecs::Scheduler::Run") {
     SUBCASE("Run with explicit executor executes schedules") {
       Scheduler scheduler;
       scheduler.Add(UpdateLabel{}, Schedule{});
@@ -353,7 +353,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler::In") {
+  TEST_CASE("helios::ecs::Scheduler::In") {
     SUBCASE("In with label hash returns the schedule") {
       Scheduler scheduler;
       scheduler.Add(MyFirstLabel{}, Schedule{});
@@ -374,7 +374,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler::Add") {
+  TEST_CASE("helios::ecs::Scheduler::Add") {
     SUBCASE("Adding a schedule with a label returns an ordering handle") {
       Scheduler scheduler;
       Schedule schedule;
@@ -404,7 +404,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler::Remove") {
+  TEST_CASE("helios::ecs::Scheduler::Remove") {
     SUBCASE("Remove returns true for an existing schedule") {
       Scheduler scheduler;
       scheduler.Add(MyFirstLabel{}, Schedule{});
@@ -435,7 +435,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler::TryGetSchedule") {
+  TEST_CASE("helios::ecs::Scheduler::TryGetSchedule") {
     SUBCASE("Mutable TryGetSchedule returns pointer for existing schedule") {
       Scheduler scheduler;
       scheduler.Add(MyFirstLabel{}, Schedule{});
@@ -496,7 +496,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler::IsDirty") {
+  TEST_CASE("helios::ecs::Scheduler::IsDirty") {
     SUBCASE("New scheduler is dirty") {
       const Scheduler scheduler;
       CHECK(scheduler.IsDirty());
@@ -529,7 +529,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler: schedule ordering execution") {
+  TEST_CASE("helios::ecs::Scheduler: schedule ordering execution") {
     SUBCASE("Ordering between schedules is respected during Run") {
       std::array<int, 3> order{};
       int call_index = 0;
@@ -570,7 +570,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler: commands across schedules") {
+  TEST_CASE("helios::ecs::Scheduler: commands across schedules") {
     SUBCASE("Commands enqueued in schedule A take effect before schedule B") {
       Scheduler scheduler;
       scheduler.Add(SchedALabel{}, Schedule{});
@@ -618,7 +618,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler: messages across schedules") {
+  TEST_CASE("helios::ecs::Scheduler: messages across schedules") {
     SUBCASE("Message written in schedule A is readable in schedule B") {
       Scheduler scheduler;
       scheduler.Add(SchedALabel{}, Schedule{});
@@ -665,7 +665,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler: stages are not schedules") {
+  TEST_CASE("helios::ecs::Scheduler: stages are not schedules") {
     SUBCASE("Registered stages are not returned by TryGetSchedule") {
       Scheduler scheduler;
       scheduler.AddStage(TestStage{});
@@ -687,7 +687,7 @@ TEST_SUITE("helios::ecs::Scheduler") {
     }
   }
 
-  TEST_CASE("ecs::Scheduler: entity reservations across schedules") {
+  TEST_CASE("helios::ecs::Scheduler: entity reservations across schedules") {
     SUBCASE("Reserved entities are alive in next schedule after Flush") {
       Scheduler scheduler;
       scheduler.Add(SchedALabel{}, Schedule{});

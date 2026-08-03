@@ -8,7 +8,7 @@
 using namespace helios::app;
 
 TEST_SUITE("helios::app::FrameCount") {
-  TEST_CASE("app::FrameCount::ctor") {
+  TEST_CASE("helios::app::FrameCount::ctor") {
     SUBCASE("Default construction starts at zero") {
       const FrameCount frame_count;
       CHECK_EQ(frame_count.count, 0);
@@ -17,7 +17,7 @@ TEST_SUITE("helios::app::FrameCount") {
 }
 
 TEST_SUITE("helios::app::CountFrame") {
-  TEST_CASE("app::CountFrame::operator()") {
+  TEST_CASE("helios::app::CountFrame::operator()") {
     SUBCASE("Increments frame count") {
       App app;
       app.InsertResources(FrameCount{});
@@ -31,7 +31,7 @@ TEST_SUITE("helios::app::CountFrame") {
 }
 
 TEST_SUITE("helios::app::FrameCountPlugin") {
-  TEST_CASE("app::FrameCountPlugin::Build") {
+  TEST_CASE("helios::app::FrameCountPlugin::Build") {
     SUBCASE("Adds FrameCount resource on initialize") {
       App app;
       app.AddPlugins(FrameCountPlugin{});

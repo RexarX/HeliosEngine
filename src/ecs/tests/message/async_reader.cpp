@@ -24,7 +24,7 @@ struct OtherAsync {
 }  // namespace
 
 TEST_SUITE("helios::ecs::AsyncMessageReader") {
-  TEST_CASE("ecs::AsyncMessageReader::ctor") {
+  TEST_CASE("helios::ecs::AsyncMessageReader::ctor") {
     SUBCASE("Construct from MessageManager") {
       MessageManager manager;
 
@@ -57,7 +57,7 @@ TEST_SUITE("helios::ecs::AsyncMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageReader::operator=") {
+  TEST_CASE("helios::ecs::AsyncMessageReader::operator=") {
     SUBCASE("Move assignment") {
       MessageManager manager;
 
@@ -73,7 +73,7 @@ TEST_SUITE("helios::ecs::AsyncMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageReader::Dequeue (return value)") {
+  TEST_CASE("helios::ecs::AsyncMessageReader::Dequeue (return value)") {
     SUBCASE("Dequeue returns default-constructed T when queue is empty") {
       MessageManager manager;
 
@@ -110,7 +110,7 @@ TEST_SUITE("helios::ecs::AsyncMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageReader::Dequeue (bool overload)") {
+  TEST_CASE("helios::ecs::AsyncMessageReader::Dequeue (bool overload)") {
     SUBCASE("Returns false and leaves dest unchanged when queue is empty") {
       MessageManager manager;
 
@@ -155,7 +155,7 @@ TEST_SUITE("helios::ecs::AsyncMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageReader::ForEach") {
+  TEST_CASE("helios::ecs::AsyncMessageReader::ForEach") {
     SUBCASE("ForEach visits every enqueued message") {
       MessageManager manager;
 
@@ -195,7 +195,7 @@ TEST_SUITE("helios::ecs::AsyncMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageReader::Empty") {
+  TEST_CASE("helios::ecs::AsyncMessageReader::Empty") {
     SUBCASE("Empty returns true when no messages are present") {
       MessageManager manager;
 
@@ -228,7 +228,7 @@ TEST_SUITE("helios::ecs::AsyncMessageReader") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageReader::CountApprox") {
+  TEST_CASE("helios::ecs::AsyncMessageReader::CountApprox") {
     SUBCASE("CountApprox returns zero when queue is empty") {
       MessageManager manager;
 

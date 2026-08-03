@@ -64,4 +64,5 @@ jobs:
         run: cmake --build --preset ${{ matrix.preset }}
 
       - name: Test (${{ matrix.preset }})
-        run: ctest --preset ${{ matrix.preset }} --output-on-failure
+        timeout-minutes: 10
+        run: ctest --preset ${{ matrix.preset }} --output-on-failure --timeout 120

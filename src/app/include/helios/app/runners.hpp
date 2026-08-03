@@ -115,6 +115,9 @@ inline ExitCode RunOnce(App& app) {
 inline void RunDefaultSubApp(SubApp& sub_app, async::Executor& executor) {
   while (!sub_app.ShouldExit()) {
     sub_app.Update(executor);
+    // Yield so stop requests / other executor work can progress on
+    // oversubscribed hosts (e.g. small CI runners).
+    std::this_thread::yield();
   }
 }
 

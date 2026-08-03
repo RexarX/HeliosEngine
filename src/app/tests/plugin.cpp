@@ -35,7 +35,7 @@ struct UnnamedTestPlugin final : public Plugin {
 }  // namespace
 
 TEST_SUITE("helios::app::PluginNameOf") {
-  TEST_CASE("app::PluginNameOf") {
+  TEST_CASE("helios::app::PluginNameOf") {
     SUBCASE("Returns kName when PluginWithNameTrait is satisfied") {
       CHECK_EQ(PluginNameOf<NamedTestPlugin>(), "NamedTestPlugin");
       CHECK_EQ(PluginNameOf(NamedTestPlugin{}), "NamedTestPlugin");
@@ -49,35 +49,35 @@ TEST_SUITE("helios::app::PluginNameOf") {
 }
 
 TEST_SUITE("helios::app::Plugin") {
-  TEST_CASE("app::Plugin::Build") {
+  TEST_CASE("helios::app::Plugin::Build") {
     NamedTestPlugin plugin;
     App app;
     plugin.Build(app);
     CHECK_EQ(plugin.build_count_, 1);
   }
 
-  TEST_CASE("app::Plugin::Finish") {
+  TEST_CASE("helios::app::Plugin::Finish") {
     NamedTestPlugin plugin;
     App app;
     plugin.Finish(app);
     CHECK_EQ(plugin.finish_count_, 1);
   }
 
-  TEST_CASE("app::Plugin::Destroy") {
+  TEST_CASE("helios::app::Plugin::Destroy") {
     NamedTestPlugin plugin;
     App app;
     plugin.Destroy(app);
     CHECK_EQ(plugin.destroy_count_, 1);
   }
 
-  TEST_CASE("app::Plugin::Poll") {
+  TEST_CASE("helios::app::Plugin::Poll") {
     NamedTestPlugin plugin;
     App app;
     plugin.Poll(app);
     CHECK_EQ(plugin.poll_count_, 1);
   }
 
-  TEST_CASE("app::Plugin::IsReady") {
+  TEST_CASE("helios::app::Plugin::IsReady") {
     SUBCASE("Default implementation returns true") {
       UnnamedTestPlugin plugin;
       App app;

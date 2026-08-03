@@ -129,7 +129,8 @@ public:
 };
 
 TEST_SUITE("helios::mem::RefCounted") {
-  TEST_CASE("mem::RefCounted::Default construction produces null handle") {
+  TEST_CASE(
+      "helios::mem::RefCounted::Default construction produces null handle") {
     Rc<Widget> rc;
     CHECK_FALSE(rc);
     CHECK(rc.Empty());
@@ -137,14 +138,16 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(rc.RefCount(), 0);
   }
 
-  TEST_CASE("mem::RefCounted::nullptr construction produces null handle") {
+  TEST_CASE(
+      "helios::mem::RefCounted::nullptr construction produces null handle") {
     Rc<Widget> rc(nullptr);
     CHECK_FALSE(rc);
     CHECK(rc.Empty());
     CHECK_EQ(rc.Get(), nullptr);
   }
 
-  TEST_CASE("mem::RefCounted::MakeRc constructs object with ref count 1") {
+  TEST_CASE(
+      "helios::mem::RefCounted::MakeRc constructs object with ref count 1") {
     auto rc = MakeRc<Widget>(42);
 
     CHECK(rc);
@@ -156,7 +159,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ((*rc).Value(), 42);
   }
 
-  TEST_CASE("mem::RefCounted::Copy construction increments ref count") {
+  TEST_CASE("helios::mem::RefCounted::Copy construction increments ref count") {
     auto rc1 = MakeRc<Widget>(10);
     CHECK_EQ(rc1.RefCount(), 1);
 
@@ -195,7 +198,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(destroyed, 1);
   }
 
-  TEST_CASE("mem::RefCounted::Last copy destroyed triggers deletion") {
+  TEST_CASE("helios::mem::RefCounted::Last copy destroyed triggers deletion") {
     int destroyed = 0;
     Rc<Widget> rc2;
     {
@@ -209,7 +212,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(destroyed, 1);
   }
 
-  TEST_CASE("mem::RefCounted::Copy assignment increments ref count") {
+  TEST_CASE("helios::mem::RefCounted::Copy assignment increments ref count") {
     auto rc1 = MakeRc<Widget>(5);
     Rc<Widget> rc2;
     rc2 = rc1;
@@ -219,7 +222,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(rc1.Get(), rc2.Get());
   }
 
-  TEST_CASE("mem::RefCounted::Copy assignment to self is safe") {
+  TEST_CASE("helios::mem::RefCounted::Copy assignment to self is safe") {
     auto rc = MakeRc<Widget>(3);
     auto* raw = rc.Get();
 
@@ -229,7 +232,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(rc.Get(), raw);
   }
 
-  TEST_CASE("mem::RefCounted::Move assignment transfers ownership") {
+  TEST_CASE("helios::mem::RefCounted::Move assignment transfers ownership") {
     auto rc1 = MakeRc<Widget>(8);
     auto* raw = rc1.Get();
     Rc<Widget> rc2;
@@ -240,7 +243,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(rc2.RefCount(), 1);
   }
 
-  TEST_CASE("mem::RefCounted::Move assignment to self is safe") {
+  TEST_CASE("helios::mem::RefCounted::Move assignment to self is safe") {
     auto rc = MakeRc<Widget>(11);
     auto* raw = rc.Get();
 
@@ -257,7 +260,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(rc.RefCount(), rc.Empty() ? 0 : 1);
   }
 
-  TEST_CASE("mem::RefCounted::nullptr assignment resets handle") {
+  TEST_CASE("helios::mem::RefCounted::nullptr assignment resets handle") {
     int destroyed = 0;
     auto rc = MakeRc<Widget>(0);
     rc->SetDestroyCounter(&destroyed);
@@ -268,7 +271,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(destroyed, 1);
   }
 
-  TEST_CASE("mem::RefCounted::Reset releases handle") {
+  TEST_CASE("helios::mem::RefCounted::Reset releases handle") {
     int destroyed = 0;
     auto rc = MakeRc<Widget>(0);
     rc->SetDestroyCounter(&destroyed);
@@ -278,7 +281,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(destroyed, 1);
   }
 
-  TEST_CASE("mem::RefCounted::Reset on null handle is safe") {
+  TEST_CASE("helios::mem::RefCounted::Reset on null handle is safe") {
     Rc<Widget> rc;
     rc.Reset();
     CHECK_FALSE(rc);
@@ -302,7 +305,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(destroyed, 1);
   }
 
-  TEST_CASE("mem::RefCounted::Equality operators") {
+  TEST_CASE("helios::mem::RefCounted::Equality operators") {
     auto rc1 = MakeRc<Widget>(1);
     auto rc2 = rc1;
     auto rc3 = MakeRc<Widget>(2);
@@ -315,7 +318,8 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_NE(rc1, nullptr);
   }
 
-  TEST_CASE("mem::RefCounted::Multiple handles all share same ref count") {
+  TEST_CASE(
+      "helios::mem::RefCounted::Multiple handles all share same ref count") {
     auto a = MakeRc<Node>(1);
     auto b = a;
     auto c = b;
@@ -333,7 +337,8 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK(a.Unique());
   }
 
-  TEST_CASE("mem::RefCounted::RcFromThis copy/move do not copy ref count") {
+  TEST_CASE(
+      "helios::mem::RefCounted::RcFromThis copy/move do not copy ref count") {
     auto rc = MakeRc<Widget>(0);
     CHECK_EQ(rc->RefCount(), 1);
 
@@ -447,7 +452,9 @@ TEST_SUITE("helios::mem::RefCounted") {
     CHECK_EQ(rc.RefCount(), 1);
   }
 
-  TEST_CASE("mem::RefCounted::PMR — PmrRc with default memory resource works") {
+  TEST_CASE(
+      "helios::mem::RefCounted::PMR — PmrRc with default memory resource "
+      "works") {
     auto rc = MakeRcWith<Widget>(std::pmr::get_default_resource(), 8888);
 
     CHECK(rc);
@@ -536,7 +543,8 @@ TEST_SUITE("helios::mem::AtomicRefCounted") {
     CHECK_EQ(destroyed.load(), 1);
   }
 
-  TEST_CASE("mem::AtomicRefCounted::Last copy destroyed triggers deletion") {
+  TEST_CASE(
+      "helios::mem::AtomicRefCounted::Last copy destroyed triggers deletion") {
     std::atomic<int> destroyed{0};
     Arc<Texture> arc2;
     {
@@ -550,7 +558,8 @@ TEST_SUITE("helios::mem::AtomicRefCounted") {
     CHECK_EQ(destroyed.load(), 1);
   }
 
-  TEST_CASE("mem::AtomicRefCounted::Copy assignment increments ref count") {
+  TEST_CASE(
+      "helios::mem::AtomicRefCounted::Copy assignment increments ref count") {
     auto arc1 = MakeArc<Texture>(5);
     Arc<Texture> arc2;
     arc2 = arc1;
@@ -560,7 +569,7 @@ TEST_SUITE("helios::mem::AtomicRefCounted") {
     CHECK_EQ(arc1.Get(), arc2.Get());
   }
 
-  TEST_CASE("mem::AtomicRefCounted::Copy assignment to self is safe") {
+  TEST_CASE("helios::mem::AtomicRefCounted::Copy assignment to self is safe") {
     auto arc = MakeArc<Texture>(6);
     auto* raw = arc.Get();
 
@@ -570,7 +579,8 @@ TEST_SUITE("helios::mem::AtomicRefCounted") {
     CHECK_EQ(arc.Get(), raw);
   }
 
-  TEST_CASE("mem::AtomicRefCounted::Move assignment transfers ownership") {
+  TEST_CASE(
+      "helios::mem::AtomicRefCounted::Move assignment transfers ownership") {
     auto arc1 = MakeArc<Texture>(7);
     auto* raw = arc1.Get();
     Arc<Texture> arc2;
@@ -581,7 +591,7 @@ TEST_SUITE("helios::mem::AtomicRefCounted") {
     CHECK_EQ(arc2.RefCount(), 1);
   }
 
-  TEST_CASE("mem::AtomicRefCounted::nullptr assignment resets handle") {
+  TEST_CASE("helios::mem::AtomicRefCounted::nullptr assignment resets handle") {
     std::atomic<int> destroyed{0};
     auto arc = MakeArc<Texture>(0);
     arc->SetDestroyCounter(&destroyed);
@@ -592,7 +602,7 @@ TEST_SUITE("helios::mem::AtomicRefCounted") {
     CHECK_EQ(destroyed.load(), 1);
   }
 
-  TEST_CASE("mem::AtomicRefCounted::Reset releases handle") {
+  TEST_CASE("helios::mem::AtomicRefCounted::Reset releases handle") {
     std::atomic<int> destroyed{0};
     auto arc = MakeArc<Texture>(0);
     arc->SetDestroyCounter(&destroyed);
@@ -602,7 +612,7 @@ TEST_SUITE("helios::mem::AtomicRefCounted") {
     CHECK_EQ(destroyed.load(), 1);
   }
 
-  TEST_CASE("mem::AtomicRefCounted::Reset on null handle is safe") {
+  TEST_CASE("helios::mem::AtomicRefCounted::Reset on null handle is safe") {
     Arc<Texture> arc;
     arc.Reset();
     CHECK_FALSE(arc);
@@ -625,7 +635,7 @@ TEST_SUITE("helios::mem::AtomicRefCounted") {
     CHECK_EQ(destroyed.load(), 1);
   }
 
-  TEST_CASE("mem::AtomicRefCounted::Equality operators") {
+  TEST_CASE("helios::mem::AtomicRefCounted::Equality operators") {
     auto arc1 = MakeArc<Texture>(1);
     auto arc2 = arc1;
     auto arc3 = MakeArc<Texture>(2);
@@ -885,7 +895,8 @@ TEST_SUITE("helios::mem::AtomicRefCounted") {
 }
 
 TEST_SUITE("helios::mem::RcArcAliases") {
-  TEST_CASE("mem::RcArcAliases::Rc<T> is RefCounted<T, std::allocator<T>>") {
+  TEST_CASE(
+      "helios::mem::RcArcAliases::Rc<T> is RefCounted<T, std::allocator<T>>") {
     static_assert(
         std::same_as<Rc<Widget>, RefCounted<Widget, std::allocator<Widget>>>);
     auto rc = MakeRc<Widget>(1);

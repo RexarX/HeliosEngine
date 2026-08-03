@@ -23,7 +23,7 @@ constexpr size_t kAlign = alignof(std::max_align_t);
 }  // namespace
 
 TEST_SUITE("helios::mem::FixedArenaAllocator") {
-  TEST_CASE("mem::FixedArenaAllocator::ctor()") {
+  TEST_CASE("helios::mem::FixedArenaAllocator::ctor()") {
     SUBCASE("InitialCapacity equals configured capacity") {
       const FixedArenaAllocator arena(kCapacity);
       CHECK_EQ(arena.InitialCapacity(), kCapacity);
@@ -51,7 +51,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator::ctor(FixedArenaAllocator&&)") {
+  TEST_CASE("helios::mem::FixedArenaAllocator::ctor(FixedArenaAllocator&&)") {
     SUBCASE("Moved-into arena has same InitialCapacity") {
       FixedArenaAllocator source(kCapacity);
       const FixedArenaAllocator moved(std::move(source));
@@ -88,7 +88,8 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator::operator=(FixedArenaAllocator&&)") {
+  TEST_CASE(
+      "helios::mem::FixedArenaAllocator::operator=(FixedArenaAllocator&&)") {
     SUBCASE("Target acquires source allocation state") {
       FixedArenaAllocator source(kCapacity);
       std::ignore = source.allocate(32, kAlign);
@@ -134,7 +135,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator::Reset") {
+  TEST_CASE("helios::mem::FixedArenaAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       FixedArenaAllocator arena(kCapacity);
       std::ignore = arena.allocate(128, kAlign);
@@ -171,7 +172,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator::Empty") {
+  TEST_CASE("helios::mem::FixedArenaAllocator::Empty") {
     SUBCASE("Returns true on fresh arena") {
       const FixedArenaAllocator arena(kCapacity);
       CHECK(arena.Empty());
@@ -198,7 +199,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator::Owns") {
+  TEST_CASE("helios::mem::FixedArenaAllocator::Owns") {
     SUBCASE("Returns true for pointer from this arena") {
       FixedArenaAllocator arena(kCapacity);
       void* const ptr = arena.allocate(64, kAlign);
@@ -239,7 +240,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator::Stats") {
+  TEST_CASE("helios::mem::FixedArenaAllocator::Stats") {
     SUBCASE("All fields are zero on fresh arena") {
       const FixedArenaAllocator arena(kCapacity);
       const AllocatorStats stats = arena.Stats();
@@ -296,7 +297,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator::InitialCapacity") {
+  TEST_CASE("helios::mem::FixedArenaAllocator::InitialCapacity") {
     SUBCASE("Returns configured capacity template argument") {
       const FixedArenaAllocator arena(1024);
       CHECK_EQ(arena.InitialCapacity(), 1024);
@@ -316,7 +317,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator::TotalCapacity") {
+  TEST_CASE("helios::mem::FixedArenaAllocator::TotalCapacity") {
     SUBCASE("Equals configured capacity immediately after construction") {
       const FixedArenaAllocator arena(kCapacity);
       CHECK_EQ(arena.TotalCapacity(), kCapacity);
@@ -336,7 +337,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator::allocate") {
+  TEST_CASE("helios::mem::FixedArenaAllocator::allocate") {
     SUBCASE("Returns non-null pointer") {
       FixedArenaAllocator arena(kCapacity);
       CHECK_NE(arena.allocate(32, kAlign), nullptr);
@@ -383,7 +384,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator::deallocate") {
+  TEST_CASE("helios::mem::FixedArenaAllocator::deallocate") {
     SUBCASE("Is a no-op: subsequent allocation still returns valid pointer") {
       FixedArenaAllocator arena(kCapacity);
       void* const first = arena.allocate(32, kAlign);
@@ -415,7 +416,8 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator thread-safety: concurrent allocate") {
+  TEST_CASE(
+      "helios::mem::FixedArenaAllocator thread-safety: concurrent allocate") {
     SUBCASE("All threads receive valid non-null pointers") {
       FixedArenaAllocator arena(65536);
       constexpr size_t kThreads = 8;
@@ -512,7 +514,8 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
     }
   }
 
-  TEST_CASE("mem::FixedArenaAllocator thread-safety: concurrent deallocate") {
+  TEST_CASE(
+      "helios::mem::FixedArenaAllocator thread-safety: concurrent deallocate") {
     SUBCASE("Concurrent deallocate increments total_deallocations correctly") {
       FixedArenaAllocator arena(65536);
       constexpr size_t kThreads = 4;

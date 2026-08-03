@@ -98,9 +98,11 @@ public:
   constexpr bool operator==(const ArchetypeId& other) const noexcept {
     return types_ == other.types_;
   }
+
   constexpr bool operator!=(const ArchetypeId& other) const noexcept {
     return !(*this == other);
   }
+
   constexpr bool operator<(const ArchetypeId& other) const noexcept {
     return std::ranges::lexicographical_compare(types_, other.types_);
   }

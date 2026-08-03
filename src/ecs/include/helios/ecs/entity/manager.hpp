@@ -30,8 +30,7 @@ namespace helios::ecs {
  *   run concurrently. Generation elements are accessed via `std::atomic_ref`.
  * - Structural operations (`Flush`, `Destroy`, `Create`, `Reserve`, `Clear`,
  *   copy/move, and any vector growth) require all concurrent readers/reservers
- *   to be quiescent first. The scheduler already provides this barrier before
- *   flush/destroy.
+ *   to be quiescent first.
  */
 class EntityManager {
 public:
@@ -345,6 +344,7 @@ inline void EntityManager::Flush(const F& callback) {
   // encoding before invoking the callback.
   HELIOS_ASSERT(new_free_cursor <= free_indices_.size(),
                 "free_cursor is out of sync with free list!");
+  new_free_cursor = std::min(new_free_cursor, free_indices_.size());
   const size_t recycled_reserved = free_indices_.size() - new_free_cursor;
   for (size_t i = new_free_cursor; i < free_indices_.size(); ++i) {
     const Entity::IndexType index = free_indices_[i];

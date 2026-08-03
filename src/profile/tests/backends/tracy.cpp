@@ -13,7 +13,7 @@
 using namespace helios::profile;
 
 TEST_SUITE("helios::profile::TracyBackend") {
-  TEST_CASE("TracyBackend::Name") {
+  TEST_CASE("helios::profile::TracyBackend::Name") {
     SUBCASE("Name returns \"tracy\"") {
       const TracyBackend backend;
       CHECK_EQ(backend.Name(), "tracy");
@@ -26,7 +26,7 @@ TEST_SUITE("helios::profile::TracyBackend") {
     }
   }
 
-  TEST_CASE("TracyBackend::ZoneStorageSize") {
+  TEST_CASE("helios::profile::TracyBackend::ZoneStorageSize") {
     SUBCASE("ZoneStorageSize returns a non-negative value") {
       const TracyBackend backend;
       CHECK_GE(backend.ZoneStorageSize(), 0);
@@ -38,7 +38,7 @@ TEST_SUITE("helios::profile::TracyBackend") {
     }
   }
 
-  TEST_CASE("TracyBackend zone operations") {
+  TEST_CASE("helios::profile::TracyBackend: zone operations") {
     SUBCASE("BeginZone and EndZone do not crash") {
       TracyBackend backend;
       std::array<std::byte, 256> storage{};
@@ -87,7 +87,7 @@ TEST_SUITE("helios::profile::TracyBackend") {
     }
   }
 
-  TEST_CASE("TracyBackend frame operations") {
+  TEST_CASE("helios::profile::TracyBackend: frame operations") {
     SUBCASE("FrameMark does not crash") {
       TracyBackend backend;
       backend.FrameMark();
@@ -108,13 +108,15 @@ TEST_SUITE("helios::profile::TracyBackend") {
     }
   }
 
-  TEST_CASE("TracyBackend message / thread") {
+  TEST_CASE("helios::profile::TracyBackend::Message / thread") {
     SUBCASE("Message does not crash") {
       TracyBackend backend;
       backend.Message("Event!", 0x00FF00);
       CHECK(true);
     }
+  }
 
+  TEST_CASE("helios::profile::TracyBackend::SetThreadName") {
     SUBCASE("SetThreadName does not crash") {
       TracyBackend backend;
       backend.SetThreadName("Worker-1");
@@ -122,13 +124,15 @@ TEST_SUITE("helios::profile::TracyBackend") {
     }
   }
 
-  TEST_CASE("TracyBackend plot") {
+  TEST_CASE("helios::profile::TracyBackend::Plot") {
     SUBCASE("Plot does not crash") {
       TracyBackend backend;
       backend.Plot("FPS", 60.0);
       CHECK(true);
     }
+  }
 
+  TEST_CASE("helios::profile::TracyBackend::PlotConfig") {
     SUBCASE("PlotConfig does not crash") {
       TracyBackend backend;
       backend.PlotConfig("FPS", PlotFormat::kNumber, true, false, 0xFF);
@@ -136,7 +140,7 @@ TEST_SUITE("helios::profile::TracyBackend") {
     }
   }
 
-  TEST_CASE("TracyBackend memory operations") {
+  TEST_CASE("helios::profile::TracyBackend: memory operations") {
     SUBCASE("Alloc does not crash") {
       TracyBackend backend;
       int dummy = 0;
@@ -159,7 +163,7 @@ TEST_SUITE("helios::profile::TracyBackend") {
     }
   }
 
-  TEST_CASE("TracyBackend::Startup / Shutdown") {
+  TEST_CASE("helios::profile::TracyBackend::Startup / Shutdown") {
     SUBCASE("Startup does not crash") {
       TracyBackend backend;
       backend.Startup();
@@ -180,7 +184,7 @@ TEST_SUITE("helios::profile::TracyBackend") {
     }
   }
 
-  TEST_CASE("TracyBackend in Profiler") {
+  TEST_CASE("helios::profile::TracyBackend: in Profiler") {
     Profiler::Instance().Clear();
 
     SUBCASE("TracyBackend can be registered with Profiler") {

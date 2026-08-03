@@ -48,7 +48,7 @@ using NestedBundle = ComponentBundle<Health, MotionBundle>;
 }  // namespace
 
 TEST_SUITE("helios::ecs::ComponentBundleTrait") {
-  TEST_CASE("ecs::ComponentBundleTrait::concept") {
+  TEST_CASE("helios::ecs::ComponentBundleTrait::concept") {
     SUBCASE("Direct and nested bundles satisfy ComponentBundleTrait") {
       CHECK(ComponentBundleTrait<MotionBundle>);
       CHECK(ComponentBundleTrait<NestedBundle>);
@@ -83,7 +83,7 @@ TEST_SUITE("helios::ecs::ComponentBundleTrait") {
 }
 
 TEST_SUITE("helios::ecs::ComponentBundle") {
-  TEST_CASE("ecs::ComponentBundle::ctor") {
+  TEST_CASE("helios::ecs::ComponentBundle::ctor") {
     SUBCASE("Default constructor") {
       constexpr MotionBundle bundle;
       CHECK(ComponentBundleTrait<decltype(bundle)>);
@@ -124,7 +124,7 @@ TEST_SUITE("helios::ecs::ComponentBundle") {
     }
   }
 
-  TEST_CASE("ecs::ComponentBundle::operator=") {
+  TEST_CASE("helios::ecs::ComponentBundle::operator=") {
     SUBCASE("Copy assignment") {
       MotionBundle source{Position{.x = 1.0F}, Velocity{.y = 2.0F}};
       MotionBundle target;

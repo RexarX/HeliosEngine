@@ -28,7 +28,7 @@ struct CommandMsg {
 }  // namespace
 
 TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
-  TEST_CASE("ecs::TypedAsyncMessageStorage::ctor") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::ctor") {
     SUBCASE("Default construction produces an empty storage") {
       TypedAsyncMessageStorage<EventMsg> storage;
       CHECK(storage.Empty());
@@ -44,7 +44,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::operator=") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::operator=") {
     SUBCASE("Move assignment transfers messages") {
       TypedAsyncMessageStorage<EventMsg> src;
       TypedAsyncMessageStorage<EventMsg> dst;
@@ -56,7 +56,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::Clear") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::Clear") {
     SUBCASE("All messages are removed after Clear") {
       TypedAsyncMessageStorage<EventMsg> storage;
 
@@ -75,7 +75,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::Enqueue (copy)") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::Enqueue (copy)") {
     const EventMsg msg{};
 
     SUBCASE("Copy enqueue stores the message") {
@@ -94,7 +94,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::Enqueue (move)") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::Enqueue (move)") {
     SUBCASE("Move enqueue stores the message") {
       TypedAsyncMessageStorage<EventMsg> storage;
       storage.Enqueue(EventMsg{});
@@ -111,7 +111,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::EnqueueBulk") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::EnqueueBulk") {
     SUBCASE("All messages in a bulk vector are enqueued") {
       TypedAsyncMessageStorage<EventMsg> storage;
 
@@ -141,7 +141,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::Dequeue (return value)") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::Dequeue (return value)") {
     SUBCASE("Dequeued message has the value that was enqueued") {
       TypedAsyncMessageStorage<EventMsg> storage;
 
@@ -168,7 +168,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::Dequeue (bool, dest ref)") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::Dequeue (bool, dest ref)") {
     SUBCASE("Returns true and populates dest when queue is non-empty") {
       TypedAsyncMessageStorage<EventMsg> storage;
 
@@ -214,7 +214,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::Into") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::Into") {
     SUBCASE("Moves all messages into the output iterator") {
       TypedAsyncMessageStorage<EventMsg> storage;
 
@@ -286,7 +286,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::MakeProducerToken") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::MakeProducerToken") {
     SUBCASE("Producer token can be used to enqueue a message") {
       TypedAsyncMessageStorage<EventMsg> storage;
 
@@ -297,7 +297,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::MakeConsumerToken") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::MakeConsumerToken") {
     SUBCASE("Consumer token can be used to dequeue a message") {
       TypedAsyncMessageStorage<EventMsg> storage;
 
@@ -310,7 +310,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::Empty") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::Empty") {
     SUBCASE("Returns true for a freshly constructed storage") {
       const TypedAsyncMessageStorage<EventMsg> storage;
       CHECK(storage.Empty());
@@ -333,7 +333,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
     }
   }
 
-  TEST_CASE("ecs::TypedAsyncMessageStorage::SizeApprox") {
+  TEST_CASE("helios::ecs::TypedAsyncMessageStorage::SizeApprox") {
     SUBCASE("Returns zero for empty storage") {
       const TypedAsyncMessageStorage<EventMsg> storage;
       CHECK_EQ(storage.SizeApprox(), 0);
@@ -351,7 +351,7 @@ TEST_SUITE("helios::ecs::TypedAsyncMessageStorage") {
 }
 
 TEST_SUITE("helios::ecs::AsyncMessageQueue") {
-  TEST_CASE("ecs::AsyncMessageQueue::ctor") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::ctor") {
     SUBCASE("Default construction produces an empty queue") {
       const AsyncMessageQueue queue;
 
@@ -373,7 +373,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::operator=") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::operator=") {
     SUBCASE("Move assignment transfers registrations and messages") {
       AsyncMessageQueue src;
       AsyncMessageQueue dst;
@@ -386,7 +386,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::Register") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::Register") {
     SUBCASE("Type is registered after Register<T>()") {
       AsyncMessageQueue queue;
       queue.Register<EventMsg>();
@@ -419,7 +419,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::Clear (all)") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::Clear (all)") {
     SUBCASE("All messages are removed but types remain registered") {
       AsyncMessageQueue queue;
 
@@ -435,7 +435,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::Clear (typed)") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::Clear (typed)") {
     SUBCASE("Clears only the specified type") {
       AsyncMessageQueue queue;
 
@@ -456,7 +456,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::Reset (all)") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::Reset (all)") {
     SUBCASE("Reset removes all types and all messages") {
       AsyncMessageQueue queue;
 
@@ -469,7 +469,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::Reset (typed)") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::Reset (typed)") {
     SUBCASE("Reset<T> unregisters the type and removes its messages") {
       AsyncMessageQueue queue;
 
@@ -484,7 +484,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::Enqueue (move)") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::Enqueue (move)") {
     SUBCASE("Enqueuing a message makes HasMessages return true") {
       AsyncMessageQueue queue;
 
@@ -506,7 +506,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::Enqueue (with producer token)") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::Enqueue (with producer token)") {
     SUBCASE("Enqueue with producer token stores the message") {
       AsyncMessageQueue queue;
 
@@ -518,7 +518,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::EnqueueBulk") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::EnqueueBulk") {
     SUBCASE("All messages in a range are enqueued") {
       AsyncMessageQueue queue;
 
@@ -551,7 +551,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::MakeProducerToken") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::MakeProducerToken") {
     SUBCASE("Token can be used to enqueue messages for that type") {
       AsyncMessageQueue queue;
 
@@ -563,7 +563,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::MakeConsumerToken") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::MakeConsumerToken") {
     SUBCASE("Token can be used to dequeue from TypedStorage") {
       AsyncMessageQueue queue;
 
@@ -579,7 +579,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::Swap") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::Swap") {
     SUBCASE("Swap exchanges registrations and messages between two queues") {
       AsyncMessageQueue q1;
       AsyncMessageQueue q2;
@@ -614,7 +614,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::IsRegistered") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::IsRegistered") {
     SUBCASE("Returns true for a registered type") {
       AsyncMessageQueue queue;
       queue.Register<EventMsg>();
@@ -627,7 +627,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::HasMessages") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::HasMessages") {
     SUBCASE("Returns false when no messages exist across all types") {
       AsyncMessageQueue queue;
       queue.Register<EventMsg>();
@@ -665,7 +665,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::TypeCount") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::TypeCount") {
     SUBCASE("Returns zero for empty queue") {
       const AsyncMessageQueue queue;
       CHECK_EQ(queue.TypeCount(), 0);
@@ -681,7 +681,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::MessageCount") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::MessageCount") {
     SUBCASE("Total MessageCount returns zero for empty queue") {
       const AsyncMessageQueue queue;
       CHECK_EQ(queue.MessageCount(), 0);
@@ -725,7 +725,7 @@ TEST_SUITE("helios::ecs::AsyncMessageQueue") {
     }
   }
 
-  TEST_CASE("ecs::AsyncMessageQueue::TypedStorage") {
+  TEST_CASE("helios::ecs::AsyncMessageQueue::TypedStorage") {
     SUBCASE("Mutable TypedStorage allows direct enqueue and dequeue") {
       AsyncMessageQueue queue;
 

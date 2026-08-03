@@ -5,7 +5,6 @@
 
 #include <limits>
 #include <memory_resource>
-#include <type_traits>
 
 namespace {
 
@@ -70,20 +69,20 @@ protected:
 }  // namespace
 
 TEST_SUITE("helios::mem::AllocatorTraitsConcepts") {
-  TEST_CASE("mem::AllocatorTraitsConcepts::PmrAllocator") {
+  TEST_CASE("helios::mem::AllocatorTraitsConcepts::PmrAllocator") {
     static_assert(PmrAllocator<StatsResource>);
     static_assert(PmrAllocator<BareResource>);
     static_assert(!PmrAllocator<int>);
     CHECK(true);
   }
 
-  TEST_CASE("mem::AllocatorTraitsConcepts::PmrAllocatorWithStats") {
+  TEST_CASE("helios::mem::AllocatorTraitsConcepts::PmrAllocatorWithStats") {
     static_assert(PmrAllocatorWithStats<StatsResource>);
     static_assert(!PmrAllocatorWithStats<BareResource>);
     CHECK(true);
   }
 
-  TEST_CASE("mem::AllocatorTraitsConcepts::ResettablePmrAllocator") {
+  TEST_CASE("helios::mem::AllocatorTraitsConcepts::ResettablePmrAllocator") {
     static_assert(!ResettablePmrAllocator<StatsResource>);
     static_assert(!ResettablePmrAllocator<BareResource>);
     CHECK(true);
@@ -91,7 +90,7 @@ TEST_SUITE("helios::mem::AllocatorTraitsConcepts") {
 }
 
 TEST_SUITE("helios::mem::TryAllocate") {
-  TEST_CASE("mem::TryAllocate::returns typed pointer on success") {
+  TEST_CASE("helios::mem::TryAllocate::returns typed pointer on success") {
     StatsResource allocator;
     auto result = TryAllocate<int>(allocator);
     REQUIRE(result.has_value());
@@ -104,14 +103,14 @@ TEST_SUITE("helios::mem::TryAllocate") {
 }
 
 TEST_SUITE("helios::mem::TryAllocateSpan") {
-  TEST_CASE("mem::TryAllocateSpan::returns empty span for zero count") {
+  TEST_CASE("helios::mem::TryAllocateSpan::returns empty span for zero count") {
     StatsResource allocator;
     auto result = TryAllocateSpan<int>(allocator, 0);
     REQUIRE(result.has_value());
     CHECK(result->empty());
   }
 
-  TEST_CASE("mem::TryAllocateSpan::returns span on success") {
+  TEST_CASE("helios::mem::TryAllocateSpan::returns span on success") {
     StatsResource allocator;
     auto result = TryAllocateSpan<int>(allocator, 8);
     REQUIRE(result.has_value());
@@ -122,7 +121,7 @@ TEST_SUITE("helios::mem::TryAllocateSpan") {
     Deallocate(allocator, *result);
   }
 
-  TEST_CASE("mem::TryAllocateSpan::returns invalid_size on overflow") {
+  TEST_CASE("helios::mem::TryAllocateSpan::returns invalid_size on overflow") {
     StatsResource allocator;
     constexpr size_t kTooMany =
         (std::numeric_limits<size_t>::max() / sizeof(int)) + 1;
@@ -133,7 +132,7 @@ TEST_SUITE("helios::mem::TryAllocateSpan") {
 }
 
 TEST_SUITE("helios::mem::DeallocateObject") {
-  TEST_CASE("mem::DeallocateObject::accepts null pointer") {
+  TEST_CASE("helios::mem::DeallocateObject::accepts null pointer") {
     StatsResource allocator;
     Deallocate<int>(allocator, nullptr);
     CHECK_EQ(allocator.Stats().total_deallocations, 0);
@@ -141,7 +140,7 @@ TEST_SUITE("helios::mem::DeallocateObject") {
 }
 
 TEST_SUITE("helios::mem::DeallocateSpan") {
-  TEST_CASE("mem::DeallocateSpan::accepts empty span") {
+  TEST_CASE("helios::mem::DeallocateSpan::accepts empty span") {
     StatsResource allocator;
     std::span<int> empty;
     Deallocate<int>(allocator, empty);
@@ -150,7 +149,7 @@ TEST_SUITE("helios::mem::DeallocateSpan") {
 }
 
 TEST_SUITE("helios::mem::StatsFunction") {
-  TEST_CASE("mem::StatsFunction::returns allocator-provided stats") {
+  TEST_CASE("helios::mem::StatsFunction::returns allocator-provided stats") {
     StatsResource allocator;
     auto one = TryAllocate<int>(allocator);
     REQUIRE(one.has_value());
@@ -162,7 +161,8 @@ TEST_SUITE("helios::mem::StatsFunction") {
     Deallocate(allocator, one.value());
   }
 
-  TEST_CASE("mem::StatsFunction::returns zero stats for plain allocators") {
+  TEST_CASE(
+      "helios::mem::StatsFunction::returns zero stats for plain allocators") {
     BareResource allocator;
     const AllocatorStats stats = Stats(allocator);
     CHECK_EQ(stats.total_allocated, 0);

@@ -64,7 +64,7 @@ struct RenderSystem {
 TEST_SUITE("helios::ecs::CompositeSystemParam") {
   using namespace helios::ecs::composite_param_test;
 
-  TEST_CASE("ecs::CompositeSystemParam::RegisterAccess") {
+  TEST_CASE("helios::ecs::CompositeSystemParam::RegisterAccess") {
     const auto policy = BuildPolicyFromParams<RenderParam>();
 
     CHECK(policy.HasReadResource(ResourceTypeIndex::From<Camera>()));
@@ -74,7 +74,7 @@ TEST_SUITE("helios::ecs::CompositeSystemParam") {
     CHECK_FALSE(policy.HasWriteComponent(ComponentTypeIndex::From<Mesh>()));
   }
 
-  TEST_CASE("ecs::CompositeSystemParam::Make") {
+  TEST_CASE("helios::ecs::CompositeSystemParam::Make") {
     World world;
     world.InsertResources(Camera{.fov = 75.0F});
 
@@ -90,7 +90,7 @@ TEST_SUITE("helios::ecs::CompositeSystemParam") {
     CHECK_EQ(param.meshes.Count(), 1);
   }
 
-  TEST_CASE("ecs::CompositeSystemParam through Schedule::Add") {
+  TEST_CASE("helios::ecs::CompositeSystemParam through Schedule::Add") {
     World world;
     world.InsertResources(Camera{.fov = 75.0F});
 
@@ -108,7 +108,7 @@ TEST_SUITE("helios::ecs::CompositeSystemParam") {
     CHECK_EQ(g_render_mesh_count, 1);
   }
 
-  TEST_CASE("ecs::SystemParam concept") {
+  TEST_CASE("helios::ecs::SystemParam concept") {
     CHECK(SystemParam<RenderParam>);
     CHECK(SystemParam<Res<const Camera>>);
     CHECK_FALSE(SystemParam<int>);
