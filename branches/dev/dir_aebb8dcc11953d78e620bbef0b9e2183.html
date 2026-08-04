@@ -263,7 +263,35 @@ CStringView</h1>
 <div class="line">WCStringView wname(L<span class="stringliteral">&quot;Window&quot;</span>);        <span class="comment">// wide-char variant</span></div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* raw = name.c_str();       <span class="comment">// safe to pass to C APIs</span></div>
 <div class="ttc" id="acstring__view_8hpp_html"><div class="ttname"><a href="cstring__view_8hpp.html">cstring_view.hpp</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="dependencies-3"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="delegate"></a>
+Delegate</h1>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="delegate_8hpp.html">helios/delegate.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> FreeFn(<span class="keywordtype">int</span> x) { <span class="comment">/* ... */</span> }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>Handler {</div>
+<div class="line">  <span class="keywordtype">void</span> OnEvent(<span class="keywordtype">int</span> x) { <span class="comment">/* ... */</span> }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> free = <a class="code hl_class" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt;void(<span class="keywordtype">int</span>)&gt;::FromFunction&lt;&amp;FreeFn&gt;();</div>
+<div class="line">free.Invoke(42);</div>
+<div class="line">free(42);  <span class="comment">// operator() alias</span></div>
+<div class="line"> </div>
+<div class="line">Handler h;</div>
+<div class="line"><span class="keyword">auto</span> member =</div>
+<div class="line">    <a class="code hl_class" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt;void(<span class="keywordtype">int</span>)&gt;::FromFunction&lt;&amp;Handler::OnEvent&gt;(h);</div>
+<div class="line">member(42);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// optional helpers — deduce signature from the function pointer</span></div>
+<div class="line"><span class="keyword">auto</span> deduced = helios::DelegateFromFunction&lt;&amp;FreeFn&gt;();</div>
+<div class="line"> </div>
+<div class="line">CHECK(free.Valid());</div>
+<div class="line">free.Reset();</div>
+<div class="ttc" id="aclasshelios_1_1Delegate_html"><div class="ttname"><a href="classhelios_1_1Delegate.html">helios::Delegate</a></div><div class="ttdoc">Type-erased callable wrapper for free and member functions.</div><div class="ttdef"><b>Definition</b> <a href="delegate_8hpp_source.html#l00071">delegate.hpp:71</a></div></div>
+<div class="ttc" id="adelegate_8hpp_html"><div class="ttname"><a href="delegate_8hpp.html">delegate.hpp</a></div></div>
+</div><!-- fragment --><p><span class="tt">FromFunction</span> binds free functions (no instance) or member functions (pass <span class="tt">this</span>). For overloaded or explicit signatures use <span class="tt">FromFunction&lt;ReturnType(*)(Args...), &amp;Func&gt;()</span> or <span class="tt">DelegateFromFunction&lt;Signature, &amp;Func&gt;()</span>.</p>
+<p>Non-owning, no heap allocation, exception-free. Empty delegates return default-constructed values (non-void) or no-op (void).</p>
+<h1 class="doxsection"><a class="anchor" id="dependencies-3"></a>
 Dependencies</h1>
 <ul>
 <li><span class="tt">compiler</span> — intrinsics</li>

@@ -290,7 +290,9 @@ Requirements</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Python</b>  </td><td class="markdownTableBodyNone">3.8+  </td><td class="markdownTableBodyNone">3.10+ (scripts, pre-commit)  </td></tr>
 </table>
-<p>Clone with submodules (needed for Doxygen theme):</p>
+<div class="fragment"><div class="line">git clone https://github.com/RexarX/HeliosEngine.git</div>
+<div class="line">cd HeliosEngine</div>
+</div><!-- fragment --><p>Clone with submodules if you intend to build docs locally:</p>
 <div class="fragment"><div class="line">git clone --recursive https://github.com/RexarX/HeliosEngine.git</div>
 <div class="line">cd HeliosEngine</div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="installing-dependencies"></a>
@@ -314,25 +316,18 @@ All platforms — build tools</h4>
 <h4 class="doxsection"><a class="anchor" id="linux-apt--ubuntu--debian"></a>
 Linux (APT — Ubuntu / Debian)</h4>
 <div class="fragment"><div class="line">sudo apt-get update</div>
-<div class="line">sudo apt-get install -y ninja-build clang-format doxygen \</div>
-<div class="line">  libboost-all-dev libtbb-dev libspdlog-dev \</div>
-<div class="line">  libtaskflow-cpp-dev libconcurrentqueue-dev libglfw3-dev \</div>
-<div class="line">  doctest-dev</div>
+<div class="line">sudo apt-get install -y ninja-build clang-format libboost-all-dev libtbb-dev #doxygen</div>
 </div><!-- fragment --><p>Optional (profile module): <span class="tt">sudo apt-get install -y libtracy-dev</span></p>
 <h4 class="doxsection"><a class="anchor" id="linux-dnf--fedora"></a>
 Linux (DNF — Fedora)</h4>
-<div class="fragment"><div class="line">sudo dnf install -y ninja-build clang-tools-extra doxygen \</div>
-<div class="line">  boost-devel tbb-devel spdlog-devel taskflow-devel \</div>
-<div class="line">  glfw-devel doctest-devel stduuid-devel</div>
+<div class="fragment"><div class="line">sudo dnf install -y ninja-build clang-tools-extra boost-devel tbb-devel #doxygen</div>
 </div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="linux-pacman--arch"></a>
 Linux (Pacman — Arch)</h4>
-<div class="fragment"><div class="line">sudo pacman -S --needed ninja clang doxygen \</div>
-<div class="line">  boost tbb spdlog taskflow glfw doctest concurrentqueue</div>
+<div class="fragment"><div class="line">sudo pacman -S --needed ninja clang boost tbb #doxygen</div>
 </div><!-- fragment --><p>Optional (profile module): <span class="tt">sudo pacman -S tracy</span></p>
 <h4 class="doxsection"><a class="anchor" id="macos-homebrew"></a>
 macOS (Homebrew)</h4>
-<div class="fragment"><div class="line">brew install cmake ninja clang-format doxygen \</div>
-<div class="line">  boost spdlog taskflow glfw doctest concurrentqueue</div>
+<div class="fragment"><div class="line">brew install cmake ninja clang-format boost #doxygen</div>
 </div><!-- fragment --><p>Optional (profile module): <span class="tt">brew install tracy</span></p>
 <blockquote class="doxtable">
 <p><b>Note:</b> On Linux with <b>GCC + libstdc++</b>, <a href="https://github.com/oneapi-src/oneTBB">TBB</a> is required for parallel STL (<span class="tt">libtbb-dev</span> / <span class="tt">tbb-devel</span> / <span class="tt">onetbb</span>). Clang on Linux and all macOS builds use libc++ and do not require TBB. spdlog is auto-downloaded via CPM when using Clang on Linux (system Ubuntu packages are incompatible). </p>
@@ -373,9 +368,9 @@ macOS (Clang)</h4>
 <div class="line">ctest --preset macos-clang-release</div>
 </div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="recommended-developer-flags"></a>
 Recommended developer flags</h4>
-<div class="fragment"><div class="line">cmake --preset linux-gcc-release \</div>
+<div class="fragment"><div class="line">cmake --preset linux-gcc-relwithdebinfo \</div>
 <div class="line">  -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \</div>
-<div class="line">  -DHELIOS_DEVELOPER_MODE=ON \</div>
+<div class="line">  #-DHELIOS_DEVELOPER_MODE=ON \</div>
 </div><!-- fragment --><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Option  </th><th class="markdownTableHeadNone">Default  </th><th class="markdownTableHeadNone">Notes  </th></tr>
@@ -392,9 +387,7 @@ Recommended developer flags</h4>
 </table>
 <h3 class="doxsection"><a class="anchor" id="run-the-example"></a>
 Run the Example</h3>
-<div class="fragment"><div class="line">cmake --preset linux-gcc-release \</div>
-<div class="line">  -DHELIOS_BUILD_EXAMPLES=ON \</div>
-<div class="line">  -DHELIOS_BUILD_PROFILE=ON</div>
+<div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_BUILD_EXAMPLES=ON</div>
 <div class="line">cmake --build --preset linux-gcc-release --target simple_example</div>
 <div class="line">./bin/examples/debug-linux-x86_64/simple_example</div>
 </div><!-- fragment --><p>See <a href="examples/simple/src/main.cpp">examples/simple/src/main.cpp</a> for schedules, system sets, sub-apps, and profiling.</p>
@@ -402,7 +395,7 @@ Run the Example</h3>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="usage-2"></a>
 Usage</h2>
-<p>Systems are plain structs — <span class="tt">operator()</span> parameters declare data access. <span class="tt">App</span> owns the main world, executor, and frame scheduler.</p>
+<p>Systems are plain structs — <span class="tt">operator()</span> parameters declare data access or regular C++ lambdas. <span class="tt">App</span> owns the main world, executor, and frame scheduler.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="app_8hpp.html">helios/app/app.hpp</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="ecs_8hpp.html">helios/ecs/ecs.hpp</a>&gt;</span></div>
 <div class="line"> </div>
