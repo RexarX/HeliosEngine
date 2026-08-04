@@ -133,6 +133,8 @@ cd HeliosEngine
 
 Helios resolves dependencies per module: **system packages are tried first**, then **CPM download** if missing (`HELIOS_DOWNLOAD_PACKAGES=ON`, default). Pre-installing system packages speeds up configuration and avoids network fetches.
 
+Some packages could require additional system packages, most notably when building on Linux make sure to install the X11/Wayland development packages to properly build `glfw3` (`libwayland-dev`, `libx11-dev`, etc.)
+
 Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/dependencies/).
 
 #### All platforms — build tools
@@ -148,32 +150,73 @@ Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/depen
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y ninja-build clang-format libboost-all-dev libtbb-dev #doxygen
+sudo apt-get install -y ninja-build libboost-all-dev libtbb-dev
 ```
 
-Optional (profile module): `sudo apt-get install -y libtracy-dev`
+Additinal tools:
+
+```bash
+sudo apt-get install -y clang-format doxygen
+```
+
+Wayland/X11:
+
+```bash
+sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \
+  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev
+```
 
 #### Linux (DNF — Fedora)
 
 ```bash
-sudo dnf install -y ninja-build clang-tools-extra boost-devel tbb-devel #doxygen
+sudo dnf install -y ninja-build  boost-devel tbb-devel
+
+```
+
+Additinal tools:
+
+```bash
+sudo dnf install -y clang-tools-extra doxygen
+```
+
+Wayland/X11:
+
+```bash
+sudo apt-get install -y wayland-devel libxkbcommon-devel libX11-devel \
+  libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel libXext-devel
 ```
 
 #### Linux (Pacman — Arch)
 
 ```bash
-sudo pacman -S --needed ninja clang boost tbb #doxygen
+sudo pacman -S --needed ninja boost tbb
+
 ```
 
-Optional (profile module): `sudo pacman -S tracy`
+Additinal tools:
+
+```bash
+sudo pacman -S --needed clang doxygen
+```
+
+Wayland/X11:
+
+```bash
+sudo pacman -S --needed wayland libxkbcommon libx11 \
+  libxrandr libxinerama libxi libxcursor libxext
+```
 
 #### macOS (Homebrew)
 
 ```bash
-brew install cmake ninja clang-format boost #doxygen
+brew install cmake ninja boost
 ```
 
-Optional (profile module): `brew install tracy`
+Additinal tools:
+
+```bash
+brew install clang-format doxygen
+```
 
 > **Note:** On Linux with **GCC + libstdc++**, [TBB](https://github.com/oneapi-src/oneTBB) is required for parallel STL (`libtbb-dev` / `tbb-devel` / `onetbb`). Clang on Linux and all macOS builds use libc++ and do not require TBB. spdlog is auto-downloaded via CPM when using Clang on Linux (system Ubuntu packages are incompatible).
 
