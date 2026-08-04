@@ -117,7 +117,12 @@ cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW
 | **Generator**    | —                               | Ninja                       |
 | **Python**       | 3.8+                            | 3.10+ (scripts, pre-commit) |
 
-Clone with submodules (needed for Doxygen theme):
+```bash
+git clone https://github.com/RexarX/HeliosEngine.git
+cd HeliosEngine
+```
+
+Clone with submodules if you intend to build docs locally:
 
 ```bash
 git clone --recursive https://github.com/RexarX/HeliosEngine.git
@@ -143,10 +148,7 @@ Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/depen
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y ninja-build clang-format doxygen \
-  libboost-all-dev libtbb-dev libspdlog-dev \
-  libtaskflow-cpp-dev libconcurrentqueue-dev libglfw3-dev \
-  doctest-dev
+sudo apt-get install -y ninja-build clang-format libboost-all-dev libtbb-dev #doxygen
 ```
 
 Optional (profile module): `sudo apt-get install -y libtracy-dev`
@@ -154,16 +156,13 @@ Optional (profile module): `sudo apt-get install -y libtracy-dev`
 #### Linux (DNF — Fedora)
 
 ```bash
-sudo dnf install -y ninja-build clang-tools-extra doxygen \
-  boost-devel tbb-devel spdlog-devel taskflow-devel \
-  glfw-devel doctest-devel stduuid-devel
+sudo dnf install -y ninja-build clang-tools-extra boost-devel tbb-devel #doxygen
 ```
 
 #### Linux (Pacman — Arch)
 
 ```bash
-sudo pacman -S --needed ninja clang doxygen \
-  boost tbb spdlog taskflow glfw doctest concurrentqueue
+sudo pacman -S --needed ninja clang boost tbb #doxygen
 ```
 
 Optional (profile module): `sudo pacman -S tracy`
@@ -171,8 +170,7 @@ Optional (profile module): `sudo pacman -S tracy`
 #### macOS (Homebrew)
 
 ```bash
-brew install cmake ninja clang-format doxygen \
-  boost spdlog taskflow glfw doctest concurrentqueue
+brew install cmake ninja clang-format boost #doxygen
 ```
 
 Optional (profile module): `brew install tracy`
@@ -241,9 +239,9 @@ ctest --preset macos-clang-release
 #### Recommended developer flags
 
 ```bash
-cmake --preset linux-gcc-release \
+cmake --preset linux-gcc-relwithdebinfo \
   -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-  -DHELIOS_DEVELOPER_MODE=ON \
+  #-DHELIOS_DEVELOPER_MODE=ON \
 ```
 
 | Option                     | Default        | Notes                         |
@@ -257,9 +255,7 @@ cmake --preset linux-gcc-release \
 ### Run the Example
 
 ```bash
-cmake --preset linux-gcc-release \
-  -DHELIOS_BUILD_EXAMPLES=ON \
-  -DHELIOS_BUILD_PROFILE=ON
+cmake --preset linux-gcc-release -DHELIOS_BUILD_EXAMPLES=ON
 cmake --build --preset linux-gcc-release --target simple_example
 ./bin/examples/debug-linux-x86_64/simple_example
 ```
@@ -272,7 +268,8 @@ See [examples/simple/src/main.cpp](examples/simple/src/main.cpp) for schedules, 
 
 ## Usage
 
-Systems are plain structs — `operator()` parameters declare data access. `App` owns the main world, executor, and frame scheduler.
+Systems are plain structs — `operator()` parameters declare data access or regular C++ lambdas.
+`App` owns the main world, executor, and frame scheduler.
 
 ```cpp
 #include <helios/app/app.hpp>

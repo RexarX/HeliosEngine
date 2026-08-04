@@ -85,6 +85,37 @@ WCStringView wname(L"Window");        // wide-char variant
 const char* raw = name.c_str();       // safe to pass to C APIs
 ```
 
+## Delegate
+
+```cpp
+#include <helios/delegate.hpp>
+
+void FreeFn(int x) { /* ... */ }
+
+struct Handler {
+  void OnEvent(int x) { /* ... */ }
+};
+
+auto free = helios::Delegate<void(int)>::FromFunction<&FreeFn>();
+free.Invoke(42);
+free(42);  // operator() alias
+
+Handler h;
+auto member =
+    helios::Delegate<void(int)>::FromFunction<&Handler::OnEvent>(h);
+member(42);
+
+// optional helpers — deduce signature from the function pointer
+auto deduced = helios::DelegateFromFunction<&FreeFn>();
+
+CHECK(free.Valid());
+free.Reset();
+```
+
+`FromFunction` binds free functions (no instance) or member functions (pass `this`). For overloaded or explicit signatures use `FromFunction<ReturnType(*)(Args...), &Func>()` or `DelegateFromFunction<Signature, &Func>()`.
+
+Non-owning, no heap allocation, exception-free. Empty delegates return default-constructed values (non-void) or no-op (void).
+
 ## Dependencies
 
 - `compiler` — intrinsics
