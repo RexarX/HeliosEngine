@@ -231,32 +231,6 @@ Type Identification</h1>
 <div class="ttc" id="aclasshelios_1_1utils_1_1TypeIndex_html_a297644a5a2859e698149e927a691d622"><div class="ttname"><a href="classhelios_1_1utils_1_1TypeIndex.html#a297644a5a2859e698149e927a691d622">helios::utils::TypeIndex::From</a></div><div class="ttdeci">static constexpr TypeIndex From() noexcept</div><div class="ttdoc">Constructs a TypeIndex from a type T.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00376">type_info.hpp:376</a></div></div>
 <div class="ttc" id="atype__info_8hpp_html"><div class="ttname"><a href="type__info_8hpp.html">type_info.hpp</a></div></div>
 </div><!-- fragment --><p><span class="tt">TypeIndex</span> is a lightweight 64-bit hash; <span class="tt">TypeId</span> also carries the qualified type name string.</p>
-<h1 class="doxsection"><a class="anchor" id="delegate"></a>
-Delegate</h1>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;helios/utils/delegate.hpp&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> FreeFn(<span class="keywordtype">int</span> x) { <span class="comment">/* ... */</span> }</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">struct </span>Handler {</div>
-<div class="line">  <span class="keywordtype">void</span> OnEvent(<span class="keywordtype">int</span> x) { <span class="comment">/* ... */</span> }</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">auto</span> free = helios::utils::Delegate&lt;void(<span class="keywordtype">int</span>)&gt;::FromFunction&lt;&amp;FreeFn&gt;();</div>
-<div class="line">free.Invoke(42);</div>
-<div class="line">free(42);  <span class="comment">// operator() alias</span></div>
-<div class="line"> </div>
-<div class="line">Handler h;</div>
-<div class="line"><span class="keyword">auto</span> member =</div>
-<div class="line">    helios::utils::Delegate&lt;void(<span class="keywordtype">int</span>)&gt;::FromFunction&lt;&amp;Handler::OnEvent&gt;(h);</div>
-<div class="line">member(42);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// optional helpers — deduce signature from the function pointer</span></div>
-<div class="line"><span class="keyword">auto</span> deduced = helios::utils::DelegateFromFunction&lt;&amp;FreeFn&gt;();</div>
-<div class="line"> </div>
-<div class="line">CHECK(free.Valid());</div>
-<div class="line">free.Reset();</div>
-</div><!-- fragment --><p><span class="tt">FromFunction</span> binds free functions (no instance) or member functions (pass <span class="tt">this</span>). For overloaded or explicit signatures use <span class="tt">FromFunction&lt;ReturnType(*)(Args...), &amp;Func&gt;()</span> or <span class="tt">DelegateFromFunction&lt;Signature, &amp;Func&gt;()</span>.</p>
-<p>Non-owning, no heap allocation, exception-free. Empty delegates return default-constructed values (non-void) or no-op (void).</p>
 <h1 class="doxsection"><a class="anchor" id="scope-guard"></a>
 Scope Guard</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="defer_8hpp.html">helios/utils/defer.hpp</a>&gt;</span></div>

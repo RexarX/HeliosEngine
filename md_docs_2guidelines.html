@@ -187,7 +187,7 @@ Non-negotiable</h2>
 <li><b>No exceptions</b> — use <span class="tt"><a class="el" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc" title="Assertion macro that aborts execution in debug builds.">HELIOS_ASSERT</a></span> for invariants; <span class="tt">std::expected&lt;T, ErrorEnum&gt;</span> or <span class="tt">std::optional</span> for recoverable failures.</li>
 <li><b>No backward-compat debt</b> — change or remove deprecated code freely.</li>
 <li><b>Include what you use</b> — every file includes exactly what it needs.</li>
-<li><b>Priority order:</b> performance → simplicity → maintainability.</li>
+<li><b>Priority order:</b> performance → simplicity → scalability.</li>
 <li><b>Avoid locks in hot paths</b> — prefer atomics and lock-free structures.</li>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="types-and-apis"></a>
@@ -287,7 +287,7 @@ Build definition (<span class="tt">CMakeLists.txt</span>)</h2>
 <div class="line">        tests/main.cpp</div>
 <div class="line">        ...</div>
 <div class="line">)</div>
-</div><!-- fragment --><p>External dependencies are declared per-module via <span class="tt">USES</span> and resolved from <span class="tt">cmake/dependencies/</span> (system packages first, CPM fallback).</p>
+</div><!-- fragment --><p>External dependencies are declared per-module via <span class="tt">USES</span> and resolved from <span class="tt">cmake/dependencies/</span>. Most engine libraries are vendored under <span class="tt">HELIOS_THIRD_PARTY_DIR</span> (defaults to <span class="tt">third-party/</span>); use <span class="tt">-DHELIOS_THIRD_PARTY_DIR=...</span>, <span class="tt">HELIOS_FORCE_DOWNLOAD_&lt;PKG&gt;</span>, or <span class="tt">HELIOS_USE_SYSTEM_&lt;PKG&gt;</span> to relocate or opt into CPM/system packages. Remaining deps (e.g. Boost, TBB) still use system packages first with CPM fallback.</p>
 <h2 class="doxsection"><a class="anchor" id="selective-module-builds"></a>
 Selective module builds</h2>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-debug -DHELIOS_BUILD_WINDOW=OFF</div>
