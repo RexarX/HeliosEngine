@@ -78,20 +78,29 @@ targets, or generated files must appear below it.
 
 ## Adding A Dependency
 
-Prefer `helios_dependency()` for normal packages:
+Prefer `helios_dependency()` for normal packages. Vendored packages declare
+`VENDORED_DIR` as an absolute path (typically under `HELIOS_THIRD_PARTY_DIR`):
 
 ```cmake
 helios_dependency(
     NAME doctest
     VERSION "^2.0.0"
+    VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/doctest
     CPM_REPOSITORY doctest/doctest
-    CPM_GIT_TAG v2.4.11
+    CPM_GIT_TAG v2.5.3
     UMBRELLA_ALIAS helios::lib::doctest
     ALIASES
         helios::lib::doctest::doctest doctest::doctest
         helios::lib::doctest::doctest doctest
 )
 ```
+
+`HELIOS_THIRD_PARTY_DIR` defaults to `${HELIOS_ROOT_DIR}/third-party`; point it
+elsewhere with `-DHELIOS_THIRD_PARTY_DIR=...`. Relative `VENDORED_DIR` values are
+resolved against that root. Overrides for a vendored package:
+`HELIOS_FORCE_DOWNLOAD_<PKG>=ON` (CPM network) or `HELIOS_USE_SYSTEM_<PKG>=ON`
+(`find_package`). Force-download wins if both are set. Packages without
+`VENDORED_DIR` keep the system→CPM fallback chain.
 
 Use a custom dependency script only when the package needs feature probes,
 non-standard include normalization, platform-specific behavior, or multiple

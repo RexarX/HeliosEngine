@@ -35,11 +35,7 @@ Data-oriented ECS with deferred commands, double-buffered messages, archetype-ba
 ## Quick Start
 
 ```cpp
-#include <helios/ecs/world.hpp>
-#include <helios/ecs/command/commands.hpp>
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/ecs/schedule/schedule.hpp>
+#include <helios/ecs/ecs.hpp>
 
 struct Position { float x = 0, y = 0; };
 struct Velocity { float dx = 1, dy = 0; };
@@ -84,9 +80,10 @@ struct MoveSystem {
 
 helios::ecs::Schedule schedule("Update");
 schedule.Add(MoveSystem{});
+
 helios::async::Executor async_executor;
-schedule.SetExecutor(
-    std::make_unique<helios::ecs::MultiThreadedExecutor>(async_executor));
+auto executor = std::make_unique<helios::ecs::MultiThreadedExecutor>(async_executor);
+schedule.SetExecutor(std::move(executor));
 schedule.Build();
 
 schedule.RunAndWait(world);
@@ -121,10 +118,7 @@ A type models the `SystemParam` concept when the specialization provides:
 Bundle multiple built-in params into one struct; field types must match the template list exactly:
 
 ```cpp
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/ecs/system/composite_param.hpp>
-#include <helios/ecs/system/param_traits.hpp>
+#include <helios/ecs/ecs.hpp>
 
 struct Mesh {};
 struct Transform { float x = 0; };
@@ -160,10 +154,7 @@ struct RenderSystem {
 Implement `SystemParamTraits` directly when you need custom `Make` logic or non-standard access declaration:
 
 ```cpp
-#include <helios/ecs/resource/param.hpp>
-#include <helios/ecs/resource/resource.hpp>
-#include <helios/ecs/system/access_decl.hpp>
-#include <helios/ecs/system/param_traits.hpp>
+#include <helios/ecs/ecs.hpp>
 
 struct Time { float delta = 0.0F; };
 struct PhysicsWorld {};
@@ -207,6 +198,8 @@ After specialization, pass the type to `Schedule::Add` like any other system —
 ### Ordering
 
 ```cpp
+#include <helios/ecs/ecs.hpp>
+
 struct SpawnSet {};
 struct MovementSet {};
 
@@ -220,6 +213,8 @@ schedule.Add(RenderSystem{}).Before<MoveSystem>();
 Systems never mutate the world directly during parallel execution. All structural changes go through `Commands`:
 
 ```cpp
+#include <helios/ecs/ecs.hpp>
+
 struct SpawnEnemies {
   void operator()(helios::ecs::Commands commands) {
     commands.Spawn()
@@ -252,6 +247,8 @@ Frame N+2: auto-cleared (unless kManual clear policy)
 ```
 
 ```cpp
+#include <helios/ecs/ecs.hpp>
+
 struct DamageEvent {
   helios::ecs::Entity target;
   float amount = 0;
@@ -291,7 +288,7 @@ removed together. A bundle can contain other bundles; nested leaves are
 flattened depth-first and left-to-right.
 
 ```cpp
-#include <helios/ecs/component/bundle.hpp>
+#include <helios/ecs/ecs.hpp>
 
 using MovementBundle = helios::ecs::ComponentBundle<Position, Velocity>;
 using PlayerBundle =
@@ -310,6 +307,8 @@ leaf component types must be unique. Empty bundles are rejected.
 ## Queries
 
 ```cpp
+#include <helios/ecs/ecs.hpp>
+
 // Mutable + const + optional pointer + filters
 auto q = world.Query<Transform&, const Mesh&, const Light*,
                      helios::ecs::With<Visible>, helios::ecs::Without<Hidden>>();

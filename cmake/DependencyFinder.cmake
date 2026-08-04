@@ -1,6 +1,8 @@
 # Helios Engine Dependency Finder
 #
-# External dependency management with system→CPM fallback chain.
+# External dependency management with vendored third-party/ trees by default
+# (when VENDORED_DIR is set), plus HELIOS_FORCE_DOWNLOAD_* / HELIOS_USE_SYSTEM_*
+# overrides. Packages without VENDORED_DIR keep the system→CPM fallback chain.
 #
 # Key APIs:
 #   helios_dependency()         — declarative single-call dependency
@@ -30,6 +32,13 @@ option(HELIOS_DOWNLOAD_PACKAGES "Download missing packages using CPM" ON)
 option(HELIOS_FORCE_DOWNLOAD_PACKAGES "Force download all packages even if system version exists" OFF)
 option(HELIOS_CHECK_PACKAGE_VERSIONS "Check and enforce package version requirements" ON)
 
+# Root for vendored dependency trees. Override with -DHELIOS_THIRD_PARTY_DIR=...
+# to use a custom checkout layout.
+set(HELIOS_THIRD_PARTY_DIR "${HELIOS_ROOT_DIR}/third-party" CACHE PATH
+    "Root directory for vendored third-party dependencies")
+get_filename_component(HELIOS_THIRD_PARTY_DIR "${HELIOS_THIRD_PARTY_DIR}" ABSOLUTE
+    BASE_DIR "${HELIOS_ROOT_DIR}")
+
 # Custom dependency search paths (user-extensible)
 if(NOT DEFINED HELIOS_DEPENDENCY_PATHS)
   set(HELIOS_DEPENDENCY_PATHS "" CACHE STRING "Additional paths to search for dependency .cmake files")
@@ -37,6 +46,26 @@ endif()
 if(NOT DEFINED HELIOS_DEPENDENCY_OVERRIDE_PATHS)
   set(HELIOS_DEPENDENCY_OVERRIDE_PATHS "" CACHE STRING "Override paths (checked before engine built-ins)")
 endif()
+
+#[[
+    _helios_resolve_vendored_path(<input> <out_var>)
+
+    Resolves VENDORED_DIR to an absolute path. Absolute inputs are normalized
+    as-is; relative inputs are joined with HELIOS_THIRD_PARTY_DIR.
+]]
+function(_helios_resolve_vendored_path INPUT OUT_VAR)
+  if("${INPUT}" STREQUAL "")
+    set(${OUT_VAR} "" PARENT_SCOPE)
+    return()
+  endif()
+  if(IS_ABSOLUTE "${INPUT}")
+    set(_resolved "${INPUT}")
+  else()
+    set(_resolved "${HELIOS_THIRD_PARTY_DIR}/${INPUT}")
+  endif()
+  cmake_path(NORMAL_PATH _resolved OUTPUT_VARIABLE _resolved)
+  set(${OUT_VAR} "${_resolved}" PARENT_SCOPE)
+endfunction()
 
 # ============================================================================
 # Logging Helpers
@@ -359,6 +388,11 @@ endfunction()
             brew spdlog
             pkg_config spdlog
 
+        # Absolute path (or relative to HELIOS_THIRD_PARTY_DIR). Default trees
+        # live under HELIOS_THIRD_PARTY_DIR (override with -DHELIOS_THIRD_PARTY_DIR=...).
+        # HELIOS_FORCE_DOWNLOAD_<PKG> (CPM network) wins over HELIOS_USE_SYSTEM_<PKG>.
+        VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/spdlog
+
         CPM_REPOSITORY gabime/spdlog
         CPM_VERSION 1.16.0
         CPM_OPTIONS
@@ -381,7 +415,7 @@ endfunction()
 ]]
 function(helios_dependency)
   set(options "")
-  set(oneValueArgs NAME VERSION CPM_REPOSITORY CPM_GITHUB_REPOSITORY CPM_VERSION CPM_URL CPM_GIT_TAG CPM_SOURCE_SUBDIR CPM_DOWNLOAD_ONLY BUILD_TYPE UMBRELLA_ALIAS)
+  set(oneValueArgs NAME VERSION CPM_REPOSITORY CPM_GITHUB_REPOSITORY CPM_VERSION CPM_URL CPM_GIT_TAG CPM_SOURCE_DIR CPM_SOURCE_SUBDIR CPM_DOWNLOAD_ONLY BUILD_TYPE UMBRELLA_ALIAS VENDORED_DIR)
   set(multiValueArgs INSTALL_HINTS CPM_OPTIONS ALIASES)
 
   cmake_parse_arguments(DEP "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -454,6 +488,14 @@ function(helios_dependency)
     set(_cpm_repo "${DEP_CPM_GITHUB_REPOSITORY}")
   endif()
 
+  # Resolve vendored / explicit local source directory
+  set(_cpm_source_dir "")
+  if(DEP_CPM_SOURCE_DIR)
+    _helios_resolve_vendored_path("${DEP_CPM_SOURCE_DIR}" _cpm_source_dir)
+  elseif(DEP_VENDORED_DIR)
+    _helios_resolve_vendored_path("${DEP_VENDORED_DIR}" _cpm_source_dir)
+  endif()
+
   # Build the _helios_dep_begin call
   set(_begin_args NAME ${DEP_NAME})
   if(_ver_min)
@@ -475,7 +517,7 @@ function(helios_dependency)
     list(APPEND _begin_args PKG_CONFIG_NAMES ${_pkg_config_names})
   endif()
 
-  if(DEP_CPM_VERSION OR _cpm_repo)
+  if(DEP_CPM_VERSION OR _cpm_repo OR _cpm_source_dir OR DEP_CPM_URL)
     if(DEP_CPM_VERSION)
       list(APPEND _begin_args CPM_NAME ${DEP_NAME})
       list(APPEND _begin_args CPM_VERSION ${DEP_CPM_VERSION})
@@ -488,6 +530,13 @@ function(helios_dependency)
     endif()
     if(DEP_CPM_URL)
       list(APPEND _begin_args CPM_URL ${DEP_CPM_URL})
+    endif()
+    if(_cpm_source_dir)
+      list(APPEND _begin_args CPM_SOURCE_DIR ${_cpm_source_dir})
+    endif()
+    if(DEP_VENDORED_DIR)
+      # Pass the resolved absolute path so _helios_dep_begin does not re-prefix
+      list(APPEND _begin_args VENDORED_DIR ${_cpm_source_dir})
     endif()
     if(DEP_CPM_SOURCE_SUBDIR)
       list(APPEND _begin_args CPM_SOURCE_SUBDIR ${DEP_CPM_SOURCE_SUBDIR})
@@ -607,7 +656,7 @@ endfunction()
 
 macro(_helios_dep_begin)
   set(options CPM_DOWNLOAD_ONLY)
-  set(oneValueArgs NAME VERSION CPM_NAME CPM_VERSION CPM_GITHUB_REPOSITORY CPM_URL CPM_GIT_TAG CPM_SOURCE_SUBDIR)
+  set(oneValueArgs NAME VERSION CPM_NAME CPM_VERSION CPM_GITHUB_REPOSITORY CPM_URL CPM_GIT_TAG CPM_SOURCE_DIR CPM_SOURCE_SUBDIR VENDORED_DIR)
   set(multiValueArgs DEBIAN_NAMES RPM_NAMES PACMAN_NAMES BREW_NAMES PKG_CONFIG_NAMES CPM_OPTIONS)
 
   cmake_parse_arguments(HELIOS_PKG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -648,6 +697,22 @@ macro(_helios_dep_begin)
             "Force download ${HELIOS_PKG_CPM_NAME} even if system package exists"
             ${HELIOS_FORCE_DOWNLOAD_PACKAGES}
         )
+    option(
+            HELIOS_USE_SYSTEM_${_PKG_CPM_NAME_UPPER}
+            "Use system ${HELIOS_PKG_CPM_NAME} via find_package instead of HELIOS_THIRD_PARTY_DIR"
+            OFF
+        )
+
+    # Resolve VENDORED_DIR to an absolute path when CPM_SOURCE_DIR was not set
+    if(NOT HELIOS_PKG_CPM_SOURCE_DIR AND HELIOS_PKG_VENDORED_DIR)
+      _helios_resolve_vendored_path("${HELIOS_PKG_VENDORED_DIR}" HELIOS_PKG_CPM_SOURCE_DIR)
+    elseif(HELIOS_PKG_CPM_SOURCE_DIR)
+      _helios_resolve_vendored_path("${HELIOS_PKG_CPM_SOURCE_DIR}" HELIOS_PKG_CPM_SOURCE_DIR)
+    endif()
+    set(_PKG_HAS_VENDOR FALSE)
+    if(HELIOS_PKG_CPM_SOURCE_DIR OR HELIOS_PKG_VENDORED_DIR)
+      set(_PKG_HAS_VENDOR TRUE)
+    endif()
 
     if(HELIOS_PKG_VERSION)
       if(NOT ${_PKG_NAME}_FIND_VERSION OR "${${_PKG_NAME}_FIND_VERSION}" VERSION_LESS "${HELIOS_PKG_VERSION}")
@@ -686,6 +751,11 @@ macro(_helios_dep_begin)
       list(JOIN HELIOS_PKG_BREW_NAMES " " _pkg_names)
       string(APPEND _ERROR_MESSAGE "\n\tmacOS: brew install ${_pkg_names}")
     endif()
+    if(_PKG_HAS_VENDOR AND HELIOS_PKG_CPM_SOURCE_DIR)
+      string(APPEND _ERROR_MESSAGE
+          "\n\tVendored: place sources in ${HELIOS_PKG_CPM_SOURCE_DIR}"
+          "\n\tOr set HELIOS_FORCE_DOWNLOAD_${_PKG_CPM_NAME_UPPER}=ON / HELIOS_USE_SYSTEM_${_PKG_CPM_NAME_UPPER}=ON")
+    endif()
     string(APPEND _ERROR_MESSAGE "\n")
 
     set("${_PKG_NAME}_LIBRARIES")
@@ -702,71 +772,154 @@ macro(_helios_dep_end)
 
   set(_FOUND_VIA "")
 
-  # 1. System packages
-  if(NOT ${_PKG_NAME}_FOUND AND NOT HELIOS_FORCE_DOWNLOAD_${_PKG_CPM_NAME_UPPER} AND NOT _PKG_FORCE_CPM)
-    find_package(${_PKG_NAME} ${${_PKG_NAME}_FIND_VERSION} CONFIG QUIET)
-    if(${_PKG_NAME}_FOUND)
-      set(_FOUND_VIA "system (CONFIG)")
-    else()
-      find_package(${_PKG_NAME} ${${_PKG_NAME}_FIND_VERSION} MODULE QUIET)
+  # Vendored packages: force-download > use-system > third-party SOURCE_DIR
+  if(_PKG_HAS_VENDOR)
+    if(HELIOS_FORCE_DOWNLOAD_${_PKG_CPM_NAME_UPPER})
+      if(HELIOS_PKG_CPM_GITHUB_REPOSITORY OR HELIOS_PKG_CPM_URL)
+        include(DownloadUsingCPM)
+        set(_helios_cpm_remote TRUE)
+        _helios_cpm_add_package()
+        unset(_helios_cpm_remote)
+        if(${_PKG_NAME}_ADDED OR TARGET ${_PKG_NAME} OR ${HELIOS_PKG_CPM_NAME}_ADDED)
+          set(${_PKG_NAME}_FOUND TRUE)
+          set(_FOUND_VIA "CPM")
+        endif()
+      else()
+        message(FATAL_ERROR
+            "${_PKG_NAME}: HELIOS_FORCE_DOWNLOAD_${_PKG_CPM_NAME_UPPER}=ON but no "
+            "CPM_REPOSITORY / CPM_URL configured")
+      endif()
+    elseif(HELIOS_USE_SYSTEM_${_PKG_CPM_NAME_UPPER})
+      find_package(${_PKG_NAME} ${${_PKG_NAME}_FIND_VERSION} CONFIG QUIET)
       if(${_PKG_NAME}_FOUND)
-        set(_FOUND_VIA "system (MODULE)")
+        set(_FOUND_VIA "system (CONFIG)")
+      else()
+        find_package(${_PKG_NAME} ${${_PKG_NAME}_FIND_VERSION} MODULE QUIET)
+        if(${_PKG_NAME}_FOUND)
+          set(_FOUND_VIA "system (MODULE)")
+        endif()
+      endif()
+
+      if(NOT ${_PKG_NAME}_FOUND AND HELIOS_PKG_PKG_CONFIG_NAMES)
+        find_package(PkgConfig QUIET)
+        if(PKG_CONFIG_FOUND)
+          list(GET HELIOS_PKG_PKG_CONFIG_NAMES 0 _pkg_config_name)
+          pkg_check_modules(${_PKG_NAME}_PC QUIET IMPORTED_TARGET ${_pkg_config_name})
+          if(${_PKG_NAME}_PC_FOUND)
+            set(${_PKG_NAME}_FOUND TRUE)
+            set(_FOUND_VIA "pkg-config")
+            if(NOT TARGET ${_PKG_NAME})
+              add_library(${_PKG_NAME} INTERFACE IMPORTED)
+              target_link_libraries(${_PKG_NAME} INTERFACE PkgConfig::${_PKG_NAME}_PC)
+            endif()
+          endif()
+        endif()
+      endif()
+    else()
+      if(HELIOS_PKG_CPM_SOURCE_DIR AND EXISTS "${HELIOS_PKG_CPM_SOURCE_DIR}/CMakeLists.txt")
+        include(DownloadUsingCPM)
+        set(_helios_cpm_vendored TRUE)
+        _helios_cpm_add_package()
+        unset(_helios_cpm_vendored)
+        if(${_PKG_NAME}_ADDED OR ${HELIOS_PKG_CPM_NAME}_ADDED OR TARGET ${_PKG_NAME}
+            OR DEFINED ${HELIOS_PKG_CPM_NAME}_SOURCE_DIR)
+          set(${_PKG_NAME}_FOUND TRUE)
+          set(_FOUND_VIA "vendored")
+        endif()
+      else()
+        set(_vendor_path "${HELIOS_PKG_CPM_SOURCE_DIR}")
+        if(NOT _vendor_path AND HELIOS_PKG_VENDORED_DIR)
+          _helios_resolve_vendored_path("${HELIOS_PKG_VENDORED_DIR}" _vendor_path)
+        endif()
+        message(FATAL_ERROR
+            "Could not find vendored `${_PKG_NAME}` at `${_vendor_path}`.\n"
+            "\tPlace release sources there (or set HELIOS_THIRD_PARTY_DIR), or set:\n"
+            "\t  -DHELIOS_FORCE_DOWNLOAD_${_PKG_CPM_NAME_UPPER}=ON  (CPM network)\n"
+            "\t  -DHELIOS_USE_SYSTEM_${_PKG_CPM_NAME_UPPER}=ON      (find_package)\n")
       endif()
     endif()
-  endif()
+  else()
+    # Non-vendored: system packages → pkg-config → manual → CPM (legacy chain)
 
-  # 2. pkg-config
-  if(NOT ${_PKG_NAME}_FOUND AND HELIOS_PKG_PKG_CONFIG_NAMES AND NOT HELIOS_FORCE_DOWNLOAD_${_PKG_CPM_NAME_UPPER} AND NOT _PKG_FORCE_CPM)
-    find_package(PkgConfig QUIET)
-    if(PKG_CONFIG_FOUND)
-      list(GET HELIOS_PKG_PKG_CONFIG_NAMES 0 _pkg_config_name)
-      pkg_check_modules(${_PKG_NAME}_PC QUIET IMPORTED_TARGET ${_pkg_config_name})
-      if(${_PKG_NAME}_PC_FOUND)
-        set(${_PKG_NAME}_FOUND TRUE)
-        set(_FOUND_VIA "pkg-config")
-        if(NOT TARGET ${_PKG_NAME})
-          add_library(${_PKG_NAME} INTERFACE IMPORTED)
-          target_link_libraries(${_PKG_NAME} INTERFACE PkgConfig::${_PKG_NAME}_PC)
+    # 1. System packages
+    if(NOT ${_PKG_NAME}_FOUND AND NOT HELIOS_FORCE_DOWNLOAD_${_PKG_CPM_NAME_UPPER} AND NOT _PKG_FORCE_CPM)
+      find_package(${_PKG_NAME} ${${_PKG_NAME}_FIND_VERSION} CONFIG QUIET)
+      if(${_PKG_NAME}_FOUND)
+        set(_FOUND_VIA "system (CONFIG)")
+      else()
+        find_package(${_PKG_NAME} ${${_PKG_NAME}_FIND_VERSION} MODULE QUIET)
+        if(${_PKG_NAME}_FOUND)
+          set(_FOUND_VIA "system (MODULE)")
+        endif()
+      endif()
+    endif()
+
+    # 2. pkg-config
+    if(NOT ${_PKG_NAME}_FOUND AND HELIOS_PKG_PKG_CONFIG_NAMES AND NOT HELIOS_FORCE_DOWNLOAD_${_PKG_CPM_NAME_UPPER} AND NOT _PKG_FORCE_CPM)
+      find_package(PkgConfig QUIET)
+      if(PKG_CONFIG_FOUND)
+        list(GET HELIOS_PKG_PKG_CONFIG_NAMES 0 _pkg_config_name)
+        pkg_check_modules(${_PKG_NAME}_PC QUIET IMPORTED_TARGET ${_pkg_config_name})
+        if(${_PKG_NAME}_PC_FOUND)
+          set(${_PKG_NAME}_FOUND TRUE)
+          set(_FOUND_VIA "pkg-config")
+          if(NOT TARGET ${_PKG_NAME})
+            add_library(${_PKG_NAME} INTERFACE IMPORTED)
+            target_link_libraries(${_PKG_NAME} INTERFACE PkgConfig::${_PKG_NAME}_PC)
+          endif()
+        endif()
+      endif()
+    endif()
+
+    # 3. Manual search
+    set(_required_vars)
+    if(NOT "${${_PKG_NAME}_LIBRARIES}" STREQUAL "")
+      list(APPEND _required_vars "${_PKG_NAME}_LIBRARIES")
+    endif()
+    if(NOT "${${_PKG_NAME}_INCLUDE_DIRS}" STREQUAL "")
+      list(APPEND _required_vars "${_PKG_NAME}_INCLUDE_DIRS")
+    endif()
+    if(NOT "${${_PKG_NAME}_EXECUTABLE}" STREQUAL "")
+      list(APPEND _required_vars "${_PKG_NAME}_EXECUTABLE")
+    endif()
+
+    if(_required_vars AND NOT ${_PKG_NAME}_FOUND AND NOT _PKG_FORCE_CPM)
+      include(FindPackageHandleStandardArgs)
+      find_package_handle_standard_args(
+          ${_PKG_NAME}
+          REQUIRED_VARS ${_required_vars}
+          VERSION_VAR ${_PKG_NAME}_VERSION
+          FAIL_MESSAGE "${_ERROR_MESSAGE}"
+      )
+      if(${_PKG_NAME}_FOUND)
+        set(_FOUND_VIA "manual search")
+      endif()
+    endif()
+
+    # 4. CPM
+    if(NOT ${_PKG_NAME}_FOUND AND HELIOS_DOWNLOAD_${_PKG_CPM_NAME_UPPER})
+      if(HELIOS_PKG_CPM_GITHUB_REPOSITORY OR HELIOS_PKG_CPM_URL)
+        include(DownloadUsingCPM)
+        _helios_cpm_add_package()
+        if(${_PKG_NAME}_ADDED OR TARGET ${_PKG_NAME})
+          set(${_PKG_NAME}_FOUND TRUE)
+          set(_FOUND_VIA "CPM")
         endif()
       endif()
     endif()
   endif()
 
-  # 3. Manual search
-  set(_required_vars)
-  if(NOT "${${_PKG_NAME}_LIBRARIES}" STREQUAL "")
-    list(APPEND _required_vars "${_PKG_NAME}_LIBRARIES")
-  endif()
-  if(NOT "${${_PKG_NAME}_INCLUDE_DIRS}" STREQUAL "")
-    list(APPEND _required_vars "${_PKG_NAME}_INCLUDE_DIRS")
-  endif()
-  if(NOT "${${_PKG_NAME}_EXECUTABLE}" STREQUAL "")
-    list(APPEND _required_vars "${_PKG_NAME}_EXECUTABLE")
-  endif()
-
-  if(_required_vars AND NOT ${_PKG_NAME}_FOUND AND NOT _PKG_FORCE_CPM)
-    include(FindPackageHandleStandardArgs)
-    find_package_handle_standard_args(
-        ${_PKG_NAME}
-        REQUIRED_VARS ${_required_vars}
-        VERSION_VAR ${_PKG_NAME}_VERSION
-        FAIL_MESSAGE "${_ERROR_MESSAGE}"
-    )
-    if(${_PKG_NAME}_FOUND)
-      set(_FOUND_VIA "manual search")
+  # Manual search vars for post-processing (vendored path may leave these empty)
+  if(NOT DEFINED _required_vars)
+    set(_required_vars)
+    if(NOT "${${_PKG_NAME}_LIBRARIES}" STREQUAL "")
+      list(APPEND _required_vars "${_PKG_NAME}_LIBRARIES")
     endif()
-  endif()
-
-  # 4. CPM
-  if(NOT ${_PKG_NAME}_FOUND AND HELIOS_DOWNLOAD_${_PKG_CPM_NAME_UPPER})
-    if(HELIOS_PKG_CPM_GITHUB_REPOSITORY OR HELIOS_PKG_CPM_URL)
-      include(DownloadUsingCPM)
-      # Use the public helios_cpm_add_package macro from DownloadUsingCPM
-      _helios_cpm_add_package()
-      if(${_PKG_NAME}_ADDED OR TARGET ${_PKG_NAME})
-        set(${_PKG_NAME}_FOUND TRUE)
-        set(_FOUND_VIA "CPM")
-      endif()
+    if(NOT "${${_PKG_NAME}_INCLUDE_DIRS}" STREQUAL "")
+      list(APPEND _required_vars "${_PKG_NAME}_INCLUDE_DIRS")
+    endif()
+    if(NOT "${${_PKG_NAME}_EXECUTABLE}" STREQUAL "")
+      list(APPEND _required_vars "${_PKG_NAME}_EXECUTABLE")
     endif()
   endif()
 
@@ -786,8 +939,11 @@ macro(_helios_dep_end)
       helios_target_suppress_warnings(${_PKG_NAME}::${_PKG_NAME})
     endif()
 
-    if(_FOUND_VIA STREQUAL "CPM" AND DEFINED ${_PKG_NAME}_BINARY_DIR)
+    if((_FOUND_VIA STREQUAL "CPM" OR _FOUND_VIA STREQUAL "vendored") AND DEFINED ${_PKG_NAME}_BINARY_DIR)
       helios_suppress_warnings_in_binary_dir("${${_PKG_NAME}_BINARY_DIR}")
+    endif()
+    if((_FOUND_VIA STREQUAL "CPM" OR _FOUND_VIA STREQUAL "vendored") AND DEFINED ${HELIOS_PKG_CPM_NAME}_BINARY_DIR)
+      helios_suppress_warnings_in_binary_dir("${${HELIOS_PKG_CPM_NAME}_BINARY_DIR}")
     endif()
 
     if(_required_vars AND NOT TARGET ${_PKG_NAME})
@@ -819,6 +975,7 @@ macro(_helios_dep_end)
   unset(_PKG_CPM_NAME_UPPER)
   unset(_PKG_NAME_UPPER)
   unset(_PKG_FORCE_CPM)
+  unset(_PKG_HAS_VENDOR)
   unset(_PKG_ALREADY_PROCESSED)
 endmacro()
 
@@ -829,15 +986,22 @@ macro(_helios_cpm_add_package)
   if(HELIOS_PKG_CPM_VERSION)
     list(APPEND _cpm_args VERSION ${HELIOS_PKG_CPM_VERSION})
   endif()
-  if(HELIOS_PKG_CPM_GITHUB_REPOSITORY)
-    list(APPEND _cpm_args GITHUB_REPOSITORY ${HELIOS_PKG_CPM_GITHUB_REPOSITORY})
+
+  # Vendored local tree: SOURCE_DIR only (no network). Remote/force-download: repo/URL.
+  if(_helios_cpm_vendored AND HELIOS_PKG_CPM_SOURCE_DIR)
+    list(APPEND _cpm_args SOURCE_DIR ${HELIOS_PKG_CPM_SOURCE_DIR})
+  else()
+    if(HELIOS_PKG_CPM_GITHUB_REPOSITORY)
+      list(APPEND _cpm_args GITHUB_REPOSITORY ${HELIOS_PKG_CPM_GITHUB_REPOSITORY})
+    endif()
+    if(HELIOS_PKG_CPM_URL)
+      list(APPEND _cpm_args URL ${HELIOS_PKG_CPM_URL})
+    endif()
+    if(HELIOS_PKG_CPM_GIT_TAG)
+      list(APPEND _cpm_args GIT_TAG ${HELIOS_PKG_CPM_GIT_TAG})
+    endif()
   endif()
-  if(HELIOS_PKG_CPM_URL)
-    list(APPEND _cpm_args URL ${HELIOS_PKG_CPM_URL})
-  endif()
-  if(HELIOS_PKG_CPM_GIT_TAG)
-    list(APPEND _cpm_args GIT_TAG ${HELIOS_PKG_CPM_GIT_TAG})
-  endif()
+
   if(HELIOS_PKG_CPM_SOURCE_SUBDIR)
     list(APPEND _cpm_args SOURCE_SUBDIR ${HELIOS_PKG_CPM_SOURCE_SUBDIR})
   endif()

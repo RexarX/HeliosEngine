@@ -1,12 +1,6 @@
-# Ubuntu's system spdlog links external fmt, which fails to compile with Clang
-# (consteval format-string checks in spdlog/details/fmt_helper.h). Use the CPM
-# build with std::format instead.
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  if(NOT DEFINED HELIOS_FORCE_DOWNLOAD_SPDLOG)
-    set(HELIOS_FORCE_DOWNLOAD_SPDLOG ON CACHE BOOL
-        "Force CPM spdlog when Clang would otherwise pick a system fmt-backed package")
-  endif()
-endif()
+# Prefer vendored third-party/spdlog (SPDLOG_USE_STD_FORMAT). System spdlog on
+# some distros links external fmt and can fail with Clang; use
+# HELIOS_USE_SYSTEM_SPDLOG=ON only when the system package is known-good.
 
 helios_dependency(
     NAME spdlog
@@ -19,8 +13,10 @@ helios_dependency(
         brew spdlog
         pkg_config spdlog
 
+    VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/spdlog
+
     CPM_REPOSITORY gabime/spdlog
-    CPM_VERSION 1.16.0
+    CPM_VERSION 1.17.0
     CPM_OPTIONS
         "SPDLOG_BUILD_SHARED OFF"
         "SPDLOG_BUILD_EXAMPLE OFF"

@@ -13,6 +13,8 @@ helios_dependency(
         brew concurrentqueue
         pkg_config concurrentqueue
 
+    VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/concurrentqueue
+
     CPM_REPOSITORY cameron314/concurrentqueue
     CPM_VERSION 1.0.5
 )

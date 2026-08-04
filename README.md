@@ -83,20 +83,20 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 ## Modules
 
-| Module      | Description                                        | Default | Documentation                     |
-| ----------- | -------------------------------------------------- | ------- | --------------------------------- |
-| `core`      | Asserts, UUID, stack traces, CStringView           | ON      | [README](src/core/README.md)      |
-| `platform`  | Platform detection, `HELIOS_API`, debug break      | ON      | [README](src/platform/README.md)  |
-| `compiler`  | Branch hints, feature detection macros             | ON      | [README](src/compiler/README.md)  |
-| `utils`     | TypeId, Delegate, timers, filesystem, adapters     | ON      | [README](src/utils/README.md)     |
-| `container` | SparseSet, MultiTypeMap, TypedBuffer, StaticString | ON      | [README](src/container/README.md) |
-| `memory`    | PMR allocators, `Rc`/`Arc`                         | ON      | [README](src/memory/README.md)    |
-| `log`       | spdlog-based typed logging                         | ON      | [README](src/log/README.md)       |
-| `async`     | Task graphs and work-stealing executor             | ON      | [README](src/async/README.md)     |
-| `ecs`       | World, entities, components, schedules             | ON      | [README](src/ecs/README.md)       |
-| `app`       | Application framework, plugins, sub-apps           | ON      | [README](src/app/README.md)       |
-| `profile`   | Tracy / flamegraph profiling (opt-in)              | OFF     | [README](src/profile/README.md)   |
-| `window`    | GLFW windowing (skeleton)                          | ON      | [README](src/window/README.md)    |
+| Module      | Description                                              | Default | Documentation                     |
+| ----------- | -------------------------------------------------------- | ------- | --------------------------------- |
+| `core`      | Asserts, UUID, stack traces, CStringView, etc.           | ON      | [README](src/core/README.md)      |
+| `platform`  | Platform detection, `HELIOS_API`, debug break, etc.      | ON      | [README](src/platform/README.md)  |
+| `compiler`  | Branch hints, feature detection macros, etc.             | ON      | [README](src/compiler/README.md)  |
+| `utils`     | TypeId, timer, filesystem, adapters, etc.                | ON      | [README](src/utils/README.md)     |
+| `container` | SparseSet, MultiTypeMap, TypedBuffer, StaticString, etc. | ON      | [README](src/container/README.md) |
+| `memory`    | PMR allocators, `Rc`/`Arc`, etc.                         | ON      | [README](src/memory/README.md)    |
+| `log`       | spdlog-based typed logging                               | ON      | [README](src/log/README.md)       |
+| `async`     | Task graphs and work-stealing executor                   | ON      | [README](src/async/README.md)     |
+| `ecs`       | World, entities, components, schedules, etc.             | ON      | [README](src/ecs/README.md)       |
+| `app`       | Application framework, plugins, sub-apps, etc.           | ON      | [README](src/app/README.md)       |
+| `profile`   | Tracy / flamegraph profiling (opt-in), etc.              | ON      | [README](src/profile/README.md)   |
+| `window`    | GLFW windowing (skeleton)                                | ON      | [README](src/window/README.md)    |
 
 ```bash
 cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW=OFF
@@ -117,7 +117,12 @@ cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW
 | **Generator**    | —                               | Ninja                       |
 | **Python**       | 3.8+                            | 3.10+ (scripts, pre-commit) |
 
-Clone with submodules (needed for Doxygen theme):
+```bash
+git clone https://github.com/RexarX/HeliosEngine.git
+cd HeliosEngine
+```
+
+Clone with submodules if you intend to build docs locally:
 
 ```bash
 git clone --recursive https://github.com/RexarX/HeliosEngine.git
@@ -127,6 +132,8 @@ cd HeliosEngine
 ### Installing Dependencies
 
 Helios resolves dependencies per module: **system packages are tried first**, then **CPM download** if missing (`HELIOS_DOWNLOAD_PACKAGES=ON`, default). Pre-installing system packages speeds up configuration and avoids network fetches.
+
+Some packages could require additional system packages, most notably when building on Linux make sure to install the X11/Wayland development packages to properly build `glfw3` (`libwayland-dev`, `libx11-dev`, etc.)
 
 Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/dependencies/).
 
@@ -143,39 +150,73 @@ Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/depen
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y ninja-build clang-format doxygen \
-  libboost-all-dev libtbb-dev libspdlog-dev \
-  libtaskflow-cpp-dev libconcurrentqueue-dev libglfw3-dev \
-  doctest-dev
+sudo apt-get install -y ninja-build libboost-all-dev libtbb-dev
 ```
 
-Optional (profile module): `sudo apt-get install -y libtracy-dev`
+Additinal tools:
+
+```bash
+sudo apt-get install -y clang-format doxygen
+```
+
+Wayland/X11:
+
+```bash
+sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \
+  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev
+```
 
 #### Linux (DNF — Fedora)
 
 ```bash
-sudo dnf install -y ninja-build clang-tools-extra doxygen \
-  boost-devel tbb-devel spdlog-devel taskflow-devel \
-  glfw-devel doctest-devel stduuid-devel
+sudo dnf install -y ninja-build  boost-devel tbb-devel
+
+```
+
+Additinal tools:
+
+```bash
+sudo dnf install -y clang-tools-extra doxygen
+```
+
+Wayland/X11:
+
+```bash
+sudo apt-get install -y wayland-devel libxkbcommon-devel libX11-devel \
+  libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel libXext-devel
 ```
 
 #### Linux (Pacman — Arch)
 
 ```bash
-sudo pacman -S --needed ninja clang doxygen \
-  boost tbb spdlog taskflow glfw doctest concurrentqueue
+sudo pacman -S --needed ninja boost tbb
+
 ```
 
-Optional (profile module): `sudo pacman -S tracy`
+Additinal tools:
+
+```bash
+sudo pacman -S --needed clang doxygen
+```
+
+Wayland/X11:
+
+```bash
+sudo pacman -S --needed wayland libxkbcommon libx11 \
+  libxrandr libxinerama libxi libxcursor libxext
+```
 
 #### macOS (Homebrew)
 
 ```bash
-brew install cmake ninja clang-format doxygen \
-  boost spdlog taskflow glfw doctest concurrentqueue
+brew install cmake ninja boost
 ```
 
-Optional (profile module): `brew install tracy`
+Additinal tools:
+
+```bash
+brew install clang-format doxygen
+```
 
 > **Note:** On Linux with **GCC + libstdc++**, [TBB](https://github.com/oneapi-src/oneTBB) is required for parallel STL (`libtbb-dev` / `tbb-devel` / `onetbb`). Clang on Linux and all macOS builds use libc++ and do not require TBB. spdlog is auto-downloaded via CPM when using Clang on Linux (system Ubuntu packages are incompatible).
 
@@ -241,9 +282,9 @@ ctest --preset macos-clang-release
 #### Recommended developer flags
 
 ```bash
-cmake --preset linux-gcc-release \
+cmake --preset linux-gcc-relwithdebinfo \
   -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-  -DHELIOS_DEVELOPER_MODE=ON \
+  #-DHELIOS_DEVELOPER_MODE=ON \
 ```
 
 | Option                     | Default        | Notes                         |
@@ -257,9 +298,7 @@ cmake --preset linux-gcc-release \
 ### Run the Example
 
 ```bash
-cmake --preset linux-gcc-release \
-  -DHELIOS_BUILD_EXAMPLES=ON \
-  -DHELIOS_BUILD_PROFILE=ON
+cmake --preset linux-gcc-release -DHELIOS_BUILD_EXAMPLES=ON
 cmake --build --preset linux-gcc-release --target simple_example
 ./bin/examples/debug-linux-x86_64/simple_example
 ```
@@ -272,7 +311,8 @@ See [examples/simple/src/main.cpp](examples/simple/src/main.cpp) for schedules, 
 
 ## Usage
 
-Systems are plain structs — `operator()` parameters declare data access. `App` owns the main world, executor, and frame scheduler.
+Systems are plain structs — `operator()` parameters declare data access or regular C++ lambdas.
+`App` owns the main world, executor, and frame scheduler.
 
 ```cpp
 #include <helios/app/app.hpp>

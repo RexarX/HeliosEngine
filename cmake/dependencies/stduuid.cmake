@@ -5,6 +5,8 @@ helios_dependency(
     INSTALL_HINTS
         dnf stduuid-devel
 
+    VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/stduuid
+
     CPM_REPOSITORY mariusbancila/stduuid
     CPM_VERSION 1.2.3
     CPM_OPTIONS

@@ -16,6 +16,10 @@ helios_dependency(
         brew package
         pkg_config package
 
+    # Absolute path under HELIOS_THIRD_PARTY_DIR (override root with -DHELIOS_THIRD_PARTY_DIR=...).
+    # Overrides: HELIOS_FORCE_DOWNLOAD_<PKG>=ON (CPM) or HELIOS_USE_SYSTEM_<PKG>=ON.
+    VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/packagename
+
     CPM_REPOSITORY owner/repo
     CPM_VERSION 1.0.0
     CPM_OPTIONS

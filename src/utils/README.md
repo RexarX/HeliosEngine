@@ -35,37 +35,6 @@ CHECK_EQ(Id.QualifiedName(), "MyComponent");  // compiler-dependent
 
 `TypeIndex` is a lightweight 64-bit hash; `TypeId` also carries the qualified type name string.
 
-## Delegate
-
-```cpp
-#include <helios/utils/delegate.hpp>
-
-void FreeFn(int x) { /* ... */ }
-
-struct Handler {
-  void OnEvent(int x) { /* ... */ }
-};
-
-auto free = helios::utils::Delegate<void(int)>::FromFunction<&FreeFn>();
-free.Invoke(42);
-free(42);  // operator() alias
-
-Handler h;
-auto member =
-    helios::utils::Delegate<void(int)>::FromFunction<&Handler::OnEvent>(h);
-member(42);
-
-// optional helpers — deduce signature from the function pointer
-auto deduced = helios::utils::DelegateFromFunction<&FreeFn>();
-
-CHECK(free.Valid());
-free.Reset();
-```
-
-`FromFunction` binds free functions (no instance) or member functions (pass `this`). For overloaded or explicit signatures use `FromFunction<ReturnType(*)(Args...), &Func>()` or `DelegateFromFunction<Signature, &Func>()`.
-
-Non-owning, no heap allocation, exception-free. Empty delegates return default-constructed values (non-void) or no-op (void).
-
 ## Scope Guard
 
 ```cpp
