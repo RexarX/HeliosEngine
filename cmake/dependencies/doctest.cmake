@@ -9,6 +9,8 @@ helios_dependency(
         brew doctest
         pkg_config doctest
 
+    VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/doctest
+
     CPM_REPOSITORY doctest/doctest
     CPM_GIT_TAG v2.5.3
     CPM_OPTIONS

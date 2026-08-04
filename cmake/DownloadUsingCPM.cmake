@@ -100,10 +100,11 @@ endif()
 # Include CPM
 include("${_cpm_path}")
 
-# Track downloaded packages
-if(NOT DEFINED CPM_PACKAGES)
-  set(CPM_PACKAGES "" CACHE INTERNAL "List of packages downloaded via CPM")
-endif()
+# Per-configure Helios tracking (GLOBAL props — do not reuse CPM_PACKAGES;
+# CPM sets *_ADDED for SOURCE_DIR the same as network fetches, and only on
+# the first add in a build tree).
+set_property(GLOBAL PROPERTY HELIOS_CPM_VENDORED_PACKAGES "")
+set_property(GLOBAL PROPERTY HELIOS_CPM_DOWNLOADED_PACKAGES "")
 
 #[[
     helios_cpm_add_package(
@@ -112,6 +113,7 @@ endif()
         [GIT_TAG <tag>]
         [GITHUB_REPOSITORY <owner/repo>]
         [URL <url>]
+        [SOURCE_DIR <path>]
         [SOURCE_SUBDIR <dir>]
         [OPTIONS <options...>]
         [DOWNLOAD_ONLY]
@@ -120,10 +122,11 @@ endif()
     )
 
     Wraps CPMAddPackage with Helios dependency build-type and LTO isolation.
+    When SOURCE_DIR is set, CPM uses the local tree and skips network download.
 ]]
 macro(helios_cpm_add_package)
   set(options DOWNLOAD_ONLY EXCLUDE_FROM_ALL SYSTEM)
-  set(oneValueArgs NAME VERSION GIT_TAG GITHUB_REPOSITORY URL SOURCE_SUBDIR)
+  set(oneValueArgs NAME VERSION GIT_TAG GITHUB_REPOSITORY URL SOURCE_DIR SOURCE_SUBDIR)
   set(multiValueArgs OPTIONS)
 
   cmake_parse_arguments(CPM_ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -149,6 +152,10 @@ macro(helios_cpm_add_package)
 
   if(CPM_ARG_URL)
     list(APPEND _cpm_args URL ${CPM_ARG_URL})
+  endif()
+
+  if(CPM_ARG_SOURCE_DIR)
+    list(APPEND _cpm_args SOURCE_DIR ${CPM_ARG_SOURCE_DIR})
   endif()
 
   if(CPM_ARG_SOURCE_SUBDIR)
@@ -197,17 +204,22 @@ macro(helios_cpm_add_package)
     unset(_helios_saved_build_type)
   endif()
 
-  # Track the package
-  if(${CPM_ARG_NAME}_ADDED)
-    list(APPEND CPM_PACKAGES ${CPM_ARG_NAME})
-    set(CPM_PACKAGES "${CPM_PACKAGES}" CACHE INTERNAL "List of packages downloaded via CPM")
+  if(CPM_ARG_VERSION)
+    set(CPM_${CPM_ARG_NAME}_VERSION "${CPM_ARG_VERSION}" CACHE INTERNAL
+        "CPM version for ${CPM_ARG_NAME}")
+  endif()
 
-    # Store the version that was actually requested for this package
-    if(CPM_ARG_VERSION)
-      set(CPM_${CPM_ARG_NAME}_VERSION "${CPM_ARG_VERSION}" CACHE INTERNAL "CPM version for ${CPM_ARG_NAME}")
+  # Record for summary whenever this configure invokes add (not only *_ADDED).
+  if(CPM_ARG_SOURCE_DIR)
+    set_property(GLOBAL APPEND PROPERTY HELIOS_CPM_VENDORED_PACKAGES ${CPM_ARG_NAME})
+    if(${CPM_ARG_NAME}_ADDED)
+      message(STATUS "Added ${CPM_ARG_NAME} from local SOURCE_DIR")
     endif()
-
-    message(STATUS "Downloaded ${CPM_ARG_NAME} via CPM")
+  else()
+    set_property(GLOBAL APPEND PROPERTY HELIOS_CPM_DOWNLOADED_PACKAGES ${CPM_ARG_NAME})
+    if(${CPM_ARG_NAME}_ADDED)
+      message(STATUS "Downloaded ${CPM_ARG_NAME} via CPM")
+    endif()
   endif()
 
   if(DEFINED ${CPM_ARG_NAME}_BINARY_DIR)
@@ -224,16 +236,36 @@ endmacro()
 #[[
     helios_print_cpm_packages()
 
-    Prints packages downloaded through CPM during this configure run.
+    Prints packages added through helios_cpm_add_package this configure,
+    split into vendored (SOURCE_DIR) vs network downloads.
 ]]
 function(helios_print_cpm_packages)
-  if(CPM_PACKAGES)
+  get_property(_vendored GLOBAL PROPERTY HELIOS_CPM_VENDORED_PACKAGES)
+  get_property(_downloaded GLOBAL PROPERTY HELIOS_CPM_DOWNLOADED_PACKAGES)
+  if(_vendored)
+    list(REMOVE_DUPLICATES _vendored)
+    list(SORT _vendored)
+  endif()
+  if(_downloaded)
+    list(REMOVE_DUPLICATES _downloaded)
+    list(SORT _downloaded)
+  endif()
+
+  if(_vendored)
+    message(STATUS "========== Vendored Packages (SOURCE_DIR) ==========")
+    foreach(_pkg ${_vendored})
+      if(CPM_${_pkg}_VERSION)
+        message(STATUS "  ■ ${_pkg} ${CPM_${_pkg}_VERSION}")
+      else()
+        message(STATUS "  ■ ${_pkg}")
+      endif()
+    endforeach()
+    message(STATUS "====================================================")
+  endif()
+
+  if(_downloaded)
     message(STATUS "========== CPM Downloaded Packages ==========")
-    list(REMOVE_DUPLICATES CPM_PACKAGES)
-    list(SORT CPM_PACKAGES)
-    foreach(_pkg ${CPM_PACKAGES})
-      # Use CPM's stored version instead of the package's version variable
-      # to avoid stale cached values from find_package() attempts
+    foreach(_pkg ${_downloaded})
       if(CPM_${_pkg}_VERSION)
         message(STATUS "  ↓ ${_pkg} ${CPM_${_pkg}_VERSION}")
       else()

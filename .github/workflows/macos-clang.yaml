@@ -9,6 +9,7 @@ on:
       - "cmake/**"
       - "examples/**"
       - "src/**"
+      - "third-party/**"
       - "CMakeLists.txt"
       - "CMakePresets.json"
       - "!**.md"
@@ -21,6 +22,7 @@ on:
       - "cmake/**"
       - "examples/**"
       - "src/**"
+      - "third-party/**"
       - "CMakeLists.txt"
       - "CMakePresets.json"
       - "!**.md"
@@ -58,7 +60,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          brew install ninja boost spdlog taskflow glfw doctest concurrentqueue
+          brew install ninja boost tbb
 
       - name: Configure (${{ matrix.preset }})
         run: cmake --preset ${{ matrix.preset }} ${{ matrix.cmake_extra }}

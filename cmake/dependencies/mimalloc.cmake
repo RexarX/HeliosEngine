@@ -9,8 +9,10 @@ helios_dependency(
         brew mimalloc
         pkg_config mimalloc
 
+    VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/mimalloc
+
     CPM_REPOSITORY microsoft/mimalloc
-    CPM_GIT_TAG v3.3.2
+    CPM_GIT_TAG v3.4.4
     CPM_OPTIONS
         "MI_BUILD_SHARED OFF"
         "MI_BUILD_STATIC ON"

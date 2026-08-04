@@ -83,20 +83,20 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 ## Modules
 
-| Module      | Description                                        | Default | Documentation                     |
-| ----------- | -------------------------------------------------- | ------- | --------------------------------- |
-| `core`      | Asserts, UUID, stack traces, CStringView           | ON      | [README](src/core/README.md)      |
-| `platform`  | Platform detection, `HELIOS_API`, debug break      | ON      | [README](src/platform/README.md)  |
-| `compiler`  | Branch hints, feature detection macros             | ON      | [README](src/compiler/README.md)  |
-| `utils`     | TypeId, Delegate, timers, filesystem, adapters     | ON      | [README](src/utils/README.md)     |
-| `container` | SparseSet, MultiTypeMap, TypedBuffer, StaticString | ON      | [README](src/container/README.md) |
-| `memory`    | PMR allocators, `Rc`/`Arc`                         | ON      | [README](src/memory/README.md)    |
-| `log`       | spdlog-based typed logging                         | ON      | [README](src/log/README.md)       |
-| `async`     | Task graphs and work-stealing executor             | ON      | [README](src/async/README.md)     |
-| `ecs`       | World, entities, components, schedules             | ON      | [README](src/ecs/README.md)       |
-| `app`       | Application framework, plugins, sub-apps           | ON      | [README](src/app/README.md)       |
-| `profile`   | Tracy / flamegraph profiling (opt-in)              | OFF     | [README](src/profile/README.md)   |
-| `window`    | GLFW windowing (skeleton)                          | ON      | [README](src/window/README.md)    |
+| Module      | Description                                              | Default | Documentation                     |
+| ----------- | -------------------------------------------------------- | ------- | --------------------------------- |
+| `core`      | Asserts, UUID, stack traces, CStringView, etc.           | ON      | [README](src/core/README.md)      |
+| `platform`  | Platform detection, `HELIOS_API`, debug break, etc.      | ON      | [README](src/platform/README.md)  |
+| `compiler`  | Branch hints, feature detection macros, etc.             | ON      | [README](src/compiler/README.md)  |
+| `utils`     | TypeId, timer, filesystem, adapters, etc.                | ON      | [README](src/utils/README.md)     |
+| `container` | SparseSet, MultiTypeMap, TypedBuffer, StaticString, etc. | ON      | [README](src/container/README.md) |
+| `memory`    | PMR allocators, `Rc`/`Arc`, etc.                         | ON      | [README](src/memory/README.md)    |
+| `log`       | spdlog-based typed logging                               | ON      | [README](src/log/README.md)       |
+| `async`     | Task graphs and work-stealing executor                   | ON      | [README](src/async/README.md)     |
+| `ecs`       | World, entities, components, schedules, etc.             | ON      | [README](src/ecs/README.md)       |
+| `app`       | Application framework, plugins, sub-apps, etc.           | ON      | [README](src/app/README.md)       |
+| `profile`   | Tracy / flamegraph profiling (opt-in), etc.              | ON      | [README](src/profile/README.md)   |
+| `window`    | GLFW windowing (skeleton)                                | ON      | [README](src/window/README.md)    |
 
 ```bash
 cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW=OFF

@@ -13,7 +13,7 @@ Coding standards, module layout, testing, and tooling for HeliosEngine developme
 - **No exceptions** — use `HELIOS_ASSERT` for invariants; `std::expected<T, ErrorEnum>` or `std::optional` for recoverable failures.
 - **No backward-compat debt** — change or remove deprecated code freely.
 - **Include what you use** — every file includes exactly what it needs.
-- **Priority order:** performance → simplicity → maintainability.
+- **Priority order:** performance → simplicity → scalability.
 - **Avoid locks in hot paths** — prefer atomics and lock-free structures.
 
 ### Types and APIs
@@ -128,7 +128,7 @@ helios_module(
 )
 ```
 
-External dependencies are declared per-module via `USES` and resolved from `cmake/dependencies/` (system packages first, CPM fallback).
+External dependencies are declared per-module via `USES` and resolved from `cmake/dependencies/`. Most engine libraries are vendored under `HELIOS_THIRD_PARTY_DIR` (defaults to `third-party/`); use `-DHELIOS_THIRD_PARTY_DIR=...`, `HELIOS_FORCE_DOWNLOAD_<PKG>`, or `HELIOS_USE_SYSTEM_<PKG>` to relocate or opt into CPM/system packages. Remaining deps (e.g. Boost, TBB) still use system packages first with CPM fallback.
 
 ### Selective module builds
 

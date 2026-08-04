@@ -105,6 +105,10 @@ else()
       )
       message(STATUS "helios_module_core: libbacktrace not found, using Boost addr2line backend")
     endif()
+
+    target_link_options(helios_module_core INTERFACE
+        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:-rdynamic>
+    )
   elseif(WIN32)
     target_compile_definitions(helios_module_core PRIVATE BOOST_STACKTRACE_USE_WINDBG)
   endif()

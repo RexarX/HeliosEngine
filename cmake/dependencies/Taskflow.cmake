@@ -9,8 +9,10 @@ helios_dependency(
         brew taskflow
         pkg_config taskflow
 
+    VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/Taskflow
+
     CPM_REPOSITORY taskflow/taskflow
-    CPM_GIT_TAG v4.0.0
+    CPM_GIT_TAG v4.1.0
     CPM_OPTIONS
         "TF_BUILD_TESTS OFF"
         "TF_BUILD_EXAMPLES OFF"

@@ -12,6 +12,8 @@ helios_dependency(
         brew tracy
         pkg_config tracy
 
+    VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/tracy
+
     CPM_REPOSITORY wolfpld/tracy
     CPM_GIT_TAG v0.13.1
     CPM_OPTIONS
