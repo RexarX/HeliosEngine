@@ -298,6 +298,7 @@ Requirements</h3>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="installing-dependencies"></a>
 Installing Dependencies</h3>
 <p>Helios resolves dependencies per module: <b>system packages are tried first</b>, then <b>CPM download</b> if missing (<span class="tt">HELIOS_DOWNLOAD_PACKAGES=ON</span>, default). Pre-installing system packages speeds up configuration and avoids network fetches.</p>
+<p>Some packages could require additional system packages, most notably when building on Linux make sure to install the X11/Wayland development packages to properly build <span class="tt">glfw3</span> (<span class="tt">libwayland-dev</span>, <span class="tt">libx11-dev</span>, etc.)</p>
 <p>Package names below match <span class="tt">INSTALL_HINTS</span> in <a href="cmake/dependencies/"><span class="tt">cmake/dependencies/</span></a>.</p>
 <h4 class="doxsection"><a class="anchor" id="all-platforms--build-tools"></a>
 All platforms — build tools</h4>
@@ -316,20 +317,34 @@ All platforms — build tools</h4>
 <h4 class="doxsection"><a class="anchor" id="linux-apt--ubuntu--debian"></a>
 Linux (APT — Ubuntu / Debian)</h4>
 <div class="fragment"><div class="line">sudo apt-get update</div>
-<div class="line">sudo apt-get install -y ninja-build clang-format libboost-all-dev libtbb-dev #doxygen</div>
-</div><!-- fragment --><p>Optional (profile module): <span class="tt">sudo apt-get install -y libtracy-dev</span></p>
-<h4 class="doxsection"><a class="anchor" id="linux-dnf--fedora"></a>
+<div class="line">sudo apt-get install -y ninja-build libboost-all-dev libtbb-dev</div>
+</div><!-- fragment --><p>Additinal tools:</p>
+<div class="fragment"><div class="line">sudo apt-get install -y clang-format doxygen</div>
+</div><!-- fragment --><p>Wayland/X11:</p>
+<div class="fragment"><div class="line">sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \</div>
+<div class="line">  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev</div>
+</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="linux-dnf--fedora"></a>
 Linux (DNF — Fedora)</h4>
-<div class="fragment"><div class="line">sudo dnf install -y ninja-build clang-tools-extra boost-devel tbb-devel #doxygen</div>
+<div class="fragment"><div class="line">sudo dnf install -y ninja-build  boost-devel tbb-devel</div>
+</div><!-- fragment --><p>Additinal tools:</p>
+<div class="fragment"><div class="line">sudo dnf install -y clang-tools-extra doxygen</div>
+</div><!-- fragment --><p>Wayland/X11:</p>
+<div class="fragment"><div class="line">sudo apt-get install -y wayland-devel libxkbcommon-devel libX11-devel \</div>
+<div class="line">  libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel libXext-devel</div>
 </div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="linux-pacman--arch"></a>
 Linux (Pacman — Arch)</h4>
-<div class="fragment"><div class="line">sudo pacman -S --needed ninja clang boost tbb #doxygen</div>
-</div><!-- fragment --><p>Optional (profile module): <span class="tt">sudo pacman -S tracy</span></p>
-<h4 class="doxsection"><a class="anchor" id="macos-homebrew"></a>
+<div class="fragment"><div class="line">sudo pacman -S --needed ninja boost tbb</div>
+</div><!-- fragment --><p>Additinal tools:</p>
+<div class="fragment"><div class="line">sudo pacman -S --needed clang doxygen</div>
+</div><!-- fragment --><p>Wayland/X11:</p>
+<div class="fragment"><div class="line">sudo pacman -S --needed wayland libxkbcommon libx11 \</div>
+<div class="line">  libxrandr libxinerama libxi libxcursor libxext</div>
+</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="macos-homebrew"></a>
 macOS (Homebrew)</h4>
-<div class="fragment"><div class="line">brew install cmake ninja clang-format boost #doxygen</div>
-</div><!-- fragment --><p>Optional (profile module): <span class="tt">brew install tracy</span></p>
-<blockquote class="doxtable">
+<div class="fragment"><div class="line">brew install cmake ninja boost</div>
+</div><!-- fragment --><p>Additinal tools:</p>
+<div class="fragment"><div class="line">brew install clang-format doxygen</div>
+</div><!-- fragment --><blockquote class="doxtable">
 <p><b>Note:</b> On Linux with <b>GCC + libstdc++</b>, <a href="https://github.com/oneapi-src/oneTBB">TBB</a> is required for parallel STL (<span class="tt">libtbb-dev</span> / <span class="tt">tbb-devel</span> / <span class="tt">onetbb</span>). Clang on Linux and all macOS builds use libc++ and do not require TBB. spdlog is auto-downloaded via CPM when using Clang on Linux (system Ubuntu packages are incompatible). </p>
 </blockquote>
 <h4 class="doxsection"><a class="anchor" id="windows-msvc"></a>
