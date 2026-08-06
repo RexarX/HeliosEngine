@@ -389,9 +389,9 @@ public:
 
   /**
    * @brief Creates sliding windows over query results.
+   * @warning window_size must be greater than 0
    * @param window_size Size of the sliding window
    * @return Lazy slide view
-   * @warning window_size must be greater than 0
    */
   [[nodiscard]] auto Slide(size_t window_size) const
       -> utils::SlideAdapter<iterator> {
@@ -400,13 +400,24 @@ public:
 
   /**
    * @brief Takes every Nth element with stride.
+   * @warning stride must be greater than 0
    * @param stride Number of elements to skip between yields
    * @return Lazy stride view
-   * @warning stride must be greater than 0
    */
   [[nodiscard]] auto Stride(size_t stride) const
       -> utils::StrideAdapter<iterator> {
     return {begin(), end(), stride};
+  }
+
+  /**
+   * @brief Groups results into chunks of a specified size.
+   * @warning chunk_size must be greater than 0
+   * @param chunk_size Size of each chunk
+   * @return Lazy chunk view
+   */
+  [[nodiscard]] auto Chunk(size_t chunk_size) const
+      -> utils::ChunkAdapter<iterator> {
+    return {begin(), end(), chunk_size};
   }
 
   /**
@@ -984,6 +995,17 @@ public:
   [[nodiscard]] auto Stride(
       size_t stride) const& -> utils::StrideAdapter<iterator> {
     return {begin(), end(), stride};
+  }
+
+  /**
+   * @brief Groups results into chunks of a specified size.
+   * @warning chunk_size must be greater than 0
+   * @param chunk_size Size of each chunk
+   * @return Lazy chunk view
+   */
+  [[nodiscard]] auto Chunk(
+      size_t chunk_size) const& -> utils::ChunkAdapter<iterator> {
+    return {begin(), end(), chunk_size};
   }
 
   /**
