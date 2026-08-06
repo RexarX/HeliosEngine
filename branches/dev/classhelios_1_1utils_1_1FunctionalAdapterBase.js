@@ -5,6 +5,7 @@ var classhelios_1_1utils_1_1FunctionalAdapterBase =
     [ "Chain", "classhelios_1_1utils_1_1FunctionalAdapterBase.html#a84844cd254ee0912a6cde565442fe852", null ],
     [ "Chain", "classhelios_1_1utils_1_1FunctionalAdapterBase.html#a9db7228e3579aefbc75c78291c5e4b59", null ],
     [ "Chain", "classhelios_1_1utils_1_1FunctionalAdapterBase.html#a05500143c093bdd31d54f55d013177d4", null ],
+    [ "Chunk", "classhelios_1_1utils_1_1FunctionalAdapterBase.html#af0ab37316628bef45a5e4b0ffe3a0fc0", null ],
     [ "Collect", "classhelios_1_1utils_1_1FunctionalAdapterBase.html#a834e53c6229570dceb2a30a7fd5bfa4d", null ],
     [ "CollectWith", "classhelios_1_1utils_1_1FunctionalAdapterBase.html#a0c8c7866dc192660a6015b942c50c72e", null ],
     [ "CollectWith", "classhelios_1_1utils_1_1FunctionalAdapterBase.html#a0e95843b6ae3b485ad2599112d50ae34", null ],

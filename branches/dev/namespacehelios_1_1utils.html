@@ -191,6 +191,8 @@ Namespaces</h2></td></tr>
 Classes</h2></td></tr>
 <tr class="memitem:ChainAdapter" id="r_ChainAdapter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator adapter that chains two sequences together.  <a href="classhelios_1_1utils_1_1ChainAdapter.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ChunkView" id="r_ChunkView"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1ChunkView.html">ChunkView</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A non-owning view over a contiguous chunk of elements.  <a href="classhelios_1_1utils_1_1ChunkView.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Defer" id="r_Defer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1Defer.html">Defer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A utility class that defers the execution of a callable until the object goes out of scope.  <a href="classhelios_1_1utils_1_1Defer.html#details">More...</a><br /></td></tr>
 <tr class="memitem:DynamicLibrary" id="r_DynamicLibrary"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a></td></tr>
@@ -251,6 +253,8 @@ Concepts</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for bidirectional iterators that support decrement operations. <br /></td></tr>
 <tr class="memitem:ChainAdapterRequirements" id="r_ChainAdapterRequirements"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1ChainAdapterRequirements.html">ChainAdapterRequirements</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate <span class="tt">ChainAdapter</span> requirements. <br /></td></tr>
+<tr class="memitem:ChunkAdapterRequirements" id="r_ChunkAdapterRequirements"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1ChunkAdapterRequirements.html">ChunkAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate <span class="tt">ChunkAdapter</span> requirements. <br /></td></tr>
 <tr class="memitem:ClockTrait" id="r_ClockTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1ClockTrait.html">ClockTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for clock types compatible with std::chrono clocks. <br /></td></tr>
 <tr class="memitem:Distribution" id="r_Distribution"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1Distribution.html">Distribution</a></td></tr>
@@ -413,6 +417,13 @@ requires StrideAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td><
 <tr class="memitem:a8f36e2b7acc5fce1665e88d93c091b1e" id="r_a8f36e2b7acc5fce1665e88d93c091b1e"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R&gt; <br />
 requires StrideAdapterRequirements&lt;std::ranges::iterator_t&lt;const R&gt;&gt;</td></tr>
 <tr class="memitem:a8f36e2b7acc5fce1665e88d93c091b1e template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8f36e2b7acc5fce1665e88d93c091b1e">StrideAdapter</a> (const R &amp;, size_t) -&gt; StrideAdapter&lt; std::ranges::iterator_t&lt; const R &gt; &gt;</td></tr>
+<tr class="memitem:a890962838b8fca5f4093d45ce0f6ab1d" id="r_a890962838b8fca5f4093d45ce0f6ab1d"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R&gt; <br />
+requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
+<tr class="memitem:a890962838b8fca5f4093d45ce0f6ab1d template"><td class="memItemLeft">constexpr auto <a class="el" href="classhelios_1_1utils_1_1ChunkView.html">ChunkView</a>&lt; Iter &gt;::CollectWith(Allocator allocator) const -&gt; std::vector&lt; value_type, Allocator &gt; <a class="el" href="namespacestd.html">std</a>&#160;</td><td class="memItemRight"><a class="el" href="#a890962838b8fca5f4093d45ce0f6ab1d">ChunkAdapter</a> (R &amp;, size_t) -&gt; ChunkAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
+<tr class="memdesc:a890962838b8fca5f4093d45ce0f6ab1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapter that yields non-overlapping chunks of elements.  <br /></td></tr>
+<tr class="memitem:a5a01516e8618a5bd56cb68e9741d90e0" id="r_a5a01516e8618a5bd56cb68e9741d90e0"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R&gt; <br />
+requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;const R&gt;&gt;</td></tr>
+<tr class="memitem:a5a01516e8618a5bd56cb68e9741d90e0 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5a01516e8618a5bd56cb68e9741d90e0">ChunkAdapter</a> (const R &amp;, size_t) -&gt; ChunkAdapter&lt; std::ranges::iterator_t&lt; const R &gt; &gt;</td></tr>
 <tr class="memitem:a40506e8fc9938dd4989498ec9f3784c1" id="r_a40506e8fc9938dd4989498ec9f3784c1"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R1, ExternalRange R2&gt; <br />
 requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::ranges::iterator_t&lt;R2&gt;&gt;</td></tr>
 <tr class="memitem:a40506e8fc9938dd4989498ec9f3784c1 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a40506e8fc9938dd4989498ec9f3784c1">ZipAdapter</a> (R1 &amp;, R2 &amp;) -&gt; ZipAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;</td></tr>
@@ -693,6 +704,82 @@ requires ChainAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::ran
       </table>
 </div><div class="memdoc">
 
+</div>
+</div>
+<a id="a5a01516e8618a5bd56cb68e9741d90e0" name="a5a01516e8618a5bd56cb68e9741d90e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a01516e8618a5bd56cb68e9741d90e0">&#9670;&#160;</a></span>ChunkAdapter() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ExternalRange R&gt; <br />
+requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;const R&gt;&gt;</div>
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::utils::ChunkAdapter </td>
+          <td>(</td>
+          <td class="paramtype">const R &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;) -&gt;  ChunkAdapter&lt; std::ranges::iterator_t&lt; const R &gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a890962838b8fca5f4093d45ce0f6ab1d" name="a890962838b8fca5f4093d45ce0f6ab1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a890962838b8fca5f4093d45ce0f6ab1d">&#9670;&#160;</a></span>ChunkAdapter() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ExternalRange R&gt; <br />
+requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1ChunkView.html">ChunkView</a>&lt; Iter &gt;::CollectWith(Allocator allocator) const -&gt; std::vector&lt; value_type, Allocator &gt; <a class="el" href="namespacestd.html">std</a> helios::utils::ChunkAdapter </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;) -&gt;  ChunkAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adapter that yields non-overlapping chunks of elements. </p>
+<p>Splits a range into consecutive, non-overlapping chunks of a fixed size, advancing chunk_size elements at a time. The final chunk may contain fewer than chunk_size elements if the range length isn't an exact multiple. Each chunk is returned as a <a class="el" href="classhelios_1_1utils_1_1ChunkView.html" title="A non-owning view over a contiguous chunk of elements.">ChunkView</a>, a non-allocating view. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iter</td><td>Type of the underlying iterator</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line">std::vector&lt;int&gt; data = {1, 2, 3, 4, 5};</div>
+<div class="line"><a class="code hl_function" href="#a890962838b8fca5f4093d45ce0f6ab1d">ChunkAdapter</a> chunks(data, 2);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; chunk : chunks) {</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> val : chunk) {</div>
+<div class="line">    std::cout &lt;&lt; val &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> owned = (*chunks.begin()).Collect();  <span class="comment">// std::vector&lt;int&gt;</span></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_a890962838b8fca5f4093d45ce0f6ab1d"><div class="ttname"><a href="#a890962838b8fca5f4093d45ce0f6ab1d">helios::utils::ChunkAdapter</a></div><div class="ttdeci">constexpr auto ChunkView&lt; Iter &gt;::CollectWith(Allocator allocator) const -&gt; std::vector&lt; value_type, Allocator &gt; std ChunkAdapter(R &amp;, size_t) -&gt; ChunkAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</div><div class="ttdoc">Adapter that yields non-overlapping chunks of elements.</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="ae412d06926f505f92866943e64611a72" name="ae412d06926f505f92866943e64611a72"></a>

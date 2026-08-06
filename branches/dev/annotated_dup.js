@@ -280,6 +280,7 @@ var annotated_dup =
           [ "UniqueTypesHelper&lt; T, Rest... &gt;", "structhelios_1_1utils_1_1details_1_1UniqueTypesHelper_3_01T_00_01Rest_8_8_8_01_4.html", null ]
         ] ],
         [ "ChainAdapter", "classhelios_1_1utils_1_1ChainAdapter.html", "classhelios_1_1utils_1_1ChainAdapter" ],
+        [ "ChunkView", "classhelios_1_1utils_1_1ChunkView.html", "classhelios_1_1utils_1_1ChunkView" ],
         [ "Defer", "classhelios_1_1utils_1_1Defer.html", "classhelios_1_1utils_1_1Defer" ],
         [ "DynamicLibrary", "classhelios_1_1utils_1_1DynamicLibrary.html", "classhelios_1_1utils_1_1DynamicLibrary" ],
         [ "EnumerateAdapter", "classhelios_1_1utils_1_1EnumerateAdapter.html", "classhelios_1_1utils_1_1EnumerateAdapter" ],

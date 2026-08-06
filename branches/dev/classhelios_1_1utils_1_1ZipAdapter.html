@@ -253,6 +253,8 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;const R1&gt;, std:
 <tr class="memdesc:ab6785a8a5adc56bb25294bbfef261000 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates sliding windows over elements.  <br /></td></tr>
 <tr class="memitem:a6f4c201c163d5be88b9f3e351caefeba pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6f4c201c163d5be88b9f3e351caefeba"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6f4c201c163d5be88b9f3e351caefeba">Stride</a> (size_t stride) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; Iter1, Iter2 &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), stride)))</td></tr>
 <tr class="memdesc:a6f4c201c163d5be88b9f3e351caefeba pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes every Nth element with stride.  <br /></td></tr>
+<tr class="memitem:af0ab37316628bef45a5e4b0ffe3a0fc0 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af0ab37316628bef45a5e4b0ffe3a0fc0"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af0ab37316628bef45a5e4b0ffe3a0fc0">Chunk</a> (size_t chunk_size) const noexcept(noexcept(<a class="el" href="namespacehelios_1_1utils.html#a890962838b8fca5f4093d45ce0f6ab1d">ChunkAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; Iter1, Iter2 &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), chunk_size)))</td></tr>
+<tr class="memdesc:af0ab37316628bef45a5e4b0ffe3a0fc0 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packs elements into non-overlapping chunks.  <br /></td></tr>
 <tr class="memitem:aaba0fd7e864b439cc55db33bd095f4a3 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aaba0fd7e864b439cc55db33bd095f4a3"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aaba0fd7e864b439cc55db33bd095f4a3">Zip</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; Derived, OtherIter &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move(end))))</td></tr>
 <tr class="memdesc:aaba0fd7e864b439cc55db33bd095f4a3 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
 <tr class="memitem:ac699b03f66eb2139beb18126191d27f9 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ac699b03f66eb2139beb18126191d27f9"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ac699b03f66eb2139beb18126191d27f9">ForEach</a> (const Action &amp;action) const</td></tr>
@@ -307,7 +309,7 @@ class helios::utils::ZipAdapter&lt; Iter1, Iter2 &gt;</div><p>Adapter that combi
 </dl>
 <div class="fragment"><div class="line">std::vector&lt;int&gt; ids = {1, 2, 3};</div>
 <div class="line">std::vector&lt;std::string&gt; names = {<span class="stringliteral">&quot;Alice&quot;</span>, <span class="stringliteral">&quot;Bob&quot;</span>, <span class="stringliteral">&quot;Charlie&quot;</span>};</div>
-<div class="line"><span class="keyword">auto</span> zipped = ZipAdapterFromRange(ids, names);</div>
+<div class="line"><span class="keyword">auto</span> zipped = <a class="code hl_function" href="#a05280858da87f6a1659d552bf8cba366">ZipAdapter</a>(ids, names);</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [<span class="keywordtype">id</span>, name] : zipped) {</div>
 <div class="line">  std::cout &lt;&lt; <span class="keywordtype">id</span> &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
@@ -315,8 +317,9 @@ class helios::utils::ZipAdapter&lt; Iter1, Iter2 &gt;</div><p>Adapter that combi
 <div class="line"><span class="comment">// 1: Alice</span></div>
 <div class="line"><span class="comment">// 2: Bob</span></div>
 <div class="line"><span class="comment">// 3: Charlie</span></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1ZipAdapter_html_a05280858da87f6a1659d552bf8cba366"><div class="ttname"><a href="#a05280858da87f6a1659d552bf8cba366">helios::utils::ZipAdapter::ZipAdapter</a></div><div class="ttdeci">constexpr ZipAdapter(Iter1 begin1, Iter1 end1, Iter2 begin2, Iter2 end2) noexcept(std::is_nothrow_move_constructible_v&lt; Iter1 &gt; &amp;&amp;std::is_nothrow_copy_constructible_v&lt; Iter1 &gt; &amp;&amp;std::is_nothrow_move_constructible_v&lt; Iter2 &gt; &amp;&amp;std::is_nothrow_copy_constructible_v&lt; Iter2 &gt;)</div><div class="ttdoc">Constructs a zip adapter.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l03871">functional_adapters.hpp:3871</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03400">3400</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03853">3853</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a98dee1a775999e0e1636f662a6f7036b" name="a98dee1a775999e0e1636f662a6f7036b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a98dee1a775999e0e1636f662a6f7036b">&#9670;&#160;</a></span>difference_type</h2>
@@ -332,7 +335,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03409">3409</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03862">3862</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -350,7 +353,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03404">3404</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03857">3857</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -368,7 +371,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03403">3403</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03856">3856</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -386,7 +389,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03408">3408</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03861">3861</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -404,7 +407,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03407">3407</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03860">3860</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -424,7 +427,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line">std::tuple&lt;std::iter_value_t&lt;Iter1&gt;, std::iter_value_t&lt;Iter2&gt;&gt;</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03405">3405</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03858">3858</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -479,7 +482,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03418">3418</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03871">3871</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -515,7 +518,7 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::range
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03434">3434</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03887">3887</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -551,7 +554,7 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;const R1&gt;, std:
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03445">3445</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03898">3898</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -662,7 +665,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03509">3509</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03962">3962</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -692,7 +695,7 @@ requires ZipAdapterRequirements&lt;Iter1, Iter2&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03567">3567</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04020">4020</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -721,7 +724,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03503">3503</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03956">3956</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -750,7 +753,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03497">3497</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03950">3950</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -779,7 +782,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03482">3482</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03935">3935</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -809,7 +812,7 @@ requires ZipAdapterRequirements&lt;Iter1, Iter2&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03541">3541</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03994">3994</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -839,7 +842,7 @@ requires ZipAdapterRequirements&lt;Iter1, Iter2&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03557">3557</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04010">4010</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -949,7 +952,7 @@ template&lt;typename Iter1, typename Iter2&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03488">3488</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03941">3941</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>

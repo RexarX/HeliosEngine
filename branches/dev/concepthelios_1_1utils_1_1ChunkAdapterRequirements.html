@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: helios::utils::ZipAdapterRequirements Concept Reference</title>
+    <title>Helios Engine: helios::utils::ChunkAdapterRequirements Concept Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded',() => { initNavTree('concepthelios_1_1utils_1_1ZipAdapterRequirements.html','',''); });
+document.addEventListener('DOMContentLoaded',() => { initNavTree('concepthelios_1_1utils_1_1ChunkAdapterRequirements.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -171,30 +171,29 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('concepthelios_
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">helios::utils::ZipAdapterRequirements Concept Reference</div></div>
+  <div class="headertitle"><div class="title">helios::utils::ChunkAdapterRequirements Concept Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Concept to validate <span class="tt">ZipAdapter</span> requirements.  
+<p>Concept to validate <span class="tt">ChunkAdapter</span> requirements.  
 <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>&gt;</code></p>
 <h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iter1, <span class="keyword">typename</span> Iter2&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1ZipAdapterRequirements.html">ZipAdapterRequirements</a> = <a class="code hl_concept" href="concepthelios_1_1utils_1_1IteratorLike.html">IteratorLike&lt;Iter1&gt;</a> &amp;&amp; <a class="code hl_concept" href="concepthelios_1_1utils_1_1IteratorLike.html">IteratorLike&lt;Iter2&gt;</a></div>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iter&gt;</div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1ChunkAdapterRequirements.html">ChunkAdapterRequirements</a> = <a class="code hl_concept" href="concepthelios_1_1utils_1_1IteratorLike.html">IteratorLike&lt;Iter&gt;</a></div>
+<div class="ttc" id="aconcepthelios_1_1utils_1_1ChunkAdapterRequirements_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1ChunkAdapterRequirements.html">helios::utils::ChunkAdapterRequirements</a></div><div class="ttdoc">Concept to validate ChunkAdapter requirements.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00391">functional_adapters.hpp:391</a></div></div>
 <div class="ttc" id="aconcepthelios_1_1utils_1_1IteratorLike_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1IteratorLike.html">helios::utils::IteratorLike</a></div><div class="ttdoc">Concept for types that can be used as base iterators in adapters.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00151">functional_adapters.hpp:151</a></div></div>
-<div class="ttc" id="aconcepthelios_1_1utils_1_1ZipAdapterRequirements_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1ZipAdapterRequirements.html">helios::utils::ZipAdapterRequirements</a></div><div class="ttdoc">Concept to validate ZipAdapter requirements.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00399">functional_adapters.hpp:399</a></div></div>
 </div><!-- fragment --><a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Concept to validate <span class="tt">ZipAdapter</span> requirements. </p>
+<div class="textblock"><p>Concept to validate <span class="tt">ChunkAdapter</span> requirements. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Iter1</td><td>First iterator type </td></tr>
-    <tr><td class="paramname">Iter2</td><td>Second iterator type </td></tr>
+    <tr><td class="paramname">Iter</td><td>Iterator type </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00399">399</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00391">391</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
@@ -202,7 +201,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('concepthelios_
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacehelios.html">helios</a></li><li class="navelem"><a href="namespacehelios_1_1utils.html">utils</a></li><li class="navelem"><a href="concepthelios_1_1utils_1_1ZipAdapterRequirements.html">ZipAdapterRequirements</a></li>
+    <li class="navelem"><a href="namespacehelios.html">helios</a></li><li class="navelem"><a href="namespacehelios_1_1utils.html">utils</a></li><li class="navelem"><a href="concepthelios_1_1utils_1_1ChunkAdapterRequirements.html">ChunkAdapterRequirements</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

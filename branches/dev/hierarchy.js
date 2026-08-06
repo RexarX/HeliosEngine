@@ -44,6 +44,7 @@ var hierarchy =
     [ "helios::container::details::CallableBufferDeducer&lt; FirstSig, RestSigs... &gt;", "structhelios_1_1container_1_1details_1_1CallableBufferDeducer_3_01FirstSig_00_01RestSigs_8_8_8_01_4.html", null ],
     [ "helios::container::CallableBufferImpl&lt; Allocator, Signatures &gt;", "classhelios_1_1container_1_1CallableBufferImpl.html", null ],
     [ "anonymous_namespace{stacktrace.cpp}::CapturedFramesResult", "structanonymous__namespace_02stacktrace_8cpp_03_1_1CapturedFramesResult.html", null ],
+    [ "helios::utils::ChunkView&lt; Iter &gt;", "classhelios_1_1utils_1_1ChunkView.html", null ],
     [ "helios::ecs::ClearAllMessagesCmd", "structhelios_1_1ecs_1_1ClearAllMessagesCmd.html", null ],
     [ "helios::ecs::ClearComponentsCmd", "classhelios_1_1ecs_1_1ClearComponentsCmd.html", null ],
     [ "helios::ecs::ClearMessagesCmd&lt; T &gt;", "structhelios_1_1ecs_1_1ClearMessagesCmd.html", null ],

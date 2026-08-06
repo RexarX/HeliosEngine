@@ -78,6 +78,7 @@ var concepts =
         [ "ArithmeticTrait", "concepthelios_1_1utils_1_1ArithmeticTrait.html", null ],
         [ "BidirectionalIteratorLike", "concepthelios_1_1utils_1_1BidirectionalIteratorLike.html", null ],
         [ "ChainAdapterRequirements", "concepthelios_1_1utils_1_1ChainAdapterRequirements.html", null ],
+        [ "ChunkAdapterRequirements", "concepthelios_1_1utils_1_1ChunkAdapterRequirements.html", null ],
         [ "ClockTrait", "concepthelios_1_1utils_1_1ClockTrait.html", null ],
         [ "Distribution", "concepthelios_1_1utils_1_1Distribution.html", null ],
         [ "DurationTrait", "concepthelios_1_1utils_1_1DurationTrait.html", null ],
