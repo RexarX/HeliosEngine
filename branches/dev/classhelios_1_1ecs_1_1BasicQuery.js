@@ -61,6 +61,7 @@ var classhelios_1_1ecs_1_1BasicQuery =
     [ "TryGetFiltered", "classhelios_1_1ecs_1_1BasicQuery.html#ade9faeb9d5b48579c4267285d6a8629a", null ],
     [ "WithEntity", "classhelios_1_1ecs_1_1BasicQuery.html#a52bf3bc4bd535366253d3630bfcb3626", null ],
     [ "WithoutTypes", "classhelios_1_1ecs_1_1BasicQuery.html#a8938b46c51a3ff087f2dcb830cccd6a7", null ],
+    [ "WithTypes", "classhelios_1_1ecs_1_1BasicQuery.html#ab64f34a11271ebbdc980bef74faf4003", null ],
     [ "Zip", "classhelios_1_1ecs_1_1BasicQuery.html#a4b512af61cbd1cae23a617719720128d", null ],
     [ "Zip", "classhelios_1_1ecs_1_1BasicQuery.html#ad3f50f6291411d7e592c3528d1ab991d", null ],
     [ "Zip", "classhelios_1_1ecs_1_1BasicQuery.html#ac7acd8d720cf627362d2cc719390f184", null ],

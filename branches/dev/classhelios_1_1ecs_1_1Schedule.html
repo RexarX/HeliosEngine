@@ -204,7 +204,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1905f9d3964d06afe5d4b7411a9f5bec" id="r_a1905f9d3964d06afe5d4b7411a9f5bec"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1905f9d3964d06afe5d4b7411a9f5bec">RunAndWait</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;world)</td></tr>
 <tr class="memdesc:a1905f9d3964d06afe5d4b7411a9f5bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the compiled schedule using the stored executor and blocks until completion.  <br /></td></tr>
 <tr class="memitem:a834817ef85b5ffe3d8ce610814a96f22" id="r_a834817ef85b5ffe3d8ce610814a96f22"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a834817ef85b5ffe3d8ce610814a96f22">ApplyDeferred</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;world)</td></tr>
-<tr class="memdesc:a834817ef85b5ffe3d8ce610814a96f22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flushes world state and applies all pending system-local data.  <br /></td></tr>
+<tr class="memdesc:a834817ef85b5ffe3d8ce610814a96f22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies pending deferred work using this schedule's settings.  <br /></td></tr>
+<tr class="memitem:a328cef67031d8d974e31a15a367b6ca3" id="r_a328cef67031d8d974e31a15a367b6ca3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a328cef67031d8d974e31a15a367b6ca3">ApplyDeferred</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;world, bool apply_commands, bool merge_messages)</td></tr>
+<tr class="memdesc:a328cef67031d8d974e31a15a367b6ca3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies selected deferred work for this schedule.  <br /></td></tr>
 <tr class="memitem:a221472b7e946bfae9b23c1c31085c7b5" id="r_a221472b7e946bfae9b23c1c31085c7b5"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a221472b7e946bfae9b23c1c31085c7b5">Build</a> () -&gt; <a class="el" href="namespacehelios_1_1ecs.html#a8f83ec9e10ac875cd97ca58529d5013a">ScheduleResult</a>&lt; void &gt;</td></tr>
 <tr class="memdesc:a221472b7e946bfae9b23c1c31085c7b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compiles the schedule into an executable plan.  <br /></td></tr>
 <tr class="memitem:ac6af493c1a374570d293578731aa5c44" id="r_ac6af493c1a374570d293578731aa5c44"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac6af493c1a374570d293578731aa5c44">Clear</a> ()</td></tr>
@@ -264,7 +266,7 @@ Friends</h2></td></tr>
 <div class="textblock"><p>A collection of systems, sets, and run conditions with ordering constraints. </p>
 <p>Compile the schedule with <span class="tt"><a class="el" href="#a221472b7e946bfae9b23c1c31085c7b5" title="Compiles the schedule into an executable plan.">Build()</a></span> to produce an executable plan, then call <span class="tt"><a class="el" href="#a9fbf6a3e5c2f1305e9c39159c85c966a" title="Submits the compiled schedule for execution using the provided executor.">Run()</a></span> with an executor to execute it. Adding, removing, or modifying any configuration invalidates the plan and requires recompilation. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00182">182</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00198">198</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9e93d0b97922319ebfa1d9457f37333d" name="a9e93d0b97922319ebfa1d9457f37333d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9e93d0b97922319ebfa1d9457f37333d">&#9670;&#160;</a></span>Schedule() <span class="overload">[1/4]</span></h2>
@@ -322,7 +324,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00190">190</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00206">206</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -451,7 +453,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Handle for further configuration </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00631">631</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00662">662</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -506,7 +508,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Handle for further configuration </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00606">606</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00637">637</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -555,7 +557,7 @@ template&lt;FunctorSystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Handle for further configuration </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00596">596</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00627">627</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -600,15 +602,18 @@ requires (sizeof...(Ts) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Handle for configuring the system group </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00618">618</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00649">649</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a834817ef85b5ffe3d8ce610814a96f22" name="a834817ef85b5ffe3d8ce610814a96f22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a834817ef85b5ffe3d8ce610814a96f22">&#9670;&#160;</a></span>ApplyDeferred()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a834817ef85b5ffe3d8ce610814a96f22">&#9670;&#160;</a></span>ApplyDeferred() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void helios::ecs::Schedule::ApplyDeferred </td>
@@ -617,17 +622,61 @@ requires (sizeof...(Ts) &gt; 1)</div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Flushes world state and applies all pending system-local data. </p>
-<p>Calls <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a473fc38f99f63f6b356a8afe2793ba98" title="Flushes entity reservations and executes pending commands.">World::Flush()</a></span> (entity reservations and <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#ab2e51749c97141b5b13161bcb6bb1a73" title="Enqueues a command to be executed during the next Update().">World::EnqueueCommand</a></span> queue), then runs <span class="tt"><a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html#a021a8070837cca04d98f73137ad22210" title="Updates the system local data by executing commands and merging messages.">SystemLocalData::Update</a></span> for every system in this schedule. Required after <span class="tt"><a class="el" href="#a9fbf6a3e5c2f1305e9c39159c85c966a" title="Submits the compiled schedule for execution using the provided executor.">Run()</a></span> once the executor has finished; called automatically by <span class="tt"><a class="el" href="#a2c9f98fc4b933efb1c46d4909ef78085" title="Executes the compiled schedule and blocks until completion.">RunAndWait()</a></span>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Applies pending deferred work using this schedule's settings. </p>
+<p>Equivalent to <span class="tt"><a class="el" href="#a834817ef85b5ffe3d8ce610814a96f22" title="Applies pending deferred work using this schedule&#39;s settings.">ApplyDeferred</a>(world, <a class="el" href="#a2ee645b7ebc7b4db88670c363c8f2b89" title="Gets scheduler-local settings for this schedule.">Settings()</a>.apply_commands,
+<a class="el" href="#a2ee645b7ebc7b4db88670c363c8f2b89" title="Gets scheduler-local settings for this schedule.">Settings()</a>.merge_messages)</span>. Required after <span class="tt"><a class="el" href="#a9fbf6a3e5c2f1305e9c39159c85c966a" title="Submits the compiled schedule for execution using the provided executor.">Run()</a></span> once the executor has finished; called automatically by <span class="tt"><a class="el" href="#a2c9f98fc4b933efb1c46d4909ef78085" title="Executes the compiled schedule and blocks until completion.">RunAndWait()</a></span>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">world</td><td><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> to flush and update </td></tr>
+    <tr><td class="paramname">world</td><td><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> to apply deferred work on </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8cpp_source.html#l00106">106</a> of file <a class="el" href="schedule_8cpp_source.html">schedule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00281">281</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a328cef67031d8d974e31a15a367b6ca3" name="a328cef67031d8d974e31a15a367b6ca3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a328cef67031d8d974e31a15a367b6ca3">&#9670;&#160;</a></span>ApplyDeferred() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::ecs::Schedule::ApplyDeferred </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>world</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>apply_commands</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>merge_messages</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applies selected deferred work for this schedule. </p>
+<p>When <span class="tt">apply_commands</span> is true, calls <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a473fc38f99f63f6b356a8afe2793ba98" title="Flushes entity reservations and executes pending commands.">World::Flush()</a></span> then <span class="tt">ExecuteCommands</span> per system. When <span class="tt">merge_messages</span> is true, calls <span class="tt">MergeMessages</span> per system. Resets each system's arena only when no pending local work remains (commands and messages share one arena). Does <b>not</b> advance message buffer lifecycle. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world</td><td><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> to apply deferred work on </td></tr>
+    <tr><td class="paramname">apply_commands</td><td>Whether to flush and execute commands </td></tr>
+    <tr><td class="paramname">merge_messages</td><td>Whether to merge local messages </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="schedule_8cpp_source.html#l00107">107</a> of file <a class="el" href="schedule_8cpp_source.html">schedule.cpp</a>.</p>
 
 </div>
 </div>
@@ -657,7 +706,7 @@ requires (sizeof...(Ts) &gt; 1)</div>
 <p>Compiles the schedule into an executable plan. </p>
 <p>Validates for cycles, unknown references, and ambiguous access. Produces a topological order and conflict matrix for parallel execution. </p><dl class="section return"><dt>Returns</dt><dd>Empty on success, or a <span class="tt"><a class="el" href="structhelios_1_1ecs_1_1ScheduleError.html" title="Error type returned when schedule compilation fails.">ScheduleError</a></span> with diagnostics </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8cpp_source.html#l00117">117</a> of file <a class="el" href="schedule_8cpp_source.html">schedule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8cpp_source.html#l00121">121</a> of file <a class="el" href="schedule_8cpp_source.html">schedule.cpp</a>.</p>
 
 </div>
 </div>
@@ -679,7 +728,7 @@ requires (sizeof...(Ts) &gt; 1)</div>
 <p>Clears all systems, sets, and compiled state from this schedule. </p>
 <p>Preserves <span class="tt"><a class="el" href="#a2ee645b7ebc7b4db88670c363c8f2b89" title="Gets scheduler-local settings for this schedule.">Settings()</a></span> and the stored executor for reuse. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8cpp_source.html#l00160">160</a> of file <a class="el" href="schedule_8cpp_source.html">schedule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8cpp_source.html#l00164">164</a> of file <a class="el" href="schedule_8cpp_source.html">schedule.cpp</a>.</p>
 
 </div>
 </div>
@@ -723,7 +772,7 @@ template&lt;ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Schedule.html" title="A collection of systems, sets, and run conditions with ordering constraints.">Schedule</a> with name derived from the type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00206">206</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00222">222</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -753,7 +802,7 @@ template&lt;ScheduleTrait T&gt; </div>
 <p>Gets the stored executor. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to the stored executor, or nullptr if not set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00417">417</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00448">448</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -783,7 +832,7 @@ template&lt;ScheduleTrait T&gt; </div>
 <p>Gets the stored executor. </p>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the stored executor, or nullptr if not set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00411">411</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00442">442</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -813,7 +862,7 @@ template&lt;ScheduleTrait T&gt; </div>
 <p>Gets the human-readable schedule name. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Schedule.html" title="A collection of systems, sets, and run conditions with ordering constraints.">Schedule</a> name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00391">391</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00422">422</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -841,9 +890,9 @@ template&lt;ScheduleTrait T&gt; </div>
 </div><div class="memdoc">
 
 <p>Checks whether any system still has unapplied local commands or messages. </p>
-<dl class="section return"><dt>Returns</dt><dd>True if <span class="tt"><a class="el" href="#a834817ef85b5ffe3d8ce610814a96f22" title="Flushes world state and applies all pending system-local data.">ApplyDeferred</a></span> is still required before the next <span class="tt"><a class="el" href="#a9fbf6a3e5c2f1305e9c39159c85c966a" title="Submits the compiled schedule for execution using the provided executor.">Run()</a></span> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if <span class="tt"><a class="el" href="#a834817ef85b5ffe3d8ce610814a96f22" title="Applies pending deferred work using this schedule&#39;s settings.">ApplyDeferred</a></span> is still required before the next <span class="tt"><a class="el" href="#a9fbf6a3e5c2f1305e9c39159c85c966a" title="Submits the compiled schedule for execution using the provided executor.">Run()</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00381">381</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00412">412</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -873,7 +922,7 @@ template&lt;ScheduleTrait T&gt; </div>
 <p>Checks whether the schedule requires recompilation. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if any configuration has changed since the last <span class="tt"><a class="el" href="#a221472b7e946bfae9b23c1c31085c7b5" title="Compiles the schedule into an executable plan.">Build()</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00374">374</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00405">405</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -959,7 +1008,7 @@ template&lt;ScheduleTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00567">567</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00598">598</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -992,7 +1041,7 @@ template&lt;ScheduleTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8cpp_source.html#l00055">55</a> of file <a class="el" href="schedule_8cpp_source.html">schedule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8cpp_source.html#l00056">56</a> of file <a class="el" href="schedule_8cpp_source.html">schedule.cpp</a>.</p>
 
 </div>
 </div>
@@ -1028,7 +1077,7 @@ template&lt;ScheduleTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00581">581</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00612">612</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1061,7 +1110,7 @@ template&lt;ScheduleTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8cpp_source.html#l00080">80</a> of file <a class="el" href="schedule_8cpp_source.html">schedule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8cpp_source.html#l00081">81</a> of file <a class="el" href="schedule_8cpp_source.html">schedule.cpp</a>.</p>
 
 </div>
 </div>
@@ -1099,7 +1148,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Handle for configuring the set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00351">351</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00382">382</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1135,7 +1184,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Handle for configuring the set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00642">642</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00673">673</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1170,7 +1219,7 @@ template&lt;SystemSetTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00360">360</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00391">391</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1205,7 +1254,7 @@ template&lt;SystemSetTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00368">368</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00399">399</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1235,7 +1284,7 @@ template&lt;SystemSetTrait T&gt; </div>
 <p>Gets scheduler-local settings for this schedule. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the settings </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00403">403</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00434">434</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1265,7 +1314,7 @@ template&lt;SystemSetTrait T&gt; </div>
 <p>Gets scheduler-local settings for this schedule. </p>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to the settings </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00397">397</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00428">428</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1290,7 +1339,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00559">559</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00590">590</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1314,7 +1363,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00561">561</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00592">592</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1338,7 +1387,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00560">560</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00591">591</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1362,7 +1411,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00564">564</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00595">595</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1386,7 +1435,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00562">562</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00593">593</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1410,7 +1459,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00563">563</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00594">594</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>

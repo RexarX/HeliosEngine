@@ -50,6 +50,7 @@ var classhelios_1_1app_1_1App =
     [ "operator=", "classhelios_1_1app_1_1App.html#a5562d46b386a2750bb1c6f960b57f20c", null ],
     [ "RemoveSubApp", "classhelios_1_1app_1_1App.html#a7d39f6baa767c5f105ce79e182b6c05d", null ],
     [ "Run", "classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be", null ],
+    [ "RunFrameOrder", "classhelios_1_1app_1_1App.html#aa91d4b9b4b1d693bc8d555aa7a7abf90", null ],
     [ "SetRunner", "classhelios_1_1app_1_1App.html#a768fbfe09eff0c53e35f4328ae8b5b42", null ],
     [ "ShouldExit", "classhelios_1_1app_1_1App.html#a026d2fec7457f4c87f17183e73dc2736", null ],
     [ "TryGetSchedule", "classhelios_1_1app_1_1App.html#a47575befa383f37f81ee80739b68d214", null ],

@@ -199,6 +199,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to add a component bundle to an entity.  <a href="classhelios_1_1ecs_1_1AddBundleCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:AddComponentsCmd" id="r_AddComponentsCmd"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1AddComponentsCmd.html">AddComponentsCmd</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to add multiple components to an entity.  <a href="classhelios_1_1ecs_1_1AddComponentsCmd.html#details">More...</a><br /></td></tr>
+<tr class="memitem:AnyMessageId" id="r_AnyMessageId"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased, type-checked message identity.  <a href="structhelios_1_1ecs_1_1AnyMessageId.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Archetype" id="r_Archetype"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1Archetype.html">Archetype</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores entities and their component data in a Structure-of-Arrays layout for a specific archetype.  <a href="classhelios_1_1ecs_1_1Archetype.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ArchetypeId" id="r_ArchetypeId"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ArchetypeId.html">ArchetypeId</a></td></tr>
@@ -233,8 +235,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thin wrapper over command queue and world for deferred ECS operations.  <a href="classhelios_1_1ecs_1_1Commands.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ComponentAddedMsg" id="r_ComponentAddedMsg"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ComponentAddedMsg.html">ComponentAddedMsg</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message sent when a component is added.  <a href="classhelios_1_1ecs_1_1ComponentAddedMsg.html#details">More...</a><br /></td></tr>
-<tr class="memitem:ComponentBundle" id="r_ComponentBundle"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ComponentBundle.html">ComponentBundle</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Owning collection of components that can be added or removed as one ECS operation.  <a href="classhelios_1_1ecs_1_1ComponentBundle.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ComponentBundleTypes" id="r_ComponentBundleTypes"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1ComponentBundleTypes.html">ComponentBundleTypes</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component and nested-bundle values for a bundle operation.  <a href="structhelios_1_1ecs_1_1ComponentBundleTypes.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ComponentConflictInfo" id="r_ComponentConflictInfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1ComponentConflictInfo.html">ComponentConflictInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a single component access conflict between two policies.  <a href="structhelios_1_1ecs_1_1ComponentConflictInfo.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ComponentManager" id="r_ComponentManager"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ComponentManager.html">ComponentManager</a></td></tr>
@@ -252,13 +254,13 @@ Classes</h2></td></tr>
 <tr class="memitem:CompositeSystemParam" id="r_CompositeSystemParam"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1CompositeSystemParam.html">CompositeSystemParam</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for implementing <span class="tt"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits.html" title="Primary template — deliberately incomplete.">SystemParamTraits</a></span> on aggregate parameters.  <a href="structhelios_1_1ecs_1_1CompositeSystemParam.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ConsumableMessageReader" id="r_ConsumableMessageReader"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">ConsumableMessageReader</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-safe, zero-copy reader for consumable messages with consume support.  <a href="classhelios_1_1ecs_1_1ConsumableMessageReader.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-safe, zero-copy reader for consumable messages with cursor delivery and consume support.  <a href="classhelios_1_1ecs_1_1ConsumableMessageReader.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ConsumableMessageWrapper" id="r_ConsumableMessageWrapper"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html">ConsumableMessageWrapper</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A wrapper around a message that provides convenient access to the message's data, type information, and the ability to mark the message as consumed.  <a href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ConsumableMessageWrapperIter" id="r_ConsumableMessageWrapperIter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">ConsumableMessageWrapperIter</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> instances with consume support.  <a href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> for unread messages with consume support.  <a href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ConsumedMessagesRegistry" id="r_ConsumedMessagesRegistry"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-system registry for tracking consumed message indices.  <a href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-system registry for tracking consumed message ids.  <a href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Dag" id="r_Dag"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1Dag.html">Dag</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directed acyclic graph used to compute the topological execution order of systems within a schedule.  <a href="classhelios_1_1ecs_1_1Dag.html#details">More...</a><br /></td></tr>
 <tr class="memitem:DagError" id="r_DagError"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1DagError.html">DagError</a></td></tr>
@@ -286,8 +288,16 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to insert a resource into the world.  <a href="classhelios_1_1ecs_1_1InsertResourceCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Local" id="r_Local"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1Local.html">Local</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-only or mutable access to a system-local resource.  <a href="classhelios_1_1ecs_1_1Local.html#details">More...</a><br /></td></tr>
+<tr class="memitem:LocalArena" id="r_LocalArena"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1LocalArena.html">LocalArena</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">System-local arena allocator resource.  <a href="structhelios_1_1ecs_1_1LocalArena.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MainThreadExecutor" id="r_MainThreadExecutor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MainThreadExecutor.html">MainThreadExecutor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main-thread executor that runs systems sequentially on the calling thread.  <a href="classhelios_1_1ecs_1_1MainThreadExecutor.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ManagedMessageWriter" id="r_ManagedMessageWriter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ManagedMessageWriter.html">ManagedMessageWriter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writer that inserts messages directly into a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html" title="Central coordinator for message lifecycle with double buffering and consumed message removal.">MessageManager</a></span>.  <a href="classhelios_1_1ecs_1_1ManagedMessageWriter.html#details">More...</a><br /></td></tr>
+<tr class="memitem:MessageCursor" id="r_MessageCursor"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-reader cursor tracking which messages of type <span class="tt">T</span> have been seen.  <a href="structhelios_1_1ecs_1_1MessageCursor.html#details">More...</a><br /></td></tr>
+<tr class="memitem:MessageId" id="r_MessageId"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1MessageId.html">MessageId</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Monotonic identity for a buffered message of type <span class="tt">T</span>.  <a href="structhelios_1_1ecs_1_1MessageId.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MessageManager" id="r_MessageManager"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html">MessageManager</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Central coordinator for message lifecycle with double buffering and consumed message removal.  <a href="classhelios_1_1ecs_1_1MessageManager.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MessageMetadata" id="r_MessageMetadata"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1MessageMetadata.html">MessageMetadata</a></td></tr>
@@ -295,13 +305,13 @@ Classes</h2></td></tr>
 <tr class="memitem:MessageQueue" id="r_MessageQueue"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue for managing multiple message types using type-erased contiguous storage.  <a href="classhelios_1_1ecs_1_1MessageQueue.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MessageReader" id="r_MessageReader"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReader.html">MessageReader</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-safe, zero-copy reader for regular messages.  <a href="classhelios_1_1ecs_1_1MessageReader.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-safe, zero-copy reader for regular messages with cursor delivery.  <a href="classhelios_1_1ecs_1_1MessageReader.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MessageReaderBase" id="r_MessageReaderBase"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html">MessageReaderBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CRTP base class for message readers providing common functionality.  <a href="classhelios_1_1ecs_1_1MessageReaderBase.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MessageWrapper" id="r_MessageWrapper"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapper.html">MessageWrapper</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A wrapper around a message that provides convenient access to the message's data and type information.  <a href="classhelios_1_1ecs_1_1MessageWrapper.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MessageWrapperIter" id="r_MessageWrapperIter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">MessageWrapperIter</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data and type information...">MessageWrapper</a>&lt;T&gt;</span> instances.  <a href="classhelios_1_1ecs_1_1MessageWrapperIter.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data and type information...">MessageWrapper</a>&lt;T&gt;</span> for unread messages.  <a href="classhelios_1_1ecs_1_1MessageWrapperIter.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MultiThreadedExecutor" id="r_MultiThreadedExecutor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MultiThreadedExecutor.html">MultiThreadedExecutor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multi-threaded executor that runs systems in parallel using work-stealing.  <a href="classhelios_1_1ecs_1_1MultiThreadedExecutor.html#details">More...</a><br /></td></tr>
 <tr class="memitem:RemoveBundleCmd" id="r_RemoveBundleCmd"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1RemoveBundleCmd.html">RemoveBundleCmd</a></td></tr>
@@ -311,7 +321,7 @@ Classes</h2></td></tr>
 <tr class="memitem:RemoveResourceCmd" id="r_RemoveResourceCmd"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1RemoveResourceCmd.html">RemoveResourceCmd</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to remove resource from the world.  <a href="structhelios_1_1ecs_1_1RemoveResourceCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Res" id="r_Res"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1Res.html">Res</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-only or mutable access to resource.  <a href="classhelios_1_1ecs_1_1Res.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to resource.  <a href="classhelios_1_1ecs_1_1Res.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ResourceConflictInfo" id="r_ResourceConflictInfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1ResourceConflictInfo.html">ResourceConflictInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a single resource access conflict between two policies.  <a href="structhelios_1_1ecs_1_1ResourceConflictInfo.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ResourceInsertedMsg" id="r_ResourceInsertedMsg"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1ResourceInsertedMsg.html">ResourceInsertedMsg</a></td></tr>
@@ -322,6 +332,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message sent when a resource is removed.  <a href="structhelios_1_1ecs_1_1ResourceRemovedMsg.html#details">More...</a><br /></td></tr>
 <tr class="memitem:RunConditionStorage" id="r_RunConditionStorage"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1RunConditionStorage.html">RunConditionStorage</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for a run condition — predicate + access policy + local data.  <a href="structhelios_1_1ecs_1_1RunConditionStorage.html#details">More...</a><br /></td></tr>
+<tr class="memitem:RunStageOptions" id="r_RunStageOptions"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1RunStageOptions.html">RunStageOptions</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Options controlling how <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1Scheduler.html#a749074703d60b0a93108dab7148c18a3">Scheduler::RunStage</a></span> executes stage members.  <a href="structhelios_1_1ecs_1_1RunStageOptions.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Schedule" id="r_Schedule"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1Schedule.html">Schedule</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of systems, sets, and run conditions with ordering constraints.  <a href="classhelios_1_1ecs_1_1Schedule.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ScheduleError" id="r_ScheduleError"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1ScheduleError.html">ScheduleError</a></td></tr>
@@ -330,6 +342,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle returned when adding a schedule to the scheduler for configuring ordering.  <a href="classhelios_1_1ecs_1_1ScheduleOrdering.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Scheduler" id="r_Scheduler"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1Scheduler.html">Scheduler</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orchestrates multiple named schedules, handles transitions, and executes them in topological order.  <a href="classhelios_1_1ecs_1_1Scheduler.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ScheduleRunScope" id="r_ScheduleRunScope"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ScheduleRunScope.html">ScheduleRunScope</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">RAII guard that records an active schedule on the current thread.  <a href="classhelios_1_1ecs_1_1ScheduleRunScope.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ScheduleSettings" id="r_ScheduleSettings"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1ScheduleSettings.html">ScheduleSettings</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Settings that control how a schedule is compiled and executed.  <a href="structhelios_1_1ecs_1_1ScheduleSettings.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ScheduleSystemId" id="r_ScheduleSystemId"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1ScheduleSystemId.html">ScheduleSystemId</a></td></tr>
@@ -342,6 +356,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concrete sparse-set storage for a single component type (non-polymorphic).  <a href="classhelios_1_1ecs_1_1SparseComponentStorage.html#details">More...</a><br /></td></tr>
 <tr class="memitem:StageOrdering" id="r_StageOrdering"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1StageOrdering.html">StageOrdering</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle returned when configuring stage ordering.  <a href="classhelios_1_1ecs_1_1StageOrdering.html#details">More...</a><br /></td></tr>
+<tr class="memitem:StageSettings" id="r_StageSettings"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1StageSettings.html">StageSettings</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Settings that control how a stage behaves when run.  <a href="structhelios_1_1ecs_1_1StageSettings.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SystemGroupHandle" id="r_SystemGroupHandle"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1SystemGroupHandle.html">SystemGroupHandle</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle returned by variadic <a class="el" href="classhelios_1_1ecs_1_1Schedule.html#a3f5cdecd1020d57258f83d2f03b8978d" title="Adds a param-style functor system to the schedule.">Schedule::Add</a> for configuring a batch of systems added together.  <a href="classhelios_1_1ecs_1_1SystemGroupHandle.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SystemHandle" id="r_SystemHandle"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1SystemHandle.html">SystemHandle</a></td></tr>
@@ -359,7 +375,34 @@ Classes</h2></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20BasicMessageWriter_3C_20T_2C_20Allocator_20_3E_20_3E" id="r_SystemParamTraits_3C_20BasicMessageWriter_3C_20T_2C_20Allocator_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01BasicMessageWriter_3_01T_00_01Allocator_01_4_01_4.html">SystemParamTraits&lt; BasicMessageWriter&lt; T, Allocator &gt; &gt;</a></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20Commands_20_3E" id="r_SystemParamTraits_3C_20Commands_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01Commands_01_4.html">SystemParamTraits&lt; Commands &gt;</a></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20ConsumableMessageReader_3C_20T_20_3E_20_3E" id="r_SystemParamTraits_3C_20ConsumableMessageReader_3C_20T_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01ConsumableMessageReader_3_01T_01_4_01_4.html">SystemParamTraits&lt; ConsumableMessageReader&lt; T &gt; &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AGamepadMessages_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AGamepadMessages_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1GamepadMessages_01_4.html">SystemParamTraits&lt; helios::input::GamepadMessages &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AGamepadWriters_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AGamepadWriters_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1GamepadWriters_01_4.html">SystemParamTraits&lt; helios::input::GamepadWriters &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AKeyboardMessages_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AKeyboardMessages_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1KeyboardMessages_01_4.html">SystemParamTraits&lt; helios::input::KeyboardMessages &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AKeyboardWriters_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AKeyboardWriters_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1KeyboardWriters_01_4.html">SystemParamTraits&lt; helios::input::KeyboardWriters &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AMessages_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AMessages_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1Messages_01_4.html">SystemParamTraits&lt; helios::input::Messages &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AMouseMessages_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AMouseMessages_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1MouseMessages_01_4.html">SystemParamTraits&lt; helios::input::MouseMessages &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AMouseWriters_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AMouseWriters_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1MouseWriters_01_4.html">SystemParamTraits&lt; helios::input::MouseWriters &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AState_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AState_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1State_01_4.html">SystemParamTraits&lt; helios::input::State &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AStateView_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AStateView_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1StateView_01_4.html">SystemParamTraits&lt; helios::input::StateView &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AWriters_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Ainput_3A_3AWriters_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1Writers_01_4.html">SystemParamTraits&lt; helios::input::Writers &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AAppearanceMessages_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AAppearanceMessages_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1AppearanceMessages_01_4.html">SystemParamTraits&lt; helios::window::AppearanceMessages &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AAppearanceWriters_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AAppearanceWriters_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1AppearanceWriters_01_4.html">SystemParamTraits&lt; helios::window::AppearanceWriters &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3ACreationWriters_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3ACreationWriters_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1CreationWriters_01_4.html">SystemParamTraits&lt; helios::window::CreationWriters &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AGeometryMessages_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AGeometryMessages_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1GeometryMessages_01_4.html">SystemParamTraits&lt; helios::window::GeometryMessages &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AGeometryWriters_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AGeometryWriters_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1GeometryWriters_01_4.html">SystemParamTraits&lt; helios::window::GeometryWriters &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3ALifecycleMessages_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3ALifecycleMessages_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1LifecycleMessages_01_4.html">SystemParamTraits&lt; helios::window::LifecycleMessages &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3ALifecycleWriters_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3ALifecycleWriters_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1LifecycleWriters_01_4.html">SystemParamTraits&lt; helios::window::LifecycleWriters &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AMessages_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AMessages_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1Messages_01_4.html">SystemParamTraits&lt; helios::window::Messages &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3APlatformMessages_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3APlatformMessages_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1PlatformMessages_01_4.html">SystemParamTraits&lt; helios::window::PlatformMessages &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3APlatformWriters_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3APlatformWriters_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1PlatformWriters_01_4.html">SystemParamTraits&lt; helios::window::PlatformWriters &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3APrimaryWindows_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3APrimaryWindows_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1PrimaryWindows_01_4.html">SystemParamTraits&lt; helios::window::PrimaryWindows &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3APrimaryWindowsView_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3APrimaryWindowsView_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1PrimaryWindowsView_01_4.html">SystemParamTraits&lt; helios::window::PrimaryWindowsView &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AWindows_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AWindows_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1Windows_01_4.html">SystemParamTraits&lt; helios::window::Windows &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AWindowsView_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AWindowsView_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1WindowsView_01_4.html">SystemParamTraits&lt; helios::window::WindowsView &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AWriters_20_3E" id="r_SystemParamTraits_3C_20helios_3A_3Awindow_3A_3AWriters_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1Writers_01_4.html">SystemParamTraits&lt; helios::window::Writers &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20Local_3C_20const_20LocalArena_20_3E_20_3E" id="r_SystemParamTraits_3C_20Local_3C_20const_20LocalArena_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01Local_3_01const_01LocalArena_01_4_01_4.html">SystemParamTraits&lt; Local&lt; const LocalArena &gt; &gt;</a></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20Local_3C_20const_20T_20_3E_20_3E" id="r_SystemParamTraits_3C_20Local_3C_20const_20T_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01Local_3_01const_01T_01_4_01_4.html">SystemParamTraits&lt; Local&lt; const T &gt; &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20Local_3C_20LocalArena_20_3E_20_3E" id="r_SystemParamTraits_3C_20Local_3C_20LocalArena_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01Local_3_01LocalArena_01_4_01_4.html">SystemParamTraits&lt; Local&lt; LocalArena &gt; &gt;</a></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20Local_3C_20T_20_3E_20_3E" id="r_SystemParamTraits_3C_20Local_3C_20T_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01Local_3_01T_01_4_01_4.html">SystemParamTraits&lt; Local&lt; T &gt; &gt;</a></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20MessageReader_3C_20T_20_3E_20_3E" id="r_SystemParamTraits_3C_20MessageReader_3C_20T_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01MessageReader_3_01T_01_4_01_4.html">SystemParamTraits&lt; MessageReader&lt; T &gt; &gt;</a></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20MessageWriter_3C_20T_20_3E_20_3E" id="r_SystemParamTraits_3C_20MessageWriter_3C_20T_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01MessageWriter_3_01T_01_4_01_4.html">SystemParamTraits&lt; MessageWriter&lt; T &gt; &gt;</a></td></tr>
@@ -368,6 +411,7 @@ Classes</h2></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20Res_3C_20T_20_3E_20_3E" id="r_SystemParamTraits_3C_20Res_3C_20T_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01Res_3_01T_01_4_01_4.html">SystemParamTraits&lt; Res&lt; T &gt; &gt;</a></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20std_3A_3Aoptional_3C_20Res_3C_20const_20T_20_3E_20_3E_20_3E" id="r_SystemParamTraits_3C_20std_3A_3Aoptional_3C_20Res_3C_20const_20T_20_3E_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Res_3_01const_01T_01_4_01_4_01_4.html">SystemParamTraits&lt; std::optional&lt; Res&lt; const T &gt; &gt; &gt;</a></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20std_3A_3Aoptional_3C_20Res_3C_20T_20_3E_20_3E_20_3E" id="r_SystemParamTraits_3C_20std_3A_3Aoptional_3C_20Res_3C_20T_20_3E_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Res_3_01T_01_4_01_4_01_4.html">SystemParamTraits&lt; std::optional&lt; Res&lt; T &gt; &gt; &gt;</a></td></tr>
+<tr class="memitem:SystemParamTraits_3C_20World_20_3E" id="r_SystemParamTraits_3C_20World_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01World_01_4.html">SystemParamTraits&lt; World &gt;</a></td></tr>
 <tr class="memitem:SystemParamTraits_3C_20WorldView_20_3E" id="r_SystemParamTraits_3C_20WorldView_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits_3_01WorldView_01_4.html">SystemParamTraits&lt; WorldView &gt;</a></td></tr>
 <tr class="memitem:SystemSet" id="r_SystemSet"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1SystemSet.html">SystemSet</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A group of systems that share ordering, run conditions, and other properties.  <a href="classhelios_1_1ecs_1_1SystemSet.html#details">More...</a><br /></td></tr>
@@ -415,7 +459,7 @@ Concepts</h2></td></tr>
 <tr class="memitem:CommandTrait" id="r_CommandTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1CommandTrait.html">CommandTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept that defines the requirements for a command trait. <br /></td></tr>
 <tr class="memitem:ComponentBundleTrait" id="r_ComponentBundleTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1ComponentBundleTrait.html">ComponentBundleTrait</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to check if a type is a valid component bundle. <br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for a valid component bundle. <br /></td></tr>
 <tr class="memitem:ComponentTrait" id="r_ComponentTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1ComponentTrait.html">ComponentTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to check if a type can be used as a component. <br /></td></tr>
 <tr class="memitem:ComponentWithNameTrait" id="r_ComponentWithNameTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1ComponentWithNameTrait.html">ComponentWithNameTrait</a></td></tr>
@@ -481,7 +525,7 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:a698edbc66c65f6b639ba87dc2cd0e70e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type id for components.  <br /></td></tr>
 <tr class="memitem:a87cb006b37e2a79de065c80d524358ce" id="r_a87cb006b37e2a79de065c80d524358ce"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a87cb006b37e2a79de065c80d524358ce">AsyncMessageQueueProducerToken</a> = moodycamel::ProducerToken</td></tr>
 <tr class="memitem:a71994db78118f91bcaf65469f04be4af" id="r_a71994db78118f91bcaf65469f04be4af"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a71994db78118f91bcaf65469f04be4af">AsyncMessageQueueConsumerToken</a> = moodycamel::ConsumerToken</td></tr>
-<tr class="memitem:a993632cd1f8b6938856d9772a55053aa" id="r_a993632cd1f8b6938856d9772a55053aa"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a993632cd1f8b6938856d9772a55053aa">PmrConsumedMessagesRegistry</a></td></tr>
+<tr class="memitem:a4ceb1af88b255d8c60a4b27b647dd632" id="r_a4ceb1af88b255d8c60a4b27b647dd632"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a4ceb1af88b255d8c60a4b27b647dd632">PmrConsumedMessagesRegistry</a></td></tr>
 <tr class="memitem:a95e25988a88218da8780e8e87893630b" id="r_a95e25988a88218da8780e8e87893630b"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> = <a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">utils::TypeIndex</a></td></tr>
 <tr class="memdesc:a95e25988a88218da8780e8e87893630b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type index for messages.  <br /></td></tr>
 <tr class="memitem:a9194367ea52d3cfe90adeff730f90fe0" id="r_a9194367ea52d3cfe90adeff730f90fe0"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a9194367ea52d3cfe90adeff730f90fe0">PmrMessageQueue</a></td></tr>
@@ -523,7 +567,13 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:a2222a8ceaa7f9005447fc4e1bf219cb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html" title="Query result object for iterating over matching entities and components.">BasicQuery</a></span> bound to <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span> with a PMR allocator.  <br /></td></tr>
 <tr class="memitem:a674cbdc503746f81c89e6b12f67c26d0" id="r_a674cbdc503746f81c89e6b12f67c26d0"><td class="memTemplParams" colspan="2">template&lt;AsyncResourceTrait T&gt; </td></tr>
 <tr class="memitem:a674cbdc503746f81c89e6b12f67c26d0 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a674cbdc503746f81c89e6b12f67c26d0">AsyncRes</a> = <a class="el" href="classhelios_1_1ecs_1_1Res.html">Res</a>&lt;T&gt;</td></tr>
-<tr class="memdesc:a674cbdc503746f81c89e6b12f67c26d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-only access to thread-safe resources.  <br /></td></tr>
+<tr class="memdesc:a674cbdc503746f81c89e6b12f67c26d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to thread-safe resource.  <br /></td></tr>
+<tr class="memitem:a08439f87b8ff5fd5ecd5cc6af031bb08" id="r_a08439f87b8ff5fd5ecd5cc6af031bb08"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a08439f87b8ff5fd5ecd5cc6af031bb08 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a08439f87b8ff5fd5ecd5cc6af031bb08">OptRes</a> = std::optional&lt;<a class="el" href="classhelios_1_1ecs_1_1Res.html">Res</a>&lt;T&gt;&gt;</td></tr>
+<tr class="memdesc:a08439f87b8ff5fd5ecd5cc6af031bb08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional access to resource.  <br /></td></tr>
+<tr class="memitem:a0b786c7fdda949d9ad0bd60095031991" id="r_a0b786c7fdda949d9ad0bd60095031991"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a0b786c7fdda949d9ad0bd60095031991 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a0b786c7fdda949d9ad0bd60095031991">OptAsyncRes</a> = std::optional&lt;<a class="el" href="#a674cbdc503746f81c89e6b12f67c26d0">AsyncRes</a>&lt;T&gt;&gt;</td></tr>
+<tr class="memdesc:a0b786c7fdda949d9ad0bd60095031991"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional access to thread-safe resource.  <br /></td></tr>
 <tr class="memitem:a45b08bd3bd30f8cb22680febe289a064" id="r_a45b08bd3bd30f8cb22680febe289a064"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a45b08bd3bd30f8cb22680febe289a064">ResourceTypeIndex</a> = <a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">utils::TypeIndex</a></td></tr>
 <tr class="memdesc:a45b08bd3bd30f8cb22680febe289a064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type index for resources.  <br /></td></tr>
 <tr class="memitem:a1ade48c83dca16fbbd2344906a052f6c" id="r_a1ade48c83dca16fbbd2344906a052f6c"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a1ade48c83dca16fbbd2344906a052f6c">ResourceTypeId</a> = <a class="el" href="classhelios_1_1utils_1_1TypeId.html">utils::TypeId</a></td></tr>
@@ -594,8 +644,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a9b3736dcb167cbead8b16fb9b9a9acca template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a9b3736dcb167cbead8b16fb9b9a9acca">TryAddComponentsCmd</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>, Us &amp;&amp;...) -&gt; TryAddComponentsCmd&lt; std::remove_cvref_t&lt; Us &gt;... &gt;</td></tr>
 <tr class="memitem:a8c67dfbf45b4cfe7d80c2df1951a72bf" id="r_a8c67dfbf45b4cfe7d80c2df1951a72bf"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
 <tr class="memitem:a8c67dfbf45b4cfe7d80c2df1951a72bf template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8c67dfbf45b4cfe7d80c2df1951a72bf">TryAddBundleCmd</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>, B &amp;&amp;) -&gt; TryAddBundleCmd&lt; std::remove_cvref_t&lt; B &gt; &gt;</td></tr>
-<tr class="memitem:a34a19cc13cd814d63d8eb3835f320c53" id="r_a34a19cc13cd814d63d8eb3835f320c53"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
-<tr class="memitem:a34a19cc13cd814d63d8eb3835f320c53 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a34a19cc13cd814d63d8eb3835f320c53">ComponentBundle</a> (Ts &amp;&amp;...) -&gt; ComponentBundle&lt; std::remove_cvref_t&lt; Ts &gt;... &gt;</td></tr>
 <tr class="memitem:a6bf80a403b2fc24bf08fdbf1a9d9917b" id="r_a6bf80a403b2fc24bf08fdbf1a9d9917b"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait T&gt; </td></tr>
 <tr class="memitem:a6bf80a403b2fc24bf08fdbf1a9d9917b template"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a6bf80a403b2fc24bf08fdbf1a9d9917b">ComponentNameOf</a> () noexcept</td></tr>
 <tr class="memdesc:a6bf80a403b2fc24bf08fdbf1a9d9917b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component name for debugging and serialization.  <br /></td></tr>
@@ -683,6 +731,7 @@ requires utils::UniqueTypes&lt;Cs...&gt;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a983b2c68640a2e1ec58908d5ea5f1f9b" id="r_a983b2c68640a2e1ec58908d5ea5f1f9b"><td class="memItemLeft">std::vector&lt; size_t &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a983b2c68640a2e1ec58908d5ea5f1f9b">g_active_schedule_stack</a></td></tr>
 <tr class="memitem:ada7d094331ca0a65eb27df397cda305e" id="r_ada7d094331ca0a65eb27df397cda305e"><td class="memTemplParams" colspan="2">template&lt;auto Fn&gt; </td></tr>
 <tr class="memitem:ada7d094331ca0a65eb27df397cda305e template"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1ecs_1_1FreeFunctionSystem.html">FreeFunctionSystem</a>&lt; Fn &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ada7d094331ca0a65eb27df397cda305e">kSystem</a> {}</td></tr>
 <tr class="memdesc:ada7d094331ca0a65eb27df397cda305e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline free function system wrapper instance.  <br /></td></tr>
@@ -734,9 +783,15 @@ template&lt;AsyncResourceTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Read-only access to thread-safe resources. </p>
+<p>Access to thread-safe resource. </p>
+<p>Just an alias for <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1Res.html" title="Access to resource.">Res</a>&lt;T&gt;</span>, but documents that the resource is thread-safe and can be accessed in parallel. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="param_8hpp_source.html#l00048">48</a> of file <a class="el" href="param_8hpp_source.html">param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="param_8hpp_source.html#l00054">54</a> of file <a class="el" href="param_8hpp_source.html">param.hpp</a>.</p>
 
 </div>
 </div>
@@ -754,7 +809,7 @@ template&lt;AsyncResourceTrait T&gt; </div>
 
 <p>Type id for components. </p>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00030">30</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00027">27</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -772,7 +827,7 @@ template&lt;AsyncResourceTrait T&gt; </div>
 
 <p>Type index for components. </p>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00027">27</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00024">24</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -836,10 +891,10 @@ template&lt;MessageTrait T&gt; </div>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> MySystem(<a class="code hl_typedef" href="#a1a3cca45d631afb052c728c7589f4554">MessageWriter&lt;DeathEvent&gt;</a> writer) {</div>
 <div class="line">  writer.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a1879828695519f011fbaad76115245dd">Write</a>(DeathEvent{...});</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html_a1879828695519f011fbaad76115245dd"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a1879828695519f011fbaad76115245dd">helios::ecs::BasicMessageWriter::Write</a></div><div class="ttdeci">void Write(U &amp;&amp;message) const</div><div class="ttdoc">Writes a single message to the local queue.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00049">writer.hpp:49</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a1a3cca45d631afb052c728c7589f4554"><div class="ttname"><a href="#a1a3cca45d631afb052c728c7589f4554">helios::ecs::MessageWriter</a></div><div class="ttdeci">PmrBasicMessageWriter&lt; T &gt; MessageWriter</div><div class="ttdoc">Alias for BasicMessageWriter bound to a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00097">writer.hpp:97</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html_a1879828695519f011fbaad76115245dd"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a1879828695519f011fbaad76115245dd">helios::ecs::BasicMessageWriter::Write</a></div><div class="ttdeci">void Write(U &amp;&amp;message) const</div><div class="ttdoc">Writes a single message to the local queue.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00050">writer.hpp:50</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a1a3cca45d631afb052c728c7589f4554"><div class="ttname"><a href="#a1a3cca45d631afb052c728c7589f4554">helios::ecs::MessageWriter</a></div><div class="ttdeci">PmrBasicMessageWriter&lt; T &gt; MessageWriter</div><div class="ttdoc">Alias for BasicMessageWriter bound to a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00162">writer.hpp:162</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00097">97</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00162">162</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
 
 </div>
 </div>
@@ -857,7 +912,7 @@ template&lt;typename Alloc, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02244">2244</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02266">2266</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -875,7 +930,59 @@ template&lt;typename Alloc, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02250">2250</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02272">2272</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0b786c7fdda949d9ad0bd60095031991" name="a0b786c7fdda949d9ad0bd60095031991"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b786c7fdda949d9ad0bd60095031991">&#9670;&#160;</a></span>OptAsyncRes</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a0b786c7fdda949d9ad0bd60095031991">helios::ecs::OptAsyncRes</a> = std::optional&lt;<a class="el" href="#a674cbdc503746f81c89e6b12f67c26d0">AsyncRes</a>&lt;T&gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Optional access to thread-safe resource. </p>
+<p>Alias for <span class="tt">std::optional&lt;<a class="el" href="#a674cbdc503746f81c89e6b12f67c26d0" title="Access to thread-safe resource.">AsyncRes</a>&lt;T&gt;&gt;</span>. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="param_8hpp_source.html#l00070">70</a> of file <a class="el" href="param_8hpp_source.html">param.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a08439f87b8ff5fd5ecd5cc6af031bb08" name="a08439f87b8ff5fd5ecd5cc6af031bb08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08439f87b8ff5fd5ecd5cc6af031bb08">&#9670;&#160;</a></span>OptRes</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a08439f87b8ff5fd5ecd5cc6af031bb08">helios::ecs::OptRes</a> = std::optional&lt;<a class="el" href="classhelios_1_1ecs_1_1Res.html">Res</a>&lt;T&gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Optional access to resource. </p>
+<p>Alias for <span class="tt">std::optional&lt;<a class="el" href="classhelios_1_1ecs_1_1Res.html" title="Access to resource.">Res</a>&lt;T&gt;&gt;</span>. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="param_8hpp_source.html#l00062">62</a> of file <a class="el" href="param_8hpp_source.html">param.hpp</a>.</p>
 
 </div>
 </div>
@@ -894,9 +1001,9 @@ template&lt;MessageTrait T&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">BasicMessageWriter&lt;T, std::pmr::polymorphic_allocator&lt;&gt;</a>&gt;</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a></div><div class="ttdoc">Type-safe writer for regular messages with a configurable queue allocator.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00026">writer.hpp:26</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a></div><div class="ttdoc">Type-safe writer for regular messages with a configurable queue allocator.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00027">writer.hpp:27</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00081">81</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00146">146</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
 
 </div>
 </div>
@@ -917,7 +1024,7 @@ template&lt;QueryArg... Args&gt; </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery&lt;World, std::pmr::polymorphic_allocator&lt;&gt;</a>, Args...&gt;</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery</a></div><div class="ttdoc">Query result object for iterating over matching entities and components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l00670">query.hpp:670</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02257">2257</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02279">2279</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -938,7 +1045,7 @@ template&lt;QueryArg... Args&gt; </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity&lt;World, std::pmr::polymorphic_allocator&lt;&gt;</a>, Args...&gt;</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQueryWithEntity_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">helios::ecs::BasicQueryWithEntity</a></div><div class="ttdoc">Wrapper that provides entity-aware iteration over query results.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l00080">query.hpp:80</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02265">2265</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02287">2287</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -955,28 +1062,28 @@ template&lt;QueryArg... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Command queue for deferred ECS operations that uses a polymorphic allocator. </p>
-<p>Provides a queue for commands that will be executed during <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">World::Update()</a></span>. <a class="el" href="classhelios_1_1ecs_1_1Commands.html" title="Thin wrapper over command queue and world for deferred ECS operations.">Commands</a> are executed in the order they were enqueued, ensuring predictable behavior. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<p>Provides a queue for commands that will be executed during <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a473fc38f99f63f6b356a8afe2793ba98" title="Flushes entity reservations and executes pending commands.">World::Flush()</a></span>. <a class="el" href="classhelios_1_1ecs_1_1Commands.html" title="Thin wrapper over command queue and world for deferred ECS operations.">Commands</a> are executed in the order they were enqueued, ensuring predictable behavior. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00174">174</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a993632cd1f8b6938856d9772a55053aa" name="a993632cd1f8b6938856d9772a55053aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a993632cd1f8b6938856d9772a55053aa">&#9670;&#160;</a></span>PmrConsumedMessagesRegistry</h2>
+<a id="a4ceb1af88b255d8c60a4b27b647dd632" name="a4ceb1af88b255d8c60a4b27b647dd632"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ceb1af88b255d8c60a4b27b647dd632">&#9670;&#160;</a></span>PmrConsumedMessagesRegistry</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#a993632cd1f8b6938856d9772a55053aa">helios::ecs::PmrConsumedMessagesRegistry</a></td>
+          <td class="memname">using <a class="el" href="#a4ceb1af88b255d8c60a4b27b647dd632">helios::ecs::PmrConsumedMessagesRegistry</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt;</div>
-<div class="line">   std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt;</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1ConsumedMessagesRegistry_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a></div><div class="ttdoc">Per-system registry for tracking consumed message indices.</div><div class="ttdef"><b>Definition</b> <a href="consumed__registry_8hpp_source.html#l00042">consumed_registry.hpp:42</a></div></div>
+<b>Initial value:</b><div class="fragment"><div class="line"> </div>
+<div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry&lt;std::pmr::polymorphic_allocator&lt;std::byte&gt;</a>&gt;</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1ConsumedMessagesRegistry_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a></div><div class="ttdoc">Per-system registry for tracking consumed message ids.</div><div class="ttdef"><b>Definition</b> <a href="consumed__registry_8hpp_source.html#l00043">consumed_registry.hpp:43</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00404">404</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00398">398</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1043,7 +1150,7 @@ template&lt;QueryArg... Args&gt; </div>
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery&lt;const World, std::pmr::polymorphic_allocator&lt;&gt;</a>, Args...&gt;</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02261">2261</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02283">2283</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1064,7 +1171,7 @@ template&lt;QueryArg... Args&gt; </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity&lt;const World, std::pmr::polymorphic_allocator&lt;&gt;</a>,</div>
 <div class="line">                     Args...&gt;</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02269">2269</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02291">2291</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1120,9 +1227,9 @@ template&lt;QueryArg... Args&gt; </div>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> MySystem(<a class="code hl_typedef" href="#a2222a8ceaa7f9005447fc4e1bf219cb5">Query</a>&lt;Transform&amp;, <span class="keyword">const</span> Velocity&amp;, With&lt;Player&gt;&gt; query) {</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; [transform, velocity] : query) { ... }</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02286">query.hpp:2286</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02308">query.hpp:2308</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02286">2286</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02308">2308</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1149,7 +1256,7 @@ template&lt;typename... Components&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00302">302</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00305">305</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -1176,7 +1283,7 @@ template&lt;typename... Components&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00731">731</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00773">773</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -1194,7 +1301,7 @@ template&lt;typename Alloc, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02247">2247</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02269">2269</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1215,7 +1322,7 @@ template&lt;typename Alloc, QueryArg... Args&gt; </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity</a>&lt;<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1World.html">World</a>, Alloc, Args...&gt;</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html">helios::ecs::World</a></div><div class="ttdoc">The World class manages entities with their components and systems.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00040">world.hpp:40</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02253">2253</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02275">2275</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1242,7 +1349,7 @@ template&lt;typename... Components&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00315">315</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00318">318</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -1261,7 +1368,7 @@ template&lt;typename... Components&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQueryWithEntityIter.html">BasicQueryWithEntityIter</a>&lt;<span class="keyword">true</span>, Components...&gt;</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQueryWithEntityIter_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQueryWithEntityIter.html">helios::ecs::BasicQueryWithEntityIter</a></div><div class="ttdoc">Iterator for query results including the entity.</div><div class="ttdef"><b>Definition</b> <a href="iterator_8hpp_source.html#l00328">iterator.hpp:330</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQueryWithEntityIter_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQueryWithEntityIter.html">helios::ecs::BasicQueryWithEntityIter</a></div><div class="ttdoc">Iterator for query results including the entity.</div><div class="ttdef"><b>Definition</b> <a href="iterator_8hpp_source.html#l00331">iterator.hpp:333</a></div></div>
 </div><!-- fragment -->
 <p>Read-only iterator for query results including the entity. </p>
 <p>Same as <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicQueryIter.html" title="Iterator for query results without entity information.">BasicQueryIter</a></span> but each dereferenced value is a tuple starting with the <a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a>, followed by the requested component access values. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
@@ -1272,7 +1379,7 @@ template&lt;typename... Components&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00741">741</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00783">783</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -1346,7 +1453,7 @@ template&lt;typename T&gt; </div>
 
 <p>Result type for schedule operations that can fail. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00173">173</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00189">189</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1539,7 +1646,7 @@ template&lt;typename T&gt; </div>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00033">33</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00030">30</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -1666,7 +1773,7 @@ template&lt;typename T&gt; </div>
 <tr><td class="fieldname"><a id="abd1fa5ad164fafc85b0908aac3fbf20ba03fd5b5c9577b8248bfb9a2f39f770e4" name="abd1fa5ad164fafc85b0908aac3fbf20ba03fd5b5c9577b8248bfb9a2f39f770e4"></a>kUnknownNode&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00156">156</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00172">172</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1793,25 +1900,6 @@ template&lt;SystemTrait T&gt; </div>
 
 </div>
 </div>
-<a id="a34a19cc13cd814d63d8eb3835f320c53" name="a34a19cc13cd814d63d8eb3835f320c53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34a19cc13cd814d63d8eb3835f320c53">&#9670;&#160;</a></span>ComponentBundle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Ts&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">helios::ecs::ComponentBundle </td>
-          <td>(</td>
-          <td class="paramtype">Ts &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>...</em></span></td><td>)</td>
-          <td> -&gt;  ComponentBundle&lt; std::remove_cvref_t&lt; Ts &gt;... &gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a6bf80a403b2fc24bf08fdbf1a9d9917b" name="a6bf80a403b2fc24bf08fdbf1a9d9917b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6bf80a403b2fc24bf08fdbf1a9d9917b">&#9670;&#160;</a></span>ComponentNameOf() <span class="overload">[1/2]</span></h2>
 
@@ -1846,7 +1934,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Component name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00090">90</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00087">87</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -1890,7 +1978,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Component name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00105">105</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00102">102</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -1932,7 +2020,7 @@ template&lt;ComponentTrait T&gt; </div>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00119">119</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00116">116</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -1976,7 +2064,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Component storage type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00140">140</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00137">137</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -2200,7 +2288,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if resource is thread-safe, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00119">119</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00120">120</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2244,7 +2332,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if resource is thread-safe, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00130">130</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00131">131</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2542,7 +2630,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00142">142</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00143">143</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2590,7 +2678,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00155">155</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00156">156</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2672,7 +2760,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Name of the resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00108">108</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00109">109</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2975,6 +3063,30 @@ template&lt;ComponentTrait... Us&gt; </div>
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a983b2c68640a2e1ec58908d5ea5f1f9b" name="a983b2c68640a2e1ec58908d5ea5f1f9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a983b2c68640a2e1ec58908d5ea5f1f9b">&#9670;&#160;</a></span>g_active_schedule_stack</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;size_t&gt; helios::ecs::g_active_schedule_stack</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel thread_local">thread_local</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="run__scope_8hpp_source.html#l00011">11</a> of file <a class="el" href="run__scope_8hpp_source.html">run_scope.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ada7d094331ca0a65eb27df397cda305e" name="ada7d094331ca0a65eb27df397cda305e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ada7d094331ca0a65eb27df397cda305e">&#9670;&#160;</a></span>kSystem</h2>
 

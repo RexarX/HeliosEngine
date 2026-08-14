@@ -185,7 +185,7 @@ Directories</h2></td></tr>
 `memory` — PMR Allocators &amp; Reference Counting</h1>
 <p>Custom <span class="tt">std::pmr::memory_resource</span> allocators for frame-scoped, arena, pool, and general-purpose allocation, plus <span class="tt">Rc</span>/<span class="tt">Arc</span> smart pointers.</p>
 <p>Namespace: <span class="tt"><a class="el" href="namespacehelios_1_1mem.html">helios::mem</a></span>.</p>
-<h1 class="doxsection"><a class="anchor" id="public-api-7"></a>
+<h1 class="doxsection"><a class="anchor" id="public-api-9"></a>
 Public API</h1>
 <h2 class="doxsection"><a class="anchor" id="allocators"></a>
 Allocators</h2>
@@ -291,7 +291,7 @@ Pool Allocator</h1>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span>* obj = alloc.new_object&lt;MyStruct&gt;(args...);</div>
 <div class="line">alloc.delete_object(obj);</div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1PoolAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1PoolAllocator.html">helios::mem::PoolAllocator</a></div><div class="ttdoc">Lock-free PMR pool allocator for fixed-size blocks.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00034">pool_allocator.hpp:34</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1PoolAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1PoolAllocator.html">helios::mem::PoolAllocator</a></div><div class="ttdoc">Lock-free PMR pool allocator for fixed-size blocks.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00035">pool_allocator.hpp:35</a></div></div>
 <div class="ttc" id="apool__allocator_8hpp_html"><div class="ttname"><a href="pool__allocator_8hpp.html">pool_allocator.hpp</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="reference-counting-1"></a>
 Reference Counting</h1>
@@ -315,7 +315,7 @@ Reference Counting</h1>
 <div class="ttc" id="anamespacehelios_1_1mem_html_a10f597088c98df7a40f43d8ac7236814"><div class="ttname"><a href="namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814">helios::mem::MakeArc</a></div><div class="ttdeci">auto MakeArc(Args &amp;&amp;... args) -&gt; Arc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning an Arc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01204">ref_counted.hpp:1204</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1mem_html_a3739908b3ea624bbd6e990f5c0ebe5da"><div class="ttname"><a href="namespacehelios_1_1mem.html#a3739908b3ea624bbd6e990f5c0ebe5da">helios::mem::MakeRc</a></div><div class="ttdeci">auto MakeRc(Args &amp;&amp;... args) -&gt; Rc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning a Rc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01174">ref_counted.hpp:1174</a></div></div>
 <div class="ttc" id="aref__counted_8hpp_html"><div class="ttname"><a href="ref__counted_8hpp.html">ref_counted.hpp</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="dependencies-6"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="dependencies-8"></a>
 Dependencies</h1>
 <ul>
 <li><span class="tt">core</span> — asserts</li>

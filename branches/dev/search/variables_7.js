@@ -1,4 +1,10 @@
 var searchData=
 [
-  ['hash_0',['hash',['../structhelios_1_1app_1_1PluginTypeExport.html#ab64c7e22152bcaa072cadaadf763da34',1,'helios::app::PluginTypeExport']]]
+  ['handle_0',['handle',['../structhelios_1_1window_1_1NativeHandleComponent.html#a7577c9941f9a934c7cf11c25b37b4493',1,'helios::window::NativeHandleComponent']]],
+  ['hash_1',['hash',['../structhelios_1_1app_1_1PluginTypeExport.html#ab64c7e22152bcaa072cadaadf763da34',1,'helios::app::PluginTypeExport']]],
+  ['height_2',['height',['../structhelios_1_1input_1_1CursorImage.html#a555589addb4bb4f3739d5da5336dd706',1,'helios::input::CursorImage::height'],['../structhelios_1_1window_1_1ResizedMsg.html#a9a4845b73cd56fc2ecfa65559f8c6fef',1,'helios::window::ResizedMsg::height'],['../structhelios_1_1window_1_1ClientResizedMsg.html#a5e72d7ef7c7abe61b187873dec33fb56',1,'helios::window::ClientResizedMsg::height'],['../structhelios_1_1window_1_1IconImage.html#a9f5a026f7b9e846e298a9db212fdf3d1',1,'helios::window::IconImage::height'],['../structhelios_1_1window_1_1Properties.html#a13a04b35ac28adfdcb7ede60c0816340',1,'helios::window::Properties::height'],['../structhelios_1_1window_1_1ExclusiveVideoMode.html#a28550ab411eb4941ada4754b3e6d19db',1,'helios::window::ExclusiveVideoMode::height'],['../structhelios_1_1window_1_1VideoMode.html#a7fc6e6a4276af44d27aad62540579c75',1,'helios::window::VideoMode::height'],['../structhelios_1_1window_1_1Monitor.html#a5c32cc2e65fad4cbde1466198f1b0024',1,'helios::window::Monitor::height']]],
+  ['hotspot_5fx_3',['hotspot_x',['../structhelios_1_1input_1_1CursorImage.html#abbe3221bef2f84534f30c067f03aa2af',1,'helios::input::CursorImage']]],
+  ['hotspot_5fy_4',['hotspot_y',['../structhelios_1_1input_1_1CursorImage.html#af37d8f744dca378949baf4c6b822780b',1,'helios::input::CursorImage']]],
+  ['hover_5',['hover',['../structhelios_1_1window_1_1AppearanceMessages.html#a1d9bb7ee7f55da030feda0c4de9a0c33',1,'helios::window::AppearanceMessages::hover'],['../structhelios_1_1window_1_1AppearanceWriters.html#ad103d141fe6e676fab25b127452b66ff',1,'helios::window::AppearanceWriters::hover']]],
+  ['hovered_6',['hovered',['../structhelios_1_1window_1_1HoverChangedMsg.html#a21fb00c299c02b0a5a09dcfdcbb5b775',1,'helios::window::HoverChangedMsg::hovered'],['../structhelios_1_1window_1_1Properties.html#a8911cb56adca877196b3ea2fcbda1d19',1,'helios::window::Properties::hovered']]]
 ];

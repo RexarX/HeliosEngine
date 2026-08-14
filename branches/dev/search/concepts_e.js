@@ -16,8 +16,9 @@ var searchData=
   ['subappwithnametrait_13',['SubAppWithNameTrait',['../concepthelios_1_1app_1_1SubAppWithNameTrait.html',1,'helios::app']]],
   ['subtask_14',['SubTask',['../concepthelios_1_1async_1_1SubTask.html',1,'helios::async']]],
   ['systemparam_15',['SystemParam',['../concepthelios_1_1ecs_1_1SystemParam.html',1,'helios::ecs']]],
-  ['systemsettrait_16',['SystemSetTrait',['../concepthelios_1_1ecs_1_1SystemSetTrait.html',1,'helios::ecs']]],
-  ['systemsetwithnametrait_17',['SystemSetWithNameTrait',['../concepthelios_1_1ecs_1_1SystemSetWithNameTrait.html',1,'helios::ecs']]],
-  ['systemtrait_18',['SystemTrait',['../concepthelios_1_1ecs_1_1SystemTrait.html',1,'helios::ecs']]],
-  ['systemwithnametrait_19',['SystemWithNameTrait',['../concepthelios_1_1ecs_1_1SystemWithNameTrait.html',1,'helios::ecs']]]
+  ['systemparammakeresultmatches_16',['SystemParamMakeResultMatches',['../concepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches.html',1,'helios::ecs::details']]],
+  ['systemsettrait_17',['SystemSetTrait',['../concepthelios_1_1ecs_1_1SystemSetTrait.html',1,'helios::ecs']]],
+  ['systemsetwithnametrait_18',['SystemSetWithNameTrait',['../concepthelios_1_1ecs_1_1SystemSetWithNameTrait.html',1,'helios::ecs']]],
+  ['systemtrait_19',['SystemTrait',['../concepthelios_1_1ecs_1_1SystemTrait.html',1,'helios::ecs']]],
+  ['systemwithnametrait_20',['SystemWithNameTrait',['../concepthelios_1_1ecs_1_1SystemWithNameTrait.html',1,'helios::ecs']]]
 ];

@@ -314,9 +314,9 @@ class helios::utils::SlideAdapter&lt; Iter &gt;</div><p>Adapter that yields slid
 <div class="line"><span class="keyword">auto</span> slide = <a class="code hl_function" href="#a72b651f9d3ddbdcb8b70c25f6db51239">SlideAdapter</a>(data, 3);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Iterate over windows</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; window : slide) {</div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_namespace" href="namespacehelios_1_1window.html">window</a> : slide) {</div>
 <div class="line">  <span class="comment">// Each window is a SlideView</span></div>
-<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> val : window) {</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> val : <a class="code hl_namespace" href="namespacehelios_1_1window.html">window</a>) {</div>
 <div class="line">    std::cout &lt;&lt; val &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line">  }</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -328,6 +328,7 @@ class helios::utils::SlideAdapter&lt; Iter &gt;</div><p>Adapter that yields slid
 <div class="line"><span class="comment">// Convert a window to vector if ownership needed</span></div>
 <div class="line"><span class="keyword">auto</span> first_window = (*slide.begin()).Collect();  <span class="comment">// std::vector&lt;int&gt;</span></div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1SlideAdapter_html_a72b651f9d3ddbdcb8b70c25f6db51239"><div class="ttname"><a href="#a72b651f9d3ddbdcb8b70c25f6db51239">helios::utils::SlideAdapter::SlideAdapter</a></div><div class="ttdeci">constexpr SlideAdapter(Iter begin, Iter end, size_t window_size) noexcept(std::is_nothrow_move_constructible_v&lt; Iter &gt; &amp;&amp;std::is_nothrow_copy_constructible_v&lt; Iter &gt; &amp;&amp;noexcept(std::declval&lt; Iter &amp; &gt;() !=std::declval&lt; Iter &amp; &gt;()) &amp;&amp;noexcept(++std::declval&lt; Iter &amp; &gt;()))</div><div class="ttdoc">Constructs a slide adapter.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l03148">functional_adapters.hpp:3148</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1window_html"><div class="ttname"><a href="namespacehelios_1_1window.html">helios::window</a></div><div class="ttdef"><b>Definition</b> <a href="window_2include_2helios_2window_2components_8hpp_source.html#l00014">components.hpp:14</a></div></div>
 </div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03018">3018</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>

@@ -9,5 +9,8 @@ var searchData=
   ['hash_3c_20helios_3a_3autils_3a_3atypeid_20_3e_6',['hash&lt; helios::utils::TypeId &gt;',['../structstd_1_1hash_3_01helios_1_1utils_1_1TypeId_01_4.html',1,'std']]],
   ['hash_3c_20helios_3a_3autils_3a_3atypeindex_20_3e_7',['hash&lt; helios::utils::TypeIndex &gt;',['../structstd_1_1hash_3_01helios_1_1utils_1_1TypeIndex_01_4.html',1,'std']]],
   ['hash_3c_20helios_3a_3auuid_20_3e_8',['hash&lt; helios::Uuid &gt;',['../structstd_1_1hash_3_01helios_1_1Uuid_01_4.html',1,'std']]],
-  ['hassystemparamcalloperatorhelper_9',['HasSystemParamCallOperatorHelper',['../structhelios_1_1ecs_1_1details_1_1HasSystemParamCallOperatorHelper.html',1,'helios::ecs::details']]]
+  ['hasstructbundlebuild_9',['HasStructBundleBuild',['../structhelios_1_1ecs_1_1details_1_1HasStructBundleBuild.html',1,'helios::ecs::details']]],
+  ['hasstructbundlebuild_3c_20t_20_3e_10',['HasStructBundleBuild&lt; T &gt;',['../structhelios_1_1ecs_1_1details_1_1HasStructBundleBuild_3_01T_01_4.html',1,'helios::ecs::details']]],
+  ['hassystemparamcalloperatorhelper_11',['HasSystemParamCallOperatorHelper',['../structhelios_1_1ecs_1_1details_1_1HasSystemParamCallOperatorHelper.html',1,'helios::ecs::details']]],
+  ['hoverchangedmsg_12',['HoverChangedMsg',['../structhelios_1_1window_1_1HoverChangedMsg.html',1,'helios::window']]]
 ];

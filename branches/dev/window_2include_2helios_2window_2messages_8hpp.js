@@ -1,0 +1,26 @@
+var window_2include_2helios_2window_2messages_8hpp =
+[
+    [ "helios::window::CreatedMsg", "structhelios_1_1window_1_1CreatedMsg.html", "structhelios_1_1window_1_1CreatedMsg" ],
+    [ "helios::window::ClosedMsg", "structhelios_1_1window_1_1ClosedMsg.html", "structhelios_1_1window_1_1ClosedMsg" ],
+    [ "helios::window::ResizedMsg", "structhelios_1_1window_1_1ResizedMsg.html", "structhelios_1_1window_1_1ResizedMsg" ],
+    [ "helios::window::ClientResizedMsg", "structhelios_1_1window_1_1ClientResizedMsg.html", "structhelios_1_1window_1_1ClientResizedMsg" ],
+    [ "helios::window::ContentScaleChangedMsg", "structhelios_1_1window_1_1ContentScaleChangedMsg.html", "structhelios_1_1window_1_1ContentScaleChangedMsg" ],
+    [ "helios::window::PosChangedMsg", "structhelios_1_1window_1_1PosChangedMsg.html", "structhelios_1_1window_1_1PosChangedMsg" ],
+    [ "helios::window::ModeChangedMsg", "structhelios_1_1window_1_1ModeChangedMsg.html", "structhelios_1_1window_1_1ModeChangedMsg" ],
+    [ "helios::window::CursorModeChangedMsg", "structhelios_1_1window_1_1CursorModeChangedMsg.html", "structhelios_1_1window_1_1CursorModeChangedMsg" ],
+    [ "helios::window::VisibilityChangedMsg", "structhelios_1_1window_1_1VisibilityChangedMsg.html", "structhelios_1_1window_1_1VisibilityChangedMsg" ],
+    [ "helios::window::FocusChangedMsg", "structhelios_1_1window_1_1FocusChangedMsg.html", "structhelios_1_1window_1_1FocusChangedMsg" ],
+    [ "helios::window::MaximizedChangedMsg", "structhelios_1_1window_1_1MaximizedChangedMsg.html", "structhelios_1_1window_1_1MaximizedChangedMsg" ],
+    [ "helios::window::IconChangedMsg", "structhelios_1_1window_1_1IconChangedMsg.html", "structhelios_1_1window_1_1IconChangedMsg" ],
+    [ "helios::window::ResizableChangedMsg", "structhelios_1_1window_1_1ResizableChangedMsg.html", "structhelios_1_1window_1_1ResizableChangedMsg" ],
+    [ "helios::window::DecoratedChangedMsg", "structhelios_1_1window_1_1DecoratedChangedMsg.html", "structhelios_1_1window_1_1DecoratedChangedMsg" ],
+    [ "helios::window::OpacityChangedMsg", "structhelios_1_1window_1_1OpacityChangedMsg.html", "structhelios_1_1window_1_1OpacityChangedMsg" ],
+    [ "helios::window::FloatingChangedMsg", "structhelios_1_1window_1_1FloatingChangedMsg.html", "structhelios_1_1window_1_1FloatingChangedMsg" ],
+    [ "helios::window::HoverChangedMsg", "structhelios_1_1window_1_1HoverChangedMsg.html", "structhelios_1_1window_1_1HoverChangedMsg" ],
+    [ "helios::window::ClipboardChangedMsg", "structhelios_1_1window_1_1ClipboardChangedMsg.html", "structhelios_1_1window_1_1ClipboardChangedMsg" ],
+    [ "helios::window::DroppedFilesMsg", "structhelios_1_1window_1_1DroppedFilesMsg.html", "structhelios_1_1window_1_1DroppedFilesMsg" ],
+    [ "helios::window::CloseRequestedMsg", "structhelios_1_1window_1_1CloseRequestedMsg.html", "structhelios_1_1window_1_1CloseRequestedMsg" ],
+    [ "helios::window::MonitorsChangedMsg", "structhelios_1_1window_1_1MonitorsChangedMsg.html", "structhelios_1_1window_1_1MonitorsChangedMsg" ],
+    [ "helios::window::CreationFailedMsg", "structhelios_1_1window_1_1CreationFailedMsg.html", "structhelios_1_1window_1_1CreationFailedMsg" ],
+    [ "helios::window::MousePassthroughChangedMsg", "structhelios_1_1window_1_1MousePassthroughChangedMsg.html", "structhelios_1_1window_1_1MousePassthroughChangedMsg" ]
+];

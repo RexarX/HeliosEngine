@@ -1,16 +1,16 @@
 var searchData=
 [
-  ['param_2ehpp_0',['param.hpp',['../param_8hpp.html',1,'']]],
-  ['param_5fpolicy_2ehpp_1',['param_policy.hpp',['../param__policy_8hpp.html',1,'']]],
-  ['param_5ftraits_2ehpp_2',['param_traits.hpp',['../param__traits_8hpp.html',1,'']]],
-  ['pch_2ehpp_3',['pch.hpp',['../app_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../core_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../ecs_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../log_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../memory_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../profile_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../utils_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../window_2src_2pch_8hpp.html',1,'(Global Namespace)']]],
-  ['platform_2ehpp_4',['platform.hpp',['../platform_8hpp.html',1,'']]],
-  ['plot_2ehpp_5',['plot.hpp',['../plot_8hpp.html',1,'']]],
-  ['plugin_2ehpp_6',['plugin.hpp',['../plugin_8hpp.html',1,'']]],
-  ['plugin_5fgroup_2ehpp_7',['plugin_group.hpp',['../plugin__group_8hpp.html',1,'']]],
-  ['pool_5fallocator_2ecpp_8',['pool_allocator.cpp',['../pool__allocator_8cpp.html',1,'']]],
-  ['pool_5fallocator_2ehpp_9',['pool_allocator.hpp',['../pool__allocator_8hpp.html',1,'']]],
-  ['profile_2ehpp_10',['profile.hpp',['../profile_8hpp.html',1,'']]],
-  ['profiler_2ecpp_11',['profiler.cpp',['../profiler_8cpp.html',1,'']]],
-  ['profiler_2ehpp_12',['profiler.hpp',['../profiler_8hpp.html',1,'']]]
+  ['macro_2ehpp_0',['macro.hpp',['../macro_8hpp.html',1,'']]],
+  ['macros_2ehpp_1',['macros.hpp',['../macros_8hpp.html',1,'']]],
+  ['main_5fthread_2ecpp_2',['main_thread.cpp',['../main__thread_8cpp.html',1,'']]],
+  ['main_5fthread_2ehpp_3',['main_thread.hpp',['../main__thread_8hpp.html',1,'']]],
+  ['manager_2ecpp_4',['manager.cpp',['../manager_8cpp.html',1,'']]],
+  ['manager_2ehpp_5',['manager.hpp',['../component_2manager_8hpp.html',1,'(Global Namespace)'],['../entity_2manager_8hpp.html',1,'(Global Namespace)'],['../message_2manager_8hpp.html',1,'(Global Namespace)'],['../resource_2manager_8hpp.html',1,'(Global Namespace)']]],
+  ['memory_2ehpp_6',['memory.hpp',['../memory_2include_2helios_2memory_2memory_8hpp.html',1,'(Global Namespace)'],['../profile_2include_2helios_2profile_2memory_8hpp.html',1,'(Global Namespace)']]],
+  ['message_2ehpp_7',['message.hpp',['../ecs_2include_2helios_2ecs_2message_2message_8hpp.html',1,'(Global Namespace)'],['../profile_2include_2helios_2profile_2message_8hpp.html',1,'(Global Namespace)']]],
+  ['messages_2ehpp_8',['messages.hpp',['../input_2include_2helios_2input_2messages_8hpp.html',1,'(Global Namespace)'],['../window_2include_2helios_2window_2messages_8hpp.html',1,'(Global Namespace)']]],
+  ['mouse_2ehpp_9',['mouse.hpp',['../mouse_8hpp.html',1,'']]],
+  ['multi_5fthreaded_2ecpp_10',['multi_threaded.cpp',['../multi__threaded_8cpp.html',1,'']]],
+  ['multi_5fthreaded_2ehpp_11',['multi_threaded.hpp',['../multi__threaded_8hpp.html',1,'']]],
+  ['multi_5ftype_5fmap_2ehpp_12',['multi_type_map.hpp',['../multi__type__map_8hpp.html',1,'']]]
 ];

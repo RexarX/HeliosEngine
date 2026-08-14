@@ -220,7 +220,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afe7f450e709867c8e680957d508d38a2" id="r_afe7f450e709867c8e680957d508d38a2"><td class="memTemplParams" colspan="2">template&lt;typename F&gt; <br />
 requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;&gt;</td></tr>
 <tr class="memitem:afe7f450e709867c8e680957d508d38a2 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#afe7f450e709867c8e680957d508d38a2">DeferredUpdate</a> (this auto &amp;&amp;self, F &amp;&amp;command) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:afe7f450e709867c8e680957d508d38a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to be executed during the next <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">World::Update()</a></span>.  <br /></td></tr>
+<tr class="memdesc:afe7f450e709867c8e680957d508d38a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to be executed during the next <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a473fc38f99f63f6b356a8afe2793ba98" title="Flushes entity reservations and executes pending commands.">World::Flush()</a></span>.  <br /></td></tr>
 <tr class="memitem:aa0224a41e3e293d43b8a12f126e14998" id="r_aa0224a41e3e293d43b8a12f126e14998"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#aa0224a41e3e293d43b8a12f126e14998">Empty</a> () const noexcept</td></tr>
 <tr class="memdesc:aa0224a41e3e293d43b8a12f126e14998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the buffer is empty.  <br /></td></tr>
 <tr class="memitem:acde89ce69c07d7a47ff3b5aef78a99a3" id="r_acde89ce69c07d7a47ff3b5aef78a99a3"><td class="memItemLeft">constexpr <a class="el" href="#ab3d8a0f54a760d34a633a1930e388817">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#acde89ce69c07d7a47ff3b5aef78a99a3">Size</a> () const noexcept</td></tr>
@@ -542,7 +542,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
 </table>
 </div><div class="memdoc">
 
-<p>Enqueues a command to be executed during the next <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">World::Update()</a></span>. </p>
+<p>Enqueues a command to be executed during the next <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a473fc38f99f63f6b356a8afe2793ba98" title="Flushes entity reservations and executes pending commands.">World::Flush()</a></span>. </p>
 <p>Equivalent to enqueueing a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1FunctionCmd.html" title="Command that executes a function with World reference.">FunctionCmd</a></span> with the given callable. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

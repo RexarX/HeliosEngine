@@ -8,5 +8,6 @@ var searchData=
   ['arithmetictrait_5',['ArithmeticTrait',['../concepthelios_1_1utils_1_1ArithmeticTrait.html',1,'helios::utils']]],
   ['asyncmessagetrait_6',['AsyncMessageTrait',['../concepthelios_1_1ecs_1_1AsyncMessageTrait.html',1,'helios::ecs']]],
   ['asyncresourcetrait_7',['AsyncResourceTrait',['../concepthelios_1_1ecs_1_1AsyncResourceTrait.html',1,'helios::ecs']]],
-  ['asyncsubapptrait_8',['AsyncSubAppTrait',['../concepthelios_1_1app_1_1AsyncSubAppTrait.html',1,'helios::app']]]
+  ['asyncsubapptrait_8',['AsyncSubAppTrait',['../concepthelios_1_1app_1_1AsyncSubAppTrait.html',1,'helios::app']]],
+  ['axistrait_9',['AxisTrait',['../concepthelios_1_1input_1_1AxisTrait.html',1,'helios::input']]]
 ];

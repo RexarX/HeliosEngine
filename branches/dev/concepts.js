@@ -18,8 +18,9 @@ var concepts =
       ] ],
       [ "ecs", "namespacehelios_1_1ecs.html", [
         [ "details", "namespacehelios_1_1ecs_1_1details.html", [
+          [ "HasSystemParamCallOperator", "concepthelios_1_1ecs_1_1details_1_1HasSystemParamCallOperator.html", null ],
           [ "HasValidSystemParams", "concepthelios_1_1ecs_1_1details_1_1HasValidSystemParams.html", null ],
-          [ "HasSystemParamCallOperator", "concepthelios_1_1ecs_1_1details_1_1HasSystemParamCallOperator.html", null ]
+          [ "SystemParamMakeResultMatches", "concepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches.html", null ]
         ] ],
         [ "AnyMessageTrait", "concepthelios_1_1ecs_1_1AnyMessageTrait.html", null ],
         [ "ArchetypeComponentTrait", "concepthelios_1_1ecs_1_1ArchetypeComponentTrait.html", null ],
@@ -52,6 +53,10 @@ var concepts =
         [ "SystemTrait", "concepthelios_1_1ecs_1_1SystemTrait.html", null ],
         [ "SystemWithNameTrait", "concepthelios_1_1ecs_1_1SystemWithNameTrait.html", null ],
         [ "TagComponentTrait", "concepthelios_1_1ecs_1_1TagComponentTrait.html", null ]
+      ] ],
+      [ "input", "namespacehelios_1_1input.html", [
+        [ "AxisTrait", "concepthelios_1_1input_1_1AxisTrait.html", null ],
+        [ "ButtonTrait", "concepthelios_1_1input_1_1ButtonTrait.html", null ]
       ] ],
       [ "log", "namespacehelios_1_1log.html", [
         [ "LoggerTrait", "concepthelios_1_1log_1_1LoggerTrait.html", null ],

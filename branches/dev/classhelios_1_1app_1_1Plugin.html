@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <p>Base class for all plugins.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plugin_8hpp_source.html">plugin.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html">plugin.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for helios::app::Plugin:</div>
 <div class="dyncontent">
@@ -191,6 +191,9 @@ Inheritance diagram for helios::app::Plugin:</div>
 <area href="classhelios_1_1app_1_1ExecutorPlugin.html" title="Adds the Executor resource." alt="helios::app::ExecutorPlugin" shape="rect" coords="0,56,182,80"/>
 <area href="classhelios_1_1app_1_1FrameCountPlugin.html" title="Adds the FrameCount resource and its per-frame update system." alt="helios::app::FrameCountPlugin" shape="rect" coords="192,56,374,80"/>
 <area href="classhelios_1_1app_1_1TimePlugin.html" title="Adds the Time resource and its per-frame update system." alt="helios::app::TimePlugin" shape="rect" coords="384,56,566,80"/>
+<area href="structhelios_1_1glfw_1_1Plugin.html" title="GLFW backend that synchronizes OS windows with helios::window ECS types." alt="helios::glfw::Plugin" shape="rect" coords="576,56,758,80"/>
+<area href="structhelios_1_1input_1_1Plugin.html" title="Registers input ECS resources, messages, and update systems." alt="helios::input::Plugin" shape="rect" coords="768,56,950,80"/>
+<area href="structhelios_1_1window_1_1Plugin.html" title="Registers window ECS types without creating OS windows." alt="helios::window::Plugin" shape="rect" coords="960,56,1142,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -211,7 +214,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for all plugins. </p>
 
-<p class="definition">Definition at line <a class="el" href="plugin_8hpp_source.html#l00014">14</a> of file <a class="el" href="plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00014">14</a> of file <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0b833a644b959b037139981d485981c6" name="a0b833a644b959b037139981d485981c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0b833a644b959b037139981d485981c6">&#9670;&#160;</a></span>~Plugin()</h2>
@@ -270,7 +273,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classhelios_1_1app_1_1ExecutorPlugin.html#aeac032175d33383a7d527a71d9a8aa8a">helios::app::ExecutorPlugin</a>, <a class="el" href="classhelios_1_1app_1_1FrameCountPlugin.html#ae8c8f9e63d8f7ed06f76b595d59a8d84">helios::app::FrameCountPlugin</a>, and <a class="el" href="classhelios_1_1app_1_1TimePlugin.html#ab5acbb84b00dc7e8def7ad7de98da6cb">helios::app::TimePlugin</a>.</p>
+<p>Implemented in <a class="el" href="classhelios_1_1app_1_1ExecutorPlugin.html#aeac032175d33383a7d527a71d9a8aa8a">helios::app::ExecutorPlugin</a>, <a class="el" href="classhelios_1_1app_1_1FrameCountPlugin.html#ae8c8f9e63d8f7ed06f76b595d59a8d84">helios::app::FrameCountPlugin</a>, <a class="el" href="classhelios_1_1app_1_1TimePlugin.html#ab5acbb84b00dc7e8def7ad7de98da6cb">helios::app::TimePlugin</a>, <a class="el" href="structhelios_1_1glfw_1_1Plugin.html#a287ed17a217caf62077a168a8f0681e8">helios::glfw::Plugin</a>, <a class="el" href="structhelios_1_1input_1_1Plugin.html#a20a86a113fb43bdc1ac35d5800e50dcc">helios::input::Plugin</a>, and <a class="el" href="structhelios_1_1window_1_1Plugin.html#a60159742d4f5a32668d4b3bd3cb3bedd">helios::window::Plugin</a>.</p>
 
 </div>
 </div>
@@ -305,7 +308,9 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="plugin_8hpp_source.html#l00040">40</a> of file <a class="el" href="plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p>Reimplemented in <a class="el" href="structhelios_1_1glfw_1_1Plugin.html#af20247bc0812cfbdac5776b03ef0bace">helios::glfw::Plugin</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00040">40</a> of file <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -340,7 +345,9 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="plugin_8hpp_source.html#l00033">33</a> of file <a class="el" href="plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p>Reimplemented in <a class="el" href="structhelios_1_1glfw_1_1Plugin.html#afae3cf6e1f5bd6dcbd10a908968e7f77">helios::glfw::Plugin</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00033">33</a> of file <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -376,7 +383,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the plugin is ready, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="plugin_8hpp_source.html#l00059">59</a> of file <a class="el" href="plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00059">59</a> of file <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -411,7 +418,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="plugin_8hpp_source.html#l00049">49</a> of file <a class="el" href="plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00049">49</a> of file <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tasktype_0',['TaskType',['../namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd',1,'helios::async']]]
+  ['plotformat_0',['PlotFormat',['../namespacehelios_1_1profile.html#a4028dc96634ea1fda3b42f975e840cbb',1,'helios::profile']]]
 ];

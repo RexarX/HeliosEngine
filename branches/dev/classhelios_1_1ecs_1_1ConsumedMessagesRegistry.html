@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 </div><!--header-->
 <div class="contents">
 
-<p>Per-system registry for tracking consumed message indices.  
+<p>Per-system registry for tracking consumed message ids.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>&gt;</code></p>
@@ -193,18 +193,18 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a42999c8d1ba215281f98d2b3983a42f3" id="r_a42999c8d1ba215281f98d2b3983a42f3"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> (<a class="el" href="#a01aeee5c24d3529a9073e5858d873779">allocator_type</a> alloc={})</td></tr>
 <tr class="memitem:a28595969958bf6bcf75bdada508adf99" id="r_a28595969958bf6bcf75bdada508adf99"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a28595969958bf6bcf75bdada508adf99">ConsumedMessagesRegistry</a> (std::pmr::memory_resource *resource)</td></tr>
-<tr class="memdesc:a28595969958bf6bcf75bdada508adf99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message indices.">ConsumedMessagesRegistry</a></span> from a PMR memory resource.  <br /></td></tr>
+<tr class="memdesc:a28595969958bf6bcf75bdada508adf99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message ids.">ConsumedMessagesRegistry</a></span> from a PMR memory resource.  <br /></td></tr>
 <tr class="memitem:acaf04ac0c96fe9bc0240de3573af2aa7" id="r_acaf04ac0c96fe9bc0240de3573af2aa7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#acaf04ac0c96fe9bc0240de3573af2aa7">ConsumedMessagesRegistry</a> (std::nullptr_t)=delete</td></tr>
 <tr class="memitem:ae3d48aa19b4d049f38fce30c0d8343c2" id="r_ae3d48aa19b4d049f38fce30c0d8343c2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae3d48aa19b4d049f38fce30c0d8343c2">ConsumedMessagesRegistry</a> (const ConsumedMessagesRegistry &amp;)=default</td></tr>
 <tr class="memitem:a1ba1c74ae7e37dec2d6a433a8490ac78" id="r_a1ba1c74ae7e37dec2d6a433a8490ac78"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1ba1c74ae7e37dec2d6a433a8490ac78">ConsumedMessagesRegistry</a> (ConsumedMessagesRegistry &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:a1952427197c882ac7ff790fd82f38e35" id="r_a1952427197c882ac7ff790fd82f38e35"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1952427197c882ac7ff790fd82f38e35">~ConsumedMessagesRegistry</a> ()=default</td></tr>
 <tr class="memitem:ab7276ac350eb5c667944836f5300c9c0" id="r_ab7276ac350eb5c667944836f5300c9c0"><td class="memItemLeft"><a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab7276ac350eb5c667944836f5300c9c0">operator=</a> (const <a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> &amp;)=default</td></tr>
 <tr class="memitem:a88d6bb601d237596b211eb64c5769763" id="r_a88d6bb601d237596b211eb64c5769763"><td class="memItemLeft"><a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a88d6bb601d237596b211eb64c5769763">operator=</a> (<a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a34d8f38cbc12cbce19a2b242f6f20c3a" id="r_a34d8f38cbc12cbce19a2b242f6f20c3a"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
-<tr class="memitem:a34d8f38cbc12cbce19a2b242f6f20c3a template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a34d8f38cbc12cbce19a2b242f6f20c3a">MarkConsumed</a> (<a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> global_index)</td></tr>
-<tr class="memdesc:a34d8f38cbc12cbce19a2b242f6f20c3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks an message as consumed by its type and global index.  <br /></td></tr>
-<tr class="memitem:a2cd427b1da112da073a90238e2ab03cf" id="r_a2cd427b1da112da073a90238e2ab03cf"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a2cd427b1da112da073a90238e2ab03cf">MarkConsumed</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index, <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> global_index)</td></tr>
-<tr class="memdesc:a2cd427b1da112da073a90238e2ab03cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks an message as consumed by its type index and global index.  <br /></td></tr>
+<tr class="memitem:a04f0fa08f5d8052f4590ea56e3cd2256" id="r_a04f0fa08f5d8052f4590ea56e3cd2256"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
+<tr class="memitem:a04f0fa08f5d8052f4590ea56e3cd2256 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a04f0fa08f5d8052f4590ea56e3cd2256">MarkConsumed</a> (<a class="el" href="structhelios_1_1ecs_1_1MessageId.html">MessageId</a>&lt; T &gt; message_id)</td></tr>
+<tr class="memdesc:a04f0fa08f5d8052f4590ea56e3cd2256"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks an message as consumed by its type and message id.  <br /></td></tr>
+<tr class="memitem:aa15a47cfbbb6542b27dfd913bc804a81" id="r_aa15a47cfbbb6542b27dfd913bc804a81"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#aa15a47cfbbb6542b27dfd913bc804a81">MarkConsumed</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index, <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> message_id)</td></tr>
+<tr class="memdesc:aa15a47cfbbb6542b27dfd913bc804a81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks an message as consumed by its type index and message id.  <br /></td></tr>
 <tr class="memitem:a2135114e6759c30d858e971f8fba216d" id="r_a2135114e6759c30d858e971f8fba216d"><td class="memTemplParams" colspan="2">template&lt;typename OtherAlloc&gt; </td></tr>
 <tr class="memitem:a2135114e6759c30d858e971f8fba216d template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a2135114e6759c30d858e971f8fba216d">MergeFrom</a> (const <a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a>&lt; OtherAlloc &gt; &amp;other)</td></tr>
 <tr class="memdesc:a2135114e6759c30d858e971f8fba216d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges consumed entries from another registry into this one.  <br /></td></tr>
@@ -218,16 +218,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8497912b4235355eed85b9a0622be4f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears consumed entries for a specific message type.  <br /></td></tr>
 <tr class="memitem:a60b2c2c8615331a9c3f7fbcf07022762" id="r_a60b2c2c8615331a9c3f7fbcf07022762"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a60b2c2c8615331a9c3f7fbcf07022762">Clear</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) noexcept</td></tr>
 <tr class="memdesc:a60b2c2c8615331a9c3f7fbcf07022762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears consumed entries for a specific message type.  <br /></td></tr>
-<tr class="memitem:aec7db1387091688a605ec3d75f5d3551" id="r_aec7db1387091688a605ec3d75f5d3551"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
-<tr class="memitem:aec7db1387091688a605ec3d75f5d3551 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#aec7db1387091688a605ec3d75f5d3551">IsConsumed</a> (<a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> global_index) const noexcept</td></tr>
-<tr class="memdesc:aec7db1387091688a605ec3d75f5d3551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message is marked as consumed.  <br /></td></tr>
-<tr class="memitem:ac6196741861f41eb9b0031ac293cf697" id="r_ac6196741861f41eb9b0031ac293cf697"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ac6196741861f41eb9b0031ac293cf697">IsConsumed</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index, <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> global_index) const noexcept</td></tr>
-<tr class="memdesc:ac6196741861f41eb9b0031ac293cf697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message is marked as consumed.  <br /></td></tr>
-<tr class="memitem:a100b71470438f154bf5d46d2306392f8" id="r_a100b71470438f154bf5d46d2306392f8"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
-<tr class="memitem:a100b71470438f154bf5d46d2306392f8 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a100b71470438f154bf5d46d2306392f8">ConsumedIndicesFor</a> () const noexcept -&gt; std::span&lt; const <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> &gt;</td></tr>
-<tr class="memdesc:a100b71470438f154bf5d46d2306392f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the sorted consumed indices for a specific message type.  <br /></td></tr>
-<tr class="memitem:a52baae77b079a420fa27be835cbd7ec1" id="r_a52baae77b079a420fa27be835cbd7ec1"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a52baae77b079a420fa27be835cbd7ec1">ConsumedIndicesFor</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept -&gt; std::span&lt; const <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> &gt;</td></tr>
-<tr class="memdesc:a52baae77b079a420fa27be835cbd7ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the sorted consumed indices for a specific message type.  <br /></td></tr>
+<tr class="memitem:a364c2e357508590e6839acc114dc1547" id="r_a364c2e357508590e6839acc114dc1547"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
+<tr class="memitem:a364c2e357508590e6839acc114dc1547 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a364c2e357508590e6839acc114dc1547">ConsumedIndicesFor</a> () const noexcept -&gt; std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td></tr>
+<tr class="memdesc:a364c2e357508590e6839acc114dc1547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the sorted consumed message ids for a specific message type.  <br /></td></tr>
+<tr class="memitem:ad554f5716d005512bd23651d731d6b19" id="r_ad554f5716d005512bd23651d731d6b19"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#ad554f5716d005512bd23651d731d6b19">ConsumedIndicesFor</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept -&gt; std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td></tr>
+<tr class="memdesc:ad554f5716d005512bd23651d731d6b19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the sorted consumed message ids for a specific message type.  <br /></td></tr>
+<tr class="memitem:a84a75b182880ba127aa61b6b8e35927b" id="r_a84a75b182880ba127aa61b6b8e35927b"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
+<tr class="memitem:a84a75b182880ba127aa61b6b8e35927b template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a84a75b182880ba127aa61b6b8e35927b">IsConsumed</a> (<a class="el" href="structhelios_1_1ecs_1_1MessageId.html">MessageId</a>&lt; T &gt; message_id) const noexcept</td></tr>
+<tr class="memdesc:a84a75b182880ba127aa61b6b8e35927b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message is marked as consumed.  <br /></td></tr>
+<tr class="memitem:adbc03987b6f413d82cbae7bdbb96fc10" id="r_adbc03987b6f413d82cbae7bdbb96fc10"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#adbc03987b6f413d82cbae7bdbb96fc10">IsConsumed</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index, <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> message_id) const noexcept</td></tr>
+<tr class="memdesc:adbc03987b6f413d82cbae7bdbb96fc10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message is marked as consumed.  <br /></td></tr>
 <tr class="memitem:aab38b9c832e272da67ad920248360354" id="r_aab38b9c832e272da67ad920248360354"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#aab38b9c832e272da67ad920248360354">Empty</a> () const noexcept</td></tr>
 <tr class="memdesc:aab38b9c832e272da67ad920248360354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any message type has consumed entries.  <br /></td></tr>
 <tr class="memitem:aa5bbc892a5558805cca168287cc3f4fd" id="r_aa5bbc892a5558805cca168287cc3f4fd"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
@@ -247,12 +247,9 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt;<br />
-class helios::ecs::ConsumedMessagesRegistry&lt; Alloc &gt;</div><p>Per-system registry for tracking consumed message indices. </p>
-<p>Each system running in parallel gets its own <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message indices.">ConsumedMessagesRegistry</a></span> instance. Systems mark messages as consumed by writing indices into their registry, avoiding data races. At Update time, all registries are merged and applied to message queues in <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html" title="Central coordinator for message lifecycle with double buffering and consumed message removal.">MessageManager</a></span>.</p>
-<p>Indices are global within the combined (previous + current) message view for a given type. For a type with P previous messages and C current messages:</p><ul>
-<li>Indices [0, P) refer to previous messages</li>
-<li>Indices [P, P + C) refer to current messages</li>
-</ul>
+class helios::ecs::ConsumedMessagesRegistry&lt; Alloc &gt;</div><p>Per-system registry for tracking consumed message ids. </p>
+<p>Each system running in parallel gets its own <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message ids.">ConsumedMessagesRegistry</a></span> instance. Systems mark messages as consumed by writing stable message ids into their registry, avoiding data races. At Update time, all registries are merged and applied to message queues in <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html" title="Central coordinator for message lifecycle with double buffering and consumed message removal.">MessageManager</a></span>.</p>
+<p>Entries are monotonic message ids assigned when messages enter the global manager — not transient indices into the previous/current buffers.</p>
 <dl class="section note"><dt>Note</dt><dd>Not therad-safe. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -261,7 +258,7 @@ class helios::ecs::ConsumedMessagesRegistry&lt; Alloc &gt;</div><p>Per-system re
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00042">42</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00043">43</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a01aeee5c24d3529a9073e5858d873779" name="a01aeee5c24d3529a9073e5858d873779"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a01aeee5c24d3529a9073e5858d873779">&#9670;&#160;</a></span>allocator_type</h2>
@@ -277,7 +274,7 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00045">45</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00046">46</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -295,7 +292,7 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00044">44</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00045">45</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -354,7 +351,7 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message indices.">ConsumedMessagesRegistry</a></span> from a PMR memory resource. </p>
+<p>Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message ids.">ConsumedMessagesRegistry</a></span> from a PMR memory resource. </p>
 <p>Enabled only when <span class="tt"><a class="el" href="#a01aeee5c24d3529a9073e5858d873779">allocator_type</a></span> is constructible from <span class="tt">std::pmr::memory_resource*</span>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resource</td><td>Memory resource used to construct allocator </td></tr>
@@ -510,7 +507,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00154">154</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00152">152</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -541,7 +538,7 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 
 <p>Clears all consumed entries. </p>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00147">147</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00145">145</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -578,7 +575,7 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00162">162</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00160">160</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -618,7 +615,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of consumed messages for this type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00244">244</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00242">242</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -656,12 +653,12 @@ template&lt;typename Alloc&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of consumed messages for this type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00395">395</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00389">389</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a100b71470438f154bf5d46d2306392f8" name="a100b71470438f154bf5d46d2306392f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a100b71470438f154bf5d46d2306392f8">&#9670;&#160;</a></span>ConsumedIndicesFor() <span class="overload">[1/2]</span></h2>
+<a id="a364c2e357508590e6839acc114dc1547" name="a364c2e357508590e6839acc114dc1547"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a364c2e357508590e6839acc114dc1547">&#9670;&#160;</a></span>ConsumedIndicesFor() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -677,7 +674,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
           <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedIndicesFor </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const -&gt; std::span&lt; const <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> &gt;</td>
+          <td> const -&gt; std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td>
         </tr>
       </table>
   </td>
@@ -687,21 +684,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the sorted consumed indices for a specific message type. </p>
+<p>Gets the sorted consumed message ids for a specific message type. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Consumable message type </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Span of sorted consumed indices, or empty span if none </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Span of sorted consumed ids, or empty span if none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00193">193</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00170">170</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a52baae77b079a420fa27be835cbd7ec1" name="a52baae77b079a420fa27be835cbd7ec1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52baae77b079a420fa27be835cbd7ec1">&#9670;&#160;</a></span>ConsumedIndicesFor() <span class="overload">[2/2]</span></h2>
+<a id="ad554f5716d005512bd23651d731d6b19" name="ad554f5716d005512bd23651d731d6b19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad554f5716d005512bd23651d731d6b19">&#9670;&#160;</a></span>ConsumedIndicesFor() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -715,7 +712,7 @@ template&lt;typename Alloc&gt; </div>
           <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedIndicesFor </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span></td><td>)</td>
-          <td> const -&gt; std::span&lt; const <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> &gt;</td>
+          <td> const -&gt; std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td>
         </tr>
       </table>
   </td>
@@ -725,16 +722,16 @@ template&lt;typename Alloc&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the sorted consumed indices for a specific message type. </p>
+<p>Gets the sorted consumed message ids for a specific message type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">type_index</td><td>Type index of the message </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Span of sorted consumed indices, or empty span if none </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Span of sorted consumed ids, or empty span if none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00368">368</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00351">351</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -766,7 +763,7 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Provides direct access to the underlying consumed map. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the consumed map </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00260">260</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00258">258</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -798,7 +795,7 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Checks if any message type has consumed entries. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if no consumed entries exist, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00210">210</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00208">208</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -838,7 +835,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if consumed entries exist for this type, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00220">220</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00218">218</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -876,55 +873,12 @@ template&lt;typename Alloc&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if consumed entries exist for this type, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00378">378</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00372">372</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ac6196741861f41eb9b0031ac293cf697" name="ac6196741861f41eb9b0031ac293cf697"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6196741861f41eb9b0031ac293cf697">&#9670;&#160;</a></span>IsConsumed() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::IsConsumed </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>global_index</em></span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if a specific message is marked as consumed. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">type_index</td><td>Type index of the message </td></tr>
-    <tr><td class="paramname">global_index</td><td>Global index of the message </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the message is consumed, false otherwise </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00358">358</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aec7db1387091688a605ec3d75f5d3551" name="aec7db1387091688a605ec3d75f5d3551"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec7db1387091688a605ec3d75f5d3551">&#9670;&#160;</a></span>IsConsumed() <span class="overload">[2/2]</span></h2>
+<a id="a84a75b182880ba127aa61b6b8e35927b" name="a84a75b182880ba127aa61b6b8e35927b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84a75b182880ba127aa61b6b8e35927b">&#9670;&#160;</a></span>IsConsumed() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -939,7 +893,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::IsConsumed </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>global_index</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1MessageId.html">MessageId</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>message_id</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -959,18 +913,106 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">global_index</td><td>Global index of the message </td></tr>
+    <tr><td class="paramname">message_id</td><td>Stable id of the message </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the message is consumed, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00173">173</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00190">190</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2cd427b1da112da073a90238e2ab03cf" name="a2cd427b1da112da073a90238e2ab03cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cd427b1da112da073a90238e2ab03cf">&#9670;&#160;</a></span>MarkConsumed() <span class="overload">[1/2]</span></h2>
+<a id="adbc03987b6f413d82cbae7bdbb96fc10" name="adbc03987b6f413d82cbae7bdbb96fc10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbc03987b6f413d82cbae7bdbb96fc10">&#9670;&#160;</a></span>IsConsumed() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::IsConsumed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a></td>          <td class="paramname"><span class="paramname"><em>message_id</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a specific message is marked as consumed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type_index</td><td>Type index of the message </td></tr>
+    <tr><td class="paramname">message_id</td><td>Stable id of the message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the message is consumed, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00362">362</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a04f0fa08f5d8052f4590ea56e3cd2256" name="a04f0fa08f5d8052f4590ea56e3cd2256"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04f0fa08f5d8052f4590ea56e3cd2256">&#9670;&#160;</a></span>MarkConsumed() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;ConsumableMessageTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::MarkConsumed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1MessageId.html">MessageId</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>message_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Marks an message as consumed by its type and message id. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Consumable message type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message_id</td><td>Stable id of the message </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00113">113</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa15a47cfbbb6542b27dfd913bc804a81" name="aa15a47cfbbb6542b27dfd913bc804a81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa15a47cfbbb6542b27dfd913bc804a81">&#9670;&#160;</a></span>MarkConsumed() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -988,7 +1030,7 @@ template&lt;typename Alloc&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>global_index</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a></td>          <td class="paramname"><span class="paramname"><em>message_id</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -998,61 +1040,16 @@ template&lt;typename Alloc&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Marks an message as consumed by its type index and global index. </p>
+<p>Marks an message as consumed by its type index and message id. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">type_index</td><td>Type index of the message </td></tr>
-    <tr><td class="paramname">global_index</td><td>Index of the message in the combined (previous + current) view </td></tr>
+    <tr><td class="paramname">message_id</td><td>Stable id of the message </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00288">288</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a34d8f38cbc12cbce19a2b242f6f20c3a" name="a34d8f38cbc12cbce19a2b242f6f20c3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34d8f38cbc12cbce19a2b242f6f20c3a">&#9670;&#160;</a></span>MarkConsumed() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
-<div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::MarkConsumed </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>global_index</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Marks an message as consumed by its type and global index. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>Consumable message type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">global_index</td><td>Index of the message in the combined (previous + current) view </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00114">114</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00284">284</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1097,7 +1094,7 @@ template&lt;typename OtherAlloc&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00300">300</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00298">298</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1142,7 +1139,7 @@ template&lt;typename OtherAlloc&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00330">330</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00324">324</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1228,7 +1225,7 @@ template&lt;typename Alloc&gt; </div>
 <p>Gets the total number of consumed messages across all types. </p>
 <dl class="section return"><dt>Returns</dt><dd>Total consumed message count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00385">385</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00379">379</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>

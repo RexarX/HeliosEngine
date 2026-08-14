@@ -184,7 +184,7 @@ Directories</h2></td></tr>
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="utils--common-utilities"></a>
 `utils` — Common Utilities</h1>
 <p>Header-only helpers shared across modules: compile-time type identification, type-erased delegates, scope guards, timers, random number generation, filesystem I/O, and lazy iterator adapters.</p>
-<h1 class="doxsection"><a class="anchor" id="public-api-10"></a>
+<h1 class="doxsection"><a class="anchor" id="public-api-12"></a>
 Public API</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -214,9 +214,9 @@ Public API</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">UniqueTypes</span> / <span class="tt">AllConvertibleTo</span>  </td><td class="markdownTableBodyNone">Compile-time type-list traits.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">FilterAdapter</span>, <span class="tt">MapAdapter</span>, <span class="tt">TakeAdapter</span>, <span class="tt">SkipAdapter</span>, …  </td><td class="markdownTableBodyNone">Lazy iterator adapters with chained <span class="tt">.Filter()</span>, <span class="tt">.Map()</span>, <span class="tt">.Take()</span>, …  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">FilterAdapter</span>, <span class="tt">MapAdapter</span>, <span class="tt">TakeAdapter</span>, <span class="tt">SkipAdapter</span>, ...  </td><td class="markdownTableBodyNone">Lazy iterator adapters with chained <span class="tt">.Filter()</span>, <span class="tt">.Map()</span>, <span class="tt">.Take()</span>, ...  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="macro_8hpp.html#ac2f8c278b92c19e156146c758e906a9e">HELIOS_BIT</a></span>, <span class="tt"><a class="el" href="macro_8hpp.html#a48f3e62b87770c7794446ce3015653b5">HELIOS_STRINGIFY</a></span>, <span class="tt"><a class="el" href="macro_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a></span>, <span class="tt"><a class="el" href="macro_8hpp.html#a970386823b90d92c77c4d3c19d619b7a">HELIOS_ANONYMOUS_VAR</a></span>  </td><td class="markdownTableBodyNone">Utility macros (<span class="tt"><a class="el" href="macro_8hpp.html">macro.hpp</a></span>).  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="macro_8hpp.html#a48f3e62b87770c7794446ce3015653b5">HELIOS_STRINGIFY</a></span>, <span class="tt"><a class="el" href="macro_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a></span>, <span class="tt"><a class="el" href="macro_8hpp.html#a970386823b90d92c77c4d3c19d619b7a">HELIOS_ANONYMOUS_VAR</a></span>  </td><td class="markdownTableBodyNone">Utility macros (<span class="tt"><a class="el" href="macro_8hpp.html">macro.hpp</a></span>).  </td></tr>
 </table>
 <h1 class="doxsection"><a class="anchor" id="type-identification"></a>
 Type Identification</h1>
@@ -227,7 +227,7 @@ Type Identification</h1>
 <div class="line"> </div>
 <div class="line">CHECK_EQ(Id.Hash(), Index.Hash());</div>
 <div class="line">CHECK_EQ(Id.QualifiedName(), <span class="stringliteral">&quot;MyComponent&quot;</span>);  <span class="comment">// compiler-dependent</span></div>
-<div class="ttc" id="aclasshelios_1_1utils_1_1TypeId_html_aa60175b22fdc85c7a8a04a007667ad8e"><div class="ttname"><a href="classhelios_1_1utils_1_1TypeId.html#aa60175b22fdc85c7a8a04a007667ad8e">helios::utils::TypeId::From</a></div><div class="ttdeci">static constexpr TypeId From() noexcept</div><div class="ttdoc">Constructs a TypeId from a type T.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00443">type_info.hpp:443</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1TypeId_html_aa60175b22fdc85c7a8a04a007667ad8e"><div class="ttname"><a href="classhelios_1_1utils_1_1TypeId.html#aa60175b22fdc85c7a8a04a007667ad8e">helios::utils::TypeId::From</a></div><div class="ttdeci">static constexpr TypeId From() noexcept</div><div class="ttdoc">Constructs a TypeId from a type T.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00441">type_info.hpp:441</a></div></div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1TypeIndex_html_a297644a5a2859e698149e927a691d622"><div class="ttname"><a href="classhelios_1_1utils_1_1TypeIndex.html#a297644a5a2859e698149e927a691d622">helios::utils::TypeIndex::From</a></div><div class="ttdeci">static constexpr TypeIndex From() noexcept</div><div class="ttdoc">Constructs a TypeIndex from a type T.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00376">type_info.hpp:376</a></div></div>
 <div class="ttc" id="atype__info_8hpp_html"><div class="ttname"><a href="type__info_8hpp.html">type_info.hpp</a></div></div>
 </div><!-- fragment --><p><span class="tt">TypeIndex</span> is a lightweight 64-bit hash; <span class="tt">TypeId</span> also carries the qualified type name string.</p>
@@ -307,7 +307,7 @@ Iterator Adapters</h1>
 <div class="ttc" id="anamespacehelios_1_1utils_html_a4e2676a8aaba7f9f532bc83c92238790"><div class="ttname"><a href="namespacehelios_1_1utils.html#a4e2676a8aaba7f9f532bc83c92238790">helios::utils::FilterAdapter</a></div><div class="ttdeci">FilterAdapter(R &amp;, Pred) -&gt; FilterAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;</div></div>
 </div><!-- fragment --><p>ECS queries use the same chaining style: <span class="tt">query.Filter(pred).Map(fn).Collect()</span>.</p>
 <p>Other adapters include <span class="tt">SkipAdapter</span>, <span class="tt">EnumerateAdapter</span>, <span class="tt">StepByAdapter</span>, <span class="tt">ReverseAdapter</span>, <span class="tt">ChainAdapter</span>, and more. Terminal operations: <span class="tt">Collect</span>, <span class="tt">Fold</span>, <span class="tt">Find</span>, <span class="tt">Count</span>, <span class="tt">Any</span>, <span class="tt">All</span>, <span class="tt">None</span>, <span class="tt">Partition</span>, <span class="tt">GroupBy</span>, <span class="tt">MaxBy</span>, <span class="tt">MinBy</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="dependencies-8"></a>
+<h1 class="doxsection"><a class="anchor" id="dependencies-10"></a>
 Dependencies</h1>
 <ul>
 <li><span class="tt">compiler</span> — intrinsics, feature detection</li>

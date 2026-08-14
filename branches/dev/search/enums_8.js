@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['plotformat_0',['PlotFormat',['../namespacehelios_1_1profile.html#a4028dc96634ea1fda3b42f975e840cbb',1,'helios::profile']]]
+  ['level_0',['Level',['../namespacehelios_1_1log.html#addfd119fad8921232327088631b3aeb9',1,'helios::log']]]
 ];

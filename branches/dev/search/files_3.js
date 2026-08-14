@@ -4,7 +4,9 @@ var searchData=
   ['dag_2ehpp_1',['dag.hpp',['../dag_8hpp.html',1,'']]],
   ['defer_2ehpp_2',['defer.hpp',['../defer_8hpp.html',1,'']]],
   ['delegate_2ehpp_3',['delegate.hpp',['../delegate_8hpp.html',1,'']]],
-  ['dynamic_5flibrary_2ecpp_4',['dynamic_library.cpp',['../dynamic__library_8cpp.html',1,'']]],
-  ['dynamic_5flibrary_2ehpp_5',['dynamic_library.hpp',['../dynamic__library_8hpp.html',1,'']]],
-  ['dynamic_5fplugin_2ehpp_6',['dynamic_plugin.hpp',['../dynamic__plugin_8hpp.html',1,'']]]
+  ['destroy_2ecpp_4',['destroy.cpp',['../destroy_8cpp.html',1,'']]],
+  ['destroy_2ehpp_5',['destroy.hpp',['../destroy_8hpp.html',1,'']]],
+  ['dynamic_5flibrary_2ecpp_6',['dynamic_library.cpp',['../dynamic__library_8cpp.html',1,'']]],
+  ['dynamic_5flibrary_2ehpp_7',['dynamic_library.hpp',['../dynamic__library_8hpp.html',1,'']]],
+  ['dynamic_5fplugin_2ehpp_8',['dynamic_plugin.hpp',['../dynamic__plugin_8hpp.html',1,'']]]
 ];

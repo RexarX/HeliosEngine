@@ -1,10 +1,12 @@
 var structhelios_1_1ecs_1_1SystemLocalData =
 [
-    [ "SystemLocalData", "structhelios_1_1ecs_1_1SystemLocalData.html#a97bfa6b7a0a618e5f73274145c659e15", null ],
+    [ "SystemLocalData", "structhelios_1_1ecs_1_1SystemLocalData.html#a2ff0cf24eb740be4b73bbb691735100b", null ],
     [ "SystemLocalData", "structhelios_1_1ecs_1_1SystemLocalData.html#a9e2a26a24a77eaeb658f6008a6b555c4", null ],
     [ "SystemLocalData", "structhelios_1_1ecs_1_1SystemLocalData.html#ad6e1628e307f6822d02925e7de76a2b6", null ],
     [ "SystemLocalData", "structhelios_1_1ecs_1_1SystemLocalData.html#af26e3ae583ae12ccd46edd1868e480a4", null ],
     [ "~SystemLocalData", "structhelios_1_1ecs_1_1SystemLocalData.html#af966357c47ec256d06854e2129dbbd0d", null ],
+    [ "AddLocalArena", "structhelios_1_1ecs_1_1SystemLocalData.html#af0c53806c9b3cf960f0afb51d4e0034b", null ],
+    [ "Apply", "structhelios_1_1ecs_1_1SystemLocalData.html#a4cefecc44814e7be33ec588d9b6ef229", null ],
     [ "Clear", "structhelios_1_1ecs_1_1SystemLocalData.html#aa851ecfc081ee2fbccdaf9b298670f56", null ],
     [ "ExecuteCommands", "structhelios_1_1ecs_1_1SystemLocalData.html#a5e307d56e7e34074450f79d27a077968", null ],
     [ "From", "structhelios_1_1ecs_1_1SystemLocalData.html#ad3e1ab86b35c1a7e3366883fa4d5883c", null ],

@@ -200,7 +200,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a051b22aba8937d2c67b39d582a10b646" id="r_a051b22aba8937d2c67b39d582a10b646"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a051b22aba8937d2c67b39d582a10b646">RunStartup</a> (<a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;app)</td></tr>
 <tr class="memdesc:a051b22aba8937d2c67b39d582a10b646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs startup on the main sub-app, then startup on all sub-apps in parallel, then starts async sub-app update loops.  <br /></td></tr>
 <tr class="memitem:a42835b0c1df276d5f303afe853901f05" id="r_a42835b0c1df276d5f303afe853901f05"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a42835b0c1df276d5f303afe853901f05">RunFrame</a> (<a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;app)</td></tr>
-<tr class="memdesc:a42835b0c1df276d5f303afe853901f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs one full application frame.  <br /></td></tr>
+<tr class="memdesc:a42835b0c1df276d5f303afe853901f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs one full application frame using <span class="tt"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a></span>.  <br /></td></tr>
+<tr class="memitem:aaaab9958d8adb5dabcc726e65ad4749f" id="r_aaaab9958d8adb5dabcc726e65ad4749f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaaab9958d8adb5dabcc726e65ad4749f">RunFrameOrder</a> (<a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;app, const <a class="el" href="classhelios_1_1app_1_1FrameOrder.html">FrameOrder</a> &amp;order)</td></tr>
+<tr class="memdesc:aaaab9958d8adb5dabcc726e65ad4749f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the given ordered stage list on the main sub-app.  <br /></td></tr>
 <tr class="memitem:a592a558083433d722cdc508862fc9ca1" id="r_a592a558083433d722cdc508862fc9ca1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a592a558083433d722cdc508862fc9ca1">Shutdown</a> (<a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;app)</td></tr>
 <tr class="memdesc:a592a558083433d722cdc508862fc9ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops async loops, waits for in-flight updates, shuts down sub-apps, then the main sub-app.  <br /></td></tr>
 <tr class="memitem:abc405f3dd6f3f77f4843fcdcb6f7cb68" id="r_abc405f3dd6f3f77f4843fcdcb6f7cb68"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abc405f3dd6f3f77f4843fcdcb6f7cb68">StopAsyncLoops</a> (<a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;app)</td></tr>
@@ -210,9 +212,9 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Orchestrates the main sub-app schedule loop and sub-app updates. </p>
-<p>Each frame runs the main sub-app <a class="el" href="namespacehelios_1_1app.html#aad0e9cb0d1b47caf5140069e17729d66" title="kUpdateStage">kUpdateStage</a>, then <a class="el" href="namespacehelios_1_1app.html#a02953d4591cfda9ffae4789a1205956f" title="kExtractStage">kExtractStage</a>, then sub-app updates. Blocking sub-apps are joined each frame. Overlapping sub-apps may skip extraction while an update is in flight, up to <span class="tt">kMaxOverlappingUpdates</span> consecutive frames (<span class="tt">0</span> = unlimited). Async sub-apps run updates on a background loop; extraction runs every main frame. </p>
+<p>Each frame walks <span class="tt"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a></span> (default: <span class="tt"><a class="el" href="namespacehelios_1_1app.html#aad0e9cb0d1b47caf5140069e17729d66" title="Builtin stage for per-frame updates.">kUpdateStage</a></span>, then <span class="tt"><a class="el" href="namespacehelios_1_1app.html#a02953d4591cfda9ffae4789a1205956f" title="Builtin stage for extraction.">kExtractStage</a></span>). Nested pumps walk <span class="tt"><a class="el" href="structhelios_1_1app_1_1FramePumpOrder.html" title="Stages run by nested frame pumps (e.g. OS modal loops).">FramePumpOrder</a></span>. Blocking sub-apps are joined when extract runs. Overlapping sub-apps may skip extraction while an update is in flight, up to <span class="tt">kMaxOverlappingUpdates</span> consecutive frames (<span class="tt">0</span> = unlimited). Async sub-apps run updates on a background loop; extraction runs every main frame that includes extract. </p>
 
-<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00028">28</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00029">29</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aabbd7dd7059b3f08de77f02bdcc1417e" name="aabbd7dd7059b3f08de77f02bdcc1417e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aabbd7dd7059b3f08de77f02bdcc1417e">&#9670;&#160;</a></span>Scheduler() <span class="overload">[1/3]</span></h2>
@@ -287,7 +289,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00130">130</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00143">143</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
 
 </div>
 </div>
@@ -340,7 +342,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00051">51</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00053">53</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -362,7 +364,7 @@ Public Member Functions</h2></td></tr>
 <p>Clears cached task graphs and pending sub-app update state. </p>
 <p>Asserts that no sub-app updates or async loops are in flight. Call <a class="el" href="#a5ec41f3c7e552628e8cbabee50f46546" title="Stop()">Stop()</a> or <a class="el" href="#a592a558083433d722cdc508862fc9ca1" title="Shutdown()">Shutdown()</a> first if work may still be running. </p>
 
-<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00017">17</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00019">19</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +416,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00141">141</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00154">154</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
 
 </div>
 </div>
@@ -433,7 +435,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Runs one full application frame. </p>
+<p>Runs one full application frame using <span class="tt"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a></span>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">app</td><td>Owning application </td></tr>
@@ -441,7 +443,39 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00110">110</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00112">112</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aaaab9958d8adb5dabcc726e65ad4749f" name="aaaab9958d8adb5dabcc726e65ad4749f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaab9958d8adb5dabcc726e65ad4749f">&#9670;&#160;</a></span>RunFrameOrder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::Scheduler::RunFrameOrder </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>app</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1FrameOrder.html">FrameOrder</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>order</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runs the given ordered stage list on the main sub-app. </p>
+<p>For each stage: <span class="tt">RunStage</span>, then optional stage <span class="tt">apply_commands</span> / <span class="tt">merge_messages</span> via <span class="tt">ApplyStageDeferred</span>. <span class="tt">MessageManager::Update()</span> runs only after the last present stage in the order when that stage has <span class="tt">advance_messages</span> (so <a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a> advances on <a class="el" href="structhelios_1_1app_1_1Extract.html" title="Extract schedule (runs after the last frame schedule).">Extract</a> while <a class="el" href="structhelios_1_1app_1_1FramePumpOrder.html" title="Stages run by nested frame pumps (e.g. OS modal loops).">FramePumpOrder</a> advances on <a class="el" href="structhelios_1_1app_1_1Update.html" title="Update schedule.">Update</a> without double-swapping). When <span class="tt"><a class="el" href="namespacehelios_1_1app.html#a02953d4591cfda9ffae4789a1205956f" title="Builtin stage for extraction.">kExtractStage</a></span> appears, extracts into sub-apps; after the full order, launches and waits for sub-app updates if extract ran. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">app</td><td>Owning application </td></tr>
+    <tr><td class="paramname">order</td><td>Ordered stages to execute </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00119">119</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -468,7 +502,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00096">96</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00098">98</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -495,7 +529,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00126">126</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00181">181</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -522,7 +556,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00045">45</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00047">47</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -549,7 +583,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00151">151</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00206">206</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -570,7 +604,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Waits until blocking sub-apps finish their frame update. </p>
 
-<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00161">161</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00216">216</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
 
 </div>
 </div>

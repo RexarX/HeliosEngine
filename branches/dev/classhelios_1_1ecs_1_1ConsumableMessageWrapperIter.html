@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: helios::ecs::ConsumableMessageWrapperIter&lt; T &gt; Class Template Reference</title>
+    <title>Helios Engine: helios::ecs::ConsumableMessageWrapperIter&lt; T, Alloc &gt; Class Template Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -175,265 +175,311 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">helios::ecs::ConsumableMessageWrapperIter&lt; T &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">helios::ecs::ConsumableMessageWrapperIter&lt; T, Alloc &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> instances with consume support.  
+<p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> for unread messages with consume support.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="reader_8hpp_source.html">reader.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for helios::ecs::ConsumableMessageWrapperIter&lt; T &gt;:</div>
+Inheritance diagram for helios::ecs::ConsumableMessageWrapperIter&lt; T, Alloc &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.png" usemap="#helios_3A_3Aecs_3A_3AConsumableMessageWrapperIter_3C_20T_20_3E_map" alt=""/>
-  <map id="helios_3A_3Aecs_3A_3AConsumableMessageWrapperIter_3C_20T_20_3E_map" name="helios_3A_3Aecs_3A_3AConsumableMessageWrapperIter_3C_20T_20_3E_map">
-<area href="classhelios_1_1utils_1_1FunctionalAdapterBase.html" alt="helios::utils::FunctionalAdapterBase&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;" shape="rect" coords="0,0,453,24"/>
+  <img src="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.png" usemap="#helios_3A_3Aecs_3A_3AConsumableMessageWrapperIter_3C_20T_2C_20Alloc_20_3E_map" alt=""/>
+  <map id="helios_3A_3Aecs_3A_3AConsumableMessageWrapperIter_3C_20T_2C_20Alloc_20_3E_map" name="helios_3A_3Aecs_3A_3AConsumableMessageWrapperIter_3C_20T_2C_20Alloc_20_3E_map">
+<area href="classhelios_1_1utils_1_1FunctionalAdapterBase.html" title="CRTP base class providing common adapter operations." alt="helios::utils::FunctionalAdapterBase&lt; Derived &gt;" shape="rect" coords="0,0,706,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a72d1848a65b2d48008b4ab4e0cc50475" id="r_a72d1848a65b2d48008b4ab4e0cc50475"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a72d1848a65b2d48008b4ab4e0cc50475">iterator_concept</a> = std::bidirectional_iterator_tag</td></tr>
-<tr class="memitem:adf5bb3fbd238b048787bbeb0bb87c956" id="r_adf5bb3fbd238b048787bbeb0bb87c956"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#adf5bb3fbd238b048787bbeb0bb87c956">iterator_category</a> = std::input_iterator_tag</td></tr>
-<tr class="memitem:a7b54cbc600c550d14895817f02157351" id="r_a7b54cbc600c550d14895817f02157351"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a7b54cbc600c550d14895817f02157351">value_type</a> = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html">ConsumableMessageWrapper</a>&lt;T&gt;</td></tr>
-<tr class="memitem:a0b3bf9e120a2855363803a52092139fc" id="r_a0b3bf9e120a2855363803a52092139fc"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a0b3bf9e120a2855363803a52092139fc">reference</a> = <a class="el" href="#a7b54cbc600c550d14895817f02157351">value_type</a></td></tr>
-<tr class="memitem:af8008e50795ec2740e1e802137a20937" id="r_af8008e50795ec2740e1e802137a20937"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#af8008e50795ec2740e1e802137a20937">pointer</a> = void</td></tr>
-<tr class="memitem:ad6eb5f885cdb2faa74693b20391b4ebc" id="r_ad6eb5f885cdb2faa74693b20391b4ebc"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ad6eb5f885cdb2faa74693b20391b4ebc">difference_type</a> = ptrdiff_t</td></tr>
+<tr class="memitem:acfbb8c2eaaae03429b0da764897ffa4c" id="r_acfbb8c2eaaae03429b0da764897ffa4c"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#acfbb8c2eaaae03429b0da764897ffa4c">iterator_concept</a> = std::bidirectional_iterator_tag</td></tr>
+<tr class="memitem:a3cb08c94c76504dbf7348e4c7a05faea" id="r_a3cb08c94c76504dbf7348e4c7a05faea"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a3cb08c94c76504dbf7348e4c7a05faea">iterator_category</a> = std::input_iterator_tag</td></tr>
+<tr class="memitem:ae8171f080b65ff16824821717dea7a2a" id="r_ae8171f080b65ff16824821717dea7a2a"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae8171f080b65ff16824821717dea7a2a">value_type</a> = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html">ConsumableMessageWrapper</a>&lt;T, Alloc&gt;</td></tr>
+<tr class="memitem:a3fd38486a347940b85a444d8589ce287" id="r_a3fd38486a347940b85a444d8589ce287"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a3fd38486a347940b85a444d8589ce287">reference</a> = <a class="el" href="#ae8171f080b65ff16824821717dea7a2a">value_type</a></td></tr>
+<tr class="memitem:a3ab5ff03b83bf34195780b21a28471c5" id="r_a3ab5ff03b83bf34195780b21a28471c5"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a3ab5ff03b83bf34195780b21a28471c5">pointer</a> = void</td></tr>
+<tr class="memitem:ae1db0c62e29224c88bde0716b8db1a59" id="r_ae1db0c62e29224c88bde0716b8db1a59"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae1db0c62e29224c88bde0716b8db1a59">difference_type</a> = ptrdiff_t</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a792111e5754b180ae37c1ec1b78ae920" id="r_a792111e5754b180ae37c1ec1b78ae920"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> () noexcept=default</td></tr>
-<tr class="memitem:a4cf5f46470fb749f850b64e00efaf78e" id="r_a4cf5f46470fb749f850b64e00efaf78e"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a4cf5f46470fb749f850b64e00efaf78e">ConsumableMessageWrapperIter</a> (std::span&lt; const T &gt; first, std::span&lt; const T &gt; second, std::reference_wrapper&lt; <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt;&gt; &gt; registry, size_t position) noexcept</td></tr>
-<tr class="memdesc:a4cf5f46470fb749f850b64e00efaf78e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a wrapper iterator over two contiguous message spans.  <br /></td></tr>
-<tr class="memitem:ab001bd07d5b6a173016638d9f32b4833" id="r_ab001bd07d5b6a173016638d9f32b4833"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ab001bd07d5b6a173016638d9f32b4833">ConsumableMessageWrapperIter</a> (const ConsumableMessageWrapperIter &amp;) noexcept=default</td></tr>
-<tr class="memitem:adeb7f0e7ee483f913c3b938799bb01a8" id="r_adeb7f0e7ee483f913c3b938799bb01a8"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#adeb7f0e7ee483f913c3b938799bb01a8">ConsumableMessageWrapperIter</a> (ConsumableMessageWrapperIter &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:ad1fac6185457d24e2eae24e970919e3e" id="r_ad1fac6185457d24e2eae24e970919e3e"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad1fac6185457d24e2eae24e970919e3e">~ConsumableMessageWrapperIter</a> () noexcept=default</td></tr>
-<tr class="memitem:a6d02db28fca3d669aa8e73435f1d900e" id="r_a6d02db28fca3d669aa8e73435f1d900e"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6d02db28fca3d669aa8e73435f1d900e">operator=</a> (const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;) noexcept=default</td></tr>
-<tr class="memitem:a945f5bf3abe98a08daf0989b64cf1d4d" id="r_a945f5bf3abe98a08daf0989b64cf1d4d"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a945f5bf3abe98a08daf0989b64cf1d4d">operator=</a> (<a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a84e73cf16a206a4de05823dbad8bc004" id="r_a84e73cf16a206a4de05823dbad8bc004"><td class="memItemLeft">constexpr <a class="el" href="#a0b3bf9e120a2855363803a52092139fc">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a84e73cf16a206a4de05823dbad8bc004">operator*</a> () const noexcept</td></tr>
-<tr class="memitem:a8e8808e6c09724b70d6977736d20628e" id="r_a8e8808e6c09724b70d6977736d20628e"><td class="memItemLeft"><a class="el" href="#af8008e50795ec2740e1e802137a20937">pointer</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8e8808e6c09724b70d6977736d20628e">operator-&gt;</a> () const =delete</td></tr>
-<tr class="memitem:a01794d67482f8ab0d9d890c2b3fefeed" id="r_a01794d67482f8ab0d9d890c2b3fefeed"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a01794d67482f8ab0d9d890c2b3fefeed">operator++</a> () noexcept</td></tr>
-<tr class="memitem:a3167fbcd1986970e948f8e6f4ee07ad4" id="r_a3167fbcd1986970e948f8e6f4ee07ad4"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3167fbcd1986970e948f8e6f4ee07ad4">operator++</a> (int) noexcept</td></tr>
-<tr class="memitem:aaf82d58665d06a904f81f90031032e77" id="r_aaf82d58665d06a904f81f90031032e77"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aaf82d58665d06a904f81f90031032e77">operator--</a> () noexcept</td></tr>
-<tr class="memitem:a7aa5f6968b8165e71b2770fbdc830f65" id="r_a7aa5f6968b8165e71b2770fbdc830f65"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7aa5f6968b8165e71b2770fbdc830f65">operator--</a> (int) noexcept</td></tr>
-<tr class="memitem:a28f36a355d0c4f30297de4d47632633c" id="r_a28f36a355d0c4f30297de4d47632633c"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a28f36a355d0c4f30297de4d47632633c">operator&lt;=&gt;</a> (const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;other) const noexcept</td></tr>
-<tr class="memitem:a2a3a9780eee2e579e2326d435b32edf1" id="r_a2a3a9780eee2e579e2326d435b32edf1"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a2a3a9780eee2e579e2326d435b32edf1">operator==</a> (const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;other) const noexcept</td></tr>
-<tr class="memitem:ab4328a90ac161034dcf521afbe43009a" id="r_ab4328a90ac161034dcf521afbe43009a"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ab4328a90ac161034dcf521afbe43009a">operator!=</a> (const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;other) const noexcept</td></tr>
-<tr class="memitem:adce7c5cd17c35e32777e91f6d8968724" id="r_adce7c5cd17c35e32777e91f6d8968724"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#adce7c5cd17c35e32777e91f6d8968724">Position</a> () const noexcept</td></tr>
-<tr class="memdesc:adce7c5cd17c35e32777e91f6d8968724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current logical position in the combined sequence.  <br /></td></tr>
-<tr class="memitem:a633a39c5686c35e7273f51510f12e5ee" id="r_a633a39c5686c35e7273f51510f12e5ee"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a633a39c5686c35e7273f51510f12e5ee">begin</a> () const noexcept</td></tr>
-<tr class="memdesc:a633a39c5686c35e7273f51510f12e5ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned at the beginning of the sequence.  <br /></td></tr>
-<tr class="memitem:a2a1c00c27ca706931f10a3397876c7e6" id="r_a2a1c00c27ca706931f10a3397876c7e6"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2a1c00c27ca706931f10a3397876c7e6">end</a> () const noexcept</td></tr>
-<tr class="memdesc:a2a1c00c27ca706931f10a3397876c7e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned one past the last element.  <br /></td></tr>
-<tr class="inherit_header pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td colspan="2">Public Member Functions inherited from <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;</a></td></tr>
-<tr class="memitem:ab01800764520f2fa73ef51912adabcf1 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab01800764520f2fa73ef51912adabcf1"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab01800764520f2fa73ef51912adabcf1">Filter</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt;, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
+<tr class="memitem:a3f249fee662a5961f68802c8382fea7b" id="r_a3f249fee662a5961f68802c8382fea7b"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> () noexcept=default</td></tr>
+<tr class="memitem:a23cba0bdd714a7bb50420dd1acdd7df3" id="r_a23cba0bdd714a7bb50420dd1acdd7df3"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a23cba0bdd714a7bb50420dd1acdd7df3">ConsumableMessageWrapperIter</a> (std::span&lt; const T &gt; previous_messages, std::span&lt; const T &gt; current_messages, std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt; previous_ids, std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt; current_ids, <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;registry, <a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; *cursor, size_t previous_offset, size_t current_offset, size_t position) noexcept</td></tr>
+<tr class="memdesc:a23cba0bdd714a7bb50420dd1acdd7df3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an unread consumable-message wrapper iterator.  <br /></td></tr>
+<tr class="memitem:aac9dcfa576991de300b6e01e221034fc" id="r_aac9dcfa576991de300b6e01e221034fc"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aac9dcfa576991de300b6e01e221034fc">ConsumableMessageWrapperIter</a> (const ConsumableMessageWrapperIter &amp;) noexcept=default</td></tr>
+<tr class="memitem:a7e26ee23f95e7ccb0f1ff3a15f59722c" id="r_a7e26ee23f95e7ccb0f1ff3a15f59722c"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7e26ee23f95e7ccb0f1ff3a15f59722c">ConsumableMessageWrapperIter</a> (ConsumableMessageWrapperIter &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a5be429fc90c7da955b40edc6bb617065" id="r_a5be429fc90c7da955b40edc6bb617065"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a5be429fc90c7da955b40edc6bb617065">~ConsumableMessageWrapperIter</a> () noexcept=default</td></tr>
+<tr class="memitem:af531ac5ad2d02a7a1b69d191b389f21b" id="r_af531ac5ad2d02a7a1b69d191b389f21b"><td class="memItemLeft">constexpr <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af531ac5ad2d02a7a1b69d191b389f21b">operator=</a> (const <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp;) noexcept=default</td></tr>
+<tr class="memitem:a28abcadf45305776e02964eb80232929" id="r_a28abcadf45305776e02964eb80232929"><td class="memItemLeft">constexpr <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a28abcadf45305776e02964eb80232929">operator=</a> (<a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a5835ebf40d4d4311df715b9fbcbf9f31" id="r_a5835ebf40d4d4311df715b9fbcbf9f31"><td class="memItemLeft">constexpr <a class="el" href="#a3fd38486a347940b85a444d8589ce287">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5835ebf40d4d4311df715b9fbcbf9f31">operator*</a> () const noexcept</td></tr>
+<tr class="memdesc:a5835ebf40d4d4311df715b9fbcbf9f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current unread message consumable wrapper.  <br /></td></tr>
+<tr class="memitem:a8ae788f6142d95b35e13379d326743da" id="r_a8ae788f6142d95b35e13379d326743da"><td class="memItemLeft"><a class="el" href="#a3ab5ff03b83bf34195780b21a28471c5">pointer</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8ae788f6142d95b35e13379d326743da">operator-&gt;</a> () const =delete</td></tr>
+<tr class="memitem:ad4cf3eb0b62a1439e70036736dd5860d" id="r_ad4cf3eb0b62a1439e70036736dd5860d"><td class="memItemLeft">constexpr <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad4cf3eb0b62a1439e70036736dd5860d">operator++</a> () noexcept</td></tr>
+<tr class="memdesc:ad4cf3eb0b62a1439e70036736dd5860d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances to the next unread message and updates the cursor.  <br /></td></tr>
+<tr class="memitem:a9e859de76c3e29b315a3ec2d664762f5" id="r_a9e859de76c3e29b315a3ec2d664762f5"><td class="memItemLeft">constexpr <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9e859de76c3e29b315a3ec2d664762f5">operator++</a> (int) noexcept</td></tr>
+<tr class="memdesc:a9e859de76c3e29b315a3ec2d664762f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances to the next unread message and updates the cursor.  <br /></td></tr>
+<tr class="memitem:a037b9510fc9ef48c1ef43192ab2cac68" id="r_a037b9510fc9ef48c1ef43192ab2cac68"><td class="memItemLeft">constexpr <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a037b9510fc9ef48c1ef43192ab2cac68">operator--</a> () noexcept</td></tr>
+<tr class="memdesc:a037b9510fc9ef48c1ef43192ab2cac68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the previous unread message.  <br /></td></tr>
+<tr class="memitem:a53a336b6c7bc9133aef9073af25150f7" id="r_a53a336b6c7bc9133aef9073af25150f7"><td class="memItemLeft">constexpr <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a53a336b6c7bc9133aef9073af25150f7">operator--</a> (int) noexcept</td></tr>
+<tr class="memdesc:a53a336b6c7bc9133aef9073af25150f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the previous unread message.  <br /></td></tr>
+<tr class="memitem:a7d34b137fc215083a74978db80aa4b32" id="r_a7d34b137fc215083a74978db80aa4b32"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a7d34b137fc215083a74978db80aa4b32">operator&lt;=&gt;</a> (const <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp;other) const noexcept</td></tr>
+<tr class="memitem:a87a546a73b2572394b380757a7eb9d6e" id="r_a87a546a73b2572394b380757a7eb9d6e"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a87a546a73b2572394b380757a7eb9d6e">operator==</a> (const <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp;other) const noexcept</td></tr>
+<tr class="memitem:abc70478e14f058aa0d48188922826630" id="r_abc70478e14f058aa0d48188922826630"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#abc70478e14f058aa0d48188922826630">operator!=</a> (const <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp;other) const noexcept</td></tr>
+<tr class="memitem:a40a0278d2fef64d35c444303c61bce4b" id="r_a40a0278d2fef64d35c444303c61bce4b"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a40a0278d2fef64d35c444303c61bce4b">Position</a> () const noexcept</td></tr>
+<tr class="memdesc:a40a0278d2fef64d35c444303c61bce4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current logical position in the unread sequence.  <br /></td></tr>
+<tr class="memitem:a11aa0774ab174b1be96e45048c486522" id="r_a11aa0774ab174b1be96e45048c486522"><td class="memItemLeft">constexpr <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a11aa0774ab174b1be96e45048c486522">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:a11aa0774ab174b1be96e45048c486522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned at the beginning of the unread snapshot.  <br /></td></tr>
+<tr class="memitem:a56d22180e5bb49a2c29485e42de89561" id="r_a56d22180e5bb49a2c29485e42de89561"><td class="memItemLeft">constexpr <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a56d22180e5bb49a2c29485e42de89561">end</a> () const noexcept</td></tr>
+<tr class="memdesc:a56d22180e5bb49a2c29485e42de89561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned one past the last unread element.  <br /></td></tr>
+<tr class="inherit_header pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td colspan="2">Public Member Functions inherited from <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase&lt; Derived &gt;</a></td></tr>
+<tr class="memitem:ab01800764520f2fa73ef51912adabcf1 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab01800764520f2fa73ef51912adabcf1"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:ab01800764520f2fa73ef51912adabcf1 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab01800764520f2fa73ef51912adabcf1">Filter</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a>&lt; Derived, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
 <tr class="memdesc:ab01800764520f2fa73ef51912adabcf1 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another filter operation on top of this iterator.  <br /></td></tr>
-<tr class="memitem:a4a8b012ca6fc77ef45a0f26f43ecdbe9 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a4a8b012ca6fc77ef45a0f26f43ecdbe9"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a4a8b012ca6fc77ef45a0f26f43ecdbe9">Map</a> (Func transform) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt;, Func &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(transform))))</td></tr>
+<tr class="memitem:a4a8b012ca6fc77ef45a0f26f43ecdbe9 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a4a8b012ca6fc77ef45a0f26f43ecdbe9"><td class="memTemplParams" colspan="2">template&lt;typename Func&gt; </td></tr>
+<tr class="memitem:a4a8b012ca6fc77ef45a0f26f43ecdbe9 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a4a8b012ca6fc77ef45a0f26f43ecdbe9">Map</a> (Func transform) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a>&lt; Derived, Func &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(transform))))</td></tr>
 <tr class="memdesc:a4a8b012ca6fc77ef45a0f26f43ecdbe9 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms each element using the given function.  <br /></td></tr>
-<tr class="memitem:af57c214e209204c69e50de8dc935d0a6 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af57c214e209204c69e50de8dc935d0a6"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af57c214e209204c69e50de8dc935d0a6">Take</a> (size_t count) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), count)))</td></tr>
+<tr class="memitem:af57c214e209204c69e50de8dc935d0a6 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af57c214e209204c69e50de8dc935d0a6"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af57c214e209204c69e50de8dc935d0a6">Take</a> (size_t count) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), count)))</td></tr>
 <tr class="memdesc:af57c214e209204c69e50de8dc935d0a6 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limits the number of elements to at most count.  <br /></td></tr>
-<tr class="memitem:ab016bc9350aa52a903bf1b065ea38221 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab016bc9350aa52a903bf1b065ea38221"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab016bc9350aa52a903bf1b065ea38221">Skip</a> (size_t count) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), count)))</td></tr>
+<tr class="memitem:ab016bc9350aa52a903bf1b065ea38221 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab016bc9350aa52a903bf1b065ea38221"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab016bc9350aa52a903bf1b065ea38221">Skip</a> (size_t count) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), count)))</td></tr>
 <tr class="memdesc:ab016bc9350aa52a903bf1b065ea38221 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skips the first count elements.  <br /></td></tr>
-<tr class="memitem:a5941ca7ea5dbe31b0240dd3dbe475396 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a5941ca7ea5dbe31b0240dd3dbe475396"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a5941ca7ea5dbe31b0240dd3dbe475396">TakeWhile</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt;, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
+<tr class="memitem:a5941ca7ea5dbe31b0240dd3dbe475396 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a5941ca7ea5dbe31b0240dd3dbe475396"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:a5941ca7ea5dbe31b0240dd3dbe475396 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a5941ca7ea5dbe31b0240dd3dbe475396">TakeWhile</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a>&lt; Derived, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
 <tr class="memdesc:a5941ca7ea5dbe31b0240dd3dbe475396 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes elements while a predicate is true.  <br /></td></tr>
-<tr class="memitem:aaaf89432c98c7a6052e894c99153620b pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aaaf89432c98c7a6052e894c99153620b"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aaaf89432c98c7a6052e894c99153620b">SkipWhile</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt;, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
+<tr class="memitem:aaaf89432c98c7a6052e894c99153620b pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aaaf89432c98c7a6052e894c99153620b"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:aaaf89432c98c7a6052e894c99153620b pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aaaf89432c98c7a6052e894c99153620b">SkipWhile</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a>&lt; Derived, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
 <tr class="memdesc:aaaf89432c98c7a6052e894c99153620b pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skips elements while a predicate is true.  <br /></td></tr>
-<tr class="memitem:a0f240c888f45805510f2af63dfadb2b8 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a0f240c888f45805510f2af63dfadb2b8"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a0f240c888f45805510f2af63dfadb2b8">Enumerate</a> () const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end())))</td></tr>
+<tr class="memitem:a0f240c888f45805510f2af63dfadb2b8 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a0f240c888f45805510f2af63dfadb2b8"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a0f240c888f45805510f2af63dfadb2b8">Enumerate</a> () const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end())))</td></tr>
 <tr class="memdesc:a0f240c888f45805510f2af63dfadb2b8 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an index to each element.  <br /></td></tr>
-<tr class="memitem:a73a8bfda58cfb57697f1dd19e95bd6a6 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a73a8bfda58cfb57697f1dd19e95bd6a6"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a73a8bfda58cfb57697f1dd19e95bd6a6">Inspect</a> (Func inspector) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt;, Func &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(inspector))))</td></tr>
+<tr class="memitem:a73a8bfda58cfb57697f1dd19e95bd6a6 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a73a8bfda58cfb57697f1dd19e95bd6a6"><td class="memTemplParams" colspan="2">template&lt;typename Func&gt; </td></tr>
+<tr class="memitem:a73a8bfda58cfb57697f1dd19e95bd6a6 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a73a8bfda58cfb57697f1dd19e95bd6a6">Inspect</a> (Func inspector) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a>&lt; Derived, Func &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(inspector))))</td></tr>
 <tr class="memdesc:a73a8bfda58cfb57697f1dd19e95bd6a6 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Observes each element without modifying it.  <br /></td></tr>
-<tr class="memitem:ac3387620f51635c19a2b16abe92c3a2e pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ac3387620f51635c19a2b16abe92c3a2e"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ac3387620f51635c19a2b16abe92c3a2e">StepBy</a> (size_t step) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), step)))</td></tr>
+<tr class="memitem:ac3387620f51635c19a2b16abe92c3a2e pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ac3387620f51635c19a2b16abe92c3a2e"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ac3387620f51635c19a2b16abe92c3a2e">StepBy</a> (size_t step) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), step)))</td></tr>
 <tr class="memdesc:ac3387620f51635c19a2b16abe92c3a2e pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes every Nth element.  <br /></td></tr>
-<tr class="memitem:a9db7228e3579aefbc75c78291c5e4b59 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a9db7228e3579aefbc75c78291c5e4b59"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a9db7228e3579aefbc75c78291c5e4b59">Chain</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt;, OtherIter &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move(end))))</td></tr>
+<tr class="memitem:a9db7228e3579aefbc75c78291c5e4b59 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a9db7228e3579aefbc75c78291c5e4b59"><td class="memTemplParams" colspan="2">template&lt;typename OtherIter&gt; </td></tr>
+<tr class="memitem:a9db7228e3579aefbc75c78291c5e4b59 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a9db7228e3579aefbc75c78291c5e4b59">Chain</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; Derived, OtherIter &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move(end))))</td></tr>
 <tr class="memdesc:a9db7228e3579aefbc75c78291c5e4b59 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another range after this one.  <br /></td></tr>
-<tr class="memitem:a634889b61feadebcd7701eb099815a8f pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a634889b61feadebcd7701eb099815a8f"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a634889b61feadebcd7701eb099815a8f">Reverse</a> () const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end())))</td></tr>
+<tr class="memitem:a05500143c093bdd31d54f55d013177d4 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a05500143c093bdd31d54f55d013177d4"><td class="memTemplParams" colspan="2">template&lt;typename R&gt; </td></tr>
+<tr class="memitem:a05500143c093bdd31d54f55d013177d4 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a05500143c093bdd31d54f55d013177d4">Chain</a> (R &amp;range) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; Derived, std::ranges::iterator_t&lt; R &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), range)))</td></tr>
+<tr class="memdesc:a05500143c093bdd31d54f55d013177d4 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another range after this one.  <br /></td></tr>
+<tr class="memitem:a84844cd254ee0912a6cde565442fe852 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a84844cd254ee0912a6cde565442fe852"><td class="memTemplParams" colspan="2">template&lt;typename R&gt; </td></tr>
+<tr class="memitem:a84844cd254ee0912a6cde565442fe852 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a84844cd254ee0912a6cde565442fe852">Chain</a> (const R &amp;range) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; Derived, std::ranges::iterator_t&lt; const R &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), range)))</td></tr>
+<tr class="memdesc:a84844cd254ee0912a6cde565442fe852 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another range after this one.  <br /></td></tr>
+<tr class="memitem:a634889b61feadebcd7701eb099815a8f pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a634889b61feadebcd7701eb099815a8f"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a634889b61feadebcd7701eb099815a8f">Reverse</a> () const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end())))</td></tr>
 <tr class="memdesc:a634889b61feadebcd7701eb099815a8f pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the order of elements.  <br /></td></tr>
-<tr class="memitem:ab6785a8a5adc56bb25294bbfef261000 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab6785a8a5adc56bb25294bbfef261000"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab6785a8a5adc56bb25294bbfef261000">Slide</a> (size_t window_size) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), window_size)))</td></tr>
+<tr class="memitem:ab6785a8a5adc56bb25294bbfef261000 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab6785a8a5adc56bb25294bbfef261000"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab6785a8a5adc56bb25294bbfef261000">Slide</a> (size_t window_size) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), window_size)))</td></tr>
 <tr class="memdesc:ab6785a8a5adc56bb25294bbfef261000 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates sliding windows over elements.  <br /></td></tr>
-<tr class="memitem:a6f4c201c163d5be88b9f3e351caefeba pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6f4c201c163d5be88b9f3e351caefeba"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6f4c201c163d5be88b9f3e351caefeba">Stride</a> (size_t stride) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), stride)))</td></tr>
+<tr class="memitem:a6f4c201c163d5be88b9f3e351caefeba pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6f4c201c163d5be88b9f3e351caefeba"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6f4c201c163d5be88b9f3e351caefeba">Stride</a> (size_t stride) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), stride)))</td></tr>
 <tr class="memdesc:a6f4c201c163d5be88b9f3e351caefeba pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes every Nth element with stride.  <br /></td></tr>
-<tr class="memitem:af0ab37316628bef45a5e4b0ffe3a0fc0 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af0ab37316628bef45a5e4b0ffe3a0fc0"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af0ab37316628bef45a5e4b0ffe3a0fc0">Chunk</a> (size_t chunk_size) const noexcept(noexcept(<a class="el" href="namespacehelios_1_1utils.html#a890962838b8fca5f4093d45ce0f6ab1d">ChunkAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), chunk_size)))</td></tr>
+<tr class="memitem:af0ab37316628bef45a5e4b0ffe3a0fc0 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af0ab37316628bef45a5e4b0ffe3a0fc0"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af0ab37316628bef45a5e4b0ffe3a0fc0">Chunk</a> (size_t chunk_size) const noexcept(noexcept(<a class="el" href="namespacehelios_1_1utils.html#a890962838b8fca5f4093d45ce0f6ab1d">ChunkAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), chunk_size)))</td></tr>
 <tr class="memdesc:af0ab37316628bef45a5e4b0ffe3a0fc0 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packs elements into non-overlapping chunks.  <br /></td></tr>
-<tr class="memitem:aaba0fd7e864b439cc55db33bd095f4a3 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aaba0fd7e864b439cc55db33bd095f4a3"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aaba0fd7e864b439cc55db33bd095f4a3">Zip</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt;, OtherIter &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move(end))))</td></tr>
+<tr class="memitem:aaba0fd7e864b439cc55db33bd095f4a3 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aaba0fd7e864b439cc55db33bd095f4a3"><td class="memTemplParams" colspan="2">template&lt;typename OtherIter&gt; </td></tr>
+<tr class="memitem:aaba0fd7e864b439cc55db33bd095f4a3 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aaba0fd7e864b439cc55db33bd095f4a3">Zip</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; Derived, OtherIter &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move(end))))</td></tr>
 <tr class="memdesc:aaba0fd7e864b439cc55db33bd095f4a3 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
-<tr class="memitem:ac699b03f66eb2139beb18126191d27f9 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ac699b03f66eb2139beb18126191d27f9"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ac699b03f66eb2139beb18126191d27f9">ForEach</a> (const Action &amp;action) const</td></tr>
+<tr class="memitem:a253e871bf24b67bea8e8224322126f68 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a253e871bf24b67bea8e8224322126f68"><td class="memTemplParams" colspan="2">template&lt;typename R&gt; </td></tr>
+<tr class="memitem:a253e871bf24b67bea8e8224322126f68 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a253e871bf24b67bea8e8224322126f68">Zip</a> (R &amp;range) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; Derived, std::ranges::iterator_t&lt; R &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), range)))</td></tr>
+<tr class="memdesc:a253e871bf24b67bea8e8224322126f68 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
+<tr class="memitem:aeaaa2145d2727dd1052899132c532d83 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aeaaa2145d2727dd1052899132c532d83"><td class="memTemplParams" colspan="2">template&lt;typename R&gt; </td></tr>
+<tr class="memitem:aeaaa2145d2727dd1052899132c532d83 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aeaaa2145d2727dd1052899132c532d83">Zip</a> (const R &amp;range) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; Derived, std::ranges::iterator_t&lt; const R &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), range)))</td></tr>
+<tr class="memdesc:aeaaa2145d2727dd1052899132c532d83 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
+<tr class="memitem:ac699b03f66eb2139beb18126191d27f9 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ac699b03f66eb2139beb18126191d27f9"><td class="memTemplParams" colspan="2">template&lt;typename Action&gt; </td></tr>
+<tr class="memitem:ac699b03f66eb2139beb18126191d27f9 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ac699b03f66eb2139beb18126191d27f9">ForEach</a> (const Action &amp;action) const</td></tr>
 <tr class="memdesc:ac699b03f66eb2139beb18126191d27f9 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: applies an action to each element.  <br /></td></tr>
-<tr class="memitem:ad37328f4c6e64ff7eb15abb9a2b2f894 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ad37328f4c6e64ff7eb15abb9a2b2f894"><td class="memItemLeft">constexpr T&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ad37328f4c6e64ff7eb15abb9a2b2f894">Fold</a> (T init, const Folder &amp;folder) const</td></tr>
+<tr class="memitem:ad37328f4c6e64ff7eb15abb9a2b2f894 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ad37328f4c6e64ff7eb15abb9a2b2f894"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Folder&gt; </td></tr>
+<tr class="memitem:ad37328f4c6e64ff7eb15abb9a2b2f894 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr T&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ad37328f4c6e64ff7eb15abb9a2b2f894">Fold</a> (T init, const Folder &amp;folder) const</td></tr>
 <tr class="memdesc:ad37328f4c6e64ff7eb15abb9a2b2f894 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: reduces elements to a single value using a folder function.  <br /></td></tr>
-<tr class="memitem:a7b714e5c8e0d77b1c486a8685bff6bee pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a7b714e5c8e0d77b1c486a8685bff6bee"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a7b714e5c8e0d77b1c486a8685bff6bee">Find</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memitem:a7b714e5c8e0d77b1c486a8685bff6bee pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a7b714e5c8e0d77b1c486a8685bff6bee"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:a7b714e5c8e0d77b1c486a8685bff6bee pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a7b714e5c8e0d77b1c486a8685bff6bee">Find</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a7b714e5c8e0d77b1c486a8685bff6bee pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the first element satisfying a predicate.  <br /></td></tr>
-<tr class="memitem:a067a927e5be14e8851642b1a49ff0636 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a067a927e5be14e8851642b1a49ff0636"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a067a927e5be14e8851642b1a49ff0636">CountIf</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memitem:a067a927e5be14e8851642b1a49ff0636 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a067a927e5be14e8851642b1a49ff0636"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:a067a927e5be14e8851642b1a49ff0636 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a067a927e5be14e8851642b1a49ff0636">CountIf</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a067a927e5be14e8851642b1a49ff0636 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: counts elements satisfying a predicate.  <br /></td></tr>
-<tr class="memitem:a7bddc9da14c1742058e0f0c816aa44ce pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a7bddc9da14c1742058e0f0c816aa44ce"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a7bddc9da14c1742058e0f0c816aa44ce">Partition</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memitem:a7bddc9da14c1742058e0f0c816aa44ce pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a7bddc9da14c1742058e0f0c816aa44ce"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:a7bddc9da14c1742058e0f0c816aa44ce pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a7bddc9da14c1742058e0f0c816aa44ce">Partition</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a7bddc9da14c1742058e0f0c816aa44ce pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: partitions elements into two groups based on a predicate.  <br /></td></tr>
-<tr class="memitem:a2a7bf89fe9f2c7761bb65dd0991a5702 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a2a7bf89fe9f2c7761bb65dd0991a5702"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a2a7bf89fe9f2c7761bb65dd0991a5702">PartitionWith</a> (const Pred &amp;predicate, Allocator allocator) const</td></tr>
+<tr class="memitem:a2a7bf89fe9f2c7761bb65dd0991a5702 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a2a7bf89fe9f2c7761bb65dd0991a5702"><td class="memTemplParams" colspan="2">template&lt;typename Pred, typename Allocator&gt; <br />
+requires std::same_as&lt;typename Allocator::value_type, std::iter_value_t&lt;Derived&gt;&gt;</td></tr>
+<tr class="memitem:a2a7bf89fe9f2c7761bb65dd0991a5702 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a2a7bf89fe9f2c7761bb65dd0991a5702">PartitionWith</a> (const Pred &amp;predicate, Allocator allocator) const</td></tr>
 <tr class="memdesc:a2a7bf89fe9f2c7761bb65dd0991a5702 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: partitions elements with a custom allocator.  <br /></td></tr>
-<tr class="memitem:a5413a0ac213cda3a6b508881af956acc pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a5413a0ac213cda3a6b508881af956acc"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a5413a0ac213cda3a6b508881af956acc">MaxBy</a> (const KeyFunc &amp;key_func) const</td></tr>
+<tr class="memitem:a5413a0ac213cda3a6b508881af956acc pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a5413a0ac213cda3a6b508881af956acc"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc&gt; </td></tr>
+<tr class="memitem:a5413a0ac213cda3a6b508881af956acc pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a5413a0ac213cda3a6b508881af956acc">MaxBy</a> (const KeyFunc &amp;key_func) const</td></tr>
 <tr class="memdesc:a5413a0ac213cda3a6b508881af956acc pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the element with the maximum value according to a key function.  <br /></td></tr>
-<tr class="memitem:aac70342387e9f9db44ba448e391eafbd pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aac70342387e9f9db44ba448e391eafbd"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aac70342387e9f9db44ba448e391eafbd">MinBy</a> (const KeyFunc &amp;key_func) const</td></tr>
+<tr class="memitem:aac70342387e9f9db44ba448e391eafbd pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aac70342387e9f9db44ba448e391eafbd"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc&gt; </td></tr>
+<tr class="memitem:aac70342387e9f9db44ba448e391eafbd pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aac70342387e9f9db44ba448e391eafbd">MinBy</a> (const KeyFunc &amp;key_func) const</td></tr>
 <tr class="memdesc:aac70342387e9f9db44ba448e391eafbd pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the element with the minimum value according to a key function.  <br /></td></tr>
-<tr class="memitem:a34abb87022d768a03070fcccd64df0ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a34abb87022d768a03070fcccd64df0ac"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a34abb87022d768a03070fcccd64df0ac">GroupBy</a> (const KeyFunc &amp;key_func) const</td></tr>
+<tr class="memitem:a34abb87022d768a03070fcccd64df0ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a34abb87022d768a03070fcccd64df0ac"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc&gt; </td></tr>
+<tr class="memitem:a34abb87022d768a03070fcccd64df0ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a34abb87022d768a03070fcccd64df0ac">GroupBy</a> (const KeyFunc &amp;key_func) const</td></tr>
 <tr class="memdesc:a34abb87022d768a03070fcccd64df0ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: groups elements by a key function.  <br /></td></tr>
-<tr class="memitem:a1921322daaf078463880349560c9ae5a pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a1921322daaf078463880349560c9ae5a"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a1921322daaf078463880349560c9ae5a">GroupByWith</a> (const KeyFunc &amp;key_func, MapAllocator map_allocator, ValueAllocator value_allocator) const</td></tr>
+<tr class="memitem:a1921322daaf078463880349560c9ae5a pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a1921322daaf078463880349560c9ae5a"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc, typename MapAllocator, typename ValueAllocator&gt; </td></tr>
+<tr class="memitem:a1921322daaf078463880349560c9ae5a pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a1921322daaf078463880349560c9ae5a">GroupByWith</a> (const KeyFunc &amp;key_func, MapAllocator map_allocator, ValueAllocator value_allocator) const</td></tr>
 <tr class="memdesc:a1921322daaf078463880349560c9ae5a pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: groups elements by key with custom allocators.  <br /></td></tr>
 <tr class="memitem:a834e53c6229570dceb2a30a7fd5bfa4d pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a834e53c6229570dceb2a30a7fd5bfa4d"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a834e53c6229570dceb2a30a7fd5bfa4d">Collect</a> () const</td></tr>
 <tr class="memdesc:a834e53c6229570dceb2a30a7fd5bfa4d pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements into a vector.  <br /></td></tr>
-<tr class="memitem:a0c8c7866dc192660a6015b942c50c72e pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a0c8c7866dc192660a6015b942c50c72e"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a0c8c7866dc192660a6015b942c50c72e">CollectWith</a> (Allocator allocator={}) const</td></tr>
+<tr class="memitem:a0c8c7866dc192660a6015b942c50c72e pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a0c8c7866dc192660a6015b942c50c72e"><td class="memTemplParams" colspan="2">template&lt;typename Allocator&gt; </td></tr>
+<tr class="memitem:a0c8c7866dc192660a6015b942c50c72e pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a0c8c7866dc192660a6015b942c50c72e">CollectWith</a> (Allocator allocator={}) const</td></tr>
 <tr class="memdesc:a0c8c7866dc192660a6015b942c50c72e pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements into a vector with a custom allocator.  <br /></td></tr>
-<tr class="memitem:a6352ac1157243d7ab76a014120fa68ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6352ac1157243d7ab76a014120fa68ac"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6352ac1157243d7ab76a014120fa68ac">Into</a> (OutIt out) const</td></tr>
+<tr class="memitem:aa9bda3e17a34788d84832d3ff13c0de1 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aa9bda3e17a34788d84832d3ff13c0de1"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aa9bda3e17a34788d84832d3ff13c0de1">CollectWith</a> (std::pmr::memory_resource *resource) const</td></tr>
+<tr class="memdesc:aa9bda3e17a34788d84832d3ff13c0de1 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements into a vector with a specific memory resource.  <br /></td></tr>
+<tr class="memitem:a0e95843b6ae3b485ad2599112d50ae34 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a0e95843b6ae3b485ad2599112d50ae34"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a0e95843b6ae3b485ad2599112d50ae34">CollectWith</a> (std::nullptr_t) const =delete</td></tr>
+<tr class="memitem:a6352ac1157243d7ab76a014120fa68ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6352ac1157243d7ab76a014120fa68ac"><td class="memTemplParams" colspan="2">template&lt;typename OutIt&gt; </td></tr>
+<tr class="memitem:a6352ac1157243d7ab76a014120fa68ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6352ac1157243d7ab76a014120fa68ac">Into</a> (OutIt out) const</td></tr>
 <tr class="memdesc:a6352ac1157243d7ab76a014120fa68ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: writes all elements into an output iterator.  <br /></td></tr>
-<tr class="memitem:af289817b75ec2f37aede9d9329dead09 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af289817b75ec2f37aede9d9329dead09"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af289817b75ec2f37aede9d9329dead09">Any</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memitem:af289817b75ec2f37aede9d9329dead09 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af289817b75ec2f37aede9d9329dead09"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:af289817b75ec2f37aede9d9329dead09 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af289817b75ec2f37aede9d9329dead09">Any</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:af289817b75ec2f37aede9d9329dead09 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: checks if any element satisfies a predicate.  <br /></td></tr>
-<tr class="memitem:a25a0467b816b37cd68d74177e21e096b pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a25a0467b816b37cd68d74177e21e096b"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a25a0467b816b37cd68d74177e21e096b">All</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memitem:a25a0467b816b37cd68d74177e21e096b pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a25a0467b816b37cd68d74177e21e096b"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:a25a0467b816b37cd68d74177e21e096b pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a25a0467b816b37cd68d74177e21e096b">All</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a25a0467b816b37cd68d74177e21e096b pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: checks if all elements satisfy a predicate.  <br /></td></tr>
-<tr class="memitem:a791509606f43cb6011e5975d483d6589 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a791509606f43cb6011e5975d483d6589"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a791509606f43cb6011e5975d483d6589">None</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memitem:a791509606f43cb6011e5975d483d6589 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a791509606f43cb6011e5975d483d6589"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:a791509606f43cb6011e5975d483d6589 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a791509606f43cb6011e5975d483d6589">None</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a791509606f43cb6011e5975d483d6589 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: checks if no elements satisfy a predicate.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td colspan="2">Protected Member Functions inherited from <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;</a></td></tr>
-<tr class="memitem:a6a31b42112f20291cb0a04d8e93a8f00 pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6a31b42112f20291cb0a04d8e93a8f00"><td class="memItemLeft">constexpr ConsumableMessageWrapperIter&lt; T &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a> () noexcept</td></tr>
+<tr class="inherit_header pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td colspan="2">Protected Member Functions inherited from <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase&lt; Derived &gt;</a></td></tr>
+<tr class="memitem:a6a31b42112f20291cb0a04d8e93a8f00 pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6a31b42112f20291cb0a04d8e93a8f00"><td class="memItemLeft">constexpr Derived &amp;&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a> () noexcept</td></tr>
 <tr class="memdesc:a6a31b42112f20291cb0a04d8e93a8f00 pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to derived class instance.  <br /></td></tr>
+<tr class="memitem:aece9f4d575d09f5952d659dbbd03f835 pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aece9f4d575d09f5952d659dbbd03f835"><td class="memItemLeft">constexpr const Derived &amp;&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aece9f4d575d09f5952d659dbbd03f835">GetDerived</a> () const noexcept</td></tr>
+<tr class="memdesc:aece9f4d575d09f5952d659dbbd03f835 pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to derived class instance.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;ConsumableMessageTrait T&gt;<br />
-class helios::ecs::ConsumableMessageWrapperIter&lt; T &gt;</div><p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> instances with consume support. </p>
-<p>Each wrapper carries a const reference to the message, a reference to <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message indices.">ConsumedMessagesRegistry</a></span>, and the global index, enabling the caller to mark individual messages as consumed during iteration.</p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt;<br />
+class helios::ecs::ConsumableMessageWrapperIter&lt; T, Alloc &gt;</div><p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> for unread messages with consume support. </p>
+<p>Walks previous then current buffers for ids &gt;= <span class="tt">cursor-&gt;last_message_count</span>. Prefixed <span class="tt">operator++</span> advances the cursor to <span class="tt">current_id + 1</span>.</p>
 <p>Derives from <span class="tt">FunctionalAdapterBase</span> so the iterator itself can be used as a lazy range, enabling chained adapter calls such as <span class="tt">.Filter(...)</span>, <span class="tt">.Map(...)</span>, <span class="tt">.Take(...)</span>, etc.</p>
 <dl class="section note"><dt>Note</dt><dd>The adapter methods operate on <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> values. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Message type satisfying <span class="tt"><a class="el" href="concepthelios_1_1ecs_1_1ConsumableMessageTrait.html" title="Concept for consumable message types.">ConsumableMessageTrait</a></span> </td></tr>
+    <tr><td class="paramname">Alloc</td><td>Allocator type for the consumed messages registry </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00163">163</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00298">298</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
-<a id="ad6eb5f885cdb2faa74693b20391b4ebc" name="ad6eb5f885cdb2faa74693b20391b4ebc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6eb5f885cdb2faa74693b20391b4ebc">&#9670;&#160;</a></span>difference_type</h2>
+<a id="ae1db0c62e29224c88bde0716b8db1a59" name="ae1db0c62e29224c88bde0716b8db1a59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1db0c62e29224c88bde0716b8db1a59">&#9670;&#160;</a></span>difference_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::difference_type = ptrdiff_t</td>
+          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::difference_type = ptrdiff_t</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00171">171</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00307">307</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="adf5bb3fbd238b048787bbeb0bb87c956" name="adf5bb3fbd238b048787bbeb0bb87c956"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf5bb3fbd238b048787bbeb0bb87c956">&#9670;&#160;</a></span>iterator_category</h2>
+<a id="a3cb08c94c76504dbf7348e4c7a05faea" name="a3cb08c94c76504dbf7348e4c7a05faea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cb08c94c76504dbf7348e4c7a05faea">&#9670;&#160;</a></span>iterator_category</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::iterator_category = std::input_iterator_tag</td>
+          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::iterator_category = std::input_iterator_tag</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00167">167</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00303">303</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a72d1848a65b2d48008b4ab4e0cc50475" name="a72d1848a65b2d48008b4ab4e0cc50475"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72d1848a65b2d48008b4ab4e0cc50475">&#9670;&#160;</a></span>iterator_concept</h2>
+<a id="acfbb8c2eaaae03429b0da764897ffa4c" name="acfbb8c2eaaae03429b0da764897ffa4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfbb8c2eaaae03429b0da764897ffa4c">&#9670;&#160;</a></span>iterator_concept</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::iterator_concept = std::bidirectional_iterator_tag</td>
+          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::iterator_concept = std::bidirectional_iterator_tag</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00166">166</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00302">302</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="af8008e50795ec2740e1e802137a20937" name="af8008e50795ec2740e1e802137a20937"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8008e50795ec2740e1e802137a20937">&#9670;&#160;</a></span>pointer</h2>
+<a id="a3ab5ff03b83bf34195780b21a28471c5" name="a3ab5ff03b83bf34195780b21a28471c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ab5ff03b83bf34195780b21a28471c5">&#9670;&#160;</a></span>pointer</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::pointer = void</td>
+          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::pointer = void</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00170">170</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00306">306</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a0b3bf9e120a2855363803a52092139fc" name="a0b3bf9e120a2855363803a52092139fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b3bf9e120a2855363803a52092139fc">&#9670;&#160;</a></span>reference</h2>
+<a id="a3fd38486a347940b85a444d8589ce287" name="a3fd38486a347940b85a444d8589ce287"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fd38486a347940b85a444d8589ce287">&#9670;&#160;</a></span>reference</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::reference = <a class="el" href="#a7b54cbc600c550d14895817f02157351">value_type</a></td>
+          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::reference = <a class="el" href="#ae8171f080b65ff16824821717dea7a2a">value_type</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00169">169</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00305">305</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7b54cbc600c550d14895817f02157351" name="a7b54cbc600c550d14895817f02157351"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b54cbc600c550d14895817f02157351">&#9670;&#160;</a></span>value_type</h2>
+<a id="ae8171f080b65ff16824821717dea7a2a" name="ae8171f080b65ff16824821717dea7a2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8171f080b65ff16824821717dea7a2a">&#9670;&#160;</a></span>value_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::value_type = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html">ConsumableMessageWrapper</a>&lt;T&gt;</td>
+          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::value_type = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html">ConsumableMessageWrapper</a>&lt;T, Alloc&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00168">168</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00304">304</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a792111e5754b180ae37c1ec1b78ae920" name="a792111e5754b180ae37c1ec1b78ae920"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a792111e5754b180ae37c1ec1b78ae920">&#9670;&#160;</a></span>ConsumableMessageWrapperIter() <span class="overload">[1/4]</span></h2>
+<a id="a3f249fee662a5961f68802c8382fea7b" name="a3f249fee662a5961f68802c8382fea7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f249fee662a5961f68802c8382fea7b">&#9670;&#160;</a></span>ConsumableMessageWrapperIter() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::ConsumableMessageWrapperIter </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::ConsumableMessageWrapperIter </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -448,31 +494,56 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 
 </div>
 </div>
-<a id="a4cf5f46470fb749f850b64e00efaf78e" name="a4cf5f46470fb749f850b64e00efaf78e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cf5f46470fb749f850b64e00efaf78e">&#9670;&#160;</a></span>ConsumableMessageWrapperIter() <span class="overload">[2/4]</span></h2>
+<a id="a23cba0bdd714a7bb50420dd1acdd7df3" name="a23cba0bdd714a7bb50420dd1acdd7df3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23cba0bdd714a7bb50420dd1acdd7df3">&#9670;&#160;</a></span>ConsumableMessageWrapperIter() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::ConsumableMessageWrapperIter </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::ConsumableMessageWrapperIter </td>
           <td>(</td>
-          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>previous_messages</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>second</em></span>, </td>
+          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>current_messages</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::reference_wrapper&lt; <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt;&gt; &gt;</td>          <td class="paramname"><span class="paramname"><em>registry</em></span>, </td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>previous_ids</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>current_ids</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>registry</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; *</td>          <td class="paramname"><span class="paramname"><em>cursor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>previous_offset</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>current_offset</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -487,36 +558,41 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a wrapper iterator over two contiguous message spans. </p>
+<p>Constructs an unread consumable-message wrapper iterator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">first</td><td>Span of messages from the previous frame </td></tr>
-    <tr><td class="paramname">second</td><td>Span of messages from the current frame </td></tr>
+    <tr><td class="paramname">previous_messages</td><td>Span of messages from the previous frame </td></tr>
+    <tr><td class="paramname">current_messages</td><td>Span of messages from the current frame </td></tr>
+    <tr><td class="paramname">previous_ids</td><td>Ids aligned with <span class="tt">previous_messages</span> </td></tr>
+    <tr><td class="paramname">current_ids</td><td>Ids aligned with <span class="tt">current_messages</span> </td></tr>
     <tr><td class="paramname">registry</td><td>Per-system consumed messages registry </td></tr>
-    <tr><td class="paramname">position</td><td>Logical position in the combined [first | second] sequence </td></tr>
+    <tr><td class="paramname">cursor</td><td>Delivery cursor advanced by <span class="tt">operator++</span> (may be null only for a singular iterator) </td></tr>
+    <tr><td class="paramname">previous_offset</td><td>First unread index in the previous buffer </td></tr>
+    <tr><td class="paramname">current_offset</td><td>First unread index in the current buffer </td></tr>
+    <tr><td class="paramname">position</td><td>Logical position in the combined unread sequence </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00182">182</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00324">324</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab001bd07d5b6a173016638d9f32b4833" name="ab001bd07d5b6a173016638d9f32b4833"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab001bd07d5b6a173016638d9f32b4833">&#9670;&#160;</a></span>ConsumableMessageWrapperIter() <span class="overload">[3/4]</span></h2>
+<a id="aac9dcfa576991de300b6e01e221034fc" name="aac9dcfa576991de300b6e01e221034fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac9dcfa576991de300b6e01e221034fc">&#9670;&#160;</a></span>ConsumableMessageWrapperIter() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::ConsumableMessageWrapperIter </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::ConsumableMessageWrapperIter </td>
           <td>(</td>
-          <td class="paramtype">const ConsumableMessageWrapperIter&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const ConsumableMessageWrapperIter&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -529,21 +605,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 
 </div>
 </div>
-<a id="adeb7f0e7ee483f913c3b938799bb01a8" name="adeb7f0e7ee483f913c3b938799bb01a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adeb7f0e7ee483f913c3b938799bb01a8">&#9670;&#160;</a></span>ConsumableMessageWrapperIter() <span class="overload">[4/4]</span></h2>
+<a id="a7e26ee23f95e7ccb0f1ff3a15f59722c" name="a7e26ee23f95e7ccb0f1ff3a15f59722c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e26ee23f95e7ccb0f1ff3a15f59722c">&#9670;&#160;</a></span>ConsumableMessageWrapperIter() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::ConsumableMessageWrapperIter </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::ConsumableMessageWrapperIter </td>
           <td>(</td>
-          <td class="paramtype">ConsumableMessageWrapperIter&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">ConsumableMessageWrapperIter&lt; T, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -556,19 +632,19 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 
 </div>
 </div>
-<a id="ad1fac6185457d24e2eae24e970919e3e" name="ad1fac6185457d24e2eae24e970919e3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1fac6185457d24e2eae24e970919e3e">&#9670;&#160;</a></span>~ConsumableMessageWrapperIter()</h2>
+<a id="a5be429fc90c7da955b40edc6bb617065" name="a5be429fc90c7da955b40edc6bb617065"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5be429fc90c7da955b40edc6bb617065">&#9670;&#160;</a></span>~ConsumableMessageWrapperIter()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::~<a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::~<a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -584,19 +660,19 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a633a39c5686c35e7273f51510f12e5ee" name="a633a39c5686c35e7273f51510f12e5ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a633a39c5686c35e7273f51510f12e5ee">&#9670;&#160;</a></span>begin()</h2>
+<a id="a11aa0774ab174b1be96e45048c486522" name="a11aa0774ab174b1be96e45048c486522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11aa0774ab174b1be96e45048c486522">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::begin </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::begin </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -604,31 +680,32 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a copy of this iterator positioned at the beginning of the sequence. </p>
-<p>Required so <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html" title="Bidirectional iterator that yields ConsumableMessageWrapper&lt;T&gt; instances with consume support.">ConsumableMessageWrapperIter</a></span> can act as a self-contained range for <span class="tt">FunctionalAdapterBase</span> adapter methods. </p><dl class="section return"><dt>Returns</dt><dd>Iterator reset to position 0 </dd></dl>
+<p>Returns a copy of this iterator positioned at the beginning of the unread snapshot. </p>
+<p>Required so <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html" title="Bidirectional iterator that yields ConsumableMessageWrapper&lt;T&gt; for unread messages with consume suppo...">ConsumableMessageWrapperIter</a></span> can act as a self-contained range for <span class="tt">FunctionalAdapterBase</span> adapter methods. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if consumed messages registry is null. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Iterator reset to position 0 over the same unread window </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00263">263</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00498">498</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2a1c00c27ca706931f10a3397876c7e6" name="a2a1c00c27ca706931f10a3397876c7e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a1c00c27ca706931f10a3397876c7e6">&#9670;&#160;</a></span>end()</h2>
+<a id="a56d22180e5bb49a2c29485e42de89561" name="a56d22180e5bb49a2c29485e42de89561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56d22180e5bb49a2c29485e42de89561">&#9670;&#160;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::end </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::end </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -636,33 +713,34 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a copy of this iterator positioned one past the last element. </p>
-<dl class="section return"><dt>Returns</dt><dd>Iterator at position <span class="tt">first_.size() + second_.size()</span> </dd></dl>
+<p>Returns a copy of this iterator positioned one past the last unread element. </p>
+<p>The end iterator does not advance the cursor. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if consumed messages registry is null. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Iterator at position equal to the unread count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00272">272</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00508">508</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab4328a90ac161034dcf521afbe43009a" name="ab4328a90ac161034dcf521afbe43009a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4328a90ac161034dcf521afbe43009a">&#9670;&#160;</a></span>operator!=()</h2>
+<a id="abc70478e14f058aa0d48188922826630" name="abc70478e14f058aa0d48188922826630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc70478e14f058aa0d48188922826630">&#9670;&#160;</a></span>operator!=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator!= </td>
+          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator!= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -673,23 +751,23 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00245">245</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00401">401</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a84e73cf16a206a4de05823dbad8bc004" name="a84e73cf16a206a4de05823dbad8bc004"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84e73cf16a206a4de05823dbad8bc004">&#9670;&#160;</a></span>operator*()</h2>
+<a id="a5835ebf40d4d4311df715b9fbcbf9f31" name="a5835ebf40d4d4311df715b9fbcbf9f31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5835ebf40d4d4311df715b9fbcbf9f31">&#9670;&#160;</a></span>operator*()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a0b3bf9e120a2855363803a52092139fc">reference</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator* </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator* </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -697,28 +775,32 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00202">202</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Gets the current unread message consumable wrapper. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if registry is null or the iterator is out of range. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Consumable message wrapper for the current unread message </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00454">454</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a01794d67482f8ab0d9d890c2b3fefeed" name="a01794d67482f8ab0d9d890c2b3fefeed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01794d67482f8ab0d9d890c2b3fefeed">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+<a id="ad4cf3eb0b62a1439e70036736dd5860d" name="ad4cf3eb0b62a1439e70036736dd5860d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4cf3eb0b62a1439e70036736dd5860d">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator++ </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator++ </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -726,28 +808,32 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00211">211</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Advances to the next unread message and updates the cursor. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the cursor is null or the iterator is at end. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this iterator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00464">464</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a3167fbcd1986970e948f8e6f4ee07ad4" name="a3167fbcd1986970e948f8e6f4ee07ad4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3167fbcd1986970e948f8e6f4ee07ad4">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+<a id="a9e859de76c3e29b315a3ec2d664762f5" name="a9e859de76c3e29b315a3ec2d664762f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e859de76c3e29b315a3ec2d664762f5">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator++ </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator++ </td>
           <td>(</td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -755,28 +841,32 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00216">216</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Advances to the next unread message and updates the cursor. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the cursor is null or the iterator is at end. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Copy of this iterator before advancing </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00475">475</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aaf82d58665d06a904f81f90031032e77" name="aaf82d58665d06a904f81f90031032e77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf82d58665d06a904f81f90031032e77">&#9670;&#160;</a></span>operator--() <span class="overload">[1/2]</span></h2>
+<a id="a037b9510fc9ef48c1ef43192ab2cac68" name="a037b9510fc9ef48c1ef43192ab2cac68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a037b9510fc9ef48c1ef43192ab2cac68">&#9670;&#160;</a></span>operator--() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator-- </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator-- </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -784,28 +874,32 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00223">223</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Moves to the previous unread message. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the iterator is at the beginning. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this iterator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00483">483</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7aa5f6968b8165e71b2770fbdc830f65" name="a7aa5f6968b8165e71b2770fbdc830f65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7aa5f6968b8165e71b2770fbdc830f65">&#9670;&#160;</a></span>operator--() <span class="overload">[2/2]</span></h2>
+<a id="a53a336b6c7bc9133aef9073af25150f7" name="a53a336b6c7bc9133aef9073af25150f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53a336b6c7bc9133aef9073af25150f7">&#9670;&#160;</a></span>operator--() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator-- </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator-- </td>
           <td>(</td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -813,28 +907,32 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00228">228</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Moves to the previous unread message. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the iterator is at the beginning. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Copy of this iterator before moving </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00490">490</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a8e8808e6c09724b70d6977736d20628e" name="a8e8808e6c09724b70d6977736d20628e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e8808e6c09724b70d6977736d20628e">&#9670;&#160;</a></span>operator-&gt;()</h2>
+<a id="a8ae788f6142d95b35e13379d326743da" name="a8ae788f6142d95b35e13379d326743da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ae788f6142d95b35e13379d326743da">&#9670;&#160;</a></span>operator-&gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#af8008e50795ec2740e1e802137a20937">pointer</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator-&gt; </td>
+          <td class="memname"><a class="el" href="#a3ab5ff03b83bf34195780b21a28471c5">pointer</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator-&gt; </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -849,21 +947,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 
 </div>
 </div>
-<a id="a28f36a355d0c4f30297de4d47632633c" name="a28f36a355d0c4f30297de4d47632633c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28f36a355d0c4f30297de4d47632633c">&#9670;&#160;</a></span>operator&lt;=&gt;()</h2>
+<a id="a7d34b137fc215083a74978db80aa4b32" name="a7d34b137fc215083a74978db80aa4b32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d34b137fc215083a74978db80aa4b32">&#9670;&#160;</a></span>operator&lt;=&gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator&lt;=&gt; </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator&lt;=&gt; </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -874,25 +972,25 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00235">235</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00391">391</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a6d02db28fca3d669aa8e73435f1d900e" name="a6d02db28fca3d669aa8e73435f1d900e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d02db28fca3d669aa8e73435f1d900e">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="af531ac5ad2d02a7a1b69d191b389f21b" name="af531ac5ad2d02a7a1b69d191b389f21b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af531ac5ad2d02a7a1b69d191b389f21b">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -905,21 +1003,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 
 </div>
 </div>
-<a id="a945f5bf3abe98a08daf0989b64cf1d4d" name="a945f5bf3abe98a08daf0989b64cf1d4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a945f5bf3abe98a08daf0989b64cf1d4d">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a28abcadf45305776e02964eb80232929" name="a28abcadf45305776e02964eb80232929"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28abcadf45305776e02964eb80232929">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -932,21 +1030,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 
 </div>
 </div>
-<a id="a2a3a9780eee2e579e2326d435b32edf1" name="a2a3a9780eee2e579e2326d435b32edf1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a3a9780eee2e579e2326d435b32edf1">&#9670;&#160;</a></span>operator==()</h2>
+<a id="a87a546a73b2572394b380757a7eb9d6e" name="a87a546a73b2572394b380757a7eb9d6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87a546a73b2572394b380757a7eb9d6e">&#9670;&#160;</a></span>operator==()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator== </td>
+          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::operator== </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a3f249fee662a5961f68802c8382fea7b">ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -957,23 +1055,23 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00240">240</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00396">396</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="adce7c5cd17c35e32777e91f6d8968724" name="adce7c5cd17c35e32777e91f6d8968724"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adce7c5cd17c35e32777e91f6d8968724">&#9670;&#160;</a></span>Position()</h2>
+<a id="a40a0278d2fef64d35c444303c61bce4b" name="a40a0278d2fef64d35c444303c61bce4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a0278d2fef64d35c444303c61bce4b">&#9670;&#160;</a></span>Position()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
+template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::Position </td>
+          <td class="memname">size_t <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T, Alloc &gt;::Position </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -986,10 +1084,10 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the current logical position in the combined sequence. </p>
+<p>Returns the current logical position in the unread sequence. </p>
 <dl class="section return"><dt>Returns</dt><dd>Zero-based position index </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00254">254</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00410">410</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>

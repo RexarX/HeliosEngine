@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['last_0',['Last',['../structhelios_1_1app_1_1Last.html',1,'helios::app']]],
-  ['local_1',['Local',['../classhelios_1_1ecs_1_1Local.html',1,'helios::ecs']]],
-  ['logger_2',['Logger',['../classhelios_1_1log_1_1Logger.html',1,'helios::log']]]
+  ['keyboard_0',['Keyboard',['../structhelios_1_1input_1_1Keyboard.html',1,'helios::input']]],
+  ['keyboardinputmsg_1',['KeyboardInputMsg',['../structhelios_1_1input_1_1KeyboardInputMsg.html',1,'helios::input']]],
+  ['keyboardmessages_2',['KeyboardMessages',['../structhelios_1_1input_1_1KeyboardMessages.html',1,'helios::input']]],
+  ['keyboardwriters_3',['KeyboardWriters',['../structhelios_1_1input_1_1KeyboardWriters.html',1,'helios::input']]]
 ];

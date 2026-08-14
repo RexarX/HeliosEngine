@@ -180,13 +180,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('param_8hpp.htm
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="resource_8hpp_source.html">helios/ecs/resource/resource.hpp</a>&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;optional&gt;</code><br />
 </div>
 <p><a href="param_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:helios_3A_3Aecs_3A_3ARes_3C_20T_20_3E" id="r_helios_3A_3Aecs_3A_3ARes_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-only or mutable access to resource.  <a href="classhelios_1_1ecs_1_1Res.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to resource.  <a href="classhelios_1_1ecs_1_1Res.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -197,7 +198,13 @@ Namespaces</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a674cbdc503746f81c89e6b12f67c26d0" id="r_a674cbdc503746f81c89e6b12f67c26d0"><td class="memTemplParams" colspan="2">template&lt;AsyncResourceTrait T&gt; </td></tr>
 <tr class="memitem:a674cbdc503746f81c89e6b12f67c26d0 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a674cbdc503746f81c89e6b12f67c26d0">helios::ecs::AsyncRes</a> = <a class="el" href="classhelios_1_1ecs_1_1Res.html">Res</a>&lt;T&gt;</td></tr>
-<tr class="memdesc:a674cbdc503746f81c89e6b12f67c26d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-only access to thread-safe resources.  <br /></td></tr>
+<tr class="memdesc:a674cbdc503746f81c89e6b12f67c26d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to thread-safe resource.  <br /></td></tr>
+<tr class="memitem:a08439f87b8ff5fd5ecd5cc6af031bb08" id="r_a08439f87b8ff5fd5ecd5cc6af031bb08"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a08439f87b8ff5fd5ecd5cc6af031bb08 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a08439f87b8ff5fd5ecd5cc6af031bb08">helios::ecs::OptRes</a> = std::optional&lt;<a class="el" href="classhelios_1_1ecs_1_1Res.html">Res</a>&lt;T&gt;&gt;</td></tr>
+<tr class="memdesc:a08439f87b8ff5fd5ecd5cc6af031bb08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional access to resource.  <br /></td></tr>
+<tr class="memitem:a0b786c7fdda949d9ad0bd60095031991" id="r_a0b786c7fdda949d9ad0bd60095031991"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a0b786c7fdda949d9ad0bd60095031991 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a0b786c7fdda949d9ad0bd60095031991">helios::ecs::OptAsyncRes</a> = std::optional&lt;<a class="el" href="namespacehelios_1_1ecs.html#a674cbdc503746f81c89e6b12f67c26d0">AsyncRes</a>&lt;T&gt;&gt;</td></tr>
+<tr class="memdesc:a0b786c7fdda949d9ad0bd60095031991"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional access to thread-safe resource.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -176,18 +176,16 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('macro_8hpp_sou
 <div class="contents">
 <a href="macro_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="macro_8hpp.html#ac2f8c278b92c19e156146c758e906a9e">    3</a></span><span class="preprocessor">#define HELIOS_BIT(x) (1 &lt;&lt; (x))</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Stringify macros</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="macro_8hpp.html#a88543d6f718bdf82483fbcb4ee50f3ad">    6</a></span><span class="preprocessor">#define HELIOS_STRINGIFY_IMPL(x) #x</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="macro_8hpp.html#a48f3e62b87770c7794446ce3015653b5">    7</a></span><span class="preprocessor">#define HELIOS_STRINGIFY(x) HELIOS_STRINGIFY_IMPL(x)</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// Concatenation macros</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="macro_8hpp.html#a285f4973c3550f0a19a20ebcb3c58186">   10</a></span><span class="preprocessor">#define HELIOS_CONCAT_IMPL(a, b) a##b</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="macro_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">   11</a></span><span class="preprocessor">#define HELIOS_CONCAT(a, b) HELIOS_CONCAT_IMPL(a, b)</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Anonymous variable generation</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="macro_8hpp.html#a970386823b90d92c77c4d3c19d619b7a">   14</a></span><span class="preprocessor">#define HELIOS_ANONYMOUS_VAR(prefix) HELIOS_CONCAT(prefix, __LINE__)</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// Stringify macros</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="macro_8hpp.html#a88543d6f718bdf82483fbcb4ee50f3ad">    4</a></span><span class="preprocessor">#define HELIOS_STRINGIFY_IMPL(x) #x</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="macro_8hpp.html#a48f3e62b87770c7794446ce3015653b5">    5</a></span><span class="preprocessor">#define HELIOS_STRINGIFY(x) HELIOS_STRINGIFY_IMPL(x)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// Concatenation macros</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="macro_8hpp.html#a285f4973c3550f0a19a20ebcb3c58186">    8</a></span><span class="preprocessor">#define HELIOS_CONCAT_IMPL(a, b) a##b</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="macro_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">    9</a></span><span class="preprocessor">#define HELIOS_CONCAT(a, b) HELIOS_CONCAT_IMPL(a, b)</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// Anonymous variable generation</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="macro_8hpp.html#a970386823b90d92c77c4d3c19d619b7a">   12</a></span><span class="preprocessor">#define HELIOS_ANONYMOUS_VAR(prefix) HELIOS_CONCAT(prefix, __LINE__)</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

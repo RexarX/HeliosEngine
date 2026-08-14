@@ -207,7 +207,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Message that requests the application to exit. </p>
-<p>Written by systems; <span class="tt"><a class="el" href="namespacehelios_1_1app.html#a022063119d282398a06fd9bba73f20fc" title="Runs the application until an AppExit message is received.">RunDefault</a></span> stops when this message is present. Uses manual clear policy so it survives per-schedule <span class="tt">World::Update()</span> sync points within a frame. </p>
+<p>Written by systems; <span class="tt"><a class="el" href="namespacehelios_1_1app.html#a022063119d282398a06fd9bba73f20fc" title="Runs the application until an AppExit message is received.">RunDefault</a></span> stops when this message is present. Uses manual clear policy so it survives per-stage message merge / advance within a frame. </p>
 
 <p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00060">60</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>

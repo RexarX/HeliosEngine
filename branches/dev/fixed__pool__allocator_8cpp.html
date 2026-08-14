@@ -172,13 +172,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('fixed__pool__a
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">fixed_pool_allocator.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="memory_2src_2pch_8hpp_source.html">pch.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="fixed__pool__allocator_8hpp_source.html">helios/memory/fixed_pool_allocator.hpp</a>&gt;</code><br />
+<code>#include &lt;details/treiber_stack.hpp&gt;</code><br />
 <code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="aligned__alloc_8hpp_source.html">helios/memory/aligned_alloc.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">helios/memory/common.hpp</a>&gt;</code><br />
@@ -191,14 +191,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('fixed__pool__a
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:anonymous_5Fnamespace_7Bfixed_5Fpool_5Fallocator_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bfixed_5Fpool_5Fallocator_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html">anonymous_namespace{fixed_pool_allocator.cpp}</a></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Amem" id="r_helios_3A_3Amem"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1mem.html">helios::mem</a></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a2fa9bd490604dfdbd1ec1910662973f2" id="r_a2fa9bd490604dfdbd1ec1910662973f2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a2fa9bd490604dfdbd1ec1910662973f2">anonymous_namespace{fixed_pool_allocator.cpp}::PushBlock</a> (std::atomic&lt; void * &gt; &amp;head, void *block) noexcept</td></tr>
-<tr class="memitem:a84015026769dbfa2c57a72f2fd57da10" id="r_a84015026769dbfa2c57a72f2fd57da10"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a84015026769dbfa2c57a72f2fd57da10">anonymous_namespace{fixed_pool_allocator.cpp}::PopBlock</a> (std::atomic&lt; void * &gt; &amp;head) noexcept</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

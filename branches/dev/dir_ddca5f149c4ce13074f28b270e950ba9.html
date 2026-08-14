@@ -198,7 +198,7 @@ Core Types</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">Entity</span>  </td><td class="markdownTableBodyNone">64-bit ID: 32-bit index + 32-bit generation.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">ComponentBundle&lt;Ts...&gt;</span>  </td><td class="markdownTableBodyNone">Owning, composable group of component values for structural operations.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">ComponentBundleTypes&lt;...&gt;</span>  </td><td class="markdownTableBodyNone">Component bundle type list and value holder.  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">Schedule</span>  </td><td class="markdownTableBodyNone">System collection with ordering, access policies, and executor selection.  </td></tr>
 <tr class="markdownTableRowEven">
@@ -212,10 +212,12 @@ Core Types</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">Local&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Per-system local storage (never conflicts in scheduling).  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">MessageWriter&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Write regular messages (current frame buffer).  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">MessageWriter&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Write regular messages (current buffer; assigns stable <span class="tt">MessageId</span>).  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">MessageReader&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Read regular messages (previous frame buffer).  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">MessageReader&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Unread-only read of retained messages via a persistent <span class="tt">MessageCursor</span>.  </td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">MessageCursor&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Per-reader delivery cursor (<span class="tt">IncludeBacklog</span> / <span class="tt">FutureOnly</span>).  </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">AsyncMessageWriter&lt;T&gt;</span> / <span class="tt">AsyncMessageReader&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Lock-free async message queue.  </td></tr>
 </table>
 <h2 class="doxsection"><a class="anchor" id="world-lifecycle"></a>
@@ -230,7 +232,7 @@ World Lifecycle</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">Clear()</span>  </td><td class="markdownTableBodyNone">Remove all world data.  </td></tr>
 </table>
-<p><span class="tt">World::Update()</span> is called once per frame after the update stage completes (handled by <span class="tt">app::Scheduler</span>).</p>
+<p><span class="tt">MessageManager::Update()</span> (stage <span class="tt">advance_messages</span> on the last stage of each frame order) ages regular message buffers. Prefer that over calling <span class="tt">World::Update()</span> from app code when only the swap is needed.</p>
 <h1 class="doxsection"><a class="anchor" id="quick-start-2"></a>
 Quick Start</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="ecs_8hpp.html">helios/ecs/ecs.hpp</a>&gt;</span></div>
@@ -258,10 +260,10 @@ Quick Start</h1>
 <div class="line">world.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c">Update</a>();</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html">helios::ecs::World</a></div><div class="ttdoc">The World class manages entities with their components and systems.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00040">world.hpp:40</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a5e496dc22cbbd010dcdbc0942176e4a7"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a5e496dc22cbbd010dcdbc0942176e4a7">helios::ecs::World::Query</a></div><div class="ttdeci">auto Query(Allocator alloc={}) noexcept -&gt; BasicQuery&lt; World, Allocator, Args... &gt;</div><div class="ttdoc">Creates a query over entities matching the specified component criteria.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00167">world.hpp:167</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a6afaf7fca093943b8edd4c36682807c1"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a6afaf7fca093943b8edd4c36682807c1">helios::ecs::World::AddComponents</a></div><div class="ttdeci">void AddComponents(Entity entity, Ts &amp;&amp;... components)</div><div class="ttdoc">Adds components to the entity.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01040">world.hpp:1040</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a8c135f24991d9a3e3cc57cacfee0d01c"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c">helios::ecs::World::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">Flushes buffer of pending operations.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00954">world.hpp:954</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_aaf78a7e15fe124eb717de0adf235148e"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#aaf78a7e15fe124eb717de0adf235148e">helios::ecs::World::CreateEntity</a></div><div class="ttdeci">Entity CreateEntity()</div><div class="ttdoc">Creates new entity.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00983">world.hpp:983</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_acae47908929f49bd652fbc097e30f0d7"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#acae47908929f49bd652fbc097e30f0d7">helios::ecs::World::InsertResources</a></div><div class="ttdeci">void InsertResources(T &amp;&amp;resource)</div><div class="ttdoc">Inserts a resource into the world.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01243">world.hpp:1243</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a6afaf7fca093943b8edd4c36682807c1"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a6afaf7fca093943b8edd4c36682807c1">helios::ecs::World::AddComponents</a></div><div class="ttdeci">void AddComponents(Entity entity, Ts &amp;&amp;... components)</div><div class="ttdoc">Adds components to the entity.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01043">world.hpp:1043</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a8c135f24991d9a3e3cc57cacfee0d01c"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c">helios::ecs::World::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">Flushes buffer of pending operations.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00957">world.hpp:957</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_aaf78a7e15fe124eb717de0adf235148e"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#aaf78a7e15fe124eb717de0adf235148e">helios::ecs::World::CreateEntity</a></div><div class="ttdeci">Entity CreateEntity()</div><div class="ttdoc">Creates new entity.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00986">world.hpp:986</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_acae47908929f49bd652fbc097e30f0d7"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#acae47908929f49bd652fbc097e30f0d7">helios::ecs::World::InsertResources</a></div><div class="ttdeci">void InsertResources(T &amp;&amp;resource)</div><div class="ttdoc">Inserts a resource into the world.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01247">world.hpp:1247</a></div></div>
 <div class="ttc" id="aecs_8hpp_html"><div class="ttname"><a href="ecs_8hpp.html">ecs.hpp</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="systems--schedules"></a>
 Systems &amp; Schedules</h1>
@@ -289,10 +291,10 @@ Systems &amp; Schedules</h1>
 <div class="line"> </div>
 <div class="line">schedule.RunAndWait(world);</div>
 <div class="ttc" id="aclasshelios_1_1async_1_1Executor_html"><div class="ttname"><a href="classhelios_1_1async_1_1Executor.html">helios::async::Executor</a></div><div class="ttdoc">Manages worker threads and executes task graphs using work-stealing scheduling.</div><div class="ttdef"><b>Definition</b> <a href="async_2include_2helios_2async_2executor_8hpp_source.html#l00032">executor.hpp:32</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a96897d89cdf618e38944a1a9ba9b6f46"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a96897d89cdf618e38944a1a9ba9b6f46">helios::ecs::BasicQuery::ForEach</a></div><div class="ttdeci">void ForEach(const Action &amp;action) const</div><div class="ttdoc">Executes an action for each matching entity&#39;s components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01430">query.hpp:1430</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res</a></div><div class="ttdoc">Read-only or mutable access to resource.</div><div class="ttdef"><b>Definition</b> <a href="param_8hpp_source.html#l00017">param.hpp:17</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Schedule_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Schedule.html">helios::ecs::Schedule</a></div><div class="ttdoc">A collection of systems, sets, and run conditions with ordering constraints.</div><div class="ttdef"><b>Definition</b> <a href="schedule_8hpp_source.html#l00182">schedule.hpp:182</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02286">query.hpp:2286</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a96897d89cdf618e38944a1a9ba9b6f46"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a96897d89cdf618e38944a1a9ba9b6f46">helios::ecs::BasicQuery::ForEach</a></div><div class="ttdeci">void ForEach(const Action &amp;action) const</div><div class="ttdoc">Executes an action for each matching entity&#39;s components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01443">query.hpp:1443</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res</a></div><div class="ttdoc">Access to resource.</div><div class="ttdef"><b>Definition</b> <a href="param_8hpp_source.html#l00018">param.hpp:18</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Schedule_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Schedule.html">helios::ecs::Schedule</a></div><div class="ttdoc">A collection of systems, sets, and run conditions with ordering constraints.</div><div class="ttdef"><b>Definition</b> <a href="schedule_8hpp_source.html#l00198">schedule.hpp:198</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02308">query.hpp:2308</a></div></div>
 <div class="ttc" id="asystem_8hpp_html"><div class="ttname"><a href="system_8hpp.html">system.hpp</a></div></div>
 </div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="system-parameters"></a>
 System Parameters</h2>
@@ -308,9 +310,9 @@ System Parameters</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">Local&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Per-system persistent state  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">MessageWriter&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Write messages (visible next frame)  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">MessageWriter&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Write messages into the current retention buffer  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">MessageReader&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Read messages (from previous frame)  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">MessageReader&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Unread-only iteration; cursor persisted in <span class="tt">SystemLocalData</span>  </td></tr>
 </table>
 <h2 class="doxsection"><a class="anchor" id="custom-system-parameters"></a>
 Custom System Parameters</h2>
@@ -324,7 +326,7 @@ Custom System Parameters</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">Make(World&amp;, SystemLocalData&amp;, const AccessPolicy&amp;)</span>  </td><td class="markdownTableBodyNone">Construct the parameter at system invocation time  </td></tr>
 </table>
-<p><span class="tt">Commands</span>, <span class="tt">Local&lt;T&gt;</span>, <span class="tt">WorldView</span>, and message params register no scheduling access — they never participate in conflict detection.</p>
+<p><span class="tt">World</span> registers exclusive access and conflicts with component/resource access. <span class="tt">Commands</span>, <span class="tt">Local&lt;T&gt;</span>, <span class="tt">WorldView</span>, and message params register no scheduling access — they never participate in conflict detection.</p>
 <h3 class="doxsection"><a class="anchor" id="aggregate-parameters-compositesystemparam"></a>
 Aggregate parameters (<span class="tt">CompositeSystemParam</span>)</h3>
 <p>Bundle multiple built-in params into one struct; field types must match the template list exactly:</p>
@@ -396,10 +398,10 @@ Fully custom parameters</h3>
 <div class="line">    step.world-&gt;Simulate(step.dt);</div>
 <div class="line">  }</div>
 <div class="line">};</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html_a40fcef498192d25df80b69bdf87e71e1"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html#a40fcef498192d25df80b69bdf87e71e1">helios::ecs::AccessPolicyBuilder::ReadResources</a></div><div class="ttdeci">constexpr auto ReadResources(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares read-only access to resource types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00633">access_policy.hpp:633</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html_ad06a2ebd52cfe114109fb5fe5739bdf8"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html#ad06a2ebd52cfe114109fb5fe5739bdf8">helios::ecs::AccessPolicyBuilder::WriteResources</a></div><div class="ttdeci">constexpr auto WriteResources(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares write access to resource types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00649">access_policy.hpp:649</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a14e4f63a8fc72bd6ce40adae7a1824a5"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a14e4f63a8fc72bd6ce40adae7a1824a5">helios::ecs::World::ReadResource</a></div><div class="ttdeci">const T &amp; ReadResource() const noexcept</div><div class="ttdoc">Gets const reference to a resource.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01342">world.hpp:1342</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a330cfbeeb34358489307d82437867b2a"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a330cfbeeb34358489307d82437867b2a">helios::ecs::World::WriteResource</a></div><div class="ttdeci">T &amp; WriteResource() noexcept</div><div class="ttdoc">Gets reference to a resource.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01335">world.hpp:1335</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html_a40fcef498192d25df80b69bdf87e71e1"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html#a40fcef498192d25df80b69bdf87e71e1">helios::ecs::AccessPolicyBuilder::ReadResources</a></div><div class="ttdeci">constexpr auto ReadResources(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares read-only access to resource types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00673">access_policy.hpp:673</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html_ad06a2ebd52cfe114109fb5fe5739bdf8"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html#ad06a2ebd52cfe114109fb5fe5739bdf8">helios::ecs::AccessPolicyBuilder::WriteResources</a></div><div class="ttdeci">constexpr auto WriteResources(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares write access to resource types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00689">access_policy.hpp:689</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a14e4f63a8fc72bd6ce40adae7a1824a5"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a14e4f63a8fc72bd6ce40adae7a1824a5">helios::ecs::World::ReadResource</a></div><div class="ttdeci">const T &amp; ReadResource() const noexcept</div><div class="ttdoc">Gets const reference to a resource.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01348">world.hpp:1348</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a330cfbeeb34358489307d82437867b2a"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a330cfbeeb34358489307d82437867b2a">helios::ecs::World::WriteResource</a></div><div class="ttdeci">T &amp; WriteResource() noexcept</div><div class="ttdoc">Gets reference to a resource.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01341">world.hpp:1341</a></div></div>
 </div><!-- fragment --><p>Use <span class="tt">DeclareReadComponents</span>, <span class="tt">DeclareWriteComponents</span>, or <span class="tt">DeclareQueryAccess</span> from <span class="tt"><a class="el" href="access__decl_8hpp.html">helios/ecs/system/access_decl.hpp</a></span> when you need finer-grained component declarations inside <span class="tt">RegisterAccess</span>.</p>
 <p>After specialization, pass the type to <span class="tt">Schedule::Add</span> like any other system — access policy and parallel ordering are deduced automatically.</p>
 <h2 class="doxsection"><a class="anchor" id="ordering"></a>
@@ -434,7 +436,7 @@ Commands — Deferred Mutations</h1>
 <div class="line">    });</div>
 <div class="line">  }</div>
 <div class="line">};</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a36c1bffc4761dd715d9ab27d03fa8fa4"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a36c1bffc4761dd715d9ab27d03fa8fa4">helios::ecs::BasicQuery::ForEachWithEntity</a></div><div class="ttdeci">void ForEachWithEntity(const Action &amp;action) const</div><div class="ttdoc">Executes an action for each entity and its components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01445">query.hpp:1445</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a36c1bffc4761dd715d9ab27d03fa8fa4"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a36c1bffc4761dd715d9ab27d03fa8fa4">helios::ecs::BasicQuery::ForEachWithEntity</a></div><div class="ttdeci">void ForEachWithEntity(const Action &amp;action) const</div><div class="ttdoc">Executes an action for each entity and its components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01458">query.hpp:1458</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Commands_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Commands.html">helios::ecs::Commands</a></div><div class="ttdoc">Thin wrapper over command queue and world for deferred ECS operations.</div><div class="ttdef"><b>Definition</b> <a href="commands_8hpp_source.html#l00024">commands.hpp:24</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Commands_html_a7efef6275a2fb96fc3abe989d8981f8f"><div class="ttname"><a href="classhelios_1_1ecs_1_1Commands.html#a7efef6275a2fb96fc3abe989d8981f8f">helios::ecs::Commands::Entity</a></div><div class="ttdeci">constexpr PmrEntityCmdBuffer Entity(Entity entity)</div><div class="ttdoc">Returns a command buffer for an existing entity.</div><div class="ttdef"><b>Definition</b> <a href="commands_8hpp_source.html#l00104">commands.hpp:104</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Commands_html_abbeb6d3300b05c05040341c7d770af3e"><div class="ttname"><a href="classhelios_1_1ecs_1_1Commands.html#abbeb6d3300b05c05040341c7d770af3e">helios::ecs::Commands::Spawn</a></div><div class="ttdeci">PmrEntityCmdBuffer Spawn()</div><div class="ttdoc">Spawns a new entity and returns a command buffer for it.</div><div class="ttdef"><b>Definition</b> <a href="commands_8hpp_source.html#l00099">commands.hpp:99</a></div></div>
@@ -443,10 +445,16 @@ Commands — Deferred Mutations</h1>
 </div><!-- fragment --><p>Commands apply at schedule boundaries (<span class="tt">RunAndWait</span> → <span class="tt">Flush()</span> → per-system local flush). Split spawning and consumption across schedules (e.g. <span class="tt">kPreUpdate</span> → <span class="tt">kUpdate</span>) when entities must exist before queries run.</p>
 <h1 class="doxsection"><a class="anchor" id="messages"></a>
 Messages</h1>
-<p>Regular messages use a double-buffer with a 2-frame TTL:</p>
-<div class="fragment"><div class="line">Frame N:   write via MessageWriter&lt;T&gt;</div>
-<div class="line">Frame N+1: read via MessageReader&lt;T&gt;</div>
-<div class="line">Frame N+2: auto-cleared (unless kManual clear policy)</div>
+<p>Regular messages separate <b>retention</b> from <b>delivery</b>:</p>
+<ul>
+<li>Buffers keep auto-policy messages across two <span class="tt">MessageManager::Update()</span> lifecycle steps (<span class="tt">previous</span> + <span class="tt">current</span>).</li>
+<li>Each <span class="tt">MessageReader</span> uses a <span class="tt">MessageCursor</span> so a message is observed once per reader, even if the system runs twice before aging or the message moves current-&gt;previous.</li>
+<li>Outside systems, pass an explicit cursor: <span class="tt">world.ReadMessages&lt;T&gt;(cursor)</span>. Raw manager spans bypass delivery tracking.</li>
+</ul>
+<div class="fragment"><div class="line">Update N:   write via MessageWriter&lt;T&gt;</div>
+<div class="line">            MessageReader yields unread previous+current once per cursor</div>
+<div class="line">Update N+1: aged into previous; same cursor does not redeliver</div>
+<div class="line">Update N+2: auto-cleared (unless kManual clear policy)</div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="ecs_8hpp.html">helios/ecs/ecs.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">struct </span>DamageEvent {</div>
@@ -459,19 +467,29 @@ Messages</h1>
 <div class="line"><span class="keyword">struct </span>ApplyDamage {</div>
 <div class="line">  <span class="keywordtype">void</span> operator()(<a class="code hl_class" href="classhelios_1_1ecs_1_1MessageReader.html">helios::ecs::MessageReader&lt;DamageEvent&gt;</a> events,</div>
 <div class="line">                  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query&lt;Health&amp;&gt;</a> healths) {</div>
-<div class="line">    events.<a class="code hl_function" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1980748c67b15d6d8f689cdae6539fc2">ForEach</a>([&amp;](<span class="keyword">const</span> DamageEvent&amp; evt) {</div>
-<div class="line">      <span class="keywordflow">if</span> (<span class="keyword">auto</span>* hp = healths.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicQuery.html#a01653522d400194200dd6a3dbc02aec1">Get</a>(evt.target)) {</div>
-<div class="line">        hp-&gt;value -= evt.amount;</div>
+<div class="line">    <span class="comment">// System params persist the cursor; ForEach / Read advance it.</span></div>
+<div class="line">    events.<a class="code hl_function" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1980748c67b15d6d8f689cdae6539fc2">ForEach</a>([&amp;](<span class="keyword">const</span> <span class="keyword">auto</span> evt) {</div>
+<div class="line">      <span class="keywordflow">if</span> (<span class="keyword">auto</span>* hp = healths.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicQuery.html#a01653522d400194200dd6a3dbc02aec1">Get</a>(evt-&gt;target)) {</div>
+<div class="line">        hp-&gt;value -= evt-&gt;amount;</div>
 <div class="line">      }</div>
 <div class="line">    });</div>
 <div class="line">  }</div>
 <div class="line">};</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a01653522d400194200dd6a3dbc02aec1"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a01653522d400194200dd6a3dbc02aec1">helios::ecs::BasicQuery::Get</a></div><div class="ttdeci">auto Get(Entity entity) const -&gt; typename BasicQuery&lt; WorldT, Allocator, Args... &gt;::value_type</div><div class="ttdoc">Gets all query components for a specific entity (ignores query filters).</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01286">query.hpp:1286</a></div></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Manual / non-system reads require a cursor:</span></div>
+<div class="line"><span class="keyword">auto</span> cursor = <a class="code hl_function" href="structhelios_1_1ecs_1_1MessageCursor.html#acd31a920117583ae1c6db9fd24f1e57c">helios::ecs::MessageCursor&lt;DamageEvent&gt;::IncludeBacklog</a>();</div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> msg : world.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#ae6ffea433e6b664e7ed7d619e79c0f3b">ReadMessages</a>(cursor)) {</div>
+<div class="line">  <span class="comment">// ...</span></div>
+<div class="line">}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a01653522d400194200dd6a3dbc02aec1"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a01653522d400194200dd6a3dbc02aec1">helios::ecs::BasicQuery::Get</a></div><div class="ttdeci">auto Get(Entity entity) const -&gt; typename BasicQuery&lt; WorldT, Allocator, Args... &gt;::value_type</div><div class="ttdoc">Gets all query components for a specific entity (ignores query filters).</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01299">query.hpp:1299</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html">helios::ecs::Entity</a></div><div class="ttdoc">Unique identifier for entities with generation counter to handle recycling.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00025">entity.hpp:25</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1MessageReaderBase_html_a1980748c67b15d6d8f689cdae6539fc2"><div class="ttname"><a href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1980748c67b15d6d8f689cdae6539fc2">helios::ecs::MessageReaderBase::ForEach</a></div><div class="ttdeci">constexpr void ForEach(const Action &amp;action) const</div><div class="ttdoc">Applies an action to every message (unwrapped const T&amp;).</div><div class="ttdef"><b>Definition</b> <a href="reader_8hpp_source.html#l00317">reader.hpp:317</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1MessageReader_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1MessageReader.html">helios::ecs::MessageReader</a></div><div class="ttdoc">Type-safe, zero-copy reader for regular messages.</div><div class="ttdef"><b>Definition</b> <a href="reader_8hpp_source.html#l00770">reader.hpp:771</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_ac9ee38ab084af8be76caaec9bfbc67fb"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#ac9ee38ab084af8be76caaec9bfbc67fb">helios::ecs::World::AddMessage</a></div><div class="ttdeci">void AddMessage()</div><div class="ttdoc">Registers an message type for use.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01349">world.hpp:1349</a></div></div>
-</div><!-- fragment --><p>Async messages (<span class="tt">kAsync = true</span>) use a lock-free queue and are not managed by <span class="tt">World::Update()</span> — clear explicitly.</p>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1MessageReaderBase_html_a1980748c67b15d6d8f689cdae6539fc2"><div class="ttname"><a href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1980748c67b15d6d8f689cdae6539fc2">helios::ecs::MessageReaderBase::ForEach</a></div><div class="ttdeci">constexpr void ForEach(const Action &amp;action) const</div><div class="ttdoc">Applies an action to every unread message wrapper.</div><div class="ttdef"><b>Definition</b> <a href="reader_8hpp_source.html#l00572">reader.hpp:572</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1MessageReader_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1MessageReader.html">helios::ecs::MessageReader</a></div><div class="ttdoc">Type-safe, zero-copy reader for regular messages with cursor delivery.</div><div class="ttdef"><b>Definition</b> <a href="reader_8hpp_source.html#l01075">reader.hpp:1076</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_ac9ee38ab084af8be76caaec9bfbc67fb"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#ac9ee38ab084af8be76caaec9bfbc67fb">helios::ecs::World::AddMessage</a></div><div class="ttdeci">void AddMessage()</div><div class="ttdoc">Registers an message type for use.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01355">world.hpp:1355</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_ae6ffea433e6b664e7ed7d619e79c0f3b"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#ae6ffea433e6b664e7ed7d619e79c0f3b">helios::ecs::World::ReadMessages</a></div><div class="ttdeci">auto ReadMessages(MessageCursor&lt; T &gt; &amp;cursor) const noexcept -&gt; MessageReader&lt; T &gt;</div><div class="ttdoc">Gets a reader for unread messages of type T.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01409">world.hpp:1409</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html_acd31a920117583ae1c6db9fd24f1e57c"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html#acd31a920117583ae1c6db9fd24f1e57c">helios::ecs::MessageCursor::IncludeBacklog</a></div><div class="ttdeci">static constexpr MessageCursor IncludeBacklog() noexcept</div><div class="ttdoc">Creates a cursor that includes all currently retained messages.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00027">cursor.hpp:27</a></div></div>
+</div><!-- fragment --><p>Consumable messages record stable ids on <span class="tt">Consume()</span> and remove globally when deferred merges apply; independent readers still each see the message once beforehand.</p>
+<p>Async messages (<span class="tt">kAsync = true</span>) use a lock-free queue and are not managed by <span class="tt">MessageManager::Update()</span> — clear explicitly.</p>
 <h1 class="doxsection"><a class="anchor" id="components"></a>
 Components</h1>
 <p>Two storage models, chosen per component type:</p>
@@ -486,20 +504,34 @@ Components</h1>
 <p>Override with <span class="tt">static constexpr ComponentStorageType kStorageType = ...</span> in the component struct.</p>
 <h2 class="doxsection"><a class="anchor" id="component-bundles"></a>
 Component Bundles</h2>
-<p><span class="tt">ComponentBundle&lt;Ts...&gt;</span> groups component values that are commonly added or removed together. A bundle can contain other bundles; nested leaves are flattened depth-first and left-to-right.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="ecs_8hpp.html">helios/ecs/ecs.hpp</a>&gt;</span></div>
+<p><span class="tt">ComponentBundleTypes&lt;Ts...&gt;</span> declares component and nested-bundle types at compile time and stores their values. Nested types are flattened depth-first, left-to-right for add/remove.</p>
+<p><b>Leaf bundle</b> — use <span class="tt">ComponentBundleTypes</span> directly:</p>
+<div class="fragment"><div class="line"><span class="keyword">using </span>MovementBundle = <a class="code hl_struct" href="structhelios_1_1ecs_1_1ComponentBundleTypes.html">helios::ecs::ComponentBundleTypes&lt;Position, Velocity&gt;</a>;</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">using </span>MovementBundle = <a class="code hl_class" href="classhelios_1_1ecs_1_1ComponentBundle.html">helios::ecs::ComponentBundle&lt;Position, Velocity&gt;</a>;</div>
-<div class="line"><span class="keyword">using </span>PlayerBundle =</div>
-<div class="line">    <a class="code hl_class" href="classhelios_1_1ecs_1_1ComponentBundle.html">helios::ecs::ComponentBundle&lt;Player, MovementBundle, Health&gt;</a>;</div>
-<div class="line"> </div>
-<div class="line">world.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a488046461f1b3a548d296dc1a3d206f3">AddBundle</a>(entity, PlayerBundle{</div>
-<div class="line">    Player{}, MovementBundle{Position{}, Velocity{}}, Health{100}});</div>
+<div class="line">world.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a488046461f1b3a548d296dc1a3d206f3">AddBundle</a>(entity, MovementBundle{pos, vel});</div>
 <div class="line">world.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a66e51d5b208ae92453cd02b40c46861e">RemoveBundle</a>&lt;MovementBundle&gt;(entity);</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1ComponentBundle_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1ComponentBundle.html">helios::ecs::ComponentBundle</a></div><div class="ttdoc">Owning collection of components that can be added or removed as one ECS operation.</div><div class="ttdef"><b>Definition</b> <a href="bundle_8hpp_source.html#l00123">bundle.hpp:123</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a488046461f1b3a548d296dc1a3d206f3"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a488046461f1b3a548d296dc1a3d206f3">helios::ecs::World::AddBundle</a></div><div class="ttdeci">void AddBundle(Entity entity, B &amp;&amp;bundle)</div><div class="ttdoc">Adds all components in a bundle to the entity.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01082">world.hpp:1082</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a66e51d5b208ae92453cd02b40c46861e"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a66e51d5b208ae92453cd02b40c46861e">helios::ecs::World::RemoveBundle</a></div><div class="ttdeci">void RemoveBundle(Entity entity)</div><div class="ttdoc">Removes all components in a bundle from the entity.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01179">world.hpp:1179</a></div></div>
-</div><!-- fragment --><p>Bundles are transfer objects rather than components: queries access their leaf components, and <span class="tt">ComponentTrait&lt;ComponentBundle&lt;...&gt;&gt;</span> is false. Bundle element types must be unqualified values, every leaf must be a component, and flattened leaf component types must be unique. Empty bundles are rejected.</p>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a488046461f1b3a548d296dc1a3d206f3"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a488046461f1b3a548d296dc1a3d206f3">helios::ecs::World::AddBundle</a></div><div class="ttdeci">void AddBundle(Entity entity, B &amp;&amp;bundle)</div><div class="ttdoc">Adds all components in a bundle to the entity.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01085">world.hpp:1085</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a66e51d5b208ae92453cd02b40c46861e"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a66e51d5b208ae92453cd02b40c46861e">helios::ecs::World::RemoveBundle</a></div><div class="ttdeci">void RemoveBundle(Entity entity)</div><div class="ttdoc">Removes all components in a bundle from the entity.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01183">world.hpp:1183</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1ComponentBundleTypes_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1ComponentBundleTypes.html">helios::ecs::ComponentBundleTypes</a></div><div class="ttdoc">Component and nested-bundle values for a bundle operation.</div><div class="ttdef"><b>Definition</b> <a href="bundle_8hpp_source.html#l00023">bundle.hpp:23</a></div></div>
+</div><!-- fragment --><p><b>Struct bundle</b> — named fields plus <span class="tt">Build() &amp;&amp;</span> returning <span class="tt">ComponentTypes</span>:</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>PlayerBundle {</div>
+<div class="line">  <span class="keyword">using </span>ComponentTypes =</div>
+<div class="line">      <a class="code hl_struct" href="structhelios_1_1ecs_1_1ComponentBundleTypes.html">helios::ecs::ComponentBundleTypes&lt;Player, MovementBundle, Health&gt;</a>;</div>
+<div class="line"> </div>
+<div class="line">  Player player;</div>
+<div class="line">  Position position;</div>
+<div class="line">  Velocity velocity;</div>
+<div class="line">  Health health;</div>
+<div class="line"> </div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> ComponentTypes Build() {</div>
+<div class="line">    <span class="keywordflow">return</span> {std::move(player),</div>
+<div class="line">            MovementBundle{std::move(position), std::move(velocity)},</div>
+<div class="line">            std::move(health)};</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">world.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a488046461f1b3a548d296dc1a3d206f3">AddBundle</a>(entity, PlayerBundle{.player = {}, .position = {...}, ...});</div>
+</div><!-- fragment --><p>Extras (e.g. tags) can be synthesized in <span class="tt">Build()</span>; include their types in <span class="tt">ComponentTypes</span>. Bundles are not components (<span class="tt">ComponentTrait</span> is false). Flattened leaf types must be unique.</p>
 <h1 class="doxsection"><a class="anchor" id="queries"></a>
 Queries</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="ecs_8hpp.html">helios/ecs/ecs.hpp</a>&gt;</span></div>

@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 </div><!--header-->
 <div class="contents">
 
-<p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data and type information...">MessageWrapper</a>&lt;T&gt;</span> instances.  
+<p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data and type information...">MessageWrapper</a>&lt;T&gt;</span> for unread messages.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="reader_8hpp_source.html">reader.hpp</a>&gt;</code></p>
@@ -205,28 +205,33 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a04be89e1384b66d1096012bfc17d8a44" id="r_a04be89e1384b66d1096012bfc17d8a44"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> () noexcept=default</td></tr>
-<tr class="memitem:ad578ad8a07cdf3ac938b2866f32d9046" id="r_ad578ad8a07cdf3ac938b2866f32d9046"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad578ad8a07cdf3ac938b2866f32d9046">MessageWrapperIter</a> (std::span&lt; const T &gt; first, std::span&lt; const T &gt; second, size_t position) noexcept</td></tr>
-<tr class="memdesc:ad578ad8a07cdf3ac938b2866f32d9046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a wrapper iterator over two contiguous message spans.  <br /></td></tr>
+<tr class="memitem:ae574af4a989bcd2eea12db8e4537a9af" id="r_ae574af4a989bcd2eea12db8e4537a9af"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ae574af4a989bcd2eea12db8e4537a9af">MessageWrapperIter</a> (std::span&lt; const T &gt; previous_messages, std::span&lt; const T &gt; current_messages, std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt; previous_ids, std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt; current_ids, <a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; *cursor, size_t previous_offset, size_t current_offset, size_t position) noexcept</td></tr>
+<tr class="memdesc:ae574af4a989bcd2eea12db8e4537a9af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an unread-message wrapper iterator.  <br /></td></tr>
 <tr class="memitem:a7da79a7cd6a049856ca90092dd820a7c" id="r_a7da79a7cd6a049856ca90092dd820a7c"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7da79a7cd6a049856ca90092dd820a7c">MessageWrapperIter</a> (const MessageWrapperIter &amp;) noexcept=default</td></tr>
 <tr class="memitem:a6f102c7db32306f501d19aa20672cdf6" id="r_a6f102c7db32306f501d19aa20672cdf6"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a6f102c7db32306f501d19aa20672cdf6">MessageWrapperIter</a> (MessageWrapperIter &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:a6521ecbbb6281c78344b428844ca1eb5" id="r_a6521ecbbb6281c78344b428844ca1eb5"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a6521ecbbb6281c78344b428844ca1eb5">~MessageWrapperIter</a> () noexcept=default</td></tr>
 <tr class="memitem:a4c756ed43d22298e814ea013d44b4c00" id="r_a4c756ed43d22298e814ea013d44b4c00"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4c756ed43d22298e814ea013d44b4c00">operator=</a> (const <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;) noexcept=default</td></tr>
 <tr class="memitem:afcd12273edf37ba17435d4362ac109b7" id="r_afcd12273edf37ba17435d4362ac109b7"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#afcd12273edf37ba17435d4362ac109b7">operator=</a> (<a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a899a8bed5ba944e492bf36a659f6bf27" id="r_a899a8bed5ba944e492bf36a659f6bf27"><td class="memItemLeft">constexpr <a class="el" href="#a83545b32f67d79613dc5e62e38b848f4">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a899a8bed5ba944e492bf36a659f6bf27">operator*</a> () const noexcept</td></tr>
+<tr class="memitem:a5d9d329c013280ba389f2828c47eb02d" id="r_a5d9d329c013280ba389f2828c47eb02d"><td class="memItemLeft">constexpr <a class="el" href="#a83545b32f67d79613dc5e62e38b848f4">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5d9d329c013280ba389f2828c47eb02d">operator*</a> () const noexcept</td></tr>
+<tr class="memdesc:a5d9d329c013280ba389f2828c47eb02d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current unread message wrapper.  <br /></td></tr>
 <tr class="memitem:adf863d53e1e4a016817c5353aa6e4325" id="r_adf863d53e1e4a016817c5353aa6e4325"><td class="memItemLeft"><a class="el" href="#a273d835b916a34e7b9f44ace0456a5b7">pointer</a>&#160;</td><td class="memItemRight"><a class="el" href="#adf863d53e1e4a016817c5353aa6e4325">operator-&gt;</a> () const =delete</td></tr>
-<tr class="memitem:ad50324dbcf3e5f26c1ef55b57106c2a6" id="r_ad50324dbcf3e5f26c1ef55b57106c2a6"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad50324dbcf3e5f26c1ef55b57106c2a6">operator++</a> () noexcept</td></tr>
-<tr class="memitem:a89c74da77806b6b1f58bbfe98bf198d1" id="r_a89c74da77806b6b1f58bbfe98bf198d1"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a89c74da77806b6b1f58bbfe98bf198d1">operator++</a> (int) noexcept</td></tr>
-<tr class="memitem:aa9e461e21d6f71b1db23a05ea1abf7ba" id="r_aa9e461e21d6f71b1db23a05ea1abf7ba"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa9e461e21d6f71b1db23a05ea1abf7ba">operator--</a> () noexcept</td></tr>
-<tr class="memitem:a20e2094dabe9c3c3cbcfa808dcc95fd2" id="r_a20e2094dabe9c3c3cbcfa808dcc95fd2"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a20e2094dabe9c3c3cbcfa808dcc95fd2">operator--</a> (int) noexcept</td></tr>
+<tr class="memitem:a1a66e149f6582aaa26cc08e8bb1e61b6" id="r_a1a66e149f6582aaa26cc08e8bb1e61b6"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1a66e149f6582aaa26cc08e8bb1e61b6">operator++</a> () noexcept</td></tr>
+<tr class="memdesc:a1a66e149f6582aaa26cc08e8bb1e61b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances to the next unread message and updates the cursor.  <br /></td></tr>
+<tr class="memitem:af78aa2bf50f783d0db3629e462ce8bfd" id="r_af78aa2bf50f783d0db3629e462ce8bfd"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#af78aa2bf50f783d0db3629e462ce8bfd">operator++</a> (int) noexcept</td></tr>
+<tr class="memdesc:af78aa2bf50f783d0db3629e462ce8bfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances to the next unread message and updates the cursor.  <br /></td></tr>
+<tr class="memitem:a22d6887922afec3783452870b0d8116e" id="r_a22d6887922afec3783452870b0d8116e"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a22d6887922afec3783452870b0d8116e">operator--</a> () noexcept</td></tr>
+<tr class="memdesc:a22d6887922afec3783452870b0d8116e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the previous unread message.  <br /></td></tr>
+<tr class="memitem:a80d5312f00ca3074edcfe2877ed65256" id="r_a80d5312f00ca3074edcfe2877ed65256"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a80d5312f00ca3074edcfe2877ed65256">operator--</a> (int) noexcept</td></tr>
+<tr class="memdesc:a80d5312f00ca3074edcfe2877ed65256"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the previous unread message.  <br /></td></tr>
 <tr class="memitem:a5739bf7bcd93ba9b190a77d5db022000" id="r_a5739bf7bcd93ba9b190a77d5db022000"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a5739bf7bcd93ba9b190a77d5db022000">operator&lt;=&gt;</a> (const <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;other) const noexcept</td></tr>
 <tr class="memitem:a0ca72779acbd6141a41ef0b23b7ba79b" id="r_a0ca72779acbd6141a41ef0b23b7ba79b"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a0ca72779acbd6141a41ef0b23b7ba79b">operator==</a> (const <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;other) const noexcept</td></tr>
 <tr class="memitem:a178b14bcfa0c1463028e1b4a61d975c4" id="r_a178b14bcfa0c1463028e1b4a61d975c4"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a178b14bcfa0c1463028e1b4a61d975c4">operator!=</a> (const <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp;other) const noexcept</td></tr>
 <tr class="memitem:acc293f95b0d6ea1a635ec10ae8075fb2" id="r_acc293f95b0d6ea1a635ec10ae8075fb2"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#acc293f95b0d6ea1a635ec10ae8075fb2">Position</a> () const noexcept</td></tr>
-<tr class="memdesc:acc293f95b0d6ea1a635ec10ae8075fb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current logical position in the combined sequence.  <br /></td></tr>
+<tr class="memdesc:acc293f95b0d6ea1a635ec10ae8075fb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current logical position in the unread sequence.  <br /></td></tr>
 <tr class="memitem:a7a7145ba1d8d3b3a1df792a428e2a89d" id="r_a7a7145ba1d8d3b3a1df792a428e2a89d"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7a7145ba1d8d3b3a1df792a428e2a89d">begin</a> () const noexcept</td></tr>
-<tr class="memdesc:a7a7145ba1d8d3b3a1df792a428e2a89d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned at the beginning of the sequence.  <br /></td></tr>
+<tr class="memdesc:a7a7145ba1d8d3b3a1df792a428e2a89d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned at the beginning of the unread snapshot.  <br /></td></tr>
 <tr class="memitem:a4f5b717c300551353e428050d047994a" id="r_a4f5b717c300551353e428050d047994a"><td class="memItemLeft">constexpr <a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4f5b717c300551353e428050d047994a">end</a> () const noexcept</td></tr>
-<tr class="memdesc:a4f5b717c300551353e428050d047994a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned one past the last element.  <br /></td></tr>
+<tr class="memdesc:a4f5b717c300551353e428050d047994a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned one past the last unread element.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td colspan="2">Public Member Functions inherited from <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase&lt; MessageWrapperIter&lt; T &gt; &gt;</a></td></tr>
 <tr class="memitem:ab01800764520f2fa73ef51912adabcf1 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab01800764520f2fa73ef51912adabcf1"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab01800764520f2fa73ef51912adabcf1">Filter</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a>&lt; MessageWrapperIter&lt; T &gt;, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
 <tr class="memdesc:ab01800764520f2fa73ef51912adabcf1 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another filter operation on top of this iterator.  <br /></td></tr>
@@ -299,8 +304,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;MessageTrait T&gt;<br />
-class helios::ecs::MessageWrapperIter&lt; T &gt;</div><p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data and type information...">MessageWrapper</a>&lt;T&gt;</span> instances. </p>
-<p>Each wrapper carries a const reference to the message and the global index, enabling the caller to access the message during iteration.</p>
+class helios::ecs::MessageWrapperIter&lt; T &gt;</div><p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data and type information...">MessageWrapper</a>&lt;T&gt;</span> for unread messages. </p>
+<p>Walks previous then current buffers for ids &gt;= <span class="tt">cursor-&gt;last_message_count</span>. Prefixed <span class="tt">operator++</span> advances the cursor to <span class="tt">current_id + 1</span>.</p>
 <p>Derives from <span class="tt">FunctionalAdapterBase</span> so the iterator itself can be used as a lazy range, enabling chained adapter calls such as <span class="tt">.Filter(...)</span>, <span class="tt">.Map(...)</span>, <span class="tt">.Take(...)</span>, etc.</p>
 <dl class="section note"><dt>Note</dt><dd>The adapter methods operate on <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data and type information...">MessageWrapper</a>&lt;T&gt;</span> values. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -310,7 +315,7 @@ class helios::ecs::MessageWrapperIter&lt; T &gt;</div><p>Bidirectional iterator 
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00038">38</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00059">59</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a8322f5702c55cf8df66f26313ab4537e" name="a8322f5702c55cf8df66f26313ab4537e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8322f5702c55cf8df66f26313ab4537e">&#9670;&#160;</a></span>difference_type</h2>
@@ -326,7 +331,7 @@ template&lt;MessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00046">46</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00067">67</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -344,7 +349,7 @@ template&lt;MessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00042">42</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00063">63</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -362,7 +367,7 @@ template&lt;MessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00041">41</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00062">62</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -380,7 +385,7 @@ template&lt;MessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00045">45</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00066">66</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -398,7 +403,7 @@ template&lt;MessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00044">44</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00065">65</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -416,7 +421,7 @@ template&lt;MessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00043">43</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00064">64</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -448,8 +453,8 @@ template&lt;MessageTrait T&gt; </div>
 
 </div>
 </div>
-<a id="ad578ad8a07cdf3ac938b2866f32d9046" name="ad578ad8a07cdf3ac938b2866f32d9046"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad578ad8a07cdf3ac938b2866f32d9046">&#9670;&#160;</a></span>MessageWrapperIter() <span class="overload">[2/4]</span></h2>
+<a id="ae574af4a989bcd2eea12db8e4537a9af" name="ae574af4a989bcd2eea12db8e4537a9af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae574af4a989bcd2eea12db8e4537a9af">&#9670;&#160;</a></span>MessageWrapperIter() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -462,12 +467,37 @@ template&lt;MessageTrait T&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::MessageWrapperIter </td>
           <td>(</td>
-          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>previous_messages</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>second</em></span>, </td>
+          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>current_messages</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>previous_ids</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>current_ids</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; *</td>          <td class="paramname"><span class="paramname"><em>cursor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>previous_offset</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>current_offset</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -482,17 +512,22 @@ template&lt;MessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a wrapper iterator over two contiguous message spans. </p>
+<p>Constructs an unread-message wrapper iterator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">first</td><td>Span of messages from the previous frame </td></tr>
-    <tr><td class="paramname">second</td><td>Span of messages from the current frame </td></tr>
-    <tr><td class="paramname">position</td><td>Logical position in the combined [first | second] sequence </td></tr>
+    <tr><td class="paramname">previous_messages</td><td>Span of messages from the previous frame </td></tr>
+    <tr><td class="paramname">current_messages</td><td>Span of messages from the current frame </td></tr>
+    <tr><td class="paramname">previous_ids</td><td>Ids aligned with <span class="tt">previous_messages</span> </td></tr>
+    <tr><td class="paramname">current_ids</td><td>Ids aligned with <span class="tt">current_messages</span> </td></tr>
+    <tr><td class="paramname">cursor</td><td>Delivery cursor advanced by <span class="tt">operator++</span> (may be null only for a singular iterator) </td></tr>
+    <tr><td class="paramname">previous_offset</td><td>First unread index in the previous buffer </td></tr>
+    <tr><td class="paramname">current_offset</td><td>First unread index in the current buffer </td></tr>
+    <tr><td class="paramname">position</td><td>Logical position in the combined unread sequence </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00056">56</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00083">83</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -603,10 +638,10 @@ template&lt;MessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a copy of this iterator positioned at the beginning of the sequence. </p>
-<p>Required so <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html" title="Bidirectional iterator that yields MessageWrapper&lt;T&gt; instances.">MessageWrapperIter</a></span> can act as a self-contained range for <span class="tt">FunctionalAdapterBase</span> adapter methods. </p><dl class="section return"><dt>Returns</dt><dd>Iterator reset to position 0 </dd></dl>
+<p>Returns a copy of this iterator positioned at the beginning of the unread snapshot. </p>
+<p>Required so <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html" title="Bidirectional iterator that yields MessageWrapper&lt;T&gt; for unread messages.">MessageWrapperIter</a></span> can act as a self-contained range for <span class="tt">FunctionalAdapterBase</span> adapter methods. </p><dl class="section return"><dt>Returns</dt><dd>Iterator reset to position 0 over the same unread window </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00129">129</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00174">174</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -635,10 +670,10 @@ template&lt;MessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a copy of this iterator positioned one past the last element. </p>
-<dl class="section return"><dt>Returns</dt><dd>Iterator at position <span class="tt">first_.size() + second_.size()</span> </dd></dl>
+<p>Returns a copy of this iterator positioned one past the last unread element. </p>
+<p>The end iterator does not advance the cursor. </p><dl class="section return"><dt>Returns</dt><dd>Iterator at position equal to the unread count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00138">138</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00191">191</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -667,12 +702,12 @@ template&lt;MessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00111">111</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00156">156</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a899a8bed5ba944e492bf36a659f6bf27" name="a899a8bed5ba944e492bf36a659f6bf27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a899a8bed5ba944e492bf36a659f6bf27">&#9670;&#160;</a></span>operator*()</h2>
+<a id="a5d9d329c013280ba389f2828c47eb02d" name="a5d9d329c013280ba389f2828c47eb02d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d9d329c013280ba389f2828c47eb02d">&#9670;&#160;</a></span>operator*()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -683,7 +718,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a83545b32f67d79613dc5e62e38b848f4">reference</a> <a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::operator* </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::operator* </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -691,17 +726,21 @@ template&lt;MessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00070">70</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Gets the current unread message wrapper. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the iterator is singular or out of range. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Message wrapper for the current unread message </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00220">220</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad50324dbcf3e5f26c1ef55b57106c2a6" name="ad50324dbcf3e5f26c1ef55b57106c2a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad50324dbcf3e5f26c1ef55b57106c2a6">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+<a id="a1a66e149f6582aaa26cc08e8bb1e61b6" name="a1a66e149f6582aaa26cc08e8bb1e61b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a66e149f6582aaa26cc08e8bb1e61b6">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -712,7 +751,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::operator++ </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::operator++ </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -720,17 +759,21 @@ template&lt;MessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00079">79</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Advances to the next unread message and updates the cursor. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the cursor is null or the iterator is at end. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this iterator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00227">227</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a89c74da77806b6b1f58bbfe98bf198d1" name="a89c74da77806b6b1f58bbfe98bf198d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89c74da77806b6b1f58bbfe98bf198d1">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+<a id="af78aa2bf50f783d0db3629e462ce8bfd" name="af78aa2bf50f783d0db3629e462ce8bfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af78aa2bf50f783d0db3629e462ce8bfd">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -741,7 +784,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> <a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::operator++ </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::operator++ </td>
           <td>(</td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -749,17 +792,21 @@ template&lt;MessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00084">84</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Advances to the next unread message and updates the cursor. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the cursor is null or the iterator is at end. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Copy of this iterator before advancing </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00238">238</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aa9e461e21d6f71b1db23a05ea1abf7ba" name="aa9e461e21d6f71b1db23a05ea1abf7ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9e461e21d6f71b1db23a05ea1abf7ba">&#9670;&#160;</a></span>operator--() <span class="overload">[1/2]</span></h2>
+<a id="a22d6887922afec3783452870b0d8116e" name="a22d6887922afec3783452870b0d8116e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22d6887922afec3783452870b0d8116e">&#9670;&#160;</a></span>operator--() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -770,7 +817,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::operator-- </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::operator-- </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -778,17 +825,21 @@ template&lt;MessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00090">90</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Moves to the previous unread message. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the iterator is at the beginning. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this iterator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00246">246</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a20e2094dabe9c3c3cbcfa808dcc95fd2" name="a20e2094dabe9c3c3cbcfa808dcc95fd2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20e2094dabe9c3c3cbcfa808dcc95fd2">&#9670;&#160;</a></span>operator--() <span class="overload">[2/2]</span></h2>
+<a id="a80d5312f00ca3074edcfe2877ed65256" name="a80d5312f00ca3074edcfe2877ed65256"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80d5312f00ca3074edcfe2877ed65256">&#9670;&#160;</a></span>operator--() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -799,7 +850,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a04be89e1384b66d1096012bfc17d8a44">MessageWrapperIter</a> <a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::operator-- </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1MessageWrapperIter.html">helios::ecs::MessageWrapperIter</a>&lt; T &gt;::operator-- </td>
           <td>(</td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -807,12 +858,16 @@ template&lt;MessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00095">95</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Moves to the previous unread message. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the iterator is at the beginning. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Copy of this iterator before moving </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00253">253</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -868,7 +923,7 @@ template&lt;MessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00101">101</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00146">146</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -951,7 +1006,7 @@ template&lt;MessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00106">106</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00151">151</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -980,10 +1035,10 @@ template&lt;MessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the current logical position in the combined sequence. </p>
+<p>Returns the current logical position in the unread sequence. </p>
 <dl class="section return"><dt>Returns</dt><dd>Zero-based position index </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00120">120</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00165">165</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>

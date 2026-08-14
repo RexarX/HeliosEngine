@@ -215,8 +215,14 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application frame counter resource.  <a href="structhelios_1_1app_1_1FrameCount.html#details">More...</a><br /></td></tr>
 <tr class="memitem:FrameCountPlugin" id="r_FrameCountPlugin"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1app_1_1FrameCountPlugin.html">FrameCountPlugin</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the <span class="tt"><a class="el" href="structhelios_1_1app_1_1FrameCount.html" title="Application frame counter resource.">FrameCount</a></span> resource and its per-frame update system.  <a href="classhelios_1_1app_1_1FrameCountPlugin.html#details">More...</a><br /></td></tr>
+<tr class="memitem:FrameOrder" id="r_FrameOrder"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1app_1_1FrameOrder.html">FrameOrder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ordered list of stages to run for one frame pass.  <a href="classhelios_1_1app_1_1FrameOrder.html#details">More...</a><br /></td></tr>
+<tr class="memitem:FramePumpOrder" id="r_FramePumpOrder"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1FramePumpOrder.html">FramePumpOrder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stages run by nested frame pumps (e.g. OS modal loops).  <a href="structhelios_1_1app_1_1FramePumpOrder.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Last" id="r_Last"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1Last.html">Last</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1Last.html" title="Last schedule in a frame.">Last</a> schedule in a frame.  <a href="structhelios_1_1app_1_1Last.html#details">More...</a><br /></td></tr>
+<tr class="memitem:MainFrameOrder" id="r_MainFrameOrder"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html">MainFrameOrder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stages run by <span class="tt"><a class="el" href="classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4" title="Updates the application and its subsystems.">App::Update()</a></span> each frame.  <a href="structhelios_1_1app_1_1MainFrameOrder.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MainStartup" id="r_MainStartup"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1MainStartup.html">MainStartup</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main-thread startup schedule (window creation, etc.).  <a href="structhelios_1_1app_1_1MainStartup.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Plugin" id="r_Plugin"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1app_1_1Plugin.html">Plugin</a></td></tr>
@@ -338,6 +344,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a8e052e1da732c35b13c145cafe5b675f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a single sub-app update stage.  <br /></td></tr>
 <tr class="memitem:af388595529c0a9f54fbe45d3728edbf0" id="r_af388595529c0a9f54fbe45d3728edbf0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af388595529c0a9f54fbe45d3728edbf0">RegisterBuiltinSchedules</a> (<a class="el" href="classhelios_1_1ecs_1_1Scheduler.html">ecs::Scheduler</a> &amp;scheduler)</td></tr>
 <tr class="memdesc:af388595529c0a9f54fbe45d3728edbf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers default application schedules on an ECS scheduler.  <br /></td></tr>
+<tr class="memitem:a16ee678738ff6f4bb4ecc37324a47281" id="r_a16ee678738ff6f4bb4ecc37324a47281"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a16ee678738ff6f4bb4ecc37324a47281">RegisterBuiltinFrameOrders</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world)</td></tr>
+<tr class="memdesc:a16ee678738ff6f4bb4ecc37324a47281"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts default <span class="tt"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a></span> and <span class="tt"><a class="el" href="structhelios_1_1app_1_1FramePumpOrder.html" title="Stages run by nested frame pumps (e.g. OS modal loops).">FramePumpOrder</a></span> resources.  <br /></td></tr>
 <tr class="memitem:a60d91b67bd8440f11125ee67906c6da2" id="r_a60d91b67bd8440f11125ee67906c6da2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a60d91b67bd8440f11125ee67906c6da2">RegisterBuiltinSubAppSchedules</a> (<a class="el" href="classhelios_1_1ecs_1_1Scheduler.html">ecs::Scheduler</a> &amp;scheduler)</td></tr>
 <tr class="memdesc:a60d91b67bd8440f11125ee67906c6da2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers built-in schedules for a sub-app ECS scheduler.  <br /></td></tr>
 <tr class="memitem:a29e542966caa88d8a8cff7e975d6ac1b" id="r_a29e542966caa88d8a8cff7e975d6ac1b"><td class="memTemplParams" colspan="2">template&lt;SubAppTrait T&gt; </td></tr>
@@ -465,7 +473,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type id for plugins. </p>
 
-<p class="definition">Definition at line <a class="el" href="plugin_8hpp_source.html#l00068">68</a> of file <a class="el" href="plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00068">68</a> of file <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -483,7 +491,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type index for plugins. </p>
 
-<p class="definition">Definition at line <a class="el" href="plugin_8hpp_source.html#l00065">65</a> of file <a class="el" href="plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00065">65</a> of file <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -743,7 +751,7 @@ template&lt;PluginTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Name of the plugin </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="plugin_8hpp_source.html#l00095">95</a> of file <a class="el" href="plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00095">95</a> of file <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -787,7 +795,42 @@ template&lt;PluginTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Name of the plugin </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="plugin_8hpp_source.html#l00110">110</a> of file <a class="el" href="plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00110">110</a> of file <a class="el" href="app_2include_2helios_2app_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a16ee678738ff6f4bb4ecc37324a47281" name="a16ee678738ff6f4bb4ecc37324a47281"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16ee678738ff6f4bb4ecc37324a47281">&#9670;&#160;</a></span>RegisterBuiltinFrameOrders()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::RegisterBuiltinFrameOrders </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>world</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserts default <span class="tt"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a></span> and <span class="tt"><a class="el" href="structhelios_1_1app_1_1FramePumpOrder.html" title="Stages run by nested frame pumps (e.g. OS modal loops).">FramePumpOrder</a></span> resources. </p>
+<p>Safe to call multiple times (<span class="tt">TryInsertResources</span>). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world</td><td>World that owns the frame-order resources </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00243">243</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -822,7 +865,7 @@ template&lt;PluginTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00154">154</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00156">156</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -857,7 +900,7 @@ template&lt;PluginTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00225">225</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00261">261</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1259,7 +1302,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin extract schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00122">122</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00124">124</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1285,7 +1328,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin stage for extraction. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00034">34</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00036">36</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1311,7 +1354,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin first schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00082">82</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00084">84</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1337,7 +1380,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin last schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00114">114</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00116">116</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1363,7 +1406,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin main-thread startup schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00050">50</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00052">52</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1389,7 +1432,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin post-shutdown schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00146">146</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00148">148</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1415,7 +1458,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin post-startup schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00074">74</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00076">76</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1441,7 +1484,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin post-update schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00106">106</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00108">108</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1467,7 +1510,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin pre-shutdown schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00130">130</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00132">132</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1493,7 +1536,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin pre-startup schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00058">58</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00060">60</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1519,7 +1562,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin pre-update schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00090">90</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00092">92</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1545,7 +1588,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin shutdown schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00138">138</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00140">140</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1571,7 +1614,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin stage for shutdown. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00042">42</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00044">44</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1597,7 +1640,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin startup schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00066">66</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00068">68</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1623,7 +1666,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin stage for startup. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00018">18</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00020">20</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1649,7 +1692,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin update schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00098">98</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00100">100</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
@@ -1675,7 +1718,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Builtin stage for per-frame updates. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00026">26</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00028">28</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
 
 </div>
 </div>
