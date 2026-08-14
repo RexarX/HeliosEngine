@@ -176,14 +176,24 @@ function(helios_target_set_optimization TARGET)
           /Zc:preprocessor
           /MP
           $<$<CONFIG:Debug>:/Od /Zi /RTC1 /MDd>
-          $<$<CONFIG:RelWithDebInfo>:/O2 /Zi /DNDEBUG>
+          # /Ob2 + /Zo: Release-like inlining with better optimized debugging
+          $<$<CONFIG:RelWithDebInfo>:/O2 /Ob2 /Zi /Zo /DNDEBUG>
           $<$<CONFIG:Release>:/O2 /Ob2 /DNDEBUG>
       >
       # GCC and Clang on Unix-like systems
       $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:
           $<$<CONFIG:Debug>:-Og -g3 -ggdb>
-          $<$<CONFIG:RelWithDebInfo>:-O2 -g -DNDEBUG>
-          $<$<CONFIG:Release>:-O3 -DNDEBUG>
+          # Match Release -O3 while keeping DWARF and usable backtraces
+          $<$<CONFIG:RelWithDebInfo>:-O3 -g -fno-omit-frame-pointer -ffunction-sections -fdata-sections -DNDEBUG>
+          $<$<CONFIG:Release>:-O3 -ffunction-sections -fdata-sections -DNDEBUG>
+      >
+      # Split DWARF: smaller link inputs, same debug experience (Linux ELF)
+      $<$<AND:$<PLATFORM_ID:Linux>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>>:
+          $<$<CONFIG:RelWithDebInfo>:-gsplit-dwarf>
+      >
+      # Clang: richer line tables in heavily inlined -O3 code
+      $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>:
+          $<$<CONFIG:RelWithDebInfo>:-fdebug-info-for-profiling>
       >
   )
 
@@ -196,17 +206,24 @@ function(helios_target_set_optimization TARGET)
               -rdynamic
           >
       >
-      # Windows: No special linker flags needed for debugging (PDB is handled by /Zi)
+      # ELF: COMDAT GC pairs with -ffunction-sections / -fdata-sections
+      $<$<AND:$<PLATFORM_ID:Linux>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>>:
+          $<$<CONFIG:RelWithDebInfo>:-Wl,--gc-sections>
+      >
+      # Mach-O: strip unreferenced sections at link time
+      $<$<AND:$<PLATFORM_ID:Darwin>,$<OR:$<CXX_COMPILER_ID:Clang,AppleClang>>>:
+          $<$<CONFIG:RelWithDebInfo>:-Wl,-dead_strip>
+      >
   )
 
-  # Enable incremental linking for Debug builds on MSVC
-  # This significantly speeds up link times during development
+  # MSVC: incremental linking for Debug; REF/ICF for RelWithDebInfo (/DEBUG disables them by default)
   get_target_property(_target_type ${TARGET} TYPE)
   if(_target_type STREQUAL "EXECUTABLE" OR _target_type STREQUAL "SHARED_LIBRARY")
     target_link_options(${TARGET} PRIVATE
         $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
             $<$<CONFIG:Debug>:/INCREMENTAL>
             $<$<NOT:$<CONFIG:Debug>>:/INCREMENTAL:NO>
+            $<$<CONFIG:RelWithDebInfo>:/OPT:REF /OPT:ICF>
         >
     )
   endif()
@@ -223,6 +240,8 @@ endfunction()
     helios_target_enable_lto(<target>)
 
     Enables IPO/LTO properties for Release and RelWithDebInfo when supported.
+    Also applies RelWithDebInfo ThinLTO / parallel LTO / incremental LTCG via
+    helios_target_apply_lto_mode().
 ]]
 function(helios_target_enable_lto TARGET)
   if(NOT HELIOS_ENABLE_LTO)
@@ -241,6 +260,64 @@ function(helios_target_enable_lto TARGET)
         INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON
         INTERPROCEDURAL_OPTIMIZATION_RELEASE ON
     )
+    if(COMMAND helios_target_apply_lto_mode)
+      helios_target_apply_lto_mode(${TARGET})
+    endif()
+  endif()
+endfunction()
+
+# ============================================================================
+# Consumer conventions (opt-in)
+# ============================================================================
+
+#[[
+    helios_apply_conventions(<target>
+        [NO_WARNINGS] [NO_OPTIMIZATION] [NO_LTO] [NO_SANITIZERS]
+        [NO_PLATFORM] [NO_LINKER] [STANDARD <n>]
+    )
+
+    Opt-in Helios build conventions for a consumer target (game executable,
+    plugin, etc.). Linking helios::module::* alone does not apply these flags.
+
+    Example:
+        helios_apply_conventions(my_game)
+        helios_link_modules(TARGET my_game MODULES PUBLIC app)
+]]
+function(helios_apply_conventions TARGET)
+  cmake_parse_arguments(ARG
+      "NO_WARNINGS;NO_OPTIMIZATION;NO_LTO;NO_SANITIZERS;NO_PLATFORM;NO_LINKER"
+      "STANDARD"
+      ""
+      ${ARGN}
+  )
+
+  if(NOT TARGET ${TARGET})
+    message(FATAL_ERROR "helios_apply_conventions: target '${TARGET}' does not exist")
+  endif()
+
+  if(NOT ARG_STANDARD)
+    set(ARG_STANDARD 23)
+  endif()
+
+  helios_target_set_cxx_standard(${TARGET} STANDARD ${ARG_STANDARD})
+
+  if(NOT ARG_NO_PLATFORM)
+    helios_target_set_platform(${TARGET})
+  endif()
+  if(NOT ARG_NO_OPTIMIZATION)
+    helios_target_set_optimization(${TARGET})
+  endif()
+  if(NOT ARG_NO_WARNINGS)
+    helios_target_set_warnings(${TARGET})
+  endif()
+  if(NOT ARG_NO_SANITIZERS)
+    helios_target_enable_sanitizers(${TARGET})
+  endif()
+  if(NOT ARG_NO_LINKER AND COMMAND helios_target_apply_linker)
+    helios_target_apply_linker(${TARGET})
+  endif()
+  if(NOT ARG_NO_LTO AND HELIOS_ENABLE_LTO)
+    helios_target_enable_lto(${TARGET})
   endif()
 endfunction()
 

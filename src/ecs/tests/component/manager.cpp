@@ -81,9 +81,16 @@ struct MoveOnlyComponent {
       default;
 };
 
-using MotionBundle = ComponentBundle<Position, SparseVelocity>;
-using StateBundle = ComponentBundle<Health, SparseHealth>;
-using NestedBundle = ComponentBundle<MotionBundle, StateBundle>;
+using MotionBundle = ComponentBundleTypes<Position, SparseVelocity>;
+using StateBundle = ComponentBundleTypes<Health, SparseHealth>;
+using NestedBundle = ComponentBundleTypes<MotionBundle, StateBundle>;
+using PositionVelocityBundle = ComponentBundleTypes<Position, Velocity>;
+using PositionOnlyBundle = ComponentBundleTypes<Position>;
+using MoveOnlyBundle = ComponentBundleTypes<MoveOnlyComponent>;
+using SparseNestedTryBundle =
+    ComponentBundleTypes<SparsePosition, Position, SparseVelocity>;
+using RemoveTryBundle =
+    ComponentBundleTypes<SparsePosition, Position, SparseVelocity, Health>;
 
 }  // namespace
 
@@ -868,8 +875,9 @@ TEST_SUITE("helios::ecs::ComponentManager") {
 
       mgr.InitEntity(entity);
       mgr.Add(entity, Position{.x = 1.0F, .y = 2.0F});
-      mgr.AddBundle(entity, ComponentBundle{Position{.x = 5.0F, .y = 6.0F},
-                                            Velocity{.x = 7.0F, .y = 8.0F}});
+      mgr.AddBundle(entity,
+                    PositionVelocityBundle{Position{.x = 5.0F, .y = 6.0F},
+                                           Velocity{.x = 7.0F, .y = 8.0F}});
 
       CHECK_EQ(mgr.Get<Position>(entity), Position{.x = 5.0F, .y = 6.0F});
       CHECK_EQ(mgr.Get<Velocity>(entity), Velocity{.x = 7.0F, .y = 8.0F});
@@ -879,7 +887,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
       ComponentManager mgr;
 
       mgr.InitEntity(entity);
-      mgr.AddBundle(entity, ComponentBundle{MoveOnlyComponent{42}});
+      mgr.AddBundle(entity, MoveOnlyBundle{MoveOnlyComponent{42}});
 
       CHECK_EQ(mgr.Get<MoveOnlyComponent>(entity).value, 42);
     }
@@ -889,16 +897,14 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Results follow flattened declaration order") {
-      using Bundle = ComponentBundle<SparsePosition,
-                                     ComponentBundle<Position, SparseVelocity>>;
       ComponentManager mgr;
 
       mgr.InitEntity(entity);
       mgr.Add(entity, Position{});
       const auto results = mgr.TryAddBundle(
-          entity, Bundle{SparsePosition{.x = 1.0F},
-                         ComponentBundle{Position{.x = 2.0F},
-                                         SparseVelocity{.x = 3.0F}}});
+          entity,
+          SparseNestedTryBundle{SparsePosition{.x = 1.0F}, Position{.x = 2.0F},
+                                SparseVelocity{.x = 3.0F}});
 
       CHECK(results[0]);
       CHECK_FALSE(results[1]);
@@ -911,7 +917,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
 
       mgr.InitEntity(entity);
       const bool added =
-          mgr.TryAddBundle(entity, ComponentBundle{Position{.x = 1.0F}});
+          mgr.TryAddBundle(entity, PositionOnlyBundle{Position{.x = 1.0F}});
 
       CHECK(added);
     }
@@ -1118,14 +1124,11 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     constexpr Entity entity{1, 0};
 
     SUBCASE("Results follow flattened declaration order") {
-      using Bundle =
-          ComponentBundle<SparsePosition,
-                          ComponentBundle<Position, SparseVelocity, Health>>;
       ComponentManager mgr;
 
       mgr.InitEntity(entity);
       mgr.Add(entity, Position{}, SparseVelocity{});
-      const auto results = mgr.TryRemoveBundle<Bundle>(entity);
+      const auto results = mgr.TryRemoveBundle<RemoveTryBundle>(entity);
 
       CHECK_FALSE(results[0]);
       CHECK(results[1]);
@@ -1138,8 +1141,7 @@ TEST_SUITE("helios::ecs::ComponentManager") {
 
       mgr.InitEntity(entity);
       mgr.Add(entity, Position{});
-      const bool removed =
-          mgr.TryRemoveBundle<ComponentBundle<Position>>(entity);
+      const bool removed = mgr.TryRemoveBundle<PositionOnlyBundle>(entity);
 
       CHECK(removed);
     }

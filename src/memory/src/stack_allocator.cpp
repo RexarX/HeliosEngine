@@ -287,9 +287,7 @@ void StackAllocator::do_deallocate(void* ptr, size_t bytes,
     if (bytes > 0) {
       const size_t waste =
           header->total_size > bytes ? header->total_size - bytes : 0;
-      alignment_waste_.fetch_sub(
-          std::min(waste, alignment_waste_.load(std::memory_order_relaxed)),
-          std::memory_order_relaxed);
+      details::SaturatingFetchSub(alignment_waste_, waste);
     }
   }
 }

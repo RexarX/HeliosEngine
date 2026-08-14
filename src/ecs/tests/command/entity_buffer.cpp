@@ -35,8 +35,9 @@ struct Score {
   int value = 0;
 };
 
-using MotionBundle = ComponentBundle<Position, Velocity>;
-using GameplayBundle = ComponentBundle<MotionBundle, Health>;
+using MotionBundle = ComponentBundleTypes<Position, Velocity>;
+using GameplayBundle = ComponentBundleTypes<MotionBundle, Health>;
+using MoveOnlyBundle = ComponentBundleTypes<MoveOnly>;
 
 }  // namespace
 
@@ -260,8 +261,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
-        buf.AddBundle(
-            ComponentBundle<MoveOnly>{MoveOnly{std::make_unique<int>(42)}});
+        buf.AddBundle(MoveOnlyBundle{MoveOnly{std::make_unique<int>(42)}});
       }
 
       queue.ExecuteAll(world);

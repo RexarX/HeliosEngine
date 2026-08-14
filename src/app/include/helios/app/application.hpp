@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <helios/app/details/profile.hpp>
 #include <helios/app/dynamic_plugin.hpp>
@@ -54,8 +54,8 @@ enum class ExitCode : uint8_t {
 /**
  * @brief Message that requests the application to exit.
  * @details Written by systems; `RunDefault` stops when this message is present.
- * Uses manual clear policy so it survives per-schedule `World::Update()` sync
- * points within a frame.
+ * Uses manual clear policy so it survives per-stage message merge / advance
+ * within a frame.
  */
 struct AppExit {
   static constexpr std::string_view kName = "helios::app::AppExit";
@@ -150,12 +150,23 @@ public:
 
   /**
    * @brief Updates the application and its subsystems.
-   * @details Calls Update on the main sub-app and all added sub-apps.
-   * Spawns async tasks as needed.
+   * @details Walks `MainFrameOrder` on the main sub-app (extract/sub-apps when
+   * that order includes `kExtractStage`).
    * @note Not thread-safe.
    * @warning Triggers assertion if app is not initialized.
    */
   void Update();
+
+  /**
+   * @brief Runs an ordered stage list on the main sub-app.
+   * @details Used by nested frame pumps via `FramePumpOrder`. Honors per-stage
+   * `apply_commands`, `merge_messages`, and `advance_messages`. Extract and
+   * sub-app updates run only when `kExtractStage` is present in the order.
+   * @note Not thread-safe.
+   * @warning Triggers assertion if app is not initialized.
+   * @param order Stages to run
+   */
+  void RunFrameOrder(const FrameOrder& order);
 
   /**
    * @brief Runs the application with the given arguments.
@@ -669,7 +680,7 @@ private:
     template <PluginTrait T, typename... Args>
       requires std::constructible_from<T, Args...>
     [[nodiscard]] static PluginStorage From(Args&&... args) {
-      return PluginStorage{
+      return {
           .plugin = std::make_unique<T>(std::forward<Args>(args)...),
           .name = PluginNameOf<T>(),
       };
@@ -703,23 +714,19 @@ private:
   template <SubAppTrait T>
   static void ApplySubAppLabelTraits(SubApp& sub_app, const T& label);
 
-  bool is_initialized_ = false;  ///< Whether the app has been initialized
-
-  /// Whether the app is currently running
+  bool is_initialized_ = false;
   std::atomic<bool> is_running_{false};
 
-  FlatMap<PluginTypeIndex, PluginStorage> plugins_;  ///< Plugins
-
-  /// Dynamic plugins
+  FlatMap<PluginTypeIndex, PluginStorage> plugins_;
   FlatMap<PluginTypeIndex, DynamicPlugin> dynamic_plugins_;
 
-  async::Executor executor_;  ///< Async executor for parallel execution
-  Scheduler scheduler_;       ///< Frame scheduler for main and sub-apps
+  async::Executor executor_;
+  Scheduler scheduler_;
 
-  SubApp main_sub_app_;                        ///< The main sub-app
-  FlatMap<SubAppTypeIndex, SubApp> sub_apps_;  ///< Additional sub-apps
+  SubApp main_sub_app_;
+  FlatMap<SubAppTypeIndex, SubApp> sub_apps_;
 
-  RunnerFn runner_;  ///< The runner function
+  RunnerFn runner_;
 
   // Tracy lockables are incompatible with std::condition_variable.
   mutable std::mutex plugins_ready_mutex_;
@@ -736,6 +743,13 @@ inline void App::Update() {
   scheduler_.RunFrame(*this);
 
   HELIOS_APP_PROFILE_FRAME();
+}
+
+inline void App::RunFrameOrder(const FrameOrder& order) {
+  HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::RunFrameOrder");
+
+  HELIOS_ASSERT(is_initialized_, "App is not initialized!");
+  scheduler_.RunFrameOrder(*this, order);
 }
 
 inline void App::NotifyPluginReadinessChanged() noexcept {

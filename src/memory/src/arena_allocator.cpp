@@ -197,12 +197,18 @@ void* ArenaAllocator::do_allocate(size_t bytes, size_t alignment) {
   const size_t effective_alignment = std::max(alignment, kMinAlignment);
   Reservation reservation{};
   for (;;) {
-    Block* const head = head_.load(std::memory_order_acquire);
-    if (head != nullptr) {
-      reservation = TryReserve(*head, bytes, effective_alignment);
+    // Walk the full block chain so soft-Reset arenas reuse free space in
+    // older blocks. Head-only reservation grows a new block every frame when
+    // per-cycle usage exceeds the latest head capacity but fits in the chain.
+    for (Block* block = head_.load(std::memory_order_acquire); block != nullptr;
+         block = block->next.load(std::memory_order_acquire)) {
+      reservation = TryReserve(*block, bytes, effective_alignment);
       if (reservation.ptr != nullptr) {
         break;
       }
+    }
+    if (reservation.ptr != nullptr) {
+      break;
     }
 
     const size_t min_capacity = SaturatingAdd(bytes, effective_alignment);

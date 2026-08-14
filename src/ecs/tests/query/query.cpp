@@ -1214,6 +1214,94 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
+  TEST_CASE("helios::ecs::BasicQuery - sparse With filter iteration") {
+    SUBCASE("Count respects sparse With filter") {
+      ComponentManager mgr;
+      constexpr Entity e_no_sparse{20, 0};
+      constexpr Entity e_with_sparse{21, 0};
+      AddPos(mgr, e_no_sparse, {});
+      AddPos(mgr, e_with_sparse, {});
+      AddSparseBuff(mgr, e_with_sparse, {.stacks = 1});
+
+      const auto query = MakeQuery<const Position&, With<SparseBuff>>(mgr);
+
+      CHECK_EQ(query.Count(), 1);
+    }
+
+    SUBCASE("Range-for respects sparse With filter") {
+      ComponentManager mgr;
+      constexpr Entity e_no_sparse{22, 0};
+      constexpr Entity e_with_sparse{23, 0};
+      AddPos(mgr, e_no_sparse, {.x = 1.0F});
+      AddPos(mgr, e_with_sparse, {.x = 2.0F});
+      AddSparseBuff(mgr, e_with_sparse, {.stacks = 1});
+
+      const auto query = MakeQuery<const Position&, With<SparseBuff>>(mgr);
+
+      std::vector<float> xs;
+      for (const auto& [pos] : query) {
+        xs.push_back(pos.x);
+      }
+      REQUIRE_EQ(xs.size(), 1);
+      CHECK_EQ(xs[0], doctest::Approx(2.0F));
+    }
+
+    SUBCASE("ForEach respects sparse With filter") {
+      ComponentManager mgr;
+      constexpr Entity e_with_sparse{24, 0};
+      AddPos(mgr, e_with_sparse, {.x = 3.0F});
+      AddPos(mgr, Entity{25, 0}, {.x = 4.0F});
+      AddSparseBuff(mgr, e_with_sparse, {.stacks = 1});
+
+      const auto query = MakeQuery<const Position&, With<SparseBuff>>(mgr);
+
+      size_t count = 0;
+      query.ForEach([&count](const Position& pos) {
+        ++count;
+        CHECK_EQ(pos.x, doctest::Approx(3.0F));
+      });
+      CHECK_EQ(count, 1);
+    }
+
+    SUBCASE("WithEntity iteration respects sparse With filter") {
+      ComponentManager mgr;
+      constexpr Entity e_with_sparse{26, 0};
+      AddPos(mgr, e_with_sparse, {});
+      AddPos(mgr, Entity{27, 0}, {});
+      AddSparseBuff(mgr, e_with_sparse, {.stacks = 1});
+
+      auto query = MakeQuery<const Position&, With<SparseBuff>>(mgr);
+      const auto we = query.WithEntity();
+
+      CHECK_EQ(we.Count(), 1);
+      const auto collected = we.Collect();
+      REQUIRE_EQ(collected.size(), 1);
+      CHECK_EQ(std::get<0>(collected[0]), e_with_sparse);
+    }
+
+    SUBCASE("sparse With and sparse Without combined") {
+      ComponentManager mgr;
+      constexpr Entity e_match{28, 0};
+      constexpr Entity e_missing_buff{29, 0};
+      constexpr Entity e_has_flag{30, 0};
+      AddPos(mgr, e_match, {.x = 1.0F});
+      AddPos(mgr, e_missing_buff, {.x = 2.0F});
+      AddPos(mgr, e_has_flag, {.x = 3.0F});
+      AddSparseBuff(mgr, e_match, {.stacks = 1});
+      AddSparseBuff(mgr, e_has_flag, {.stacks = 1});
+      AddSparseFlag(mgr, e_has_flag, {.value = 1});
+
+      const auto query =
+          MakeQuery<const Position&, With<SparseBuff>, Without<SparseFlag>>(
+              mgr);
+
+      CHECK_EQ(query.Count(), 1);
+      for (const auto& [pos] : query) {
+        CHECK_EQ(pos.x, doctest::Approx(1.0F));
+      }
+    }
+  }
+
   TEST_CASE("helios::ecs::BasicQuery — dynamic archetype refresh") {
     SUBCASE("Query reflects entities added after construction") {
       ComponentManager mgr;

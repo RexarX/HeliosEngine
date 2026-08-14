@@ -8,9 +8,11 @@
 #include <helios/assert.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/world.hpp>
+#include <helios/utils/defer.hpp>
 
 #include <chrono>
 #include <cstddef>
+#include <optional>
 
 namespace helios::app {
 
@@ -110,17 +112,70 @@ void Scheduler::RunStartup(App& app) {
 void Scheduler::RunFrame(App& app) {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::Scheduler::RunFrame");
 
+  const auto& order = app.GetWorld().ReadResource<MainFrameOrder>();
+  RunFrameOrder(app, order);
+}
+
+void Scheduler::RunFrameOrder(App& app, const FrameOrder& order) {
+  HELIOS_APP_PROFILE_SCOPE_N("helios::app::Scheduler::RunFrameOrder");
+
   auto& executor = app.GetExecutor();
   auto& main = app.GetMainSubApp();
+  main.BuildScheduler(executor);
+
+  auto& world = main.GetWorld();
+  auto& ecs_scheduler = main.GetScheduler();
 
   for (SubAppFrameState& state : sub_app_states_) {
     state.fresh_extract_this_frame = false;
   }
 
-  RunUpdateStage(main, executor);
-  RunExtractStage(main, executor);
-  LaunchSubAppUpdates(app);
-  WaitForSubApps();
+  bool ran_extract = false;
+  const auto extract_type_index = ecs::StageTypeIndex::From(kExtractStage);
+
+  const auto labels = order.Labels();
+  std::optional<ecs::StageTypeIndex> last_present_stage;
+  for (auto it = labels.rbegin(); it != labels.rend(); ++it) {
+    if (ecs_scheduler.HasStage(*it)) {
+      last_present_stage = *it;
+      break;
+    }
+  }
+
+  for (const ecs::StageTypeIndex stage : labels) {
+    if (!ecs_scheduler.HasStage(stage)) {
+      continue;
+    }
+
+    ecs_scheduler.RunStage(stage, world);
+
+    const auto& stage_settings = ecs_scheduler.GetStageSettings(stage);
+    if (stage_settings.apply_commands || stage_settings.merge_messages) {
+      ecs_scheduler.ApplyStageDeferred(stage, world,
+                                       stage_settings.apply_commands,
+                                       stage_settings.merge_messages);
+    }
+    // Shared StageSettings apply to every frame order; only the last present
+    // stage in *this* order may advance message buffers (MainFrameOrder ->
+    // Extract, FramePumpOrder -> Update).
+    if (last_present_stage.has_value() && stage == *last_present_stage &&
+        stage_settings.advance_messages) {
+      world.Messages().Update();
+    }
+
+    if (stage == extract_type_index) {
+      ran_extract = true;
+      const auto& main_world = main.GetWorld();
+      for (SubAppFrameState& state : sub_app_states_) {
+        ExtractSubApp(state, main_world);
+      }
+    }
+  }
+
+  if (ran_extract) {
+    LaunchSubAppUpdates(app);
+    WaitForSubApps();
+  }
 }
 
 void Scheduler::Shutdown(App& app) {
@@ -172,28 +227,9 @@ void Scheduler::RunMainStartup(SubApp& main, async::Executor& executor) {
   main.GetScheduler().RunStage(kStartupStage, main.GetWorld());
 }
 
-void Scheduler::RunUpdateStage(SubApp& main, async::Executor& executor) {
-  main.BuildScheduler(executor);
-  auto& world = main.GetWorld();
-  main.GetScheduler().RunStage(kUpdateStage, world);
-  world.Update();
-}
-
 void Scheduler::RunMainShutdown(SubApp& main, async::Executor& executor) {
   main.BuildScheduler(executor);
   main.GetScheduler().RunStage(kShutdownStage, main.GetWorld());
-}
-
-void Scheduler::RunExtractStage(SubApp& main, async::Executor& executor) {
-  main.BuildScheduler(executor);
-
-  auto& world = main.GetWorld();
-  main.GetScheduler().RunStage(kExtractStage, world);
-
-  const auto& main_world = main.GetWorld();
-  for (SubAppFrameState& state : sub_app_states_) {
-    ExtractSubApp(state, main_world);
-  }
 }
 
 void Scheduler::LaunchSubAppUpdates(App& app) {
@@ -232,14 +268,10 @@ void Scheduler::StartAsyncUpdateLoops(App& app) {
     sub_app.ResetAsyncLoopStop();
     async_loops_running_.fetch_add(1, std::memory_order_acq_rel);
 
-    async_loop_futures_.push_back(executor.Async([&sub_app, &executor, this]() {
-      struct LoopGuard {
-        Scheduler& self;
-
-        ~LoopGuard() {
-          self.async_loops_running_.fetch_sub(1, std::memory_order_acq_rel);
-        }
-      } guard{*this};
+    async_loop_futures_.push_back(executor.Async([this, &sub_app, &executor]() {
+      HELIOS_DEFER {
+        async_loops_running_.fetch_sub(1, std::memory_order_acq_rel);
+      };
 
       sub_app.RunUpdatePass(executor);
     }));

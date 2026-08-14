@@ -9,8 +9,9 @@
 #include <cstddef>
 #include <cstdlib>
 
-#ifdef HELIOS_MEMORY_USE_MIMALLOC
+#if defined(HELIOS_MEMORY_USE_MIMALLOC) && !defined(__SANITIZE_ADDRESS__)
 #include <mimalloc.h>
+#define HELIOS_ALIGNED_ALLOC_USE_MIMALLOC
 #endif
 
 namespace helios::mem {
@@ -23,7 +24,7 @@ void* AlignedAlloc(size_t alignment, size_t size,
   HELIOS_ASSERT(IsPowerOfTwo(alignment), "alignment must be a power of two!");
   HELIOS_ASSERT(size != 0, "size cannot be zero!");
 
-#ifdef HELIOS_MEMORY_USE_MIMALLOC
+#ifdef HELIOS_ALIGNED_ALLOC_USE_MIMALLOC
   void* const ptr = mi_malloc_aligned(size, alignment);
 #elif defined(_MSC_VER)
   void* const ptr = _aligned_malloc(size, alignment);
@@ -50,7 +51,7 @@ void AlignedFree(void* ptr, bool enable_profile) noexcept {
     HELIOS_MEMORY_PROFILE_FREE(ptr, "AlignedAlloc");
   }
 
-#ifdef HELIOS_MEMORY_USE_MIMALLOC
+#ifdef HELIOS_ALIGNED_ALLOC_USE_MIMALLOC
   mi_free(ptr);
 #elif defined(_MSC_VER)
   _aligned_free(ptr);

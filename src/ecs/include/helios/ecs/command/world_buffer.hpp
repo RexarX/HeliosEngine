@@ -111,7 +111,7 @@ public:
       -> decltype(std::forward<decltype(self)>(self));
 
   /**
-   * @brief Enqueues a command to be executed during the next `World::Update()`.
+   * @brief Enqueues a command to be executed during the next `World::Flush()`.
    * @details Equivalent to enqueueing a `FunctionCmd` with the given callable.
    * @note Not thread-safe.
    * @tparam F Callable type, must have signature `void(World&)`

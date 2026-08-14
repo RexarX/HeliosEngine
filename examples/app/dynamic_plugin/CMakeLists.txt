@@ -12,10 +12,7 @@ add_library(example_dynamic_plugin SHARED plugins/example_plugin.cpp)
 target_include_directories(example_dynamic_plugin PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
-helios_target_set_cxx_standard(example_dynamic_plugin STANDARD 23)
-helios_target_set_warnings(example_dynamic_plugin)
-helios_target_set_platform(example_dynamic_plugin)
-helios_target_set_optimization(example_dynamic_plugin)
+helios_apply_conventions(example_dynamic_plugin)
 helios_target_set_shared_lib_platform(example_dynamic_plugin)
 helios_target_set_output_dirs(example_dynamic_plugin CUSTOM_FOLDER examples)
 helios_target_set_folder(example_dynamic_plugin "Examples")

@@ -2,6 +2,8 @@
 
 #include <helios/container/callable_buffer_array.hpp>
 
+#include <array>
+#include <cstddef>
 #include <memory_resource>
 #include <string>
 #include <vector>
@@ -615,6 +617,59 @@ TEST_SUITE("helios::container::CallableBufferArray") {
       CHECK_EQ(InvocationTracker::call_order.size(), 2);
       CHECK_EQ(InvocationTracker::call_order[0], 1);
       CHECK_EQ(InvocationTracker::call_order[1], 2);
+    }
+
+    SUBCASE("shared monotonic resource merge into empty after growth") {
+      InvocationTracker::Reset();
+
+      std::array<std::byte, 4096> storage{};
+      std::pmr::monotonic_buffer_resource resource(storage.data(),
+                                                   storage.size());
+
+      PmrCallableBufferArray<void()> dest{&resource};
+      PmrCallableBufferArray<void()> src{&resource};
+      for (int i = 0; i < 8; ++i) {
+        src.Push(NonTrivialCallable{std::string(32, 'a'), i});
+      }
+
+      dest.Merge(std::move(src));
+
+      CHECK_EQ(dest.Size(), 8);
+      CHECK(src.Empty());
+
+      dest.Invoke();
+      CHECK_EQ(InvocationTracker::call_order.size(), 8);
+      for (int i = 0; i < 8; ++i) {
+        CHECK_EQ(InvocationTracker::call_order[static_cast<size_t>(i)], i);
+      }
+    }
+
+    SUBCASE("shared monotonic resource merge into non-empty after growth") {
+      InvocationTracker::Reset();
+
+      std::array<std::byte, 4096> storage{};
+      std::pmr::monotonic_buffer_resource resource(storage.data(),
+                                                   storage.size());
+
+      PmrCallableBufferArray<void()> dest{&resource};
+      dest.Push(NonTrivialCallable{"dest", 100});
+
+      PmrCallableBufferArray<void()> src{&resource};
+      for (int i = 0; i < 8; ++i) {
+        src.Push(NonTrivialCallable{std::string(32, 'b'), i});
+      }
+
+      dest.Merge(std::move(src));
+
+      CHECK_EQ(dest.Size(), 9);
+      CHECK(src.Empty());
+
+      dest.Invoke();
+      CHECK_EQ(InvocationTracker::call_order.size(), 9);
+      CHECK_EQ(InvocationTracker::call_order[0], 100);
+      for (int i = 0; i < 8; ++i) {
+        CHECK_EQ(InvocationTracker::call_order[static_cast<size_t>(i + 1)], i);
+      }
     }
   }
 

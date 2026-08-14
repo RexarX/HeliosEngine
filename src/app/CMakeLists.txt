@@ -13,6 +13,7 @@ helios_module(
         include/helios/app/app.hpp
         include/helios/app/application.hpp
         include/helios/app/dynamic_plugin.hpp
+        include/helios/app/frame_order.hpp
         include/helios/app/plugin.hpp
         include/helios/app/plugin_group.hpp
         include/helios/app/runners.hpp
@@ -50,6 +51,7 @@ helios_module(
         tests/builtin/time.cpp
         tests/application.cpp
         tests/dynamic_plugin.cpp
+        tests/frame_order.cpp
         tests/main.cpp
         tests/plugin.cpp
         tests/plugin_group.cpp
@@ -61,7 +63,8 @@ helios_module(
 
 if(TARGET helios_app_tests AND HELIOS_BUILD_TESTS)
   add_library(helios_app_test_plugin SHARED tests/plugins/test_plugin.cpp)
-  helios_target_set_platform(helios_app_test_plugin)
+  helios_apply_conventions(helios_app_test_plugin)
+  helios_target_set_shared_lib_platform(helios_app_test_plugin)
   target_link_libraries(helios_app_test_plugin PRIVATE
         helios::module::platform
         helios::module::app

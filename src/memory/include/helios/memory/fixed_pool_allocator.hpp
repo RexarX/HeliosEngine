@@ -24,7 +24,8 @@ struct FixedPoolAllocatorOptions {
 
 /**
  * @brief Fixed-capacity intrusive block pool.
- * @details Lock-free Treiber free-list over a single preallocated chunk.
+ * @details ABA-safe lock-free Treiber free-list over a single preallocated
+ * chunk.
  * @warning `Reset()` must not run concurrently with `allocate` or `deallocate`.
  */
 class FixedPoolAllocator final : public std::pmr::memory_resource {
@@ -169,7 +170,7 @@ private:
   size_t alignment_ = 0;
   size_t chunk_capacity_ = 0;
   std::byte* buffer_ = nullptr;
-  std::atomic<void*> free_head_{nullptr};
+  std::atomic<uintptr_t> free_head_{0};
   std::atomic<size_t> free_blocks_{0};
   std::atomic<size_t> peak_used_blocks_{0};
   std::atomic<size_t> total_allocations_{0};

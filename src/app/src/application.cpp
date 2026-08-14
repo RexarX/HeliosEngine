@@ -30,6 +30,7 @@ App::App()
     : main_sub_app_(std::string(SubAppNameOf(kMainSubApp))),
       runner_(RunDefault) {
   RegisterBuiltinSchedules(main_sub_app_.GetScheduler());
+  RegisterBuiltinFrameOrders(main_sub_app_.GetWorld());
 }
 
 App::App(size_t worker_thread_count)
@@ -37,6 +38,7 @@ App::App(size_t worker_thread_count)
       main_sub_app_(std::string(SubAppNameOf(kMainSubApp))),
       runner_(RunDefault) {
   RegisterBuiltinSchedules(main_sub_app_.GetScheduler());
+  RegisterBuiltinFrameOrders(main_sub_app_.GetWorld());
 }
 
 App::~App() {
@@ -75,6 +77,7 @@ void App::Clear() {
   sub_apps_.clear();
 
   RegisterBuiltinSchedules(main_sub_app_.GetScheduler());
+  RegisterBuiltinFrameOrders(main_sub_app_.GetWorld());
 }
 
 void App::Initialize() {
@@ -82,6 +85,10 @@ void App::Initialize() {
 
   HELIOS_ASSERT(!IsInitialized(), "App is already initialized!");
   HELIOS_ASSERT(!IsRunning(), "Cannot initialize while app is running!");
+
+  log::Info("Initializing application...");
+
+  is_initialized_ = true;
 
   BuildPlugins();
   WaitForPluginsReady();
@@ -91,8 +98,6 @@ void App::Initialize() {
 
   scheduler_.Build(*this);
   scheduler_.RunStartup(*this);
-
-  is_initialized_ = true;
 }
 
 ExitCode App::Run() {
@@ -100,9 +105,9 @@ ExitCode App::Run() {
 
   HELIOS_ASSERT(!IsRunning(), "App is already running!");
 
-  log::Info("Starting application...");
-
   Initialize();
+
+  log::Info("Running application...");
 
   is_running_.store(true, std::memory_order_release);
   const ExitCode exit_code = runner_(*this);
@@ -119,7 +124,10 @@ auto App::ShouldExit() const noexcept -> std::optional<ExitCode> {
     return std::nullopt;
   }
 
-  const auto reader = world.ReadMessages<AppExit>();
+  // Fresh IncludeBacklog cursor: poll currently retained AppExit messages each
+  // check without implying once-only delivery across ShouldExit calls.
+  auto cursor = ecs::MessageCursor<AppExit>::IncludeBacklog();
+  const auto reader = world.ReadMessages<AppExit>(cursor);
   if (reader.Empty()) {
     return std::nullopt;
   }
@@ -136,6 +144,8 @@ void App::CleanUp() {
   if (!IsInitialized()) {
     return;
   }
+
+  log::Info("Cleaning up application...");
 
   scheduler_.WaitForSubApps();
   scheduler_.Shutdown(*this);
@@ -155,9 +165,12 @@ void App::RegisterMessages() {
 void App::BuildPlugins() {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::BuildPlugins");
 
+  log::Info("Building plugins...");
+
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-  std::string zone_name = "name::Build";  // Plugin name + "::Poll"
+  std::string zone_name;
+  zone_name.reserve(128);
 #endif
 
   for (auto&& [index, storage] : plugins_) {
@@ -169,6 +182,7 @@ void App::BuildPlugins() {
                    "helios::app::Plugin::Build{{name: {}}}", storage.name);
 #endif
     HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
+    log::Debug("Building '{}' plugin", storage.name);
 
     storage.plugin->Build(*this);
   }
@@ -185,6 +199,7 @@ void App::BuildPlugins() {
 #endif
       HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
       HELIOS_APP_PROFILE_ZONE_TEXT("dynamic");
+      log::Debug("Building '{}' plugin", dynamic_plugin.GetPluginName());
 
       dynamic_plugin.GetPlugin().Build(*this);
     }
@@ -196,7 +211,8 @@ void App::PollPlugins() {
 
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-  std::string zone_name = "name::Poll";  // Plugin name + "::Poll"
+  std::string zone_name;
+  zone_name.reserve(128);
 #endif
 
   for (auto&& [index, storage] : plugins_) {
@@ -233,6 +249,8 @@ void App::PollPlugins() {
 void App::WaitForPluginsReady() {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::WaitForPluginsReady");
 
+  log::Info("Waiting for plugins to be ready...");
+
   if (PluginsReady()) {
     return;
   }
@@ -267,9 +285,12 @@ bool App::PluginsReady() const {
 void App::FinishPlugins() {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::FinishPlugins");
 
+  log::Info("Finishing plugins...");
+
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-  std::string zone_name = "name::Poll";  // Plugin name + "::Poll"
+  std::string zone_name;
+  zone_name.reserve(128);
 #endif
 
   for (auto&& [index, storage] : plugins_) {
@@ -281,6 +302,7 @@ void App::FinishPlugins() {
                    "helios::app::Plugin::Finish{{name: {}}}", storage.name);
 #endif
     HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
+    log::Debug("Finishing '{}' plugin", storage.name);
 
     storage.plugin->Finish(*this);
   }
@@ -297,6 +319,7 @@ void App::FinishPlugins() {
 #endif
       HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
       HELIOS_APP_PROFILE_ZONE_TEXT("dynamic");
+      log::Debug("Finishing '{}' plugin", dynamic_plugin.GetPluginName());
 
       dynamic_plugin.GetPlugin().Finish(*this);
     }
@@ -306,9 +329,12 @@ void App::FinishPlugins() {
 void App::DestroyPlugins() {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::DestroyPlugins");
 
+  log::Info("Destroying plugins...");
+
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-  std::string zone_name = "name::Poll";  // Plugin name + "::Poll"
+  std::string zone_name;
+  zone_name.reserve(128);
 #endif
 
   for (auto&& [index, storage] : plugins_) {
@@ -320,6 +346,7 @@ void App::DestroyPlugins() {
                    "helios::app::Plugin::Destroy{{name: {}}}", storage.name);
 #endif
     HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
+    log::Debug("Destroying '{}' plugin", storage.name);
 
     storage.plugin->Destroy(*this);
   }
@@ -336,6 +363,7 @@ void App::DestroyPlugins() {
 #endif
       HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
       HELIOS_APP_PROFILE_ZONE_TEXT("dynamic");
+      log::Debug("Destroying '{}' plugin", dynamic_plugin.GetPluginName());
 
       dynamic_plugin.GetPlugin().Destroy(*this);
     }

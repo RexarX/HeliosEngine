@@ -121,10 +121,12 @@ Run() → Initialize() → runner_(*this) → CleanUp()
 Each `Update()` runs one frame through `Scheduler::RunFrame`:
 
 1. Reset extract flags.
-2. **Update stage** (main) — schedules `kFirst` → `kLast`, then `World::Update()` (message lifecycle).
+2. For each stage in `MainFrameOrder` (default Update -> Extract): run schedules (`ApplyDeferred` per schedule), optional stage `apply_commands` / `merge_messages`, then `MessageManager::Update()` when the stage is last in the order and has `advance_messages` (Extract on main).
 3. **Extract stage** — main extract schedules, then sub-app extraction (mode-dependent).
 4. **Launch sub-app updates** — blocking sub-apps in parallel; overlapping only when fresh extract exists.
 5. **WaitForSubApps** — joins blocking sub-apps.
+
+Nested `FramePumpOrder` pumps (Update only) advance message buffers on `kUpdateStage`.
 
 ## Sub-Apps
 

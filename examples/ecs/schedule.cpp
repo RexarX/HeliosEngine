@@ -29,7 +29,7 @@ struct MarkOrder {
   void operator()() const {
     // The shared counter records the order in which schedules actually execute.
     *slot = (*call_index)++;
-    hlog::Info("schedules: {} ran (order index {})", label, *slot);
+    hlog::Info("{} ran (order index {})", label, *slot);
   }
 };
 
@@ -74,7 +74,7 @@ int main() {
                  ExitAfterFrames{});
 
   const auto code = app.Run();
-  hlog::Info("schedules: first={} custom={} last={}", order.first, order.custom,
+  hlog::Info("first={} custom={} last={}", order.first, order.custom,
              order.last);
   return std::to_underlying(code);
 }

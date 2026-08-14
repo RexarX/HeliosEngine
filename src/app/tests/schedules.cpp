@@ -73,6 +73,25 @@ TEST_SUITE("helios::app::RegisterBuiltinSchedules") {
       CHECK_EQ(scheduler.TryGetSchedule(kShutdown)->Settings().executor_kind,
                ExecutorKind::kMainThread);
     }
+
+    SUBCASE("Sets advance_messages on Update and Extract for frame orders") {
+      ecs::Scheduler scheduler;
+      RegisterBuiltinSchedules(scheduler);
+
+      // Update advances nested FramePumpOrder; Extract advances MainFrameOrder.
+      CHECK(scheduler.GetStageSettings(kUpdateStage).advance_messages);
+      CHECK(scheduler.GetStageSettings(kExtractStage).advance_messages);
+      CHECK_FALSE(scheduler.GetStageSettings(kStartupStage).advance_messages);
+    }
+
+    SUBCASE("Sets apply_commands on ExtractStage") {
+      ecs::Scheduler scheduler;
+      RegisterBuiltinSchedules(scheduler);
+
+      CHECK(scheduler.GetStageSettings(kExtractStage).apply_commands);
+      CHECK_FALSE(scheduler.GetStageSettings(kUpdateStage).apply_commands);
+      CHECK_FALSE(scheduler.GetStageSettings(kExtractStage).merge_messages);
+    }
   }
 }
 
@@ -87,6 +106,12 @@ TEST_SUITE("helios::app::RegisterBuiltinSubAppSchedules") {
       CHECK_NE(scheduler.TryGetSchedule(kShutdown), nullptr);
       CHECK_EQ(scheduler.TryGetSchedule(kExtract), nullptr);
       CHECK_FALSE(scheduler.HasStage(kExtractStage));
+    }
+
+    SUBCASE("Sets advance_messages on UpdateStage") {
+      ecs::Scheduler scheduler;
+      RegisterBuiltinSubAppSchedules(scheduler);
+      CHECK(scheduler.GetStageSettings(kUpdateStage).advance_messages);
     }
 
     SUBCASE("Is idempotent when schedules already exist") {

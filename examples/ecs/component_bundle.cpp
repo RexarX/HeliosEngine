@@ -26,13 +26,20 @@ struct Health {
 
 struct Player {};
 
-// A component bundle groups values that are commonly inserted or removed
-// together. It is a transfer object; queries still access its leaf components.
-using MovementBundle = hecs::ComponentBundle<Position, Velocity>;
+using MovementBundle = hecs::ComponentBundleTypes<Position, Velocity>;
 
-// Bundles can contain other bundles. Operations flatten nested bundles in
-// declaration order, so this contributes Player, Position, Velocity, Health.
-using PlayerBundle = hecs::ComponentBundle<Player, MovementBundle, Health>;
+struct PlayerBundle {
+  using ComponentTypes =
+      hecs::ComponentBundleTypes<Player, MovementBundle, Health>;
+
+  Position position;
+  Velocity velocity;
+  Health health;
+
+  [[nodiscard]] ComponentTypes Build() {
+    return {Player{}, MovementBundle{position, velocity}, health};
+  }
+};
 
 struct SpawnPlayer {
   void operator()(hecs::Res<const happ::FrameCount> frames,
@@ -41,14 +48,11 @@ struct SpawnPlayer {
       return;
     }
 
-    // AddBundle owns the complete nested bundle until this deferred entity
-    // command runs at the end of the schedule.
     commands.Spawn().AddBundle(
-        PlayerBundle{Player{},
-                     MovementBundle{Position{.x = 1.0F, .y = 2.0F},
-                                    Velocity{.dx = 0.5F, .dy = 0.25F}},
-                     Health{.value = 100}});
-    hlog::Info("component bundles: queued player spawn");
+        PlayerBundle{.position = {.x = 1.0F, .y = 2.0F},
+                     .velocity = {.dx = 0.5F, .dy = 0.25F},
+                     .health = {.value = 100}});
+    hlog::Info("Queued player spawn");
   }
 };
 
@@ -64,8 +68,6 @@ struct MovePlayer {
       position.y += velocity.dy;
 
       if (frames->count == 2) {
-        // Removing a bundle removes every flattened leaf while preserving
-        // unrelated components such as Player and Health.
         commands.Entity(entity).RemoveBundle<MovementBundle>();
       }
     });
@@ -78,11 +80,10 @@ struct LogPlayer {
       const {
     players.ForEach([](const Position* position, const Health& health) {
       if (position != nullptr) {
-        hlog::Info("component bundles: player pos=({},{}) health={}",
-                   position->x, position->y, health.value);
-      } else {
-        hlog::Info("component bundles: movement bundle removed, health={}",
+        hlog::Info("Player pos=({},{}) health={}", position->x, position->y,
                    health.value);
+      } else {
+        hlog::Info("Movement bundle removed, health={}", health.value);
       }
     });
   }
@@ -103,8 +104,6 @@ int main() {
   happ::App app;
   app.AddPlugins(happ::FrameCountPlugin{});
 
-  // The PreUpdate spawn is flushed before Update. Bundle removal queued during
-  // Update is then visible to the PostUpdate logger in the same frame.
   app.AddSystem(happ::kPreUpdate, SpawnPlayer{});
   app.AddSystem(happ::kUpdate, MovePlayer{});
   app.AddSystems(happ::kPostUpdate, LogPlayer{}, ExitAfterFrames{});

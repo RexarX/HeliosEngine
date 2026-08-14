@@ -23,6 +23,7 @@
 #include <optional>
 #include <string_view>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 using namespace helios;
@@ -136,6 +137,10 @@ struct CommandsOnlySystem {
 
 struct WorldViewOnlySystem {
   void operator()(WorldView /*view*/) {}
+};
+
+struct WorldOnlySystem {
+  void operator()(World& world) { std::ignore = world.CreateEntity(); }
 };
 
 struct MessageReaderOnlySystem {
@@ -365,6 +370,10 @@ TEST_SUITE("helios::ecs::SystemTrait") {
 
     SUBCASE("Systems with WorldView param satisfy SystemTrait") {
       CHECK(SystemTrait<WorldViewOnlySystem>);
+    }
+
+    SUBCASE("Systems with World param satisfy SystemTrait") {
+      CHECK(SystemTrait<WorldOnlySystem>);
     }
 
     SUBCASE("Systems with MessageReader param satisfy SystemTrait") {

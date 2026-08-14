@@ -1,5 +1,6 @@
 #include <pch.hpp>
 
+#include <helios/ecs/schedule/run_scope.hpp>
 #include <helios/ecs/schedule/scheduler.hpp>
 
 #include <helios/assert.hpp>
@@ -118,6 +119,7 @@ void Scheduler::Run(World& world, Executor& executor) {
       continue;
     }
 
+    ScheduleRunScope scope(schedule_hash);
     it->second.schedule.RunAndWait(world, executor);
   }
 }
@@ -136,39 +138,13 @@ void Scheduler::Run(World& world) {
       continue;
     }
 
-    it->second.schedule.RunAndWait(world);
-  }
-}
-
-void Scheduler::RunStage(StageTypeIndex stage, World& world) {
-  HELIOS_ASSERT(!is_dirty_,
-                "Scheduler::RunStage called but scheduler is dirty! "
-                "Call Scheduler::Build first.");
-
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Scheduler::RunStage");
-  HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
-
-  const size_t stage_hash = stage.Hash();
-  HELIOS_ASSERT(stages_.contains(stage_hash),
-                "Stage with hash '{}' is not registered!", stage_hash);
-
-  const auto members_it = stage_member_order_.find(stage_hash);
-  if (members_it == stage_member_order_.end()) {
-    return;
-  }
-
-  for (const size_t member_hash : members_it->second) {
-    const auto it = schedules_.find(member_hash);
-    if (it == schedules_.end()) [[unlikely]] {
-      continue;
-    }
-
+    ScheduleRunScope scope(schedule_hash);
     it->second.schedule.RunAndWait(world);
   }
 }
 
 void Scheduler::RunStage(StageTypeIndex stage, World& world,
-                         Executor& executor) {
+                         RunStageOptions options) {
   HELIOS_ASSERT(!is_dirty_,
                 "Scheduler::RunStage called but scheduler is dirty! "
                 "Call Scheduler::Build first.");
@@ -191,7 +167,73 @@ void Scheduler::RunStage(StageTypeIndex stage, World& world,
       continue;
     }
 
+    if (options.skip_active_schedules &&
+        ScheduleRunScope::IsActive(member_hash)) {
+      continue;
+    }
+
+    ScheduleRunScope scope(member_hash);
+    it->second.schedule.RunAndWait(world);
+  }
+}
+
+void Scheduler::RunStage(StageTypeIndex stage, World& world, Executor& executor,
+                         RunStageOptions options) {
+  HELIOS_ASSERT(!is_dirty_,
+                "Scheduler::RunStage called but scheduler is dirty! "
+                "Call Scheduler::Build first.");
+
+  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Scheduler::RunStage");
+  HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
+
+  const size_t stage_hash = stage.Hash();
+  HELIOS_ASSERT(stages_.contains(stage_hash),
+                "Stage with hash '{}' is not registered!", stage_hash);
+
+  const auto members_it = stage_member_order_.find(stage_hash);
+  if (members_it == stage_member_order_.end()) {
+    return;
+  }
+
+  for (const size_t member_hash : members_it->second) {
+    const auto it = schedules_.find(member_hash);
+    if (it == schedules_.end()) [[unlikely]] {
+      continue;
+    }
+
+    if (options.skip_active_schedules &&
+        ScheduleRunScope::IsActive(member_hash)) {
+      continue;
+    }
+
+    ScheduleRunScope scope(member_hash);
     it->second.schedule.RunAndWait(world, executor);
+  }
+}
+
+void Scheduler::ApplyStageDeferred(StageTypeIndex stage, World& world,
+                                   bool apply_commands, bool merge_messages) {
+  if (!apply_commands && !merge_messages) {
+    return;
+  }
+
+  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Scheduler::ApplyStageDeferred");
+
+  const size_t stage_hash = stage.Hash();
+  HELIOS_ASSERT(stages_.contains(stage_hash),
+                "Stage with hash '{}' is not registered!", stage_hash);
+
+  const auto members_it = stage_member_order_.find(stage_hash);
+  if (members_it == stage_member_order_.end()) {
+    return;
+  }
+
+  for (const size_t member_hash : members_it->second) {
+    const auto it = schedules_.find(member_hash);
+    if (it == schedules_.end()) [[unlikely]] {
+      continue;
+    }
+    it->second.schedule.ApplyDeferred(world, apply_commands, merge_messages);
   }
 }
 
@@ -340,11 +382,10 @@ void Scheduler::ComputeExecutionOrder() {
       }
     }
 
-    stage_member_order_[stage_hash] =
-        TopoSortHashes(members, schedule_topo_nodes);
-    execution_order_cache_.insert(execution_order_cache_.end(),
-                                  stage_member_order_[stage_hash].begin(),
-                                  stage_member_order_[stage_hash].end());
+    auto& order = stage_member_order_[stage_hash];
+    order = TopoSortHashes(members, schedule_topo_nodes);
+    execution_order_cache_.insert(execution_order_cache_.end(), order.begin(),
+                                  order.end());
   }
 
   std::vector<size_t> ungrouped_hashes;

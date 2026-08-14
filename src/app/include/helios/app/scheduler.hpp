@@ -19,11 +19,12 @@ class App;
 
 /**
  * @brief Orchestrates the main sub-app schedule loop and sub-app updates.
- * @details Each frame runs the main sub-app @ref kUpdateStage, then @ref
- * kExtractStage, then sub-app updates. Blocking sub-apps are joined each frame.
- * Overlapping sub-apps may skip extraction while an update is in flight, up to
- * `kMaxOverlappingUpdates` consecutive frames (`0` = unlimited). Async sub-apps
- * run updates on a background loop; extraction runs every main frame.
+ * @details Each frame walks `MainFrameOrder` (default: `kUpdateStage`, then
+ * `kExtractStage`). Nested pumps walk `FramePumpOrder`. Blocking sub-apps are
+ * joined when extract runs. Overlapping sub-apps may skip extraction while an
+ * update is in flight, up to `kMaxOverlappingUpdates` consecutive frames
+ * (`0` = unlimited). Async sub-apps run updates on a background loop;
+ * extraction runs every main frame that includes extract.
  */
 class Scheduler {
 public:
@@ -65,10 +66,24 @@ public:
   void RunStartup(App& app);
 
   /**
-   * @brief Runs one full application frame.
+   * @brief Runs one full application frame using `MainFrameOrder`.
    * @param app Owning application
    */
   void RunFrame(App& app);
+
+  /**
+   * @brief Runs the given ordered stage list on the main sub-app.
+   * @details For each stage: `RunStage`, then optional stage
+   * `apply_commands` / `merge_messages` via `ApplyStageDeferred`.
+   * `MessageManager::Update()` runs only after the last present stage in the
+   * order when that stage has `advance_messages` (so MainFrameOrder advances on
+   * Extract while FramePumpOrder advances on Update without double-swapping).
+   * When `kExtractStage` appears, extracts into sub-apps; after the full order,
+   * launches and waits for sub-app updates if extract ran.
+   * @param app Owning application
+   * @param order Ordered stages to execute
+   */
+  void RunFrameOrder(App& app, const FrameOrder& order);
 
   /**
    * @brief Stops async loops, waits for in-flight updates, shuts down
@@ -101,8 +116,6 @@ private:
   };
 
   static void RunMainStartup(SubApp& main, async::Executor& executor);
-  static void RunUpdateStage(SubApp& main, async::Executor& executor);
-  void RunExtractStage(SubApp& main, async::Executor& executor);
   static void RunMainShutdown(SubApp& main, async::Executor& executor);
 
   void LaunchSubAppUpdates(App& app);

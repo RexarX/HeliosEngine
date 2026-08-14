@@ -203,6 +203,35 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
       void* const ptr = arena.allocate(64, kAlign);
       CHECK_NE(ptr, nullptr);
     }
+
+    SUBCASE(
+        "Reuses non-head blocks after Reset instead of growing every cycle") {
+      // Force a multi-block chain where per-cycle usage exceeds the latest
+      // head block but fits in the full chain after soft Reset.
+      ArenaAllocator arena(ArenaOptions{
+          .initial_capacity = 64,
+          .growth =
+              GrowthPolicy::Linear(64, std::numeric_limits<size_t>::max()),
+      });
+
+      for (int i = 0; i < 6; ++i) {
+        std::ignore = arena.allocate(48, 1);
+      }
+      const size_t capacity_after_warmup = arena.TotalCapacity();
+      const size_t blocks_after_warmup = arena.BlockCount();
+      CHECK_GE(blocks_after_warmup, 2);
+      CHECK_GE(capacity_after_warmup, 128);
+
+      for (int cycle = 0; cycle < 8; ++cycle) {
+        arena.Reset();
+        for (int i = 0; i < 6; ++i) {
+          std::ignore = arena.allocate(48, 1);
+        }
+      }
+
+      CHECK_EQ(arena.TotalCapacity(), capacity_after_warmup);
+      CHECK_EQ(arena.BlockCount(), blocks_after_warmup);
+    }
   }
 
   TEST_CASE("helios::mem::ArenaAllocator::Empty") {

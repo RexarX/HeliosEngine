@@ -2,6 +2,7 @@
 
 #include <helios/memory/fixed_pool_allocator.hpp>
 
+#include <details/treiber_stack.hpp>
 #include <helios/assert.hpp>
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
@@ -11,35 +12,6 @@
 #include <cstddef>
 #include <utility>
 
-namespace {
-
-void PushBlock(std::atomic<void*>& head, void* block) noexcept {
-  void* observed = head.load(std::memory_order_acquire);
-  for (;;) {
-    *static_cast<void**>(block) = observed;
-    if (head.compare_exchange_weak(observed, block, std::memory_order_release,
-                                   std::memory_order_acquire)) {
-      return;
-    }
-  }
-}
-
-[[nodiscard]] void* PopBlock(std::atomic<void*>& head) noexcept {
-  void* observed = head.load(std::memory_order_acquire);
-  for (;;) {
-    if (observed == nullptr) {
-      return nullptr;
-    }
-    void* const next = *static_cast<void**>(observed);
-    if (head.compare_exchange_weak(observed, next, std::memory_order_acq_rel,
-                                   std::memory_order_acquire)) {
-      return observed;
-    }
-  }
-}
-
-}  // namespace
-
 namespace helios::mem {
 
 void FixedPoolAllocator::MoveFrom(FixedPoolAllocator& other) noexcept {
@@ -48,9 +20,8 @@ void FixedPoolAllocator::MoveFrom(FixedPoolAllocator& other) noexcept {
   alignment_ = std::exchange(other.alignment_, 0);
   chunk_capacity_ = std::exchange(other.chunk_capacity_, 0);
   buffer_ = std::exchange(other.buffer_, nullptr);
-  free_head_.store(
-      other.free_head_.exchange(nullptr, std::memory_order_acq_rel),
-      std::memory_order_release);
+  free_head_.store(other.free_head_.exchange(0, std::memory_order_acq_rel),
+                   std::memory_order_release);
   free_blocks_.store(other.free_blocks_.exchange(0, std::memory_order_acq_rel),
                      std::memory_order_release);
   peak_used_blocks_.store(
@@ -65,9 +36,9 @@ void FixedPoolAllocator::MoveFrom(FixedPoolAllocator& other) noexcept {
 }
 
 void FixedPoolAllocator::Rebuild() noexcept {
-  free_head_.store(nullptr, std::memory_order_release);
+  details::StoreEmptyHead(free_head_);
   for (size_t index = 0; index < block_count_; ++index) {
-    PushBlock(free_head_, buffer_ + index * block_size_);
+    details::PushBlock(free_head_, buffer_ + index * block_size_);
   }
   free_blocks_.store(block_count_, std::memory_order_release);
 }
@@ -93,7 +64,7 @@ void* FixedPoolAllocator::do_allocate(size_t bytes, size_t alignment) {
   HELIOS_VERIFY(alignment <= alignment_ && IsPowerOfTwo(alignment),
                 "Requested alignment exceeds fixed pool alignment!");
 
-  void* const block = PopBlock(free_head_);
+  void* const block = details::PopBlock(free_head_);
   HELIOS_VERIFY(block != nullptr, "Fixed pool allocator exhausted!");
 
   const size_t free = free_blocks_.fetch_sub(1) - 1;
@@ -117,7 +88,7 @@ void FixedPoolAllocator::do_deallocate(void* ptr, size_t /*bytes*/,
   }
 
   HELIOS_ASSERT(Owns(ptr), "ptr does not belong to fixed pool!");
-  PushBlock(free_head_, ptr);
+  details::PushBlock(free_head_, ptr);
   free_blocks_.fetch_add(1, std::memory_order_relaxed);
   total_deallocations_.fetch_add(1, std::memory_order_relaxed);
 }

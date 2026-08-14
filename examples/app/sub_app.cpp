@@ -25,14 +25,14 @@ struct WorkerLabel {};
 struct BumpMain {
   void operator()(hecs::Res<MainCounter> counter) const {
     ++counter->value;
-    hlog::Info("sub_apps: main update value={}", counter->value);
+    hlog::Info("Main update value={}", counter->value);
   }
 };
 
 struct BumpSub {
   void operator()(hecs::Res<SubCounter> counter) const {
     ++counter->extracted;
-    hlog::Info("sub_apps: sub-app update extracted={}", counter->extracted);
+    hlog::Info("Sub-app update extracted={}", counter->extracted);
   }
 };
 
@@ -40,7 +40,7 @@ void ExtractToSub(const hecs::World& main, hecs::World& sub) {
   // Blocking sub-apps run extract, then update the sub world before the main
   // frame continues.
   const int value = main.ReadResource<MainCounter>().value;
-  hlog::Info("sub_apps: extract main={} -> sub", value);
+  hlog::Info("Extract main={} -> sub", value);
   sub.InsertResources(SubCounter{.extracted = value});
 }
 
@@ -48,7 +48,7 @@ struct ExitAfterFrames {
   void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::MessageWriter<happ::AppExit> exit_writer) const {
     if (frames->count >= 5) {
-      hlog::Info("sub_apps: shutdown after {} frames", frames->count);
+      hlog::Info("Shutdown after {} frames", frames->count);
       exit_writer.Write(happ::AppExit::Success());
     }
   }

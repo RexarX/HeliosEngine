@@ -69,7 +69,16 @@ TEST_SUITE("helios::app::Time") {
     }
   }
 
-  TEST_CASE("helios::app::Time::convenience accessors") {
+  TEST_CASE("helios::app::Time::Fps") {
+    SUBCASE("Returns delta as custom arithmetic type and duration") {
+      Time time;
+      time.delta_time = std::chrono::milliseconds{2500};
+
+      CHECK_EQ(time.Fps(), doctest::Approx(1.0 / 2.5));
+    }
+  }
+
+  TEST_CASE("helios::app::Time: convenience accessors") {
     SUBCASE("Return elapsed and delta in common units") {
       Time time;
       time.elapsed = std::chrono::milliseconds{2};

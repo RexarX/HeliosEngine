@@ -34,8 +34,9 @@ struct Score {
   int value = 0;
 };
 
-using MotionBundle = ComponentBundle<Position, Velocity>;
-using GameplayBundle = ComponentBundle<MotionBundle, Health>;
+using MotionBundle = ComponentBundleTypes<Position, Velocity>;
+using GameplayBundle = ComponentBundleTypes<MotionBundle, Health>;
+using MoveOnlyBundle = ComponentBundleTypes<MoveOnly>;
 
 }  // namespace
 
@@ -254,8 +255,8 @@ TEST_SUITE("helios::ecs::AddBundleCmd") {
       World world;
       const Entity entity = world.CreateEntity();
 
-      AddBundleCmd cmd(entity, ComponentBundle<MoveOnly>{
-                                   MoveOnly{std::make_unique<int>(42)}});
+      AddBundleCmd cmd(entity,
+                       MoveOnlyBundle{MoveOnly{std::make_unique<int>(42)}});
       cmd.Execute(world);
 
       const auto& component = world.ReadComponent<MoveOnly>(entity);

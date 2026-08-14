@@ -541,8 +541,7 @@ public:
    * - Entity is not tracked.
    * @tparam B Component bundle type
    * @param entity Entity
-   * @return Whether each component was removed. A single-component bundle
-   * returns a bool; all other bundles return an array.
+   * @return `std::array` indicating whether each component was removed
    */
   template <ComponentBundleTrait B>
   auto TryRemoveBundle(Entity entity) -> details::ComponentBundleResult<B>;

@@ -12,23 +12,44 @@ project(HeliosEngine
     LANGUAGES CXX
 )
 
-# Set default build type to Release if not specified
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
-  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "RelWithDebInfo")
-  message(STATUS "Setting build type to 'Release' as none was specified.")
-endif()
+# Project-wide defaults only when Helios is the top-level project.
+# When embedded via add_subdirectory / FetchContent, respect the parent.
+if(PROJECT_IS_TOP_LEVEL)
+  if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "RelWithDebInfo")
+    message(STATUS "Setting build type to 'Release' as none was specified.")
+  endif()
 
-if(CMAKE_CONFIGURATION_TYPES)
-  set(CMAKE_CONFIGURATION_TYPES "Debug;RelWithDebInfo;Release" CACHE STRING "" FORCE)
+  if(CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_CONFIGURATION_TYPES "Debug;RelWithDebInfo;Release" CACHE STRING "" FORCE)
+  endif()
+
+  set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "" FORCE)
 endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "" FORCE)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+
+# RelWithDebInfo defaults: align with helios_target_set_optimization() so CMake's
+# per-config flags do not fight target flags (e.g. MSVC /Ob1 vs /Ob2).
+if(PROJECT_IS_TOP_LEVEL)
+  if(MSVC OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang"
+      AND CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC"))
+    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/O2 /Ob2 /DNDEBUG /Zi"
+        CACHE STRING "Flags used by the CXX compiler during RELWITHDEBINFO builds." FORCE)
+    set(CMAKE_C_FLAGS_RELWITHDEBINFO "/O2 /Ob2 /DNDEBUG /Zi"
+        CACHE STRING "Flags used by the C compiler during RELWITHDEBINFO builds." FORCE)
+  elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
+    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O3 -g -DNDEBUG"
+        CACHE STRING "Flags used by the CXX compiler during RELWITHDEBINFO builds." FORCE)
+    set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O3 -g -DNDEBUG"
+        CACHE STRING "Flags used by the C compiler during RELWITHDEBINFO builds." FORCE)
+  endif()
+endif()
 
 # Build options
 option(HELIOS_DEVELOPER_MODE "Enable developer-focused build features" OFF)
@@ -44,10 +65,15 @@ option(HELIOS_BUILD_EXAMPLES "Build examples" ${PROJECT_IS_TOP_LEVEL})
 option(HELIOS_BUILD_DOCS "Build API documentation (Doxygen)" OFF)
 option(HELIOS_DOCS_ONLY "Configure documentation targets only (skip engine modules)" OFF)
 option(HELIOS_ENABLE_UNITY_BUILD "Enable Unity/Jumbo builds" OFF)
-option(HELIOS_ENABLE_LTO "Enable Link Time Optimization" ON)
+# LTO default ON for standalone engine builds; OFF when embedded so consumers
+# are not forced into LTO bitcode without opting in.
+option(HELIOS_ENABLE_LTO "Enable Link Time Optimization" ${PROJECT_IS_TOP_LEVEL})
 option(HELIOS_ENABLE_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 option(HELIOS_ENABLE_INSTALL "Enable installation rules" OFF)
 option(HELIOS_BUILD_ALL_MODULES "Build every discovered module regardless of DEFAULT value" OFF)
+option(HELIOS_MANAGE_TOOLCHAIN
+    "Allow Helios to set CMAKE_LINKER / CMAKE_AR / CMAKE_RANLIB for the whole project"
+    ${PROJECT_IS_TOP_LEVEL})
 set(HELIOS_EXTRA_MODULE_DIRS "" CACHE STRING
     "Semicolon-separated list of extra directories to scan for Helios modules")
 
@@ -58,6 +84,8 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 include(ClangArchiver)
 helios_configure_clang_archiver()
+include(Linker)
+helios_configure_linker()
 
 if(HELIOS_ENABLE_UNITY_BUILD)
   set(CMAKE_UNITY_BUILD ON)
@@ -74,6 +102,7 @@ if(HELIOS_ENABLE_LTO)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
     message(STATUS "Link-Time Optimization (LTO) enabled for Release and RelWithDebInfo builds")
+    helios_configure_lto_mode()
   else()
     message(STATUS "IPO/LTO not supported: ${error}")
     set(HELIOS_ENABLE_LTO OFF)

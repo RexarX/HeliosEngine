@@ -176,6 +176,36 @@ TEST_SUITE("helios::mem::FrameAllocator") {
       CHECK(alloc.Empty());
     }
 
+    SUBCASE(
+        "Advance soft-reset reuses arena block chain without unbounded "
+        "growth") {
+      // Same soft-Reset reuse contract as ArenaAllocator: per-frame usage can
+      // exceed the latest head block but must fit in the retained chain.
+      FrameAllocator<1> alloc(FrameAllocatorOptions{
+          .initial_capacity = 64,
+          .growth =
+              GrowthPolicy::Linear(64, std::numeric_limits<size_t>::max()),
+      });
+
+      for (int i = 0; i < 6; ++i) {
+        std::ignore = alloc.allocate(48, 1);
+      }
+      const size_t capacity_after_warmup = alloc.TotalCapacity();
+      const size_t blocks_after_warmup = alloc.BlockCount();
+      CHECK_GE(blocks_after_warmup, 2);
+      CHECK_GE(capacity_after_warmup, 128);
+
+      for (int cycle = 0; cycle < 8; ++cycle) {
+        alloc.Advance();
+        for (int i = 0; i < 6; ++i) {
+          std::ignore = alloc.allocate(48, 1);
+        }
+      }
+
+      CHECK_EQ(alloc.TotalCapacity(), capacity_after_warmup);
+      CHECK_EQ(alloc.BlockCount(), blocks_after_warmup);
+    }
+
     SUBCASE("Arena that was current before Advance retains its allocations") {
       FrameAllocator<2> alloc(BasicOptions());
 

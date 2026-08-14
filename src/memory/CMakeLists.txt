@@ -32,6 +32,7 @@ helios_module(
         include/helios/memory/stack_allocator.hpp
         src/details/accumulate_peak.hpp
         src/details/deferred_region_ebr.hpp
+        src/details/treiber_stack.hpp
 
     SOURCES
         src/details/deferred_region_ebr.cpp

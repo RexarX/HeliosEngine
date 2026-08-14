@@ -180,17 +180,19 @@ public:
    * @param components Component manager for accessing component data
    * @param archetype_index Starting archetype index
    * @param entity_index Starting entity index within archetype
+   * @param with_types Span of component types required by With filters
    * @param without_types Span of component types to exclude (default empty)
    */
   BasicQueryIter(
       std::span<const std::reference_wrapper<const Archetype>> archetypes,
       ComponentManagerType& components, size_t archetype_index,
-      size_t entity_index,
+      size_t entity_index, std::span<const ComponentTypeIndex> with_types = {},
       std::span<const ComponentTypeIndex> without_types = {}) noexcept
       : archetypes_(archetypes),
         components_(components),
         archetype_index_(archetype_index),
         entity_index_(entity_index),
+        with_types_(with_types),
         without_types_(without_types) {
     AdvanceToValidEntity();
   }
@@ -268,8 +270,8 @@ public:
    * @return End iterator (points past the last valid entity)
    */
   [[nodiscard]] BasicQueryIter end() const noexcept {
-    return {archetypes_, components_.get(), archetypes_.size(), 0,
-            without_types_};
+    return {archetypes_, components_.get(), archetypes_.size(),
+            0,           with_types_,       without_types_};
   }
 
 private:
@@ -285,6 +287,7 @@ private:
   std::reference_wrapper<ComponentManagerType> components_;
   size_t archetype_index_ = 0;
   size_t entity_index_ = 0;
+  std::span<const ComponentTypeIndex> with_types_;
   std::span<const ComponentTypeIndex> without_types_;
 };
 
@@ -346,17 +349,19 @@ public:
    * @param components Component manager for accessing component data
    * @param archetype_index Starting archetype index
    * @param entity_index Starting entity index within archetype
+   * @param with_types Span of component types required by With filters
    * @param without_types Span of component types to exclude (default empty)
    */
   BasicQueryWithEntityIter(
       std::span<const std::reference_wrapper<const Archetype>> archetypes,
       ComponentManagerType& components, size_t archetype_index,
-      size_t entity_index,
+      size_t entity_index, std::span<const ComponentTypeIndex> with_types = {},
       std::span<const ComponentTypeIndex> without_types = {}) noexcept
       : archetypes_(archetypes),
         components_(components),
         archetype_index_(archetype_index),
         entity_index_(entity_index),
+        with_types_(with_types),
         without_types_(without_types) {
     AdvanceToValidEntity();
   }
@@ -426,8 +431,8 @@ public:
    * @return End iterator (points past the last valid entity)
    */
   [[nodiscard]] BasicQueryWithEntityIter end() const noexcept {
-    return {archetypes_, components_.get(), archetypes_.size(), 0,
-            without_types_};
+    return {archetypes_, components_.get(), archetypes_.size(),
+            0,           with_types_,       without_types_};
   }
 
 private:
@@ -441,6 +446,7 @@ private:
   std::reference_wrapper<ComponentManagerType> components_;
   size_t archetype_index_ = 0;
   size_t entity_index_ = 0;
+  std::span<const ComponentTypeIndex> with_types_;
   std::span<const ComponentTypeIndex> without_types_;
 };
 
@@ -552,6 +558,24 @@ inline void BasicQueryIter<IsConst, Components...>::AdvanceToValidEntity() {
           }(),
           ...);
       if (has_all_sparse) {
+        bool has_all_required = std::ranges::all_of(
+            with_types_, [&entity, this](const ComponentTypeIndex type) {
+              const auto* meta =
+                  std::as_const(components_.get()).MetadataByIndex(type);
+              if (meta == nullptr) {
+                return false;
+              }
+              if (meta->storage_type == ComponentStorageType::kSparseSet) {
+                const auto* entry =
+                    std::as_const(components_.get()).SparseEntry(type);
+                return entry != nullptr && entry->Contains(entity);
+              }
+              return true;
+            });
+        if (!has_all_required) {
+          ++entity_index_;
+          continue;
+        }
         // Check that the entity does NOT have any excluded sparse component.
         bool has_none_excluded = std::ranges::all_of(
             without_types_, [&entity, this](const ComponentTypeIndex type) {
@@ -692,6 +716,24 @@ BasicQueryWithEntityIter<IsConst, Components...>::AdvanceToValidEntity() {
           }(),
           ...);
       if (has_all_sparse) {
+        bool has_all_required = std::ranges::all_of(
+            with_types_, [&entity, this](const ComponentTypeIndex type) {
+              const auto* meta =
+                  std::as_const(components_.get()).MetadataByIndex(type);
+              if (meta == nullptr) {
+                return false;
+              }
+              if (meta->storage_type == ComponentStorageType::kSparseSet) {
+                const auto* entry =
+                    std::as_const(components_.get()).SparseEntry(type);
+                return entry != nullptr && entry->Contains(entity);
+              }
+              return true;
+            });
+        if (!has_all_required) {
+          ++entity_index_;
+          continue;
+        }
         bool has_none_excluded = std::ranges::all_of(
             without_types_, [&entity, this](const ComponentTypeIndex type) {
               const auto* meta =

@@ -338,6 +338,88 @@ TEST_SUITE("helios::ecs::Scheduler") {
 
       CHECK_LT(stage_order[0], stage_order[1]);
     }
+
+    SUBCASE("skip_active_schedules avoids re-entering the active schedule") {
+      struct ActiveScheduleSystem {
+        Scheduler* scheduler = nullptr;
+        World* world = nullptr;
+        int* runs = nullptr;
+
+        void operator()(Res<CounterResource> /*counter*/) const {
+          ++*runs;
+          if (*runs == 1) {
+            scheduler->RunStage(TestStage{}, *world,
+                                {.skip_active_schedules = true});
+          }
+        }
+      };
+
+      struct FollowUpScheduleSystem {
+        int* runs = nullptr;
+
+        void operator()(Res<CounterResource> counter) const {
+          ++*runs;
+          ++counter->value;
+        }
+      };
+
+      Scheduler scheduler;
+      scheduler.AddStage(TestStage{});
+      scheduler.Add(StageScheduleALabel{}, Schedule{}).InStage(TestStage{});
+      scheduler.Add(StageScheduleBLabel{}, Schedule{})
+          .InStage(TestStage{})
+          .After(StageScheduleALabel{});
+
+      World world;
+      world.InsertResources(CounterResource{});
+      int active_runs = 0;
+      int follow_up_runs = 0;
+
+      scheduler.In(StageScheduleALabel{})
+          .Add(ActiveScheduleSystem{
+              .scheduler = &scheduler, .world = &world, .runs = &active_runs});
+      scheduler.In(StageScheduleBLabel{})
+          .Add(FollowUpScheduleSystem{.runs = &follow_up_runs});
+
+      scheduler.Build();
+
+      scheduler.RunStage(TestStage{}, world);
+
+      CHECK_EQ(active_runs, 1);
+      CHECK_EQ(follow_up_runs, 2);
+      CHECK_EQ(world.ReadResource<CounterResource>().value, 2);
+    }
+
+    SUBCASE("StageSettings advance_messages defaults false") {
+      Scheduler scheduler;
+      scheduler.AddStage(TestStage{});
+      CHECK_FALSE(scheduler.GetStageSettings(TestStage{}).advance_messages);
+    }
+
+    SUBCASE("StageSettings merge_messages defaults false") {
+      Scheduler scheduler;
+      scheduler.AddStage(TestStage{});
+      CHECK_FALSE(scheduler.GetStageSettings(TestStage{}).merge_messages);
+    }
+
+    SUBCASE("StageSettings apply_commands defaults false") {
+      Scheduler scheduler;
+      scheduler.AddStage(TestStage{});
+      CHECK_FALSE(scheduler.GetStageSettings(TestStage{}).apply_commands);
+    }
+
+    SUBCASE("StageOrdering Settings mutates StageSettings independently") {
+      Scheduler scheduler;
+      scheduler.AddStage(TestStage{}).Settings().advance_messages = true;
+      scheduler.AddStage(OtherStage{}).Settings().apply_commands = true;
+      scheduler.GetStageSettings(OtherStage{}).merge_messages = true;
+      CHECK(scheduler.GetStageSettings(TestStage{}).advance_messages);
+      CHECK_FALSE(scheduler.GetStageSettings(TestStage{}).apply_commands);
+      CHECK_FALSE(scheduler.GetStageSettings(TestStage{}).merge_messages);
+      CHECK(scheduler.GetStageSettings(OtherStage{}).apply_commands);
+      CHECK(scheduler.GetStageSettings(OtherStage{}).merge_messages);
+      CHECK_FALSE(scheduler.GetStageSettings(OtherStage{}).advance_messages);
+    }
   }
 
   TEST_CASE("Clear") {
@@ -662,6 +744,102 @@ TEST_SUITE("helios::ecs::Scheduler") {
       read_scheduler.Run(world);
 
       CHECK_EQ(world.ReadResource<CounterResource>().value, 7);
+    }
+
+    SUBCASE(
+        "Same system invoked twice before World::Update sees message only "
+        "once") {
+      Scheduler write_scheduler;
+      write_scheduler.Add(UpdateLabel{}, Schedule{});
+      write_scheduler.In(UpdateLabel{}).Add(WriteMsgSystem{.msg_value = 11});
+      write_scheduler.Build();
+
+      World world;
+      world.InsertResources(CounterResource{0});
+      world.AddMessage<SchedulerMsg>();
+      write_scheduler.Run(world);
+
+      Scheduler read_scheduler;
+      read_scheduler.Add(UpdateLabel{}, Schedule{});
+      read_scheduler.In(UpdateLabel{}).Add(ReadMsgSystem{});
+      read_scheduler.Build();
+
+      read_scheduler.Run(world);
+      read_scheduler.Run(world);
+
+      CHECK_EQ(world.ReadResource<CounterResource>().value, 11);
+    }
+
+    SUBCASE(
+        "After Update aging, same cursor/system does not re-read the message") {
+      Scheduler write_scheduler;
+      write_scheduler.Add(UpdateLabel{}, Schedule{});
+      write_scheduler.In(UpdateLabel{}).Add(WriteMsgSystem{.msg_value = 13});
+      write_scheduler.Build();
+
+      World world;
+      world.InsertResources(CounterResource{0});
+      world.AddMessage<SchedulerMsg>();
+      write_scheduler.Run(world);
+
+      Scheduler read_scheduler;
+      read_scheduler.Add(UpdateLabel{}, Schedule{});
+      read_scheduler.In(UpdateLabel{}).Add(ReadMsgSystem{});
+      read_scheduler.Build();
+
+      read_scheduler.Run(world);
+      CHECK_EQ(world.ReadResource<CounterResource>().value, 13);
+
+      world.Update();
+      read_scheduler.Run(world);
+      CHECK_EQ(world.ReadResource<CounterResource>().value, 13);
+    }
+
+    SUBCASE("Two systems each see the same message once") {
+      Scheduler scheduler;
+      scheduler.Add(SchedALabel{}, Schedule{});
+      scheduler.Add(SchedBLabel{}, Schedule{}).After(SchedALabel{});
+      scheduler.Add(SchedCLabel{}, Schedule{}).After(SchedBLabel{});
+
+      scheduler.In(SchedALabel{}).Add(WriteMsgSystem{.msg_value = 5});
+      scheduler.In(SchedBLabel{}).Add(ReadMsgSystem{});
+      scheduler.In(SchedCLabel{}).Add(ReadMsgSystem{});
+      scheduler.Build();
+
+      World world;
+      world.InsertResources(CounterResource{0});
+      world.AddMessage<SchedulerMsg>();
+      scheduler.Run(world);
+
+      CHECK_EQ(world.ReadResource<CounterResource>().value, 10);
+    }
+
+    SUBCASE("System skipped one frame still sees retained message") {
+      Scheduler write_scheduler;
+      write_scheduler.Add(UpdateLabel{}, Schedule{});
+      write_scheduler.In(UpdateLabel{}).Add(WriteMsgSystem{.msg_value = 17});
+      write_scheduler.Build();
+
+      World world;
+      world.InsertResources(CounterResource{0});
+      world.AddMessage<SchedulerMsg>();
+      write_scheduler.Run(world);
+      world.Update();
+
+      Scheduler idle_scheduler;
+      idle_scheduler.Add(UpdateLabel{}, Schedule{});
+      idle_scheduler.In(UpdateLabel{}).Add(IncrementSystem{});
+      idle_scheduler.Build();
+      idle_scheduler.Run(world);
+      CHECK_EQ(world.ReadResource<CounterResource>().value, 1);
+
+      Scheduler read_scheduler;
+      read_scheduler.Add(UpdateLabel{}, Schedule{});
+      read_scheduler.In(UpdateLabel{}).Add(ReadMsgSystem{});
+      read_scheduler.Build();
+      read_scheduler.Run(world);
+
+      CHECK_EQ(world.ReadResource<CounterResource>().value, 18);
     }
   }
 

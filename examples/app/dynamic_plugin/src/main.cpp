@@ -19,7 +19,7 @@ struct LogPluginResource {
     // The resource was inserted by the shared-library plugin. After loading,
     // systems in the host app access it like any other world resource.
     ++ticks->count;
-    hlog::Info("dynamic_plugins: plugin resource tick {}", ticks->count);
+    hlog::Info("Plugin resource tick {}", ticks->count);
   }
 };
 
@@ -36,20 +36,20 @@ struct ExitAfterFrames {
 
 int main() {
 #ifndef HELIOS_EXAMPLE_PLUGIN_PATH
-  hlog::Error("dynamic_plugins: HELIOS_EXAMPLE_PLUGIN_PATH not defined");
+  hlog::Error("HELIOS_EXAMPLE_PLUGIN_PATH not defined");
   return 1;
 #else
   // CMake fills this definition with the built plugin DLL path, keeping the
   // example independent from the current working directory.
   const std::filesystem::path plugin_path{HELIOS_EXAMPLE_PLUGIN_PATH};
-  hlog::Info("dynamic_plugins: loading '{}'", plugin_path.string());
+  hlog::Info("Loading '{}'", plugin_path.string());
 
   happ::DynamicPlugin dynamic_plugin;
 
   // Loading validates the exported symbols and constructs the plugin object.
   const auto load_result = dynamic_plugin.Load(plugin_path);
   if (!load_result) [[unlikely]] {
-    hlog::Error("dynamic_plugins: load failed ({})",
+    hlog::Error("Load failed ({})",
                 happ::DynamicPluginErrorToString(load_result.error()));
     return 1;
   }

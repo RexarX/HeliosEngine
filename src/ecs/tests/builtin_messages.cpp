@@ -1,7 +1,11 @@
 #include <doctest/doctest.h>
 
 #include <helios/ecs/builtin_messages.hpp>
+#include <helios/ecs/message/cursor.hpp>
 #include <helios/ecs/world.hpp>
+
+#include <algorithm>
+#include <cstddef>
 
 using namespace helios::ecs;
 
@@ -27,7 +31,8 @@ struct Score {
 
 template <MessageTrait T>
 [[nodiscard]] size_t MessageCount(const World& world) noexcept {
-  return world.ReadMessages<T>().Count();
+  auto cursor = MessageCursor<T>::IncludeBacklog();
+  return world.ReadMessages<T>(cursor).Count();
 }
 
 }  // namespace
@@ -72,9 +77,12 @@ TEST_SUITE("helios::ecs::EntityAddedMsg") {
       const Entity entity = world.CreateEntity();
       world.Update();
 
-      const auto reader = world.ReadMessages<EntityAddedMsg>();
+      MessageCursor<EntityAddedMsg> cursor;
+      const auto reader = world.ReadMessages<EntityAddedMsg>(cursor);
       CHECK_EQ(reader.Count(), 1);
-      CHECK_EQ(reader.PreviousMessages()[0].GetEntity(), entity);
+      CHECK_EQ(
+          world.Messages().PreviousMessages<EntityAddedMsg>()[0].GetEntity(),
+          entity);
     }
 
     SUBCASE("Two messages are emitted when two entities are created") {
@@ -85,7 +93,8 @@ TEST_SUITE("helios::ecs::EntityAddedMsg") {
       const Entity e2 = world.CreateEntity();
       world.Update();
 
-      const auto reader = world.ReadMessages<EntityAddedMsg>();
+      MessageCursor<EntityAddedMsg> cursor;
+      const auto reader = world.ReadMessages<EntityAddedMsg>(cursor);
       CHECK_EQ(reader.Count(), 2);
 
       const auto messages = reader.Collect();
@@ -173,9 +182,13 @@ TEST_SUITE("ecs::EntityDestroyedMsg") {
       world.DestroyEntity(entity);
       world.Update();
 
-      const auto reader = world.ReadMessages<EntityDestroyedMsg>();
+      MessageCursor<EntityDestroyedMsg> cursor;
+      const auto reader = world.ReadMessages<EntityDestroyedMsg>(cursor);
       CHECK_EQ(reader.Count(), 1);
-      CHECK_EQ(reader.PreviousMessages()[0].GetEntity(), entity);
+      CHECK_EQ(world.Messages()
+                   .PreviousMessages<EntityDestroyedMsg>()[0]
+                   .GetEntity(),
+               entity);
     }
 
     SUBCASE("Two messages are emitted when two entities are destroyed") {
@@ -265,9 +278,14 @@ TEST_SUITE("helios::ecs::ComponentAddedMsg") {
       world.AddComponents(entity, Position{});
       world.Update();
 
-      const auto reader = world.ReadMessages<ComponentAddedMsg<Position>>();
+      MessageCursor<ComponentAddedMsg<Position>> cursor;
+      const auto reader =
+          world.ReadMessages<ComponentAddedMsg<Position>>(cursor);
       CHECK_EQ(reader.Count(), 1);
-      CHECK_EQ(reader.PreviousMessages()[0].GetEntity(), entity);
+      CHECK_EQ(world.Messages()
+                   .PreviousMessages<ComponentAddedMsg<Position>>()[0]
+                   .GetEntity(),
+               entity);
     }
 
     SUBCASE("Component types are tracked independently") {
@@ -360,9 +378,14 @@ TEST_SUITE("helios::ecs::ComponentRemovedMsg") {
       world.RemoveComponents<Position>(entity);
       world.Update();
 
-      const auto reader = world.ReadMessages<ComponentRemovedMsg<Position>>();
+      MessageCursor<ComponentRemovedMsg<Position>> cursor;
+      const auto reader =
+          world.ReadMessages<ComponentRemovedMsg<Position>>(cursor);
       CHECK_EQ(reader.Count(), 1);
-      CHECK_EQ(reader.PreviousMessages()[0].GetEntity(), entity);
+      CHECK_EQ(world.Messages()
+                   .PreviousMessages<ComponentRemovedMsg<Position>>()[0]
+                   .GetEntity(),
+               entity);
     }
 
     SUBCASE("Component types are tracked independently") {
@@ -456,9 +479,13 @@ TEST_SUITE("helios::ecs::ComponentsClearedMsg") {
       world.ClearComponents(entity);
       world.Update();
 
-      const auto reader = world.ReadMessages<ComponentsClearedMsg>();
+      MessageCursor<ComponentsClearedMsg> cursor;
+      const auto reader = world.ReadMessages<ComponentsClearedMsg>(cursor);
       CHECK_EQ(reader.Count(), 1);
-      CHECK_EQ(reader.PreviousMessages()[0].GetEntity(), entity);
+      CHECK_EQ(world.Messages()
+                   .PreviousMessages<ComponentsClearedMsg>()[0]
+                   .GetEntity(),
+               entity);
     }
 
     SUBCASE("Two messages are emitted when two entities are cleared") {

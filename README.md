@@ -96,7 +96,9 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 | `ecs`       | World, entities, components, schedules, etc.             | ON      | [README](src/ecs/README.md)       |
 | `app`       | Application framework, plugins, sub-apps, etc.           | ON      | [README](src/app/README.md)       |
 | `profile`   | Tracy / flamegraph profiling (opt-in), etc.              | ON      | [README](src/profile/README.md)   |
-| `window`    | GLFW windowing (skeleton)                                | ON      | [README](src/window/README.md)    |
+| `window`    | Window ECS contract (no OS deps)                         | ON      | [README](src/window/README.md)    |
+| `glfw`      | GLFW backend for `window` (+ optional `input`)           | ON      | [README](src/glfw/README.md)      |
+| `input`     | Keyboard, mouse, cursor, gamepad ECS contract            | ON      | [README](src/input/README.md)     |
 
 ```bash
 cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW=OFF
@@ -443,6 +445,10 @@ Typical consumer settings when embedding:
 ```cmake
 set(HELIOS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+# Optional overrides (safer defaults already apply when embedded):
+# set(HELIOS_ENABLE_LTO OFF CACHE BOOL "" FORCE)
+# set(HELIOS_MANAGE_TOOLCHAIN OFF CACHE BOOL "" FORCE)
+# set(HELIOS_LINKER DEFAULT CACHE STRING "" FORCE)
 ```
 
 ### Method 1: `add_subdirectory`
@@ -459,6 +465,8 @@ set(CMAKE_CXX_STANDARD 23)
 add_subdirectory(third_party/HeliosEngine)
 
 add_executable(my_game src/main.cpp)
+# Optional: adopt Helios warning/optimization/sanitizer profile
+# helios_apply_conventions(my_game)
 helios_link_modules(
     TARGET my_game
     MODULES PUBLIC app

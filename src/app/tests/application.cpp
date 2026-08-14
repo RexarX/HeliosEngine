@@ -189,6 +189,18 @@ TEST_SUITE("helios::app::App") {
       CHECK_NE(app.TryGetSchedule(kUpdate), nullptr);
     }
 
+    SUBCASE("Default-constructed app registers frame orders") {
+      App app;
+      CHECK(app.GetWorld().HasResource<MainFrameOrder>());
+      CHECK(app.GetWorld().HasResource<FramePumpOrder>());
+      CHECK(
+          app.GetWorld().ReadResource<MainFrameOrder>().Contains(kUpdateStage));
+      CHECK(app.GetWorld().ReadResource<MainFrameOrder>().Contains(
+          kExtractStage));
+      CHECK(
+          app.GetWorld().ReadResource<FramePumpOrder>().Contains(kUpdateStage));
+    }
+
     SUBCASE("Worker thread count ctor leaves app uninitialized") {
       App app(4);
       CHECK_FALSE(app.IsInitialized());

@@ -22,7 +22,7 @@ namespace helios::ecs {
 /**
  * @brief Command that executes a function with `World` reference.
  * @details Wraps arbitrary functions for deferred execution during
- * `World::Update()`. The function must be invocable with a `World&` parameter.
+ * `World::Flush()`. The function must be invocable with a `World&` parameter.
  * @tparam F Function type that accepts `World&`
  */
 template <typename F>

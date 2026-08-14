@@ -15,7 +15,7 @@ class World;
 /**
  * @brief Command queue for deferred ECS operations.
  * @details Provides a queue for commands that will be executed during
- * `World::Update()`.
+ * `World::Flush()`.
  * Commands are executed in the order they were enqueued, ensuring predictable
  * behavior.
  * @note Not thread-safe.
@@ -166,7 +166,7 @@ inline void CmdQueue<Allocator>::ExecuteAll(World& world) {
  * @brief Command queue for deferred ECS operations that uses a polymorphic
  * allocator.
  * @details Provides a queue for commands that will be executed during
- * `World::Update()`.
+ * `World::Flush()`.
  * Commands are executed in the order they were enqueued, ensuring predictable
  * behavior.
  * @note Not thread-safe.

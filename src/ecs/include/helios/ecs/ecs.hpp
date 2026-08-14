@@ -19,6 +19,8 @@
 #include <helios/ecs/message/async_wrapper.hpp>
 #include <helios/ecs/message/async_writer.hpp>
 #include <helios/ecs/message/consumed_registry.hpp>
+#include <helios/ecs/message/cursor.hpp>
+#include <helios/ecs/message/id.hpp>
 #include <helios/ecs/message/manager.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/message/queue.hpp>
@@ -37,9 +39,12 @@
 #include <helios/ecs/schedule/executor/multi_threaded.hpp>
 #include <helios/ecs/schedule/executor/single_threaded.hpp>
 #include <helios/ecs/schedule/run_condition.hpp>
+#include <helios/ecs/schedule/run_scope.hpp>
+#include <helios/ecs/schedule/run_stage_options.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/schedule/scheduler.hpp>
 #include <helios/ecs/schedule/stage.hpp>
+#include <helios/ecs/schedule/stage_settings.hpp>
 #include <helios/ecs/schedule/system_group_handle.hpp>
 #include <helios/ecs/schedule/system_handle.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>

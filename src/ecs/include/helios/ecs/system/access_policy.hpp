@@ -113,6 +113,10 @@ struct ResourceConflictInfo {
  * `AccessPolicy` is used to:
  * - Enable automatic scheduling and conflict detection
  *
+ * An optional `exclusive_` flag declares exclusive access to the world
+ * (used by the `World` system parameter). Exclusive policies conflict with
+ * other exclusive policies and with any component or resource access.
+ *
  * It is compile-time scheduling metadata only. Runtime access validation is
  * not implemented yet.
  */
@@ -165,12 +169,23 @@ public:
 
   /**
    * @brief Checks if this policy conflicts with another policy at all.
-   * @details Shorthand for `HasQueryConflictWith || HasResourceConflictWith`.
+   * @details Returns true when component or resource access conflicts, or when
+   * either policy declares exclusive access and the other declares exclusive
+   * access or any component or resource access.
    * @param other Other access policy to check against
    * @return True if any conflict exists, false otherwise
    */
   [[nodiscard]] constexpr bool ConflictsWith(
       const AccessPolicy& other) const noexcept {
+    if (exclusive_ && other.exclusive_) {
+      return true;
+    }
+    if (exclusive_ && (other.HasComponents() || other.HasResources())) {
+      return true;
+    }
+    if (other.exclusive_ && (HasComponents() || HasResources())) {
+      return true;
+    }
     return HasQueryConflictWith(other) || HasResourceConflictWith(other);
   }
 
@@ -210,6 +225,12 @@ public:
   [[nodiscard]] constexpr bool HasResources() const noexcept {
     return !read_resources_.empty() || !write_resources_.empty();
   }
+
+  /**
+   * @brief Checks if this policy declares exclusive access.
+   * @return True if exclusive access was declared
+   */
+  [[nodiscard]] constexpr bool Exclusive() const noexcept { return exclusive_; }
 
   /**
    * @brief Checks if this policy declares read access to a component.
@@ -283,17 +304,21 @@ private:
   constexpr AccessPolicy(std::vector<ComponentTypeId>&& read_components,
                          std::vector<ComponentTypeId>&& write_components,
                          std::vector<ResourceTypeId>&& read_resources,
-                         std::vector<ResourceTypeId>&& write_resources) noexcept
+                         std::vector<ResourceTypeId>&& write_resources,
+                         bool exclusive) noexcept
       : read_components_(std::move(read_components)),
         write_components_(std::move(write_components)),
         read_resources_(std::move(read_resources)),
-        write_resources_(std::move(write_resources)) {}
+        write_resources_(std::move(write_resources)),
+        exclusive_(exclusive) {}
 
-  std::vector<ComponentTypeId> read_components_;   // Sorted, deduped
-  std::vector<ComponentTypeId> write_components_;  // Sorted, deduped
+  std::vector<ComponentTypeId> read_components_;   ///< Sorted, deduped
+  std::vector<ComponentTypeId> write_components_;  ///< Sorted, deduped
 
-  std::vector<ResourceTypeId> read_resources_;   // Sorted, deduped
-  std::vector<ResourceTypeId> write_resources_;  // Sorted, deduped
+  std::vector<ResourceTypeId> read_resources_;   ///< Sorted, deduped
+  std::vector<ResourceTypeId> write_resources_;  ///< Sorted, deduped
+
+  bool exclusive_ = false;
 
   friend class AccessPolicyBuilder;
 };
@@ -326,6 +351,7 @@ constexpr void AccessPolicy::Merge(const AccessPolicy& other) {
   write_components_ = std::move(merged_write_components);
   read_resources_ = std::move(merged_read_resources);
   write_resources_ = std::move(merged_write_resources);
+  exclusive_ |= other.exclusive_;
 }
 
 constexpr void AccessPolicy::Merge(AccessPolicy&& other) {
@@ -544,7 +570,20 @@ public:
    */
   constexpr AccessPolicy Build() noexcept {
     return {std::move(read_components_), std::move(write_components_),
-            std::move(read_resources_), std::move(write_resources_)};
+            std::move(read_resources_), std::move(write_resources_),
+            exclusive_};
+  }
+
+  /**
+   * @brief Declares exclusive access to the world.
+   * @details Used by the `World` system parameter. Conflicts with other
+   * exclusive policies and with any component or resource access.
+   * @return `*this` for method chaining
+   */
+  constexpr auto Exclusive(this auto&& self)
+      -> decltype(std::forward<decltype(self)>(self)) {
+    self.exclusive_ = true;
+    return std::forward<decltype(self)>(self);
   }
 
   /**
@@ -600,6 +639,7 @@ private:
   std::vector<ComponentTypeId> write_components_;  ///< Sorted, deduped
   std::vector<ResourceTypeId> read_resources_;     ///< Sorted, deduped
   std::vector<ResourceTypeId> write_resources_;    ///< Sorted, deduped
+  bool exclusive_ = false;
 };
 
 template <typename... Components>

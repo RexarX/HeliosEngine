@@ -1,9 +1,11 @@
 #pragma once
 
+#include <helios/app/frame_order.hpp>
 #include <helios/ecs/schedule/executor/executor.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/schedule/scheduler.hpp>
 #include <helios/ecs/schedule/stage.hpp>
+#include <helios/ecs/world.hpp>
 
 #include <string_view>
 
@@ -166,12 +168,30 @@ inline void RegisterBuiltinSchedules(ecs::Scheduler& scheduler) {
   if (!scheduler.HasStage(kStartupStage)) {
     scheduler.AddStage(kStartupStage);
   }
+
+  // FramePumpOrder ends at Update — advance message buffers there for nested
+  // pumps. MainFrameOrder also includes Update but only advances on its last
+  // present stage (Extract); see Scheduler::RunFrameOrder.
   if (!scheduler.HasStage(kUpdateStage)) {
-    scheduler.AddStage(kUpdateStage);
+    auto& settings = scheduler.AddStage(kUpdateStage).Settings();
+    settings.advance_messages = true;
+  } else {
+    auto& settings = scheduler.GetStageSettings(kUpdateStage);
+    settings.advance_messages = true;
   }
+
+  // MainFrameOrder ends at Extract: flush after extract, advance message
+  // buffers once at end of the main frame order.
   if (!scheduler.HasStage(kExtractStage)) {
-    scheduler.AddStage(kExtractStage);
+    auto& settings = scheduler.AddStage(kExtractStage).Settings();
+    settings.apply_commands = true;
+    settings.advance_messages = true;
+  } else {
+    auto& settings = scheduler.GetStageSettings(kExtractStage);
+    settings.apply_commands = true;
+    settings.advance_messages = true;
   }
+
   if (!scheduler.HasStage(kShutdownStage)) {
     scheduler.AddStage(kShutdownStage);
   }
@@ -216,6 +236,22 @@ inline void RegisterBuiltinSchedules(ecs::Scheduler& scheduler) {
 }
 
 /**
+ * @brief Inserts default `MainFrameOrder` and `FramePumpOrder` resources.
+ * @details Safe to call multiple times (`TryInsertResources`).
+ * @param world World that owns the frame-order resources
+ */
+inline void RegisterBuiltinFrameOrders(ecs::World& world) {
+  MainFrameOrder main_order;
+  main_order.TryPushBack(kUpdateStage);
+  main_order.TryPushBack(kExtractStage);
+
+  FramePumpOrder pump_order;
+  pump_order.TryPushBack(kUpdateStage);
+
+  world.TryInsertResources(std::move(main_order), std::move(pump_order));
+}
+
+/**
  * @brief Registers built-in schedules for a sub-app ECS scheduler.
  * @details Same as @ref RegisterBuiltinSchedules except extract stage and
  * schedules are omitted; extraction is driven by the main app via
@@ -237,9 +273,16 @@ inline void RegisterBuiltinSubAppSchedules(ecs::Scheduler& scheduler) {
   if (!scheduler.HasStage(kStartupStage)) {
     scheduler.AddStage(kStartupStage);
   }
+
+  // Sub-apps and FramePumpOrder end at Update: advance message buffers there.
   if (!scheduler.HasStage(kUpdateStage)) {
-    scheduler.AddStage(kUpdateStage);
+    auto& settings = scheduler.AddStage(kUpdateStage).Settings();
+    settings.advance_messages = true;
+  } else {
+    auto& settings = scheduler.GetStageSettings(kUpdateStage);
+    settings.advance_messages = true;
   }
+
   if (!scheduler.HasStage(kShutdownStage)) {
     scheduler.AddStage(kShutdownStage);
   }

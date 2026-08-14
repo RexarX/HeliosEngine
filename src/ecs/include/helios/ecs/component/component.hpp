@@ -11,15 +11,12 @@
 namespace helios::ecs {
 
 template <typename... Ts>
-class ComponentBundle;
+struct ComponentBundleTypes;
 
 namespace details {
 
 template <typename T>
 struct IsComponentBundle : std::false_type {};
-
-template <typename... Ts>
-struct IsComponentBundle<ComponentBundle<Ts...>> : std::true_type {};
 
 }  // namespace details
 

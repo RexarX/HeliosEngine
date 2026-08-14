@@ -17,7 +17,7 @@ namespace {
 happ::ExitCode TimedRunner(happ::App& app) {
   using namespace std::chrono_literals;
 
-  hlog::Info("TimedRunner: starting");
+  hlog::Info("Starting TimedRunner");
 
   const auto start_time = std::chrono::steady_clock::now();
   const auto exit_time = start_time + 10ms;
@@ -26,14 +26,14 @@ happ::ExitCode TimedRunner(happ::App& app) {
   while (exit_code = app.ShouldExit(),
          !exit_code && std::chrono::steady_clock::now() < exit_time) {
     const auto& frame_count = app.GetWorld().ReadResource<happ::FrameCount>();
-    hlog::Info("TimedRunner: {} frame", frame_count.count);
+    hlog::Info("TimedRunner {} frame", frame_count.count);
     app.Update();
   }
 
   const auto millisec = std::chrono::duration_cast<std::chrono::milliseconds>(
                             std::chrono::steady_clock::now() - start_time)
                             .count();
-  hlog::Info("TimedRunner: stopping after {} ms", millisec);
+  hlog::Info("TimedRunner stopping after {} ms", millisec);
 
   return exit_code.value_or(happ::ExitCode::kSuccess);
 }

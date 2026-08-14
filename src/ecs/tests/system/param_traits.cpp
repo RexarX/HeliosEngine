@@ -4,7 +4,9 @@
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/query/query.hpp>
 #include <helios/ecs/resource/resource.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/system/param_traits.hpp>
+#include <helios/ecs/world.hpp>
 
 #include <optional>
 
@@ -286,6 +288,32 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
       const auto policy = builder.Build();
       CHECK_FALSE(policy.HasComponents());
       CHECK_FALSE(policy.HasResources());
+    }
+  }
+
+  TEST_CASE("helios::ecs::SystemParamTraits::World") {
+    SUBCASE("World exists as a system parameter trait") {
+      CHECK(HasSystemParamTraits<World>);
+      CHECK(HasRegisterAccess<World>);
+    }
+
+    SUBCASE("World RegisterAccess sets exclusive flag") {
+      AccessPolicyBuilder builder;
+      SystemParamTraits<World>::RegisterAccess(builder);
+
+      const auto policy = builder.Build();
+      CHECK(policy.Exclusive());
+      CHECK_FALSE(policy.HasComponents());
+      CHECK_FALSE(policy.HasResources());
+    }
+
+    SUBCASE("World Make returns the same world reference") {
+      World world;
+      SystemLocalData local = SystemLocalData::From();
+      const AccessPolicy policy;
+
+      World& made = SystemParamTraits<World>::Make(world, local, policy);
+      CHECK_EQ(&made, &world);
     }
   }
 

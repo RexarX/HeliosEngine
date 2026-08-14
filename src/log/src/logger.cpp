@@ -28,14 +28,19 @@
 #include <system_error>
 #include <vector>
 
-using Timestamp = helios::container::StaticString<19>;  // YYYY-MM-DD_HH-MM-SS
+namespace helios::log {
 
 namespace {
+
+using Timestamp = container::StaticString<24>;  // YYYY-MM-DD_HH-MM-SS.sss
 
 [[nodiscard]] auto GenerateTimestamp() noexcept
     -> std::expected<Timestamp, std::string_view> {
   try {
     const auto now = std::chrono::system_clock::now();
+    const auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+                        now.time_since_epoch()) %
+                    1000;
     const auto time_t_now = std::chrono::system_clock::to_time_t(now);
 
     std::tm local_time{};
@@ -60,11 +65,12 @@ namespace {
     const int hour = local_time.tm_hour;
     const int min = local_time.tm_min;
     const int sec = local_time.tm_sec;
+    const auto milli = ms.count();
 
-    std::array<char, 20> time_buf = {};
+    std::array<char, 25> time_buf = {};
     const auto result = std::format_to(
-        time_buf.begin(), "{:04d}-{:02d}-{:02d}_{:02d}-{:02d}-{:02d}", year,
-        month, day, hour, min, sec);
+        time_buf.begin(), "{:04d}-{:02d}-{:02d}_{:02d}-{:02d}-{:02d}.{:03d}",
+        year, month, day, hour, min, sec, milli);
     const auto len =
         static_cast<size_t>(std::distance(time_buf.begin(), result));
     return Timestamp(std::string_view(time_buf.data(), len));
@@ -92,8 +98,6 @@ namespace {
 }
 
 }  // namespace
-
-namespace helios::log {
 
 void Logger::FlushAll() noexcept {
   if (shut_down_.load(std::memory_order_acquire)) [[unlikely]] {

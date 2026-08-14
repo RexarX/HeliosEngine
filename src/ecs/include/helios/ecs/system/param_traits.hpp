@@ -48,8 +48,7 @@ struct SystemParamTraits<Query<Args...>> {
 
   static ParamType Make(World& world, SystemLocalData& data,
                         const AccessPolicy& /*policy*/) {
-    auto alloc = Allocator{&data.allocator};
-    return ParamType(world.Components(), std::move(alloc));
+    return ParamType(world.Components(), &data.allocator);
   }
 
   static constexpr void RegisterAccess(AccessPolicyBuilder& builder) {
@@ -155,6 +154,37 @@ struct SystemParamTraits<Local<T>> {
       AccessPolicyBuilder& /*builder*/) noexcept {}
 };
 
+// Special case for `LocalArena` to ensure it is always available in system
+// local data. The `LocalArena` is constructed with the system's arena
+// allocator, allowing for efficient temporary allocations during system
+// execution.
+
+template <>
+struct SystemParamTraits<Local<const LocalArena>> {
+  static auto Make(World& /*world*/, SystemLocalData& data,
+                   const AccessPolicy& /*policy*/) noexcept
+      -> Local<const LocalArena> {
+    data.resource_manager.TryEmplace<LocalArena>(data.allocator);
+    return Local<const LocalArena>(data.resource_manager.Get<LocalArena>());
+  }
+
+  static constexpr void RegisterAccess(
+      AccessPolicyBuilder& /*builder*/) noexcept {}
+};
+
+template <>
+struct SystemParamTraits<Local<LocalArena>> {
+  static auto Make(World& /*world*/, SystemLocalData& data,
+                   const AccessPolicy& /*policy*/) noexcept
+      -> Local<LocalArena> {
+    data.resource_manager.TryEmplace<LocalArena>(data.allocator);
+    return Local<LocalArena>(data.resource_manager.Get<LocalArena>());
+  }
+
+  static constexpr void RegisterAccess(
+      AccessPolicyBuilder& /*builder*/) noexcept {}
+};
+
 // ---------------------------------------------------------------------------
 // Commands
 // ---------------------------------------------------------------------------
@@ -168,6 +198,22 @@ struct SystemParamTraits<Commands> {
 
   static constexpr void RegisterAccess(
       AccessPolicyBuilder& /*builder*/) noexcept {}
+};
+
+// ---------------------------------------------------------------------------
+// World
+// ---------------------------------------------------------------------------
+
+template <>
+struct SystemParamTraits<World> {
+  static constexpr World& Make(World& world, SystemLocalData& /*data*/,
+                               const AccessPolicy& /*policy*/) noexcept {
+    return world;
+  }
+
+  static constexpr void RegisterAccess(AccessPolicyBuilder& builder) {
+    builder.Exclusive();
+  }
 };
 
 // ---------------------------------------------------------------------------
@@ -191,10 +237,12 @@ struct SystemParamTraits<WorldView> {
 
 template <MessageTrait T>
 struct SystemParamTraits<MessageReader<T>> {
-  static auto Make(World& world, SystemLocalData& /*data*/,
+  static auto Make(World& world, SystemLocalData& data,
                    const AccessPolicy& /*policy*/) noexcept
       -> MessageReader<T> {
-    return world.ReadMessages<T>();
+    data.resource_manager.template TryEmplace<MessageCursor<T>>();
+    return world.ReadMessages<T>(
+        data.resource_manager.template Get<MessageCursor<T>>());
   }
 
   static constexpr void RegisterAccess(
@@ -206,7 +254,11 @@ struct SystemParamTraits<ConsumableMessageReader<T>> {
   static auto Make(World& world, SystemLocalData& data,
                    const AccessPolicy& /*policy*/) noexcept
       -> ConsumableMessageReader<T> {
-    return ConsumableMessageReader<T>(world.Messages(), data.consumed_messages);
+    data.resource_manager.template TryEmplace<MessageCursor<T>>();
+    return ConsumableMessageReader<T>(
+        world.Messages(),
+        data.resource_manager.template Get<MessageCursor<T>>(),
+        data.consumed_messages);
   }
 
   static constexpr void RegisterAccess(

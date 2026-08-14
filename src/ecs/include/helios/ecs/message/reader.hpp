@@ -2,7 +2,7 @@
 
 #include <helios/assert.hpp>
 #include <helios/ecs/message/consumed_registry.hpp>
-#include <helios/ecs/message/manager.hpp>
+#include <helios/ecs/message/cursor.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/message/wrapper.hpp>
 #include <helios/utils/functional_adapters.hpp>
@@ -22,10 +22,31 @@
 
 namespace helios::ecs {
 
+namespace details {
+
 /**
- * @brief Bidirectional iterator that yields `MessageWrapper<T>` instances.
- * @details Each wrapper carries a const reference to the message and the
- * global index, enabling the caller to access the message during iteration.
+ * @brief Returns the index of the first id >= `last_message_count`.
+ * @param ids Sorted message ids for one buffer
+ * @param last_message_count Cursor position
+ * @return Offset into `ids`, or `ids.size()` when all ids are older
+ */
+template <MessageTrait T>
+[[nodiscard]] constexpr size_t MessageUnreadOffset(
+    std::span<const AnyMessageId> ids,
+    MessageId<T> last_message_count) noexcept {
+  const AnyMessageId cursor_pos = last_message_count.ToAny();
+  const auto it = std::ranges::lower_bound(ids, cursor_pos);
+  return static_cast<size_t>(it - ids.begin());
+}
+
+}  // namespace details
+
+/**
+ * @brief Bidirectional iterator that yields `MessageWrapper<T>` for unread
+ * messages.
+ * @details Walks previous then current buffers for ids >=
+ * `cursor->last_message_count`. Prefixed `operator++` advances the cursor to
+ * `current_id + 1`.
  *
  * Derives from `FunctionalAdapterBase` so the iterator itself can be used as a
  * lazy range, enabling chained adapter calls such as `.Filter(...)`,
@@ -48,15 +69,31 @@ public:
   constexpr MessageWrapperIter() noexcept = default;
 
   /**
-   * @brief Constructs a wrapper iterator over two contiguous message spans.
-   * @param first Span of messages from the previous frame
-   * @param second Span of messages from the current frame
-   * @param position Logical position in the combined [first | second] sequence
+   * @brief Constructs an unread-message wrapper iterator.
+   * @param previous_messages Span of messages from the previous frame
+   * @param current_messages Span of messages from the current frame
+   * @param previous_ids Ids aligned with `previous_messages`
+   * @param current_ids Ids aligned with `current_messages`
+   * @param cursor Delivery cursor advanced by `operator++` (may be null only
+   * for a singular iterator)
+   * @param previous_offset First unread index in the previous buffer
+   * @param current_offset First unread index in the current buffer
+   * @param position Logical position in the combined unread sequence
    */
-  constexpr MessageWrapperIter(std::span<const T> first,
-                               std::span<const T> second,
-                               size_t position) noexcept
-      : first_(first), second_(second), position_(position) {}
+  constexpr MessageWrapperIter(std::span<const T> previous_messages,
+                               std::span<const T> current_messages,
+                               std::span<const AnyMessageId> previous_ids,
+                               std::span<const AnyMessageId> current_ids,
+                               MessageCursor<T>* cursor, size_t previous_offset,
+                               size_t current_offset, size_t position) noexcept
+      : previous_messages_(previous_messages),
+        current_messages_(current_messages),
+        previous_ids_(previous_ids),
+        current_ids_(current_ids),
+        cursor_(cursor),
+        previous_offset_(previous_offset),
+        current_offset_(current_offset),
+        position_(position) {}
 
   constexpr MessageWrapperIter(const MessageWrapperIter&) noexcept = default;
   constexpr MessageWrapperIter(MessageWrapperIter&&) noexcept = default;
@@ -67,36 +104,44 @@ public:
   constexpr MessageWrapperIter& operator=(MessageWrapperIter&&) noexcept =
       default;
 
-  [[nodiscard]] constexpr reference operator*() const noexcept {
-    const T& msg = (position_ < first_.size())
-                       ? first_[position_]
-                       : second_[position_ - first_.size()];
-    return {msg, position_};
-  }
+  /**
+   * @brief Gets the current unread message wrapper.
+   * @warning Triggers assertion if the iterator is singular or out of range.
+   * @return Message wrapper for the current unread message
+   */
+  [[nodiscard]] constexpr reference operator*() const noexcept;
 
   pointer operator->() const = delete;
 
-  constexpr MessageWrapperIter& operator++() noexcept {
-    ++position_;
-    return *this;
-  }
+  /**
+   * @brief Advances to the next unread message and updates the cursor.
+   * @warning Triggers assertion if the cursor is null or the iterator is at
+   * end.
+   * @return Reference to this iterator
+   */
+  constexpr MessageWrapperIter& operator++() noexcept;
 
-  [[nodiscard]] constexpr MessageWrapperIter operator++(int) noexcept {
-    auto copy = *this;
-    ++(*this);
-    return copy;
-  }
+  /**
+   * @brief Advances to the next unread message and updates the cursor.
+   * @warning Triggers assertion if the cursor is null or the iterator is at
+   * end.
+   * @return Copy of this iterator before advancing
+   */
+  [[nodiscard]] constexpr MessageWrapperIter operator++(int) noexcept;
 
-  constexpr MessageWrapperIter& operator--() noexcept {
-    --position_;
-    return *this;
-  }
+  /**
+   * @brief Moves to the previous unread message.
+   * @warning Triggers assertion if the iterator is at the beginning.
+   * @return Reference to this iterator
+   */
+  constexpr MessageWrapperIter& operator--() noexcept;
 
-  [[nodiscard]] constexpr MessageWrapperIter operator--(int) noexcept {
-    auto copy = *this;
-    --(*this);
-    return copy;
-  }
+  /**
+   * @brief Moves to the previous unread message.
+   * @warning Triggers assertion if the iterator is at the beginning.
+   * @return Copy of this iterator before moving
+   */
+  [[nodiscard]] constexpr MessageWrapperIter operator--(int) noexcept;
 
   [[nodiscard]] constexpr auto operator<=>(
       const MessageWrapperIter& other) const noexcept {
@@ -114,43 +159,131 @@ public:
   }
 
   /**
-   * @brief Returns the current logical position in the combined sequence.
+   * @brief Returns the current logical position in the unread sequence.
    * @return Zero-based position index
    */
   [[nodiscard]] constexpr size_t Position() const noexcept { return position_; }
 
   /**
    * @brief Returns a copy of this iterator positioned at the beginning of the
-   * sequence.
+   * unread snapshot.
    * @details Required so `MessageWrapperIter` can act as a self-contained range
    * for `FunctionalAdapterBase` adapter methods.
-   * @return Iterator reset to position 0
+   * @return Iterator reset to position 0 over the same unread window
    */
   [[nodiscard]] constexpr MessageWrapperIter begin() const noexcept {
-    return {first_, second_, 0};
+    return {previous_messages_,
+            current_messages_,
+            previous_ids_,
+            current_ids_,
+            cursor_,
+            previous_offset_,
+            current_offset_,
+            0};
   }
 
   /**
-   * @brief Returns a copy of this iterator positioned one past the last
+   * @brief Returns a copy of this iterator positioned one past the last unread
    * element.
-   * @return Iterator at position `first_.size() + second_.size()`
+   * @details The end iterator does not advance the cursor.
+   * @return Iterator at position equal to the unread count
    */
   [[nodiscard]] constexpr MessageWrapperIter end() const noexcept {
-    return {first_, second_, first_.size() + second_.size()};
+    return {previous_messages_, current_messages_, previous_ids_,
+            current_ids_,       cursor_,           previous_offset_,
+            current_offset_,    UnreadCount()};
   }
 
 private:
-  std::span<const T> first_;
-  std::span<const T> second_;
+  [[nodiscard]] constexpr const T& MessageAt(size_t position) const noexcept;
+  [[nodiscard]] constexpr MessageId<T> IdAt(size_t position) const noexcept;
+
+  [[nodiscard]] constexpr size_t UnreadPreviousCount() const noexcept {
+    return previous_ids_.size() - previous_offset_;
+  }
+
+  [[nodiscard]] constexpr size_t UnreadCount() const noexcept {
+    return UnreadPreviousCount() + (current_ids_.size() - current_offset_);
+  }
+
+  std::span<const T> previous_messages_;
+  std::span<const T> current_messages_;
+  std::span<const AnyMessageId> previous_ids_;
+  std::span<const AnyMessageId> current_ids_;
+  MessageCursor<T>* cursor_ = nullptr;
+  size_t previous_offset_ = 0;
+  size_t current_offset_ = 0;
   size_t position_ = 0;
 };
 
+template <MessageTrait T>
+constexpr auto MessageWrapperIter<T>::operator*() const noexcept -> reference {
+  HELIOS_ASSERT(position_ < UnreadCount(),
+                "MessageWrapperIter dereference past the end!");
+  return {MessageAt(position_), IdAt(position_)};
+}
+
+template <MessageTrait T>
+constexpr auto MessageWrapperIter<T>::operator++() noexcept
+    -> MessageWrapperIter& {
+  HELIOS_ASSERT(cursor_ != nullptr, "MessageCursor pointer is null!");
+  HELIOS_ASSERT(position_ < UnreadCount(),
+                "MessageWrapperIter increment past the end!");
+  cursor_->last_message_count = MessageId<T>{IdAt(position_).value + 1};
+  ++position_;
+  return *this;
+}
+
+template <MessageTrait T>
+constexpr auto MessageWrapperIter<T>::operator++(int) noexcept
+    -> MessageWrapperIter {
+  auto copy = *this;
+  ++(*this);
+  return copy;
+}
+
+template <MessageTrait T>
+constexpr auto MessageWrapperIter<T>::operator--() noexcept
+    -> MessageWrapperIter& {
+  --position_;
+  return *this;
+}
+
+template <MessageTrait T>
+constexpr auto MessageWrapperIter<T>::operator--(int) noexcept
+    -> MessageWrapperIter {
+  auto copy = *this;
+  --(*this);
+  return copy;
+}
+
+template <MessageTrait T>
+constexpr const T& MessageWrapperIter<T>::MessageAt(
+    size_t position) const noexcept {
+  const size_t unread_previous = UnreadPreviousCount();
+  if (position < unread_previous) {
+    return previous_messages_[previous_offset_ + position];
+  }
+  return current_messages_[current_offset_ + (position - unread_previous)];
+}
+
+template <MessageTrait T>
+constexpr MessageId<T> MessageWrapperIter<T>::IdAt(
+    size_t position) const noexcept {
+  const size_t unread_previous = UnreadPreviousCount();
+  if (position < unread_previous) {
+    return MessageId<T>::From(previous_ids_[previous_offset_ + position]);
+  }
+  return MessageId<T>::From(
+      current_ids_[current_offset_ + (position - unread_previous)]);
+}
+
 /**
- * @brief Bidirectional iterator that yields `ConsumableMessageWrapper<T>`
- * instances with consume support.
- * @details Each wrapper carries a const reference to the message, a reference
- * to `ConsumedMessagesRegistry`, and the global index, enabling the caller to
- * mark individual messages as consumed during iteration.
+ * @brief Bidirectional iterator that yields `ConsumableMessageWrapper<T>` for
+ * unread messages with consume support.
+ * @details Walks previous then current buffers for ids >=
+ * `cursor->last_message_count`. Prefixed `operator++` advances the cursor to
+ * `current_id + 1`.
  *
  * Derives from `FunctionalAdapterBase` so the iterator itself can be used as a
  * lazy range, enabling chained adapter calls such as `.Filter(...)`,
@@ -158,14 +291,17 @@ private:
  *
  * @note The adapter methods operate on `ConsumableMessageWrapper<T>` values.
  * @tparam T Message type satisfying `ConsumableMessageTrait`
+ * @tparam Alloc Allocator type for the consumed messages registry
  */
-template <ConsumableMessageTrait T>
+template <ConsumableMessageTrait T,
+          typename Alloc = std::pmr::polymorphic_allocator<std::byte>>
 class ConsumableMessageWrapperIter
-    : public utils::FunctionalAdapterBase<ConsumableMessageWrapperIter<T>> {
+    : public utils::FunctionalAdapterBase<
+          ConsumableMessageWrapperIter<T, Alloc>> {
 public:
   using iterator_concept = std::bidirectional_iterator_tag;
   using iterator_category = std::input_iterator_tag;
-  using value_type = ConsumableMessageWrapper<T>;
+  using value_type = ConsumableMessageWrapper<T, Alloc>;
   using reference = value_type;
   using pointer = void;
   using difference_type = ptrdiff_t;
@@ -173,20 +309,33 @@ public:
   constexpr ConsumableMessageWrapperIter() noexcept = default;
 
   /**
-   * @brief Constructs a wrapper iterator over two contiguous message spans.
-   * @param first Span of messages from the previous frame
-   * @param second Span of messages from the current frame
+   * @brief Constructs an unread consumable-message wrapper iterator.
+   * @param previous_messages Span of messages from the previous frame
+   * @param current_messages Span of messages from the current frame
+   * @param previous_ids Ids aligned with `previous_messages`
+   * @param current_ids Ids aligned with `current_messages`
    * @param registry Per-system consumed messages registry
-   * @param position Logical position in the combined [first | second] sequence
+   * @param cursor Delivery cursor advanced by `operator++` (may be null only
+   * for a singular iterator)
+   * @param previous_offset First unread index in the previous buffer
+   * @param current_offset First unread index in the current buffer
+   * @param position Logical position in the combined unread sequence
    */
   constexpr ConsumableMessageWrapperIter(
-      std::span<const T> first, std::span<const T> second,
-      std::reference_wrapper<ConsumedMessagesRegistry<>> registry,
-      size_t position) noexcept
-      : first_(first),
-        second_(second),
-        position_(position),
-        registry_(&registry.get()) {}
+      std::span<const T> previous_messages, std::span<const T> current_messages,
+      std::span<const AnyMessageId> previous_ids,
+      std::span<const AnyMessageId> current_ids,
+      ConsumedMessagesRegistry<Alloc>& registry, MessageCursor<T>* cursor,
+      size_t previous_offset, size_t current_offset, size_t position) noexcept
+      : previous_messages_(previous_messages),
+        current_messages_(current_messages),
+        previous_ids_(previous_ids),
+        current_ids_(current_ids),
+        registry_(&registry),
+        cursor_(cursor),
+        previous_offset_(previous_offset),
+        current_offset_(current_offset),
+        position_(position) {}
 
   constexpr ConsumableMessageWrapperIter(
       const ConsumableMessageWrapperIter&) noexcept = default;
@@ -199,38 +348,45 @@ public:
   constexpr ConsumableMessageWrapperIter& operator=(
       ConsumableMessageWrapperIter&&) noexcept = default;
 
-  [[nodiscard]] constexpr reference operator*() const noexcept {
-    const T& msg = (position_ < first_.size())
-                       ? first_[position_]
-                       : second_[position_ - first_.size()];
-    return {msg, *registry_, position_};
-  }
+  /**
+   * @brief Gets the current unread message consumable wrapper.
+   * @warning Triggers assertion if registry is null or the iterator is out of
+   * range.
+   * @return Consumable message wrapper for the current unread message
+   */
+  [[nodiscard]] constexpr reference operator*() const noexcept;
 
   pointer operator->() const = delete;
 
-  constexpr ConsumableMessageWrapperIter& operator++() noexcept {
-    ++position_;
-    return *this;
-  }
+  /**
+   * @brief Advances to the next unread message and updates the cursor.
+   * @warning Triggers assertion if the cursor is null or the iterator is at
+   * end.
+   * @return Reference to this iterator
+   */
+  constexpr ConsumableMessageWrapperIter& operator++() noexcept;
 
-  [[nodiscard]] constexpr ConsumableMessageWrapperIter operator++(
-      int) noexcept {
-    auto copy = *this;
-    ++(*this);
-    return copy;
-  }
+  /**
+   * @brief Advances to the next unread message and updates the cursor.
+   * @warning Triggers assertion if the cursor is null or the iterator is at
+   * end.
+   * @return Copy of this iterator before advancing
+   */
+  [[nodiscard]] constexpr ConsumableMessageWrapperIter operator++(int) noexcept;
 
-  constexpr ConsumableMessageWrapperIter& operator--() noexcept {
-    --position_;
-    return *this;
-  }
+  /**
+   * @brief Moves to the previous unread message.
+   * @warning Triggers assertion if the iterator is at the beginning.
+   * @return Reference to this iterator
+   */
+  constexpr ConsumableMessageWrapperIter& operator--() noexcept;
 
-  [[nodiscard]] constexpr ConsumableMessageWrapperIter operator--(
-      int) noexcept {
-    auto copy = *this;
-    --(*this);
-    return copy;
-  }
+  /**
+   * @brief Moves to the previous unread message.
+   * @warning Triggers assertion if the iterator is at the beginning.
+   * @return Copy of this iterator before moving
+   */
+  [[nodiscard]] constexpr ConsumableMessageWrapperIter operator--(int) noexcept;
 
   [[nodiscard]] constexpr auto operator<=>(
       const ConsumableMessageWrapperIter& other) const noexcept {
@@ -248,37 +404,136 @@ public:
   }
 
   /**
-   * @brief Returns the current logical position in the combined sequence.
+   * @brief Returns the current logical position in the unread sequence.
    * @return Zero-based position index
    */
   [[nodiscard]] constexpr size_t Position() const noexcept { return position_; }
 
   /**
    * @brief Returns a copy of this iterator positioned at the beginning of the
-   * sequence.
+   * unread snapshot.
    * @details Required so `ConsumableMessageWrapperIter` can act as a
    * self-contained range for `FunctionalAdapterBase` adapter methods.
-   * @return Iterator reset to position 0
+   * @warning Triggers assertion if consumed messages registry is null.
+   * @return Iterator reset to position 0 over the same unread window
    */
-  [[nodiscard]] constexpr ConsumableMessageWrapperIter begin() const noexcept {
-    return {first_, second_, *registry_, 0};
-  }
+  [[nodiscard]] constexpr ConsumableMessageWrapperIter begin() const noexcept;
 
   /**
-   * @brief Returns a copy of this iterator positioned one past the last
+   * @brief Returns a copy of this iterator positioned one past the last unread
    * element.
-   * @return Iterator at position `first_.size() + second_.size()`
+   * @details The end iterator does not advance the cursor.
+   * @warning Triggers assertion if consumed messages registry is null.
+   * @return Iterator at position equal to the unread count
    */
-  [[nodiscard]] constexpr ConsumableMessageWrapperIter end() const noexcept {
-    return {first_, second_, *registry_, first_.size() + second_.size()};
-  }
+  [[nodiscard]] constexpr ConsumableMessageWrapperIter end() const noexcept;
 
 private:
-  std::span<const T> first_;
-  std::span<const T> second_;
+  [[nodiscard]] constexpr const T& MessageAt(size_t position) const noexcept;
+  [[nodiscard]] constexpr MessageId<T> IdAt(size_t position) const noexcept;
+
+  [[nodiscard]] constexpr size_t UnreadPreviousCount() const noexcept {
+    return previous_ids_.size() - previous_offset_;
+  }
+  [[nodiscard]] constexpr size_t UnreadCount() const noexcept {
+    return UnreadPreviousCount() + (current_ids_.size() - current_offset_);
+  }
+
+  std::span<const T> previous_messages_;
+  std::span<const T> current_messages_;
+  std::span<const AnyMessageId> previous_ids_;
+  std::span<const AnyMessageId> current_ids_;
+  ConsumedMessagesRegistry<Alloc>* registry_ = nullptr;
+  MessageCursor<T>* cursor_ = nullptr;
+  size_t previous_offset_ = 0;
+  size_t current_offset_ = 0;
   size_t position_ = 0;
-  ConsumedMessagesRegistry<>* registry_ = nullptr;
 };
+
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator*()
+    const noexcept -> reference {
+  HELIOS_ASSERT(registry_ != nullptr,
+                "ConsumedMessagesRegistry pointer is null!");
+  HELIOS_ASSERT(position_ < UnreadCount(),
+                "ConsumableMessageWrapperIter dereference past the end!");
+  return {MessageAt(position_), *registry_, IdAt(position_)};
+}
+
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator++() noexcept
+    -> ConsumableMessageWrapperIter& {
+  HELIOS_ASSERT(cursor_ != nullptr, "MessageCursor pointer is null!");
+  HELIOS_ASSERT(position_ < UnreadCount(),
+                "ConsumableMessageWrapperIter increment past the end!");
+  cursor_->last_message_count = MessageId<T>{IdAt(position_).value + 1};
+  ++position_;
+  return *this;
+}
+
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator++(int) noexcept
+    -> ConsumableMessageWrapperIter {
+  auto copy = *this;
+  ++(*this);
+  return copy;
+}
+
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator--() noexcept
+    -> ConsumableMessageWrapperIter& {
+  --position_;
+  return *this;
+}
+
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator--(int) noexcept
+    -> ConsumableMessageWrapperIter {
+  auto copy = *this;
+  --(*this);
+  return copy;
+}
+
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr auto ConsumableMessageWrapperIter<T, Alloc>::begin() const noexcept
+    -> ConsumableMessageWrapperIter {
+  HELIOS_ASSERT(registry_ != nullptr,
+                "ConsumedMessagesRegistry pointer is null!");
+  return {previous_messages_, current_messages_, previous_ids_,
+          current_ids_,       *registry_,        cursor_,
+          previous_offset_,   current_offset_,   0};
+}
+
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr auto ConsumableMessageWrapperIter<T, Alloc>::end() const noexcept
+    -> ConsumableMessageWrapperIter {
+  HELIOS_ASSERT(registry_ != nullptr,
+                "ConsumedMessagesRegistry pointer is null!");
+  return {previous_messages_, current_messages_, previous_ids_,
+          current_ids_,       *registry_,        cursor_,
+          previous_offset_,   current_offset_,   UnreadCount()};
+}
+
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr const T& ConsumableMessageWrapperIter<T, Alloc>::MessageAt(
+    size_t position) const noexcept {
+  const size_t unread_previous = UnreadPreviousCount();
+  if (position < unread_previous) {
+    return previous_messages_[previous_offset_ + position];
+  }
+  return current_messages_[current_offset_ + (position - unread_previous)];
+}
+
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr MessageId<T> ConsumableMessageWrapperIter<T, Alloc>::IdAt(
+    size_t position) const noexcept {
+  const size_t unread_previous = UnreadPreviousCount();
+  if (position < unread_previous) {
+    return MessageId<T>::From(previous_ids_[previous_offset_ + position]);
+  }
+  return MessageId<T>::From(
+      current_ids_[current_offset_ + (position - unread_previous)]);
+}
 
 /**
  * @brief CRTP base class for message readers providing common functionality.
@@ -308,7 +563,7 @@ public:
       default;
 
   /**
-   * @brief Applies an action to every message (unwrapped `const T&`).
+   * @brief Applies an action to every unread message wrapper.
    * @tparam Action Callable type `(const value_type&) -> void`
    * @param action Action to apply
    */
@@ -319,21 +574,20 @@ public:
   }
 
   /**
-   * @brief Collects all messages (previous + current) into a vector of raw `T`
-   * values.
+   * @brief Collects all unread messages into a vector of raw `T` values.
    * @note This shadows `FunctionalAdapterBase::Collect()`. To collect
    * wrapper values, chain a lazy adapter first (e.g.,
-   * `reader.Filter(...).Collect()`).
-   * @return Vector containing copies of all messages
+   * `reader.Filter(...).Collect()`). Iteration advances the delivery cursor.
+   * @return Vector containing copies of all unread messages
    */
   [[nodiscard]] constexpr auto Collect() const -> std::vector<T>;
 
   /**
-   * @brief Collects all messages into a vector of raw `T` values using a custom
-   * allocator.
+   * @brief Collects all unread messages into a vector of raw `T` values using a
+   * custom allocator.
    * @tparam Alloc STL-compatible allocator type for `T`
    * @param alloc Allocator instance
-   * @return Vector containing copies of all messages, using the provided
+   * @return Vector containing copies of all unread messages, using the provided
    * allocator
    */
   template <typename Alloc>
@@ -342,10 +596,10 @@ public:
       -> std::vector<T, Alloc>;
 
   /**
-   * @brief Collects all messages into a vector of raw `T` values using a memory
-   * resource.
+   * @brief Collects all unread messages into a vector of raw `T` values using a
+   * memory resource.
    * @param resource Memory resource for allocating the vector
-   * @return Vector containing copies of all messages, using the provided
+   * @return Vector containing copies of all unread messages, using the provided
    * memory resource
    */
   [[nodiscard]] constexpr auto CollectWith(
@@ -354,7 +608,8 @@ public:
   auto CollectWith(std::nullptr_t) const -> std::pmr::vector<T> = delete;
 
   /**
-   * @brief Reads all messages into an output iterator.
+   * @brief Reads all unread messages into an output iterator.
+   * @details Advances the delivery cursor as messages are copied.
    * @tparam OutIt Output iterator type for `T`
    * @param out Output iterator
    */
@@ -363,7 +618,8 @@ public:
   constexpr void ReadInto(OutIt out) const;
 
   /**
-   * @brief Returns a lazy filter adapter over the wrapped message sequence.
+   * @brief Returns a lazy filter adapter over the unread wrapped message
+   * sequence.
    * @details The adapter yields only those wrapper elements for
    * which `predicate` returns `true`. Chain further adapters or call terminal
    * operations (`.Collect()`, `.ForEach()`, etc.) on the result.
@@ -380,7 +636,7 @@ public:
   }
 
   /**
-   * @brief Returns a lazy map adapter over the wrapped message sequence.
+   * @brief Returns a lazy map adapter over the unread wrapped message sequence.
    * @details Each wrapper is transformed by `transform`.
    * @tparam Func Transform type `(const value_type&) -> R`
    * @param transform Transformation function
@@ -395,7 +651,7 @@ public:
   }
 
   /**
-   * @brief Returns a lazy adapter yielding at most `count` wrappers.
+   * @brief Returns a lazy adapter yielding at most `count` unread wrappers.
    * @param count Maximum number of elements to yield
    * @return `TakeAdapter` over the iterator
    */
@@ -406,7 +662,7 @@ public:
   }
 
   /**
-   * @brief Returns a lazy adapter that skips the first `count` wrappers.
+   * @brief Returns a lazy adapter that skips the first `count` unread wrappers.
    * @param count Number of elements to skip
    * @return `SkipAdapter` over the iterator
    */
@@ -417,8 +673,8 @@ public:
   }
 
   /**
-   * @brief Returns a lazy adapter that yields wrappers while `predicate` is
-   * true.
+   * @brief Returns a lazy adapter that yields unread wrappers while `predicate`
+   * is true.
    * @tparam Pred Predicate type `(const value_type&) -> bool`
    * @param predicate Stop condition
    * @return `TakeWhileAdapter` over the iterator
@@ -432,8 +688,8 @@ public:
   }
 
   /**
-   * @brief Returns a lazy adapter that skips wrappers while `predicate` is
-   * true.
+   * @brief Returns a lazy adapter that skips unread wrappers while `predicate`
+   * is true.
    * @tparam Pred Predicate type `(const value_type&) -> bool`
    * @param predicate Skip condition
    * @return `SkipWhileAdapter` over the iterator
@@ -447,8 +703,8 @@ public:
   }
 
   /**
-   * @brief Returns a lazy adapter that pairs each wrapper with its zero-based
-   * index.
+   * @brief Returns a lazy adapter that pairs each unread wrapper with its
+   * zero-based index.
    * @return `EnumerateAdapter` over the iterator
    */
   [[nodiscard]] constexpr auto Enumerate() const
@@ -458,8 +714,8 @@ public:
   }
 
   /**
-   * @brief Returns a lazy adapter that calls `inspector` on each wrapper as a
-   * side-effect.
+   * @brief Returns a lazy adapter that calls `inspector` on each unread wrapper
+   * as a side-effect.
    * @tparam Func Inspector type `(const value_type&) -> void`
    * @param inspector Side-effect function
    * @return `InspectAdapter` over the iterator
@@ -473,7 +729,7 @@ public:
   }
 
   /**
-   * @brief Returns a lazy adapter that yields every `step`-th wrapper.
+   * @brief Returns a lazy adapter that yields every `step`-th unread wrapper.
    * @param step Step size (must be > 0)
    * @warning Triggers assertion if `step == 0`.
    * @return `StepByAdapter` over the iterator
@@ -516,7 +772,7 @@ public:
   }
 
   /**
-   * @brief Returns a lazy adapter that yields wrappers in reverse order.
+   * @brief Returns a lazy adapter that yields unread wrappers in reverse order.
    * @return `ReverseAdapter` over the iterator
    */
   [[nodiscard]] constexpr auto Reverse() const
@@ -527,7 +783,7 @@ public:
 
   /**
    * @brief Returns a lazy adapter that yields windows of `window_size`
-   * wrappers.
+   * unread wrappers.
    * @param window_size Number of wrappers to include in each window
    * @return `SlideAdapter` over the iterator
    */
@@ -538,7 +794,7 @@ public:
   }
 
   /**
-   * @brief Returns a lazy adapter that yields every `stride`-th wrapper.
+   * @brief Returns a lazy adapter that yields every `stride`-th unread wrapper.
    * @param stride Number of wrappers to skip between each yield
    * @return `StrideAdapter` over the iterator
    */
@@ -581,7 +837,7 @@ public:
   }
 
   /**
-   * @brief Left-folds all messages with an accumulator.
+   * @brief Left-folds all unread messages with an accumulator.
    * @tparam Acc Accumulator type
    * @tparam Folder Callable type `(Acc, const value_type&) -> Acc`
    * @param init Initial accumulator value
@@ -595,7 +851,7 @@ public:
   }
 
   /**
-   * @brief Returns a pointer to the first message matching a predicate.
+   * @brief Returns a pointer to the first unread message matching a predicate.
    * @tparam Pred Predicate type `(const value_type&) -> bool`
    * @param predicate Predicate function
    * @return Optional containing the first matching message, or `std::nullopt`
@@ -609,7 +865,7 @@ public:
   }
 
   /**
-   * @brief Counts messages matching a predicate.
+   * @brief Counts unread messages matching a predicate.
    * @tparam Pred Predicate type `(const value_type&) -> bool`
    * @param predicate Predicate function
    * @return Number of matching messages
@@ -621,7 +877,8 @@ public:
   }
 
   /**
-   * @brief Partitions wrapped messages into matching and non-matching groups.
+   * @brief Partitions unread wrapped messages into matching and non-matching
+   * groups.
    * @tparam Pred Predicate type `(const value_type&) -> bool`
    * @param predicate Predicate function
    * @return Pair of vectors: first contains matching wrappers, second contains
@@ -635,7 +892,7 @@ public:
   }
 
   /**
-   * @brief Finds the wrapped message with the maximum extracted key.
+   * @brief Finds the unread wrapped message with the maximum extracted key.
    * @tparam KeyFunc Key extractor type `(const value_type&) -> Key`
    * @param key_func Key extraction function
    * @return Matching wrapper, or `std::nullopt` if the reader is empty
@@ -648,7 +905,7 @@ public:
   }
 
   /**
-   * @brief Finds the wrapped message with the minimum extracted key.
+   * @brief Finds the unread wrapped message with the minimum extracted key.
    * @tparam KeyFunc Key extractor type `(const value_type&) -> Key`
    * @param key_func Key extraction function
    * @return Matching wrapper, or `std::nullopt` if the reader is empty
@@ -661,7 +918,7 @@ public:
   }
 
   /**
-   * @brief Groups wrapped messages by a key extracted from each wrapper.
+   * @brief Groups unread wrapped messages by a key extracted from each wrapper.
    * @tparam KeyFunc Key extractor type `(const value_type&) -> Key`
    * @param key_func Key extraction function
    * @return Hash map from key to grouped wrappers
@@ -676,7 +933,7 @@ public:
   }
 
   /**
-   * @brief Checks if any message matches a predicate.
+   * @brief Checks if any unread message matches a predicate.
    * @tparam Pred Predicate type `(const value_type&) -> bool`
    * @param predicate Predicate function
    * @return `true` if at least one message matches
@@ -688,7 +945,7 @@ public:
   }
 
   /**
-   * @brief Checks if all messages match a predicate.
+   * @brief Checks if all unread messages match a predicate.
    * @tparam Pred Predicate type `(const value_type&) -> bool`
    * @param predicate Predicate function
    * @return `true` if all messages match (vacuously true if empty)
@@ -700,7 +957,7 @@ public:
   }
 
   /**
-   * @brief Checks if no messages match a predicate.
+   * @brief Checks if no unread messages match a predicate.
    * @tparam Pred Predicate type `(const value_type&) -> bool`
    * @param predicate Predicate function
    * @return `true` if no messages match (vacuously true if empty)
@@ -712,21 +969,19 @@ public:
   }
 
   /**
-   * @brief Checks if there are no messages.
-   * @return `true` if both previous and current spans are empty
+   * @brief Checks if there are no unread messages.
+   * @return `true` if the delivery cursor has no unread retained messages
    */
   [[nodiscard]] constexpr bool Empty() const noexcept {
-    return GetDerived().PreviousMessages().empty() &&
-           GetDerived().CurrentMessages().empty();
+    return GetDerived().Empty();
   }
 
   /**
-   * @brief Returns the total number of messages (previous + current).
-   * @return Total message count
+   * @brief Returns the number of unread retained messages.
+   * @return Unread message count
    */
   [[nodiscard]] constexpr size_type Count() const noexcept {
-    return GetDerived().PreviousMessages().size() +
-           GetDerived().CurrentMessages().size();
+    return GetDerived().Count();
   }
 
 private:
@@ -739,38 +994,86 @@ private:
   }
 };
 
+template <typename Derived, MessageTrait T, typename IterType>
+constexpr auto MessageReaderBase<Derived, T, IterType>::Collect() const
+    -> std::vector<T> {
+  std::vector<T> result;
+  result.reserve(Count());
+  auto it = GetDerived().begin();
+  const auto last = GetDerived().end();
+  for (; it != last; ++it) {
+    result.push_back(**it);
+  }
+  return result;
+}
+
+template <typename Derived, MessageTrait T, typename IterType>
+template <typename Alloc>
+  requires std::same_as<typename std::allocator_traits<Alloc>::value_type, T>
+constexpr auto MessageReaderBase<Derived, T, IterType>::CollectWith(
+    const Alloc& alloc) const -> std::vector<T, Alloc> {
+  std::vector<T, Alloc> result{alloc};
+  result.reserve(Count());
+  auto it = GetDerived().begin();
+  const auto last = GetDerived().end();
+  for (; it != last; ++it) {
+    result.push_back(**it);
+  }
+  return result;
+}
+
+template <typename Derived, MessageTrait T, typename IterType>
+constexpr auto MessageReaderBase<Derived, T, IterType>::CollectWith(
+    std::pmr::memory_resource* resource) const -> std::pmr::vector<T> {
+  std::pmr::vector<T> result{resource};
+  result.reserve(Count());
+  auto it = GetDerived().begin();
+  const auto last = GetDerived().end();
+  for (; it != last; ++it) {
+    result.push_back(**it);
+  }
+  return result;
+}
+
+template <typename Derived, MessageTrait T, typename IterType>
+template <typename OutIt>
+  requires std::output_iterator<OutIt, T>
+constexpr void MessageReaderBase<Derived, T, IterType>::ReadInto(
+    OutIt out) const {
+  auto it = GetDerived().begin();
+  const auto last = GetDerived().end();
+  for (; it != last; ++it) {
+    *out++ = **it;
+  }
+}
+
 /**
- * @brief Type-safe, zero-copy reader for regular messages.
- * @details Provides a read-only view over the combined (previous + current)
- * message queues for a specific message type. Messages are accessed via spans
- * directly into the underlying `TypedBuffer` storage — no copying is performed.
+ * @brief Type-safe, zero-copy reader for regular messages with cursor delivery.
+ * @details Provides a read-only view over unread messages (id >=
+ * `cursor.last_message_count`) across the previous and current queues. Messages
+ * are accessed via spans directly into the underlying `TypedBuffer` storage —
+ * no copying is performed.
  *
- * For regular (non-consumable) messages, no consumption support is available.
+ * Iteration and `Read()` advance the cursor so each message is observed at most
+ * once per cursor. Use `MessageManager::PreviousMessages` /
+ * `CurrentMessages` to inspect retained buffers without delivery tracking.
  *
- * @note Thread-safe.
+ * @note Thread-safe for concurrent reads of retained messages; cursor updates
+ * are not synchronized.
  * @tparam T Message type satisfying `MessageTrait`
  *
  * @code
- * // Wrapper iteration
- * for (auto wrapper : reader) {
- *   // Use wrapper
+ * auto cursor = MessageCursor<Damage>::IncludeBacklog();
+ * MessageReader<Damage> reader(manager, cursor);
+ * for (auto wrapper : reader.Read()) {
+ *   // Use wrapper; cursor advances
  * }
- *
- * // Lazy adapter chaining
- * reader.Filter([](const auto& w) { return (*w).amount > 10; })
- *       .ForEach([](const auto& w) { ... });
- *
- * // Direct span access
- * auto prev = reader.PreviousMessages();
- * auto curr = reader.CurrentMessages();
  * @endcode
  */
 template <MessageTrait T>
   requires(!ConsumableMessageTrait<T>)
 class MessageReader final
     : public MessageReaderBase<MessageReader<T>, T, MessageWrapperIter<T>> {
-  friend class MessageReaderBase<MessageReader<T>, T, MessageWrapperIter<T>>;
-
 public:
   using value_type = MessageWrapper<T>;
   using size_type = MessageManager::size_type;
@@ -778,153 +1081,176 @@ public:
   using iterator = const_iterator;
 
   /**
-   * @brief Constructs a `MessageReader` from explicit spans.
-   * @param previous Span of messages from the previous frame
-   * @param current Span of messages from the current frame
-   */
-  constexpr MessageReader(std::span<const T> previous,
-                          std::span<const T> current) noexcept
-      : previous_(previous), current_(current) {}
-
-  /**
-   * @brief Constructs a `MessageReader` from the message manager.
+   * @brief Constructs a `MessageReader` bound to a manager and delivery cursor.
    * @param manager Const reference to the message manager
+   * @param cursor Per-reader cursor tracking which messages have been seen
    */
-  explicit constexpr MessageReader(const MessageManager& manager) noexcept
-      : MessageReader(manager.PreviousMessages<T>(),
-                      manager.CurrentMessages<T>()) {}
+  constexpr MessageReader(const MessageManager& manager,
+                          MessageCursor<T>& cursor) noexcept
+      : manager_(manager), cursor_(cursor) {}
 
-  MessageReader(MessageReader&) = delete;
+  MessageReader(const MessageReader&) = delete;
   constexpr MessageReader(MessageReader&&) noexcept = default;
   constexpr ~MessageReader() noexcept = default;
 
-  MessageReader& operator=(MessageReader&) = delete;
+  MessageReader& operator=(const MessageReader&) = delete;
   constexpr MessageReader& operator=(MessageReader&&) noexcept = default;
 
   /**
-   * @brief Gets the messages from the previous frame.
-   * @return Span of const messages from the previous queue
+   * @brief Returns an iterator range over unread messages.
+   * @details Equivalent to `begin()`; provided for an explicit read API.
+   * @return Iterator to the first unread message
    */
-  [[nodiscard]] constexpr auto PreviousMessages() const noexcept
-      -> std::span<const T> {
-    return previous_;
+  [[nodiscard]] constexpr iterator Read() const noexcept { return begin(); }
+
+  /**
+   * @brief Skips all currently retained unread messages for this cursor.
+   * @details After `Clear()`, `Empty()` is true until new messages are written.
+   */
+  constexpr void Clear() const noexcept { cursor_.get().Clear(manager_.get()); }
+
+  /**
+   * @brief Returns how many retained messages were dropped before this cursor
+   * caught up.
+   * @return Count of ids older than the oldest retained message
+   */
+  [[nodiscard]] constexpr size_type MissedMessages() const noexcept {
+    return cursor_.get().MissedMessages(manager_.get());
   }
 
   /**
-   * @brief Gets the messages from the current frame.
-   * @return Span of const messages from the current queue
+   * @brief Returns the number of unread retained messages.
+   * @return Unread message count
    */
-  [[nodiscard]] constexpr auto CurrentMessages() const noexcept
-      -> std::span<const T> {
-    return current_;
+  [[nodiscard]] constexpr size_type Count() const noexcept {
+    return cursor_.get().Count(manager_.get());
   }
 
   /**
-   * @brief Returns a const iterator to the first message in the combined view.
-   * @return Const iterator to the beginning
+   * @brief Checks if there are no unread messages.
+   * @return `true` when `Count()` is zero
+   */
+  [[nodiscard]] constexpr bool Empty() const noexcept {
+    return cursor_.get().Empty(manager_.get());
+  }
+
+  /**
+   * @brief Returns an iterator to the first unread message.
+   * @return Iterator to the beginning of the unread range
    */
   [[nodiscard]] constexpr const_iterator begin() const noexcept {
-    return {previous_, current_, 0};
+    return MakeIterator(0);
   }
 
   /**
-   * @brief Returns a const iterator past the last message in the combined view.
-   * @return Const iterator to the end
+   * @brief Returns an iterator past the last unread message.
+   * @details Does not advance the cursor.
+   * @return Iterator to the end of the unread range
    */
   [[nodiscard]] constexpr const_iterator end() const noexcept {
-    return {previous_, current_, previous_.size() + current_.size()};
+    return MakeIterator(0).end();
   }
 
 private:
-  std::span<const T> previous_;
-  std::span<const T> current_;
+  [[nodiscard]] constexpr const_iterator MakeIterator(
+      size_t position) const noexcept;
+
+  std::reference_wrapper<const MessageManager> manager_;
+  std::reference_wrapper<MessageCursor<T>> cursor_;
 };
 
+template <MessageTrait T>
+  requires(!ConsumableMessageTrait<T>)
+constexpr auto MessageReader<T>::MakeIterator(size_t position) const noexcept
+    -> const_iterator {
+  const auto& manager = manager_.get();
+  const auto previous_messages = manager.PreviousMessages<T>();
+  const auto current_messages = manager.CurrentMessages<T>();
+  const auto previous_ids = manager.PreviousIds<T>();
+  const auto current_ids = manager.CurrentIds<T>();
+  const MessageId<T> last = cursor_.get().last_message_count;
+  return {previous_messages,
+          current_messages,
+          previous_ids,
+          current_ids,
+          &cursor_.get(),
+          details::MessageUnreadOffset(previous_ids, last),
+          details::MessageUnreadOffset(current_ids, last),
+          position};
+}
+
 /**
- * @brief Type-safe, zero-copy reader for consumable messages with consume
- * support.
- * @details Provides a read-only view over the combined (previous + current)
- * message queues for a specific message type. Messages are accessed via spans
- * directly into the underlying `TypedBuffer` storage — no copying is performed.
+ * @brief Type-safe, zero-copy reader for consumable messages with cursor
+ * delivery and consume support.
+ * @details Provides a read-only view over unread messages (id >=
+ * `cursor.last_message_count`) across the previous and current queues. Messages
+ * are accessed via spans directly into the underlying `TypedBuffer` storage —
+ * no copying is performed.
  *
  * Consumed messages are not filtered during iteration within the same frame.
- * They are removed at the next `MessageManager::Update` call.
+ * They are removed at the next `MessageManager::Update` call. Consumption is
+ * tracked by stable message id.
  *
- * @note Thread-safe, but beware that `ConsumableMessageWrapper`'s `Consume()`
- * method is NOT thread-safe.
+ * @note Thread-safe for concurrent reads of retained messages, but
+ * `ConsumableMessageWrapper::Consume()` and cursor updates are NOT thread-safe.
  * @tparam T Message type satisfying `ConsumableMessageTrait`
+ * @tparam Alloc Allocator type for the consumed messages registry
  *
  * @code
- * // Wrapper iteration — with consume support
- * for (auto wrapper : reader) {
- *   if ((*wrapper).priority > 5) {
+ * MessageCursor<Score> cursor = MessageCursor<Score>::IncludeBacklog();
+ * ConsumableMessageReader<Score> reader(manager, cursor, registry);
+ * for (auto wrapper : reader.Read()) {
+ *   if ((*wrapper).value > 5) {
  *     wrapper.Consume();
  *   }
  * }
- *
- * // Lazy adapter chaining — operates on ConsumableMessageWrapper<T>
- * reader.Filter([](const auto& w) { return (*w).amount > 10; })
- *       .ForEach([](const auto& w) { w.Consume(); });
- *
- * // Direct span access
- * auto prev = reader.PreviousMessages();
- * auto curr = reader.CurrentMessages();
  * @endcode
  */
-template <ConsumableMessageTrait T>
+template <ConsumableMessageTrait T,
+          typename Alloc = std::pmr::polymorphic_allocator<std::byte>>
 class ConsumableMessageReader final
-    : public MessageReaderBase<ConsumableMessageReader<T>, T,
-                               ConsumableMessageWrapperIter<T>> {
-  friend class MessageReaderBase<ConsumableMessageReader<T>, T,
-                                 ConsumableMessageWrapperIter<T>>;
-
+    : public MessageReaderBase<ConsumableMessageReader<T, Alloc>, T,
+                               ConsumableMessageWrapperIter<T, Alloc>> {
 public:
-  using value_type = ConsumableMessageWrapper<T>;
+  using value_type = ConsumableMessageWrapper<T, Alloc>;
   using size_type = MessageManager::size_type;
-  using const_iterator = ConsumableMessageWrapperIter<T>;
+  using const_iterator = ConsumableMessageWrapperIter<T, Alloc>;
   using iterator = const_iterator;
 
   /**
-   * @brief Constructs a `ConsumableMessageReader` from explicit spans and a
-   * consumed registry.
-   * @param previous Span of messages from the previous frame
-   * @param current Span of messages from the current frame
-   * @param consumed_registry Mutable reference to the per-system consumed
-   * messages registry
-   */
-  constexpr ConsumableMessageReader(
-      std::span<const T> previous, std::span<const T> current,
-      ConsumedMessagesRegistry<>& consumed_registry) noexcept
-      : previous_(previous), current_(current), registry_(consumed_registry) {}
-
-  /**
-   * @brief Constructs a `ConsumableMessageReader` from the message manager and
-   * a per-system consumed registry.
+   * @brief Constructs a `ConsumableMessageReader` bound to a manager, cursor,
+   * and consumed registry.
    * @param manager Const reference to the message manager
+   * @param cursor Per-reader cursor tracking which messages have been seen
    * @param consumed_registry Mutable reference to the per-system consumed
    * messages registry
    */
   constexpr ConsumableMessageReader(
-      const MessageManager& manager,
-      ConsumedMessagesRegistry<>& consumed_registry) noexcept
-      : ConsumableMessageReader(manager.PreviousMessages<T>(),
-                                manager.CurrentMessages<T>(),
-                                consumed_registry) {}
+      const MessageManager& manager, MessageCursor<T>& cursor,
+      ConsumedMessagesRegistry<Alloc>& consumed_registry) noexcept
+      : manager_(manager), cursor_(cursor), registry_(consumed_registry) {}
 
-  ConsumableMessageReader(ConsumableMessageReader&) = delete;
+  ConsumableMessageReader(const ConsumableMessageReader&) = delete;
   constexpr ConsumableMessageReader(ConsumableMessageReader&&) noexcept =
       default;
   constexpr ~ConsumableMessageReader() noexcept = default;
 
-  ConsumableMessageReader& operator=(ConsumableMessageReader&) = delete;
+  ConsumableMessageReader& operator=(const ConsumableMessageReader&) = delete;
   constexpr ConsumableMessageReader& operator=(
       ConsumableMessageReader&&) noexcept = default;
 
-  /// @brief Marks all messages as consumed.
+  /**
+   * @brief Returns an iterator range over unread messages.
+   * @details Equivalent to `begin()`; provided for an explicit read API.
+   * @return Iterator to the first unread message
+   */
+  [[nodiscard]] constexpr iterator Read() const noexcept { return begin(); }
+
+  /// @brief Marks all unread messages as consumed by message id.
   constexpr void ConsumeAll() const;
 
   /**
-   * @brief Marks all messages matching a predicate as consumed.
+   * @brief Marks all unread messages matching a predicate as consumed.
    * @tparam Pred Predicate type `(const T&) -> bool`
    * @param predicate Predicate function
    * @return Number of messages marked as consumed
@@ -934,125 +1260,109 @@ public:
   constexpr size_type ConsumeIf(const Pred& predicate) const;
 
   /**
-   * @brief Gets the messages from the previous frame.
-   * @return Span of const messages from the previous queue
+   * @brief Skips all currently retained unread messages for this cursor.
+   * @details After `Clear()`, `Empty()` is true until new messages are written.
+   * Does not mark messages as consumed.
    */
-  [[nodiscard]] constexpr auto PreviousMessages() const noexcept
-      -> std::span<const T> {
-    return previous_;
+  constexpr void Clear() const noexcept { cursor_.get().Clear(manager_.get()); }
+
+  /**
+   * @brief Returns how many retained messages were dropped before this cursor
+   * caught up.
+   * @return Count of ids older than the oldest retained message
+   */
+  [[nodiscard]] constexpr size_type MissedMessages() const noexcept {
+    return cursor_.get().MissedMessages(manager_.get());
   }
 
   /**
-   * @brief Gets the messages from the current frame.
-   * @return Span of const messages from the current queue
+   * @brief Returns the number of unread retained messages.
+   * @return Unread message count
    */
-  [[nodiscard]] constexpr auto CurrentMessages() const noexcept
-      -> std::span<const T> {
-    return current_;
+  [[nodiscard]] constexpr size_type Count() const noexcept {
+    return cursor_.get().Count(manager_.get());
   }
 
   /**
-   * @brief Returns a const iterator to the first message in the combined view.
-   * @return Const iterator to the beginning
+   * @brief Checks if there are no unread messages.
+   * @return `true` when `Count()` is zero
+   */
+  [[nodiscard]] constexpr bool Empty() const noexcept {
+    return cursor_.get().Empty(manager_.get());
+  }
+
+  /**
+   * @brief Returns an iterator to the first unread message.
+   * @return Iterator to the beginning of the unread range
    */
   [[nodiscard]] constexpr const_iterator begin() const noexcept {
-    return {previous_, current_, registry_, 0};
+    return MakeIterator(0);
   }
 
   /**
-   * @brief Returns a const iterator past the last message in the combined view.
-   * @return Const iterator to the end
+   * @brief Returns an iterator past the last unread message.
+   * @details Does not advance the cursor.
+   * @return Iterator to the end of the unread range
    */
   [[nodiscard]] constexpr const_iterator end() const noexcept {
-    return {previous_, current_, registry_, previous_.size() + current_.size()};
+    return MakeIterator(0).end();
   }
 
 private:
-  std::span<const T> previous_;
-  std::span<const T> current_;
-  std::reference_wrapper<ConsumedMessagesRegistry<>> registry_;
+  [[nodiscard]] constexpr const_iterator MakeIterator(
+      size_t position) const noexcept;
+
+  std::reference_wrapper<const MessageManager> manager_;
+  std::reference_wrapper<MessageCursor<T>> cursor_;
+  std::reference_wrapper<ConsumedMessagesRegistry<Alloc>> registry_;
 };
 
-template <typename Derived, MessageTrait T, typename IterType>
-[[nodiscard]] constexpr auto MessageReaderBase<Derived, T, IterType>::Collect()
-    const -> std::vector<T> {
-  std::vector<T> result;
-  result.reserve(Count());
-  const auto& derived = GetDerived();
-  std::ranges::copy(derived.PreviousMessages(), std::back_inserter(result));
-  std::ranges::copy(derived.CurrentMessages(), std::back_inserter(result));
-  return result;
-}
-
-template <typename Derived, MessageTrait T, typename IterType>
-template <typename Alloc>
-  requires std::same_as<typename std::allocator_traits<Alloc>::value_type, T>
-[[nodiscard]] constexpr auto
-MessageReaderBase<Derived, T, IterType>::CollectWith(const Alloc& alloc) const
-    -> std::vector<T, Alloc> {
-  std::vector<T, Alloc> result{alloc};
-  result.reserve(Count());
-  const auto& derived = GetDerived();
-  std::ranges::copy(derived.PreviousMessages(), std::back_inserter(result));
-  std::ranges::copy(derived.CurrentMessages(), std::back_inserter(result));
-  return result;
-}
-
-template <typename Derived, MessageTrait T, typename IterType>
-[[nodiscard]] constexpr auto
-MessageReaderBase<Derived, T, IterType>::CollectWith(
-    std::pmr::memory_resource* resource) const -> std::pmr::vector<T> {
-  std::pmr::vector<T> result{resource};
-  result.reserve(Count());
-  const auto& derived = GetDerived();
-  std::ranges::copy(derived.PreviousMessages(), std::back_inserter(result));
-  std::ranges::copy(derived.CurrentMessages(), std::back_inserter(result));
-  return result;
-}
-
-template <typename Derived, MessageTrait T, typename IterType>
-template <typename OutIt>
-  requires std::output_iterator<OutIt, T>
-constexpr void MessageReaderBase<Derived, T, IterType>::ReadInto(
-    OutIt out) const {
-  const auto& derived = GetDerived();
-  std::ranges::copy(derived.PreviousMessages(), out);
-  std::ranges::copy(derived.CurrentMessages(), out);
-}
-
-template <ConsumableMessageTrait T>
-constexpr void ConsumableMessageReader<T>::ConsumeAll() const {
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr void ConsumableMessageReader<T, Alloc>::ConsumeAll() const {
   auto& registry = registry_.get();
-  const auto total = this->Count();
-  for (size_type i = 0; i < total; ++i) {
-    registry.template MarkConsumed<T>(i);
+  auto it = begin();
+  const auto last = end();
+  for (; it != last; ++it) {
+    registry.template MarkConsumed<T>((*it).Id());
   }
 }
 
-template <ConsumableMessageTrait T>
+template <ConsumableMessageTrait T, typename Alloc>
 template <typename Pred>
   requires std::predicate<Pred, const T&>
-constexpr auto ConsumableMessageReader<T>::ConsumeIf(
+constexpr auto ConsumableMessageReader<T, Alloc>::ConsumeIf(
     const Pred& predicate) const -> size_type {
   size_type consumed_count = 0;
   auto& registry = registry_.get();
-  size_type global_index = 0;
-
-  for (const auto& message : previous_) {
-    if (predicate(message)) {
-      registry.template MarkConsumed<T>(global_index);
+  auto it = begin();
+  const auto last = end();
+  for (; it != last; ++it) {
+    if (predicate(**it)) {
+      registry.template MarkConsumed<T>((*it).Id());
       ++consumed_count;
     }
-    ++global_index;
-  }
-  for (const auto& message : current_) {
-    if (predicate(message)) {
-      registry.template MarkConsumed<T>(global_index);
-      ++consumed_count;
-    }
-    ++global_index;
   }
   return consumed_count;
+}
+
+template <ConsumableMessageTrait T, typename Alloc>
+constexpr auto ConsumableMessageReader<T, Alloc>::MakeIterator(
+    size_t position) const noexcept -> const_iterator {
+  const auto& manager = manager_.get();
+  const auto previous_messages = manager.PreviousMessages<T>();
+  const auto current_messages = manager.CurrentMessages<T>();
+  const auto previous_ids = manager.PreviousIds<T>();
+  const auto current_ids = manager.CurrentIds<T>();
+  const MessageId<T> last = cursor_.get().last_message_count;
+  return {previous_messages,
+          current_messages,
+          previous_ids,
+          current_ids,
+          registry_.get(),
+          &cursor_.get(),
+          details::MessageUnreadOffset(previous_ids, last),
+          details::MessageUnreadOffset(current_ids, last),
+          position};
 }
 
 }  // namespace helios::ecs

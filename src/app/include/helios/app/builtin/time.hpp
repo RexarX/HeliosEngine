@@ -3,6 +3,7 @@
 #include <helios/app/application.hpp>
 #include <helios/app/plugin.hpp>
 #include <helios/app/schedules.hpp>
+#include <helios/assert.hpp>
 #include <helios/ecs/resource/param.hpp>
 #include <helios/utils/common_traits.hpp>
 
@@ -139,6 +140,12 @@ struct Time {
    */
   [[nodiscard]] int64_t DeltaMicroSec() const {
     return Delta<int64_t, std::chrono::microseconds>();
+  }
+
+  [[nodiscard]] double Fps() const noexcept {
+    const auto delta_sec = DeltaSec();
+    HELIOS_ASSERT(delta_sec > 0.0, "Delta time must be greater than zero!");
+    return 1.0 / delta_sec;
   }
 
   /**

@@ -1213,8 +1213,21 @@ public:
    */
   [[nodiscard]] iterator end() const {
     RefreshArchetypes();
-    return {matching_archetypes_, GetComponentManager(),
-            matching_archetypes_.size(), 0, WithoutTypes()};
+    return {matching_archetypes_,
+            GetComponentManager(),
+            matching_archetypes_.size(),
+            0,
+            WithTypes(),
+            WithoutTypes()};
+  }
+
+  /**
+   * @brief Gets component type indices required by With filters.
+   * @return Span of component type indices that are required by this query
+   */
+  [[nodiscard]] auto WithTypes() const noexcept
+      -> std::span<const ComponentTypeIndex> {
+    return {kWithIndices.data(), kWithIndices.size()};
   }
 
   /**
@@ -1676,10 +1689,10 @@ inline size_t BasicQuery<WorldT, Allocator, Args...>::Count() const noexcept {
   RefreshArchetypes();
   size_t count = 0;
   auto iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0,
-                       WithoutTypes());
+                       WithTypes(), WithoutTypes());
   const auto end_iter =
       iterator(matching_archetypes_, GetComponentManager(),
-               matching_archetypes_.size(), 0, WithoutTypes());
+               matching_archetypes_.size(), 0, WithTypes(), WithoutTypes());
   while (iter != end_iter) {
     ++count;
     ++iter;
@@ -1691,7 +1704,8 @@ template <typename WorldT, typename Allocator, QueryArg... Args>
 inline auto BasicQuery<WorldT, Allocator, Args...>::begin() const ->
     typename BasicQuery<WorldT, Allocator, Args...>::iterator {
   RefreshArchetypes();
-  return {matching_archetypes_, GetComponentManager(), 0, 0, WithoutTypes()};
+  return {matching_archetypes_, GetComponentManager(), 0, 0,
+          WithTypes(),          WithoutTypes()};
 }
 
 template <typename WorldT, typename Allocator, QueryArg... Args>
@@ -2229,15 +2243,23 @@ template <typename WorldT, typename Allocator, QueryArg... Args>
 inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::begin() const
     -> iterator {
   query_.RefreshArchetypes();
-  return {query_.GetMatchingArchetypes(), query_.GetComponentManager(), 0, 0,
+  return {query_.GetMatchingArchetypes(),
+          query_.GetComponentManager(),
+          0,
+          0,
+          query_.WithTypes(),
           query_.WithoutTypes()};
 }
 
 template <typename WorldT, typename Allocator, QueryArg... Args>
 inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::end()
     const noexcept -> iterator {
-  return {query_.GetMatchingArchetypes(), query_.GetComponentManager(),
-          query_.GetMatchingArchetypes().size(), 0};
+  return {query_.GetMatchingArchetypes(),
+          query_.GetComponentManager(),
+          query_.GetMatchingArchetypes().size(),
+          0,
+          query_.WithTypes(),
+          query_.WithoutTypes()};
 }
 
 template <typename Alloc, QueryArg... Args>

@@ -44,7 +44,7 @@ struct SpawnComponents {
     commands.Spawn().AddComponents(Player{}, Position{.x = 1.0F, .y = 2.0F},
                                    Velocity{.dx = 0.5F, .dy = 0.25F});
     commands.Spawn().AddComponents(Enemy{}, Position{.x = 10.0F, .y = 20.0F});
-    hlog::Info("components: queued player and enemy spawns");
+    hlog::Info("Queued player and enemy spawns");
   }
 };
 
@@ -55,13 +55,13 @@ struct LogComponents {
     // With<Player> filters the query to tagged entities without reading a
     // Player value.
     players.ForEach([](const Position& pos, const Velocity& vel) {
-      hlog::Info("components: player pos=({},{}) vel=({},{})", pos.x, pos.y,
-                 vel.dx, vel.dy);
+      hlog::Info("Player pos=({},{}) vel=({},{})", pos.x, pos.y, vel.dx,
+                 vel.dy);
     });
 
     // A tag-only query can count matching entities without fetching component
     // payload.
-    hlog::Info("components: {} enemies (tag/sparse)", enemies.Count());
+    hlog::Info("{} enemies (tag/sparse)", enemies.Count());
   }
 };
 

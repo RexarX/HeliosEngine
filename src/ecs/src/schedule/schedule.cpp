@@ -24,9 +24,10 @@ namespace {
 [[nodiscard]] constexpr ScheduleErrorKind DagToScheduleErrorKind(
     DagErrorKind kind) noexcept {
   switch (kind) {
-    case DagErrorKind::kCycleDetected:
+    using enum DagErrorKind;
+    case kCycleDetected:
       return ScheduleErrorKind::kCycleDetected;
-    case DagErrorKind::kUnknownNode:
+    case kUnknownNode:
       return ScheduleErrorKind::kUnknownNode;
     default:
       return ScheduleErrorKind::kUnknown;
@@ -35,9 +36,9 @@ namespace {
 
 [[nodiscard]] constexpr ScheduleError DagToScheduleError(
     DagError error) noexcept {
-  return ScheduleError{.kind = DagToScheduleErrorKind(error.kind),
-                       .message = std::move(error.message),
-                       .involved_systems = std::move(error.involved_nodes)};
+  return {.kind = DagToScheduleErrorKind(error.kind),
+          .message = std::move(error.message),
+          .involved_systems = std::move(error.involved_nodes)};
 }
 
 template <typename T, std::ranges::input_range R>
@@ -103,14 +104,17 @@ void Schedule::RunAndWait(World& world, Executor& executor) {
   ApplyDeferred(world);
 }
 
-void Schedule::ApplyDeferred(World& world) {
+void Schedule::ApplyDeferred(World& world, bool apply_commands,
+                             bool merge_messages) {
   HELIOS_ECS_PROFILE_SCOPE();
   HELIOS_ECS_PROFILE_ZONE_NAME(
       std::format("helios::ecs::Schedule::ApplyDeferred{{name: {}}}", name_));
 
-  world.Flush();
+  if (apply_commands) {
+    world.Flush();
+  }
   for (auto& entry : system_entries_) {
-    entry.storage.local_data.Update(world);
+    entry.storage.local_data.Apply(world, apply_commands, merge_messages);
   }
 }
 

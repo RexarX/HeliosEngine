@@ -150,6 +150,22 @@ struct ScheduleSystemMetadata {
 /// @brief Settings that control how a schedule is compiled and executed.
 struct ScheduleSettings {
   ExecutorKind executor_kind = ExecutorKind::kMultiThreaded;
+
+  /**
+   * @brief When true, `ApplyDeferred` flushes the world and executes local
+   * commands.
+   * @details Independent of `merge_messages`. Defaults to true to preserve
+   * unconditional flush/execute after each schedule run.
+   */
+  bool apply_commands = true;
+
+  /**
+   * @brief When true, `ApplyDeferred` merges local messages into the world.
+   * @details Applies consumed registries and merges system-local writes. Does
+   * **not** swap previous/current buffers (stage `advance_messages`). Defaults
+   * to true.
+   */
+  bool merge_messages = true;
 };
 
 /// @brief Kind of error produced during schedule compilation.
@@ -255,14 +271,29 @@ public:
   void RunAndWait(World& world);
 
   /**
-   * @brief Flushes world state and applies all pending system-local data.
-   * @details Calls `World::Flush()` (entity reservations and
-   * `World::EnqueueCommand` queue), then runs `SystemLocalData::Update` for
-   * every system in this schedule. Required after `Run()` once the executor has
+   * @brief Applies pending deferred work using this schedule's settings.
+   * @details Equivalent to
+   * `ApplyDeferred(world, Settings().apply_commands,
+   * Settings().merge_messages)`. Required after `Run()` once the executor has
    * finished; called automatically by `RunAndWait()`.
-   * @param world World to flush and update
+   * @param world World to apply deferred work on
    */
-  void ApplyDeferred(World& world);
+  void ApplyDeferred(World& world) {
+    ApplyDeferred(world, settings_.apply_commands, settings_.merge_messages);
+  }
+
+  /**
+   * @brief Applies selected deferred work for this schedule.
+   * @details When `apply_commands` is true, calls `World::Flush()` then
+   * `ExecuteCommands` per system. When `merge_messages` is true, calls
+   * `MergeMessages` per system. Resets each system's arena only when no pending
+   * local work remains (commands and messages share one arena). Does **not**
+   * advance message buffer lifecycle.
+   * @param world World to apply deferred work on
+   * @param apply_commands Whether to flush and execute commands
+   * @param merge_messages Whether to merge local messages
+   */
+  void ApplyDeferred(World& world, bool apply_commands, bool merge_messages);
 
   /**
    * @brief Compiles the schedule into an executable plan.

@@ -369,6 +369,13 @@ constexpr void CallableBufferArrayImpl<Allocator, Signatures...>::Merge(
   if (this == &other) [[unlikely]] {
     return;
   }
+  if (other.Empty()) {
+    return;
+  }
+  if (Empty()) {
+    Swap(other);
+    return;
+  }
 
   constexpr size_type fn_ptr_size = sizeof(FirstExecuteFn);
 
@@ -389,8 +396,11 @@ constexpr void CallableBufferArrayImpl<Allocator, Signatures...>::Merge(
   for (const auto offset : other.offsets_) {
     offsets_.push_back(offset + offset_adjustment);
   }
-  buffer_.insert(buffer_.end(), std::make_move_iterator(other.buffer_.begin()),
-                 std::make_move_iterator(other.buffer_.end()));
+
+  const auto dest_used = buffer_.size();
+  buffer_.resize(dest_used + other.buffer_.size());
+  std::memcpy(buffer_.data() + dest_used, other.buffer_.data(),
+              other.buffer_.size());
 
   for (const auto other_offset : other.offsets_) {
     auto* old_header = other.buffer_.data() + other_offset;
@@ -461,30 +471,30 @@ inline void CallableBufferArrayImpl<Allocator, Signatures...>::GrowBuffer(
 
   BufferType new_buffer(buffer_.get_allocator());
   const auto new_cap = std::max(required_capacity, buffer_.capacity() * 2);
-  new_buffer.resize(new_cap);
+  new_buffer.reserve(new_cap);
 
-  if (!buffer_.empty()) {
-    std::memcpy(new_buffer.data(), buffer_.data(), buffer_.size());
-  }
+  const auto used = buffer_.size();
+  if (used > 0) {
+    new_buffer.resize(used);
+    std::memcpy(new_buffer.data(), buffer_.data(), used);
 
-  for (auto header_offset : offsets_) {
-    auto* old_header = buffer_.data() + header_offset;
-    auto* new_header = new_buffer.data() + header_offset;
+    for (auto header_offset : offsets_) {
+      auto* old_header = buffer_.data() + header_offset;
+      auto* new_header = new_buffer.data() + header_offset;
 
-    auto relocate_fn = *std::launder(reinterpret_cast<RelocateFn*>(
-        old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn)));
+      auto relocate_fn = *std::launder(reinterpret_cast<RelocateFn*>(
+          old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn)));
 
-    if (relocate_fn != nullptr) {
-      const auto data_offset = *std::launder(reinterpret_cast<size_type*>(
-          old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn) +
-          sizeof(RelocateFn)));
-      relocate_fn(new_header + data_offset, old_header + data_offset);
+      if (relocate_fn != nullptr) {
+        const auto data_offset = *std::launder(reinterpret_cast<size_type*>(
+            old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn) +
+            sizeof(RelocateFn)));
+        relocate_fn(new_header + data_offset, old_header + data_offset);
+      }
     }
   }
 
-  const auto used = buffer_.size();
   buffer_ = std::move(new_buffer);
-  buffer_.resize(used);
 }
 
 template <typename Allocator, typename... Signatures>

@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <helios/ecs/entity/entity.hpp>
+#include <helios/ecs/message/cursor.hpp>
 #include <helios/ecs/world.hpp>
 
 #include <memory_resource>
@@ -29,9 +30,29 @@ struct Tag {
   constexpr bool operator==(const Tag&) const noexcept = default;
 };
 
-using PositionBundle = ComponentBundle<Position>;
-using MovementBundle = ComponentBundle<Position, Velocity>;
-using TaggedMovementBundle = ComponentBundle<Tag, MovementBundle>;
+using PositionBundle = ComponentBundleTypes<Position>;
+
+struct MovementBundle {
+  using ComponentTypes = ComponentBundleTypes<Position, Velocity>;
+
+  Position position;
+  Velocity velocity;
+
+  [[nodiscard]] constexpr ComponentTypes Build() {
+    return {std::move(position), std::move(velocity)};
+  }
+};
+
+struct TaggedMovementBundle {
+  using ComponentTypes = ComponentBundleTypes<Tag, MovementBundle>;
+
+  Tag tag;
+  MovementBundle movement;
+
+  [[nodiscard]] constexpr ComponentTypes Build() {
+    return {std::move(tag), std::move(movement)};
+  }
+};
 
 struct DeltaTime {
   float value = 0.0F;
@@ -469,8 +490,8 @@ TEST_SUITE("helios::ecs::World") {
     SUBCASE("AddBundle adds a flat bundle and stores its values") {
       World world;
       const Entity entity = world.CreateEntity();
-      world.AddBundle(
-          entity, MovementBundle{Position{1.0F, 2.0F}, Velocity{3.0F, 4.0F}});
+      world.AddBundle(entity, MovementBundle{.position = {1.0F, 2.0F},
+                                             .velocity = {3.0F, 4.0F}});
       CHECK_EQ(world.ReadComponent<Position>(entity), (Position{1.0F, 2.0F}));
       CHECK_EQ(world.ReadComponent<Velocity>(entity), (Velocity{3.0F, 4.0F}));
     }
@@ -479,7 +500,8 @@ TEST_SUITE("helios::ecs::World") {
       World world;
       const Entity entity = world.CreateEntity();
       constexpr TaggedMovementBundle bundle{
-          Tag{}, MovementBundle{Position{1.0F, 2.0F}, Velocity{3.0F, 4.0F}}};
+          .tag = {},
+          .movement = {.position = {1.0F, 2.0F}, .velocity = {3.0F, 4.0F}}};
       world.AddBundle(entity, bundle);
       CHECK(world.HasComponent<Tag>(entity));
       CHECK_EQ(world.ReadComponent<Position>(entity), (Position{1.0F, 2.0F}));
@@ -490,8 +512,8 @@ TEST_SUITE("helios::ecs::World") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{1.0F, 2.0F});
-      world.AddBundle(
-          entity, MovementBundle{Position{5.0F, 6.0F}, Velocity{7.0F, 8.0F}});
+      world.AddBundle(entity, MovementBundle{.position = {5.0F, 6.0F},
+                                             .velocity = {7.0F, 8.0F}});
       CHECK_EQ(world.ReadComponent<Position>(entity), (Position{5.0F, 6.0F}));
       CHECK_EQ(world.ReadComponent<Velocity>(entity), (Velocity{7.0F, 8.0F}));
     }
@@ -517,9 +539,9 @@ TEST_SUITE("helios::ecs::World") {
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{9.0F, 9.0F});
       const auto result = world.TryAddBundle(
-          entity,
-          TaggedMovementBundle{Tag{}, MovementBundle{Position{1.0F, 2.0F},
-                                                     Velocity{3.0F, 4.0F}}});
+          entity, TaggedMovementBundle{.tag = {},
+                                       .movement = {.position = {1.0F, 2.0F},
+                                                    .velocity = {3.0F, 4.0F}}});
       CHECK(result[0]);
       CHECK_FALSE(result[1]);
       CHECK(result[2]);
@@ -978,6 +1000,14 @@ TEST_SUITE("helios::ecs::World") {
       CHECK_EQ(world.ReadResource<DeltaTime>().value, 1.0F);
       CHECK_EQ(world.ReadResource<Config>().max_entities, 1);
     }
+
+    SUBCASE("TryInsertResources copies from an lvalue") {
+      World world;
+      DeltaTime dt{1.5F};
+      const bool inserted = world.TryInsertResources(dt);
+      CHECK(inserted);
+      CHECK_EQ(world.ReadResource<DeltaTime>().value, 1.5F);
+    }
   }
 
   TEST_CASE("helios::ecs::World::EmplaceResource") {
@@ -1137,7 +1167,8 @@ TEST_SUITE("helios::ecs::World") {
       world.WriteMessages<GameMsg>().Write(GameMsg{42});
       world.Update();
       int count = 0;
-      for (const auto msg : world.ReadMessages<GameMsg>()) {
+      MessageCursor<GameMsg> cursor;
+      for (const auto msg : world.ReadMessages<GameMsg>(cursor)) {
         CHECK_EQ(msg->value, 42);
         ++count;
       }
@@ -1187,7 +1218,8 @@ TEST_SUITE("helios::ecs::World") {
       world.Update();
 
       std::vector<int> values;
-      for (const auto msg : world.ReadMessages<GameMsg>()) {
+      MessageCursor<GameMsg> cursor;
+      for (const auto msg : world.ReadMessages<GameMsg>(cursor)) {
         values.push_back(msg->value);
       }
       REQUIRE_EQ(values.size(), 2);
@@ -1201,7 +1233,9 @@ TEST_SUITE("helios::ecs::World") {
       world.Update();
 
       int count = 0;
-      for ([[maybe_unused]] const auto& _ : world.ReadMessages<GameMsg>()) {
+      MessageCursor<GameMsg> cursor;
+      for ([[maybe_unused]] const auto& _ :
+           world.ReadMessages<GameMsg>(cursor)) {
         ++count;
       }
       CHECK_EQ(count, 0);
@@ -1226,7 +1260,9 @@ TEST_SUITE("helios::ecs::World") {
       world.Update();
 
       int count = 0;
-      for ([[maybe_unused]] const auto& _ : world.ReadMessages<GameMsg>()) {
+      MessageCursor<GameMsg> cursor;
+      for ([[maybe_unused]] const auto& _ :
+           world.ReadMessages<GameMsg>(cursor)) {
         ++count;
       }
       CHECK_EQ(count, 2);

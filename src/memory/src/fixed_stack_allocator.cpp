@@ -2,6 +2,7 @@
 
 #include <helios/memory/fixed_stack_allocator.hpp>
 
+#include <details/accumulate_peak.hpp>
 #include <helios/assert.hpp>
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
@@ -121,9 +122,7 @@ void FixedStackAllocator::do_deallocate(void* ptr, size_t /*bytes*/,
     const auto user_offset =
         static_cast<size_t>(static_cast<std::byte*>(ptr) - buffer_);
     const size_t waste = user_offset - header->previous_offset - kHeaderSize;
-    alignment_waste_.fetch_sub(
-        std::min(waste, alignment_waste_.load(std::memory_order_relaxed)),
-        std::memory_order_relaxed);
+    details::SaturatingFetchSub(alignment_waste_, waste);
   }
 }
 

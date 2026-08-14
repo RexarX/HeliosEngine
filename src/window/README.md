@@ -1,18 +1,27 @@
-# `window` — Cross-Platform Window Management
+# `window` — Window ECS Contract
 
-Skeleton module for GLFW-based window creation and input handling.
+Public ECS interface for window management without OS dependencies.
 
 ## Public API
 
-_Not yet implemented._ This module is a work-in-progress placeholder.
+- `Properties`, `Window`, `PrimaryWindow`, `CreationFailed`
+- `Settings`, `kEvents`, `RegisterEventsSchedule`
+- Lifecycle and property event messages (`ResizedMsg`, `CreationFailedMsg`, ...)
+- Composite params: `Windows`, `Messages`, `Writers`, `CreationWriters`, and
+  lifecycle / geometry / appearance / platform groups
+- `Plugin` — registers ECS types; does not create OS windows
 
-## Intended Scope
+Creation-time extras: `transparent_framebuffer`, `scale_to_monitor`,
+`scale_framebuffer`, `mouse_passthrough`. Runtime: `RequestFocus()`,
+`SetMousePassthrough()`.
 
-- Window creation and configuration (GLFW)
-- Input event polling (keyboard, mouse, gamepad)
-- Swapchain integration for rendering
-- Multi-monitor support
+Failed OS window creation tags the entity with `CreationFailed` and emits
+`CreationFailedMsg` instead of aborting the process.
+
+## Backends
+
+Use `glfw` for the default GLFW backend (`WindowPlugin` / `WindowInputPlugin`).
 
 ## Dependencies
 
-- External: GLFW
+- `app`, `ecs`

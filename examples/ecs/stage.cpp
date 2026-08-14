@@ -28,7 +28,7 @@ struct LogStage {
   const char* name = nullptr;
 
   void operator()(hecs::Res<const Counter> counter) const {
-    hlog::Info("stages: {} counter={}", name, counter->value);
+    hlog::Info("{} counter={}", name, counter->value);
   }
 };
 
@@ -42,9 +42,14 @@ int main() {
   auto& scheduler = app.GetMainSubApp().GetScheduler();
 
   // Stage ordering is separate from schedule ordering inside a stage.
+  // StageSettings (apply_commands / merge_messages / advance_messages) are
+  // independent; advance_messages swaps message buffers via
+  // MessageManager::Update and is typically set on the last stage of a frame
+  // order by app builtins.
   scheduler.AddStage(FirstStage{});
   scheduler.AddStage(SecondStage{});
   scheduler.OrderStage(SecondStage{}).After(FirstStage{});
+  scheduler.GetStageSettings(SecondStage{}).advance_messages = true;
 
   // Each schedule is placed into the stage it should run inside.
   scheduler.Add(FirstSchedule{}, hecs::Schedule{}).InStage(FirstStage{});
@@ -65,11 +70,11 @@ int main() {
 
   auto& world = app.GetWorld();
   // Running stages manually is useful for tests or custom engine loops.
-  hlog::Info("stages: running FirstStage");
+  hlog::Info("Running FirstStage");
   scheduler.RunStage(FirstStage{}, world);
-  hlog::Info("stages: running SecondStage");
+  hlog::Info("Running SecondStage");
   scheduler.RunStage(SecondStage{}, world);
 
-  hlog::Info("stages: final counter={}", world.ReadResource<Counter>().value);
+  hlog::Info("Final counter={}", world.ReadResource<Counter>().value);
   return 0;
 }

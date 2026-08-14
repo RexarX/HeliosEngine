@@ -850,5 +850,48 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
       CHECK(pool.Empty());
     }
+
+    SUBCASE("Interleaved alloc/dealloc returns unique live pointers") {
+      constexpr size_t kThreads = 8;
+      constexpr size_t kRounds = 4096;
+      PoolAllocator pool(GrowingOptions(kBlockSize, kThreads));
+
+      std::vector<void*> held(kThreads);
+      std::barrier sync(static_cast<ptrdiff_t>(kThreads + 1));
+      std::vector<std::thread> threads;
+      threads.reserve(kThreads);
+
+      for (size_t index = 0; index < kThreads; ++index) {
+        threads.emplace_back([&, index] {
+          for (size_t round = 0; round < kRounds; ++round) {
+            sync.arrive_and_wait();
+            held[index] = pool.allocate(kBlockSize, kAlign);
+            sync.arrive_and_wait();
+          }
+        });
+      }
+
+      for (size_t round = 0; round < kRounds; ++round) {
+        sync.arrive_and_wait();
+        sync.arrive_and_wait();
+
+        std::vector<void*> round_ptrs = held;
+        std::ranges::sort(round_ptrs);
+        CHECK_EQ(std::ranges::adjacent_find(round_ptrs), round_ptrs.end());
+
+        for (void* ptr : held) {
+          CHECK_NE(ptr, nullptr);
+          if (ptr != nullptr) {
+            pool.deallocate(ptr, kBlockSize, kAlign);
+          }
+        }
+      }
+
+      for (auto& thread : threads) {
+        thread.join();
+      }
+
+      CHECK(pool.Empty());
+    }
   }
 }  // TEST_SUITE

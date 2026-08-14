@@ -2,7 +2,9 @@
 
 #include <helios/ecs/command/commands.hpp>
 #include <helios/ecs/command/queue.hpp>
+#include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/world.hpp>
+#include <helios/memory/arena_allocator.hpp>
 
 #include <memory_resource>
 #include <vector>
@@ -95,6 +97,26 @@ TEST_SUITE("helios::ecs::Commands") {
       queue.ExecuteAll(world);
 
       CHECK_EQ(world.ReadComponent<Position>(entity).x, doctest::Approx(1.0F));
+    }
+
+    SUBCASE("Spawn add bundle and component shares a system arena") {
+      World world;
+      helios::mem::ArenaAllocator arena(1024);
+      PmrCmdQueue queue(&arena);
+      Commands cmds(queue, world, &arena);
+
+      const Entity entity = [&cmds] {
+        return cmds.Spawn()
+            .AddBundle(ComponentBundleTypes<Position>{Position{1.0F, 2.0F}})
+            .AddComponents(Velocity{3.0F, 4.0F})
+            .GetEntity();
+      }();
+
+      world.Update();
+      queue.ExecuteAll(world);
+
+      CHECK_EQ(world.ReadComponent<Position>(entity).x, doctest::Approx(1.0F));
+      CHECK_EQ(world.ReadComponent<Velocity>(entity).dx, doctest::Approx(3.0F));
     }
   }
 

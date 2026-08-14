@@ -74,25 +74,23 @@ struct LogQueryResults {
           optional_components) const {
     // WithEntity adds the owning Entity to each result tuple.
     players.ForEachWithEntity([](hecs::Entity entity, const Position& pos) {
-      hlog::Info("queries: player {} at ({}, {})", entity, pos.x, pos.y);
+      hlog::Info("Player {} at ({}, {})", entity, pos.x, pos.y);
     });
 
     // Query adapters are lazy until a terminal operation such as Collect runs.
     const auto sums =
         static_objects.Map([](const Position& pos) { return pos.x + pos.y; })
             .Collect();
-    hlog::Info("queries: static position sum={}",
-               sums.empty() ? 0.0F : sums.front());
+    hlog::Info("Static position sum={}", sums.empty() ? 0.0F : sums.front());
 
     // This pass prints which optional components were present on each entity.
-    optional_components.ForEachWithEntity(
-        [](hecs::Entity entity, const Position& pos, const Velocity* vel,
-           const Acceleration* accel) {
-          hlog::Info(
-              "queries: entity {} at ({}, {}), has_velocity={}, "
-              "has_acceleration={}",
-              entity, pos.x, pos.y, vel != nullptr, accel != nullptr);
-        });
+    optional_components.ForEachWithEntity([](hecs::Entity entity,
+                                             const Position& pos,
+                                             const Velocity* vel,
+                                             const Acceleration* accel) {
+      hlog::Info("Entity {} at ({}, {}), has_velocity={}, has_acceleration={}",
+                 entity, pos.x, pos.y, vel != nullptr, accel != nullptr);
+    });
   }
 };
 

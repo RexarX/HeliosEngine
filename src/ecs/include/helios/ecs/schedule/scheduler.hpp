@@ -2,8 +2,11 @@
 
 #include <helios/assert.hpp>
 #include <helios/ecs/details/profile.hpp>
+#include <helios/ecs/schedule/run_scope.hpp>
+#include <helios/ecs/schedule/run_stage_options.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/schedule/stage.hpp>
+#include <helios/ecs/schedule/stage_settings.hpp>
 
 #include <cstddef>
 #include <functional>
@@ -70,6 +73,8 @@ public:
   }
 
   Scheduler& Done() noexcept { return scheduler_.get(); }
+
+  [[nodiscard]] StageSettings& Settings() noexcept;
 
   [[nodiscard]] size_t Hash() const noexcept { return hash_; }
 
@@ -165,14 +170,44 @@ public:
   void Run(World& world, Executor& executor);
   void Run(World& world);
 
-  void RunStage(StageTypeIndex stage, World& world);
-  void RunStage(StageTypeIndex stage, World& world, Executor& executor);
+  void RunStage(StageTypeIndex stage, World& world,
+                RunStageOptions options = {});
+  void RunStage(StageTypeIndex stage, World& world, Executor& executor,
+                RunStageOptions options = {});
 
   template <StageTrait T>
-  void RunStage(const T& stage, World& world);
+  void RunStage(const T& stage, World& world, RunStageOptions options = {});
 
   template <StageTrait T>
-  void RunStage(const T& stage, World& world, Executor& executor);
+  void RunStage(const T& stage, World& world, Executor& executor,
+                RunStageOptions options = {});
+
+  /**
+   * @brief Applies deferred work for every schedule in a stage with explicit
+   * flags.
+   * @details Used after `RunStage` when stage settings request additional
+   * command flush / message merge. Does **not** advance message buffers.
+   * @param stage Stage whose member schedules to drain
+   * @param world World to apply against
+   * @param apply_commands Whether to flush and execute commands
+   * @param merge_messages Whether to merge local messages
+   */
+  void ApplyStageDeferred(StageTypeIndex stage, World& world,
+                          bool apply_commands, bool merge_messages);
+
+  /**
+   * @brief Applies deferred work for every schedule in a stage with explicit
+   * flags.
+   * @details Used after `RunStage` when stage settings request additional
+   * command flush / message merge. Does **not** advance message buffers.
+   * @param stage Stage whose member schedules to drain
+   * @param world World to apply against
+   * @param apply_commands Whether to flush and execute commands
+   * @param merge_messages Whether to merge local messages
+   */
+  template <StageTrait T>
+  void ApplyStageDeferred(const T& stage, World& world, bool apply_commands,
+                          bool merge_messages);
 
   void Clear();
 
@@ -237,6 +272,22 @@ public:
     return HasStage(StageTypeIndex::From(stage));
   }
 
+  [[nodiscard]] StageSettings& GetStageSettings(StageTypeIndex index);
+
+  template <StageTrait T>
+  [[nodiscard]] StageSettings& GetStageSettings(const T& stage = {}) {
+    return GetStageSettings(StageTypeIndex::From(stage));
+  }
+
+  [[nodiscard]] const StageSettings& GetStageSettings(
+      StageTypeIndex index) const;
+
+  template <StageTrait T>
+  [[nodiscard]] const StageSettings& GetStageSettings(
+      const T& stage = {}) const {
+    return GetStageSettings(StageTypeIndex::From(stage));
+  }
+
   [[nodiscard]] bool IsDirty() const noexcept;
 
 private:
@@ -252,6 +303,7 @@ private:
     std::vector<size_t> after_stages;
     std::vector<size_t> before_stages;
     std::string_view name;
+    StageSettings settings;
   };
 
   [[nodiscard]] ScheduleEntry& GetEntry(size_t hash) {
@@ -375,24 +427,25 @@ inline void Scheduler::Build(async::Executor& executor) {
 }
 
 template <StageTrait T>
-inline void Scheduler::RunStage(const T& stage, World& world) {
+inline void Scheduler::RunStage(const T& stage, World& world,
+                                RunStageOptions options) {
   HELIOS_ECS_PROFILE_SCOPE();
   HELIOS_ECS_PROFILE_ZONE_NAME(std::format(
       "helios::ecs::Scheduler::RunStage{{name: {}}}", StageNameOf(stage)));
   HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
 
-  RunStage(StageTypeIndex::From(stage), world);
+  RunStage(StageTypeIndex::From(stage), world, options);
 }
 
 template <StageTrait T>
 inline void Scheduler::RunStage(const T& stage, World& world,
-                                Executor& executor) {
+                                Executor& executor, RunStageOptions options) {
   HELIOS_ECS_PROFILE_SCOPE();
   HELIOS_ECS_PROFILE_ZONE_NAME(std::format(
       "helios::ecs::Scheduler::RunStage{{name: {}}}", StageNameOf(stage)));
   HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
 
-  RunStage(StageTypeIndex::From(stage), world, executor);
+  RunStage(StageTypeIndex::From(stage), world, executor, options);
 }
 
 inline void Scheduler::Clear() {
@@ -435,6 +488,10 @@ inline StageOrdering Scheduler::OrderStage(StageTypeIndex index) {
   return {*this, index.Hash()};
 }
 
+inline StageSettings& StageOrdering::Settings() noexcept {
+  return scheduler_.get().GetStageEntry(hash_).settings;
+}
+
 inline ScheduleOrdering Scheduler::Add(ScheduleTypeId id, Schedule&& schedule) {
   const size_t hash = id.Index().Hash();
   schedules_[hash] = ScheduleEntry{
@@ -459,6 +516,7 @@ inline StageOrdering Scheduler::AddStage(StageTypeId id) {
       .after_stages = {},
       .before_stages = {},
       .name = id.Name(),
+      .settings = {},
   };
   MarkDirty();
   return {*this, hash};
@@ -503,6 +561,17 @@ inline bool Scheduler::IsDirty() const noexcept {
   return std::ranges::any_of(schedules_, [](const auto& pair) {
     return pair.second.schedule.IsDirty();
   });
+}
+
+inline StageSettings& Scheduler::GetStageSettings(StageTypeIndex index) {
+  return GetStageEntry(index.Hash()).settings;
+}
+
+inline const StageSettings& Scheduler::GetStageSettings(
+    StageTypeIndex index) const {
+  HELIOS_ASSERT(stages_.contains(index.Hash()),
+                "Stage with hash '{}' not found!", index.Hash());
+  return stages_.at(index.Hash()).settings;
 }
 
 }  // namespace helios::ecs

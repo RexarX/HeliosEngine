@@ -1402,7 +1402,7 @@ constexpr void TypedBufferArray<Allocator>::Merge(
     if (!type_info_.IsValid()) {
       type_info_ = other.type_info_;
     }
-    other.type_info_.Reset();
+    other.Reset();
     return;
   }
 

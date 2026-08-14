@@ -1,0 +1,44 @@
+helios_module(
+    NAME input
+    VERSION 0.1.0
+    DESCRIPTION "Input ECS contract (keyboard, mouse, cursor, gamepad)"
+
+    HEADERS
+        include/helios/input/axis.hpp
+        include/helios/input/button_input.hpp
+        include/helios/input/components.hpp
+        include/helios/input/gamepad.hpp
+        include/helios/input/input.hpp
+        include/helios/input/keyboard.hpp
+        include/helios/input/messages.hpp
+        include/helios/input/mouse.hpp
+        include/helios/input/params.hpp
+        include/helios/input/plugin.hpp
+        include/helios/input/resources.hpp
+        include/helios/input/systems.hpp
+
+    SOURCES
+        src/plugin.cpp
+        src/systems.cpp
+
+    PCH
+        src/pch.hpp
+
+    DEPENDS
+        PUBLIC app
+        PUBLIC ecs
+        PUBLIC log
+
+    TEST_SOURCES
+        tests/axis.cpp
+        tests/button_input.cpp
+        tests/components.cpp
+        tests/gamepad.cpp
+        tests/keyboard.cpp
+        tests/main.cpp
+        tests/mouse.cpp
+        tests/params.cpp
+        tests/plugin.cpp
+        tests/resources.cpp
+        tests/systems.cpp
+)

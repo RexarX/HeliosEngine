@@ -24,6 +24,8 @@ struct Health {
   int value = 100;
 };
 
+struct Tag {};
+
 struct MoveOnly {
   int value = 0;
 
@@ -42,103 +44,182 @@ public:
   virtual ~Polymorphic() = default;
 };
 
-using MotionBundle = ComponentBundle<Position, Velocity>;
-using NestedBundle = ComponentBundle<Health, MotionBundle>;
+using FlatMotionBundle = ComponentBundleTypes<Position, Velocity>;
+
+struct MotionBundle {
+  using ComponentTypes = ComponentBundleTypes<Position, Velocity>;
+
+  Position position;
+  Velocity velocity;
+
+  [[nodiscard]] constexpr ComponentTypes Build() {
+    return {std::move(position), std::move(velocity)};
+  }
+};
+
+struct NestedBundle {
+  using ComponentTypes = ComponentBundleTypes<Health, MotionBundle>;
+
+  Health health;
+  MotionBundle motion;
+
+  [[nodiscard]] constexpr ComponentTypes Build() {
+    return {std::move(health), std::move(motion)};
+  }
+};
+
+struct MoveOnlyBundle {
+  using ComponentTypes = ComponentBundleTypes<MoveOnly>;
+
+  MoveOnly value;
+
+  [[nodiscard]] constexpr ComponentTypes Build() { return {std::move(value)}; }
+};
+
+struct PolymorphicLeafBundle {
+  using ComponentTypes = ComponentBundleTypes<Polymorphic>;
+
+  [[nodiscard]] constexpr ComponentTypes Build() { return {}; }
+};
 
 }  // namespace
 
 TEST_SUITE("helios::ecs::ComponentBundleTrait") {
   TEST_CASE("helios::ecs::ComponentBundleTrait::concept") {
-    SUBCASE("Direct and nested bundles satisfy ComponentBundleTrait") {
+    SUBCASE("ComponentBundleTypes satisfies ComponentBundleTrait") {
+      CHECK(ComponentBundleTrait<FlatMotionBundle>);
+      CHECK(ComponentBundleTrait<const FlatMotionBundle&>);
+    }
+
+    SUBCASE("Struct bundles with Build satisfy ComponentBundleTrait") {
       CHECK(ComponentBundleTrait<MotionBundle>);
       CHECK(ComponentBundleTrait<NestedBundle>);
       CHECK(ComponentBundleTrait<const NestedBundle&>);
     }
 
-    SUBCASE("ComponentBundle is not a component") {
+    SUBCASE("Bundles are not components") {
+      CHECK_FALSE(ComponentTrait<FlatMotionBundle>);
       CHECK_FALSE(ComponentTrait<MotionBundle>);
     }
 
-    SUBCASE("Empty bundles do not satisfy ComponentBundleTrait") {
-      CHECK_FALSE(ComponentBundleTrait<ComponentBundle<>>);
+    SUBCASE("Empty ComponentBundleTypes do not satisfy ComponentBundleTrait") {
+      CHECK_FALSE(ComponentBundleTrait<ComponentBundleTypes<>>);
     }
 
     SUBCASE("Bundle elements must be unqualified owning values") {
-      CHECK_FALSE(ComponentBundleTrait<ComponentBundle<const Position>>);
-      CHECK_FALSE(ComponentBundleTrait<ComponentBundle<Position&>>);
-      CHECK_FALSE(ComponentBundleTrait<ComponentBundle<Position[1]>>);
+      CHECK_FALSE(ComponentBundleTrait<ComponentBundleTypes<const Position>>);
     }
 
     SUBCASE("Invalid component leaves do not satisfy ComponentBundleTrait") {
-      CHECK_FALSE(ComponentBundleTrait<ComponentBundle<Polymorphic>>);
+      CHECK_FALSE(ComponentBundleTrait<PolymorphicLeafBundle>);
     }
 
     SUBCASE("Flattened component types must be unique") {
-      CHECK_FALSE(ComponentBundleTrait<ComponentBundle<Position, Position>>);
       CHECK_FALSE(
-          ComponentBundleTrait<
-              ComponentBundle<Position, ComponentBundle<Velocity, Position>>>);
+          ComponentBundleTrait<ComponentBundleTypes<Position, Position>>);
+      CHECK_FALSE(
+          ComponentBundleTrait<ComponentBundleTypes<Position, MotionBundle>>);
+    }
+
+    SUBCASE("ComponentBundleTypes flattens nested bundle types") {
+      using Leaves = details::BundleLeafTypes<NestedBundle>;
+      CHECK((std::same_as<Leaves,
+                          ComponentBundleTypes<Health, Position, Velocity>>));
+      CHECK_EQ(details::kComponentBundleSize<NestedBundle>, 3);
     }
   }
 }
 
-TEST_SUITE("helios::ecs::ComponentBundle") {
-  TEST_CASE("helios::ecs::ComponentBundle::ctor") {
+TEST_SUITE("helios::ecs::ComponentBundleTypes") {
+  TEST_CASE("helios::ecs::ComponentBundleTypes::ctor") {
     SUBCASE("Default constructor") {
-      constexpr MotionBundle bundle;
+      constexpr FlatMotionBundle bundle{};
       CHECK(ComponentBundleTrait<decltype(bundle)>);
     }
 
     SUBCASE("Value constructor") {
-      constexpr MotionBundle bundle{Position{.x = 1.0F, .y = 2.0F},
-                                    Velocity{.x = 3.0F, .y = 4.0F}};
+      constexpr FlatMotionBundle bundle{Position{.x = 1.0F, .y = 2.0F},
+                                        Velocity{.x = 3.0F, .y = 4.0F}};
       CHECK(ComponentBundleTrait<decltype(bundle)>);
-    }
-
-    SUBCASE("Nested bundle constructor") {
-      constexpr NestedBundle bundle{
-          Health{.value = 75},
-          MotionBundle{Position{.x = 1.0F}, Velocity{.y = 2.0F}}};
-      CHECK(ComponentBundleTrait<decltype(bundle)>);
-    }
-
-    SUBCASE("Class template argument deduction") {
-      using Deduced = decltype(ComponentBundle{Position{}, Velocity{}});
-      CHECK((std::same_as<Deduced, MotionBundle>));
     }
 
     SUBCASE("Copy constructor") {
-      constexpr MotionBundle source{Position{}, Velocity{}};
-      constexpr MotionBundle copy(source);
+      constexpr FlatMotionBundle source{Position{}, Velocity{}};
+      constexpr FlatMotionBundle copy(source);
       CHECK(ComponentBundleTrait<decltype(copy)>);
     }
 
     SUBCASE("Move constructor supports move-only components") {
-      ComponentBundle source{MoveOnly{42}};
+      ComponentBundleTypes<MoveOnly> source{MoveOnly{42}};
       auto moved = std::move(source);
       CHECK(ComponentBundleTrait<decltype(moved)>);
     }
-
-    SUBCASE("Value constructor is conditionally noexcept") {
-      CHECK(noexcept(ComponentBundle{Position{}}));
-    }
   }
 
-  TEST_CASE("helios::ecs::ComponentBundle::operator=") {
+  TEST_CASE("helios::ecs::ComponentBundleTypes::operator=") {
     SUBCASE("Copy assignment") {
-      MotionBundle source{Position{.x = 1.0F}, Velocity{.y = 2.0F}};
-      MotionBundle target;
+      FlatMotionBundle source{Position{.x = 1.0F}, Velocity{.y = 2.0F}};
+      FlatMotionBundle target;
       target = source;
 
       CHECK(ComponentBundleTrait<decltype(target)>);
     }
 
     SUBCASE("Move assignment") {
-      ComponentBundle source{MoveOnly{42}};
-      ComponentBundle<MoveOnly> target;
+      ComponentBundleTypes<MoveOnly> source{MoveOnly{42}};
+      ComponentBundleTypes<MoveOnly> target;
       target = std::move(source);
 
       CHECK(ComponentBundleTrait<decltype(target)>);
+    }
+  }
+
+  TEST_CASE("helios::ecs::ComponentBundleTypes::Build") {
+    SUBCASE("ApplyComponentBundle extracts flattened values from Build") {
+      NestedBundle bundle{.health = {.value = 10},
+                          .motion = {.position = {.x = 1.0F, .y = 2.0F},
+                                     .velocity = {.x = 3.0F, .y = 4.0F}}};
+
+      details::ApplyComponentBundle(
+          std::move(bundle),
+          [](Health health, Position position, Velocity velocity) {
+            CHECK_EQ(health.value, 10);
+            CHECK_EQ(position.x, 1.0F);
+            CHECK_EQ(position.y, 2.0F);
+            CHECK_EQ(velocity.x, 3.0F);
+            CHECK_EQ(velocity.y, 4.0F);
+          });
+    }
+
+    SUBCASE("ApplyComponentBundle extracts values from ComponentBundleTypes") {
+      FlatMotionBundle bundle{Position{.x = 1.0F, .y = 2.0F},
+                              Velocity{.x = 3.0F, .y = 4.0F}};
+
+      details::ApplyComponentBundle(std::move(bundle),
+                                    [](Position position, Velocity velocity) {
+                                      CHECK_EQ(position.x, 1.0F);
+                                      CHECK_EQ(position.y, 2.0F);
+                                      CHECK_EQ(velocity.x, 3.0F);
+                                      CHECK_EQ(velocity.y, 4.0F);
+                                    });
+    }
+
+    SUBCASE("Build can synthesize extras not stored as fields") {
+      struct TaggedMotionBundle final {
+        using ComponentTypes = ComponentBundleTypes<Position, Velocity, Tag>;
+
+        Position position;
+        Velocity velocity;
+
+        [[nodiscard]] ComponentTypes Build() && {
+          return {std::move(position), std::move(velocity), Tag{}};
+        }
+      };
+
+      TaggedMotionBundle bundle{.position = {.x = 1.0F},
+                                .velocity = {.y = 2.0F}};
+      details::ApplyComponentBundle(
+          std::move(bundle), [](Position, Velocity, Tag) { CHECK(true); });
     }
   }
 }

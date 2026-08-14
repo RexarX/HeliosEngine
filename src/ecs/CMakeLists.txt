@@ -52,9 +52,12 @@ helios_module(
         include/helios/ecs/schedule/executor/single_threaded.hpp
         include/helios/ecs/schedule/dag.hpp
         include/helios/ecs/schedule/run_condition.hpp
+        include/helios/ecs/schedule/run_scope.hpp
+        include/helios/ecs/schedule/run_stage_options.hpp
         include/helios/ecs/schedule/schedule.hpp
         include/helios/ecs/schedule/scheduler.hpp
         include/helios/ecs/schedule/stage.hpp
+        include/helios/ecs/schedule/stage_settings.hpp
         include/helios/ecs/schedule/system_group_handle.hpp
         include/helios/ecs/schedule/system_handle.hpp
         include/helios/ecs/schedule/system_local_data.hpp
@@ -122,6 +125,7 @@ helios_module(
         tests/message/message.cpp
         tests/message/queue.cpp
         tests/message/reader.cpp
+        tests/message/wrapper.cpp
         tests/message/writer.cpp
         tests/query/details/traits.cpp
         tests/query/details/query_args.cpp

@@ -27,7 +27,8 @@ struct PoolAllocatorOptions {
  * @brief Lock-free PMR pool allocator for fixed-size blocks.
  * @details Allocates from fixed-size blocks stored in growable chunks.
  *
- * Fast path uses lock-free freelist push/pop based on embedded next pointers.
+ * Fast path uses an ABA-safe lock-free Treiber freelist with embedded next
+ * pointers.
  * Growth allocates and links a new chunk, then pushes all its blocks into the
  * freelist.
  */
@@ -207,7 +208,7 @@ private:
   size_t alignment_ = 0;
   GrowthPolicy growth_;
 
-  std::atomic<void*> free_head_{nullptr};
+  std::atomic<uintptr_t> free_head_{0};
   std::atomic<ChunkHeader*> chunks_{nullptr};
   std::atomic<GrowState> grow_state_{GrowState::kIdle};
 
