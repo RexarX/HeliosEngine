@@ -208,8 +208,15 @@ Usage</h1>
 Dependencies</h1>
 <ul>
 <li>Required: <span class="tt">window</span>, <span class="tt">app</span>, GLFW</li>
-<li>Optional: <span class="tt">input</span> (<span class="tt">HELIOS_MODULE_INPUT_AVAILABLE</span>) </li>
+<li>Optional: <span class="tt">input</span> (<span class="tt">HELIOS_MODULE_INPUT_AVAILABLE</span>)</li>
 </ul>
+<h1 class="doxsection"><a class="anchor" id="system-packages"></a>
+System packages</h1>
+<p>Needed on Linux when building vendored GLFW (X11 + Wayland). Windows and macOS need no extra packages.</p>
+<p>Debian / Ubuntu:</p>
+<div class="fragment"><div class="line">sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \</div>
+<div class="line">  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev</div>
+</div><!-- fragment --><p>Fedora, Arch, and shared build tools are listed under <a class="el" href="index.html#installing-dependencies" title="Installing Dependencies">Installing Dependencies</a>Installing Dependencies. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

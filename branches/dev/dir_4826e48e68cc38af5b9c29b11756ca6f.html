@@ -207,8 +207,16 @@ Usage</h1>
 <h1 class="doxsection"><a class="anchor" id="dependencies-10"></a>
 Dependencies</h1>
 <ul>
-<li><span class="tt">app</span>, <span class="tt">ecs</span>, <span class="tt">log</span>, <span class="tt">window</span>, SDL3 (public) </li>
+<li><span class="tt">app</span>, <span class="tt">ecs</span>, <span class="tt">log</span>, <span class="tt">window</span>, SDL3 (public)</li>
 </ul>
+<h1 class="doxsection"><a class="anchor" id="system-packages-1"></a>
+System packages</h1>
+<p>Needed on Linux when building vendored SDL3 (X11 + Wayland). Windows and macOS need no extra packages. SDL3 configure <b>fails</b> if XScrnSaver / XTest / Xfixes headers are missing while those features are enabled (the default).</p>
+<p>Debian / Ubuntu:</p>
+<div class="fragment"><div class="line">sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \</div>
+<div class="line">  libxrandr-dev libxi-dev libxcursor-dev libxext-dev \</div>
+<div class="line">  libxfixes-dev libxss-dev libxtst-dev</div>
+</div><!-- fragment --><p>Fedora, Arch, and shared build tools are listed under <a class="el" href="index.html#installing-dependencies" title="Installing Dependencies">Installing Dependencies</a>Installing Dependencies. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
