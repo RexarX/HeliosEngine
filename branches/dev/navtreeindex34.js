@@ -1,5 +1,9 @@
 var NAVTREEINDEX34 =
 {
+"namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#a5d42348229cad6ed3e3aa941e6aa38e6":[2,0,3,11,1,0,1],
+"namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#ae60d0357ca8df09648883ac792d63cd3":[2,0,3,11,1,0,0],
+"namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#afda4dde3bbbca6301ca2ea5f393812f6":[2,0,3,11,1,0,3],
+"namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02poll__gamepads_8cpp_03.html":[2,0,3,11,1,1],
 "namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02poll__gamepads_8cpp_03.html#a0a4a46e71d81b4eb81f952a50f4d2fc4":[2,0,3,11,1,1,0],
 "namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02poll__gamepads_8cpp_03.html#a2723a6d16c4af16aed99f446836d3e4a":[2,0,3,11,1,1,7],
 "namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02poll__gamepads_8cpp_03.html#a4ed757c759f8ff4ff0a6df153bf6f84e":[2,0,3,11,1,1,2],
@@ -245,9 +249,5 @@ var NAVTREEINDEX34 =
 "namespacehelios_1_1window.html#a982419fe99f84c42a48a7d894cbc8656":[2,0,3,13,159],
 "namespacehelios_1_1window.html#a9d7b71a4191132f2de625f2ab9c23fe0":[2,0,3,13,122],
 "namespacehelios_1_1window.html#a9e3da088e301fa9799a884fc39fb9ff2":[2,0,3,13,127],
-"namespacehelios_1_1window.html#aa1469ed82b72537f38847a6b135de55f":[2,0,3,13,163],
-"namespacehelios_1_1window.html#aa2e7ec0f012b77205a97a3ba19121e5c":[2,0,3,13,149],
-"namespacehelios_1_1window.html#aa50130b22fa1b2aab2fc07facf2f40a6":[2,0,3,13,80],
-"namespacehelios_1_1window.html#aa5fdb39c6eab4ba1c5112ac4ad093d36":[2,0,3,13,124],
-"namespacehelios_1_1window.html#aa66902a50e58707c921675b74af685c0":[2,0,3,13,123]
+"namespacehelios_1_1window.html#aa1469ed82b72537f38847a6b135de55f":[2,0,3,13,163]
 };

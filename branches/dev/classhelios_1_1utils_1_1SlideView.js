@@ -1,6 +1,7 @@
 var classhelios_1_1utils_1_1SlideView =
 [
     [ "const_iterator", "classhelios_1_1utils_1_1SlideView.html#a39a52e0d663bcb98760f86c872d613aa", null ],
+    [ "difference_type", "classhelios_1_1utils_1_1SlideView.html#ab6dd4526bf14253930a33a9268d4b6a7", null ],
     [ "iterator", "classhelios_1_1utils_1_1SlideView.html#a5012dbf6a3f3f93d927ff3443dd6f98c", null ],
     [ "reference", "classhelios_1_1utils_1_1SlideView.html#af0f7d210bb91d0cf9b6ea63c36557913", null ],
     [ "size_type", "classhelios_1_1utils_1_1SlideView.html#a6b77029ffda429321505f1988f6a053c", null ],

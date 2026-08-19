@@ -1,5 +1,9 @@
 var NAVTREEINDEX44 =
 {
+"structhelios_1_1input_1_1PenMovedMsg.html#add0f247039c8b40e9c3d8e9dd09941f4":[4,0,2,6,46,8],
+"structhelios_1_1input_1_1PenMovedMsg.html#af4df7af1f3fa18e81e9c56956f13e878":[2,0,3,7,47,3],
+"structhelios_1_1input_1_1PenMovedMsg.html#af4df7af1f3fa18e81e9c56956f13e878":[4,0,2,6,46,3],
+"structhelios_1_1input_1_1PenProximityMsg.html":[2,0,3,7,48],
 "structhelios_1_1input_1_1PenProximityMsg.html":[4,0,2,6,47],
 "structhelios_1_1input_1_1PenProximityMsg.html#a076ea9dbb0420f083443957b3cee4409":[2,0,3,7,48,4],
 "structhelios_1_1input_1_1PenProximityMsg.html#a076ea9dbb0420f083443957b3cee4409":[4,0,2,6,47,4],
@@ -245,9 +249,5 @@ var NAVTREEINDEX44 =
 "structhelios_1_1mem_1_1FixedPoolAllocatorOptions.html#aba2b82eb2e32a9f944d464eac8f22101":[4,0,2,8,8,2],
 "structhelios_1_1mem_1_1FixedStackAllocator_1_1Marker.html":[2,0,3,9,9,0],
 "structhelios_1_1mem_1_1FixedStackAllocator_1_1Marker.html":[4,0,2,8,9,0],
-"structhelios_1_1mem_1_1FixedStackAllocator_1_1Marker.html#afe600c22d795cc0ae3e72516cd6d651c":[2,0,3,9,9,0,0],
-"structhelios_1_1mem_1_1FixedStackAllocator_1_1Marker.html#afe600c22d795cc0ae3e72516cd6d651c":[4,0,2,8,9,0,0],
-"structhelios_1_1mem_1_1FrameAllocatorOptions.html":[2,0,3,9,11],
-"structhelios_1_1mem_1_1FrameAllocatorOptions.html":[4,0,2,8,11],
-"structhelios_1_1mem_1_1FrameAllocatorOptions.html#a3e432f47bb462db7bf139425eb882a9a":[2,0,3,9,11,0]
+"structhelios_1_1mem_1_1FixedStackAllocator_1_1Marker.html#afe600c22d795cc0ae3e72516cd6d651c":[2,0,3,9,9,0,0]
 };

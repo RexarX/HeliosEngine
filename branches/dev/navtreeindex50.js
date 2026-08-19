@@ -1,5 +1,9 @@
 var NAVTREEINDEX50 =
 {
+"structstd_1_1formatter_3_01helios_1_1input_1_1GamepadConnectionMsg_01_4.html#ab5ef6688a335e863f9004915c28d7c74":[4,0,3,14,1],
+"structstd_1_1formatter_3_01helios_1_1input_1_1GamepadDirtyFlags_01_4.html":[2,0,5,15],
+"structstd_1_1formatter_3_01helios_1_1input_1_1GamepadDirtyFlags_01_4.html":[4,0,3,15],
+"structstd_1_1formatter_3_01helios_1_1input_1_1GamepadDirtyFlags_01_4.html#a06f310e0a8d5cbaf970e354c533255f5":[2,0,5,15,1],
 "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadDirtyFlags_01_4.html#a06f310e0a8d5cbaf970e354c533255f5":[4,0,3,15,1],
 "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadDirtyFlags_01_4.html#ad5beefea828c0d738095cd16e737f348":[2,0,5,15,0],
 "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadDirtyFlags_01_4.html#ad5beefea828c0d738095cd16e737f348":[4,0,3,15,0],
@@ -245,9 +249,5 @@ var NAVTREEINDEX50 =
 "structstd_1_1formatter_3_01helios_1_1window_1_1ClientApi_01_4.html#a5c5fd7a63e2439160cbbfa2f76de4b2d":[4,0,3,54,1],
 "structstd_1_1formatter_3_01helios_1_1window_1_1ClientResizedMsg_01_4.html":[2,0,5,55],
 "structstd_1_1formatter_3_01helios_1_1window_1_1ClientResizedMsg_01_4.html":[4,0,3,55],
-"structstd_1_1formatter_3_01helios_1_1window_1_1ClientResizedMsg_01_4.html#a1ff0f08ddb7fb8d0e88e165859ecdcbd":[2,0,5,55,0],
-"structstd_1_1formatter_3_01helios_1_1window_1_1ClientResizedMsg_01_4.html#a1ff0f08ddb7fb8d0e88e165859ecdcbd":[4,0,3,55,0],
-"structstd_1_1formatter_3_01helios_1_1window_1_1ClientResizedMsg_01_4.html#a89037b4b3d335d17ebb766ab71147506":[2,0,5,55,1],
-"structstd_1_1formatter_3_01helios_1_1window_1_1ClientResizedMsg_01_4.html#a89037b4b3d335d17ebb766ab71147506":[4,0,3,55,1],
-"structstd_1_1formatter_3_01helios_1_1window_1_1ClipboardChangedMsg_01_4.html":[2,0,5,57]
+"structstd_1_1formatter_3_01helios_1_1window_1_1ClientResizedMsg_01_4.html#a1ff0f08ddb7fb8d0e88e165859ecdcbd":[2,0,5,55,0]
 };

@@ -1,5 +1,9 @@
 var NAVTREEINDEX36 =
 {
+"sdl3__window_2src_2systems_2create_8cpp_source.html":[5,0,2,14,1,0,1],
+"sdl3__window_2src_2systems_2destroy_8cpp.html":[5,0,2,14,1,0,2],
+"sdl3__window_2src_2systems_2destroy_8cpp_source.html":[5,0,2,14,1,0,2],
+"sdl3__window_2src_2systems_2init_8cpp.html":[5,0,2,14,1,0,3],
 "sdl3__window_2src_2systems_2init_8cpp_source.html":[5,0,2,14,1,0,3],
 "sdl3__window_2src_2systems_2poll_8cpp.html":[5,0,2,14,1,0,4],
 "sdl3__window_2src_2systems_2poll_8cpp_source.html":[5,0,2,14,1,0,4],
@@ -245,9 +249,5 @@ var NAVTREEINDEX36 =
 "structhelios_1_1app_1_1Time.html":[4,0,2,0,39],
 "structhelios_1_1app_1_1Time.html#a0333e9180f411b094a6f2b780758e6a9":[2,0,3,1,41,17],
 "structhelios_1_1app_1_1Time.html#a0333e9180f411b094a6f2b780758e6a9":[4,0,2,0,39,17],
-"structhelios_1_1app_1_1Time.html#a0a1cbfe664a5abc6143e82f59f9e035e":[2,0,3,1,41,7],
-"structhelios_1_1app_1_1Time.html#a0a1cbfe664a5abc6143e82f59f9e035e":[4,0,2,0,39,7],
-"structhelios_1_1app_1_1Time.html#a114e61f3a19d51583417f61db26dd467":[2,0,3,1,41,12],
-"structhelios_1_1app_1_1Time.html#a114e61f3a19d51583417f61db26dd467":[4,0,2,0,39,12],
-"structhelios_1_1app_1_1Time.html#a25a0f9a6ab2e2548c3a345b6656bf527":[2,0,3,1,41,1]
+"structhelios_1_1app_1_1Time.html#a0a1cbfe664a5abc6143e82f59f9e035e":[2,0,3,1,41,7]
 };

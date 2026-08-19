@@ -1,6 +1,7 @@
 var classhelios_1_1utils_1_1ChunkView =
 [
     [ "const_iterator", "classhelios_1_1utils_1_1ChunkView.html#a0321ee9f139bd90c4da2f63a411f2c8f", null ],
+    [ "difference_type", "classhelios_1_1utils_1_1ChunkView.html#a64f0301a99167ae8438742e537cfeac7", null ],
     [ "iterator", "classhelios_1_1utils_1_1ChunkView.html#a5cd611c206397cd51b7384e65f437726", null ],
     [ "reference", "classhelios_1_1utils_1_1ChunkView.html#af91a21c46d60e11d3ac86315319d942f", null ],
     [ "size_type", "classhelios_1_1utils_1_1ChunkView.html#a736eea716ccd1286e668224678d1b43d", null ],

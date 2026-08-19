@@ -1,5 +1,9 @@
 var NAVTREEINDEX45 =
 {
+"structhelios_1_1mem_1_1FixedStackAllocator_1_1Marker.html#afe600c22d795cc0ae3e72516cd6d651c":[4,0,2,8,9,0,0],
+"structhelios_1_1mem_1_1FrameAllocatorOptions.html":[2,0,3,9,11],
+"structhelios_1_1mem_1_1FrameAllocatorOptions.html":[4,0,2,8,11],
+"structhelios_1_1mem_1_1FrameAllocatorOptions.html#a3e432f47bb462db7bf139425eb882a9a":[2,0,3,9,11,0],
 "structhelios_1_1mem_1_1FrameAllocatorOptions.html#a3e432f47bb462db7bf139425eb882a9a":[4,0,2,8,11,0],
 "structhelios_1_1mem_1_1FrameAllocatorOptions.html#ae6d596a7705fb44b915772a2e60fd633":[2,0,3,9,11,1],
 "structhelios_1_1mem_1_1FrameAllocatorOptions.html#ae6d596a7705fb44b915772a2e60fd633":[4,0,2,8,11,1],
@@ -245,9 +249,5 @@ var NAVTREEINDEX45 =
 "structhelios_1_1sdl3_1_1window_1_1DestroyClosedWindows.html":[4,0,2,10,1,4],
 "structhelios_1_1sdl3_1_1window_1_1DestroyClosedWindows.html#aaa7d8dce954ea8a7959c72ccefce83aa":[2,0,3,11,2,5,0],
 "structhelios_1_1sdl3_1_1window_1_1DestroyClosedWindows.html#aaa7d8dce954ea8a7959c72ccefce83aa":[4,0,2,10,1,4,0],
-"structhelios_1_1sdl3_1_1window_1_1DestroyClosedWindows.html#ada16bf146d35a32bb3f8be8da9455301":[2,0,3,11,2,5,1],
-"structhelios_1_1sdl3_1_1window_1_1DestroyClosedWindows.html#ada16bf146d35a32bb3f8be8da9455301":[4,0,2,10,1,4,1],
-"structhelios_1_1sdl3_1_1window_1_1Init.html":[2,0,3,11,2,6],
-"structhelios_1_1sdl3_1_1window_1_1Init.html":[4,0,2,10,1,5],
-"structhelios_1_1sdl3_1_1window_1_1Init.html#a1619d2124b20626a615bd00792ab4f91":[2,0,3,11,2,6,1]
+"structhelios_1_1sdl3_1_1window_1_1DestroyClosedWindows.html#ada16bf146d35a32bb3f8be8da9455301":[2,0,3,11,2,5,1]
 };

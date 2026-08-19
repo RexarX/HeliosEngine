@@ -1,5 +1,9 @@
 var NAVTREEINDEX43 =
 {
+"structhelios_1_1input_1_1Keyboard.html":[4,0,2,6,31],
+"structhelios_1_1input_1_1Keyboard.html#ac99dd19bcff513f1e457bd297a361497":[2,0,3,7,32,1],
+"structhelios_1_1input_1_1Keyboard.html#ac99dd19bcff513f1e457bd297a361497":[4,0,2,6,31,1],
+"structhelios_1_1input_1_1Keyboard.html#ad5ddfa89b6564cf1ceaba1911c6035df":[2,0,3,7,32,0],
 "structhelios_1_1input_1_1Keyboard.html#ad5ddfa89b6564cf1ceaba1911c6035df":[4,0,2,6,31,0],
 "structhelios_1_1input_1_1Keyboard.html#afa4baf32b515df9d350e41b4f5908c74":[2,0,3,7,32,2],
 "structhelios_1_1input_1_1Keyboard.html#afa4baf32b515df9d350e41b4f5908c74":[4,0,2,6,31,2],
@@ -245,9 +249,5 @@ var NAVTREEINDEX43 =
 "structhelios_1_1input_1_1PenMovedMsg.html#aa1f42b396e23d1c758cca69c240687f6":[4,0,2,6,46,0],
 "structhelios_1_1input_1_1PenMovedMsg.html#ac2cd6ae6ae4c2f4345cbfd549d7a2be6":[2,0,3,7,47,7],
 "structhelios_1_1input_1_1PenMovedMsg.html#ac2cd6ae6ae4c2f4345cbfd549d7a2be6":[4,0,2,6,46,7],
-"structhelios_1_1input_1_1PenMovedMsg.html#add0f247039c8b40e9c3d8e9dd09941f4":[2,0,3,7,47,8],
-"structhelios_1_1input_1_1PenMovedMsg.html#add0f247039c8b40e9c3d8e9dd09941f4":[4,0,2,6,46,8],
-"structhelios_1_1input_1_1PenMovedMsg.html#af4df7af1f3fa18e81e9c56956f13e878":[2,0,3,7,47,3],
-"structhelios_1_1input_1_1PenMovedMsg.html#af4df7af1f3fa18e81e9c56956f13e878":[4,0,2,6,46,3],
-"structhelios_1_1input_1_1PenProximityMsg.html":[2,0,3,7,48]
+"structhelios_1_1input_1_1PenMovedMsg.html#add0f247039c8b40e9c3d8e9dd09941f4":[2,0,3,7,47,8]
 };

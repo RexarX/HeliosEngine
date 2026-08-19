@@ -1,5 +1,9 @@
 var NAVTREEINDEX33 =
 {
+"namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3":[2,0,3,7,78],
+"namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3a06d1e804ee86996f2037c114abd01272":[2,0,3,7,78,5],
+"namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3a0c7a810e8571c883a0661b8e97fd5c85":[2,0,3,7,78,6],
+"namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3a32c49c188aee8eef17cb800fa9afe1af":[2,0,3,7,78,3],
 "namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3a35c3ace1970663a16e5c65baa5941b13":[2,0,3,7,78,0],
 "namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3a6da192f0267d265452a8f6147c50991d":[2,0,3,7,78,4],
 "namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3aa754a0f863e3fadd8098162c48468399":[2,0,3,7,78,1],
@@ -245,9 +249,5 @@ var NAVTREEINDEX33 =
 "namespacehelios_1_1sdl3_1_1input.html#aaeadb37e86a566065587a0a9d4d2c57d":[2,0,3,11,1,17],
 "namespacehelios_1_1sdl3_1_1input.html#ad30a0b49db497e3c751f2d0be41db551":[2,0,3,11,1,16],
 "namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html":[2,0,3,11,1,0],
-"namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#a37316aec6b9e199bce13ac8c7a82cd08":[2,0,3,11,1,0,2],
-"namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#a5d42348229cad6ed3e3aa941e6aa38e6":[2,0,3,11,1,0,1],
-"namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#ae60d0357ca8df09648883ac792d63cd3":[2,0,3,11,1,0,0],
-"namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#afda4dde3bbbca6301ca2ea5f393812f6":[2,0,3,11,1,0,3],
-"namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02poll__gamepads_8cpp_03.html":[2,0,3,11,1,1]
+"namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#a37316aec6b9e199bce13ac8c7a82cd08":[2,0,3,11,1,0,2]
 };
