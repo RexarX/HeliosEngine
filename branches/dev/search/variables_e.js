@@ -1,20 +1,6 @@
 var searchData=
 [
-  ['padding_0',['padding',['../structanonymous__namespace_02free__list__allocator_8cpp_03_1_1AllocationHeader.html#a8b0a3ae98ffb3ff6783c048ba03ac0af',1,'anonymous_namespace{free_list_allocator.cpp}::AllocationHeader']]],
-  ['pads_1',['pads',['../structhelios_1_1input_1_1Gamepads.html#a297cc251bd28b2fcf913b4b7ec5d41e3',1,'helios::input::Gamepads']]],
-  ['paths_2',['paths',['../structhelios_1_1window_1_1DroppedFilesMsg.html#ad55895cbb72560eb64e71b0f059151e1',1,'helios::window::DroppedFilesMsg']]],
-  ['peak_5fusage_3',['peak_usage',['../structhelios_1_1mem_1_1AllocatorStats.html#a4306fd94db7f97ad8b4f46fcbb6f1128',1,'helios::mem::AllocatorStats']]],
-  ['pending_5fwrite_4',['pending_write',['../structhelios_1_1window_1_1Clipboard.html#abcf9e2371e6fceeeb6e86feee73e232d',1,'helios::window::Clipboard']]],
-  ['physical_5fheight_5fmm_5',['physical_height_mm',['../structhelios_1_1window_1_1Monitor.html#a1d941f978881d8956e121b79c9c4f35a',1,'helios::window::Monitor']]],
-  ['physical_5fwidth_5fmm_6',['physical_width_mm',['../structhelios_1_1window_1_1Monitor.html#ab1067e3552c256b6a86d017f992a240a',1,'helios::window::Monitor']]],
-  ['platform_7',['platform',['../structhelios_1_1window_1_1Messages.html#a954fc9bf93b54a3ee9ee4fb9f17f1d41',1,'helios::window::Messages::platform'],['../structhelios_1_1window_1_1Writers.html#abadecc53b2053fd08daeb1141f7c5dbf',1,'helios::window::Writers::platform']]],
-  ['plugin_5ftype_5fid_5fsymbol_8',['plugin_type_id_symbol',['../structhelios_1_1app_1_1DynamicPluginConfig.html#a6c499ca0f4c1144e85ab9cebb9476ecc',1,'helios::app::DynamicPluginConfig']]],
-  ['pos_9',['pos',['../structhelios_1_1window_1_1GeometryMessages.html#a3cb01d1ace3e88f6cc7534f268bab6e0',1,'helios::window::GeometryMessages::pos'],['../structhelios_1_1window_1_1GeometryWriters.html#a249f8f2393f14c0df2509af74074139f',1,'helios::window::GeometryWriters::pos']]],
-  ['pos_5fx_10',['pos_x',['../structhelios_1_1window_1_1Properties.html#aa0ce67644efd2e8c762da75ed82ce003',1,'helios::window::Properties']]],
-  ['pos_5fy_11',['pos_y',['../structhelios_1_1window_1_1Properties.html#a81fac79d16c80a38e1479c29fa1e5d7c',1,'helios::window::Properties']]],
-  ['position_5fx_12',['position_x',['../structhelios_1_1input_1_1Mouse.html#a2f80555c19aef3e48e5e9b293dda305a',1,'helios::input::Mouse']]],
-  ['position_5fy_13',['position_y',['../structhelios_1_1input_1_1Mouse.html#a539a25dd195cc06addb832129066b5a5',1,'helios::input::Mouse']]],
-  ['preallocated_5fsize_14',['preallocated_size',['../structhelios_1_1ecs_1_1SystemLocalDataOptions.html#a43b73fc2778bdf4712e36a8e9b0aef7e',1,'helios::ecs::SystemLocalDataOptions']]],
-  ['primary_15',['primary',['../structhelios_1_1window_1_1Monitor.html#a151dab3745fece58756a8a72b762e3b1',1,'helios::window::Monitor']]],
-  ['properties_16',['properties',['../structhelios_1_1window_1_1Window.html#a96719cf8507c259137af8d9a0ea27add',1,'helios::window::Window::properties'],['../structhelios_1_1window_1_1CreatedMsg.html#ae6be5e90493b94678f449d78bc68ace2',1,'helios::window::CreatedMsg::properties']]]
+  ['offset_0',['offset',['../structhelios_1_1mem_1_1FixedStackAllocator_1_1Marker.html#afe600c22d795cc0ae3e72516cd6d651c',1,'helios::mem::FixedStackAllocator::Marker::offset'],['../structhelios_1_1mem_1_1StackAllocator_1_1Marker.html#a344ec67f566c3fba8c0e99db04475364',1,'helios::mem::StackAllocator::Marker::offset']]],
+  ['opacity_1',['opacity',['../structhelios_1_1window_1_1OpacityChangedMsg.html#a68af19d8213d0b6249f29e5edc8c88bf',1,'helios::window::OpacityChangedMsg::opacity'],['../structhelios_1_1window_1_1AppearanceMessages.html#acfee51355cb51eeb019b236df915fca8',1,'helios::window::AppearanceMessages::opacity'],['../structhelios_1_1window_1_1AppearanceWriters.html#a4e7ff420f11fc2bdb3cbb6059542e331',1,'helios::window::AppearanceWriters::opacity'],['../structhelios_1_1window_1_1Properties.html#a95e8860600fdb1d5088facf8e218bb13',1,'helios::window::Properties::opacity']]],
+  ['output_5fpath_2',['output_path',['../structhelios_1_1profile_1_1FlamegraphBackendConfig.html#a3899e2c69f33fc28bdfad21d1eac335f',1,'helios::profile::FlamegraphBackendConfig']]]
 ];

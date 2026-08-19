@@ -1,5 +1,6 @@
 var structhelios_1_1window_1_1ClientResizedMsg =
 [
+    [ "GetSize", "structhelios_1_1window_1_1ClientResizedMsg.html#a488f471f4c4d599627a4f3b9db06c43a", null ],
     [ "entity", "structhelios_1_1window_1_1ClientResizedMsg.html#afd27eac7cddbd3388f04a23b5371395e", null ],
     [ "height", "structhelios_1_1window_1_1ClientResizedMsg.html#a5e72d7ef7c7abe61b187873dec33fb56", null ],
     [ "kAsync", "structhelios_1_1window_1_1ClientResizedMsg.html#a13d498d4492d795611170b2559d48812", null ],

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['unique_0',['Unique',['../classhelios_1_1mem_1_1RefCounted.html#ab3f8020c2290a84cc42624f3c3dc64e4',1,'helios::mem::RefCounted::Unique()'],['../classhelios_1_1mem_1_1AtomicRefCounted.html#ab2a0d1bd14bf70793113d161095b6665',1,'helios::mem::AtomicRefCounted::Unique()']]],
-  ['unload_1',['Unload',['../classhelios_1_1app_1_1DynamicPlugin.html#ae19b4f7e85e135841874fe600be29f1f',1,'helios::app::DynamicPlugin::Unload()'],['../classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7',1,'helios::utils::DynamicLibrary::Unload()']]],
+  ['unload_1',['Unload',['../classhelios_1_1app_1_1DynamicPlugin.html#ae19b4f7e85e135841874fe600be29f1f',1,'helios::app::DynamicPlugin::Unload()'],['../classhelios_1_1utils_1_1DynamicLibrary.html#a4fa782acd67049efde62676146c1208d',1,'helios::utils::DynamicLibrary::Unload()']]],
   ['unreadcount_2',['UnreadCount',['../classhelios_1_1ecs_1_1MessageManager.html#a199a76400429df2b41c8dd88e150ac28',1,'helios::ecs::MessageManager']]],
   ['unregistermonitorcallback_3',['UnregisterMonitorCallback',['../namespacehelios_1_1glfw.html#a99a721d0df59fb81d8c06cbce6168694',1,'helios::glfw']]],
   ['unwrap_4',['Unwrap',['../classhelios_1_1ecs_1_1AsyncMessageWrapper.html#aa1302c67ec5986c4e9bbe1a85085b6fb',1,'helios::ecs::AsyncMessageWrapper::Unwrap() noexcept'],['../classhelios_1_1ecs_1_1AsyncMessageWrapper.html#afbbb8feafd3ac57abcc86d4d2e78ed85',1,'helios::ecs::AsyncMessageWrapper::Unwrap() const noexcept']]],

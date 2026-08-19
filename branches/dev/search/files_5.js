@@ -14,10 +14,13 @@ var searchData=
   ['flamegraph_2ehpp_11',['flamegraph.hpp',['../flamegraph_8hpp.html',1,'']]],
   ['frame_2ehpp_12',['frame.hpp',['../frame_8hpp.html',1,'']]],
   ['frame_5fallocator_2ehpp_13',['frame_allocator.hpp',['../frame__allocator_8hpp.html',1,'']]],
-  ['frame_5fcount_2ehpp_14',['frame_count.hpp',['../frame__count_8hpp.html',1,'']]],
-  ['frame_5forder_2ehpp_15',['frame_order.hpp',['../frame__order_8hpp.html',1,'']]],
-  ['free_5flist_5fallocator_2ecpp_16',['free_list_allocator.cpp',['../free__list__allocator_8cpp.html',1,'']]],
-  ['free_5flist_5fallocator_2ehpp_17',['free_list_allocator.hpp',['../free__list__allocator_8hpp.html',1,'']]],
-  ['functional_5fadapters_2ehpp_18',['functional_adapters.hpp',['../functional__adapters_8hpp.html',1,'']]],
-  ['future_2ehpp_19',['future.hpp',['../future_8hpp.html',1,'']]]
+  ['frame_5fcount_2ecpp_14',['frame_count.cpp',['../frame__count_8cpp.html',1,'']]],
+  ['frame_5fcount_2ehpp_15',['frame_count.hpp',['../frame__count_8hpp.html',1,'']]],
+  ['frame_5flimiter_2ecpp_16',['frame_limiter.cpp',['../frame__limiter_8cpp.html',1,'']]],
+  ['frame_5flimiter_2ehpp_17',['frame_limiter.hpp',['../frame__limiter_8hpp.html',1,'']]],
+  ['frame_5forder_2ehpp_18',['frame_order.hpp',['../frame__order_8hpp.html',1,'']]],
+  ['free_5flist_5fallocator_2ecpp_19',['free_list_allocator.cpp',['../free__list__allocator_8cpp.html',1,'']]],
+  ['free_5flist_5fallocator_2ehpp_20',['free_list_allocator.hpp',['../free__list__allocator_8hpp.html',1,'']]],
+  ['functional_5fadapters_2ehpp_21',['functional_adapters.hpp',['../functional__adapters_8hpp.html',1,'']]],
+  ['future_2ehpp_22',['future.hpp',['../future_8hpp.html',1,'']]]
 ];

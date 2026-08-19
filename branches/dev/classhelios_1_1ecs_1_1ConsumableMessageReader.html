@@ -376,11 +376,11 @@ class helios::ecs::ConsumableMessageReader&lt; T, Alloc &gt;</div><p>Type-safe, 
 <div class="line">    wrapper.Consume();</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1ConsumableMessageReader_html_a613a120cd212a2529a2bd8075dd5535d"><div class="ttname"><a href="#a613a120cd212a2529a2bd8075dd5535d">helios::ecs::ConsumableMessageReader::ConsumableMessageReader</a></div><div class="ttdeci">constexpr ConsumableMessageReader(const MessageManager &amp;manager, MessageCursor&lt; T &gt; &amp;cursor, ConsumedMessagesRegistry&lt; Alloc &gt; &amp;consumed_registry) noexcept</div><div class="ttdoc">Constructs a ConsumableMessageReader bound to a manager, cursor, and consumed registry.</div><div class="ttdef"><b>Definition</b> <a href="reader_8hpp_source.html#l01228">reader.hpp:1228</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html">helios::ecs::MessageCursor</a></div><div class="ttdoc">Per-reader cursor tracking which messages of type T have been seen.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00019">cursor.hpp:19</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html_acd31a920117583ae1c6db9fd24f1e57c"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html#acd31a920117583ae1c6db9fd24f1e57c">helios::ecs::MessageCursor::IncludeBacklog</a></div><div class="ttdeci">static constexpr MessageCursor IncludeBacklog() noexcept</div><div class="ttdoc">Creates a cursor that includes all currently retained messages.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00027">cursor.hpp:27</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1ConsumableMessageReader_html_a613a120cd212a2529a2bd8075dd5535d"><div class="ttname"><a href="#a613a120cd212a2529a2bd8075dd5535d">helios::ecs::ConsumableMessageReader::ConsumableMessageReader</a></div><div class="ttdeci">constexpr ConsumableMessageReader(const MessageManager &amp;manager, MessageCursor&lt; T &gt; &amp;cursor, ConsumedMessagesRegistry&lt; Alloc &gt; &amp;consumed_registry) noexcept</div><div class="ttdoc">Constructs a ConsumableMessageReader bound to a manager, cursor, and consumed registry.</div><div class="ttdef"><b>Definition</b> <a href="reader_8hpp_source.html#l01232">reader.hpp:1232</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html">helios::ecs::MessageCursor</a></div><div class="ttdoc">Per-reader cursor tracking which messages of type T have been seen.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00020">cursor.hpp:20</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html_acd31a920117583ae1c6db9fd24f1e57c"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html#acd31a920117583ae1c6db9fd24f1e57c">helios::ecs::MessageCursor::IncludeBacklog</a></div><div class="ttdeci">static constexpr MessageCursor IncludeBacklog() noexcept</div><div class="ttdoc">Creates a cursor that includes all currently retained messages.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00028">cursor.hpp:28</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01211">1211</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01215">1215</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="ac2775bfc96cba3ed236a229da9b67d1e" name="ac2775bfc96cba3ed236a229da9b67d1e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac2775bfc96cba3ed236a229da9b67d1e">&#9670;&#160;</a></span>const_iterator</h2>
@@ -396,7 +396,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01217">1217</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01221">1221</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +414,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01218">1218</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01222">1222</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -432,7 +432,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01216">1216</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01220">1220</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -450,7 +450,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01215">1215</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01219">1219</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -499,7 +499,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01228">1228</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01232">1232</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -613,7 +613,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Returns an iterator to the first unread message. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator to the beginning of the unread range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01298">1298</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01302">1302</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -645,7 +645,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Skips all currently retained unread messages for this cursor. </p>
 <p>After <span class="tt"><a class="el" href="#a256dc278c9338aac13b9e201e6c7d6ef" title="Skips all currently retained unread messages for this cursor.">Clear()</a></span>, <span class="tt"><a class="el" href="#a23349cb50926b8a86fccaa8b34b0919d" title="Checks if there are no unread messages.">Empty()</a></span> is true until new messages are written. Does not mark messages as consumed. </p>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01267">1267</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01271">1271</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -676,7 +676,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
 
 <p>Marks all unread messages as consumed by message id. </p>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01321">1321</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01325">1325</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -753,7 +753,7 @@ requires std::predicate&lt;Pred, const T&amp;&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01333">1333</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01337">1337</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -785,7 +785,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Returns the number of unread retained messages. </p>
 <dl class="section return"><dt>Returns</dt><dd>Unread message count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01282">1282</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01286">1286</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -817,7 +817,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Checks if there are no unread messages. </p>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> when <span class="tt"><a class="el" href="#a13d7124d72697823d741d6c7b288af26" title="Returns the number of unread retained messages.">Count()</a></span> is zero </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01290">1290</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01294">1294</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -849,7 +849,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Returns an iterator past the last unread message. </p>
 <p>Does not advance the cursor. </p><dl class="section return"><dt>Returns</dt><dd>Iterator to the end of the unread range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01307">1307</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01311">1311</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -881,7 +881,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Returns how many retained messages were dropped before this cursor caught up. </p>
 <dl class="section return"><dt>Returns</dt><dd>Count of ids older than the oldest retained message </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01274">1274</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01278">1278</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -967,7 +967,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Returns an iterator range over unread messages. </p>
 <p>Equivalent to <span class="tt"><a class="el" href="#a2861cc806dc63a06075ef6bf354a7f17" title="Returns an iterator to the first unread message.">begin()</a></span>; provided for an explicit read API. </p><dl class="section return"><dt>Returns</dt><dd>Iterator to the first unread message </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01247">1247</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01251">1251</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>

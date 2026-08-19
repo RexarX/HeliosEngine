@@ -1,5 +1,6 @@
 var structhelios_1_1input_1_1MouseWheelMsg =
 [
+    [ "GetDelta", "structhelios_1_1input_1_1MouseWheelMsg.html#a43e640bafeffb3bb375847005a2d2706", null ],
     [ "entity", "structhelios_1_1input_1_1MouseWheelMsg.html#a2537f1b283a8346fdd4b8d1b1e6d41c2", null ],
     [ "kAsync", "structhelios_1_1input_1_1MouseWheelMsg.html#a1c3c6a18e76b9cf3d3c8e429cfbe3749", null ],
     [ "kClearPolicy", "structhelios_1_1input_1_1MouseWheelMsg.html#a871c2ddf9ab8b8ac6ac346dbcf633b07", null ],

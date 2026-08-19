@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['level_0',['Level',['../namespacehelios_1_1log.html#addfd119fad8921232327088631b3aeb9',1,'helios::log']]]
+  ['key_0',['Key',['../namespacehelios_1_1input.html#a9428ae91737625870558a82a3612d997',1,'helios::input']]]
 ];

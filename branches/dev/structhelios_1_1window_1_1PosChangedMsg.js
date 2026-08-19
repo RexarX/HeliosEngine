@@ -1,5 +1,6 @@
 var structhelios_1_1window_1_1PosChangedMsg =
 [
+    [ "GetPos", "structhelios_1_1window_1_1PosChangedMsg.html#a1d08997f0e1e169f17783bf065434010", null ],
     [ "entity", "structhelios_1_1window_1_1PosChangedMsg.html#ad160b40b90b3d0c2efe8a2d44c325f38", null ],
     [ "kAsync", "structhelios_1_1window_1_1PosChangedMsg.html#ab50d51c2ddf4154f5b28a11fda52ef37", null ],
     [ "kClearPolicy", "structhelios_1_1window_1_1PosChangedMsg.html#a66b53bab3be00cc284cb56125156dee0", null ],

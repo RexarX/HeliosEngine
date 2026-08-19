@@ -174,19 +174,28 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('input_2include
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">resources.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="axis_8hpp_source.html">helios/input/axis.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="button__input_8hpp_source.html">helios/input/button_input.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="gamepad_8hpp_source.html">helios/input/gamepad.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="joystick_8hpp_source.html">helios/input/joystick.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="keyboard_8hpp_source.html">helios/input/keyboard.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="mouse_8hpp_source.html">helios/input/mouse.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="pen_8hpp_source.html">helios/input/pen.hpp</a>&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;format&gt;</code><br />
+<code>#include &lt;iterator&gt;</code><br />
+<code>#include &lt;ostream&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="input_2include_2helios_2input_2resources_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -200,16 +209,90 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregated mouse state for the main window / app.  <a href="structhelios_1_1input_1_1Mouse.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Ainput_3A_3AGamepads" id="r_helios_3A_3Ainput_3A_3AGamepads"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1input_1_1Gamepads.html">helios::input::Gamepads</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed gamepad slot table (GLFW joystick range 0..15).  <a href="structhelios_1_1input_1_1Gamepads.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Ainput_3A_3AJoysticks" id="r_helios_3A_3Ainput_3A_3AJoysticks"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1input_1_1Joysticks.html">helios::input::Joysticks</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed unmapped-joystick slot table (same <span class="tt">0..15</span> ids as <span class="tt"><a class="el" href="structhelios_1_1input_1_1Gamepads.html" title="Fixed gamepad slot table (GLFW joystick range 0..15).">Gamepads</a></span>).  <a href="structhelios_1_1input_1_1Joysticks.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Ainput_3A_3APens" id="r_helios_3A_3Ainput_3A_3APens"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1input_1_1Pens.html">helios::input::Pens</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed pen slot table (independent of gamepad / joystick ids).  <a href="structhelios_1_1input_1_1Pens.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Ainput_3A_3AGamepadMappings" id="r_helios_3A_3Ainput_3A_3AGamepadMappings"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1input_1_1GamepadMappings.html">helios::input::GamepadMappings</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pending SDL_GameControllerDB mapping lines and files for backends.  <a href="structhelios_1_1input_1_1GamepadMappings.html#details">More...</a><br /></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3ASettings_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3ASettings_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1Settings_01_4.html">std::formatter&lt; helios::input::Settings &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AKeyboard_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AKeyboard_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1Keyboard_01_4.html">std::formatter&lt; helios::input::Keyboard &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AMouse_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AMouse_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1Mouse_01_4.html">std::formatter&lt; helios::input::Mouse &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepads_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepads_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html">std::formatter&lt; helios::input::Gamepads &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AJoysticks_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AJoysticks_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1Joysticks_01_4.html">std::formatter&lt; helios::input::Joysticks &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3APens_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3APens_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1Pens_01_4.html">std::formatter&lt; helios::input::Pens &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadMappings_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadMappings_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1GamepadMappings_01_4.html">std::formatter&lt; helios::input::GamepadMappings &gt;</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Ainput" id="r_helios_3A_3Ainput"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html">helios::input</a></td></tr>
+<tr class="memitem:std" id="r_std"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacestd.html">std</a></td></tr>
+<tr class="memdesc:namespacestd"><td class="mdescLeft">&#160;</td><td class="mdescRight">STL namespace. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a8a0c3dc2dcaf65335d17a01fd209a7ef" id="r_a8a0c3dc2dcaf65335d17a01fd209a7ef"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a8a0c3dc2dcaf65335d17a01fd209a7ef">helios::input::KeyboardInput</a> = <a class="el" href="classhelios_1_1input_1_1ButtonInput.html">ButtonInput</a>&lt;<a class="el" href="namespacehelios_1_1input.html#a9428ae91737625870558a82a3612d997">Key</a>&gt;</td></tr>
 <tr class="memitem:a846d89913a3c7464419111b62381d825" id="r_a846d89913a3c7464419111b62381d825"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a846d89913a3c7464419111b62381d825">helios::input::MouseButtonInput</a> = <a class="el" href="classhelios_1_1input_1_1ButtonInput.html">ButtonInput</a>&lt;<a class="el" href="namespacehelios_1_1input.html#abee3e6c21f81694353117f13eb414ee9">MouseButton</a>&gt;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a67422454b53b03c7f11c9ba0351198a0" id="r_a67422454b53b03c7f11c9ba0351198a0"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:a67422454b53b03c7f11c9ba0351198a0 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a67422454b53b03c7f11c9ba0351198a0">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Settings.html">Settings</a> &amp;settings, It out)</td></tr>
+<tr class="memdesc:a67422454b53b03c7f11c9ba0351198a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats input settings using an output iterator.  <br /></td></tr>
+<tr class="memitem:abef6ceb6b8697f36278ce8f7388c86ad" id="r_abef6ceb6b8697f36278ce8f7388c86ad"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#abef6ceb6b8697f36278ce8f7388c86ad">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Settings.html">Settings</a> &amp;settings)</td></tr>
+<tr class="memdesc:abef6ceb6b8697f36278ce8f7388c86ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats input settings as a string.  <br /></td></tr>
+<tr class="memitem:ac474941fa7795a8e4598182cc507e9c8" id="r_ac474941fa7795a8e4598182cc507e9c8"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ac474941fa7795a8e4598182cc507e9c8">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1Settings.html">Settings</a> &amp;settings)</td></tr>
+<tr class="memdesc:ac474941fa7795a8e4598182cc507e9c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs input settings to an output stream.  <br /></td></tr>
+<tr class="memitem:ae3c6638811a114cc9f4043843e1a3050" id="r_ae3c6638811a114cc9f4043843e1a3050"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:ae3c6638811a114cc9f4043843e1a3050 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ae3c6638811a114cc9f4043843e1a3050">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Keyboard.html">Keyboard</a> &amp;keyboard, It out)</td></tr>
+<tr class="memdesc:ae3c6638811a114cc9f4043843e1a3050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats keyboard state using an output iterator.  <br /></td></tr>
+<tr class="memitem:afe0b16d510727f56bcdcbbbedc5a6d01" id="r_afe0b16d510727f56bcdcbbbedc5a6d01"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#afe0b16d510727f56bcdcbbbedc5a6d01">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Keyboard.html">Keyboard</a> &amp;keyboard)</td></tr>
+<tr class="memdesc:afe0b16d510727f56bcdcbbbedc5a6d01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats keyboard state as a string.  <br /></td></tr>
+<tr class="memitem:a5ec0dc757104faddc13d3fbc663c7626" id="r_a5ec0dc757104faddc13d3fbc663c7626"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a5ec0dc757104faddc13d3fbc663c7626">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1Keyboard.html">Keyboard</a> &amp;keyboard)</td></tr>
+<tr class="memdesc:a5ec0dc757104faddc13d3fbc663c7626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs keyboard state to an output stream.  <br /></td></tr>
+<tr class="memitem:a0a0b7d00b1d94bdb8be54f64f93780e0" id="r_a0a0b7d00b1d94bdb8be54f64f93780e0"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:a0a0b7d00b1d94bdb8be54f64f93780e0 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a0a0b7d00b1d94bdb8be54f64f93780e0">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Mouse.html">Mouse</a> &amp;mouse, It out)</td></tr>
+<tr class="memdesc:a0a0b7d00b1d94bdb8be54f64f93780e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats mouse state using an output iterator.  <br /></td></tr>
+<tr class="memitem:a20879b68a86bb7152eced2adadadf503" id="r_a20879b68a86bb7152eced2adadadf503"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a20879b68a86bb7152eced2adadadf503">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Mouse.html">Mouse</a> &amp;mouse)</td></tr>
+<tr class="memdesc:a20879b68a86bb7152eced2adadadf503"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats mouse state as a string.  <br /></td></tr>
+<tr class="memitem:ab175c244776b702a0849625e4a6c3423" id="r_ab175c244776b702a0849625e4a6c3423"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ab175c244776b702a0849625e4a6c3423">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1Mouse.html">Mouse</a> &amp;mouse)</td></tr>
+<tr class="memdesc:ab175c244776b702a0849625e4a6c3423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs mouse state to an output stream.  <br /></td></tr>
+<tr class="memitem:abd02a5072ce0c643c68dc2d1eaab8786" id="r_abd02a5072ce0c643c68dc2d1eaab8786"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:abd02a5072ce0c643c68dc2d1eaab8786 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#abd02a5072ce0c643c68dc2d1eaab8786">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Gamepads.html">Gamepads</a> &amp;gamepads, It out)</td></tr>
+<tr class="memdesc:abd02a5072ce0c643c68dc2d1eaab8786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats the gamepad slot table using an output iterator.  <br /></td></tr>
+<tr class="memitem:ac790681217ebb0fb734794ec383b6ecd" id="r_ac790681217ebb0fb734794ec383b6ecd"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ac790681217ebb0fb734794ec383b6ecd">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Gamepads.html">Gamepads</a> &amp;gamepads)</td></tr>
+<tr class="memdesc:ac790681217ebb0fb734794ec383b6ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats the gamepad slot table as a string.  <br /></td></tr>
+<tr class="memitem:a21e4ffa7dd45018cffac2f3bdb3587f7" id="r_a21e4ffa7dd45018cffac2f3bdb3587f7"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a21e4ffa7dd45018cffac2f3bdb3587f7">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1Gamepads.html">Gamepads</a> &amp;gamepads)</td></tr>
+<tr class="memdesc:a21e4ffa7dd45018cffac2f3bdb3587f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the gamepad slot table to an output stream.  <br /></td></tr>
+<tr class="memitem:acb4fd4b71790651eb1b2f6a7b4b0ab39" id="r_acb4fd4b71790651eb1b2f6a7b4b0ab39"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:acb4fd4b71790651eb1b2f6a7b4b0ab39 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#acb4fd4b71790651eb1b2f6a7b4b0ab39">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Joysticks.html">Joysticks</a> &amp;joysticks, It out)</td></tr>
+<tr class="memdesc:acb4fd4b71790651eb1b2f6a7b4b0ab39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats the joystick slot table using an output iterator.  <br /></td></tr>
+<tr class="memitem:a5ec5eec2491fd7a1eb4569be8dc6dbb9" id="r_a5ec5eec2491fd7a1eb4569be8dc6dbb9"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a5ec5eec2491fd7a1eb4569be8dc6dbb9">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Joysticks.html">Joysticks</a> &amp;joysticks)</td></tr>
+<tr class="memdesc:a5ec5eec2491fd7a1eb4569be8dc6dbb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats the joystick slot table as a string.  <br /></td></tr>
+<tr class="memitem:afb975580660ca206c5a703ef2dae2e40" id="r_afb975580660ca206c5a703ef2dae2e40"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#afb975580660ca206c5a703ef2dae2e40">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1Joysticks.html">Joysticks</a> &amp;joysticks)</td></tr>
+<tr class="memdesc:afb975580660ca206c5a703ef2dae2e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the joystick slot table to an output stream.  <br /></td></tr>
+<tr class="memitem:a5db6a469f2e00bbee6129359701566f7" id="r_a5db6a469f2e00bbee6129359701566f7"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:a5db6a469f2e00bbee6129359701566f7 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a5db6a469f2e00bbee6129359701566f7">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Pens.html">Pens</a> &amp;pens, It out)</td></tr>
+<tr class="memdesc:a5db6a469f2e00bbee6129359701566f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats the pen slot table using an output iterator.  <br /></td></tr>
+<tr class="memitem:a9925f956f5eef01f66267c306a3e259c" id="r_a9925f956f5eef01f66267c306a3e259c"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a9925f956f5eef01f66267c306a3e259c">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Pens.html">Pens</a> &amp;pens)</td></tr>
+<tr class="memdesc:a9925f956f5eef01f66267c306a3e259c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats the pen slot table as a string.  <br /></td></tr>
+<tr class="memitem:a1c696f298e84c3300be2d563e69c65ea" id="r_a1c696f298e84c3300be2d563e69c65ea"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a1c696f298e84c3300be2d563e69c65ea">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1Pens.html">Pens</a> &amp;pens)</td></tr>
+<tr class="memdesc:a1c696f298e84c3300be2d563e69c65ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the pen slot table to an output stream.  <br /></td></tr>
+<tr class="memitem:aa8f46c7622e2330d1996dd2ab2367b42" id="r_aa8f46c7622e2330d1996dd2ab2367b42"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:aa8f46c7622e2330d1996dd2ab2367b42 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#aa8f46c7622e2330d1996dd2ab2367b42">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1GamepadMappings.html">GamepadMappings</a> &amp;mappings, It out)</td></tr>
+<tr class="memdesc:aa8f46c7622e2330d1996dd2ab2367b42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats pending gamepad mappings using an output iterator.  <br /></td></tr>
+<tr class="memitem:af5f7209714f85885018ce4a820cb940b" id="r_af5f7209714f85885018ce4a820cb940b"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#af5f7209714f85885018ce4a820cb940b">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1GamepadMappings.html">GamepadMappings</a> &amp;mappings)</td></tr>
+<tr class="memdesc:af5f7209714f85885018ce4a820cb940b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats pending gamepad mappings as a string.  <br /></td></tr>
+<tr class="memitem:a5fa8f99cd5cad4bf9324e6a923c47da4" id="r_a5fa8f99cd5cad4bf9324e6a923c47da4"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a5fa8f99cd5cad4bf9324e6a923c47da4">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1GamepadMappings.html">GamepadMappings</a> &amp;mappings)</td></tr>
+<tr class="memdesc:a5fa8f99cd5cad4bf9324e6a923c47da4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs pending gamepad mappings to an output stream.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

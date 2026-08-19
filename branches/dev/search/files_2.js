@@ -15,8 +15,8 @@ var searchData=
   ['consumed_5fregistry_2ehpp_12',['consumed_registry.hpp',['../consumed__registry_8hpp.html',1,'']]],
   ['container_2ehpp_13',['container.hpp',['../container_8hpp.html',1,'']]],
   ['core_2ehpp_14',['core.hpp',['../core_8hpp.html',1,'']]],
-  ['create_2ecpp_15',['create.cpp',['../create_8cpp.html',1,'']]],
-  ['create_2ehpp_16',['create.hpp',['../create_8hpp.html',1,'']]],
+  ['create_2ecpp_15',['create.cpp',['../glfw_2src_2systems_2create_8cpp.html',1,'(Global Namespace)'],['../sdl3__window_2src_2systems_2create_8cpp.html',1,'(Global Namespace)']]],
+  ['create_2ehpp_16',['create.hpp',['../glfw_2include_2helios_2glfw_2systems_2create_8hpp.html',1,'(Global Namespace)'],['../sdl3__window_2include_2helios_2sdl3_2window_2systems_2create_8hpp.html',1,'(Global Namespace)']]],
   ['cstring_5fview_2ehpp_17',['cstring_view.hpp',['../cstring__view_8hpp.html',1,'']]],
   ['cursor_2ehpp_18',['cursor.hpp',['../cursor_8hpp.html',1,'']]]
 ];

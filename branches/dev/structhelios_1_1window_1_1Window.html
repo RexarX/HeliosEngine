@@ -252,6 +252,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a768c5d2d186aa773d9cffb2cfbf37c8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requests that the OS window receive input focus.  <br /></td></tr>
 <tr class="memitem:a7c4f9ec80593f5fd0fec1e85d6cda4c5" id="r_a7c4f9ec80593f5fd0fec1e85d6cda4c5"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a7c4f9ec80593f5fd0fec1e85d6cda4c5">SetMousePassthrough</a> (bool value) noexcept</td></tr>
 <tr class="memdesc:a7c4f9ec80593f5fd0fec1e85d6cda4c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether mouse events pass through the window.  <br /></td></tr>
+<tr class="memitem:a606ff153dd02cfb184d421e64d962502" id="r_a606ff153dd02cfb184d421e64d962502"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a606ff153dd02cfb184d421e64d962502">GetSize</a> () const noexcept -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td></tr>
+<tr class="memdesc:a606ff153dd02cfb184d421e64d962502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the window size.  <br /></td></tr>
+<tr class="memitem:a5ac79a829bb81c4f0caa3c5a7b80ad7a" id="r_a5ac79a829bb81c4f0caa3c5a7b80ad7a"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a5ac79a829bb81c4f0caa3c5a7b80ad7a">GetClientSize</a> () const noexcept -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td></tr>
+<tr class="memdesc:a5ac79a829bb81c4f0caa3c5a7b80ad7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the client-area size.  <br /></td></tr>
+<tr class="memitem:a07581d323dc98778364eec596a704775" id="r_a07581d323dc98778364eec596a704775"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a07581d323dc98778364eec596a704775">GetPos</a> () const noexcept -&gt; std::pair&lt; std::optional&lt; int32_t &gt;, std::optional&lt; int32_t &gt; &gt;</td></tr>
+<tr class="memdesc:a07581d323dc98778364eec596a704775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the window position.  <br /></td></tr>
+<tr class="memitem:aab437cabfe336bdaac4079cdee0623f9" id="r_aab437cabfe336bdaac4079cdee0623f9"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#aab437cabfe336bdaac4079cdee0623f9">GetContentScale</a> () const noexcept -&gt; std::pair&lt; float, float &gt;</td></tr>
+<tr class="memdesc:aab437cabfe336bdaac4079cdee0623f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the content scale.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -271,7 +279,7 @@ Static Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Describes a logical window entity. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00017">17</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00022">22</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a5caecad8b9e95c0bd723ca3836bae702" name="a5caecad8b9e95c0bd723ca3836bae702"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5caecad8b9e95c0bd723ca3836bae702">&#9670;&#160;</a></span>ClearAspectRatio()</h2>
@@ -298,7 +306,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Clears the aspect ratio constraint. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00250">250</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00255">255</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -327,7 +335,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Clears all dirty flags after backend synchronization. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00055">55</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00060">60</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -362,7 +370,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00049">49</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00054">54</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +399,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Clears an explicit monitor index so the backend infers placement. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00114">114</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00119">119</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -420,7 +428,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Clears an explicit position so the backend chooses placement. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00098">98</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00103">103</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -449,7 +457,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Clears an explicit refresh rate so exclusive fullscreen uses the desktop Hz. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00141">141</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00146">146</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +493,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True when the flag is set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00062">62</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00067">67</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -521,7 +529,127 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structhelios_1_1window_1_1Window.html" title="Describes a logical window entity.">Window</a> component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00029">29</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00034">34</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5ac79a829bb81c4f0caa3c5a7b80ad7a" name="a5ac79a829bb81c4f0caa3c5a7b80ad7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ac79a829bb81c4f0caa3c5a7b80ad7a">&#9670;&#160;</a></span>GetClientSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Window::GetClientSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the client-area size. </p>
+<dl class="section return"><dt>Returns</dt><dd>Client width and height, if set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00327">327</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aab437cabfe336bdaac4079cdee0623f9" name="aab437cabfe336bdaac4079cdee0623f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab437cabfe336bdaac4079cdee0623f9">&#9670;&#160;</a></span>GetContentScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Window::GetContentScale </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; float, float &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the content scale. </p>
+<dl class="section return"><dt>Returns</dt><dd>Horizontal and vertical scale </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00345">345</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a07581d323dc98778364eec596a704775" name="a07581d323dc98778364eec596a704775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07581d323dc98778364eec596a704775">&#9670;&#160;</a></span>GetPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Window::GetPos </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; std::optional&lt; int32_t &gt;, std::optional&lt; int32_t &gt; &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the window position. </p>
+<dl class="section return"><dt>Returns</dt><dd>X and y, if set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00336">336</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a606ff153dd02cfb184d421e64d962502" name="a606ff153dd02cfb184d421e64d962502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a606ff153dd02cfb184d421e64d962502">&#9670;&#160;</a></span>GetSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Window::GetSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the window size. </p>
+<dl class="section return"><dt>Returns</dt><dd>Width and height, if set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00318">318</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -556,7 +684,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00041">41</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00046">46</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -585,7 +713,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Requests that the OS draw user attention to this window. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00293">293</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00298">298</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -614,7 +742,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Requests that the backend close the OS window. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00035">35</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00040">40</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -643,7 +771,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Requests that the OS window receive input focus. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00298">298</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00303">303</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -683,7 +811,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00242">242</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00247">247</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -718,7 +846,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00278">278</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00283">283</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -753,7 +881,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00163">163</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00168">168</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -788,7 +916,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00190">190</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00195">195</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -823,7 +951,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00269">269</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00274">274</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -858,7 +986,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00287">287</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00292">292</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -893,7 +1021,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00199">199</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00204">204</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -928,7 +1056,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00208">208</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00213">213</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -968,7 +1096,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00230">230</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00235">235</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1008,7 +1136,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00218">218</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00223">223</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1043,7 +1171,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00123">123</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00128">128</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1078,7 +1206,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00108">108</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00113">113</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1113,7 +1241,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00304">304</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00309">309</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1148,7 +1276,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00260">260</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00265">265</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1188,7 +1316,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00091">91</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00096">96</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1224,7 +1352,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Ignored in borderless fullscreen, which cannot change the display mode. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00134">134</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00139">139</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1259,7 +1387,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00181">181</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00186">186</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1299,7 +1427,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00080">80</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00085">85</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1334,7 +1462,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00070">70</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00075">75</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1370,7 +1498,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Refresh rate is ignored in borderless fullscreen, which cannot change the display mode. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00154">154</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00159">159</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1405,7 +1533,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00172">172</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00177">177</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1422,7 +1550,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00022">22</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00027">27</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1438,7 +1566,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00021">21</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00026">26</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1462,7 +1590,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00018">18</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00023">23</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>
@@ -1478,7 +1606,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00020">20</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html#l00025">25</a> of file <a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">components.hpp</a>.</p>
 
 </div>
 </div>

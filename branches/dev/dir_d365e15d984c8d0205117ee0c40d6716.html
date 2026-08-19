@@ -183,26 +183,27 @@ Directories</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="input--input-ecs-contract"></a>
 `input` — Input ECS Contract</h1>
-<p>Public ECS interface for keyboard, mouse, cursor, and gamepad state without OS dependencies.</p>
+<p>Public ECS interface for keyboard, mouse, cursor, pen, and gamepad state without OS dependencies.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api-7"></a>
 Public API</h1>
 <ul>
 <li><span class="tt">Key</span>, <span class="tt">Modifiers</span>, <span class="tt">ButtonState</span></li>
 <li><span class="tt">MouseButton</span>, <span class="tt">CursorIcon</span>, <span class="tt">CursorImage</span>, <span class="tt">Cursor</span></li>
+<li><span class="tt">PenButton</span>, <span class="tt">PenAxis</span>, <span class="tt">PenDeviceType</span>, <span class="tt">Pen</span>, <span class="tt">Pens</span></li>
 <li><span class="tt">GamepadButton</span>, <span class="tt">GamepadAxis</span>, <span class="tt">Gamepad</span>, <span class="tt">GamepadAxisFilter</span></li>
 <li><span class="tt">Trigger</span>, <span class="tt">LeftStick</span>, <span class="tt">RightStick</span></li>
 <li><span class="tt">ButtonInput</span>, <span class="tt">Axis</span>, <span class="tt">AxisFilter</span></li>
 <li><span class="tt">ApplyLinearDeadzone</span>, <span class="tt">ApplyRadialDeadzone</span>, <span class="tt">RemapTrigger</span></li>
-<li><span class="tt">Settings</span>, <span class="tt">Keyboard</span>, <span class="tt">Mouse</span>, <span class="tt">Gamepads</span></li>
-<li>Input messages (<span class="tt">KeyboardInputMsg</span>, <span class="tt">MouseButtonInputMsg</span>, ...)</li>
+<li><span class="tt">Settings</span>, <span class="tt">Keyboard</span>, <span class="tt">Mouse</span>, <span class="tt">Gamepads</span>, <span class="tt">Joysticks</span>, <span class="tt">Pens</span></li>
+<li>Input messages (<span class="tt">KeyboardInputMsg</span>, <span class="tt">MouseButtonInputMsg</span>, <span class="tt">PenMovedMsg</span>, ...)</li>
 <li>Composite params: <span class="tt">State</span>, <span class="tt">StateView</span>, <span class="tt">Messages</span>, <span class="tt">Writers</span>, and per-device <span class="tt">*Messages</span> / <span class="tt">*Writers</span> groups</li>
-<li><span class="tt">ClearInputState</span>, <span class="tt">UpdateKeyboardState</span>, <span class="tt">UpdateMouseState</span>, <span class="tt">UpdateGamepadState</span></li>
+<li><span class="tt">ClearInputState</span>, <span class="tt">UpdateKeyboardState</span>, <span class="tt">UpdateMouseState</span>, <span class="tt">UpdateGamepadState</span>, <span class="tt">UpdateJoystickState</span>, <span class="tt">UpdatePenState</span></li>
 <li><span class="tt">Plugin</span> — registers ECS types and frame systems</li>
 </ul>
-<p><span class="tt">Gamepad::axes</span> is filtered (circular sticks, triggers in <span class="tt">[0, 1]</span>). <span class="tt">GamepadAxisChangedMsg</span> carries raw backend values. <span class="tt">Settings::stick</span> / <span class="tt">Settings::trigger</span> configure deadzone, livezone, and rescale; <span class="tt">auto_calibrate</span> tracks rest center. Unmapped joysticks, wheels, pedals, and force feedback are out of scope.</p>
+<p><span class="tt">Gamepad::axes</span> is filtered (circular sticks, triggers in <span class="tt">[0, 1]</span>). <span class="tt">GamepadAxisChangedMsg</span> carries raw backend values. <span class="tt">Settings::stick</span> / <span class="tt">Settings::trigger</span> configure deadzone, livezone, and rescale; <span class="tt">auto_calibrate</span> tracks rest center. Pen axes are raw SDL samples (pressure 0..1, tilt/rotation in degrees). GLFW has no tablet API; a stylus still arrives as mouse there.</p>
 <h1 class="doxsection"><a class="anchor" id="backends"></a>
 Backends</h1>
-<p>Platform backends (for example GLFW) emit input messages; this module aggregates them into resources. GLFW polls only mapped gamepads and seeds axis values on connect.</p>
+<p>SDL3 backends (<span class="tt"><a class="el" href="namespacehelios_1_1sdl3_1_1input.html">helios::sdl3::input</a></span>) emit input messages by default. GLFW remains opt-in via <span class="tt">-DHELIOS_BUILD_GLFW=ON</span>.</p>
 <h1 class="doxsection"><a class="anchor" id="dependencies-6"></a>
 Dependencies</h1>
 <ul>

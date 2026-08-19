@@ -18,12 +18,11 @@ var searchData=
   ['mimalloc_20and_20global_20allocation_15',['mimalloc and global allocation',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#mimalloc-and-global-allocation',1,'']]],
   ['module_16',['Module',['../dir_217ee790cdc210ca56feb9a8b7616066.html#creating-a-custom-helios-module',1,'Creating A Custom Helios Module'],['../index.html#creating-a-custom-module',1,'Creating a Custom Module']]],
   ['module_20builds_17',['Selective module builds',['../md_docs_2guidelines.html#selective-module-builds',1,'']]],
-  ['module_20cmake_18',['Registration (&lt;span class=&quot;tt&quot;&gt;Module.cmake&lt;/span&gt;)',['../md_docs_2guidelines.html#registration-modulecmake',1,'']]],
-  ['module_20definition_19',['Module Definition',['../dir_217ee790cdc210ca56feb9a8b7616066.html#module-definition',1,'']]],
-  ['module_20structure_20',['Module structure',['../md_docs_2guidelines.html#module-structure',1,'']]],
-  ['modules_21',['Modules',['../index.html#modules',1,'']]],
-  ['msvc_22',['Windows (MSVC)',['../index.html#windows-msvc',1,'']]],
-  ['multi_20backend_23',['Multi-Backend',['../dir_2730ace12cf03b0ba989133b5ac743ea.html#multi-backend',1,'']]],
-  ['multitypemap_24',['MultiTypeMap',['../dir_1b313d86a3cedf427c8a82c0995b1bb6.html#multitypemap',1,'']]],
-  ['mutations_25',['Commands — Deferred Mutations',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#commands--deferred-mutations',1,'']]]
+  ['module_20definition_18',['Module Definition',['../dir_217ee790cdc210ca56feb9a8b7616066.html#module-definition',1,'']]],
+  ['module_20structure_19',['Module structure',['../md_docs_2guidelines.html#module-structure',1,'']]],
+  ['modules_20',['Modules',['../index.html#modules',1,'']]],
+  ['msvc_21',['Windows (MSVC)',['../index.html#windows-msvc',1,'']]],
+  ['multi_20backend_22',['Multi-Backend',['../dir_2730ace12cf03b0ba989133b5ac743ea.html#multi-backend',1,'']]],
+  ['multitypemap_23',['MultiTypeMap',['../dir_1b313d86a3cedf427c8a82c0995b1bb6.html#multitypemap',1,'']]],
+  ['mutations_24',['Commands — Deferred Mutations',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#commands--deferred-mutations',1,'']]]
 ];

@@ -180,13 +180,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('window_2includ
   <div class="headertitle"><div class="title">resources.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="resource_8hpp_source.html">helios/ecs/resource/resource.hpp</a>&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;format&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;ostream&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="window_2include_2helios_2window_2resources_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -205,9 +205,12 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process-global clipboard text snapshot.  <a href="structhelios_1_1window_1_1Clipboard.html#details">More...</a><br /></td></tr>
 <tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AExitTrigger_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AExitTrigger_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1window_1_1ExitTrigger_01_4.html">std::formatter&lt; helios::window::ExitTrigger &gt;</a></td></tr>
 <tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AEventMode_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AEventMode_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html">std::formatter&lt; helios::window::EventMode &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3ASettings_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3ASettings_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1window_1_1Settings_01_4.html">std::formatter&lt; helios::window::Settings &gt;</a></td></tr>
 <tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AMonitorEvent_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AMonitorEvent_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1window_1_1MonitorEvent_01_4.html">std::formatter&lt; helios::window::MonitorEvent &gt;</a></td></tr>
 <tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AVideoMode_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AVideoMode_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1window_1_1VideoMode_01_4.html">std::formatter&lt; helios::window::VideoMode &gt;</a></td></tr>
 <tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AMonitor_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AMonitor_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1window_1_1Monitor_01_4.html">std::formatter&lt; helios::window::Monitor &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AMonitors_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AMonitors_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1window_1_1Monitors_01_4.html">std::formatter&lt; helios::window::Monitors &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AClipboard_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Awindow_3A_3AClipboard_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1window_1_1Clipboard_01_4.html">std::formatter&lt; helios::window::Clipboard &gt;</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -253,6 +256,14 @@ requires std::output_iterator&lt;It, char&gt;</td></tr>
 <tr class="memdesc:aa1469ed82b72537f38847a6b135de55f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string name of an event wait mode.  <br /></td></tr>
 <tr class="memitem:a1f5a811febac70a85eb236cb6de052f0" id="r_a1f5a811febac70a85eb236cb6de052f0"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a1f5a811febac70a85eb236cb6de052f0">helios::window::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1window.html#ae85102b4ba21a0189717ad0438f50844">EventMode</a> mode)</td></tr>
 <tr class="memdesc:a1f5a811febac70a85eb236cb6de052f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs an event wait mode to an output stream.  <br /></td></tr>
+<tr class="memitem:aa2e7ec0f012b77205a97a3ba19121e5c" id="r_aa2e7ec0f012b77205a97a3ba19121e5c"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:aa2e7ec0f012b77205a97a3ba19121e5c template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#aa2e7ec0f012b77205a97a3ba19121e5c">helios::window::ToString</a> (const <a class="el" href="structhelios_1_1window_1_1Settings.html">Settings</a> &amp;settings, It out)</td></tr>
+<tr class="memdesc:aa2e7ec0f012b77205a97a3ba19121e5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats window settings using an output iterator.  <br /></td></tr>
+<tr class="memitem:a723b28df371e44926de210e9a3c17079" id="r_a723b28df371e44926de210e9a3c17079"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a723b28df371e44926de210e9a3c17079">helios::window::ToString</a> (const <a class="el" href="structhelios_1_1window_1_1Settings.html">Settings</a> &amp;settings)</td></tr>
+<tr class="memdesc:a723b28df371e44926de210e9a3c17079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats window settings as a string.  <br /></td></tr>
+<tr class="memitem:a12c4dbee226e5324a71ac0e770f38924" id="r_a12c4dbee226e5324a71ac0e770f38924"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a12c4dbee226e5324a71ac0e770f38924">helios::window::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1window_1_1Settings.html">Settings</a> &amp;settings)</td></tr>
+<tr class="memdesc:a12c4dbee226e5324a71ac0e770f38924"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs window settings to an output stream.  <br /></td></tr>
 <tr class="memitem:ab68560c472d08a3301c9fe2b1137a516" id="r_ab68560c472d08a3301c9fe2b1137a516"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#ab68560c472d08a3301c9fe2b1137a516">helios::window::ToString</a> (<a class="el" href="namespacehelios_1_1window.html#ae96a3884b6910af92d635bd506c8cb72">MonitorEvent</a> event) noexcept</td></tr>
 <tr class="memdesc:ab68560c472d08a3301c9fe2b1137a516"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string name of a monitor event.  <br /></td></tr>
 <tr class="memitem:ac77cf761ffe3bc73c0e2c841d80cf639" id="r_ac77cf761ffe3bc73c0e2c841d80cf639"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#ac77cf761ffe3bc73c0e2c841d80cf639">helios::window::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1window.html#ae96a3884b6910af92d635bd506c8cb72">MonitorEvent</a> event)</td></tr>
@@ -273,6 +284,22 @@ requires std::output_iterator&lt;It, char&gt;</td></tr>
 <tr class="memdesc:aee775d0004e7ddcfa48c609757fb9e0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a monitor as a string.  <br /></td></tr>
 <tr class="memitem:aa50130b22fa1b2aab2fc07facf2f40a6" id="r_aa50130b22fa1b2aab2fc07facf2f40a6"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#aa50130b22fa1b2aab2fc07facf2f40a6">helios::window::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1window_1_1Monitor.html">Monitor</a> &amp;monitor)</td></tr>
 <tr class="memdesc:aa50130b22fa1b2aab2fc07facf2f40a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a monitor to an output stream.  <br /></td></tr>
+<tr class="memitem:a83fc05c987a4c9b2dbd0c1173d908bbf" id="r_a83fc05c987a4c9b2dbd0c1173d908bbf"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:a83fc05c987a4c9b2dbd0c1173d908bbf template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a83fc05c987a4c9b2dbd0c1173d908bbf">helios::window::ToString</a> (const <a class="el" href="structhelios_1_1window_1_1Monitors.html">Monitors</a> &amp;monitors, It out)</td></tr>
+<tr class="memdesc:a83fc05c987a4c9b2dbd0c1173d908bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats the connected monitor list using an output iterator.  <br /></td></tr>
+<tr class="memitem:a1f2df96e810adfb11ec9c756c4ff4275" id="r_a1f2df96e810adfb11ec9c756c4ff4275"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a1f2df96e810adfb11ec9c756c4ff4275">helios::window::ToString</a> (const <a class="el" href="structhelios_1_1window_1_1Monitors.html">Monitors</a> &amp;monitors)</td></tr>
+<tr class="memdesc:a1f2df96e810adfb11ec9c756c4ff4275"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats the connected monitor list as a string.  <br /></td></tr>
+<tr class="memitem:a0ecdc92e84519119c2faa06539e88c7c" id="r_a0ecdc92e84519119c2faa06539e88c7c"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a0ecdc92e84519119c2faa06539e88c7c">helios::window::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1window_1_1Monitors.html">Monitors</a> &amp;monitors)</td></tr>
+<tr class="memdesc:a0ecdc92e84519119c2faa06539e88c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the connected monitor list to an output stream.  <br /></td></tr>
+<tr class="memitem:aa66902a50e58707c921675b74af685c0" id="r_aa66902a50e58707c921675b74af685c0"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:aa66902a50e58707c921675b74af685c0 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#aa66902a50e58707c921675b74af685c0">helios::window::ToString</a> (const <a class="el" href="structhelios_1_1window_1_1Clipboard.html">Clipboard</a> &amp;clipboard, It out)</td></tr>
+<tr class="memdesc:aa66902a50e58707c921675b74af685c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a clipboard snapshot using an output iterator.  <br /></td></tr>
+<tr class="memitem:a9d7b71a4191132f2de625f2ab9c23fe0" id="r_a9d7b71a4191132f2de625f2ab9c23fe0"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a9d7b71a4191132f2de625f2ab9c23fe0">helios::window::ToString</a> (const <a class="el" href="structhelios_1_1window_1_1Clipboard.html">Clipboard</a> &amp;clipboard)</td></tr>
+<tr class="memdesc:a9d7b71a4191132f2de625f2ab9c23fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a clipboard snapshot as a string.  <br /></td></tr>
+<tr class="memitem:a202f5055ff405fc8a25a1996ab15ad9a" id="r_a202f5055ff405fc8a25a1996ab15ad9a"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a202f5055ff405fc8a25a1996ab15ad9a">helios::window::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1window_1_1Clipboard.html">Clipboard</a> &amp;clipboard)</td></tr>
+<tr class="memdesc:a202f5055ff405fc8a25a1996ab15ad9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a clipboard snapshot to an output stream.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

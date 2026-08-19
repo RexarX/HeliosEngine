@@ -3,6 +3,7 @@ var mouse_8hpp =
     [ "helios::input::CursorImage", "structhelios_1_1input_1_1CursorImage.html", "structhelios_1_1input_1_1CursorImage" ],
     [ "std::formatter&lt; helios::input::MouseButton &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseButton_01_4.html", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseButton_01_4" ],
     [ "std::formatter&lt; helios::input::CursorIcon &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1CursorIcon_01_4.html", "structstd_1_1formatter_3_01helios_1_1input_1_1CursorIcon_01_4" ],
+    [ "std::formatter&lt; helios::input::CursorImage &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1CursorImage_01_4.html", "structstd_1_1formatter_3_01helios_1_1input_1_1CursorImage_01_4" ],
     [ "helios::input::CursorIcon", "namespacehelios_1_1input.html#a937f55b9c1b0a9cfd795f799cd652958", [
       [ "helios::input::CursorIcon::kDefault", "namespacehelios_1_1input.html#a937f55b9c1b0a9cfd795f799cd652958a6867faeaa475fda467e48267db2bb8a8", null ],
       [ "helios::input::CursorIcon::kArrow", "namespacehelios_1_1input.html#a937f55b9c1b0a9cfd795f799cd652958ab9915b027f3c5c3f045c880f99f22bc4", null ],
@@ -28,8 +29,11 @@ var mouse_8hpp =
       [ "helios::input::MouseButton::kExtra5", "namespacehelios_1_1input.html#abee3e6c21f81694353117f13eb414ee9a7cb3f08fa4a17a4cbc648df6f644613a", null ],
       [ "helios::input::MouseButton::kCount", "namespacehelios_1_1input.html#abee3e6c21f81694353117f13eb414ee9a5a162d352f3b3603e03fc9b2f043fb40", null ]
     ] ],
+    [ "helios::input::operator<<", "namespacehelios_1_1input.html#ae6e5697353d3ada5291cb4e400a5ce24", null ],
     [ "helios::input::operator<<", "namespacehelios_1_1input.html#a9754f84aef0c5a5762ee817ad21d0e13", null ],
     [ "helios::input::operator<<", "namespacehelios_1_1input.html#a01bfb89acd1d499c538ea5007f6acec8", null ],
+    [ "helios::input::ToString", "namespacehelios_1_1input.html#a8d91f7dc67ed800e53cc8077dcb98276", null ],
+    [ "helios::input::ToString", "namespacehelios_1_1input.html#a459a9ba1077bfe91032eb1612b2e7a45", null ],
     [ "helios::input::ToString", "namespacehelios_1_1input.html#afa204f0427b65dedb7581da7ee6f5130", null ],
     [ "helios::input::ToString", "namespacehelios_1_1input.html#a04e66ec2ac906fb337c740ca714cd28a", null ]
 ];

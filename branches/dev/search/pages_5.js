@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['backend_0',['Backend',['../dir_4f42fb64a2a7ed6ea9e03b9eaacd6206.html#glfw--glfw-window-backend',1,'`glfw` — GLFW Window Backend'],['../dir_2730ace12cf03b0ba989133b5ac743ea.html#multi-backend',1,'Multi-Backend']]],
+  ['backend_0',['Backend',['../dir_4f42fb64a2a7ed6ea9e03b9eaacd6206.html#glfw--glfw-window-backend',1,'`glfw` — GLFW Window Backend'],['../dir_404e9df7b1c4707ca4ad3b316f586c31.html#sdl3_input--sdl3-input-backend',1,'`sdl3_input` — SDL3 Input Backend'],['../dir_39160ce22810435969292f6931873579.html#sdl3_window--sdl3-window-backend',1,'`sdl3_window` — SDL3 Window Backend'],['../dir_2730ace12cf03b0ba989133b5ac743ea.html#multi-backend',1,'Multi-Backend']]],
   ['backends_1',['Backends',['../dir_d365e15d984c8d0205117ee0c40d6716.html#backends',1,'Backends'],['../dir_c7f79d9fead0a70cab4af348b59fbdf1.html#backends-1',1,'Backends'],['../dir_2730ace12cf03b0ba989133b5ac743ea.html#custom-backends',1,'Custom Backends']]],
   ['based_20parallelism_2',['`async` — Task-Based Parallelism',['../dir_b60a79ed93f318a37dbc9781b4452c17.html#async--task-based-parallelism',1,'']]],
   ['build_3',['Build',['../dir_2730ace12cf03b0ba989133b5ac743ea.html#build',1,'']]],

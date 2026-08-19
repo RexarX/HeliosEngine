@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structhelios_1_1input_1_1MouseWheelMsg-members.html">List of all members</a>  </div>
@@ -184,6 +185,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 
 <p><code>#include &lt;<a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a43e640bafeffb3bb375847005a2d2706" id="r_a43e640bafeffb3bb375847005a2d2706"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a43e640bafeffb3bb375847005a2d2706">GetDelta</a> () const noexcept -&gt; std::pair&lt; double, double &gt;</td></tr>
+<tr class="memdesc:a43e640bafeffb3bb375847005a2d2706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the scroll delta.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a2537f1b283a8346fdd4b8d1b1e6d41c2" id="r_a2537f1b283a8346fdd4b8d1b1e6d41c2"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2537f1b283a8346fdd4b8d1b1e6d41c2">entity</a></td></tr>
@@ -200,8 +206,39 @@ Static Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a> scroll / wheel event for a window entity. </p>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00078">78</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
-</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00103">103</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a43e640bafeffb3bb375847005a2d2706" name="a43e640bafeffb3bb375847005a2d2706"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43e640bafeffb3bb375847005a2d2706">&#9670;&#160;</a></span>GetDelta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::input::MouseWheelMsg::GetDelta </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; double, double &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the scroll delta. </p>
+<dl class="section return"><dt>Returns</dt><dd>Scroll x and y </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00117">117</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a2537f1b283a8346fdd4b8d1b1e6d41c2" name="a2537f1b283a8346fdd4b8d1b1e6d41c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2537f1b283a8346fdd4b8d1b1e6d41c2">&#9670;&#160;</a></span>entity</h2>
 
@@ -214,7 +251,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00084">84</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00109">109</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -238,7 +275,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00082">82</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00107">107</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -262,7 +299,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00080">80</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00105">105</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +323,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00081">81</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00106">106</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -310,7 +347,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00079">79</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00104">104</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -326,7 +363,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00085">85</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00110">110</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -342,7 +379,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00086">86</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00111">111</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>

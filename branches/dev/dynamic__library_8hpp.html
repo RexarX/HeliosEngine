@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dynamic__libra
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">dynamic_library.hpp File Reference</div></div>
@@ -199,6 +200,11 @@ Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Autils" id="r_helios_3A_3Autils"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1utils.html">helios::utils</a></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a0e2db988335f2e50e437dd094ac6c974" id="r_a0e2db988335f2e50e437dd094ac6c974"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a0e2db988335f2e50e437dd094ac6c974 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1utils.html#a0e2db988335f2e50e437dd094ac6c974">helios::utils::DynamicLibraryResult</a> = std::expected&lt;T, <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:aca74c060b4e32cb671a0bc6fb378365e" id="r_aca74c060b4e32cb671a0bc6fb378365e"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">helios::utils::DynamicLibraryError</a> : uint8_t { <br />
@@ -218,7 +224,6 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:abc4221e0af800d4c7dd1f3042525427c" id="r_abc4221e0af800d4c7dd1f3042525427c"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">helios::utils::DynamicLibraryErrorToString</a> (<a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> error) noexcept</td></tr>
 <tr class="memdesc:abc4221e0af800d4c7dd1f3042525427c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a human-readable description for a <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e" title="Error codes for dynamic library operations.">DynamicLibraryError</a>.  <br /></td></tr>
-<tr class="memitem:ac60a7361517b211c989c0a9f1d5518b3" id="r_ac60a7361517b211c989c0a9f1d5518b3"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1utils.html#ac60a7361517b211c989c0a9f1d5518b3">helios::utils::FromPath</a> (const std::filesystem::path &amp;path) -&gt; std::expected&lt; <a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>, <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> &gt;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

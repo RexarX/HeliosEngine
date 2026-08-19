@@ -1,5 +1,6 @@
 var structhelios_1_1input_1_1MouseMotionMsg =
 [
+    [ "GetDelta", "structhelios_1_1input_1_1MouseMotionMsg.html#a85f735431b55909384b40a7b56170780", null ],
     [ "delta_x", "structhelios_1_1input_1_1MouseMotionMsg.html#a5ebd9c62d29d0644d9be06e62d18e518", null ],
     [ "delta_y", "structhelios_1_1input_1_1MouseMotionMsg.html#af3d0316b90af538216b8f1278f8a0101", null ],
     [ "entity", "structhelios_1_1input_1_1MouseMotionMsg.html#af435d092cb028c4ad3063b395d460594", null ],

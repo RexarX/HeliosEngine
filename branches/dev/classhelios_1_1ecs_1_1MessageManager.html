@@ -307,7 +307,7 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
 <p>Consumed messages are removed at Update time based on merged per-system <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message ids.">ConsumedMessagesRegistry</a></span> instances. Each system writes to its own registry during parallel execution, and all registries are merged and applied here.</p>
 <dl class="section note"><dt>Note</dt><dd>Partially thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00059">59</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00060">60</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a26f8b24d221097025fab50b2f49e1363" name="a26f8b24d221097025fab50b2f49e1363"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26f8b24d221097025fab50b2f49e1363">&#9670;&#160;</a></span>size_type</h2>
@@ -321,7 +321,7 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00061">61</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00062">62</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -467,7 +467,7 @@ template&lt;typename Alloc&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00488">488</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00454">454</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -498,7 +498,7 @@ template&lt;typename Alloc&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the async message queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00402">402</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00403">403</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -529,7 +529,7 @@ template&lt;typename Alloc&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the async message queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00393">393</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00394">394</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -551,7 +551,7 @@ template&lt;typename Alloc&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -559,7 +559,7 @@ template&lt;typename Alloc&gt; </div>
 <p>Clears all messages, consumed flags, and registration data. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00438">438</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00014">14</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -581,7 +581,7 @@ template&lt;typename Alloc&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -589,7 +589,7 @@ template&lt;typename Alloc&gt; </div>
 <p>Clears all message data without removing registrations. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00448">448</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00024">24</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -628,7 +628,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Span of message ids aligned with <span class="tt"><a class="el" href="#ad1e4814ee44e8de30e300a199de11566" title="Gets a const span of messages of a specific type from the current queue.">CurrentMessages</a>&lt;T&gt;()</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00296">296</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00297">297</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -667,7 +667,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Span of const messages </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00273">273</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00274">274</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -698,7 +698,7 @@ template&lt;MessageTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to current queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00356">356</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00357">357</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -729,7 +729,7 @@ template&lt;MessageTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. Prefer <span class="tt"><a class="el" href="#a3203409b0cbf34ea52033ef58d0604ae" title="Writes a single regular message to the current queue.">Write</a></span> / <span class="tt"><a class="el" href="#aaa44e164506d9b475291740f1b9431a2" title="Merges messages from a local MessageQueue into the current queue.">MergeLocalMessages</a></span> so ids stay consistent. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to current queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00366">366</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00367">367</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -768,7 +768,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if async messages exist, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00688">688</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00654">654</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -807,7 +807,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if messages exist, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00678">678</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00644">644</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -838,7 +838,7 @@ template&lt;MessageTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread safe for concurrent reads. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if at least one message exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00230">230</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00231">231</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -877,7 +877,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the message type is registered, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00221">221</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00222">222</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -916,7 +916,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00646">646</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00612">612</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -955,7 +955,7 @@ template&lt;MessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00636">636</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00602">602</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -999,7 +999,7 @@ template&lt;typename OtherAllocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00654">654</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00620">620</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1043,7 +1043,7 @@ template&lt;typename OtherAllocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00666">666</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00632">632</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1082,7 +1082,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Next id value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00697">697</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00663">663</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1121,7 +1121,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to metadata, or nullptr if not registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00338">338</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00339">339</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1160,7 +1160,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Oldest retained id, or the next id when empty </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00703">703</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00669">669</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1249,7 +1249,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Span of message ids aligned with <span class="tt"><a class="el" href="#af4fe5819687564b40403d2cb871eed43" title="Gets a const span of messages of a specific type from the previous queue.">PreviousMessages</a>&lt;T&gt;()</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00284">284</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00285">285</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1288,7 +1288,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Span of const messages </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00261">261</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00262">262</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1319,7 +1319,7 @@ template&lt;MessageTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to previous queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00375">375</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00376">376</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1350,7 +1350,7 @@ template&lt;MessageTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to previous queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00384">384</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00385">385</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1390,7 +1390,7 @@ requires (sizeof...(Messages) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00546">546</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00512">512</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1421,7 +1421,7 @@ requires (sizeof...(Messages) &gt; 0)</div>
 <dl class="section note"><dt>Note</dt><dd>Thread safe for concurrent reads. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Count of registered messages </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00347">347</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00348">348</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1466,7 +1466,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unread retained count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00717">717</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00683">683</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1475,9 +1475,6 @@ template&lt;MessageTrait T&gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void helios::ecs::MessageManager::Update </td>
@@ -1486,17 +1483,12 @@ template&lt;MessageTrait T&gt; </div>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Updates message lifecycle without any consumed message processing. </p>
 <p>Convenience overload when no systems have consumed any messages. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00469">469</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00031">31</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -1545,7 +1537,7 @@ template&lt;typename Alloc&gt; </div>
 </li>
 </ol>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00456">456</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00440">440</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1591,7 +1583,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Assigned message id </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00590">590</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00556">556</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1636,7 +1628,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00605">605</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00571">571</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1682,7 +1674,7 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00628">628</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00594">594</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1728,7 +1720,7 @@ requires MessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00615">615</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00581">581</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>

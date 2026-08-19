@@ -289,9 +289,9 @@ class helios::mem::AtomicRefCounted&lt; Derived, Allocator &gt;</div><p>Thread-s
 <div class="fragment"><div class="line"><span class="keyword">auto</span> tex = <a class="code hl_function" href="namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814">helios::mem::MakeArc&lt;Texture&gt;</a>(<span class="stringliteral">&quot;diffuse&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> copy = tex;  <span class="comment">// thread-safe ref-count increment</span></div>
 <div class="line"><span class="comment">// Both tex and copy can be used/destroyed from different threads safely.</span></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a10f597088c98df7a40f43d8ac7236814"><div class="ttname"><a href="namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814">helios::mem::MakeArc</a></div><div class="ttdeci">auto MakeArc(Args &amp;&amp;... args) -&gt; Arc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning an Arc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01204">ref_counted.hpp:1204</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a10f597088c98df7a40f43d8ac7236814"><div class="ttname"><a href="namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814">helios::mem::MakeArc</a></div><div class="ttdeci">auto MakeArc(Args &amp;&amp;... args) -&gt; Arc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning an Arc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01205">ref_counted.hpp:1205</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00692">692</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00693">693</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a6899549fd10d0d4dc469f3135df37822" name="a6899549fd10d0d4dc469f3135df37822"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6899549fd10d0d4dc469f3135df37822">&#9670;&#160;</a></span>AllocatorType</h2>
@@ -307,7 +307,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00694">694</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00695">695</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -370,7 +370,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Constructs a null handle storing a pre-built allocator. </p>
 <p>Use this when the allocator is stateful and you need a typed null handle that is ready to receive an assignment from a <span class="tt"><a class="el" href="namespacehelios_1_1mem.html#a620b6cca583af089faa00b80142398cd" title="Overload of MakeArc accepting a pre-constructed allocator instance.">MakeArcWith</a></span>-created handle. </p>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00712">712</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00713">713</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -401,7 +401,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 
 <p>Constructs a null handle explicitly (default-constructible allocators only). </p>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00717">717</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00718">718</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -436,7 +436,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 
 <p>Constructs a null handle explicitly with an explicit allocator. </p>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00722">722</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00723">723</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -473,7 +473,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00731">731</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00732">732</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -515,7 +515,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00745">745</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00746">746</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -559,7 +559,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00959">959</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00960">960</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -591,7 +591,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Constructs from a raw pointer using a default-constructed allocator. </p>
 <dl class="section note"><dt>Note</dt><dd>Only available when <span class="tt"><a class="el" href="#a6899549fd10d0d4dc469f3135df37822">AllocatorType</a></span> is default-constructible. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00765">765</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00766">766</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -629,7 +629,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00969">969</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00970">970</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -667,7 +667,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00981">981</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00982">982</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -714,7 +714,7 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00991">991</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00992">992</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -761,7 +761,7 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01006">1006</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01007">1007</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -792,7 +792,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 
 <p>Destroys the handle and decrements the reference count. </p>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00806">806</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00807">807</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -825,7 +825,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Checks if the handle is null. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if no object is managed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00925">925</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00926">926</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -857,7 +857,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Returns the raw pointer without releasing ownership. </p>
 <dl class="section return"><dt>Returns</dt><dd>Raw pointer, or <span class="tt">nullptr</span> if the handle is null </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00931">931</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00932">932</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -889,7 +889,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Returns a reference to the stored allocator. </p>
 <dl class="section return"><dt>Returns</dt><dd>The allocator instance used for this handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00946">946</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00947">947</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -921,7 +921,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Checks whether the handle owns an object. </p>
 <dl class="section return"><dt>Returns</dt><dd>True when non-null, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00882">882</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00883">883</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -955,7 +955,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion when the handle is null. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the managed object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01107">1107</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01108">1108</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -989,7 +989,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion when the handle is null. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the managed object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01115">1115</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01116">1116</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1028,7 +1028,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01033">1033</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01034">1034</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1060,7 +1060,7 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01071">1071</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01072">1072</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1144,7 +1144,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01014">1014</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01015">1015</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1176,7 +1176,7 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01052">1052</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01053">1053</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1254,7 +1254,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 <p>Assigns null, releasing any currently managed object. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01085">1085</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01086">1086</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1292,7 +1292,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True when both handles refer to the same object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00891">891</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00892">892</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1338,7 +1338,7 @@ template&lt;typename Other&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True when both handles refer to the same object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00910">910</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00911">911</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1370,7 +1370,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Checks whether the handle is null. </p>
 <dl class="section return"><dt>Returns</dt><dd>True when no object is managed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00899">899</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00900">900</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1403,7 +1403,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <dl class="section warning"><dt>Warning</dt><dd>Returns 0 if the handle is null. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Current reference count, or 0 for a null handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00938">938</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00939">939</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1436,7 +1436,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 <p>Releases ownership without decrementing the ref count. </p>
 <p>The caller becomes responsible for managing the object's lifetime. </p><dl class="section return"><dt>Returns</dt><dd>Raw pointer that was managed, or <span class="tt">nullptr</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01099">1099</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01100">1100</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1469,7 +1469,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 <p>Releases ownership and resets the handle to null. </p>
 <p>Decrements the ref count; destroys the object via the stored allocator if it reaches 0. </p>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01092">1092</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l01093">1093</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1501,7 +1501,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Checks if this handle is the sole owner of the managed object. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if ref count == 1, false if null or ref count &gt; 1 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00919">919</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00920">920</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>

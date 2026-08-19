@@ -242,8 +242,7 @@ Public Member Functions</h2></td></tr>
 <li>A creation function (default: "helios_create_plugin") that returns <span class="tt">Plugin*</span></li>
 <li>A plugin type export function (default: "helios_plugin_type_id") that returns a <span class="tt"><a class="el" href="structhelios_1_1app_1_1PluginTypeExport.html" title="C-compatible plugin identity exported by dynamic libraries.">PluginTypeExport</a></span> via <span class="tt"><a class="el" href="namespacehelios_1_1app.html#ab12c8d399f188fa434507fe750108351" title="Function signature for the plugin type export symbol.">PluginTypeExportFn</a></span></li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>Not thread-safe.</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// In my_plugin.cpp (compiled as shared library)</span></div>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. <div class="fragment"><div class="line"><span class="comment">// In my_plugin.cpp (compiled as shared library)</span></div>
 <div class="line"><span class="keyword">class </span>MyPlugin : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1app_1_1Plugin.html">helios::app::Plugin</a> {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view kName = <span class="stringliteral">&quot;MyPlugin&quot;</span>;</div>
@@ -266,21 +265,22 @@ Public Member Functions</h2></td></tr>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00101">application.hpp:101</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00099">application.hpp:99</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Plugin_html"><div class="ttname"><a href="classhelios_1_1app_1_1Plugin.html">helios::app::Plugin</a></div><div class="ttdoc">Base class for all plugins.</div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00014">plugin.hpp:14</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Plugin_html_a9ba1339380ae0e2b7e098592d9ff56dc"><div class="ttname"><a href="classhelios_1_1app_1_1Plugin.html#a9ba1339380ae0e2b7e098592d9ff56dc">helios::app::Plugin::Build</a></div><div class="ttdeci">virtual void Build(App &amp;app)=0</div><div class="ttdoc">Builds the plugin.</div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Plugin_html_ad4313822fa015a013d520e1b31036a86"><div class="ttname"><a href="classhelios_1_1app_1_1Plugin.html#ad4313822fa015a013d520e1b31036a86">helios::app::Plugin::Destroy</a></div><div class="ttdeci">virtual void Destroy(App &amp;)</div><div class="ttdoc">Destroys the plugin and cleans up plugins.</div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00040">plugin.hpp:40</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00046">application.hpp:46</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00043">application.hpp:43</a></div></div>
 <div class="ttc" id="aplatform_8hpp_html_addef039204a27478a1fff77081d409bd"><div class="ttname"><a href="platform_8hpp.html#addef039204a27478a1fff77081d409bd">HELIOS_EXPORT</a></div><div class="ttdeci">#define HELIOS_EXPORT</div><div class="ttdef"><b>Definition</b> <a href="platform_8hpp_source.html#l00025">platform.hpp:25</a></div></div>
-<div class="ttc" id="astructhelios_1_1app_1_1PluginTypeExport_html_a0278d5501e4cb2dba6103fd40176d705"><div class="ttname"><a href="structhelios_1_1app_1_1PluginTypeExport.html#a0278d5501e4cb2dba6103fd40176d705">helios::app::PluginTypeExport::From</a></div><div class="ttdeci">static constexpr PluginTypeExport From() noexcept</div><div class="ttdoc">Builds an export descriptor from a plugin type.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00057">dynamic_plugin.hpp:57</a></div></div>
-</div><!-- fragment --><div class="fragment"><div class="line"><a class="code hl_function" href="#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin</a> dyn_plugin;</div>
+<div class="ttc" id="astructhelios_1_1app_1_1PluginTypeExport_html_a0278d5501e4cb2dba6103fd40176d705"><div class="ttname"><a href="structhelios_1_1app_1_1PluginTypeExport.html#a0278d5501e4cb2dba6103fd40176d705">helios::app::PluginTypeExport::From</a></div><div class="ttdeci">static constexpr PluginTypeExport From() noexcept</div><div class="ttdoc">Builds an export descriptor from a plugin type.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00054">dynamic_plugin.hpp:54</a></div></div>
+</div><!-- fragment --></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_function" href="#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin</a> dyn_plugin;</div>
 <div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span> result = dyn_plugin.<a class="code hl_function" href="#a6ebf28ec321d00ca7fc3acf55529b628">Load</a>(<span class="stringliteral">&quot;my_plugin.so&quot;</span>); result) {</div>
 <div class="line">  <a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>.AddDynamicPlugin(std::move(dyn_plugin));</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a6ebf28ec321d00ca7fc3acf55529b628"><div class="ttname"><a href="#a6ebf28ec321d00ca7fc3acf55529b628">helios::app::DynamicPlugin::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path, DynamicPluginConfig config={}) -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Loads a plugin from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00397">dynamic_plugin.hpp:397</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a6ebf28ec321d00ca7fc3acf55529b628"><div class="ttname"><a href="#a6ebf28ec321d00ca7fc3acf55529b628">helios::app::DynamicPlugin::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path, DynamicPluginConfig config={}) -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Loads a plugin from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8cpp_source.html#l00052">dynamic_plugin.cpp:52</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_aee76ef756f54a8560f0bc6c839c9e71d"><div class="ttname"><a href="#aee76ef756f54a8560f0bc6c839c9e71d">helios::app::DynamicPlugin::DynamicPlugin</a></div><div class="ttdeci">DynamicPlugin()=default</div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00185">185</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00181">181</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a19268979bef556fbc15243755b76de2d" name="a19268979bef556fbc15243755b76de2d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a19268979bef556fbc15243755b76de2d">&#9670;&#160;</a></span>FileTime</h2>
@@ -294,7 +294,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00187">187</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00183">183</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -346,7 +346,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+<span class="mlabels"><span class="mlabel explicit">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -360,7 +360,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00366">366</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00021">21</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -407,12 +407,12 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00375">375</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00030">30</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -468,7 +468,7 @@ Public Member Functions</h2></td></tr>
 <p>Gets the configuration used for this plugin. </p>
 <dl class="section return"><dt>Returns</dt><dd>Configuration struct </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00345">345</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00341">341</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -490,7 +490,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -499,7 +499,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if plugin is not loaded. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the plugin </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00534">534</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00188">188</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -521,7 +521,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -530,7 +530,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if plugin is not loaded. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the plugin </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00529">529</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00183">183</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -560,7 +560,7 @@ Public Member Functions</h2></td></tr>
 <p>Gets the plugin name. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> name, or empty string if not loaded </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00315">315</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00311">311</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -590,7 +590,7 @@ Public Member Functions</h2></td></tr>
 <p>Gets the plugin type ID. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> type ID, or 0 if not loaded </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00307">307</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00303">303</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -612,7 +612,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -620,7 +620,7 @@ Public Member Functions</h2></td></tr>
 <p>Checks if the library file has been modified since last load. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the file modification time has changed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00514">514</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00168">168</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -650,7 +650,7 @@ Public Member Functions</h2></td></tr>
 <p>Gets const reference to the underlying dynamic library. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to <span class="tt">DynamicLibrary</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00337">337</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00333">333</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -680,7 +680,7 @@ Public Member Functions</h2></td></tr>
 <p>Gets reference to the underlying dynamic library. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to <span class="tt">DynamicLibrary</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00331">331</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00327">327</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -706,7 +706,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -721,7 +721,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult</a></span> that holds void on success, or <span class="tt"><a class="el" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span> on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00397">397</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00052">52</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -751,7 +751,7 @@ Public Member Functions</h2></td></tr>
 <p>Checks if a plugin is currently loaded. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if a plugin is loaded </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00261">261</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00257">257</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -798,12 +798,12 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00382">382</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00037">37</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -833,7 +833,7 @@ Public Member Functions</h2></td></tr>
 <p>Gets the path of the loaded library. </p>
 <dl class="section return"><dt>Returns</dt><dd>Path to the library, or empty if not loaded </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00323">323</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00319">319</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -863,7 +863,7 @@ Public Member Functions</h2></td></tr>
 <p>Releases ownership of the plugin. </p>
 <p>After this call, the <span class="tt"><a class="el" href="classhelios_1_1app_1_1DynamicPlugin.html" title="Wrapper for dynamically loaded plugins.">DynamicPlugin</a></span> no longer owns the plugin. The caller is responsible for the plugin's lifetime. </p><dl class="section return"><dt>Returns</dt><dd>Unique pointer to the plugin </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00299">299</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00295">295</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -885,7 +885,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -900,7 +900,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult</a></span> that holds void on success, or <span class="tt"><a class="el" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span> on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00445">445</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00100">100</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -922,7 +922,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -937,7 +937,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult</a></span> that holds void on success, or <span class="tt"><a class="el" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span> on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00494">494</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00149">149</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -967,7 +967,7 @@ Public Member Functions</h2></td></tr>
 <p>Tries to get the loaded plugin. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to plugin, or <span class="tt">nullptr</span> if not loaded </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00289">289</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00285">285</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -997,7 +997,7 @@ Public Member Functions</h2></td></tr>
 <p>Tries to get the loaded plugin. </p>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to plugin, or <span class="tt">nullptr</span> if not loaded </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00283">283</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00279">279</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -1019,7 +1019,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1028,7 +1028,7 @@ Public Member Functions</h2></td></tr>
 <p>Releases the plugin and unloads the library. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the plugin is not loaded. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult</a></span> that holds void on success, or <span class="tt"><a class="el" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span> on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00427">427</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00082">82</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -1050,7 +1050,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1058,7 +1058,7 @@ Public Member Functions</h2></td></tr>
 <p>Updates the cached file modification time. </p>
 <p>Call this after detecting a change to reset the tracking. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00505">505</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00159">159</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>

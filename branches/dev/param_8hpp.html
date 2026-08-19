@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: src/ecs/include/helios/ecs/resource/param.hpp File Reference</title>
+    <title>Helios Engine: src/ecs/include/helios/ecs/system/param.hpp File Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -172,39 +172,35 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('param_8hpp.htm
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
 <a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">param.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="resource_8hpp_source.html">helios/ecs/resource/resource.hpp</a>&gt;</code><br />
-<code>#include &lt;functional&gt;</code><br />
-<code>#include &lt;optional&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="access__policy_8hpp_source.html">helios/ecs/system/access_policy.hpp</a>&gt;</code><br />
+<code>#include &lt;concepts&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 </div>
 <p><a href="param_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Aecs_3A_3ARes_3C_20T_20_3E" id="r_helios_3A_3Aecs_3A_3ARes_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to resource.  <a href="classhelios_1_1ecs_1_1Res.html#details">More...</a><br /></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Aecs" id="r_helios_3A_3Aecs"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html">helios::ecs</a></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3Adetails" id="r_helios_3A_3Aecs_3A_3Adetails"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">helios::ecs::details</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-concepts" class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3Adetails_3A_3ASystemParamMakeResultMatches" id="r_helios_3A_3Aecs_3A_3Adetails_3A_3ASystemParamMakeResultMatches"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches.html">helios::ecs::details::SystemParamMakeResultMatches</a></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3ASystemParam" id="r_helios_3A_3Aecs_3A_3ASystemParam"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1SystemParam.html">helios::ecs::SystemParam</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for types usable as system function parameters. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a674cbdc503746f81c89e6b12f67c26d0" id="r_a674cbdc503746f81c89e6b12f67c26d0"><td class="memTemplParams" colspan="2">template&lt;AsyncResourceTrait T&gt; </td></tr>
-<tr class="memitem:a674cbdc503746f81c89e6b12f67c26d0 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a674cbdc503746f81c89e6b12f67c26d0">helios::ecs::AsyncRes</a> = <a class="el" href="classhelios_1_1ecs_1_1Res.html">Res</a>&lt;T&gt;</td></tr>
-<tr class="memdesc:a674cbdc503746f81c89e6b12f67c26d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to thread-safe resource.  <br /></td></tr>
-<tr class="memitem:a08439f87b8ff5fd5ecd5cc6af031bb08" id="r_a08439f87b8ff5fd5ecd5cc6af031bb08"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a08439f87b8ff5fd5ecd5cc6af031bb08 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a08439f87b8ff5fd5ecd5cc6af031bb08">helios::ecs::OptRes</a> = std::optional&lt;<a class="el" href="classhelios_1_1ecs_1_1Res.html">Res</a>&lt;T&gt;&gt;</td></tr>
-<tr class="memdesc:a08439f87b8ff5fd5ecd5cc6af031bb08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional access to resource.  <br /></td></tr>
-<tr class="memitem:a0b786c7fdda949d9ad0bd60095031991" id="r_a0b786c7fdda949d9ad0bd60095031991"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a0b786c7fdda949d9ad0bd60095031991 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a0b786c7fdda949d9ad0bd60095031991">helios::ecs::OptAsyncRes</a> = std::optional&lt;<a class="el" href="namespacehelios_1_1ecs.html#a674cbdc503746f81c89e6b12f67c26d0">AsyncRes</a>&lt;T&gt;&gt;</td></tr>
-<tr class="memdesc:a0b786c7fdda949d9ad0bd60095031991"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional access to thread-safe resource.  <br /></td></tr>
+<tr class="memitem:ad26b4d323ca7700d0aa30a2c0af43954" id="r_ad26b4d323ca7700d0aa30a2c0af43954"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ad26b4d323ca7700d0aa30a2c0af43954 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs_1_1details.html#ad26b4d323ca7700d0aa30a2c0af43954">helios::ecs::details::SystemParamMakeResult</a></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -213,7 +209,7 @@ Typedefs</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a href="dir_357f20ec14403b481784d625e30c945c.html">include</a></li><li class="navelem"><a href="dir_f48e1382f1fa1d2baa64a65be047433a.html">helios</a></li><li class="navelem"><a href="dir_114d35f520128cfbc27502a147f45edd.html">ecs</a></li><li class="navelem"><a href="dir_120dbf2d06153d0530e81db0f361fe52.html">resource</a></li><li class="navelem"><a href="param_8hpp.html">param.hpp</a></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a href="dir_357f20ec14403b481784d625e30c945c.html">include</a></li><li class="navelem"><a href="dir_f48e1382f1fa1d2baa64a65be047433a.html">helios</a></li><li class="navelem"><a href="dir_114d35f520128cfbc27502a147f45edd.html">ecs</a></li><li class="navelem"><a href="dir_a3b485c73c056e8b3e9a139538eb1412.html">system</a></li><li class="navelem"><a href="param_8hpp.html">param.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

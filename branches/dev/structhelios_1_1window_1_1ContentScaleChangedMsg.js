@@ -1,5 +1,6 @@
 var structhelios_1_1window_1_1ContentScaleChangedMsg =
 [
+    [ "GetScale", "structhelios_1_1window_1_1ContentScaleChangedMsg.html#a36f001c2ad0bc1a880cee842e2ae5260", null ],
     [ "entity", "structhelios_1_1window_1_1ContentScaleChangedMsg.html#ae7893c224cf740c7e61558a4f221a8c4", null ],
     [ "kAsync", "structhelios_1_1window_1_1ContentScaleChangedMsg.html#aab1d104413eaa8820d9b7866debf5522", null ],
     [ "kClearPolicy", "structhelios_1_1window_1_1ContentScaleChangedMsg.html#acee64dfd40bb9a2621d0af3d9d12654d", null ],

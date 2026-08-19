@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structhelios_1_1window_1_1ClientResizedMsg-members.html">List of all members</a>  </div>
@@ -184,6 +185,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 
 <p><code>#include &lt;<a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a488f471f4c4d599627a4f3b9db06c43a" id="r_a488f471f4c4d599627a4f3b9db06c43a"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a488f471f4c4d599627a4f3b9db06c43a">GetSize</a> () const noexcept -&gt; std::pair&lt; uint32_t, uint32_t &gt;</td></tr>
+<tr class="memdesc:a488f471f4c4d599627a4f3b9db06c43a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the client-area size.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:afd27eac7cddbd3388f04a23b5371395e" id="r_afd27eac7cddbd3388f04a23b5371395e"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a>&#160;</td><td class="memItemRight"><a class="el" href="#afd27eac7cddbd3388f04a23b5371395e">entity</a></td></tr>
@@ -200,8 +206,39 @@ Static Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sent when a window client-area size changes. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00049">49</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
-</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00062">62</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a488f471f4c4d599627a4f3b9db06c43a" name="a488f471f4c4d599627a4f3b9db06c43a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a488f471f4c4d599627a4f3b9db06c43a">&#9670;&#160;</a></span>GetSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::ClientResizedMsg::GetSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; uint32_t, uint32_t &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the client-area size. </p>
+<dl class="section return"><dt>Returns</dt><dd>Width and height in pixels </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00076">76</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="afd27eac7cddbd3388f04a23b5371395e" name="afd27eac7cddbd3388f04a23b5371395e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd27eac7cddbd3388f04a23b5371395e">&#9670;&#160;</a></span>entity</h2>
 
@@ -214,7 +251,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00055">55</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00068">68</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -230,7 +267,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00057">57</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00070">70</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -254,7 +291,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00053">53</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00066">66</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -278,7 +315,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00051">51</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00064">64</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -302,7 +339,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00052">52</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00065">65</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -326,7 +363,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00050">50</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00063">63</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -342,7 +379,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00056">56</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00069">69</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>

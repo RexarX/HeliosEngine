@@ -13,6 +13,13 @@ var hierarchy =
     [ "helios::window::AppearanceWriters", "structhelios_1_1window_1_1AppearanceWriters.html", null ],
     [ "helios::app::AppExit", "structhelios_1_1app_1_1AppExit.html", null ],
     [ "helios::glfw::ApplyChanges", "structhelios_1_1glfw_1_1ApplyChanges.html", null ],
+    [ "helios::sdl3::window::ApplyChanges", "structhelios_1_1sdl3_1_1window_1_1ApplyChanges.html", null ],
+    [ "helios::sdl3::input::ApplyCursors", "structhelios_1_1sdl3_1_1input_1_1ApplyCursors.html", null ],
+    [ "helios::sdl3::input::ApplyGamepadMappings", "structhelios_1_1sdl3_1_1input_1_1ApplyGamepadMappings.html", null ],
+    [ "helios::sdl3::input::ApplyGamepadOutputs", "structhelios_1_1sdl3_1_1input_1_1ApplyGamepadOutputs.html", null ],
+    [ "helios::sdl3::input::ApplyRawMouseMotion", "structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html", null ],
+    [ "helios::sdl3::input::ApplySet", "structhelios_1_1sdl3_1_1input_1_1ApplySet.html", null ],
+    [ "helios::sdl3::window::ApplySet", "structhelios_1_1sdl3_1_1window_1_1ApplySet.html", null ],
     [ "helios::mem::ArcFromThis&lt; Derived &gt;", "classhelios_1_1mem_1_1ArcFromThis.html", null ],
     [ "helios::ecs::Archetype", "classhelios_1_1ecs_1_1Archetype.html", null ],
     [ "helios::ecs::ArchetypeId", "classhelios_1_1ecs_1_1ArchetypeId.html", null ],
@@ -54,6 +61,7 @@ var hierarchy =
     [ "helios::container::details::CallableBufferDeducer&lt; Alloc, FirstSig, RestSigs... &gt;", "structhelios_1_1container_1_1details_1_1CallableBufferDeducer_3_01Alloc_00_01FirstSig_00_01RestSigs_8_8_8_01_4.html", null ],
     [ "helios::container::details::CallableBufferDeducer&lt; FirstSig, RestSigs... &gt;", "structhelios_1_1container_1_1details_1_1CallableBufferDeducer_3_01FirstSig_00_01RestSigs_8_8_8_01_4.html", null ],
     [ "helios::container::CallableBufferImpl&lt; Allocator, Signatures &gt;", "classhelios_1_1container_1_1CallableBufferImpl.html", null ],
+    [ "helios::details::CallableTraits&lt; Callable &gt;", "structhelios_1_1details_1_1CallableTraits.html", null ],
     [ "helios::glfw::anonymous_namespace{callbacks.cpp}::CallbackContext", "structhelios_1_1glfw_1_1anonymous__namespace_02callbacks_8cpp_03_1_1CallbackContext.html", null ],
     [ "anonymous_namespace{stacktrace.cpp}::CapturedFramesResult", "structanonymous__namespace_02stacktrace_8cpp_03_1_1CapturedFramesResult.html", null ],
     [ "helios::utils::ChunkView&lt; Iter &gt;", "classhelios_1_1utils_1_1ChunkView.html", null ],
@@ -84,80 +92,92 @@ var hierarchy =
     [ "helios::ecs::ComponentTraits&lt; T &gt;", "structhelios_1_1ecs_1_1ComponentTraits.html", null ],
     [ "helios::ecs::ComponentTypeInfo", "classhelios_1_1ecs_1_1ComponentTypeInfo.html", null ],
     [ "helios::ecs::CompositeSystemParam&lt; Param, Fields &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", null ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::input::GamepadMessages, MessageReader&lt; helios::input::GamepadConnectionMsg &gt;, MessageReader&lt; helios::input::GamepadButtonInputMsg &gt;, MessageReader&lt; helios::input::GamepadAxisChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::input::GamepadMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1GamepadMessages_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::GamepadMessages, MessageReader&lt; input::GamepadConnectionMsg &gt;, MessageReader&lt; input::GamepadButtonInputMsg &gt;, MessageReader&lt; input::GamepadAxisChangedMsg &gt;, MessageReader&lt; input::GamepadRemappedMsg &gt;, MessageReader&lt; input::GamepadPowerChangedMsg &gt;, MessageReader&lt; input::GamepadSensorUpdateMsg &gt;, MessageReader&lt; input::GamepadTouchpadMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::GamepadMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1GamepadMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::input::GamepadWriters, MessageWriter&lt; helios::input::GamepadConnectionMsg &gt;, MessageWriter&lt; helios::input::GamepadButtonInputMsg &gt;, MessageWriter&lt; helios::input::GamepadAxisChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::input::GamepadWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1GamepadWriters_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::GamepadWriters, MessageWriter&lt; input::GamepadConnectionMsg &gt;, MessageWriter&lt; input::GamepadButtonInputMsg &gt;, MessageWriter&lt; input::GamepadAxisChangedMsg &gt;, MessageWriter&lt; input::GamepadRemappedMsg &gt;, MessageWriter&lt; input::GamepadPowerChangedMsg &gt;, MessageWriter&lt; input::GamepadSensorUpdateMsg &gt;, MessageWriter&lt; input::GamepadTouchpadMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::GamepadWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1GamepadWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::input::KeyboardMessages, MessageReader&lt; helios::input::KeyboardInputMsg &gt;, MessageReader&lt; helios::input::TextInputMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::input::KeyboardMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1KeyboardMessages_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::JoystickMessages, MessageReader&lt; input::JoystickConnectionMsg &gt;, MessageReader&lt; input::JoystickButtonInputMsg &gt;, MessageReader&lt; input::JoystickAxisChangedMsg &gt;, MessageReader&lt; input::JoystickHatChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::JoystickMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1JoystickMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::input::KeyboardWriters, MessageWriter&lt; helios::input::KeyboardInputMsg &gt;, MessageWriter&lt; helios::input::TextInputMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::input::KeyboardWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1KeyboardWriters_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::JoystickWriters, MessageWriter&lt; input::JoystickConnectionMsg &gt;, MessageWriter&lt; input::JoystickButtonInputMsg &gt;, MessageWriter&lt; input::JoystickAxisChangedMsg &gt;, MessageWriter&lt; input::JoystickHatChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::JoystickWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1JoystickWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::input::Messages, helios::input::KeyboardMessages, helios::input::MouseMessages, helios::input::GamepadMessages &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::input::Messages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1Messages_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::KeyboardMessages, MessageReader&lt; input::KeyboardInputMsg &gt;, MessageReader&lt; input::TextInputMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::KeyboardMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1KeyboardMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::input::MouseMessages, MessageReader&lt; helios::input::MouseButtonInputMsg &gt;, MessageReader&lt; helios::input::CursorMovedMsg &gt;, MessageReader&lt; helios::input::MouseMotionMsg &gt;, MessageReader&lt; helios::input::MouseWheelMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::input::MouseMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1MouseMessages_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::KeyboardWriters, MessageWriter&lt; input::KeyboardInputMsg &gt;, MessageWriter&lt; input::TextInputMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::KeyboardWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1KeyboardWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::input::MouseWriters, MessageWriter&lt; helios::input::MouseButtonInputMsg &gt;, MessageWriter&lt; helios::input::CursorMovedMsg &gt;, MessageWriter&lt; helios::input::MouseMotionMsg &gt;, MessageWriter&lt; helios::input::MouseWheelMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::input::MouseWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1MouseWriters_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::Messages, input::KeyboardMessages, input::MouseMessages, input::GamepadMessages, input::JoystickMessages, input::PenMessages &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::Messages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1Messages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::input::State, Res&lt; helios::input::Keyboard &gt;, Res&lt; helios::input::Mouse &gt;, Res&lt; helios::input::Gamepads &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::input::State >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1State_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::MouseMessages, MessageReader&lt; input::MouseButtonInputMsg &gt;, MessageReader&lt; input::CursorMovedMsg &gt;, MessageReader&lt; input::MouseMotionMsg &gt;, MessageReader&lt; input::MouseWheelMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::MouseMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1MouseMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::input::StateView, Res&lt; const helios::input::Keyboard &gt;, Res&lt; const helios::input::Mouse &gt;, Res&lt; const helios::input::Gamepads &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::input::StateView >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1StateView_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::MouseWriters, MessageWriter&lt; input::MouseButtonInputMsg &gt;, MessageWriter&lt; input::CursorMovedMsg &gt;, MessageWriter&lt; input::MouseMotionMsg &gt;, MessageWriter&lt; input::MouseWheelMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::MouseWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1MouseWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::input::Writers, helios::input::KeyboardWriters, helios::input::MouseWriters, helios::input::GamepadWriters &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::input::Writers >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1input_1_1Writers_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::PenMessages, MessageReader&lt; input::PenProximityMsg &gt;, MessageReader&lt; input::PenTouchMsg &gt;, MessageReader&lt; input::PenButtonInputMsg &gt;, MessageReader&lt; input::PenMovedMsg &gt;, MessageReader&lt; input::PenAxisChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::PenMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1PenMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::AppearanceMessages, MessageReader&lt; helios::window::ModeChangedMsg &gt;, MessageReader&lt; helios::window::CursorModeChangedMsg &gt;, MessageReader&lt; helios::window::VisibilityChangedMsg &gt;, MessageReader&lt; helios::window::FocusChangedMsg &gt;, MessageReader&lt; helios::window::MaximizedChangedMsg &gt;, MessageReader&lt; helios::window::IconChangedMsg &gt;, MessageReader&lt; helios::window::ResizableChangedMsg &gt;, MessageReader&lt; helios::window::DecoratedChangedMsg &gt;, MessageReader&lt; helios::window::OpacityChangedMsg &gt;, MessageReader&lt; helios::window::FloatingChangedMsg &gt;, MessageReader&lt; helios::window::HoverChangedMsg &gt;, MessageReader&lt; helios::window::MousePassthroughChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::AppearanceMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1AppearanceMessages_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::PenWriters, MessageWriter&lt; input::PenProximityMsg &gt;, MessageWriter&lt; input::PenTouchMsg &gt;, MessageWriter&lt; input::PenButtonInputMsg &gt;, MessageWriter&lt; input::PenMovedMsg &gt;, MessageWriter&lt; input::PenAxisChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::PenWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1PenWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::AppearanceWriters, MessageWriter&lt; helios::window::ModeChangedMsg &gt;, MessageWriter&lt; helios::window::CursorModeChangedMsg &gt;, MessageWriter&lt; helios::window::VisibilityChangedMsg &gt;, MessageWriter&lt; helios::window::FocusChangedMsg &gt;, MessageWriter&lt; helios::window::MaximizedChangedMsg &gt;, MessageWriter&lt; helios::window::IconChangedMsg &gt;, MessageWriter&lt; helios::window::ResizableChangedMsg &gt;, MessageWriter&lt; helios::window::DecoratedChangedMsg &gt;, MessageWriter&lt; helios::window::OpacityChangedMsg &gt;, MessageWriter&lt; helios::window::FloatingChangedMsg &gt;, MessageWriter&lt; helios::window::HoverChangedMsg &gt;, MessageWriter&lt; helios::window::MousePassthroughChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::AppearanceWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1AppearanceWriters_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::State, Res&lt; input::Keyboard &gt;, Res&lt; input::Mouse &gt;, Res&lt; input::Gamepads &gt;, Res&lt; input::Joysticks &gt;, Res&lt; input::Pens &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::State >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1State_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::CreationWriters, MessageWriter&lt; helios::window::CreatedMsg &gt;, MessageWriter&lt; helios::window::ContentScaleChangedMsg &gt;, MessageWriter&lt; helios::window::CreationFailedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::CreationWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1CreationWriters_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::StateView, Res&lt; const input::Keyboard &gt;, Res&lt; const input::Mouse &gt;, Res&lt; const input::Gamepads &gt;, Res&lt; const input::Joysticks &gt;, Res&lt; const input::Pens &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::StateView >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1StateView_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::GeometryMessages, MessageReader&lt; helios::window::ResizedMsg &gt;, MessageReader&lt; helios::window::ClientResizedMsg &gt;, MessageReader&lt; helios::window::ContentScaleChangedMsg &gt;, MessageReader&lt; helios::window::PosChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::GeometryMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1GeometryMessages_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; input::Writers, input::KeyboardWriters, input::MouseWriters, input::GamepadWriters, input::JoystickWriters, input::PenWriters &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::Writers >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1Writers_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::GeometryWriters, MessageWriter&lt; helios::window::ResizedMsg &gt;, MessageWriter&lt; helios::window::ClientResizedMsg &gt;, MessageWriter&lt; helios::window::ContentScaleChangedMsg &gt;, MessageWriter&lt; helios::window::PosChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::GeometryWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1GeometryWriters_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::AppearanceMessages, MessageReader&lt; window::ModeChangedMsg &gt;, MessageReader&lt; window::CursorModeChangedMsg &gt;, MessageReader&lt; window::VisibilityChangedMsg &gt;, MessageReader&lt; window::FocusChangedMsg &gt;, MessageReader&lt; window::MaximizedChangedMsg &gt;, MessageReader&lt; window::IconChangedMsg &gt;, MessageReader&lt; window::ResizableChangedMsg &gt;, MessageReader&lt; window::DecoratedChangedMsg &gt;, MessageReader&lt; window::OpacityChangedMsg &gt;, MessageReader&lt; window::FloatingChangedMsg &gt;, MessageReader&lt; window::HoverChangedMsg &gt;, MessageReader&lt; window::MousePassthroughChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::AppearanceMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1AppearanceMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::LifecycleMessages, MessageReader&lt; helios::window::CreatedMsg &gt;, MessageReader&lt; helios::window::ClosedMsg &gt;, MessageReader&lt; helios::window::CloseRequestedMsg &gt;, MessageReader&lt; helios::window::CreationFailedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::LifecycleMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1LifecycleMessages_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::AppearanceWriters, MessageWriter&lt; window::ModeChangedMsg &gt;, MessageWriter&lt; window::CursorModeChangedMsg &gt;, MessageWriter&lt; window::VisibilityChangedMsg &gt;, MessageWriter&lt; window::FocusChangedMsg &gt;, MessageWriter&lt; window::MaximizedChangedMsg &gt;, MessageWriter&lt; window::IconChangedMsg &gt;, MessageWriter&lt; window::ResizableChangedMsg &gt;, MessageWriter&lt; window::DecoratedChangedMsg &gt;, MessageWriter&lt; window::OpacityChangedMsg &gt;, MessageWriter&lt; window::FloatingChangedMsg &gt;, MessageWriter&lt; window::HoverChangedMsg &gt;, MessageWriter&lt; window::MousePassthroughChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::AppearanceWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1AppearanceWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::LifecycleWriters, MessageWriter&lt; helios::window::CreatedMsg &gt;, MessageWriter&lt; helios::window::ClosedMsg &gt;, MessageWriter&lt; helios::window::CloseRequestedMsg &gt;, MessageWriter&lt; helios::window::CreationFailedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::LifecycleWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1LifecycleWriters_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::CreationWriters, MessageWriter&lt; window::CreatedMsg &gt;, MessageWriter&lt; window::ContentScaleChangedMsg &gt;, MessageWriter&lt; window::CreationFailedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::CreationWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1CreationWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::Messages, helios::window::LifecycleMessages, helios::window::GeometryMessages, helios::window::AppearanceMessages, helios::window::PlatformMessages &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::Messages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1Messages_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::GeometryMessages, MessageReader&lt; window::ResizedMsg &gt;, MessageReader&lt; window::ClientResizedMsg &gt;, MessageReader&lt; window::ContentScaleChangedMsg &gt;, MessageReader&lt; window::PosChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::GeometryMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1GeometryMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::PlatformMessages, MessageReader&lt; helios::window::ClipboardChangedMsg &gt;, MessageReader&lt; helios::window::DroppedFilesMsg &gt;, MessageReader&lt; helios::window::MonitorsChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::PlatformMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1PlatformMessages_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::GeometryWriters, MessageWriter&lt; window::ResizedMsg &gt;, MessageWriter&lt; window::ClientResizedMsg &gt;, MessageWriter&lt; window::ContentScaleChangedMsg &gt;, MessageWriter&lt; window::PosChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::GeometryWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1GeometryWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::PlatformWriters, MessageWriter&lt; helios::window::ClipboardChangedMsg &gt;, MessageWriter&lt; helios::window::DroppedFilesMsg &gt;, MessageWriter&lt; helios::window::MonitorsChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::PlatformWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1PlatformWriters_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::LifecycleMessages, MessageReader&lt; window::CreatedMsg &gt;, MessageReader&lt; window::ClosedMsg &gt;, MessageReader&lt; window::CloseRequestedMsg &gt;, MessageReader&lt; window::CreationFailedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::LifecycleMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1LifecycleMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::PrimaryWindows, Query&lt; helios::window::Window &amp;, With&lt; helios::window::Primary &gt; &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::PrimaryWindows >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1PrimaryWindows_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::LifecycleWriters, MessageWriter&lt; window::CreatedMsg &gt;, MessageWriter&lt; window::ClosedMsg &gt;, MessageWriter&lt; window::CloseRequestedMsg &gt;, MessageWriter&lt; window::CreationFailedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::LifecycleWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1LifecycleWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::PrimaryWindowsView, Query&lt; const helios::window::Window &amp;, With&lt; helios::window::Primary &gt; &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::PrimaryWindowsView >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1PrimaryWindowsView_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::Messages, window::LifecycleMessages, window::GeometryMessages, window::AppearanceMessages, window::PlatformMessages &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::Messages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1Messages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::Windows, Query&lt; helios::window::Window &amp; &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::Windows >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1Windows_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::PlatformMessages, MessageReader&lt; window::ClipboardChangedMsg &gt;, MessageReader&lt; window::DroppedFilesMsg &gt;, MessageReader&lt; window::MonitorConnectedMsg &gt;, MessageReader&lt; window::MonitorDisconnectedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::PlatformMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1PlatformMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::WindowsView, Query&lt; const helios::window::Window &amp; &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::WindowsView >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1WindowsView_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::PlatformWriters, MessageWriter&lt; window::ClipboardChangedMsg &gt;, MessageWriter&lt; window::DroppedFilesMsg &gt;, MessageWriter&lt; window::MonitorConnectedMsg &gt;, MessageWriter&lt; window::MonitorDisconnectedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::PlatformWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1PlatformWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; helios::window::Writers, helios::window::LifecycleWriters, helios::window::GeometryWriters, helios::window::AppearanceWriters, helios::window::PlatformWriters &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
-      [ "helios::ecs::SystemParamTraits< helios::window::Writers >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01helios_1_1window_1_1Writers_01_4.html", null ]
+    [ "helios::ecs::CompositeSystemParam&lt; window::PrimaryWindows, Query&lt; window::Window &amp;, With&lt; window::Primary &gt; &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::PrimaryWindows >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1PrimaryWindows_01_4.html", null ]
+    ] ],
+    [ "helios::ecs::CompositeSystemParam&lt; window::PrimaryWindowsView, Query&lt; const window::Window &amp;, With&lt; window::Primary &gt; &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::PrimaryWindowsView >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1PrimaryWindowsView_01_4.html", null ]
+    ] ],
+    [ "helios::ecs::CompositeSystemParam&lt; window::Windows, Query&lt; window::Window &amp; &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::Windows >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1Windows_01_4.html", null ]
+    ] ],
+    [ "helios::ecs::CompositeSystemParam&lt; window::WindowsView, Query&lt; const window::Window &amp; &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::WindowsView >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1WindowsView_01_4.html", null ]
+    ] ],
+    [ "helios::ecs::CompositeSystemParam&lt; window::Writers, window::LifecycleWriters, window::GeometryWriters, window::AppearanceWriters, window::PlatformWriters &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< window::Writers >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01window_1_1Writers_01_4.html", null ]
     ] ],
     [ "helios::ecs::details::ConcatComponentBundleTypes&lt; Lists &gt;", "structhelios_1_1ecs_1_1details_1_1ConcatComponentBundleTypes.html", null ],
     [ "helios::ecs::details::ConcatComponentBundleTypes&lt; ComponentBundleTypes&lt; Ts... &gt; &gt;", "structhelios_1_1ecs_1_1details_1_1ConcatComponentBundleTypes_3_01ComponentBundleTypes_3_01Ts_8_8_8_01_4_01_4.html", null ],
@@ -172,6 +192,8 @@ var hierarchy =
     [ "helios::app::CountFrame", "structhelios_1_1app_1_1CountFrame.html", null ],
     [ "helios::window::CreatedMsg", "structhelios_1_1window_1_1CreatedMsg.html", null ],
     [ "helios::glfw::CreateNativeWindows", "structhelios_1_1glfw_1_1CreateNativeWindows.html", null ],
+    [ "helios::sdl3::window::CreateNativeWindows", "structhelios_1_1sdl3_1_1window_1_1CreateNativeWindows.html", null ],
+    [ "helios::sdl3::window::CreateSet", "structhelios_1_1sdl3_1_1window_1_1CreateSet.html", null ],
     [ "helios::window::CreationFailed", "structhelios_1_1window_1_1CreationFailed.html", null ],
     [ "helios::window::CreationFailedMsg", "structhelios_1_1window_1_1CreationFailedMsg.html", null ],
     [ "helios::window::CreationWriters", "structhelios_1_1window_1_1CreationWriters.html", null ],
@@ -188,6 +210,7 @@ var hierarchy =
     [ "helios::Delegate&lt; FunctionSignature &gt;", "classhelios_1_1Delegate.html", null ],
     [ "helios::Delegate&lt; ReturnType(Args...)&gt;", "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html", null ],
     [ "helios::glfw::DestroyClosedWindows", "structhelios_1_1glfw_1_1DestroyClosedWindows.html", null ],
+    [ "helios::sdl3::window::DestroyClosedWindows", "structhelios_1_1sdl3_1_1window_1_1DestroyClosedWindows.html", null ],
     [ "helios::ecs::DestroyEntitiesCmd&lt; Alloc &gt;", "classhelios_1_1ecs_1_1DestroyEntitiesCmd.html", null ],
     [ "helios::ecs::DestroyEntityCmd", "classhelios_1_1ecs_1_1DestroyEntityCmd.html", null ],
     [ "helios::window::DroppedFilesMsg", "structhelios_1_1window_1_1DroppedFilesMsg.html", null ],
@@ -199,6 +222,7 @@ var hierarchy =
     [ "helios::ecs::EntityCmdBuffer&lt; Allocator &gt;", "classhelios_1_1ecs_1_1EntityCmdBuffer.html", null ],
     [ "helios::ecs::EntityDestroyedMsg", "classhelios_1_1ecs_1_1EntityDestroyedMsg.html", null ],
     [ "helios::ecs::EntityManager", "classhelios_1_1ecs_1_1EntityManager.html", null ],
+    [ "helios::sdl3::EventPumpSet", "structhelios_1_1sdl3_1_1EventPumpSet.html", null ],
     [ "helios::window::Events", "structhelios_1_1window_1_1Events.html", null ],
     [ "helios::window::ExclusiveVideoMode", "structhelios_1_1window_1_1ExclusiveVideoMode.html", null ],
     [ "helios::app::Executor", "structhelios_1_1app_1_1Executor.html", null ],
@@ -241,29 +265,109 @@ var hierarchy =
       [ "std::formatter< helios::container::BasicStaticString< StrCapacity, CharT, Traits > >", "structstd_1_1formatter_3_01helios_1_1container_1_1BasicStaticString_3_01StrCapacity_00_01CharT_00_01Traits_01_4_01_4.html", null ]
     ] ],
     [ "std::formatter&lt; helios::ecs::Entity &gt;", "structstd_1_1formatter_3_01helios_1_1ecs_1_1Entity_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::AxisFilter &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1AxisFilter_01_4.html", null ],
     [ "std::formatter&lt; helios::input::ButtonState &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1ButtonState_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Cursor &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Cursor_01_4.html", null ],
     [ "std::formatter&lt; helios::input::CursorIcon &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1CursorIcon_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::CursorImage &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1CursorImage_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::CursorMovedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1CursorMovedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Gamepad &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Gamepad_01_4.html", null ],
     [ "std::formatter&lt; helios::input::GamepadAxis &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadAxis_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadAxisChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadAxisChangedMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::input::GamepadButton &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadButton_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadButtonInputMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadButtonInputMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadConnectionMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadConnectionMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadDirtyFlags &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadDirtyFlags_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadMappings &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadMappings_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadPower &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadPower_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadPowerChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadPowerChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadPowerState &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadPowerState_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadRemappedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadRemappedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Gamepads &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadSensor &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadSensor_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadSensorUpdateMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadSensorUpdateMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadTouchpadFinger &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadTouchpadFinger_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::GamepadTouchpadMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1GamepadTouchpadMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Joystick &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Joystick_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::JoystickAxisChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1JoystickAxisChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::JoystickButtonInputMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1JoystickButtonInputMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::JoystickConnectionMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1JoystickConnectionMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::JoystickHat &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1JoystickHat_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::JoystickHatChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1JoystickHatChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Joysticks &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Joysticks_01_4.html", null ],
     [ "std::formatter&lt; helios::input::Key &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Key_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Keyboard &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Keyboard_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::KeyboardInputMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1KeyboardInputMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::input::Modifiers &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Modifiers_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Mouse &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Mouse_01_4.html", null ],
     [ "std::formatter&lt; helios::input::MouseButton &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseButton_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::MouseButtonInputMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseButtonInputMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::MouseMotionMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseMotionMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::MouseWheelMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseWheelMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Pen &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Pen_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::PenAxis &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1PenAxis_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::PenAxisChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1PenAxisChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::PenButton &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1PenButton_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::PenButtonInputMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1PenButtonInputMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::PenDeviceType &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1PenDeviceType_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::PenMovedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1PenMovedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::PenProximityMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1PenProximityMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Pens &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Pens_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::PenTouchMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1PenTouchMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Settings &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Settings_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::TextInputMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1TextInputMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::window::ClientApi &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ClientApi_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::ClientResizedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ClientResizedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::Clipboard &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1Clipboard_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::ClipboardChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ClipboardChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::ClosedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ClosedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::CloseRequestedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1CloseRequestedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::ContentScaleChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ContentScaleChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::CreatedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1CreatedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::CreationFailedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1CreationFailedMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::window::CursorMode &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1CursorMode_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::CursorModeChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1CursorModeChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::DecoratedChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1DecoratedChangedMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::window::DirtyFlag &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1DirtyFlag_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::DroppedFilesMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1DroppedFilesMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::window::EventMode &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::ExclusiveVideoMode &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ExclusiveVideoMode_01_4.html", null ],
     [ "std::formatter&lt; helios::window::ExitTrigger &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ExitTrigger_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::FloatingChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1FloatingChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::FocusChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1FocusChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::HoverChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1HoverChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::IconChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1IconChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::IconImage &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1IconImage_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::MaximizedChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1MaximizedChangedMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::window::Mode &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1Mode_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::ModeChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ModeChangedMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::window::Monitor &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1Monitor_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::MonitorConnectedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1MonitorConnectedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::MonitorDisconnectedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1MonitorDisconnectedMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::window::MonitorEvent &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1MonitorEvent_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::Monitors &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1Monitors_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::MousePassthroughChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1MousePassthroughChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::NativeHandle &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1NativeHandle_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::NativeHandleComponent &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1NativeHandleComponent_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::OpacityChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1OpacityChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::PosChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1PosChangedMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::window::Properties &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1Properties_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::ResizableChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ResizableChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::ResizedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ResizedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::Settings &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1Settings_01_4.html", null ],
     [ "std::formatter&lt; helios::window::VideoMode &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1VideoMode_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::VisibilityChangedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::window::Window &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1Window_01_4.html", null ],
     [ "helios::mem::FrameAllocatorOptions", "structhelios_1_1mem_1_1FrameAllocatorOptions.html", null ],
     [ "helios::app::FrameCount", "structhelios_1_1app_1_1FrameCount.html", null ],
+    [ "helios::app::FrameLimiter", "classhelios_1_1app_1_1FrameLimiter.html", null ],
+    [ "helios::app::FrameLimiterSettings", "structhelios_1_1app_1_1FrameLimiterSettings.html", null ],
     [ "helios::app::FrameOrder", "classhelios_1_1app_1_1FrameOrder.html", [
       [ "helios::app::FramePumpOrder", "structhelios_1_1app_1_1FramePumpOrder.html", null ],
       [ "helios::app::MainFrameOrder", "structhelios_1_1app_1_1MainFrameOrder.html", null ]
     ] ],
+    [ "helios::app::FramePace", "structhelios_1_1app_1_1FramePace.html", null ],
+    [ "helios::app::FramePaceStage", "structhelios_1_1app_1_1FramePaceStage.html", null ],
     [ "helios::ecs::details::FreeFunctionSystemImpl&lt; Fn, FnType &gt;", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl.html", null ],
     [ "helios::ecs::details::FreeFunctionSystemImpl&lt; Fn, decltype(Fn)&gt;", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl.html", [
       [ "helios::ecs::FreeFunctionSystem< Fn >", "structhelios_1_1ecs_1_1FreeFunctionSystem.html", null ]
@@ -342,9 +446,18 @@ var hierarchy =
     [ "helios::input::GamepadAxisChangedMsg", "structhelios_1_1input_1_1GamepadAxisChangedMsg.html", null ],
     [ "helios::input::GamepadAxisFilter", "structhelios_1_1input_1_1GamepadAxisFilter.html", null ],
     [ "helios::input::GamepadButtonInputMsg", "structhelios_1_1input_1_1GamepadButtonInputMsg.html", null ],
+    [ "helios::sdl3::input::GamepadCache", "structhelios_1_1sdl3_1_1input_1_1GamepadCache.html", null ],
     [ "helios::input::GamepadConnectionMsg", "structhelios_1_1input_1_1GamepadConnectionMsg.html", null ],
+    [ "helios::input::GamepadMappings", "structhelios_1_1input_1_1GamepadMappings.html", null ],
     [ "helios::input::GamepadMessages", "structhelios_1_1input_1_1GamepadMessages.html", null ],
+    [ "helios::input::GamepadPower", "structhelios_1_1input_1_1GamepadPower.html", null ],
+    [ "helios::input::GamepadPowerChangedMsg", "structhelios_1_1input_1_1GamepadPowerChangedMsg.html", null ],
+    [ "helios::input::GamepadRemappedMsg", "structhelios_1_1input_1_1GamepadRemappedMsg.html", null ],
     [ "helios::input::Gamepads", "structhelios_1_1input_1_1Gamepads.html", null ],
+    [ "helios::input::GamepadSensorUpdateMsg", "structhelios_1_1input_1_1GamepadSensorUpdateMsg.html", null ],
+    [ "helios::sdl3::input::GamepadSlotCache", "structhelios_1_1sdl3_1_1input_1_1GamepadSlotCache.html", null ],
+    [ "helios::input::GamepadTouchpadFinger", "structhelios_1_1input_1_1GamepadTouchpadFinger.html", null ],
+    [ "helios::input::GamepadTouchpadMsg", "structhelios_1_1input_1_1GamepadTouchpadMsg.html", null ],
     [ "helios::input::GamepadWriters", "structhelios_1_1input_1_1GamepadWriters.html", null ],
     [ "helios::window::GeometryMessages", "structhelios_1_1window_1_1GeometryMessages.html", null ],
     [ "helios::window::GeometryWriters", "structhelios_1_1window_1_1GeometryWriters.html", null ],
@@ -362,9 +475,21 @@ var hierarchy =
     [ "helios::window::HoverChangedMsg", "structhelios_1_1window_1_1HoverChangedMsg.html", null ],
     [ "helios::window::IconChangedMsg", "structhelios_1_1window_1_1IconChangedMsg.html", null ],
     [ "helios::window::IconImage", "structhelios_1_1window_1_1IconImage.html", null ],
+    [ "helios::input::IndexedButtonInput&lt; N &gt;", "classhelios_1_1input_1_1IndexedButtonInput.html", null ],
     [ "helios::glfw::Init", "structhelios_1_1glfw_1_1Init.html", null ],
+    [ "helios::sdl3::Init", "structhelios_1_1sdl3_1_1Init.html", null ],
+    [ "helios::sdl3::input::Init", "structhelios_1_1sdl3_1_1input_1_1Init.html", null ],
+    [ "helios::sdl3::window::Init", "structhelios_1_1sdl3_1_1window_1_1Init.html", null ],
     [ "helios::ecs::InsertResourceCmd&lt; T &gt;", "classhelios_1_1ecs_1_1InsertResourceCmd.html", null ],
     [ "helios::utils::JoinAdapter&lt; Iter &gt;", "classhelios_1_1utils_1_1JoinAdapter.html", null ],
+    [ "helios::input::Joystick", "structhelios_1_1input_1_1Joystick.html", null ],
+    [ "helios::input::JoystickAxisChangedMsg", "structhelios_1_1input_1_1JoystickAxisChangedMsg.html", null ],
+    [ "helios::input::JoystickButtonInputMsg", "structhelios_1_1input_1_1JoystickButtonInputMsg.html", null ],
+    [ "helios::input::JoystickConnectionMsg", "structhelios_1_1input_1_1JoystickConnectionMsg.html", null ],
+    [ "helios::input::JoystickHatChangedMsg", "structhelios_1_1input_1_1JoystickHatChangedMsg.html", null ],
+    [ "helios::input::JoystickMessages", "structhelios_1_1input_1_1JoystickMessages.html", null ],
+    [ "helios::input::Joysticks", "structhelios_1_1input_1_1Joysticks.html", null ],
+    [ "helios::input::JoystickWriters", "structhelios_1_1input_1_1JoystickWriters.html", null ],
     [ "helios::input::Keyboard", "structhelios_1_1input_1_1Keyboard.html", null ],
     [ "helios::input::KeyboardInputMsg", "structhelios_1_1input_1_1KeyboardInputMsg.html", null ],
     [ "helios::input::KeyboardMessages", "structhelios_1_1input_1_1KeyboardMessages.html", null ],
@@ -372,6 +497,7 @@ var hierarchy =
     [ "helios::app::Last", "structhelios_1_1app_1_1Last.html", null ],
     [ "helios::window::LifecycleMessages", "structhelios_1_1window_1_1LifecycleMessages.html", null ],
     [ "helios::window::LifecycleWriters", "structhelios_1_1window_1_1LifecycleWriters.html", null ],
+    [ "helios::app::LimitFrameRate", "structhelios_1_1app_1_1LimitFrameRate.html", null ],
     [ "helios::ecs::Local&lt; T &gt;", "classhelios_1_1ecs_1_1Local.html", null ],
     [ "helios::ecs::LocalArena", "structhelios_1_1ecs_1_1LocalArena.html", null ],
     [ "helios::log::Logger", "classhelios_1_1log_1_1Logger.html", null ],
@@ -389,6 +515,14 @@ var hierarchy =
     [ "helios::ecs::details::MemberFnArgs&lt; R(C::*)(Args...) const noexcept &gt;", "structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01const_01noexcept_01_4.html", null ],
     [ "helios::ecs::details::MemberFnArgs&lt; R(C::*)(Args...) noexcept &gt;", "structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01noexcept_01_4.html", null ],
     [ "helios::ecs::details::MemberFnArgs&lt; R(C::*)(Args...)&gt;", "structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4.html", null ],
+    [ "helios::details::MemberFnPtrTraits&lt; MemberFnPtr &gt;", "structhelios_1_1details_1_1MemberFnPtrTraits.html", null ],
+    [ "helios::details::MemberFnPtrTraits&lt; decltype(&amp;Callable::operator())&gt;", "structhelios_1_1details_1_1MemberFnPtrTraits.html", [
+      [ "helios::details::CallableTraits< Callable >", "structhelios_1_1details_1_1CallableTraits_3_01Callable_01_4.html", null ]
+    ] ],
+    [ "helios::details::MemberFnPtrTraits&lt; R(C::*)(Args...) const &gt;", "structhelios_1_1details_1_1MemberFnPtrTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01const_01_4.html", null ],
+    [ "helios::details::MemberFnPtrTraits&lt; R(C::*)(Args...) const noexcept &gt;", "structhelios_1_1details_1_1MemberFnPtrTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01const_01noexcept_01_4.html", null ],
+    [ "helios::details::MemberFnPtrTraits&lt; R(C::*)(Args...) noexcept &gt;", "structhelios_1_1details_1_1MemberFnPtrTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01noexcept_01_4.html", null ],
+    [ "helios::details::MemberFnPtrTraits&lt; R(C::*)(Args...)&gt;", "structhelios_1_1details_1_1MemberFnPtrTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4.html", null ],
     [ "helios::details::MemberFunctionTraits&lt; FunctionSignature &gt;", "structhelios_1_1details_1_1MemberFunctionTraits.html", null ],
     [ "helios::details::MemberFunctionTraits&lt; R(C::*)(Args...) const &gt;", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01const_01_4.html", null ],
     [ "helios::details::MemberFunctionTraits&lt; R(C::*)(Args...)&gt;", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4.html", null ],
@@ -415,12 +549,25 @@ var hierarchy =
       [ "helios::ecs::MessageReader< helios::input::GamepadConnectionMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::GamepadButtonInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::GamepadAxisChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::GamepadRemappedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::GamepadPowerChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::GamepadSensorUpdateMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::GamepadTouchpadMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::JoystickConnectionMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::JoystickButtonInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::JoystickAxisChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::JoystickHatChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::KeyboardInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::TextInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::MouseButtonInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::CursorMovedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::MouseMotionMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::MouseWheelMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::PenProximityMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::PenTouchMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::PenButtonInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::PenMovedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::PenAxisChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::window::ModeChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::window::CursorModeChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::window::VisibilityChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
@@ -443,7 +590,8 @@ var hierarchy =
       [ "helios::ecs::MessageReader< helios::window::CreationFailedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::window::ClipboardChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::window::DroppedFilesMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
-      [ "helios::ecs::MessageReader< helios::window::MonitorsChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::window::MonitorConnectedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::window::MonitorDisconnectedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< T >", "classhelios_1_1ecs_1_1MessageReader.html", null ]
     ] ],
     [ "helios::input::Messages", "structhelios_1_1input_1_1Messages.html", null ],
@@ -451,8 +599,9 @@ var hierarchy =
     [ "helios::ecs::MessageWrapper&lt; T &gt;", "classhelios_1_1ecs_1_1MessageWrapper.html", null ],
     [ "helios::window::ModeChangedMsg", "structhelios_1_1window_1_1ModeChangedMsg.html", null ],
     [ "helios::window::Monitor", "structhelios_1_1window_1_1Monitor.html", null ],
+    [ "helios::window::MonitorConnectedMsg", "structhelios_1_1window_1_1MonitorConnectedMsg.html", null ],
+    [ "helios::window::MonitorDisconnectedMsg", "structhelios_1_1window_1_1MonitorDisconnectedMsg.html", null ],
     [ "helios::window::Monitors", "structhelios_1_1window_1_1Monitors.html", null ],
-    [ "helios::window::MonitorsChangedMsg", "structhelios_1_1window_1_1MonitorsChangedMsg.html", null ],
     [ "helios::input::Mouse", "structhelios_1_1input_1_1Mouse.html", null ],
     [ "helios::input::MouseButtonInputMsg", "structhelios_1_1input_1_1MouseButtonInputMsg.html", null ],
     [ "helios::input::MouseMessages", "structhelios_1_1input_1_1MouseMessages.html", null ],
@@ -463,26 +612,45 @@ var hierarchy =
     [ "helios::container::MultiTypeMap&lt; Storage, Allocator &gt;", "classhelios_1_1container_1_1MultiTypeMap.html", null ],
     [ "helios::window::NativeHandleComponent", "structhelios_1_1window_1_1NativeHandleComponent.html", null ],
     [ "helios::window::OpacityChangedMsg", "structhelios_1_1window_1_1OpacityChangedMsg.html", null ],
+    [ "helios::input::Pen", "structhelios_1_1input_1_1Pen.html", null ],
+    [ "helios::input::PenAxisChangedMsg", "structhelios_1_1input_1_1PenAxisChangedMsg.html", null ],
+    [ "helios::input::PenButtonInputMsg", "structhelios_1_1input_1_1PenButtonInputMsg.html", null ],
+    [ "helios::input::PenMessages", "structhelios_1_1input_1_1PenMessages.html", null ],
+    [ "helios::input::PenMovedMsg", "structhelios_1_1input_1_1PenMovedMsg.html", null ],
+    [ "helios::input::PenProximityMsg", "structhelios_1_1input_1_1PenProximityMsg.html", null ],
+    [ "helios::input::Pens", "structhelios_1_1input_1_1Pens.html", null ],
+    [ "helios::input::PenTouchMsg", "structhelios_1_1input_1_1PenTouchMsg.html", null ],
+    [ "helios::input::PenWriters", "structhelios_1_1input_1_1PenWriters.html", null ],
     [ "helios::window::PlatformMessages", "structhelios_1_1window_1_1PlatformMessages.html", null ],
     [ "helios::window::PlatformWriters", "structhelios_1_1window_1_1PlatformWriters.html", null ],
     [ "helios::app::Plugin", "classhelios_1_1app_1_1Plugin.html", [
       [ "helios::app::ExecutorPlugin", "classhelios_1_1app_1_1ExecutorPlugin.html", null ],
       [ "helios::app::FrameCountPlugin", "classhelios_1_1app_1_1FrameCountPlugin.html", null ],
+      [ "helios::app::FrameLimiterPlugin", "classhelios_1_1app_1_1FrameLimiterPlugin.html", null ],
       [ "helios::app::TimePlugin", "classhelios_1_1app_1_1TimePlugin.html", null ],
       [ "helios::glfw::Plugin", "structhelios_1_1glfw_1_1Plugin.html", null ],
       [ "helios::input::Plugin", "structhelios_1_1input_1_1Plugin.html", null ],
+      [ "helios::sdl3::Plugin", "structhelios_1_1sdl3_1_1Plugin.html", null ],
+      [ "helios::sdl3::input::Plugin", "structhelios_1_1sdl3_1_1input_1_1Plugin.html", null ],
+      [ "helios::sdl3::window::Plugin", "structhelios_1_1sdl3_1_1window_1_1Plugin.html", null ],
       [ "helios::window::Plugin", "structhelios_1_1window_1_1Plugin.html", null ]
     ] ],
     [ "helios::app::PluginGroup", "classhelios_1_1app_1_1PluginGroup.html", [
-      [ "helios::glfw::WindowPlugin", "structhelios_1_1glfw_1_1WindowPlugin.html", null ]
+      [ "helios::glfw::WindowPlugin", "structhelios_1_1glfw_1_1WindowPlugin.html", null ],
+      [ "helios::sdl3::input::InputPlugin", "structhelios_1_1sdl3_1_1input_1_1InputPlugin.html", null ],
+      [ "helios::sdl3::window::WindowPlugin", "structhelios_1_1sdl3_1_1window_1_1WindowPlugin.html", null ]
     ] ],
     [ "helios::app::PluginTypeExport", "structhelios_1_1app_1_1PluginTypeExport.html", null ],
     [ "helios::glfw::PollEvents", "structhelios_1_1glfw_1_1PollEvents.html", null ],
+    [ "helios::sdl3::window::PollEvents", "structhelios_1_1sdl3_1_1window_1_1PollEvents.html", null ],
+    [ "helios::sdl3::input::PollGamepads", "structhelios_1_1sdl3_1_1input_1_1PollGamepads.html", null ],
     [ "helios::mem::PoolAllocatorOptions", "structhelios_1_1mem_1_1PoolAllocatorOptions.html", null ],
     [ "helios::window::PosChangedMsg", "structhelios_1_1window_1_1PosChangedMsg.html", null ],
     [ "helios::app::PostShutdown", "structhelios_1_1app_1_1PostShutdown.html", null ],
     [ "helios::app::PostStartup", "structhelios_1_1app_1_1PostStartup.html", null ],
     [ "helios::app::PostUpdate", "structhelios_1_1app_1_1PostUpdate.html", null ],
+    [ "helios::details::PrependReturnType&lt; R, ArgsTuple &gt;", "structhelios_1_1details_1_1PrependReturnType.html", null ],
+    [ "helios::details::PrependReturnType&lt; R, std::tuple&lt; Args... &gt; &gt;", "structhelios_1_1details_1_1PrependReturnType_3_01R_00_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html", null ],
     [ "helios::app::PreShutdown", "structhelios_1_1app_1_1PreShutdown.html", null ],
     [ "helios::app::PreStartup", "structhelios_1_1app_1_1PreStartup.html", null ],
     [ "helios::app::PreUpdate", "structhelios_1_1app_1_1PreUpdate.html", null ],
@@ -492,6 +660,7 @@ var hierarchy =
     [ "helios::window::PrimaryWindowsView", "structhelios_1_1window_1_1PrimaryWindowsView.html", null ],
     [ "helios::profile::Profiler", "classhelios_1_1profile_1_1Profiler.html", null ],
     [ "helios::window::Properties", "structhelios_1_1window_1_1Properties.html", null ],
+    [ "helios::sdl3::PumpEvents", "structhelios_1_1sdl3_1_1PumpEvents.html", null ],
     [ "helios::utils::RandomGenerator&lt; Engine &gt;", "classhelios_1_1utils_1_1RandomGenerator.html", null ],
     [ "helios::mem::RcFromThis&lt; Derived &gt;", "classhelios_1_1mem_1_1RcFromThis.html", null ],
     [ "helios::mem::RefCounted&lt; Derived, Allocator &gt;", "classhelios_1_1mem_1_1RefCounted.html", null ],
@@ -523,6 +692,10 @@ var hierarchy =
     [ "helios::window::Settings", "structhelios_1_1window_1_1Settings.html", null ],
     [ "helios::app::Shutdown", "structhelios_1_1app_1_1Shutdown.html", null ],
     [ "helios::glfw::Shutdown", "structhelios_1_1glfw_1_1Shutdown.html", null ],
+    [ "helios::sdl3::Shutdown", "structhelios_1_1sdl3_1_1Shutdown.html", null ],
+    [ "helios::sdl3::window::Shutdown", "structhelios_1_1sdl3_1_1window_1_1Shutdown.html", null ],
+    [ "helios::sdl3::ShutdownSet", "structhelios_1_1sdl3_1_1ShutdownSet.html", null ],
+    [ "helios::sdl3::window::ShutdownSet", "structhelios_1_1sdl3_1_1window_1_1ShutdownSet.html", null ],
     [ "helios::app::ShutdownStage", "structhelios_1_1app_1_1ShutdownStage.html", null ],
     [ "helios::utils::SlideView&lt; Iter &gt;", "classhelios_1_1utils_1_1SlideView.html", null ],
     [ "helios::ecs::SparseComponentStorage&lt; T &gt;", "classhelios_1_1ecs_1_1SparseComponentStorage.html", null ],
@@ -534,6 +707,9 @@ var hierarchy =
     [ "helios::ecs::StageOrdering", "classhelios_1_1ecs_1_1StageOrdering.html", null ],
     [ "helios::ecs::StageSettings", "structhelios_1_1ecs_1_1StageSettings.html", null ],
     [ "helios::app::Startup", "structhelios_1_1app_1_1Startup.html", null ],
+    [ "helios::sdl3::input::StartupSet", "structhelios_1_1sdl3_1_1input_1_1StartupSet.html", null ],
+    [ "helios::sdl3::StartupSet", "structhelios_1_1sdl3_1_1StartupSet.html", null ],
+    [ "helios::sdl3::window::StartupSet", "structhelios_1_1sdl3_1_1window_1_1StartupSet.html", null ],
     [ "helios::app::StartupStage", "structhelios_1_1app_1_1StartupStage.html", null ],
     [ "helios::input::State", "structhelios_1_1input_1_1State.html", null ],
     [ "helios::input::StateView", "structhelios_1_1input_1_1StateView.html", null ],
@@ -541,6 +717,7 @@ var hierarchy =
     [ "helios::utils::StringHash", "structhelios_1_1utils_1_1StringHash.html", null ],
     [ "helios::app::SubApp", "classhelios_1_1app_1_1SubApp.html", null ],
     [ "helios::async::SubTaskGraph", "classhelios_1_1async_1_1SubTaskGraph.html", null ],
+    [ "helios::window::SyncFrameLimiterRefreshRate", "structhelios_1_1window_1_1SyncFrameLimiterRefreshRate.html", null ],
     [ "helios::ecs::details::SystemArgsTupleImpl&lt; T, kHasCallOperator &gt;", "structhelios_1_1ecs_1_1details_1_1SystemArgsTupleImpl.html", null ],
     [ "helios::ecs::details::SystemArgsTupleImpl&lt; T, true &gt;", "structhelios_1_1ecs_1_1details_1_1SystemArgsTupleImpl_3_01T_00_01true_01_4.html", null ],
     [ "helios::ecs::SystemGroupHandle", "classhelios_1_1ecs_1_1SystemGroupHandle.html", null ],
@@ -560,11 +737,11 @@ var hierarchy =
     [ "helios::ecs::SystemParamTraits&lt; Local&lt; T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01Local_3_01T_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; MessageReader&lt; T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01MessageReader_3_01T_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; MessageWriter&lt; T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01MessageWriter_3_01T_01_4_01_4.html", null ],
+    [ "helios::ecs::SystemParamTraits&lt; OptRes&lt; const T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01const_01T_01_4_01_4.html", null ],
+    [ "helios::ecs::SystemParamTraits&lt; OptRes&lt; T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01T_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; Query&lt; Args... &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01Query_3_01Args_8_8_8_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; Res&lt; const T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01Res_3_01const_01T_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; Res&lt; T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01Res_3_01T_01_4_01_4.html", null ],
-    [ "helios::ecs::SystemParamTraits&lt; std::optional&lt; Res&lt; const T &gt; &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Res_3_01const_01T_01_4_01_4_01_4.html", null ],
-    [ "helios::ecs::SystemParamTraits&lt; std::optional&lt; Res&lt; T &gt; &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Res_3_01T_01_4_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; World &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01World_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; WorldView &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01WorldView_01_4.html", null ],
     [ "helios::ecs::SystemSet", "classhelios_1_1ecs_1_1SystemSet.html", null ],
@@ -600,8 +777,10 @@ var hierarchy =
     [ "helios::utils::TypeIndex", "classhelios_1_1utils_1_1TypeIndex.html", null ],
     [ "helios::app::Update", "structhelios_1_1app_1_1Update.html", null ],
     [ "helios::input::UpdateGamepadState", "structhelios_1_1input_1_1UpdateGamepadState.html", null ],
+    [ "helios::input::UpdateJoystickState", "structhelios_1_1input_1_1UpdateJoystickState.html", null ],
     [ "helios::input::UpdateKeyboardState", "structhelios_1_1input_1_1UpdateKeyboardState.html", null ],
     [ "helios::input::UpdateMouseState", "structhelios_1_1input_1_1UpdateMouseState.html", null ],
+    [ "helios::input::UpdatePenState", "structhelios_1_1input_1_1UpdatePenState.html", null ],
     [ "helios::app::UpdateStage", "structhelios_1_1app_1_1UpdateStage.html", null ],
     [ "helios::app::UpdateTime", "structhelios_1_1app_1_1UpdateTime.html", null ],
     [ "helios::Uuid", "classhelios_1_1Uuid.html", null ],

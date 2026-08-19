@@ -17,7 +17,7 @@ var searchData=
   ['and_20apis_14',['Types and APIs',['../md_docs_2guidelines.html#types-and-apis',1,'']]],
   ['and_20global_20allocation_15',['mimalloc and global allocation',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#mimalloc-and-global-allocation',1,'']]],
   ['and_20struct_20layout_16',['Class and struct layout',['../md_docs_2guidelines.html#class-and-struct-layout',1,'']]],
-  ['api_17',['API',['../dir_5194e5fea318fda12687127c23f8aba1.html#public-api',1,'Public API'],['../dir_b60a79ed93f318a37dbc9781b4452c17.html#public-api-1',1,'Public API'],['../dir_f13bc85843fa14191e0ad4a3a157cf60.html#public-api-2',1,'Public API'],['../dir_1b313d86a3cedf427c8a82c0995b1bb6.html#public-api-3',1,'Public API'],['../dir_aebb8dcc11953d78e620bbef0b9e2183.html#public-api-4',1,'Public API'],['../dir_ddca5f149c4ce13074f28b270e950ba9.html#public-api-5',1,'Public API'],['../dir_4f42fb64a2a7ed6ea9e03b9eaacd6206.html#public-api-6',1,'Public API'],['../dir_d365e15d984c8d0205117ee0c40d6716.html#public-api-7',1,'Public API'],['../dir_2241064965c8d9ca993f08b926076f7d.html#public-api-8',1,'Public API'],['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#public-api-9',1,'Public API'],['../dir_4b68c2fef3e151b6b93d5e93b14f1857.html#public-api-10',1,'Public API'],['../dir_2730ace12cf03b0ba989133b5ac743ea.html#public-api-11',1,'Public API'],['../dir_313caf1132e152dd9b58bea13a4052ca.html#public-api-12',1,'Public API'],['../dir_c7f79d9fead0a70cab4af348b59fbdf1.html#public-api-13',1,'Public API'],['../dir_217ee790cdc210ca56feb9a8b7616066.html#public-api-14',1,'Public API']]],
+  ['api_17',['API',['../dir_5194e5fea318fda12687127c23f8aba1.html#public-api',1,'Public API'],['../dir_b60a79ed93f318a37dbc9781b4452c17.html#public-api-1',1,'Public API'],['../dir_f13bc85843fa14191e0ad4a3a157cf60.html#public-api-2',1,'Public API'],['../dir_1b313d86a3cedf427c8a82c0995b1bb6.html#public-api-3',1,'Public API'],['../dir_aebb8dcc11953d78e620bbef0b9e2183.html#public-api-4',1,'Public API'],['../dir_ddca5f149c4ce13074f28b270e950ba9.html#public-api-5',1,'Public API'],['../dir_4f42fb64a2a7ed6ea9e03b9eaacd6206.html#public-api-6',1,'Public API'],['../dir_d365e15d984c8d0205117ee0c40d6716.html#public-api-7',1,'Public API'],['../dir_2241064965c8d9ca993f08b926076f7d.html#public-api-8',1,'Public API'],['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#public-api-9',1,'Public API'],['../dir_4b68c2fef3e151b6b93d5e93b14f1857.html#public-api-10',1,'Public API'],['../dir_2730ace12cf03b0ba989133b5ac743ea.html#public-api-11',1,'Public API'],['../dir_4826e48e68cc38af5b9c29b11756ca6f.html#public-api-12',1,'Public API'],['../dir_404e9df7b1c4707ca4ad3b316f586c31.html#public-api-13',1,'Public API'],['../dir_39160ce22810435969292f6931873579.html#public-api-14',1,'Public API'],['../dir_313caf1132e152dd9b58bea13a4052ca.html#public-api-15',1,'Public API'],['../dir_c7f79d9fead0a70cab4af348b59fbdf1.html#public-api-16',1,'Public API'],['../dir_217ee790cdc210ca56feb9a8b7616066.html#public-api-17',1,'Public API']]],
   ['api_20macros_18',['`platform` — Platform Detection &amp;amp; API Macros',['../dir_4b68c2fef3e151b6b93d5e93b14f1857.html#platform--platform-detection--api-macros',1,'']]],
   ['api_20reference_20doxygen_19',['API reference (Doxygen)',['../index.html#api-reference-doxygen',1,'']]],
   ['apis_20',['Types and APIs',['../md_docs_2guidelines.html#types-and-apis',1,'']]],
@@ -27,11 +27,10 @@ var searchData=
   ['apps_24',['Sub-Apps',['../dir_5194e5fea318fda12687127c23f8aba1.html#sub-apps',1,'']]],
   ['apt_20—_20ubuntu_20debian_25',['Linux (APT — Ubuntu / Debian)',['../index.html#linux-apt--ubuntu--debian',1,'']]],
   ['arch_26',['Linux (Pacman — Arch)',['../index.html#linux-pacman--arch',1,'']]],
-  ['architecture_27',['Architecture',['../index.html#architecture',1,'']]],
-  ['arena_20allocator_28',['Arena Allocator',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#arena-allocator',1,'']]],
-  ['as_20a_20dependency_29',['Using as a Dependency',['../index.html#using-as-a-dependency',1,'']]],
-  ['assert_20integration_30',['Assert Integration',['../dir_2241064965c8d9ca993f08b926076f7d.html#assert-integration',1,'']]],
-  ['assert_20system_31',['Assert System',['../dir_aebb8dcc11953d78e620bbef0b9e2183.html#assert-system',1,'']]],
-  ['async_20—_20task_20based_20parallelism_32',['`async` — Task-Based Parallelism',['../dir_b60a79ed93f318a37dbc9781b4452c17.html#async--task-based-parallelism',1,'']]],
-  ['async_20tasks_33',['Independent Async Tasks',['../dir_b60a79ed93f318a37dbc9781b4452c17.html#independent-async-tasks',1,'']]]
+  ['arena_20allocator_27',['Arena Allocator',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#arena-allocator',1,'']]],
+  ['as_20a_20dependency_28',['Using as a Dependency',['../index.html#using-as-a-dependency',1,'']]],
+  ['assert_20integration_29',['Assert Integration',['../dir_2241064965c8d9ca993f08b926076f7d.html#assert-integration',1,'']]],
+  ['assert_20system_30',['Assert System',['../dir_aebb8dcc11953d78e620bbef0b9e2183.html#assert-system',1,'']]],
+  ['async_20—_20task_20based_20parallelism_31',['`async` — Task-Based Parallelism',['../dir_b60a79ed93f318a37dbc9781b4452c17.html#async--task-based-parallelism',1,'']]],
+  ['async_20tasks_32',['Independent Async Tasks',['../dir_b60a79ed93f318a37dbc9781b4452c17.html#independent-async-tasks',1,'']]]
 ];

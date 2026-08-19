@@ -176,8 +176,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('compiler_8hpp.
   <div class="headertitle"><div class="title">compiler.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;version&gt;</code><br />
-</div>
+
 <p><a href="compiler_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
@@ -187,6 +186,7 @@ Macros</h2></td></tr>
 <tr class="memitem:a754fba4b22744e64a97ad1afc9065bc1" id="r_a754fba4b22744e64a97ad1afc9065bc1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a754fba4b22744e64a97ad1afc9065bc1">HELIOS_FORCE_INLINE</a>&#160;&#160;&#160;inline</td></tr>
 <tr class="memitem:a262ce53dc4ca5edb9c5b33e8f9384580" id="r_a262ce53dc4ca5edb9c5b33e8f9384580"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a262ce53dc4ca5edb9c5b33e8f9384580">HELIOS_ALWAYS_INLINE</a></td></tr>
 <tr class="memitem:a95ef3dcee5d3dd81a75581aaa5a91b3a" id="r_a95ef3dcee5d3dd81a75581aaa5a91b3a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a95ef3dcee5d3dd81a75581aaa5a91b3a">HELIOS_NO_INLINE</a></td></tr>
+<tr class="memitem:a554256c179a82b23733f2f405d10a3fe" id="r_a554256c179a82b23733f2f405d10a3fe"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a554256c179a82b23733f2f405d10a3fe">HELIOS_NO_UNIQUE_ADDRESS</a>&#160;&#160;&#160;[[no_unique_address]]</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a262ce53dc4ca5edb9c5b33e8f9384580" name="a262ce53dc4ca5edb9c5b33e8f9384580"></a>
@@ -201,7 +201,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00044">44</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00042">42</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -221,7 +221,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">(x)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00010">10</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00008">8</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -241,7 +241,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">(x)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00009">9</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00007">7</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -257,7 +257,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00034">34</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00032">32</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -273,7 +273,23 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00052">52</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00050">50</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a554256c179a82b23733f2f405d10a3fe" name="a554256c179a82b23733f2f405d10a3fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a554256c179a82b23733f2f405d10a3fe">&#9670;&#160;</a></span>HELIOS_NO_UNIQUE_ADDRESS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_NO_UNIQUE_ADDRESS&#160;&#160;&#160;[[no_unique_address]]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compiler_8hpp_source.html#l00057">57</a> of file <a class="el" href="compiler_8hpp_source.html">compiler.hpp</a>.</p>
 
 </div>
 </div>

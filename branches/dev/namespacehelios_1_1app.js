@@ -4,6 +4,9 @@ var namespacehelios_1_1app =
       [ "kPluginReadyPollMaxSleep", "namespacehelios_1_1app_1_1anonymous__namespace_02application_8cpp_03.html#a5f8a0fe2119d58b227a6218d1e6a050d", null ],
       [ "kPluginReadyPollMinSleep", "namespacehelios_1_1app_1_1anonymous__namespace_02application_8cpp_03.html#a2bb4c30e88659bda1eafd58b20ad40f8", null ]
     ] ],
+    [ "anonymous_namespace{frame_limiter.cpp}", "namespacehelios_1_1app_1_1anonymous__namespace_02frame__limiter_8cpp_03.html", [
+      [ "RegisterFramePaceSchedule", "namespacehelios_1_1app_1_1anonymous__namespace_02frame__limiter_8cpp_03.html#aa3b9813bb1bb3b4a223aa0c668819b97", null ]
+    ] ],
     [ "App", "classhelios_1_1app_1_1App.html", "classhelios_1_1app_1_1App" ],
     [ "AppExit", "structhelios_1_1app_1_1AppExit.html", "structhelios_1_1app_1_1AppExit" ],
     [ "CountFrame", "structhelios_1_1app_1_1CountFrame.html", "structhelios_1_1app_1_1CountFrame" ],
@@ -17,9 +20,15 @@ var namespacehelios_1_1app =
     [ "FixedRunnerConfig", "structhelios_1_1app_1_1FixedRunnerConfig.html", "structhelios_1_1app_1_1FixedRunnerConfig" ],
     [ "FrameCount", "structhelios_1_1app_1_1FrameCount.html", "structhelios_1_1app_1_1FrameCount" ],
     [ "FrameCountPlugin", "classhelios_1_1app_1_1FrameCountPlugin.html", "classhelios_1_1app_1_1FrameCountPlugin" ],
+    [ "FrameLimiter", "classhelios_1_1app_1_1FrameLimiter.html", "classhelios_1_1app_1_1FrameLimiter" ],
+    [ "FrameLimiterPlugin", "classhelios_1_1app_1_1FrameLimiterPlugin.html", "classhelios_1_1app_1_1FrameLimiterPlugin" ],
+    [ "FrameLimiterSettings", "structhelios_1_1app_1_1FrameLimiterSettings.html", "structhelios_1_1app_1_1FrameLimiterSettings" ],
     [ "FrameOrder", "classhelios_1_1app_1_1FrameOrder.html", "classhelios_1_1app_1_1FrameOrder" ],
+    [ "FramePace", "structhelios_1_1app_1_1FramePace.html", "structhelios_1_1app_1_1FramePace" ],
+    [ "FramePaceStage", "structhelios_1_1app_1_1FramePaceStage.html", "structhelios_1_1app_1_1FramePaceStage" ],
     [ "FramePumpOrder", "structhelios_1_1app_1_1FramePumpOrder.html", null ],
     [ "Last", "structhelios_1_1app_1_1Last.html", "structhelios_1_1app_1_1Last" ],
+    [ "LimitFrameRate", "structhelios_1_1app_1_1LimitFrameRate.html", "structhelios_1_1app_1_1LimitFrameRate" ],
     [ "MainFrameOrder", "structhelios_1_1app_1_1MainFrameOrder.html", null ],
     [ "MainStartup", "structhelios_1_1app_1_1MainStartup.html", "structhelios_1_1app_1_1MainStartup" ],
     [ "Plugin", "classhelios_1_1app_1_1Plugin.html", "classhelios_1_1app_1_1Plugin" ],
@@ -69,7 +78,14 @@ var namespacehelios_1_1app =
       [ "kSuccess", "namespacehelios_1_1app.html#a4825c33ecb12c84774fbf8af4424743ea8c632159fa131f09d04f94e3cbcd8782", null ],
       [ "kFailure", "namespacehelios_1_1app.html#a4825c33ecb12c84774fbf8af4424743ea45d5f642bcbee805302334d856c54259", null ]
     ] ],
+    [ "FrameLimiterMode", "namespacehelios_1_1app.html#a548d242252cc722128cfd8eb09e4862a", [
+      [ "kOff", "namespacehelios_1_1app.html#a548d242252cc722128cfd8eb09e4862aacc9ab5e60ac2a9a675ba64bf4bb49dc8", null ],
+      [ "kManual", "namespacehelios_1_1app.html#a548d242252cc722128cfd8eb09e4862aa840f73673d401f2e539743e82e167a45", null ],
+      [ "kAuto", "namespacehelios_1_1app.html#a548d242252cc722128cfd8eb09e4862aaa8c857c2f1b000c92f9794ebf53888d7", null ]
+    ] ],
     [ "DynamicPluginErrorToString", "namespacehelios_1_1app.html#a6c14f36c354fa92a14823337d0ee4114", null ],
+    [ "InstallFrameLimiter", "namespacehelios_1_1app.html#a39656018dcdb91d3606e1b486aa5e593", null ],
+    [ "InstallFrameLimiter", "namespacehelios_1_1app.html#aa939dd9b3eda3310828662db750faf4a", null ],
     [ "IsSubAppAllowsOverlappingUpdates", "namespacehelios_1_1app.html#a87f1c031a5a935d4d048005583aa17ed", null ],
     [ "IsSubAppAsync", "namespacehelios_1_1app.html#a00582ab5883cec2705f4d5a08badc278", null ],
     [ "PluginNameOf", "namespacehelios_1_1app.html#a39050f58d09134b6e423302abab5a578", null ],
@@ -90,6 +106,8 @@ var namespacehelios_1_1app =
     [ "kExtract", "namespacehelios_1_1app.html#a204a57a85ac876ab0950fcd4ecce94c4", null ],
     [ "kExtractStage", "namespacehelios_1_1app.html#a02953d4591cfda9ffae4789a1205956f", null ],
     [ "kFirst", "namespacehelios_1_1app.html#aaa2e7e163848df09000145bed33817e4", null ],
+    [ "kFramePace", "namespacehelios_1_1app.html#a772844065ef81b58c16371ec4b31bff4", null ],
+    [ "kFramePaceStage", "namespacehelios_1_1app.html#a327c3de28d9ab80cefe825b67b4a297c", null ],
     [ "kLast", "namespacehelios_1_1app.html#a5448171d19536b3b3d7edff33e13b5b0", null ],
     [ "kMainStartup", "namespacehelios_1_1app.html#a089b3bb68338019f95afad425d0a8dd6", null ],
     [ "kPostShutdown", "namespacehelios_1_1app.html#a5abb2299508867bba6b80b43be316d2a", null ],

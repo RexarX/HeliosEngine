@@ -181,8 +181,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('mouse_8hpp.htm
 <div class="contents">
 <div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;format&gt;</code><br />
+<code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;ostream&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="mouse_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -193,6 +196,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom RGBA cursor image with hotspot.  <a href="structhelios_1_1input_1_1CursorImage.html#details">More...</a><br /></td></tr>
 <tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AMouseButton_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AMouseButton_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1MouseButton_01_4.html">std::formatter&lt; helios::input::MouseButton &gt;</a></td></tr>
 <tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3ACursorIcon_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3ACursorIcon_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1CursorIcon_01_4.html">std::formatter&lt; helios::input::CursorIcon &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3ACursorImage_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3ACursorImage_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1CursorImage_01_4.html">std::formatter&lt; helios::input::CursorImage &gt;</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -247,6 +251,14 @@ Functions</h2></td></tr>
 <tr class="memdesc:afa204f0427b65dedb7581da7ee6f5130"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string name of a cursor icon.  <br /></td></tr>
 <tr class="memitem:a9754f84aef0c5a5762ee817ad21d0e13" id="r_a9754f84aef0c5a5762ee817ad21d0e13"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a9754f84aef0c5a5762ee817ad21d0e13">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1input.html#a937f55b9c1b0a9cfd795f799cd652958">CursorIcon</a> icon)</td></tr>
 <tr class="memdesc:a9754f84aef0c5a5762ee817ad21d0e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a cursor icon to an output stream.  <br /></td></tr>
+<tr class="memitem:a459a9ba1077bfe91032eb1612b2e7a45" id="r_a459a9ba1077bfe91032eb1612b2e7a45"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:a459a9ba1077bfe91032eb1612b2e7a45 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a459a9ba1077bfe91032eb1612b2e7a45">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1CursorImage.html">CursorImage</a> &amp;image, It out)</td></tr>
+<tr class="memdesc:a459a9ba1077bfe91032eb1612b2e7a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a custom cursor image using an output iterator.  <br /></td></tr>
+<tr class="memitem:a8d91f7dc67ed800e53cc8077dcb98276" id="r_a8d91f7dc67ed800e53cc8077dcb98276"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a8d91f7dc67ed800e53cc8077dcb98276">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1CursorImage.html">CursorImage</a> &amp;image)</td></tr>
+<tr class="memdesc:a8d91f7dc67ed800e53cc8077dcb98276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a custom cursor image as a string.  <br /></td></tr>
+<tr class="memitem:ae6e5697353d3ada5291cb4e400a5ce24" id="r_ae6e5697353d3ada5291cb4e400a5ce24"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ae6e5697353d3ada5291cb4e400a5ce24">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1CursorImage.html">CursorImage</a> &amp;image)</td></tr>
+<tr class="memdesc:ae6e5697353d3ada5291cb4e400a5ce24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a custom cursor image to an output stream.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

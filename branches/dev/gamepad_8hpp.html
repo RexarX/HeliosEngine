@@ -185,9 +185,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('gamepad_8hpp.h
 <code>#include &lt;array&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;format&gt;</code><br />
+<code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;ostream&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 </div>
 <p><a href="gamepad_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -195,10 +197,20 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('gamepad_8hpp.h
 Classes</h2></td></tr>
 <tr class="memitem:helios_3A_3Ainput_3A_3AGamepadAxisFilter" id="r_helios_3A_3Ainput_3A_3AGamepadAxisFilter"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">helios::input::GamepadAxisFilter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-slot rest-center bookkeeping for <span class="tt"><a class="el" href="structhelios_1_1input_1_1UpdateGamepadState.html" title="Applies gamepad messages into the Gamepads resource.">UpdateGamepadState</a></span>.  <a href="structhelios_1_1input_1_1GamepadAxisFilter.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Ainput_3A_3AGamepadPower" id="r_helios_3A_3Ainput_3A_3AGamepadPower"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1input_1_1GamepadPower.html">helios::input::GamepadPower</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Battery state and charge percent (<span class="tt">-1</span> when unknown).  <a href="structhelios_1_1input_1_1GamepadPower.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Ainput_3A_3AGamepadTouchpadFinger" id="r_helios_3A_3Ainput_3A_3AGamepadTouchpadFinger"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">helios::input::GamepadTouchpadFinger</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">One touchpad finger sample (PlayStation-style pads).  <a href="structhelios_1_1input_1_1GamepadTouchpadFinger.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Ainput_3A_3AGamepad" id="r_helios_3A_3Ainput_3A_3AGamepad"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1input_1_1Gamepad.html">helios::input::Gamepad</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Snapshot of one gamepad slot.  <a href="structhelios_1_1input_1_1Gamepad.html#details">More...</a><br /></td></tr>
 <tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadButton_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadButton_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1GamepadButton_01_4.html">std::formatter&lt; helios::input::GamepadButton &gt;</a></td></tr>
 <tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadAxis_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadAxis_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1GamepadAxis_01_4.html">std::formatter&lt; helios::input::GamepadAxis &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadPowerState_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadPowerState_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1GamepadPowerState_01_4.html">std::formatter&lt; helios::input::GamepadPowerState &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadPower_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadPower_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1GamepadPower_01_4.html">std::formatter&lt; helios::input::GamepadPower &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadTouchpadFinger_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadTouchpadFinger_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1GamepadTouchpadFinger_01_4.html">std::formatter&lt; helios::input::GamepadTouchpadFinger &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadSensor_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadSensor_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1GamepadSensor_01_4.html">std::formatter&lt; helios::input::GamepadSensor &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadDirtyFlags_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepadDirtyFlags_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1GamepadDirtyFlags_01_4.html">std::formatter&lt; helios::input::GamepadDirtyFlags &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepad_20_3E" id="r_std_3A_3Aformatter_3C_20helios_3A_3Ainput_3A_3AGamepad_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01helios_1_1input_1_1Gamepad_01_4.html">std::formatter&lt; helios::input::Gamepad &gt;</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -232,6 +244,20 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da8080617412eb402a1ccc256ed54a02e8">helios::input::kDpadRight</a>
 , <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da901ee52b4f76e4c9184a1ca91eaa76cd">helios::input::kDpadDown</a>
 , <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da5c9b0f138099cd82a4fc481a1d05d60e">helios::input::kDpadLeft</a>
+, <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da53bebe7b3be680ea752d0d8acaca964b">helios::input::kMisc1</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019dab29ea06d9d4c37348f155fbd2ad0658f">helios::input::kRightPaddle1</a>
+, <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da7a705750a313890fc1cfbdee6e390fa5">helios::input::kLeftPaddle1</a>
+, <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da3292d353edc9906ef2c01e7d937768f1">helios::input::kRightPaddle2</a>
+, <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da2a80481b57e64ca6269d366cbd5781b9">helios::input::kLeftPaddle2</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da3bed3b362ca9cb3b6ab388802646145e">helios::input::kTouchpad</a>
+, <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019dac502fcecedcce46ffadb3785164f890a">helios::input::kMisc2</a>
+, <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da2c56eb9dd5e1fafb42028566e3be3f3c">helios::input::kMisc3</a>
+, <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da14c6b07fccdcf3b5f78bf1e55929fd6d">helios::input::kMisc4</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da19e141db154fe824547b371c9e5625d0">helios::input::kMisc5</a>
+, <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019dacccf0c6746f38fda5218917fb5513170">helios::input::kMisc6</a>
 , <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da5a162d352f3b3603e03fc9b2f043fb40">helios::input::kCount</a>
 <br />
  }</td></tr>
@@ -248,6 +274,32 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="memdesc:a24be6c0a181c8c4c00eac3c960a74e74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contiguous gamepad axis identifiers (GLFW order).  <a href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">More...</a><br /></td></tr>
+<tr class="memitem:adb9558d1eaf30151889b2c1c14e3d3cd" id="r_adb9558d1eaf30151889b2c1c14e3d3cd"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#adb9558d1eaf30151889b2c1c14e3d3cd">helios::input::GamepadPowerState</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1input.html#adb9558d1eaf30151889b2c1c14e3d3cda25c2dc47991b3df171ed5192bcf70390">helios::input::kUnknown</a> = 0
+, <a class="el" href="namespacehelios_1_1input.html#adb9558d1eaf30151889b2c1c14e3d3cda9cc2cb77312ab483759095ae084a06ed">helios::input::kOnBattery</a>
+, <a class="el" href="namespacehelios_1_1input.html#adb9558d1eaf30151889b2c1c14e3d3cdad30114a88462eba170133828dbb257ae">helios::input::kNoBattery</a>
+, <a class="el" href="namespacehelios_1_1input.html#adb9558d1eaf30151889b2c1c14e3d3cda830cd58eeb334d21b040c7e3ca691101">helios::input::kCharging</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1input.html#adb9558d1eaf30151889b2c1c14e3d3cdadfcedb2cab8be6973f564772cb19fac3">helios::input::kCharged</a>
+, <a class="el" href="namespacehelios_1_1input.html#adb9558d1eaf30151889b2c1c14e3d3cdadc328ff1c22270d65ea283ea0df32a39">helios::input::kWired</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:adb9558d1eaf30151889b2c1c14e3d3cd"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1input_1_1Gamepad.html" title="Snapshot of one gamepad slot.">Gamepad</a> battery / power snapshot.  <a href="namespacehelios_1_1input.html#adb9558d1eaf30151889b2c1c14e3d3cd">More...</a><br /></td></tr>
+<tr class="memitem:afbcd6bff11cb54ee0cd105e6b68a0312" id="r_afbcd6bff11cb54ee0cd105e6b68a0312"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#afbcd6bff11cb54ee0cd105e6b68a0312">helios::input::GamepadSensor</a> : uint8_t { <a class="el" href="namespacehelios_1_1input.html#afbcd6bff11cb54ee0cd105e6b68a0312a93dc1708730fa31dd9c3d0b155208480">helios::input::kGyro</a> = 0
+, <a class="el" href="namespacehelios_1_1input.html#afbcd6bff11cb54ee0cd105e6b68a0312a6a3ca65964ed681ff7e506036507a354">helios::input::kAccel</a>
+, <a class="el" href="namespacehelios_1_1input.html#afbcd6bff11cb54ee0cd105e6b68a0312a5a162d352f3b3603e03fc9b2f043fb40">helios::input::kCount</a>
+ }</td></tr>
+<tr class="memdesc:afbcd6bff11cb54ee0cd105e6b68a0312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motion sensor kind reported by <span class="tt"><a class="el" href="structhelios_1_1input_1_1GamepadSensorUpdateMsg.html" title="Latest gyro or accelerometer sample for a gamepad slot.">GamepadSensorUpdateMsg</a></span>.  <a href="namespacehelios_1_1input.html#afbcd6bff11cb54ee0cd105e6b68a0312">More...</a><br /></td></tr>
+<tr class="memitem:a5bc4358dcf5e35a7eebf15fac43d3794" id="r_a5bc4358dcf5e35a7eebf15fac43d3794"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794">helios::input::GamepadDirtyFlags</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794a35c3ace1970663a16e5c65baa5941b13">helios::input::kNone</a> = 0
+, <a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794a1277ef793dd9a65102c4090065f50d2b">helios::input::kRumble</a> = 1U &lt;&lt; 0U
+, <a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794a186fc9ed9d5cc36972dbaad59613611f">helios::input::kTriggerRumble</a> = 1U &lt;&lt; 1U
+, <a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794a67d2f741618e5e4eda3f02274fe8bf38">helios::input::kLed</a> = 1U &lt;&lt; 2U
+, <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794aa5659ef383fdc54f1189b93689be81ff">helios::input::kSensors</a> = 1U &lt;&lt; 3U
+<br />
+ }</td></tr>
+<tr class="memdesc:a5bc4358dcf5e35a7eebf15fac43d3794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitmask of pending gamepad output changes for backend synchronization.  <a href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -257,6 +309,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:a680f8c4110c5f27a2eec830dae5e727c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether <span class="tt">axis</span> is on the left stick.  <br /></td></tr>
 <tr class="memitem:a28a6274825aa4ba58304028089797ef3" id="r_a28a6274825aa4ba58304028089797ef3"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a28a6274825aa4ba58304028089797ef3">helios::input::RightStick</a> (<a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">GamepadAxis</a> axis) noexcept</td></tr>
 <tr class="memdesc:a28a6274825aa4ba58304028089797ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether <span class="tt">axis</span> is on the right stick.  <br /></td></tr>
+<tr class="memitem:afaae072744963df1e9bb2fe442758ffe" id="r_afaae072744963df1e9bb2fe442758ffe"><td class="memItemLeft">constexpr <a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794">GamepadDirtyFlags</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#afaae072744963df1e9bb2fe442758ffe">helios::input::operator|</a> (<a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794">GamepadDirtyFlags</a> lhs, <a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794">GamepadDirtyFlags</a> rhs) noexcept</td></tr>
+<tr class="memdesc:afaae072744963df1e9bb2fe442758ffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combines gamepad dirty flags.  <br /></td></tr>
+<tr class="memitem:a6c6e9ac566845249a810745a857788d8" id="r_a6c6e9ac566845249a810745a857788d8"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a6c6e9ac566845249a810745a857788d8">helios::input::HasFlag</a> (<a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794">GamepadDirtyFlags</a> flags, <a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794">GamepadDirtyFlags</a> flag) noexcept</td></tr>
+<tr class="memdesc:a6c6e9ac566845249a810745a857788d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests whether a gamepad dirty flag is set.  <br /></td></tr>
 <tr class="memitem:abfa49efa01a2f42af610f986f7bc1045" id="r_abfa49efa01a2f42af610f986f7bc1045"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#abfa49efa01a2f42af610f986f7bc1045">helios::input::ToString</a> (<a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019d">GamepadButton</a> button) noexcept</td></tr>
 <tr class="memdesc:abfa49efa01a2f42af610f986f7bc1045"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string name of a gamepad button.  <br /></td></tr>
 <tr class="memitem:a4d8c47bd55b251d34bec57a13e8bf307" id="r_a4d8c47bd55b251d34bec57a13e8bf307"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a4d8c47bd55b251d34bec57a13e8bf307">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019d">GamepadButton</a> button)</td></tr>
@@ -265,6 +321,46 @@ Functions</h2></td></tr>
 <tr class="memdesc:acb46dae55cd7f9fdeb0e419b401e7d36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string name of a gamepad axis.  <br /></td></tr>
 <tr class="memitem:a727f219739875dac134d7fda01d4ebad" id="r_a727f219739875dac134d7fda01d4ebad"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a727f219739875dac134d7fda01d4ebad">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">GamepadAxis</a> axis)</td></tr>
 <tr class="memdesc:a727f219739875dac134d7fda01d4ebad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a gamepad axis to an output stream.  <br /></td></tr>
+<tr class="memitem:a8dbc69421e88ce4fd201cd76c43cd4dd" id="r_a8dbc69421e88ce4fd201cd76c43cd4dd"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a8dbc69421e88ce4fd201cd76c43cd4dd">helios::input::ToString</a> (<a class="el" href="namespacehelios_1_1input.html#adb9558d1eaf30151889b2c1c14e3d3cd">GamepadPowerState</a> state) noexcept</td></tr>
+<tr class="memdesc:a8dbc69421e88ce4fd201cd76c43cd4dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string name of a gamepad power state.  <br /></td></tr>
+<tr class="memitem:abecf0343cb0f4d9eda31adb6be3a6974" id="r_abecf0343cb0f4d9eda31adb6be3a6974"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#abecf0343cb0f4d9eda31adb6be3a6974">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1input.html#adb9558d1eaf30151889b2c1c14e3d3cd">GamepadPowerState</a> state)</td></tr>
+<tr class="memdesc:abecf0343cb0f4d9eda31adb6be3a6974"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a gamepad power state to an output stream.  <br /></td></tr>
+<tr class="memitem:ade47fd8f669dea715af846e72ea07a8f" id="r_ade47fd8f669dea715af846e72ea07a8f"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:ade47fd8f669dea715af846e72ea07a8f template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ade47fd8f669dea715af846e72ea07a8f">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1GamepadPower.html">GamepadPower</a> &amp;power, It out)</td></tr>
+<tr class="memdesc:ade47fd8f669dea715af846e72ea07a8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a gamepad power snapshot using an output iterator.  <br /></td></tr>
+<tr class="memitem:a8737011fb7f49f6c9a44ba32e29e9e7a" id="r_a8737011fb7f49f6c9a44ba32e29e9e7a"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a8737011fb7f49f6c9a44ba32e29e9e7a">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1GamepadPower.html">GamepadPower</a> &amp;power)</td></tr>
+<tr class="memdesc:a8737011fb7f49f6c9a44ba32e29e9e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a gamepad power snapshot as a string.  <br /></td></tr>
+<tr class="memitem:a75fde54c6c2a55f2f245c7f0232a007d" id="r_a75fde54c6c2a55f2f245c7f0232a007d"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a75fde54c6c2a55f2f245c7f0232a007d">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1GamepadPower.html">GamepadPower</a> &amp;power)</td></tr>
+<tr class="memdesc:a75fde54c6c2a55f2f245c7f0232a007d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a gamepad power snapshot to an output stream.  <br /></td></tr>
+<tr class="memitem:a7fa052f63e0a394eba3a6fd390675a04" id="r_a7fa052f63e0a394eba3a6fd390675a04"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:a7fa052f63e0a394eba3a6fd390675a04 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a7fa052f63e0a394eba3a6fd390675a04">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">GamepadTouchpadFinger</a> &amp;finger, It out)</td></tr>
+<tr class="memdesc:a7fa052f63e0a394eba3a6fd390675a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a touchpad finger sample using an output iterator.  <br /></td></tr>
+<tr class="memitem:ad1fc8f965c2642c53ddca6c916e7c4a0" id="r_ad1fc8f965c2642c53ddca6c916e7c4a0"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ad1fc8f965c2642c53ddca6c916e7c4a0">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">GamepadTouchpadFinger</a> &amp;finger)</td></tr>
+<tr class="memdesc:ad1fc8f965c2642c53ddca6c916e7c4a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a touchpad finger sample as a string.  <br /></td></tr>
+<tr class="memitem:a5c669be71974d6669a373ae01cf63456" id="r_a5c669be71974d6669a373ae01cf63456"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a5c669be71974d6669a373ae01cf63456">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">GamepadTouchpadFinger</a> &amp;finger)</td></tr>
+<tr class="memdesc:a5c669be71974d6669a373ae01cf63456"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a touchpad finger sample to an output stream.  <br /></td></tr>
+<tr class="memitem:a03dc4eb08fc484fcc9656bc19d5217f1" id="r_a03dc4eb08fc484fcc9656bc19d5217f1"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a03dc4eb08fc484fcc9656bc19d5217f1">helios::input::ToString</a> (<a class="el" href="namespacehelios_1_1input.html#afbcd6bff11cb54ee0cd105e6b68a0312">GamepadSensor</a> sensor) noexcept</td></tr>
+<tr class="memdesc:a03dc4eb08fc484fcc9656bc19d5217f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string name of a gamepad sensor.  <br /></td></tr>
+<tr class="memitem:a22b91993a636e0578a6e8ba3cc48c15b" id="r_a22b91993a636e0578a6e8ba3cc48c15b"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a22b91993a636e0578a6e8ba3cc48c15b">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1input.html#afbcd6bff11cb54ee0cd105e6b68a0312">GamepadSensor</a> sensor)</td></tr>
+<tr class="memdesc:a22b91993a636e0578a6e8ba3cc48c15b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a gamepad sensor to an output stream.  <br /></td></tr>
+<tr class="memitem:a1cb8b062c5672460030dad863767f8e3" id="r_a1cb8b062c5672460030dad863767f8e3"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:a1cb8b062c5672460030dad863767f8e3 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a1cb8b062c5672460030dad863767f8e3">helios::input::ToString</a> (<a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794">GamepadDirtyFlags</a> flags, It out, bool with_prefix=false)</td></tr>
+<tr class="memdesc:a1cb8b062c5672460030dad863767f8e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats gamepad dirty flags as a pipe-separated list and writes to an output iterator.  <br /></td></tr>
+<tr class="memitem:ac507804c970da3d812d2751d4a23f1b9" id="r_ac507804c970da3d812d2751d4a23f1b9"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ac507804c970da3d812d2751d4a23f1b9">helios::input::ToString</a> (<a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794">GamepadDirtyFlags</a> flags, bool with_prefix=false)</td></tr>
+<tr class="memdesc:ac507804c970da3d812d2751d4a23f1b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats gamepad dirty flags as a pipe-separated list of flag names.  <br /></td></tr>
+<tr class="memitem:a1c84cccd27f672eb4dfaa4d8ee5636d5" id="r_a1c84cccd27f672eb4dfaa4d8ee5636d5"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a1c84cccd27f672eb4dfaa4d8ee5636d5">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1input.html#a5bc4358dcf5e35a7eebf15fac43d3794">GamepadDirtyFlags</a> flags)</td></tr>
+<tr class="memdesc:a1c84cccd27f672eb4dfaa4d8ee5636d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs gamepad dirty flags to an output stream.  <br /></td></tr>
+<tr class="memitem:a318c2656cc29e6f460dcc446079cb801" id="r_a318c2656cc29e6f460dcc446079cb801"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+requires std::output_iterator&lt;It, char&gt;</td></tr>
+<tr class="memitem:a318c2656cc29e6f460dcc446079cb801 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a318c2656cc29e6f460dcc446079cb801">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> &amp;pad, It out)</td></tr>
+<tr class="memdesc:a318c2656cc29e6f460dcc446079cb801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a gamepad snapshot using an output iterator.  <br /></td></tr>
+<tr class="memitem:a010b256bffded7fa4ce5174e3466ee44" id="r_a010b256bffded7fa4ce5174e3466ee44"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a010b256bffded7fa4ce5174e3466ee44">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> &amp;pad)</td></tr>
+<tr class="memdesc:a010b256bffded7fa4ce5174e3466ee44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a gamepad snapshot as a string.  <br /></td></tr>
+<tr class="memitem:ab36db95a6ce568d46d1cbb37a783eb46" id="r_ab36db95a6ce568d46d1cbb37a783eb46"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ab36db95a6ce568d46d1cbb37a783eb46">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> &amp;pad)</td></tr>
+<tr class="memdesc:ab36db95a6ce568d46d1cbb37a783eb46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a gamepad snapshot to an output stream.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,5 +1,26 @@
 var searchData=
 [
-  ['query_2ehpp_0',['query.hpp',['../query_8hpp.html',1,'']]],
-  ['queue_2ehpp_1',['queue.hpp',['../command_2queue_8hpp.html',1,'(Global Namespace)'],['../message_2queue_8hpp.html',1,'(Global Namespace)']]]
+  ['param_2ehpp_0',['param.hpp',['../param_8hpp.html',1,'']]],
+  ['param_5fpolicy_2ehpp_1',['param_policy.hpp',['../param__policy_8hpp.html',1,'']]],
+  ['params_2ehpp_2',['params.hpp',['../ecs_2include_2helios_2ecs_2message_2params_8hpp.html',1,'(Global Namespace)'],['../ecs_2include_2helios_2ecs_2query_2params_8hpp.html',1,'(Global Namespace)'],['../ecs_2include_2helios_2ecs_2resource_2params_8hpp.html',1,'(Global Namespace)'],['../input_2include_2helios_2input_2params_8hpp.html',1,'(Global Namespace)'],['../window_2include_2helios_2window_2params_8hpp.html',1,'(Global Namespace)']]],
+  ['pch_2ehpp_3',['pch.hpp',['../app_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../core_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../ecs_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../glfw_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../input_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../log_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../memory_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../profile_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../sdl3_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../sdl3__input_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../sdl3__window_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../utils_2src_2pch_8hpp.html',1,'(Global Namespace)'],['../window_2src_2pch_8hpp.html',1,'(Global Namespace)']]],
+  ['pen_2ehpp_4',['pen.hpp',['../pen_8hpp.html',1,'']]],
+  ['platform_2ehpp_5',['platform.hpp',['../platform_8hpp.html',1,'']]],
+  ['plot_2ehpp_6',['plot.hpp',['../plot_8hpp.html',1,'']]],
+  ['plugin_2ecpp_7',['plugin.cpp',['../glfw_2src_2plugin_8cpp.html',1,'(Global Namespace)'],['../input_2src_2plugin_8cpp.html',1,'(Global Namespace)'],['../sdl3_2src_2plugin_8cpp.html',1,'(Global Namespace)'],['../sdl3__input_2src_2plugin_8cpp.html',1,'(Global Namespace)'],['../sdl3__window_2src_2plugin_8cpp.html',1,'(Global Namespace)'],['../window_2src_2plugin_8cpp.html',1,'(Global Namespace)']]],
+  ['plugin_2ehpp_8',['plugin.hpp',['../app_2include_2helios_2app_2plugin_8hpp.html',1,'(Global Namespace)'],['../glfw_2include_2helios_2glfw_2plugin_8hpp.html',1,'(Global Namespace)'],['../input_2include_2helios_2input_2plugin_8hpp.html',1,'(Global Namespace)'],['../sdl3_2include_2helios_2sdl3_2plugin_8hpp.html',1,'(Global Namespace)'],['../sdl3__input_2include_2helios_2sdl3_2input_2plugin_8hpp.html',1,'(Global Namespace)'],['../sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp.html',1,'(Global Namespace)'],['../window_2include_2helios_2window_2plugin_8hpp.html',1,'(Global Namespace)']]],
+  ['plugin_5fgroup_2ecpp_9',['plugin_group.cpp',['../plugin__group_8cpp.html',1,'']]],
+  ['plugin_5fgroup_2ehpp_10',['plugin_group.hpp',['../plugin__group_8hpp.html',1,'']]],
+  ['poll_2ecpp_11',['poll.cpp',['../glfw_2src_2systems_2poll_8cpp.html',1,'(Global Namespace)'],['../sdl3__window_2src_2systems_2poll_8cpp.html',1,'(Global Namespace)']]],
+  ['poll_2ehpp_12',['poll.hpp',['../glfw_2include_2helios_2glfw_2systems_2poll_8hpp.html',1,'(Global Namespace)'],['../sdl3__window_2include_2helios_2sdl3_2window_2systems_2poll_8hpp.html',1,'(Global Namespace)']]],
+  ['poll_5fgamepads_2ecpp_13',['poll_gamepads.cpp',['../poll__gamepads_8cpp.html',1,'']]],
+  ['poll_5fgamepads_2ehpp_14',['poll_gamepads.hpp',['../poll__gamepads_8hpp.html',1,'']]],
+  ['pool_5fallocator_2ecpp_15',['pool_allocator.cpp',['../pool__allocator_8cpp.html',1,'']]],
+  ['pool_5fallocator_2ehpp_16',['pool_allocator.hpp',['../pool__allocator_8hpp.html',1,'']]],
+  ['profile_2ehpp_17',['profile.hpp',['../profile_8hpp.html',1,'']]],
+  ['profiler_2ecpp_18',['profiler.cpp',['../profiler_8cpp.html',1,'']]],
+  ['profiler_2ehpp_19',['profiler.hpp',['../profiler_8hpp.html',1,'']]],
+  ['properties_2ehpp_20',['properties.hpp',['../properties_8hpp.html',1,'']]],
+  ['pump_5fevents_2ecpp_21',['pump_events.cpp',['../pump__events_8cpp.html',1,'']]],
+  ['pump_5fevents_2ehpp_22',['pump_events.hpp',['../pump__events_8hpp.html',1,'']]]
 ];

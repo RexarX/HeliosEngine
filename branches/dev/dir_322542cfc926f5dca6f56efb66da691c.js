@@ -9,6 +9,7 @@ var dir_322542cfc926f5dca6f56efb66da691c =
     [ "id.hpp", "id_8hpp.html", "id_8hpp" ],
     [ "manager.hpp", "message_2manager_8hpp.html", "message_2manager_8hpp" ],
     [ "message.hpp", "ecs_2include_2helios_2ecs_2message_2message_8hpp.html", "ecs_2include_2helios_2ecs_2message_2message_8hpp" ],
+    [ "params.hpp", "ecs_2include_2helios_2ecs_2message_2params_8hpp.html", "ecs_2include_2helios_2ecs_2message_2params_8hpp" ],
     [ "queue.hpp", "message_2queue_8hpp.html", "message_2queue_8hpp" ],
     [ "reader.hpp", "reader_8hpp.html", "reader_8hpp" ],
     [ "wrapper.hpp", "wrapper_8hpp.html", "wrapper_8hpp" ],

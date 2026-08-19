@@ -9,5 +9,7 @@ var classhelios_1_1app_1_1FrameOrder =
     [ "InsertBefore", "classhelios_1_1app_1_1FrameOrder.html#acec4d60ad40f90bbb4825122aad4a454", null ],
     [ "Labels", "classhelios_1_1app_1_1FrameOrder.html#a502ad5383756cbfc19518d7229a6017a", null ],
     [ "TryPushBack", "classhelios_1_1app_1_1FrameOrder.html#afd76bc185a957e9a9b0b3429077e8fb5", null ],
-    [ "TryPushBack", "classhelios_1_1app_1_1FrameOrder.html#a8c2e2c7735a210266db37406494e0c7e", null ]
+    [ "TryPushBack", "classhelios_1_1app_1_1FrameOrder.html#a8c2e2c7735a210266db37406494e0c7e", null ],
+    [ "TryPushFront", "classhelios_1_1app_1_1FrameOrder.html#a98dabc1ab8c6efb9d863833359b1c11b", null ],
+    [ "TryPushFront", "classhelios_1_1app_1_1FrameOrder.html#adeb06a3c78613cd9c3b702347477b33b", null ]
 ];

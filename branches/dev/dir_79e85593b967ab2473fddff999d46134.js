@@ -2,6 +2,7 @@ var dir_79e85593b967ab2473fddff999d46134 =
 [
     [ "executor", "dir_feaa4db664d821a626453f35fc354b88.html", "dir_feaa4db664d821a626453f35fc354b88" ],
     [ "dag.hpp", "dag_8hpp.html", "dag_8hpp" ],
+    [ "local_arena.hpp", "local__arena_8hpp.html", "local__arena_8hpp" ],
     [ "run_condition.hpp", "run__condition_8hpp.html", "run__condition_8hpp" ],
     [ "run_scope.hpp", "run__scope_8hpp.html", "run__scope_8hpp" ],
     [ "run_stage_options.hpp", "run__stage__options_8hpp.html", "run__stage__options_8hpp" ],

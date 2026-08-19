@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structhelios_1_1window_1_1Properties-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">helios::window::Properties Struct Reference</div></div>
@@ -183,6 +184,23 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 
 <p><code>#include &lt;<a class="el" href="properties_8hpp_source.html">properties.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab52e6874e3182f029c49559969315ea1" id="r_ab52e6874e3182f029c49559969315ea1"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#ab52e6874e3182f029c49559969315ea1">GetSize</a> () const noexcept -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td></tr>
+<tr class="memdesc:ab52e6874e3182f029c49559969315ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the window size.  <br /></td></tr>
+<tr class="memitem:a841d1f190930c76554ea483ad328aeff" id="r_a841d1f190930c76554ea483ad328aeff"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a841d1f190930c76554ea483ad328aeff">GetClientSize</a> () const noexcept -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td></tr>
+<tr class="memdesc:a841d1f190930c76554ea483ad328aeff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the client-area size.  <br /></td></tr>
+<tr class="memitem:aa4609397014c512ebfe2fe5de67e1836" id="r_aa4609397014c512ebfe2fe5de67e1836"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#aa4609397014c512ebfe2fe5de67e1836">GetPos</a> () const noexcept -&gt; std::pair&lt; std::optional&lt; int32_t &gt;, std::optional&lt; int32_t &gt; &gt;</td></tr>
+<tr class="memdesc:aa4609397014c512ebfe2fe5de67e1836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the window position.  <br /></td></tr>
+<tr class="memitem:a99a9190fb649af4a799fcd83d58ff9d7" id="r_a99a9190fb649af4a799fcd83d58ff9d7"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a99a9190fb649af4a799fcd83d58ff9d7">GetContentScale</a> () const noexcept -&gt; std::pair&lt; float, float &gt;</td></tr>
+<tr class="memdesc:a99a9190fb649af4a799fcd83d58ff9d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the content scale.  <br /></td></tr>
+<tr class="memitem:ab79c939ce143041d5fb8f68e7d423916" id="r_ab79c939ce143041d5fb8f68e7d423916"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#ab79c939ce143041d5fb8f68e7d423916">GetMinSize</a> () const noexcept -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td></tr>
+<tr class="memdesc:ab79c939ce143041d5fb8f68e7d423916"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the minimum size limits.  <br /></td></tr>
+<tr class="memitem:aef6121e051254b28cb832012b109d50c" id="r_aef6121e051254b28cb832012b109d50c"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#aef6121e051254b28cb832012b109d50c">GetMaxSize</a> () const noexcept -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td></tr>
+<tr class="memdesc:aef6121e051254b28cb832012b109d50c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the maximum size limits.  <br /></td></tr>
+<tr class="memitem:a25c96e561d6189291a6ac71f3b720c54" id="r_a25c96e561d6189291a6ac71f3b720c54"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a25c96e561d6189291a6ac71f3b720c54">GetAspectRatio</a> () const noexcept -&gt; std::pair&lt; std::optional&lt; int32_t &gt;, std::optional&lt; int32_t &gt; &gt;</td></tr>
+<tr class="memdesc:a25c96e561d6189291a6ac71f3b720c54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the aspect-ratio constraint.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a205d8089e44e54980e3410695be1d4c7" id="r_a205d8089e44e54980e3410695be1d4c7"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a205d8089e44e54980e3410695be1d4c7">title</a> = &quot;Helios&quot;</td></tr>
@@ -224,8 +242,219 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Creation-time and mutable window properties. </p>
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00264">264</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
-</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00111">111</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a25c96e561d6189291a6ac71f3b720c54" name="a25c96e561d6189291a6ac71f3b720c54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25c96e561d6189291a6ac71f3b720c54">&#9670;&#160;</a></span>GetAspectRatio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Properties::GetAspectRatio </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; std::optional&lt; int32_t &gt;, std::optional&lt; int32_t &gt; &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the aspect-ratio constraint. </p>
+<dl class="section return"><dt>Returns</dt><dd>Numerator and denominator, if set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00206">206</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a841d1f190930c76554ea483ad328aeff" name="a841d1f190930c76554ea483ad328aeff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a841d1f190930c76554ea483ad328aeff">&#9670;&#160;</a></span>GetClientSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Properties::GetClientSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the client-area size. </p>
+<dl class="section return"><dt>Returns</dt><dd>Client width and height, if set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00161">161</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a99a9190fb649af4a799fcd83d58ff9d7" name="a99a9190fb649af4a799fcd83d58ff9d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99a9190fb649af4a799fcd83d58ff9d7">&#9670;&#160;</a></span>GetContentScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Properties::GetContentScale </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; float, float &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the content scale. </p>
+<dl class="section return"><dt>Returns</dt><dd>Horizontal and vertical scale </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00179">179</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aef6121e051254b28cb832012b109d50c" name="aef6121e051254b28cb832012b109d50c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef6121e051254b28cb832012b109d50c">&#9670;&#160;</a></span>GetMaxSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Properties::GetMaxSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the maximum size limits. </p>
+<dl class="section return"><dt>Returns</dt><dd>Maximum width and height, if set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00197">197</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab79c939ce143041d5fb8f68e7d423916" name="ab79c939ce143041d5fb8f68e7d423916"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab79c939ce143041d5fb8f68e7d423916">&#9670;&#160;</a></span>GetMinSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Properties::GetMinSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the minimum size limits. </p>
+<dl class="section return"><dt>Returns</dt><dd>Minimum width and height, if set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00188">188</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa4609397014c512ebfe2fe5de67e1836" name="aa4609397014c512ebfe2fe5de67e1836"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4609397014c512ebfe2fe5de67e1836">&#9670;&#160;</a></span>GetPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Properties::GetPos </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; std::optional&lt; int32_t &gt;, std::optional&lt; int32_t &gt; &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the window position. </p>
+<dl class="section return"><dt>Returns</dt><dd>X and y, if set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00170">170</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab52e6874e3182f029c49559969315ea1" name="ab52e6874e3182f029c49559969315ea1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab52e6874e3182f029c49559969315ea1">&#9670;&#160;</a></span>GetSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::Properties::GetSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; std::optional&lt; uint32_t &gt;, std::optional&lt; uint32_t &gt; &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the window size. </p>
+<dl class="section return"><dt>Returns</dt><dd>Width and height, if set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00152">152</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a753a986ebf15d267be77fe95f059147d" name="a753a986ebf15d267be77fe95f059147d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a753a986ebf15d267be77fe95f059147d">&#9670;&#160;</a></span>aspect_denom</h2>
 
@@ -238,7 +467,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00280">280</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00127">127</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -254,7 +483,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00279">279</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00126">126</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -270,7 +499,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00293">293</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00140">140</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +515,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00286">286</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00133">133</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -302,7 +531,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00270">270</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00117">117</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -318,7 +547,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00269">269</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00116">116</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -334,7 +563,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00281">281</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00128">128</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -350,7 +579,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00282">282</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00129">129</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -366,7 +595,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00285">285</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00132">132</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -382,7 +611,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00290">290</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00137">137</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -398,7 +627,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00292">292</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00139">139</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +643,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00294">294</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00141">141</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -430,7 +659,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00288">288</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00135">135</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -446,7 +675,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00268">268</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00115">115</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -462,7 +691,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00295">295</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00142">142</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -478,7 +707,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00266">266</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00113">113</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -494,7 +723,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00278">278</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00125">125</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -510,7 +739,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00277">277</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00124">124</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -526,7 +755,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00291">291</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00138">138</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -542,7 +771,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00276">276</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00123">123</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -558,7 +787,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00275">275</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00122">122</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -574,7 +803,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00284">284</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00131">131</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -590,7 +819,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00273">273</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00120">120</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -606,7 +835,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00299">299</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00146">146</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -622,7 +851,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00283">283</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00130">130</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -638,7 +867,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00271">271</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00118">118</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -654,7 +883,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00272">272</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00119">119</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -670,7 +899,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00274">274</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00121">121</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -686,7 +915,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00289">289</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00136">136</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -702,7 +931,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00298">298</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00145">145</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -718,7 +947,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00297">297</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00144">144</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -734,7 +963,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00265">265</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00112">112</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -750,7 +979,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00296">296</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00143">143</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -766,7 +995,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00287">287</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00134">134</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>
@@ -782,7 +1011,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00267">267</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="properties_8hpp_source.html#l00114">114</a> of file <a class="el" href="properties_8hpp_source.html">properties.hpp</a>.</p>
 
 </div>
 </div>

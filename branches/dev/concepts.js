@@ -16,6 +16,12 @@ var concepts =
         [ "SubTask", "concepthelios_1_1async_1_1SubTask.html", null ],
         [ "AnyTask", "concepthelios_1_1async_1_1AnyTask.html", null ]
       ] ],
+      [ "details", "namespacehelios_1_1details.html", [
+        [ "HasUnambiguousCallOperator", "concepthelios_1_1details_1_1HasUnambiguousCallOperator.html", null ],
+        [ "DecaysToFunctionPointer", "concepthelios_1_1details_1_1DecaysToFunctionPointer.html", null ],
+        [ "EmptyDefaultCallable", "concepthelios_1_1details_1_1EmptyDefaultCallable.html", null ],
+        [ "SafeTemporaryCallable", "concepthelios_1_1details_1_1SafeTemporaryCallable.html", null ]
+      ] ],
       [ "ecs", "namespacehelios_1_1ecs.html", [
         [ "details", "namespacehelios_1_1ecs_1_1details.html", [
           [ "HasSystemParamCallOperator", "concepthelios_1_1ecs_1_1details_1_1HasSystemParamCallOperator.html", null ],

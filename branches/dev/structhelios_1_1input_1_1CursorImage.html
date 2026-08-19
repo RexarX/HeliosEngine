@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structhelios_1_1input_1_1CursorImage-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">helios::input::CursorImage Struct Reference</div></div>
@@ -183,6 +184,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 
 <p><code>#include &lt;<a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:afae8384363f2d79567d8c7fe1f7aafa1" id="r_afae8384363f2d79567d8c7fe1f7aafa1"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#afae8384363f2d79567d8c7fe1f7aafa1">GetSize</a> () const noexcept -&gt; std::pair&lt; uint32_t, uint32_t &gt;</td></tr>
+<tr class="memdesc:afae8384363f2d79567d8c7fe1f7aafa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the image size in pixels.  <br /></td></tr>
+<tr class="memitem:a3bd767c4d7539c8a6f63871b2e378078" id="r_a3bd767c4d7539c8a6f63871b2e378078"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a3bd767c4d7539c8a6f63871b2e378078">GetHotspot</a> () const noexcept -&gt; std::pair&lt; int32_t, int32_t &gt;</td></tr>
+<tr class="memdesc:a3bd767c4d7539c8a6f63871b2e378078"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the cursor hotspot.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ae9d4f136d3c81505aa47ac9801faec0f" id="r_ae9d4f136d3c81505aa47ac9801faec0f"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#ae9d4f136d3c81505aa47ac9801faec0f">width</a> = 0</td></tr>
@@ -194,8 +202,69 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Custom RGBA cursor image with hotspot. </p>
 
-<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00041">41</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
-</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00044">44</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a3bd767c4d7539c8a6f63871b2e378078" name="a3bd767c4d7539c8a6f63871b2e378078"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bd767c4d7539c8a6f63871b2e378078">&#9670;&#160;</a></span>GetHotspot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::input::CursorImage::GetHotspot </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; int32_t, int32_t &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the cursor hotspot. </p>
+<dl class="section return"><dt>Returns</dt><dd>Hotspot x and y in pixels </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00064">64</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afae8384363f2d79567d8c7fe1f7aafa1" name="afae8384363f2d79567d8c7fe1f7aafa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afae8384363f2d79567d8c7fe1f7aafa1">&#9670;&#160;</a></span>GetSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::input::CursorImage::GetSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; uint32_t, uint32_t &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the image size in pixels. </p>
+<dl class="section return"><dt>Returns</dt><dd>Width and height </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00055">55</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a555589addb4bb4f3739d5da5336dd706" name="a555589addb4bb4f3739d5da5336dd706"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a555589addb4bb4f3739d5da5336dd706">&#9670;&#160;</a></span>height</h2>
 
@@ -208,7 +277,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00043">43</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00046">46</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
 
 </div>
 </div>
@@ -224,7 +293,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00044">44</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00047">47</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
 
 </div>
 </div>
@@ -240,7 +309,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00045">45</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00048">48</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
 
 </div>
 </div>
@@ -256,7 +325,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00046">46</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00049">49</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
 
 </div>
 </div>
@@ -272,7 +341,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00042">42</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mouse_8hpp_source.html#l00045">45</a> of file <a class="el" href="mouse_8hpp_source.html">mouse.hpp</a>.</p>
 
 </div>
 </div>

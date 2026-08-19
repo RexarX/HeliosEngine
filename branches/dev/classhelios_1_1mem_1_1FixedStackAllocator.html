@@ -228,7 +228,7 @@ Public Member Functions</h2></td></tr>
 <p>LIFO-aware deallocation on the current top allocation uses CAS on the bump offset. Non-LIFO frees are no-ops for PMR compatibility. </p><dl class="section note"><dt>Note</dt><dd><span class="tt">allocate</span> and LIFO <span class="tt">deallocate</span> on the current head are lock-free. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd><span class="tt"><a class="el" href="#a6a61e34bb22e7a1ce5a23aa7498a8c33" title="Soft-resets bump offset and statistics.">Reset()</a></span> and <span class="tt"><a class="el" href="#a42d1846b72d332c2e1e8847f7064f90b" title="Rewinds bump offset to marker.">RewindToMarker()</a></span> must not run concurrently with <span class="tt">allocate</span> or <span class="tt">deallocate</span>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00022">22</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00023">23</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2789bd7779ed4fb211fce3e7e8ec2254" name="a2789bd7779ed4fb211fce3e7e8ec2254"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2789bd7779ed4fb211fce3e7e8ec2254">&#9670;&#160;</a></span>FixedStackAllocator() <span class="overload">[1/3]</span></h2>
@@ -262,7 +262,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00138">138</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00139">139</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -322,7 +322,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00043">43</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00044">44</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -349,7 +349,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00044">44</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00045">45</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -380,7 +380,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns true when no active allocations remain. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00073">73</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00074">74</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -410,7 +410,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns current marker. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structhelios_1_1mem_1_1FixedStackAllocator_1_1Marker.html" title="Marker capturing the current bump offset for rewind operations.">Marker</a> that can later be rewound to </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00088">88</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00089">89</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -440,7 +440,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns configured backing capacity. </p>
 <dl class="section return"><dt>Returns</dt><dd>Capacity in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00102">102</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00103">103</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -501,7 +501,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this allocator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00148">148</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00149">149</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -537,7 +537,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True when owned, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00175">175</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00176">176</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -567,7 +567,7 @@ Public Member Functions</h2></td></tr>
 <p>Soft-resets bump offset and statistics. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Must not be called concurrently with <span class="tt">allocate</span> or <span class="tt">deallocate</span>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00170">170</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00171">171</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -603,7 +603,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00159">159</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00160">160</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -633,7 +633,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns runtime statistics snapshot. </p>
 <dl class="section return"><dt>Returns</dt><dd>Allocator stats for this stack </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00187">187</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00188">188</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -663,7 +663,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns configured backing capacity. </p>
 <dl class="section return"><dt>Returns</dt><dd>Capacity in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00108">108</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixed__stack__allocator_8hpp_source.html#l00109">109</a> of file <a class="el" href="fixed__stack__allocator_8hpp_source.html">fixed_stack_allocator.hpp</a>.</p>
 
 </div>
 </div>

@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structhelios_1_1window_1_1ContentScaleChangedMsg-members.html">List of all members</a>  </div>
@@ -184,11 +185,16 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 
 <p><code>#include &lt;<a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a36f001c2ad0bc1a880cee842e2ae5260" id="r_a36f001c2ad0bc1a880cee842e2ae5260"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a36f001c2ad0bc1a880cee842e2ae5260">GetScale</a> () const noexcept -&gt; std::pair&lt; float, float &gt;</td></tr>
+<tr class="memdesc:a36f001c2ad0bc1a880cee842e2ae5260"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the content scale.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ae7893c224cf740c7e61558a4f221a8c4" id="r_ae7893c224cf740c7e61558a4f221a8c4"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae7893c224cf740c7e61558a4f221a8c4">entity</a></td></tr>
-<tr class="memitem:afbad84bac40a0aff7e9441faae5dbb91" id="r_afbad84bac40a0aff7e9441faae5dbb91"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#afbad84bac40a0aff7e9441faae5dbb91">scale_x</a> = 1.0f</td></tr>
-<tr class="memitem:a8ad2b52fabda997fd4dfc39f55656ec9" id="r_a8ad2b52fabda997fd4dfc39f55656ec9"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a8ad2b52fabda997fd4dfc39f55656ec9">scale_y</a> = 1.0f</td></tr>
+<tr class="memitem:afbad84bac40a0aff7e9441faae5dbb91" id="r_afbad84bac40a0aff7e9441faae5dbb91"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#afbad84bac40a0aff7e9441faae5dbb91">scale_x</a> = 1.0F</td></tr>
+<tr class="memitem:a8ad2b52fabda997fd4dfc39f55656ec9" id="r_a8ad2b52fabda997fd4dfc39f55656ec9"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a8ad2b52fabda997fd4dfc39f55656ec9">scale_y</a> = 1.0F</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -200,8 +206,39 @@ Static Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sent when a window content scale changes. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00061">61</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
-</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00083">83</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a36f001c2ad0bc1a880cee842e2ae5260" name="a36f001c2ad0bc1a880cee842e2ae5260"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36f001c2ad0bc1a880cee842e2ae5260">&#9670;&#160;</a></span>GetScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::window::ContentScaleChangedMsg::GetScale </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; std::pair&lt; float, float &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the content scale. </p>
+<dl class="section return"><dt>Returns</dt><dd>Horizontal and vertical scale </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00098">98</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="ae7893c224cf740c7e61558a4f221a8c4" name="ae7893c224cf740c7e61558a4f221a8c4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae7893c224cf740c7e61558a4f221a8c4">&#9670;&#160;</a></span>entity</h2>
 
@@ -214,7 +251,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00068">68</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00090">90</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -238,7 +275,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00066">66</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00088">88</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -262,7 +299,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00064">64</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00086">86</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +323,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00065">65</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00087">87</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -312,7 +349,7 @@ Static Public Attributes</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line">                                    =</div>
 <div class="line"><span class="stringliteral">&quot;helios::window::ContentScaleChangedMsg&quot;</span></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00062">62</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00084">84</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -323,12 +360,12 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float helios::window::ContentScaleChangedMsg::scale_x = 1.0f</td>
+          <td class="memname">float helios::window::ContentScaleChangedMsg::scale_x = 1.0F</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00069">69</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00091">91</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -339,12 +376,12 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float helios::window::ContentScaleChangedMsg::scale_y = 1.0f</td>
+          <td class="memname">float helios::window::ContentScaleChangedMsg::scale_y = 1.0F</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00070">70</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html#l00092">92</a> of file <a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">messages.hpp</a>.</p>
 
 </div>
 </div>

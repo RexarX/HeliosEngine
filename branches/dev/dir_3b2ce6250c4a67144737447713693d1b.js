@@ -8,5 +8,5 @@ var dir_3b2ce6250c4a67144737447713693d1b =
     [ "properties.hpp", "properties_8hpp.html", "properties_8hpp" ],
     [ "resources.hpp", "window_2include_2helios_2window_2resources_8hpp.html", "window_2include_2helios_2window_2resources_8hpp" ],
     [ "schedules.hpp", "window_2include_2helios_2window_2schedules_8hpp.html", "window_2include_2helios_2window_2schedules_8hpp" ],
-    [ "window.hpp", "window_8hpp.html", null ]
+    [ "window.hpp", "window_2include_2helios_2window_2window_8hpp.html", null ]
 ];

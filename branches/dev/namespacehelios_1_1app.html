@@ -186,6 +186,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacehelio
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:anonymous_5Fnamespace_7Bapplication_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bapplication_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1app_1_1anonymous__namespace_02application_8cpp_03.html">anonymous_namespace{application.cpp}</a></td></tr>
+<tr class="memitem:anonymous_5Fnamespace_7Bframe_5Flimiter_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bframe_5Flimiter_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1app_1_1anonymous__namespace_02frame__limiter_8cpp_03.html">anonymous_namespace{frame_limiter.cpp}</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -215,12 +216,24 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application frame counter resource.  <a href="structhelios_1_1app_1_1FrameCount.html#details">More...</a><br /></td></tr>
 <tr class="memitem:FrameCountPlugin" id="r_FrameCountPlugin"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1app_1_1FrameCountPlugin.html">FrameCountPlugin</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the <span class="tt"><a class="el" href="structhelios_1_1app_1_1FrameCount.html" title="Application frame counter resource.">FrameCount</a></span> resource and its per-frame update system.  <a href="classhelios_1_1app_1_1FrameCountPlugin.html#details">More...</a><br /></td></tr>
+<tr class="memitem:FrameLimiter" id="r_FrameLimiter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1app_1_1FrameLimiter.html">FrameLimiter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-world frame pacer. One instance per <span class="tt"><a class="el" href="classhelios_1_1app_1_1App.html" title="Application class.">App</a></span> / <span class="tt"><a class="el" href="classhelios_1_1app_1_1SubApp.html" title="A sub-application with its own ECS world and scheduler.">SubApp</a></span> world.  <a href="classhelios_1_1app_1_1FrameLimiter.html#details">More...</a><br /></td></tr>
+<tr class="memitem:FrameLimiterPlugin" id="r_FrameLimiterPlugin"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1app_1_1FrameLimiterPlugin.html">FrameLimiterPlugin</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a <span class="tt"><a class="el" href="classhelios_1_1app_1_1FrameLimiter.html" title="Per-world frame pacer. One instance per App / SubApp world.">FrameLimiter</a></span> and paces the main app's <span class="tt">Update()</span>.  <a href="classhelios_1_1app_1_1FrameLimiterPlugin.html#details">More...</a><br /></td></tr>
+<tr class="memitem:FrameLimiterSettings" id="r_FrameLimiterSettings"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1FrameLimiterSettings.html">FrameLimiterSettings</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construction / install configuration for <span class="tt"><a class="el" href="classhelios_1_1app_1_1FrameLimiter.html" title="Per-world frame pacer. One instance per App / SubApp world.">FrameLimiter</a></span>.  <a href="structhelios_1_1app_1_1FrameLimiterSettings.html#details">More...</a><br /></td></tr>
 <tr class="memitem:FrameOrder" id="r_FrameOrder"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1app_1_1FrameOrder.html">FrameOrder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ordered list of stages to run for one frame pass.  <a href="classhelios_1_1app_1_1FrameOrder.html#details">More...</a><br /></td></tr>
+<tr class="memitem:FramePace" id="r_FramePace"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1FramePace.html">FramePace</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main-thread schedule that calls <span class="tt"><a class="el" href="classhelios_1_1app_1_1FrameLimiter.html#ad1255bc537b6a38732509914a4dc5181" title="Blocks until the next tick boundary when pacing is active.">FrameLimiter::Wait()</a></span>.  <a href="structhelios_1_1app_1_1FramePace.html#details">More...</a><br /></td></tr>
+<tr class="memitem:FramePaceStage" id="r_FramePaceStage"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1FramePaceStage.html">FramePaceStage</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stage that runs frame pacing before window polling and update.  <a href="structhelios_1_1app_1_1FramePaceStage.html#details">More...</a><br /></td></tr>
 <tr class="memitem:FramePumpOrder" id="r_FramePumpOrder"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1FramePumpOrder.html">FramePumpOrder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stages run by nested frame pumps (e.g. OS modal loops).  <a href="structhelios_1_1app_1_1FramePumpOrder.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Last" id="r_Last"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1Last.html">Last</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1Last.html" title="Last schedule in a frame.">Last</a> schedule in a frame.  <a href="structhelios_1_1app_1_1Last.html#details">More...</a><br /></td></tr>
+<tr class="memitem:LimitFrameRate" id="r_LimitFrameRate"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1LimitFrameRate.html">LimitFrameRate</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes <span class="tt"><a class="el" href="classhelios_1_1app_1_1FrameLimiter.html#ad1255bc537b6a38732509914a4dc5181" title="Blocks until the next tick boundary when pacing is active.">FrameLimiter::Wait()</a></span> once per scheduled run.  <a href="structhelios_1_1app_1_1LimitFrameRate.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MainFrameOrder" id="r_MainFrameOrder"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html">MainFrameOrder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stages run by <span class="tt"><a class="el" href="classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4" title="Updates the application and its subsystems.">App::Update()</a></span> each frame.  <a href="structhelios_1_1app_1_1MainFrameOrder.html#details">More...</a><br /></td></tr>
 <tr class="memitem:MainStartup" id="r_MainStartup"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1app_1_1MainStartup.html">MainStartup</a></td></tr>
@@ -308,6 +321,11 @@ Enumerations</h2></td></tr>
 , <a class="el" href="#a4825c33ecb12c84774fbf8af4424743ea45d5f642bcbee805302334d856c54259">kFailure</a> = 1
  }</td></tr>
 <tr class="memdesc:a4825c33ecb12c84774fbf8af4424743e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application exit codes.  <a href="#a4825c33ecb12c84774fbf8af4424743e">More...</a><br /></td></tr>
+<tr class="memitem:a548d242252cc722128cfd8eb09e4862a" id="r_a548d242252cc722128cfd8eb09e4862a"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a548d242252cc722128cfd8eb09e4862a">FrameLimiterMode</a> : uint8_t { <a class="el" href="#a548d242252cc722128cfd8eb09e4862aacc9ab5e60ac2a9a675ba64bf4bb49dc8">kOff</a>
+, <a class="el" href="#a548d242252cc722128cfd8eb09e4862aa840f73673d401f2e539743e82e167a45">kManual</a>
+, <a class="el" href="#a548d242252cc722128cfd8eb09e4862aaa8c857c2f1b000c92f9794ebf53888d7">kAuto</a>
+ }</td></tr>
+<tr class="memdesc:a548d242252cc722128cfd8eb09e4862a"><td class="mdescLeft">&#160;</td><td class="mdescRight">How <span class="tt"><a class="el" href="classhelios_1_1app_1_1FrameLimiter.html" title="Per-world frame pacer. One instance per App / SubApp world.">FrameLimiter</a></span> chooses a frame interval.  <a href="#a548d242252cc722128cfd8eb09e4862a">More...</a><br /></td></tr>
 <tr class="memitem:ab891c48f4a5152ee2a0635478f7419ee" id="r_ab891c48f4a5152ee2a0635478f7419ee"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee">DynamicPluginError</a> : uint8_t { <br />
 &#160;&#160;<a class="el" href="#ab891c48f4a5152ee2a0635478f7419eea6d0530ba38df14ef9873d03ef6a3e29a">kLibraryLoadFailed</a>
 , <a class="el" href="#ab891c48f4a5152ee2a0635478f7419eea55807f54e02fe9fcbe5e28e1efb7e3dd">kCreateSymbolNotFound</a>
@@ -322,6 +340,10 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a39656018dcdb91d3606e1b486aa5e593" id="r_a39656018dcdb91d3606e1b486aa5e593"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a39656018dcdb91d3606e1b486aa5e593">InstallFrameLimiter</a> (<a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;app, <a class="el" href="structhelios_1_1app_1_1FrameLimiterSettings.html">FrameLimiterSettings</a> settings={})</td></tr>
+<tr class="memdesc:a39656018dcdb91d3606e1b486aa5e593"><td class="mdescLeft">&#160;</td><td class="mdescRight">Installs a limiter on the main app world.  <br /></td></tr>
+<tr class="memitem:aa939dd9b3eda3310828662db750faf4a" id="r_aa939dd9b3eda3310828662db750faf4a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa939dd9b3eda3310828662db750faf4a">InstallFrameLimiter</a> (<a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;sub_app, <a class="el" href="structhelios_1_1app_1_1FrameLimiterSettings.html">FrameLimiterSettings</a> settings={})</td></tr>
+<tr class="memdesc:aa939dd9b3eda3310828662db750faf4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Installs a limiter on a sub-app world.  <br /></td></tr>
 <tr class="memitem:a6c14f36c354fa92a14823337d0ee4114" id="r_a6c14f36c354fa92a14823337d0ee4114"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a6c14f36c354fa92a14823337d0ee4114">DynamicPluginErrorToString</a> (<a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee">DynamicPluginError</a> error) noexcept</td></tr>
 <tr class="memdesc:a6c14f36c354fa92a14823337d0ee4114"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a human-readable description for a <span class="tt"><a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span>.  <br /></td></tr>
 <tr class="memitem:a39050f58d09134b6e423302abab5a578" id="r_a39050f58d09134b6e423302abab5a578"><td class="memTemplParams" colspan="2">template&lt;PluginTrait T&gt; </td></tr>
@@ -363,6 +385,10 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a327c3de28d9ab80cefe825b67b4a297c" id="r_a327c3de28d9ab80cefe825b67b4a297c"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1app_1_1FramePaceStage.html">FramePaceStage</a>&#160;</td><td class="memItemRight"><a class="el" href="#a327c3de28d9ab80cefe825b67b4a297c">kFramePaceStage</a> {}</td></tr>
+<tr class="memdesc:a327c3de28d9ab80cefe825b67b4a297c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builtin frame-pace stage (main app <span class="tt"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a></span> only).  <br /></td></tr>
+<tr class="memitem:a772844065ef81b58c16371ec4b31bff4" id="r_a772844065ef81b58c16371ec4b31bff4"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1app_1_1FramePace.html">FramePace</a>&#160;</td><td class="memItemRight"><a class="el" href="#a772844065ef81b58c16371ec4b31bff4">kFramePace</a> {}</td></tr>
+<tr class="memdesc:a772844065ef81b58c16371ec4b31bff4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builtin frame-pace schedule.  <br /></td></tr>
 <tr class="memitem:aab4005c98d8bec33b01b1a9be47aad0d" id="r_aab4005c98d8bec33b01b1a9be47aad0d"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#aab4005c98d8bec33b01b1a9be47aad0d">kDefaultCreateSymbol</a> = &quot;helios_create_plugin&quot;</td></tr>
 <tr class="memdesc:aab4005c98d8bec33b01b1a9be47aad0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default symbol name for the plugin creation function.  <br /></td></tr>
 <tr class="memitem:a267cb12b56cf7c71ce8296a62a812294" id="r_a267cb12b56cf7c71ce8296a62a812294"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a267cb12b56cf7c71ce8296a62a812294">kDefaultPluginIdSymbol</a></td></tr>
@@ -418,7 +444,7 @@ Variables</h2></td></tr>
 <p>Function signature for plugin creation. </p>
 <p>Dynamic plugins must export a function with this signature. The function should create and return a new <a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> instance. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00027">27</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00024">24</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -436,7 +462,7 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00101">101</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00098">98</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -455,7 +481,7 @@ template&lt;typename T&gt; </div>
 <p>Function signature for the plugin type export symbol. </p>
 <p>Dynamic plugins must export this with C linkage. The returned pointer must remain valid for the lifetime of the library image. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00081">81</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00078">78</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -568,7 +594,7 @@ template&lt;typename T&gt; </div>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00091">91</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00088">88</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -600,7 +626,41 @@ template&lt;typename T&gt; </div>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00049">49</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00048">48</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a548d242252cc722128cfd8eb09e4862a" name="a548d242252cc722128cfd8eb09e4862a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a548d242252cc722128cfd8eb09e4862a">&#9670;&#160;</a></span>FrameLimiterMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a548d242252cc722128cfd8eb09e4862a">helios::app::FrameLimiterMode</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>How <span class="tt"><a class="el" href="classhelios_1_1app_1_1FrameLimiter.html" title="Per-world frame pacer. One instance per App / SubApp world.">FrameLimiter</a></span> chooses a frame interval. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a548d242252cc722128cfd8eb09e4862aacc9ab5e60ac2a9a675ba64bf4bb49dc8" name="a548d242252cc722128cfd8eb09e4862aacc9ab5e60ac2a9a675ba64bf4bb49dc8"></a>kOff&#160;</td><td class="fielddoc"><p>Do not sleep. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a548d242252cc722128cfd8eb09e4862aa840f73673d401f2e539743e82e167a45" name="a548d242252cc722128cfd8eb09e4862aa840f73673d401f2e539743e82e167a45"></a>kManual&#160;</td><td class="fielddoc"><p>Sleep using <span class="tt">Interval()</span>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a548d242252cc722128cfd8eb09e4862aaa8c857c2f1b000c92f9794ebf53888d7" name="a548d242252cc722128cfd8eb09e4862aaa8c857c2f1b000c92f9794ebf53888d7"></a>kAuto&#160;</td><td class="fielddoc"><p>Sleep using <span class="tt">RefreshRate()</span> when it is non-zero. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="frame__limiter_8hpp_source.html#l00019">19</a> of file <a class="el" href="frame__limiter_8hpp_source.html">frame_limiter.hpp</a>.</p>
 
 </div>
 </div>
@@ -637,7 +697,72 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String description of the error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00108">108</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00105">105</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a39656018dcdb91d3606e1b486aa5e593" name="a39656018dcdb91d3606e1b486aa5e593"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39656018dcdb91d3606e1b486aa5e593">&#9670;&#160;</a></span>InstallFrameLimiter() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::InstallFrameLimiter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>app</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1app_1_1FrameLimiterSettings.html">FrameLimiterSettings</a></td>          <td class="paramname"><span class="paramname"><em>settings</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Installs a limiter on the main app world. </p>
+<p>Adds <span class="tt"><a class="el" href="classhelios_1_1app_1_1FrameLimiter.html" title="Per-world frame pacer. One instance per App / SubApp world.">FrameLimiter</a></span>, a main-thread <span class="tt"><a class="el" href="#a772844065ef81b58c16371ec4b31bff4" title="Builtin frame-pace schedule.">kFramePace</a></span> schedule in <span class="tt"><a class="el" href="#a327c3de28d9ab80cefe825b67b4a297c" title="Builtin frame-pace stage (main app MainFrameOrder only).">kFramePaceStage</a></span>, and prepends that stage to <span class="tt"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a></span>. Nested <span class="tt"><a class="el" href="structhelios_1_1app_1_1FramePumpOrder.html" title="Stages run by nested frame pumps (e.g. OS modal loops).">FramePumpOrder</a></span> is left unchanged. Prefer this (or <span class="tt"><a class="el" href="classhelios_1_1app_1_1FrameLimiterPlugin.html" title="Adds a FrameLimiter and paces the main app&#39;s Update().">FrameLimiterPlugin</a></span>) with <span class="tt"><a class="el" href="#a022063119d282398a06fd9bba73f20fc" title="Runs the application until an AppExit message is received.">RunDefault</a></span> instead of combining with <span class="tt"><a class="el" href="#a4755d091b0a2d56d677014598c68378d" title="Runs the application with a fixed timestep.">RunFixed</a></span>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">app</td><td>Application to configure </td></tr>
+    <tr><td class="paramname">settings</td><td>Limiter configuration </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="frame__limiter_8cpp_source.html#l00094">94</a> of file <a class="el" href="frame__limiter_8cpp_source.html">frame_limiter.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa939dd9b3eda3310828662db750faf4a" name="aa939dd9b3eda3310828662db750faf4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa939dd9b3eda3310828662db750faf4a">&#9670;&#160;</a></span>InstallFrameLimiter() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::InstallFrameLimiter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sub_app</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1app_1_1FrameLimiterSettings.html">FrameLimiterSettings</a></td>          <td class="paramname"><span class="paramname"><em>settings</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Installs a limiter on a sub-app world. </p>
+<p>Adds <span class="tt"><a class="el" href="classhelios_1_1app_1_1FrameLimiter.html" title="Per-world frame pacer. One instance per App / SubApp world.">FrameLimiter</a></span> and a main-thread <span class="tt"><a class="el" href="#a772844065ef81b58c16371ec4b31bff4" title="Builtin frame-pace schedule.">kFramePace</a></span> schedule in <span class="tt"><a class="el" href="#aad0e9cb0d1b47caf5140069e17729d66" title="Builtin stage for per-frame updates.">kUpdateStage</a></span> ordered before <span class="tt"><a class="el" href="#aaa2e7e163848df09000145bed33817e4" title="Builtin first schedule.">kFirst</a></span>. Blocking sub-apps still join the main frame (<span class="tt">WaitForSubApps</span>); independent rates require an async sub-app. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the sub-app allows overlapping updates. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sub_app</td><td>Sub-app to configure </td></tr>
+    <tr><td class="paramname">settings</td><td>Limiter configuration </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="frame__limiter_8cpp_source.html#l00105">105</a> of file <a class="el" href="frame__limiter_8cpp_source.html">frame_limiter.cpp</a>.</p>
 
 </div>
 </div>
@@ -804,9 +929,6 @@ template&lt;PluginTrait T&gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void helios::app::RegisterBuiltinFrameOrders </td>
@@ -815,11 +937,6 @@ template&lt;PluginTrait T&gt; </div>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Inserts default <span class="tt"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a></span> and <span class="tt"><a class="el" href="structhelios_1_1app_1_1FramePumpOrder.html" title="Stages run by nested frame pumps (e.g. OS modal loops).">FramePumpOrder</a></span> resources. </p>
@@ -830,7 +947,7 @@ template&lt;PluginTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00243">243</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedules_8cpp_source.html#l00096">96</a> of file <a class="el" href="schedules_8cpp_source.html">schedules.cpp</a>.</p>
 
 </div>
 </div>
@@ -839,9 +956,6 @@ template&lt;PluginTrait T&gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void helios::app::RegisterBuiltinSchedules </td>
@@ -850,11 +964,6 @@ template&lt;PluginTrait T&gt; </div>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Registers default application schedules on an ECS scheduler. </p>
@@ -865,7 +974,7 @@ template&lt;PluginTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00156">156</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedules_8cpp_source.html#l00014">14</a> of file <a class="el" href="schedules_8cpp_source.html">schedules.cpp</a>.</p>
 
 </div>
 </div>
@@ -874,9 +983,6 @@ template&lt;PluginTrait T&gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void helios::app::RegisterBuiltinSubAppSchedules </td>
@@ -885,11 +991,6 @@ template&lt;PluginTrait T&gt; </div>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Registers built-in schedules for a sub-app ECS scheduler. </p>
@@ -900,7 +1001,7 @@ template&lt;PluginTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00261">261</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedules_8cpp_source.html#l00107">107</a> of file <a class="el" href="schedules_8cpp_source.html">schedules.cpp</a>.</p>
 
 </div>
 </div>
@@ -1008,7 +1109,7 @@ template&lt;PluginTrait T&gt; </div>
 </div><div class="memdoc">
 
 <p>Runs the application with a fixed timestep. </p>
-<p>Uses <span class="tt">sleep_until</span> against an advancing absolute target time point so that scheduler wake-up overshoot on one frame is automatically absorbed by a shorter sleep on the next, preventing drift accumulation. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Uses <span class="tt"><a class="el" href="namespacehelios_1_1utils.html#af9349d72cdc36d9f1cb81f5b261ec651" title="Sleeps until deadline with SDL_DelayPrecise-style accuracy.">utils::PreciseSleepUntil</a></span> against an advancing absolute target time point so that scheduler wake-up overshoot on one frame is absorbed by a shorter sleep on the next, preventing drift accumulation. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">app</td><td>Application to update </td></tr>
     <tr><td class="paramname">config</td><td>Fixed-runner configuration </td></tr>
@@ -1054,7 +1155,7 @@ template&lt;PluginTrait T&gt; </div>
 </div><div class="memdoc">
 
 <p>Runs the sub-app with a fixed timestep. </p>
-<p>Intended for async sub-apps via <span class="tt"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a28a325e3247768bfdc62d20844273ae7" title="Sets the function invoked each frame to run this sub-app&#39;s update pass.">SubApp::SetRunner</a></span>. Uses <span class="tt">sleep_until</span> against an advancing absolute target time point so that scheduler wake-up overshoot on one frame is automatically absorbed by a shorter sleep on the next, preventing drift accumulation. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Intended for async sub-apps via <span class="tt"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a28a325e3247768bfdc62d20844273ae7" title="Sets the function invoked each frame to run this sub-app&#39;s update pass.">SubApp::SetRunner</a></span>. Uses <span class="tt"><a class="el" href="namespacehelios_1_1utils.html#af9349d72cdc36d9f1cb81f5b261ec651" title="Sleeps until deadline with SDL_DelayPrecise-style accuracy.">utils::PreciseSleepUntil</a></span> against an advancing absolute target time point so that scheduler wake-up overshoot on one frame is absorbed by a shorter sleep on the next, preventing drift accumulation. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sub_app</td><td>Sub-app to update </td></tr>
     <tr><td class="paramname">executor</td><td>Async executor used to build and run schedules </td></tr>
@@ -1248,7 +1349,7 @@ template&lt;SubAppTrait T&gt; </div>
 
 <p>Default symbol name for the plugin creation function. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00084">84</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00081">81</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -1276,7 +1377,7 @@ template&lt;SubAppTrait T&gt; </div>
 </div><!-- fragment -->
 <p>Default symbol name for the plugin ID function. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00087">87</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00084">84</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -1355,6 +1456,58 @@ template&lt;SubAppTrait T&gt; </div>
 <p>Builtin first schedule. </p>
 
 <p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00084">84</a> of file <a class="el" href="app_2include_2helios_2app_2schedules_8hpp_source.html">schedules.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a772844065ef81b58c16371ec4b31bff4" name="a772844065ef81b58c16371ec4b31bff4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a772844065ef81b58c16371ec4b31bff4">&#9670;&#160;</a></span>kFramePace</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1app_1_1FramePace.html">FramePace</a> helios::app::kFramePace {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Builtin frame-pace schedule. </p>
+
+<p class="definition">Definition at line <a class="el" href="frame__limiter_8hpp_source.html#l00105">105</a> of file <a class="el" href="frame__limiter_8hpp_source.html">frame_limiter.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a327c3de28d9ab80cefe825b67b4a297c" name="a327c3de28d9ab80cefe825b67b4a297c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a327c3de28d9ab80cefe825b67b4a297c">&#9670;&#160;</a></span>kFramePaceStage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1app_1_1FramePaceStage.html">FramePaceStage</a> helios::app::kFramePaceStage {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Builtin frame-pace stage (main app <span class="tt"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a></span> only). </p>
+
+<p class="definition">Definition at line <a class="el" href="frame__limiter_8hpp_source.html#l00097">97</a> of file <a class="el" href="frame__limiter_8hpp_source.html">frame_limiter.hpp</a>.</p>
 
 </div>
 </div>

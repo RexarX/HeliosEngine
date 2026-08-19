@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tasktype_0',['TaskType',['../namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd',1,'helios::async']]]
+  ['scheduleerrorkind_0',['ScheduleErrorKind',['../namespacehelios_1_1ecs.html#abd1fa5ad164fafc85b0908aac3fbf20b',1,'helios::ecs']]]
 ];

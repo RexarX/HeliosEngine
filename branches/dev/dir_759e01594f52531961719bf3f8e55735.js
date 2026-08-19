@@ -9,6 +9,7 @@ var dir_759e01594f52531961719bf3f8e55735 =
     [ "hash.hpp", "hash_8hpp.html", "hash_8hpp" ],
     [ "macro.hpp", "macro_8hpp.html", "macro_8hpp" ],
     [ "random.hpp", "random_8hpp.html", "random_8hpp" ],
+    [ "sleep.hpp", "sleep_8hpp.html", "sleep_8hpp" ],
     [ "string_hash.hpp", "string__hash_8hpp.html", "string__hash_8hpp" ],
     [ "timer.hpp", "timer_8hpp.html", "timer_8hpp" ],
     [ "type_info.hpp", "type__info_8hpp.html", "type__info_8hpp" ],

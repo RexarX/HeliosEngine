@@ -16,6 +16,7 @@ var classhelios_1_1ecs_1_1Entity =
     [ "operator=", "classhelios_1_1ecs_1_1Entity.html#aec3fe441b32207d13a58a909e86f9400", null ],
     [ "operator=", "classhelios_1_1ecs_1_1Entity.html#acfbbf9ac15c5625c85e4a42ac3b7b7f3", null ],
     [ "operator==", "classhelios_1_1ecs_1_1Entity.html#a9003d6cbc86aa36b09ef5c31d69c58a7", null ],
+    [ "ReuseCount", "classhelios_1_1ecs_1_1Entity.html#ab0894a38b4d74ad9850c2c1b11a2fbc5", null ],
     [ "Valid", "classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7", null ],
     [ "kAliveBit", "classhelios_1_1ecs_1_1Entity.html#a1fdbfcb1516a2928e29f0d70ece28469", null ],
     [ "kCounterMask", "classhelios_1_1ecs_1_1Entity.html#a6e6d11703469bc7e2cbba9fbe4b0b647", null ],

@@ -223,16 +223,16 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Drains gamepad messages into aggregated gamepad state. </p>
-<p><a class="el" href="classhelios_1_1input_1_1Axis.html" title="Stores continuous float values for axis enums.">Axis</a> messages are stored as raw backend samples. Filtered stick and trigger values are written to <span class="tt"><a class="el" href="structhelios_1_1input_1_1Gamepad.html#a2a0ade2b2cbd89fd88d5b7fb5a1cb20b">Gamepad::axes</a></span> using <span class="tt"><a class="el" href="structhelios_1_1input_1_1Settings.html" title="Global input behavior settings.">Settings</a></span>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p><a class="el" href="classhelios_1_1input_1_1Axis.html" title="Stores continuous float values for axis enums.">Axis</a> messages are stored as raw backend samples. Filtered stick and trigger values are written to <span class="tt"><a class="el" href="structhelios_1_1input_1_1Gamepad.html#a2a0ade2b2cbd89fd88d5b7fb5a1cb20b">Gamepad::axes</a></span> using <span class="tt"><a class="el" href="structhelios_1_1input_1_1Settings.html" title="Global input behavior settings.">Settings</a></span>. Remap, power, sensor, and touchpad messages update extra device fields. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">gamepads</td><td><a class="el" href="structhelios_1_1input_1_1Gamepads.html" title="Fixed gamepad slot table (GLFW joystick range 0..15).">Gamepads</a> resource </td></tr>
     <tr><td class="paramname">settings</td><td>Stick / trigger filters and auto-calibration </td></tr>
-    <tr><td class="paramname">messages</td><td><a class="el" href="structhelios_1_1input_1_1Gamepad.html" title="Snapshot of one gamepad slot.">Gamepad</a> connection, button, and axis readers </td></tr>
+    <tr><td class="paramname">messages</td><td><a class="el" href="structhelios_1_1input_1_1Gamepad.html" title="Snapshot of one gamepad slot.">Gamepad</a> connection, button, axis, and extra readers </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00180">180</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00219">219</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
 
 </div>
 </div>

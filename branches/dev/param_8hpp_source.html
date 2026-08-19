@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: src/ecs/include/helios/ecs/resource/param.hpp Source File</title>
+    <title>Helios Engine: src/ecs/include/helios/ecs/system/param.hpp Source File</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -176,94 +176,70 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('param_8hpp_sou
 <div class="contents">
 <a href="param_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="resource_8hpp.html">helios/ecs/resource/resource.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="access__policy_8hpp.html">helios/ecs/system/access_policy.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs.html">helios::ecs</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"></span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> * @brief Access to resource.</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> * @details Pointer-like interface for resource access.</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> * Use `Res&lt;const T&gt;` for read-only access and `Res&lt;T&gt;` for mutable</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> * access.</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * @tparam T Resource type</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">template</span> &lt;ResourceTrait T&gt;</div>
-<div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html">   18</a></span><span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">Res</a> {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">   * @brief Constructs a resource reference.</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">   * @param resource Resource value</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">   24</a></span>  <span class="keyword">explicit</span> <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">Res</a>(T&amp; resource) noexcept : resource_(resource) {}</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html#a2dfb7744d77984d06389666694df7ab9">   25</a></span>  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a2dfb7744d77984d06389666694df7ab9">Res</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">Res</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html#ad4fda7cdf66668d6d2796b48fb06b64d">   26</a></span>  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#ad4fda7cdf66668d6d2796b48fb06b64d">Res</a>(<a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">Res</a>&amp;&amp;) noexcept = default;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html#a897238eb1ec2cd77e2a835323392f97e">   27</a></span>  constexpr ~<a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">Res</a>() noexcept = default;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html#a0c13e58eb6d88faf2a25c495d2898d2b">   29</a></span>  constexpr <a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">Res</a>&amp; operator=(const <a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">Res</a>&amp;) noexcept = default;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html#a63a43711f49f5b1fab57a621eaea476d">   30</a></span>  constexpr <a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">Res</a>&amp; operator=(<a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">Res</a>&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs.html">helios::ecs</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1ecs_1_1World.html">World</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">struct </span><a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"></span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * @brief Primary template — deliberately incomplete.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * @details Every system parameter type must provide a specialisation with:</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * - `static auto Make(World&amp;, SystemLocalData&amp;, const AccessPolicy&amp;) -&gt; T` or</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> *   `T&amp;`</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * - `static constexpr void RegisterAccess(AccessPolicyBuilder&amp;)`</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structhelios_1_1ecs_1_1SystemParamTraits.html">   22</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemParamTraits.html">SystemParamTraits</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs_1_1details.html">details</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespacehelios_1_1ecs_1_1details.html#ad26b4d323ca7700d0aa30a2c0af43954">   27</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1ecs_1_1details.html#ad26b4d323ca7700d0aa30a2c0af43954">SystemParamMakeResult</a> =</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">decltype</span>(<a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemParamTraits.html">SystemParamTraits&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::Make(</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        std::declval&lt;World&amp;&gt;(), std::declval&lt;SystemLocalData&amp;&gt;(),</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        std::declval&lt;const AccessPolicy&amp;&gt;()));</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html#a19dbf37ee3fb1a95a3c216d761fa0c14">   32</a></span>  [[nodiscard]] constexpr T* operator-&gt;() noexcept { <span class="keywordflow">return</span> &amp;resource_.get(); }</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html#ac37e9a08cbd29870a3143a1024e83e8a">   33</a></span>  [[nodiscard]] <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#ac37e9a08cbd29870a3143a1024e83e8a">operator*</a>() noexcept { <span class="keywordflow">return</span> resource_.get(); }</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html#afeb35dc60d47be72465fb0d5bf8e3f9c">   35</a></span>  [[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">const</span> T* <a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#afeb35dc60d47be72465fb0d5bf8e3f9c">operator-&gt;</a>() const noexcept {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">return</span> &amp;resource_.get();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  }</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="concepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches.html">   33</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches.html">SystemParamMakeResultMatches</a> =</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    std::same_as&lt;SystemParamMakeResult&lt;T&gt;, std::remove_cvref_t&lt;T&gt;&gt; ||</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    std::same_as&lt;SystemParamMakeResult&lt;T&gt;, std::remove_cvref_t&lt;T&gt;&amp;&gt;;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}  <span class="comment">// namespace details</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"></span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> * @brief Concept for types usable as system function parameters.</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> * @details Satisfied when `SystemParamTraits&lt;T&gt;` provides `RegisterAccess` and</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> * `Make` returning `T` or `T&amp;`.</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="concepthelios_1_1ecs_1_1SystemParam.html">   45</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1ecs_1_1SystemParam.html">SystemParam</a> =</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">requires</span>(<a class="code hl_class" href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html">AccessPolicyBuilder</a>&amp; builder, <a class="code hl_class" href="classhelios_1_1ecs_1_1World.html">World</a>&amp; world, <a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>&amp; local,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>             <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1AccessPolicy.html">AccessPolicy</a>&amp; policy) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      { <a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemParamTraits.html">SystemParamTraits&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::RegisterAccess(builder) };</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      <a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemParamTraits.html">SystemParamTraits&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::Make(world, local, policy);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      <a class="code hl_concept" href="concepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches.html">details::SystemParamMakeResultMatches&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    };</div>
 </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Res.html#a596c3ed86036e8ab0fa2434752dd549f">   39</a></span>  [[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">const</span> T&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1Res.html#a596c3ed86036e8ab0fa2434752dd549f">operator*</a>() const noexcept {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">return</span> resource_.get();</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  }</div>
-</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  std::reference_wrapper&lt;T&gt; resource_;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>};</div>
-</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"></span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"> * @brief Access to thread-safe resource.</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"> * @details Just an alias for `Res&lt;T&gt;`, but documents that the resource is</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"> * thread-safe and can be accessed in parallel.</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"> * @tparam T Resource type</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">template</span> &lt;AsyncResourceTrait T&gt;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="namespacehelios_1_1ecs.html#a674cbdc503746f81c89e6b12f67c26d0">   54</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a674cbdc503746f81c89e6b12f67c26d0">AsyncRes</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1Res.html">Res&lt;T&gt;</a>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"></span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"> * @brief Optional access to resource.</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"> * @details Alias for `std::optional&lt;Res&lt;T&gt;&gt;`.</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"> * @tparam T Resource type</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">template</span> &lt;ResourceTrait T&gt;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="namespacehelios_1_1ecs.html#a08439f87b8ff5fd5ecd5cc6af031bb08">   62</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a08439f87b8ff5fd5ecd5cc6af031bb08">OptRes</a> = std::optional&lt;Res&lt;T&gt;&gt;;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> * @brief Optional access to thread-safe resource.</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"> * @details Alias for `std::optional&lt;AsyncRes&lt;T&gt;&gt;`.</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"> * @tparam T Resource type</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keyword">template</span> &lt;ResourceTrait T&gt;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="namespacehelios_1_1ecs.html#a0b786c7fdda949d9ad0bd60095031991">   70</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a0b786c7fdda949d9ad0bd60095031991">OptAsyncRes</a> = std::optional&lt;AsyncRes&lt;T&gt;&gt;;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}  <span class="comment">// namespace helios::ecs</span></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res</a></div><div class="ttdoc">Access to resource.</div><div class="ttdef"><b>Definition</b> <a href="#l00018">param.hpp:18</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html_a2dfb7744d77984d06389666694df7ab9"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html#a2dfb7744d77984d06389666694df7ab9">helios::ecs::Res::Res</a></div><div class="ttdeci">constexpr Res(const Res &amp;) noexcept=default</div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html_a596c3ed86036e8ab0fa2434752dd549f"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html#a596c3ed86036e8ab0fa2434752dd549f">helios::ecs::Res::operator*</a></div><div class="ttdeci">constexpr const T &amp; operator*() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00039">param.hpp:39</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html_a7228bb195a106ed388d1414ef834439f"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html#a7228bb195a106ed388d1414ef834439f">helios::ecs::Res::Res</a></div><div class="ttdeci">constexpr Res(T &amp;resource) noexcept</div><div class="ttdoc">Constructs a resource reference.</div><div class="ttdef"><b>Definition</b> <a href="#l00024">param.hpp:24</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html_ac37e9a08cbd29870a3143a1024e83e8a"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html#ac37e9a08cbd29870a3143a1024e83e8a">helios::ecs::Res::operator*</a></div><div class="ttdeci">constexpr T &amp; operator*() noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00033">param.hpp:33</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html_ad4fda7cdf66668d6d2796b48fb06b64d"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html#ad4fda7cdf66668d6d2796b48fb06b64d">helios::ecs::Res::Res</a></div><div class="ttdeci">constexpr Res(Res &amp;&amp;) noexcept=default</div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html_afeb35dc60d47be72465fb0d5bf8e3f9c"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html#afeb35dc60d47be72465fb0d5bf8e3f9c">helios::ecs::Res::operator-&gt;</a></div><div class="ttdeci">constexpr const T * operator-&gt;() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00035">param.hpp:35</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="builtin__commands_8hpp_source.html#l00020">builtin_commands.hpp:20</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a08439f87b8ff5fd5ecd5cc6af031bb08"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a08439f87b8ff5fd5ecd5cc6af031bb08">helios::ecs::OptRes</a></div><div class="ttdeci">std::optional&lt; Res&lt; T &gt; &gt; OptRes</div><div class="ttdoc">Optional access to resource.</div><div class="ttdef"><b>Definition</b> <a href="#l00062">param.hpp:62</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a0b786c7fdda949d9ad0bd60095031991"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a0b786c7fdda949d9ad0bd60095031991">helios::ecs::OptAsyncRes</a></div><div class="ttdeci">std::optional&lt; AsyncRes&lt; T &gt; &gt; OptAsyncRes</div><div class="ttdoc">Optional access to thread-safe resource.</div><div class="ttdef"><b>Definition</b> <a href="#l00070">param.hpp:70</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a674cbdc503746f81c89e6b12f67c26d0"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a674cbdc503746f81c89e6b12f67c26d0">helios::ecs::AsyncRes</a></div><div class="ttdeci">Res&lt; T &gt; AsyncRes</div><div class="ttdoc">Access to thread-safe resource.</div><div class="ttdef"><b>Definition</b> <a href="#l00054">param.hpp:54</a></div></div>
-<div class="ttc" id="aresource_8hpp_html"><div class="ttname"><a href="resource_8hpp.html">resource.hpp</a></div></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}  <span class="comment">// namespace helios::ecs</span></div>
+<div class="ttc" id="aaccess__policy_8hpp_html"><div class="ttname"><a href="access__policy_8hpp.html">access_policy.hpp</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html">helios::ecs::AccessPolicyBuilder</a></div><div class="ttdoc">Fluent builder for constructing an AccessPolicy.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00556">access_policy.hpp:556</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicy_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicy.html">helios::ecs::AccessPolicy</a></div><div class="ttdoc">Stores data access requirements for a system at compile time.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00124">access_policy.hpp:124</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html">helios::ecs::World</a></div><div class="ttdoc">The World class manages entities with their components and systems.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00050">world.hpp:50</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1SystemParam_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1SystemParam.html">helios::ecs::SystemParam</a></div><div class="ttdoc">Concept for types usable as system function parameters.</div><div class="ttdef"><b>Definition</b> <a href="#l00045">param.hpp:45</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches.html">helios::ecs::details::SystemParamMakeResultMatches</a></div><div class="ttdef"><b>Definition</b> <a href="#l00033">param.hpp:33</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_1_1details_html"><div class="ttname"><a href="namespacehelios_1_1ecs_1_1details.html">helios::ecs::details</a></div><div class="ttdef"><b>Definition</b> <a href="bundle_8hpp_source.html#l00058">bundle.hpp:58</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_1_1details_html_ad26b4d323ca7700d0aa30a2c0af43954"><div class="ttname"><a href="namespacehelios_1_1ecs_1_1details.html#ad26b4d323ca7700d0aa30a2c0af43954">helios::ecs::details::SystemParamMakeResult</a></div><div class="ttdeci">decltype(SystemParamTraits&lt; std::remove_cvref_t&lt; T &gt; &gt;::Make( std::declval&lt; World &amp; &gt;(), std::declval&lt; SystemLocalData &amp; &gt;(), std::declval&lt; const AccessPolicy &amp; &gt;())) SystemParamMakeResult</div><div class="ttdef"><b>Definition</b> <a href="#l00027">param.hpp:27</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00005">schedules.hpp:5</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1SystemLocalData_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1SystemLocalData.html">helios::ecs::SystemLocalData</a></div><div class="ttdoc">Local data for a system.</div><div class="ttdef"><b>Definition</b> <a href="system__local__data_8hpp_source.html#l00025">system_local_data.hpp:25</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1SystemParamTraits_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a></div><div class="ttdoc">Primary template — deliberately incomplete.</div><div class="ttdef"><b>Definition</b> <a href="#l00022">param.hpp:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
@@ -271,7 +247,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('param_8hpp_sou
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a href="dir_357f20ec14403b481784d625e30c945c.html">include</a></li><li class="navelem"><a href="dir_f48e1382f1fa1d2baa64a65be047433a.html">helios</a></li><li class="navelem"><a href="dir_114d35f520128cfbc27502a147f45edd.html">ecs</a></li><li class="navelem"><a href="dir_120dbf2d06153d0530e81db0f361fe52.html">resource</a></li><li class="navelem"><a href="param_8hpp.html">param.hpp</a></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a href="dir_357f20ec14403b481784d625e30c945c.html">include</a></li><li class="navelem"><a href="dir_f48e1382f1fa1d2baa64a65be047433a.html">helios</a></li><li class="navelem"><a href="dir_114d35f520128cfbc27502a147f45edd.html">ecs</a></li><li class="navelem"><a href="dir_a3b485c73c056e8b3e9a139538eb1412.html">system</a></li><li class="navelem"><a href="param_8hpp.html">param.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

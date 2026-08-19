@@ -4,10 +4,12 @@ var properties_8hpp =
     [ "helios::window::Properties", "structhelios_1_1window_1_1Properties.html", "structhelios_1_1window_1_1Properties" ],
     [ "helios::window::ExclusiveVideoMode", "structhelios_1_1window_1_1ExclusiveVideoMode.html", "structhelios_1_1window_1_1ExclusiveVideoMode" ],
     [ "std::formatter&lt; helios::window::Mode &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1Mode_01_4.html", "structstd_1_1formatter_3_01helios_1_1window_1_1Mode_01_4" ],
-    [ "std::formatter&lt; helios::window::ClientApi &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ClientApi_01_4.html", "structstd_1_1formatter_3_01helios_1_1window_1_1ClientApi_01_4" ],
     [ "std::formatter&lt; helios::window::CursorMode &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1CursorMode_01_4.html", "structstd_1_1formatter_3_01helios_1_1window_1_1CursorMode_01_4" ],
+    [ "std::formatter&lt; helios::window::ClientApi &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ClientApi_01_4.html", "structstd_1_1formatter_3_01helios_1_1window_1_1ClientApi_01_4" ],
     [ "std::formatter&lt; helios::window::DirtyFlag &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1DirtyFlag_01_4.html", "structstd_1_1formatter_3_01helios_1_1window_1_1DirtyFlag_01_4" ],
+    [ "std::formatter&lt; helios::window::IconImage &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1IconImage_01_4.html", "structstd_1_1formatter_3_01helios_1_1window_1_1IconImage_01_4" ],
     [ "std::formatter&lt; helios::window::Properties &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1Properties_01_4.html", "structstd_1_1formatter_3_01helios_1_1window_1_1Properties_01_4" ],
+    [ "std::formatter&lt; helios::window::ExclusiveVideoMode &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ExclusiveVideoMode_01_4.html", "structstd_1_1formatter_3_01helios_1_1window_1_1ExclusiveVideoMode_01_4" ],
     [ "helios::window::ClientApi", "namespacehelios_1_1window.html#a5b7a7072f24b38f4eb9cf97a77703acf", [
       [ "helios::window::ClientApi::kNone", "namespacehelios_1_1window.html#a5b7a7072f24b38f4eb9cf97a77703acfa35c3ace1970663a16e5c65baa5941b13", null ],
       [ "helios::window::ClientApi::kOpenGL", "namespacehelios_1_1window.html#a5b7a7072f24b38f4eb9cf97a77703acfa2eddb543bfc92e48e6552a9e88f0748f", null ]
@@ -15,7 +17,8 @@ var properties_8hpp =
     [ "helios::window::CursorMode", "namespacehelios_1_1window.html#a79d017571e4f91110c3c235fadf37fb7", [
       [ "helios::window::CursorMode::kVisible", "namespacehelios_1_1window.html#a79d017571e4f91110c3c235fadf37fb7a1157767e9b4fd4f2ffeb7ee94c8fac2f", null ],
       [ "helios::window::CursorMode::kHidden", "namespacehelios_1_1window.html#a79d017571e4f91110c3c235fadf37fb7a7c5019af37cb66b2492ac211b28eedc1", null ],
-      [ "helios::window::CursorMode::kDisabled", "namespacehelios_1_1window.html#a79d017571e4f91110c3c235fadf37fb7a7b04d8795f5fd03c761ce70dab985fee", null ]
+      [ "helios::window::CursorMode::kDisabled", "namespacehelios_1_1window.html#a79d017571e4f91110c3c235fadf37fb7a7b04d8795f5fd03c761ce70dab985fee", null ],
+      [ "helios::window::CursorMode::kCaptured", "namespacehelios_1_1window.html#a79d017571e4f91110c3c235fadf37fb7ac4016a259da37275494b0de1d9c6c502", null ]
     ] ],
     [ "helios::window::DirtyFlag", "namespacehelios_1_1window.html#a19cd60ad8b1491acaae60e2681833c07", [
       [ "helios::window::DirtyFlag::kNone", "namespacehelios_1_1window.html#a19cd60ad8b1491acaae60e2681833c07a35c3ace1970663a16e5c65baa5941b13", null ],
@@ -50,6 +53,8 @@ var properties_8hpp =
     [ "helios::window::HasFlag", "namespacehelios_1_1window.html#a8e8143489231da758f88c375cf841cf7", null ],
     [ "helios::window::IsFullscreenPresentation", "namespacehelios_1_1window.html#a686a03f6249a58561d4358060d211d17", null ],
     [ "helios::window::operator<<", "namespacehelios_1_1window.html#ae7a4c7296e1b0a25b9e27bdcebc5df37", null ],
+    [ "helios::window::operator<<", "namespacehelios_1_1window.html#acc253392a05c6e3ce8270528db06d4e5", null ],
+    [ "helios::window::operator<<", "namespacehelios_1_1window.html#a1842ef8b49c843855ab01a49145e1a10", null ],
     [ "helios::window::operator<<", "namespacehelios_1_1window.html#a8d34c2e4af6df56ad5bdf41c5167e123", null ],
     [ "helios::window::operator<<", "namespacehelios_1_1window.html#a197064711d540b10f5c67101809fea29", null ],
     [ "helios::window::operator<<", "namespacehelios_1_1window.html#a954e8cc1491933219f223dbcb315c2a6", null ],
@@ -57,6 +62,10 @@ var properties_8hpp =
     [ "helios::window::operator|", "namespacehelios_1_1window.html#aee4c114b37f7ac2b8cd17dc0ebbe4119", null ],
     [ "helios::window::ResolveExclusiveVideoMode", "namespacehelios_1_1window.html#ab96c82549489fff1a5886f9791d6506e", null ],
     [ "helios::window::ToString", "namespacehelios_1_1window.html#aadffc11e7b1f08b503929ee2466c021a", null ],
+    [ "helios::window::ToString", "namespacehelios_1_1window.html#a4639a3a76056d7426909bf23cec9f89c", null ],
+    [ "helios::window::ToString", "namespacehelios_1_1window.html#a3878ee317eaab4bfc7f34faa84a5c452", null ],
+    [ "helios::window::ToString", "namespacehelios_1_1window.html#ae7c21353b14dea3387c8b63829d0a6e8", null ],
+    [ "helios::window::ToString", "namespacehelios_1_1window.html#af6b841af3a4e646b445b001ec7744692", null ],
     [ "helios::window::ToString", "namespacehelios_1_1window.html#afbd1795fa2c54d86b54147c5f5acfb03", null ],
     [ "helios::window::ToString", "namespacehelios_1_1window.html#a1732c437dd1aa242f90100ea63a4d050", null ],
     [ "helios::window::ToString", "namespacehelios_1_1window.html#a8d406d35fb95e1bdec3e73aa739e75a7", null ],

@@ -181,6 +181,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacehelio
 Functions</h2></td></tr>
 <tr class="memitem:a9f5928c3af284f91dbef3efe1bb5f598" id="r_a9f5928c3af284f91dbef3efe1bb5f598"><td class="memTemplParams" colspan="2">template&lt;ButtonTrait T&gt; </td></tr>
 <tr class="memitem:a9f5928c3af284f91dbef3efe1bb5f598 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a9f5928c3af284f91dbef3efe1bb5f598">ApplyButtonState</a> (<a class="el" href="classhelios_1_1input_1_1ButtonInput.html">ButtonInput</a>&lt; T &gt; &amp;buttons, T button, <a class="el" href="namespacehelios_1_1input.html#a1b9ddfdfdf73d8c501418f1e200b5807">ButtonState</a> state) noexcept</td></tr>
+<tr class="memitem:ad358538fd09b986df2a91a9ab80e6a9c" id="r_ad358538fd09b986df2a91a9ab80e6a9c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad358538fd09b986df2a91a9ab80e6a9c">ApplyIndexedButtonState</a> (<a class="el" href="classhelios_1_1input_1_1IndexedButtonInput.html">IndexedButtonInput</a>&lt; <a class="el" href="structhelios_1_1input_1_1Joystick.html#adadc128cf913c9afa3cb7c2b221b78ef">Joystick::kMaxButtons</a> &gt; &amp;buttons, size_t index, <a class="el" href="namespacehelios_1_1input.html#a1b9ddfdfdf73d8c501418f1e200b5807">ButtonState</a> state) noexcept</td></tr>
 <tr class="memitem:aa1026ae4c6a80560cc7d79abd03b5a55" id="r_aa1026ae4c6a80560cc7d79abd03b5a55"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#aa1026ae4c6a80560cc7d79abd03b5a55">AxisIndex</a> (<a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">GamepadAxis</a> axis) noexcept</td></tr>
 <tr class="memitem:a5d98e8d37e092da787a63658805a3966" id="r_a5d98e8d37e092da787a63658805a3966"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5d98e8d37e092da787a63658805a3966">CaptureRestIfFirstSample</a> (<a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> &amp;filter, <a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">GamepadAxis</a> axis, float raw, bool auto_calibrate) noexcept</td></tr>
 <tr class="memitem:ae3721e02804d81a81d17f5c81dd286f0" id="r_ae3721e02804d81a81d17f5c81dd286f0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae3721e02804d81a81d17f5c81dd286f0">RecenterAxis</a> (<a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> &amp;filter, <a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">GamepadAxis</a> axis, bool resting, uint16_t rest_frames, bool auto_calibrate) noexcept</td></tr>
@@ -189,6 +190,7 @@ Functions</h2></td></tr>
 <tr class="memitem:aa0a32619033b99486b0865a7aa6079d9" id="r_aa0a32619033b99486b0865a7aa6079d9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa0a32619033b99486b0865a7aa6079d9">ApplyStick</a> (<a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> &amp;pad, const <a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> &amp;filter, <a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">GamepadAxis</a> x_axis, <a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">GamepadAxis</a> y_axis, const <a class="el" href="structhelios_1_1input_1_1AxisFilter.html">AxisFilter</a> &amp;stick) noexcept</td></tr>
 <tr class="memitem:a20c3751975139db9b7548809b1785cf4" id="r_a20c3751975139db9b7548809b1785cf4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a20c3751975139db9b7548809b1785cf4">ApplyTrigger</a> (<a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> &amp;pad, const <a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> &amp;filter, <a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">GamepadAxis</a> axis, const <a class="el" href="structhelios_1_1input_1_1AxisFilter.html">AxisFilter</a> &amp;trigger) noexcept</td></tr>
 <tr class="memitem:abee1e3a6bdac44c646e18c70bb463b66" id="r_abee1e3a6bdac44c646e18c70bb463b66"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abee1e3a6bdac44c646e18c70bb463b66">FilterConnectedPad</a> (<a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> &amp;pad, <a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> &amp;filter, const <a class="el" href="structhelios_1_1input_1_1Settings.html">Settings</a> &amp;settings) noexcept</td></tr>
+<tr class="memitem:afb06b131fffada70c9276d47122ee4f8" id="r_afb06b131fffada70c9276d47122ee4f8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afb06b131fffada70c9276d47122ee4f8">ApplyPenPosition</a> (<a class="el" href="structhelios_1_1input_1_1Pen.html">Pen</a> &amp;pen, double x, double y) noexcept</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a9f5928c3af284f91dbef3efe1bb5f598" name="a9f5928c3af284f91dbef3efe1bb5f598"></a>
@@ -225,7 +227,79 @@ template&lt;ButtonTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00021">21</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00023">23</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad358538fd09b986df2a91a9ab80e6a9c" name="ad358538fd09b986df2a91a9ab80e6a9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad358538fd09b986df2a91a9ab80e6a9c">&#9670;&#160;</a></span>ApplyIndexedButtonState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::input::anonymous_namespace{systems.cpp}::ApplyIndexedButtonState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1input_1_1IndexedButtonInput.html">IndexedButtonInput</a>&lt; <a class="el" href="structhelios_1_1input_1_1Joystick.html#adadc128cf913c9afa3cb7c2b221b78ef">Joystick::kMaxButtons</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>buttons</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1input.html#a1b9ddfdfdf73d8c501418f1e200b5807">ButtonState</a></td>          <td class="paramname"><span class="paramname"><em>state</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00037">37</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+
+</div>
+</div>
+<a id="afb06b131fffada70c9276d47122ee4f8" name="afb06b131fffada70c9276d47122ee4f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb06b131fffada70c9276d47122ee4f8">&#9670;&#160;</a></span>ApplyPenPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::input::anonymous_namespace{systems.cpp}::ApplyPenPosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1input_1_1Pen.html">Pen</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>pen</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>y</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00154">154</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
 
 </div>
 </div>
@@ -271,7 +345,7 @@ template&lt;ButtonTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00098">98</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00117">117</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
 
 </div>
 </div>
@@ -312,7 +386,7 @@ template&lt;ButtonTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00108">108</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00127">127</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
 
 </div>
 </div>
@@ -339,7 +413,7 @@ template&lt;ButtonTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00035">35</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00054">54</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
 
 </div>
 </div>
@@ -380,7 +454,7 @@ template&lt;ButtonTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00039">39</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00058">58</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
 
 </div>
 </div>
@@ -416,7 +490,7 @@ template&lt;ButtonTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00116">116</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00135">135</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
 
 </div>
 </div>
@@ -462,7 +536,7 @@ template&lt;ButtonTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00056">56</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00075">75</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
 
 </div>
 </div>
@@ -513,7 +587,7 @@ template&lt;ButtonTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00078">78</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00097">97</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
 
 </div>
 </div>
@@ -559,7 +633,7 @@ template&lt;ButtonTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00088">88</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00107">107</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
 
 </div>
 </div>

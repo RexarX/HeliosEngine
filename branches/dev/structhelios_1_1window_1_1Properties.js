@@ -1,5 +1,12 @@
 var structhelios_1_1window_1_1Properties =
 [
+    [ "GetAspectRatio", "structhelios_1_1window_1_1Properties.html#a25c96e561d6189291a6ac71f3b720c54", null ],
+    [ "GetClientSize", "structhelios_1_1window_1_1Properties.html#a841d1f190930c76554ea483ad328aeff", null ],
+    [ "GetContentScale", "structhelios_1_1window_1_1Properties.html#a99a9190fb649af4a799fcd83d58ff9d7", null ],
+    [ "GetMaxSize", "structhelios_1_1window_1_1Properties.html#aef6121e051254b28cb832012b109d50c", null ],
+    [ "GetMinSize", "structhelios_1_1window_1_1Properties.html#ab79c939ce143041d5fb8f68e7d423916", null ],
+    [ "GetPos", "structhelios_1_1window_1_1Properties.html#aa4609397014c512ebfe2fe5de67e1836", null ],
+    [ "GetSize", "structhelios_1_1window_1_1Properties.html#ab52e6874e3182f029c49559969315ea1", null ],
     [ "aspect_denom", "structhelios_1_1window_1_1Properties.html#a753a986ebf15d267be77fe95f059147d", null ],
     [ "aspect_numer", "structhelios_1_1window_1_1Properties.html#a412df254b0d41505d28dedffc7bee4e2", null ],
     [ "auto_iconify", "structhelios_1_1window_1_1Properties.html#ac52290d61b671a092c6c1fbc2347a5ff", null ],

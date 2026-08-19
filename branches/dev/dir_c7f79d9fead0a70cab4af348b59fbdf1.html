@@ -178,12 +178,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_c7f79d9fea
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
 <tr class="memitem:include" id="r_include"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_24faf0efbcf2ff9142a3afb5a6203f9b.html">include</a></td></tr>
+<tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_6b218999d7695d8fe1f69e019a561746.html">src</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="window--window-ecs-contract"></a>
 `window` — Window ECS Contract</h1>
 <p>Public ECS interface for window management without OS dependencies.</p>
-<h1 class="doxsection"><a class="anchor" id="public-api-13"></a>
+<h1 class="doxsection"><a class="anchor" id="public-api-16"></a>
 Public API</h1>
 <ul>
 <li><span class="tt">Properties</span>, <span class="tt">Window</span>, <span class="tt">PrimaryWindow</span>, <span class="tt">CreationFailed</span></li>
@@ -196,8 +197,8 @@ Public API</h1>
 <p>Failed OS window creation tags the entity with <span class="tt">CreationFailed</span> and emits <span class="tt">CreationFailedMsg</span> instead of aborting the process.</p>
 <h1 class="doxsection"><a class="anchor" id="backends-1"></a>
 Backends</h1>
-<p>Use <span class="tt">glfw</span> for the default GLFW backend (<span class="tt">WindowPlugin</span> / <span class="tt">WindowInputPlugin</span>).</p>
-<h1 class="doxsection"><a class="anchor" id="dependencies-11"></a>
+<p>Use <span class="tt"><a class="el" href="structhelios_1_1sdl3_1_1Plugin.html" title="Registers the process-global SDL3 runtime, event pump, and shutdown.">helios::sdl3::Plugin</a></span>, <span class="tt"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1Plugin.html" title="SDL3 backend that synchronizes OS windows with helios::window ECS types.">helios::sdl3::window::Plugin</a></span>, and <span class="tt"><a class="el" href="structhelios_1_1sdl3_1_1input_1_1Plugin.html" title="SDL3 backend that emits helios::input messages and applies cursors.">helios::sdl3::input::Plugin</a></span> with <span class="tt">window::Plugin</span> / <span class="tt">input::Plugin</span> as needed. GLFW remains available via <span class="tt">-DHELIOS_BUILD_GLFW=ON</span> and <span class="tt">-DHELIOS_BUILD_SDL3_WINDOW=OFF</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="dependencies-14"></a>
 Dependencies</h1>
 <ul>
 <li><span class="tt">app</span>, <span class="tt">ecs</span> </li>

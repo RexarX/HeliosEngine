@@ -185,6 +185,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacehelio
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
+<tr class="memitem:anonymous_5Fnamespace_7Bsleep_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bsleep_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1utils_1_1anonymous__namespace_02sleep_8cpp_03.html">anonymous_namespace{sleep.cpp}</a></td></tr>
 <tr class="memitem:details" id="r_details"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1utils_1_1details.html">details</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -316,6 +317,8 @@ Concepts</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:a0e2db988335f2e50e437dd094ac6c974" id="r_a0e2db988335f2e50e437dd094ac6c974"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a0e2db988335f2e50e437dd094ac6c974 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a0e2db988335f2e50e437dd094ac6c974">DynamicLibraryResult</a> = std::expected&lt;T, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt;</td></tr>
 <tr class="memitem:ae6f12943a45b892bec3a5e117dfc5aea" id="r_ae6f12943a45b892bec3a5e117dfc5aea"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae6f12943a45b892bec3a5e117dfc5aea">HashType</a> = size_t</td></tr>
 <tr class="memitem:aa277c9bc6bdfb97423e88f6bc45686b0" id="r_aa277c9bc6bdfb97423e88f6bc45686b0"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0">DefaultRandomEngine</a> = std::mt19937_64</td></tr>
 <tr class="memdesc:aa277c9bc6bdfb97423e88f6bc45686b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default engine type used by random utilities.  <br /></td></tr>
@@ -348,7 +351,6 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:abc4221e0af800d4c7dd1f3042525427c" id="r_abc4221e0af800d4c7dd1f3042525427c"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#abc4221e0af800d4c7dd1f3042525427c">DynamicLibraryErrorToString</a> (<a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> error) noexcept</td></tr>
 <tr class="memdesc:abc4221e0af800d4c7dd1f3042525427c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a human-readable description for a <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e" title="Error codes for dynamic library operations.">DynamicLibraryError</a>.  <br /></td></tr>
-<tr class="memitem:ac60a7361517b211c989c0a9f1d5518b3" id="r_ac60a7361517b211c989c0a9f1d5518b3"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ac60a7361517b211c989c0a9f1d5518b3">FromPath</a> (const std::filesystem::path &amp;path) -&gt; std::expected&lt; <a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> &gt;</td></tr>
 <tr class="memitem:a8456f8516be4dd86cc838b2e928b7239" id="r_a8456f8516be4dd86cc838b2e928b7239"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a8456f8516be4dd86cc838b2e928b7239">FileErrorToString</a> (<a class="el" href="#aa8f8d89ee8389efd92330df687025d68">FileError</a> error) noexcept</td></tr>
 <tr class="memdesc:a8456f8516be4dd86cc838b2e928b7239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts <a class="el" href="#aa8f8d89ee8389efd92330df687025d68">FileError</a> to a human-readable string.  <br /></td></tr>
 <tr class="memitem:a0ace996a7219fcf7730cf5d767278420" id="r_a0ace996a7219fcf7730cf5d767278420"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a0ace996a7219fcf7730cf5d767278420">ReadFileToString</a> (std::string_view filepath) -&gt; std::expected&lt; std::string, <a class="el" href="#aa8f8d89ee8389efd92330df687025d68">FileError</a> &gt;</td></tr>
@@ -461,6 +463,14 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;const R1&gt;, std:
 <tr class="memitem:a23241f690d1445eca83b07b0eb962ce8" id="r_a23241f690d1445eca83b07b0eb962ce8"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </td></tr>
 <tr class="memitem:a23241f690d1445eca83b07b0eb962ce8 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a23241f690d1445eca83b07b0eb962ce8">RandomFastValueFromRange</a> (T min, U max) -&gt; std::common_type_t&lt; T, U &gt;</td></tr>
 <tr class="memdesc:a23241f690d1445eca83b07b0eb962ce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to generate a value in range using the fast engine.  <br /></td></tr>
+<tr class="memitem:abef9c3bd62b19cbb913849a8c7cec714" id="r_abef9c3bd62b19cbb913849a8c7cec714"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abef9c3bd62b19cbb913849a8c7cec714">SleepFor</a> (std::chrono::nanoseconds duration)</td></tr>
+<tr class="memdesc:abef9c3bd62b19cbb913849a8c7cec714"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs one OS-level wait for <span class="tt">duration</span>.  <br /></td></tr>
+<tr class="memitem:a7800a61f83a2f4a43ee72887b61c61e4" id="r_a7800a61f83a2f4a43ee72887b61c61e4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7800a61f83a2f4a43ee72887b61c61e4">SleepUntil</a> (std::chrono::steady_clock::time_point deadline)</td></tr>
+<tr class="memdesc:a7800a61f83a2f4a43ee72887b61c61e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs one OS-level wait until <span class="tt">deadline</span>.  <br /></td></tr>
+<tr class="memitem:aef96796eecff8f8ce87c8e9d2c7251f4" id="r_aef96796eecff8f8ce87c8e9d2c7251f4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aef96796eecff8f8ce87c8e9d2c7251f4">PreciseSleep</a> (std::chrono::nanoseconds duration, bool pinned_thread=true)</td></tr>
+<tr class="memdesc:aef96796eecff8f8ce87c8e9d2c7251f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleeps for <span class="tt">duration</span> with SDL_DelayPrecise-style accuracy.  <br /></td></tr>
+<tr class="memitem:af9349d72cdc36d9f1cb81f5b261ec651" id="r_af9349d72cdc36d9f1cb81f5b261ec651"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af9349d72cdc36d9f1cb81f5b261ec651">PreciseSleepUntil</a> (std::chrono::steady_clock::time_point deadline, bool pinned_thread=true)</td></tr>
+<tr class="memdesc:af9349d72cdc36d9f1cb81f5b261ec651"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleeps until <span class="tt">deadline</span> with SDL_DelayPrecise-style accuracy.  <br /></td></tr>
 <tr class="memitem:a65b7a0a35fc797e38a4f1010d9bea47f" id="r_a65b7a0a35fc797e38a4f1010d9bea47f"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a65b7a0a35fc797e38a4f1010d9bea47f">operator==</a> (const <a class="el" href="classhelios_1_1utils_1_1TypeId.html">TypeId</a> &amp;lhs, <a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">TypeIndex</a> rhs) noexcept</td></tr>
 <tr class="memdesc:a65b7a0a35fc797e38a4f1010d9bea47f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeId.html">TypeId</a></span> with a <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">TypeIndex</a></span> for equality.  <br /></td></tr>
 <tr class="memitem:af3f8f4c8fd7f2b818d628dec65a88754" id="r_af3f8f4c8fd7f2b818d628dec65a88754"><td class="memItemLeft">constexpr std::strong_ordering&#160;</td><td class="memItemRight"><a class="el" href="#af3f8f4c8fd7f2b818d628dec65a88754">operator&lt;=&gt;</a> (const <a class="el" href="classhelios_1_1utils_1_1TypeId.html">TypeId</a> &amp;lhs, <a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">TypeIndex</a> rhs) noexcept</td></tr>
@@ -487,6 +497,7 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;const R1&gt;, std:
 <tr class="memitem:a675eb5e5f1273c6c8ccd31ae72b5c7fb" id="r_a675eb5e5f1273c6c8ccd31ae72b5c7fb"><td class="memTemplParams" colspan="2">template&lt;auto Fn&gt; </td></tr>
 <tr class="memitem:a675eb5e5f1273c6c8ccd31ae72b5c7fb template"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a675eb5e5f1273c6c8ccd31ae72b5c7fb">QualifiedFunctionNameOf</a> () noexcept</td></tr>
 <tr class="memdesc:a675eb5e5f1273c6c8ccd31ae72b5c7fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the fully qualified function name of <span class="tt">Fn</span>.  <br /></td></tr>
+<tr class="memitem:ab3f8e2720c4a05f639227d0e7cfab385" id="r_ab3f8e2720c4a05f639227d0e7cfab385"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ab3f8e2720c4a05f639227d0e7cfab385">FromPath</a> (const std::filesystem::path &amp;path) -&gt; <a class="el" href="#a0e2db988335f2e50e437dd094ac6c974">DynamicLibraryResult</a>&lt; <a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a> &gt;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -529,6 +540,24 @@ Variables</h2></td></tr>
 <p>Uses thread-local <span class="tt"><a class="el" href="#ae412d06926f505f92866943e64611a72" title="Thread-local default-quality engine.">DefaultEngine()</a></span> as the underlying engine. </p>
 
 <p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00248">248</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0e2db988335f2e50e437dd094ac6c974" name="a0e2db988335f2e50e437dd094ac6c974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e2db988335f2e50e437dd094ac6c974">&#9670;&#160;</a></span>DynamicLibraryResult</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a0e2db988335f2e50e437dd094ac6c974">helios::utils::DynamicLibraryResult</a> = std::expected&lt;T, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00053">53</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -582,7 +611,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00008">8</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00009">9</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
 
 </div>
 </div>
@@ -1038,7 +1067,7 @@ template&lt;size_t N&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The computed FNV-1a hash of the input string literal. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00041">41</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00042">42</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
 
 </div>
 </div>
@@ -1079,34 +1108,26 @@ template&lt;size_t N&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The computed FNV-1a hash of the input string. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00026">26</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00027">27</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ac60a7361517b211c989c0a9f1d5518b3" name="ac60a7361517b211c989c0a9f1d5518b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac60a7361517b211c989c0a9f1d5518b3">&#9670;&#160;</a></span>FromPath()</h2>
+<a id="ab3f8e2720c4a05f639227d0e7cfab385" name="ab3f8e2720c4a05f639227d0e7cfab385"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3f8e2720c4a05f639227d0e7cfab385">&#9670;&#160;</a></span>FromPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">auto helios::utils::FromPath </td>
           <td>(</td>
           <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span></td><td>)</td>
-          <td> -&gt; std::expected&lt; <a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> &gt;</td>
+          <td> -&gt; <a class="el" href="#a0e2db988335f2e50e437dd094ac6c974">DynamicLibraryResult</a>&lt; <a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a> &gt;</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00214">214</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00041">41</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
 
 </div>
 </div>
@@ -1144,7 +1165,7 @@ template&lt;auto Fn&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unqualified function name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00619">619</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00621">621</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1409,7 +1430,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">std::strong_ordering</span> result of the comparison </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00541">541</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00543">543</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1450,7 +1471,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">std::strong_ordering</span> result of the comparison </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00563">563</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00565">565</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1491,7 +1512,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if the <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeId.html">TypeId</a></span> and <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">TypeIndex</a></span> refer to the same type, <span class="tt">false</span> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00531">531</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00533">533</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1532,7 +1553,71 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if the <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">TypeIndex</a></span> and <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeId.html">TypeId</a></span> refer to the same type, <span class="tt">false</span> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00553">553</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00555">555</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aef96796eecff8f8ce87c8e9d2c7251f4" name="aef96796eecff8f8ce87c8e9d2c7251f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef96796eecff8f8ce87c8e9d2c7251f4">&#9670;&#160;</a></span>PreciseSleep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::utils::PreciseSleep </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::nanoseconds</td>          <td class="paramname"><span class="paramname"><em>duration</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>pinned_thread</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sleeps for <span class="tt">duration</span> with SDL_DelayPrecise-style accuracy. </p>
+<p>Sleeps in ~1 ms chunks while tracking scheduler overshoot, then busy-waits the remainder with a CPU pause. Zero or negative durations return immediately. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Relative time to sleep </td></tr>
+    <tr><td class="paramname">pinned_thread</td><td>If true (default), the final sub-millisecond busy-wait uses a CPU pause/yield hint (<span class="tt"><a class="el" href="platform_8hpp.html#add6cedf0b0fe9ba6f9a8e8fa90ed24e2" title="Inserts a CPU pause hint for busy-wait loops.">HELIOS_PAUSE_CPU</a></span>), which keeps the calling thread runnable and holding its core the whole time =&gt; lowest wakeup latency, but only appropriate when the caller owns a dedicated core (e.g. a pinned render/simulation thread). If false, the tail loop instead calls <span class="tt">std::this_thread::yield()</span>, which relinquishes the thread's timeslice to the OS scheduler on each spin. Use this when the calling thread may share a core with other runnable work (e.g. a thread-pool worker), so this sleep doesn't starve unrelated threads of scheduler time. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00196">196</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af9349d72cdc36d9f1cb81f5b261ec651" name="af9349d72cdc36d9f1cb81f5b261ec651"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9349d72cdc36d9f1cb81f5b261ec651">&#9670;&#160;</a></span>PreciseSleepUntil()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::utils::PreciseSleepUntil </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::steady_clock::time_point</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>pinned_thread</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sleeps until <span class="tt">deadline</span> with SDL_DelayPrecise-style accuracy. </p>
+<p>Past deadlines return immediately. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deadline</td><td>Absolute <span class="tt">steady_clock</span> time to wait for </td></tr>
+    <tr><td class="paramname">pinned_thread</td><td>If true (default), the final sub-millisecond busy-wait uses a CPU pause/yield hint (<span class="tt"><a class="el" href="platform_8hpp.html#add6cedf0b0fe9ba6f9a8e8fa90ed24e2" title="Inserts a CPU pause hint for busy-wait loops.">HELIOS_PAUSE_CPU</a></span>), which keeps the calling thread runnable and holding its core the whole time =&gt; lowest wakeup latency, but only appropriate when the caller owns a dedicated core (e.g. a pinned render/simulation thread). If false, the tail loop instead calls <span class="tt">std::this_thread::yield()</span>, which relinquishes the thread's timeslice to the OS scheduler on each spin. Use this when the calling thread may share a core with other runnable work (e.g. a thread-pool worker), so this sleep doesn't starve unrelated threads of scheduler time. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00150">150</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
 
 </div>
 </div>
@@ -1570,7 +1655,7 @@ template&lt;auto Fn&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Fully qualified function name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00629">629</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00631">631</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1608,7 +1693,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Fully qualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00596">596</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00598">598</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1652,7 +1737,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Fully qualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00608">608</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00610">610</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -2124,6 +2209,60 @@ template&lt;ExternalRange R, typename Pred&gt; </div>
 
 </div>
 </div>
+<a id="abef9c3bd62b19cbb913849a8c7cec714" name="abef9c3bd62b19cbb913849a8c7cec714"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abef9c3bd62b19cbb913849a8c7cec714">&#9670;&#160;</a></span>SleepFor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::utils::SleepFor </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::nanoseconds</td>          <td class="paramname"><span class="paramname"><em>duration</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs one OS-level wait for <span class="tt">duration</span>. </p>
+<p>Zero or negative durations return immediately. Interrupted waits (<span class="tt">EINTR</span>) are restarted. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Relative time to sleep </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00123">123</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7800a61f83a2f4a43ee72887b61c61e4" name="a7800a61f83a2f4a43ee72887b61c61e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7800a61f83a2f4a43ee72887b61c61e4">&#9670;&#160;</a></span>SleepUntil()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::utils::SleepUntil </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::steady_clock::time_point</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs one OS-level wait until <span class="tt">deadline</span>. </p>
+<p>Past deadlines return immediately. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deadline</td><td>Absolute <span class="tt">steady_clock</span> time to wait for </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00137">137</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
+
+</div>
+</div>
 <a id="ac144031f0d2e4c3d55feb376c08e69ea" name="ac144031f0d2e4c3d55feb376c08e69ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac144031f0d2e4c3d55feb376c08e69ea">&#9670;&#160;</a></span>SlideAdapter() <span class="overload">[1/2]</span></h2>
 
@@ -2392,7 +2531,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unqualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00574">574</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00576">576</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -2436,7 +2575,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unqualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00585">585</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00587">587</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -2509,7 +2648,7 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::range
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00011">11</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00012">12</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
 
 </div>
 </div>
@@ -2533,7 +2672,7 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::range
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00012">12</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00013">13</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
 
 </div>
 </div>

@@ -1,5 +1,8 @@
 var structhelios_1_1input_1_1Mouse =
 [
+    [ "GetDelta", "structhelios_1_1input_1_1Mouse.html#ac17ff1ba46dfe184a5a99675f29af16f", null ],
+    [ "GetPosition", "structhelios_1_1input_1_1Mouse.html#a44305774a6e983f56446d2ed1f1e3612", null ],
+    [ "GetScroll", "structhelios_1_1input_1_1Mouse.html#a152dc4d8db4b0b0c3da8728eb153243a", null ],
     [ "buttons", "structhelios_1_1input_1_1Mouse.html#a0f7ad4939f809c1883ab308719d08e64", null ],
     [ "delta_x", "structhelios_1_1input_1_1Mouse.html#a146ef2865749f5498ac855b0fb7b4410", null ],
     [ "delta_y", "structhelios_1_1input_1_1Mouse.html#ab429591a8f458e8a4045b2be722c56ac", null ],
