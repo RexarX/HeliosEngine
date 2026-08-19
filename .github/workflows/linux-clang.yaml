@@ -73,7 +73,10 @@ jobs:
             libxinerama-dev \
             libxi-dev \
             libxcursor-dev \
-            libxext-dev
+            libxext-dev \
+            libxfixes-dev \
+            libxss-dev \
+            libxtst-dev
 
       - name: Configure (${{ matrix.preset }})
         run: cmake --preset ${{ matrix.preset }} ${{ matrix.cmake_extra }}

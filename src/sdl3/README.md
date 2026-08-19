@@ -38,3 +38,20 @@ against those sets.
 ## Dependencies
 
 - `app`, `ecs`, `log`, `window`, SDL3 (public)
+
+## System packages
+
+Needed on Linux when building vendored SDL3 (X11 + Wayland). Windows and macOS
+need no extra packages. SDL3 configure **fails** if XScrnSaver / XTest / Xfixes
+headers are missing while those features are enabled (the default).
+
+Debian / Ubuntu:
+
+```bash
+sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \
+  libxrandr-dev libxi-dev libxcursor-dev libxext-dev \
+  libxfixes-dev libxss-dev libxtst-dev
+```
+
+Fedora, Arch, and shared build tools are listed under
+[Installing Dependencies](../../README.md#installing-dependencies).

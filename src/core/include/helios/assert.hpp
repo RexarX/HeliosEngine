@@ -4,13 +4,10 @@
 #include <helios/platform/platform.hpp>
 #include <helios/utils/macro.hpp>
 
+#include <format>
 #include <source_location>
 #include <string>
 #include <string_view>
-
-#ifdef HELIOS_ENABLE_ASSERTS
-#include <format>
-#endif
 
 namespace helios {
 

@@ -38,3 +38,8 @@ app.AddPluginGroups(helios::sdl3::InputPlugin{});
 
 - Required: `sdl3`, `input`, `window`, `app`, `ecs`, `log`
 - Optional: `sdl3_window`
+
+## System packages
+
+Same as [`sdl3`](../sdl3/README.md#system-packages). This backend does not add
+OS packages beyond those required to build vendored SDL3.

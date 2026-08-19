@@ -1168,10 +1168,10 @@ template <MessageTrait T>
 constexpr auto MessageReader<T>::MakeIterator(size_t position) const noexcept
     -> const_iterator {
   const auto& manager = manager_.get();
-  const auto previous_messages = manager.PreviousMessages<T>();
-  const auto current_messages = manager.CurrentMessages<T>();
-  const auto previous_ids = manager.PreviousIds<T>();
-  const auto current_ids = manager.CurrentIds<T>();
+  const auto previous_messages = manager.template PreviousMessages<T>();
+  const auto current_messages = manager.template CurrentMessages<T>();
+  const auto previous_ids = manager.template PreviousIds<T>();
+  const auto current_ids = manager.template CurrentIds<T>();
   const MessageId<T> last = cursor_.get().last_message_count;
   return {previous_messages,
           current_messages,
@@ -1353,10 +1353,10 @@ template <ConsumableMessageTrait T, typename Alloc>
 constexpr auto ConsumableMessageReader<T, Alloc>::MakeIterator(
     size_t position) const noexcept -> const_iterator {
   const auto& manager = manager_.get();
-  const auto previous_messages = manager.PreviousMessages<T>();
-  const auto current_messages = manager.CurrentMessages<T>();
-  const auto previous_ids = manager.PreviousIds<T>();
-  const auto current_ids = manager.CurrentIds<T>();
+  const auto previous_messages = manager.template PreviousMessages<T>();
+  const auto current_messages = manager.template CurrentMessages<T>();
+  const auto previous_ids = manager.template PreviousIds<T>();
+  const auto current_ids = manager.template CurrentIds<T>();
   const MessageId<T> last = cursor_.get().last_message_count;
   return {previous_messages,
           current_messages,

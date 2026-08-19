@@ -44,3 +44,18 @@ app.AddPluginGroups(helios::glfw::WindowInputPlugin{});
 
 - Required: `window`, `app`, GLFW
 - Optional: `input` (`HELIOS_MODULE_INPUT_AVAILABLE`)
+
+## System packages
+
+Needed on Linux when building vendored GLFW (X11 + Wayland). Windows and macOS
+need no extra packages.
+
+Debian / Ubuntu:
+
+```bash
+sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \
+  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev
+```
+
+Fedora, Arch, and shared build tools are listed under
+[Installing Dependencies](../../README.md#installing-dependencies).

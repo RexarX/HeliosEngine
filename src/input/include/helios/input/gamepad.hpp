@@ -192,11 +192,13 @@ enum class GamepadDirtyFlags : uint8_t {
   return (std::to_underlying(flags) & std::to_underlying(flag)) != 0U;
 }
 
-/// @brief Snapshot of one gamepad slot.
-/// @details `axes` holds filtered gameplay values (circular sticks, triggers
-/// remapped to `[0, 1]`). Raw backend samples live in `Gamepads::filters`.
-/// Rumble, LED, and sensor-enable fields are gameplay outputs consumed by
-/// backends. GLFW ignores rumble, LED, sensors, touchpad, and battery.
+/**
+ * @brief Snapshot of one gamepad slot.
+ * @details `axes` holds filtered gameplay values (circular sticks, triggers
+ * remapped to `[0, 1]`). Raw backend samples live in `Gamepads::filters`.
+ * Rumble, LED, and sensor-enable fields are gameplay outputs consumed by
+ * backends. GLFW ignores rumble, LED, sensors, touchpad, and battery.
+ */
 struct Gamepad {
   static constexpr size_t kMaxTouchpadFingers = 2;
 

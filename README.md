@@ -137,7 +137,10 @@ cd HeliosEngine
 
 Helios resolves dependencies per module: **system packages are tried first**, then **CPM download** if missing (`HELIOS_DOWNLOAD_PACKAGES=ON`, default). Pre-installing system packages speeds up configuration and avoids network fetches.
 
-Some packages could require additional system packages, most notably when building on Linux make sure to install the X11/Wayland development packages to properly build `glfw` and `sdl3` (`libwayland-dev`, `libx11-dev`, etc.)
+Some packages need extra OS development libraries. On Linux, vendored `glfw` and
+`sdl3` both require X11/Wayland headers. SDL3 also needs Xfixes, XScrnSaver, and
+XTest (`libxfixes-dev`, `libxss-dev`, `libxtst-dev`); configure fails if those
+are missing. Windows and macOS need no extra packages for these backends.
 
 Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/dependencies/).
 
@@ -157,17 +160,18 @@ sudo apt-get update
 sudo apt-get install -y ninja-build libboost-all-dev libtbb-dev
 ```
 
-Additinal tools:
+Additional tools:
 
 ```bash
 sudo apt-get install -y clang-format clang-tidy doxygen
 ```
 
-Wayland/X11:
+Wayland/X11 (GLFW + SDL3):
 
 ```bash
 sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \
-  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev
+  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev \
+  libxfixes-dev libxss-dev libxtst-dev
 ```
 
 #### Linux (DNF — Fedora)
@@ -177,17 +181,18 @@ sudo dnf install -y ninja-build  boost-devel tbb-devel
 
 ```
 
-Additinal tools:
+Additional tools:
 
 ```bash
 sudo dnf install -y clang-tools-extra doxygen
 ```
 
-Wayland/X11:
+Wayland/X11 (GLFW + SDL3):
 
 ```bash
-sudo apt-get install -y wayland-devel libxkbcommon-devel libX11-devel \
-  libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel libXext-devel
+sudo dnf install -y wayland-devel libxkbcommon-devel libX11-devel \
+  libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel libXext-devel \
+  libXfixes-devel libXScrnSaver-devel libXtst-devel
 ```
 
 #### Linux (Pacman — Arch)
@@ -197,17 +202,18 @@ sudo pacman -S --needed ninja boost tbb
 
 ```
 
-Additinal tools:
+Additional tools:
 
 ```bash
 sudo pacman -S --needed clang doxygen
 ```
 
-Wayland/X11:
+Wayland/X11 (GLFW + SDL3):
 
 ```bash
 sudo pacman -S --needed wayland libxkbcommon libx11 \
-  libxrandr libxinerama libxi libxcursor libxext
+  libxrandr libxinerama libxi libxcursor libxext \
+  libxfixes libxss libxtst
 ```
 
 #### macOS (Homebrew)
@@ -216,7 +222,7 @@ sudo pacman -S --needed wayland libxkbcommon libx11 \
 brew install cmake ninja boost
 ```
 
-Additinal tools:
+Additional tools:
 
 ```bash
 brew install clang-format doxygen
