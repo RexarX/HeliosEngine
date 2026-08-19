@@ -2769,6 +2769,7 @@ public:
   using value_type = std::iter_value_t<Iter>;
   using reference = decltype(*std::declval<Iter>());
   using size_type = size_t;
+  using difference_type = std::iter_difference_t<Iter>;
 
   /**
    * @brief Constructs a SlideView.
@@ -2837,7 +2838,7 @@ public:
   [[nodiscard]] constexpr reference operator[](size_t index) const
       noexcept(noexcept(*std::declval<Iter>()) &&
                noexcept(++std::declval<Iter&>())) {
-    return *std::next(begin_, index);
+    return *std::next(begin_, static_cast<difference_type>(index));
   }
 
   /**
@@ -3426,6 +3427,7 @@ public:
   using value_type = std::iter_value_t<Iter>;
   using reference = decltype(*std::declval<Iter>());
   using size_type = size_t;
+  using difference_type = std::iter_difference_t<Iter>;
 
   /**
    * @brief Constructs a ChunkView.
@@ -3489,7 +3491,7 @@ public:
   [[nodiscard]] constexpr reference operator[](size_t index) const
       noexcept(noexcept(*std::declval<Iter>()) &&
                noexcept(++std::declval<Iter&>())) {
-    return *std::next(begin_, index);
+    return *std::next(begin_, static_cast<difference_type>(index));
   }
 
   /**
@@ -3537,7 +3539,7 @@ public:
   [[nodiscard]] constexpr Iter end() const
       noexcept(std::is_nothrow_copy_constructible_v<Iter> &&
                noexcept(++std::declval<Iter&>())) {
-    return std::next(begin_, size_);
+    return std::next(begin_, static_cast<difference_type>(size_));
   }
 
 private:
@@ -3819,7 +3821,8 @@ constexpr auto ChunkAdapter<Iter>::operator*() const
   size_t available = 0;
   if constexpr (std::random_access_iterator<Iter>) {
     available = static_cast<size_t>(
-        std::min<difference_type>(chunk_size_, std::distance(current_, end_)));
+        std::min<difference_type>(static_cast<difference_type>(chunk_size_),
+                                  std::distance(current_, end_)));
   } else {
     auto it = current_;
     for (; available < chunk_size_ && it != end_; ++available) {

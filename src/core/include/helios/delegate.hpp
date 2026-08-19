@@ -457,7 +457,7 @@ public:
 
 private:
   template <typename NativeFnPtr>
-  constexpr void BindStateless(NativeFnPtr fn_ptr) noexcept;
+  void BindStateless(NativeFnPtr fn_ptr) noexcept;
 
   template <typename Callable>
   constexpr void BindEmpty() noexcept;
@@ -696,13 +696,13 @@ constexpr auto Delegate<ReturnType(Args...)>::Invoke(UArgs&&... args) const
 
 template <typename ReturnType, typename... Args>
 template <typename NativeFnPtr>
-constexpr void Delegate<ReturnType(Args...)>::BindStateless(
+inline void Delegate<ReturnType(Args...)>::BindStateless(
     NativeFnPtr fn_ptr) noexcept {
-  instance_ptr_ = static_cast<void*>(fn_ptr);
+  instance_ptr_ = reinterpret_cast<void*>(fn_ptr);
   function_ptr_ =
       [](void* instance_ptr, Args... call_args) noexcept(
           std::is_nothrow_invocable_v<NativeFnPtr, Args...>) -> ReturnType {
-    auto fn = static_cast<NativeFnPtr>(instance_ptr);
+    auto fn = reinterpret_cast<NativeFnPtr>(instance_ptr);
     if constexpr (std::is_void_v<ReturnType>) {
       fn(call_args...);
       return;
