@@ -241,35 +241,37 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('fixed__pool__a
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                <span class="stringliteral">&quot;Requested alignment exceeds fixed pool alignment!&quot;</span>);</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordtype">void</span>* <span class="keyword">const</span> block = details::PopBlock(free_head_);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(block != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Fixed pool allocator exhausted!&quot;</span>);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> free = free_blocks_.fetch_sub(1) - 1;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> used = block_count_ - free;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordtype">size_t</span> peak = peak_used_blocks_.load(std::memory_order_relaxed);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordflow">while</span> (used &gt; peak &amp;&amp; !peak_used_blocks_.compare_exchange_weak(</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                            peak, used, std::memory_order_relaxed)) {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  }</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  total_allocations_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordflow">return</span> block;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keywordtype">void</span> FixedPoolAllocator::do_deallocate(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">size_t</span> <span class="comment">/*bytes*/</span>,</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                                       <span class="keywordtype">size_t</span> <span class="comment">/*alignment*/</span>) {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      <span class="stringliteral">&quot;helios::mem::FixedPoolAllocator::do_deallocate&quot;</span>);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  }</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#adb414ea9cc60790c10c805da792a4375">Owns</a>(ptr), <span class="stringliteral">&quot;ptr does not belong to fixed pool!&quot;</span>);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  details::PushBlock(free_head_, ptr);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  free_blocks_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  total_deallocations_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}  <span class="comment">// namespace helios::mem</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordflow">if</span> (block == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> free = free_blocks_.fetch_sub(1) - 1;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> used = block_count_ - free;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordtype">size_t</span> peak = peak_used_blocks_.load(std::memory_order_relaxed);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keywordflow">while</span> (used &gt; peak &amp;&amp; !peak_used_blocks_.compare_exchange_weak(</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                            peak, used, std::memory_order_relaxed)) {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  total_allocations_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordflow">return</span> block;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keywordtype">void</span> FixedPoolAllocator::do_deallocate(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">size_t</span> <span class="comment">/*bytes*/</span>,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                                       <span class="keywordtype">size_t</span> <span class="comment">/*alignment*/</span>) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      <span class="stringliteral">&quot;helios::mem::FixedPoolAllocator::do_deallocate&quot;</span>);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#adb414ea9cc60790c10c805da792a4375">Owns</a>(ptr), <span class="stringliteral">&quot;ptr does not belong to fixed pool!&quot;</span>);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  details::PushBlock(free_head_, ptr);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  free_blocks_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  total_deallocations_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}  <span class="comment">// namespace helios::mem</span></div>
 <div class="ttc" id="aaligned__alloc_8hpp_html"><div class="ttname"><a href="aligned__alloc_8hpp.html">aligned_alloc.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00228">assert.hpp:228</a></div></div>

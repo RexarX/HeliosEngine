@@ -252,57 +252,59 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('fixed__stack__
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> user_offset = <a class="code hl_function" href="namespacehelios_1_1mem.html#afb5fcf4ad640ef2c85f829cfbcd4baf6">SaturatingAdd</a>(observed, padding);</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> next = <a class="code hl_function" href="namespacehelios_1_1mem.html#afb5fcf4ad640ef2c85f829cfbcd4baf6">SaturatingAdd</a>(user_offset, bytes);</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(next &lt;= capacity_, <span class="stringliteral">&quot;Fixed stack allocator exhausted!&quot;</span>);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">if</span> (offset_.compare_exchange_weak(observed, next, std::memory_order_acq_rel,</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                                      std::memory_order_relaxed)) {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      <span class="keyword">auto</span>* <span class="keyword">const</span> user_ptr = buffer_ + user_offset;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      <span class="keyword">auto</span>* <span class="keyword">const</span> header = std::launder(</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>          <span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(user_ptr - kHeaderSize));</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      header-&gt;previous_offset = observed;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>      header-&gt;end_offset = next;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      <span class="keyword">const</span> <span class="keywordtype">size_t</span> waste = padding - kHeaderSize;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      alignment_waste_.fetch_add(waste, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      allocation_count_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      total_allocations_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      <span class="keywordtype">size_t</span> peak = peak_usage_.load(std::memory_order_relaxed);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      <span class="keywordflow">while</span> (next &gt; peak &amp;&amp; !peak_usage_.compare_exchange_weak(</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                                peak, next, std::memory_order_relaxed)) {</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      }</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      <span class="keywordflow">return</span> user_ptr;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  }</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keywordtype">void</span> FixedStackAllocator::do_deallocate(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">size_t</span> <span class="comment">/*bytes*/</span>,</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                                        <span class="keywordtype">size_t</span> <span class="comment">/*alignment*/</span>) {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      <span class="stringliteral">&quot;helios::mem::FixedStackAllocator::do_deallocate&quot;</span>);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1mem_1_1FixedStackAllocator.html#a20573d5631621a71cdc19e64db76918d">Owns</a>(ptr), <span class="stringliteral">&quot;ptr does not belong to fixed stack!&quot;</span>);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">if</span> (next &gt; capacity_) [[unlikely]] {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">if</span> (offset_.compare_exchange_weak(observed, next, std::memory_order_acq_rel,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                                      std::memory_order_relaxed)) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      <span class="keyword">auto</span>* <span class="keyword">const</span> user_ptr = buffer_ + user_offset;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      <span class="keyword">auto</span>* <span class="keyword">const</span> header = std::launder(</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>          <span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(user_ptr - kHeaderSize));</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      header-&gt;previous_offset = observed;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      header-&gt;end_offset = next;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      <span class="keyword">const</span> <span class="keywordtype">size_t</span> waste = padding - kHeaderSize;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      alignment_waste_.fetch_add(waste, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      allocation_count_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      total_allocations_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      <span class="keywordtype">size_t</span> peak = peak_usage_.load(std::memory_order_relaxed);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      <span class="keywordflow">while</span> (next &gt; peak &amp;&amp; !peak_usage_.compare_exchange_weak(</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                                peak, next, std::memory_order_relaxed)) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      <span class="keywordflow">return</span> user_ptr;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keywordtype">void</span> FixedStackAllocator::do_deallocate(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">size_t</span> <span class="comment">/*bytes*/</span>,</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                                        <span class="keywordtype">size_t</span> <span class="comment">/*alignment*/</span>) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      <span class="stringliteral">&quot;helios::mem::FixedStackAllocator::do_deallocate&quot;</span>);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  }</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> kHeaderSize = <span class="keyword">sizeof</span>(AllocationHeader);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keyword">auto</span>* <span class="keyword">const</span> header = std::launder(<span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>      <span class="keyword">static_cast&lt;</span>std::byte*<span class="keyword">&gt;</span>(ptr) - kHeaderSize));</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keywordtype">size_t</span> expected = header-&gt;end_offset;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keywordflow">if</span> (offset_.compare_exchange_strong(expected, header-&gt;previous_offset,</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                                      std::memory_order_acq_rel)) {</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    allocation_count_.fetch_sub(1, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    total_deallocations_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keyword">const</span> <span class="keyword">auto</span> user_offset =</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span>std::byte*<span class="keyword">&gt;</span>(ptr) - buffer_);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> waste = user_offset - header-&gt;previous_offset - kHeaderSize;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    details::SaturatingFetchSub(alignment_waste_, waste);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>}</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}  <span class="comment">// namespace helios::mem</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1mem_1_1FixedStackAllocator.html#a20573d5631621a71cdc19e64db76918d">Owns</a>(ptr), <span class="stringliteral">&quot;ptr does not belong to fixed stack!&quot;</span>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> kHeaderSize = <span class="keyword">sizeof</span>(AllocationHeader);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keyword">auto</span>* <span class="keyword">const</span> header = std::launder(<span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      <span class="keyword">static_cast&lt;</span>std::byte*<span class="keyword">&gt;</span>(ptr) - kHeaderSize));</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <span class="keywordtype">size_t</span> expected = header-&gt;end_offset;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="keywordflow">if</span> (offset_.compare_exchange_strong(expected, header-&gt;previous_offset,</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                                      std::memory_order_acq_rel)) {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    allocation_count_.fetch_sub(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    total_deallocations_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">const</span> <span class="keyword">auto</span> user_offset =</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span>std::byte*<span class="keyword">&gt;</span>(ptr) - buffer_);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> waste = user_offset - header-&gt;previous_offset - kHeaderSize;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    details::SaturatingFetchSub(alignment_waste_, waste);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>}  <span class="comment">// namespace helios::mem</span></div>
 <div class="ttc" id="aaligned__alloc_8hpp_html"><div class="ttname"><a href="aligned__alloc_8hpp.html">aligned_alloc.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00228">assert.hpp:228</a></div></div>

@@ -201,10 +201,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8750086f476a9b847abddd26a48c1868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs with a PMR memory resource.  <br /></td></tr>
 <tr class="memitem:a8c4cb89f912956982f48a1245f2a574c" id="r_a8c4cb89f912956982f48a1245f2a574c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8c4cb89f912956982f48a1245f2a574c">MultiTypeMap</a> (std::nullptr_t)=delete</td></tr>
 <tr class="memitem:abf4bb59aa5fab1b165d5f097a8ce8e5e" id="r_abf4bb59aa5fab1b165d5f097a8ce8e5e"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#abf4bb59aa5fab1b165d5f097a8ce8e5e">MultiTypeMap</a> (const MultiTypeMap &amp;other)=default</td></tr>
-<tr class="memitem:a0d0d16b2a2d9d2be8181cdf0c2fa5ea3" id="r_a0d0d16b2a2d9d2be8181cdf0c2fa5ea3"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a0d0d16b2a2d9d2be8181cdf0c2fa5ea3">MultiTypeMap</a> (MultiTypeMap &amp;&amp;other) noexcept=default</td></tr>
+<tr class="memitem:a5f721915baf8ec7a9dca454f980c20d5" id="r_a5f721915baf8ec7a9dca454f980c20d5"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a5f721915baf8ec7a9dca454f980c20d5">MultiTypeMap</a> (MultiTypeMap &amp;&amp;other) noexcept(std::is_nothrow_swappable_v&lt; MapType &gt; &amp;&amp;std::is_nothrow_swappable_v&lt; <a class="el" href="#ab9a195e68d4eac0fd1fe16da6253389c">allocator_type</a> &gt;)</td></tr>
+<tr class="memdesc:a5f721915baf8ec7a9dca454f980c20d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs by swapping with an empty map.  <br /></td></tr>
 <tr class="memitem:a2e1f37a3216c688abe5559aed8bcd9d7" id="r_a2e1f37a3216c688abe5559aed8bcd9d7"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a2e1f37a3216c688abe5559aed8bcd9d7">~MultiTypeMap</a> ()=default</td></tr>
 <tr class="memitem:a1d7979f717fad5a95ce2c73773d52bf7" id="r_a1d7979f717fad5a95ce2c73773d52bf7"><td class="memItemLeft">constexpr <a class="el" href="#a29f6a3b4dc36360f6986af446ab3fd5c">MultiTypeMap</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1d7979f717fad5a95ce2c73773d52bf7">operator=</a> (const <a class="el" href="#a29f6a3b4dc36360f6986af446ab3fd5c">MultiTypeMap</a> &amp;other)=default</td></tr>
-<tr class="memitem:aa567b729554931c6d51ab5f7bfc91d44" id="r_aa567b729554931c6d51ab5f7bfc91d44"><td class="memItemLeft">constexpr <a class="el" href="#a29f6a3b4dc36360f6986af446ab3fd5c">MultiTypeMap</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa567b729554931c6d51ab5f7bfc91d44">operator=</a> (<a class="el" href="#a29f6a3b4dc36360f6986af446ab3fd5c">MultiTypeMap</a> &amp;&amp;other) noexcept=default</td></tr>
+<tr class="memitem:a38bc37502462363d15eb737e7ea6894f" id="r_a38bc37502462363d15eb737e7ea6894f"><td class="memItemLeft">constexpr <a class="el" href="#a29f6a3b4dc36360f6986af446ab3fd5c">MultiTypeMap</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a38bc37502462363d15eb737e7ea6894f">operator=</a> (<a class="el" href="#a29f6a3b4dc36360f6986af446ab3fd5c">MultiTypeMap</a> &amp;&amp;other) noexcept(std::is_nothrow_swappable_v&lt; MapType &gt; &amp;&amp;std::is_nothrow_swappable_v&lt; <a class="el" href="#ab9a195e68d4eac0fd1fe16da6253389c">allocator_type</a> &gt;)</td></tr>
+<tr class="memdesc:a38bc37502462363d15eb737e7ea6894f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns by taking <span class="tt">other</span>'s contents and leaving it empty.  <br /></td></tr>
 <tr class="memitem:a739c2d44b65032996a703e545be3f7c3" id="r_a739c2d44b65032996a703e545be3f7c3"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a739c2d44b65032996a703e545be3f7c3 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a739c2d44b65032996a703e545be3f7c3">Clear</a> () noexcept</td></tr>
 <tr class="memdesc:a739c2d44b65032996a703e545be3f7c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the Storage for type <span class="tt">T</span> (calls <span class="tt">Storage::Clear()</span> or <span class="tt">Storage::clear()</span> if available).  <br /></td></tr>
@@ -542,8 +544,8 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 
 </div>
 </div>
-<a id="a0d0d16b2a2d9d2be8181cdf0c2fa5ea3" name="a0d0d16b2a2d9d2be8181cdf0c2fa5ea3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d0d16b2a2d9d2be8181cdf0c2fa5ea3">&#9670;&#160;</a></span>MultiTypeMap() <span class="overload">[6/6]</span></h2>
+<a id="a5f721915baf8ec7a9dca454f980c20d5" name="a5f721915baf8ec7a9dca454f980c20d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f721915baf8ec7a9dca454f980c20d5">&#9670;&#160;</a></span>MultiTypeMap() <span class="overload">[6/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -562,10 +564,20 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Move-constructs by swapping with an empty map. </p>
+<p>Avoids <span class="tt">std::flat_map</span> move, which can leave a corrupted moved-from container on some standard libraries. The source is empty afterwards. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Map to steal from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00117">117</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -625,7 +637,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 <p>Returns a const iterator to the beginning of the map entries. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const iterator to the beginning of the map entries </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00459">459</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00481">481</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -657,7 +669,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 <p>Returns an iterator to the beginning of the map entries. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator to the beginning of the map entries </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00453">453</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00475">475</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -689,7 +701,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 <p>Returns a const iterator to the beginning of the map entries. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const iterator to the beginning of the map entries </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00467">467</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00489">489</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -721,7 +733,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 <p>Returns a const iterator to the end of the map entries. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const iterator to the end of the map entries </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00487">487</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00509">509</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -760,7 +772,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00121">121</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00143">143</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -797,7 +809,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00502">502</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00538">538</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -828,7 +840,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
 
 <p>Clears all per-type storages (calls <span class="tt"><a class="el" href="#a739c2d44b65032996a703e545be3f7c3" title="Clears the Storage for type T (calls Storage::Clear() or Storage::clear() if available).">Clear()</a></span>/<span class="tt">clear()</span> on each entry if available). </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00514">514</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00550">550</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -868,7 +880,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if an entry exists </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00342">342</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00364">364</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -906,7 +918,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if an entry exists </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00351">351</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00373">373</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -938,7 +950,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 <p>Returns a view of the underlying map (const). </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the underlying flat_map </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00437">437</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00459">459</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -970,7 +982,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 <p>Returns a view of the underlying map (non-const). </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the underlying flat_map </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00431">431</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00453">453</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1018,7 +1030,7 @@ requires std::constructible_from&lt;Storage, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pair of iterator to the entry and bool — <span class="tt">true</span> if a new entry was inserted </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00165">165</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00187">187</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1058,7 +1070,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if storage is empty or doesn't exist </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00364">364</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00386">386</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1096,7 +1108,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if storage is empty or doesn't exist </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00709">709</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00745">745</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1128,7 +1140,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
 <p>Returns true if all per-type storages are empty or if the map has no entries. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if all storages are empty </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00725">725</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00761">761</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1160,7 +1172,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 <p>Returns a const iterator to the end of the map entries. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const iterator to the end of the map entries </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00481">481</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00503">503</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1192,7 +1204,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 <p>Returns an iterator to the end of the map entries. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator to the end of the map entries </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00475">475</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00497">497</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1232,7 +1244,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the Storage for type <span class="tt">T</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00526">526</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00562">562</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1270,7 +1282,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the Storage for the given type index </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00540">540</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00576">576</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1311,7 +1323,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the Storage for type <span class="tt">T</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00564">564</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00600">600</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1352,7 +1364,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the Storage for type <span class="tt">T</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00554">554</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00590">590</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1391,7 +1403,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the Storage for the given type index </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00583">583</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00619">619</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1430,7 +1442,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the Storage for the given type index </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00574">574</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00610">610</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1462,7 +1474,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 <p>Gets the allocator. </p>
 <dl class="section return"><dt>Returns</dt><dd>Copy of the allocator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00445">445</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00467">467</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1513,7 +1525,7 @@ template&lt;typename OtherStorage, typename OtherAllocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00607">607</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00643">643</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1544,7 +1556,7 @@ template&lt;typename OtherStorage, typename OtherAllocator&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00668">668</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00704">704</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1575,19 +1587,19 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 
 </div>
 </div>
-<a id="aa567b729554931c6d51ab5f7bfc91d44" name="aa567b729554931c6d51ab5f7bfc91d44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa567b729554931c6d51ab5f7bfc91d44">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a38bc37502462363d15eb737e7ea6894f" name="a38bc37502462363d15eb737e7ea6894f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38bc37502462363d15eb737e7ea6894f">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename Storage, typename Allocator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a29f6a3b4dc36360f6986af446ab3fd5c">MultiTypeMap</a> &amp; <a class="el" href="classhelios_1_1container_1_1MultiTypeMap.html">helios::container::MultiTypeMap</a>&lt; Storage, Allocator &gt;::operator= </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1container_1_1MultiTypeMap.html">helios::container::MultiTypeMap</a>&lt; Storage, Allocator &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a29f6a3b4dc36360f6986af446ab3fd5c">MultiTypeMap</a>&lt; Storage, Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td></td>
@@ -1595,10 +1607,21 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Move-assigns by taking <span class="tt">other</span>'s contents and leaving it empty. </p>
+<p>Clears this map, then swaps. Same <span class="tt">std::flat_map</span> workaround as the move constructor. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Map to steal from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt">*this</span> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00524">524</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1638,7 +1661,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if storage was removed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00193">193</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00215">215</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1676,7 +1699,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if storage was removed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00202">202</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00224">224</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1715,7 +1738,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00140">140</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00162">162</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1752,7 +1775,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00148">148</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00170">170</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1783,7 +1806,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 
 <p>Removes all Storage entries from the map. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00151">151</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00173">173</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1823,7 +1846,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Element count, 0 if storage doesn't exist </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00408">408</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00430">430</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1855,7 +1878,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
 <p>Returns the total number of elements across all entries. </p>
 <p>Only meaningful if Storage supports <span class="tt"><a class="el" href="#acccc5d27dcabf4c4530915d116a6fc30" title="Returns the total number of elements across all entries.">Size()</a></span> or <span class="tt">size()</span>. Returns number of map entries otherwise. </p><dl class="section return"><dt>Returns</dt><dd>Total element count (or entry count if Storage has no size method) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00738">738</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00774">774</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1893,7 +1916,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Element count, 0 if storage doesn't exist </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00754">754</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00790">790</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1930,7 +1953,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00323">323</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00345">345</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -1978,7 +2001,7 @@ requires std::constructible_from&lt;Storage, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pair of iterator to the entry and bool — <span class="tt">true</span> if a new entry was inserted </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00183">183</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00205">205</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -2018,7 +2041,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to Storage if exists, <span class="tt">nullptr</span> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00279">279</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00301">301</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -2058,7 +2081,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to Storage if exists, <span class="tt">nullptr</span> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00269">269</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00291">291</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -2096,7 +2119,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to Storage if exists, <span class="tt">nullptr</span> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00599">599</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00635">635</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -2134,7 +2157,7 @@ template&lt;typename Storage, typename Allocator&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to Storage if exists, <span class="tt">nullptr</span> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00592">592</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00628">628</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -2166,7 +2189,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 <p>Returns the number of registered type entries. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of registered type entries </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00423">423</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00445">445</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -2206,7 +2229,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Type index </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00388">388</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00410">410</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -2235,7 +2258,7 @@ template&lt;typename OtherStorage, typename OtherA&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00491">491</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00513">513</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
@@ -2268,7 +2291,7 @@ template&lt;typename Storage, typename Allocator = std::allocator&lt;std::byte&g
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00330">330</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__type__map_8hpp_source.html#l00352">352</a> of file <a class="el" href="multi__type__map_8hpp_source.html">multi_type_map.hpp</a>.</p>
 
 </div>
 </div>
