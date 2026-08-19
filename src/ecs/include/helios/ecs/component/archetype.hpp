@@ -6,16 +6,24 @@
 #include <helios/ecs/component/archetype_id.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/entity/entity.hpp>
+#include <helios/utils/common_traits.hpp>
 
 #include <algorithm>
+#include <concepts>
 #include <cstddef>
 #include <cstdint>
 #include <limits>
 #include <optional>
 #include <span>
 #include <string>
+#include <type_traits>
 #include <utility>
 #include <vector>
+
+#ifdef HELIOS_ENABLE_ASSERTS
+#include <array>
+#include <functional>
+#endif
 
 #ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
 #include <flat_map>

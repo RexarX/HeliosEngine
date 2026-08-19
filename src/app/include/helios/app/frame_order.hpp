@@ -84,6 +84,24 @@ public:
   }
 
   /**
+   * @brief Prepends `stage` if not already present.
+   * @param stage Stage type index to prepend
+   * @return True if inserted
+   */
+  constexpr bool TryPushFront(ecs::StageTypeIndex stage);
+
+  /**
+   * @brief Prepends `stage` if not already present.
+   * @tparam Stage Stage type to prepend
+   * @param stage Optional instance of `Stage` to deduce type
+   * @return True if inserted
+   */
+  template <ecs::StageTrait Stage>
+  constexpr bool TryPushFront(const Stage& stage = {}) {
+    return TryPushFront(ecs::StageTypeIndex::From(stage));
+  }
+
+  /**
    * @brief Checks if `stage` is present in the order.
    * @param stage Stage type index to check
    * @return True if present
@@ -132,7 +150,7 @@ constexpr void FrameOrder::InsertAfter(ecs::StageTypeIndex after,
       labels_, [after](ecs::StageTypeIndex label) { return label == after; });
   HELIOS_ASSERT(it != labels_.end(),
                 "Anchor stage not found in frame order for InsertAfter!");
-  labels_.insert(std::next(it), stage);
+  labels_.insert(it + 1, stage);
 }
 
 constexpr void FrameOrder::InsertBefore(ecs::StageTypeIndex before,
@@ -151,6 +169,15 @@ constexpr bool FrameOrder::TryPushBack(ecs::StageTypeIndex stage) {
   }
 
   labels_.push_back(stage);
+  return true;
+}
+
+constexpr bool FrameOrder::TryPushFront(ecs::StageTypeIndex stage) {
+  if (Contains(stage)) {
+    return false;
+  }
+
+  labels_.insert(labels_.begin(), stage);
   return true;
 }
 

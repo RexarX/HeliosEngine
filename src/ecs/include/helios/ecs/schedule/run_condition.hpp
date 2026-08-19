@@ -2,16 +2,20 @@
 
 #include <helios/compiler/compiler.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
+#include <helios/ecs/system/access_policy.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/system/param_policy.hpp>
 #include <helios/ecs/system/system.hpp>
-#include <helios/ecs/world.hpp>
 
 #include <functional>
 #include <string>
 #include <tuple>
 #include <type_traits>
+#include <utility>
 
 namespace helios::ecs {
+
+class World;
 
 /// @brief Type-erased run condition: returns bool, receives World& + local
 /// data.

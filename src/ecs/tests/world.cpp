@@ -2,6 +2,9 @@
 
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/message/cursor.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
+#include <helios/ecs/system/access_policy.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
 
 #include <memory_resource>
@@ -72,6 +75,7 @@ struct GameMsg {
 
 struct ManualGameMsg {
   static constexpr auto kClearPolicy = MessageClearPolicy::kManual;
+
   int value = 0;
 };
 
@@ -91,6 +95,14 @@ struct DestroyEntityCmd {
   Entity entity;
 
   void Execute(World& world) const { world.DestroyEntity(entity); }
+};
+
+template <typename T>
+concept HasSystemParamTraits = requires { typename SystemParamTraits<T>; };
+
+template <typename T>
+concept HasRegisterAccess = requires(AccessPolicyBuilder& builder) {
+  SystemParamTraits<T>::RegisterAccess(builder);
 };
 
 }  // namespace
@@ -1612,3 +1624,31 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 }  // TEST_SUITE("ecs::World")
+
+TEST_SUITE("helios::ecs::SystemParamTraits") {
+  TEST_CASE("helios::ecs::SystemParamTraits: World") {
+    SUBCASE("World exists as a system parameter trait") {
+      CHECK(HasSystemParamTraits<World>);
+      CHECK(HasRegisterAccess<World>);
+    }
+
+    SUBCASE("World RegisterAccess sets exclusive flag") {
+      AccessPolicyBuilder builder;
+      SystemParamTraits<World>::RegisterAccess(builder);
+
+      const auto policy = builder.Build();
+      CHECK(policy.Exclusive());
+      CHECK_FALSE(policy.HasComponents());
+      CHECK_FALSE(policy.HasResources());
+    }
+
+    SUBCASE("World Make returns the same world reference") {
+      World world;
+      SystemLocalData local = SystemLocalData::From();
+      const AccessPolicy policy;
+
+      World& made = SystemParamTraits<World>::Make(world, local, policy);
+      CHECK_EQ(&made, &world);
+    }
+  }
+}

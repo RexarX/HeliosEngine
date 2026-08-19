@@ -2,11 +2,6 @@
 
 #include <helios/input/gamepad.hpp>
 
-#include <cstdint>
-#include <format>
-#include <sstream>
-#include <utility>
-
 using namespace helios::input;
 
 TEST_SUITE("helios::input::Trigger") {
@@ -87,71 +82,174 @@ TEST_SUITE("helios::input::GamepadAxisFilter") {
   }
 }
 
-TEST_SUITE("helios::input::ToString") {
-  TEST_CASE("helios::input::ToString") {
-    SUBCASE("Formats every defined gamepad button") {
-      for (uint8_t i = 0; i <= std::to_underlying(GamepadButton::kCount); ++i) {
-        const auto name = ToString(static_cast<GamepadButton>(i));
-        CHECK_FALSE(name.empty());
-        CHECK_NE(name, "unknown");
-      }
+TEST_SUITE("helios::input::GamepadDirtyFlags") {
+  TEST_CASE("helios::input::HasFlag") {
+    SUBCASE("Detects a set gamepad dirty flag") {
+      CHECK(HasFlag(GamepadDirtyFlags::kRumble | GamepadDirtyFlags::kLed,
+                    GamepadDirtyFlags::kRumble));
     }
 
-    SUBCASE("Formats representative gamepad buttons") {
-      CHECK_EQ(ToString(GamepadButton::kA), "A");
-      CHECK_EQ(ToString(GamepadButton::kStart), "Start");
-      CHECK_EQ(ToString(GamepadButton::kDpadLeft), "DpadLeft");
-      CHECK_EQ(ToString(GamepadButton::kCount), "Count");
+    SUBCASE("Returns false for an unset gamepad dirty flag") {
+      CHECK_FALSE(HasFlag(GamepadDirtyFlags::kRumble, GamepadDirtyFlags::kLed));
     }
 
-    SUBCASE("Formats an invalid gamepad button as unknown") {
-      CHECK_EQ(ToString(static_cast<GamepadButton>(255)), "unknown");
+    SUBCASE("kNone never matches a concrete flag") {
+      CHECK_FALSE(
+          HasFlag(GamepadDirtyFlags::kNone, GamepadDirtyFlags::kRumble));
     }
+  }
 
-    SUBCASE("Formats every defined gamepad axis") {
-      for (uint8_t i = 0; i <= std::to_underlying(GamepadAxis::kCount); ++i) {
-        const auto name = ToString(static_cast<GamepadAxis>(i));
-        CHECK_FALSE(name.empty());
-        CHECK_NE(name, "unknown");
-      }
-    }
-
-    SUBCASE("Formats representative gamepad axes") {
-      CHECK_EQ(ToString(GamepadAxis::kLeftX), "LeftX");
-      CHECK_EQ(ToString(GamepadAxis::kRightTrigger), "RightTrigger");
-      CHECK_EQ(ToString(GamepadAxis::kCount), "Count");
-    }
-
-    SUBCASE("Formats an invalid gamepad axis as unknown") {
-      CHECK_EQ(ToString(static_cast<GamepadAxis>(255)), "unknown");
+  TEST_CASE("helios::input::operator|") {
+    SUBCASE("Combines gamepad dirty flags") {
+      const GamepadDirtyFlags flags =
+          GamepadDirtyFlags::kRumble | GamepadDirtyFlags::kSensors;
+      CHECK(HasFlag(flags, GamepadDirtyFlags::kRumble));
+      CHECK(HasFlag(flags, GamepadDirtyFlags::kSensors));
     }
   }
 }
 
-TEST_SUITE("helios::input::operator<<") {
-  TEST_CASE("helios::input::operator<<") {
-    SUBCASE("Streams gamepad buttons") {
-      std::ostringstream stream;
-      stream << GamepadButton::kLeftBumper;
-      CHECK_EQ(stream.str(), "GamepadButton::LeftBumper");
-    }
+TEST_SUITE("helios::input::Gamepad") {
+  TEST_CASE("helios::input::Gamepad::Reset") {
+    SUBCASE("Clears identity, buttons, axes, and extras") {
+      Gamepad pad;
+      pad.name = "Pad";
+      pad.guid = "guid";
+      pad.mapping = "map";
+      pad.buttons.Press(GamepadButton::kA);
+      pad.axes.Set(GamepadAxis::kLeftX, 1.0F);
+      pad.power.state = GamepadPowerState::kCharging;
+      pad.gyro[0] = 1.0F;
+      pad.touchpad_count = 1;
+      pad.id = 2;
+      pad.connected = true;
+      pad.SetRumble(1, 2, 3);
 
-    SUBCASE("Streams gamepad axes") {
-      std::ostringstream stream;
-      stream << GamepadAxis::kLeftTrigger;
-      CHECK_EQ(stream.str(), "GamepadAxis::LeftTrigger");
+      pad.Reset();
+
+      CHECK(pad.name.empty());
+      CHECK(pad.guid.empty());
+      CHECK(pad.mapping.empty());
+      CHECK_FALSE(pad.buttons.AnyPressed());
+      CHECK_EQ(pad.axes.Get(GamepadAxis::kLeftX), doctest::Approx(0.0F));
+      CHECK_EQ(pad.power.state, GamepadPowerState::kUnknown);
+      CHECK_EQ(pad.gyro[0], doctest::Approx(0.0F));
+      CHECK_EQ(pad.touchpad_count, 0);
+      CHECK_EQ(pad.id, -1);
+      CHECK_FALSE(pad.connected);
+      CHECK_EQ(pad.dirty_flags, GamepadDirtyFlags::kNone);
     }
   }
-}
 
-TEST_SUITE("std::formatter") {
-  TEST_CASE("std::formatter") {
-    SUBCASE("Formats GamepadButton") {
-      CHECK_EQ(std::format("{}", GamepadButton::kY), "GamepadButton::Y");
+  TEST_CASE("helios::input::Gamepad::MarkDirty") {
+    SUBCASE("Sets a single dirty flag") {
+      Gamepad pad;
+      pad.MarkDirty(GamepadDirtyFlags::kRumble);
+
+      CHECK(pad.Dirty(GamepadDirtyFlags::kRumble));
+      CHECK_FALSE(pad.Dirty(GamepadDirtyFlags::kLed));
     }
 
-    SUBCASE("Formats GamepadAxis") {
-      CHECK_EQ(std::format("{}", GamepadAxis::kRightY), "GamepadAxis::RightY");
+    SUBCASE("Combines additional dirty flags") {
+      Gamepad pad;
+      pad.MarkDirty(GamepadDirtyFlags::kRumble);
+      pad.MarkDirty(GamepadDirtyFlags::kLed | GamepadDirtyFlags::kSensors);
+
+      CHECK(pad.Dirty(GamepadDirtyFlags::kRumble));
+      CHECK(pad.Dirty(GamepadDirtyFlags::kLed));
+      CHECK(pad.Dirty(GamepadDirtyFlags::kSensors));
+    }
+  }
+
+  TEST_CASE("helios::input::Gamepad::ClearDirty") {
+    SUBCASE("Clears selected flags and leaves others") {
+      Gamepad pad;
+      pad.MarkDirty(GamepadDirtyFlags::kRumble | GamepadDirtyFlags::kLed |
+                    GamepadDirtyFlags::kSensors);
+      pad.ClearDirty(GamepadDirtyFlags::kLed);
+
+      CHECK(pad.Dirty(GamepadDirtyFlags::kRumble));
+      CHECK_FALSE(pad.Dirty(GamepadDirtyFlags::kLed));
+      CHECK(pad.Dirty(GamepadDirtyFlags::kSensors));
+    }
+
+    SUBCASE("Clears all flags") {
+      Gamepad pad;
+      pad.MarkDirty(GamepadDirtyFlags::kRumble |
+                    GamepadDirtyFlags::kTriggerRumble);
+      pad.ClearDirty();
+
+      CHECK_EQ(pad.dirty_flags, GamepadDirtyFlags::kNone);
+      CHECK_FALSE(pad.Dirty(GamepadDirtyFlags::kRumble));
+    }
+  }
+
+  TEST_CASE("helios::input::Gamepad::SetRumble") {
+    SUBCASE("Stores motor strengths and marks rumble dirty") {
+      Gamepad pad;
+      pad.SetRumble(10, 20, 30);
+
+      CHECK_EQ(pad.rumble_low, 10);
+      CHECK_EQ(pad.rumble_high, 20);
+      CHECK_EQ(pad.rumble_duration_ms, 30U);
+      CHECK(pad.Dirty(GamepadDirtyFlags::kRumble));
+    }
+  }
+
+  TEST_CASE("helios::input::Gamepad::SetTriggerRumble") {
+    SUBCASE("Stores trigger strengths and marks trigger rumble dirty") {
+      Gamepad pad;
+      pad.SetTriggerRumble(4, 5, 6);
+
+      CHECK_EQ(pad.trigger_rumble_left, 4);
+      CHECK_EQ(pad.trigger_rumble_right, 5);
+      CHECK_EQ(pad.trigger_rumble_duration_ms, 6U);
+      CHECK(pad.Dirty(GamepadDirtyFlags::kTriggerRumble));
+    }
+  }
+
+  TEST_CASE("helios::input::Gamepad::SetLed") {
+    SUBCASE("Stores LED color and marks LED dirty") {
+      Gamepad pad;
+      pad.SetLed(1, 2, 3);
+
+      CHECK_EQ(pad.led_r, 1);
+      CHECK_EQ(pad.led_g, 2);
+      CHECK_EQ(pad.led_b, 3);
+      CHECK(pad.Dirty(GamepadDirtyFlags::kLed));
+    }
+  }
+
+  TEST_CASE("helios::input::Gamepad::SetGyroEnabled") {
+    SUBCASE("Stores gyro enable and marks sensors dirty") {
+      Gamepad pad;
+      pad.SetGyroEnabled(true);
+
+      CHECK(pad.gyro_enabled);
+      CHECK(pad.Dirty(GamepadDirtyFlags::kSensors));
+    }
+  }
+
+  TEST_CASE("helios::input::Gamepad::SetAccelEnabled") {
+    SUBCASE("Stores accel enable and marks sensors dirty") {
+      Gamepad pad;
+      pad.SetAccelEnabled(true);
+
+      CHECK(pad.accel_enabled);
+      CHECK(pad.Dirty(GamepadDirtyFlags::kSensors));
+    }
+  }
+
+  TEST_CASE("helios::input::Gamepad::Dirty") {
+    SUBCASE("Returns false when the flag is unset") {
+      const Gamepad pad{};
+      CHECK_FALSE(pad.Dirty(GamepadDirtyFlags::kRumble));
+    }
+
+    SUBCASE("Returns true when the flag is set") {
+      Gamepad pad;
+      pad.MarkDirty(GamepadDirtyFlags::kLed);
+      CHECK(pad.Dirty(GamepadDirtyFlags::kLed));
     }
   }
 }

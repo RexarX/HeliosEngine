@@ -2,7 +2,7 @@
 
 #include <helios/glfw/systems/shutdown.hpp>
 
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/glfw/details/glfw_state.hpp>
 #include <helios/window/components.hpp>
 #include <helios/window/native_handle.hpp>

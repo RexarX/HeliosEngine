@@ -10,6 +10,7 @@
 #include <format>
 #include <functional>
 #include <initializer_list>
+#include <ios>
 #include <istream>
 #include <iterator>
 #include <ostream>

@@ -7,7 +7,11 @@
 #include <cmath>
 #include <concepts>
 #include <cstddef>
+#include <format>
+#include <iterator>
+#include <ostream>
 #include <span>
+#include <string>
 #include <type_traits>
 #include <utility>
 
@@ -225,4 +229,58 @@ constexpr size_t Axis<T>::Index(T axis) noexcept {
   return std::clamp((raw - center) / denom, 0.0F, 1.0F);
 }
 
+/**
+ * @brief Formats axis filter parameters using an output iterator.
+ * @tparam It Output iterator type
+ * @param filter Axis filter
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(const AxisFilter& filter, It out) {
+  return std::format_to(out,
+                        "AxisFilter{{deadzone={}, livezone={}, rescale={}}}",
+                        filter.deadzone, filter.livezone, filter.rescale);
+}
+
+/**
+ * @brief Formats axis filter parameters as a string.
+ * @param filter Axis filter
+ * @return Formatted filter string
+ */
+[[nodiscard]] inline std::string ToString(const AxisFilter& filter) {
+  std::string result;
+  result.reserve(128);
+  ToString(filter, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs axis filter parameters to an output stream.
+ * @param os Output stream
+ * @param filter Axis filter
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const AxisFilter& filter) {
+  ToString(filter, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
 }  // namespace helios::input
+
+namespace std {
+
+template <>
+struct formatter<helios::input::AxisFilter> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::AxisFilter& filter,
+                     format_context& ctx) {
+    return helios::input::ToString(filter, ctx.out());
+  }
+};
+
+}  // namespace std

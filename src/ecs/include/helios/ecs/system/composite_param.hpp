@@ -2,15 +2,21 @@
 
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/system/access_decl.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
 
 namespace helios::ecs {
+
+class AccessPolicy;
+class AccessPolicyBuilder;
 
 /**
  * @brief Helper for implementing `SystemParamTraits` on aggregate parameters.
  * @details Inherit from this type in a `SystemParamTraits` specialization when
  * every field is itself a system parameter. Field types in `Fields...` must
- * match the aggregate's member types exactly.
+ * match the aggregate's member types exactly. Include the headers that define
+ * `SystemParamTraits` for each field (for example `query/params.hpp` and
+ * `message/params.hpp`) before this specialization is instantiated.
  * @tparam Param Aggregate parameter type
  * @tparam Fields System parameter types for each aggregate field, in order
  */

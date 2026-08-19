@@ -1,6 +1,8 @@
 #pragma once
 
 #include <helios/ecs/schedule/run_condition.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
+#include <helios/ecs/system/access_policy.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/utils/type_info.hpp>
 
@@ -9,8 +11,10 @@
 #include <concepts>
 #include <cstddef>
 #include <ranges>
+#include <string>
 #include <string_view>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 namespace helios::ecs {

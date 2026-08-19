@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <array>
 #include <atomic>
+#include <chrono>
 #include <compare>
 #include <concepts>
 #include <cstddef>
@@ -11,6 +12,7 @@
 #include <expected>
 #include <format>
 #include <functional>
+#include <future>
 #include <initializer_list>
 #include <iostream>
 #include <iterator>
@@ -18,6 +20,7 @@
 #include <memory>
 #include <memory_resource>
 #include <optional>
+#include <ostream>
 #include <queue>
 #include <ranges>
 #include <span>

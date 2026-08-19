@@ -3,9 +3,9 @@
 #include <helios/assert.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/entity/entity.hpp>
-#include <helios/ecs/message/async_reader.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/resource/resource.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
 #include <helios/utils/common_traits.hpp>
 
@@ -14,6 +14,9 @@
 #include <functional>
 
 namespace helios::ecs {
+
+class AccessPolicy;
+class AccessPolicyBuilder;
 
 /**
  * @brief Thread-safe read-only view into the world.
@@ -157,5 +160,16 @@ inline auto WorldView::HasComponents(Entity entity) const
                 "Entity '{}' does not exist in the world!", entity);
   return world.template HasComponents<Ts...>(entity);
 }
+
+template <>
+struct SystemParamTraits<WorldView> {
+  static constexpr WorldView Make(World& world, SystemLocalData& /*data*/,
+                                  const AccessPolicy& /*policy*/) noexcept {
+    return WorldView(world);
+  }
+
+  static constexpr void RegisterAccess(
+      AccessPolicyBuilder& /*builder*/) noexcept {}
+};
 
 }  // namespace helios::ecs

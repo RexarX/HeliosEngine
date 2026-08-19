@@ -8,6 +8,7 @@
 #include <filesystem>
 #include <string>
 #include <string_view>
+#include <utility>
 
 #ifdef HELIOS_PLATFORM_WINDOWS
 #ifndef WIN32_LEAN_AND_MEAN
@@ -25,8 +26,29 @@
 
 namespace helios::utils {
 
+DynamicLibrary& DynamicLibrary::operator=(DynamicLibrary&& other) noexcept {
+  if (this != &other) {
+    if (Loaded()) {
+      std::ignore = Unload();
+    }
+    handle_ = other.handle_;
+    path_ = std::move(other.path_);
+    other.handle_ = kInvalidHandle;
+  }
+  return *this;
+}
+
+auto FromPath(const std::filesystem::path& path)
+    -> DynamicLibraryResult<DynamicLibrary> {
+  DynamicLibrary lib;
+  if (const auto result = lib.Load(path); !result) {
+    return std::unexpected(result.error());
+  }
+  return lib;
+}
+
 auto DynamicLibrary::Load(const std::filesystem::path& path)
-    -> std::expected<void, DynamicLibraryError> {
+    -> DynamicLibraryResult<void> {
   if (Loaded()) {
     return std::unexpected(DynamicLibraryError::kAlreadyLoaded);
   }
@@ -52,7 +74,7 @@ auto DynamicLibrary::Load(const std::filesystem::path& path)
   return {};
 }
 
-auto DynamicLibrary::Unload() -> std::expected<void, DynamicLibraryError> {
+auto DynamicLibrary::Unload() -> DynamicLibraryResult<void> {
   if (!Loaded()) {
     return std::unexpected(DynamicLibraryError::kNotLoaded);
   }
@@ -76,8 +98,23 @@ auto DynamicLibrary::Unload() -> std::expected<void, DynamicLibraryError> {
   return {};
 }
 
+auto DynamicLibrary::Reload() -> DynamicLibraryResult<void> {
+  if (!Loaded()) {
+    return std::unexpected(DynamicLibraryError::kNotLoaded);
+  }
+
+  const auto saved_path = path_;
+
+  auto unload_result = Unload();
+  if (!unload_result) {
+    return unload_result;
+  }
+
+  return Load(saved_path);
+}
+
 auto DynamicLibrary::GetSymbolAddress(std::string_view name) const
-    -> std::expected<void*, DynamicLibraryError> {
+    -> DynamicLibraryResult<void*> {
   if (!Loaded()) {
     return std::unexpected(DynamicLibraryError::kNotLoaded);
   }

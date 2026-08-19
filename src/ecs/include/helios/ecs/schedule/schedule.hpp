@@ -1,14 +1,13 @@
 #pragma once
 
-#include <helios/assert.hpp>
 #include <helios/ecs/schedule/dag.hpp>
 #include <helios/ecs/schedule/executor/executor.hpp>
 #include <helios/ecs/schedule/run_condition.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/schedule/system_set.hpp>
 #include <helios/ecs/schedule/system_storage.hpp>
+#include <helios/ecs/system/access_policy.hpp>
 #include <helios/ecs/system/system.hpp>
-#include <helios/ecs/world.hpp>
 #include <helios/utils/type_info.hpp>
 
 #include <algorithm>
@@ -17,25 +16,22 @@
 #include <cstddef>
 #include <cstdint>
 #include <expected>
-#include <functional>
 #include <memory>
 #include <optional>
 #include <string>
 #include <string_view>
 #include <type_traits>
 #include <unordered_map>
+#include <utility>
 #include <vector>
-
-#if defined(HELIOS_ECS_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-#include <format>
-#endif
 
 #include <helios/ecs/schedule/system_group_handle.hpp>
 #include <helios/ecs/schedule/system_handle.hpp>
 #include <helios/ecs/schedule/system_set_handle.hpp>
 
 namespace helios::ecs {
+
+class World;
 
 /// @brief Type index for schedules.
 using ScheduleTypeIndex = utils::TypeIndex;
@@ -544,10 +540,7 @@ private:
   [[nodiscard]] SystemSetId AllocateAnonymousGroupId() noexcept;
 
   /// @brief Bumps the generation counter and marks the schedule dirty.
-  void MarkDirty() noexcept {
-    is_dirty_ = true;
-    ++generation_;
-  }
+  void MarkDirty() noexcept;
 
   /**
    * @brief Returns the system entry for the system at `slot`.
@@ -555,11 +548,7 @@ private:
    * @param slot Index of the system entry to retrieve
    * @return Reference to the system entry at the given slot
    */
-  [[nodiscard]] SystemEntry& GetSystemEntry(size_t slot) {
-    HELIOS_ASSERT(slot < system_entries_.size(), "Invalid system slot '{}'!",
-                  slot);
-    return system_entries_[slot];
-  }
+  [[nodiscard]] SystemEntry& GetSystemEntry(size_t slot);
 
   /**
    * @brief Returns the system set with the given id.
@@ -567,11 +556,7 @@ private:
    * @param id System set id
    * @return Reference to the system set with the given id
    */
-  [[nodiscard]] SystemSet& GetSystemSet(size_t id) {
-    const auto it = sets_.find(id);
-    HELIOS_ASSERT(it != sets_.end(), "Unknown system set '{}'!", id);
-    return it->second;
-  }
+  [[nodiscard]] SystemSet& GetSystemSet(size_t id);
 
   std::vector<SystemEntry> system_entries_;
   std::unordered_map<size_t, SystemSet> sets_;
@@ -594,34 +579,6 @@ private:
   friend class SystemSetHandle;
   friend class SystemGroupHandle;
 };
-
-inline void Schedule::Run(World& world) {
-  HELIOS_ASSERT(executor_ != nullptr,
-                "Schedule::Run() called but no executor is set! "
-                "Use SetExecutor() before running.");
-
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Schedule::Run");
-  HELIOS_ECS_PROFILE_ZONE_NAME(
-      std::format("helios::ecs::Schedule::Run{{name: {}}}", name_));
-  HELIOS_ECS_PROFILE_ZONE_VALUE(
-      plan_.has_value() ? plan_->execution_order.size() : 0U);
-
-  Run(world, *executor_);
-}
-
-inline void Schedule::RunAndWait(World& world) {
-  HELIOS_ASSERT(executor_ != nullptr,
-                "Schedule::RunAndWait() called but no executor is set! "
-                "Use SetExecutor() before running.");
-
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Schedule::RunAndWait");
-  HELIOS_ECS_PROFILE_ZONE_NAME(
-      std::format("helios::ecs::Schedule::RunAndWait{{name: {}}}", name_));
-  HELIOS_ECS_PROFILE_ZONE_VALUE(
-      plan_.has_value() ? plan_->execution_order.size() : 0U);
-
-  RunAndWait(world, *executor_);
-}
 
 template <FunctorSystemTrait T>
 inline SystemHandle Schedule::Add(T&& system, SystemLocalDataOptions options) {
@@ -674,46 +631,6 @@ inline SystemSetHandle Schedule::Set(SystemSetId id) {
   EnsureSet(id);
   MarkDirty();
   return {id, *this};
-}
-
-inline void Schedule::EnsureSet(SystemSetId set_id) {
-  if (sets_.contains(set_id.id)) {
-    return;
-  }
-
-  sets_.emplace(set_id.id, SystemSet(set_id));
-  MarkDirty();
-}
-
-inline bool Schedule::AddSystemToSet(size_t slot, SystemSetId set_id) {
-  EnsureSet(set_id);
-
-  auto& entry = GetSystemEntry(slot);
-  const size_t before = entry.metadata.member_of_sets.size();
-  entry.metadata.AddMemberOfSet(set_id);
-  if (entry.metadata.member_of_sets.size() != before) {
-    MarkDirty();
-    return true;
-  }
-  return false;
-}
-
-inline void Schedule::AssignGroupToSet(SystemSetId group_id,
-                                       SystemSetId target_set_id) {
-  EnsureSet(target_set_id);
-
-  for (size_t slot = 0; slot < system_entries_.size(); ++slot) {
-    const auto& entry = system_entries_[slot];
-    if (std::ranges::find(entry.metadata.member_of_sets, group_id) !=
-        entry.metadata.member_of_sets.end()) {
-      AddSystemToSet(slot, target_set_id);
-    }
-  }
-}
-
-inline SystemSetId Schedule::AllocateAnonymousGroupId() noexcept {
-  static constexpr size_t kAnonymousGroupIdTag = static_cast<size_t>(1) << 63;
-  return SystemSetId{.id = kAnonymousGroupIdTag ^ next_anonymous_group_id_++};
 }
 
 constexpr auto SystemHandle::Before(this auto&& self, SystemId target)

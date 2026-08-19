@@ -1,6 +1,5 @@
 #pragma once
 
-#include <helios/assert.hpp>
 #include <helios/memory/common.hpp>
 #include <helios/memory/details/profile.hpp>
 

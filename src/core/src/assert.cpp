@@ -64,6 +64,47 @@ std::string FormatAssertionMessage(std::string_view condition,
   return result;
 }
 
+void DefaultAssertionHandler(std::string_view condition,
+                             const std::source_location& loc,
+                             std::string_view message) noexcept {
+  const std::string formatted = FormatAssertionMessage(condition, loc, message);
+
+#if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
+  std::println(stderr, "{}", formatted);
+#else
+  std::fprintf(stderr, "%s\n", formatted.c_str());
+#endif
+  std::fflush(stderr);
+  std::abort();
+}
+
+void HandleAssertion(std::string_view condition,
+                     const std::source_location& loc,
+                     std::string_view message) noexcept {
+  // Priority 1: Custom user handler
+  if (g_custom_assertion_handler != nullptr) {
+    g_custom_assertion_handler(condition, loc, message);
+    return;
+  }
+
+  // Priority 2: Log plugin handler (if available)
+#ifdef _MSC_VER
+  if (HasLogPluginHandler()) {
+    LogPluginAssertionHandler(condition, loc, message);
+    return;
+  }
+#else
+  if (HasLogPluginHandler != nullptr && LogPluginAssertionHandler != nullptr &&
+      HasLogPluginHandler()) {
+    LogPluginAssertionHandler(condition, loc, message);
+    return;
+  }
+#endif
+
+  // Priority 3: Default handler (printf/println to stderr)
+  DefaultAssertionHandler(condition, loc, message);
+}
+
 }  // namespace details
 
 void AbortWithStacktrace(std::string_view message) noexcept {

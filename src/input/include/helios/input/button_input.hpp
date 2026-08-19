@@ -148,4 +148,123 @@ constexpr size_t ButtonInput<T>::Index(T button) noexcept {
   return static_cast<size_t>(underlying);
 }
 
+/**
+ * @brief Tracks pressed / just-pressed / just-released state by index.
+ * @tparam N Maximum number of buttons
+ */
+template <size_t N>
+class IndexedButtonInput {
+public:
+  static constexpr size_t kSize = N;
+
+  /**
+   * @brief Marks a button as pressed.
+   * @param index Button index
+   * @details Sets `just_pressed` only when transitioning from released.
+   * @warning Asserts when `index` is out of range (`>= N`).
+   */
+  constexpr void Press(size_t index) noexcept;
+
+  /**
+   * @brief Marks a button as released.
+   * @param index Button index
+   * @details Sets `just_released` only when transitioning from pressed.
+   * @warning Asserts when `index` is out of range (`>= N`).
+   */
+  constexpr void Release(size_t index) noexcept;
+
+  /// @brief Clears edge state (`just_pressed` / `just_released`) only.
+  constexpr void Clear() noexcept;
+
+  /// @brief Clears pressed and edge state.
+  constexpr void Reset() noexcept;
+
+  /**
+   * @brief Tests whether a button is currently held.
+   * @param index Button index
+   * @return True if the button is pressed
+   * @warning Asserts when `index` is out of range (`>= N`).
+   */
+  [[nodiscard]] constexpr bool Pressed(size_t index) const noexcept {
+    return pressed_[CheckIndex(index)];
+  }
+
+  /**
+   * @brief Tests whether a button was pressed this frame.
+   * @param index Button index
+   * @return True if the button transitioned to pressed this frame
+   * @warning Asserts when `index` is out of range (`>= N`).
+   */
+  [[nodiscard]] constexpr bool JustPressed(size_t index) const noexcept {
+    return just_pressed_[CheckIndex(index)];
+  }
+
+  /**
+   * @brief Tests whether a button was released this frame.
+   * @param index Button index
+   * @return True if the button transitioned to released this frame
+   * @warning Asserts when `index` is out of range (`>= N`).
+   */
+  [[nodiscard]] constexpr bool JustReleased(size_t index) const noexcept {
+    return just_released_[CheckIndex(index)];
+  }
+
+  /**
+   * @brief Tests whether any button is currently held.
+   * @return True if at least one button is pressed
+   */
+  [[nodiscard]] constexpr bool AnyPressed() const noexcept {
+    return pressed_.any();
+  }
+
+private:
+  /**
+   * @brief Validates a button index.
+   * @param index Button index
+   * @return `index` when in range
+   * @warning Asserts when `index` is out of range (`>= N`).
+   */
+  [[nodiscard]] static constexpr size_t CheckIndex(size_t index) noexcept;
+
+  std::bitset<N> pressed_{};
+  std::bitset<N> just_pressed_{};
+  std::bitset<N> just_released_{};
+};
+
+template <size_t N>
+constexpr void IndexedButtonInput<N>::Press(size_t index) noexcept {
+  const size_t checked = CheckIndex(index);
+  if (!pressed_[checked]) {
+    just_pressed_[checked] = true;
+  }
+  pressed_[checked] = true;
+}
+
+template <size_t N>
+constexpr void IndexedButtonInput<N>::Release(size_t index) noexcept {
+  const size_t checked = CheckIndex(index);
+  if (pressed_[checked]) {
+    just_released_[checked] = true;
+    pressed_[checked] = false;
+  }
+}
+
+template <size_t N>
+constexpr void IndexedButtonInput<N>::Clear() noexcept {
+  just_pressed_.reset();
+  just_released_.reset();
+}
+
+template <size_t N>
+constexpr void IndexedButtonInput<N>::Reset() noexcept {
+  pressed_.reset();
+  Clear();
+}
+
+template <size_t N>
+constexpr size_t IndexedButtonInput<N>::CheckIndex(size_t index) noexcept {
+  HELIOS_ASSERT(index < N);
+  return index;
+}
+
 }  // namespace helios::input

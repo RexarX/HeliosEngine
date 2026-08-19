@@ -1,11 +1,15 @@
 #pragma once
 
-#include <helios/app/application.hpp>
 #include <helios/app/plugin.hpp>
-#include <helios/async/executor.hpp>
 
 #include <functional>
 #include <string_view>
+
+namespace helios::async {
+
+class Executor;
+
+}
 
 namespace helios::app {
 
@@ -38,9 +42,7 @@ class ExecutorPlugin final : public Plugin {
 public:
   static constexpr std::string_view kName = "helios::app::ExecutorPlugin";
 
-  void Build(App& app) override {
-    app.TryInsertResources(Executor{app.GetExecutor()});
-  }
+  void Build(App& app) override;
 };
 
 }  // namespace helios::app

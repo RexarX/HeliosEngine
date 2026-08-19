@@ -1,10 +1,12 @@
 #pragma once
 
+#include <helios/ecs/message/params.hpp>
 #include <helios/ecs/message/reader.hpp>
 #include <helios/ecs/message/writer.hpp>
+#include <helios/ecs/query/params.hpp>
 #include <helios/ecs/query/query.hpp>
 #include <helios/ecs/system/composite_param.hpp>
-#include <helios/ecs/system/param_traits.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/window/components.hpp>
 #include <helios/window/messages.hpp>
 
@@ -66,7 +68,8 @@ struct AppearanceMessages {
 struct PlatformMessages {
   ecs::MessageReader<ClipboardChangedMsg> clipboard;
   ecs::MessageReader<DroppedFilesMsg> dropped_files;
-  ecs::MessageReader<MonitorsChangedMsg> monitors;
+  ecs::MessageReader<MonitorConnectedMsg> monitor_connected;
+  ecs::MessageReader<MonitorDisconnectedMsg> monitor_disconnected;
 };
 
 /// @brief All window message readers.
@@ -113,7 +116,8 @@ struct AppearanceWriters {
 struct PlatformWriters {
   ecs::MessageWriter<ClipboardChangedMsg> clipboard;
   ecs::MessageWriter<DroppedFilesMsg> dropped_files;
-  ecs::MessageWriter<MonitorsChangedMsg> monitors;
+  ecs::MessageWriter<MonitorConnectedMsg> monitor_connected;
+  ecs::MessageWriter<MonitorDisconnectedMsg> monitor_disconnected;
 };
 
 /// @brief All window message writers.
@@ -136,132 +140,124 @@ struct CreationWriters {
 namespace helios::ecs {
 
 template <>
-struct SystemParamTraits<helios::window::Windows>
-    : CompositeSystemParam<helios::window::Windows,
-                           Query<helios::window::Window&>> {};
+struct SystemParamTraits<window::Windows>
+    : CompositeSystemParam<window::Windows, Query<window::Window&>> {};
 
 template <>
-struct SystemParamTraits<helios::window::WindowsView>
-    : CompositeSystemParam<helios::window::WindowsView,
-                           Query<const helios::window::Window&>> {};
-
-template <>
-struct SystemParamTraits<helios::window::PrimaryWindows>
-    : CompositeSystemParam<
-          helios::window::PrimaryWindows,
-          Query<helios::window::Window&, With<helios::window::Primary>>> {};
-
-template <>
-struct SystemParamTraits<helios::window::PrimaryWindowsView>
-    : CompositeSystemParam<
-          helios::window::PrimaryWindowsView,
-          Query<const helios::window::Window&, With<helios::window::Primary>>> {
+struct SystemParamTraits<window::WindowsView>
+    : CompositeSystemParam<window::WindowsView, Query<const window::Window&>> {
 };
 
 template <>
-struct SystemParamTraits<helios::window::LifecycleMessages>
-    : CompositeSystemParam<helios::window::LifecycleMessages,
-                           MessageReader<helios::window::CreatedMsg>,
-                           MessageReader<helios::window::ClosedMsg>,
-                           MessageReader<helios::window::CloseRequestedMsg>,
-                           MessageReader<helios::window::CreationFailedMsg>> {};
+struct SystemParamTraits<window::PrimaryWindows>
+    : CompositeSystemParam<window::PrimaryWindows,
+                           Query<window::Window&, With<window::Primary>>> {};
 
 template <>
-struct SystemParamTraits<helios::window::GeometryMessages>
+struct SystemParamTraits<window::PrimaryWindowsView>
     : CompositeSystemParam<
-          helios::window::GeometryMessages,
-          MessageReader<helios::window::ResizedMsg>,
-          MessageReader<helios::window::ClientResizedMsg>,
-          MessageReader<helios::window::ContentScaleChangedMsg>,
-          MessageReader<helios::window::PosChangedMsg>> {};
+          window::PrimaryWindowsView,
+          Query<const window::Window&, With<window::Primary>>> {};
 
 template <>
-struct SystemParamTraits<helios::window::AppearanceMessages>
-    : CompositeSystemParam<
-          helios::window::AppearanceMessages,
-          MessageReader<helios::window::ModeChangedMsg>,
-          MessageReader<helios::window::CursorModeChangedMsg>,
-          MessageReader<helios::window::VisibilityChangedMsg>,
-          MessageReader<helios::window::FocusChangedMsg>,
-          MessageReader<helios::window::MaximizedChangedMsg>,
-          MessageReader<helios::window::IconChangedMsg>,
-          MessageReader<helios::window::ResizableChangedMsg>,
-          MessageReader<helios::window::DecoratedChangedMsg>,
-          MessageReader<helios::window::OpacityChangedMsg>,
-          MessageReader<helios::window::FloatingChangedMsg>,
-          MessageReader<helios::window::HoverChangedMsg>,
-          MessageReader<helios::window::MousePassthroughChangedMsg>> {};
+struct SystemParamTraits<window::LifecycleMessages>
+    : CompositeSystemParam<window::LifecycleMessages,
+                           MessageReader<window::CreatedMsg>,
+                           MessageReader<window::ClosedMsg>,
+                           MessageReader<window::CloseRequestedMsg>,
+                           MessageReader<window::CreationFailedMsg>> {};
 
 template <>
-struct SystemParamTraits<helios::window::PlatformMessages>
-    : CompositeSystemParam<helios::window::PlatformMessages,
-                           MessageReader<helios::window::ClipboardChangedMsg>,
-                           MessageReader<helios::window::DroppedFilesMsg>,
-                           MessageReader<helios::window::MonitorsChangedMsg>> {
+struct SystemParamTraits<window::GeometryMessages>
+    : CompositeSystemParam<window::GeometryMessages,
+                           MessageReader<window::ResizedMsg>,
+                           MessageReader<window::ClientResizedMsg>,
+                           MessageReader<window::ContentScaleChangedMsg>,
+                           MessageReader<window::PosChangedMsg>> {};
+
+template <>
+struct SystemParamTraits<window::AppearanceMessages>
+    : CompositeSystemParam<window::AppearanceMessages,
+                           MessageReader<window::ModeChangedMsg>,
+                           MessageReader<window::CursorModeChangedMsg>,
+                           MessageReader<window::VisibilityChangedMsg>,
+                           MessageReader<window::FocusChangedMsg>,
+                           MessageReader<window::MaximizedChangedMsg>,
+                           MessageReader<window::IconChangedMsg>,
+                           MessageReader<window::ResizableChangedMsg>,
+                           MessageReader<window::DecoratedChangedMsg>,
+                           MessageReader<window::OpacityChangedMsg>,
+                           MessageReader<window::FloatingChangedMsg>,
+                           MessageReader<window::HoverChangedMsg>,
+                           MessageReader<window::MousePassthroughChangedMsg>> {
 };
 
 template <>
-struct SystemParamTraits<helios::window::Messages>
-    : CompositeSystemParam<
-          helios::window::Messages, helios::window::LifecycleMessages,
-          helios::window::GeometryMessages, helios::window::AppearanceMessages,
-          helios::window::PlatformMessages> {};
+struct SystemParamTraits<window::PlatformMessages>
+    : CompositeSystemParam<window::PlatformMessages,
+                           MessageReader<window::ClipboardChangedMsg>,
+                           MessageReader<window::DroppedFilesMsg>,
+                           MessageReader<window::MonitorConnectedMsg>,
+                           MessageReader<window::MonitorDisconnectedMsg>> {};
 
 template <>
-struct SystemParamTraits<helios::window::LifecycleWriters>
-    : CompositeSystemParam<helios::window::LifecycleWriters,
-                           MessageWriter<helios::window::CreatedMsg>,
-                           MessageWriter<helios::window::ClosedMsg>,
-                           MessageWriter<helios::window::CloseRequestedMsg>,
-                           MessageWriter<helios::window::CreationFailedMsg>> {};
+struct SystemParamTraits<window::Messages>
+    : CompositeSystemParam<window::Messages, window::LifecycleMessages,
+                           window::GeometryMessages, window::AppearanceMessages,
+                           window::PlatformMessages> {};
 
 template <>
-struct SystemParamTraits<helios::window::GeometryWriters>
-    : CompositeSystemParam<
-          helios::window::GeometryWriters,
-          MessageWriter<helios::window::ResizedMsg>,
-          MessageWriter<helios::window::ClientResizedMsg>,
-          MessageWriter<helios::window::ContentScaleChangedMsg>,
-          MessageWriter<helios::window::PosChangedMsg>> {};
+struct SystemParamTraits<window::LifecycleWriters>
+    : CompositeSystemParam<window::LifecycleWriters,
+                           MessageWriter<window::CreatedMsg>,
+                           MessageWriter<window::ClosedMsg>,
+                           MessageWriter<window::CloseRequestedMsg>,
+                           MessageWriter<window::CreationFailedMsg>> {};
 
 template <>
-struct SystemParamTraits<helios::window::AppearanceWriters>
-    : CompositeSystemParam<
-          helios::window::AppearanceWriters,
-          MessageWriter<helios::window::ModeChangedMsg>,
-          MessageWriter<helios::window::CursorModeChangedMsg>,
-          MessageWriter<helios::window::VisibilityChangedMsg>,
-          MessageWriter<helios::window::FocusChangedMsg>,
-          MessageWriter<helios::window::MaximizedChangedMsg>,
-          MessageWriter<helios::window::IconChangedMsg>,
-          MessageWriter<helios::window::ResizableChangedMsg>,
-          MessageWriter<helios::window::DecoratedChangedMsg>,
-          MessageWriter<helios::window::OpacityChangedMsg>,
-          MessageWriter<helios::window::FloatingChangedMsg>,
-          MessageWriter<helios::window::HoverChangedMsg>,
-          MessageWriter<helios::window::MousePassthroughChangedMsg>> {};
+struct SystemParamTraits<window::GeometryWriters>
+    : CompositeSystemParam<window::GeometryWriters,
+                           MessageWriter<window::ResizedMsg>,
+                           MessageWriter<window::ClientResizedMsg>,
+                           MessageWriter<window::ContentScaleChangedMsg>,
+                           MessageWriter<window::PosChangedMsg>> {};
 
 template <>
-struct SystemParamTraits<helios::window::PlatformWriters>
-    : CompositeSystemParam<helios::window::PlatformWriters,
-                           MessageWriter<helios::window::ClipboardChangedMsg>,
-                           MessageWriter<helios::window::DroppedFilesMsg>,
-                           MessageWriter<helios::window::MonitorsChangedMsg>> {
+struct SystemParamTraits<window::AppearanceWriters>
+    : CompositeSystemParam<window::AppearanceWriters,
+                           MessageWriter<window::ModeChangedMsg>,
+                           MessageWriter<window::CursorModeChangedMsg>,
+                           MessageWriter<window::VisibilityChangedMsg>,
+                           MessageWriter<window::FocusChangedMsg>,
+                           MessageWriter<window::MaximizedChangedMsg>,
+                           MessageWriter<window::IconChangedMsg>,
+                           MessageWriter<window::ResizableChangedMsg>,
+                           MessageWriter<window::DecoratedChangedMsg>,
+                           MessageWriter<window::OpacityChangedMsg>,
+                           MessageWriter<window::FloatingChangedMsg>,
+                           MessageWriter<window::HoverChangedMsg>,
+                           MessageWriter<window::MousePassthroughChangedMsg>> {
 };
 
 template <>
-struct SystemParamTraits<helios::window::Writers>
-    : CompositeSystemParam<
-          helios::window::Writers, helios::window::LifecycleWriters,
-          helios::window::GeometryWriters, helios::window::AppearanceWriters,
-          helios::window::PlatformWriters> {};
+struct SystemParamTraits<window::PlatformWriters>
+    : CompositeSystemParam<window::PlatformWriters,
+                           MessageWriter<window::ClipboardChangedMsg>,
+                           MessageWriter<window::DroppedFilesMsg>,
+                           MessageWriter<window::MonitorConnectedMsg>,
+                           MessageWriter<window::MonitorDisconnectedMsg>> {};
 
 template <>
-struct SystemParamTraits<helios::window::CreationWriters>
-    : CompositeSystemParam<
-          helios::window::CreationWriters,
-          MessageWriter<helios::window::CreatedMsg>,
-          MessageWriter<helios::window::ContentScaleChangedMsg>,
-          MessageWriter<helios::window::CreationFailedMsg>> {};
+struct SystemParamTraits<window::Writers>
+    : CompositeSystemParam<window::Writers, window::LifecycleWriters,
+                           window::GeometryWriters, window::AppearanceWriters,
+                           window::PlatformWriters> {};
+
+template <>
+struct SystemParamTraits<window::CreationWriters>
+    : CompositeSystemParam<window::CreationWriters,
+                           MessageWriter<window::CreatedMsg>,
+                           MessageWriter<window::ContentScaleChangedMsg>,
+                           MessageWriter<window::CreationFailedMsg>> {};
 
 }  // namespace helios::ecs

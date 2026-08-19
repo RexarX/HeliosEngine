@@ -7,6 +7,12 @@ helios_add_example(
 )
 
 helios_add_example(
+    NAME frame_limit
+    SOURCES frame_limit.cpp
+    MODULES app ecs log
+)
+
+helios_add_example(
     NAME overlapping_sub_app
     SOURCES overlapping_sub_app.cpp
     MODULES app ecs log

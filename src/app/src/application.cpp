@@ -3,13 +3,21 @@
 #include <helios/app/application.hpp>
 
 #include <helios/app/details/profile.hpp>
+#include <helios/app/plugin.hpp>
+#include <helios/app/plugin_group.hpp>
 #include <helios/app/runners.hpp>
 #include <helios/assert.hpp>
+#include <helios/ecs/schedule/schedule.hpp>
+#include <helios/ecs/schedule/scheduler.hpp>
 #include <helios/log/logger.hpp>
 
 #include <algorithm>
 #include <atomic>
 #include <chrono>
+#include <cstddef>
+#include <memory>
+#include <mutex>
+
 #include <string>
 
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
@@ -100,6 +108,15 @@ void App::Initialize() {
   scheduler_.RunStartup(*this);
 }
 
+void App::Update() {
+  HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::Update");
+
+  HELIOS_ASSERT(is_initialized_, "App is not initialized!");
+  scheduler_.RunFrame(*this);
+
+  HELIOS_APP_PROFILE_FRAME();
+}
+
 ExitCode App::Run() {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::Run");
 
@@ -116,6 +133,29 @@ ExitCode App::Run() {
   CleanUp();
 
   return exit_code;
+}
+
+void App::RunFrameOrder(const FrameOrder& order) {
+  HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::RunFrameOrder");
+
+  HELIOS_ASSERT(is_initialized_, "App is not initialized!");
+  scheduler_.RunFrameOrder(*this, order);
+}
+
+void App::NotifyPluginReadinessChanged() noexcept {
+  {
+    const std::scoped_lock lock(plugins_ready_mutex_);
+  }
+  plugins_ready_cv_.notify_all();
+}
+
+auto App::AddSchedule(ecs::ScheduleTypeId id, ecs::Schedule&& schedule)
+    -> ecs::ScheduleOrdering {
+  HELIOS_ASSERT(!IsInitialized(),
+                "Cannot add schedule after app initialization!");
+  HELIOS_ASSERT(!IsRunning(), "Cannot add schedule while app is running!");
+
+  return main_sub_app_.AddSchedule(id, std::move(schedule));
 }
 
 auto App::ShouldExit() const noexcept -> std::optional<ExitCode> {

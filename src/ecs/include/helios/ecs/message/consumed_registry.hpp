@@ -11,7 +11,6 @@
 #include <functional>
 #include <memory>
 #include <memory_resource>
-#include <ranges>
 #include <span>
 #include <utility>
 #include <vector>
@@ -264,7 +263,7 @@ private:
 
   ConsumedMap consumed_;  ///< Map of message type index to sorted consumed
                           ///< message ids
-  [[no_unique_address]] allocator_type allocator_;
+  HELIOS_NO_UNIQUE_ADDRESS allocator_type allocator_;
 };
 
 template <typename Alloc>

@@ -1,10 +1,12 @@
 #include <doctest/doctest.h>
 
-#include <helios/app/app.hpp>
+#include <helios/app/application.hpp>
+#include <helios/app/builtin/time.hpp>
+#include <helios/app/schedules.hpp>
 
 #include <chrono>
+#include <cstdint>
 #include <thread>
-#include <utility>
 
 using namespace helios::app;
 

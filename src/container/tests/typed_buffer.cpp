@@ -3,9 +3,11 @@
 #include <helios/container/typed_buffer.hpp>
 
 #include <atomic>
+#include <cstddef>
 #include <memory>
 #include <memory_resource>
 #include <string>
+#include <utility>
 
 using namespace helios::container;
 

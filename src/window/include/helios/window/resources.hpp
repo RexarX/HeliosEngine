@@ -1,13 +1,12 @@
 #pragma once
 
-#include <helios/ecs/resource/resource.hpp>
-
 #include <cstdint>
 #include <format>
 #include <iterator>
 #include <ostream>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 namespace helios::window {
@@ -79,6 +78,129 @@ inline constexpr auto kExitTriggersDefault =
   return false;
 }
 
+/// @brief How the window backend waits for OS events.
+enum class EventMode : uint8_t {
+  kPoll = 0,  ///< `glfwPollEvents` — return immediately (games).
+  kWaitTimeout =
+      1,  ///< `glfwWaitEventsTimeout` — idle up to `event_wait_timeout`.
+};
+
+/// @brief Global window behavior settings.
+struct Settings {
+  static constexpr std::string_view kName = "helios::window::Settings";
+  static constexpr double kDefaultEventWaitTimeout = 1.0 / 60.0;
+
+  /// Seconds to block when `event_mode == kWaitTimeout`. Must be finite and
+  /// greater than zero. Also the max gamepad poll interval while waiting.
+  double event_wait_timeout = kDefaultEventWaitTimeout;
+  /// Bitmask of conditions that request application exit on window close.
+  ExitTrigger exit_triggers = kExitTriggersDefault;
+  /// How `PollEvents` waits for OS events. Default is poll (running sim).
+  EventMode event_mode = EventMode::kPoll;
+};
+
+/// @brief Monitor connection event reported by the platform backend.
+enum class MonitorEvent : uint8_t {
+  kConnected = 1,     ///< A monitor was connected.
+  kDisconnected = 2,  ///< A monitor was disconnected.
+};
+
+/// @brief A display video mode (resolution and refresh rate).
+struct VideoMode {
+  uint32_t width = 0;
+  uint32_t height = 0;
+  uint32_t refresh_rate = 0;
+
+  /**
+   * @brief Returns the video-mode size.
+   * @return Width and height
+   */
+  [[nodiscard]] constexpr auto GetSize() const noexcept
+      -> std::pair<uint32_t, uint32_t> {
+    return {width, height};
+  }
+};
+
+/// @brief Snapshot of a connected display.
+struct Monitor {
+  std::string name;
+  std::vector<VideoMode> modes;
+  int32_t index = 0;
+  int32_t x = 0;
+  int32_t y = 0;
+  uint32_t width = 0;
+  uint32_t height = 0;
+  int32_t work_x = 0;
+  int32_t work_y = 0;
+  uint32_t work_width = 0;
+  uint32_t work_height = 0;
+  int32_t physical_width_mm = 0;
+  int32_t physical_height_mm = 0;
+  VideoMode current;
+  bool primary = false;
+
+  /**
+   * @brief Returns the monitor origin.
+   * @return X and y in screen coordinates
+   */
+  [[nodiscard]] constexpr auto GetPos() const noexcept
+      -> std::pair<int32_t, int32_t> {
+    return {x, y};
+  }
+
+  /**
+   * @brief Returns the monitor size.
+   * @return Width and height in pixels
+   */
+  [[nodiscard]] constexpr auto GetSize() const noexcept
+      -> std::pair<uint32_t, uint32_t> {
+    return {width, height};
+  }
+
+  /**
+   * @brief Returns the work-area origin.
+   * @return X and y in screen coordinates
+   */
+  [[nodiscard]] constexpr auto GetWorkPos() const noexcept
+      -> std::pair<int32_t, int32_t> {
+    return {work_x, work_y};
+  }
+
+  /**
+   * @brief Returns the work-area size.
+   * @return Width and height in pixels
+   */
+  [[nodiscard]] constexpr auto GetWorkSize() const noexcept
+      -> std::pair<uint32_t, uint32_t> {
+    return {work_width, work_height};
+  }
+
+  /**
+   * @brief Returns the physical panel size.
+   * @return Width and height in millimetres
+   */
+  [[nodiscard]] constexpr auto GetPhysicalSize() const noexcept
+      -> std::pair<int32_t, int32_t> {
+    return {physical_width_mm, physical_height_mm};
+  }
+};
+
+/// @brief Current connected monitor layout.
+struct Monitors {
+  static constexpr std::string_view kName = "helios::window::Monitors";
+
+  std::vector<Monitor> monitors;
+};
+
+/// @brief Process-global clipboard text snapshot.
+struct Clipboard {
+  static constexpr std::string_view kName = "helios::window::Clipboard";
+
+  std::string text;
+  /// When true, the backend writes `text` to the OS clipboard.
+  bool pending_write = false;
+};
+
 /**
  * @brief Formats exit triggers as a pipe-separated list and writes to an output
  * iterator.
@@ -142,13 +264,6 @@ inline std::ostream& operator<<(std::ostream& os, ExitTrigger triggers) {
   return os;
 }
 
-/// @brief How the window backend waits for OS events.
-enum class EventMode : uint8_t {
-  kPoll = 0,  ///< `glfwPollEvents` — return immediately (games).
-  kWaitTimeout =
-      1,  ///< `glfwWaitEventsTimeout` — idle up to `event_wait_timeout`.
-};
-
 /**
  * @brief Returns the string name of an event wait mode.
  * @param mode Event wait mode
@@ -175,25 +290,44 @@ inline std::ostream& operator<<(std::ostream& os, EventMode mode) {
   return os << "EventMode::" << ToString(mode);
 }
 
-/// @brief Global window behavior settings.
-struct Settings {
-  static constexpr std::string_view kName = "helios::window::Settings";
-  static constexpr double kDefaultEventWaitTimeout = 1.0 / 60.0;
+/**
+ * @brief Formats window settings using an output iterator.
+ * @param settings Window settings
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(const Settings& settings, It out) {
+  out = std::format_to(out, "Settings{{exit_triggers=");
+  out = ToString(settings.exit_triggers, out);
+  out = std::format_to(out, ", event_mode={}", ToString(settings.event_mode));
+  return std::format_to(out, ", event_wait_timeout={}}}",
+                        settings.event_wait_timeout);
+}
 
-  /// Bitmask of conditions that request application exit on window close.
-  ExitTrigger exit_triggers = kExitTriggersDefault;
-  /// How `PollEvents` waits for OS events. Default is poll (running sim).
-  EventMode event_mode = EventMode::kPoll;
-  /// Seconds to block when `event_mode == kWaitTimeout`. Must be finite and
-  /// greater than zero. Also the max gamepad poll interval while waiting.
-  double event_wait_timeout = kDefaultEventWaitTimeout;
-};
+/**
+ * @brief Formats window settings as a string.
+ * @param settings Window settings
+ * @return Formatted settings string
+ */
+[[nodiscard]] inline std::string ToString(const Settings& settings) {
+  std::string result;
+  result.reserve(128);
+  ToString(settings, std::back_inserter(result));
+  return result;
+}
 
-/// @brief Monitor connection event reported by the platform backend.
-enum class MonitorEvent : uint8_t {
-  kConnected = 1,     ///< A monitor was connected.
-  kDisconnected = 2,  ///< A monitor was disconnected.
-};
+/**
+ * @brief Outputs window settings to an output stream.
+ * @param os Output stream
+ * @param settings Window settings
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const Settings& settings) {
+  ToString(settings, std::ostreambuf_iterator<char>(os));
+  return os;
+}
 
 /**
  * @brief Returns the string name of a monitor event.
@@ -221,13 +355,6 @@ inline std::ostream& operator<<(std::ostream& os, MonitorEvent event) {
   return os << "MonitorEvent::" << ToString(event);
 }
 
-/// @brief A display video mode (resolution and refresh rate).
-struct VideoMode {
-  uint32_t width = 0;
-  uint32_t height = 0;
-  uint32_t refresh_rate = 0;
-};
-
 /**
  * @brief Formats a video mode using an output iterator.
  * @param mode Video mode
@@ -237,11 +364,9 @@ struct VideoMode {
 template <typename It>
   requires std::output_iterator<It, char>
 inline It ToString(const VideoMode& mode, It out) {
-  out = std::format_to(out, "VideoMode{{");
-  out = std::format_to(out, "width={}, height={}, refresh_rate={}", mode.width,
-                       mode.height, mode.refresh_rate);
-  out = std::format_to(out, "}}");
-  return out;
+  return std::format_to(out,
+                        "VideoMode{{width={}, height={}, refresh_rate={}}}",
+                        mode.width, mode.height, mode.refresh_rate);
 }
 
 /**
@@ -251,7 +376,7 @@ inline It ToString(const VideoMode& mode, It out) {
  */
 [[nodiscard]] inline std::string ToString(const VideoMode& mode) {
   std::string result;
-  result.reserve(64);
+  result.reserve(128);
   ToString(mode, std::back_inserter(result));
   return result;
 }
@@ -266,25 +391,6 @@ inline std::ostream& operator<<(std::ostream& os, const VideoMode& mode) {
   ToString(mode, std::ostreambuf_iterator<char>(os));
   return os;
 }
-
-/// @brief Snapshot of a connected display.
-struct Monitor {
-  std::string name;
-  std::vector<VideoMode> modes;
-  int32_t index = 0;
-  int32_t x = 0;
-  int32_t y = 0;
-  uint32_t width = 0;
-  uint32_t height = 0;
-  int32_t work_x = 0;
-  int32_t work_y = 0;
-  uint32_t work_width = 0;
-  uint32_t work_height = 0;
-  int32_t physical_width_mm = 0;
-  int32_t physical_height_mm = 0;
-  VideoMode current;
-  bool primary = false;
-};
 
 /**
  * @brief Formats a monitor using an output iterator.
@@ -340,21 +446,89 @@ inline std::ostream& operator<<(std::ostream& os, const Monitor& monitor) {
   return os;
 }
 
-/// @brief Current connected monitor layout.
-struct Monitors {
-  static constexpr std::string_view kName = "helios::window::Monitors";
+/**
+ * @brief Formats the connected monitor list using an output iterator.
+ * @param monitors Monitors resource
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(const Monitors& monitors, It out) {
+  out = std::format_to(out, "Monitors{{count={}", monitors.monitors.size());
+  if (!monitors.monitors.empty()) {
+    out = std::format_to(out, ", names=[");
+    bool first = true;
+    for (const Monitor& monitor : monitors.monitors) {
+      if (!first) {
+        out = std::format_to(out, ", ");
+      }
+      first = false;
+      out = std::format_to(out, "\"{}\"", monitor.name);
+    }
+    out = std::format_to(out, "]");
+  }
+  return std::format_to(out, "}}");
+}
 
-  std::vector<Monitor> monitors;
-};
+/**
+ * @brief Formats the connected monitor list as a string.
+ * @param monitors Monitors resource
+ * @return Formatted monitors string
+ */
+[[nodiscard]] inline std::string ToString(const Monitors& monitors) {
+  std::string result;
+  result.reserve(128);
+  ToString(monitors, std::back_inserter(result));
+  return result;
+}
 
-/// @brief Process-global clipboard text snapshot.
-struct Clipboard {
-  static constexpr std::string_view kName = "helios::window::Clipboard";
+/**
+ * @brief Outputs the connected monitor list to an output stream.
+ * @param os Output stream
+ * @param monitors Monitors resource
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const Monitors& monitors) {
+  ToString(monitors, std::ostreambuf_iterator<char>(os));
+  return os;
+}
 
-  std::string text;
-  /// When true, the backend writes `text` to the OS clipboard.
-  bool pending_write = false;
-};
+/**
+ * @brief Formats a clipboard snapshot using an output iterator.
+ * @param clipboard Clipboard resource
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(const Clipboard& clipboard, It out) {
+  return std::format_to(out, "Clipboard{{text=\"{}\", pending_write={}}}",
+                        clipboard.text, clipboard.pending_write);
+}
+
+/**
+ * @brief Formats a clipboard snapshot as a string.
+ * @param clipboard Clipboard resource
+ * @return Formatted clipboard string
+ */
+[[nodiscard]] inline std::string ToString(const Clipboard& clipboard) {
+  std::string result;
+  result.reserve(128);
+  ToString(clipboard, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs a clipboard snapshot to an output stream.
+ * @param os Output stream
+ * @param clipboard Clipboard resource
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const Clipboard& clipboard) {
+  ToString(clipboard, std::ostreambuf_iterator<char>(os));
+  return os;
+}
 
 }  // namespace helios::window
 
@@ -362,7 +536,7 @@ namespace std {
 
 template <>
 struct formatter<helios::window::ExitTrigger> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -374,7 +548,7 @@ struct formatter<helios::window::ExitTrigger> {
 
 template <>
 struct formatter<helios::window::EventMode> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -386,8 +560,20 @@ struct formatter<helios::window::EventMode> {
 };
 
 template <>
+struct formatter<helios::window::Settings> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::window::Settings& settings,
+                     format_context& ctx) {
+    return helios::window::ToString(settings, ctx.out());
+  }
+};
+
+template <>
 struct formatter<helios::window::MonitorEvent> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -400,7 +586,7 @@ struct formatter<helios::window::MonitorEvent> {
 
 template <>
 struct formatter<helios::window::VideoMode> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -412,13 +598,37 @@ struct formatter<helios::window::VideoMode> {
 
 template <>
 struct formatter<helios::window::Monitor> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
   static auto format(const helios::window::Monitor& monitor,
                      format_context& ctx) {
     return helios::window::ToString(monitor, ctx.out());
+  }
+};
+
+template <>
+struct formatter<helios::window::Monitors> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::window::Monitors& monitors,
+                     format_context& ctx) {
+    return helios::window::ToString(monitors, ctx.out());
+  }
+};
+
+template <>
+struct formatter<helios::window::Clipboard> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::window::Clipboard& clipboard,
+                     format_context& ctx) {
+    return helios::window::ToString(clipboard, ctx.out());
   }
 };
 

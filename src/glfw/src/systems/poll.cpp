@@ -3,7 +3,7 @@
 #include <helios/glfw/systems/poll.hpp>
 
 #include <helios/assert.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/glfw/details/glfw_state.hpp>
 #include <helios/glfw/details/glfw_sync.hpp>
 #include <helios/window/resources.hpp>

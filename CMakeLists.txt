@@ -53,12 +53,12 @@ endif()
 
 # Build options
 option(HELIOS_DEVELOPER_MODE "Enable developer-focused build features" OFF)
-if(DEFINED DEVELOPER_MODE)
+if(DEFINED DEVELOPER_MODE AND NOT DEFINED HELIOS_DEVELOPER_MODE)
   set(HELIOS_DEVELOPER_MODE ${DEVELOPER_MODE} CACHE BOOL "Enable developer-focused build features" FORCE)
 endif()
 
 option(HELIOS_BUILD_TESTS "Build tests" ${PROJECT_IS_TOP_LEVEL})
-if(DEFINED BUILD_TESTING)
+if(DEFINED BUILD_TESTING AND NOT DEFINED HELIOS_BUILD_TESTS)
   set(HELIOS_BUILD_TESTS ${BUILD_TESTING} CACHE BOOL "Build tests" FORCE)
 endif()
 option(HELIOS_BUILD_EXAMPLES "Build examples" ${PROJECT_IS_TOP_LEVEL})
@@ -68,6 +68,9 @@ option(HELIOS_ENABLE_UNITY_BUILD "Enable Unity/Jumbo builds" OFF)
 # LTO default ON for standalone engine builds; OFF when embedded so consumers
 # are not forced into LTO bitcode without opting in.
 option(HELIOS_ENABLE_LTO "Enable Link Time Optimization" ${PROJECT_IS_TOP_LEVEL})
+option(HELIOS_ENABLE_LTO_RELWITHDEBINFO
+    "Enable LTO for RelWithDebInfo (requires HELIOS_ENABLE_LTO; off by default for faster links)"
+    OFF)
 option(HELIOS_ENABLE_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 option(HELIOS_ENABLE_INSTALL "Enable installation rules" OFF)
 option(HELIOS_BUILD_ALL_MODULES "Build every discovered module regardless of DEFAULT value" OFF)
@@ -99,9 +102,14 @@ if(HELIOS_ENABLE_LTO)
   check_ipo_supported(RESULT HELIOS_IPO_SUPPORTED OUTPUT error)
   if(HELIOS_IPO_SUPPORTED)
     set(HELIOS_IPO_SUPPORTED "${HELIOS_IPO_SUPPORTED}" CACHE INTERNAL "IPO/LTO support result")
-    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
-    message(STATUS "Link-Time Optimization (LTO) enabled for Release and RelWithDebInfo builds")
+    if(HELIOS_ENABLE_LTO_RELWITHDEBINFO)
+      set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON)
+      message(STATUS "Link-Time Optimization (LTO) enabled for Release and RelWithDebInfo builds")
+    else()
+      set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO OFF)
+      message(STATUS "Link-Time Optimization (LTO) enabled for Release builds (RelWithDebInfo LTO off)")
+    endif()
     helios_configure_lto_mode()
   else()
     message(STATUS "IPO/LTO not supported: ${error}")
@@ -126,6 +134,8 @@ include(cmake/ModuleUtils.cmake)
 
 # Include sanitizer support
 include(cmake/Sanitizers.cmake)
+
+helios_apply_linker()
 
 # Initialize test infrastructure
 if(HELIOS_BUILD_TESTS)
@@ -184,6 +194,7 @@ helios_discover_extra_module_dirs()
 # Pass 1C-E: Resolve and validate
 helios_resolve_module_dependencies()
 helios_validate_module_dependencies()
+helios_validate_module_backend_implementations()
 
 # Pass 2: Build enabled modules in topological order
 helios_build_discovered_modules()

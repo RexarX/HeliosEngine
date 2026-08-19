@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <format>
+#include <functional>
 #include <limits>
 
 namespace helios::ecs {
@@ -91,6 +92,18 @@ public:
    * @return Hash combining generation (high bits) and index (low bits)
    */
   [[nodiscard]] constexpr size_t Hash() const noexcept;
+
+  /**
+   * @brief Gets the reuse counter encoded in the generation.
+   * @details Masks off `kAliveBit`. This is the 31-bit counter in bits 0–30,
+   * not the packed value returned by `Generation()`. Alive and free encodings
+   * of the same slot share this counter until the next destroy bump.
+   * @return Reuse counter, or `kCounterMask` when generation is the invalid
+   * sentinel
+   */
+  [[nodiscard]] constexpr GenerationType ReuseCount() const noexcept {
+    return generation_ & kCounterMask;
+  }
 
   /**
    * @brief Gets the index component of the entity.

@@ -6,6 +6,7 @@
 #include <helios/ecs/schedule/scheduler.hpp>
 
 #include <string_view>
+#include <utility>
 
 namespace helios::window {
 

@@ -2,10 +2,11 @@
 
 #include <helios/async/executor.hpp>
 #include <helios/ecs/command/commands.hpp>
-#include <helios/ecs/message/reader.hpp>
-#include <helios/ecs/message/writer.hpp>
+#include <helios/ecs/message/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/ecs/schedule/scheduler.hpp>
+#include <helios/ecs/world_view.hpp>
 
 using namespace helios::ecs;
 

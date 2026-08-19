@@ -3,6 +3,7 @@
 #include <helios/app/app.hpp>
 #include <helios/input/input.hpp>
 
+using namespace helios;
 using namespace helios::input;
 
 TEST_SUITE("helios::input::Plugin") {
@@ -30,7 +31,7 @@ TEST_SUITE("helios::input::Plugin") {
 
   TEST_CASE("helios::input::Plugin::Build") {
     SUBCASE("Inserts resources and registers messages") {
-      helios::app::App app;
+      app::App app;
       Plugin plugin;
       plugin.Build(app);
 
@@ -38,6 +39,9 @@ TEST_SUITE("helios::input::Plugin") {
       CHECK(app.GetWorld().HasResource<Keyboard>());
       CHECK(app.GetWorld().HasResource<Mouse>());
       CHECK(app.GetWorld().HasResource<Gamepads>());
+      CHECK(app.GetWorld().HasResource<Joysticks>());
+      CHECK(app.GetWorld().HasResource<Pens>());
+      CHECK(app.GetWorld().HasResource<GamepadMappings>());
 
       CHECK(app.GetWorld().HasMessage<KeyboardInputMsg>());
       CHECK(app.GetWorld().HasMessage<TextInputMsg>());
@@ -48,10 +52,23 @@ TEST_SUITE("helios::input::Plugin") {
       CHECK(app.GetWorld().HasMessage<GamepadConnectionMsg>());
       CHECK(app.GetWorld().HasMessage<GamepadButtonInputMsg>());
       CHECK(app.GetWorld().HasMessage<GamepadAxisChangedMsg>());
+      CHECK(app.GetWorld().HasMessage<GamepadRemappedMsg>());
+      CHECK(app.GetWorld().HasMessage<GamepadPowerChangedMsg>());
+      CHECK(app.GetWorld().HasMessage<GamepadSensorUpdateMsg>());
+      CHECK(app.GetWorld().HasMessage<GamepadTouchpadMsg>());
+      CHECK(app.GetWorld().HasMessage<JoystickConnectionMsg>());
+      CHECK(app.GetWorld().HasMessage<JoystickButtonInputMsg>());
+      CHECK(app.GetWorld().HasMessage<JoystickAxisChangedMsg>());
+      CHECK(app.GetWorld().HasMessage<JoystickHatChangedMsg>());
+      CHECK(app.GetWorld().HasMessage<PenProximityMsg>());
+      CHECK(app.GetWorld().HasMessage<PenTouchMsg>());
+      CHECK(app.GetWorld().HasMessage<PenButtonInputMsg>());
+      CHECK(app.GetWorld().HasMessage<PenMovedMsg>());
+      CHECK(app.GetWorld().HasMessage<PenAxisChangedMsg>());
     }
 
     SUBCASE("Inserts constructor-provided settings") {
-      helios::app::App app;
+      app::App app;
       Plugin{{.stick = {.deadzone = 0.25F}, .raw_mouse_motion = true}}.Build(
           app);
 
@@ -61,7 +78,7 @@ TEST_SUITE("helios::input::Plugin") {
     }
 
     SUBCASE("Does not overwrite settings inserted by an earlier build") {
-      helios::app::App app;
+      app::App app;
       Plugin{{.stick = {.deadzone = 0.3F}}}.Build(app);
       Plugin{{.stick = {.deadzone = 0.9F}}}.Build(app);
 
@@ -70,7 +87,7 @@ TEST_SUITE("helios::input::Plugin") {
     }
 
     SUBCASE("Update systems apply messages written before kFirst") {
-      helios::app::App app;
+      app::App app;
       Plugin{}.Build(app);
       app.Initialize();
 
@@ -87,12 +104,35 @@ TEST_SUITE("helios::input::Plugin") {
           .button = GamepadButton::kA,
           .state = ButtonState::kPressed,
       });
+      world.WriteMessages<JoystickConnectionMsg>().Write({
+          .name = "Stick",
+          .id = 2,
+          .button_count = 4,
+          .connected = true,
+      });
+      world.WriteMessages<JoystickButtonInputMsg>().Write({
+          .id = 2,
+          .button = 0,
+          .state = ButtonState::kPressed,
+      });
+      world.WriteMessages<PenProximityMsg>().Write({
+          .id = 0,
+          .device_type = PenDeviceType::kDirect,
+          .in_proximity = true,
+      });
+      world.WriteMessages<PenButtonInputMsg>().Write({
+          .id = 0,
+          .button = PenButton::kBarrel1,
+          .state = ButtonState::kPressed,
+      });
 
       app.Update();
 
       const auto& keyboard = world.ReadResource<Keyboard>();
       const auto& mouse = world.ReadResource<Mouse>();
       const auto& gamepads = world.ReadResource<Gamepads>();
+      const auto& joysticks = world.ReadResource<Joysticks>();
+      const auto& pens = world.ReadResource<Pens>();
 
       CHECK(keyboard.keys.Pressed(Key::kA));
       CHECK(keyboard.keys.JustPressed(Key::kA));
@@ -101,10 +141,14 @@ TEST_SUITE("helios::input::Plugin") {
       CHECK_EQ(mouse.delta_y, -1.5);
       CHECK(gamepads.pads[0].buttons.Pressed(GamepadButton::kA));
       CHECK(gamepads.pads[0].buttons.JustPressed(GamepadButton::kA));
+      CHECK(joysticks.sticks[2].connected);
+      CHECK(joysticks.sticks[2].buttons.Pressed(0));
+      CHECK(pens.pens[0].in_proximity);
+      CHECK(pens.pens[0].buttons.Pressed(PenButton::kBarrel1));
     }
 
     SUBCASE("A second frame without messages clears just-pressed") {
-      helios::app::App app;
+      app::App app;
       Plugin{}.Build(app);
       app.Initialize();
 

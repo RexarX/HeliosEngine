@@ -11,14 +11,19 @@
 namespace helios::input {
 
 void Plugin::Build(app::App& app) {
-  app.TryInsertResources(std::move(settings), Keyboard{}, Mouse{}, Gamepads{});
-  app.AddMessages<KeyboardInputMsg, TextInputMsg, MouseButtonInputMsg,
-                  CursorMovedMsg, MouseMotionMsg, MouseWheelMsg,
-                  GamepadConnectionMsg, GamepadButtonInputMsg,
-                  GamepadAxisChangedMsg>();
+  app.TryInsertResources(std::move(settings), Keyboard{}, Mouse{}, Gamepads{},
+                         Joysticks{}, Pens{}, GamepadMappings{});
+  app.AddMessages<
+      KeyboardInputMsg, TextInputMsg, MouseButtonInputMsg, CursorMovedMsg,
+      MouseMotionMsg, MouseWheelMsg, GamepadConnectionMsg,
+      GamepadButtonInputMsg, GamepadAxisChangedMsg, GamepadRemappedMsg,
+      GamepadPowerChangedMsg, GamepadSensorUpdateMsg, GamepadTouchpadMsg,
+      JoystickConnectionMsg, JoystickButtonInputMsg, JoystickAxisChangedMsg,
+      JoystickHatChangedMsg, PenProximityMsg, PenTouchMsg, PenButtonInputMsg,
+      PenMovedMsg, PenAxisChangedMsg>();
   auto clear_system = app.AddSystem(app::kFirst, ClearInputState{});
   app.AddSystems(app::kFirst, UpdateKeyboardState{}, UpdateMouseState{},
-                 UpdateGamepadState{})
+                 UpdateGamepadState{}, UpdateJoystickState{}, UpdatePenState{})
       .After(clear_system);
 }
 

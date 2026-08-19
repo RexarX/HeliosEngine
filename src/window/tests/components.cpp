@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-using namespace helios::ecs;
+using namespace helios;
 using namespace helios::window;
 
 TEST_SUITE("helios::window::Window") {
@@ -245,6 +245,14 @@ TEST_SUITE("helios::window::Window") {
       CHECK_EQ(window.properties.cursor_mode, CursorMode::kDisabled);
       CHECK(window.Dirty(DirtyFlag::kCursor));
     }
+
+    SUBCASE("Sets captured cursor mode") {
+      auto window = Window::FromProperties(Properties{});
+      window.SetCursorMode(CursorMode::kCaptured);
+
+      CHECK_EQ(window.properties.cursor_mode, CursorMode::kCaptured);
+      CHECK(window.Dirty(DirtyFlag::kCursor));
+    }
   }
 
   TEST_CASE("helios::window::Window::SetVisible") {
@@ -433,7 +441,7 @@ TEST_SUITE("helios::window::Window") {
 TEST_SUITE("helios::window::PrimaryWindow") {
   TEST_CASE("helios::window::PrimaryWindow::Build") {
     SUBCASE("Adds Window and Primary components") {
-      World world;
+      ecs::World world;
       const auto entity = world.CreateEntity();
       world.AddBundle(
           entity,

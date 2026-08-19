@@ -1,14 +1,14 @@
 #pragma once
 
-#include <helios/app/application.hpp>
 #include <helios/app/plugin.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/resource/params.hpp>
 
 #include <cstddef>
 #include <string_view>
 
 namespace helios::app {
+
+class App;
 
 /// @brief Application frame counter resource.
 struct FrameCount {
@@ -31,10 +31,7 @@ class FrameCountPlugin final : public Plugin {
 public:
   static constexpr std::string_view kName = "helios::app::FrameCountPlugin";
 
-  void Build(App& app) override {
-    app.TryInsertResources(FrameCount{});
-    app.AddSystem(kLast, CountFrame{});
-  }
+  void Build(App& app) override;
 };
 
 }  // namespace helios::app

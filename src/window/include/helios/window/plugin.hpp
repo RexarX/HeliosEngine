@@ -1,13 +1,24 @@
 #pragma once
 
-#include <helios/app/application.hpp>
+#include <helios/app/builtin/frame_limiter.hpp>
 #include <helios/app/plugin.hpp>
-#include <helios/window/messages.hpp>
+#include <helios/ecs/resource/params.hpp>
+#include <helios/window/params.hpp>
 #include <helios/window/resources.hpp>
 
 #include <string_view>
 
 namespace helios::window {
+
+/// @brief Copies the active display refresh rate into `app::FrameLimiter`.
+struct SyncFrameLimiterRefreshRate {
+  static constexpr std::string_view kName =
+      "helios::window::SyncFrameLimiterRefreshRate";
+
+  void operator()(ecs::Res<app::FrameLimiter> limiter,
+                  ecs::Res<const Monitors> monitors,
+                  PrimaryWindowsView primaries) const;
+};
 
 /// @brief Registers window ECS types without creating OS windows.
 struct Plugin final : public app::Plugin {
@@ -19,17 +30,7 @@ struct Plugin final : public app::Plugin {
    */
   explicit Plugin(Settings settings = {}) : settings(settings) {}
 
-  void Build(app::App& app) override {
-    app.TryInsertResources(settings, Monitors{}, Clipboard{});
-    app.AddMessages<CreatedMsg, ClosedMsg, ResizedMsg, ClientResizedMsg,
-                    ContentScaleChangedMsg, PosChangedMsg, ModeChangedMsg,
-                    CursorModeChangedMsg, VisibilityChangedMsg, FocusChangedMsg,
-                    MaximizedChangedMsg, IconChangedMsg, ResizableChangedMsg,
-                    DecoratedChangedMsg, MonitorsChangedMsg, CloseRequestedMsg,
-                    OpacityChangedMsg, FloatingChangedMsg, HoverChangedMsg,
-                    ClipboardChangedMsg, DroppedFilesMsg, CreationFailedMsg,
-                    MousePassthroughChangedMsg>();
-  }
+  void Build(app::App& app) override;
 
   Settings settings;
 };

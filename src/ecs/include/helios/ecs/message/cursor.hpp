@@ -2,6 +2,7 @@
 
 #include <helios/ecs/message/id.hpp>
 #include <helios/ecs/message/manager.hpp>
+#include <helios/ecs/message/message.hpp>
 
 #include <cstddef>
 

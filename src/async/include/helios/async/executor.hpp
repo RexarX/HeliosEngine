@@ -8,6 +8,7 @@
 
 #include <taskflow/core/async_task.hpp>
 #include <taskflow/core/executor.hpp>
+#include <taskflow/core/graph.hpp>
 
 #include <algorithm>
 #include <concepts>

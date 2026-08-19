@@ -7,8 +7,13 @@
 #include <helios/window/resources.hpp>
 
 #include <cstdint>
+#include <format>
+#include <iterator>
+#include <optional>
+#include <ostream>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 namespace helios::window {
@@ -305,6 +310,42 @@ struct Window {
     properties.mouse_passthrough = value;
     MarkDirty(DirtyFlag::kMousePassthrough);
   }
+
+  /**
+   * @brief Returns the window size.
+   * @return Width and height, if set
+   */
+  [[nodiscard]] constexpr auto GetSize() const noexcept
+      -> std::pair<std::optional<uint32_t>, std::optional<uint32_t>> {
+    return properties.GetSize();
+  }
+
+  /**
+   * @brief Returns the client-area size.
+   * @return Client width and height, if set
+   */
+  [[nodiscard]] constexpr auto GetClientSize() const noexcept
+      -> std::pair<std::optional<uint32_t>, std::optional<uint32_t>> {
+    return properties.GetClientSize();
+  }
+
+  /**
+   * @brief Returns the window position.
+   * @return X and y, if set
+   */
+  [[nodiscard]] constexpr auto GetPos() const noexcept
+      -> std::pair<std::optional<int32_t>, std::optional<int32_t>> {
+    return properties.GetPos();
+  }
+
+  /**
+   * @brief Returns the content scale.
+   * @return Horizontal and vertical scale
+   */
+  [[nodiscard]] constexpr auto GetContentScale() const noexcept
+      -> std::pair<float, float> {
+    return properties.GetContentScale();
+  }
 };
 
 /// @brief Marks the primary application window.
@@ -338,4 +379,114 @@ struct NativeHandleComponent {
   NativeHandle handle;
 };
 
+/**
+ * @brief Formats a window component using an output iterator.
+ * @tparam It Output iterator type
+ * @param window Window component
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(const Window& window, It out) {
+  out =
+      std::format_to(out, "Window{{close_requested={}", window.close_requested);
+  out = std::format_to(out, ", dirty_flags=");
+  out = ToString(window.dirty_flags, out);
+  out = std::format_to(out, ", properties=");
+  out = ToString(window.properties, out);
+  return std::format_to(out, "}}");
+}
+
+/**
+ * @brief Formats a window component as a string.
+ * @param window Window component
+ * @return Formatted window string
+ */
+[[nodiscard]] inline std::string ToString(const Window& window) {
+  std::string result;
+  result.reserve(256);
+  ToString(window, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs a window component to an output stream.
+ * @param os Output stream
+ * @param window Window component
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const Window& window) {
+  ToString(window, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
+/**
+ * @brief Formats a native handle component using an output iterator.
+ * @tparam It Output iterator type
+ * @param component Native handle component
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(const NativeHandleComponent& component, It out) {
+  out = std::format_to(out, "NativeHandleComponent{{handle=");
+  out = ToString(component.handle, out);
+  return std::format_to(out, "}}");
+}
+
+/**
+ * @brief Formats a native handle component as a string.
+ * @param component Native handle component
+ * @return Formatted native handle component string
+ */
+[[nodiscard]] inline std::string ToString(
+    const NativeHandleComponent& component) {
+  std::string result;
+  result.reserve(128);
+  ToString(component, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs a native handle component to an output stream.
+ * @param os Output stream
+ * @param component Native handle component
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const NativeHandleComponent& component) {
+  ToString(component, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
 }  // namespace helios::window
+
+namespace std {
+
+template <>
+struct formatter<helios::window::Window> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::window::Window& window,
+                     format_context& ctx) {
+    return helios::window::ToString(window, ctx.out());
+  }
+};
+
+template <>
+struct formatter<helios::window::NativeHandleComponent> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::window::NativeHandleComponent& component,
+                     format_context& ctx) {
+    return helios::window::ToString(component, ctx.out());
+  }
+};
+
+}  // namespace std

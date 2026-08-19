@@ -33,6 +33,20 @@ TEST_SUITE("helios::app::FrameOrder") {
     }
   }
 
+  TEST_CASE("helios::app::FrameOrder::TryPushFront") {
+    SUBCASE("Prepends unique stages") {
+      FrameOrder order;
+      CHECK(order.TryPushBack(kUpdateStage));
+      CHECK(order.TryPushFront(kExtractStage));
+      CHECK_FALSE(order.TryPushFront(kExtractStage));
+      CHECK_EQ(order.Labels().size(), 2);
+      CHECK_EQ(order.Labels()[0].Hash(),
+               StageTypeIndex::From(kExtractStage).Hash());
+      CHECK_EQ(order.Labels()[1].Hash(),
+               StageTypeIndex::From(kUpdateStage).Hash());
+    }
+  }
+
   TEST_CASE("helios::app::FrameOrder::InsertBefore") {
     SUBCASE("Inserts relative to existing label") {
       FrameOrder order;

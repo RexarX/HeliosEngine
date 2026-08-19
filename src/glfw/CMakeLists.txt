@@ -2,6 +2,8 @@ helios_module(
     NAME glfw
     VERSION 0.1.0
     DESCRIPTION "GLFW backend for the window ECS contract"
+    DEFAULT OFF
+    IMPLEMENTS window input
 
     HEADERS
         include/helios/glfw/details/glfw_state.hpp
@@ -19,6 +21,7 @@ helios_module(
         include/helios/glfw/plugin.hpp
 
     SOURCES
+        src/details/glfw_sync.cpp
         src/systems/apply.cpp
         src/systems/create.cpp
         src/systems/destroy.cpp
@@ -27,8 +30,6 @@ helios_module(
         src/systems/poll.cpp
         src/systems/shutdown.cpp
         src/callbacks.cpp
-        src/glfw_sync.cpp
-        src/input_map.cpp
         src/native_handle.cpp
         src/plugin.cpp
 
@@ -45,7 +46,7 @@ helios_module(
         PUBLIC input
 
     USES
-        glfw PUBLIC helios::lib::glfw::glfw
+        glfw PRIVATE helios::lib::glfw::glfw
 
     TEST_SOURCES
         tests/glfw_sync.cpp

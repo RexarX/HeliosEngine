@@ -1,13 +1,10 @@
 #include <doctest/doctest.h>
 
 #include <helios/async/executor.hpp>
-#include <helios/ecs/message/async_reader.hpp>
-#include <helios/ecs/message/async_writer.hpp>
-#include <helios/ecs/message/message.hpp>
-#include <helios/ecs/message/reader.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/command/commands.hpp>
+#include <helios/ecs/message/params.hpp>
+#include <helios/ecs/query/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/ecs/schedule/executor/single_threaded.hpp>
 #include <helios/ecs/schedule/schedule.hpp>

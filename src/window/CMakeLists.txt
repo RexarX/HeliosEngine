@@ -14,6 +14,11 @@ helios_module(
         include/helios/window/schedules.hpp
         include/helios/window/window.hpp
 
+    SOURCES
+        src/plugin.cpp
+
+    PCH src/pch.hpp
+
     DEPENDS
         PUBLIC app
         PUBLIC ecs
@@ -22,7 +27,6 @@ helios_module(
         tests/components.cpp
         tests/main.cpp
         tests/native_handle.cpp
-        tests/params.cpp
         tests/plugin.cpp
         tests/properties.cpp
         tests/resources.cpp

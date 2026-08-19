@@ -3,6 +3,7 @@
 #include <helios/async/executor.hpp>
 #include <helios/ecs/schedule/executor/multi_threaded.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
+#include <helios/ecs/world.hpp>
 
 using namespace helios;
 using namespace helios::ecs;

@@ -3,6 +3,7 @@
 #include <helios/delegate.hpp>
 
 #include <concepts>
+#include <utility>
 #include <vector>
 
 using namespace helios;
@@ -71,6 +72,25 @@ int PolymorphicArgumentFunction(const Derived& base) {
   return base.get_id();
 }
 
+struct EmptyFunctor {
+  int operator()(int x) const { return x * 4; }
+};
+
+struct StatefulFunctor {
+  int multiplier = 1;
+
+  int operator()(int x) const { return x * multiplier; }
+};
+
+struct OverloadedFunctor {
+  int operator()(int x) const { return x; }
+  int operator()(int x, int y) const { return x + y; }
+};
+
+int InvokeAsFunctionRef(Delegate<int(int)> callback, int value) {
+  return callback(value);
+}
+
 }  // namespace
 
 TEST_SUITE("helios::Delegate") {
@@ -111,6 +131,123 @@ TEST_SUITE("helios::Delegate") {
       delegate2 = std::move(delegate1);
       CHECK(delegate2.Valid());
       CHECK_EQ(delegate2(3, 4), 7);
+    }
+
+    SUBCASE("Capture-less lambda") {
+      Delegate<int(int)> delegate = [](int x) { return x * 2; };
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate(5), 10);
+      CHECK_EQ(delegate.Invoke(7), 14);
+    }
+
+    SUBCASE("Capture-less lambda temporary is allowed") {
+      CHECK(std::constructible_from<Delegate<int(int)>,
+                                    decltype([](int x) { return x; })>);
+    }
+
+    SUBCASE("Function pointer") {
+      Delegate<int(int)> delegate = &free_function_double;
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate(6), 12);
+    }
+
+    SUBCASE("Empty functor") {
+      Delegate<int(int)> delegate = EmptyFunctor{};
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate(3), 12);
+    }
+
+    SUBCASE("Generic capture-less lambda") {
+      Delegate<int(int)> delegate = [](auto x) { return x * 3; };
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate(4), 12);
+    }
+
+    SUBCASE("Stateful lambda lvalue") {
+      int factor = 5;
+      auto lambda = [factor](int x) { return x * factor; };
+      Delegate<int(int)> delegate = lambda;
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate.InstancePtr(), &lambda);
+      CHECK_EQ(delegate(3), 15);
+    }
+
+    SUBCASE("Stateful functor lvalue") {
+      StatefulFunctor functor{7};
+      Delegate<int(int)> delegate = functor;
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate.InstancePtr(), &functor);
+      CHECK_EQ(delegate(2), 14);
+    }
+
+    SUBCASE("Stateful rvalue construction is forbidden") {
+      int factor = 5;
+      auto lambda = [factor](int x) { return x * factor; };
+      CHECK_FALSE(
+          std::constructible_from<Delegate<int(int)>, decltype(lambda)>);
+      CHECK_FALSE(std::constructible_from<Delegate<int(int)>, StatefulFunctor>);
+      CHECK(std::constructible_from<Delegate<int(int)>, decltype(lambda)&>);
+      CHECK(std::constructible_from<Delegate<int(int)>, StatefulFunctor&>);
+    }
+
+    SUBCASE("Implicit conversion as function argument") {
+      CHECK_EQ(InvokeAsFunctionRef([](int x) { return x + 1; }, 10), 11);
+
+      int addend = 4;
+      auto lambda = [addend](int x) { return x + addend; };
+      CHECK_EQ(InvokeAsFunctionRef(lambda, 10), 14);
+    }
+
+    SUBCASE("Argument and return conversions") {
+      Delegate<int(Derived&)> from_base = [](Base& base) {
+        return base.get_id();
+      };
+      Derived derived;
+      CHECK_EQ(from_base(derived), 2);
+
+      Delegate<int(int)> from_long = [](long value) {
+        return static_cast<int>(value) + 1;
+      };
+      CHECK_EQ(from_long(8), 9);
+    }
+
+    SUBCASE("Void capture-less lambda") {
+      int out = 0;
+      Delegate<void(int&)> delegate = [](int& value) { value = 21; };
+      delegate(out);
+      CHECK_EQ(out, 21);
+    }
+  }
+
+  TEST_CASE("helios::Delegate::operator=: Callable") {
+    SUBCASE("Assign capture-less lambda") {
+      Delegate<int(int)> delegate;
+      delegate = [](int x) { return x * 2; };
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate(9), 18);
+    }
+
+    SUBCASE("Assign stateful lvalue") {
+      Delegate<int(int)> delegate;
+      int factor = 3;
+      auto lambda = [factor](int x) { return x * factor; };
+      delegate = lambda;
+      CHECK_EQ(delegate(4), 12);
+    }
+
+    SUBCASE("Assign function pointer") {
+      Delegate<int(int)> delegate;
+      delegate = &free_function_triple;
+      CHECK_EQ(delegate(5), 15);
+    }
+
+    SUBCASE("Stateful rvalue assignment is forbidden") {
+      int factor = 2;
+      auto lambda = [factor](int x) { return x * factor; };
+      CHECK_FALSE(std::assignable_from<Delegate<int(int)>&, decltype(lambda)>);
+      CHECK(std::assignable_from<Delegate<int(int)>&, decltype(lambda)&>);
+      CHECK_FALSE(std::assignable_from<Delegate<int(int)>&, StatefulFunctor>);
+      CHECK(std::assignable_from<Delegate<int(int)>&, StatefulFunctor&>);
     }
   }
 
@@ -260,6 +397,78 @@ TEST_SUITE("helios::Delegate") {
     }
   }
 
+  TEST_CASE(
+      "helios::Delegate::From: Explicit signature for overload resolution") {
+    SUBCASE("Explicit signature for free function") {
+      using Signature = int (*)(int, int);
+      constexpr Signature func_ptr = &free_function_sum;
+      auto delegate = Delegate<int(int, int)>::From<Signature, func_ptr>();
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate(3, 7), 10);
+    }
+
+    SUBCASE("Explicit signature for single param free function") {
+      using Signature = int (*)(int);
+      constexpr Signature func_ptr = &free_function_double;
+      auto delegate = Delegate<int(int)>::From<Signature, func_ptr>();
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate(6), 12);
+    }
+
+    SUBCASE("Explicit signature for member function") {
+      Counter counter{3};
+      using Signature = int (Counter::*)(int);
+      constexpr Signature func_ptr = &Counter::multiply;
+      auto delegate = Delegate<int(int)>::From<Signature, func_ptr>(counter);
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate(7), 21);
+    }
+
+    SUBCASE("Explicit signature for overloaded member function") {
+      OverloadedStruct obj{100};
+      using Signature = int (OverloadedStruct::*)(int);
+      constexpr auto func_ptr = static_cast<Signature>(&OverloadedStruct::foo);
+      auto delegate = Delegate<int(int)>::From<Signature, func_ptr>(obj);
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate(25), 125);
+    }
+
+    SUBCASE("Explicit signature constexpr") {
+      using Signature = int (*)(int);
+      constexpr Signature func_ptr = &free_function_triple;
+      constexpr auto delegate = Delegate<int(int)>::From<Signature, func_ptr>();
+      CHECK(delegate.Valid());
+      CHECK_EQ(delegate(5), 15);
+    }
+  }
+
+  TEST_CASE("helios::Delegate::Reset") {
+    SUBCASE("Reset free function delegate") {
+      auto delegate = Delegate<int(int, int)>::From<&free_function_sum>();
+      CHECK(delegate.Valid());
+      delegate.Reset();
+      CHECK_FALSE(delegate.Valid());
+      CHECK_EQ(delegate.InstancePtr(), nullptr);
+    }
+
+    SUBCASE("Reset member function delegate") {
+      Counter counter{10};
+      auto delegate = Delegate<void(int)>::From<&Counter::add>(counter);
+      CHECK(delegate.Valid());
+      CHECK_NE(delegate.InstancePtr(), nullptr);
+      delegate.Reset();
+      CHECK_FALSE(delegate.Valid());
+      CHECK_EQ(delegate.InstancePtr(), nullptr);
+    }
+
+    SUBCASE("Reset multiple times is safe") {
+      auto delegate = Delegate<int(int)>::From<&free_function_double>();
+      delegate.Reset();
+      CHECK_NOTHROW(delegate.Reset());
+      CHECK_FALSE(delegate.Valid());
+    }
+  }
+
   TEST_CASE("helios::Delegate::Invoke: Empty delegate behavior") {
     SUBCASE("Empty delegate with int return type returns default value") {
       Delegate<int(int)> delegate;
@@ -282,6 +491,15 @@ TEST_SUITE("helios::Delegate") {
       delegate.Reset();
       CHECK_FALSE(delegate.Valid());
       CHECK_EQ(delegate(10), 0);
+    }
+  }
+
+  TEST_CASE("helios::Delegate::Invoke: Polymorphic conversion") {
+    SUBCASE("Derived to base conversion in arguments") {
+      Derived derived;
+      auto delegate =
+          Delegate<int(const Base&)>::From<&PolymorphicArgumentFunction>();
+      CHECK_EQ(delegate.Invoke(derived), 2);
     }
   }
 
@@ -325,33 +543,6 @@ TEST_SUITE("helios::Delegate") {
       auto delegate1 = Delegate<int(int)>::From<&free_function_double>();
       Delegate<int(int)> delegate2;
       CHECK_NE(delegate1, delegate2);
-    }
-  }
-
-  TEST_CASE("helios::Delegate::Reset") {
-    SUBCASE("Reset free function delegate") {
-      auto delegate = Delegate<int(int, int)>::From<&free_function_sum>();
-      CHECK(delegate.Valid());
-      delegate.Reset();
-      CHECK_FALSE(delegate.Valid());
-      CHECK_EQ(delegate.InstancePtr(), nullptr);
-    }
-
-    SUBCASE("Reset member function delegate") {
-      Counter counter{10};
-      auto delegate = Delegate<void(int)>::From<&Counter::add>(counter);
-      CHECK(delegate.Valid());
-      CHECK_NE(delegate.InstancePtr(), nullptr);
-      delegate.Reset();
-      CHECK_FALSE(delegate.Valid());
-      CHECK_EQ(delegate.InstancePtr(), nullptr);
-    }
-
-    SUBCASE("Reset multiple times is safe") {
-      auto delegate = Delegate<int(int)>::From<&free_function_double>();
-      delegate.Reset();
-      CHECK_NOTHROW(delegate.Reset());
-      CHECK_FALSE(delegate.Valid());
     }
   }
 
@@ -400,59 +591,36 @@ TEST_SUITE("helios::Delegate") {
       delegate();
       CHECK_EQ(counter.value, 1);
     }
-  }
 
-  TEST_CASE(
-      "helios::Delegate::From: Explicit signature for overload resolution") {
-    SUBCASE("Explicit signature for free function") {
-      using Signature = int (*)(int, int);
-      constexpr Signature func_ptr = &free_function_sum;
-      auto delegate = Delegate<int(int, int)>::From<Signature, func_ptr>();
+    SUBCASE("MakeDelegate for capture-less lambda") {
+      auto delegate = MakeDelegate([](int x) { return x + 8; });
+      CHECK(std::same_as<decltype(delegate), Delegate<int(int)>>);
       CHECK(delegate.Valid());
-      CHECK_EQ(delegate(3, 7), 10);
+      CHECK_EQ(delegate(2), 10);
     }
 
-    SUBCASE("Explicit signature for single param free function") {
-      using Signature = int (*)(int);
-      constexpr Signature func_ptr = &free_function_double;
-      auto delegate = Delegate<int(int)>::From<Signature, func_ptr>();
-      CHECK(delegate.Valid());
-      CHECK_EQ(delegate(6), 12);
+    SUBCASE("MakeDelegate for stateful lambda lvalue") {
+      int offset = 6;
+      auto lambda = [offset](int x) { return x + offset; };
+      auto delegate = MakeDelegate(lambda);
+      CHECK(std::same_as<decltype(delegate), Delegate<int(int)>>);
+      CHECK_EQ(delegate(4), 10);
     }
 
-    SUBCASE("Explicit signature for member function") {
-      Counter counter{3};
-      using Signature = int (Counter::*)(int);
-      constexpr Signature func_ptr = &Counter::multiply;
-      auto delegate = Delegate<int(int)>::From<Signature, func_ptr>(counter);
-      CHECK(delegate.Valid());
-      CHECK_EQ(delegate(7), 21);
+    SUBCASE("MakeDelegate with explicit signature for overloaded functor") {
+      OverloadedFunctor functor;
+      auto delegate = MakeDelegate<int(int)>(functor);
+      CHECK(std::same_as<decltype(delegate), Delegate<int(int)>>);
+      CHECK_EQ(delegate(11), 11);
+
+      auto two_args = MakeDelegate<int(int, int)>(functor);
+      CHECK_EQ(two_args(3, 4), 7);
     }
 
-    SUBCASE("Explicit signature for overloaded member function") {
-      OverloadedStruct obj{100};
-      using Signature = int (OverloadedStruct::*)(int);
-      constexpr auto func_ptr = static_cast<Signature>(&OverloadedStruct::foo);
-      auto delegate = Delegate<int(int)>::From<Signature, func_ptr>(obj);
-      CHECK(delegate.Valid());
-      CHECK_EQ(delegate(25), 125);
-    }
-
-    SUBCASE("Explicit signature constexpr") {
-      using Signature = int (*)(int);
-      constexpr Signature func_ptr = &free_function_triple;
-      constexpr auto delegate = Delegate<int(int)>::From<Signature, func_ptr>();
-      CHECK(delegate.Valid());
-      CHECK_EQ(delegate(5), 15);
-    }
-  }
-
-  TEST_CASE("helios::Delegate::Invoke: Polymorphic conversion") {
-    SUBCASE("Derived to base conversion in arguments") {
-      Derived derived;
-      auto delegate =
-          Delegate<int(const Base&)>::From<&PolymorphicArgumentFunction>();
-      CHECK_EQ(delegate.Invoke(derived), 2);
+    SUBCASE("MakeDelegate with explicit signature for generic lambda") {
+      auto lambda = [](auto x) { return x * 2; };
+      auto delegate = MakeDelegate<int(int)>(lambda);
+      CHECK_EQ(delegate(9), 18);
     }
   }
 

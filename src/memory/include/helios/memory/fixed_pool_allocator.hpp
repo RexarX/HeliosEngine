@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <atomic>
 #include <cstddef>
+#include <cstdint>
 #include <memory_resource>
 
 namespace helios::mem {

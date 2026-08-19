@@ -2,11 +2,13 @@
 
 #include <helios/input/systems.hpp>
 
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/input/axis.hpp>
 #include <helios/input/gamepad.hpp>
+#include <helios/input/joystick.hpp>
 #include <helios/input/messages.hpp>
 #include <helios/input/params.hpp>
+#include <helios/input/pen.hpp>
 #include <helios/input/resources.hpp>
 
 #include <cmath>
@@ -28,6 +30,23 @@ constexpr void ApplyButtonState(ButtonInput<T>& buttons, T button,
       break;
     case kReleased:
       buttons.Release(button);
+      break;
+  }
+}
+
+void ApplyIndexedButtonState(IndexedButtonInput<Joystick::kMaxButtons>& buttons,
+                             size_t index, ButtonState state) noexcept {
+  if (index >= Joystick::kMaxButtons) [[unlikely]] {
+    return;
+  }
+  switch (state) {
+    using enum ButtonState;
+    case kPressed:
+    case kRepeat:
+      buttons.Press(index);
+      break;
+    case kReleased:
+      buttons.Release(index);
       break;
   }
 }
@@ -132,6 +151,16 @@ void FilterConnectedPad(Gamepad& pad, GamepadAxisFilter& filter,
   ApplyTrigger(pad, filter, GamepadAxis::kRightTrigger, settings.trigger);
 }
 
+void ApplyPenPosition(Pen& pen, double x, double y) noexcept {
+  if (pen.has_position) {
+    pen.delta_x += x - pen.position_x;
+    pen.delta_y += y - pen.position_y;
+  }
+  pen.position_x = x;
+  pen.position_y = y;
+  pen.has_position = true;
+}
+
 }  // namespace
 
 void ClearInputState::operator()(State state) const {
@@ -144,6 +173,16 @@ void ClearInputState::operator()(State state) const {
 
   for (Gamepad& pad : state.gamepads->pads) {
     pad.buttons.Clear();
+  }
+
+  for (Joystick& stick : state.joysticks->sticks) {
+    stick.buttons.Clear();
+  }
+
+  for (Pen& pen : state.pens->pens) {
+    pen.buttons.Clear();
+    pen.delta_x = 0.0;
+    pen.delta_y = 0.0;
   }
 }
 
@@ -187,15 +226,60 @@ void UpdateGamepadState::operator()(ecs::Res<Gamepads> gamepads,
       continue;
     }
 
+    pad->Reset();
     pad->id = msg->id;
     pad->connected = msg->connected;
-    pad->buttons.Reset();
-    pad->axes.Clear();
     filter->Reset();
     if (msg->connected) {
       pad->name = msg->name;
-    } else {
-      pad->name.clear();
+      pad->guid = msg->guid;
+    }
+  }
+
+  for (const auto msg : messages.remapped) {
+    Gamepad* pad = gamepads->TryGet(msg->id);
+    if (pad == nullptr || !pad->connected) [[unlikely]] {
+      continue;
+    }
+    pad->mapping = msg->mapping;
+  }
+
+  for (const auto msg : messages.power) {
+    Gamepad* pad = gamepads->TryGet(msg->id);
+    if (pad == nullptr || !pad->connected) [[unlikely]] {
+      continue;
+    }
+    pad->power = msg->power;
+  }
+
+  for (const auto msg : messages.sensors) {
+    Gamepad* pad = gamepads->TryGet(msg->id);
+    if (pad == nullptr || !pad->connected) [[unlikely]] {
+      continue;
+    }
+    if (msg->sensor == GamepadSensor::kGyro) {
+      pad->gyro = msg->value;
+    } else if (msg->sensor == GamepadSensor::kAccel) {
+      pad->accel = msg->value;
+    }
+  }
+
+  for (const auto msg : messages.touchpad) {
+    Gamepad* pad = gamepads->TryGet(msg->id);
+    if (pad == nullptr || !pad->connected) [[unlikely]] {
+      continue;
+    }
+    if (msg->finger >= Gamepad::kMaxTouchpadFingers) [[unlikely]] {
+      continue;
+    }
+    GamepadTouchpadFinger& finger = pad->touchpad[msg->finger];
+    finger.x = msg->x;
+    finger.y = msg->y;
+    finger.pressure = msg->pressure;
+    finger.down = msg->down;
+    const uint8_t needed = static_cast<uint8_t>(msg->finger + 1U);
+    if (pad->touchpad_count < needed) {
+      pad->touchpad_count = needed;
     }
   }
 
@@ -224,6 +308,114 @@ void UpdateGamepadState::operator()(ecs::Res<Gamepads> gamepads,
       continue;
     }
     FilterConnectedPad(pad, gamepads->filters[i], *settings);
+  }
+}
+
+void UpdateJoystickState::operator()(ecs::Res<Joysticks> joysticks,
+                                     JoystickMessages messages) const {
+  for (const auto msg : messages.connection) {
+    Joystick* stick = joysticks->TryGet(msg->id);
+    if (stick == nullptr) [[unlikely]] {
+      continue;
+    }
+
+    stick->Reset();
+    stick->id = msg->id;
+    stick->connected = msg->connected;
+    if (msg->connected) {
+      stick->name = msg->name;
+      stick->guid = msg->guid;
+      stick->axis_count = msg->axis_count;
+      stick->button_count = msg->button_count;
+      stick->hat_count = msg->hat_count;
+    }
+  }
+
+  for (const auto msg : messages.buttons) {
+    Joystick* stick = joysticks->TryGet(msg->id);
+    if (stick == nullptr || !stick->connected) [[unlikely]] {
+      continue;
+    }
+    if (msg->button >= stick->button_count) [[unlikely]] {
+      continue;
+    }
+    ApplyIndexedButtonState(stick->buttons, msg->button, msg->state);
+  }
+
+  for (const auto msg : messages.axes) {
+    Joystick* stick = joysticks->TryGet(msg->id);
+    if (stick == nullptr || !stick->connected) [[unlikely]] {
+      continue;
+    }
+    if (msg->axis >= stick->axis_count || msg->axis >= Joystick::kMaxAxes)
+        [[unlikely]] {
+      continue;
+    }
+    stick->axes[msg->axis] = msg->value;
+  }
+
+  for (const auto msg : messages.hats) {
+    Joystick* stick = joysticks->TryGet(msg->id);
+    if (stick == nullptr || !stick->connected) [[unlikely]] {
+      continue;
+    }
+    if (msg->hat >= stick->hat_count || msg->hat >= Joystick::kMaxHats)
+        [[unlikely]] {
+      continue;
+    }
+    stick->hats[msg->hat] = msg->value;
+  }
+}
+
+void UpdatePenState::operator()(ecs::Res<Pens> pens,
+                                PenMessages messages) const {
+  for (const auto msg : messages.proximity) {
+    Pen* pen = pens->TryGet(msg->id);
+    if (pen == nullptr) [[unlikely]] {
+      continue;
+    }
+
+    pen->Reset();
+    pen->id = msg->id;
+    pen->in_proximity = msg->in_proximity;
+    if (msg->in_proximity) {
+      pen->device_type = msg->device_type;
+    }
+  }
+
+  for (const auto msg : messages.moved) {
+    Pen* pen = pens->TryGet(msg->id);
+    if (pen == nullptr || !pen->in_proximity) [[unlikely]] {
+      continue;
+    }
+    ApplyPenPosition(*pen, msg->x, msg->y);
+  }
+
+  for (const auto msg : messages.axes) {
+    Pen* pen = pens->TryGet(msg->id);
+    if (pen == nullptr || !pen->in_proximity) [[unlikely]] {
+      continue;
+    }
+    pen->axes.Set(msg->axis, msg->value);
+    ApplyPenPosition(*pen, msg->x, msg->y);
+  }
+
+  for (const auto msg : messages.touch) {
+    Pen* pen = pens->TryGet(msg->id);
+    if (pen == nullptr || !pen->in_proximity) [[unlikely]] {
+      continue;
+    }
+    pen->down = msg->down;
+    pen->eraser = msg->eraser;
+    ApplyPenPosition(*pen, msg->x, msg->y);
+  }
+
+  for (const auto msg : messages.buttons) {
+    Pen* pen = pens->TryGet(msg->id);
+    if (pen == nullptr || !pen->in_proximity) [[unlikely]] {
+      continue;
+    }
+    ApplyButtonState(pen->buttons, msg->button, msg->state);
   }
 }
 

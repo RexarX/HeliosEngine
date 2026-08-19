@@ -21,11 +21,6 @@ thread_local int g_memory_dispatch_suspend_count = 0;
 std::atomic<bool> g_profiler_memory_dispatch_enabled{true};
 std::atomic<bool> g_profiler_finalized{false};
 
-[[nodiscard]] constexpr size_t AlignUp(size_t value,
-                                       size_t alignment) noexcept {
-  return (value + alignment - 1) & ~(alignment - 1);
-}
-
 void RegisterShutdownMemoryDispatchGuard() noexcept {
   static bool registered = false;
   if (registered) {
@@ -97,8 +92,11 @@ void Profiler::Finalize() noexcept {
   HELIOS_ASSERT(!finalized_, "Profiler already finalized!");
 
   size_t offset = 0;
+  const auto align_up = [](size_t value, size_t alignment) noexcept {
+    return (value + alignment - 1) & ~(alignment - 1);
+  };
   for (auto&& [_, entry] : backends_) {
-    offset = AlignUp(offset, alignof(std::max_align_t));
+    offset = align_up(offset, alignof(std::max_align_t));
     entry.storage_offset = offset;
     entry.storage_size = entry.backend->ZoneStorageSize();
     HELIOS_ASSERT(

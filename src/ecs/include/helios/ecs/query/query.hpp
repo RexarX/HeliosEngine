@@ -1,6 +1,7 @@
 #pragma once
 
 #include <helios/assert.hpp>
+#include <helios/compiler/compiler.hpp>
 #include <helios/ecs/component/archetype.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/component/manager.hpp>
@@ -8,15 +9,17 @@
 #include <helios/ecs/query/details/query_args.hpp>
 #include <helios/ecs/query/details/traits.hpp>
 #include <helios/ecs/query/iterator.hpp>
-#include <helios/utils/common_traits.hpp>
 #include <helios/utils/functional_adapters.hpp>
 
 #include <algorithm>
+#include <concepts>
 #include <cstddef>
 #include <functional>
+#include <iterator>
 #include <memory>
 #include <memory_resource>
 #include <optional>
+#include <ranges>
 #include <span>
 #include <tuple>
 #include <type_traits>
@@ -1277,7 +1280,7 @@ private:
                       ArchetypeAllocator>
       matching_archetypes_;
 
-  [[no_unique_address]] allocator_type alloc_;
+  HELIOS_NO_UNIQUE_ADDRESS allocator_type alloc_;
 
   friend class BasicQueryWithEntity<WorldT, Allocator, Args...>;
 };

@@ -2,8 +2,11 @@
 
 #include <cstdint>
 #include <format>
+#include <iterator>
 #include <ostream>
+#include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 namespace helios::input {
@@ -44,6 +47,24 @@ struct CursorImage {
   int32_t hotspot_x = 0;
   int32_t hotspot_y = 0;
   std::vector<uint8_t> rgba;
+
+  /**
+   * @brief Returns the image size in pixels.
+   * @return Width and height
+   */
+  [[nodiscard]] constexpr auto GetSize() const noexcept
+      -> std::pair<uint32_t, uint32_t> {
+    return {width, height};
+  }
+
+  /**
+   * @brief Returns the cursor hotspot.
+   * @return Hotspot x and y in pixels
+   */
+  [[nodiscard]] constexpr auto GetHotspot() const noexcept
+      -> std::pair<int32_t, int32_t> {
+    return {hotspot_x, hotspot_y};
+  }
 };
 
 /**
@@ -132,13 +153,53 @@ inline std::ostream& operator<<(std::ostream& os, CursorIcon icon) {
   return os << "CursorIcon::" << ToString(icon);
 }
 
+/**
+ * @brief Formats a custom cursor image using an output iterator.
+ * @tparam It Output iterator type
+ * @param image Custom cursor image
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(const CursorImage& image, It out) {
+  return std::format_to(
+      out,
+      "CursorImage{{width={}, height={}, hotspot_x={}, hotspot_y={}, rgba={}}}",
+      image.width, image.height, image.hotspot_x, image.hotspot_y,
+      image.rgba.size());
+}
+
+/**
+ * @brief Formats a custom cursor image as a string.
+ * @param image Custom cursor image
+ * @return Formatted cursor image string
+ */
+[[nodiscard]] inline std::string ToString(const CursorImage& image) {
+  std::string result;
+  result.reserve(96);
+  ToString(image, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs a custom cursor image to an output stream.
+ * @param os Output stream
+ * @param image Custom cursor image
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const CursorImage& image) {
+  ToString(image, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
 }  // namespace helios::input
 
 namespace std {
 
 template <>
 struct formatter<helios::input::MouseButton> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -151,7 +212,7 @@ struct formatter<helios::input::MouseButton> {
 
 template <>
 struct formatter<helios::input::CursorIcon> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -159,6 +220,18 @@ struct formatter<helios::input::CursorIcon> {
                                format_context& ctx) {
     return format_to(ctx.out(), "CursorIcon::{}",
                      helios::input::ToString(icon));
+  }
+};
+
+template <>
+struct formatter<helios::input::CursorImage> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::CursorImage& image,
+                     format_context& ctx) {
+    return helios::input::ToString(image, ctx.out());
   }
 };
 

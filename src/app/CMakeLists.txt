@@ -8,6 +8,7 @@ helios_module(
     HEADERS
         include/helios/app/builtin/executor.hpp
         include/helios/app/builtin/frame_count.hpp
+        include/helios/app/builtin/frame_limiter.hpp
         include/helios/app/builtin/time.hpp
         include/helios/app/details/profile.hpp
         include/helios/app/app.hpp
@@ -22,8 +23,15 @@ helios_module(
         include/helios/app/sub_app.hpp
 
     SOURCES
+        src/builtin/executor.cpp
+        src/builtin/frame_count.cpp
+        src/builtin/frame_limiter.cpp
+        src/builtin/time.cpp
         src/application.cpp
+        src/dynamic_plugin.cpp
+        src/plugin_group.cpp
         src/scheduler.cpp
+        src/schedules.cpp
         src/sub_app.cpp
 
     PCH src/pch.hpp
@@ -48,6 +56,7 @@ helios_module(
     TEST_SOURCES
         tests/builtin/executor.cpp
         tests/builtin/frame_count.cpp
+        tests/builtin/frame_limiter.cpp
         tests/builtin/time.cpp
         tests/application.cpp
         tests/dynamic_plugin.cpp

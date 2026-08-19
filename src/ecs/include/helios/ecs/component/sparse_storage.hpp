@@ -5,7 +5,6 @@
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/entity/entity.hpp>
 
-#include <algorithm>
 #include <concepts>
 #include <cstddef>
 #include <span>

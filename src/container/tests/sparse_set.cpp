@@ -2,10 +2,15 @@
 
 #include <helios/container/sparse_set.hpp>
 
+#include <cstddef>
+#include <cstdlib>
+#include <iterator>
+#include <memory>
 #include <memory_resource>
 #include <random>
 #include <string>
 #include <unordered_set>
+#include <utility>
 #include <vector>
 
 using namespace helios::container;

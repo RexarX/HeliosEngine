@@ -11,23 +11,26 @@
 #include "available.hpp"
 
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#include <helios/ecs/resource/params.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
+#include <helios/ecs/system/param.hpp>
+#include <helios/ecs/system/param_policy.hpp>
+#include <helios/glfw/details/glfw_sync.hpp>
 #include <helios/glfw/systems/input.hpp>
 #include <helios/input/input.hpp>
 #endif
 
 #include <GLFW/glfw3.h>
 
+#include <cstdint>
 #include <string>
-#include <variant>
 
-using namespace helios::app;
-using namespace helios::ecs;
+using namespace helios;
 using namespace helios::glfw;
-using namespace helios::window;
 
 namespace {
 
-[[nodiscard]] Properties HiddenTestProperties(
+[[nodiscard]] window::Properties HiddenTestProperties(
     std::string title = "HeliosTest") {
   return {
       .title = std::move(title),
@@ -41,10 +44,10 @@ namespace {
 struct CaptureCloseRequestedDirty {
   bool* dirty_cleared = nullptr;
 
-  void operator()(Windows windows) const {
+  void operator()(window::Windows windows) const {
     for (auto&& [window] : windows.query) {
       if (window.close_requested && dirty_cleared != nullptr) {
-        *dirty_cleared = window.dirty_flags == DirtyFlag::kNone;
+        *dirty_cleared = window.dirty_flags == window::DirtyFlag::kNone;
       }
     }
   }
@@ -57,56 +60,60 @@ TEST_SUITE("helios::glfw::CreateNativeWindows") {
     SUBCASE("Creates a hidden window and emits CreatedMsg") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowPlugin{});
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
+      const ecs::Entity entity = world.CreateEntity();
       world.AddBundle(
-          entity, PrimaryWindow{
-                      .window = Window::FromProperties(HiddenTestProperties()),
-                  });
+          entity,
+          window::PrimaryWindow{
+              .window = window::Window::FromProperties(HiddenTestProperties()),
+          });
       app.Update();
 
-      CHECK(world.HasComponent<NativeHandleComponent>(entity));
-      CHECK_FALSE(world.HasComponent<CreationFailed>(entity));
+      CHECK(world.HasComponent<window::NativeHandleComponent>(entity));
+      CHECK_FALSE(world.HasComponent<window::CreationFailed>(entity));
       CHECK(world.ReadResource<NativeWindows>().Contains(entity));
       CHECK(world.ReadResource<Context>().initialized);
-      CHECK_FALSE(world.ReadComponent<Window>(entity).Dirty(DirtyFlag::kTitle));
+      CHECK_FALSE(world.ReadComponent<window::Window>(entity).Dirty(
+          window::DirtyFlag::kTitle));
 
-      const auto created = world.Messages().PreviousMessages<CreatedMsg>();
+      const auto created =
+          world.Messages().PreviousMessages<window::CreatedMsg>();
       REQUIRE_EQ(created.size(), 1U);
       CHECK_EQ(created[0].entity, entity);
-      CHECK_EQ(world.ReadComponent<Window>(entity).properties.title,
+      CHECK_EQ(created[0].properties.title, "HeliosTest");
+      CHECK_EQ(world.ReadComponent<window::Window>(entity).properties.title,
                "HeliosTest");
 
 #if defined(HELIOS_PLATFORM_WINDOWS)
-      CHECK(std::holds_alternative<Win32Handle>(
-          world.ReadComponent<NativeHandleComponent>(entity).handle));
+      CHECK(std::holds_alternative<window::Win32Handle>(
+          world.ReadComponent<window::NativeHandleComponent>(entity).handle));
 #endif
     }
   }
 }
 
-TEST_SUITE("helios::glfw::ApplyChanges") {
-  TEST_CASE("helios::glfw::ApplyChanges::operator()") {
+TEST_SUITE("helios::glfw::window::ApplyChanges") {
+  TEST_CASE("helios::glfw::window::ApplyChanges::operator()") {
     SUBCASE("Applies title, size, and visibility then clears dirty flags") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowPlugin{});
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(
-          entity, Window::FromProperties(HiddenTestProperties("Apply")));
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(entity, window::Window::FromProperties(
+                                      HiddenTestProperties("Apply")));
       app.Update();
 
-      auto& window = world.WriteComponent<Window>(entity);
+      auto& window = world.WriteComponent<window::Window>(entity);
       window.SetTitle("Applied");
       window.SetSize(80, 48);
       window.SetVisible(false);
@@ -114,14 +121,14 @@ TEST_SUITE("helios::glfw::ApplyChanges") {
       window.SetMousePassthrough(true);
       app.Update();
 
-      const auto& updated = world.ReadComponent<Window>(entity);
+      const auto& updated = world.ReadComponent<window::Window>(entity);
       CHECK_EQ(updated.properties.title, "Applied");
-      CHECK_EQ(updated.dirty_flags, DirtyFlag::kNone);
+      CHECK_EQ(updated.dirty_flags, window::DirtyFlag::kNone);
       CHECK_FALSE(updated.properties.visible);
       CHECK(updated.properties.mouse_passthrough);
 
       const auto titles =
-          world.Messages().PreviousMessages<VisibilityChangedMsg>();
+          world.Messages().PreviousMessages<window::VisibilityChangedMsg>();
       CHECK_FALSE(titles.empty());
     }
 
@@ -129,22 +136,22 @@ TEST_SUITE("helios::glfw::ApplyChanges") {
       HELIOS_SKIP_IF_NO_GLFW();
 
       bool dirty_cleared = false;
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowPlugin{});
-      RegisterEventsSchedule(app.GetMainSubApp().GetScheduler());
-      app.AddSystem(kEvents, CaptureCloseRequestedDirty{&dirty_cleared})
+      window::RegisterEventsSchedule(app.GetMainSubApp().GetScheduler());
+      app.AddSystem(window::kEvents, CaptureCloseRequestedDirty{&dirty_cleared})
           .After<ApplyChanges>()
           .Before<DestroyClosedWindows>();
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(
-          entity, Window::FromProperties(HiddenTestProperties("Closing")));
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(entity, window::Window::FromProperties(
+                                      HiddenTestProperties("Closing")));
       app.Update();
 
-      auto& window = world.WriteComponent<Window>(entity);
+      auto& window = world.WriteComponent<window::Window>(entity);
       window.SetTitle("Closing");
       window.RequestClose();
       app.Update();
@@ -155,24 +162,25 @@ TEST_SUITE("helios::glfw::ApplyChanges") {
     SUBCASE("Applies exclusive fullscreen from the desktop video mode") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowPlugin{});
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
       HELIOS_SKIP_IF_NO_MONITOR();
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(
-          entity, Window::FromProperties(HiddenTestProperties("Exclusive")));
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(entity, window::Window::FromProperties(
+                                      HiddenTestProperties("Exclusive")));
       app.Update();
 
-      world.WriteComponent<Window>(entity).SetMode(Mode::kFullscreen);
+      world.WriteComponent<window::Window>(entity).SetMode(
+          window::Mode::kFullscreen);
       app.Update();
 
-      const auto& updated = world.ReadComponent<Window>(entity);
-      CHECK_EQ(updated.dirty_flags, DirtyFlag::kNone);
-      CHECK_EQ(updated.properties.mode, Mode::kFullscreen);
+      const auto& updated = world.ReadComponent<window::Window>(entity);
+      CHECK_EQ(updated.dirty_flags, window::DirtyFlag::kNone);
+      CHECK_EQ(updated.properties.mode, window::Mode::kFullscreen);
 
       const NativeWindows::Entry* entry =
           world.ReadResource<NativeWindows>().TryGet(entity);
@@ -183,7 +191,8 @@ TEST_SUITE("helios::glfw::ApplyChanges") {
         MESSAGE(
             "Exclusive fullscreen was not applied (virtual/CI display); "
             "skipping Hz change");
-        world.WriteComponent<Window>(entity).SetMode(Mode::kWindowed);
+        world.WriteComponent<window::Window>(entity).SetMode(
+            window::Mode::kWindowed);
         app.Update();
         return;
       }
@@ -206,7 +215,7 @@ TEST_SUITE("helios::glfw::ApplyChanges") {
       if (other_hz == 0U) {
         MESSAGE("Monitor has no alternate refresh rate; skipping Hz change");
       } else {
-        world.WriteComponent<Window>(entity).SetRefreshRate(other_hz);
+        world.WriteComponent<window::Window>(entity).SetRefreshRate(other_hz);
         app.Update();
 
         entry = world.ReadResource<NativeWindows>().TryGet(entity);
@@ -218,62 +227,65 @@ TEST_SUITE("helios::glfw::ApplyChanges") {
         CHECK_EQ(static_cast<uint32_t>(current->refreshRate), other_hz);
       }
 
-      world.WriteComponent<Window>(entity).SetMode(Mode::kWindowed);
+      world.WriteComponent<window::Window>(entity).SetMode(
+          window::Mode::kWindowed);
       app.Update();
     }
   }
 }
 
-TEST_SUITE("helios::glfw::DestroyClosedWindows") {
-  TEST_CASE("helios::glfw::DestroyClosedWindows::operator()") {
+TEST_SUITE("helios::glfw::window::DestroyClosedWindows") {
+  TEST_CASE("helios::glfw::window::DestroyClosedWindows::operator()") {
     SUBCASE("Destroys a closed primary window and requests AppExit") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowPlugin{});
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
+      const ecs::Entity entity = world.CreateEntity();
       world.AddBundle(
-          entity, PrimaryWindow{
-                      .window = Window::FromProperties(HiddenTestProperties()),
-                  });
+          entity,
+          window::PrimaryWindow{
+              .window = window::Window::FromProperties(HiddenTestProperties()),
+          });
       app.Update();
-      world.WriteComponent<Window>(entity).RequestClose();
+      world.WriteComponent<window::Window>(entity).RequestClose();
       app.Update();
 
       CHECK_FALSE(world.Exists(entity));
       CHECK(world.ReadResource<NativeWindows>().Empty());
 
-      const auto closed = world.Messages().PreviousMessages<ClosedMsg>();
+      const auto closed =
+          world.Messages().PreviousMessages<window::ClosedMsg>();
       REQUIRE_EQ(closed.size(), 1U);
       CHECK_EQ(closed[0].entity, entity);
 
-      const auto exits = world.Messages().PreviousMessages<AppExit>();
+      const auto exits = world.Messages().PreviousMessages<app::AppExit>();
       CHECK_FALSE(exits.empty());
     }
 
     SUBCASE("Does not request exit when triggers are none") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowPlugin{}.Configure(
-          helios::window::Plugin{{.exit_triggers = kExitTriggersNone}}));
+          window::Plugin{{.exit_triggers = window::kExitTriggersNone}}));
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(entity,
-                          Window::FromProperties(HiddenTestProperties()));
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(
+          entity, window::Window::FromProperties(HiddenTestProperties()));
       app.Update();
-      world.WriteComponent<Window>(entity).RequestClose();
+      world.WriteComponent<window::Window>(entity).RequestClose();
       app.Update();
 
       CHECK_FALSE(world.Exists(entity));
-      CHECK(world.Messages().PreviousMessages<AppExit>().empty());
+      CHECK(world.Messages().PreviousMessages<app::AppExit>().empty());
     }
   }
 }
@@ -283,50 +295,51 @@ TEST_SUITE("helios::glfw::PollEvents") {
     SUBCASE("Writes pending clipboard text") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowPlugin{});
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(entity,
-                          Window::FromProperties(HiddenTestProperties()));
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(
+          entity, window::Window::FromProperties(HiddenTestProperties()));
       app.Update();
 
-      auto& clipboard = world.WriteResource<Clipboard>();
+      auto& clipboard = world.WriteResource<window::Clipboard>();
       clipboard.text = "helios-clipboard";
       clipboard.pending_write = true;
       app.Update();
 
-      CHECK_FALSE(world.ReadResource<Clipboard>().pending_write);
-      CHECK_EQ(world.ReadResource<Clipboard>().text, "helios-clipboard");
+      CHECK_FALSE(world.ReadResource<window::Clipboard>().pending_write);
+      CHECK_EQ(world.ReadResource<window::Clipboard>().text,
+               "helios-clipboard");
     }
 
     SUBCASE("WaitTimeout returns and writes pending clipboard text") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
-      app.AddPluginGroups(WindowPlugin{}.Configure(helios::window::Plugin{{
-          .event_mode = EventMode::kWaitTimeout,
+      app::App app;
+      app.AddPluginGroups(WindowPlugin{}.Configure(window::Plugin{{
           .event_wait_timeout = 0.001,
+          .event_mode = window::EventMode::kWaitTimeout,
       }}));
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(entity,
-                          Window::FromProperties(HiddenTestProperties()));
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(
+          entity, window::Window::FromProperties(HiddenTestProperties()));
       app.Update();
 
-      auto& clipboard = world.WriteResource<Clipboard>();
+      auto& clipboard = world.WriteResource<window::Clipboard>();
       clipboard.text = "helios-wait";
       clipboard.pending_write = true;
       app.Update();
 
-      CHECK_FALSE(world.ReadResource<Clipboard>().pending_write);
-      CHECK_EQ(world.ReadResource<Clipboard>().text, "helios-wait");
+      CHECK_FALSE(world.ReadResource<window::Clipboard>().pending_write);
+      CHECK_EQ(world.ReadResource<window::Clipboard>().text, "helios-wait");
     }
   }
 }
@@ -336,7 +349,7 @@ TEST_SUITE("helios::glfw::Init") {
     SUBCASE("Marks context initialized and snapshots monitors") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowPlugin{});
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
@@ -344,10 +357,11 @@ TEST_SUITE("helios::glfw::Init") {
       CHECK(app.GetWorld().ReadResource<Context>().initialized);
       CHECK_NE(app.GetWorld().ReadResource<Context>().world, nullptr);
       if (glfwGetPrimaryMonitor() == nullptr) {
-        CHECK(app.GetWorld().ReadResource<Monitors>().monitors.empty());
+        CHECK(app.GetWorld().ReadResource<window::Monitors>().monitors.empty());
         return;
       }
-      CHECK_FALSE(app.GetWorld().ReadResource<Monitors>().monitors.empty());
+      CHECK_FALSE(
+          app.GetWorld().ReadResource<window::Monitors>().monitors.empty());
     }
   }
 }
@@ -357,19 +371,19 @@ TEST_SUITE("helios::glfw::Shutdown") {
     SUBCASE("Terminates GLFW and clears native windows") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowPlugin{});
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(entity,
-                          Window::FromProperties(HiddenTestProperties()));
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(
+          entity, window::Window::FromProperties(HiddenTestProperties()));
       app.Update();
       CHECK(world.ReadResource<NativeWindows>().Contains(entity));
 
-      helios::glfw::Plugin{}.Destroy(app);
+      Plugin{}.Destroy(app);
 
       CHECK_FALSE(world.ReadResource<Context>().initialized);
       CHECK(world.ReadResource<NativeWindows>().Empty());
@@ -378,30 +392,58 @@ TEST_SUITE("helios::glfw::Shutdown") {
 }
 
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
-TEST_SUITE("helios::glfw::ApplyCursors") {
-  TEST_CASE("helios::glfw::ApplyCursors::operator()") {
-    SUBCASE("Applies a standard cursor icon and clears dirty") {
+TEST_SUITE("helios::glfw::ApplyCursorMode") {
+  TEST_CASE("helios::glfw::ApplyCursorMode") {
+    SUBCASE("Sets captured cursor mode on a native window") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowInputPlugin{});
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(entity,
-                          Window::FromProperties(HiddenTestProperties()),
-                          helios::input::Cursor{});
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(
+          entity, window::Window::FromProperties(HiddenTestProperties()));
       app.Update();
 
-      world.WriteComponent<helios::input::Cursor>(entity).SetIcon(
-          helios::input::CursorIcon::kIBeam);
+      NativeWindows::Entry* entry =
+          world.WriteResource<NativeWindows>().TryGet(entity);
+      REQUIRE_NE(entry, nullptr);
+      REQUIRE_NE(entry->native.window, nullptr);
+
+      ApplyCursorMode(*entry->native.window, window::CursorMode::kCaptured);
+      CHECK_EQ(glfwGetInputMode(entry->native.window, GLFW_CURSOR),
+               GLFW_CURSOR_CAPTURED);
+    }
+  }
+}
+
+TEST_SUITE("helios::glfw::ApplyCursors") {
+  TEST_CASE("helios::glfw::ApplyCursors::operator()") {
+    SUBCASE("Applies a standard cursor icon and clears dirty") {
+      HELIOS_SKIP_IF_NO_GLFW();
+
+      app::App app;
+      app.AddPluginGroups(WindowInputPlugin{});
+      app.Initialize();
+      test::ScopedGlfwShutdown shutdown{app};
+
+      auto& world = app.GetWorld();
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(
+          entity, window::Window::FromProperties(HiddenTestProperties()),
+          input::Cursor{});
       app.Update();
 
-      CHECK_FALSE(world.ReadComponent<helios::input::Cursor>(entity).dirty);
-      CHECK_EQ(world.ReadComponent<helios::input::Cursor>(entity).icon,
-               helios::input::CursorIcon::kIBeam);
+      world.WriteComponent<input::Cursor>(entity).SetIcon(
+          input::CursorIcon::kIBeam);
+      app.Update();
+
+      CHECK_FALSE(world.ReadComponent<input::Cursor>(entity).dirty);
+      CHECK_EQ(world.ReadComponent<input::Cursor>(entity).icon,
+               input::CursorIcon::kIBeam);
     }
   }
 }
@@ -411,7 +453,7 @@ TEST_SUITE("helios::glfw::ApplyRawMouseMotion") {
     SUBCASE("Enables and disables raw motion for a disabled cursor") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowInputPlugin{});
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
@@ -422,13 +464,14 @@ TEST_SUITE("helios::glfw::ApplyRawMouseMotion") {
       }
 
       auto& world = app.GetWorld();
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(entity,
-                          Window::FromProperties(HiddenTestProperties()));
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(
+          entity, window::Window::FromProperties(HiddenTestProperties()));
       app.Update();
 
-      world.WriteComponent<Window>(entity).SetCursorMode(CursorMode::kDisabled);
-      world.WriteResource<helios::input::Settings>().raw_mouse_motion = true;
+      world.WriteComponent<window::Window>(entity).SetCursorMode(
+          window::CursorMode::kDisabled);
+      world.WriteResource<input::Settings>().raw_mouse_motion = true;
       app.Update();
 
       const NativeWindows::Entry* entry =
@@ -438,7 +481,7 @@ TEST_SUITE("helios::glfw::ApplyRawMouseMotion") {
       CHECK_EQ(glfwGetInputMode(entry->native.window, GLFW_RAW_MOUSE_MOTION),
                GLFW_TRUE);
 
-      world.WriteResource<helios::input::Settings>().raw_mouse_motion = false;
+      world.WriteResource<input::Settings>().raw_mouse_motion = false;
       app.Update();
 
       entry = world.ReadResource<NativeWindows>().TryGet(entity);
@@ -455,7 +498,7 @@ TEST_SUITE("helios::glfw::PollGamepads") {
     SUBCASE("Runs without connected gamepads") {
       HELIOS_SKIP_IF_NO_GLFW();
 
-      App app;
+      app::App app;
       app.AddPluginGroups(WindowInputPlugin{});
       app.Initialize();
       test::ScopedGlfwShutdown shutdown{app};
@@ -464,8 +507,77 @@ TEST_SUITE("helios::glfw::PollGamepads") {
       CHECK(app.GetWorld().HasResource<GamepadCache>());
       CHECK(app.GetWorld()
                 .Messages()
-                .PreviousMessages<helios::input::GamepadConnectionMsg>()
+                .PreviousMessages<input::JoystickConnectionMsg>()
                 .empty());
+    }
+  }
+}
+
+TEST_SUITE("helios::glfw::ApplyGamepadMappings") {
+  TEST_CASE("helios::glfw::ApplyGamepadMappings::operator()") {
+    SUBCASE("Consumes queued mapping lines") {
+      HELIOS_SKIP_IF_NO_GLFW();
+
+      app::App app;
+      app.AddPluginGroups(WindowInputPlugin{});
+      app.Initialize();
+      test::ScopedGlfwShutdown shutdown{app};
+
+      auto& mappings = app.GetWorld().WriteResource<input::GamepadMappings>();
+      mappings.Add(
+          "03000000000000000000000000000000,Test "
+          "Pad,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0."
+          "1,guide:b8,leftshoulder:b4,leftstick:b9,lefttrigger:a2,leftx:a0,"
+          "lefty:a1,rightshoulder:b5,rightstick:b10,righttrigger:a5,rightx:a3,"
+          "righty:a4,start:b7,x:b2,y:b3,platform:window::Windows,");
+
+      auto local_data = ecs::SystemLocalData::From();
+      const ecs::AccessPolicy policy =
+          ecs::BuildPolicyFromParams<ecs::Res<const Context>,
+                                     ecs::Res<input::GamepadMappings>>();
+      ApplyGamepadMappings{}(
+          ecs::SystemParamTraits<ecs::Res<const Context>>::Make(
+              app.GetWorld(), local_data, policy),
+          ecs::SystemParamTraits<ecs::Res<input::GamepadMappings>>::Make(
+              app.GetWorld(), local_data, policy));
+
+      CHECK_FALSE(app.GetWorld().ReadResource<input::GamepadMappings>().dirty);
+      CHECK(app.GetWorld()
+                .ReadResource<input::GamepadMappings>()
+                .pending_lines.empty());
+    }
+  }
+}
+
+TEST_SUITE("helios::glfw::ApplyGamepadOutputs") {
+  TEST_CASE("helios::glfw::ApplyGamepadOutputs::operator()") {
+    SUBCASE("Clears dirty output flags") {
+      HELIOS_SKIP_IF_NO_GLFW();
+
+      app::App app;
+      app.AddPluginGroups(WindowInputPlugin{});
+      app.Initialize();
+      test::ScopedGlfwShutdown shutdown{app};
+
+      auto& pads = app.GetWorld().WriteResource<input::Gamepads>();
+      pads.pads[0].connected = true;
+      pads.pads[0].SetRumble(1, 2, 3);
+      pads.pads[0].SetLed(4, 5, 6);
+
+      ecs::SystemLocalData local_data = ecs::SystemLocalData::From();
+      const ecs::AccessPolicy policy =
+          ecs::BuildPolicyFromParams<ecs::Res<const Context>,
+                                     ecs::Res<input::Gamepads>>();
+      ApplyGamepadOutputs{}(
+          ecs::SystemParamTraits<ecs::Res<const Context>>::Make(
+              app.GetWorld(), local_data, policy),
+          ecs::SystemParamTraits<ecs::Res<input::Gamepads>>::Make(
+              app.GetWorld(), local_data, policy));
+
+      CHECK_FALSE(app.GetWorld().ReadResource<input::Gamepads>().pads[0].Dirty(
+          input::GamepadDirtyFlags::kRumble));
+      CHECK_FALSE(app.GetWorld().ReadResource<input::Gamepads>().pads[0].Dirty(
+          input::GamepadDirtyFlags::kLed));
     }
   }
 }

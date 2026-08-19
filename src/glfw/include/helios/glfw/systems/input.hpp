@@ -3,40 +3,60 @@
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
 
 #include <helios/ecs/entity/entity.hpp>
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/query/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/glfw/details/glfw_state.hpp>
 #include <helios/input/components.hpp>
+#include <helios/input/joystick.hpp>
+#include <helios/input/mouse.hpp>
 #include <helios/input/params.hpp>
 #include <helios/input/resources.hpp>
 #include <helios/window/components.hpp>
 
 #include <array>
 #include <cstddef>
+#include <cstdint>
 #include <string>
 #include <string_view>
-#include <vector>
 
 struct GLFWcursor;
 
 namespace helios::glfw {
 
+/// @brief Number of GLFW mapped gamepad buttons (`GLFW_GAMEPAD_BUTTON_LAST+1`).
+inline constexpr size_t kGlfwMappedButtonCount = 15;
+/// @brief Number of GLFW mapped gamepad axes (`GLFW_GAMEPAD_AXIS_LAST+1`).
+inline constexpr size_t kGlfwMappedAxisCount = 6;
+
 /// @brief Cached previous GLFW gamepad slot state for edge detection.
 struct GamepadSlotCache {
   std::string name;
-  std::array<float, static_cast<size_t>(input::GamepadAxis::kCount)> axes = {};
-  std::array<unsigned char, static_cast<size_t>(input::GamepadButton::kCount)>
-      buttons = {};
+  std::array<float, kGlfwMappedAxisCount> axes = {};
+  std::array<unsigned char, kGlfwMappedButtonCount> buttons = {};
   bool connected = false;
 };
 
-/// @brief Previous gamepad snapshots for joysticks `0..GLFW_JOYSTICK_LAST`.
+/// @brief Cached previous unmapped joystick slot state for edge detection.
+struct JoystickSlotCache {
+  std::string name;
+  std::string guid;
+  std::array<float, input::Joystick::kMaxAxes> axes = {};
+  std::array<unsigned char, input::Joystick::kMaxButtons> buttons = {};
+  std::array<unsigned char, input::Joystick::kMaxHats> hats = {};
+  uint8_t axis_count = 0;
+  uint8_t button_count = 0;
+  uint8_t hat_count = 0;
+  bool connected = false;
+};
+
+/// @brief Previous gamepad and joystick snapshots for ids `0..15`.
 struct GamepadCache {
   static constexpr std::string_view kName = "helios::glfw::GamepadCache";
   static constexpr size_t kSlotCount = 16;
 
   std::array<GamepadSlotCache, kSlotCount> slots = {};
+  std::array<JoystickSlotCache, kSlotCount> joysticks = {};
 };
 
 /// @brief Cached `GLFWcursor*` objects for standard and custom cursors.
@@ -59,19 +79,33 @@ struct CursorCache {
  */
 void DestroyCursorCache(CursorCache& cache);
 
-/// @brief Polls GLFW gamepads and emits connection / button / axis messages.
-/// @details Hot-plug is detected with `glfwJoystickPresent` each frame rather
-/// than `glfwSetJoystickCallback`, so it stays consistent with per-frame
-/// `glfwGetGamepadState` polling. GLFW joystick state is not delivered as OS
-/// events. Newly connected mapped gamepads emit a full axis snapshot (and any
-/// currently pressed buttons) so rest-center calibration can see the first
-/// sample. Unmapped joysticks (wheels, pedals, HOTAS) are ignored.
+/// @brief Applies queued `GamepadMappings` via `glfwUpdateGamepadMappings`.
+struct ApplyGamepadMappings {
+  static constexpr std::string_view kName =
+      "helios::glfw::ApplyGamepadMappings";
+
+  void operator()(ecs::Res<const Context> context,
+                  ecs::Res<input::GamepadMappings> mappings) const;
+};
+
+/// @brief Polls GLFW gamepads and unmapped joysticks.
+/// @details Hot-plug is detected with `glfwJoystickPresent` each frame.
+/// Mapped devices emit gamepad messages; unmapped devices emit joystick
+/// messages. A mapping change promotes or demotes the slot.
 struct PollGamepads {
   static constexpr std::string_view kName = "helios::glfw::PollGamepads";
 
   void operator()(ecs::Res<const Context> context,
-                  input::GamepadWriters writers,
+                  input::GamepadWriters gamepads, input::JoystickWriters sticks,
                   ecs::Res<GamepadCache> cache) const;
+};
+
+/// @brief GLFW has no rumble / LED / sensor APIs; consumes dirty flags only.
+struct ApplyGamepadOutputs {
+  static constexpr std::string_view kName = "helios::glfw::ApplyGamepadOutputs";
+
+  void operator()(ecs::Res<const Context> context,
+                  ecs::Res<input::Gamepads> gamepads) const;
 };
 
 /// @brief Applies dirty `input::Cursor` components to native GLFW windows.

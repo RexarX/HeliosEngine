@@ -1,10 +1,13 @@
 #include <doctest/doctest.h>
 
-#include <helios/app/app.hpp>
+#include <helios/app/application.hpp>
+#include <helios/app/builtin/frame_count.hpp>
+#include <helios/app/schedules.hpp>
+#include <helios/ecs/resource/params.hpp>
 
 #include <cstddef>
-#include <utility>
 
+using namespace helios;
 using namespace helios::app;
 
 TEST_SUITE("helios::app::FrameCount") {
@@ -56,8 +59,7 @@ TEST_SUITE("helios::app::FrameCountPlugin") {
       struct ReadFrame {
         size_t* observed_frame = nullptr;
 
-        void operator()(
-            helios::ecs::Res<const FrameCount> frame_count) const noexcept {
+        void operator()(ecs::Res<const FrameCount> frame_count) const noexcept {
           *observed_frame = frame_count->count;
         }
       };

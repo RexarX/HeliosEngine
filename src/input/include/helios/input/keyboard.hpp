@@ -543,7 +543,7 @@ namespace std {
 
 template <>
 struct formatter<helios::input::Key> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -554,7 +554,7 @@ struct formatter<helios::input::Key> {
 
 template <>
 struct formatter<helios::input::Modifiers> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -566,7 +566,7 @@ struct formatter<helios::input::Modifiers> {
 
 template <>
 struct formatter<helios::input::ButtonState> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 

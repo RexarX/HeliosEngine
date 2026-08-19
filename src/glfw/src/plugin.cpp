@@ -5,7 +5,7 @@
 #include <helios/app/application.hpp>
 #include <helios/app/frame_order.hpp>
 #include <helios/app/schedules.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/glfw/details/glfw_state.hpp>
 #include <helios/glfw/systems/apply.hpp>
 #include <helios/glfw/systems/create.hpp>
@@ -47,8 +47,8 @@ void Plugin::Finish(app::App& app) {
   context.input_enabled = world.HasMessage<input::KeyboardInputMsg>();
   if (context.input_enabled) {
     app.TryInsertResources(GamepadCache{}, CursorCache{});
-    app.AddSystems(window::kEvents, PollGamepads{}, ApplyCursors{},
-                   ApplyRawMouseMotion{})
+    app.AddSystems(window::kEvents, ApplyGamepadMappings{}, PollGamepads{},
+                   ApplyGamepadOutputs{}, ApplyCursors{}, ApplyRawMouseMotion{})
         .Sequence()
         .After<PollEvents>()
         .Before<ApplyChanges>();

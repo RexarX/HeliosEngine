@@ -1,7 +1,7 @@
 #pragma once
 
 #include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/glfw/details/glfw_state.hpp>
 #include <helios/window/params.hpp>

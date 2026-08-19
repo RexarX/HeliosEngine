@@ -112,6 +112,7 @@ EXPAND_ONLY_PREDEF     = YES
 PREDEFINED             = HELIOS_API= \
                          HELIOS_FORCE_INLINE=inline \
                          HELIOS_NO_INLINE= \
+                         HELIOS_NO_UNIQUE_ADDRESS= \
 
 # STL support
 BUILTIN_STL_SUPPORT    = YES

@@ -7,10 +7,12 @@
 #include <algorithm>
 #include <concepts>
 #include <cstddef>
+#include <functional>
 #include <memory>
 #include <memory_resource>
 #include <type_traits>
 #include <utility>
+#include <vector>
 
 #ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
 #include <flat_map>
@@ -493,7 +495,7 @@ private:
   [[nodiscard]] constexpr Storage MakeStorage() const;
 
   MapType storage_;
-  [[no_unique_address]] allocator_type allocator_{};
+  HELIOS_NO_UNIQUE_ADDRESS allocator_type allocator_{};
 };
 
 template <typename Storage, typename Allocator>

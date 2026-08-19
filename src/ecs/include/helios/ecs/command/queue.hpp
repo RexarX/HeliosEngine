@@ -4,9 +4,12 @@
 #include <helios/ecs/command/command.hpp>
 #include <helios/ecs/details/profile.hpp>
 
+#include <concepts>
 #include <cstddef>
+#include <memory>
 #include <memory_resource>
 #include <ranges>
+#include <type_traits>
 
 namespace helios::ecs {
 

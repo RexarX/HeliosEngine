@@ -1,19 +1,19 @@
 #pragma once
 
-#include <helios/app/details/profile.hpp>
 #include <helios/app/dynamic_plugin.hpp>
 #include <helios/app/plugin.hpp>
 #include <helios/app/plugin_group.hpp>
 #include <helios/app/scheduler.hpp>
 #include <helios/app/schedules.hpp>
 #include <helios/app/sub_app.hpp>
+#include <helios/async/executor.hpp>
 #include <helios/compiler/compiler.hpp>
-#include <helios/ecs/command/command.hpp>
 #include <helios/ecs/message/message.hpp>
-#include <helios/ecs/message/reader.hpp>
 #include <helios/ecs/resource/resource.hpp>
-#include <helios/ecs/schedule/run_condition.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
+#include <helios/ecs/schedule/scheduler.hpp>
+#include <helios/ecs/schedule/system_handle.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/schedule/system_set.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/ecs/world.hpp>
@@ -29,13 +29,10 @@
 #include <memory>
 #include <mutex>
 #include <optional>
-#include <ranges>
+#include <string>
 #include <string_view>
-
-#if defined(HELIOS_APP_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-#include <format>
-#endif
+#include <type_traits>
+#include <utility>
 
 #ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
 #include <flat_map>
@@ -44,6 +41,8 @@
 #endif
 
 namespace helios::app {
+
+class FrameOrder;
 
 /// @brief Application exit codes.
 enum class ExitCode : uint8_t {
@@ -59,8 +58,7 @@ enum class ExitCode : uint8_t {
  */
 struct AppExit {
   static constexpr std::string_view kName = "helios::app::AppExit";
-  static constexpr ecs::MessageClearPolicy kClearPolicy =
-      ecs::MessageClearPolicy::kManual;
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kManual;
   static constexpr bool kAsync = false;
   static constexpr bool kConsumable = false;
 
@@ -404,12 +402,13 @@ public:
    */
   template <ecs::ScheduleTrait L, ecs::FunctorSystemTrait... Systems>
     requires(sizeof...(Systems) > 1)
-  ecs::SystemGroupHandle AddSystems(const L& label, Systems&&... systems);
+  ecs::SystemGroupHandle AddSystems(const L& label, Systems&&... systems) {
+    return main_sub_app_.AddSystems(label, std::forward<Systems>(systems)...);
+  }
 
   /**
    * @brief Gets or creates a system set in a main sub-app schedule.
    * @note Not thread-safe.
-   * @warning Triggers assertion if app is initialized or running.
    * @tparam L Schedule label type
    * @tparam S System set type
    * @param label Target schedule label
@@ -736,31 +735,8 @@ private:
   friend class Scheduler;
 };
 
-inline void App::Update() {
-  HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::Update");
-
-  HELIOS_ASSERT(is_initialized_, "App is not initialized!");
-  scheduler_.RunFrame(*this);
-
-  HELIOS_APP_PROFILE_FRAME();
-}
-
-inline void App::RunFrameOrder(const FrameOrder& order) {
-  HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::RunFrameOrder");
-
-  HELIOS_ASSERT(is_initialized_, "App is not initialized!");
-  scheduler_.RunFrameOrder(*this, order);
-}
-
-inline void App::NotifyPluginReadinessChanged() noexcept {
-  {
-    const std::scoped_lock lock(plugins_ready_mutex_);
-  }
-  plugins_ready_cv_.notify_all();
-}
-
-inline auto App::AddPlugin(this auto&& self, PluginTypeId id,
-                           std::unique_ptr<Plugin> plugin)
+auto App::AddPlugin(this auto&& self, PluginTypeId id,
+                    std::unique_ptr<Plugin> plugin)
     -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(),
                 "Cannot add plugin after app initialization!");
@@ -835,7 +811,7 @@ inline auto App::AddPluginGroups(this auto&& self, Ts&&... plugin_groups)
   return std::forward<decltype(self)>(self);
 }
 
-inline auto App::AddDynamicPlugin(this auto&& self, DynamicPlugin plugin)
+auto App::AddDynamicPlugin(this auto&& self, DynamicPlugin plugin)
     -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(),
                 "Cannot add dynamic plugin after app initialization!");
@@ -869,15 +845,6 @@ inline bool App::RemoveSubApp(const T& label) {
   return sub_apps_.erase(SubAppTypeIndex::From(label)) > 0;
 }
 
-inline auto App::AddSchedule(ecs::ScheduleTypeId id, ecs::Schedule&& schedule)
-    -> ecs::ScheduleOrdering {
-  HELIOS_ASSERT(!IsInitialized(),
-                "Cannot add schedule after app initialization!");
-  HELIOS_ASSERT(!IsRunning(), "Cannot add schedule while app is running!");
-
-  return main_sub_app_.AddSchedule(id, std::move(schedule));
-}
-
 template <ecs::ScheduleTrait T>
 inline auto App::AddSchedule(const T& label, ecs::Schedule&& schedule)
     -> ecs::ScheduleOrdering {
@@ -893,13 +860,6 @@ inline auto App::InitSchedule(this auto&& self, const T& label)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.main_sub_app_.InitSchedule(label);
   return std::forward<decltype(self)>(self);
-}
-
-template <ecs::ScheduleTrait L, ecs::FunctorSystemTrait... Systems>
-  requires(sizeof...(Systems) > 1)
-inline ecs::SystemGroupHandle App::AddSystems(const L& label,
-                                              Systems&&... systems) {
-  return main_sub_app_.AddSystems(label, std::forward<Systems>(systems)...);
 }
 
 template <ecs::ScheduleTrait L, typename F>
@@ -932,7 +892,7 @@ inline auto App::AddMessages(this auto&& self)
   return std::forward<decltype(self)>(self);
 }
 
-inline auto App::SetRunner(this auto&& self, RunnerFn runner) noexcept
+auto App::SetRunner(this auto&& self, RunnerFn runner) noexcept
     -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(),
                 "Cannot set runner after app initialization!");
@@ -983,22 +943,6 @@ inline void App::ApplySubAppLabelTraits(SubApp& sub_app, const T& label) {
   } else if constexpr (OverlappingUpdatesSubAppTrait<T>) {
     sub_app.SetAllowOverlappingUpdates(true);
     sub_app.SetMaxExtractionSkips(SubAppMaxOverlappingUpdates<T>());
-  }
-}
-
-inline void PluginGroup::Build(App& app) {
-  for (auto& storage : plugins_ | std::views::values) {
-    if (storage.disabled) [[unlikely]] {
-      continue;
-    }
-
-    HELIOS_ASSERT(storage.plugin != nullptr,
-                  "Enabled plugin storage has no plugin instance!");
-    if (storage.plugin == nullptr) [[unlikely]] {
-      continue;
-    }
-
-    app.AddPlugin(storage.id, std::move(storage.plugin));
   }
 }
 

@@ -40,7 +40,6 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
   - <a href="#building">Building</a>
   - <a href="#run-the-example">Run the Example</a>
 - <a href="#usage">Usage</a>
-- <a href="#architecture">Architecture</a>
 - <a href="#using-as-a-dependency">Using as a Dependency</a>
   - <a href="#method-1-add_subdirectory">add_subdirectory</a>
   - <a href="#method-2-fetchcontent">FetchContent</a>
@@ -58,7 +57,7 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 ## About The Project
 
-**Helios Engine** is a high-performance, ECS-based game engine framework written in C++23. It combines an archetype-based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.
+**Helios Engine** is a high-performance, ECS-based game engine framework written in C++23. It combines an configurable sparse-set/archetype based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.
 
 <a href="#readme-top">↑ Back to Top</a>
 
@@ -83,22 +82,25 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 ## Modules
 
-| Module      | Description                                              | Default | Documentation                     |
-| ----------- | -------------------------------------------------------- | ------- | --------------------------------- |
-| `core`      | Asserts, UUID, stack traces, CStringView, etc.           | ON      | [README](src/core/README.md)      |
-| `platform`  | Platform detection, `HELIOS_API`, debug break, etc.      | ON      | [README](src/platform/README.md)  |
-| `compiler`  | Branch hints, feature detection macros, etc.             | ON      | [README](src/compiler/README.md)  |
-| `utils`     | TypeId, timer, filesystem, adapters, etc.                | ON      | [README](src/utils/README.md)     |
-| `container` | SparseSet, MultiTypeMap, TypedBuffer, StaticString, etc. | ON      | [README](src/container/README.md) |
-| `memory`    | PMR allocators, `Rc`/`Arc`, etc.                         | ON      | [README](src/memory/README.md)    |
-| `log`       | spdlog-based typed logging                               | ON      | [README](src/log/README.md)       |
-| `async`     | Task graphs and work-stealing executor                   | ON      | [README](src/async/README.md)     |
-| `ecs`       | World, entities, components, schedules, etc.             | ON      | [README](src/ecs/README.md)       |
-| `app`       | Application framework, plugins, sub-apps, etc.           | ON      | [README](src/app/README.md)       |
-| `profile`   | Tracy / flamegraph profiling (opt-in), etc.              | ON      | [README](src/profile/README.md)   |
-| `window`    | Window ECS contract (no OS deps)                         | ON      | [README](src/window/README.md)    |
-| `glfw`      | GLFW backend for `window` (+ optional `input`)           | ON      | [README](src/glfw/README.md)      |
-| `input`     | Keyboard, mouse, cursor, gamepad ECS contract            | ON      | [README](src/input/README.md)     |
+| Module        | Description                                              | Default | Documentation                       |
+| ------------- | -------------------------------------------------------- | ------- | ----------------------------------- |
+| `core`        | Asserts, UUID, stack traces, CStringView, etc.           | ON      | [README](src/core/README.md)        |
+| `platform`    | Platform detection, `HELIOS_API`, debug break, etc.      | ON      | [README](src/platform/README.md)    |
+| `compiler`    | Branch hints, feature detection macros, etc.             | ON      | [README](src/compiler/README.md)    |
+| `utils`       | TypeId, timer, filesystem, adapters, etc.                | ON      | [README](src/utils/README.md)       |
+| `container`   | SparseSet, MultiTypeMap, TypedBuffer, StaticString, etc. | ON      | [README](src/container/README.md)   |
+| `memory`      | PMR allocators, `Rc`/`Arc`, etc.                         | ON      | [README](src/memory/README.md)      |
+| `log`         | spdlog-based typed logging                               | ON      | [README](src/log/README.md)         |
+| `async`       | Task graphs and work-stealing executor                   | ON      | [README](src/async/README.md)       |
+| `ecs`         | World, entities, components, schedules, etc.             | ON      | [README](src/ecs/README.md)         |
+| `app`         | Application framework, plugins, sub-apps, etc.           | ON      | [README](src/app/README.md)         |
+| `profile`     | Tracy / flamegraph profiling (opt-in), etc.              | ON      | [README](src/profile/README.md)     |
+| `window`      | Window ECS contract (no OS deps)                         | ON      | [README](src/window/README.md)      |
+| `sdl3`        | SDL3 process runtime (init, event pump, window map)      | ON      | [README](src/sdl3/README.md)        |
+| `sdl3_window` | Default SDL3 window backend                              | ON      | [README](src/sdl3_window/README.md) |
+| `sdl3_input`  | Default SDL3 input backend                               | ON      | [README](src/sdl3_input/README.md)  |
+| `glfw`        | Optional GLFW backend for `window` (+ optional `input`)  | OFF     | [README](src/glfw/README.md)        |
+| `input`       | Keyboard, mouse, cursor, gamepad ECS contract            | ON      | [README](src/input/README.md)       |
 
 ```bash
 cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW=OFF
@@ -135,7 +137,7 @@ cd HeliosEngine
 
 Helios resolves dependencies per module: **system packages are tried first**, then **CPM download** if missing (`HELIOS_DOWNLOAD_PACKAGES=ON`, default). Pre-installing system packages speeds up configuration and avoids network fetches.
 
-Some packages could require additional system packages, most notably when building on Linux make sure to install the X11/Wayland development packages to properly build `glfw3` (`libwayland-dev`, `libx11-dev`, etc.)
+Some packages could require additional system packages, most notably when building on Linux make sure to install the X11/Wayland development packages to properly build `glfw` and `sdl3` (`libwayland-dev`, `libx11-dev`, etc.)
 
 Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/dependencies/).
 
@@ -158,7 +160,7 @@ sudo apt-get install -y ninja-build libboost-all-dev libtbb-dev
 Additinal tools:
 
 ```bash
-sudo apt-get install -y clang-format doxygen
+sudo apt-get install -y clang-format clang-tidy doxygen
 ```
 
 Wayland/X11:
@@ -227,9 +229,9 @@ brew install clang-format doxygen
 No system packages required for a minimal build — MSVC + Ninja (via Visual Studio) is sufficient; missing libraries are fetched by CPM.
 
 ```bat
-# Optional: LLVM clang-format for local formatting
+# Optional: LLVM clang-format for local formatting and clang-tidy for linting
 choco install llvm
-# Or use clang-format bundled with Visual Studio 2022
+# Or use clang-format and clang-tidy bundled with Visual Studio 2022
 ```
 
 ### Building
@@ -403,39 +405,6 @@ By default, `MainStartup` and `Shutdown` use the main-thread schedule executor; 
 
 ---
 
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│  App                                                    │
-│  ├─ async::Executor        (work-stealing thread pool)  │
-│  ├─ Scheduler              (frame stages)               │
-│  ├─ SubApp (main)          (ecs::World + schedules)     │
-│  ├─ SubApp...              (optional parallel worlds)   │
-│  └─ Plugins                (static + dynamic)           │
-└─────────────────────────────────────────────────────────┘
-         │ schedules                │ task graphs
-         ▼                          ▼
-┌─────────────────┐        ┌─────────────────┐
-│  ecs::Schedule  │        │ async::Executor │
-│  systems + DAG  │        │ TaskGraph       │
-└─────────────────┘        └─────────────────┘
-         │
-         ▼
-┌─────────────────────────────────────────────────────────┐
-│ ecs::World                                              │
-│ entities · components · resources · messages · commands │
-└─────────────────────────────────────────────────────────┘
-```
-
-- **Entities** — 64-bit ID (32-bit index + 32-bit generation), free-list recycling
-- **Components** — archetype columns or per-type sparse sets; structural changes via deferred `Commands`
-- **Messages** — double-buffered (read previous frame); async messages use lock-free queues
-
-<a href="#readme-top">↑ Back to Top</a>
-
----
-
 ## Using as a Dependency
 
 Helios can be consumed from another CMake project in several ways. All methods expose targets as `helios::module::<name>` and the helper `helios_link_modules()`.
@@ -447,6 +416,7 @@ set(HELIOS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 # Optional overrides (safer defaults already apply when embedded):
 # set(HELIOS_ENABLE_LTO OFF CACHE BOOL "" FORCE)
+# set(HELIOS_ENABLE_LTO_RELWITHDEBINFO OFF CACHE BOOL "" FORCE)
 # set(HELIOS_MANAGE_TOOLCHAIN OFF CACHE BOOL "" FORCE)
 # set(HELIOS_LINKER DEFAULT CACHE STRING "" FORCE)
 ```

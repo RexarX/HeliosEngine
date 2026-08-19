@@ -4,7 +4,7 @@
 
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/glfw/details/glfw_state.hpp>
 #include <helios/glfw/details/glfw_sync.hpp>
@@ -90,11 +90,6 @@ void CreateNativeWindows::operator()(
         glfwGetWindowAttrib(glfw_window, GLFW_FOCUSED) == GLFW_TRUE;
     window.properties.hovered =
         glfwGetWindowAttrib(glfw_window, GLFW_HOVERED) == GLFW_TRUE;
-    context->world->AddComponents(
-        entity, window::NativeHandleComponent{
-                    .handle = QueryNativeHandle(*glfw_window)});
-    native->Insert(entity, std::move(entry));
-
     window.ClearDirty();
 
     writers.content_scale.Write({
@@ -103,6 +98,13 @@ void CreateNativeWindows::operator()(
         .scale_y = window.properties.content_scale_y,
     });
     writers.created.Write({.entity = entity, .properties = window.properties});
+
+    // NativeHandleComponent is archetype-stored; adding it migrates the
+    // entity and invalidates `window`.
+    context->world->AddComponents(
+        entity, window::NativeHandleComponent{
+                    .handle = QueryNativeHandle(*glfw_window)});
+    native->Insert(entity, std::move(entry));
   }
 }
 

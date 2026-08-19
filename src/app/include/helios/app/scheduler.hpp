@@ -1,21 +1,28 @@
 #pragma once
 
 #include <helios/app/schedules.hpp>
-#include <helios/app/sub_app.hpp>
-#include <helios/async/executor.hpp>
 #include <helios/async/future.hpp>
 #include <helios/async/task_graph.hpp>
 
 #include <atomic>
 #include <cstddef>
+#include <cstdint>
 #include <functional>
 #include <future>
 #include <optional>
 #include <vector>
 
+namespace helios::async {
+
+class Executor;
+
+}
+
 namespace helios::app {
 
 class App;
+class SubApp;
+class FrameOrder;
 
 /**
  * @brief Orchestrates the main sub-app schedule loop and sub-app updates.
@@ -139,35 +146,5 @@ private:
   std::vector<std::future<void>> overlapping_update_futures_;
   std::atomic<size_t> async_loops_running_{0};
 };
-
-inline Scheduler::Scheduler(Scheduler&& other) noexcept
-    : startup_graph_(std::move(other.startup_graph_)),
-      blocking_update_graph_(std::move(other.blocking_update_graph_)),
-      shutdown_graph_(std::move(other.shutdown_graph_)),
-      sub_app_states_(std::move(other.sub_app_states_)),
-      blocking_update_future_(std::move(other.blocking_update_future_)),
-      async_loop_futures_(std::move(other.async_loop_futures_)),
-      overlapping_update_futures_(std::move(other.overlapping_update_futures_)),
-      async_loops_running_(
-          other.async_loops_running_.exchange(0, std::memory_order_relaxed)) {}
-
-inline Scheduler& Scheduler::operator=(Scheduler&& other) noexcept {
-  if (this == &other) [[unlikely]] {
-    return *this;
-  }
-
-  startup_graph_ = std::move(other.startup_graph_);
-  blocking_update_graph_ = std::move(other.blocking_update_graph_);
-  shutdown_graph_ = std::move(other.shutdown_graph_);
-  sub_app_states_ = std::move(other.sub_app_states_);
-  blocking_update_future_ = std::move(other.blocking_update_future_);
-  async_loop_futures_ = std::move(other.async_loop_futures_);
-  overlapping_update_futures_ = std::move(other.overlapping_update_futures_);
-  async_loops_running_.store(
-      other.async_loops_running_.exchange(0, std::memory_order_relaxed),
-      std::memory_order_release);
-
-  return *this;
-}
 
 }  // namespace helios::app

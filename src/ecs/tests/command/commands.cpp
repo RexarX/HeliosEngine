@@ -3,6 +3,8 @@
 #include <helios/ecs/command/commands.hpp>
 #include <helios/ecs/command/queue.hpp>
 #include <helios/ecs/component/bundle.hpp>
+#include <helios/ecs/system/access_policy.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
 #include <helios/memory/arena_allocator.hpp>
 
@@ -39,6 +41,14 @@ struct SimpleCommand {
       ++(*counter);
     }
   }
+};
+
+template <typename T>
+concept HasSystemParamTraits = requires { typename SystemParamTraits<T>; };
+
+template <typename T>
+concept HasRegisterAccess = requires(AccessPolicyBuilder& builder) {
+  SystemParamTraits<T>::RegisterAccess(builder);
 };
 
 }  // namespace
@@ -280,6 +290,24 @@ TEST_SUITE("helios::ecs::Commands") {
       queue.ExecuteAll(world);
 
       CHECK_EQ(counter, 2);
+    }
+  }
+}
+
+TEST_SUITE("helios::ecs::SystemParamTraits") {
+  TEST_CASE("helios::ecs::SystemParamTraits: Commands") {
+    SUBCASE("Commands exists as a system parameter trait") {
+      CHECK(HasSystemParamTraits<Commands>);
+      CHECK(HasRegisterAccess<Commands>);
+    }
+
+    SUBCASE("Commands RegisterAccess leaves policy empty") {
+      AccessPolicyBuilder builder;
+      SystemParamTraits<Commands>::RegisterAccess(builder);
+
+      const auto policy = builder.Build();
+      CHECK_FALSE(policy.HasComponents());
+      CHECK_FALSE(policy.HasResources());
     }
   }
 }

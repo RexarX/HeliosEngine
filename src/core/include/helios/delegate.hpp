@@ -5,6 +5,7 @@
 #include <concepts>
 #include <cstddef>
 #include <functional>
+#include <memory>
 #include <tuple>
 #include <type_traits>
 #include <utility>
@@ -48,24 +49,116 @@ struct MemberFunctionTraits<R (C::*)(Args...) const> {
   using Arguments = std::tuple<Args...>;
 };
 
+/// @brief Extracts ReturnType/Arguments from a pointer-to-member-function
+/// type (used to unwrap `&Callable::operator()`).
+template <typename MemberFnPtr>
+struct MemberFnPtrTraits;
+
+template <typename C, typename R, typename... Args>
+struct MemberFnPtrTraits<R (C::*)(Args...)> {
+  using ReturnType = R;
+  using Arguments = std::tuple<Args...>;
+};
+
+template <typename C, typename R, typename... Args>
+struct MemberFnPtrTraits<R (C::*)(Args...) const> {
+  using ReturnType = R;
+  using Arguments = std::tuple<Args...>;
+};
+
+template <typename C, typename R, typename... Args>
+struct MemberFnPtrTraits<R (C::*)(Args...) noexcept> {
+  using ReturnType = R;
+  using Arguments = std::tuple<Args...>;
+};
+
+template <typename C, typename R, typename... Args>
+struct MemberFnPtrTraits<R (C::*)(Args...) const noexcept> {
+  using ReturnType = R;
+  using Arguments = std::tuple<Args...>;
+};
+
+/// @brief True iff `&T::operator()` is well-formed — a single, non-overloaded,
+/// non-template call operator.
+template <typename T>
+concept HasUnambiguousCallOperator = requires { &T::operator(); };
+
+/**
+ * @brief Traits for callables with a single `operator()` (lambdas, functors).
+ * @details Overloaded or templated `operator()` yields no members so this can
+ * be probed from a `requires` clause. Bind those callables with an explicit
+ * `MakeDelegate<Signature>(callable)` instead.
+ */
+template <typename Callable>
+struct CallableTraits {};
+
+template <typename Callable>
+  requires HasUnambiguousCallOperator<Callable>
+struct CallableTraits<Callable>
+    : MemberFnPtrTraits<decltype(&Callable::operator())> {};
+
+/**
+ * @brief True iff `T` decays to a function pointer via unary plus (`+t`).
+ * @details Signature-agnostic: a capture-less lambda still qualifies when its
+ * parameter or return types need an implicit conversion to match a Delegate
+ * signature, rather than matching exactly.
+ */
+template <typename T>
+concept DecaysToFunctionPointer = requires(T& callable) { +callable; };
+
+/// @brief Empty, default-constructible class type (capture-less closures,
+/// empty functors). Safe to reconstruct inside the thunk with no stored
+/// pointer, so rvalue temporaries cannot dangle.
+template <typename T>
+concept EmptyDefaultCallable = std::is_class_v<T> && std::is_empty_v<T> &&
+                               std::is_default_constructible_v<T>;
+
+/// @brief Callable that can be bound from an rvalue without storing its
+/// address.
+template <typename T>
+concept SafeTemporaryCallable =
+    DecaysToFunctionPointer<T> || EmptyDefaultCallable<T>;
+
+/// @brief Prepends `R` to an argument tuple for `TupleToFunctionSignature`.
+template <typename R, typename ArgsTuple>
+struct PrependReturnType;
+
+template <typename R, typename... Args>
+struct PrependReturnType<R, std::tuple<Args...>> {
+  using Type = std::tuple<R, Args...>;
+};
+
 }  // namespace details
 
 /**
- * @brief Type-erased callable wrapper for free and member functions.
- * @details Delegate is a lightweight, non-owning wrapper for:
+ * @brief Type-erased, non-owning callable wrapper.
+ * @details Delegate is a lightweight wrapper for:
  * - Free functions
  * - Member functions (including const and virtual)
+ * - Capture-less lambdas and empty functors
+ * - Stateful lambdas and functors (bound by address)
  *
  * It does not allocate and stores only:
- * - A raw instance pointer (for member functions, may be null for free
- * functions)
+ * - A raw instance pointer (may be null, or a decayed function pointer)
  * - A function pointer to a small thunk that performs the actual call
+ *
+ * Implicit converting constructors enable `std::function_ref`-style
+ * parameters: a `Delegate<R(Args...)>` function argument can be passed a
+ * matching callable directly.
  *
  * The delegate is intentionally minimal and exception-free.
  * It returns default-constructed values when empty (for non-void return types)
  * and is a no-op for void return types.
  *
  * @tparam FunctionSignature Function type in the form `R(Args...)`
+ * @code
+ * void take(Delegate<int(int)> cb);
+ * take([](int x) { return x * 2; });
+ *
+ * int n = 3;
+ * auto add = [n](int x) { return x + n; };
+ * take(add);  // named capturing lambda: caller keeps it alive
+ * @endcode
  */
 template <typename FunctionSignature>
 class Delegate;
@@ -77,12 +170,106 @@ public:
 
   /// @brief Default constructs an empty delegate.
   constexpr Delegate() noexcept = default;
+
+  /**
+   * @brief Construct from a capture-less lambda, empty functor, or function
+   * pointer.
+   * @details Enabled when `Callable` is invocable with this signature and is
+   * either empty and default-constructible or decays to a function pointer.
+   * No pointer to the original object is stored, so temporaries are safe.
+   * Argument and return conversions (including polymorphic ones) follow
+   * ordinary call semantics.
+   * @tparam Callable Stateless or empty callable type
+   * @param callable Callable to bind
+   */
+  template <typename Callable>
+    requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
+             details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             std::is_invocable_r_v<ReturnType, std::remove_cvref_t<Callable>&,
+                                   Args...>)
+  constexpr Delegate(Callable&& callable) noexcept {
+    BindSafeTemporary(std::forward<Callable>(callable));
+  }
+
+  /**
+   * @brief Construct from a named stateful callable (capturing lambda or
+   * functor).
+   * @details Stores a pointer to `callable` without taking ownership.
+   * @warning `callable` must outlive this delegate.
+   * @tparam Callable Stateful callable type
+   * @param callable Lvalue callable to bind
+   */
+  template <typename Callable>
+    requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
+             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             std::is_invocable_r_v<
+                 ReturnType, std::remove_reference_t<Callable>&, Args...> &&
+             std::is_lvalue_reference_v<Callable>)
+  constexpr Delegate(Callable&& callable) noexcept {
+    BindStateful(std::forward<Callable>(callable));
+  }
+
+  /**
+   * @brief Deleted: a stateful rvalue would leave a dangling pointer.
+   * @details Name the callable (or pass a capture-less / empty one) instead.
+   */
+  template <typename Callable>
+    requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
+             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             std::is_invocable_r_v<
+                 ReturnType, std::remove_reference_t<Callable>&, Args...> &&
+             !std::is_lvalue_reference_v<Callable>)
+  constexpr Delegate(Callable&&) noexcept = delete;
+
   constexpr Delegate(const Delegate&) noexcept = default;
   constexpr Delegate(Delegate&&) noexcept = default;
   constexpr ~Delegate() noexcept = default;
 
   constexpr Delegate& operator=(const Delegate&) noexcept = default;
   constexpr Delegate& operator=(Delegate&&) noexcept = default;
+
+  /**
+   * @brief Assign a capture-less lambda, empty functor, or function pointer.
+   * @tparam Callable Stateless or empty callable type
+   * @param callable Callable to bind
+   * @return Reference to this delegate
+   */
+  template <typename Callable>
+    requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
+             details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             std::is_invocable_r_v<ReturnType, std::remove_cvref_t<Callable>&,
+                                   Args...>)
+  constexpr Delegate& operator=(Callable&& callable) noexcept {
+    BindSafeTemporary(std::forward<Callable>(callable));
+    return *this;
+  }
+
+  /**
+   * @brief Assign a named stateful callable.
+   * @warning `callable` must outlive this delegate.
+   * @tparam Callable Stateful callable type
+   * @param callable Lvalue callable to bind
+   * @return Reference to this delegate
+   */
+  template <typename Callable>
+    requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
+             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             std::is_invocable_r_v<ReturnType, Callable&, Args...>)
+  constexpr Delegate& operator=(Callable& callable) noexcept {
+    BindStateful(callable);
+    return *this;
+  }
+
+  /**
+   * @brief Deleted: assigning a stateful rvalue would dangle immediately.
+   */
+  template <typename Callable>
+    requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
+             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             std::is_invocable_r_v<
+                 ReturnType, std::remove_reference_t<Callable>&, Args...> &&
+             !std::is_lvalue_reference_v<Callable>)
+  constexpr Delegate& operator=(Callable&&) noexcept = delete;
 
   /**
    * @brief Create delegate from a free function pointer.
@@ -258,8 +445,10 @@ public:
 
   /**
    * @brief Get raw instance pointer stored inside delegate.
-   * @details For free functions this will be nullptr.
-   * For member functions this points to the bound object instance.
+   * @details For `From` free functions and reconstructed empty callables this
+   * is nullptr. For member functions and stateful callables this points to the
+   * bound object. For function pointers bound via unary-plus decay, this holds
+   * the function pointer value.
    * @return Raw instance pointer
    */
   [[nodiscard]] constexpr void* InstancePtr() const noexcept {
@@ -267,60 +456,21 @@ public:
   }
 
 private:
+  template <typename NativeFnPtr>
+  constexpr void BindStateless(NativeFnPtr fn_ptr) noexcept;
+
+  template <typename Callable>
+  constexpr void BindEmpty() noexcept;
+
+  template <typename Callable>
+  constexpr void BindStateful(Callable&& callable) noexcept;
+
+  template <typename Callable>
+  constexpr void BindSafeTemporary(Callable&& callable) noexcept;
+
   void* instance_ptr_ = nullptr;
   FunctionType function_ptr_ = nullptr;
 };
-
-template <typename ReturnType, typename... Args>
-constexpr void Delegate<ReturnType(Args...)>::Reset() noexcept {
-  instance_ptr_ = nullptr;
-  function_ptr_ = nullptr;
-}
-
-template <typename ReturnType, typename... Args>
-constexpr auto Delegate<ReturnType(Args...)>::Invoke(Args&&... args) const
-    noexcept(std::is_nothrow_invocable_v<FunctionType, void*, Args&&...>)
-        -> ReturnType {
-  if (function_ptr_ == nullptr) [[unlikely]] {
-    if constexpr (std::is_void_v<ReturnType>) {
-      return;
-    } else {
-      return {};
-    }
-  }
-
-  if constexpr (std::is_void_v<ReturnType>) {
-    std::invoke(function_ptr_, instance_ptr_, std::forward<Args>(args)...);
-    return;
-  } else {
-    return std::invoke(function_ptr_, instance_ptr_,
-                       std::forward<Args>(args)...);
-  }
-}
-
-template <typename ReturnType, typename... Args>
-template <typename... UArgs>
-  requires(sizeof...(UArgs) == sizeof...(Args)) &&
-          (... && utils::PolymorphicConvertible<UArgs, Args>)
-constexpr auto Delegate<ReturnType(Args...)>::Invoke(UArgs&&... args) const
-    noexcept(std::is_nothrow_invocable_v<FunctionType, void*, UArgs...>)
-        -> ReturnType {
-  if (function_ptr_ == nullptr) [[unlikely]] {
-    if constexpr (std::is_void_v<ReturnType>) {
-      return;
-    } else {
-      return {};
-    }
-  }
-
-  if constexpr (std::is_void_v<ReturnType>) {
-    std::invoke(function_ptr_, instance_ptr_, std::forward<UArgs>(args)...);
-    return;
-  } else {
-    return std::invoke(function_ptr_, instance_ptr_,
-                       std::forward<UArgs>(args)...);
-  }
-}
 
 template <typename ReturnType, typename... Args>
 template <auto Func>
@@ -493,6 +643,127 @@ constexpr auto Delegate<ReturnType(Args...)>::From(
   return delegate;
 }
 
+template <typename ReturnType, typename... Args>
+constexpr void Delegate<ReturnType(Args...)>::Reset() noexcept {
+  instance_ptr_ = nullptr;
+  function_ptr_ = nullptr;
+}
+
+template <typename ReturnType, typename... Args>
+constexpr auto Delegate<ReturnType(Args...)>::Invoke(Args&&... args) const
+    noexcept(std::is_nothrow_invocable_v<FunctionType, void*, Args&&...>)
+        -> ReturnType {
+  if (function_ptr_ == nullptr) [[unlikely]] {
+    if constexpr (std::is_void_v<ReturnType>) {
+      return;
+    } else {
+      return {};
+    }
+  }
+
+  if constexpr (std::is_void_v<ReturnType>) {
+    std::invoke(function_ptr_, instance_ptr_, std::forward<Args>(args)...);
+    return;
+  } else {
+    return std::invoke(function_ptr_, instance_ptr_,
+                       std::forward<Args>(args)...);
+  }
+}
+
+template <typename ReturnType, typename... Args>
+template <typename... UArgs>
+  requires(sizeof...(UArgs) == sizeof...(Args)) &&
+          (... && utils::PolymorphicConvertible<UArgs, Args>)
+constexpr auto Delegate<ReturnType(Args...)>::Invoke(UArgs&&... args) const
+    noexcept(std::is_nothrow_invocable_v<FunctionType, void*, UArgs...>)
+        -> ReturnType {
+  if (function_ptr_ == nullptr) [[unlikely]] {
+    if constexpr (std::is_void_v<ReturnType>) {
+      return;
+    } else {
+      return {};
+    }
+  }
+
+  if constexpr (std::is_void_v<ReturnType>) {
+    std::invoke(function_ptr_, instance_ptr_, std::forward<UArgs>(args)...);
+    return;
+  } else {
+    return std::invoke(function_ptr_, instance_ptr_,
+                       std::forward<UArgs>(args)...);
+  }
+}
+
+template <typename ReturnType, typename... Args>
+template <typename NativeFnPtr>
+constexpr void Delegate<ReturnType(Args...)>::BindStateless(
+    NativeFnPtr fn_ptr) noexcept {
+  instance_ptr_ = static_cast<void*>(fn_ptr);
+  function_ptr_ =
+      [](void* instance_ptr, Args... call_args) noexcept(
+          std::is_nothrow_invocable_v<NativeFnPtr, Args...>) -> ReturnType {
+    auto fn = static_cast<NativeFnPtr>(instance_ptr);
+    if constexpr (std::is_void_v<ReturnType>) {
+      fn(call_args...);
+      return;
+    } else {
+      return fn(call_args...);
+    }
+  };
+}
+
+template <typename ReturnType, typename... Args>
+template <typename Callable>
+constexpr void Delegate<ReturnType(Args...)>::BindEmpty() noexcept {
+  using StoredType = std::remove_cvref_t<Callable>;
+  instance_ptr_ = nullptr;
+  function_ptr_ =
+      [](void* /*instance_ptr*/, Args... call_args) noexcept(
+          std::is_nothrow_invocable_r_v<ReturnType, StoredType, Args...>)
+      -> ReturnType {
+    StoredType callable{};
+    if constexpr (std::is_void_v<ReturnType>) {
+      std::invoke(callable, call_args...);
+      return;
+    } else {
+      return std::invoke(callable, call_args...);
+    }
+  };
+}
+
+template <typename ReturnType, typename... Args>
+template <typename Callable>
+constexpr void Delegate<ReturnType(Args...)>::BindStateful(
+    Callable&& callable) noexcept {
+  using StoredType = std::remove_reference_t<Callable>;
+  instance_ptr_ =
+      const_cast<void*>(static_cast<const void*>(std::addressof(callable)));
+  function_ptr_ =
+      [](void* instance_ptr, Args... call_args) noexcept(
+          std::is_nothrow_invocable_r_v<ReturnType, StoredType&, Args...>)
+      -> ReturnType {
+    auto* typed_callable = static_cast<StoredType*>(instance_ptr);
+    if constexpr (std::is_void_v<ReturnType>) {
+      std::invoke(*typed_callable, call_args...);
+      return;
+    } else {
+      return std::invoke(*typed_callable, call_args...);
+    }
+  };
+}
+
+template <typename ReturnType, typename... Args>
+template <typename Callable>
+constexpr void Delegate<ReturnType(Args...)>::BindSafeTemporary(
+    Callable&& callable) noexcept {
+  using T = std::remove_cvref_t<Callable>;
+  if constexpr (details::EmptyDefaultCallable<T>) {
+    BindEmpty<T>();
+  } else {
+    BindStateless(+callable);
+  }
+}
+
 /**
  * @brief Helper to create delegate from free function pointer.
  * @tparam Func Free function pointer.
@@ -530,6 +801,43 @@ constexpr auto MakeDelegate(
     return Delegate<ReturnType(
         std::tuple_element_t<I, Args>...)>::template From<Func>(inst);
   }(std::make_index_sequence<std::tuple_size_v<Args>>{}, instance);
+}
+
+/**
+ * @brief Create a delegate from a callable, deducing the signature from
+ * `operator()`.
+ * @details Stateless and empty callables may be temporaries. Stateful
+ * callables must be lvalues; see `Delegate`'s constructors.
+ * @note Unavailable when `operator()` is overloaded or templated — use
+ * `MakeDelegate<Signature>(callable)` instead.
+ * @tparam Callable Callable type (deduced)
+ * @param callable Callable to bind
+ * @return Delegate bound to the given callable
+ */
+template <typename Callable>
+  requires details::HasUnambiguousCallOperator<std::remove_cvref_t<Callable>>
+constexpr auto MakeDelegate(Callable&& callable) noexcept {
+  using Traits = details::CallableTraits<std::remove_cvref_t<Callable>>;
+  using ReturnType = typename Traits::ReturnType;
+  using Arguments = typename Traits::Arguments;
+  using Signature = typename details::TupleToFunctionSignature<
+      typename details::PrependReturnType<ReturnType, Arguments>::Type>::Type;
+
+  return Delegate<Signature>(std::forward<Callable>(callable));
+}
+
+/**
+ * @brief Create a delegate from a callable with an explicit signature.
+ * @details Use when `operator()` is overloaded or generic so no single
+ * signature can be deduced.
+ * @tparam Signature Function type in the form `R(Args...)`
+ * @tparam Callable Callable type (deduced)
+ * @param callable Callable to bind
+ * @return Delegate bound to the given callable
+ */
+template <typename Signature, typename Callable>
+constexpr auto MakeDelegate(Callable&& callable) noexcept {
+  return Delegate<Signature>(std::forward<Callable>(callable));
 }
 
 }  // namespace helios

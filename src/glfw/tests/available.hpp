@@ -20,9 +20,9 @@ namespace helios::glfw::test {
 }
 
 struct ScopedGlfwShutdown {
-  helios::app::App& app;
+  app::App& app;
 
-  ~ScopedGlfwShutdown() { helios::glfw::Plugin{}.Destroy(app); }
+  ~ScopedGlfwShutdown() { Plugin{}.Destroy(app); }
 };
 
 }  // namespace helios::glfw::test

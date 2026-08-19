@@ -1,10 +1,12 @@
 #include <doctest/doctest.h>
 
-#include <helios/app/app.hpp>
+#include <helios/app/application.hpp>
+#include <helios/app/frame_order.hpp>
+#include <helios/app/runners.hpp>
 #include <helios/app/scheduler.hpp>
 #include <helios/app/schedules.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/message/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 
 #include <array>

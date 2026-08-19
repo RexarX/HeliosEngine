@@ -1,13 +1,16 @@
 #pragma once
 
 #include <helios/ecs/schedule/run_condition.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/schedule/system_set.hpp>
+#include <helios/ecs/system/access_policy.hpp>
 #include <helios/ecs/system/system.hpp>
 
 #include <compare>
 #include <cstddef>
 #include <functional>
 #include <string>
+#include <type_traits>
 
 namespace helios::ecs {
 
@@ -112,12 +115,14 @@ public:
    * @brief Adds an ordering constraint: this system must run before all members
    * of the given set type.
    * @tparam T Set type satisfying `SystemSetTrait`
+   * @param set Optional set instance
    * @return Reference to this handle for chaining
    */
   template <SystemSetTrait T>
-  constexpr auto BeforeSet(this auto&& self)
+  constexpr auto BeforeSet(this auto&& self, const T& /*set*/ = {})
       -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).Before(SystemSetId::From<T>());
+    return std::forward<decltype(self)>(self).Before(
+        SystemSetId::From<std::remove_cvref_t<T>>());
   }
 
   /**
@@ -165,12 +170,14 @@ public:
    * @brief Adds an ordering constraint: this system must run after all members
    * of the given set type.
    * @tparam T Set type satisfying `SystemSetTrait`
+   * @param set Optional set instance
    * @return Reference to this handle for chaining
    */
   template <SystemSetTrait T>
-  constexpr auto AfterSet(this auto&& self)
+  constexpr auto AfterSet(this auto&& self, const T& /*set*/ = {})
       -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).After(SystemSetId::From<T>());
+    return std::forward<decltype(self)>(self).After(
+        SystemSetId::From<std::remove_cvref_t<T>>());
   }
 
   /**
@@ -242,12 +249,14 @@ public:
   /**
    * @brief Assigns this system to a labeled set by type.
    * @tparam T Set type satisfying `SystemSetTrait`
+   * @param set Optional set instance
    * @return Reference to this handle for chaining
    */
   template <SystemSetTrait T>
   constexpr auto InSet(this auto&& self, const T& /*set*/ = {})
       -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).InSet(SystemSetId::From<T>());
+    return std::forward<decltype(self)>(self).InSet(
+        SystemSetId::From<std::remove_cvref_t<T>>());
   }
 
   /**

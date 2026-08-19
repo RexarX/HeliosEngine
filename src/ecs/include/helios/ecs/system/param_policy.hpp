@@ -1,11 +1,10 @@
 #pragma once
 
 #include <helios/ecs/system/access_decl.hpp>
-#include <helios/ecs/system/param_traits.hpp>
+#include <helios/ecs/system/access_policy.hpp>
 #include <helios/ecs/system/system.hpp>
 
 #include <tuple>
-#include <type_traits>
 
 namespace helios::ecs {
 

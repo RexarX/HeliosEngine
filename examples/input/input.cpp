@@ -1,8 +1,9 @@
 #include <helios/app/app.hpp>
 #include <helios/ecs/ecs.hpp>
-#include <helios/glfw/glfw.hpp>
 #include <helios/input/input.hpp>
 #include <helios/log/log.hpp>
+#include <helios/sdl3/input/input.hpp>
+#include <helios/sdl3/window/window.hpp>
 #include <helios/window/window.hpp>
 
 #include <helios/profile/backends/tracy.hpp>
@@ -16,7 +17,7 @@ namespace hecs = helios::ecs;
 namespace hlog = helios::log;
 namespace hwindow = helios::window;
 namespace hinput = helios::input;
-namespace hglfw = helios::glfw;
+namespace hsdl3 = helios::sdl3;
 
 namespace {
 
@@ -43,46 +44,94 @@ struct ChangeCursor {
   }
 };
 
-struct LogInput {
-  void operator()(hinput::KeyboardMessages keyboard_messages,
-                  hinput::MouseMessages mouse_messages,
-                  hinput::GamepadMessages gamepad_messages) const {
+struct LogKeyboardInput {
+  void operator()(hinput::KeyboardMessages keyboard_messages) const {
     for (const auto msg : keyboard_messages.keys) {
-      hlog::Info("{} | {} | {}", msg->key, msg->state, msg->modifiers);
+      hlog::Info("{}", *msg);
     }
+  };
+};
 
+struct LogMouseInput {
+  void operator()(hinput::MouseMessages mouse_messages) const {
     for (const auto msg : mouse_messages.buttons) {
-      hlog::Info("{} | {} | {}", msg->button, msg->state, msg->modifiers);
+      hlog::Info("{}", *msg);
     }
 
     for (const auto msg : mouse_messages.cursor) {
-      hlog::Info("Mouse moved: x={}, y={}", msg->x, msg->y);
+      hlog::Info("{}", *msg);
     }
 
     for (const auto msg : mouse_messages.motion) {
-      hlog::Info("Mouse motion (delta): x={}, y={}", msg->delta_x,
-                 msg->delta_y);
+      hlog::Info("{}", *msg);
     }
 
     for (const auto msg : mouse_messages.wheel) {
-      hlog::Info("Mouse wheel: x={}, y={}", msg->x, msg->y);
+      hlog::Info("{}", *msg);
     }
 
     for (const auto msg : mouse_messages.wheel) {
-      hlog::Info("Mouse wheel: x={}, y={}", msg->x, msg->y);
+      hlog::Info("{}", *msg);
     }
+  }
+};
 
+struct LogGamepadInput {
+  void operator()(hinput::GamepadMessages gamepad_messages) const {
     for (const auto msg : gamepad_messages.buttons) {
-      hlog::Info("Gamepad: {} | {} | {}", msg->id, msg->button, msg->state);
+      hlog::Info("{}", *msg);
     }
 
     for (const auto msg : gamepad_messages.axes) {
-      hlog::Info("Gamepad: {} | {} | {}", msg->id, msg->axis, msg->value);
+      hlog::Info("{}", *msg);
     }
 
     for (const auto msg : gamepad_messages.connection) {
-      hlog::Info("Gamepad: {} | {} | connected={}", msg->id, msg->name,
-                 msg->connected);
+      hlog::Info("{}", *msg);
+    }
+  }
+};
+
+struct LogJoystickInput {
+  void operator()(hinput::JoystickMessages joystick_messages) const {
+    for (const auto msg : joystick_messages.connection) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : joystick_messages.buttons) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : joystick_messages.axes) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : joystick_messages.hats) {
+      hlog::Info("{}", *msg);
+    }
+  }
+};
+
+struct LogPenInput {
+  void operator()(hinput::PenMessages pen_messages) const {
+    for (const auto msg : pen_messages.proximity) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : pen_messages.touch) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : pen_messages.buttons) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : pen_messages.moved) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : pen_messages.axes) {
+      hlog::Info("{}", *msg);
     }
   }
 };
@@ -104,16 +153,12 @@ struct RequestCloseOnEscape {
 }  // namespace
 
 int main() {
-  auto& profiler = helios::profile::Profiler::Instance();
-  profiler.AddBackend<helios::profile::TracyBackend>();
-  profiler.Finalize();
-  std::this_thread::sleep_for(std::chrono::milliseconds(300));
-
   happ::App app;
-  app.AddPluginGroups(hglfw::WindowInputPlugin{}.Configure(
-      hinput::Plugin{{.raw_mouse_motion = true}}));
+  app.AddPluginGroups(hsdl3::input::InputPlugin{{.raw_mouse_motion = true}},
+                      hsdl3::window::WindowPlugin{});
   app.AddSystem(happ::kStartup, SpawnWindowStartup{});
-  app.AddSystems(happ::kUpdate, ChangeCursor{}, LogInput{},
-                 RequestCloseOnEscape{});
+  app.AddSystems(happ::kUpdate, ChangeCursor{}, LogKeyboardInput{},
+                 LogMouseInput{}, LogGamepadInput{}, LogJoystickInput{},
+                 LogPenInput{}, RequestCloseOnEscape{});
   return std::to_underlying(app.Run());
 }

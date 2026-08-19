@@ -88,6 +88,10 @@ if(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC)
   helios_target_set_platform(helios_memory_global_alloc)
   helios_target_set_warnings(helios_memory_global_alloc)
   helios_target_set_optimization(helios_memory_global_alloc)
+  helios_target_enable_sanitizers(helios_memory_global_alloc)
+  if(COMMAND helios_target_apply_linker)
+    helios_target_apply_linker(helios_memory_global_alloc)
+  endif()
   helios_target_set_folder(helios_memory_global_alloc "Modules/memory")
 
   target_include_directories(helios_memory_global_alloc PRIVATE

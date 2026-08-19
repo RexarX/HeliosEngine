@@ -4,7 +4,10 @@
 
 #include <algorithm>
 #include <array>
+#include <concepts>
 #include <cstddef>
+#include <cstdint>
+#include <functional>
 #include <random>
 #include <span>
 #include <string>

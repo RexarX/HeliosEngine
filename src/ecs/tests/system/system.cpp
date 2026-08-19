@@ -2,18 +2,13 @@
 
 #include <helios/ecs/command/commands.hpp>
 #include <helios/ecs/component/component.hpp>
-#include <helios/ecs/message/async_reader.hpp>
-#include <helios/ecs/message/async_writer.hpp>
-#include <helios/ecs/message/message.hpp>
-#include <helios/ecs/message/reader.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/local_param.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/message/params.hpp>
+#include <helios/ecs/query/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
-#include <helios/ecs/system/param_traits.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/ecs/world.hpp>
 #include <helios/ecs/world_view.hpp>
@@ -22,7 +17,6 @@
 #include <algorithm>
 #include <optional>
 #include <string_view>
-#include <type_traits>
 #include <utility>
 #include <vector>
 

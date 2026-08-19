@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <functional>
 #include <iterator>
+#include <memory_resource>
 #include <optional>
 #include <ranges>
 #include <tuple>

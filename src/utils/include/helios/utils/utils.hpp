@@ -9,6 +9,7 @@
 #include <helios/utils/hash.hpp>
 #include <helios/utils/macro.hpp>
 #include <helios/utils/random.hpp>
+#include <helios/utils/sleep.hpp>
 #include <helios/utils/string_hash.hpp>
 #include <helios/utils/timer.hpp>
 #include <helios/utils/type_info.hpp>

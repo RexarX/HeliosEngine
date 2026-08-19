@@ -2,16 +2,18 @@
 
 #include <helios/assert.hpp>
 #include <helios/ecs/details/profile.hpp>
-#include <helios/ecs/schedule/run_scope.hpp>
+#include <helios/ecs/schedule/executor/executor.hpp>
 #include <helios/ecs/schedule/run_stage_options.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/schedule/stage.hpp>
 #include <helios/ecs/schedule/stage_settings.hpp>
 
+#include <algorithm>
 #include <cstddef>
 #include <functional>
 #include <memory>
 #include <optional>
+#include <string_view>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -226,7 +228,7 @@ public:
   }
 
   Schedule& In(size_t schedule_hash);
-  Schedule& In(ScheduleTypeIndex index);
+  Schedule& In(ScheduleTypeIndex index) { return In(index.Hash()); }
 
   template <ScheduleTrait T>
   Schedule& In(const T& schedule = {});
@@ -265,14 +267,18 @@ public:
     return TryGetSchedule(ScheduleTypeIndex::From(schedule));
   }
 
-  [[nodiscard]] bool HasStage(StageTypeIndex index) const;
+  [[nodiscard]] bool HasStage(StageTypeIndex index) const noexcept {
+    return stages_.contains(index.Hash());
+  }
 
   template <StageTrait T>
-  [[nodiscard]] bool HasStage(const T& stage = {}) const {
+  [[nodiscard]] bool HasStage(const T& stage = {}) const noexcept {
     return HasStage(StageTypeIndex::From(stage));
   }
 
-  [[nodiscard]] StageSettings& GetStageSettings(StageTypeIndex index);
+  [[nodiscard]] StageSettings& GetStageSettings(StageTypeIndex index) {
+    return GetStageEntry(index.Hash()).settings;
+  }
 
   template <StageTrait T>
   [[nodiscard]] StageSettings& GetStageSettings(const T& stage = {}) {
@@ -306,23 +312,9 @@ private:
     StageSettings settings;
   };
 
-  [[nodiscard]] ScheduleEntry& GetEntry(size_t hash) {
-    HELIOS_ASSERT(schedules_.contains(hash),
-                  "Schedule with hash '{}' not found!", hash);
-    return schedules_.at(hash);
-  }
-
-  [[nodiscard]] const ScheduleEntry& GetEntry(size_t hash) const {
-    HELIOS_ASSERT(schedules_.contains(hash),
-                  "Schedule with hash '{}' not found!", hash);
-    return schedules_.at(hash);
-  }
-
-  [[nodiscard]] StageEntry& GetStageEntry(size_t hash) {
-    HELIOS_ASSERT(stages_.contains(hash), "Stage with hash '{}' not found!",
-                  hash);
-    return stages_.at(hash);
-  }
+  [[nodiscard]] ScheduleEntry& GetEntry(size_t hash);
+  [[nodiscard]] const ScheduleEntry& GetEntry(size_t hash) const;
+  [[nodiscard]] StageEntry& GetStageEntry(size_t hash);
 
   void MarkDirty() noexcept { is_dirty_ = true; }
   void MarkClean() noexcept { is_dirty_ = false; }
@@ -347,18 +339,95 @@ private:
   friend class StageOrdering;
 };
 
-inline auto StageOrdering::After(this auto&& self, StageTypeIndex index)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  const size_t other_hash = index.Hash();
-  auto& scheduler = self.scheduler_.get();
-  auto& entry = scheduler.GetStageEntry(self.Hash());
+inline void Scheduler::Build() {
+  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Scheduler::Build");
+  HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
 
-  if (std::ranges::find(entry.after_stages, other_hash) ==
-      entry.after_stages.end()) {
-    entry.after_stages.push_back(other_hash);
+  BuildImpl(nullptr);
+}
+
+inline void Scheduler::Build(async::Executor& executor) {
+  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Scheduler::Build");
+  HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
+
+  BuildImpl(&executor);
+}
+
+template <StageTrait T>
+inline void Scheduler::RunStage(const T& stage, World& world,
+                                RunStageOptions options) {
+  HELIOS_ECS_PROFILE_SCOPE();
+  HELIOS_ECS_PROFILE_ZONE_NAME(std::format(
+      "helios::ecs::Scheduler::RunStage{{name: {}}}", StageNameOf(stage)));
+  HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
+
+  RunStage(StageTypeIndex::From(stage), world, options);
+}
+
+template <StageTrait T>
+inline void Scheduler::RunStage(const T& stage, World& world,
+                                Executor& executor, RunStageOptions options) {
+  HELIOS_ECS_PROFILE_SCOPE();
+  HELIOS_ECS_PROFILE_ZONE_NAME(std::format(
+      "helios::ecs::Scheduler::RunStage{{name: {}}}", StageNameOf(stage)));
+  HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
+
+  RunStage(StageTypeIndex::From(stage), world, executor, options);
+}
+
+inline Schedule& Scheduler::In(size_t schedule_hash) {
+  const auto it = schedules_.find(schedule_hash);
+  HELIOS_ASSERT(it != schedules_.end(),
+                "Schedule with hash '{}' does not exist!", schedule_hash);
+  return it->second.schedule;
+}
+
+template <ScheduleTrait T>
+inline Schedule& Scheduler::In(const T& schedule) {
+  const auto it = schedules_.find(ScheduleTypeIndex::From(schedule).Hash());
+  HELIOS_ASSERT(it != schedules_.end(), "Schedule '{}' does not exist!",
+                ScheduleNameOf(schedule));
+  return it->second.schedule;
+}
+
+inline ScheduleOrdering Scheduler::Order(ScheduleTypeIndex index) {
+  HELIOS_ASSERT(schedules_.contains(index.Hash()),
+                "Schedule with hash '{}' does not exist!", index.Hash());
+  return {*this, index.Hash()};
+}
+
+inline StageOrdering Scheduler::OrderStage(StageTypeIndex index) {
+  HELIOS_ASSERT(stages_.contains(index.Hash()),
+                "Stage with hash '{}' does not exist!", index.Hash());
+  return {*this, index.Hash()};
+}
+
+inline StageSettings& StageOrdering::Settings() noexcept {
+  return scheduler_.get().GetStageEntry(hash_).settings;
+}
+
+inline Schedule* Scheduler::TryGetSchedule(ScheduleTypeIndex index) {
+  const auto it = schedules_.find(index.Hash());
+  if (it == schedules_.end()) {
+    return nullptr;
   }
-  scheduler.MarkDirty();
-  return std::forward<decltype(self)>(self);
+  return &it->second.schedule;
+}
+
+inline const Schedule* Scheduler::TryGetSchedule(
+    ScheduleTypeIndex index) const {
+  const auto it = schedules_.find(index.Hash());
+  if (it == schedules_.end()) {
+    return nullptr;
+  }
+  return &it->second.schedule;
+}
+
+inline const StageSettings& Scheduler::GetStageSettings(
+    StageTypeIndex index) const {
+  HELIOS_ASSERT(stages_.contains(index.Hash()),
+                "Stage with hash '{}' not found!", index.Hash());
+  return stages_.at(index.Hash()).settings;
 }
 
 inline auto StageOrdering::Before(this auto&& self, StageTypeIndex index)
@@ -370,6 +439,20 @@ inline auto StageOrdering::Before(this auto&& self, StageTypeIndex index)
   if (std::ranges::find(entry.before_stages, other_hash) ==
       entry.before_stages.end()) {
     entry.before_stages.push_back(other_hash);
+  }
+  scheduler.MarkDirty();
+  return std::forward<decltype(self)>(self);
+}
+
+inline auto StageOrdering::After(this auto&& self, StageTypeIndex index)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  const size_t other_hash = index.Hash();
+  auto& scheduler = self.scheduler_.get();
+  auto& entry = scheduler.GetStageEntry(self.Hash());
+
+  if (std::ranges::find(entry.after_stages, other_hash) ==
+      entry.after_stages.end()) {
+    entry.after_stages.push_back(other_hash);
   }
   scheduler.MarkDirty();
   return std::forward<decltype(self)>(self);
@@ -410,168 +493,6 @@ inline auto ScheduleOrdering::InStage(this auto&& self, StageTypeIndex stage)
   entry.stage_hash = stage.Hash();
   scheduler.MarkDirty();
   return std::forward<decltype(self)>(self);
-}
-
-inline void Scheduler::Build() {
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Scheduler::Build");
-  HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
-
-  BuildImpl(nullptr);
-}
-
-inline void Scheduler::Build(async::Executor& executor) {
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Scheduler::Build");
-  HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
-
-  BuildImpl(&executor);
-}
-
-template <StageTrait T>
-inline void Scheduler::RunStage(const T& stage, World& world,
-                                RunStageOptions options) {
-  HELIOS_ECS_PROFILE_SCOPE();
-  HELIOS_ECS_PROFILE_ZONE_NAME(std::format(
-      "helios::ecs::Scheduler::RunStage{{name: {}}}", StageNameOf(stage)));
-  HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
-
-  RunStage(StageTypeIndex::From(stage), world, options);
-}
-
-template <StageTrait T>
-inline void Scheduler::RunStage(const T& stage, World& world,
-                                Executor& executor, RunStageOptions options) {
-  HELIOS_ECS_PROFILE_SCOPE();
-  HELIOS_ECS_PROFILE_ZONE_NAME(std::format(
-      "helios::ecs::Scheduler::RunStage{{name: {}}}", StageNameOf(stage)));
-  HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
-
-  RunStage(StageTypeIndex::From(stage), world, executor, options);
-}
-
-inline void Scheduler::Clear() {
-  schedules_.clear();
-  stages_.clear();
-  execution_order_cache_.clear();
-  stage_order_.clear();
-  stage_member_order_.clear();
-  MarkDirty();
-}
-
-inline Schedule& Scheduler::In(size_t schedule_hash) {
-  const auto it = schedules_.find(schedule_hash);
-  HELIOS_ASSERT(it != schedules_.end(),
-                "Schedule with hash '{}' does not exist!", schedule_hash);
-  return it->second.schedule;
-}
-
-inline Schedule& Scheduler::In(ScheduleTypeIndex index) {
-  return In(index.Hash());
-}
-
-template <ScheduleTrait T>
-inline Schedule& Scheduler::In(const T& schedule) {
-  const auto it = schedules_.find(ScheduleTypeIndex::From(schedule).Hash());
-  HELIOS_ASSERT(it != schedules_.end(), "Schedule '{}' does not exist!",
-                ScheduleNameOf(schedule));
-  return it->second.schedule;
-}
-
-inline ScheduleOrdering Scheduler::Order(ScheduleTypeIndex index) {
-  HELIOS_ASSERT(schedules_.contains(index.Hash()),
-                "Schedule with hash '{}' does not exist!", index.Hash());
-  return {*this, index.Hash()};
-}
-
-inline StageOrdering Scheduler::OrderStage(StageTypeIndex index) {
-  HELIOS_ASSERT(stages_.contains(index.Hash()),
-                "Stage with hash '{}' does not exist!", index.Hash());
-  return {*this, index.Hash()};
-}
-
-inline StageSettings& StageOrdering::Settings() noexcept {
-  return scheduler_.get().GetStageEntry(hash_).settings;
-}
-
-inline ScheduleOrdering Scheduler::Add(ScheduleTypeId id, Schedule&& schedule) {
-  const size_t hash = id.Index().Hash();
-  schedules_[hash] = ScheduleEntry{
-      .schedule = std::move(schedule),
-      .after_schedules = {},
-      .before_schedules = {},
-      .name = id.Name(),
-      .stage_hash = std::nullopt,
-  };
-
-  if (schedules_[hash].schedule.GetName().empty()) {
-    schedules_[hash].schedule.SetName(std::string(id.Name()));
-  }
-
-  MarkDirty();
-  return {*this, hash};
-}
-
-inline StageOrdering Scheduler::AddStage(StageTypeId id) {
-  const size_t hash = id.Index().Hash();
-  stages_[hash] = StageEntry{
-      .after_stages = {},
-      .before_stages = {},
-      .name = id.Name(),
-      .settings = {},
-  };
-  MarkDirty();
-  return {*this, hash};
-}
-
-inline bool Scheduler::Remove(ScheduleTypeIndex index) {
-  const auto it = schedules_.find(index.Hash());
-  if (it == schedules_.end()) {
-    return false;
-  }
-  schedules_.erase(it);
-  MarkDirty();
-  return true;
-}
-
-inline Schedule* Scheduler::TryGetSchedule(ScheduleTypeIndex index) {
-  const auto it = schedules_.find(index.Hash());
-  if (it == schedules_.end()) {
-    return nullptr;
-  }
-  return &it->second.schedule;
-}
-
-inline const Schedule* Scheduler::TryGetSchedule(
-    ScheduleTypeIndex index) const {
-  const auto it = schedules_.find(index.Hash());
-  if (it == schedules_.end()) {
-    return nullptr;
-  }
-  return &it->second.schedule;
-}
-
-inline bool Scheduler::HasStage(StageTypeIndex index) const {
-  return stages_.contains(index.Hash());
-}
-
-inline bool Scheduler::IsDirty() const noexcept {
-  if (is_dirty_) {
-    return true;
-  }
-
-  return std::ranges::any_of(schedules_, [](const auto& pair) {
-    return pair.second.schedule.IsDirty();
-  });
-}
-
-inline StageSettings& Scheduler::GetStageSettings(StageTypeIndex index) {
-  return GetStageEntry(index.Hash()).settings;
-}
-
-inline const StageSettings& Scheduler::GetStageSettings(
-    StageTypeIndex index) const {
-  HELIOS_ASSERT(stages_.contains(index.Hash()),
-                "Stage with hash '{}' not found!", index.Hash());
-  return stages_.at(index.Hash()).settings;
 }
 
 }  // namespace helios::ecs

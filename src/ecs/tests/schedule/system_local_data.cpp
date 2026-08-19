@@ -1,5 +1,6 @@
 #include <doctest/doctest.h>
 
+#include <helios/ecs/schedule/local_arena.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/world.hpp>
 

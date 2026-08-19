@@ -4,9 +4,10 @@
 
 #include <helios/assert.hpp>
 #include <helios/ecs/details/profile.hpp>
+#include <helios/ecs/schedule/system_set.hpp>
+#include <helios/ecs/world.hpp>
 #include <helios/log/logger.hpp>
 
-#include <algorithm>
 #include <cstddef>
 #include <expected>
 #include <format>
@@ -16,6 +17,11 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+
+#if defined(HELIOS_ECS_ENABLE_PROFILE) && \
+    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#include <format>
+#endif
 
 namespace helios::ecs {
 
@@ -78,6 +84,20 @@ void Schedule::Run(World& world, Executor& executor) {
   executor.Execute(*this, world);
 }
 
+void Schedule::Run(World& world) {
+  HELIOS_ASSERT(executor_ != nullptr,
+                "Schedule::Run() called but no executor is set! "
+                "Use SetExecutor() before running.");
+
+  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Schedule::Run");
+  HELIOS_ECS_PROFILE_ZONE_NAME(
+      std::format("helios::ecs::Schedule::Run{{name: {}}}", name_));
+  HELIOS_ECS_PROFILE_ZONE_VALUE(
+      plan_.has_value() ? plan_->execution_order.size() : 0U);
+
+  Run(world, *executor_);
+}
+
 void Schedule::RunAndWait(World& world, Executor& executor) {
   HELIOS_ASSERT(!is_dirty_,
                 "Schedule::RunAndWait called but schedule is dirty! Call "
@@ -102,6 +122,20 @@ void Schedule::RunAndWait(World& world, Executor& executor) {
 
   executor.ExecuteAndWait(*this, world);
   ApplyDeferred(world);
+}
+
+void Schedule::RunAndWait(World& world) {
+  HELIOS_ASSERT(executor_ != nullptr,
+                "Schedule::RunAndWait() called but no executor is set! "
+                "Use SetExecutor() before running.");
+
+  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Schedule::RunAndWait");
+  HELIOS_ECS_PROFILE_ZONE_NAME(
+      std::format("helios::ecs::Schedule::RunAndWait{{name: {}}}", name_));
+  HELIOS_ECS_PROFILE_ZONE_VALUE(
+      plan_.has_value() ? plan_->execution_order.size() : 0U);
+
+  RunAndWait(world, *executor_);
 }
 
 void Schedule::ApplyDeferred(World& world, bool apply_commands,
@@ -462,6 +496,63 @@ void Schedule::MergeRunConditions(
       }
     }
   }
+}
+
+void Schedule::EnsureSet(SystemSetId set_id) {
+  if (sets_.contains(set_id.id)) {
+    return;
+  }
+
+  sets_.emplace(set_id.id, SystemSet(set_id));
+  MarkDirty();
+}
+
+bool Schedule::AddSystemToSet(size_t slot, SystemSetId set_id) {
+  EnsureSet(set_id);
+
+  auto& entry = GetSystemEntry(slot);
+  const size_t before = entry.metadata.member_of_sets.size();
+  entry.metadata.AddMemberOfSet(set_id);
+  if (entry.metadata.member_of_sets.size() != before) {
+    MarkDirty();
+    return true;
+  }
+  return false;
+}
+
+void Schedule::AssignGroupToSet(SystemSetId group_id,
+                                SystemSetId target_set_id) {
+  EnsureSet(target_set_id);
+
+  for (size_t slot = 0; slot < system_entries_.size(); ++slot) {
+    const auto& entry = system_entries_[slot];
+    if (std::ranges::find(entry.metadata.member_of_sets, group_id) !=
+        entry.metadata.member_of_sets.end()) {
+      AddSystemToSet(slot, target_set_id);
+    }
+  }
+}
+
+SystemSetId Schedule::AllocateAnonymousGroupId() noexcept {
+  static constexpr size_t kAnonymousGroupIdTag = static_cast<size_t>(1) << 63;
+  return SystemSetId{.id = kAnonymousGroupIdTag ^ next_anonymous_group_id_++};
+}
+
+void Schedule::MarkDirty() noexcept {
+  is_dirty_ = true;
+  ++generation_;
+}
+
+auto Schedule::GetSystemEntry(size_t slot) -> SystemEntry& {
+  HELIOS_ASSERT(slot < system_entries_.size(), "Invalid system slot '{}'!",
+                slot);
+  return system_entries_[slot];
+}
+
+SystemSet& Schedule::GetSystemSet(size_t id) {
+  const auto it = sets_.find(id);
+  HELIOS_ASSERT(it != sets_.end(), "Unknown system set '{}'!", id);
+  return it->second;
 }
 
 }  // namespace helios::ecs

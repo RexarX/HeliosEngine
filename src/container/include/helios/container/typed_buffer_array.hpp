@@ -2,6 +2,7 @@
 
 #include <helios/assert.hpp>
 #include <helios/container/details/typed_buffer_common.hpp>
+#include <helios/utils/type_info.hpp>
 
 #include <algorithm>
 #include <concepts>

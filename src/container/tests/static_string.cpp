@@ -4,8 +4,10 @@
 
 #include <algorithm>
 #include <format>
+#include <ranges>
 #include <string>
 #include <string_view>
+#include <utility>
 
 using namespace helios::container;
 

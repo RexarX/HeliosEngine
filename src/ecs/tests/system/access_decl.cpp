@@ -1,12 +1,12 @@
 #include <doctest/doctest.h>
 
 #include <helios/ecs/component/component.hpp>
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/query/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/system/access_decl.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/system/param_policy.hpp>
-#include <helios/ecs/system/param_traits.hpp>
 
 using namespace helios::ecs;
 

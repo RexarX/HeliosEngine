@@ -1,6 +1,6 @@
 #include <doctest/doctest.h>
 
-#include <helios/app/app.hpp>
+#include <helios/app/application.hpp>
 #include <helios/app/plugin.hpp>
 
 #include <string_view>

@@ -258,18 +258,18 @@ void MonitorCallback(GLFWmonitor* monitor, int event) {
     }
   }
 
-  auto monitor_event = window::MonitorEvent::kConnected;
-  if (event == GLFW_DISCONNECTED) {
-    monitor_event = window::MonitorEvent::kDisconnected;
-  }
-
   if (auto* layout = world.TryWriteResource<window::Monitors>();
       layout != nullptr) {
     RefreshMonitors(*layout);
   }
 
-  world.WriteMessages<window::MonitorsChangedMsg>().Write(
-      {.index = monitor_index, .event = monitor_event});
+  if (event == GLFW_CONNECTED) {
+    world.WriteMessages<::helios::window::MonitorConnectedMsg>().Write(
+        {.index = monitor_index});
+  } else if (event == GLFW_DISCONNECTED) {
+    world.WriteMessages<::helios::window::MonitorDisconnectedMsg>().Write(
+        {.index = monitor_index});
+  }
 
   if (auto* native = world.TryWriteResource<NativeWindows>();
       native != nullptr) {

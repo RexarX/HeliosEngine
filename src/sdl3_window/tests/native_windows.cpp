@@ -1,0 +1,117 @@
+#include <doctest/doctest.h>
+
+#include <helios/ecs/entity/entity.hpp>
+#include <helios/sdl3/window/details/native_state.hpp>
+
+using namespace helios;
+using namespace helios::sdl3::window;
+
+TEST_SUITE("helios::sdl3::window::NativeWindows") {
+  TEST_CASE("helios::sdl3::window::NativeWindows::Insert") {
+    SUBCASE("Inserts entries in sorted entity order") {
+      NativeWindows native;
+      constexpr ecs::Entity entity_a{1, 1};
+      constexpr ecs::Entity entity_b{3, 1};
+      constexpr ecs::Entity entity_c{5, 1};
+
+      native.Insert(entity_b, {});
+      native.Insert(entity_a, {});
+      native.Insert(entity_c, {});
+
+      CHECK_EQ(native.Size(), 3U);
+      CHECK_EQ(native.entries[0].entity, entity_a);
+      CHECK_EQ(native.entries[1].entity, entity_b);
+      CHECK_EQ(native.entries[2].entity, entity_c);
+    }
+  }
+
+  TEST_CASE("helios::sdl3::window::NativeWindows::Erase") {
+    SUBCASE("Removes an existing entry") {
+      NativeWindows native;
+      constexpr ecs::Entity entity_a{1, 1};
+      constexpr ecs::Entity entity_b{3, 1};
+      native.Insert(entity_a, {});
+      native.Insert(entity_b, {});
+
+      CHECK(native.Erase(entity_b));
+      CHECK_FALSE(native.Contains(entity_b));
+      CHECK(native.Contains(entity_a));
+      CHECK_EQ(native.Size(), 1U);
+    }
+
+    SUBCASE("Returns false when the entity is missing") {
+      NativeWindows native;
+      native.Insert(ecs::Entity{1, 1}, {});
+      CHECK_FALSE(native.Erase(ecs::Entity{2, 1}));
+      CHECK_EQ(native.Size(), 1U);
+    }
+  }
+
+  TEST_CASE("helios::sdl3::window::NativeWindows::TryGet") {
+    SUBCASE("Returns a mutable entry when present") {
+      NativeWindows native;
+      constexpr ecs::Entity entity{4, 1};
+      native.Insert(entity, NativeEntry{});
+
+      NativeWindows::Entry* entry = native.TryGet(entity);
+      REQUIRE_NE(entry, nullptr);
+      CHECK_EQ(entry->entity, entity);
+      entry->native.window = reinterpret_cast<SDL_Window*>(1);
+      CHECK_EQ(native.TryGet(entity)->native.window,
+               reinterpret_cast<SDL_Window*>(1));
+    }
+
+    SUBCASE("Returns a const entry when present") {
+      NativeWindows native;
+      constexpr ecs::Entity entity{4, 1};
+      native.Insert(entity, {});
+      const NativeWindows& view = native;
+
+      CHECK_NE(view.TryGet(entity), nullptr);
+      CHECK_EQ(view.TryGet(ecs::Entity{2, 1}), nullptr);
+    }
+
+    SUBCASE("Returns nullptr when missing") {
+      NativeWindows native;
+      native.Insert(ecs::Entity{1, 1}, {});
+      CHECK_EQ(native.TryGet(ecs::Entity{2, 1}), nullptr);
+    }
+  }
+
+  TEST_CASE("helios::sdl3::window::NativeWindows::Contains") {
+    SUBCASE("Reports presence after insert and erase") {
+      NativeWindows native;
+      constexpr ecs::Entity entity{7, 1};
+      CHECK_FALSE(native.Contains(entity));
+      native.Insert(entity, {});
+      CHECK(native.Contains(entity));
+      native.Erase(entity);
+      CHECK_FALSE(native.Contains(entity));
+    }
+  }
+
+  TEST_CASE("helios::sdl3::window::NativeWindows::Empty") {
+    SUBCASE("Default-constructed table is empty") {
+      NativeWindows native;
+      CHECK(native.Empty());
+    }
+
+    SUBCASE("Empty after the last entry is erased") {
+      NativeWindows native;
+      native.Insert(ecs::Entity{1, 1}, {});
+      CHECK_FALSE(native.Empty());
+      native.Erase(ecs::Entity{1, 1});
+      CHECK(native.Empty());
+    }
+  }
+
+  TEST_CASE("helios::sdl3::window::NativeWindows::Size") {
+    SUBCASE("Tracks the number of entries") {
+      NativeWindows native;
+      CHECK_EQ(native.Size(), 0U);
+      native.Insert(ecs::Entity{1, 1}, {});
+      native.Insert(ecs::Entity{2, 1}, {});
+      CHECK_EQ(native.Size(), 2U);
+    }
+  }
+}

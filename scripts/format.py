@@ -9,142 +9,70 @@ import argparse
 import subprocess
 import sys
 from pathlib import Path
-from typing import List
+from typing import List, Optional
+
+from common import (
+    Colors,
+    add_config_override_argument,
+    add_extra_args_argument,
+    check_tool_installed,
+    enable_windows_colors,
+    find_source_files,
+    print_error,
+    print_info,
+    print_success,
+    print_warning,
+    resolve_config_file,
+)
+
+enable_windows_colors()
 
 
-class Colors:
-    """ANSI color codes for terminal output"""
-
-    RED = "\033[0;31m"
-    GREEN = "\033[0;32m"
-    YELLOW = "\033[1;33m"
-    BLUE = ""
-    NC = "\033[0m"  # No Color
-
-    @classmethod
-    def disable(cls):
-        """Disable colors (for Windows terminals that don't support ANSI)"""
-
-        cls.RED = ""
-        cls.GREEN = ""
-        cls.YELLOW = ""
-        cls.BLUE = ""
-        cls.NC = ""
-
-
-# Enable colors on Windows 10+
-if sys.platform == "win32":
-    try:
-        import ctypes
-
-        kernel32 = ctypes.windll.kernel32
-        kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
-    except Exception:
-        Colors.disable()
-
-
-def print_info(msg: str) -> None:
-    """Print info message in blue"""
-
-    print(f"{Colors.BLUE}{msg}{Colors.NC}")
-
-
-def print_success(msg: str) -> None:
-    """Print success message in green"""
-
-    print(f"{Colors.GREEN}{msg}{Colors.NC}")
-
-
-def print_warning(msg: str) -> None:
-    """Print warning message in yellow"""
-
-    print(f"{Colors.YELLOW}{msg}{Colors.NC}")
-
-
-def print_error(msg: str) -> None:
-    """Print error message in red"""
-
-    print(f"{Colors.RED}{msg}{Colors.NC}", file=sys.stderr)
-
-
-def check_clang_format() -> bool:
-    """Check if clang-format is installed"""
-
-    try:
-        subprocess.run(
-            ["clang-format", "--version"],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            check=True,
-        )
-        return True
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        return False
-
-
-def find_source_files(
-    source_dirs: List[Path], extensions: List[str], exclude_dirs: List[str]
-) -> List[Path]:
-    """Find all source files in the given directories"""
-
-    source_files = []
-
-    for source_dir in source_dirs:
-        if not source_dir.exists():
-            print_warning(f"Directory does not exist: {source_dir}")
-            continue
-
-        print_info(f"Scanning directory: {source_dir}")
-
-        for ext in extensions:
-            for file_path in source_dir.rglob(f"*.{ext}"):
-                # Check if file is in an excluded directory
-                excluded = False
-                for exclude_dir in exclude_dirs:
-                    try:
-                        file_path.relative_to(exclude_dir)
-                        excluded = True
-                        break
-                    except ValueError:
-                        pass
-
-                if not excluded:
-                    source_files.append(file_path)
-
-    return sorted(source_files)
-
-
-def format_file(file_path: Path, check_only: bool = False) -> bool:
+def format_file(
+    file_path: Path,
+    check_only: bool = False,
+    config_file: Optional[Path] = None,
+    extra_args: Optional[List[str]] = None,
+) -> bool:
     """
     Format a single file using clang-format
 
     Args:
         file_path: Path to the file to format
         check_only: If True, only check formatting without modifying
+        config_file: Optional explicit .clang-format config to use instead
+            of the one clang-format would auto-discover via -style=file
+        extra_args: Additional raw arguments to pass through to clang-format
 
     Returns:
         True if file is correctly formatted (or was formatted successfully),
         False otherwise
     """
 
+    style_arg = f"-style=file:{config_file}" if config_file else "-style=file"
+
     try:
         if check_only:
+            cmd = ["clang-format", style_arg, "--dry-run", "--Werror"]
+            if extra_args:
+                cmd.extend(extra_args)
+            cmd.append(str(file_path))
+
             result = subprocess.run(
-                [
-                    "clang-format",
-                    "-style=file",
-                    "--dry-run",
-                    "--Werror",
-                    str(file_path),
-                ],
+                cmd,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
             )
             return result.returncode == 0
         else:
-            result = subprocess.run(
-                ["clang-format", "-style=file", "-i", str(file_path)],
+            cmd = ["clang-format", style_arg, "-i"]
+            if extra_args:
+                cmd.extend(extra_args)
+            cmd.append(str(file_path))
+
+            subprocess.run(
+                cmd,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 check=True,
@@ -170,8 +98,16 @@ def main() -> int:
         nargs="*",
         help="Specific files or directories to format (default: all source files)",
     )
+    add_config_override_argument(parser, "clang-format", ".clang-format")
+    add_extra_args_argument(parser, "clang-format")
+    parser.add_argument(
+        "--no-color", action="store_true", help="Disable colored output"
+    )
 
     args = parser.parse_args()
+
+    if args.no_color:
+        Colors.disable()
 
     # Get script and project directories
     script_dir = Path(__file__).parent.resolve()
@@ -181,8 +117,15 @@ def main() -> int:
     print_info("=" * 33)
 
     # Check if clang-format is installed
-    if not check_clang_format():
+    if not check_tool_installed("clang-format"):
         print_error("clang-format is not installed. Please install it first.")
+        return 1
+
+    # Resolve an explicit config file override, if given
+    try:
+        config_file = resolve_config_file(args.config_file, project_root)
+    except FileNotFoundError as error:
+        print_error(str(error))
         return 1
 
     # Define file extensions to process
@@ -193,6 +136,12 @@ def main() -> int:
 
     # Find source files
     print_info("Finding source files...")
+
+    source_dirs = [
+        project_root / "src",
+        project_root / "tests",
+        project_root / "examples",
+    ]
 
     if args.paths:
         # Process specific paths provided by user
@@ -236,11 +185,6 @@ def main() -> int:
         source_files = sorted(set(source_files))
     else:
         # Default: process all source directories
-        source_dirs = [
-            project_root / "src",
-            project_root / "tests",
-            project_root / "examples",
-        ]
         source_files = find_source_files(source_dirs, extensions, exclude_dirs)
 
     if not source_files:
@@ -251,13 +195,23 @@ def main() -> int:
 
     print_info(f"Found {len(source_files)} source files to process.")
 
+    if config_file:
+        print_info(f"Using config file override: {config_file}")
+    if args.extra_args:
+        print_info(f"Extra clang-format arguments: {' '.join(args.extra_args)}")
+
     # Process files
     if args.check:
         print_info("Checking format only (not modifying files)...")
         needs_formatting = []
 
         for file_path in source_files:
-            if not format_file(file_path, check_only=True):
+            if not format_file(
+                file_path,
+                check_only=True,
+                config_file=config_file,
+                extra_args=args.extra_args,
+            ):
                 print_warning(f"File needs formatting: {file_path}")
                 needs_formatting.append(file_path)
 
@@ -276,7 +230,12 @@ def main() -> int:
 
         for file_path in source_files:
             print_info(f"Formatting: {file_path}")
-            if not format_file(file_path, check_only=False):
+            if not format_file(
+                file_path,
+                check_only=False,
+                config_file=config_file,
+                extra_args=args.extra_args,
+            ):
                 print_error(f"Failed to format: {file_path}")
                 failed_files.append(file_path)
 

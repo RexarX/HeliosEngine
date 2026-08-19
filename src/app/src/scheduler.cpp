@@ -2,10 +2,12 @@
 
 #include <helios/app/scheduler.hpp>
 
-#include <helios/app/app.hpp>
+#include <helios/app/application.hpp>
 #include <helios/app/details/profile.hpp>
+#include <helios/app/frame_order.hpp>
 #include <helios/app/sub_app.hpp>
 #include <helios/assert.hpp>
+#include <helios/async/executor.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/world.hpp>
 #include <helios/utils/defer.hpp>
@@ -13,8 +15,43 @@
 #include <chrono>
 #include <cstddef>
 #include <optional>
+#include <utility>
+
+#ifdef HELIOS_ENABLE_ASSERTS
+#include <algorithm>
+#endif
 
 namespace helios::app {
+
+Scheduler::Scheduler(Scheduler&& other) noexcept
+    : startup_graph_(std::move(other.startup_graph_)),
+      blocking_update_graph_(std::move(other.blocking_update_graph_)),
+      shutdown_graph_(std::move(other.shutdown_graph_)),
+      sub_app_states_(std::move(other.sub_app_states_)),
+      blocking_update_future_(std::move(other.blocking_update_future_)),
+      async_loop_futures_(std::move(other.async_loop_futures_)),
+      overlapping_update_futures_(std::move(other.overlapping_update_futures_)),
+      async_loops_running_(
+          other.async_loops_running_.exchange(0, std::memory_order_relaxed)) {}
+
+Scheduler& Scheduler::operator=(Scheduler&& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return *this;
+  }
+
+  startup_graph_ = std::move(other.startup_graph_);
+  blocking_update_graph_ = std::move(other.blocking_update_graph_);
+  shutdown_graph_ = std::move(other.shutdown_graph_);
+  sub_app_states_ = std::move(other.sub_app_states_);
+  blocking_update_future_ = std::move(other.blocking_update_future_);
+  async_loop_futures_ = std::move(other.async_loop_futures_);
+  overlapping_update_futures_ = std::move(other.overlapping_update_futures_);
+  async_loops_running_.store(
+      other.async_loops_running_.exchange(0, std::memory_order_relaxed),
+      std::memory_order_release);
+
+  return *this;
+}
 
 void Scheduler::Clear() {
   HELIOS_ASSERT(async_loops_running_.load(std::memory_order_acquire) == 0,
@@ -27,11 +64,13 @@ void Scheduler::Clear() {
                 "Cannot clear scheduler while overlapping updates remain! Call "
                 "Stop() or Shutdown() first.");
 
-  for (const SubAppFrameState& state : sub_app_states_) {
-    HELIOS_ASSERT(!state.sub_app.get().IsUpdating(),
-                  "Cannot clear scheduler while sub-apps are updating! Call "
-                  "Stop() or Shutdown() first.");
-  }
+  [[maybe_unused]] const bool any_sub_app_updating =
+      std::ranges::any_of(sub_app_states_, [](const SubAppFrameState& state) {
+        return state.sub_app.get().IsUpdating();
+      });
+  HELIOS_ASSERT(!any_sub_app_updating,
+                "Cannot clear scheduler while sub-apps are updating! Call "
+                "Stop() or Shutdown() first.");
 
   HELIOS_ASSERT(!blocking_update_future_.has_value(),
                 "Cannot clear scheduler while blocking sub-app updates are in "

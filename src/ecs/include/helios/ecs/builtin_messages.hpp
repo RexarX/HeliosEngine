@@ -6,6 +6,10 @@
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/resource/resource.hpp>
 
+#include <format>
+#include <iterator>
+#include <ostream>
+#include <string>
 #include <string_view>
 
 namespace helios::ecs {
@@ -212,5 +216,269 @@ struct ResourceRemovedMsg {
   static constexpr bool kConsumable = false;
   static constexpr bool kAsync = false;
 };
+
+/**
+ * @brief Formats `EntityAddedMsg` message using an output iterator.
+ * @tparam It Output iterator type
+ * @param msg `EntityAddedMsg` message
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(EntityAddedMsg msg, It out) {
+  return std::format_to(out, "EntityAddedMsg{{entity={}}}", msg.GetEntity());
+}
+
+/**
+ * @brief Formats `EntityAddedMsg` message as a string.
+ * @param msg `EntityAddedMsg` message
+ * @return Formatted settings string
+ */
+[[nodiscard]] inline std::string ToString(EntityAddedMsg msg) {
+  std::string result;
+  result.reserve(64);
+  ToString(msg, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs `EntityAddedMsg` message to an output stream.
+ * @param os Output stream
+ * @param msg `EntityAddedMsg` message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, EntityAddedMsg msg) {
+  ToString(msg, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
+/**
+ * @brief Formats `EntityDestroyedMsg` message using an output iterator.
+ * @tparam It Output iterator type
+ * @param msg `EntityDestroyedMsg` message
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(EntityDestroyedMsg msg, It out) {
+  return std::format_to(out, "EntityDestroyedMsg{{entity={}}}",
+                        msg.GetEntity());
+}
+
+/**
+ * @brief Formats `EntityDestroyedMsg` message as a string.
+ * @param msg `EntityDestroyedMsg` message
+ * @return Formatted settings string
+ */
+[[nodiscard]] inline std::string ToString(EntityDestroyedMsg msg) {
+  std::string result;
+  result.reserve(64);
+  ToString(msg, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs `EntityDestroyedMsg` message to an output stream.
+ * @param os Output stream
+ * @param msg `EntityDestroyedMsg` message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, EntityDestroyedMsg msg) {
+  ToString(msg, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
+/**
+ * @brief Formats `ComponentAddedMsg` message using an output iterator.
+ * @tparam It Output iterator type
+ * @param msg `ComponentAddedMsg` message
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <ComponentTrait T, typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(ComponentAddedMsg<T> msg, It out) {
+  return std::format_to(out, "ComponentAddedMsg<{}>{{entity={}}}",
+                        ComponentNameOf<T>(), msg.GetEntity());
+}
+
+/**
+ * @brief Formats `ComponentAddedMsg` message as a string.
+ * @param msg `ComponentAddedMsg` message
+ * @return Formatted settings string
+ */
+template <ComponentTrait T>
+[[nodiscard]] inline std::string ToString(ComponentAddedMsg<T> msg) {
+  std::string result;
+  result.reserve(64);
+  ToString(msg, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs `ComponentAddedMsg` message to an output stream.
+ * @param os Output stream
+ * @param msg `ComponentAddedMsg` message
+ * @return Reference to the output stream
+ */
+template <ComponentTrait T>
+inline std::ostream& operator<<(std::ostream& os, ComponentAddedMsg<T> msg) {
+  ToString(msg, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
+/**
+ * @brief Formats `ComponentRemovedMsg` message using an output iterator.
+ * @tparam It Output iterator type
+ * @param msg `ComponentRemovedMsg` message
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <ComponentTrait T, typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(ComponentRemovedMsg<T> msg, It out) {
+  return std::format_to(out, "ComponentRemovedMsg<{}>{{entity={}}}",
+                        ComponentNameOf<T>(), msg.GetEntity());
+}
+
+/**
+ * @brief Formats `ComponentRemovedMsg` message as a string.
+ * @param msg `ComponentRemovedMsg` message
+ * @return Formatted settings string
+ */
+template <ComponentTrait T>
+[[nodiscard]] inline std::string ToString(ComponentRemovedMsg<T> msg) {
+  std::string result;
+  result.reserve(64);
+  ToString(msg, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs `ComponentRemovedMsg` message to an output stream.
+ * @param os Output stream
+ * @param msg `ComponentRemovedMsg` message
+ * @return Reference to the output stream
+ */
+template <ComponentTrait T>
+inline std::ostream& operator<<(std::ostream& os, ComponentRemovedMsg<T> msg) {
+  ToString(msg, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
+/**
+ * @brief Formats `ComponentsClearedMsg` message using an output iterator.
+ * @tparam It Output iterator type
+ * @param msg `ComponentsClearedMsg` message
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(ComponentsClearedMsg msg, It out) {
+  return std::format_to(out, "ComponentsClearedMsg{{entity={}}}",
+                        msg.GetEntity());
+}
+
+/**
+ * @brief Formats `ComponentsClearedMsg` message as a string.
+ * @param msg `ComponentsClearedMsg` message
+ * @return Formatted settings string
+ */
+[[nodiscard]] inline std::string ToString(ComponentsClearedMsg msg) {
+  std::string result;
+  result.reserve(64);
+  ToString(msg, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs `ComponentsClearedMsg` message to an output stream.
+ * @param os Output stream
+ * @param msg `ComponentsClearedMsg` message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, ComponentsClearedMsg msg) {
+  ToString(msg, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
+/**
+ * @brief Formats `ResourceInsertedMsg` message using an output iterator.
+ * @tparam It Output iterator type
+ * @param msg `ResourceInsertedMsg` message
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <ResourceTrait T, typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(ResourceInsertedMsg<T> /*msg*/, It out) {
+  return std::format_to(out, "ResourceInsertedMsg<{}>", ResourceNameOf<T>());
+}
+
+/**
+ * @brief Formats `ResourceInsertedMsg` message as a string.
+ * @param msg `ResourceInsertedMsg` message
+ * @return Formatted settings string
+ */
+template <ComponentTrait T>
+[[nodiscard]] inline std::string ToString(ResourceInsertedMsg<T> msg) {
+  std::string result;
+  result.reserve(64);
+  ToString(msg, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs `ResourceInsertedMsg` message to an output stream.
+ * @param os Output stream
+ * @param msg `ResourceInsertedMsg` message
+ * @return Reference to the output stream
+ */
+template <ComponentTrait T>
+inline std::ostream& operator<<(std::ostream& os, ResourceInsertedMsg<T> msg) {
+  ToString(msg, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
+/**
+ * @brief Formats `ResourceRemovedMsg` message using an output iterator.
+ * @tparam It Output iterator type
+ * @param msg `ResourceRemovedMsg` message
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <ResourceTrait T, typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(ResourceRemovedMsg<T> /*msg*/, It out) {
+  return std::format_to(out, "ResourceRemovedMsg<{}>", ResourceNameOf<T>());
+}
+
+/**
+ * @brief Formats `ResourceRemovedMsg` message as a string.
+ * @param msg `ResourceRemovedMsg` message
+ * @return Formatted settings string
+ */
+template <ComponentTrait T>
+[[nodiscard]] inline std::string ToString(ResourceRemovedMsg<T> msg) {
+  std::string result;
+  result.reserve(64);
+  ToString(msg, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs `ResourceRemovedMsg` message to an output stream.
+ * @param os Output stream
+ * @param msg `ResourceRemovedMsg` message
+ * @return Reference to the output stream
+ */
+template <ComponentTrait T>
+inline std::ostream& operator<<(std::ostream& os, ResourceRemovedMsg<T> msg) {
+  ToString(msg, std::ostreambuf_iterator<char>(os));
+  return os;
+}
 
 }  // namespace helios::ecs

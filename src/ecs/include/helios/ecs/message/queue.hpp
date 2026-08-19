@@ -6,6 +6,9 @@
 #include <helios/ecs/message/message.hpp>
 
 #include <algorithm>
+#include <concepts>
+#include <cstddef>
+#include <memory>
 #include <memory_resource>
 #include <ranges>
 #include <span>

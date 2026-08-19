@@ -4,6 +4,7 @@
 
 #include <atomic>
 #include <concepts>
+#include <cstddef>
 #include <cstdint>
 #include <memory>
 #include <memory_resource>
@@ -799,8 +800,8 @@ public:
     requires std::convertible_to<Other*, Derived*>
   AtomicRefCounted(AtomicRefCounted<Other, Allocator>&& other) noexcept;
 
-  // NOLINTEND(hicpp-explicit-conversions)
   // NOLINTEND(google-explicit-constructor)
+  // NOLINTEND(hicpp-explicit-conversions)
 
   /// @brief Destroys the handle and decrements the reference count.
   ~AtomicRefCounted() noexcept { DecRef(); }

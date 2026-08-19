@@ -14,53 +14,30 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import List, Optional, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from common import (
+    Colors,
+    add_extra_args_argument,
+    enable_windows_colors,
+    find_executable,
+    print_header,
+)
+from common import (
+    print_info as _print_info,
+)
+from common import (
+    print_success as _print_success,
+)
 from edition_selector import (
     render_branch_selector_html,
     render_version_selector_html,
     write_selector_js,
 )
 
-
-class Colors:
-    """ANSI color codes for terminal output"""
-
-    RED = "\033[0;31m"
-    GREEN = "\033[0;32m"
-    YELLOW = "\033[1;33m"
-    BLUE = "\033[0;34m"
-    NC = "\033[0m"  # No Color
-
-    @classmethod
-    def disable(cls):
-        """Disable colors for non-ANSI terminals"""
-
-        cls.RED = ""
-        cls.GREEN = ""
-        cls.YELLOW = ""
-        cls.BLUE = ""
-        cls.NC = ""
-
-
-# Enable colors on Windows 10+
-if sys.platform == "win32":
-    try:
-        import ctypes
-
-        kernel32 = ctypes.windll.kernel32
-        kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
-    except Exception:
-        Colors.disable()
-
-
-def print_header(message: str) -> None:
-    """Print a colored header message"""
-    print(f"\n{Colors.GREEN}{'=' * 60}{Colors.NC}")
-    print(f"{Colors.GREEN}{message:^60}{Colors.NC}")
-    print(f"{Colors.GREEN}{'=' * 60}{Colors.NC}\n")
+enable_windows_colors()
 
 
 def print_error(message: str) -> None:
@@ -78,20 +55,13 @@ def print_warning(message: str) -> None:
 def print_success(message: str) -> None:
     """Print a colored success message"""
 
-    print(f"{Colors.GREEN}{message}{Colors.NC}")
+    _print_success(message)
 
 
 def print_info(message: str) -> None:
     """Print a colored info message"""
 
-    print(f"{Colors.BLUE}{message}{Colors.NC}")
-
-
-def find_executable(name: str) -> Optional[Path]:
-    """Find an executable in PATH"""
-
-    result = shutil.which(name)
-    return Path(result) if result else None
+    _print_info(message)
 
 
 def check_dependencies(root_dir: Path) -> Tuple[bool, list, list]:
@@ -315,7 +285,9 @@ def build_docs_with_cmake(build_dir: Path, quiet: bool) -> Tuple[bool, int]:
     return result.returncode == 0, warning_count
 
 
-def build_docs_standalone(root_dir: Path, quiet: bool) -> bool:
+def build_docs_standalone(
+    root_dir: Path, quiet: bool, extra_args: Optional[List[str]] = None
+) -> bool:
     """Configure Doxyfile.in in the build tree and run Doxygen directly."""
 
     build_doxygen_dir = root_dir / "build/docs-doxygen"
@@ -329,11 +301,14 @@ def build_docs_standalone(root_dir: Path, quiet: bool) -> bool:
 
     print_info(f"Building documentation from: {build_doxygen_dir / 'Doxyfile'}")
     print_info(f"Output directory: {output_dir}")
+    if extra_args:
+        print_info(f"Extra doxygen arguments: {' '.join(extra_args)}")
     print()
 
     try:
+        command = ["doxygen", "Doxyfile"] + (extra_args or [])
         result = subprocess.run(
-            ["doxygen", "Doxyfile"],
+            command,
             cwd=str(build_doxygen_dir),
             capture_output=True,
             text=True,
@@ -413,6 +388,7 @@ def build_docs(
     quiet: bool = False,
     use_cmake: bool = False,
     build_dir: Optional[Path] = None,
+    extra_args: Optional[List[str]] = None,
 ) -> bool:
     """Build documentation using CMake when configured, otherwise standalone."""
 
@@ -446,7 +422,7 @@ def build_docs(
         print_build_success(output_dir, warning_count, quiet)
         return True
 
-    return build_docs_standalone(root_dir, quiet)
+    return build_docs_standalone(root_dir, quiet, extra_args=extra_args)
 
 
 def main() -> int:
@@ -510,6 +486,7 @@ Examples:
     parser.add_argument(
         "--no-color", action="store_true", help="Disable colored output"
     )
+    add_extra_args_argument(parser, "doxygen (standalone builds only)")
 
     args = parser.parse_args()
 
@@ -568,12 +545,16 @@ Examples:
 
     print()
 
+    if args.extra_args and args.cmake:
+        print_warning("--extra-arg is only applied to standalone (non-CMake) builds")
+
     success = build_docs(
         root_dir,
         clean=args.clean,
         quiet=quiet,
         use_cmake=args.cmake,
         build_dir=args.build_dir.resolve() if args.build_dir else None,
+        extra_args=args.extra_args,
     )
     return 0 if success else 1
 

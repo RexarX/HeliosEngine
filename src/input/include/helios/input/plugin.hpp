@@ -1,6 +1,5 @@
 #pragma once
 
-#include <helios/app/application.hpp>
 #include <helios/app/plugin.hpp>
 #include <helios/input/resources.hpp>
 

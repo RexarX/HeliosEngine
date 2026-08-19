@@ -1,5 +1,6 @@
 #include <doctest/doctest.h>
 
+#include <helios/window/components.hpp>
 #include <helios/window/native_handle.hpp>
 
 #include <variant>

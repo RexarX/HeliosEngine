@@ -5,6 +5,7 @@
 #include <helios/ecs/message/message.hpp>
 
 #include <concepts>
+#include <functional>
 #include <ranges>
 #include <utility>
 

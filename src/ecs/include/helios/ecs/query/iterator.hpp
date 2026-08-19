@@ -6,9 +6,9 @@
 #include <helios/ecs/component/manager.hpp>
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/query/details/traits.hpp>
-#include <helios/utils/common_traits.hpp>
 #include <helios/utils/functional_adapters.hpp>
 
+#include <algorithm>
 #include <concepts>
 #include <cstddef>
 #include <functional>

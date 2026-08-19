@@ -7,28 +7,38 @@
 #include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/component/manager.hpp>
-#include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/entity/manager.hpp>
 #include <helios/ecs/message/async_reader.hpp>
 #include <helios/ecs/message/async_writer.hpp>
+#include <helios/ecs/message/consumed_registry.hpp>
+#include <helios/ecs/message/cursor.hpp>
 #include <helios/ecs/message/manager.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/message/reader.hpp>
 #include <helios/ecs/message/writer.hpp>
+#include <helios/ecs/query/details/query_args.hpp>
 #include <helios/ecs/query/query.hpp>
 #include <helios/ecs/resource/manager.hpp>
 #include <helios/ecs/resource/resource.hpp>
+#include <helios/ecs/system/access_policy.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/utils/common_traits.hpp>
 
+#include <algorithm>
 #include <array>
 #include <concepts>
 #include <cstddef>
+#include <memory>
+#include <memory_resource>
 #include <ranges>
 #include <string>
 #include <type_traits>
+#include <utility>
 
 namespace helios::ecs {
+
+struct SystemLocalData;
 
 /**
  * @brief The World class manages entities with their components and systems.
@@ -39,7 +49,7 @@ namespace helios::ecs {
  */
 class World {
 public:
-  World() { AddBuiltinMessages(); }
+  World();
   World(const World&) = delete;
   World(World&&) noexcept = default;
   ~World() = default;
@@ -954,67 +964,6 @@ private:
                               ///< world, executed during `Flush()`.
 };
 
-inline void World::Update() {
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::World::Update");
-
-  Flush();
-  messages_.Update();
-}
-
-inline void World::Flush() {
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::World::Flush");
-
-  entity_manager_.Flush(
-      [this](Entity entity) { component_manager_.InitEntity(entity); });
-  command_queue_.ExecuteAll(*this);
-}
-
-inline void World::Clear() {
-  command_queue_.Clear();
-  component_manager_.Clear();
-  entity_manager_.Clear();
-  resources_.Clear();
-  messages_.Clear();
-  AddBuiltinMessages();
-}
-
-inline void World::ClearEntities() noexcept {
-  component_manager_.ClearData();
-  entity_manager_.Clear();
-}
-
-inline Entity World::CreateEntity() {
-  Entity entity = entity_manager_.Create();
-  component_manager_.InitEntity(entity);
-  messages_.Write(EntityAddedMsg(entity));
-  return entity;
-}
-
-inline void World::DestroyEntity(Entity entity) {
-  HELIOS_ASSERT(!entity_manager_.NeedsFlush(),
-                "Flush reserved entities before destruction!");
-  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
-  HELIOS_ASSERT(entity_manager_.Validate(entity),
-                "World does not own entity '{}'!", entity);
-
-  component_manager_.RemoveEntity(entity);
-  entity_manager_.Destroy(entity);
-  messages_.Write(EntityDestroyedMsg(entity));
-}
-
-inline void World::TryDestroyEntity(Entity entity) {
-  HELIOS_ASSERT(!entity_manager_.NeedsFlush(),
-                "Flush reserved entities before destruction!");
-  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
-  if (!entity_manager_.Validate(entity)) {
-    return;
-  }
-
-  component_manager_.TryRemoveEntity(entity);
-  entity_manager_.Destroy(entity);
-  messages_.Write(EntityDestroyedMsg(entity));
-}
-
 template <std::ranges::input_range R>
   requires std::same_as<std::ranges::range_value_t<R>, Entity>
 inline void World::DestroyEntities(const R& entities) {
@@ -1202,15 +1151,6 @@ inline auto World::TryRemoveBundle(Entity entity)
       });
 }
 
-inline void World::ClearComponents(Entity entity) {
-  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
-  HELIOS_ASSERT(entity_manager_.Validate(entity),
-                "World does not own entity '{}'!", entity);
-
-  component_manager_.Clear(entity);
-  messages_.Write(ComponentsClearedMsg{entity});
-}
-
 template <ComponentTrait T>
 inline T& World::WriteComponent(Entity entity) {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
@@ -1297,8 +1237,8 @@ template <ResourceTrait... Ts>
   requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
 inline void World::RemoveResources() {
 #ifdef HELIOS_ENABLE_ASSERTS
-  const auto has_resource = std::to_array({HasResource<Ts>()...});
-  constexpr auto names = std::to_array({ResourceNameOf<Ts>()...});
+  const std::array has_resource = {HasResource<Ts>()...};
+  constexpr std::array names = {ResourceNameOf<Ts>()...};
 
   const bool all_has_resource =
       std::ranges::all_of(has_resource, std::identity{});
@@ -1358,12 +1298,6 @@ inline void World::AddMessage() {
   }
 }
 
-inline void World::AddBuiltinMessages() {
-  AddMessage<EntityAddedMsg>();
-  AddMessage<EntityDestroyedMsg>();
-  AddMessage<ComponentsClearedMsg>();
-}
-
 template <AsyncMessageTrait T>
 inline auto World::ReadAsyncMessages() noexcept -> AsyncMessageReader<T> {
   HELIOS_ASSERT(HasMessage<T>(), "Message of type '{}' is not registered!",
@@ -1382,8 +1316,8 @@ template <AnyMessageTrait... Ts>
   requires(sizeof...(Ts) > 0)
 inline void World::ClearMessages() {
 #ifdef HELIOS_ENABLE_ASSERTS
-  const auto has_message = std::to_array({HasMessage<Ts>()...});
-  constexpr auto names = std::to_array({MessageNameOf<Ts>()...});
+  const std::array has_message = {HasMessage<Ts>()...};
+  constexpr std::array names = {MessageNameOf<Ts>()...};
 
   const bool all_has_message =
       std::ranges::all_of(has_message, std::identity{});
@@ -1453,5 +1387,17 @@ inline auto World::HasComponents(Entity entity) const
                 "World does not own entity '{}'!", entity);
   return component_manager_.template Has<Ts...>(entity);
 }
+
+template <>
+struct SystemParamTraits<World> {
+  static constexpr World& Make(World& world, SystemLocalData& /*data*/,
+                               const AccessPolicy& /*policy*/) noexcept {
+    return world;
+  }
+
+  static constexpr void RegisterAccess(AccessPolicyBuilder& builder) {
+    builder.Exclusive();
+  }
+};
 
 }  // namespace helios::ecs

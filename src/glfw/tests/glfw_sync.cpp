@@ -11,53 +11,54 @@
 
 #include <GLFW/glfw3.h>
 
-using namespace helios::ecs;
+using namespace helios;
 using namespace helios::glfw;
-using namespace helios::window;
 
 TEST_SUITE("helios::glfw::MarkMonitorDependentDirty") {
   TEST_CASE("helios::glfw::MarkMonitorDependentDirty") {
     SUBCASE("Marks monitor dirty when a window pins a monitor index") {
-      World world;
+      ecs::World world;
       NativeWindows native;
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(entity, Window::FromProperties(Properties{
-                                      .monitor_index = 0,
-                                      .mode = Mode::kWindowed,
-                                  }));
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(entity,
+                          window::Window::FromProperties(window::Properties{
+                              .monitor_index = 0,
+                              .mode = window::Mode::kWindowed,
+                          }));
       native.Insert(entity, {});
 
       MarkMonitorDependentDirty(world, native);
 
-      const auto& window = world.ReadComponent<Window>(entity);
-      CHECK(window.Dirty(DirtyFlag::kMonitor));
-      CHECK_FALSE(window.Dirty(DirtyFlag::kMode));
+      const auto& window = world.ReadComponent<window::Window>(entity);
+      CHECK(window.Dirty(window::DirtyFlag::kMonitor));
+      CHECK_FALSE(window.Dirty(window::DirtyFlag::kMode));
     }
 
     SUBCASE("Marks mode dirty for fullscreen presentation") {
-      World world;
+      ecs::World world;
       NativeWindows native;
-      const Entity entity = world.CreateEntity();
-      world.AddComponents(entity, Window::FromProperties(Properties{
-                                      .mode = Mode::kFullscreen,
-                                  }));
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(entity,
+                          window::Window::FromProperties(window::Properties{
+                              .mode = window::Mode::kFullscreen,
+                          }));
       native.Insert(entity, {});
 
       MarkMonitorDependentDirty(world, native);
 
-      const auto& window = world.ReadComponent<Window>(entity);
-      CHECK(window.Dirty(DirtyFlag::kMode));
-      CHECK_FALSE(window.Dirty(DirtyFlag::kMonitor));
+      const auto& window = world.ReadComponent<window::Window>(entity);
+      CHECK(window.Dirty(window::DirtyFlag::kMode));
+      CHECK_FALSE(window.Dirty(window::DirtyFlag::kMonitor));
     }
 
     SUBCASE("Skips entities without a Window component") {
-      World world;
+      ecs::World world;
       NativeWindows native;
-      const Entity entity = world.CreateEntity();
+      const ecs::Entity entity = world.CreateEntity();
       native.Insert(entity, {});
 
       MarkMonitorDependentDirty(world, native);
-      CHECK_FALSE(world.HasComponent<Window>(entity));
+      CHECK_FALSE(world.HasComponent<window::Window>(entity));
     }
   }
 }
@@ -93,7 +94,7 @@ TEST_SUITE("helios::glfw::RefreshMonitors") {
         return;
       }
 
-      Monitors monitors;
+      window::Monitors monitors;
       RefreshMonitors(monitors);
 
       CHECK_FALSE(monitors.monitors.empty());
@@ -109,7 +110,7 @@ TEST_SUITE("helios::glfw::RefreshMonitors") {
 TEST_SUITE("helios::glfw::ResolveCreationSize") {
   TEST_CASE("helios::glfw::ResolveCreationSize") {
     SUBCASE("Leaves an explicit size unchanged") {
-      Window window = Window::FromProperties(Properties{
+      window::Window window = window::Window::FromProperties(window::Properties{
           .width = 64,
           .height = 48,
       });
@@ -127,7 +128,8 @@ TEST_SUITE("helios::glfw::ResolveCreationSize") {
         return;
       }
 
-      Window window = Window::FromProperties(Properties{});
+      window::Window window =
+          window::Window::FromProperties(window::Properties{});
       ResolveCreationSize(window);
 
       CHECK(window.properties.width.has_value());

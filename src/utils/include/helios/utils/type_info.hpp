@@ -6,6 +6,7 @@
 #include <compare>
 #include <cstddef>
 #include <cstdint>
+#include <functional>
 #include <string_view>
 #include <type_traits>
 
@@ -322,12 +323,13 @@ template <typename T>
 [[nodiscard]] consteval bool IsLambdaType() noexcept {
 #if HELIOS_HAS_REFLECTION
   return std::meta::is_class(^^T) && !std::meta::has_identifier(^^T);
+#elif defined(__clang__)
+  // clang-cl also defines _MSC_VER; Clang pretty-prints "(lambda at ...)".
+  constexpr auto name = GetUnqualifiedTypeName<T>();
+  return name.find("(lambda at") != std::string_view::npos;
 #elif defined(_MSC_VER)
   constexpr auto name = GetUnqualifiedTypeName<T>();
   return name.find("<lambda_") != std::string_view::npos;
-#elif defined(__clang__)
-  constexpr auto name = GetUnqualifiedTypeName<T>();
-  return name.find("(lambda at") != std::string_view::npos;
 #elif defined(__GNUC__)
   constexpr auto name = GetUnqualifiedTypeName<T>();
   return name.find("<lambda(") != std::string_view::npos ||

@@ -6,6 +6,7 @@
 #include <compare>
 #include <cstddef>
 #include <format>
+#include <functional>
 #include <iostream>
 #include <iterator>
 #include <string>

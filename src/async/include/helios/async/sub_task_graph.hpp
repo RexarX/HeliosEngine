@@ -13,7 +13,7 @@
 #include <taskflow/algorithm/sort.hpp>
 #include <taskflow/algorithm/transform.hpp>
 #include <taskflow/core/async_task.hpp>
-#include <taskflow/taskflow.hpp>
+#include <taskflow/core/flow_builder.hpp>
 
 #include <array>
 #include <concepts>

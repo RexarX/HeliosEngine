@@ -5,6 +5,7 @@
 
 #include <taskflow/core/task.hpp>
 
+#include <array>
 #include <concepts>
 #include <cstddef>
 #include <ranges>

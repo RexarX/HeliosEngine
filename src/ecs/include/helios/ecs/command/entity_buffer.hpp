@@ -2,13 +2,15 @@
 
 #include <helios/assert.hpp>
 #include <helios/ecs/builtin_commands.hpp>
-#include <helios/ecs/command/command.hpp>
 #include <helios/ecs/command/queue.hpp>
 #include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/entity/entity.hpp>
+#include <helios/utils/common_traits.hpp>
 
 #include <concepts>
+#include <cstddef>
+#include <memory>
 #include <memory_resource>
 #include <type_traits>
 #include <utility>

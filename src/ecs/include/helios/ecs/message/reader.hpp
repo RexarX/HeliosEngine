@@ -3,17 +3,21 @@
 #include <helios/assert.hpp>
 #include <helios/ecs/message/consumed_registry.hpp>
 #include <helios/ecs/message/cursor.hpp>
+#include <helios/ecs/message/id.hpp>
+#include <helios/ecs/message/manager.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/message/wrapper.hpp>
 #include <helios/utils/functional_adapters.hpp>
 
 #include <algorithm>
+#include <concepts>
 #include <cstddef>
 #include <functional>
 #include <iterator>
 #include <memory>
 #include <memory_resource>
 #include <optional>
+#include <ranges>
 #include <span>
 #include <type_traits>
 #include <unordered_map>

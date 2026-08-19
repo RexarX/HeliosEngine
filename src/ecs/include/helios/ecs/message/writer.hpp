@@ -1,13 +1,17 @@
 #pragma once
 
+#include <helios/ecs/message/id.hpp>
 #include <helios/ecs/message/manager.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/message/queue.hpp>
 
 #include <concepts>
+#include <cstddef>
 #include <functional>
+#include <memory>
 #include <memory_resource>
 #include <ranges>
+#include <type_traits>
 #include <utility>
 
 namespace helios::ecs {

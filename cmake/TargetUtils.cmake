@@ -170,12 +170,26 @@ endfunction()
     Applies configuration-specific optimization and debug compile options.
 ]]
 function(helios_target_set_optimization TARGET)
+  # /RTC1 is incompatible with MSVC ASan. Keep it for unsanitized Debug.
+  set(_helios_msvc_debug_rtc "$<$<CONFIG:Debug>:/RTC1>")
+  if(HELIOS_ENABLE_SANITIZERS AND HELIOS_SANITIZER_ADDRESS
+      AND NOT HELIOS_COMPILER_IS_CLANG_CL)
+    set(_helios_msvc_debug_rtc "")
+  endif()
+
   target_compile_options(${TARGET} PRIVATE
-      # MSVC and clang-cl (MSVC frontend)
-      $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
+      # MSVC-only: clang-cl does not implement /Zc:preprocessor or /MP
+      # (Ninja already parallelizes compiles).
+      $<$<CXX_COMPILER_ID:MSVC>:
           /Zc:preprocessor
           /MP
-          $<$<CONFIG:Debug>:/Od /Zi /RTC1 /MDd>
+      >
+      # MSVC and clang-cl (MSVC frontend)
+      $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
+          $<$<CONFIG:Debug>:/Od>
+          $<$<CONFIG:Debug>:/Zi>
+          ${_helios_msvc_debug_rtc}
+          $<$<CONFIG:Debug>:/MDd>
           # /Ob2 + /Zo: Release-like inlining with better optimized debugging
           $<$<CONFIG:RelWithDebInfo>:/O2 /Ob2 /Zi /Zo /DNDEBUG>
           $<$<CONFIG:Release>:/O2 /Ob2 /DNDEBUG>
@@ -223,9 +237,16 @@ function(helios_target_set_optimization TARGET)
         $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
             $<$<CONFIG:Debug>:/INCREMENTAL>
             $<$<NOT:$<CONFIG:Debug>>:/INCREMENTAL:NO>
-            $<$<CONFIG:RelWithDebInfo>:/OPT:REF /OPT:ICF>
         >
     )
+    # RAD Linker does not implement /opt:ref yet.
+    if(NOT HELIOS_LINKER_RELWITHDEBINFO STREQUAL "rad")
+      target_link_options(${TARGET} PRIVATE
+          $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
+              $<$<CONFIG:RelWithDebInfo>:/OPT:REF /OPT:ICF>
+          >
+      )
+    endif()
   endif()
 
   # Workaround for Clang < 21: std::forward_like builtin causes issues
@@ -239,9 +260,9 @@ endfunction()
 #[[
     helios_target_enable_lto(<target>)
 
-    Enables IPO/LTO properties for Release and RelWithDebInfo when supported.
-    Also applies RelWithDebInfo ThinLTO / parallel LTO / incremental LTCG via
-    helios_target_apply_lto_mode().
+    Enables IPO/LTO for Release when supported. RelWithDebInfo LTO is opt-in
+    via HELIOS_ENABLE_LTO_RELWITHDEBINFO (ThinLTO / parallel LTO / incremental
+    LTCG via helios_target_apply_lto_mode()).
 ]]
 function(helios_target_enable_lto TARGET)
   if(NOT HELIOS_ENABLE_LTO)
@@ -257,9 +278,17 @@ function(helios_target_enable_lto TARGET)
 
   if(HELIOS_IPO_SUPPORTED)
     set_target_properties(${TARGET} PROPERTIES
-        INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON
         INTERPROCEDURAL_OPTIMIZATION_RELEASE ON
     )
+    if(HELIOS_ENABLE_LTO_RELWITHDEBINFO)
+      set_target_properties(${TARGET} PROPERTIES
+          INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON
+      )
+    else()
+      set_target_properties(${TARGET} PROPERTIES
+          INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO OFF
+      )
+    endif()
     if(COMMAND helios_target_apply_lto_mode)
       helios_target_apply_lto_mode(${TARGET})
     endif()

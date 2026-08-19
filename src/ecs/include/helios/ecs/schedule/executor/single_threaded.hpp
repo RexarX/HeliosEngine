@@ -1,18 +1,24 @@
 #pragma once
 
-#include <helios/async/executor.hpp>
 #include <helios/async/future.hpp>
 #include <helios/async/task.hpp>
 #include <helios/async/task_graph.hpp>
 #include <helios/ecs/schedule/executor/executor.hpp>
 
-#include <chrono>
 #include <functional>
-#include <future>
 #include <optional>
 #include <vector>
 
+namespace helios::async {
+
+class Executor;
+
+}
+
 namespace helios::ecs {
+
+class World;
+class Schedule;
 
 /**
  * @brief Single-threaded executor that runs systems sequentially on a single
@@ -67,23 +73,5 @@ private:
   std::vector<async::Task> tasks_;
   std::optional<async::Future<void>> future_;
 };
-
-inline void SingleThreadedExecutor::Wait() {
-  if (!future_.has_value()) [[unlikely]] {
-    return;
-  }
-
-  if (executor_.get().IsWorkerThread()) {
-    async::Future<void>& future = *future_;
-    executor_.get().CoRunUntil([&future]() {
-      return future.WaitFor(std::chrono::seconds{0}) ==
-             std::future_status::ready;
-    });
-  } else {
-    future_->Wait();
-  }
-
-  future_.reset();
-}
 
 }  // namespace helios::ecs

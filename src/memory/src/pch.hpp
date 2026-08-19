@@ -24,6 +24,6 @@
 #include <crtdbg.h>
 #endif
 
-#ifdef HELIOS_MEMORY_USE_MIMALLOC
+#if defined(HELIOS_MEMORY_USE_MIMALLOC) && !defined(__SANITIZE_ADDRESS__)
 #include <mimalloc.h>
 #endif

@@ -1,19 +1,17 @@
 #pragma once
 
-#include <helios/app/details/profile.hpp>
 #include <helios/app/schedules.hpp>
 #include <helios/assert.hpp>
-#include <helios/async/executor.hpp>
-#include <helios/compiler/compiler.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/schedule/scheduler.hpp>
 #include <helios/ecs/schedule/stage.hpp>
+#include <helios/ecs/schedule/system_handle.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/schedule/system_set.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/ecs/world.hpp>
-#include <helios/log/logger.hpp>
 #include <helios/utils/type_info.hpp>
 
 #include <atomic>
@@ -24,12 +22,14 @@
 #include <optional>
 #include <string>
 #include <string_view>
+#include <type_traits>
 #include <utility>
 
-#if defined(HELIOS_APP_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-#include <format>
-#endif
+namespace helios::async {
+
+class Executor;
+
+}
 
 namespace helios::app {
 
@@ -632,71 +632,6 @@ private:
   friend class App;
   friend class Scheduler;
 };
-
-inline SubApp::SubApp(SubApp&& other) noexcept
-    : name_(std::move(other.name_)),
-      world_(std::move(other.world_)),
-      scheduler_(std::move(other.scheduler_)),
-      update_stage_(other.update_stage_),
-      runner_(std::move(other.runner_)),
-      extract_fn_(std::move(other.extract_fn_)),
-      is_updating_(other.is_updating_.load(std::memory_order_acquire)),
-      async_loop_stop_(other.async_loop_stop_.load(std::memory_order_acquire)),
-      allow_overlapping_updates_(other.allow_overlapping_updates_),
-      is_async_(other.is_async_),
-      max_extraction_skips_(other.max_extraction_skips_),
-      owner_app_(other.owner_app_) {
-  HELIOS_ASSERT(!other.IsUpdating(), "Cannot move from updating sub-app!");
-}
-
-inline void SubApp::Update(async::Executor& executor) {
-  HELIOS_APP_PROFILE_SCOPE();
-  HELIOS_APP_PROFILE_ZONE_NAME(
-      std::format("helios::app::SubApp::Update{{name: {}}}", GetName()));
-  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(
-      "allow_overlapping_updates: {}, max_extraction_skips: {}, is_async: "
-      "{}",
-      allow_overlapping_updates_, max_extraction_skips_, is_async_));
-
-  HELIOS_ASSERT(IsUpdating(),
-                "Update must be called within an active update pass!");
-  if (!update_stage_.has_value()) [[unlikely]] {
-    log::Warn("Sub-app update stage is not set!");
-    return;
-  }
-
-  RunStageUnchecked(executor, *update_stage_, world_);
-}
-
-inline void SubApp::Extract(const ecs::World& main_world,
-                            [[maybe_unused]] bool allow_while_updating) {
-  HELIOS_APP_PROFILE_SCOPE();
-  HELIOS_APP_PROFILE_ZONE_NAME(
-      std::format("helios::app::SubApp::Extract{{name: {}}}", GetName()));
-  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(
-      "allow_overlapping_updates: {}, max_extraction_skips: {}, is_async: {}",
-      allow_overlapping_updates_, max_extraction_skips_, is_async_));
-
-  HELIOS_ASSERT(!IsUpdating() || allow_while_updating,
-                "Cannot extract while sub-app is updating!");
-
-  if (extract_fn_) [[likely]] {
-    extract_fn_(main_world, world_);
-  }
-}
-
-inline void SubApp::BuildScheduler(async::Executor& executor) {
-  HELIOS_APP_PROFILE_SCOPE();
-  HELIOS_APP_PROFILE_ZONE_NAME(std::format(
-      "helios::app::SubApp::BuildScheduler{{name: {}}}", GetName()));
-  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(
-      "allow_overlapping_updates: {}, max_extraction_skips: {}, is_async: {}",
-      allow_overlapping_updates_, max_extraction_skips_, is_async_));
-
-  if (scheduler_.IsDirty()) {
-    scheduler_.Build(executor);
-  }
-}
 
 template <ecs::ScheduleTrait T>
 inline auto SubApp::InitSchedule(this auto&& self, const T& label)

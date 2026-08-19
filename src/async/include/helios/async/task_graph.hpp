@@ -9,7 +9,8 @@
 #include <taskflow/algorithm/reduce.hpp>
 #include <taskflow/algorithm/sort.hpp>
 #include <taskflow/algorithm/transform.hpp>
-#include <taskflow/taskflow.hpp>
+#include <taskflow/core/task.hpp>
+#include <taskflow/core/taskflow.hpp>
 
 #include <array>
 #include <concepts>

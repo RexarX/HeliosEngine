@@ -6,7 +6,6 @@
 #include <helios/window/resources.hpp>
 
 #include <cstdint>
-#include <span>
 
 struct GLFWmonitor;
 struct GLFWwindow;

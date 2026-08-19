@@ -2,10 +2,6 @@
 
 #include <helios/window/properties.hpp>
 
-#include <format>
-#include <sstream>
-#include <string>
-
 using namespace helios::window;
 
 TEST_SUITE("helios::window::IsFullscreenPresentation") {
@@ -36,126 +32,6 @@ TEST_SUITE("helios::window::HasFlag") {
 
     SUBCASE("kNone never matches a concrete flag") {
       CHECK_FALSE(HasFlag(DirtyFlag::kNone, DirtyFlag::kTitle));
-    }
-  }
-}
-
-TEST_SUITE("helios::window::operator|") {
-  TEST_CASE("helios::window::operator|") {
-    SUBCASE("Combines dirty flags") {
-      const DirtyFlag flags = DirtyFlag::kTitle | DirtyFlag::kSize;
-      CHECK(HasFlag(flags, DirtyFlag::kTitle));
-      CHECK(HasFlag(flags, DirtyFlag::kSize));
-    }
-  }
-}
-
-TEST_SUITE("helios::window::ToString") {
-  TEST_CASE("helios::window::ToString") {
-    SUBCASE("Formats presentation modes") {
-      CHECK_EQ(ToString(Mode::kWindowed), "Windowed");
-      CHECK_EQ(ToString(Mode::kBorderless), "Borderless");
-      CHECK_EQ(ToString(Mode::kFullscreen), "Fullscreen");
-      CHECK_EQ(ToString(static_cast<Mode>(255)), "unknown");
-    }
-
-    SUBCASE("Formats cursor modes") {
-      CHECK_EQ(ToString(CursorMode::kVisible), "Visible");
-      CHECK_EQ(ToString(CursorMode::kHidden), "Hidden");
-      CHECK_EQ(ToString(CursorMode::kDisabled), "Disabled");
-      CHECK_EQ(ToString(static_cast<CursorMode>(255)), "unknown");
-    }
-
-    SUBCASE("Formats client APIs") {
-      CHECK_EQ(ToString(ClientApi::kNone), "None");
-      CHECK_EQ(ToString(ClientApi::kOpenGL), "OpenGL");
-      CHECK_EQ(ToString(static_cast<ClientApi>(255)), "unknown");
-    }
-
-    SUBCASE("Formats dirty flags without prefix") {
-      CHECK_EQ(ToString(DirtyFlag::kNone), "None");
-      CHECK_EQ(ToString(DirtyFlag::kTitle | DirtyFlag::kSize), "Title | Size");
-      CHECK_EQ(ToString(DirtyFlag::kFocus | DirtyFlag::kMousePassthrough),
-               "Focus | MousePassthrough");
-      CHECK_EQ(ToString(DirtyFlag::kRefreshRate), "RefreshRate");
-    }
-
-    SUBCASE("Formats dirty flags with prefix") {
-      CHECK_EQ(ToString(DirtyFlag::kNone, true), "DirtyFlag::None");
-      CHECK_EQ(ToString(DirtyFlag::kTitle | DirtyFlag::kSize, true),
-               "DirtyFlag::Title | DirtyFlag::Size");
-    }
-
-    SUBCASE("Formats properties") {
-      const Properties properties{
-          .title = "Test",
-          .width = 800,
-          .height = 600,
-          .client_width = 790,
-          .client_height = 560,
-          .pos_x = 10,
-          .pos_y = 20,
-          .monitor_index = 0,
-          .refresh_rate = 144,
-          .min_width = 320,
-          .min_height = 240,
-          .max_width = 1920,
-          .max_height = 1080,
-          .aspect_numer = 16,
-          .aspect_denom = 9,
-          .mode = Mode::kBorderless,
-          .cursor_mode = CursorMode::kHidden,
-          .visible = false,
-          .focused = false,
-          .resizable = false,
-          .decorated = false,
-      };
-
-      const auto formatted = ToString(properties);
-      CHECK_NE(formatted.find("title=\"Test\""), std::string::npos);
-      CHECK_NE(formatted.find("width=800"), std::string::npos);
-      CHECK_NE(formatted.find("height=600"), std::string::npos);
-      CHECK_NE(formatted.find("client_width=790"), std::string::npos);
-      CHECK_NE(formatted.find("pos_x=10"), std::string::npos);
-      CHECK_NE(formatted.find("refresh_rate=144"), std::string::npos);
-      CHECK_NE(formatted.find("mode=Borderless"), std::string::npos);
-      CHECK_NE(formatted.find("cursor_mode=Hidden"), std::string::npos);
-      CHECK_NE(formatted.find("visible=false"), std::string::npos);
-    }
-  }
-}
-
-TEST_SUITE("helios::window::operator<<") {
-  TEST_CASE("helios::window::operator<<") {
-    SUBCASE("Streams presentation mode") {
-      std::ostringstream stream;
-      stream << Mode::kWindowed;
-      CHECK_EQ(stream.str(), "Mode::Windowed");
-    }
-
-    SUBCASE("Streams cursor mode") {
-      std::ostringstream stream;
-      stream << CursorMode::kDisabled;
-      CHECK_EQ(stream.str(), "CursorMode::Disabled");
-    }
-
-    SUBCASE("Streams client API") {
-      std::ostringstream stream;
-      stream << ClientApi::kNone;
-      CHECK_EQ(stream.str(), "ClientApi::None");
-    }
-
-    SUBCASE("Streams dirty flags") {
-      std::ostringstream stream;
-      stream << (DirtyFlag::kTitle | DirtyFlag::kSize);
-      CHECK_EQ(stream.str(), "Title | Size");
-    }
-
-    SUBCASE("Streams properties") {
-      const Properties properties{.title = "Test", .width = 800, .height = 600};
-      std::ostringstream stream;
-      stream << properties;
-      CHECK_EQ(stream.str(), ToString(properties));
     }
   }
 }
@@ -232,34 +108,6 @@ TEST_SUITE("helios::window::ResolveExclusiveVideoMode") {
       CHECK_EQ(requested.width, 2560U);
       CHECK_EQ(requested.height, 1440U);
       CHECK_EQ(requested.refresh_rate, 144U);
-    }
-  }
-}
-
-TEST_SUITE("std::formatter") {
-  TEST_CASE("std::formatter") {
-    SUBCASE("Formats Mode") {
-      CHECK_EQ(std::format("{}", Mode::kWindowed), "Mode::Windowed");
-    }
-
-    SUBCASE("Formats ClientApi") {
-      CHECK_EQ(std::format("{}", ClientApi::kOpenGL), "ClientApi::OpenGL");
-    }
-
-    SUBCASE("Formats CursorMode") {
-      CHECK_EQ(std::format("{}", CursorMode::kDisabled),
-               "CursorMode::Disabled");
-    }
-
-    SUBCASE("Formats DirtyFlag with prefix") {
-      CHECK_EQ(std::format("{}", DirtyFlag::kNone), "DirtyFlag::None");
-      CHECK_EQ(std::format("{}", DirtyFlag::kTitle | DirtyFlag::kSize),
-               "DirtyFlag::Title | DirtyFlag::Size");
-    }
-
-    SUBCASE("Formats Properties") {
-      const Properties properties{.title = "Test"};
-      CHECK_EQ(std::format("{}", properties), ToString(properties));
     }
   }
 }

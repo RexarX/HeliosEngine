@@ -3,10 +3,11 @@
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/query/details/traits.hpp>
 #include <helios/ecs/resource/resource.hpp>
-#include <helios/log/logger.hpp>
 #include <helios/utils/common_traits.hpp>
+#include <helios/utils/type_info.hpp>
 
 #include <algorithm>
+#include <iterator>
 #include <span>
 #include <string_view>
 #include <utility>

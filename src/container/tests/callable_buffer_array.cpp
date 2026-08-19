@@ -4,8 +4,11 @@
 
 #include <array>
 #include <cstddef>
+#include <memory>
 #include <memory_resource>
 #include <string>
+#include <type_traits>
+#include <utility>
 #include <vector>
 
 using namespace helios::container;

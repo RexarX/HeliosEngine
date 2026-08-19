@@ -29,100 +29,19 @@ enum class Mode : uint8_t {
   return mode == Mode::kBorderless || mode == Mode::kFullscreen;
 }
 
-/**
- * @brief Returns the string name of a window presentation mode.
- * @param mode Presentation mode
- * @return String name of the mode
- */
-[[nodiscard]] constexpr std::string_view ToString(Mode mode) noexcept {
-  switch (mode) {
-    using enum Mode;
-    case kWindowed:
-      return "Windowed";
-    case kBorderless:
-      return "Borderless";
-    case kFullscreen:
-      return "Fullscreen";
-  }
-  return "unknown";
-}
-
-/**
- * @brief Outputs a window presentation mode to an output stream.
- * @param os Output stream
- * @param mode Presentation mode
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, Mode mode) {
-  return os << "Mode::" << ToString(mode);
-}
-
 /// @brief Cursor visibility and capture mode.
 enum class CursorMode : uint8_t {
   kVisible = 0,   ///< Cursor is visible and free.
   kHidden = 1,    ///< Cursor is hidden but not captured.
   kDisabled = 2,  ///< Cursor is hidden and captured (raw input).
+  kCaptured = 3,  ///< Cursor is visible and confined to the window.
 };
-
-/**
- * @brief Returns the string name of a cursor mode.
- * @param mode Cursor mode
- * @return String name of the mode
- */
-[[nodiscard]] constexpr std::string_view ToString(CursorMode mode) noexcept {
-  switch (mode) {
-    using enum CursorMode;
-    case kVisible:
-      return "Visible";
-    case kHidden:
-      return "Hidden";
-    case kDisabled:
-      return "Disabled";
-  }
-  return "unknown";
-}
-
-/**
- * @brief Outputs a cursor mode to an output stream.
- * @param os Output stream
- * @param mode Cursor mode
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, CursorMode mode) {
-  return os << "CursorMode::" << ToString(mode);
-}
 
 /// @brief Graphics client API requested at window creation.
 enum class ClientApi : uint8_t {
-  kNone = 0,    ///< No client API (`GLFW_NO_API`); for Vulkan/DX/NRI backends.
-  kOpenGL = 1,  ///< OpenGL context (`GLFW_OPENGL_API`).
+  kNone = 0,  ///< No graphics client API; for Vulkan/DX/NRI/SDL-no-GL backends.
+  kOpenGL = 1,  ///< OpenGL context at window creation.
 };
-
-/**
- * @brief Returns the string name of a client API.
- * @param api Client API
- * @return String name of the API
- */
-[[nodiscard]] constexpr std::string_view ToString(ClientApi api) noexcept {
-  switch (api) {
-    using enum ClientApi;
-    case kNone:
-      return "None";
-    case kOpenGL:
-      return "OpenGL";
-  }
-  return "unknown";
-}
-
-/**
- * @brief Outputs a client API to an output stream.
- * @param os Output stream
- * @param api Client API
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, ClientApi api) {
-  return os << "ClientApi::" << ToString(api);
-}
 
 /// @brief Bitmask of pending property changes for backend synchronization.
 enum class DirtyFlag : uint32_t {
@@ -170,6 +89,273 @@ enum class DirtyFlag : uint32_t {
  */
 [[nodiscard]] constexpr bool HasFlag(DirtyFlag flags, DirtyFlag flag) noexcept {
   return (std::to_underlying(flags) & std::to_underlying(flag)) != 0U;
+}
+
+/// @brief RGBA8 window icon image.
+struct IconImage {
+  uint32_t width = 0;
+  uint32_t height = 0;
+  std::vector<uint8_t> rgba;
+
+  /**
+   * @brief Returns the image size in pixels.
+   * @return Width and height
+   */
+  [[nodiscard]] constexpr auto GetSize() const noexcept
+      -> std::pair<uint32_t, uint32_t> {
+    return {width, height};
+  }
+};
+
+/// @brief Creation-time and mutable window properties.
+struct Properties {
+  std::string title = "Helios";
+  std::vector<IconImage> icons;
+  std::optional<uint32_t> width;
+  std::optional<uint32_t> height;
+  std::optional<uint32_t> client_width;
+  std::optional<uint32_t> client_height;
+  std::optional<int32_t> pos_x;
+  std::optional<int32_t> pos_y;
+  std::optional<int32_t> monitor_index;
+  std::optional<uint32_t> refresh_rate;
+  std::optional<uint32_t> min_width;
+  std::optional<uint32_t> min_height;
+  std::optional<uint32_t> max_width;
+  std::optional<uint32_t> max_height;
+  std::optional<int32_t> aspect_numer;
+  std::optional<int32_t> aspect_denom;
+  float content_scale_x = 1.0F;
+  float content_scale_y = 1.0F;
+  float opacity = 1.0F;
+  Mode mode = Mode::kWindowed;
+  CursorMode cursor_mode = CursorMode::kVisible;
+  ClientApi client_api = ClientApi::kNone;
+  bool visible = true;
+  bool focused = true;
+  bool resizable = true;
+  bool decorated = true;
+  bool maximized = false;
+  bool floating = false;
+  bool auto_iconify = true;
+  bool focus_on_show = true;
+  bool hovered = false;
+  bool transparent_framebuffer = false;
+  bool scale_to_monitor = false;
+  bool scale_framebuffer = true;
+  bool mouse_passthrough = false;
+
+  /**
+   * @brief Returns the window size.
+   * @return Width and height, if set
+   */
+  [[nodiscard]] constexpr auto GetSize() const noexcept
+      -> std::pair<std::optional<uint32_t>, std::optional<uint32_t>> {
+    return {width, height};
+  }
+
+  /**
+   * @brief Returns the client-area size.
+   * @return Client width and height, if set
+   */
+  [[nodiscard]] constexpr auto GetClientSize() const noexcept
+      -> std::pair<std::optional<uint32_t>, std::optional<uint32_t>> {
+    return {client_width, client_height};
+  }
+
+  /**
+   * @brief Returns the window position.
+   * @return X and y, if set
+   */
+  [[nodiscard]] constexpr auto GetPos() const noexcept
+      -> std::pair<std::optional<int32_t>, std::optional<int32_t>> {
+    return {pos_x, pos_y};
+  }
+
+  /**
+   * @brief Returns the content scale.
+   * @return Horizontal and vertical scale
+   */
+  [[nodiscard]] constexpr auto GetContentScale() const noexcept
+      -> std::pair<float, float> {
+    return {content_scale_x, content_scale_y};
+  }
+
+  /**
+   * @brief Returns the minimum size limits.
+   * @return Minimum width and height, if set
+   */
+  [[nodiscard]] constexpr auto GetMinSize() const noexcept
+      -> std::pair<std::optional<uint32_t>, std::optional<uint32_t>> {
+    return {min_width, min_height};
+  }
+
+  /**
+   * @brief Returns the maximum size limits.
+   * @return Maximum width and height, if set
+   */
+  [[nodiscard]] constexpr auto GetMaxSize() const noexcept
+      -> std::pair<std::optional<uint32_t>, std::optional<uint32_t>> {
+    return {max_width, max_height};
+  }
+
+  /**
+   * @brief Returns the aspect-ratio constraint.
+   * @return Numerator and denominator, if set
+   */
+  [[nodiscard]] constexpr auto GetAspectRatio() const noexcept
+      -> std::pair<std::optional<int32_t>, std::optional<int32_t>> {
+    return {aspect_numer, aspect_denom};
+  }
+};
+
+/**
+ * @brief Computes a default client size for a monitor resolution.
+ * @details Uses most of the screen on portrait displays and a balanced fraction
+ * on landscape displays so fixed 1280x720 is not assumed.
+ * @param screen_width Monitor width in pixels
+ * @param screen_height Monitor height in pixels
+ * @return Default width and height in pixels
+ */
+[[nodiscard]] constexpr auto DefaultSizeForScreen(
+    uint32_t screen_width, uint32_t screen_height) noexcept
+    -> std::pair<uint32_t, uint32_t> {
+  constexpr uint32_t kMinSize = 320;
+
+  if (screen_width == 0 || screen_height == 0) {
+    return {1280, 720};
+  }
+
+  if (screen_height > screen_width) {
+    const uint32_t width =
+        std::clamp((screen_width * 9U) / 10U, kMinSize, screen_width);
+    const uint32_t height =
+        std::clamp((width * 16U) / 10U, kMinSize, (screen_height * 9U) / 10U);
+    return {width, height};
+  }
+
+  const uint32_t width =
+      std::clamp((screen_width * 2U) / 3U, kMinSize, screen_width);
+  const uint32_t height =
+      std::clamp((screen_height * 2U) / 3U, kMinSize, screen_height);
+  return {width, height};
+}
+
+/// @brief Exclusive-fullscreen width, height, and refresh rate.
+struct ExclusiveVideoMode {
+  uint32_t width = 0;
+  uint32_t height = 0;
+  uint32_t refresh_rate = 0;
+
+  /**
+   * @brief Returns the video-mode size.
+   * @return Width and height
+   */
+  [[nodiscard]] constexpr auto GetSize() const noexcept
+      -> std::pair<uint32_t, uint32_t> {
+    return {width, height};
+  }
+};
+
+/**
+ * @brief Resolves exclusive-fullscreen size and refresh rate.
+ * @details Unset `width`, `height`, and `refresh_rate` fall back to the
+ * current desktop video mode. Borderless fullscreen ignores this helper.
+ * @param properties Window properties
+ * @param desktop Current desktop video mode
+ * @return Size and refresh rate to request from the backend
+ */
+[[nodiscard]] constexpr ExclusiveVideoMode ResolveExclusiveVideoMode(
+    const Properties& properties, ExclusiveVideoMode desktop) noexcept {
+  return {
+      .width = properties.width.value_or(desktop.width),
+      .height = properties.height.value_or(desktop.height),
+      .refresh_rate = properties.refresh_rate.value_or(desktop.refresh_rate),
+  };
+}
+
+/**
+ * @brief Returns the string name of a window presentation mode.
+ * @param mode Presentation mode
+ * @return String name of the mode
+ */
+[[nodiscard]] constexpr std::string_view ToString(Mode mode) noexcept {
+  switch (mode) {
+    using enum Mode;
+    case kWindowed:
+      return "Windowed";
+    case kBorderless:
+      return "Borderless";
+    case kFullscreen:
+      return "Fullscreen";
+  }
+  return "unknown";
+}
+
+/**
+ * @brief Outputs a window presentation mode to an output stream.
+ * @param os Output stream
+ * @param mode Presentation mode
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, Mode mode) {
+  return os << "Mode::" << ToString(mode);
+}
+
+/**
+ * @brief Returns the string name of a cursor mode.
+ * @param mode Cursor mode
+ * @return String name of the mode
+ */
+[[nodiscard]] constexpr std::string_view ToString(CursorMode mode) noexcept {
+  switch (mode) {
+    using enum CursorMode;
+    case kVisible:
+      return "Visible";
+    case kHidden:
+      return "Hidden";
+    case kDisabled:
+      return "Disabled";
+    case kCaptured:
+      return "Captured";
+  }
+  return "unknown";
+}
+
+/**
+ * @brief Outputs a cursor mode to an output stream.
+ * @param os Output stream
+ * @param mode Cursor mode
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, CursorMode mode) {
+  return os << "CursorMode::" << ToString(mode);
+}
+
+/**
+ * @brief Returns the string name of a client API.
+ * @param api Client API
+ * @return String name of the API
+ */
+[[nodiscard]] constexpr std::string_view ToString(ClientApi api) noexcept {
+  switch (api) {
+    using enum ClientApi;
+    case kNone:
+      return "None";
+    case kOpenGL:
+      return "OpenGL";
+  }
+  return "unknown";
+}
+
+/**
+ * @brief Outputs a client API to an output stream.
+ * @param os Output stream
+ * @param api Client API
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, ClientApi api) {
+  return os << "ClientApi::" << ToString(api);
 }
 
 /**
@@ -237,7 +423,7 @@ inline It ToString(DirtyFlag flags, It out, bool with_prefix = false) {
 [[nodiscard]] inline std::string ToString(DirtyFlag flags,
                                           bool with_prefix = false) {
   std::string result;
-  result.reserve(32);  // Reserve some space for common cases
+  result.reserve(32);
   ToString(flags, std::back_inserter(result), with_prefix);
   return result;
 }
@@ -253,110 +439,46 @@ inline std::ostream& operator<<(std::ostream& os, DirtyFlag flags) {
   return os;
 }
 
-/// @brief RGBA8 window icon image.
-struct IconImage {
-  uint32_t width = 0;
-  uint32_t height = 0;
-  std::vector<uint8_t> rgba;
-};
-
-/// @brief Creation-time and mutable window properties.
-struct Properties {
-  std::string title = "Helios";
-  std::vector<IconImage> icons;
-  std::optional<uint32_t> width;
-  std::optional<uint32_t> height;
-  std::optional<uint32_t> client_width;
-  std::optional<uint32_t> client_height;
-  std::optional<int32_t> pos_x;
-  std::optional<int32_t> pos_y;
-  std::optional<int32_t> monitor_index;
-  std::optional<uint32_t> refresh_rate;
-  std::optional<uint32_t> min_width;
-  std::optional<uint32_t> min_height;
-  std::optional<uint32_t> max_width;
-  std::optional<uint32_t> max_height;
-  std::optional<int32_t> aspect_numer;
-  std::optional<int32_t> aspect_denom;
-  float content_scale_x = 1.0F;
-  float content_scale_y = 1.0F;
-  float opacity = 1.0F;
-  Mode mode = Mode::kWindowed;
-  CursorMode cursor_mode = CursorMode::kVisible;
-  ClientApi client_api = ClientApi::kNone;
-  bool visible = true;
-  bool focused = true;
-  bool resizable = true;
-  bool decorated = true;
-  bool maximized = false;
-  bool floating = false;
-  bool auto_iconify = true;
-  bool focus_on_show = true;
-  bool hovered = false;
-  bool transparent_framebuffer = false;
-  bool scale_to_monitor = false;
-  bool scale_framebuffer = true;
-  bool mouse_passthrough = false;
-};
-
 /**
- * @brief Computes a default client size for a monitor resolution.
- * @details Uses most of the screen on portrait displays and a balanced fraction
- * on landscape displays so fixed 1280x720 is not assumed.
- * @param screen_width Monitor width in pixels
- * @param screen_height Monitor height in pixels
- * @return Default width and height in pixels
+ * @brief Formats an icon image using an output iterator.
+ * @tparam It Output iterator type
+ * @param image Icon image
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
  */
-[[nodiscard]] constexpr auto DefaultSizeForScreen(
-    uint32_t screen_width, uint32_t screen_height) noexcept
-    -> std::pair<uint32_t, uint32_t> {
-  constexpr uint32_t kMinSize = 320;
-
-  if (screen_width == 0 || screen_height == 0) {
-    return {1280, 720};
-  }
-
-  if (screen_height > screen_width) {
-    const uint32_t width =
-        std::clamp((screen_width * 9U) / 10U, kMinSize, screen_width);
-    const uint32_t height =
-        std::clamp((width * 16U) / 10U, kMinSize, (screen_height * 9U) / 10U);
-    return {width, height};
-  }
-
-  const uint32_t width =
-      std::clamp((screen_width * 2U) / 3U, kMinSize, screen_width);
-  const uint32_t height =
-      std::clamp((screen_height * 2U) / 3U, kMinSize, screen_height);
-  return {width, height};
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(const IconImage& image, It out) {
+  return std::format_to(out, "IconImage{{width={}, height={}, rgba={}}}",
+                        image.width, image.height, image.rgba.size());
 }
 
-/// @brief Exclusive-fullscreen width, height, and refresh rate.
-struct ExclusiveVideoMode {
-  uint32_t width = 0;
-  uint32_t height = 0;
-  uint32_t refresh_rate = 0;
-};
+/**
+ * @brief Formats an icon image as a string.
+ * @param image Icon image
+ * @return Formatted icon image string
+ */
+[[nodiscard]] inline std::string ToString(const IconImage& image) {
+  std::string result;
+  result.reserve(64);
+  ToString(image, std::back_inserter(result));
+  return result;
+}
 
 /**
- * @brief Resolves exclusive-fullscreen size and refresh rate.
- * @details Unset `width`, `height`, and `refresh_rate` fall back to the
- * current desktop video mode. Borderless fullscreen ignores this helper.
- * @param properties Window properties
- * @param desktop Current desktop video mode
- * @return Size and refresh rate to request from the backend
+ * @brief Outputs an icon image to an output stream.
+ * @param os Output stream
+ * @param image Icon image
+ * @return Reference to the output stream
  */
-[[nodiscard]] constexpr ExclusiveVideoMode ResolveExclusiveVideoMode(
-    const Properties& properties, ExclusiveVideoMode desktop) noexcept {
-  return {
-      .width = properties.width.value_or(desktop.width),
-      .height = properties.height.value_or(desktop.height),
-      .refresh_rate = properties.refresh_rate.value_or(desktop.refresh_rate),
-  };
+inline std::ostream& operator<<(std::ostream& os, const IconImage& image) {
+  ToString(image, std::ostreambuf_iterator<char>(os));
+  return os;
 }
 
 /**
  * @brief Formats window properties using an output iterator.
+ * @tparam It Output iterator type
  * @param properties Window properties
  * @param out Output iterator to write the formatted string to
  * @return The output iterator after writing
@@ -464,13 +586,52 @@ inline std::ostream& operator<<(std::ostream& os,
   return os;
 }
 
+/**
+ * @brief Formats exclusive-fullscreen video mode using an output iterator.
+ * @tparam It Output iterator type
+ * @param mode Exclusive video mode
+ * @param out Output iterator to write the formatted string to
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(const ExclusiveVideoMode& mode, It out) {
+  return std::format_to(
+      out, "ExclusiveVideoMode{{width={}, height={}, refresh_rate={}}}",
+      mode.width, mode.height, mode.refresh_rate);
+}
+
+/**
+ * @brief Formats exclusive-fullscreen video mode as a string.
+ * @param mode Exclusive video mode
+ * @return Formatted exclusive video mode string
+ */
+[[nodiscard]] inline std::string ToString(const ExclusiveVideoMode& mode) {
+  std::string result;
+  result.reserve(64);
+  ToString(mode, std::back_inserter(result));
+  return result;
+}
+
+/**
+ * @brief Outputs exclusive-fullscreen video mode to an output stream.
+ * @param os Output stream
+ * @param mode Exclusive video mode
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const ExclusiveVideoMode& mode) {
+  ToString(mode, std::ostreambuf_iterator<char>(os));
+  return os;
+}
+
 }  // namespace helios::window
 
 namespace std {
 
 template <>
 struct formatter<helios::window::Mode> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -480,20 +641,8 @@ struct formatter<helios::window::Mode> {
 };
 
 template <>
-struct formatter<helios::window::ClientApi> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
-    return ctx.begin();
-  }
-
-  static constexpr auto format(helios::window::ClientApi api,
-                               format_context& ctx) {
-    return format_to(ctx.out(), "ClientApi::{}", helios::window::ToString(api));
-  }
-};
-
-template <>
 struct formatter<helios::window::CursorMode> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -505,8 +654,20 @@ struct formatter<helios::window::CursorMode> {
 };
 
 template <>
+struct formatter<helios::window::ClientApi> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static constexpr auto format(helios::window::ClientApi api,
+                               format_context& ctx) {
+    return format_to(ctx.out(), "ClientApi::{}", helios::window::ToString(api));
+  }
+};
+
+template <>
 struct formatter<helios::window::DirtyFlag> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
@@ -516,14 +677,38 @@ struct formatter<helios::window::DirtyFlag> {
 };
 
 template <>
+struct formatter<helios::window::IconImage> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::window::IconImage& image,
+                     format_context& ctx) {
+    return helios::window::ToString(image, ctx.out());
+  }
+};
+
+template <>
 struct formatter<helios::window::Properties> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 
   static auto format(const helios::window::Properties& properties,
                      format_context& ctx) {
     return helios::window::ToString(properties, ctx.out());
+  }
+};
+
+template <>
+struct formatter<helios::window::ExclusiveVideoMode> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::window::ExclusiveVideoMode& mode,
+                     format_context& ctx) {
+    return helios::window::ToString(mode, ctx.out());
   }
 };
 

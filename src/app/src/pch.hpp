@@ -15,6 +15,7 @@
 #include <memory>
 #include <mutex>
 #include <optional>
+#include <ratio>
 #include <string>
 #include <string_view>
 #include <system_error>

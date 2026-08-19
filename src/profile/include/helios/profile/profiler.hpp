@@ -5,7 +5,6 @@
 #include <helios/cstring_view.hpp>
 #include <helios/profile/backend.hpp>
 #include <helios/profile/common.hpp>
-#include <helios/profile/config.hpp>
 #include <helios/profile/details/memory_dispatch.hpp>
 #include <helios/utils/type_info.hpp>
 

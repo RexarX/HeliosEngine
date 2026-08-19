@@ -10,7 +10,6 @@
 #include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/component/sparse_storage.hpp>
-#include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/utils/common_traits.hpp>
 
@@ -1324,8 +1323,8 @@ inline auto ComponentManager::TryAdd(Entity entity, Ts&&... components)
       (... && ArchetypeComponentTrait<std::remove_cvref_t<Ts>>);
 
   if constexpr (kAllSparse) {
-    auto results = std::to_array(
-        {TryAddSparseComponent(entity, std::forward<Ts>(components))...});
+    std::array results = {
+        TryAddSparseComponent(entity, std::forward<Ts>(components))...};
     if constexpr (sizeof...(Ts) == 1) {
       return results.front();
     } else {
@@ -1458,7 +1457,7 @@ inline auto ComponentManager::TryRemove(Entity entity)
       (... && ArchetypeComponentTrait<std::remove_cvref_t<Ts>>);
 
   if constexpr (kAllSparse) {
-    auto results = std::to_array({TryRemoveSparseComponent<Ts>(entity)...});
+    std::array results = {TryRemoveSparseComponent<Ts>(entity)...};
     if constexpr (sizeof...(Ts) == 1) {
       return results.front();
     } else {

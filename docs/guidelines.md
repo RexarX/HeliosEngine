@@ -83,28 +83,11 @@ Every module under `src/` follows this layout:
 ```
 src/<module>/
 ├── CMakeLists.txt           # helios_module(...) call
-├── Module.cmake             # helios_register_module(...) call
 ├── README.md                # Module overview and usage
 ├── include/helios/<module>/ # Public headers
 ├── src/                     # Private sources + pch.hpp
 └── tests/                   # doctest test files + main.cpp
 ```
-
-### Registration (`Module.cmake`)
-
-```cmake
-helios_register_module(
-    NAME ecs
-    DESCRIPTION "Entity Component System module"
-    DEFAULT ON
-    DEPENDS async compiler container core log memory utils
-    OPTIONAL_DEPENDS profile
-)
-```
-
-- `DEFAULT ON/OFF` — whether the module builds unless explicitly overridden.
-- `DEPENDS` — required Helios modules (auto-enabled).
-- `OPTIONAL_DEPENDS` — integrated when present (e.g. `profile`).
 
 ### Build definition (`CMakeLists.txt`)
 
@@ -128,6 +111,10 @@ helios_module(
 )
 ```
 
+- `DEFAULT ON/OFF` — whether the module builds unless explicitly overridden.
+- `DEPENDS` — required Helios modules (auto-enabled).
+- `OPTIONAL_DEPENDS` — integrated when present (e.g. `profile`).
+
 External dependencies are declared per-module via `USES` and resolved from `cmake/dependencies/`. Most engine libraries are vendored under `HELIOS_THIRD_PARTY_DIR` (defaults to `third-party/`); use `-DHELIOS_THIRD_PARTY_DIR=...`, `HELIOS_FORCE_DOWNLOAD_<PKG>`, or `HELIOS_USE_SYSTEM_<PKG>` to relocate or opt into CPM/system packages. Remaining deps (e.g. Boost, TBB) still use system packages first with CPM fallback.
 
 ### Selective module builds
@@ -143,7 +130,7 @@ cmake --preset linux-gcc-debug -DHELIOS_BUILD_PROFILE=ON
 
 - **Framework:** doctest — one test binary per module, driven by `tests/main.cpp`.
 - Test files mirror source layout under each module's `tests/` directory.
-- Write tests only for non-trivial behavior.
+- Write tests only for non-trivial behavior (avoid getters, setters, etc.).
 
 ### Structure
 

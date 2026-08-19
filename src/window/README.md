@@ -20,7 +20,10 @@ Failed OS window creation tags the entity with `CreationFailed` and emits
 
 ## Backends
 
-Use `glfw` for the default GLFW backend (`WindowPlugin` / `WindowInputPlugin`).
+Use `helios::sdl3::Plugin`, `helios::sdl3::window::Plugin`, and
+`helios::sdl3::input::Plugin` with `window::Plugin` / `input::Plugin` as needed.
+GLFW remains available via `-DHELIOS_BUILD_GLFW=ON` and
+`-DHELIOS_BUILD_SDL3_WINDOW=OFF`.
 
 ## Dependencies
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include <helios/assert.hpp>
 #include <helios/ecs/message/consumed_registry.hpp>
 #include <helios/ecs/message/id.hpp>
+#include <helios/ecs/message/message.hpp>
 
 #include <cstddef>
 #include <functional>

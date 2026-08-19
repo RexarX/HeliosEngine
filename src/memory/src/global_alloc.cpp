@@ -1,7 +1,11 @@
 #include <helios/memory/details/profile.hpp>
 
-#ifdef HELIOS_MEMORY_USE_MIMALLOC
+// mimalloc global hooks bypass MSVC ASan-instrumented allocation. Route through
+// the CRT/debug heap when AddressSanitizer is enabled (MSVC /fsanitize=address
+// or Clang -fsanitize=address).
+#if defined(HELIOS_MEMORY_USE_MIMALLOC) && !defined(__SANITIZE_ADDRESS__)
 #include <mimalloc.h>
+#define HELIOS_GLOBAL_ALLOC_USE_MIMALLOC_BACKEND
 #endif
 
 #if defined(_MSC_VER) && defined(_DEBUG)
@@ -11,13 +15,6 @@
 #include <cstddef>
 #include <cstdlib>
 #include <new>
-
-// mimalloc global hooks bypass MSVC ASan-instrumented allocation. Route through
-// the CRT/debug heap when AddressSanitizer is enabled (MSVC /fsanitize=address
-// or Clang -fsanitize=address).
-#if defined(HELIOS_MEMORY_USE_MIMALLOC) && !defined(__SANITIZE_ADDRESS__)
-#define HELIOS_GLOBAL_ALLOC_USE_MIMALLOC_BACKEND
-#endif
 
 // These replaceable operator new/delete overloads form a single atomic set:
 // once any of them is provided, every allocation must be paired with a
@@ -29,7 +26,7 @@
 // overloads. Mixing this file's operator new with the default operator
 // delete (or vice versa) corrupts the heap, so every overload below is
 // force-kept regardless of apparent reachability.
-#if defined(__has_attribute)
+#ifdef __has_attribute
 #if __has_attribute(retain)
 #define HELIOS_GLOBAL_ALLOC_KEEP __attribute__((used, retain))
 #else
@@ -66,7 +63,7 @@ thread_local bool g_in_global_alloc_hook = false;
   return mi_malloc_aligned(size, static_cast<size_t>(alignment));
 #elif defined(_MSC_VER) && defined(_DEBUG)
   return _aligned_malloc_dbg(size, static_cast<size_t>(alignment), nullptr, 0);
-#elif defined(_MSC_VER)
+#elifdef _MSC_VER
   return _aligned_malloc(size, static_cast<size_t>(alignment));
 #else
   const auto align = static_cast<size_t>(alignment);
@@ -90,7 +87,7 @@ void RawAlignedFree(void* ptr) noexcept {
   mi_free(ptr);
 #elif defined(_MSC_VER) && defined(_DEBUG)
   _aligned_free_dbg(ptr);
-#elif defined(_MSC_VER)
+#elifdef _MSC_VER
   _aligned_free(ptr);
 #else
   std::free(ptr);
