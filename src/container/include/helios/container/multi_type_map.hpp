@@ -106,11 +106,33 @@ public:
   MultiTypeMap(std::nullptr_t) = delete;
 
   constexpr MultiTypeMap(const MultiTypeMap& other) = default;
-  constexpr MultiTypeMap(MultiTypeMap&& other) noexcept = default;
+
+  /**
+   * @brief Move-constructs by swapping with an empty map.
+   * @details Avoids `std::flat_map` move, which can leave a corrupted
+   * moved-from container on some standard libraries. The source is empty
+   * afterwards.
+   * @param other Map to steal from
+   */
+  constexpr MultiTypeMap(MultiTypeMap&& other) noexcept(
+      std::is_nothrow_swappable_v<MapType> &&
+      std::is_nothrow_swappable_v<allocator_type>) {
+    Swap(other);
+  }
   constexpr ~MultiTypeMap() = default;
 
   constexpr MultiTypeMap& operator=(const MultiTypeMap& other) = default;
-  constexpr MultiTypeMap& operator=(MultiTypeMap&& other) noexcept = default;
+
+  /**
+   * @brief Move-assigns by taking `other`'s contents and leaving it empty.
+   * @details Clears this map, then swaps. Same `std::flat_map` workaround as
+   * the move constructor.
+   * @param other Map to steal from
+   * @return `*this`
+   */
+  constexpr MultiTypeMap& operator=(MultiTypeMap&& other) noexcept(
+      std::is_nothrow_swappable_v<MapType> &&
+      std::is_nothrow_swappable_v<allocator_type>);
 
   /**
    * @brief Clears the Storage for type `T` (calls `Storage::Clear()` or
@@ -497,6 +519,20 @@ private:
   MapType storage_;
   HELIOS_NO_UNIQUE_ADDRESS allocator_type allocator_{};
 };
+
+template <typename Storage, typename Allocator>
+constexpr auto MultiTypeMap<Storage, Allocator>::operator=(
+    MultiTypeMap&& other) noexcept(std::is_nothrow_swappable_v<MapType> &&
+                                   std::is_nothrow_swappable_v<allocator_type>)
+    -> MultiTypeMap& {
+  if (this == &other) [[unlikely]] {
+    return *this;
+  }
+
+  ResetAll();
+  Swap(other);
+  return *this;
+}
 
 template <typename Storage, typename Allocator>
 constexpr void MultiTypeMap<Storage, Allocator>::Clear(

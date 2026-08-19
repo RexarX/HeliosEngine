@@ -65,7 +65,9 @@ void* FixedPoolAllocator::do_allocate(size_t bytes, size_t alignment) {
                 "Requested alignment exceeds fixed pool alignment!");
 
   void* const block = details::PopBlock(free_head_);
-  HELIOS_VERIFY(block != nullptr, "Fixed pool allocator exhausted!");
+  if (block == nullptr) [[unlikely]] {
+    return nullptr;
+  }
 
   const size_t free = free_blocks_.fetch_sub(1) - 1;
   const size_t used = block_count_ - free;

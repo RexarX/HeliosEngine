@@ -10,22 +10,22 @@ TEST_SUITE("helios::input::Plugin") {
   TEST_CASE("helios::input::Plugin::ctor") {
     SUBCASE("Default settings use stick and trigger filters") {
       const Plugin plugin;
-      CHECK_EQ(plugin.settings.stick.deadzone,
+      CHECK_EQ(plugin.settings_.stick.deadzone,
                doctest::Approx(AxisFilter::kDefaultDeadzone));
-      CHECK_EQ(plugin.settings.trigger.deadzone,
+      CHECK_EQ(plugin.settings_.trigger.deadzone,
                doctest::Approx(AxisFilter::kDefaultTriggerDeadzone));
-      CHECK_EQ(plugin.settings.rest_frames, Settings::kDefaultRestFrames);
-      CHECK(plugin.settings.auto_calibrate);
-      CHECK_FALSE(plugin.settings.raw_mouse_motion);
+      CHECK_EQ(plugin.settings_.rest_frames, Settings::kDefaultRestFrames);
+      CHECK(plugin.settings_.auto_calibrate);
+      CHECK_FALSE(plugin.settings_.raw_mouse_motion);
     }
 
     SUBCASE("Stores constructor-provided settings") {
       const Plugin plugin{{.stick = {.deadzone = 0.25F},
                            .auto_calibrate = false,
                            .raw_mouse_motion = true}};
-      CHECK_EQ(plugin.settings.stick.deadzone, doctest::Approx(0.25F));
-      CHECK_FALSE(plugin.settings.auto_calibrate);
-      CHECK(plugin.settings.raw_mouse_motion);
+      CHECK_EQ(plugin.settings_.stick.deadzone, doctest::Approx(0.25F));
+      CHECK_FALSE(plugin.settings_.auto_calibrate);
+      CHECK(plugin.settings_.raw_mouse_motion);
     }
   }
 

@@ -134,7 +134,9 @@ void* FixedFreeListAllocator::do_allocate(size_t bytes, size_t alignment) {
     }
   }
 
-  HELIOS_VERIFY(best != nullptr, "Fixed free-list allocator exhausted!");
+  if (best == nullptr) [[unlikely]] {
+    return nullptr;
+  }
 
   if (best_previous != nullptr) {
     best_previous->next = best->next;

@@ -11,9 +11,9 @@ TEST_SUITE("helios::window::Plugin") {
   TEST_CASE("helios::window::Plugin::ctor") {
     SUBCASE("Default settings use default exit triggers") {
       const Plugin plugin;
-      CHECK_EQ(plugin.settings.exit_triggers, kExitTriggersDefault);
-      CHECK_EQ(plugin.settings.event_mode, EventMode::kPoll);
-      CHECK_EQ(plugin.settings.event_wait_timeout,
+      CHECK_EQ(plugin.settings_.exit_triggers, kExitTriggersDefault);
+      CHECK_EQ(plugin.settings_.event_mode, EventMode::kPoll);
+      CHECK_EQ(plugin.settings_.event_wait_timeout,
                Settings::kDefaultEventWaitTimeout);
     }
 
@@ -21,9 +21,9 @@ TEST_SUITE("helios::window::Plugin") {
       const Plugin plugin{{.event_wait_timeout = 0.05,
                            .exit_triggers = kExitTriggersLastWindow,
                            .event_mode = EventMode::kWaitTimeout}};
-      CHECK_EQ(plugin.settings.exit_triggers, kExitTriggersLastWindow);
-      CHECK_EQ(plugin.settings.event_mode, EventMode::kWaitTimeout);
-      CHECK_EQ(plugin.settings.event_wait_timeout, doctest::Approx(0.05));
+      CHECK_EQ(plugin.settings_.exit_triggers, kExitTriggersLastWindow);
+      CHECK_EQ(plugin.settings_.event_mode, EventMode::kWaitTimeout);
+      CHECK_EQ(plugin.settings_.event_wait_timeout, doctest::Approx(0.05));
     }
   }
 

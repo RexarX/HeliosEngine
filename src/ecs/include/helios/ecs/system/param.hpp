@@ -47,7 +47,7 @@ concept SystemParam =
              const AccessPolicy& policy) {
       { SystemParamTraits<std::remove_cvref_t<T>>::RegisterAccess(builder) };
       SystemParamTraits<std::remove_cvref_t<T>>::Make(world, local, policy);
-      details::SystemParamMakeResultMatches<std::remove_cvref_t<T>>;
+      requires details::SystemParamMakeResultMatches<std::remove_cvref_t<T>>;
     };
 
 }  // namespace helios::ecs

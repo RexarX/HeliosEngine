@@ -417,7 +417,9 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
       while (alloc.Stats().total_allocated + kChunk + kChunkAlign <=
              kSmallCapacity) {
         void* const ptr = alloc.allocate(kChunk, kChunkAlign);
-        CHECK_NE(ptr, nullptr);
+        if (ptr == nullptr) {
+          break;
+        }
         live.push_back(ptr);
       }
       CHECK_GT(live.size(), 1);

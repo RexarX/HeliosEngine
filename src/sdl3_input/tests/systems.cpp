@@ -57,7 +57,7 @@ void AddInputPlugins(app::App& app) {
 TEST_SUITE("helios::sdl3::input::Init") {
   TEST_CASE("helios::sdl3::input::Init::operator()") {
     SUBCASE("Retains the gamepad subsystem and registers handlers") {
-      HELIOS_SKIP_IF_NO_SDL_GAMEPAD();
+      HELIOS_SKIP_IF_NO_SDL_RUNTIME();
 
       app::App app;
       AddInputPlugins(app);
@@ -116,7 +116,7 @@ TEST_SUITE("helios::sdl3::input::DestroyCursorCache") {
 TEST_SUITE("helios::sdl3::input::ApplyGamepadMappings") {
   TEST_CASE("helios::sdl3::input::ApplyGamepadMappings::operator()") {
     SUBCASE("Consumes queued mapping lines") {
-      HELIOS_SKIP_IF_NO_SDL_GAMEPAD();
+      HELIOS_SKIP_IF_NO_SDL_RUNTIME();
 
       app::App app;
       AddInputPlugins(app);
@@ -152,7 +152,7 @@ TEST_SUITE("helios::sdl3::input::ApplyGamepadMappings") {
 TEST_SUITE("helios::sdl3::input::PollGamepads") {
   TEST_CASE("helios::sdl3::input::PollGamepads::operator()") {
     SUBCASE("Runs without connected gamepads") {
-      HELIOS_SKIP_IF_NO_SDL_GAMEPAD();
+      HELIOS_SKIP_IF_NO_SDL_RUNTIME();
 
       app::App app;
       AddInputPlugins(app);
@@ -172,7 +172,7 @@ TEST_SUITE("helios::sdl3::input::PollGamepads") {
 TEST_SUITE("helios::sdl3::input::ApplyGamepadOutputs") {
   TEST_CASE("helios::sdl3::input::ApplyGamepadOutputs::operator()") {
     SUBCASE("Clears dirty output flags without an open SDL gamepad") {
-      HELIOS_SKIP_IF_NO_SDL_GAMEPAD();
+      HELIOS_SKIP_IF_NO_SDL_RUNTIME();
 
       app::App app;
       AddInputPlugins(app);
@@ -208,7 +208,7 @@ TEST_SUITE("helios::sdl3::input::ApplyGamepadOutputs") {
 TEST_SUITE("helios::sdl3::input::ApplyRawMouseMotion") {
   TEST_CASE("helios::sdl3::input::ApplyRawMouseMotion::operator()") {
     SUBCASE("Writes the relative mouse scale hint") {
-      HELIOS_SKIP_IF_NO_SDL_GAMEPAD();
+      HELIOS_SKIP_IF_NO_SDL_RUNTIME();
 
       app::App app;
       AddInputPlugins(app);

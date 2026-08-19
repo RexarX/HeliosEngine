@@ -76,7 +76,9 @@ void* FixedStackAllocator::do_allocate(size_t bytes, size_t alignment) {
     const size_t user_offset = SaturatingAdd(observed, padding);
     const size_t next = SaturatingAdd(user_offset, bytes);
 
-    HELIOS_VERIFY(next <= capacity_, "Fixed stack allocator exhausted!");
+    if (next > capacity_) [[unlikely]] {
+      return nullptr;
+    }
 
     if (offset_.compare_exchange_weak(observed, next, std::memory_order_acq_rel,
                                       std::memory_order_relaxed)) {

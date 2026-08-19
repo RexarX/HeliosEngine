@@ -31,7 +31,7 @@ HELIOS_PAUSE_CPU();                       // busy-wait pause hint (SDL3-derived)
 | ------------------------- | ----------------------------------------------------------------------------------------------- |
 | `HELIOS_API`              | `__declspec(dllexport/dllimport)` on Windows; `__attribute__((visibility("default")))` on Unix. |
 | `HELIOS_EXPORT`           | Explicit export annotation (used for plugin entry points).                                      |
-| `HELIOS_DEBUG_BREAK()`    | `__debugbreak()` on MSVC, `__builtin_trap()` on GCC/Clang.                                      |
+| `HELIOS_DEBUG_BREAK()`    | `__debugbreak()` on MSVC, `__builtin_debugtrap()` on Apple ARM64, architecture trap elsewhere.  |
 | `HELIOS_PAUSE_CPU()`      | Architecture-specific busy-wait pause (adapted from SDL3 `SDL_CPUPauseInstruction`).            |
 | `HELIOS_PLATFORM_WINDOWS` | Defined when `_WIN32` is set.                                                                   |
 | `HELIOS_PLATFORM_LINUX`   | Defined when `__linux__` is set.                                                                |

@@ -65,7 +65,7 @@ TEST_SUITE("helios::sdl3::input::Plugin") {
     }
 
     SUBCASE("Events schedule builds with input systems enabled") {
-      HELIOS_SKIP_IF_NO_SDL_GAMEPAD();
+      HELIOS_SKIP_IF_NO_SDL_RUNTIME();
 
       app::App app;
       sdl3::Plugin{}.Build(app);
@@ -90,7 +90,7 @@ TEST_SUITE("helios::sdl3::input::Plugin") {
 
   TEST_CASE("helios::sdl3::input::Plugin::Destroy") {
     SUBCASE("Releases the gamepad subsystem after init") {
-      HELIOS_SKIP_IF_NO_SDL_GAMEPAD();
+      HELIOS_SKIP_IF_NO_SDL_RUNTIME();
 
       app::App app;
       sdl3::Plugin{}.Build(app);

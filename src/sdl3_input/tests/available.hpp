@@ -65,3 +65,13 @@ struct ScopedShutdown {
       return;                                                  \
     }                                                          \
   } while (false)
+
+#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#define HELIOS_SKIP_IF_NO_SDL_RUNTIME() \
+  do {                                  \
+    HELIOS_SKIP_IF_NO_SDL_VIDEO();      \
+    HELIOS_SKIP_IF_NO_SDL_GAMEPAD();    \
+  } while (false)
+#else
+#define HELIOS_SKIP_IF_NO_SDL_RUNTIME() HELIOS_SKIP_IF_NO_SDL_GAMEPAD()
+#endif

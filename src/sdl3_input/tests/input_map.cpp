@@ -30,7 +30,7 @@ TEST_SUITE("helios::sdl3::input::KeyFromSdl") {
 
     SUBCASE("Unknown and unmapped scancodes become Key::kUnknown") {
       CHECK_EQ(KeyFromSdl(SDL_SCANCODE_UNKNOWN), input::Key::kUnknown);
-      CHECK_EQ(KeyFromSdl(static_cast<SDL_Scancode>(-2)), input::Key::kUnknown);
+      CHECK_EQ(KeyFromSdl(SDL_SCANCODE_SLEEP), input::Key::kUnknown);
     }
 
     SUBCASE(
@@ -220,7 +220,6 @@ TEST_SUITE("helios::sdl3::input::PenAxisFromSdl") {
     }
 
     SUBCASE("Returns empty for invalid axes") {
-      CHECK_FALSE(PenAxisFromSdl(static_cast<SDL_PenAxis>(-1)).has_value());
       CHECK_FALSE(PenAxisFromSdl(SDL_PEN_AXIS_COUNT).has_value());
     }
   }

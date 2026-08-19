@@ -28,11 +28,11 @@ struct Plugin final : public app::Plugin {
    * @brief Constructs a window plugin with the given settings.
    * @param settings Global window behavior to insert when absent
    */
-  explicit Plugin(Settings settings = {}) : settings(settings) {}
+  explicit Plugin(Settings settings = {}) : settings_(settings) {}
 
   void Build(app::App& app) override;
 
-  Settings settings;
+  Settings settings_;
 };
 
 }  // namespace helios::window

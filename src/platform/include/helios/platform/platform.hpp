@@ -34,11 +34,9 @@
 #if defined(_MSC_VER) && (_MSC_VER >= 1300)
 #define HELIOS_DEBUG_BREAK() __debugbreak()
 
-// ARM64 on Apple: Use signal-based break (better debugger integration)
+// ARM64 on Apple: trap so CI/ctest terminate instead of swallowing SIGINT
 #elif defined(__arm64__) && defined(__APPLE__)
-#include <unistd.h>
-#include <csignal>
-#define HELIOS_DEBUG_BREAK() ::kill(::getpid(), SIGINT)
+#define HELIOS_DEBUG_BREAK() __builtin_debugtrap()
 
 // ARM64 with GCC/Clang: Use brk instruction
 #elif defined(__arm64__) && (defined(__GNUC__) || defined(__clang__))

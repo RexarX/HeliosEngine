@@ -62,7 +62,9 @@ void* FixedArenaAllocator::do_allocate(size_t bytes, size_t alignment) {
     const size_t padding =
         CalculatePadding(buffer_ + observed, effective_alignment);
     const size_t next = SaturatingAdd(observed, SaturatingAdd(padding, bytes));
-    HELIOS_VERIFY(next <= capacity_, "Fixed arena allocator exhausted!");
+    if (next > capacity_) [[unlikely]] {
+      return nullptr;
+    }
     if (offset_.compare_exchange_weak(observed, next, std::memory_order_acq_rel,
                                       std::memory_order_relaxed)) {
       allocation_count_.fetch_add(1, std::memory_order_relaxed);

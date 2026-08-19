@@ -11,7 +11,7 @@
 namespace helios::input {
 
 void Plugin::Build(app::App& app) {
-  app.TryInsertResources(std::move(settings), Keyboard{}, Mouse{}, Gamepads{},
+  app.TryInsertResources(settings_, Keyboard{}, Mouse{}, Gamepads{},
                          Joysticks{}, Pens{}, GamepadMappings{});
   app.AddMessages<
       KeyboardInputMsg, TextInputMsg, MouseButtonInputMsg, CursorMovedMsg,

@@ -215,8 +215,8 @@ size_t Schedule::AddEntry(SystemStorage&& storage) {
     }
   }
 
-  system_entries_.push_back(SystemEntry{
-      .storage = std::move(storage), .metadata = {}, .is_sync_point = false});
+  system_entries_.emplace_back(std::move(storage), ScheduleSystemMetadata{},
+                               false);
   MarkDirty();
   return index;
 }

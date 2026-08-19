@@ -451,6 +451,12 @@ private:
     SystemStorage storage;
     ScheduleSystemMetadata metadata;
     bool is_sync_point = false;
+
+    SystemEntry(SystemStorage&& storage_arg,
+                ScheduleSystemMetadata metadata_arg, bool sync) noexcept
+        : storage(std::move(storage_arg)),
+          metadata(std::move(metadata_arg)),
+          is_sync_point(sync) {}
   };
 
   /**
