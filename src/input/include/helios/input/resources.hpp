@@ -512,10 +512,13 @@ template <typename It>
 inline It ToString(It out, const Joysticks& joysticks) {
   out = std::format_to(out, "Joysticks{{sticks = [");
 
-  auto connected = std::views::filter(
-      joysticks.sticks, [](const Joystick& stick) { return stick.connected; });
-  for (const auto& [cnt, stick] : connected | std::views::enumerate) {
-    if (cnt > 0) [[likely]] {
+  size_t cnt = 0;
+  for (const auto& stick : joysticks.sticks) {
+    if (!stick.connected) {
+      continue;
+    }
+
+    if (cnt++ > 0) [[likely]] {
       out = std::format_to(out, ", ");
     }
     ToString(out, stick);
