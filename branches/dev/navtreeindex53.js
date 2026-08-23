@@ -1,5 +1,6 @@
 var NAVTREEINDEX53 =
 {
+"structstd_1_1formatter_3_01helios_1_1window_1_1DirtyFlag_01_4.html#ad895c79d124b2d295738c448c5c6f458":[4,0,3,73,1],
 "structstd_1_1formatter_3_01helios_1_1window_1_1DroppedFilesMsg_01_4.html":[2,0,5,74],
 "structstd_1_1formatter_3_01helios_1_1window_1_1DroppedFilesMsg_01_4.html":[4,0,3,74],
 "structstd_1_1formatter_3_01helios_1_1window_1_1DroppedFilesMsg_01_4.html#a0190a528aa4980bfe599a03edc19fb9f":[2,0,5,74,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX53 =
 "temporary__storage__helpers_8hpp_source.html":[5,0,2,9,0,0,0,15],
 "time_8cpp.html":[5,0,2,0,1,0,3],
 "time_8cpp_source.html":[5,0,2,0,1,0,3],
-"time_8hpp.html":[5,0,2,0,0,0,0,0,4],
-"time_8hpp_source.html":[5,0,2,0,0,0,0,0,4]
+"time_8hpp.html":[5,0,2,0,0,0,0,0,4]
 };

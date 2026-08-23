@@ -1,5 +1,6 @@
 var NAVTREEINDEX39 =
 {
+"structhelios_1_1details_1_1PrependReturnType.html":[4,0,2,3,14],
 "structhelios_1_1details_1_1PrependReturnType_3_01R_00_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html":[2,0,3,4,15],
 "structhelios_1_1details_1_1PrependReturnType_3_01R_00_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html":[4,0,2,3,15],
 "structhelios_1_1details_1_1PrependReturnType_3_01R_00_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html#a4d6eb73500d04384eda33d32854ac49a":[2,0,3,4,15,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX39 =
 "structhelios_1_1ecs_1_1ResourceInsertedMsg.html#a7cf1b4458d57ab0c2d3984b0f7ee00d7":[4,0,2,4,69,2],
 "structhelios_1_1ecs_1_1ResourceInsertedMsg.html#aa00b48142af4112421b9e948562f5308":[2,0,3,5,71,3],
 "structhelios_1_1ecs_1_1ResourceInsertedMsg.html#aa00b48142af4112421b9e948562f5308":[4,0,2,4,69,3],
-"structhelios_1_1ecs_1_1ResourceInsertedMsg.html#ad28eeec6ce112a5be5e9a6727fd0d045":[2,0,3,5,71,1],
-"structhelios_1_1ecs_1_1ResourceInsertedMsg.html#ad28eeec6ce112a5be5e9a6727fd0d045":[4,0,2,4,69,1]
+"structhelios_1_1ecs_1_1ResourceInsertedMsg.html#ad28eeec6ce112a5be5e9a6727fd0d045":[2,0,3,5,71,1]
 };

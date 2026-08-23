@@ -1,5 +1,6 @@
 var NAVTREEINDEX46 =
 {
+"structhelios_1_1input_1_1UpdateGamepadState.html":[4,0,2,6,56],
 "structhelios_1_1input_1_1UpdateGamepadState.html#a8eb0f260c3b8058b7a3b945beeec2ad2":[2,0,3,7,57,0],
 "structhelios_1_1input_1_1UpdateGamepadState.html#a8eb0f260c3b8058b7a3b945beeec2ad2":[4,0,2,6,56,0],
 "structhelios_1_1input_1_1UpdateGamepadState.html#ab7599ff07100649d4eb0982db0fa0ebf":[2,0,3,7,57,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX46 =
 "structhelios_1_1sdl3_1_1input_1_1ApplyGamepadOutputs.html#ab9740288129d87e2f20ab50dfdbc6944":[4,0,2,10,0,2,0],
 "structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html":[2,0,3,11,1,5],
 "structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html":[4,0,2,10,0,3],
-"structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html#a1981763696e753518b0bf1877a37d366":[2,0,3,11,1,5,1],
-"structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html#a1981763696e753518b0bf1877a37d366":[4,0,2,10,0,3,1]
+"structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html#a1981763696e753518b0bf1877a37d366":[2,0,3,11,1,5,1]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX37 =
 {
+"plugin__group_8cpp.html":[5,0,2,0,1,4],
 "plugin__group_8cpp_source.html":[5,0,2,0,1,4],
 "plugin__group_8hpp.html":[5,0,2,0,0,0,0,6],
 "plugin__group_8hpp_source.html":[5,0,2,0,0,0,0,6],
@@ -248,6 +249,5 @@ var NAVTREEINDEX37 =
 "structhelios_1_1app_1_1FixedRunnerConfig.html#a0ed93df5cb52f93389ee44ad163f564a":[4,0,2,0,10,0],
 "structhelios_1_1app_1_1FixedRunnerConfig.html#a68b368bfd65418a0c4d8cc1f74d3d54e":[2,0,3,1,12,2],
 "structhelios_1_1app_1_1FixedRunnerConfig.html#a68b368bfd65418a0c4d8cc1f74d3d54e":[4,0,2,0,10,2],
-"structhelios_1_1app_1_1FixedRunnerConfig.html#a6fdb938d1131ad20bf9a12bcdda9a086":[2,0,3,1,12,1],
-"structhelios_1_1app_1_1FixedRunnerConfig.html#a6fdb938d1131ad20bf9a12bcdda9a086":[4,0,2,0,10,1]
+"structhelios_1_1app_1_1FixedRunnerConfig.html#a6fdb938d1131ad20bf9a12bcdda9a086":[2,0,3,1,12,1]
 };

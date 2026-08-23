@@ -1,5 +1,6 @@
 var NAVTREEINDEX52 =
 {
+"structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html":[4,0,3,28],
 "structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html#a087d8ee171fe368a8a7d2ba72b2b439d":[2,0,5,28,1],
 "structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html#a087d8ee171fe368a8a7d2ba72b2b439d":[4,0,3,28,1],
 "structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html#a172b6d179314294b1dd5b4636fb2f8b0":[2,0,5,28,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX52 =
 "structstd_1_1formatter_3_01helios_1_1window_1_1DirtyFlag_01_4.html":[4,0,3,73],
 "structstd_1_1formatter_3_01helios_1_1window_1_1DirtyFlag_01_4.html#aa806fba9ec5f97e51c84207ef8181906":[2,0,5,73,0],
 "structstd_1_1formatter_3_01helios_1_1window_1_1DirtyFlag_01_4.html#aa806fba9ec5f97e51c84207ef8181906":[4,0,3,73,0],
-"structstd_1_1formatter_3_01helios_1_1window_1_1DirtyFlag_01_4.html#ad895c79d124b2d295738c448c5c6f458":[2,0,5,73,1],
-"structstd_1_1formatter_3_01helios_1_1window_1_1DirtyFlag_01_4.html#ad895c79d124b2d295738c448c5c6f458":[4,0,3,73,1]
+"structstd_1_1formatter_3_01helios_1_1window_1_1DirtyFlag_01_4.html#ad895c79d124b2d295738c448c5c6f458":[2,0,5,73,1]
 };

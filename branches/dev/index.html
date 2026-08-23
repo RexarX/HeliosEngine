@@ -195,6 +195,7 @@ Table of Contents</h2>
 <li><a href="#requirements">Requirements</a></li>
 <li><a href="#installing-dependencies">Installing Dependencies</a></li>
 <li><a href="#building">Building</a></li>
+<li><a href="#linking">Linking</a></li>
 <li><a href="#run-the-example">Run the Example</a></li>
 </ul>
 </li>
@@ -411,7 +412,44 @@ Recommended developer flags</h4>
 <td class="markdownTableBodyNone"><span class="tt">HELIOS_DOWNLOAD_PACKAGES</span>  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone">CPM fallback for missing deps  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">HELIOS_BUILD_{MODULE}</span>  </td><td class="markdownTableBodyNone">module default  </td><td class="markdownTableBodyNone">Per-module toggle  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_LINKER</span>  </td><td class="markdownTableBodyNone">AUTO (top-level) / DEFAULT  </td><td class="markdownTableBodyNone">Fast linker: <span class="tt">AUTO</span>, <span class="tt">MOLD</span>, <span class="tt">LLD</span>, <span class="tt">RAD</span>, <span class="tt">DEFAULT</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_MANAGE_TOOLCHAIN</span>  </td><td class="markdownTableBodyNone">ON (top-level) / OFF  </td><td class="markdownTableBodyNone">Set <span class="tt">CMAKE_LINKER</span> / <span class="tt">CMAKE_AR</span> project-wide  </td></tr>
 </table>
+<h3 class="doxsection"><a class="anchor" id="linking"></a>
+Linking</h3>
+<p>Helios picks a faster linker when one is installed (<span class="tt">cmake/helpers/Linker.cmake</span>). Selection is controlled by <span class="tt">HELIOS_LINKER</span>:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Value  </th><th class="markdownTableHeadNone">Meaning  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">AUTO</span>  </td><td class="markdownTableBodyNone">Default for a top-level Helios build. Prefer the fastest available linker for the platform.  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">MOLD</span>  </td><td class="markdownTableBodyNone">Force <a href="https://github.com/rui314/mold">mold</a> (<span class="tt">mold</span> on <span class="tt">PATH</span>). ELF only; not used on macOS.  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">LLD</span>  </td><td class="markdownTableBodyNone">Force LLVM lld (<span class="tt">ld.lld</span> on Unix, <span class="tt">lld-link</span> on the MSVC ABI).  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">RAD</span>  </td><td class="markdownTableBodyNone">Force <a href="https://github.com/EpicGames/raddebugger">RAD Linker</a> (<span class="tt">radlink</span> on <span class="tt">PATH</span> or <span class="tt">$RAD_ROOT</span>). Windows MSVC ABI.  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">DEFAULT</span>  </td><td class="markdownTableBodyNone">Platform default (<span class="tt">ld</span> / Apple <span class="tt">ld</span> / MSVC <span class="tt">link.exe</span>). Default when Helios is embedded.  </td></tr>
+</table>
+<p><b><span class="tt">AUTO</span> by platform</b></p>
+<ul>
+<li><b>Linux (ELF):</b> <a href="https://github.com/rui314/mold">mold</a> if found, otherwise lld, otherwise the system linker.</li>
+<li><b>macOS:</b> mold is skipped (it does not link Mach-O). lld is used if <span class="tt">ld.lld</span> is on <span class="tt">PATH</span>; otherwise Apple <span class="tt">ld</span>.</li>
+<li><b>Windows (MSVC):</b> <a href="https://github.com/EpicGames/raddebugger">RAD Linker</a> for Debug and non-LTO RelWithDebInfo when <span class="tt">radlink</span> is available, then <span class="tt">lld-link</span>, then <span class="tt">link.exe</span>. <b>clang-cl</b> prefers <span class="tt">lld-link</span> (RAD can fail on some clang-cl C++ COMDATs). Release LTO (MSVC LTCG) and RelWithDebInfo with <span class="tt">HELIOS_ENABLE_LTO_RELWITHDEBINFO=ON</span> keep <span class="tt">link.exe</span>; clang-cl LTO uses <span class="tt">lld-link</span>. RAD is not used with MSVC AddressSanitizer (<span class="tt">HELIOS_DEVELOPER_MODE=ON</span>).</li>
+</ul>
+<p>Override at configure time (must be on <span class="tt">PATH</span>, or for RAD also <span class="tt">$RAD_ROOT</span>):</p>
+<div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_LINKER=MOLD</div>
+<div class="line">cmake --preset linux-clang-release -DHELIOS_LINKER=LLD</div>
+<div class="line">cmake --preset windows-msvc-debug -DHELIOS_LINKER=RAD</div>
+<div class="line">cmake --preset linux-gcc-release -DHELIOS_LINKER=DEFAULT   # disable fast linkers</div>
+</div><!-- fragment --><p><b><span class="tt">HELIOS_MANAGE_TOOLCHAIN</span></b> (see <span class="tt">CMakeLists.txt</span> and <span class="tt">cmake/helpers/ClangArchiver.cmake</span>)</p>
+<p>When <span class="tt">ON</span> (default for a standalone Helios build), Helios may set <span class="tt">CMAKE_LINKER</span>, <span class="tt">CMAKE_AR</span>, and <span class="tt">CMAKE_RANLIB</span> for the <b>whole</b> CMake project, and apply <span class="tt">-fuse-ld=</span> / linker type globally.</p>
+<p>When <span class="tt">OFF</span> (default if Helios is added via <span class="tt">add_subdirectory</span> / FetchContent), those cache variables are left to the parent. A selected fast linker is applied only to Helios targets. Consumers can opt in:</p>
+<div class="fragment"><div class="line">cmake -DHELIOS_MANAGE_TOOLCHAIN=ON -DHELIOS_LINKER=AUTO ...</div>
+</div><!-- fragment --><p>Per-config RAD vs <span class="tt">link.exe</span> on the Visual Studio generator needs CMake 3.29+; Ninja presets work from CMake 3.25.</p>
 <h3 class="doxsection"><a class="anchor" id="run-the-example"></a>
 Run the Example</h3>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_BUILD_EXAMPLES=ON</div>

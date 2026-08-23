@@ -1,5 +1,6 @@
 var NAVTREEINDEX50 =
 {
+"structhelios_1_1window_1_1Plugin.html#ab533c6e921236f48ad095af6f5eeaaaa":[4,0,2,12,38,2],
 "structhelios_1_1window_1_1Plugin.html#ab6ddb8af51dbb3cc00b8fd5cc4037c3c":[2,0,3,13,38,0],
 "structhelios_1_1window_1_1Plugin.html#ab6ddb8af51dbb3cc00b8fd5cc4037c3c":[4,0,2,12,38,0],
 "structhelios_1_1window_1_1Plugin.html#adb055344fd1f513b1b5cd6d1804731b3":[2,0,3,13,38,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX50 =
 "structhelios_1_1window_1_1Window.html#a768c5d2d186aa773d9cffb2cfbf37c8c":[4,0,2,12,51,15],
 "structhelios_1_1window_1_1Window.html#a76a5e7898227b588d794acaeb7ea0b26":[2,0,3,13,51,26],
 "structhelios_1_1window_1_1Window.html#a76a5e7898227b588d794acaeb7ea0b26":[4,0,2,12,51,26],
-"structhelios_1_1window_1_1Window.html#a771d8bdc47cb14a51fd6ffea964285d6":[2,0,3,13,51,5],
-"structhelios_1_1window_1_1Window.html#a771d8bdc47cb14a51fd6ffea964285d6":[4,0,2,12,51,5]
+"structhelios_1_1window_1_1Window.html#a771d8bdc47cb14a51fd6ffea964285d6":[2,0,3,13,51,5]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX45 =
 {
+"structhelios_1_1input_1_1MouseWheelMsg.html#ac29936af5990173f50ae69a0267b973e":[4,0,2,6,40,7],
 "structhelios_1_1input_1_1MouseWheelMsg.html#af543c6d15392393090e1992cc421374f":[2,0,3,7,41,5],
 "structhelios_1_1input_1_1MouseWheelMsg.html#af543c6d15392393090e1992cc421374f":[4,0,2,6,40,5],
 "structhelios_1_1input_1_1MouseWriters.html":[2,0,3,7,42],
@@ -248,6 +249,5 @@ var NAVTREEINDEX45 =
 "structhelios_1_1input_1_1TextInputMsg.html#a67164093b294c24626ba4b13cf9de8f3":[4,0,2,6,55,3],
 "structhelios_1_1input_1_1TextInputMsg.html#ac004c762649222a3c47197db35c6d947":[2,0,3,7,56,1],
 "structhelios_1_1input_1_1TextInputMsg.html#ac004c762649222a3c47197db35c6d947":[4,0,2,6,55,1],
-"structhelios_1_1input_1_1UpdateGamepadState.html":[2,0,3,7,57],
-"structhelios_1_1input_1_1UpdateGamepadState.html":[4,0,2,6,56]
+"structhelios_1_1input_1_1UpdateGamepadState.html":[2,0,3,7,57]
 };

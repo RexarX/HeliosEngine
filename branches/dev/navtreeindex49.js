@@ -1,5 +1,6 @@
 var NAVTREEINDEX49 =
 {
+"structhelios_1_1window_1_1FocusChangedMsg.html#ae5e62702e05aee5cfa6de72ad7743b57":[4,0,2,12,18,3],
 "structhelios_1_1window_1_1GeometryMessages.html":[2,0,3,13,19],
 "structhelios_1_1window_1_1GeometryMessages.html":[4,0,2,12,19],
 "structhelios_1_1window_1_1GeometryMessages.html#a3cb01d1ace3e88f6cc7534f268bab6e0":[2,0,3,13,19,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX49 =
 "structhelios_1_1window_1_1Plugin.html":[4,0,2,12,38],
 "structhelios_1_1window_1_1Plugin.html#a60159742d4f5a32668d4b3bd3cb3bedd":[2,0,3,13,38,1],
 "structhelios_1_1window_1_1Plugin.html#a60159742d4f5a32668d4b3bd3cb3bedd":[4,0,2,12,38,1],
-"structhelios_1_1window_1_1Plugin.html#ab533c6e921236f48ad095af6f5eeaaaa":[2,0,3,13,38,2],
-"structhelios_1_1window_1_1Plugin.html#ab533c6e921236f48ad095af6f5eeaaaa":[4,0,2,12,38,2]
+"structhelios_1_1window_1_1Plugin.html#ab533c6e921236f48ad095af6f5eeaaaa":[2,0,3,13,38,2]
 };

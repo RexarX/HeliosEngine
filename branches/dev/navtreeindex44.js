@@ -1,5 +1,6 @@
 var NAVTREEINDEX44 =
 {
+"structhelios_1_1input_1_1Joystick.html#a61363a10299aedfc46eaec04c6b63b4f":[4,0,2,6,23,8],
 "structhelios_1_1input_1_1Joystick.html#a6e58872fea3d3187a50c74ada6fdca4e":[2,0,3,7,24,7],
 "structhelios_1_1input_1_1Joystick.html#a6e58872fea3d3187a50c74ada6fdca4e":[4,0,2,6,23,7],
 "structhelios_1_1input_1_1Joystick.html#aa3e4b36d36d9b397976906739259a57f":[2,0,3,7,24,9],
@@ -248,6 +249,5 @@ var NAVTREEINDEX44 =
 "structhelios_1_1input_1_1MouseWheelMsg.html#a871c2ddf9ab8b8ac6ac346dbcf633b07":[4,0,2,6,40,3],
 "structhelios_1_1input_1_1MouseWheelMsg.html#aa5099e7202af080c4e63865ef0461546":[2,0,3,7,41,4],
 "structhelios_1_1input_1_1MouseWheelMsg.html#aa5099e7202af080c4e63865ef0461546":[4,0,2,6,40,4],
-"structhelios_1_1input_1_1MouseWheelMsg.html#ac29936af5990173f50ae69a0267b973e":[2,0,3,7,41,7],
-"structhelios_1_1input_1_1MouseWheelMsg.html#ac29936af5990173f50ae69a0267b973e":[4,0,2,6,40,7]
+"structhelios_1_1input_1_1MouseWheelMsg.html#ac29936af5990173f50ae69a0267b973e":[2,0,3,7,41,7]
 };
