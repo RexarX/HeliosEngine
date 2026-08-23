@@ -37,18 +37,26 @@ TEST_SUITE("helios::sdl3::window::QueryNativeHandle") {
 #elif defined(HELIOS_PLATFORM_MACOS)
       REQUIRE(std::holds_alternative<window::CocoaHandle>(handle));
       CHECK_NE(std::get<window::CocoaHandle>(handle).ns_window, nullptr);
-#elif defined(HELIOS_PLATFORM_LINUX_WAYLAND)
-      REQUIRE(std::holds_alternative<window::WaylandHandle>(handle));
-      const auto& wayland = std::get<window::WaylandHandle>(handle);
-      CHECK_NE(wayland.display, nullptr);
-      CHECK_NE(wayland.surface, nullptr);
-#elif defined(HELIOS_PLATFORM_LINUX_X11)
-      REQUIRE(std::holds_alternative<window::XlibHandle>(handle));
-      const auto& x11 = std::get<window::XlibHandle>(handle);
-      CHECK_NE(x11.display, nullptr);
-      CHECK_NE(x11.window, 0UL);
 #else
-      CHECK(std::holds_alternative<std::monostate>(handle));
+      REQUIRE_FALSE(std::holds_alternative<std::monostate>(handle));
+      bool matched = false;
+#ifdef HELIOS_PLATFORM_LINUX_WAYLAND
+      if (const auto* wayland = std::get_if<window::WaylandHandle>(&handle);
+          wayland != nullptr) {
+        CHECK_NE(wayland->display, nullptr);
+        CHECK_NE(wayland->surface, nullptr);
+        matched = true;
+      }
+#endif
+#ifdef HELIOS_PLATFORM_LINUX_X11
+      if (const auto* x11 = std::get_if<window::XlibHandle>(&handle);
+          x11 != nullptr) {
+        CHECK_NE(x11->display, nullptr);
+        CHECK_NE(x11->window, 0UL);
+        matched = true;
+      }
+#endif
+      CHECK(matched);
 #endif
 
       SDL_DestroyWindow(sdl_window);

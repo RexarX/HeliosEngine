@@ -75,6 +75,7 @@ helios_module(
         src/component/archetype.cpp
         src/component/manager.cpp
         src/entity/manager.cpp
+        src/message/consumed_registry.cpp
         src/message/manager.cpp
         src/schedule/executor/main_thread.cpp
         src/schedule/executor/multi_threaded.cpp
@@ -101,7 +102,6 @@ helios_module(
 
     USES
         concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
-        FlatMap PUBLIC helios::lib::flat_map
 
     COMPILE_DEFINITIONS
         PUBLIC

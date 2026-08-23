@@ -1,5 +1,7 @@
 #pragma once
 
+#include <version>
+
 #if defined(__GNUC__) || defined(__clang__)
 #define HELIOS_EXPECT_TRUE(x) __builtin_expect(!!(x), 1)
 #define HELIOS_EXPECT_FALSE(x) __builtin_expect(!!(x), 0)
@@ -16,12 +18,6 @@
 #if defined(__cpp_lib_containers_ranges) && \
     __cpp_lib_containers_ranges >= 202202L
 #define HELIOS_CONTAINERS_RANGES_AVAILABLE
-#endif
-
-#if defined(__cpp_lib_flat_map) && __cpp_lib_flat_map >= 202207L
-#define HELIOS_STL_FLAT_MAP_AVAILABLE
-#elifdef HELIOS_USE_STL_FLAT_MAP
-#define HELIOS_STL_FLAT_MAP_AVAILABLE
 #endif
 
 #ifdef _MSC_VER

@@ -12,25 +12,27 @@
 #include <helios/log/logger.hpp>
 #include <helios/utils/defer.hpp>
 
+#if defined(HELIOS_APP_ENABLE_PROFILE) && \
+    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#include <helios/memory/temporary_storage_helpers.hpp>
+#endif
+
 #include <atomic>
+#include <memory_resource>
 #include <mutex>
 #include <string>
 #include <thread>
 #include <utility>
 
-#if defined(HELIOS_APP_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-#include <format>
-#endif
-
 namespace helios::app {
 
-SubApp::SubApp() : runner_(RunOnceSubApp) {
+SubApp::SubApp(std::pmr::memory_resource* resource)
+    : world_(resource), runner_(RunOnceSubApp) {
   RegisterBuiltinSubAppSchedules(scheduler_);
 }
 
-SubApp::SubApp(std::string name)
-    : name_(std::move(name)), runner_(RunOnceSubApp) {
+SubApp::SubApp(std::string name, std::pmr::memory_resource* resource)
+    : name_(std::move(name)), world_(resource), runner_(RunOnceSubApp) {
   RegisterBuiltinSubAppSchedules(scheduler_);
 }
 
@@ -79,8 +81,8 @@ SubApp& SubApp::operator=(SubApp&& other) noexcept {
 void SubApp::Update(async::Executor& executor) {
   HELIOS_APP_PROFILE_SCOPE();
   HELIOS_APP_PROFILE_ZONE_NAME(
-      std::format("helios::app::SubApp::Update{{name: {}}}", GetName()));
-  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(
+      utils::TempFormat("helios::app::SubApp::Update{{name: {}}}", GetName()));
+  HELIOS_APP_PROFILE_ZONE_TEXT(utils::TempFormat(
       "allow_overlapping_updates: {}, max_extraction_skips: {}, is_async: "
       "{}",
       allow_overlapping_updates_, max_extraction_skips_, is_async_));
@@ -99,8 +101,8 @@ void SubApp::Extract(const ecs::World& main_world,
                      [[maybe_unused]] bool allow_while_updating) {
   HELIOS_APP_PROFILE_SCOPE();
   HELIOS_APP_PROFILE_ZONE_NAME(
-      std::format("helios::app::SubApp::Extract{{name: {}}}", GetName()));
-  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(
+      utils::TempFormat("helios::app::SubApp::Extract{{name: {}}}", GetName()));
+  HELIOS_APP_PROFILE_ZONE_TEXT(utils::TempFormat(
       "allow_overlapping_updates: {}, max_extraction_skips: {}, is_async: {}",
       allow_overlapping_updates_, max_extraction_skips_, is_async_));
 
@@ -114,9 +116,9 @@ void SubApp::Extract(const ecs::World& main_world,
 
 void SubApp::BuildScheduler(async::Executor& executor) {
   HELIOS_APP_PROFILE_SCOPE();
-  HELIOS_APP_PROFILE_ZONE_NAME(std::format(
+  HELIOS_APP_PROFILE_ZONE_NAME(utils::TempFormat(
       "helios::app::SubApp::BuildScheduler{{name: {}}}", GetName()));
-  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(
+  HELIOS_APP_PROFILE_ZONE_TEXT(utils::TempFormat(
       "allow_overlapping_updates: {}, max_extraction_skips: {}, is_async: {}",
       allow_overlapping_updates_, max_extraction_skips_, is_async_));
 
@@ -140,9 +142,9 @@ void SubApp::Clear() {
 
 void SubApp::WaitUntilFullyIdle() const noexcept {
   HELIOS_APP_PROFILE_SCOPE();
-  HELIOS_APP_PROFILE_ZONE_NAME(std::format(
+  HELIOS_APP_PROFILE_ZONE_NAME(utils::TempFormat(
       "helios::app::SubApp::WaitUntilFullyIdle{{name: {}}}", GetName()));
-  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(
+  HELIOS_APP_PROFILE_ZONE_TEXT(utils::TempFormat(
       "allow_overlapping_updates: {}, max_extraction_skips: {}, is_async: {}",
       allow_overlapping_updates_, max_extraction_skips_, is_async_));
 

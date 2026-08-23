@@ -10,6 +10,7 @@ helios_module(
         include/helios/utils/dynamic_library.hpp
         include/helios/utils/fast_pimpl.hpp
         include/helios/utils/filesystem.hpp
+        include/helios/utils/format.hpp
         include/helios/utils/functional_adapters.hpp
         include/helios/utils/hash.hpp
         include/helios/utils/macro.hpp
@@ -35,6 +36,7 @@ helios_module(
         tests/dynamic_library.cpp
         tests/fast_pimpl.cpp
         tests/filesystem.cpp
+        tests/format.cpp
         tests/functional_adapters.cpp
         tests/hash.cpp
         tests/macro.cpp

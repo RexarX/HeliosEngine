@@ -1,6 +1,7 @@
 #pragma once
 
 #include <helios/input/button_input.hpp>
+#include <helios/memory/temporary_storage.hpp>
 
 #include <array>
 #include <cstddef>
@@ -99,13 +100,13 @@ inline std::ostream& operator<<(std::ostream& os, JoystickHat hat) {
 /**
  * @brief Formats a joystick snapshot using an output iterator.
  * @tparam It Output iterator type
- * @param stick Joystick snapshot
  * @param out Output iterator to write the formatted string to
+ * @param stick Joystick snapshot
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Joystick& stick, It out) {
+inline It ToString(It out, const Joystick& stick) {
   return std::format_to(out,
                         "Joystick{{id={}, name=\"{}\", guid=\"{}\", "
                         "connected={}, axes={}, buttons={}, hats={}}}",
@@ -116,12 +117,26 @@ inline It ToString(const Joystick& stick, It out) {
 /**
  * @brief Formats a joystick snapshot as a string.
  * @param stick Joystick snapshot
- * @return Formatted joystick string
+ * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(const Joystick& stick) {
   std::string result;
-  result.reserve(128);
-  ToString(stick, std::back_inserter(result));
+  result.reserve(256);
+  ToString(std::back_inserter(result), stick);
+  return result;
+}
+
+/**
+ * @brief Formats a joystick snapshot as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param stick Joystick snapshot
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Joystick& stick) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), stick);
   return result;
 }
 
@@ -132,7 +147,7 @@ inline It ToString(const Joystick& stick, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const Joystick& stick) {
-  ToString(stick, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), stick);
   return os;
 }
 
@@ -161,7 +176,7 @@ struct formatter<helios::input::Joystick> {
 
   static auto format(const helios::input::Joystick& stick,
                      format_context& ctx) {
-    return helios::input::ToString(stick, ctx.out());
+    return helios::input::ToString(ctx.out(), stick);
   }
 };
 

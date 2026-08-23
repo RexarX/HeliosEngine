@@ -208,7 +208,7 @@ void AbortWithStacktrace(std::string_view message) noexcept;
       if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
         if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
           try {                                                      \
-            const std::string msg = std::format("" __VA_ARGS__);     \
+            const auto msg = std::format("" __VA_ARGS__);            \
             ::helios::details::HandleAssertion(                      \
                 #condition, ::std::source_location::current(), msg); \
           } catch (...) {                                            \
@@ -245,7 +245,7 @@ void AbortWithStacktrace(std::string_view message) noexcept;
     if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
       if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
         try {                                                      \
-          const std::string msg = std::format("" __VA_ARGS__);     \
+          const auto msg = std::format("" __VA_ARGS__);            \
           ::helios::details::HandleAssertion(                      \
               #condition, ::std::source_location::current(), msg); \
         } catch (...) {                                            \
@@ -266,7 +266,7 @@ void AbortWithStacktrace(std::string_view message) noexcept;
     if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
       if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
         try {                                                      \
-          const std::string msg = std::format("" __VA_ARGS__);     \
+          const auto msg = std::format("" __VA_ARGS__);            \
           ::helios::details::HandleAssertion(                      \
               #condition, ::std::source_location::current(), msg); \
         } catch (...) {                                            \
@@ -294,7 +294,7 @@ void AbortWithStacktrace(std::string_view message) noexcept;
     if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
       if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
         try {                                                      \
-          const std::string msg = std::format("" __VA_ARGS__);     \
+          const auto msg = std::format("" __VA_ARGS__);            \
           ::helios::details::HandleAssertion(                      \
               #condition, ::std::source_location::current(), msg); \
         } catch (...) {                                            \

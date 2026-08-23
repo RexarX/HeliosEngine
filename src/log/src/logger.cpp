@@ -342,7 +342,7 @@ namespace details {
 void LogAssertionViaLogger(std::string_view condition,
                            const std::source_location& loc,
                            std::string_view message) noexcept {
-  const std::string formatted =
+  const auto formatted =
       helios::details::FormatAssertionMessage(condition, loc, message);
   Logger::Instance().Log(Level::kCritical, formatted);
 }

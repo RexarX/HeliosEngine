@@ -1,5 +1,7 @@
 #pragma once
 
+#include <helios/memory/temporary_storage.hpp>
+
 #include <cstdint>
 #include <format>
 #include <iterator>
@@ -162,7 +164,7 @@ inline std::ostream& operator<<(std::ostream& os, CursorIcon icon) {
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const CursorImage& image, It out) {
+inline It ToString(It out, const CursorImage& image) {
   return std::format_to(
       out,
       "CursorImage{{width={}, height={}, hotspot_x={}, hotspot_y={}, rgba={}}}",
@@ -171,14 +173,28 @@ inline It ToString(const CursorImage& image, It out) {
 }
 
 /**
+ * @brief Formats a custom cursor image as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param image Custom cursor image
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const CursorImage& image) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), image);
+  return result;
+}
+
+/**
  * @brief Formats a custom cursor image as a string.
  * @param image Custom cursor image
- * @return Formatted cursor image string
+ * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(const CursorImage& image) {
   std::string result;
-  result.reserve(96);
-  ToString(image, std::back_inserter(result));
+  result.reserve(128);
+  ToString(std::back_inserter(result), image);
   return result;
 }
 
@@ -189,7 +205,7 @@ inline It ToString(const CursorImage& image, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const CursorImage& image) {
-  ToString(image, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), image);
   return os;
 }
 
@@ -231,7 +247,7 @@ struct formatter<helios::input::CursorImage> {
 
   static auto format(const helios::input::CursorImage& image,
                      format_context& ctx) {
-    return helios::input::ToString(image, ctx.out());
+    return helios::input::ToString(ctx.out(), image);
   }
 };
 

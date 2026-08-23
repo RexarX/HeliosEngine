@@ -7,6 +7,7 @@
 
 #include <concepts>
 #include <cstddef>
+#include <memory_resource>
 #include <span>
 #include <type_traits>
 #include <utility>
@@ -24,6 +25,15 @@ template <ComponentTrait T>
 class SparseComponentStorage {
 public:
   constexpr SparseComponentStorage() = default;
+
+  /**
+   * @brief Constructs sparse-set storage using `resource` for the underlying
+   * set.
+   * @param resource Memory resource.
+   */
+  explicit constexpr SparseComponentStorage(std::pmr::memory_resource* resource)
+      : storage_(resource) {}
+  SparseComponentStorage(std::nullptr_t) = delete;
   constexpr SparseComponentStorage(const SparseComponentStorage&) = default;
   constexpr SparseComponentStorage(SparseComponentStorage&&) noexcept = default;
   constexpr ~SparseComponentStorage() = default;
@@ -168,6 +178,15 @@ public:
    */
   [[nodiscard]] constexpr auto Data() const noexcept -> std::span<const T> {
     return storage_.Data();
+  }
+
+  /**
+   * @brief Returns the memory resource used for internal storage.
+   * @return Memory resource passed to the constructor
+   */
+  [[nodiscard]] constexpr std::pmr::memory_resource* GetMemoryResource()
+      const noexcept {
+    return storage_.GetMemoryResource();
   }
 
 private:

@@ -20,21 +20,17 @@ namespace helios::container {
 /**
  * @brief Type-erased single-instance byte storage.
  * @details Stores exactly one instance of any `TypedBufferStorable` type in a
- * `std::vector<std::byte>` backing buffer. The stored type is not fixed at
+ * `std::pmr::vector<std::byte>` backing buffer. The stored type is not fixed at
  * class instantiation; it is set at runtime and verified on every access.
  * Object lifetime is properly managed. Trivially-copyable types are
  * fast-pathed.
- * @tparam Allocator The allocator type for the byte storage (default:
- * `std::allocator<std::byte>`)
  */
-template <typename Allocator = std::allocator<std::byte>>
 class TypedBuffer {
 public:
-  using allocator_type = Allocator;
   using size_type = size_t;
   using TypeIndex = utils::TypeIndex;
 
-  using StorageType = std::vector<std::byte, allocator_type>;
+  using StorageType = std::pmr::vector<std::byte>;
 
   /// @brief Default constructor. Creates an empty buffer with no associated
   /// type.
@@ -42,24 +38,11 @@ public:
       std::is_nothrow_default_constructible_v<StorageType>) = default;
 
   /**
-   * @brief Constructs an empty buffer with a custom allocator.
-   * @param alloc Allocator instance to use
+   * @brief Constructs an empty buffer with a PMR memory resource.
+   * @param resource Memory resource used for internal storage
    */
-  explicit constexpr TypedBuffer(const allocator_type& alloc) noexcept(
-      std::is_nothrow_constructible_v<StorageType, const allocator_type&>)
-      : storage_(alloc) {}
-
-  /**
-   * @brief Constructs an empty buffer from a PMR memory resource.
-   * @details Enabled only when `allocator_type` is constructible from
-   * `std::pmr::memory_resource*`.
-   * @param resource Memory resource used to construct allocator
-   */
-  explicit constexpr TypedBuffer(std::pmr::memory_resource* resource) noexcept(
-      std::is_nothrow_constructible_v<allocator_type,
-                                      std::pmr::memory_resource*>)
-    requires std::constructible_from<allocator_type, std::pmr::memory_resource*>
-      : TypedBuffer(allocator_type{resource}) {}
+  explicit constexpr TypedBuffer(std::pmr::memory_resource* resource) noexcept
+      : storage_(resource) {}
 
   TypedBuffer(std::nullptr_t) = delete;
 
@@ -90,15 +73,30 @@ public:
   template <TypedBufferStorable T, typename... Args>
     requires std::constructible_from<T, Args...>
   constexpr TypedBuffer(std::in_place_type_t<T> tag,
-                        const allocator_type& alloc, Args&&... args);
+                        std::pmr::memory_resource* resource, Args&&... args);
   constexpr TypedBuffer(const TypedBuffer& other);
+
+  /**
+   * @brief Copy constructor with a custom memory resource.
+   * @param other Buffer to copy from
+   * @param resource Memory resource used for internal storage
+   */
+  constexpr TypedBuffer(const TypedBuffer& other,
+                        std::pmr::memory_resource* resource);
   constexpr TypedBuffer(TypedBuffer&& other) noexcept(
       std::is_nothrow_move_constructible_v<StorageType>);
+
+  /**
+   * @brief Move constructor with a custom memory resource.
+   * @param other Buffer to move from
+   * @param resource Memory resource used for internal storage
+   */
+  constexpr TypedBuffer(TypedBuffer&& other,
+                        std::pmr::memory_resource* resource);
   constexpr ~TypedBuffer() noexcept { Destroy(); }
 
   constexpr TypedBuffer& operator=(const TypedBuffer& other);
-  constexpr TypedBuffer& operator=(TypedBuffer&& other) noexcept(
-      std::is_nothrow_move_assignable_v<StorageType>);
+  constexpr TypedBuffer& operator=(TypedBuffer&& other) noexcept;
 
   /**
    * @brief Changes the stored type, destroying the current value if any.
@@ -116,6 +114,14 @@ public:
   constexpr void Reset() noexcept;
 
   /**
+   * @brief Reserves at least `bytes` of backing storage.
+   * @details Empty or trivially copyable values use `vector::reserve`. A stored
+   * non-trivial value is relocated if reallocation is required.
+   * @param bytes Minimum capacity in bytes
+   */
+  constexpr void ReserveBytes(size_type bytes);
+
+  /**
    * @brief Constructs (or replaces) the stored value in-place.
    * @details If a value of a different type is already stored it is destroyed
    * first. The type is updated to `T` before construction.
@@ -126,17 +132,14 @@ public:
    */
   template <TypedBufferStorable T, typename... Args>
     requires std::constructible_from<T, Args...>
-  T& Set(Args&&... args);
+  constexpr T& Set(Args&&... args);
 
   /**
    * @brief Swaps contents with another TypedBuffer.
    * @param other Buffer to swap with
    */
-  constexpr void Swap(TypedBuffer& other) noexcept(
-      std::is_nothrow_swappable_v<StorageType>);
-
-  friend constexpr void swap(TypedBuffer& lhs, TypedBuffer& rhs) noexcept(
-      std::is_nothrow_swappable_v<StorageType>) {
+  constexpr void Swap(TypedBuffer& other) noexcept;
+  friend constexpr void swap(TypedBuffer& lhs, TypedBuffer& rhs) noexcept {
     lhs.Swap(rhs);
   }
 
@@ -193,6 +196,23 @@ public:
   }
 
   /**
+   * @brief Returns the current capacity of the backing buffer in bytes.
+   * @return Capacity in bytes
+   */
+  [[nodiscard]] constexpr size_type CapacityBytes() const noexcept {
+    return storage_.capacity();
+  }
+
+  /**
+   * @brief Returns the memory resource used for internal storage.
+   * @return Memory resource passed to the constructor, or the default resource
+   */
+  [[nodiscard]] constexpr std::pmr::memory_resource* GetMemoryResource()
+      const noexcept {
+    return storage_.get_allocator().resource();
+  }
+
+  /**
    * @brief Accesses the stored value.
    * @warning Triggers assertion if the buffer is empty or the stored type
    * doesn't match `T`.
@@ -200,7 +220,7 @@ public:
    * @return Reference to the stored value
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] T& Value() noexcept;
+  [[nodiscard]] constexpr T& Value() noexcept;
 
   /**
    * @brief Accesses the stored value (const).
@@ -210,7 +230,7 @@ public:
    * @return Const reference to the stored value
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] const T& Value() const noexcept;
+  [[nodiscard]] constexpr const T& Value() const noexcept;
 
   /**
    * @brief Returns a const byte span of the stored value (empty if no value is
@@ -224,10 +244,10 @@ private:
   using TypeInfo = details::TypeBufferInfo;
 
   template <TypedBufferStorable T>
-  [[nodiscard]] T* DataPtr() noexcept;
+  [[nodiscard]] constexpr T* DataPtr() noexcept;
 
   template <TypedBufferStorable T>
-  [[nodiscard]] const T* DataPtr() const noexcept;
+  [[nodiscard]] constexpr const T* DataPtr() const noexcept;
 
   [[nodiscard]] constexpr void* RawDataPtr() noexcept {
     return storage_.empty() ? nullptr : static_cast<void*>(storage_.data());
@@ -241,39 +261,34 @@ private:
   /// @brief Destroys the stored value if present; sets has_value_ to false.
   constexpr void Destroy() noexcept;
 
-  TypeInfo type_info_{};
+  TypeInfo type_info_;
   StorageType storage_;
   bool has_value_ = false;
 };
 
-template <typename Allocator>
 template <TypedBufferStorable T, typename... Args>
   requires std::constructible_from<T, Args...>
-constexpr TypedBuffer<Allocator>::TypedBuffer(std::in_place_type_t<T> /*tag*/,
-                                              Args&&... args)
+constexpr TypedBuffer::TypedBuffer(std::in_place_type_t<T> /*tag*/,
+                                   Args&&... args)
     : type_info_(TypeInfo::template From<T>()), has_value_(true) {
   storage_.resize(sizeof(T));
-  std::construct_at(std::launder(reinterpret_cast<T*>(storage_.data())),
-                    std::forward<Args>(args)...);
+  std::construct_at(DataPtr<T>(), std::forward<Args>(args)...);
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T, typename... Args>
   requires std::constructible_from<T, Args...>
-constexpr TypedBuffer<Allocator>::TypedBuffer(std::in_place_type_t<T> /*tag*/,
-                                              const allocator_type& alloc,
-                                              Args&&... args)
+constexpr TypedBuffer::TypedBuffer(std::in_place_type_t<T> /*tag*/,
+                                   std::pmr::memory_resource* resource,
+                                   Args&&... args)
     : type_info_(TypeInfo::template From<T>()),
-      storage_(alloc),
+      storage_(resource),
       has_value_(true) {
   storage_.resize(sizeof(T));
-  std::construct_at(std::launder(reinterpret_cast<T*>(storage_.data())),
-                    std::forward<Args>(args)...);
+  std::construct_at(DataPtr<T>(), std::forward<Args>(args)...);
 }
 
-template <typename Allocator>
-constexpr TypedBuffer<Allocator>::TypedBuffer(const TypedBuffer& other)
-    : storage_(other.storage_.get_allocator()) {
+constexpr TypedBuffer::TypedBuffer(const TypedBuffer& other)
+    : storage_(std::pmr::get_default_resource()) {
   if (!other.has_value_) {
     type_info_ = other.type_info_;
     return;
@@ -296,8 +311,32 @@ constexpr TypedBuffer<Allocator>::TypedBuffer(const TypedBuffer& other)
   has_value_ = true;
 }
 
-template <typename Allocator>
-constexpr TypedBuffer<Allocator>::TypedBuffer(TypedBuffer&& other) noexcept(
+constexpr TypedBuffer::TypedBuffer(const TypedBuffer& other,
+                                   std::pmr::memory_resource* resource)
+    : storage_(resource) {
+  if (!other.has_value_) {
+    type_info_ = other.type_info_;
+    return;
+  }
+
+  type_info_ = other.type_info_;
+  HELIOS_ASSERT(
+      type_info_.is_copy_constructible,
+      "Cannot copy TypedBuffer: stored type is not copy constructible!");
+
+  storage_.resize(type_info_.element_size);
+
+  if (type_info_.is_trivially_copyable) {
+    std::memcpy(storage_.data(), other.storage_.data(),
+                type_info_.element_size);
+  } else {
+    type_info_.copy_construct(storage_.data(), other.storage_.data(), 1);
+  }
+
+  has_value_ = true;
+}
+
+constexpr TypedBuffer::TypedBuffer(TypedBuffer&& other) noexcept(
     std::is_nothrow_move_constructible_v<StorageType>)
     : type_info_(other.type_info_),
       storage_(std::move(other.storage_)),
@@ -306,8 +345,37 @@ constexpr TypedBuffer<Allocator>::TypedBuffer(TypedBuffer&& other) noexcept(
   other.type_info_.Reset();
 }
 
-template <typename Allocator>
-constexpr auto TypedBuffer<Allocator>::operator=(const TypedBuffer& other)
+constexpr TypedBuffer::TypedBuffer(TypedBuffer&& other,
+                                   std::pmr::memory_resource* resource)
+    : type_info_(other.type_info_), storage_(resource), has_value_(false) {
+  if (GetMemoryResource() == other.GetMemoryResource()) {
+    storage_ = std::move(other.storage_);
+    has_value_ = other.has_value_;
+  } else if (other.has_value_) {
+    HELIOS_ASSERT(
+        type_info_.is_trivially_copyable ||
+            type_info_.move_construct != nullptr ||
+            type_info_.copy_construct != nullptr,
+        "Cannot relocate TypedBuffer across memory resources: stored type is "
+        "not relocatable!");
+    storage_.resize(type_info_.element_size);
+    if (type_info_.is_trivially_copyable) {
+      std::memcpy(storage_.data(), other.storage_.data(),
+                  type_info_.element_size);
+    } else if (type_info_.move_construct != nullptr) {
+      type_info_.move_construct(storage_.data(), other.storage_.data(), 1);
+    } else {
+      type_info_.copy_construct(storage_.data(), other.storage_.data(), 1);
+    }
+    has_value_ = true;
+    other.Destroy();
+  }
+
+  other.has_value_ = false;
+  other.type_info_.Reset();
+}
+
+constexpr auto TypedBuffer::operator=(const TypedBuffer& other)
     -> TypedBuffer& {
   if (this == &other) [[unlikely]] {
     return *this;
@@ -341,41 +409,65 @@ constexpr auto TypedBuffer<Allocator>::operator=(const TypedBuffer& other)
   return *this;
 }
 
-template <typename Allocator>
-constexpr auto TypedBuffer<Allocator>::operator=(TypedBuffer&& other) noexcept(
-    std::is_nothrow_move_assignable_v<StorageType>) -> TypedBuffer& {
+constexpr auto TypedBuffer::operator=(TypedBuffer&& other) noexcept
+    -> TypedBuffer& {
   if (this == &other) [[unlikely]] {
     return *this;
   }
 
-  Destroy();
-  type_info_ = other.type_info_;
-  storage_ = std::move(other.storage_);
-  has_value_ = other.has_value_;
-  other.has_value_ = false;
-  other.type_info_.Reset();
+  TypedBuffer relocated(std::move(other), GetMemoryResource());
+  Swap(relocated);
 
   return *this;
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-constexpr void TypedBuffer<Allocator>::ChangeType() noexcept {
+constexpr void TypedBuffer::ChangeType() noexcept {
   Destroy();
   type_info_ = TypeInfo::template From<T>();
 }
 
-template <typename Allocator>
-constexpr void TypedBuffer<Allocator>::Reset() noexcept {
+constexpr void TypedBuffer::Reset() noexcept {
   Destroy();
   storage_.clear();
   type_info_.Reset();
 }
 
-template <typename Allocator>
+constexpr void TypedBuffer::ReserveBytes(size_type bytes) {
+  if (bytes <= storage_.capacity()) {
+    return;
+  }
+
+  if (!has_value_ || type_info_.is_trivially_copyable) {
+    storage_.reserve(bytes);
+    return;
+  }
+
+  StorageType new_storage(storage_.get_allocator());
+  new_storage.reserve(bytes);
+  new_storage.resize(storage_.size());
+
+  if (type_info_.move_construct != nullptr) {
+    type_info_.move_construct(new_storage.data(), storage_.data(), 1);
+    if (type_info_.destroy != nullptr) {
+      type_info_.destroy(storage_.data(), 1);
+    }
+  } else if (type_info_.copy_construct != nullptr) {
+    type_info_.copy_construct(new_storage.data(), storage_.data(), 1);
+    if (type_info_.destroy != nullptr) {
+      type_info_.destroy(storage_.data(), 1);
+    }
+  } else {
+    HELIOS_ASSERT(
+        false, "Cannot reserve TypedBuffer: stored type is not relocatable!");
+  }
+
+  storage_ = std::move(new_storage);
+}
+
 template <TypedBufferStorable T, typename... Args>
   requires std::constructible_from<T, Args...>
-inline T& TypedBuffer<Allocator>::Set(Args&&... args) {
+constexpr T& TypedBuffer::Set(Args&&... args) {
   Destroy();
 
   type_info_ = TypeInfo::template From<T>();
@@ -383,40 +475,47 @@ inline T& TypedBuffer<Allocator>::Set(Args&&... args) {
     storage_.resize(sizeof(T));
   }
 
-  std::construct_at(std::launder(reinterpret_cast<T*>(storage_.data())),
-                    std::forward<Args>(args)...);
+  T* ptr = DataPtr<T>();
+  std::construct_at(ptr, std::forward<Args>(args)...);
   has_value_ = true;
-  return *std::launder(std::launder(reinterpret_cast<T*>(storage_.data())));
+  return *ptr;
 }
 
-template <typename Allocator>
-constexpr void TypedBuffer<Allocator>::Swap(TypedBuffer& other) noexcept(
-    std::is_nothrow_swappable_v<StorageType>) {
+constexpr void TypedBuffer::Swap(TypedBuffer& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return;
+  }
+
+  if (GetMemoryResource() != other.GetMemoryResource()) {
+    TypedBuffer lhs(std::move(*this), other.GetMemoryResource());
+    TypedBuffer rhs(std::move(other), GetMemoryResource());
+    Swap(rhs);
+    other.Swap(lhs);
+    return;
+  }
+
   std::swap(type_info_, other.type_info_);
   std::swap(storage_, other.storage_);
   std::swap(has_value_, other.has_value_);
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline T& TypedBuffer<Allocator>::Value() noexcept {
+constexpr T& TypedBuffer::Value() noexcept {
   HELIOS_ASSERT(has_value_, "TypedBuffer::Value: buffer is empty!");
   HELIOS_ASSERT(type_info_.type_index == TypeIndexOf<T>(),
                 "TypedBuffer::Value: type mismatch!");
-  return *std::launder(reinterpret_cast<T*>(storage_.data()));
+  return *DataPtr<T>();
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline const T& TypedBuffer<Allocator>::Value() const noexcept {
+constexpr const T& TypedBuffer::Value() const noexcept {
   HELIOS_ASSERT(has_value_, "TypedBuffer::Value: buffer is empty!");
   HELIOS_ASSERT(type_info_.type_index == TypeIndexOf<T>(),
                 "TypedBuffer::Value: type mismatch!");
-  return *std::launder(reinterpret_cast<const T*>(storage_.data()));
+  return *DataPtr<T>();
 }
 
-template <typename Allocator>
-constexpr auto TypedBuffer<Allocator>::Bytes() const noexcept
+constexpr auto TypedBuffer::Bytes() const noexcept
     -> std::span<const std::byte> {
   if (!has_value_) {
     return {};
@@ -424,32 +523,29 @@ constexpr auto TypedBuffer<Allocator>::Bytes() const noexcept
   return {storage_.data(), type_info_.element_size};
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline T* TypedBuffer<Allocator>::DataPtr() noexcept {
+constexpr T* TypedBuffer::DataPtr() noexcept {
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
       "TypedBuffer::DataPtr: type mismatch!");
   if (storage_.empty()) [[unlikely]] {
     return nullptr;
   }
-  return std::launder(reinterpret_cast<T*>(storage_.data()));
+  return std::launder(static_cast<T*>(RawDataPtr()));
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline const T* TypedBuffer<Allocator>::DataPtr() const noexcept {
+constexpr const T* TypedBuffer::DataPtr() const noexcept {
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
       "TypedBuffer::DataPtr: type mismatch!");
   if (storage_.empty()) [[unlikely]] {
     return nullptr;
   }
-  return std::launder(reinterpret_cast<const T*>(storage_.data()));
+  return std::launder(static_cast<const T*>(RawDataPtr()));
 }
 
-template <typename Allocator>
-constexpr void TypedBuffer<Allocator>::Destroy() noexcept {
+constexpr void TypedBuffer::Destroy() noexcept {
   if (has_value_) {
     if (type_info_.destroy != nullptr) {
       type_info_.destroy(storage_.data(), 1);
@@ -457,7 +553,5 @@ constexpr void TypedBuffer<Allocator>::Destroy() noexcept {
     has_value_ = false;
   }
 }
-
-using PmrTypedBuffer = TypedBuffer<std::pmr::polymorphic_allocator<std::byte>>;
 
 }  // namespace helios::container

@@ -2,6 +2,7 @@
 
 #include <helios/input/axis.hpp>
 #include <helios/input/button_input.hpp>
+#include <helios/memory/temporary_storage.hpp>
 
 #include <array>
 #include <cstdint>
@@ -539,13 +540,13 @@ inline std::ostream& operator<<(std::ostream& os, GamepadPowerState state) {
 /**
  * @brief Formats a gamepad power snapshot using an output iterator.
  * @tparam It Output iterator type
- * @param power Power snapshot
  * @param out Output iterator to write the formatted string to
+ * @param power Power snapshot
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const GamepadPower& power, It out) {
+inline It ToString(It out, const GamepadPower& power) {
   return std::format_to(out, "GamepadPower{{state={}, percent={}}}",
                         ToString(power.state), power.percent);
 }
@@ -553,12 +554,26 @@ inline It ToString(const GamepadPower& power, It out) {
 /**
  * @brief Formats a gamepad power snapshot as a string.
  * @param power Power snapshot
- * @return Formatted power string
+ * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(const GamepadPower& power) {
   std::string result;
   result.reserve(64);
-  ToString(power, std::back_inserter(result));
+  ToString(std::back_inserter(result), power);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad power snapshot as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param power Power snapshot
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const GamepadPower& power) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), power);
   return result;
 }
 
@@ -569,7 +584,7 @@ inline It ToString(const GamepadPower& power, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const GamepadPower& power) {
-  ToString(power, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), power);
   return os;
 }
 
@@ -582,7 +597,7 @@ inline std::ostream& operator<<(std::ostream& os, const GamepadPower& power) {
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const GamepadTouchpadFinger& finger, It out) {
+inline It ToString(It out, const GamepadTouchpadFinger& finger) {
   return std::format_to(
       out, "GamepadTouchpadFinger{{x={}, y={}, pressure={}, down={}}}",
       finger.x, finger.y, finger.pressure, finger.down);
@@ -591,12 +606,27 @@ inline It ToString(const GamepadTouchpadFinger& finger, It out) {
 /**
  * @brief Formats a touchpad finger sample as a string.
  * @param finger Touchpad finger sample
- * @return Formatted finger string
+ * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(const GamepadTouchpadFinger& finger) {
   std::string result;
   result.reserve(128);
-  ToString(finger, std::back_inserter(result));
+  ToString(std::back_inserter(result), finger);
+  return result;
+}
+
+/**
+ * @brief Formats a touchpad finger sample as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param finger Touchpad finger sample
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadTouchpadFinger& finger) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), finger);
   return result;
 }
 
@@ -608,7 +638,7 @@ inline It ToString(const GamepadTouchpadFinger& finger, It out) {
  */
 inline std::ostream& operator<<(std::ostream& os,
                                 const GamepadTouchpadFinger& finger) {
-  ToString(finger, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), finger);
   return os;
 }
 
@@ -645,14 +675,14 @@ inline std::ostream& operator<<(std::ostream& os, GamepadSensor sensor) {
  * @brief Formats gamepad dirty flags as a pipe-separated list and writes to an
  * output iterator.
  * @tparam It Output iterator type
- * @param flags Combined dirty flags
  * @param out Output iterator to write the formatted string to
+ * @param flags Combined dirty flags
  * @param with_prefix Whether to include a "GamepadDirtyFlags::" prefix
  * @return Updated output iterator after writing the formatted string
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(GamepadDirtyFlags flags, It out, bool with_prefix = false) {
+inline It ToString(It out, GamepadDirtyFlags flags, bool with_prefix = false) {
   const std::string_view kNoneStr =
       with_prefix ? "GamepadDirtyFlags::None" : "None";
 
@@ -682,16 +712,34 @@ inline It ToString(GamepadDirtyFlags flags, It out, bool with_prefix = false) {
 }
 
 /**
- * @brief Formats gamepad dirty flags as a pipe-separated list of flag names.
+ * @brief Formats gamepad dirty flags as a pipe-separated list of flag names
+ * string.
  * @param flags Combined dirty flags
  * @param with_prefix Whether to include a "GamepadDirtyFlags::" prefix
- * @return Formatted flag names
+ * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(GamepadDirtyFlags flags,
                                           bool with_prefix = false) {
   std::string result;
-  result.reserve(64);
-  ToString(flags, std::back_inserter(result), with_prefix);
+  result.reserve(128);
+  ToString(std::back_inserter(result), flags, with_prefix);
+  return result;
+}
+
+/**
+ * @brief Formats gamepad dirty flags as a pipe-separated list of flag names
+ * string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param flags Combined dirty flags
+ * @param with_prefix Whether to include a "GamepadDirtyFlags::" prefix
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(GamepadDirtyFlags flags,
+                                                   bool with_prefix = false) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), flags, with_prefix);
   return result;
 }
 
@@ -702,27 +750,27 @@ inline It ToString(GamepadDirtyFlags flags, It out, bool with_prefix = false) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, GamepadDirtyFlags flags) {
-  ToString(flags, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), flags);
   return os;
 }
 
 /**
  * @brief Formats a gamepad snapshot using an output iterator.
  * @tparam It Output iterator type
- * @param pad Gamepad snapshot
  * @param out Output iterator to write the formatted string to
+ * @param pad Gamepad snapshot
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Gamepad& pad, It out) {
+inline It ToString(It out, const Gamepad& pad) {
   out = std::format_to(out,
                        "Gamepad{{id={}, name=\"{}\", guid=\"{}\", connected={}",
                        pad.id, pad.name, pad.guid, pad.connected);
   out = std::format_to(out, ", power=");
-  out = ToString(pad.power, out);
+  out = ToString(out, pad.power);
   out = std::format_to(out, ", dirty_flags=");
-  out = ToString(pad.dirty_flags, out);
+  out = ToString(out, pad.dirty_flags);
   return std::format_to(
       out, ", gyro_enabled={}, accel_enabled={}, touchpad_count={}}}",
       pad.gyro_enabled, pad.accel_enabled, pad.touchpad_count);
@@ -731,12 +779,26 @@ inline It ToString(const Gamepad& pad, It out) {
 /**
  * @brief Formats a gamepad snapshot as a string.
  * @param pad Gamepad snapshot
- * @return Formatted gamepad string
+ * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(const Gamepad& pad) {
   std::string result;
-  result.reserve(128);
-  ToString(pad, std::back_inserter(result));
+  result.reserve(256);
+  ToString(std::back_inserter(result), pad);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad snapshot as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param pad Gamepad snapshot
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Gamepad& pad) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), pad);
   return result;
 }
 
@@ -747,7 +809,7 @@ inline It ToString(const Gamepad& pad, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const Gamepad& pad) {
-  ToString(pad, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), pad);
   return os;
 }
 
@@ -802,7 +864,7 @@ struct formatter<helios::input::GamepadPower> {
 
   static auto format(const helios::input::GamepadPower& power,
                      format_context& ctx) {
-    return helios::input::ToString(power, ctx.out());
+    return helios::input::ToString(ctx.out(), power);
   }
 };
 
@@ -814,7 +876,7 @@ struct formatter<helios::input::GamepadTouchpadFinger> {
 
   static auto format(const helios::input::GamepadTouchpadFinger& finger,
                      format_context& ctx) {
-    return helios::input::ToString(finger, ctx.out());
+    return helios::input::ToString(ctx.out(), finger);
   }
 };
 
@@ -839,7 +901,7 @@ struct formatter<helios::input::GamepadDirtyFlags> {
 
   static auto format(helios::input::GamepadDirtyFlags flags,
                      format_context& ctx) {
-    return helios::input::ToString(flags, ctx.out(), /*with_prefix=*/true);
+    return helios::input::ToString(ctx.out(), flags, /*with_prefix=*/true);
   }
 };
 
@@ -850,7 +912,7 @@ struct formatter<helios::input::Gamepad> {
   }
 
   static auto format(const helios::input::Gamepad& pad, format_context& ctx) {
-    return helios::input::ToString(pad, ctx.out());
+    return helios::input::ToString(ctx.out(), pad);
   }
 };
 

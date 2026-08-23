@@ -9,13 +9,17 @@
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
+#include <memory_resource>
 #include <utility>
 
 namespace helios::ecs {
 
+EntityManager::EntityManager(std::pmr::memory_resource* resource)
+    : generations_(resource), free_indices_(resource) {}
+
 EntityManager::EntityManager(const EntityManager& other)
-    : generations_(other.generations_),
-      free_indices_(other.free_indices_),
+    : generations_(other.generations_, other.generations_.get_allocator()),
+      free_indices_(other.free_indices_, other.free_indices_.get_allocator()),
       entity_count_(other.entity_count_.load(std::memory_order_relaxed)),
       next_index_(other.next_index_.load(std::memory_order_relaxed)),
       free_cursor_(other.free_cursor_.load(std::memory_order_relaxed)) {}

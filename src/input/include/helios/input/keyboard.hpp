@@ -1,5 +1,7 @@
 #pragma once
 
+#include <helios/memory/temporary_storage.hpp>
+
 #include <cstdint>
 #include <format>
 #include <iterator>
@@ -447,14 +449,14 @@ inline std::ostream& operator<<(std::ostream& os, Key key) {
  * @brief Formats modifiers as a pipe-separated list and writes to an output
  * iterator.
  * @tparam It Output iterator type
- * @param modifiers Combined modifier flags
  * @param out Output iterator to write the formatted string to
+ * @param modifiers Combined modifier flags
  * @param with_prefix Whether to include a "Modifiers::" prefix for each flag
  * @return Updated output iterator after writing the formatted string
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(Modifiers modifiers, It out, bool with_prefix = false) {
+inline It ToString(It out, Modifiers modifiers, bool with_prefix = false) {
   const std::string_view kNoneStr = with_prefix ? "Modifiers::None" : "None";
 
   if (modifiers == Modifiers::kNone) {
@@ -488,13 +490,30 @@ inline It ToString(Modifiers modifiers, It out, bool with_prefix = false) {
  * @brief Formats modifiers as a pipe-separated list of flag names.
  * @param modifiers Combined modifier flags
  * @param with_prefix Whether to include a "Modifiers::" prefix for each flag
- * @return Formatted flag names
+ * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(Modifiers modifiers,
                                           bool with_prefix = false) {
   std::string result;
   result.reserve(64);
-  ToString(modifiers, std::back_inserter(result), with_prefix);
+  ToString(std::back_inserter(result), modifiers, with_prefix);
+  return result;
+}
+
+/**
+ * @brief Formats modifiers as a pipe-separated list of flag names using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param modifiers Combined modifier flags
+ * @param with_prefix Whether to include a "Modifiers::" prefix for each flag
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(Modifiers modifiers,
+                                                   bool with_prefix = false) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), modifiers, with_prefix);
   return result;
 }
 
@@ -505,7 +524,7 @@ inline It ToString(Modifiers modifiers, It out, bool with_prefix = false) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, Modifiers modifiers) {
-  ToString(modifiers, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), modifiers);
   return os;
 }
 
@@ -559,7 +578,7 @@ struct formatter<helios::input::Modifiers> {
   }
 
   static auto format(helios::input::Modifiers modifiers, format_context& ctx) {
-    return helios::input::ToString(modifiers, ctx.out(),
+    return helios::input::ToString(ctx.out(), modifiers,
                                    /*with_prefix=*/true);
   }
 };

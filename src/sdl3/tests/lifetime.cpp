@@ -63,3 +63,15 @@ TEST_SUITE("helios::sdl3::Initialized") {
     }
   }
 }
+
+TEST_SUITE("helios::sdl3::Probe") {
+  TEST_CASE("helios::sdl3::Probe") {
+    SUBCASE("Leaves SDL uninitialized after a successful video probe") {
+      if (!Probe(SDL_INIT_VIDEO)) {
+        MESSAGE("SDL video unavailable; skipping");
+        return;
+      }
+      CHECK_FALSE(Initialized());
+    }
+  }
+}

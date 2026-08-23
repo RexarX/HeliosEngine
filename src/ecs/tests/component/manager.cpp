@@ -5,9 +5,32 @@
 #include <helios/ecs/component/manager.hpp>
 #include <helios/ecs/entity/entity.hpp>
 
+#include <memory_resource>
+#include <type_traits>
+
 using namespace helios::ecs;
 
 namespace {
+
+class CountingResource final : public std::pmr::memory_resource {
+public:
+  size_t bytes_allocated = 0;
+
+protected:
+  auto do_allocate(size_t bytes, size_t alignment) -> void* override {
+    bytes_allocated += bytes;
+    return std::pmr::new_delete_resource()->allocate(bytes, alignment);
+  }
+
+  void do_deallocate(void* ptr, size_t bytes, size_t alignment) override {
+    std::pmr::new_delete_resource()->deallocate(ptr, bytes, alignment);
+  }
+
+  [[nodiscard]] auto do_is_equal(
+      const std::pmr::memory_resource& other) const noexcept -> bool override {
+    return this == &other;
+  }
+};
 
 struct Position {
   float x = 0.0F;
@@ -101,6 +124,27 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     SUBCASE("ComponentManager can be default constructed") {
       ComponentManager mgr;
       CHECK_EQ(mgr.TrackedEntityCount(), 0);
+      CHECK_EQ(mgr.GetMemoryResource(), std::pmr::get_default_resource());
+    }
+
+    SUBCASE("Memory resource ctor") {
+      CountingResource resource;
+      ComponentManager mgr{&resource};
+
+      CHECK_EQ(mgr.GetMemoryResource(), &resource);
+
+      constexpr Entity entity{1, 0};
+      mgr.InitEntity(entity);
+      mgr.Add(entity, Position{1.0F, 2.0F});
+      mgr.Add(entity, SparsePosition{3.0F, 4.0F});
+
+      CHECK(mgr.Has<Position>(entity));
+      CHECK(mgr.Has<SparsePosition>(entity));
+      CHECK_GT(resource.bytes_allocated, 0);
+    }
+
+    SUBCASE("Nullptr ctor is deleted") {
+      CHECK_FALSE(std::is_constructible_v<ComponentManager, std::nullptr_t>);
     }
 
     SUBCASE("Move constructor") {

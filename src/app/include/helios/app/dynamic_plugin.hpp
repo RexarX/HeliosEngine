@@ -102,7 +102,7 @@ using DynamicPluginResult = std::expected<T, DynamicPluginError>;
  * @param error The error code
  * @return String description of the error
  */
-[[nodiscard]] constexpr std::string_view DynamicPluginErrorToString(
+[[nodiscard]] constexpr std::string_view ToString(
     DynamicPluginError error) noexcept {
   switch (error) {
     using enum DynamicPluginError;

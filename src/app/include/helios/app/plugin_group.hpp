@@ -31,7 +31,7 @@ class App;
 class PluginGroup {
 public:
   PluginGroup(const PluginGroup&) = delete;
-  PluginGroup(PluginGroup&&) noexcept = default;
+  constexpr PluginGroup(PluginGroup&&) noexcept = default;
   constexpr ~PluginGroup() = default;
 
   PluginGroup& operator=(const PluginGroup&) = delete;
@@ -86,6 +86,7 @@ protected:
   template <PluginTrait... Ts>
     requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
   explicit constexpr PluginGroup(Ts&&... plugins) {
+    plugins_.Reserve(sizeof...(Ts));
     (Add(std::forward<Ts>(plugins)), ...);
   }
 

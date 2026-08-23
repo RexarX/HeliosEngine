@@ -12,11 +12,11 @@ namespace {
 
 struct ConsumedRegistry {
   std::pmr::monotonic_buffer_resource resource;
-  PmrConsumedMessagesRegistry registry;
+  ConsumedMessagesRegistry registry;
 
   ConsumedRegistry() : registry(&resource) {}
 
-  operator PmrConsumedMessagesRegistry&() noexcept { return registry; }
+  operator ConsumedMessagesRegistry&() noexcept { return registry; }
 };
 
 struct Position {

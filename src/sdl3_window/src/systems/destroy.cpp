@@ -2,7 +2,7 @@
 
 #include <helios/sdl3/window/systems/destroy.hpp>
 
-#include <helios/app/application.hpp>
+#include <helios/app/builtin/app_exit.hpp>
 #include <helios/ecs/command/commands.hpp>
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/message/writer.hpp>

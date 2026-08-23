@@ -2,6 +2,7 @@
 
 #include <helios/app/application.hpp>
 
+#include <helios/app/builtin/app_exit.hpp>
 #include <helios/app/details/profile.hpp>
 #include <helios/app/plugin.hpp>
 #include <helios/app/plugin_group.hpp>
@@ -10,6 +11,12 @@
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/schedule/scheduler.hpp>
 #include <helios/log/logger.hpp>
+#include <helios/memory/temporary_storage.hpp>
+
+#if defined(HELIOS_APP_ENABLE_PROFILE) && \
+    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#include <helios/utils/format.hpp>
+#endif
 
 #include <algorithm>
 #include <atomic>
@@ -17,13 +24,7 @@
 #include <cstddef>
 #include <memory>
 #include <mutex>
-
 #include <string>
-
-#if defined(HELIOS_APP_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-#include <format>
-#endif
 
 namespace helios::app {
 
@@ -53,7 +54,7 @@ App::~App() {
   // Ensure we're not running (should already be false if properly shut down)
   is_running_.store(false, std::memory_order_release);
 
-  for (auto&& [_, sub_app] : sub_apps_) {
+  for (auto& [_, sub_app] : sub_apps_) {
     if (sub_app.IsAsync()) {
       sub_app.RequestAsyncLoopStop();
     }
@@ -63,6 +64,10 @@ App::~App() {
   scheduler_.StopAsyncLoops(*this);
   scheduler_.WaitForSubApps();
   executor_.WaitForAll();
+
+  if (IsInitialized()) {
+    CleanUp();
+  }
 }
 
 void App::Clear() {
@@ -79,10 +84,10 @@ void App::Clear() {
   scheduler_.Clear();
 
   is_initialized_ = false;
-  plugins_.clear();
-  dynamic_plugins_.clear();
+  plugins_.Clear();
+  dynamic_plugins_.Clear();
   main_sub_app_.Clear();
-  sub_apps_.clear();
+  sub_apps_.Clear();
 
   RegisterBuiltinSchedules(main_sub_app_.GetScheduler());
   RegisterBuiltinFrameOrders(main_sub_app_.GetWorld());
@@ -112,6 +117,8 @@ void App::Update() {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::App::Update");
 
   HELIOS_ASSERT(is_initialized_, "App is not initialized!");
+
+  mem::ResetAllTemporaryStorage();
   scheduler_.RunFrame(*this);
 
   HELIOS_APP_PROFILE_FRAME();
@@ -197,7 +204,7 @@ void App::CleanUp() {
 
 void App::RegisterMessages() {
   main_sub_app_.AddMessages<AppExit>();
-  for (auto&& [_, sub_app] : sub_apps_) {
+  for (auto& [_, sub_app] : sub_apps_) {
     sub_app.AddMessages<AppExit>();
   }
 }
@@ -209,17 +216,17 @@ void App::BuildPlugins() {
 
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-  std::string zone_name;
+  std::pmr::string zone_name{&mem::GetTemporaryStorage()};
   zone_name.reserve(128);
 #endif
 
-  for (auto&& [index, storage] : plugins_) {
+  for (auto& [_, storage] : plugins_) {
     HELIOS_APP_PROFILE_SCOPE();
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
     zone_name.clear();
-    std::format_to(std::back_inserter(zone_name),
-                   "helios::app::Plugin::Build{{name: {}}}", storage.name);
+    utils::FormatTo(zone_name, "helios::app::Plugin::Build{{name: {}}}",
+                    storage.name);
 #endif
     HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
     log::Debug("Building '{}' plugin", storage.name);
@@ -227,15 +234,14 @@ void App::BuildPlugins() {
     storage.plugin->Build(*this);
   }
 
-  for (auto&& [index, dynamic_plugin] : dynamic_plugins_) {
+  for (auto& [_, dynamic_plugin] : dynamic_plugins_) {
     if (dynamic_plugin.Loaded()) [[likely]] {
       HELIOS_APP_PROFILE_SCOPE();
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
       zone_name.clear();
-      std::format_to(std::back_inserter(zone_name),
-                     "helios::app::Plugin::Build{{name: {}}}",
-                     dynamic_plugin.GetPluginName());
+      utils::FormatTo(zone_name, "helios::app::Plugin::Build{{name: {}}}",
+                      dynamic_plugin.GetPluginName());
 #endif
       HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
       HELIOS_APP_PROFILE_ZONE_TEXT("dynamic");
@@ -251,32 +257,31 @@ void App::PollPlugins() {
 
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-  std::string zone_name;
+  std::pmr::string zone_name{&mem::GetTemporaryStorage()};
   zone_name.reserve(128);
 #endif
 
-  for (auto&& [index, storage] : plugins_) {
+  for (auto& [_, storage] : plugins_) {
     HELIOS_APP_PROFILE_SCOPE();
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
     zone_name.clear();
-    std::format_to(std::back_inserter(zone_name),
-                   "helios::app::Plugin::Poll{{name: {}}}", storage.name);
+    utils::FormatTo(zone_name, "helios::app::Plugin::Poll{{name: {}}}",
+                    storage.name);
 #endif
     HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
 
     storage.plugin->Poll(*this);
   }
 
-  for (auto&& [index, dynamic_plugin] : dynamic_plugins_) {
+  for (auto& [_, dynamic_plugin] : dynamic_plugins_) {
     if (dynamic_plugin.Loaded()) [[likely]] {
       HELIOS_APP_PROFILE_SCOPE();
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
       zone_name.clear();
-      std::format_to(std::back_inserter(zone_name),
-                     "helios::app::Plugin::Poll{{name: {}}}",
-                     dynamic_plugin.GetPluginName());
+      utils::FormatTo(zone_name, "helios::app::Plugin::Poll{{name: {}}}",
+                      dynamic_plugin.GetPluginName());
 #endif
       HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
       HELIOS_APP_PROFILE_ZONE_TEXT("dynamic");
@@ -311,7 +316,7 @@ void App::WaitForPluginsReady() {
 }
 
 bool App::PluginsReady() const {
-  for (const auto& [index, storage] : plugins_) {
+  for (const auto& [_, storage] : plugins_) {
     if (!storage.plugin->IsReady(*this)) {
       return false;
     }
@@ -329,17 +334,17 @@ void App::FinishPlugins() {
 
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-  std::string zone_name;
+  std::pmr::string zone_name{&mem::GetTemporaryStorage()};
   zone_name.reserve(128);
 #endif
 
-  for (auto&& [index, storage] : plugins_) {
+  for (auto& [_, storage] : plugins_) {
     HELIOS_APP_PROFILE_SCOPE();
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
     zone_name.clear();
-    std::format_to(std::back_inserter(zone_name),
-                   "helios::app::Plugin::Finish{{name: {}}}", storage.name);
+    utils::FormatTo(zone_name, "helios::app::Plugin::Finish{{name: {}}}",
+                    storage.name);
 #endif
     HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
     log::Debug("Finishing '{}' plugin", storage.name);
@@ -347,15 +352,14 @@ void App::FinishPlugins() {
     storage.plugin->Finish(*this);
   }
 
-  for (auto&& [index, dynamic_plugin] : dynamic_plugins_) {
+  for (auto& [_, dynamic_plugin] : dynamic_plugins_) {
     if (dynamic_plugin.Loaded()) [[likely]] {
       HELIOS_APP_PROFILE_SCOPE();
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
       zone_name.clear();
-      std::format_to(std::back_inserter(zone_name),
-                     "helios::app::Plugin::Finish{{name: {}}}",
-                     dynamic_plugin.GetPluginName());
+      utils::FormatTo(zone_name, "helios::app::Plugin::Finish{{name: {}}}",
+                      dynamic_plugin.GetPluginName());
 #endif
       HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
       HELIOS_APP_PROFILE_ZONE_TEXT("dynamic");
@@ -373,17 +377,17 @@ void App::DestroyPlugins() {
 
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-  std::string zone_name;
+  std::pmr::string zone_name{&mem::GetTemporaryStorage()};
   zone_name.reserve(128);
 #endif
 
-  for (auto&& [index, storage] : plugins_) {
+  for (auto& [_, storage] : plugins_) {
     HELIOS_APP_PROFILE_SCOPE();
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
     zone_name.clear();
-    std::format_to(std::back_inserter(zone_name),
-                   "helios::app::Plugin::Destroy{{name: {}}}", storage.name);
+    utils::FormatTo(zone_name, "helios::app::Plugin::Destroy{{name: {}}}",
+                    storage.name);
 #endif
     HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
     log::Debug("Destroying '{}' plugin", storage.name);
@@ -391,15 +395,14 @@ void App::DestroyPlugins() {
     storage.plugin->Destroy(*this);
   }
 
-  for (auto&& [index, dynamic_plugin] : dynamic_plugins_) {
+  for (auto& [_, dynamic_plugin] : dynamic_plugins_) {
     if (dynamic_plugin.Loaded()) [[likely]] {
       HELIOS_APP_PROFILE_SCOPE();
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
       zone_name.clear();
-      std::format_to(std::back_inserter(zone_name),
-                     "helios::app::Plugin::Destroy{{name: {}}}",
-                     dynamic_plugin.GetPluginName());
+      utils::FormatTo(zone_name, "helios::app::Plugin::Destroy{{name: {}}}",
+                      dynamic_plugin.GetPluginName());
 #endif
       HELIOS_APP_PROFILE_ZONE_NAME(zone_name);
       HELIOS_APP_PROFILE_ZONE_TEXT("dynamic");

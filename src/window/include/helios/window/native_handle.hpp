@@ -1,5 +1,7 @@
 #pragma once
 
+#include <helios/memory/temporary_storage.hpp>
+
 #include <format>
 #include <iterator>
 #include <ostream>
@@ -68,13 +70,13 @@ using NativeHandle = std::variant<std::monostate
 /**
  * @brief Formats a Win32 handle using an output iterator.
  * @tparam It Output iterator type
- * @param handle Win32 handle
  * @param out Output iterator to write the formatted string to
+ * @param handle Win32 handle
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Win32Handle& handle, It out) {
+inline It ToString(It out, const Win32Handle& handle) {
   return std::format_to(out, "Win32Handle{{hwnd={}, hinstance={}}}",
                         handle.hwnd, handle.hinstance);
 }
@@ -84,13 +86,13 @@ inline It ToString(const Win32Handle& handle, It out) {
 /**
  * @brief Formats an Xlib handle using an output iterator.
  * @tparam It Output iterator type
- * @param handle Xlib handle
  * @param out Output iterator to write the formatted string to
+ * @param handle Xlib handle
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const XlibHandle& handle, It out) {
+inline It ToString(It out, const XlibHandle& handle) {
   return std::format_to(out, "XlibHandle{{display={}, window={}}}",
                         handle.display, handle.window);
 }
@@ -100,13 +102,13 @@ inline It ToString(const XlibHandle& handle, It out) {
 /**
  * @brief Formats a Wayland handle using an output iterator.
  * @tparam It Output iterator type
- * @param handle Wayland handle
  * @param out Output iterator to write the formatted string to
+ * @param handle Wayland handle
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const WaylandHandle& handle, It out) {
+inline It ToString(It out, const WaylandHandle& handle) {
   return std::format_to(out, "WaylandHandle{{display={}, surface={}}}",
                         handle.display, handle.surface);
 }
@@ -116,13 +118,13 @@ inline It ToString(const WaylandHandle& handle, It out) {
 /**
  * @brief Formats a Cocoa handle using an output iterator.
  * @tparam It Output iterator type
- * @param handle Cocoa handle
  * @param out Output iterator to write the formatted string to
+ * @param handle Cocoa handle
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const CocoaHandle& handle, It out) {
+inline It ToString(It out, const CocoaHandle& handle) {
   return std::format_to(out, "CocoaHandle{{ns_window={}, ns_view={}}}",
                         handle.ns_window, handle.ns_view);
 }
@@ -131,20 +133,20 @@ inline It ToString(const CocoaHandle& handle, It out) {
 /**
  * @brief Formats a native handle using an output iterator.
  * @tparam It Output iterator type
- * @param handle Native handle variant
  * @param out Output iterator to write the formatted string to
+ * @param handle Native handle variant
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const NativeHandle& handle, It out) {
+inline It ToString(It out, const NativeHandle& handle) {
   return std::visit(
       [&out](const auto& value) -> It {
         using T = std::decay_t<decltype(value)>;
         if constexpr (std::is_same_v<T, std::monostate>) {
           return std::format_to(out, "NativeHandle{{}}");
         } else {
-          return ToString(value, out);
+          return ToString(out, value);
         }
       },
       handle);
@@ -159,7 +161,21 @@ inline It ToString(const NativeHandle& handle, It out) {
 [[nodiscard]] inline std::string ToString(const Win32Handle& handle) {
   std::string result;
   result.reserve(64);
-  ToString(handle, std::back_inserter(result));
+  ToString(std::back_inserter(result), handle);
+  return result;
+}
+
+/**
+ * @brief Formats a Win32Handle as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param handle Win32Handle
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Win32Handle& handle) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), handle);
   return result;
 }
 
@@ -170,7 +186,7 @@ inline It ToString(const NativeHandle& handle, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const Win32Handle& handle) {
-  ToString(handle, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), handle);
   return os;
 }
 #endif
@@ -183,7 +199,21 @@ inline std::ostream& operator<<(std::ostream& os, const Win32Handle& handle) {
 [[nodiscard]] inline std::string ToString(const XlibHandle& handle) {
   std::string result;
   result.reserve(64);
-  ToString(handle, std::back_inserter(result));
+  ToString(std::back_inserter(result), handle);
+  return result;
+}
+
+/**
+ * @brief Formats a XlibHandle as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param handle XlibHandle
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const XlibHandle& handle) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), handle);
   return result;
 }
 
@@ -194,7 +224,7 @@ inline std::ostream& operator<<(std::ostream& os, const Win32Handle& handle) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const XlibHandle& handle) {
-  ToString(handle, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), handle);
   return os;
 }
 #endif
@@ -207,7 +237,22 @@ inline std::ostream& operator<<(std::ostream& os, const XlibHandle& handle) {
 [[nodiscard]] inline std::string ToString(const WaylandHandle& handle) {
   std::string result;
   result.reserve(64);
-  ToString(handle, std::back_inserter(result));
+  ToString(std::back_inserter(result), handle);
+  return result;
+}
+
+/**
+ * @brief Formats a WaylandHandle as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param handle WaylandHandle
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const WaylandHandle& handle) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), handle);
   return result;
 }
 
@@ -218,7 +263,7 @@ inline std::ostream& operator<<(std::ostream& os, const XlibHandle& handle) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const WaylandHandle& handle) {
-  ToString(handle, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), handle);
   return os;
 }
 #endif
@@ -231,7 +276,21 @@ inline std::ostream& operator<<(std::ostream& os, const WaylandHandle& handle) {
 [[nodiscard]] inline std::string ToString(const CocoaHandle& handle) {
   std::string result;
   result.reserve(64);
-  ToString(handle, std::back_inserter(result));
+  ToString(std::back_inserter(result), handle);
+  return result;
+}
+
+/**
+ * @brief Formats a CocoaHandle as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param handle CocoaHandle
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const CocoaHandle& handle) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), handle);
   return result;
 }
 
@@ -242,7 +301,7 @@ inline std::ostream& operator<<(std::ostream& os, const WaylandHandle& handle) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const CocoaHandle& handle) {
-  ToString(handle, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), handle);
   return os;
 }
 #endif
@@ -254,7 +313,21 @@ inline std::ostream& operator<<(std::ostream& os, const CocoaHandle& handle) {
 [[nodiscard]] inline std::string ToString(const NativeHandle& handle) {
   std::string result;
   result.reserve(64);
-  ToString(handle, std::back_inserter(result));
+  ToString(std::back_inserter(result), handle);
+  return result;
+}
+
+/**
+ * @brief Formats a NativeHandle as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param handle NativeHandle
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const NativeHandle& handle) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), handle);
   return result;
 }
 
@@ -265,7 +338,7 @@ inline std::ostream& operator<<(std::ostream& os, const CocoaHandle& handle) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const NativeHandle& handle) {
-  ToString(handle, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), handle);
   return os;
 }
 
@@ -282,7 +355,7 @@ struct formatter<helios::window::Win32Handle> {
 
   static auto format(const helios::window::Win32Handle& handle,
                      format_context& ctx) {
-    return helios::window::ToString(handle, ctx.out());
+    return helios::window::ToString(ctx.out(), handle);
   }
 };
 #endif
@@ -295,7 +368,7 @@ struct formatter<helios::window::XlibHandle> {
 
   static auto format(const helios::window::XlibHandle& handle,
                      format_context& ctx) {
-    return helios::window::ToString(handle, ctx.out());
+    return helios::window::ToString(ctx.out(), handle);
   }
 };
 #endif
@@ -308,7 +381,7 @@ struct formatter<helios::window::WaylandHandle> {
 
   static auto format(const helios::window::WaylandHandle& handle,
                      format_context& ctx) {
-    return helios::window::ToString(handle, ctx.out());
+    return helios::window::ToString(ctx.out(), handle);
   }
 };
 #endif
@@ -321,7 +394,7 @@ struct formatter<helios::window::CocoaHandle> {
 
   static auto format(const helios::window::CocoaHandle& handle,
                      format_context& ctx) {
-    return helios::window::ToString(handle, ctx.out());
+    return helios::window::ToString(ctx.out(), handle);
   }
 };
 #endif
@@ -333,7 +406,7 @@ struct formatter<helios::window::NativeHandle> {
 
   static auto format(const helios::window::NativeHandle& handle,
                      format_context& ctx) {
-    return helios::window::ToString(handle, ctx.out());
+    return helios::window::ToString(ctx.out(), handle);
   }
 };
 

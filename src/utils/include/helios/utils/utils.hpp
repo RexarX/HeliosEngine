@@ -5,6 +5,7 @@
 #include <helios/utils/dynamic_library.hpp>
 #include <helios/utils/fast_pimpl.hpp>
 #include <helios/utils/filesystem.hpp>
+#include <helios/utils/format.hpp>
 #include <helios/utils/functional_adapters.hpp>
 #include <helios/utils/hash.hpp>
 #include <helios/utils/macro.hpp>

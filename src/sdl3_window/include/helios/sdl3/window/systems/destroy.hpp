@@ -1,6 +1,6 @@
 #pragma once
 
-#include <helios/app/application.hpp>
+#include <helios/app/builtin/app_exit.hpp>
 #include <helios/ecs/command/commands.hpp>
 #include <helios/ecs/message/writer.hpp>
 #include <helios/ecs/resource/params.hpp>

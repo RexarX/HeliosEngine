@@ -9,6 +9,7 @@
 #include <array>
 #include <concepts>
 #include <cstddef>
+#include <memory_resource>
 #include <type_traits>
 
 namespace helios::ecs {
@@ -20,17 +21,25 @@ namespace helios::ecs {
  */
 class ResourceManager {
 public:
-  ResourceManager() = default;
-  ResourceManager(const ResourceManager&) = default;
-  ResourceManager(ResourceManager&&) noexcept = default;
-  ~ResourceManager() = default;
+  constexpr ResourceManager() = default;
 
-  ResourceManager& operator=(const ResourceManager&) = default;
-  ResourceManager& operator=(ResourceManager&&) noexcept = default;
+  /**
+   * @brief Constructs a resource manager using `resource` for owned storage.
+   * @param resource Memory resource for the type map and typed buffers.
+   */
+  explicit constexpr ResourceManager(std::pmr::memory_resource* resource)
+      : resources_(resource) {}
+  ResourceManager(std::nullptr_t) = delete;
+  constexpr ResourceManager(const ResourceManager&) = default;
+  constexpr ResourceManager(ResourceManager&&) noexcept = default;
+  constexpr ~ResourceManager() = default;
+
+  constexpr ResourceManager& operator=(const ResourceManager&) = default;
+  constexpr ResourceManager& operator=(ResourceManager&&) noexcept = default;
 
   /// @brief Clears all resources, destroying stored values and removing all
   /// entries.
-  void Clear() { resources_.ResetAll(); }
+  constexpr void Clear() noexcept { resources_.ResetAll(); }
 
   /**
    * @brief Inserts a new resource.
@@ -39,7 +48,7 @@ public:
    * @param resource Resource to insert
    */
   template <ResourceTrait T>
-  void Insert(T&& resource);
+  constexpr void Insert(T&& resource);
 
   /**
    * @brief Inserts multiple resources.
@@ -49,7 +58,8 @@ public:
    */
   template <ResourceTrait... Ts>
     requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 1)
-  void Insert(Ts&&... resources) {
+  constexpr void Insert(Ts&&... resources) {
+    resources_.Reserve(resources_.TypeCount() + sizeof...(Ts));
     (Insert(std::forward<Ts>(resources)), ...);
   }
 
@@ -60,7 +70,7 @@ public:
    * @return True if inserted, false if resource already exists
    */
   template <ResourceTrait T>
-  bool TryInsert(T&& resource);
+  constexpr bool TryInsert(T&& resource);
 
   /**
    * @brief Tries to insert resources if not present.
@@ -70,9 +80,8 @@ public:
    */
   template <ResourceTrait... Ts>
     requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 1)
-  auto TryInsert(Ts&&... resources) -> std::array<bool, sizeof...(Ts)> {
-    return {TryInsert(std::forward<Ts>(resources))...};
-  }
+  constexpr auto TryInsert(Ts&&... resources)
+      -> std::array<bool, sizeof...(Ts)>;
 
   /**
    * @brief Emplaces a new resource in-place.
@@ -83,7 +92,7 @@ public:
    */
   template <ResourceTrait T, typename... Args>
     requires std::constructible_from<T, Args...>
-  void Emplace(Args&&... args);
+  constexpr void Emplace(Args&&... args);
 
   /**
    * @brief Tries to emplace a resource if not present.
@@ -94,7 +103,7 @@ public:
    */
   template <ResourceTrait T, typename... Args>
     requires std::constructible_from<T, Args...>
-  bool TryEmplace(Args&&... args);
+  constexpr bool TryEmplace(Args&&... args);
 
   /**
    * @brief Removes a resource.
@@ -102,7 +111,7 @@ public:
    * @tparam T Resource type
    */
   template <ResourceTrait T>
-  void Remove();
+  constexpr void Remove();
 
   /**
    * @brief Tries to remove a resource.
@@ -110,7 +119,7 @@ public:
    * @return True if removed, false if resource didn't exist
    */
   template <ResourceTrait T>
-  bool TryRemove() {
+  constexpr bool TryRemove() {
     return resources_.Remove<T>();
   }
 
@@ -121,7 +130,7 @@ public:
    * @return Mutable reference to resource
    */
   template <ResourceTrait T>
-  [[nodiscard]] T& Get() noexcept;
+  [[nodiscard]] constexpr T& Get() noexcept;
 
   /**
    * @brief Gets const reference to a resource.
@@ -130,7 +139,7 @@ public:
    * @return Const reference to resource
    */
   template <ResourceTrait T>
-  [[nodiscard]] const T& Get() const noexcept;
+  [[nodiscard]] constexpr const T& Get() const noexcept;
 
   /**
    * @brief Tries to get mutable pointer to a resource.
@@ -138,7 +147,7 @@ public:
    * @return Pointer to resource, or `nullptr` if not found
    */
   template <ResourceTrait T>
-  [[nodiscard]] T* TryGet() noexcept;
+  [[nodiscard]] constexpr T* TryGet() noexcept;
 
   /**
    * @brief Tries to get const pointer to a resource.
@@ -146,7 +155,7 @@ public:
    * @return Const pointer to resource, or `nullptr` if not found
    */
   template <ResourceTrait T>
-  [[nodiscard]] const T* TryGet() const noexcept;
+  [[nodiscard]] constexpr const T* TryGet() const noexcept;
 
   /**
    * @brief Checks if a resource exists.
@@ -154,7 +163,7 @@ public:
    * @return True if resource exists, false otherwise
    */
   template <ResourceTrait T>
-  [[nodiscard]] bool Has() const noexcept {
+  [[nodiscard]] constexpr bool Has() const noexcept {
     return resources_.Contains<T>();
   }
 
@@ -162,59 +171,82 @@ public:
    * @brief Gets the number of stored resources.
    * @return Resource count
    */
-  [[nodiscard]] size_t Count() const noexcept { return resources_.TypeCount(); }
+  [[nodiscard]] constexpr size_t Count() const noexcept {
+    return resources_.TypeCount();
+  }
+
+  /**
+   * @brief Returns the memory resource used for owned storage.
+   * @return Memory resource of the underlying type map
+   */
+  [[nodiscard]] constexpr std::pmr::memory_resource* GetMemoryResource()
+      const noexcept {
+    return resources_.GetMemoryResource();
+  }
 
 private:
-  using StorageType = container::TypedBuffer<>;
+  using StorageType = container::TypedBuffer;
   using MapType = container::MultiTypeMap<StorageType>;
 
   MapType resources_;
 };
 
 template <ResourceTrait T>
-inline void ResourceManager::Insert(T&& resource) {
+constexpr void ResourceManager::Insert(T&& resource) {
   using DecayedT = std::remove_cvref_t<T>;
   auto& buf = resources_.Ensure<DecayedT>();
+  buf.ReserveBytes(sizeof(DecayedT));
   buf.template Set<DecayedT>(std::forward<T>(resource));
 }
 
 template <ResourceTrait T>
-inline bool ResourceManager::TryInsert(T&& resource) {
+constexpr bool ResourceManager::TryInsert(T&& resource) {
   using DecayedT = std::remove_cvref_t<T>;
   if (resources_.Contains<DecayedT>() && !resources_.Empty<DecayedT>()) {
     return false;
   }
   auto& buf = resources_.Ensure<DecayedT>();
+  buf.ReserveBytes(sizeof(DecayedT));
   buf.template Set<DecayedT>(std::forward<T>(resource));
   return true;
 }
 
+template <ResourceTrait... Ts>
+  requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 1)
+constexpr auto ResourceManager::TryInsert(Ts&&... resources)
+    -> std::array<bool, sizeof...(Ts)> {
+  resources_.Reserve(resources_.TypeCount() + sizeof...(Ts));
+  return {TryInsert(std::forward<Ts>(resources))...};
+}
+
 template <ResourceTrait T, typename... Args>
   requires std::constructible_from<T, Args...>
-inline void ResourceManager::Emplace(Args&&... args) {
+constexpr void ResourceManager::Emplace(Args&&... args) {
   auto& buf = resources_.Ensure<T>();
+  buf.ReserveBytes(sizeof(T));
   buf.template Set<T>(std::forward<Args>(args)...);
 }
 
 template <ResourceTrait T, typename... Args>
   requires std::constructible_from<T, Args...>
-inline bool ResourceManager::TryEmplace(Args&&... args) {
+constexpr bool ResourceManager::TryEmplace(Args&&... args) {
   if (resources_.Contains<T>() && !resources_.Empty<T>()) {
     return false;
   }
   auto& buf = resources_.Ensure<T>();
+  buf.ReserveBytes(sizeof(T));
   buf.template Set<T>(std::forward<Args>(args)...);
   return true;
 }
 
 template <ResourceTrait T>
-inline void ResourceManager::Remove() {
+constexpr void ResourceManager::Remove() {
   [[maybe_unused]] const bool removed = resources_.Remove<T>();
   HELIOS_ASSERT(removed, "Resource '{}' does not exist!", ResourceNameOf<T>());
 }
 
 template <ResourceTrait T>
-inline T& ResourceManager::Get() noexcept {
+constexpr T& ResourceManager::Get() noexcept {
   auto* buf = resources_.TryGet<T>();
   HELIOS_ASSERT(buf != nullptr && !buf->Empty(),
                 "Resource '{}' does not exist!", ResourceNameOf<T>());
@@ -222,7 +254,7 @@ inline T& ResourceManager::Get() noexcept {
 }
 
 template <ResourceTrait T>
-inline const T& ResourceManager::Get() const noexcept {
+constexpr const T& ResourceManager::Get() const noexcept {
   const auto* buf = resources_.TryGet<T>();
   HELIOS_ASSERT(buf != nullptr && !buf->Empty(),
                 "Resource '{}' does not exist!", ResourceNameOf<T>());
@@ -230,7 +262,7 @@ inline const T& ResourceManager::Get() const noexcept {
 }
 
 template <ResourceTrait T>
-inline T* ResourceManager::TryGet() noexcept {
+constexpr T* ResourceManager::TryGet() noexcept {
   auto* buf = resources_.TryGet<T>();
   if (buf == nullptr || buf->Empty()) {
     return nullptr;
@@ -239,7 +271,7 @@ inline T* ResourceManager::TryGet() noexcept {
 }
 
 template <ResourceTrait T>
-inline const T* ResourceManager::TryGet() const noexcept {
+constexpr const T* ResourceManager::TryGet() const noexcept {
   const auto* buf = resources_.TryGet<T>();
   if (buf == nullptr || buf->Empty()) {
     return nullptr;

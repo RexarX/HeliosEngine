@@ -30,6 +30,8 @@ helios_module(
         include/helios/memory/pool_allocator.hpp
         include/helios/memory/ref_counted.hpp
         include/helios/memory/stack_allocator.hpp
+        include/helios/memory/temporary_storage.hpp
+        include/helios/memory/temporary_storage_helpers.hpp
         src/details/accumulate_peak.hpp
         src/details/deferred_region_ebr.hpp
         src/details/treiber_stack.hpp
@@ -45,6 +47,7 @@ helios_module(
         src/free_list_allocator.cpp
         src/pool_allocator.cpp
         src/stack_allocator.cpp
+        src/temporary_storage.cpp
 
     PCH src/pch.hpp
 
@@ -78,6 +81,8 @@ helios_module(
         tests/pool_allocator.cpp
         tests/ref_counted.cpp
         tests/stack_allocator.cpp
+        tests/temporary_storage.cpp
+        tests/temporary_storage_helpers.cpp
 )
 
 if(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC)

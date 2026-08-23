@@ -572,7 +572,7 @@ Helios modules live under `src/` by default. Register additional search paths wi
 
 **[examples/custom_module/README.md](examples/custom_module/README.md)**
 
-That example defines a minimal `greeting` module (registration, build target, tests, and a demo executable) under `examples/custom_module/`, discovered through the extra module path mechanism — no manual `include(Module.cmake)` required.
+That example defines a minimal `greeting` module (registration, build target, tests, and a demo executable) under `examples/custom_module/`, discovered through the extra module path mechanism.
 
 ```bash
 # From a parent CMake project (before add_subdirectory(HeliosEngine)):
@@ -591,7 +591,6 @@ Quick layout:
 
 ```
 examples/custom_module/
-├── Module.cmake              # helios_register_module(...)
 ├── CMakeLists.txt            # helios_module(...) + demo target
 ├── README.md                 # Step-by-step guide
 ├── include/helios/greeting/  # Public headers

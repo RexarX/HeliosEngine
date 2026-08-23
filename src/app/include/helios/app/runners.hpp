@@ -1,6 +1,7 @@
 #pragma once
 
 #include <helios/app/application.hpp>
+#include <helios/app/builtin/app_exit.hpp>
 #include <helios/app/sub_app.hpp>
 #include <helios/utils/sleep.hpp>
 

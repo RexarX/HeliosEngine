@@ -1,7 +1,6 @@
 #pragma once
 
 #include <helios/assert.hpp>
-#include <helios/compiler/compiler.hpp>
 #include <helios/ecs/component/archetype.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/component/manager.hpp>
@@ -16,14 +15,12 @@
 #include <cstddef>
 #include <functional>
 #include <iterator>
-#include <memory>
 #include <memory_resource>
 #include <optional>
 #include <ranges>
 #include <span>
 #include <tuple>
 #include <type_traits>
-#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -31,34 +28,36 @@ namespace helios::ecs {
 
 class World;
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 class BasicQuery;
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 class BasicQueryWithEntity;
 
 namespace details {
 
 template <typename... Cs>
-[[nodiscard]] inline bool EntityHasComponentsCheck(
-    const ComponentManager& manager, Entity entity,
-    std::tuple<Cs...>* /*components*/) {
+[[nodiscard]] bool EntityHasComponentsCheck(const ComponentManager& manager,
+                                            Entity entity,
+                                            std::tuple<Cs...>* /*components*/) {
   return ((manager.template Has<std::remove_cvref_t<Cs>>(entity)) && ...);
 }
 
 template <typename... Cs>
-[[nodiscard]] inline auto FetchComponentsMutable(
-    const Archetype& archetype, Entity entity, ComponentManager& manager,
-    std::tuple<Cs...>* /*components*/)
+[[nodiscard]] auto FetchComponentsMutable(const Archetype& archetype,
+                                          Entity entity,
+                                          ComponentManager& manager,
+                                          std::tuple<Cs...>* /*components*/)
     -> std::tuple<ComponentAccessType_t<Cs>...> {
   return std::tuple<ComponentAccessType_t<Cs>...>(
       FetchComponent<Cs>(archetype, entity, manager)...);
 }
 
 template <typename... Cs>
-[[nodiscard]] inline auto FetchComponentsConst(
-    const Archetype& archetype, Entity entity, const ComponentManager& manager,
-    std::tuple<Cs...>* /*components*/)
+[[nodiscard]] auto FetchComponentsConst(const Archetype& archetype,
+                                        Entity entity,
+                                        const ComponentManager& manager,
+                                        std::tuple<Cs...>* /*components*/)
     -> std::tuple<ComponentAccessType_t<Cs>...> {
   return std::tuple<ComponentAccessType_t<Cs>...>(
       FetchComponentConst<Cs>(archetype, entity, manager)...);
@@ -76,10 +75,9 @@ template <typename... Cs>
  *
  * @note Not thread-safe.
  * @tparam WorldT World type (World or const World)
- * @tparam Allocator Allocator type for internal storage
  * @tparam Args Component access types and optional With/Without filters
  */
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 class BasicQueryWithEntity {
 private:
   using Split = details::QueryArgSplit<Args...>;
@@ -93,14 +91,11 @@ public:
   using difference_type = std::iter_difference_t<iterator>;
   using pointer = typename iterator::pointer;
   using reference = std::iter_reference_t<iterator>;
-  using allocator_type = Allocator;
-
   /**
    * @brief Constructs entity-aware query wrapper.
    * @param query Reference to the underlying query
    */
-  explicit BasicQueryWithEntity(
-      BasicQuery<WorldT, Allocator, Args...>& query) noexcept
+  explicit BasicQueryWithEntity(BasicQuery<WorldT, Args...>& query) noexcept
       : query_(query) {}
 
   BasicQueryWithEntity(const BasicQueryWithEntity&) = delete;
@@ -145,65 +140,36 @@ public:
    * @brief Collects all results into a vector.
    * @return Vector of tuples containing entity and components
    */
-  [[nodiscard]] auto Collect() const -> std::vector<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>;
-
-  /**
-   * @brief Collects all results into a vector using a custom allocator.
-   * @tparam ResultAlloc STL-compatible allocator type for `value_type`
-   * @param alloc Allocator instance to use
-   * @return Vector of results using the provided allocator
-   */
-  template <typename ResultAlloc>
-    requires std::same_as<typename ResultAlloc::value_type,
-                          typename BasicQueryWithEntity<WorldT, Allocator,
-                                                        Args...>::value_type> &&
-             (!std::derived_from<std::remove_pointer_t<ResultAlloc>,
-                                 std::pmr::memory_resource>)
-  [[nodiscard]] auto CollectWith(ResultAlloc alloc) const
-      -> std::vector<value_type, ResultAlloc>;
+  [[nodiscard]] auto Collect() const -> std::pmr::vector<
+      typename BasicQueryWithEntity<WorldT, Args...>::value_type>;
 
   /**
    * @brief Collects all results using a memory resource.
    * @param resource Memory resource
    * @return Vector of results using provided allocator
    */
-  [[nodiscard]] auto CollectWith(std::pmr::memory_resource* resource) const
-      -> std::pmr::vector<typename BasicQueryWithEntity<WorldT, Allocator,
-                                                        Args...>::value_type>;
+  [[nodiscard]] auto Collect(std::pmr::memory_resource* resource) const
+      -> std::pmr::vector<
+          typename BasicQueryWithEntity<WorldT, Args...>::value_type>;
 
-  auto CollectWith(std::nullptr_t) const -> std::pmr::vector<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type> =
-      delete;
+  auto Collect(std::nullptr_t) const -> std::pmr::vector<
+      typename BasicQueryWithEntity<WorldT, Args...>::value_type> = delete;
 
   /**
    * @brief Collects all matching entities into a vector.
    * @return Vector of `Entity` objects
    */
-  [[nodiscard]] auto CollectEntities() const -> std::vector<Entity>;
-
-  /**
-   * @brief Collects all matching entities using a custom allocator.
-   * @tparam ResultAlloc STL-compatible allocator type for `Entity`
-   * @param alloc Allocator instance
-   * @return Vector of entities using the provided allocator
-   */
-  template <typename ResultAlloc>
-    requires std::same_as<typename ResultAlloc::value_type, Entity> &&
-             (!std::derived_from<std::remove_pointer_t<ResultAlloc>,
-                                 std::pmr::memory_resource>)
-  [[nodiscard]] auto CollectEntitiesWith(ResultAlloc alloc) const
-      -> std::vector<Entity, ResultAlloc>;
+  [[nodiscard]] auto CollectEntities() const -> std::pmr::vector<Entity>;
 
   /**
    * @brief Collects all matching entities using a memory resource.
    * @param resource Memory resource
    * @return Vector of results using provided allocator
    */
-  [[nodiscard]] auto CollectEntitiesWith(
-      std::pmr::memory_resource* resource) const -> std::pmr::vector<Entity>;
+  [[nodiscard]] auto CollectEntities(std::pmr::memory_resource* resource) const
+      -> std::pmr::vector<Entity>;
 
-  auto CollectEntitiesWith(std::nullptr_t) const
+  auto CollectEntities(std::nullptr_t) const
       -> std::pmr::vector<Entity> = delete;
 
   /**
@@ -213,8 +179,7 @@ public:
    */
   template <typename OutIt>
     requires std::output_iterator<
-        OutIt,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        OutIt, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   void Into(OutIt out);
 
   /**
@@ -224,8 +189,7 @@ public:
    */
   template <typename Action>
     requires utils::ActionFor<
-        Action,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Action, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   void ForEach(const Action& action) const;
 
   /**
@@ -236,11 +200,9 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] auto Filter(Pred predicate) const -> utils::FilterAdapter<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator,
-      Pred>;
+      typename BasicQueryWithEntity<WorldT, Args...>::iterator, Pred>;
 
   /**
    * @brief Transforms each element using a mapping function.
@@ -250,11 +212,9 @@ public:
    */
   template <typename Func>
     requires utils::TransformFor<
-        Func,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Func, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] auto Map(Func transform) const -> utils::MapAdapter<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator,
-      Func>;
+      typename BasicQueryWithEntity<WorldT, Args...>::iterator, Func>;
 
   /**
    * @brief Takes only the first N elements.
@@ -262,7 +222,7 @@ public:
    * @return Lazy take view
    */
   [[nodiscard]] auto Take(size_t count) const -> utils::TakeAdapter<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator>;
+      typename BasicQueryWithEntity<WorldT, Args...>::iterator>;
 
   /**
    * @brief Skips the first N elements.
@@ -270,7 +230,7 @@ public:
    * @return Lazy skip view
    */
   [[nodiscard]] auto Skip(size_t count) const -> utils::SkipAdapter<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator>;
+      typename BasicQueryWithEntity<WorldT, Args...>::iterator>;
 
   /**
    * @brief Takes elements while a predicate is true.
@@ -280,11 +240,9 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] auto TakeWhile(Pred predicate) const -> utils::TakeWhileAdapter<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator,
-      Pred>;
+      typename BasicQueryWithEntity<WorldT, Args...>::iterator, Pred>;
 
   /**
    * @brief Skips elements while a predicate is true.
@@ -294,18 +252,16 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] auto SkipWhile(Pred predicate) const -> utils::SkipWhileAdapter<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator,
-      Pred>;
+      typename BasicQueryWithEntity<WorldT, Args...>::iterator, Pred>;
 
   /**
    * @brief Adds an index to each element.
    * @return Lazy enumerate view yielding (index, entity, components...) tuples
    */
   [[nodiscard]] auto Enumerate() const -> utils::EnumerateAdapter<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator>;
+      typename BasicQueryWithEntity<WorldT, Args...>::iterator>;
 
   /**
    * @brief Inspects each element without consuming it.
@@ -315,11 +271,9 @@ public:
    */
   template <typename Func>
     requires utils::InspectorFor<
-        Func,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Func, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] auto Inspect(Func inspector) const -> utils::InspectAdapter<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator,
-      Func>;
+      typename BasicQueryWithEntity<WorldT, Args...>::iterator, Func>;
 
   /**
    * @brief Yields every Nth element.
@@ -327,7 +281,7 @@ public:
    * @return Lazy step-by view
    */
   [[nodiscard]] auto StepBy(size_t step) const -> utils::StepByAdapter<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator>;
+      typename BasicQueryWithEntity<WorldT, Args...>::iterator>;
 
   /**
    * @brief Chains this query with another iterator range.
@@ -485,8 +439,7 @@ public:
    */
   template <typename T, typename Func>
     requires utils::FolderFor<
-        Func, T,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Func, T, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] T Fold(T init, const Func& folder) const;
 
   /**
@@ -497,10 +450,9 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] auto Find(const Pred& predicate) const -> std::optional<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>;
+      typename BasicQueryWithEntity<WorldT, Args...>::value_type>;
 
   /**
    * @brief Counts entities matching a predicate.
@@ -510,8 +462,7 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] size_t CountIf(const Pred& predicate) const;
 
   /**
@@ -522,10 +473,9 @@ public:
    */
   template <typename KeyFunc>
     requires utils::TransformFor<
-        KeyFunc,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        KeyFunc, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] auto MaxBy(const KeyFunc& key_func) const -> std::optional<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>;
+      typename BasicQueryWithEntity<WorldT, Args...>::value_type>;
 
   /**
    * @brief Finds the element with the minimum key value.
@@ -535,10 +485,9 @@ public:
    */
   template <typename KeyFunc>
     requires utils::TransformFor<
-        KeyFunc,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        KeyFunc, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] auto MinBy(const KeyFunc& key_func) const -> std::optional<
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>;
+      typename BasicQueryWithEntity<WorldT, Args...>::value_type>;
 
   /**
    * @brief Partitions results into two groups based on a predicate.
@@ -548,13 +497,25 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-  [[nodiscard]] auto Partition(const Pred& predicate) const
-      -> std::pair<std::vector<typename BasicQueryWithEntity<
-                       WorldT, Allocator, Args...>::value_type>,
-                   std::vector<typename BasicQueryWithEntity<
-                       WorldT, Allocator, Args...>::value_type>>;
+        Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+  [[nodiscard]] auto Partition(const Pred& predicate) const;
+
+  /**
+   * @brief Partitions results into two groups based on a predicate.
+   * @tparam Pred Predicate type
+   * @param predicate Function to test each result
+   * @param resource Memory resource for internal storage
+   * @return Pair of vectors: (matching results, non-matching results) that use
+   * provided allocator
+   */
+  template <typename Pred>
+    requires utils::PredicateFor<
+        Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+  [[nodiscard]] auto Partition(const Pred& predicate,
+                               std::pmr::memory_resource* resource) const;
+
+  template <typename Pred>
+  auto Partition(const Pred&, std::nullptr_t) const = delete;
 
   /**
    * @brief Groups results by an extracted key.
@@ -563,16 +524,25 @@ public:
    * @return Map from keys to vectors of results
    */
   template <typename KeyExtractor>
-    requires utils::TransformFor<
-        KeyExtractor,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-  [[nodiscard]] auto
-  GroupBy(const KeyExtractor& key_extractor) const -> std::unordered_map<
-      std::decay_t<utils::details::call_or_apply_result_t<
-          const KeyExtractor&, typename BasicQueryWithEntity<
-                                   WorldT, Allocator, Args...>::value_type>>,
-      std::vector<typename BasicQueryWithEntity<WorldT, Allocator,
-                                                Args...>::value_type>>;
+    requires utils::TransformFor<KeyExtractor, typename BasicQueryWithEntity<
+                                                   WorldT, Args...>::value_type>
+  [[nodiscard]] auto GroupBy(const KeyExtractor& key_extractor) const;
+
+  /**
+   * @brief Groups results by an extracted key.
+   * @tparam KeyExtractor Function type returning a hashable key
+   * @param key_extractor Function that extracts the grouping key
+   * @param resource Memory resource for internal storage
+   * @return Map from keys to vectors of results that use provided allocator
+   */
+  template <typename KeyExtractor>
+    requires utils::TransformFor<KeyExtractor, typename BasicQueryWithEntity<
+                                                   WorldT, Args...>::value_type>
+  [[nodiscard]] auto GroupBy(const KeyExtractor& key_extractor,
+                             std::pmr::memory_resource* resource) const;
+
+  template <typename KeyExtractor>
+  auto GroupBy(const KeyExtractor&, std::nullptr_t) const = delete;
 
   /**
    * @brief Checks if any entity matches the predicate.
@@ -582,8 +552,7 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] bool Any(const Pred& predicate) const;
 
   /**
@@ -594,8 +563,7 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   [[nodiscard]] bool All(const Pred& predicate) const;
 
   /**
@@ -635,7 +603,7 @@ public:
   [[nodiscard]] iterator end() const noexcept;
 
 private:
-  BasicQuery<WorldT, Allocator, Args...>& query_;
+  BasicQuery<WorldT, Args...>& query_;
 };
 
 /**
@@ -649,7 +617,6 @@ private:
  *
  * @note Not thread-safe.
  * @tparam WorldT World type (World or const World)
- * @tparam Allocator Allocator type for internal storage
  * @tparam Args Component access types and optional With/Without filters
  *
  * @code
@@ -669,7 +636,7 @@ private:
  * });
  * @endcode
  */
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 class BasicQuery {
 private:
   using Split = details::QueryArgSplit<Args...>;
@@ -690,28 +657,16 @@ public:
   using difference_type = std::iter_difference_t<iterator>;
   using pointer = typename iterator::pointer;
   using reference = std::iter_reference_t<iterator>;
-  using allocator_type = Allocator;
-
   /**
-   * @brief Constructs query with the given component manager and allocator.
+   * @brief Constructs a query with the given component manager.
    * @details The With/Without component filters are derived at compile time
    * from the template arguments (via With<> and Without<> filter types).
    * @param components Component manager reference
-   * @param alloc Allocator instance
+   * @param resource Memory resource for internal matching storage
    */
-  explicit BasicQuery(ComponentManagerType& components, Allocator alloc = {});
-
-  /**
-   * @brief Constructs query from a PMR memory resource.
-   * @details Enabled only when `allocator_type` is constructible from
-   * `std::pmr::memory_resource*`.
-   * @param components Component manager reference
-   * @param resource Memory resource used to construct allocator
-   */
-  BasicQuery(ComponentManagerType& components,
-             std::pmr::memory_resource* resource)
-    requires std::constructible_from<Allocator, std::pmr::memory_resource*>
-      : BasicQuery(components, Allocator{resource}) {}
+  explicit BasicQuery(
+      ComponentManagerType& components,
+      std::pmr::memory_resource* resource = std::pmr::get_default_resource());
 
   BasicQuery(ComponentManagerType&, std::nullptr_t) = delete;
 
@@ -728,8 +683,8 @@ public:
    * @return BasicQueryWithEntity wrapper for this query
    */
   [[nodiscard]] auto WithEntity() & noexcept
-      -> BasicQueryWithEntity<WorldT, Allocator, Args...> {
-    return BasicQueryWithEntity<WorldT, Allocator, Args...>(*this);
+      -> BasicQueryWithEntity<WorldT, Args...> {
+    return BasicQueryWithEntity<WorldT, Args...>(*this);
   }
 
   /**
@@ -739,7 +694,7 @@ public:
    * @return Tuple of component access types for the entity
    */
   [[nodiscard]] auto Get(Entity entity) const ->
-      typename BasicQuery<WorldT, Allocator, Args...>::value_type;
+      typename BasicQuery<WorldT, Args...>::value_type;
 
   /**
    * @brief Tries to get all query components for a specific entity (ignores
@@ -747,8 +702,8 @@ public:
    * @param entity The entity to get components for
    * @return Optional tuple of component access types for the entity
    */
-  [[nodiscard]] auto TryGet(Entity entity) const -> std::optional<
-      typename BasicQuery<WorldT, Allocator, Args...>::value_type>;
+  [[nodiscard]] auto TryGet(Entity entity) const
+      -> std::optional<typename BasicQuery<WorldT, Args...>::value_type>;
 
   /**
    * @brief Tries to get all query components for a specific entity while
@@ -756,42 +711,29 @@ public:
    * @param entity The entity to get components for
    * @return Optional tuple of component access types for the entity
    */
-  [[nodiscard]] auto TryGetFiltered(Entity entity) const -> std::optional<
-      typename BasicQuery<WorldT, Allocator, Args...>::value_type>;
+  [[nodiscard]] auto TryGetFiltered(Entity entity) const
+      -> std::optional<typename BasicQuery<WorldT, Args...>::value_type>;
 
   /**
    * @brief Collects all results into a vector.
    * @return Vector of tuples containing components
    */
-  [[nodiscard]] auto Collect() const -> std::vector<
-      typename BasicQuery<WorldT, Allocator, Args...>::value_type>;
-
-  /**
-   * @brief Collects all results using a custom allocator.
-   * @tparam ResultAlloc STL-compatible allocator type for `value_type`
-   * @param alloc Allocator instance
-   * @return Vector of results using provided allocator
-   */
-  template <typename ResultAlloc>
-    requires std::same_as<
-                 typename ResultAlloc::value_type,
-                 typename BasicQuery<WorldT, Allocator, Args...>::value_type> &&
-             (!std::derived_from<std::remove_pointer_t<ResultAlloc>,
-                                 std::pmr::memory_resource>)
-  [[nodiscard]] auto CollectWith(ResultAlloc alloc) const -> std::vector<
-      typename BasicQuery<WorldT, Allocator, Args...>::value_type, ResultAlloc>;
+  [[nodiscard]] auto Collect() const
+      -> std::pmr::vector<typename BasicQuery<WorldT, Args...>::value_type> {
+    return Collect(std::pmr::get_default_resource());
+  }
 
   /**
    * @brief Collects all results using a memory resource.
    * @param resource Memory resource
    * @return Vector of results using provided allocator
    */
-  [[nodiscard]] auto CollectWith(std::pmr::memory_resource* resource) const
-      -> std::pmr::vector<
-          typename BasicQuery<WorldT, Allocator, Args...>::value_type>;
+  [[nodiscard]] auto Collect(std::pmr::memory_resource* resource) const
+      -> std::pmr::vector<typename BasicQuery<WorldT, Args...>::value_type>;
 
-  auto CollectWith(std::nullptr_t) const -> std::pmr::vector<
-      typename BasicQuery<WorldT, Allocator, Args...>::value_type> = delete;
+  auto Collect(std::nullptr_t) const
+      -> std::pmr::vector<typename BasicQuery<WorldT, Args...>::value_type> =
+          delete;
 
   /**
    * @brief Writes all query results into an output iterator.
@@ -800,7 +742,7 @@ public:
    */
   template <typename OutIt>
     requires std::output_iterator<
-        OutIt, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
+        OutIt, typename BasicQuery<WorldT, Args...>::value_type>
   void Into(OutIt out) const;
 
   /**
@@ -809,8 +751,8 @@ public:
    * @param action Function to execute for each result
    */
   template <typename Action>
-    requires utils::ActionFor<
-        Action, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
+    requires utils::ActionFor<Action,
+                              typename BasicQuery<WorldT, Args...>::value_type>
   void ForEach(const Action& action) const;
 
   /**
@@ -820,8 +762,7 @@ public:
    */
   template <typename Action>
     requires utils::ActionFor<
-        Action,
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
+        Action, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
   void ForEachWithEntity(const Action& action) const;
 
   /**
@@ -832,9 +773,9 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
+        Pred, typename BasicQuery<WorldT, Args...>::value_type>
   [[nodiscard]] auto Filter(Pred predicate) const& -> utils::FilterAdapter<
-      typename BasicQuery<WorldT, Allocator, Args...>::iterator, Pred>;
+      typename BasicQuery<WorldT, Args...>::iterator, Pred>;
 
   /**
    * @brief Transforms each element using a mapping function.
@@ -844,9 +785,9 @@ public:
    */
   template <typename Func>
     requires utils::TransformFor<
-        Func, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
+        Func, typename BasicQuery<WorldT, Args...>::value_type>
   [[nodiscard]] auto Map(Func transform) const& -> utils::MapAdapter<
-      typename BasicQuery<WorldT, Allocator, Args...>::iterator, Func>;
+      typename BasicQuery<WorldT, Args...>::iterator, Func>;
 
   /**
    * @brief Takes only the first N elements.
@@ -854,7 +795,7 @@ public:
    * @return Lazy take view
    */
   [[nodiscard]] auto Take(size_t count) const& -> utils::TakeAdapter<
-      typename BasicQuery<WorldT, Allocator, Args...>::iterator>;
+      typename BasicQuery<WorldT, Args...>::iterator>;
 
   /**
    * @brief Skips the first N elements.
@@ -862,7 +803,7 @@ public:
    * @return Lazy skip view
    */
   [[nodiscard]] auto Skip(size_t count) const& -> utils::SkipAdapter<
-      typename BasicQuery<WorldT, Allocator, Args...>::iterator>;
+      typename BasicQuery<WorldT, Args...>::iterator>;
 
   /**
    * @brief Takes elements while a predicate is true.
@@ -872,10 +813,9 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-  [[nodiscard]] auto TakeWhile(Pred predicate)
-      const& -> utils::TakeWhileAdapter<
-          typename BasicQuery<WorldT, Allocator, Args...>::iterator, Pred>;
+        Pred, typename BasicQuery<WorldT, Args...>::value_type>
+  [[nodiscard]] auto TakeWhile(Pred predicate) const& -> utils::
+      TakeWhileAdapter<typename BasicQuery<WorldT, Args...>::iterator, Pred>;
 
   /**
    * @brief Skips elements while a predicate is true.
@@ -885,17 +825,16 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-  [[nodiscard]] auto SkipWhile(Pred predicate)
-      const& -> utils::SkipWhileAdapter<
-          typename BasicQuery<WorldT, Allocator, Args...>::iterator, Pred>;
+        Pred, typename BasicQuery<WorldT, Args...>::value_type>
+  [[nodiscard]] auto SkipWhile(Pred predicate) const& -> utils::
+      SkipWhileAdapter<typename BasicQuery<WorldT, Args...>::iterator, Pred>;
 
   /**
    * @brief Adds an index to each element.
    * @return Lazy enumerate view
    */
   [[nodiscard]] auto Enumerate() const& -> utils::EnumerateAdapter<
-      typename BasicQuery<WorldT, Allocator, Args...>::iterator>;
+      typename BasicQuery<WorldT, Args...>::iterator>;
 
   /**
    * @brief Inspects each element without consuming it.
@@ -905,9 +844,9 @@ public:
    */
   template <typename Func>
     requires utils::InspectorFor<
-        Func, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
+        Func, typename BasicQuery<WorldT, Args...>::value_type>
   [[nodiscard]] auto Inspect(Func inspector) const& -> utils::InspectAdapter<
-      typename BasicQuery<WorldT, Allocator, Args...>::iterator, Func>;
+      typename BasicQuery<WorldT, Args...>::iterator, Func>;
 
   /**
    * @brief Yields every Nth element.
@@ -915,7 +854,7 @@ public:
    * @return Lazy step-by view
    */
   [[nodiscard]] auto StepBy(size_t step) const& -> utils::StepByAdapter<
-      typename BasicQuery<WorldT, Allocator, Args...>::iterator>;
+      typename BasicQuery<WorldT, Args...>::iterator>;
 
   /**
    * @brief Chains this query with another iterator range.
@@ -1072,8 +1011,8 @@ public:
    * @return Final accumulated value
    */
   template <typename T, typename Func>
-    requires utils::FolderFor<
-        Func, T, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
+    requires utils::FolderFor<Func, T,
+                              typename BasicQuery<WorldT, Args...>::value_type>
   [[nodiscard]] T Fold(T init, const Func& folder) const;
 
   /**
@@ -1097,7 +1036,7 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
+        Pred, typename BasicQuery<WorldT, Args...>::value_type>
   [[nodiscard]] size_t CountIf(const Pred& predicate) const;
 
   /**
@@ -1108,10 +1047,26 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<Pred, value_type>
-  [[nodiscard]] auto Partition(const Pred& predicate) const
-      -> std::pair<std::vector<value_type>, std::vector<value_type>> {
+  [[nodiscard]] auto Partition(const Pred& predicate) const {
     return begin().Partition(predicate);
   }
+
+  /**
+   * @brief Partitions elements into two groups based on a predicate.
+   * @tparam Pred Predicate function type
+   * @param predicate Function to test each result
+   * @return Pair of vectors: (matching, non-matching) that use provided
+   * allocator
+   */
+  template <typename Pred>
+    requires utils::PredicateFor<Pred, value_type>
+  [[nodiscard]] auto Partition(const Pred& predicate,
+                               std::pmr::memory_resource* resource) const {
+    return begin().Partition(predicate, resource);
+  }
+
+  template <typename Pred>
+  auto Partition(const Pred&, std::nullptr_t) const = delete;
 
   /**
    * @brief Finds the element with the maximum key value.
@@ -1147,14 +1102,29 @@ public:
    */
   template <typename KeyExtractor>
     requires utils::TransformFor<
-        KeyExtractor,
-        typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-  [[nodiscard]] auto
-  GroupBy(const KeyExtractor& key_extractor) const -> std::unordered_map<
-      std::decay_t<utils::details::call_or_apply_result_t<
-          const KeyExtractor&,
-          typename BasicQuery<WorldT, Allocator, Args...>::value_type>>,
-      std::vector<typename BasicQuery<WorldT, Allocator, Args...>::value_type>>;
+        KeyExtractor, typename BasicQuery<WorldT, Args...>::value_type>
+  [[nodiscard]] auto GroupBy(const KeyExtractor& key_extractor) const {
+    return begin().GroupBy(key_extractor);
+  }
+
+  /**
+   * @brief Groups elements by a key extracted from each result.
+   * @tparam KeyExtractor Key extraction function type
+   * @param key_extractor Function that extracts the grouping key
+   * @param resource Memory resource for internal storage
+   * @return Map from keys to vectors of matching elements that use provided
+   * allocator
+   */
+  template <typename KeyExtractor>
+    requires utils::TransformFor<
+        KeyExtractor, typename BasicQuery<WorldT, Args...>::value_type>
+  [[nodiscard]] auto GroupBy(const KeyExtractor& key_extractor,
+                             std::pmr::memory_resource* resource) const {
+    return begin().GroupBy(key_extractor, resource);
+  }
+
+  template <typename KeyExtractor>
+  auto GroupBy(const KeyExtractor&, std::nullptr_t) const = delete;
 
   /**
    * @brief Checks if any element matches the predicate.
@@ -1176,7 +1146,7 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<
-        Pred, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
+        Pred, typename BasicQuery<WorldT, Args...>::value_type>
   [[nodiscard]] bool All(const Pred& predicate) const;
 
   /**
@@ -1242,15 +1212,6 @@ public:
     return {kWithoutIndices.data(), kWithoutIndices.size()};
   }
 
-  /**
-   * @brief Gets the allocator used for internal storage.
-   * @return Allocator instance
-   */
-  [[nodiscard]] allocator_type get_allocator() const
-      noexcept(std::is_nothrow_copy_constructible_v<allocator_type>) {
-    return alloc_;
-  }
-
 private:
   [[nodiscard]] bool EntityHasComponents(Entity entity) const;
   [[nodiscard]] bool EntityPassesFilters(Entity entity) const;
@@ -1272,25 +1233,16 @@ private:
 
   std::reference_wrapper<ComponentManagerType> components_;
 
-  /// Rebind allocator for archetype references
-  using ArchetypeAllocator =
-      typename std::allocator_traits<allocator_type>::template rebind_alloc<
-          std::reference_wrapper<const Archetype>>;
-  mutable std::vector<std::reference_wrapper<const Archetype>,
-                      ArchetypeAllocator>
+  mutable std::pmr::vector<std::reference_wrapper<const Archetype>>
       matching_archetypes_;
 
-  HELIOS_NO_UNIQUE_ADDRESS allocator_type alloc_;
-
-  friend class BasicQueryWithEntity<WorldT, Allocator, Args...>;
+  friend class BasicQueryWithEntity<WorldT, Args...>;
 };
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline BasicQuery<WorldT, Allocator, Args...>::BasicQuery(
-    ComponentManagerType& components, Allocator alloc)
-    : components_(components),
-      matching_archetypes_(ArchetypeAllocator(alloc)),
-      alloc_(alloc) {
+template <typename WorldT, QueryArg... Args>
+inline BasicQuery<WorldT, Args...>::BasicQuery(
+    ComponentManagerType& components, std::pmr::memory_resource* resource)
+    : components_(components), matching_archetypes_(resource) {
   static_assert(
       !std::is_const_v<std::remove_reference_t<WorldT>> || TypeInfo::kAllConst,
       "Cannot request mutable component access from const World! "
@@ -1298,9 +1250,9 @@ inline BasicQuery<WorldT, Allocator, Args...>::BasicQuery(
       "pass mutable World!");
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQuery<WorldT, Allocator, Args...>::Get(Entity entity) const ->
-    typename BasicQuery<WorldT, Allocator, Args...>::value_type {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQuery<WorldT, Args...>::Get(Entity entity) const ->
+    typename BasicQuery<WorldT, Args...>::value_type {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
 
   const auto& manager = GetComponentManager();
@@ -1324,10 +1276,9 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::Get(Entity entity) const ->
   }
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQuery<WorldT, Allocator, Args...>::TryGet(Entity entity) const
-    -> std::optional<
-        typename BasicQuery<WorldT, Allocator, Args...>::value_type> {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQuery<WorldT, Args...>::TryGet(Entity entity) const
+    -> std::optional<typename BasicQuery<WorldT, Args...>::value_type> {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
 
   const auto& manager = GetComponentManager();
@@ -1352,11 +1303,9 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::TryGet(Entity entity) const
   }
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQuery<WorldT, Allocator, Args...>::TryGetFiltered(
-    Entity entity) const
-    -> std::optional<
-        typename BasicQuery<WorldT, Allocator, Args...>::value_type> {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQuery<WorldT, Args...>::TryGetFiltered(Entity entity) const
+    -> std::optional<typename BasicQuery<WorldT, Args...>::value_type> {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
 
   const auto& manager = GetComponentManager();
@@ -1385,42 +1334,10 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::TryGetFiltered(
   }
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQuery<WorldT, Allocator, Args...>::Collect() const
-    -> std::vector<
-        typename BasicQuery<WorldT, Allocator, Args...>::value_type> {
-  std::vector<value_type> result;
-  result.reserve(Count());
-  for (auto&& tuple : *this) {
-    result.push_back(tuple);
-  }
-  return result;
-}
-
-template <typename WorldT, typename Allocator, QueryArg... Args>
-template <typename ResultAlloc>
-  requires std::same_as<
-               typename ResultAlloc::value_type,
-               typename BasicQuery<WorldT, Allocator, Args...>::value_type> &&
-           (!std::derived_from<std::remove_pointer_t<ResultAlloc>,
-                               std::pmr::memory_resource>)
-inline auto BasicQuery<WorldT, Allocator, Args...>::CollectWith(
-    ResultAlloc alloc) const
-    -> std::vector<typename BasicQuery<WorldT, Allocator, Args...>::value_type,
-                   ResultAlloc> {
-  std::vector<value_type, ResultAlloc> result{std::move(alloc)};
-  result.reserve(Count());
-  for (auto&& tuple : *this) {
-    result.push_back(tuple);
-  }
-  return result;
-}
-
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQuery<WorldT, Allocator, Args...>::CollectWith(
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQuery<WorldT, Args...>::Collect(
     std::pmr::memory_resource* resource) const
-    -> std::pmr::vector<
-        typename BasicQuery<WorldT, Allocator, Args...>::value_type> {
+    -> std::pmr::vector<typename BasicQuery<WorldT, Args...>::value_type> {
   std::pmr::vector<value_type> result{resource};
   result.reserve(Count());
   for (auto&& tuple : *this) {
@@ -1429,22 +1346,21 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::CollectWith(
   return result;
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename OutIt>
   requires std::output_iterator<
-      OutIt, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline void BasicQuery<WorldT, Allocator, Args...>::Into(OutIt out) const {
+      OutIt, typename BasicQuery<WorldT, Args...>::value_type>
+inline void BasicQuery<WorldT, Args...>::Into(OutIt out) const {
   for (auto&& result : *this) {
     *out++ = std::forward<decltype(result)>(result);
   }
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Action>
-  requires utils::ActionFor<
-      Action, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline void BasicQuery<WorldT, Allocator, Args...>::ForEach(
-    const Action& action) const {
+  requires utils::ActionFor<Action,
+                            typename BasicQuery<WorldT, Args...>::value_type>
+inline void BasicQuery<WorldT, Args...>::ForEach(const Action& action) const {
   for (auto&& result : *this) {
     if constexpr (std::invocable<Action, decltype(result)>) {
       action(std::forward<decltype(result)>(result));
@@ -1454,11 +1370,11 @@ inline void BasicQuery<WorldT, Allocator, Args...>::ForEach(
   }
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Action>
-  requires utils::ActionFor<Action, typename BasicQueryWithEntity<
-                                        WorldT, Allocator, Args...>::value_type>
-inline void BasicQuery<WorldT, Allocator, Args...>::ForEachWithEntity(
+  requires utils::ActionFor<
+      Action, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline void BasicQuery<WorldT, Args...>::ForEachWithEntity(
     const Action& action) const {
   RefreshArchetypes();
   auto begin_iter =
@@ -1475,13 +1391,13 @@ inline void BasicQuery<WorldT, Allocator, Args...>::ForEachWithEntity(
   }
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
-  requires utils::PredicateFor<
-      Pred, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQuery<WorldT, Allocator, Args...>::Filter(Pred predicate)
+  requires utils::PredicateFor<Pred,
+                               typename BasicQuery<WorldT, Args...>::value_type>
+inline auto BasicQuery<WorldT, Args...>::Filter(Pred predicate)
     const& -> utils::FilterAdapter<
-        typename BasicQuery<WorldT, Allocator, Args...>::iterator, Pred> {
+        typename BasicQuery<WorldT, Args...>::iterator, Pred> {
   RefreshArchetypes();
   auto begin_iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0);
   auto end_iter = iterator(matching_archetypes_, GetComponentManager(),
@@ -1489,13 +1405,13 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::Filter(Pred predicate)
   return {begin_iter, end_iter, std::move(predicate)};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Func>
-  requires utils::TransformFor<
-      Func, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQuery<WorldT, Allocator, Args...>::Map(Func transform)
-    const& -> utils::MapAdapter<
-        typename BasicQuery<WorldT, Allocator, Args...>::iterator, Func> {
+  requires utils::TransformFor<Func,
+                               typename BasicQuery<WorldT, Args...>::value_type>
+inline auto BasicQuery<WorldT, Args...>::Map(Func transform)
+    const& -> utils::MapAdapter<typename BasicQuery<WorldT, Args...>::iterator,
+                                Func> {
   RefreshArchetypes();
   auto begin_iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0);
   auto end_iter = iterator(matching_archetypes_, GetComponentManager(),
@@ -1503,10 +1419,9 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::Map(Func transform)
   return {begin_iter, end_iter, std::move(transform)};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQuery<WorldT, Allocator, Args...>::Take(size_t count)
-    const& -> utils::TakeAdapter<
-        typename BasicQuery<WorldT, Allocator, Args...>::iterator> {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQuery<WorldT, Args...>::Take(size_t count) const& -> utils::
+    TakeAdapter<typename BasicQuery<WorldT, Args...>::iterator> {
   RefreshArchetypes();
   auto begin_iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0);
   auto end_iter = iterator(matching_archetypes_, GetComponentManager(),
@@ -1514,10 +1429,9 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::Take(size_t count)
   return {begin_iter, end_iter, count};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQuery<WorldT, Allocator, Args...>::Skip(size_t count)
-    const& -> utils::SkipAdapter<
-        typename BasicQuery<WorldT, Allocator, Args...>::iterator> {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQuery<WorldT, Args...>::Skip(size_t count) const& -> utils::
+    SkipAdapter<typename BasicQuery<WorldT, Args...>::iterator> {
   RefreshArchetypes();
   auto begin_iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0);
   auto end_iter = iterator(matching_archetypes_, GetComponentManager(),
@@ -1525,13 +1439,13 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::Skip(size_t count)
   return {begin_iter, end_iter, count};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
-  requires utils::PredicateFor<
-      Pred, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQuery<WorldT, Allocator, Args...>::TakeWhile(Pred predicate)
+  requires utils::PredicateFor<Pred,
+                               typename BasicQuery<WorldT, Args...>::value_type>
+inline auto BasicQuery<WorldT, Args...>::TakeWhile(Pred predicate)
     const& -> utils::TakeWhileAdapter<
-        typename BasicQuery<WorldT, Allocator, Args...>::iterator, Pred> {
+        typename BasicQuery<WorldT, Args...>::iterator, Pred> {
   RefreshArchetypes();
   auto begin_iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0);
   auto end_iter = iterator(matching_archetypes_, GetComponentManager(),
@@ -1539,13 +1453,13 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::TakeWhile(Pred predicate)
   return {begin_iter, end_iter, std::move(predicate)};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
-  requires utils::PredicateFor<
-      Pred, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQuery<WorldT, Allocator, Args...>::SkipWhile(Pred predicate)
+  requires utils::PredicateFor<Pred,
+                               typename BasicQuery<WorldT, Args...>::value_type>
+inline auto BasicQuery<WorldT, Args...>::SkipWhile(Pred predicate)
     const& -> utils::SkipWhileAdapter<
-        typename BasicQuery<WorldT, Allocator, Args...>::iterator, Pred> {
+        typename BasicQuery<WorldT, Args...>::iterator, Pred> {
   RefreshArchetypes();
   auto begin_iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0);
   auto end_iter = iterator(matching_archetypes_, GetComponentManager(),
@@ -1553,10 +1467,9 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::SkipWhile(Pred predicate)
   return {begin_iter, end_iter, std::move(predicate)};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQuery<WorldT, Allocator, Args...>::Enumerate()
-    const& -> utils::EnumerateAdapter<
-        typename BasicQuery<WorldT, Allocator, Args...>::iterator> {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQuery<WorldT, Args...>::Enumerate() const& -> utils::
+    EnumerateAdapter<typename BasicQuery<WorldT, Args...>::iterator> {
   RefreshArchetypes();
   auto begin_iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0);
   auto end_iter = iterator(matching_archetypes_, GetComponentManager(),
@@ -1564,13 +1477,13 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::Enumerate()
   return {begin_iter, end_iter};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Func>
-  requires utils::InspectorFor<
-      Func, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQuery<WorldT, Allocator, Args...>::Inspect(Func inspector)
+  requires utils::InspectorFor<Func,
+                               typename BasicQuery<WorldT, Args...>::value_type>
+inline auto BasicQuery<WorldT, Args...>::Inspect(Func inspector)
     const& -> utils::InspectAdapter<
-        typename BasicQuery<WorldT, Allocator, Args...>::iterator, Func> {
+        typename BasicQuery<WorldT, Args...>::iterator, Func> {
   RefreshArchetypes();
   auto begin_iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0);
   auto end_iter = iterator(matching_archetypes_, GetComponentManager(),
@@ -1578,10 +1491,9 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::Inspect(Func inspector)
   return {begin_iter, end_iter, std::move(inspector)};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQuery<WorldT, Allocator, Args...>::StepBy(size_t step)
-    const& -> utils::StepByAdapter<
-        typename BasicQuery<WorldT, Allocator, Args...>::iterator> {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQuery<WorldT, Args...>::StepBy(size_t step) const& -> utils::
+    StepByAdapter<typename BasicQuery<WorldT, Args...>::iterator> {
   RefreshArchetypes();
   auto begin_iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0);
   auto end_iter = iterator(matching_archetypes_, GetComponentManager(),
@@ -1589,12 +1501,11 @@ inline auto BasicQuery<WorldT, Allocator, Args...>::StepBy(size_t step)
   return {begin_iter, end_iter, step};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
-  requires utils::PredicateFor<
-      Pred, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline bool BasicQuery<WorldT, Allocator, Args...>::All(
-    const Pred& predicate) const {
+  requires utils::PredicateFor<Pred,
+                               typename BasicQuery<WorldT, Args...>::value_type>
+inline bool BasicQuery<WorldT, Args...>::All(const Pred& predicate) const {
   for (auto&& result : *this) {
     bool matches = false;
     if constexpr (std::invocable<Pred, decltype(result)>) {
@@ -1609,11 +1520,11 @@ inline bool BasicQuery<WorldT, Allocator, Args...>::All(
   return true;
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
-  requires utils::PredicateFor<
-      Pred, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline size_t BasicQuery<WorldT, Allocator, Args...>::CountIf(
+  requires utils::PredicateFor<Pred,
+                               typename BasicQuery<WorldT, Args...>::value_type>
+inline size_t BasicQuery<WorldT, Args...>::CountIf(
     const Pred& predicate) const {
   size_t count = 0;
   for (auto&& result : *this) {
@@ -1630,12 +1541,11 @@ inline size_t BasicQuery<WorldT, Allocator, Args...>::CountIf(
   return count;
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename T, typename Func>
-  requires utils::FolderFor<
-      Func, T, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline T BasicQuery<WorldT, Allocator, Args...>::Fold(
-    T init, const Func& folder) const {
+  requires utils::FolderFor<Func, T,
+                            typename BasicQuery<WorldT, Args...>::value_type>
+inline T BasicQuery<WorldT, Args...>::Fold(T init, const Func& folder) const {
   for (auto&& tuple : *this) {
     if constexpr (std::invocable<Func, T, decltype(tuple)>) {
       init = folder(std::move(init), std::forward<decltype(tuple)>(tuple));
@@ -1651,44 +1561,14 @@ inline T BasicQuery<WorldT, Allocator, Args...>::Fold(
   return init;
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-template <typename KeyExtractor>
-  requires utils::TransformFor<
-      KeyExtractor, typename BasicQuery<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQuery<WorldT, Allocator, Args...>::GroupBy(
-    const KeyExtractor& key_extractor) const
-    -> std::unordered_map<
-        std::decay_t<utils::details::call_or_apply_result_t<
-            const KeyExtractor&,
-            typename BasicQuery<WorldT, Allocator, Args...>::value_type>>,
-        std::vector<
-            typename BasicQuery<WorldT, Allocator, Args...>::value_type>> {
-  using KeyType = std::decay_t<
-      utils::details::call_or_apply_result_t<const KeyExtractor&, value_type>>;
-  std::unordered_map<KeyType, std::vector<value_type>> groups;
-
-  for (auto&& result : *this) {
-    auto key = [&key_extractor](auto&& value) {
-      if constexpr (std::invocable<KeyExtractor, decltype(value)>) {
-        return key_extractor(std::forward<decltype(value)>(value));
-      } else {
-        return std::apply(key_extractor, std::forward<decltype(value)>(value));
-      }
-    }(std::forward<decltype(result)>(result));
-    groups[key].push_back(result);
-  }
-
-  return groups;
-}
-
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline bool BasicQuery<WorldT, Allocator, Args...>::Empty() const noexcept {
+template <typename WorldT, QueryArg... Args>
+inline bool BasicQuery<WorldT, Args...>::Empty() const noexcept {
   RefreshArchetypes();
   return matching_archetypes_.empty() || Count() == 0;
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline size_t BasicQuery<WorldT, Allocator, Args...>::Count() const noexcept {
+template <typename WorldT, QueryArg... Args>
+inline size_t BasicQuery<WorldT, Args...>::Count() const noexcept {
   RefreshArchetypes();
   size_t count = 0;
   auto iter = iterator(matching_archetypes_, GetComponentManager(), 0, 0,
@@ -1703,16 +1583,16 @@ inline size_t BasicQuery<WorldT, Allocator, Args...>::Count() const noexcept {
   return count;
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQuery<WorldT, Allocator, Args...>::begin() const ->
-    typename BasicQuery<WorldT, Allocator, Args...>::iterator {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQuery<WorldT, Args...>::begin() const ->
+    typename BasicQuery<WorldT, Args...>::iterator {
   RefreshArchetypes();
   return {matching_archetypes_, GetComponentManager(), 0, 0,
           WithTypes(),          WithoutTypes()};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline bool BasicQuery<WorldT, Allocator, Args...>::EntityHasComponents(
+template <typename WorldT, QueryArg... Args>
+inline bool BasicQuery<WorldT, Args...>::EntityHasComponents(
     Entity entity) const {
   if constexpr (std::tuple_size_v<typename Split::Components> == 0) {
     return true;
@@ -1723,8 +1603,8 @@ inline bool BasicQuery<WorldT, Allocator, Args...>::EntityHasComponents(
   }
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline bool BasicQuery<WorldT, Allocator, Args...>::EntityPassesFilters(
+template <typename WorldT, QueryArg... Args>
+inline bool BasicQuery<WorldT, Args...>::EntityPassesFilters(
     Entity entity) const {
   const auto& manager = GetComponentManager();
 
@@ -1750,8 +1630,8 @@ inline bool BasicQuery<WorldT, Allocator, Args...>::EntityPassesFilters(
   return EntityHasComponents(entity);
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline bool BasicQuery<WorldT, Allocator, Args...>::EntityPassesExclusions(
+template <typename WorldT, QueryArg... Args>
+inline bool BasicQuery<WorldT, Args...>::EntityPassesExclusions(
     Entity entity) const {
   const auto& manager = GetComponentManager();
   return std::ranges::none_of(kWithoutIndices, [&manager, entity](auto type) {
@@ -1768,8 +1648,8 @@ inline bool BasicQuery<WorldT, Allocator, Args...>::EntityPassesExclusions(
   });
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline void BasicQuery<WorldT, Allocator, Args...>::RefreshArchetypes() const {
+template <typename WorldT, QueryArg... Args>
+inline void BasicQuery<WorldT, Args...>::RefreshArchetypes() const {
   matching_archetypes_.clear();
 
   auto archetypes = [this]() {
@@ -1852,43 +1732,18 @@ inline void BasicQuery<WorldT, Allocator, Args...>::RefreshArchetypes() const {
 
 // BasicQueryWithEntity out-of-line definitions
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Collect() const
-    -> std::vector<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type> {
-  std::vector<value_type> result;
-  result.reserve(query_.Count());
-  for (auto&& tuple : *this) {
-    result.push_back(tuple);
-  }
-  return result;
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Collect() const
+    -> std::pmr::vector<
+        typename BasicQueryWithEntity<WorldT, Args...>::value_type> {
+  return Collect(std::pmr::get_default_resource());
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-template <typename ResultAlloc>
-  requires std::same_as<typename ResultAlloc::value_type,
-                        typename BasicQueryWithEntity<WorldT, Allocator,
-                                                      Args...>::value_type> &&
-           (!std::derived_from<std::remove_pointer_t<ResultAlloc>,
-                               std::pmr::memory_resource>)
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::CollectWith(
-    ResultAlloc alloc) const
-    -> std::vector<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type,
-        ResultAlloc> {
-  std::vector<value_type, ResultAlloc> result{std::move(alloc)};
-  result.reserve(query_.Count());
-  for (auto&& tuple : *this) {
-    result.push_back(tuple);
-  }
-  return result;
-}
-
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::CollectWith(
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Collect(
     std::pmr::memory_resource* resource) const
     -> std::pmr::vector<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type> {
+        typename BasicQueryWithEntity<WorldT, Args...>::value_type> {
   std::pmr::vector<value_type> result{resource};
   result.reserve(query_.Count());
   for (auto&& tuple : *this) {
@@ -1897,36 +1752,14 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::CollectWith(
   return result;
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::CollectEntities()
-    const -> std::vector<Entity> {
-  std::vector<Entity> result;
-  result.reserve(query_.Count());
-  for (auto&& tuple : *this) {
-    result.push_back(std::get<0>(tuple));
-  }
-  return result;
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQueryWithEntity<WorldT, Args...>::CollectEntities() const
+    -> std::pmr::vector<Entity> {
+  return CollectEntities(std::pmr::get_default_resource());
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-template <typename ResultAlloc>
-  requires std::same_as<typename ResultAlloc::value_type, Entity> &&
-           (!std::derived_from<std::remove_pointer_t<ResultAlloc>,
-                               std::pmr::memory_resource>)
-inline auto
-BasicQueryWithEntity<WorldT, Allocator, Args...>::CollectEntitiesWith(
-    ResultAlloc alloc) const -> std::vector<Entity, ResultAlloc> {
-  std::vector<Entity, ResultAlloc> result{std::move(alloc)};
-  result.reserve(query_.Count());
-  for (auto&& tuple : *this) {
-    result.push_back(std::get<0>(tuple));
-  }
-  return result;
-}
-
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto
-BasicQueryWithEntity<WorldT, Allocator, Args...>::CollectEntitiesWith(
+template <typename WorldT, QueryArg... Args>
+auto BasicQueryWithEntity<WorldT, Args...>::CollectEntities(
     std::pmr::memory_resource* resource) const -> std::pmr::vector<Entity> {
   std::pmr::vector<Entity> result{resource};
   result.reserve(query_.Count());
@@ -1936,22 +1769,21 @@ BasicQueryWithEntity<WorldT, Allocator, Args...>::CollectEntitiesWith(
   return result;
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename OutIt>
   requires std::output_iterator<
-      OutIt,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline void BasicQueryWithEntity<WorldT, Allocator, Args...>::Into(OutIt out) {
+      OutIt, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline void BasicQueryWithEntity<WorldT, Args...>::Into(OutIt out) {
   for (auto&& result : *this) {
     *out++ = std::forward<decltype(result)>(result);
   }
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Action>
-  requires utils::ActionFor<Action, typename BasicQueryWithEntity<
-                                        WorldT, Allocator, Args...>::value_type>
-inline void BasicQueryWithEntity<WorldT, Allocator, Args...>::ForEach(
+  requires utils::ActionFor<
+      Action, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline void BasicQueryWithEntity<WorldT, Args...>::ForEach(
     const Action& action) const {
   for (auto&& result : *this) {
     if constexpr (std::invocable<Action, decltype(result)>) {
@@ -1962,16 +1794,13 @@ inline void BasicQueryWithEntity<WorldT, Allocator, Args...>::ForEach(
   }
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
   requires utils::PredicateFor<
-      Pred,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Filter(
-    Pred predicate) const
+      Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Filter(Pred predicate) const
     -> utils::FilterAdapter<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator,
-        Pred> {
+        typename BasicQueryWithEntity<WorldT, Args...>::iterator, Pred> {
   query_.RefreshArchetypes();
   auto begin_iter = iterator(query_.GetMatchingArchetypes(),
                              query_.GetComponentManager(), 0, 0);
@@ -1981,16 +1810,13 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Filter(
   return {begin_iter, end_iter, std::move(predicate)};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Func>
   requires utils::TransformFor<
-      Func,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Map(
-    Func transform) const
+      Func, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Map(Func transform) const
     -> utils::MapAdapter<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator,
-        Func> {
+        typename BasicQueryWithEntity<WorldT, Args...>::iterator, Func> {
   query_.RefreshArchetypes();
   auto begin_iter = iterator(query_.GetMatchingArchetypes(),
                              query_.GetComponentManager(), 0, 0);
@@ -2000,10 +1826,10 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Map(
   return {begin_iter, end_iter, std::move(transform)};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Take(size_t count)
-    const -> utils::TakeAdapter<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator> {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Take(size_t count) const
+    -> utils::TakeAdapter<
+        typename BasicQueryWithEntity<WorldT, Args...>::iterator> {
   query_.RefreshArchetypes();
   auto begin_iter = iterator(query_.GetMatchingArchetypes(),
                              query_.GetComponentManager(), 0, 0);
@@ -2013,10 +1839,10 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Take(size_t count)
   return {begin_iter, end_iter, count};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Skip(size_t count)
-    const -> utils::SkipAdapter<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator> {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Skip(size_t count) const
+    -> utils::SkipAdapter<
+        typename BasicQueryWithEntity<WorldT, Args...>::iterator> {
   query_.RefreshArchetypes();
   auto begin_iter = iterator(query_.GetMatchingArchetypes(),
                              query_.GetComponentManager(), 0, 0);
@@ -2026,16 +1852,13 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Skip(size_t count)
   return {begin_iter, end_iter, count};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
   requires utils::PredicateFor<
-      Pred,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::TakeWhile(
-    Pred predicate) const
-    -> utils::TakeWhileAdapter<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator,
-        Pred> {
+      Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::TakeWhile(Pred predicate)
+    const -> utils::TakeWhileAdapter<
+        typename BasicQueryWithEntity<WorldT, Args...>::iterator, Pred> {
   query_.RefreshArchetypes();
   auto begin_iter = iterator(query_.GetMatchingArchetypes(),
                              query_.GetComponentManager(), 0, 0);
@@ -2045,16 +1868,13 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::TakeWhile(
   return {begin_iter, end_iter, std::move(predicate)};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
   requires utils::PredicateFor<
-      Pred,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::SkipWhile(
-    Pred predicate) const
-    -> utils::SkipWhileAdapter<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator,
-        Pred> {
+      Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::SkipWhile(Pred predicate)
+    const -> utils::SkipWhileAdapter<
+        typename BasicQueryWithEntity<WorldT, Args...>::iterator, Pred> {
   query_.RefreshArchetypes();
   auto begin_iter = iterator(query_.GetMatchingArchetypes(),
                              query_.GetComponentManager(), 0, 0);
@@ -2064,10 +1884,10 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::SkipWhile(
   return {begin_iter, end_iter, std::move(predicate)};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Enumerate() const
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Enumerate() const
     -> utils::EnumerateAdapter<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator> {
+        typename BasicQueryWithEntity<WorldT, Args...>::iterator> {
   query_.RefreshArchetypes();
   auto begin_iter = iterator(query_.GetMatchingArchetypes(),
                              query_.GetComponentManager(), 0, 0);
@@ -2077,16 +1897,13 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Enumerate() const
   return {begin_iter, end_iter};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Func>
   requires utils::InspectorFor<
-      Func,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Inspect(
-    Func inspector) const
+      Func, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Inspect(Func inspector) const
     -> utils::InspectAdapter<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator,
-        Func> {
+        typename BasicQueryWithEntity<WorldT, Args...>::iterator, Func> {
   query_.RefreshArchetypes();
   auto begin_iter = iterator(query_.GetMatchingArchetypes(),
                              query_.GetComponentManager(), 0, 0);
@@ -2096,11 +1913,10 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Inspect(
   return {begin_iter, end_iter, std::move(inspector)};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::StepBy(
-    size_t step) const
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQueryWithEntity<WorldT, Args...>::StepBy(size_t step) const
     -> utils::StepByAdapter<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::iterator> {
+        typename BasicQueryWithEntity<WorldT, Args...>::iterator> {
   query_.RefreshArchetypes();
   auto begin_iter = iterator(query_.GetMatchingArchetypes(),
                              query_.GetComponentManager(), 0, 0);
@@ -2110,22 +1926,20 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::StepBy(
   return {begin_iter, end_iter, step};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
   requires utils::PredicateFor<
-      Pred,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline bool BasicQueryWithEntity<WorldT, Allocator, Args...>::Any(
+      Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline bool BasicQueryWithEntity<WorldT, Args...>::Any(
     const Pred& predicate) const {
   return Find(predicate).has_value();
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
   requires utils::PredicateFor<
-      Pred,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline bool BasicQueryWithEntity<WorldT, Allocator, Args...>::All(
+      Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline bool BasicQueryWithEntity<WorldT, Args...>::All(
     const Pred& predicate) const {
   for (auto&& result : *this) {
     bool matches = false;
@@ -2141,110 +1955,95 @@ inline bool BasicQueryWithEntity<WorldT, Allocator, Args...>::All(
   return true;
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
   requires utils::PredicateFor<
-      Pred,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Find(
-    const Pred& predicate) const
-    -> std::optional<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type> {
+      Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Find(const Pred& predicate)
+    const -> std::optional<
+        typename BasicQueryWithEntity<WorldT, Args...>::value_type> {
   return begin().Find(predicate);
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
   requires utils::PredicateFor<
-      Pred,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline size_t BasicQueryWithEntity<WorldT, Allocator, Args...>::CountIf(
+      Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline size_t BasicQueryWithEntity<WorldT, Args...>::CountIf(
     const Pred& predicate) const {
   return begin().CountIf(predicate);
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename T, typename Func>
   requires utils::FolderFor<
-      Func, T,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline T BasicQueryWithEntity<WorldT, Allocator, Args...>::Fold(
-    T init, const Func& folder) const {
+      Func, T, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline T BasicQueryWithEntity<WorldT, Args...>::Fold(T init,
+                                                     const Func& folder) const {
   return begin().Fold(std::move(init), folder);
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename KeyFunc>
   requires utils::TransformFor<
-      KeyFunc,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::MaxBy(
+      KeyFunc, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::MaxBy(
     const KeyFunc& key_func) const
     -> std::optional<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type> {
+        typename BasicQueryWithEntity<WorldT, Args...>::value_type> {
   return begin().MaxBy(key_func);
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename KeyFunc>
   requires utils::TransformFor<
-      KeyFunc,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::MinBy(
+      KeyFunc, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::MinBy(
     const KeyFunc& key_func) const
     -> std::optional<
-        typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type> {
+        typename BasicQueryWithEntity<WorldT, Args...>::value_type> {
   return begin().MinBy(key_func);
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
+template <typename WorldT, QueryArg... Args>
 template <typename Pred>
   requires utils::PredicateFor<
-      Pred,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::Partition(
-    const Pred& predicate) const
-    -> std::pair<std::vector<typename BasicQueryWithEntity<
-                     WorldT, Allocator, Args...>::value_type>,
-                 std::vector<typename BasicQueryWithEntity<
-                     WorldT, Allocator, Args...>::value_type>> {
+      Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Partition(
+    const Pred& predicate) const {
   return begin().Partition(predicate);
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-template <typename KeyExtractor>
-  requires utils::TransformFor<
-      KeyExtractor,
-      typename BasicQueryWithEntity<WorldT, Allocator, Args...>::value_type>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::GroupBy(
-    const KeyExtractor& key_extractor) const
-    -> std::unordered_map<
-        std::decay_t<utils::details::call_or_apply_result_t<
-            const KeyExtractor&, typename BasicQueryWithEntity<
-                                     WorldT, Allocator, Args...>::value_type>>,
-        std::vector<typename BasicQueryWithEntity<WorldT, Allocator,
-                                                  Args...>::value_type>> {
-  using KeyType = std::decay_t<
-      utils::details::call_or_apply_result_t<const KeyExtractor&, value_type>>;
-  std::unordered_map<KeyType, std::vector<value_type>> groups;
-
-  for (auto&& result : *this) {
-    auto key = [&key_extractor](auto&& value) {
-      if constexpr (std::invocable<KeyExtractor, decltype(value)>) {
-        return key_extractor(std::forward<decltype(value)>(value));
-      } else {
-        return std::apply(key_extractor, std::forward<decltype(value)>(value));
-      }
-    }(std::forward<decltype(result)>(result));
-    groups[key].push_back(result);
-  }
-
-  return groups;
+template <typename WorldT, QueryArg... Args>
+template <typename Pred>
+  requires utils::PredicateFor<
+      Pred, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::Partition(
+    const Pred& predicate, std::pmr::memory_resource* resource) const {
+  return begin().Partition(predicate, resource);
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::begin() const
-    -> iterator {
+template <typename WorldT, QueryArg... Args>
+template <typename KeyExtractor>
+  requires utils::TransformFor<
+      KeyExtractor, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::GroupBy(
+    const KeyExtractor& key_extractor) const {
+  return begin().GroupBy(key_extractor);
+}
+
+template <typename WorldT, QueryArg... Args>
+template <typename KeyExtractor>
+  requires utils::TransformFor<
+      KeyExtractor, typename BasicQueryWithEntity<WorldT, Args...>::value_type>
+inline auto BasicQueryWithEntity<WorldT, Args...>::GroupBy(
+    const KeyExtractor& key_extractor,
+    std::pmr::memory_resource* resource) const {
+  return begin().GroupBy(key_extractor, resource);
+}
+
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQueryWithEntity<WorldT, Args...>::begin() const -> iterator {
   query_.RefreshArchetypes();
   return {query_.GetMatchingArchetypes(),
           query_.GetComponentManager(),
@@ -2254,9 +2053,9 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::begin() const
           query_.WithoutTypes()};
 }
 
-template <typename WorldT, typename Allocator, QueryArg... Args>
-inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::end()
-    const noexcept -> iterator {
+template <typename WorldT, QueryArg... Args>
+inline auto BasicQueryWithEntity<WorldT, Args...>::end() const noexcept
+    -> iterator {
   return {query_.GetMatchingArchetypes(),
           query_.GetComponentManager(),
           query_.GetMatchingArchetypes().size(),
@@ -2265,40 +2064,9 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Args...>::end()
           query_.WithoutTypes()};
 }
 
-template <typename Alloc, QueryArg... Args>
-using MutBasicQuery = BasicQuery<World, Alloc, Args...>;
-
-template <typename Alloc, QueryArg... Args>
-using ReadOnlyBasicQuery = BasicQuery<const World, Alloc, Args...>;
-
-template <typename Alloc, QueryArg... Args>
-using MutBasicQueryWithEntity = BasicQueryWithEntity<World, Alloc, Args...>;
-
-template <typename Alloc, QueryArg... Args>
-using ReadOnlyBasicQueryWithEntity =
-    BasicQueryWithEntity<const World, Alloc, Args...>;
-
-template <QueryArg... Args>
-using PmrBasicQuery =
-    BasicQuery<World, std::pmr::polymorphic_allocator<>, Args...>;
-
-template <QueryArg... Args>
-using PmrReadOnlyBasicQuery =
-    BasicQuery<const World, std::pmr::polymorphic_allocator<>, Args...>;
-
-template <QueryArg... Args>
-using PmrBasicQueryWithEntity =
-    BasicQueryWithEntity<World, std::pmr::polymorphic_allocator<>, Args...>;
-
-template <QueryArg... Args>
-using PmrReadOnlyBasicQueryWithEntity =
-    BasicQueryWithEntity<const World, std::pmr::polymorphic_allocator<>,
-                         Args...>;
-
 /**
- * @brief Alias for `BasicQuery` bound to `World` with a PMR allocator.
- * @details The canonical query type for system parameters. Users who need a
- * different world type or allocator can use `BasicQuery` directly.
+ * @brief Alias for `BasicQuery` bound to `World`.
+ * @details The canonical query type for system parameters.
  * @tparam Args Component access types and optional With/Without filters
  *
  * @code
@@ -2308,6 +2076,6 @@ using PmrReadOnlyBasicQueryWithEntity =
  * @endcode
  */
 template <QueryArg... Args>
-using Query = BasicQuery<World, std::pmr::polymorphic_allocator<>, Args...>;
+using Query = BasicQuery<World, Args...>;
 
 }  // namespace helios::ecs

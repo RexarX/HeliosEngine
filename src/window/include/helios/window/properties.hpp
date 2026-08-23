@@ -1,5 +1,7 @@
 #pragma once
 
+#include <helios/memory/temporary_storage.hpp>
+
 #include <algorithm>
 #include <cstdint>
 #include <format>
@@ -362,14 +364,14 @@ inline std::ostream& operator<<(std::ostream& os, ClientApi api) {
  * @brief Formats dirty flags as a pipe-separated list and writes to an output
  * iterator.
  * @tparam It Output iterator type
- * @param flags Combined dirty flags
  * @param out Output iterator to write the formatted string to
+ * @param flags Combined dirty flags
  * @param with_prefix Whether to include a "DirtyFlag::" prefix for each flag
  * @return Updated output iterator after writing the formatted string
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(DirtyFlag flags, It out, bool with_prefix = false) {
+inline It ToString(It out, DirtyFlag flags, bool with_prefix = false) {
   const std::string_view kNoneStr = with_prefix ? "DirtyFlag::None" : "None";
 
   if (flags == DirtyFlag::kNone) {
@@ -424,7 +426,24 @@ inline It ToString(DirtyFlag flags, It out, bool with_prefix = false) {
                                           bool with_prefix = false) {
   std::string result;
   result.reserve(32);
-  ToString(flags, std::back_inserter(result), with_prefix);
+  ToString(std::back_inserter(result), flags, with_prefix);
+  return result;
+}
+
+/**
+ * @brief Formats dirty flags as a pipe-separated list of flag names using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param flags Combined dirty flags
+ * @param with_prefix Whether to include a prefix for each flag
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(DirtyFlag flags,
+                                                   bool with_prefix = false) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(32);
+  ToString(std::back_inserter(result), flags, with_prefix);
   return result;
 }
 
@@ -435,20 +454,20 @@ inline It ToString(DirtyFlag flags, It out, bool with_prefix = false) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, DirtyFlag flags) {
-  ToString(flags, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), flags);
   return os;
 }
 
 /**
  * @brief Formats an icon image using an output iterator.
  * @tparam It Output iterator type
- * @param image Icon image
  * @param out Output iterator to write the formatted string to
+ * @param image Icon image
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const IconImage& image, It out) {
+inline It ToString(It out, const IconImage& image) {
   return std::format_to(out, "IconImage{{width={}, height={}, rgba={}}}",
                         image.width, image.height, image.rgba.size());
 }
@@ -461,7 +480,21 @@ inline It ToString(const IconImage& image, It out) {
 [[nodiscard]] inline std::string ToString(const IconImage& image) {
   std::string result;
   result.reserve(64);
-  ToString(image, std::back_inserter(result));
+  ToString(std::back_inserter(result), image);
+  return result;
+}
+
+/**
+ * @brief Formats an icon image as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param image IconImage
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const IconImage& image) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), image);
   return result;
 }
 
@@ -472,20 +505,20 @@ inline It ToString(const IconImage& image, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const IconImage& image) {
-  ToString(image, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), image);
   return os;
 }
 
 /**
  * @brief Formats window properties using an output iterator.
  * @tparam It Output iterator type
- * @param properties Window properties
  * @param out Output iterator to write the formatted string to
+ * @param properties Window properties
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Properties& properties, It out) {
+inline It ToString(It out, const Properties& properties) {
   out = std::format_to(out, "Properties{{");
   out = std::format_to(out, "title=\"{}\"", properties.title);
   out = std::format_to(out, ", icons={}", properties.icons.size());
@@ -570,7 +603,22 @@ inline It ToString(const Properties& properties, It out) {
 [[nodiscard]] inline std::string ToString(const Properties& properties) {
   std::string result;
   result.reserve(256);  // Reserve reasonable space for typical properties
-  ToString(properties, std::back_inserter(result));
+  ToString(std::back_inserter(result), properties);
+  return result;
+}
+
+/**
+ * @brief Formats window properties as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param properties Window properties
+ * @return Formatted properties string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const Properties& properties) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), properties);
   return result;
 }
 
@@ -582,20 +630,20 @@ inline It ToString(const Properties& properties, It out) {
  */
 inline std::ostream& operator<<(std::ostream& os,
                                 const Properties& properties) {
-  ToString(properties, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), properties);
   return os;
 }
 
 /**
  * @brief Formats exclusive-fullscreen video mode using an output iterator.
  * @tparam It Output iterator type
- * @param mode Exclusive video mode
  * @param out Output iterator to write the formatted string to
+ * @param mode Exclusive video mode
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const ExclusiveVideoMode& mode, It out) {
+inline It ToString(It out, const ExclusiveVideoMode& mode) {
   return std::format_to(
       out, "ExclusiveVideoMode{{width={}, height={}, refresh_rate={}}}",
       mode.width, mode.height, mode.refresh_rate);
@@ -609,7 +657,23 @@ inline It ToString(const ExclusiveVideoMode& mode, It out) {
 [[nodiscard]] inline std::string ToString(const ExclusiveVideoMode& mode) {
   std::string result;
   result.reserve(64);
-  ToString(mode, std::back_inserter(result));
+  ToString(std::back_inserter(result), mode);
+  return result;
+}
+
+/**
+ * @brief Formats exclusive-fullscreen video mode as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param mode ExclusiveVideoMode
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const ExclusiveVideoMode& mode) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), mode);
   return result;
 }
 
@@ -621,7 +685,7 @@ inline It ToString(const ExclusiveVideoMode& mode, It out) {
  */
 inline std::ostream& operator<<(std::ostream& os,
                                 const ExclusiveVideoMode& mode) {
-  ToString(mode, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), mode);
   return os;
 }
 
@@ -672,7 +736,7 @@ struct formatter<helios::window::DirtyFlag> {
   }
 
   static auto format(helios::window::DirtyFlag flags, format_context& ctx) {
-    return helios::window::ToString(flags, ctx.out(), /*with_prefix=*/true);
+    return helios::window::ToString(ctx.out(), flags, /*with_prefix=*/true);
   }
 };
 
@@ -684,7 +748,7 @@ struct formatter<helios::window::IconImage> {
 
   static auto format(const helios::window::IconImage& image,
                      format_context& ctx) {
-    return helios::window::ToString(image, ctx.out());
+    return helios::window::ToString(ctx.out(), image);
   }
 };
 
@@ -696,7 +760,7 @@ struct formatter<helios::window::Properties> {
 
   static auto format(const helios::window::Properties& properties,
                      format_context& ctx) {
-    return helios::window::ToString(properties, ctx.out());
+    return helios::window::ToString(ctx.out(), properties);
   }
 };
 
@@ -708,7 +772,7 @@ struct formatter<helios::window::ExclusiveVideoMode> {
 
   static auto format(const helios::window::ExclusiveVideoMode& mode,
                      format_context& ctx) {
-    return helios::window::ToString(mode, ctx.out());
+    return helios::window::ToString(ctx.out(), mode);
   }
 };
 

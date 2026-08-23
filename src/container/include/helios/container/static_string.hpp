@@ -45,7 +45,7 @@ public:
   using size_type = size_t;
   using difference_type = ptrdiff_t;
 
-  static constexpr size_type npos = static_cast<size_type>(-1);
+  static constexpr auto npos = static_cast<size_type>(-1);
 
   /// @brief Default constructor. Creates an empty string.
   constexpr BasicStaticString() noexcept { data_[0] = CharT{}; }

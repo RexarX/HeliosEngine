@@ -29,7 +29,6 @@
 #include <array>
 #include <concepts>
 #include <cstddef>
-#include <memory>
 #include <memory_resource>
 #include <ranges>
 #include <string>
@@ -49,7 +48,15 @@ struct SystemLocalData;
  */
 class World {
 public:
-  World();
+  /**
+   * @brief Constructs a world using `resource` for owned ECS storage.
+   * @param resource Memory resource for entities, components, resources,
+   * messages, and the command queue. Defaults to
+   * `std::pmr::get_default_resource()`.
+   */
+  explicit World(
+      std::pmr::memory_resource* resource = std::pmr::get_default_resource());
+  World(std::nullptr_t) = delete;
   World(const World&) = delete;
   World(World&&) noexcept = default;
   ~World() = default;
@@ -154,12 +161,10 @@ public:
    * (`T&`, `const T&`, `T*`, ...) are all specified as template arguments.
    * @note Not thread-safe.
    * @tparam Args Component access types and optional With/Without filters
-   * @tparam Allocator Allocator type for internal query storage
-   * @param alloc Allocator instance
    * @return Query object over entities matching the specified criteria
    *
    * @code
-   * // Default allocator — no argument needed
+   * // Uses the world's memory resource
    * auto query = world.Query<Transform&, const Velocity&,
    *                          const Gravity*, With<Player>,
    *                          Without<Dead>>();
@@ -172,19 +177,15 @@ public:
    * }
    * @endcode
    */
-  template <QueryArg... Args,
-            typename Allocator = std::allocator<ComponentTypeIndex>>
-  [[nodiscard]] auto Query(Allocator alloc = {}) noexcept
-      -> BasicQuery<World, Allocator, Args...> {
-    return BasicQuery<World, Allocator, Args...>(component_manager_,
-                                                 std::move(alloc));
+  template <QueryArg... Args>
+  [[nodiscard]] auto Query() noexcept -> BasicQuery<World, Args...> {
+    return Query<Args...>(resource_);
   }
 
   /**
    * @brief Creates a query using a PMR memory resource.
-   * @details Equivalent to the allocator overload but accepts a
-   * `pmr::memory_resource*` directly, constructing a
-   * `pmr::polymorphic_allocator` internally.
+   * @details Use this overload to place query matching storage on a different
+   * resource than the world (for example a system arena).
    *
    * @note Not thread-safe.
    * @tparam Args Component access types and optional With/Without filters
@@ -201,14 +202,12 @@ public:
    */
   template <QueryArg... Args>
   [[nodiscard]] auto Query(std::pmr::memory_resource* resource) noexcept
-      -> BasicQuery<World, std::pmr::polymorphic_allocator<>, Args...> {
-    return BasicQuery<World, std::pmr::polymorphic_allocator<>, Args...>(
-        component_manager_, resource);
+      -> BasicQuery<World, Args...> {
+    return BasicQuery<World, Args...>(component_manager_, resource);
   }
 
   template <QueryArg... Args>
-  auto Query(std::nullptr_t)
-      -> BasicQuery<World, std::pmr::polymorphic_allocator<>, Args...> = delete;
+  auto Query(std::nullptr_t) -> BasicQuery<World, Args...> = delete;
 
   /**
    * @brief Creates a read-only query over entities matching the specified
@@ -217,12 +216,10 @@ public:
    * copied) — `T&` and `T*` are rejected at compile time.
    * @note Not thread-safe.
    * @tparam Args Component access types and optional With/Without filters
-   * @tparam Allocator Allocator type for internal query storage
-   * @param alloc Allocator instance
    * @return Query object over entities matching the specified criteria
    *
    * @code
-   * // Default allocator — no argument needed
+   * // Uses the world's memory resource
    * auto query = world.ReadOnlyQuery<Health, const Status*,
    *                                  With<Player>, Without<Dead>>();
    *
@@ -233,21 +230,20 @@ public:
    * }
    * @endcode
    */
-  template <QueryArg... Args,
-            typename Allocator = std::allocator<ComponentTypeIndex>>
+  template <QueryArg... Args>
     requires details::ValidWorldComponentAccessFromTuple<
         const World,
         typename details::QueryArgSplit<Args...>::Components>::kValue
-  [[nodiscard]] auto ReadOnlyQuery(Allocator alloc = {}) const noexcept
-      -> BasicQuery<const World, Allocator, Args...> {
-    return BasicQuery<const World, Allocator, Args...>(component_manager_,
-                                                       std::move(alloc));
+  [[nodiscard]] auto ReadOnlyQuery() const noexcept
+      -> BasicQuery<const World, Args...> {
+    return ReadOnlyQuery<Args...>(resource_);
   }
 
   /**
    * @brief Creates a read-only query using a PMR memory resource.
-   * @details All component accesses must be const-qualified — see the allocator
-   * overload for details.
+   * @details All component accesses must be const-qualified. Use this
+   * overload to place query matching storage on a different resource than the
+   * world.
    *
    * @note Not thread-safe.
    * @tparam Args Component access types and optional With/Without filters
@@ -268,11 +264,9 @@ public:
     requires details::ValidWorldComponentAccessFromTuple<
         const World,
         typename details::QueryArgSplit<Args...>::Components>::kValue
-  [[nodiscard]] auto ReadOnlyQuery(
-      std::pmr::memory_resource* resource) const noexcept
-      -> BasicQuery<const World, std::pmr::polymorphic_allocator<>, Args...> {
-    return BasicQuery<const World, std::pmr::polymorphic_allocator<>, Args...>(
-        component_manager_, resource);
+  [[nodiscard]] auto ReadOnlyQuery(std::pmr::memory_resource* resource)
+      const noexcept -> BasicQuery<const World, Args...> {
+    return BasicQuery<const World, Args...>(component_manager_, resource);
   }
 
   template <QueryArg... Args>
@@ -280,8 +274,7 @@ public:
                  const World,
                  typename details::QueryArgSplit<Args...>::Components>::kValue
   auto ReadOnlyQuery(std::nullptr_t) const
-      -> BasicQuery<const World, std::pmr::polymorphic_allocator<>, Args...> =
-          delete;
+      -> BasicQuery<const World, Args...> = delete;
 
   /**
    * @brief Adds components to the entity.
@@ -711,12 +704,11 @@ public:
    * @param consumed_registry Per-system consumed-message registry
    * @return Consumable message reader for type `T`
    */
-  template <ConsumableMessageTrait T,
-            typename Alloc = std::pmr::polymorphic_allocator<std::byte>>
+  template <ConsumableMessageTrait T>
   [[nodiscard]] auto ReadConsumableMessages(
       MessageCursor<T>& cursor,
-      ConsumedMessagesRegistry<Alloc>& consumed_registry) noexcept
-      -> ConsumableMessageReader<T, Alloc>;
+      ConsumedMessagesRegistry& consumed_registry) noexcept
+      -> ConsumableMessageReader<T>;
 
   /**
    * @brief Gets a writer for messages of type `T`.
@@ -951,17 +943,26 @@ public:
     return messages_;
   }
 
+  /**
+   * @brief Returns the memory resource used for owned world storage.
+   * @return Memory resource passed to the constructor
+   */
+  [[nodiscard]] std::pmr::memory_resource* GetMemoryResource() const noexcept {
+    return resource_;
+  }
+
 private:
+  std::pmr::memory_resource* resource_;
   EntityManager entity_manager_;  ///< Entity manager that handles entity
                                   ///< creation, destruction, and validation.
   ComponentManager component_manager_;  ///< Component manager that handles
                                         ///< storage and access of components.
   ResourceManager resources_;  ///< Resource manager that handles storage and
                                ///< access of resources.
-  MessageManager messages_;   ///< Message manager that handles registration and
-                              ///< storage of messages.
-  CmdQueue<> command_queue_;  ///< Command queue for deferred operations on the
-                              ///< world, executed during `Flush()`.
+  MessageManager messages_;  ///< Message manager that handles registration and
+                             ///< storage of messages.
+  CmdQueue command_queue_;   ///< Command queue for deferred operations on the
+                             ///< world, executed during `Flush()`.
 };
 
 template <std::ranges::input_range R>
@@ -1347,15 +1348,14 @@ inline auto World::ReadMessages(MessageCursor<T>& cursor) const noexcept
   return MessageReader<T>(messages_, cursor);
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
+template <ConsumableMessageTrait T>
 inline auto World::ReadConsumableMessages(
     MessageCursor<T>& cursor,
-    ConsumedMessagesRegistry<Alloc>& consumed_registry) noexcept
-    -> ConsumableMessageReader<T, Alloc> {
+    ConsumedMessagesRegistry& consumed_registry) noexcept
+    -> ConsumableMessageReader<T> {
   HELIOS_ASSERT(HasMessage<T>(), "Message of type '{}' is not registered!",
                 MessageNameOf<T>());
-  return ConsumableMessageReader<T, Alloc>(messages_, cursor,
-                                           consumed_registry);
+  return ConsumableMessageReader<T>(messages_, cursor, consumed_registry);
 }
 
 template <MessageTrait T>

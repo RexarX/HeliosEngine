@@ -60,21 +60,6 @@ struct SystemParamTraits<MessageWriter<T>> {
       AccessPolicyBuilder& /*builder*/) noexcept {}
 };
 
-template <MessageTrait T, typename Allocator>
-struct SystemParamTraits<BasicMessageWriter<T, Allocator>> {
-  static auto Make(World& /*world*/, SystemLocalData& data,
-                   const AccessPolicy& /*policy*/) noexcept
-      -> BasicMessageWriter<T, Allocator> {
-    if (!data.message_queue.IsRegistered<T>()) {
-      data.message_queue.Register<T>();
-    }
-    return BasicMessageWriter<T, Allocator>(data.message_queue);
-  }
-
-  static constexpr void RegisterAccess(
-      AccessPolicyBuilder& /*builder*/) noexcept {}
-};
-
 template <AsyncMessageTrait T>
 struct SystemParamTraits<AsyncMessageReader<T>> {
   static auto Make(World& world, SystemLocalData& /*data*/,

@@ -295,17 +295,14 @@ constexpr MessageId<T> MessageWrapperIter<T>::IdAt(
  *
  * @note The adapter methods operate on `ConsumableMessageWrapper<T>` values.
  * @tparam T Message type satisfying `ConsumableMessageTrait`
- * @tparam Alloc Allocator type for the consumed messages registry
  */
-template <ConsumableMessageTrait T,
-          typename Alloc = std::pmr::polymorphic_allocator<std::byte>>
+template <ConsumableMessageTrait T>
 class ConsumableMessageWrapperIter
-    : public utils::FunctionalAdapterBase<
-          ConsumableMessageWrapperIter<T, Alloc>> {
+    : public utils::FunctionalAdapterBase<ConsumableMessageWrapperIter<T>> {
 public:
   using iterator_concept = std::bidirectional_iterator_tag;
   using iterator_category = std::input_iterator_tag;
-  using value_type = ConsumableMessageWrapper<T, Alloc>;
+  using value_type = ConsumableMessageWrapper<T>;
   using reference = value_type;
   using pointer = void;
   using difference_type = ptrdiff_t;
@@ -329,7 +326,7 @@ public:
       std::span<const T> previous_messages, std::span<const T> current_messages,
       std::span<const AnyMessageId> previous_ids,
       std::span<const AnyMessageId> current_ids,
-      ConsumedMessagesRegistry<Alloc>& registry, MessageCursor<T>* cursor,
+      ConsumedMessagesRegistry& registry, MessageCursor<T>* cursor,
       size_t previous_offset, size_t current_offset, size_t position) noexcept
       : previous_messages_(previous_messages),
         current_messages_(current_messages),
@@ -447,16 +444,16 @@ private:
   std::span<const T> current_messages_;
   std::span<const AnyMessageId> previous_ids_;
   std::span<const AnyMessageId> current_ids_;
-  ConsumedMessagesRegistry<Alloc>* registry_ = nullptr;
+  ConsumedMessagesRegistry* registry_ = nullptr;
   MessageCursor<T>* cursor_ = nullptr;
   size_t previous_offset_ = 0;
   size_t current_offset_ = 0;
   size_t position_ = 0;
 };
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator*()
-    const noexcept -> reference {
+template <ConsumableMessageTrait T>
+constexpr auto ConsumableMessageWrapperIter<T>::operator*() const noexcept
+    -> reference {
   HELIOS_ASSERT(registry_ != nullptr,
                 "ConsumedMessagesRegistry pointer is null!");
   HELIOS_ASSERT(position_ < UnreadCount(),
@@ -464,8 +461,8 @@ constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator*()
   return {MessageAt(position_), *registry_, IdAt(position_)};
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator++() noexcept
+template <ConsumableMessageTrait T>
+constexpr auto ConsumableMessageWrapperIter<T>::operator++() noexcept
     -> ConsumableMessageWrapperIter& {
   HELIOS_ASSERT(cursor_ != nullptr, "MessageCursor pointer is null!");
   HELIOS_ASSERT(position_ < UnreadCount(),
@@ -475,31 +472,31 @@ constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator++() noexcept
   return *this;
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator++(int) noexcept
+template <ConsumableMessageTrait T>
+constexpr auto ConsumableMessageWrapperIter<T>::operator++(int) noexcept
     -> ConsumableMessageWrapperIter {
   auto copy = *this;
   ++(*this);
   return copy;
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator--() noexcept
+template <ConsumableMessageTrait T>
+constexpr auto ConsumableMessageWrapperIter<T>::operator--() noexcept
     -> ConsumableMessageWrapperIter& {
   --position_;
   return *this;
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr auto ConsumableMessageWrapperIter<T, Alloc>::operator--(int) noexcept
+template <ConsumableMessageTrait T>
+constexpr auto ConsumableMessageWrapperIter<T>::operator--(int) noexcept
     -> ConsumableMessageWrapperIter {
   auto copy = *this;
   --(*this);
   return copy;
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr auto ConsumableMessageWrapperIter<T, Alloc>::begin() const noexcept
+template <ConsumableMessageTrait T>
+constexpr auto ConsumableMessageWrapperIter<T>::begin() const noexcept
     -> ConsumableMessageWrapperIter {
   HELIOS_ASSERT(registry_ != nullptr,
                 "ConsumedMessagesRegistry pointer is null!");
@@ -508,8 +505,8 @@ constexpr auto ConsumableMessageWrapperIter<T, Alloc>::begin() const noexcept
           previous_offset_,   current_offset_,   0};
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr auto ConsumableMessageWrapperIter<T, Alloc>::end() const noexcept
+template <ConsumableMessageTrait T>
+constexpr auto ConsumableMessageWrapperIter<T>::end() const noexcept
     -> ConsumableMessageWrapperIter {
   HELIOS_ASSERT(registry_ != nullptr,
                 "ConsumedMessagesRegistry pointer is null!");
@@ -518,8 +515,8 @@ constexpr auto ConsumableMessageWrapperIter<T, Alloc>::end() const noexcept
           previous_offset_,   current_offset_,   UnreadCount()};
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr const T& ConsumableMessageWrapperIter<T, Alloc>::MessageAt(
+template <ConsumableMessageTrait T>
+constexpr const T& ConsumableMessageWrapperIter<T>::MessageAt(
     size_t position) const noexcept {
   const size_t unread_previous = UnreadPreviousCount();
   if (position < unread_previous) {
@@ -528,8 +525,8 @@ constexpr const T& ConsumableMessageWrapperIter<T, Alloc>::MessageAt(
   return current_messages_[current_offset_ + (position - unread_previous)];
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr MessageId<T> ConsumableMessageWrapperIter<T, Alloc>::IdAt(
+template <ConsumableMessageTrait T>
+constexpr MessageId<T> ConsumableMessageWrapperIter<T>::IdAt(
     size_t position) const noexcept {
   const size_t unread_previous = UnreadPreviousCount();
   if (position < unread_previous) {
@@ -584,20 +581,7 @@ public:
    * `reader.Filter(...).Collect()`). Iteration advances the delivery cursor.
    * @return Vector containing copies of all unread messages
    */
-  [[nodiscard]] constexpr auto Collect() const -> std::vector<T>;
-
-  /**
-   * @brief Collects all unread messages into a vector of raw `T` values using a
-   * custom allocator.
-   * @tparam Alloc STL-compatible allocator type for `T`
-   * @param alloc Allocator instance
-   * @return Vector containing copies of all unread messages, using the provided
-   * allocator
-   */
-  template <typename Alloc>
-    requires std::same_as<typename std::allocator_traits<Alloc>::value_type, T>
-  [[nodiscard]] constexpr auto CollectWith(const Alloc& alloc) const
-      -> std::vector<T, Alloc>;
+  [[nodiscard]] constexpr auto Collect() const -> std::pmr::vector<T>;
 
   /**
    * @brief Collects all unread messages into a vector of raw `T` values using a
@@ -606,10 +590,10 @@ public:
    * @return Vector containing copies of all unread messages, using the provided
    * memory resource
    */
-  [[nodiscard]] constexpr auto CollectWith(
+  [[nodiscard]] constexpr auto Collect(
       std::pmr::memory_resource* resource) const -> std::pmr::vector<T>;
 
-  auto CollectWith(std::nullptr_t) const -> std::pmr::vector<T> = delete;
+  auto Collect(std::nullptr_t) const -> std::pmr::vector<T> = delete;
 
   /**
    * @brief Reads all unread messages into an output iterator.
@@ -890,10 +874,26 @@ public:
    */
   template <typename Pred>
     requires std::predicate<Pred, const value_type&>
-  [[nodiscard]] constexpr auto Partition(const Pred& predicate) const
-      -> std::pair<std::vector<value_type>, std::vector<value_type>> {
+  [[nodiscard]] constexpr auto Partition(const Pred& predicate) const {
     return GetDerived().begin().Partition(predicate);
   }
+
+  /**
+   * @brief Partitions unread wrapped messages using a memory resource.
+   * @tparam Pred Predicate type `(const value_type&) -> bool`
+   * @param predicate Predicate function
+   * @param resource Memory resource for both result vectors
+   * @return Pair of matching and non-matching vectors
+   */
+  template <typename Pred>
+    requires std::predicate<Pred, const value_type&>
+  [[nodiscard]] constexpr auto Partition(
+      const Pred& predicate, std::pmr::memory_resource* resource) const {
+    return GetDerived().begin().Partition(predicate, resource);
+  }
+
+  template <typename Pred>
+  auto Partition(const Pred&, std::nullptr_t) const = delete;
 
   /**
    * @brief Finds the unread wrapped message with the maximum extracted key.
@@ -929,12 +929,26 @@ public:
    */
   template <typename KeyFunc>
     requires std::invocable<KeyFunc, const value_type&>
-  [[nodiscard]] constexpr auto GroupBy(const KeyFunc& key_func) const
-      -> std::unordered_map<
-          std::decay_t<std::invoke_result_t<KeyFunc, const value_type&>>,
-          std::vector<value_type>> {
+  [[nodiscard]] constexpr auto GroupBy(const KeyFunc& key_func) const {
     return GetDerived().begin().GroupBy(key_func);
   }
+
+  /**
+   * @brief Groups unread wrapped messages using a memory resource.
+   * @tparam KeyFunc Key extractor type `(const value_type&) -> Key`
+   * @param key_func Key extraction function
+   * @param resource Memory resource for the map and grouped vectors
+   * @return Hash map from key to grouped wrappers
+   */
+  template <typename KeyFunc>
+    requires std::invocable<KeyFunc, const value_type&>
+  [[nodiscard]] constexpr auto GroupBy(
+      const KeyFunc& key_func, std::pmr::memory_resource* resource) const {
+    return GetDerived().begin().GroupBy(key_func, resource);
+  }
+
+  template <typename KeyFunc>
+  auto GroupBy(const KeyFunc&, std::nullptr_t) const = delete;
 
   /**
    * @brief Checks if any unread message matches a predicate.
@@ -1000,34 +1014,12 @@ private:
 
 template <typename Derived, MessageTrait T, typename IterType>
 constexpr auto MessageReaderBase<Derived, T, IterType>::Collect() const
-    -> std::vector<T> {
-  std::vector<T> result;
-  result.reserve(Count());
-  auto it = GetDerived().begin();
-  const auto last = GetDerived().end();
-  for (; it != last; ++it) {
-    result.push_back(**it);
-  }
-  return result;
+    -> std::pmr::vector<T> {
+  return Collect(std::pmr::get_default_resource());
 }
 
 template <typename Derived, MessageTrait T, typename IterType>
-template <typename Alloc>
-  requires std::same_as<typename std::allocator_traits<Alloc>::value_type, T>
-constexpr auto MessageReaderBase<Derived, T, IterType>::CollectWith(
-    const Alloc& alloc) const -> std::vector<T, Alloc> {
-  std::vector<T, Alloc> result{alloc};
-  result.reserve(Count());
-  auto it = GetDerived().begin();
-  const auto last = GetDerived().end();
-  for (; it != last; ++it) {
-    result.push_back(**it);
-  }
-  return result;
-}
-
-template <typename Derived, MessageTrait T, typename IterType>
-constexpr auto MessageReaderBase<Derived, T, IterType>::CollectWith(
+constexpr auto MessageReaderBase<Derived, T, IterType>::Collect(
     std::pmr::memory_resource* resource) const -> std::pmr::vector<T> {
   std::pmr::vector<T> result{resource};
   result.reserve(Count());
@@ -1198,7 +1190,6 @@ constexpr auto MessageReader<T>::MakeIterator(size_t position) const noexcept
  * @note Thread-safe for concurrent reads of retained messages, but
  * `ConsumableMessageWrapper::Consume()` and cursor updates are NOT thread-safe.
  * @tparam T Message type satisfying `ConsumableMessageTrait`
- * @tparam Alloc Allocator type for the consumed messages registry
  *
  * @code
  * MessageCursor<Score> cursor = MessageCursor<Score>::IncludeBacklog();
@@ -1210,15 +1201,14 @@ constexpr auto MessageReader<T>::MakeIterator(size_t position) const noexcept
  * }
  * @endcode
  */
-template <ConsumableMessageTrait T,
-          typename Alloc = std::pmr::polymorphic_allocator<std::byte>>
+template <ConsumableMessageTrait T>
 class ConsumableMessageReader final
-    : public MessageReaderBase<ConsumableMessageReader<T, Alloc>, T,
-                               ConsumableMessageWrapperIter<T, Alloc>> {
+    : public MessageReaderBase<ConsumableMessageReader<T>, T,
+                               ConsumableMessageWrapperIter<T>> {
 public:
-  using value_type = ConsumableMessageWrapper<T, Alloc>;
+  using value_type = ConsumableMessageWrapper<T>;
   using size_type = MessageManager::size_type;
-  using const_iterator = ConsumableMessageWrapperIter<T, Alloc>;
+  using const_iterator = ConsumableMessageWrapperIter<T>;
   using iterator = const_iterator;
 
   /**
@@ -1231,7 +1221,7 @@ public:
    */
   constexpr ConsumableMessageReader(
       const MessageManager& manager, MessageCursor<T>& cursor,
-      ConsumedMessagesRegistry<Alloc>& consumed_registry) noexcept
+      ConsumedMessagesRegistry& consumed_registry) noexcept
       : manager_(manager), cursor_(cursor), registry_(consumed_registry) {}
 
   ConsumableMessageReader(const ConsumableMessageReader&) = delete;
@@ -1318,11 +1308,11 @@ private:
 
   std::reference_wrapper<const MessageManager> manager_;
   std::reference_wrapper<MessageCursor<T>> cursor_;
-  std::reference_wrapper<ConsumedMessagesRegistry<Alloc>> registry_;
+  std::reference_wrapper<ConsumedMessagesRegistry> registry_;
 };
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr void ConsumableMessageReader<T, Alloc>::ConsumeAll() const {
+template <ConsumableMessageTrait T>
+constexpr void ConsumableMessageReader<T>::ConsumeAll() const {
   auto& registry = registry_.get();
   auto it = begin();
   const auto last = end();
@@ -1331,10 +1321,10 @@ constexpr void ConsumableMessageReader<T, Alloc>::ConsumeAll() const {
   }
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
+template <ConsumableMessageTrait T>
 template <typename Pred>
   requires std::predicate<Pred, const T&>
-constexpr auto ConsumableMessageReader<T, Alloc>::ConsumeIf(
+constexpr auto ConsumableMessageReader<T>::ConsumeIf(
     const Pred& predicate) const -> size_type {
   size_type consumed_count = 0;
   auto& registry = registry_.get();
@@ -1349,8 +1339,8 @@ constexpr auto ConsumableMessageReader<T, Alloc>::ConsumeIf(
   return consumed_count;
 }
 
-template <ConsumableMessageTrait T, typename Alloc>
-constexpr auto ConsumableMessageReader<T, Alloc>::MakeIterator(
+template <ConsumableMessageTrait T>
+constexpr auto ConsumableMessageReader<T>::MakeIterator(
     size_t position) const noexcept -> const_iterator {
   const auto& manager = manager_.get();
   const auto previous_messages = manager.template PreviousMessages<T>();

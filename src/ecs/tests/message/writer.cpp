@@ -20,7 +20,7 @@ struct TagMsg {
 };
 
 // Helper that builds a queue with PositionMsg already registered.
-MessageQueue<> MakeQueueWith() {
+MessageQueue MakeQueueWith() {
   MessageQueue queue;
   queue.Register<PositionMsg>();
   return queue;

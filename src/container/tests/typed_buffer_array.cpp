@@ -2,11 +2,12 @@
 
 #include <helios/container/typed_buffer_array.hpp>
 
-#include <atomic>
 #include <cstddef>
+#include <iterator>
 #include <memory>
 #include <memory_resource>
 #include <string>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -93,35 +94,30 @@ struct CountingType {
   }
 };
 
-/// @brief A tracking allocator distinct from std::allocator for cross-allocator
-/// tests. Counts live allocations to detect leaks.
-template <typename T>
-struct TrackingAllocator {
-  using value_type = T;
-
-  static inline std::atomic<int> allocation_count{0};
-
-  TrackingAllocator() noexcept = default;
-
-  template <typename U>
-  explicit TrackingAllocator(const TrackingAllocator<U>&) noexcept {}
-
-  T* allocate(size_t n) {
-    ++allocation_count;
-    return std::allocator<T>{}.allocate(n);
+/// @brief Counts live allocations for cross-resource leak tests.
+class TrackingResource final : public std::pmr::memory_resource {
+public:
+  [[nodiscard]] int AllocationCount() const noexcept {
+    return allocation_count_;
   }
 
-  void deallocate(T* p, size_t n) noexcept {
-    --allocation_count;
-    std::allocator<T>{}.deallocate(p, n);
+private:
+  void* do_allocate(size_t bytes, size_t alignment) override {
+    ++allocation_count_;
+    return std::pmr::get_default_resource()->allocate(bytes, alignment);
   }
 
-  template <typename U>
-  bool operator==(const TrackingAllocator<U>&) const noexcept {
-    return true;
+  void do_deallocate(void* pointer, size_t bytes, size_t alignment) override {
+    --allocation_count_;
+    std::pmr::get_default_resource()->deallocate(pointer, bytes, alignment);
   }
 
-  static void ResetCount() noexcept { allocation_count = 0; }
+  [[nodiscard]] bool do_is_equal(
+      const std::pmr::memory_resource& other) const noexcept override {
+    return this == &other;
+  }
+
+  int allocation_count_ = 0;
 };
 
 }  // namespace
@@ -596,6 +592,17 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     buffer.PushBack(2);
     buffer.PushBack(3);
 
+    SUBCASE("Iterator aliases match begin/end/rbegin types") {
+      CHECK(std::is_same_v<decltype(buffer.begin<int>()),
+                           TypedBufferArray::iterator<int>>);
+      CHECK(std::is_same_v<decltype(std::as_const(buffer).begin<int>()),
+                           TypedBufferArray::const_iterator<int>>);
+      CHECK(std::is_same_v<decltype(buffer.rbegin<int>()),
+                           TypedBufferArray::reverse_iterator<int>>);
+      CHECK(std::is_same_v<decltype(std::as_const(buffer).rbegin<int>()),
+                           TypedBufferArray::const_reverse_iterator<int>>);
+    }
+
     SUBCASE("Forward iteration") {
       int sum = 0;
       auto it = buffer.begin<int>();
@@ -717,7 +724,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
       TypedBufferArray buffer2_mut;
       buffer2_mut.PushBack(3);
       buffer2_mut.PushBack(4);
-      const TypedBufferArray<>& buffer2 = buffer2_mut;
+      const TypedBufferArray& buffer2 = buffer2_mut;
 
       buffer1.Merge(buffer2);
 
@@ -830,18 +837,17 @@ TEST_SUITE("helios::container::TypedBufferArray") {
       CHECK_EQ(buffer.At<int>(1), 10);
     }
 
-    SUBCASE("Swap with custom allocator") {
-      using TrackingBuffer = TypedBufferArray<TrackingAllocator<std::byte>>;
-      TrackingAllocator<std::byte> alloc;
-      TrackingBuffer buffer(alloc);
+    SUBCASE("Swap with custom memory resource") {
+      TrackingResource resource;
+      std::pmr::monotonic_buffer_resource second_resource;
+      TypedBufferArray buffer(&resource);
       buffer.PushBack(1);
       buffer.PushBack(2);
 
-      const int count_before_swap =
-          TrackingAllocator<std::byte>::allocation_count.load();
+      const int count_before_swap = resource.AllocationCount();
       (void)count_before_swap;
 
-      TrackingBuffer buffer2(alloc);
+      TypedBufferArray buffer2(&second_resource);
       buffer2.PushBack(10);
 
       buffer.Swap(buffer2);
@@ -858,8 +864,7 @@ TEST_SUITE("helios::container::TypedBufferArray") {
 
       buffer.PushBack(1);
       const auto stored_id = buffer.StoredTypeId();
-      const auto int_id =
-          TypedBufferArray<std::allocator<std::byte>>::TypeIndexOf<int>();
+      const auto int_id = TypedBufferArray::TypeIndexOf<int>();
       CHECK_EQ(stored_id, int_id);
     }
 
@@ -875,21 +880,19 @@ TEST_SUITE("helios::container::TypedBufferArray") {
     }
   }
 
-  TEST_CASE("helios::container::TypedBufferArray::allocator construction") {
+  TEST_CASE("helios::container::TypedBufferArray::resource construction") {
     TypedBufferArray buffer;
     buffer.PushBack(1);
     buffer.PushBack(2);
     buffer.PushBack(3);
 
-    SUBCASE("Merge from different allocator") {
-      using DefaultBuffer = TypedBufferArray<std::allocator<std::byte>>;
-      using TrackingBuffer = TypedBufferArray<TrackingAllocator<std::byte>>;
-
-      DefaultBuffer dest;
+    SUBCASE("Merge from different resource") {
+      std::pmr::monotonic_buffer_resource source_resource;
+      TypedBufferArray dest;
       dest.PushBack(1);
       dest.PushBack(2);
 
-      TrackingBuffer src;
+      TypedBufferArray src(&source_resource);
       src.PushBack(3);
       src.PushBack(4);
 
@@ -903,15 +906,13 @@ TEST_SUITE("helios::container::TypedBufferArray") {
   }
 
   TEST_CASE(
-      "helios::container::TypedBufferArray::Merge: cross-allocator merging") {
-    using DefaultBuffer = TypedBufferArray<std::allocator<std::byte>>;
-    using TrackingBuffer = TypedBufferArray<TrackingAllocator<std::byte>>;
-
-    SUBCASE("Merge non-trivial types from different allocator") {
-      DefaultBuffer dest;
+      "helios::container::TypedBufferArray::Merge: cross-resource merging") {
+    SUBCASE("Merge non-trivial types from different resource") {
+      std::pmr::monotonic_buffer_resource source_resource;
+      TypedBufferArray dest;
       dest.EmplaceBack<NonTrivial>("a", 1);
 
-      TrackingBuffer src;
+      TypedBufferArray src(&source_resource);
       src.EmplaceBack<NonTrivial>("b", 2);
       src.EmplaceBack<NonTrivial>("c", 3);
 
@@ -924,14 +925,15 @@ TEST_SUITE("helios::container::TypedBufferArray") {
       CHECK(src.Empty());
     }
 
-    SUBCASE("Merge const lvalue non-trivial types from different allocator") {
-      DefaultBuffer dest;
+    SUBCASE("Merge const lvalue non-trivial types from different resource") {
+      std::pmr::monotonic_buffer_resource source_resource;
+      TypedBufferArray dest;
       dest.EmplaceBack<NonTrivial>("a", 1);
 
-      TrackingBuffer src_mut;
+      TypedBufferArray src_mut(&source_resource);
       src_mut.EmplaceBack<NonTrivial>("b", 2);
       src_mut.EmplaceBack<NonTrivial>("c", 3);
-      const TrackingBuffer& src = src_mut;
+      const TypedBufferArray& src = src_mut;
 
       dest.Merge(src);
 
@@ -944,48 +946,43 @@ TEST_SUITE("helios::container::TypedBufferArray") {
       CHECK_EQ(src.At<NonTrivial>(1).data, "c");
     }
 
-    SUBCASE("Merge into untyped dest from different allocator") {
-      DefaultBuffer dest;
-
-      TrackingBuffer src;
+    SUBCASE("Merge into untyped dest from different resource") {
+      std::pmr::monotonic_buffer_resource source_resource;
+      TypedBufferArray dest;
+      TypedBufferArray src(&source_resource);
       src.EmplaceBack<int>(42);
       src.EmplaceBack<int>(99);
 
-      DefaultBuffer dest2;
-      TrackingBuffer src2;
-      src2.EmplaceBack<int>(42);
-      src2.EmplaceBack<int>(99);
+      dest.Merge(std::move(src));
 
-      dest2.Merge(std::move(src2));
-
-      CHECK_EQ(dest2.Size(), 2);
-      CHECK_EQ(dest2.At<int>(0), 42);
-      CHECK_EQ(dest2.At<int>(1), 99);
+      CHECK_EQ(dest.Size(), 2);
+      CHECK_EQ(dest.At<int>(0), 42);
+      CHECK_EQ(dest.At<int>(1), 99);
     }
 
-    SUBCASE("TrackingAllocator: no leaks after cross-allocator merge") {
-      TrackingAllocator<std::byte>::ResetCount();
+    SUBCASE("TrackingResource: no leaks after cross-resource merge") {
+      TrackingResource source_resource;
       {
-        TrackingBuffer src;
+        TypedBufferArray src(&source_resource);
         src.EmplaceBack<int>(42);
         src.EmplaceBack<int>(99);
 
-        DefaultBuffer dest;
+        TypedBufferArray dest;
         dest.Merge(std::move(src));
       }
-      CHECK_EQ(TrackingAllocator<std::byte>::allocation_count.load(), 0);
+      CHECK_EQ(source_resource.AllocationCount(), 0);
     }
   }
 
-  TEST_CASE(
-      "helios::container::PmrTypedBufferArray: works with memory_resource") {
+  TEST_CASE("helios::container::TypedBufferArray: works with memory_resource") {
     std::byte buffer[512];
     std::pmr::monotonic_buffer_resource resource(buffer, sizeof(buffer));
 
-    PmrTypedBufferArray typed_buffer_array(&resource);
+    TypedBufferArray typed_buffer_array(&resource);
     typed_buffer_array.EmplaceBack<int>(1);
     typed_buffer_array.EmplaceBack<int>(2);
 
+    CHECK_EQ(typed_buffer_array.GetMemoryResource(), &resource);
     CHECK_EQ(typed_buffer_array.Size(), 2);
     CHECK_EQ(typed_buffer_array.At<int>(0), 1);
     CHECK_EQ(typed_buffer_array.At<int>(1), 2);

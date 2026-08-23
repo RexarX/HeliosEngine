@@ -9,7 +9,13 @@
 
 namespace helios::ecs {
 
-World::World() {
+World::World(std::pmr::memory_resource* resource)
+    : resource_(resource),
+      entity_manager_(resource),
+      component_manager_(resource),
+      resources_(resource),
+      messages_(resource),
+      command_queue_(resource) {
   AddBuiltinMessages();
 }
 

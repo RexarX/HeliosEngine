@@ -1,6 +1,7 @@
 #pragma once
 
 #include <helios/assert.hpp>
+#include <helios/memory/temporary_storage.hpp>
 
 #include <algorithm>
 #include <array>
@@ -232,13 +233,13 @@ constexpr size_t Axis<T>::Index(T axis) noexcept {
 /**
  * @brief Formats axis filter parameters using an output iterator.
  * @tparam It Output iterator type
- * @param filter Axis filter
  * @param out Output iterator to write the formatted string to
+ * @param filter Axis filter
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const AxisFilter& filter, It out) {
+inline It ToString(It out, const AxisFilter& filter) {
   return std::format_to(out,
                         "AxisFilter{{deadzone={}, livezone={}, rescale={}}}",
                         filter.deadzone, filter.livezone, filter.rescale);
@@ -247,12 +248,26 @@ inline It ToString(const AxisFilter& filter, It out) {
 /**
  * @brief Formats axis filter parameters as a string.
  * @param filter Axis filter
- * @return Formatted filter string
+ * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(const AxisFilter& filter) {
   std::string result;
   result.reserve(128);
-  ToString(filter, std::back_inserter(result));
+  ToString(std::back_inserter(result), filter);
+  return result;
+}
+
+/**
+ * @brief Formats axis filter parameters as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param filter Axis filter
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const AxisFilter& filter) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), filter);
   return result;
 }
 
@@ -263,7 +278,7 @@ inline It ToString(const AxisFilter& filter, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const AxisFilter& filter) {
-  ToString(filter, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), filter);
   return os;
 }
 
@@ -279,7 +294,7 @@ struct formatter<helios::input::AxisFilter> {
 
   static auto format(const helios::input::AxisFilter& filter,
                      format_context& ctx) {
-    return helios::input::ToString(filter, ctx.out());
+    return helios::input::ToString(ctx.out(), filter);
   }
 };
 

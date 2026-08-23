@@ -7,6 +7,7 @@
 #include <helios/input/keyboard.hpp>
 #include <helios/input/mouse.hpp>
 #include <helios/input/pen.hpp>
+#include <helios/memory/temporary_storage.hpp>
 
 #include <array>
 #include <cstdint>
@@ -378,105 +379,331 @@ struct PenAxisChangedMsg {
 /**
  * @brief Formats a keyboard input message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Keyboard input message
  * @param out Output iterator to write the formatted string to
+ * @param msg Keyboard input message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const KeyboardInputMsg& msg, It out) {
+inline It ToString(It out, const KeyboardInputMsg& msg) {
   out = std::format_to(out, "KeyboardInputMsg{{entity={}, key={}, state={}",
                        msg.entity, ToString(msg.key), ToString(msg.state));
   out = std::format_to(out, ", modifiers=");
-  out = ToString(msg.modifiers, out);
+  out = ToString(out, msg.modifiers);
   return std::format_to(out, "}}");
+}
+
+/**
+ * @brief Formats a keyboard input message as a string.
+ * @param msg Keyboard input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const KeyboardInputMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a keyboard input message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Keyboard input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const KeyboardInputMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a keyboard input message to an output stream.
+ * @param os Output stream
+ * @param msg Keyboard input message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const KeyboardInputMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
 }
 
 /**
  * @brief Formats a text input message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Text input message
  * @param out Output iterator to write the formatted string to
+ * @param msg Text input message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const TextInputMsg& msg, It out) {
+inline It ToString(It out, const TextInputMsg& msg) {
   return std::format_to(out, "TextInputMsg{{entity={}, codepoint=U+{:04X}}}",
                         msg.entity, msg.codepoint);
 }
 
 /**
- * @brief Formats a mouse button message using an output iterator.
+ * @brief Formats a text input message as a string.
+ * @param msg Text input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const TextInputMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a text input message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Text input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const TextInputMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a text input message to an output stream.
+ * @param os Output stream
+ * @param msg Text input message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const TextInputMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a mouse button input message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Mouse button message
  * @param out Output iterator to write the formatted string to
+ * @param msg Mouse button input message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const MouseButtonInputMsg& msg, It out) {
+inline It ToString(It out, const MouseButtonInputMsg& msg) {
   out =
       std::format_to(out, "MouseButtonInputMsg{{entity={}, button={}, state={}",
                      msg.entity, ToString(msg.button), ToString(msg.state));
   out = std::format_to(out, ", modifiers=");
-  out = ToString(msg.modifiers, out);
+  out = ToString(out, msg.modifiers);
   return std::format_to(out, "}}");
+}
+
+/**
+ * @brief Formats a mouse button input message as a string.
+ * @param msg Mouse button input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const MouseButtonInputMsg& msg) {
+  std::string result;
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a mouse button input message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Mouse button input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const MouseButtonInputMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a mouse button message to an output stream.
+ * @param os Output stream
+ * @param msg Mouse button message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const MouseButtonInputMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
 }
 
 /**
  * @brief Formats a cursor moved message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Cursor moved message
  * @param out Output iterator to write the formatted string to
+ * @param msg Cursor moved message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const CursorMovedMsg& msg, It out) {
+inline It ToString(It out, const CursorMovedMsg& msg) {
   return std::format_to(out, "CursorMovedMsg{{entity={}, x={}, y={}}}",
                         msg.entity, msg.x, msg.y);
 }
 
 /**
+ * @brief Formats a cursor moved message as a string.
+ * @param msg Cursor moved message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const CursorMovedMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a cursor moved message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Cursor moved message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const CursorMovedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a cursor moved message to an output stream.
+ * @param os Output stream
+ * @param msg Cursor moved message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const CursorMovedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a mouse motion message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Mouse motion message
  * @param out Output iterator to write the formatted string to
+ * @param msg Mouse motion message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const MouseMotionMsg& msg, It out) {
+inline It ToString(It out, const MouseMotionMsg& msg) {
   return std::format_to(out,
                         "MouseMotionMsg{{entity={}, delta_x={}, delta_y={}}}",
                         msg.entity, msg.delta_x, msg.delta_y);
 }
 
 /**
+ * @brief Formats a mouse motion message as a string.
+ * @param msg Mouse motion message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const MouseMotionMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a mouse motion message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Mouse motion message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const MouseMotionMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a mouse motion message to an output stream.
+ * @param os Output stream
+ * @param msg Mouse motion message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const MouseMotionMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a mouse wheel message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Mouse wheel message
  * @param out Output iterator to write the formatted string to
+ * @param msg Mouse wheel message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const MouseWheelMsg& msg, It out) {
+inline It ToString(It out, const MouseWheelMsg& msg) {
   return std::format_to(out, "MouseWheelMsg{{entity={}, x={}, y={}}}",
                         msg.entity, msg.x, msg.y);
 }
 
 /**
+ * @brief Formats a mouse wheel message as a string.
+ * @param msg Mouse wheel message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const MouseWheelMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a mouse wheel message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Mouse wheel message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const MouseWheelMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a mouse wheel message to an output stream.
+ * @param os Output stream
+ * @param msg Mouse wheel message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const MouseWheelMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a gamepad connection message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Gamepad connection message
  * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad connection message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const GamepadConnectionMsg& msg, It out) {
+inline It ToString(It out, const GamepadConnectionMsg& msg) {
   return std::format_to(
       out,
       "GamepadConnectionMsg{{id={}, connected={}, name=\"{}\", guid=\"{}\"}}",
@@ -484,89 +711,325 @@ inline It ToString(const GamepadConnectionMsg& msg, It out) {
 }
 
 /**
+ * @brief Formats a gamepad connection message as a string.
+ * @param msg Gamepad connection message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadConnectionMsg& msg) {
+  std::string result;
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad connection message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad connection message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadConnectionMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad connection message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad connection message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadConnectionMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a gamepad button message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Gamepad button message
  * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad button message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const GamepadButtonInputMsg& msg, It out) {
+inline It ToString(It out, const GamepadButtonInputMsg& msg) {
   return std::format_to(out,
                         "GamepadButtonInputMsg{{id={}, button={}, state={}}}",
                         msg.id, ToString(msg.button), ToString(msg.state));
 }
 
 /**
+ * @brief Formats a gamepad button message as a string.
+ * @param msg Gamepad button message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadButtonInputMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad button input message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad button input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadButtonInputMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad button message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad button message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadButtonInputMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a gamepad axis message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Gamepad axis message
  * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad axis message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const GamepadAxisChangedMsg& msg, It out) {
+inline It ToString(It out, const GamepadAxisChangedMsg& msg) {
   return std::format_to(out,
                         "GamepadAxisChangedMsg{{id={}, axis={}, value={}}}",
                         msg.id, ToString(msg.axis), msg.value);
 }
 
 /**
+ * @brief Formats a gamepad axis message as a string.
+ * @param msg Gamepad axis message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadAxisChangedMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad axis message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad axis message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadAxisChangedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad axis message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad axis message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadAxisChangedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a gamepad remap message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Gamepad remap message
  * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad remap message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const GamepadRemappedMsg& msg, It out) {
+inline It ToString(It out, const GamepadRemappedMsg& msg) {
   return std::format_to(out, "GamepadRemappedMsg{{id={}, mapping=\"{}\"}}",
                         msg.id, msg.mapping);
 }
 
 /**
+ * @brief Formats a gamepad remap message as a string.
+ * @param msg Gamepad remap message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadRemappedMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad remap message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad remap message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadRemappedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad remap message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad remap message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadRemappedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a gamepad power message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Gamepad power message
  * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad power message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const GamepadPowerChangedMsg& msg, It out) {
+inline It ToString(It out, const GamepadPowerChangedMsg& msg) {
   out = std::format_to(out, "GamepadPowerChangedMsg{{id={}, power=", msg.id);
-  out = ToString(msg.power, out);
+  out = ToString(out, msg.power);
   return std::format_to(out, "}}");
+}
+
+/**
+ * @brief Formats a gamepad power message as a string.
+ * @param msg Gamepad power message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadPowerChangedMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad power message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad power message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadPowerChangedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad power message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad power message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadPowerChangedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
 }
 
 /**
  * @brief Formats a gamepad sensor message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Gamepad sensor message
  * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad sensor message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const GamepadSensorUpdateMsg& msg, It out) {
+inline It ToString(It out, const GamepadSensorUpdateMsg& msg) {
   return std::format_to(
       out, "GamepadSensorUpdateMsg{{id={}, sensor={}, value=({}, {}, {})}}",
       msg.id, ToString(msg.sensor), msg.value[0], msg.value[1], msg.value[2]);
 }
 
 /**
+ * @brief Formats a gamepad sensor message as a string.
+ * @param msg Gamepad sensor message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadSensorUpdateMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad sensor message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad sensor message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadSensorUpdateMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad sensor message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad sensor message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadSensorUpdateMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a gamepad touchpad message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Gamepad touchpad message
  * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad touchpad message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const GamepadTouchpadMsg& msg, It out) {
+inline It ToString(It out, const GamepadTouchpadMsg& msg) {
   return std::format_to(out,
                         "GamepadTouchpadMsg{{id={}, finger={}, x={}, y={}, "
                         "pressure={}, down={}}}",
@@ -575,15 +1038,55 @@ inline It ToString(const GamepadTouchpadMsg& msg, It out) {
 }
 
 /**
+ * @brief Formats a gamepad touchpad message as a string.
+ * @param msg Gamepad touchpad message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadTouchpadMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad touchpad message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad touchpad message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadTouchpadMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad touchpad message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad touchpad message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadTouchpadMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a joystick connection message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Joystick connection message
  * @param out Output iterator to write the formatted string to
+ * @param msg Joystick connection message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const JoystickConnectionMsg& msg, It out) {
+inline It ToString(It out, const JoystickConnectionMsg& msg) {
   return std::format_to(
       out,
       "JoystickConnectionMsg{{id={}, connected={}, name=\"{}\", guid=\"{}\", "
@@ -593,59 +1096,218 @@ inline It ToString(const JoystickConnectionMsg& msg, It out) {
 }
 
 /**
+ * @brief Formats a joystick connection message as a string.
+ * @param msg Joystick connection message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const JoystickConnectionMsg& msg) {
+  std::string result;
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a joystick connection message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Joystick connection message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const JoystickConnectionMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a joystick connection message to an output stream.
+ * @param os Output stream
+ * @param msg Joystick connection message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const JoystickConnectionMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a joystick button message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Joystick button message
  * @param out Output iterator to write the formatted string to
+ * @param msg Joystick button message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const JoystickButtonInputMsg& msg, It out) {
+inline It ToString(It out, const JoystickButtonInputMsg& msg) {
   return std::format_to(out,
                         "JoystickButtonInputMsg{{id={}, button={}, state={}}}",
                         msg.id, msg.button, ToString(msg.state));
 }
 
 /**
+ * @brief Formats a joystick button input message as a string.
+ * @param msg Joystick button message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const JoystickButtonInputMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a joystick button input message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Joystick button input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const JoystickButtonInputMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a joystick button message to an output stream.
+ * @param os Output stream
+ * @param msg Joystick button message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const JoystickButtonInputMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a joystick axis message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Joystick axis message
  * @param out Output iterator to write the formatted string to
+ * @param msg Joystick axis message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const JoystickAxisChangedMsg& msg, It out) {
+inline It ToString(It out, const JoystickAxisChangedMsg& msg) {
   return std::format_to(out,
                         "JoystickAxisChangedMsg{{id={}, axis={}, value={}}}",
                         msg.id, msg.axis, msg.value);
 }
 
 /**
+ * @brief Formats a joystick axis message as a string.
+ * @param msg Joystick axis message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const JoystickAxisChangedMsg& msg) {
+  std::string result;
+  result.reserve(64);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a joystick axis message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Joystick axis message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const JoystickAxisChangedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a joystick axis message to an output stream.
+ * @param os Output stream
+ * @param msg Joystick axis message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const JoystickAxisChangedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a joystick hat message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Joystick hat message
  * @param out Output iterator to write the formatted string to
+ * @param msg Joystick hat message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const JoystickHatChangedMsg& msg, It out) {
+inline It ToString(It out, const JoystickHatChangedMsg& msg) {
   return std::format_to(out, "JoystickHatChangedMsg{{id={}, hat={}, value={}}}",
                         msg.id, msg.hat, ToString(msg.value));
 }
 
 /**
+ * @brief Formats a joystick hat message as a string.
+ * @param msg Joystick hat message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const JoystickHatChangedMsg& msg) {
+  std::string result;
+  result.reserve(64);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a joystick hat message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Joystick hat message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const JoystickHatChangedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a joystick hat message to an output stream.
+ * @param os Output stream
+ * @param msg Joystick hat message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const JoystickHatChangedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a pen proximity message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Pen proximity message
  * @param out Output iterator to write the formatted string to
+ * @param msg Pen proximity message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const PenProximityMsg& msg, It out) {
+inline It ToString(It out, const PenProximityMsg& msg) {
   return std::format_to(
       out,
       "PenProximityMsg{{entity={}, id={}, device_type={}, in_proximity={}}}",
@@ -653,30 +1315,104 @@ inline It ToString(const PenProximityMsg& msg, It out) {
 }
 
 /**
+ * @brief Formats a pen proximity message as a string.
+ * @param msg Pen proximity message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const PenProximityMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a pen proximity message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Pen proximity message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const PenProximityMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen proximity message to an output stream.
+ * @param os Output stream
+ * @param msg Pen proximity message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const PenProximityMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a pen touch message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Pen touch message
  * @param out Output iterator to write the formatted string to
+ * @param msg Pen touch message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const PenTouchMsg& msg, It out) {
+inline It ToString(It out, const PenTouchMsg& msg) {
   return std::format_to(
       out, "PenTouchMsg{{entity={}, x={}, y={}, id={}, down={}, eraser={}}}",
       msg.entity, msg.x, msg.y, msg.id, msg.down, msg.eraser);
 }
 
 /**
+ * @brief Formats a pen touch message as a string.
+ * @param msg Pen touch message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const PenTouchMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a pen touch message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Pen touch message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const PenTouchMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen touch message to an output stream.
+ * @param os Output stream
+ * @param msg Pen touch message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const PenTouchMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a pen button message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Pen button message
  * @param out Output iterator to write the formatted string to
+ * @param msg Pen button message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const PenButtonInputMsg& msg, It out) {
+inline It ToString(It out, const PenButtonInputMsg& msg) {
   return std::format_to(out,
                         "PenButtonInputMsg{{entity={}, id={}, button={}, "
                         "state={}}}",
@@ -685,29 +1421,107 @@ inline It ToString(const PenButtonInputMsg& msg, It out) {
 }
 
 /**
+ * @brief Formats a pen button input message as a string.
+ * @param msg Pen button message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const PenButtonInputMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a pen button input message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Pen button input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const PenButtonInputMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen button message to an output stream.
+ * @param os Output stream
+ * @param msg Pen button message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const PenButtonInputMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a pen moved message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Pen moved message
  * @param out Output iterator to write the formatted string to
+ * @param msg Pen moved message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const PenMovedMsg& msg, It out) {
+inline It ToString(It out, const PenMovedMsg& msg) {
   return std::format_to(out, "PenMovedMsg{{entity={}, x={}, y={}, id={}}}",
                         msg.entity, msg.x, msg.y, msg.id);
 }
 
 /**
+ * @brief Formats a pen moved message as a string.
+ * @param msg Pen moved message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const PenMovedMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a pen moved message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Pen moved message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const PenMovedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen moved message to an output stream.
+ * @param os Output stream
+ * @param msg Pen moved message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const PenMovedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
  * @brief Formats a pen axis message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Pen axis message
  * @param out Output iterator to write the formatted string to
+ * @param msg Pen axis message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const PenAxisChangedMsg& msg, It out) {
+inline It ToString(It out, const PenAxisChangedMsg& msg) {
   return std::format_to(
       out,
       "PenAxisChangedMsg{{entity={}, x={}, y={}, value={}, id={}, axis={}}}",
@@ -715,522 +1529,41 @@ inline It ToString(const PenAxisChangedMsg& msg, It out) {
 }
 
 /**
- * @brief Formats a KeyboardInput message as a string.
- * @param msg KeyboardInput message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const KeyboardInputMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a KeyboardInput message to an output stream.
- * @param os Output stream
- * @param msg KeyboardInputMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, const KeyboardInputMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a TextInput message as a string.
- * @param msg TextInput message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const TextInputMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a TextInput message to an output stream.
- * @param os Output stream
- * @param msg TextInputMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, const TextInputMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a MouseButtonInput message as a string.
- * @param msg MouseButtonInput message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const MouseButtonInputMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a MouseButtonInput message to an output stream.
- * @param os Output stream
- * @param msg MouseButtonInputMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const MouseButtonInputMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a CursorMoved message as a string.
- * @param msg CursorMoved message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const CursorMovedMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a CursorMoved message to an output stream.
- * @param os Output stream
- * @param msg CursorMovedMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, const CursorMovedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a MouseMotion message as a string.
- * @param msg MouseMotion message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const MouseMotionMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a MouseMotion message to an output stream.
- * @param os Output stream
- * @param msg MouseMotionMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, const MouseMotionMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a MouseWheel message as a string.
- * @param msg MouseWheel message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const MouseWheelMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a MouseWheel message to an output stream.
- * @param os Output stream
- * @param msg MouseWheelMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, const MouseWheelMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a GamepadConnection message as a string.
- * @param msg GamepadConnection message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const GamepadConnectionMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a GamepadConnection message to an output stream.
- * @param os Output stream
- * @param msg GamepadConnectionMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const GamepadConnectionMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a GamepadButtonInput message as a string.
- * @param msg GamepadButtonInput message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const GamepadButtonInputMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a GamepadButtonInput message to an output stream.
- * @param os Output stream
- * @param msg GamepadButtonInputMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const GamepadButtonInputMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a GamepadAxisChanged message as a string.
- * @param msg GamepadAxisChanged message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const GamepadAxisChangedMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a GamepadAxisChanged message to an output stream.
- * @param os Output stream
- * @param msg GamepadAxisChangedMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const GamepadAxisChangedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a GamepadRemapped message as a string.
- * @param msg GamepadRemapped message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const GamepadRemappedMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a GamepadRemapped message to an output stream.
- * @param os Output stream
- * @param msg GamepadRemappedMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const GamepadRemappedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a GamepadPowerChanged message as a string.
- * @param msg GamepadPowerChanged message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const GamepadPowerChangedMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a GamepadPowerChanged message to an output stream.
- * @param os Output stream
- * @param msg GamepadPowerChangedMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const GamepadPowerChangedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a GamepadSensorUpdate message as a string.
- * @param msg GamepadSensorUpdate message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const GamepadSensorUpdateMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a GamepadSensorUpdate message to an output stream.
- * @param os Output stream
- * @param msg GamepadSensorUpdateMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const GamepadSensorUpdateMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a GamepadTouchpad message as a string.
- * @param msg GamepadTouchpad message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const GamepadTouchpadMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a GamepadTouchpad message to an output stream.
- * @param os Output stream
- * @param msg GamepadTouchpadMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const GamepadTouchpadMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a JoystickConnection message as a string.
- * @param msg JoystickConnection message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const JoystickConnectionMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a JoystickConnection message to an output stream.
- * @param os Output stream
- * @param msg JoystickConnectionMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const JoystickConnectionMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a JoystickButtonInput message as a string.
- * @param msg JoystickButtonInput message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const JoystickButtonInputMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a JoystickButtonInput message to an output stream.
- * @param os Output stream
- * @param msg JoystickButtonInputMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const JoystickButtonInputMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a JoystickAxisChanged message as a string.
- * @param msg JoystickAxisChanged message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const JoystickAxisChangedMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a JoystickAxisChanged message to an output stream.
- * @param os Output stream
- * @param msg JoystickAxisChangedMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const JoystickAxisChangedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a JoystickHatChanged message as a string.
- * @param msg JoystickHatChanged message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const JoystickHatChangedMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a JoystickHatChanged message to an output stream.
- * @param os Output stream
- * @param msg JoystickHatChangedMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const JoystickHatChangedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a PenProximity message as a string.
- * @param msg PenProximity message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const PenProximityMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a PenProximity message to an output stream.
- * @param os Output stream
- * @param msg PenProximityMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, const PenProximityMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a PenTouch message as a string.
- * @param msg PenTouch message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const PenTouchMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a PenTouch message to an output stream.
- * @param os Output stream
- * @param msg PenTouchMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, const PenTouchMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a PenButtonInput message as a string.
- * @param msg PenButtonInput message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const PenButtonInputMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a PenButtonInput message to an output stream.
- * @param os Output stream
- * @param msg PenButtonInputMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os,
-                                const PenButtonInputMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a PenMoved message as a string.
- * @param msg PenMoved message
- * @return Formatted string
- */
-[[nodiscard]] inline std::string ToString(const PenMovedMsg& msg) {
-  std::string result;
-  result.reserve(128);
-  ToString(msg, std::back_inserter(result));
-  return result;
-}
-
-/**
- * @brief Outputs a PenMoved message to an output stream.
- * @param os Output stream
- * @param msg PenMovedMsg
- * @return Reference to the output stream
- */
-inline std::ostream& operator<<(std::ostream& os, const PenMovedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
-  return os;
-}
-
-/**
- * @brief Formats a PenAxisChanged message as a string.
- * @param msg PenAxisChanged message
+ * @brief Formats a pen axis message as a string.
+ * @param msg Pen axis message
  * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(const PenAxisChangedMsg& msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
 /**
- * @brief Outputs a PenAxisChanged message to an output stream.
+ * @brief Formats a pen axis message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Pen axis message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const PenAxisChangedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen axis message to an output stream.
  * @param os Output stream
- * @param msg PenAxisChangedMsg
+ * @param msg Pen axis message
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os,
                                 const PenAxisChangedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
@@ -1246,7 +1579,7 @@ struct formatter<helios::input::KeyboardInputMsg> {
 
   static auto format(const helios::input::KeyboardInputMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1258,7 +1591,7 @@ struct formatter<helios::input::TextInputMsg> {
 
   static auto format(const helios::input::TextInputMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1270,7 +1603,7 @@ struct formatter<helios::input::MouseButtonInputMsg> {
 
   static auto format(const helios::input::MouseButtonInputMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1282,7 +1615,7 @@ struct formatter<helios::input::CursorMovedMsg> {
 
   static auto format(const helios::input::CursorMovedMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1294,7 +1627,7 @@ struct formatter<helios::input::MouseMotionMsg> {
 
   static auto format(const helios::input::MouseMotionMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1306,7 +1639,7 @@ struct formatter<helios::input::MouseWheelMsg> {
 
   static auto format(const helios::input::MouseWheelMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1318,7 +1651,7 @@ struct formatter<helios::input::GamepadConnectionMsg> {
 
   static auto format(const helios::input::GamepadConnectionMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1330,7 +1663,7 @@ struct formatter<helios::input::GamepadButtonInputMsg> {
 
   static auto format(const helios::input::GamepadButtonInputMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1342,7 +1675,7 @@ struct formatter<helios::input::GamepadAxisChangedMsg> {
 
   static auto format(const helios::input::GamepadAxisChangedMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1354,7 +1687,7 @@ struct formatter<helios::input::GamepadRemappedMsg> {
 
   static auto format(const helios::input::GamepadRemappedMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1366,7 +1699,7 @@ struct formatter<helios::input::GamepadPowerChangedMsg> {
 
   static auto format(const helios::input::GamepadPowerChangedMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1378,7 +1711,7 @@ struct formatter<helios::input::GamepadSensorUpdateMsg> {
 
   static auto format(const helios::input::GamepadSensorUpdateMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1390,7 +1723,7 @@ struct formatter<helios::input::GamepadTouchpadMsg> {
 
   static auto format(const helios::input::GamepadTouchpadMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1402,7 +1735,7 @@ struct formatter<helios::input::JoystickConnectionMsg> {
 
   static auto format(const helios::input::JoystickConnectionMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1414,7 +1747,7 @@ struct formatter<helios::input::JoystickButtonInputMsg> {
 
   static auto format(const helios::input::JoystickButtonInputMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1426,7 +1759,7 @@ struct formatter<helios::input::JoystickAxisChangedMsg> {
 
   static auto format(const helios::input::JoystickAxisChangedMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1438,7 +1771,7 @@ struct formatter<helios::input::JoystickHatChangedMsg> {
 
   static auto format(const helios::input::JoystickHatChangedMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1450,7 +1783,7 @@ struct formatter<helios::input::PenProximityMsg> {
 
   static auto format(const helios::input::PenProximityMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1462,7 +1795,7 @@ struct formatter<helios::input::PenTouchMsg> {
 
   static auto format(const helios::input::PenTouchMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1474,7 +1807,7 @@ struct formatter<helios::input::PenButtonInputMsg> {
 
   static auto format(const helios::input::PenButtonInputMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1486,7 +1819,7 @@ struct formatter<helios::input::PenMovedMsg> {
 
   static auto format(const helios::input::PenMovedMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 
@@ -1498,7 +1831,7 @@ struct formatter<helios::input::PenAxisChangedMsg> {
 
   static auto format(const helios::input::PenAxisChangedMsg& msg,
                      format_context& ctx) {
-    return helios::input::ToString(msg, ctx.out());
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 

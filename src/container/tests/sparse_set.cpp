@@ -42,12 +42,12 @@ TEST_SUITE("helios::container::SparseSet") {
   }
 
   TEST_CASE("helios::container::SparseSet::ctor: allocator construction") {
-    std::allocator<int> alloc;
-    SparseSet<int> set(alloc);
+    std::pmr::monotonic_buffer_resource resource;
+    SparseSet<int> set(&resource);
 
     CHECK(set.Empty());
     CHECK_EQ(set.Size(), 0);
-    CHECK(set.GetAllocator() == alloc);
+    CHECK_EQ(set.GetMemoryResource(), &resource);
   }
 
   TEST_CASE("helios::container::SparseSet::ctor: copy semantics") {
@@ -483,7 +483,10 @@ TEST_SUITE("helios::container::SparseSet") {
   }
 
   TEST_CASE("helios::container::SparseSet::Swap: swaps contents") {
-    SparseSet<int> set1, set2;
+    std::pmr::monotonic_buffer_resource first_resource;
+    std::pmr::monotonic_buffer_resource second_resource;
+    SparseSet<int> set1(&first_resource);
+    SparseSet<int> set2(&second_resource);
 
     set1.Insert(10, 100);
     set1.Insert(20, 200);
@@ -585,28 +588,6 @@ TEST_SUITE("helios::container::SparseSet") {
       CHECK_EQ(set.Get(*it), static_cast<int>(*it * 2));
     }
   }
-
-  // Test with custom allocator
-  template <typename T>
-  class TestAllocator {
-  public:
-    using value_type = T;
-
-    TestAllocator() noexcept = default;
-    template <typename U>
-    TestAllocator(const TestAllocator<U>&) noexcept {}
-
-    T* allocate(size_t n) {
-      return static_cast<T*>(std::malloc(n * sizeof(T)));
-    }
-
-    void deallocate(T* p, size_t) { std::free(p); }
-
-    template <typename U>
-    bool operator==(const TestAllocator<U>&) const noexcept {
-      return true;
-    }
-  };
 
   TEST_CASE("helios::container::SparseSet::TryGet") {
     SparseSet<int> set;
@@ -713,8 +694,9 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(set.Get(1).y, 1.23f);
   }
 
-  TEST_CASE("helios::container::SparseSet::custom allocator") {
-    SparseSet<int, size_t, TestAllocator<int>> set;
+  TEST_CASE("helios::container::SparseSet::custom memory resource") {
+    std::pmr::monotonic_buffer_resource resource;
+    SparseSet<int> set(&resource);
 
     set.Insert(10, 100);
     set.Insert(20, 200);
@@ -725,18 +707,18 @@ TEST_SUITE("helios::container::SparseSet") {
     CHECK_EQ(set.Get(10), 100);
     CHECK_EQ(set.Get(20), 200);
 
-    // Test TryGet with custom allocator
+    // Test TryGet with a custom memory resource
     auto* ptr = set.TryGet(10);
     REQUIRE(ptr != nullptr);
     CHECK_EQ(*ptr, 100);
     CHECK_EQ(set.TryGet(999), nullptr);
   }
 
-  TEST_CASE("helios::container::PmrSparseSet: works with memory_resource") {
+  TEST_CASE("helios::container::SparseSet: works with memory_resource") {
     std::byte buffer[1024];
     std::pmr::monotonic_buffer_resource resource(buffer, sizeof(buffer));
 
-    PmrSparseSet<int> set{&resource};
+    SparseSet<int> set{&resource};
     set.Insert(1, 100);
     set.Insert(2, 200);
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <helios/input/mouse.hpp>
+#include <helios/memory/temporary_storage.hpp>
 
 #include <format>
 #include <iterator>
@@ -54,18 +55,18 @@ constexpr void Cursor::ClearCustom() noexcept {
 /**
  * @brief Formats a cursor component using an output iterator.
  * @tparam It Output iterator type
- * @param cursor Cursor component
  * @param out Output iterator to write the formatted string to
+ * @param cursor Cursor component
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Cursor& cursor, It out) {
+inline It ToString(It out, const Cursor& cursor) {
   out = std::format_to(out, "Cursor{{icon={}", ToString(cursor.icon));
   out = std::format_to(out, ", dirty={}", cursor.dirty);
   if (cursor.custom.has_value()) {
     out = std::format_to(out, ", custom=");
-    out = ToString(*cursor.custom, out);
+    out = ToString(out, *cursor.custom);
   }
   return std::format_to(out, "}}");
 }
@@ -73,12 +74,26 @@ inline It ToString(const Cursor& cursor, It out) {
 /**
  * @brief Formats a cursor component as a string.
  * @param cursor Cursor component
- * @return Formatted cursor string
+ * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(const Cursor& cursor) {
   std::string result;
   result.reserve(128);
-  ToString(cursor, std::back_inserter(result));
+  ToString(std::back_inserter(result), cursor);
+  return result;
+}
+
+/**
+ * @brief Formats a cursor component as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param cursor Cursor component
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Cursor& cursor) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), cursor);
   return result;
 }
 
@@ -89,7 +104,7 @@ inline It ToString(const Cursor& cursor, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const Cursor& cursor) {
-  ToString(cursor, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), cursor);
   return os;
 }
 
@@ -104,7 +119,7 @@ struct formatter<helios::input::Cursor> {
   }
 
   static auto format(const helios::input::Cursor& cursor, format_context& ctx) {
-    return helios::input::ToString(cursor, ctx.out());
+    return helios::input::ToString(ctx.out(), cursor);
   }
 };
 

@@ -32,10 +32,4 @@
 #include <utility>
 #include <vector>
 
-#ifdef HELIOS_USE_STL_FLAT_MAP
-#include <flat_map>
-#else
-#include <boost/container/flat_map.hpp>
-#endif
-
 #include <concurrentqueue/moodycamel/concurrentqueue.h>

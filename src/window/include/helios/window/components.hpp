@@ -2,6 +2,7 @@
 
 #include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
+#include <helios/memory/temporary_storage.hpp>
 #include <helios/window/native_handle.hpp>
 #include <helios/window/properties.hpp>
 #include <helios/window/resources.hpp>
@@ -382,19 +383,19 @@ struct NativeHandleComponent {
 /**
  * @brief Formats a window component using an output iterator.
  * @tparam It Output iterator type
- * @param window Window component
  * @param out Output iterator to write the formatted string to
+ * @param window Window component
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Window& window, It out) {
+inline It ToString(It out, const Window& window) {
   out =
       std::format_to(out, "Window{{close_requested={}", window.close_requested);
   out = std::format_to(out, ", dirty_flags=");
-  out = ToString(window.dirty_flags, out);
+  out = ToString(out, window.dirty_flags);
   out = std::format_to(out, ", properties=");
-  out = ToString(window.properties, out);
+  out = ToString(out, window.properties);
   return std::format_to(out, "}}");
 }
 
@@ -406,7 +407,21 @@ inline It ToString(const Window& window, It out) {
 [[nodiscard]] inline std::string ToString(const Window& window) {
   std::string result;
   result.reserve(256);
-  ToString(window, std::back_inserter(result));
+  ToString(std::back_inserter(result), window);
+  return result;
+}
+
+/**
+ * @brief Formats a window component as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param window Window
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Window& window) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), window);
   return result;
 }
 
@@ -417,22 +432,22 @@ inline It ToString(const Window& window, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const Window& window) {
-  ToString(window, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), window);
   return os;
 }
 
 /**
  * @brief Formats a native handle component using an output iterator.
  * @tparam It Output iterator type
- * @param component Native handle component
  * @param out Output iterator to write the formatted string to
+ * @param component Native handle component
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const NativeHandleComponent& component, It out) {
+inline It ToString(It out, const NativeHandleComponent& component) {
   out = std::format_to(out, "NativeHandleComponent{{handle=");
-  out = ToString(component.handle, out);
+  out = ToString(out, component.handle);
   return std::format_to(out, "}}");
 }
 
@@ -445,7 +460,23 @@ inline It ToString(const NativeHandleComponent& component, It out) {
     const NativeHandleComponent& component) {
   std::string result;
   result.reserve(128);
-  ToString(component, std::back_inserter(result));
+  ToString(std::back_inserter(result), component);
+  return result;
+}
+
+/**
+ * @brief Formats a native handle component as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param component NativeHandleComponent
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const NativeHandleComponent& component) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), component);
   return result;
 }
 
@@ -457,7 +488,7 @@ inline It ToString(const NativeHandleComponent& component, It out) {
  */
 inline std::ostream& operator<<(std::ostream& os,
                                 const NativeHandleComponent& component) {
-  ToString(component, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), component);
   return os;
 }
 
@@ -473,7 +504,7 @@ struct formatter<helios::window::Window> {
 
   static auto format(const helios::window::Window& window,
                      format_context& ctx) {
-    return helios::window::ToString(window, ctx.out());
+    return helios::window::ToString(ctx.out(), window);
   }
 };
 
@@ -485,7 +516,7 @@ struct formatter<helios::window::NativeHandleComponent> {
 
   static auto format(const helios::window::NativeHandleComponent& component,
                      format_context& ctx) {
-    return helios::window::ToString(component, ctx.out());
+    return helios::window::ToString(ctx.out(), component);
   }
 };
 

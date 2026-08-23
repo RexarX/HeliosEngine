@@ -30,7 +30,6 @@ template <QueryArg... Args>
 struct SystemParamTraits<Query<Args...>> {
   using ParamType = Query<Args...>;
   using Split = details::QueryArgSplit<Args...>;
-  using Allocator = typename ParamType::allocator_type;
 
   static ParamType Make(World& world, SystemLocalData& data,
                         const AccessPolicy& /*policy*/) {

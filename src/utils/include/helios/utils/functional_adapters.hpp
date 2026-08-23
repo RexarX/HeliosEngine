@@ -2796,38 +2796,20 @@ public:
    * @details Use when you need ownership of the elements.
    * @return Vector containing copies of the window elements
    */
-  [[nodiscard]] constexpr auto Collect() const -> std::vector<value_type>
-    requires std::copy_constructible<value_type>;
-
-  /**
-   * @brief Collects the window elements into a vector with a custom allocator.
-   * @details Use when you need ownership of the elements with a specific
-   * allocator.
-   * @tparam Allocator Allocator type
-   * @param allocator Allocator to use for the vector
-   * @return Vector containing copies of the window elements
-   */
-  template <typename Allocator>
-    requires(!std::derived_from<std::remove_pointer_t<Allocator>,
-                                std::pmr::memory_resource>)
-  [[nodiscard]] constexpr auto CollectWith(Allocator allocator = {}) const
-      -> std::vector<value_type, Allocator>
+  [[nodiscard]] constexpr auto Collect() const -> std::pmr::vector<value_type>
     requires std::copy_constructible<value_type>;
 
   /**
    * @brief Collects the window elements into a vector with a specific memory
    * resource.
-   * @details Use when you need ownership of the elements with a specific
-   * memory resource.
    * @param resource Memory resource to use for the vector
    * @return Vector containing copies of the window elements
    */
-  [[nodiscard]] constexpr auto CollectWith(
+  [[nodiscard]] constexpr auto Collect(
       std::pmr::memory_resource* resource) const -> std::pmr::vector<value_type>
     requires std::copy_constructible<value_type>;
 
-  auto CollectWith(std::nullptr_t) const
-      -> std::pmr::vector<value_type> = delete;
+  auto Collect(std::nullptr_t) const -> std::pmr::vector<value_type> = delete;
 
   /**
    * @brief Accesses an element by index.
@@ -2892,37 +2874,14 @@ private:
 };
 
 template <IteratorLike Iter>
-constexpr auto SlideView<Iter>::Collect() const -> std::vector<value_type>
+constexpr auto SlideView<Iter>::Collect() const -> std::pmr::vector<value_type>
   requires std::copy_constructible<value_type>
 {
-  std::vector<value_type> result;
-  result.reserve(size_);
-  auto it = begin_;
-  for (size_t i = 0; i < size_; ++i) {
-    result.push_back(*it++);
-  }
-  return result;
+  return Collect(std::pmr::get_default_resource());
 }
 
 template <IteratorLike Iter>
-template <typename Allocator>
-  requires(!std::derived_from<std::remove_pointer_t<Allocator>,
-                              std::pmr::memory_resource>)
-constexpr auto SlideView<Iter>::CollectWith(Allocator allocator) const
-    -> std::vector<value_type, Allocator>
-  requires std::copy_constructible<value_type>
-{
-  std::vector<value_type, Allocator> result{std::move(allocator)};
-  result.reserve(size_);
-  auto it = begin_;
-  for (size_t i = 0; i < size_; ++i) {
-    result.push_back(*it++);
-  }
-  return result;
-}
-
-template <IteratorLike Iter>
-constexpr auto SlideView<Iter>::CollectWith(
+constexpr auto SlideView<Iter>::Collect(
     std::pmr::memory_resource* resource) const -> std::pmr::vector<value_type>
   requires std::copy_constructible<value_type>
 {
@@ -3012,7 +2971,7 @@ constexpr Iter SlideView<Iter>::end() const
  * auto windows = slide.Collect();  // Vector of SlideViews
  *
  * // Convert a window to vector if ownership needed
- * auto first_window = (*slide.begin()).Collect();  // std::vector<int>
+ * auto first_window = (*slide.begin()).Collect();  // std::pmr::vector<int>
  * @endcode
  */
 template <typename Iter>
@@ -3453,20 +3412,7 @@ public:
    * @brief Collects the chunk elements into a vector.
    * @return Vector containing copies of the chunk elements
    */
-  [[nodiscard]] constexpr auto Collect() const -> std::vector<value_type>
-    requires std::copy_constructible<value_type>;
-
-  /**
-   * @brief Collects the chunk elements into a vector with a custom allocator.
-   * @tparam Allocator Allocator type
-   * @param allocator Allocator to use for the vector
-   * @return Vector containing copies of the chunk elements
-   */
-  template <typename Allocator>
-    requires(!std::derived_from<std::remove_pointer_t<Allocator>,
-                                std::pmr::memory_resource>)
-  [[nodiscard]] constexpr auto CollectWith(Allocator allocator = {}) const
-      -> std::vector<value_type, Allocator>
+  [[nodiscard]] constexpr auto Collect() const -> std::pmr::vector<value_type>
     requires std::copy_constructible<value_type>;
 
   /**
@@ -3475,12 +3421,11 @@ public:
    * @param resource Memory resource to use for the vector
    * @return Vector containing copies of the chunk elements
    */
-  [[nodiscard]] constexpr auto CollectWith(
+  [[nodiscard]] constexpr auto Collect(
       std::pmr::memory_resource* resource) const -> std::pmr::vector<value_type>
     requires std::copy_constructible<value_type>;
 
-  auto CollectWith(std::nullptr_t) const
-      -> std::pmr::vector<value_type> = delete;
+  auto Collect(std::nullptr_t) const -> std::pmr::vector<value_type> = delete;
 
   /**
    * @brief Accesses an element by index.
@@ -3548,37 +3493,14 @@ private:
 };
 
 template <IteratorLike Iter>
-constexpr auto ChunkView<Iter>::Collect() const -> std::vector<value_type>
+constexpr auto ChunkView<Iter>::Collect() const -> std::pmr::vector<value_type>
   requires std::copy_constructible<value_type>
 {
-  std::vector<value_type> result;
-  result.reserve(size_);
-  auto it = begin_;
-  for (size_t i = 0; i < size_; ++i) {
-    result.push_back(*it++);
-  }
-  return result;
+  return Collect(std::pmr::get_default_resource());
 }
 
 template <IteratorLike Iter>
-template <typename Allocator>
-  requires(!std::derived_from<std::remove_pointer_t<Allocator>,
-                              std::pmr::memory_resource>)
-constexpr auto ChunkView<Iter>::CollectWith(Allocator allocator) const
-    -> std::vector<value_type, Allocator>
-  requires std::copy_constructible<value_type>
-{
-  std::vector<value_type, Allocator> result{std::move(allocator)};
-  result.reserve(size_);
-  auto it = begin_;
-  for (size_t i = 0; i < size_; ++i) {
-    result.push_back(*it++);
-  }
-  return result;
-}
-
-template <IteratorLike Iter>
-constexpr auto ChunkView<Iter>::CollectWith(
+constexpr auto ChunkView<Iter>::Collect(
     std::pmr::memory_resource* resource) const -> std::pmr::vector<value_type>
   requires std::copy_constructible<value_type>
 {
@@ -3652,7 +3574,7 @@ constexpr bool ChunkView<Iter>::operator==(const R& range) const {
  *   std::cout << "\n";
  * }
  *
- * auto owned = (*chunks.begin()).Collect();  // std::vector<int>
+ * auto owned = (*chunks.begin()).Collect();  // std::pmr::vector<int>
  * @endcode
  */
 template <typename Iter>
@@ -4350,21 +4272,23 @@ public:
    * second contains the rest
    */
   template <typename Pred>
-  [[nodiscard]] constexpr auto Partition(const Pred& predicate) const;
+  [[nodiscard]] constexpr auto Partition(const Pred& predicate) const {
+    return Partition(predicate, std::pmr::get_default_resource());
+  }
 
   /**
-   * @brief Terminal operation: partitions elements with a custom allocator.
+   * @brief Terminal operation: partitions elements with a memory resource.
    * @tparam Pred Predicate type
-   * @tparam Allocator Allocator for result vectors
    * @param predicate Function to test elements
-   * @param allocator Allocator to use for both result vectors
-   * @return Pair of vectors using the provided allocator
+   * @param resource Memory resource to use for both result vectors
+   * @return Pair of vectors using the provided memory resource
    */
-  template <typename Pred, typename Allocator>
-    requires std::same_as<typename Allocator::value_type,
-                          std::iter_value_t<Derived>>
-  [[nodiscard]] constexpr auto PartitionWith(const Pred& predicate,
-                                             Allocator allocator) const;
+  template <typename Pred>
+  [[nodiscard]] constexpr auto Partition(
+      const Pred& predicate, std::pmr::memory_resource* resource) const;
+
+  template <typename Pred>
+  auto Partition(const Pred&, std::nullptr_t) const = delete;
 
   /**
    * @brief Terminal operation: finds the element with the maximum value
@@ -4395,49 +4319,41 @@ public:
    * @return Map from keys to vectors of elements with that key
    */
   template <typename KeyFunc>
-  [[nodiscard]] constexpr auto GroupBy(const KeyFunc& key_func) const;
+  [[nodiscard]] constexpr auto GroupBy(const KeyFunc& key_func) const {
+    return GroupBy(key_func, std::pmr::get_default_resource());
+  }
 
   /**
-   * @brief Terminal operation: groups elements by key with custom allocators.
+   * @brief Terminal operation: groups elements by key with a memory resource.
    * @tparam KeyFunc Key extraction function type
-   * @tparam MapAllocator Allocator for unordered_map nodes
-   * @tparam ValueAllocator Allocator for grouped vectors
    * @param key_func Function to extract grouping key from each element
-   * @param map_allocator Allocator for map storage
-   * @param value_allocator Allocator for each grouped vector
-   * @return Map from keys to vectors using provided allocators
+   * @param resource Memory resource for map storage and grouped vectors
+   * @return Map from keys to vectors using the provided memory resource
    */
-  template <typename KeyFunc, typename MapAllocator, typename ValueAllocator>
-  [[nodiscard]] constexpr auto GroupByWith(
-      const KeyFunc& key_func, MapAllocator map_allocator,
-      ValueAllocator value_allocator) const;
+  template <typename KeyFunc>
+  [[nodiscard]] constexpr auto GroupBy(
+      const KeyFunc& key_func, std::pmr::memory_resource* resource) const;
+
+  template <typename KeyFunc>
+  auto GroupBy(const KeyFunc&, std::nullptr_t) const = delete;
 
   /**
    * @brief Terminal operation: collects all elements into a vector.
    * @return Vector containing all elements
    */
-  [[nodiscard]] constexpr auto Collect() const;
+  [[nodiscard]] constexpr auto Collect() const {
+    return Collect(std::pmr::get_default_resource());
+  }
 
   /**
-   * @brief Terminal operation: collects all elements into a vector with a
-   * custom allocator.
-   * @tparam Allocator Allocator type
-   * @param allocator Allocator to use for the vector
-   * @return Vector containing all elements
-   */
-  template <typename Allocator>
-  [[nodiscard]] constexpr auto CollectWith(Allocator allocator = {}) const;
-
-  /**
-   * @brief Terminal operation: collects all elements into a vector with a
-   * specific memory resource.
+   * @brief Terminal operation: collects all elements using a memory resource.
    * @param resource Memory resource to use for the vector
    * @return Vector containing all elements
    */
-  [[nodiscard]] constexpr auto CollectWith(
+  [[nodiscard]] constexpr auto Collect(
       std::pmr::memory_resource* resource) const;
 
-  auto CollectWith(std::nullptr_t) const = delete;
+  auto Collect(std::nullptr_t) const = delete;
 
   /**
    * @brief Terminal operation: writes all elements into an output iterator.
@@ -4449,8 +4365,7 @@ public:
    *
    * @code
    * std::vector<int> results;
-   * query.Filter([](int x) { return x > 5;
-   * }).Into(std::back_inserter(results));
+   * query.Filter([](int x) { return x > 5;}).Into(std::back_inserter(results));
    * @endcode
    */
   template <typename OutIt>
@@ -4587,38 +4502,10 @@ constexpr size_t FunctionalAdapterBase<Derived>::CountIf(
 template <typename Derived>
 template <typename Pred>
 constexpr auto FunctionalAdapterBase<Derived>::Partition(
-    const Pred& predicate) const {
+    const Pred& predicate, std::pmr::memory_resource* resource) const {
   using ValueType = std::iter_value_t<Derived>;
-  std::vector<ValueType> matched;
-  std::vector<ValueType> not_matched;
-
-  for (auto&& value : GetDerived()) {
-    bool result = false;
-    if constexpr (std::invocable<Pred, decltype(value)>) {
-      result = predicate(std::forward<decltype(value)>(value));
-    } else {
-      result = std::apply(predicate, std::forward<decltype(value)>(value));
-    }
-
-    if (result) {
-      matched.push_back(std::forward<decltype(value)>(value));
-    } else {
-      not_matched.push_back(std::forward<decltype(value)>(value));
-    }
-  }
-
-  return std::pair{std::move(matched), std::move(not_matched)};
-}
-
-template <typename Derived>
-template <typename Pred, typename Allocator>
-  requires std::same_as<typename Allocator::value_type,
-                        std::iter_value_t<Derived>>
-constexpr auto FunctionalAdapterBase<Derived>::PartitionWith(
-    const Pred& predicate, Allocator allocator) const {
-  using ValueType = std::iter_value_t<Derived>;
-  std::vector<ValueType, Allocator> matched(allocator);
-  std::vector<ValueType, Allocator> not_matched(std::move(allocator));
+  std::pmr::vector<ValueType> matched(resource);
+  std::pmr::vector<ValueType> not_matched(resource);
 
   for (auto&& value : GetDerived()) {
     bool result = false;
@@ -4744,43 +4631,12 @@ constexpr auto FunctionalAdapterBase<Derived>::MinBy(
 template <typename Derived>
 template <typename KeyFunc>
 constexpr auto FunctionalAdapterBase<Derived>::GroupBy(
-    const KeyFunc& key_func) const {
-  using ValueType = std::iter_value_t<Derived>;
-  using KeyType = std::decay_t<std::invoke_result_t<KeyFunc, ValueType>>;
-  std::unordered_map<KeyType, std::vector<ValueType>> groups;
-
-  for (auto&& value : GetDerived()) {
-    KeyType key;
-    if constexpr (std::invocable<KeyFunc, decltype(value)>) {
-      key = key_func(std::forward<decltype(value)>(value));
-    } else {
-      key = std::apply(key_func, std::forward<decltype(value)>(value));
-    }
-    groups[std::move(key)].push_back(std::forward<decltype(value)>(value));
-  }
-
-  return groups;
-}
-
-template <typename Derived>
-template <typename KeyFunc, typename MapAllocator, typename ValueAllocator>
-constexpr auto FunctionalAdapterBase<Derived>::GroupByWith(
-    const KeyFunc& key_func, MapAllocator map_allocator,
-    ValueAllocator value_allocator) const {
+    const KeyFunc& key_func, std::pmr::memory_resource* resource) const {
   using ValueType = std::iter_value_t<Derived>;
   using KeyType =
       std::decay_t<details::call_or_apply_result_t<const KeyFunc&, ValueType>>;
-  using GroupVector = std::vector<ValueType, ValueAllocator>;
-  using MapValueType = std::pair<const KeyType, GroupVector>;
-  static_assert(std::same_as<typename MapAllocator::value_type, MapValueType>,
-                "Map allocator value_type must match map value type");
-  static_assert(std::same_as<typename ValueAllocator::value_type, ValueType>,
-                "Value allocator value_type must match grouped element type");
-
-  std::unordered_map<KeyType, GroupVector, std::hash<KeyType>, std::equal_to<>,
-                     MapAllocator>
-      groups(0, std::hash<KeyType>{}, std::equal_to<>{},
-             std::move(map_allocator));
+  using GroupVector = std::pmr::vector<ValueType>;
+  std::pmr::unordered_map<KeyType, GroupVector> groups(resource);
 
   for (auto&& value : GetDerived()) {
     KeyType key;
@@ -4790,10 +4646,7 @@ constexpr auto FunctionalAdapterBase<Derived>::GroupByWith(
       key = std::apply(key_func, std::forward<decltype(value)>(value));
     }
 
-    auto [iter, inserted] = groups.try_emplace(std::move(key));
-    if (inserted) {
-      iter->second = GroupVector(value_allocator);
-    }
+    auto iter = groups.try_emplace(std::move(key)).first;
     iter->second.push_back(std::forward<decltype(value)>(value));
   }
 
@@ -4801,36 +4654,16 @@ constexpr auto FunctionalAdapterBase<Derived>::GroupByWith(
 }
 
 template <typename Derived>
-constexpr auto FunctionalAdapterBase<Derived>::Collect() const {
-  using ValueType = std::iter_value_t<Derived>;
-  std::vector<ValueType> result;
-  result.reserve(static_cast<size_t>(
-      std::distance(GetDerived().begin(), GetDerived().end())));
-  for (auto&& value : GetDerived()) {
-    result.push_back(std::forward<decltype(value)>(value));
-  }
-  return result;
-}
-
-template <typename Derived>
-template <typename Allocator>
-constexpr auto FunctionalAdapterBase<Derived>::CollectWith(
-    Allocator allocator) const {
-  using ValueType = std::iter_value_t<Derived>;
-  std::vector<ValueType, Allocator> result{std::move(allocator)};
-  result.reserve(static_cast<size_t>(
-      std::distance(GetDerived().begin(), GetDerived().end())));
-  for (auto&& value : GetDerived()) {
-    result.push_back(std::forward<decltype(value)>(value));
-  }
-  return result;
-}
-
-template <typename Derived>
-constexpr auto FunctionalAdapterBase<Derived>::CollectWith(
+constexpr auto FunctionalAdapterBase<Derived>::Collect(
     std::pmr::memory_resource* resource) const {
   using ValueType = std::iter_value_t<Derived>;
-  return CollectWith(std::pmr::polymorphic_allocator<ValueType>{resource});
+  std::pmr::vector<ValueType> result(resource);
+  result.reserve(static_cast<size_t>(
+      std::distance(GetDerived().begin(), GetDerived().end())));
+  for (auto&& value : GetDerived()) {
+    result.push_back(std::forward<decltype(value)>(value));
+  }
+  return result;
 }
 
 template <typename Derived>

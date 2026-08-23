@@ -5,9 +5,11 @@
 #include <algorithm>
 #include <array>
 #include <barrier>
+#include <concepts>
 #include <cstddef>
 #include <cstdint>
 #include <iterator>
+#include <memory_resource>
 #include <random>
 #include <thread>
 #include <unordered_set>
@@ -15,11 +17,54 @@
 
 using namespace helios::ecs;
 
+namespace {
+
+class CountingResource final : public std::pmr::memory_resource {
+public:
+  size_t bytes_allocated = 0;
+
+protected:
+  auto do_allocate(size_t bytes, size_t alignment) -> void* override {
+    bytes_allocated += bytes;
+    return std::pmr::new_delete_resource()->allocate(bytes, alignment);
+  }
+
+  void do_deallocate(void* ptr, size_t bytes, size_t alignment) override {
+    std::pmr::new_delete_resource()->deallocate(ptr, bytes, alignment);
+  }
+
+  [[nodiscard]] auto do_is_equal(
+      const std::pmr::memory_resource& other) const noexcept -> bool override {
+    return this == &other;
+  }
+};
+
+}  // namespace
+
 TEST_SUITE("helios::ecs::EntityManager") {
   TEST_CASE("helios::ecs::EntityManager::ctor") {
     SUBCASE("Default ctor") {
       const EntityManager manager;
       CHECK_EQ(manager.Count(), 0);
+      CHECK_EQ(manager.GetMemoryResource(), std::pmr::get_default_resource());
+    }
+
+    SUBCASE("Memory resource ctor") {
+      CountingResource resource;
+      EntityManager manager{&resource};
+
+      CHECK_EQ(manager.GetMemoryResource(), &resource);
+
+      std::vector<Entity> entities;
+      entities.reserve(256);
+      manager.Create(256, std::back_inserter(entities));
+
+      CHECK_EQ(manager.Count(), 256);
+      CHECK_GT(resource.bytes_allocated, 0);
+    }
+
+    SUBCASE("Nullptr ctor is deleted") {
+      CHECK_FALSE(std::constructible_from<EntityManager, std::nullptr_t>);
     }
 
     SUBCASE("Copy ctor") {
@@ -30,6 +75,18 @@ TEST_SUITE("helios::ecs::EntityManager") {
       const EntityManager copy(original);
 
       CHECK_EQ(copy.Count(), original.Count());
+      CHECK_EQ(copy.GetMemoryResource(), original.GetMemoryResource());
+    }
+
+    SUBCASE("Copy ctor preserves source memory resource") {
+      CountingResource resource;
+      EntityManager original{&resource};
+      const auto entity = original.Create();
+
+      const EntityManager copy(original);
+
+      CHECK_EQ(copy.GetMemoryResource(), &resource);
+      CHECK(copy.Validate(entity));
     }
 
     SUBCASE("Move ctor") {

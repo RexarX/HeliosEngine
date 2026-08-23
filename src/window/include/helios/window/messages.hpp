@@ -2,6 +2,7 @@
 
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/message/message.hpp>
+#include <helios/memory/temporary_storage.hpp>
 #include <helios/window/properties.hpp>
 #include <helios/window/resources.hpp>
 
@@ -329,15 +330,15 @@ struct MonitorDisconnectedMsg {
 /**
  * @brief Formats `CreatedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `CreatedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `CreatedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const CreatedMsg& msg, It out) {
+inline It ToString(It out, const CreatedMsg& msg) {
   out = std::format_to(out, "CreatedMsg{{entity={}, properties=", msg.entity);
-  out = ToString(msg.properties, out);
+  out = ToString(out, msg.properties);
   return std::format_to(out, "}}");
 }
 
@@ -349,7 +350,21 @@ inline It ToString(const CreatedMsg& msg, It out) {
 [[nodiscard]] inline std::string ToString(const CreatedMsg& msg) {
   std::string result;
   result.reserve(256);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `CreatedMsg` message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `CreatedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const CreatedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -360,20 +375,20 @@ inline It ToString(const CreatedMsg& msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const CreatedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `ClosedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg Closed message
  * @param out Output iterator to write the formatted string to
+ * @param msg Closed message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(ClosedMsg msg, It out) {
+inline It ToString(It out, ClosedMsg msg) {
   return std::format_to(out, "ClosedMsg{{entity={}}}", msg.entity);
 }
 
@@ -384,8 +399,22 @@ inline It ToString(ClosedMsg msg, It out) {
  */
 [[nodiscard]] inline std::string ToString(ClosedMsg msg) {
   std::string result;
-  result.reserve(32);
-  ToString(msg, std::back_inserter(result));
+  result.reserve(64);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `ClosedMsg` message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `ClosedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(ClosedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -396,20 +425,20 @@ inline It ToString(ClosedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, ClosedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `ResizedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `ResizedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `ResizedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(ResizedMsg msg, It out) {
+inline It ToString(It out, ResizedMsg msg) {
   return std::format_to(out, "ResizedMsg{{entity={}, width={}, height={}}}",
                         msg.entity, msg.width, msg.height);
 }
@@ -422,7 +451,21 @@ inline It ToString(ResizedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(ResizedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `ResizedMsg` message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `ResizedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(ResizedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -433,20 +476,20 @@ inline It ToString(ResizedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, ResizedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `ClientResizedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `ClientResizedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `ClientResizedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(ClientResizedMsg msg, It out) {
+inline It ToString(It out, ClientResizedMsg msg) {
   return std::format_to(out,
                         "ClientResizedMsg{{entity={}, width={}, height={}}}",
                         msg.entity, msg.width, msg.height);
@@ -460,7 +503,22 @@ inline It ToString(ClientResizedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(ClientResizedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `ClientResizedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `ClientResizedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(ClientResizedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -471,20 +529,20 @@ inline It ToString(ClientResizedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, ClientResizedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `ContentScaleChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `ContentScaleChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `ContentScaleChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(ContentScaleChangedMsg msg, It out) {
+inline It ToString(It out, ContentScaleChangedMsg msg) {
   return std::format_to(
       out, "ContentScaleChangedMsg{{entity={}, scale_x={}, scale_y={}}}",
       msg.entity, msg.scale_x, msg.scale_y);
@@ -498,7 +556,22 @@ inline It ToString(ContentScaleChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(ContentScaleChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `ContentScaleChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `ContentScaleChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(ContentScaleChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -509,20 +582,20 @@ inline It ToString(ContentScaleChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, ContentScaleChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `PosChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `PosChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `PosChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(PosChangedMsg msg, It out) {
+inline It ToString(It out, PosChangedMsg msg) {
   return std::format_to(out, "PosChangedMsg{{entity={}, x={}, y={}}}",
                         msg.entity, msg.x, msg.y);
 }
@@ -534,8 +607,23 @@ inline It ToString(PosChangedMsg msg, It out) {
  */
 [[nodiscard]] inline std::string ToString(PosChangedMsg msg) {
   std::string result;
-  result.reserve(64);
-  ToString(msg, std::back_inserter(result));
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `PosChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `PosChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(PosChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -546,20 +634,20 @@ inline It ToString(PosChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, PosChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `ModeChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `ModeChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `ModeChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(ModeChangedMsg msg, It out) {
+inline It ToString(It out, ModeChangedMsg msg) {
   return std::format_to(out, "ModeChangedMsg{{entity={}, mode={}}}", msg.entity,
                         ToString(msg.mode));
 }
@@ -572,7 +660,22 @@ inline It ToString(ModeChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(ModeChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `ModeChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `ModeChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(ModeChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -583,20 +686,20 @@ inline It ToString(ModeChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, ModeChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `CursorModeChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `CursorModeChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `CursorModeChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(CursorModeChangedMsg msg, It out) {
+inline It ToString(It out, CursorModeChangedMsg msg) {
   return std::format_to(out,
                         "CursorModeChangedMsg{{entity={}, cursor_mode={}}}",
                         msg.entity, ToString(msg.cursor_mode));
@@ -610,7 +713,22 @@ inline It ToString(CursorModeChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(CursorModeChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `CursorModeChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `CursorModeChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(CursorModeChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -621,20 +739,20 @@ inline It ToString(CursorModeChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, CursorModeChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `VisibilityChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `VisibilityChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `VisibilityChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(VisibilityChangedMsg msg, It out) {
+inline It ToString(It out, VisibilityChangedMsg msg) {
   return std::format_to(out, "VisibilityChangedMsg{{entity={}, visible={}}}",
                         msg.entity, msg.visible);
 }
@@ -647,7 +765,22 @@ inline It ToString(VisibilityChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(VisibilityChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `VisibilityChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `VisibilityChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(VisibilityChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -658,20 +791,20 @@ inline It ToString(VisibilityChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, VisibilityChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `FocusChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `FocusChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `FocusChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(FocusChangedMsg msg, It out) {
+inline It ToString(It out, FocusChangedMsg msg) {
   return std::format_to(out, "FocusChangedMsg{{entity={}, focused={}}}",
                         msg.entity, msg.focused);
 }
@@ -684,7 +817,22 @@ inline It ToString(FocusChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(FocusChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `FocusChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `FocusChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(FocusChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -695,20 +843,20 @@ inline It ToString(FocusChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, FocusChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `MaximizedChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `MaximizedChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `MaximizedChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(MaximizedChangedMsg msg, It out) {
+inline It ToString(It out, MaximizedChangedMsg msg) {
   return std::format_to(out, "MaximizedChangedMsg{{entity={}, maximized={}}}",
                         msg.entity, msg.maximized);
 }
@@ -721,7 +869,22 @@ inline It ToString(MaximizedChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(MaximizedChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `MaximizedChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `MaximizedChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(MaximizedChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -732,20 +895,20 @@ inline It ToString(MaximizedChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, MaximizedChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `IconChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `IconChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `IconChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const IconChangedMsg& msg, It out) {
+inline It ToString(It out, const IconChangedMsg& msg) {
   return std::format_to(out, "IconChangedMsg{{entity={}, icons={}}}",
                         msg.entity, msg.icons.size());
 }
@@ -758,7 +921,22 @@ inline It ToString(const IconChangedMsg& msg, It out) {
 [[nodiscard]] inline std::string ToString(const IconChangedMsg& msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `IconChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `IconChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const IconChangedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -769,20 +947,20 @@ inline It ToString(const IconChangedMsg& msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const IconChangedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `ResizableChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `ResizableChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `ResizableChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(ResizableChangedMsg msg, It out) {
+inline It ToString(It out, ResizableChangedMsg msg) {
   return std::format_to(out, "ResizableChangedMsg{{entity={}, resizable={}}}",
                         msg.entity, msg.resizable);
 }
@@ -795,7 +973,22 @@ inline It ToString(ResizableChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(ResizableChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `ResizableChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `ResizableChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(ResizableChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -806,20 +999,20 @@ inline It ToString(ResizableChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, ResizableChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `DecoratedChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `DecoratedChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `DecoratedChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(DecoratedChangedMsg msg, It out) {
+inline It ToString(It out, DecoratedChangedMsg msg) {
   return std::format_to(out, "DecoratedChangedMsg{{entity={}, decorated={}}}",
                         msg.entity, msg.decorated);
 }
@@ -832,7 +1025,22 @@ inline It ToString(DecoratedChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(DecoratedChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a DecoratedChanged message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `DecoratedChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(DecoratedChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -843,20 +1051,20 @@ inline It ToString(DecoratedChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, DecoratedChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `OpacityChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `OpacityChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `OpacityChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(OpacityChangedMsg msg, It out) {
+inline It ToString(It out, OpacityChangedMsg msg) {
   return std::format_to(out, "OpacityChangedMsg{{entity={}, opacity={}}}",
                         msg.entity, msg.opacity);
 }
@@ -869,7 +1077,22 @@ inline It ToString(OpacityChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(OpacityChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `OpacityChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `OpacityChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(OpacityChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -880,20 +1103,20 @@ inline It ToString(OpacityChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, OpacityChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `FloatingChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `FloatingChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `FloatingChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(FloatingChangedMsg msg, It out) {
+inline It ToString(It out, FloatingChangedMsg msg) {
   return std::format_to(out, "FloatingChangedMsg{{entity={}, floating={}}}",
                         msg.entity, msg.floating);
 }
@@ -906,7 +1129,22 @@ inline It ToString(FloatingChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(FloatingChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `FloatingChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `FloatingChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(FloatingChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -917,20 +1155,20 @@ inline It ToString(FloatingChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, FloatingChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `HoverChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `HoverChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `HoverChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(HoverChangedMsg msg, It out) {
+inline It ToString(It out, HoverChangedMsg msg) {
   return std::format_to(out, "HoverChangedMsg{{entity={}, hovered={}}}",
                         msg.entity, msg.hovered);
 }
@@ -943,7 +1181,22 @@ inline It ToString(HoverChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(HoverChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `HoverChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `HoverChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(HoverChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -954,20 +1207,20 @@ inline It ToString(HoverChangedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, HoverChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `MousePassthroughChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `MousePassthroughChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `MousePassthroughChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(MousePassthroughChangedMsg msg, It out) {
+inline It ToString(It out, MousePassthroughChangedMsg msg) {
   return std::format_to(
       out, "MousePassthroughChangedMsg{{entity={}, mouse_passthrough={}}}",
       msg.entity, msg.mouse_passthrough);
@@ -981,7 +1234,23 @@ inline It ToString(MousePassthroughChangedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(MousePassthroughChangedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `MousePassthroughChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `MousePassthroughChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    MousePassthroughChangedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -993,20 +1262,20 @@ inline It ToString(MousePassthroughChangedMsg msg, It out) {
  */
 inline std::ostream& operator<<(std::ostream& os,
                                 MousePassthroughChangedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `ClipboardChangedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `ClipboardChangedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `ClipboardChangedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const ClipboardChangedMsg& msg, It out) {
+inline It ToString(It out, const ClipboardChangedMsg& msg) {
   return std::format_to(out, "ClipboardChangedMsg{{text=\"{}\"}}", msg.text);
 }
 
@@ -1018,7 +1287,23 @@ inline It ToString(const ClipboardChangedMsg& msg, It out) {
 [[nodiscard]] inline std::string ToString(const ClipboardChangedMsg& msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `ClipboardChangedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `ClipboardChangedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const ClipboardChangedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -1030,20 +1315,20 @@ inline It ToString(const ClipboardChangedMsg& msg, It out) {
  */
 inline std::ostream& operator<<(std::ostream& os,
                                 const ClipboardChangedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `DroppedFilesMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `DroppedFilesMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `DroppedFilesMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const DroppedFilesMsg& msg, It out) {
+inline It ToString(It out, const DroppedFilesMsg& msg) {
   out = std::format_to(out, "DroppedFilesMsg{{entity={}, paths=[", msg.entity);
   bool first = true;
   for (const std::string& path : msg.paths) {
@@ -1064,7 +1349,22 @@ inline It ToString(const DroppedFilesMsg& msg, It out) {
 [[nodiscard]] inline std::string ToString(const DroppedFilesMsg& msg) {
   std::string result;
   result.reserve(256);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `DroppedFilesMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `DroppedFilesMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const DroppedFilesMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -1075,20 +1375,20 @@ inline It ToString(const DroppedFilesMsg& msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const DroppedFilesMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `MonitorConnectedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `MonitorConnectedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `MonitorConnectedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(MonitorConnectedMsg msg, It out) {
+inline It ToString(It out, MonitorConnectedMsg msg) {
   return std::format_to(out, "MonitorConnectedMsg{{index={}}}", msg.index);
 }
 
@@ -1100,7 +1400,22 @@ inline It ToString(MonitorConnectedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(MonitorConnectedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `MonitorConnectedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `MonitorConnectedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(MonitorConnectedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -1111,20 +1426,20 @@ inline It ToString(MonitorConnectedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, MonitorConnectedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `MonitorDisconnectedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `MonitorDisconnectedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `MonitorDisconnectedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(MonitorDisconnectedMsg msg, It out) {
+inline It ToString(It out, MonitorDisconnectedMsg msg) {
   return std::format_to(out, "MonitorConnectedMsg{{index={}}}", msg.index);
 }
 
@@ -1136,7 +1451,22 @@ inline It ToString(MonitorDisconnectedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(MonitorDisconnectedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `MonitorDisconnectedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `MonitorDisconnectedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(MonitorDisconnectedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -1147,20 +1477,20 @@ inline It ToString(MonitorDisconnectedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, MonitorDisconnectedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `CloseRequestedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `CloseRequestedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `CloseRequestedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(CloseRequestedMsg msg, It out) {
+inline It ToString(It out, CloseRequestedMsg msg) {
   return std::format_to(out, "CloseRequestedMsg{{entity={}}}", msg.entity);
 }
 
@@ -1172,7 +1502,22 @@ inline It ToString(CloseRequestedMsg msg, It out) {
 [[nodiscard]] inline std::string ToString(CloseRequestedMsg msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `CloseRequestedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `CloseRequestedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(CloseRequestedMsg msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -1183,20 +1528,20 @@ inline It ToString(CloseRequestedMsg msg, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, CloseRequestedMsg msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
 /**
  * @brief Formats `CreationFailedMsg` message using an output iterator.
  * @tparam It Output iterator type
- * @param msg `CreationFailedMsg` message
  * @param out Output iterator to write the formatted string to
+ * @param msg `CreationFailedMsg` message
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const CreationFailedMsg& msg, It out) {
+inline It ToString(It out, const CreationFailedMsg& msg) {
   return std::format_to(out, "CreationFailedMsg{{entity={}, reason=\"{}\"}}",
                         msg.entity, msg.reason);
 }
@@ -1209,7 +1554,23 @@ inline It ToString(const CreationFailedMsg& msg, It out) {
 [[nodiscard]] inline std::string ToString(const CreationFailedMsg& msg) {
   std::string result;
   result.reserve(128);
-  ToString(msg, std::back_inserter(result));
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a `CreationFailedMsg` message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param msg `CreationFailedMsg` message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const CreationFailedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
   return result;
 }
 
@@ -1221,7 +1582,7 @@ inline It ToString(const CreationFailedMsg& msg, It out) {
  */
 inline std::ostream& operator<<(std::ostream& os,
                                 const CreationFailedMsg& msg) {
-  ToString(msg, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
@@ -1237,7 +1598,7 @@ struct formatter<helios::window::CreatedMsg> {
 
   static auto format(const helios::window::CreatedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1249,7 +1610,7 @@ struct formatter<helios::window::ClosedMsg> {
 
   static auto format(const helios::window::ClosedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1261,7 +1622,7 @@ struct formatter<helios::window::ResizedMsg> {
 
   static auto format(const helios::window::ResizedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1273,7 +1634,7 @@ struct formatter<helios::window::ClientResizedMsg> {
 
   static auto format(const helios::window::ClientResizedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1285,7 +1646,7 @@ struct formatter<helios::window::ContentScaleChangedMsg> {
 
   static auto format(const helios::window::ContentScaleChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1297,7 +1658,7 @@ struct formatter<helios::window::PosChangedMsg> {
 
   static auto format(const helios::window::PosChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1309,7 +1670,7 @@ struct formatter<helios::window::ModeChangedMsg> {
 
   static auto format(const helios::window::ModeChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1321,7 +1682,7 @@ struct formatter<helios::window::CursorModeChangedMsg> {
 
   static auto format(const helios::window::CursorModeChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1333,7 +1694,7 @@ struct formatter<helios::window::VisibilityChangedMsg> {
 
   static auto format(const helios::window::VisibilityChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1345,7 +1706,7 @@ struct formatter<helios::window::FocusChangedMsg> {
 
   static auto format(const helios::window::FocusChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1357,7 +1718,7 @@ struct formatter<helios::window::MaximizedChangedMsg> {
 
   static auto format(const helios::window::MaximizedChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1369,7 +1730,7 @@ struct formatter<helios::window::IconChangedMsg> {
 
   static auto format(const helios::window::IconChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1381,7 +1742,7 @@ struct formatter<helios::window::ResizableChangedMsg> {
 
   static auto format(const helios::window::ResizableChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1393,7 +1754,7 @@ struct formatter<helios::window::DecoratedChangedMsg> {
 
   static auto format(const helios::window::DecoratedChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1405,7 +1766,7 @@ struct formatter<helios::window::OpacityChangedMsg> {
 
   static auto format(const helios::window::OpacityChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1417,7 +1778,7 @@ struct formatter<helios::window::FloatingChangedMsg> {
 
   static auto format(const helios::window::FloatingChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1429,7 +1790,7 @@ struct formatter<helios::window::HoverChangedMsg> {
 
   static auto format(const helios::window::HoverChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1441,7 +1802,7 @@ struct formatter<helios::window::MousePassthroughChangedMsg> {
 
   static auto format(const helios::window::MousePassthroughChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1453,7 +1814,7 @@ struct formatter<helios::window::ClipboardChangedMsg> {
 
   static auto format(const helios::window::ClipboardChangedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1465,7 +1826,7 @@ struct formatter<helios::window::DroppedFilesMsg> {
 
   static auto format(const helios::window::DroppedFilesMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1477,7 +1838,7 @@ struct formatter<helios::window::CloseRequestedMsg> {
 
   static auto format(const helios::window::CloseRequestedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1489,7 +1850,7 @@ struct formatter<helios::window::CreationFailedMsg> {
 
   static auto format(const helios::window::CreationFailedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1501,7 +1862,7 @@ struct formatter<helios::window::MonitorConnectedMsg> {
 
   static auto format(const helios::window::MonitorConnectedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 
@@ -1513,7 +1874,7 @@ struct formatter<helios::window::MonitorDisconnectedMsg> {
 
   static auto format(const helios::window::MonitorDisconnectedMsg& msg,
                      format_context& ctx) {
-    return helios::window::ToString(msg, ctx.out());
+    return helios::window::ToString(ctx.out(), msg);
   }
 };
 

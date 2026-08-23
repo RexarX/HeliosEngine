@@ -22,6 +22,7 @@ helios_module(
     DEPENDS
         PUBLIC app
         PUBLIC ecs
+        PUBLIC memory
 
     TEST_SOURCES
         tests/components.cpp

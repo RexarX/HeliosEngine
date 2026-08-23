@@ -11,8 +11,18 @@
 
 #include <cstddef>
 #include <functional>
+#include <memory_resource>
 
 namespace helios::ecs {
+
+ComponentManager::ComponentManager(std::pmr::memory_resource* resource)
+    : resource_(resource),
+      metadata_(resource),
+      archetype_storage_(resource),
+      archetype_map_(resource),
+      archetype_list_(resource),
+      entity_archetype_(resource),
+      sparse_storages_(resource) {}
 
 void ComponentManager::Clear() {
   entity_archetype_.clear();
@@ -20,7 +30,7 @@ void ComponentManager::Clear() {
   archetype_list_.clear();
   archetype_storage_.clear();
   sparse_storages_.ResetAll();
-  metadata_.clear();
+  metadata_.Clear();
   empty_archetype_ = nullptr;
   structural_version_ = 0;
 }
@@ -30,7 +40,7 @@ void ComponentManager::ClearData() noexcept {
   archetype_map_.clear();
   archetype_list_.clear();
   archetype_storage_.clear();
-  for (auto&& [type_index, entry] : sparse_storages_.Data()) {
+  for (auto& [type_index, entry] : sparse_storages_.Data()) {
     entry.Clear();
   }
   empty_archetype_ = nullptr;
@@ -54,7 +64,7 @@ void ComponentManager::RemoveEntity(Entity entity) {
   entity_archetype_.erase(it);
 
   // Remove from all sparse storages.
-  for (auto&& [type_index, entry] : sparse_storages_.Data()) {
+  for (auto& [type_index, entry] : sparse_storages_.Data()) {
     entry.TryRemove(entity);
   }
 }
@@ -74,7 +84,7 @@ bool ComponentManager::TryRemoveEntity(Entity entity) {
   }
   entity_archetype_.erase(it);
 
-  for (auto&& [type_index, entry] : sparse_storages_.Data()) {
+  for (auto& [type_index, entry] : sparse_storages_.Data()) {
     entry.TryRemove(entity);
   }
   return true;
@@ -104,7 +114,7 @@ void ComponentManager::Clear(Entity entity) {
   }
 
   // Remove from all sparse storages.
-  for (auto&& [type_index, entry] : sparse_storages_.Data()) {
+  for (auto& [type_index, entry] : sparse_storages_.Data()) {
     entry.TryRemove(entity);
   }
 }
@@ -120,13 +130,11 @@ Archetype& ComponentManager::GetOrCreateArchetype(const ArchetypeId& id) {
   }
 
   // Create archetype in the stable deque storage.
-  archetype_storage_.emplace_back(id);
+  archetype_storage_.emplace_back(id, resource_);
   Archetype& archetype = archetype_storage_.back();
 
   // Create record referencing the archetype.
-  archetype_map_.emplace(hash, ArchetypeRecord{.archetype = std::ref(archetype),
-                                               .add_edges = {},
-                                               .remove_edges = {}});
+  archetype_map_.emplace(hash, ArchetypeRecord(archetype, resource_));
 
   // Initialize columns with type info from metadata.
   InitArchetypeColumns(archetype);
@@ -137,7 +145,7 @@ Archetype& ComponentManager::GetOrCreateArchetype(const ArchetypeId& id) {
 
 void ComponentManager::InitArchetypeColumns(Archetype& archetype) {
   for (const auto type_index : archetype.Id().Types()) {
-    const auto meta_it = metadata_.find(type_index);
+    const auto meta_it = metadata_.Find(type_index);
     if (meta_it == metadata_.end()) {
       continue;
     }
@@ -174,7 +182,7 @@ void ComponentManager::MigrateEntity(Entity entity, Archetype& src,
       continue;
     }
 
-    const auto meta_it = metadata_.find(type_index);
+    const auto meta_it = metadata_.Find(type_index);
     HELIOS_ASSERT(meta_it != metadata_.end(),
                   "Component metadata not registered for a column in target "
                   "archetype!");
@@ -210,20 +218,6 @@ void ComponentManager::MigrateEntity(Entity entity, Archetype& src,
   ++structural_version_;
 }
 
-Archetype* ComponentManager::TryGetAddEdge(Archetype& from,
-                                           ComponentTypeIndex type) {
-  auto& record = GetRecord(from);
-  const auto it = record.add_edges.find(type);
-  return (it != record.add_edges.end()) ? &it->second.get() : nullptr;
-}
-
-Archetype* ComponentManager::TryGetRemoveEdge(Archetype& from,
-                                              ComponentTypeIndex type) {
-  auto& record = GetRecord(from);
-  const auto it = record.remove_edges.find(type);
-  return (it != record.remove_edges.end()) ? &it->second.get() : nullptr;
-}
-
 auto ComponentManager::GetRecord(Archetype& archetype) -> ArchetypeRecord& {
   const size_t hash = archetype.Id().Hash();
   const auto it = archetype_map_.find(hash);
@@ -237,6 +231,20 @@ auto ComponentManager::GetRecord(const Archetype& archetype) const
   const auto it = archetype_map_.find(hash);
   HELIOS_ASSERT(it != archetype_map_.end(), "Archetype record not found!");
   return it->second;
+}
+
+Archetype* ComponentManager::TryGetAddEdge(Archetype& from,
+                                           ComponentTypeIndex type) {
+  auto& record = GetRecord(from);
+  const auto it = record.add_edges.Find(type);
+  return (it != record.add_edges.end()) ? &it->second.get() : nullptr;
+}
+
+Archetype* ComponentManager::TryGetRemoveEdge(Archetype& from,
+                                              ComponentTypeIndex type) {
+  auto& record = GetRecord(from);
+  const auto it = record.remove_edges.Find(type);
+  return (it != record.remove_edges.end()) ? &it->second.get() : nullptr;
 }
 
 }  // namespace helios::ecs

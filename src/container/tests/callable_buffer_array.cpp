@@ -161,8 +161,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
 
   TEST_CASE(
       "helios::container::CallableBufferArray::ctor: allocator construction") {
-    std::allocator<std::byte> alloc;
-    CallableBufferArray<std::allocator<std::byte>, void()> arr(alloc);
+    std::pmr::monotonic_buffer_resource resource;
+    CallableBufferArray<void()> arr(&resource);
 
     CHECK(arr.Empty());
     CHECK_EQ(arr.Size(), 0);
@@ -477,14 +477,36 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     CHECK_GE(arr.CapacityBytes(), 1024);
   }
 
+  TEST_CASE(
+      "helios::container::CallableBufferArray::ShrinkToFit: reduces capacity") {
+    InvocationTracker::Reset();
+
+    CallableBufferArray<void()> arr;
+    arr.ReserveBytes(4096);
+    arr.Push(SimpleCallable{1});
+    arr.Push(NonTrivialCallable{"shrink", 2});
+
+    CHECK_GE(arr.CapacityBytes(), 4096);
+    arr.ShrinkToFit();
+    CHECK_LT(arr.CapacityBytes(), 4096);
+    CHECK_EQ(arr.Size(), 2);
+
+    arr.Invoke();
+    CHECK_EQ(InvocationTracker::call_order.size(), 2);
+    CHECK_EQ(InvocationTracker::call_order[0], 1);
+    CHECK_EQ(InvocationTracker::call_order[1], 2);
+  }
+
   TEST_CASE("helios::container::CallableBufferArray::Swap: swaps two arrays") {
     InvocationTracker::Reset();
 
-    CallableBufferArray<void()> arr1;
+    std::pmr::monotonic_buffer_resource first_resource;
+    std::pmr::monotonic_buffer_resource second_resource;
+    CallableBufferArray<void()> arr1(&first_resource);
     arr1.Push(SimpleCallable{1});
     arr1.Push(SimpleCallable{2});
 
-    CallableBufferArray<void()> arr2;
+    CallableBufferArray<void()> arr2(&second_resource);
     arr2.Push(SimpleCallable{10});
 
     arr1.Swap(arr2);
@@ -605,10 +627,12 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     SUBCASE("non-trivial callables are properly relocated") {
       InvocationTracker::Reset();
 
-      CallableBufferArray<void()> arr1;
+      std::pmr::monotonic_buffer_resource first_resource;
+      std::pmr::monotonic_buffer_resource second_resource;
+      CallableBufferArray<void()> arr1(&first_resource);
       arr1.Push(NonTrivialCallable{"first", 1});
 
-      CallableBufferArray<void()> arr2;
+      CallableBufferArray<void()> arr2(&second_resource);
       arr2.Push(NonTrivialCallable{"second", 2});
 
       arr1.Merge(std::move(arr2));
@@ -629,8 +653,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
       std::pmr::monotonic_buffer_resource resource(storage.data(),
                                                    storage.size());
 
-      PmrCallableBufferArray<void()> dest{&resource};
-      PmrCallableBufferArray<void()> src{&resource};
+      CallableBufferArray<void()> dest{&resource};
+      CallableBufferArray<void()> src{&resource};
       for (int i = 0; i < 8; ++i) {
         src.Push(NonTrivialCallable{std::string(32, 'a'), i});
       }
@@ -654,10 +678,10 @@ TEST_SUITE("helios::container::CallableBufferArray") {
       std::pmr::monotonic_buffer_resource resource(storage.data(),
                                                    storage.size());
 
-      PmrCallableBufferArray<void()> dest{&resource};
+      CallableBufferArray<void()> dest{&resource};
       dest.Push(NonTrivialCallable{"dest", 100});
 
-      PmrCallableBufferArray<void()> src{&resource};
+      CallableBufferArray<void()> src{&resource};
       for (int i = 0; i < 8; ++i) {
         src.Push(NonTrivialCallable{std::string(32, 'b'), i});
       }
@@ -711,13 +735,12 @@ TEST_SUITE("helios::container::CallableBufferArray") {
   }
 
   TEST_CASE(
-      "helios::container::CallableBufferArray::GetAllocator: returns "
-      "allocator") {
-    std::allocator<std::byte> alloc;
-    CallableBufferArray<std::allocator<std::byte>, void()> arr(alloc);
+      "helios::container::CallableBufferArray::GetMemoryResource: returns "
+      "resource") {
+    std::pmr::monotonic_buffer_resource resource;
+    CallableBufferArray<void()> arr(&resource);
 
-    auto retrieved = arr.GetAllocator();
-    CHECK(retrieved == alloc);
+    CHECK_EQ(arr.GetMemoryResource(), &resource);
   }
 
   TEST_CASE(
@@ -793,11 +816,12 @@ TEST_SUITE("helios::container::CallableBufferArray") {
   }
 
   TEST_CASE(
-      "container::CallableBufferArray::alias deduction: allocator + multiple "
+      "container::CallableBufferArray::resource construction with multiple "
       "signatures") {
     InvocationTracker::Reset();
 
-    CallableBufferArray<std::allocator<std::byte>, void(), void(int)> arr;
+    std::pmr::monotonic_buffer_resource resource;
+    CallableBufferArray<void(), void(int)> arr(&resource);
     arr.Push(MultiSignatureCallable{5});
 
     arr.template Invoke<0>();
@@ -806,11 +830,19 @@ TEST_SUITE("helios::container::CallableBufferArray") {
   }
 
   TEST_CASE(
-      "helios::container::PmrCallableBufferArray: works with memory_resource") {
+      "helios::container::CallableBufferArray::Clear: empty array is safe") {
+    auto* resource = std::pmr::get_default_resource();
+    CallableBufferArray<void()> arr{resource};
+    CHECK_NOTHROW(arr.Clear());
+    CHECK(arr.Empty());
+  }
+
+  TEST_CASE(
+      "helios::container::CallableBufferArray: works with memory_resource") {
     InvocationTracker::Reset();
 
     auto* resource = std::pmr::get_default_resource();
-    PmrCallableBufferArray<void()> arr{resource};
+    CallableBufferArray<void()> arr{resource};
     arr.Push(SimpleCallable{7});
     arr.Invoke();
 

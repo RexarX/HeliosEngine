@@ -102,15 +102,15 @@ void Scheduler::Build(App& app) {
   shutdown_graph_.Clear();
   sub_app_states_.clear();
 
-  if (app.sub_apps_.empty()) {
+  if (app.sub_apps_.Empty()) {
     return;
   }
 
-  sub_app_states_.reserve(app.sub_apps_.size());
+  sub_app_states_.reserve(app.sub_apps_.Size());
 
-  for (auto&& [index, sub_app] : app.sub_apps_) {
+  for (auto& [index, sub_app] : app.sub_apps_) {
     sub_app.SetOwnerApp(app);
-    sub_app_states_.push_back(SubAppFrameState{
+    sub_app_states_.push_back({
         .sub_app = sub_app,
         .mode = ClassifySubApp(sub_app),
     });
@@ -124,7 +124,7 @@ void Scheduler::Build(App& app) {
     });
   }
 
-  for (auto&& [index, sub_app] : app.sub_apps_) {
+  for (auto& [index, sub_app] : app.sub_apps_) {
     if (ClassifySubApp(sub_app) != SubAppMode::kBlocking) {
       continue;
     }
@@ -142,7 +142,7 @@ void Scheduler::RunStartup(App& app) {
 
   RunMainStartup(main, executor);
 
-  if (!app.sub_apps_.empty()) {
+  if (!app.sub_apps_.Empty()) {
     executor.Run(startup_graph_).Wait();
     StartAsyncUpdateLoops(app);
   }
@@ -235,7 +235,7 @@ void Scheduler::Shutdown(App& app) {
     state.sub_app.get().WaitUntilFullyIdle();
   }
 
-  if (!app.sub_apps_.empty()) {
+  if (!app.sub_apps_.Empty()) {
     executor.Run(shutdown_graph_).Wait();
   }
 
@@ -243,7 +243,7 @@ void Scheduler::Shutdown(App& app) {
 }
 
 void Scheduler::StopAsyncLoops(App& app) {
-  for (auto&& [index, sub_app] : app.sub_apps_) {
+  for (auto& [index, sub_app] : app.sub_apps_) {
     if (sub_app.IsAsync()) {
       sub_app.RequestAsyncLoopStop();
     }
@@ -272,7 +272,7 @@ void Scheduler::RunMainShutdown(SubApp& main, async::Executor& executor) {
 }
 
 void Scheduler::LaunchSubAppUpdates(App& app) {
-  if (app.sub_apps_.empty()) {
+  if (app.sub_apps_.Empty()) {
     return;
   }
 
@@ -299,7 +299,7 @@ void Scheduler::LaunchSubAppUpdates(App& app) {
 void Scheduler::StartAsyncUpdateLoops(App& app) {
   auto& executor = app.GetExecutor();
 
-  for (auto&& [index, sub_app] : app.sub_apps_) {
+  for (auto& [index, sub_app] : app.sub_apps_) {
     if (!sub_app.IsAsync()) {
       continue;
     }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <helios/assert.hpp>
-#include <helios/compiler/compiler.hpp>
+#include <helios/container/flat_map.hpp>
 #include <helios/ecs/message/message.hpp>
 
 #include <concurrentqueue/moodycamel/concurrentqueue.h>
@@ -11,15 +11,8 @@
 #include <cstddef>
 #include <iterator>
 #include <limits>
-#include <memory>
 #include <ranges>
 #include <utility>
-
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-#include <flat_map>
-#else
-#include <boost/container/flat_map.hpp>
-#endif
 
 namespace helios::ecs {
 
@@ -352,7 +345,7 @@ public:
 
   /// @brief Resets the queue by clearing all messages and unregistering all
   /// message types.
-  void Reset() noexcept { messages_.clear(); }
+  void Reset() noexcept { messages_.Clear(); }
 
   /**
    * @brief Resets the queue by clearing and unregistering a specific message
@@ -361,7 +354,7 @@ public:
    */
   template <AsyncMessageTrait T>
   void Reset() noexcept {
-    messages_.erase(MessageTypeIndex::From<T>());
+    messages_.Erase(MessageTypeIndex::From<T>());
   }
 
   /**
@@ -455,7 +448,7 @@ public:
    */
   template <AsyncMessageTrait T>
   [[nodiscard]] bool IsRegistered() const noexcept {
-    return messages_.contains(MessageTypeIndex::From<T>());
+    return messages_.Contains(MessageTypeIndex::From<T>());
   }
 
   /**
@@ -482,7 +475,7 @@ public:
    * @return Number of distinct message types
    */
   [[nodiscard]] size_type TypeCount() const noexcept {
-    return messages_.size();
+    return messages_.Size();
   }
 
   /**
@@ -519,36 +512,29 @@ public:
       -> const TypedAsyncMessageStorage<T>&;
 
 private:
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-  using MessageStorage =
-      std::flat_map<MessageTypeIndex,
-                    std::unique_ptr<details::AsyncMessageStorage>>;
-#else
-  using MessageStorage =
-      boost::container::flat_map<MessageTypeIndex,
-                                 std::unique_ptr<details::AsyncMessageStorage>>;
-#endif
-
-  MessageStorage messages_;  ///< Storage for async messages of different types
+  /// Storage for async messages of different types
+  container::FlatMap<MessageTypeIndex,
+                     std::unique_ptr<details::AsyncMessageStorage>>
+      messages_;
 };
 
 template <AsyncMessageTrait T>
 inline void AsyncMessageQueue::Register() {
   if (!IsRegistered<T>()) [[likely]] {
-    messages_.emplace(MessageTypeIndex::From<T>(),
+    messages_.Emplace(MessageTypeIndex::From<T>(),
                       std::make_unique<TypedAsyncMessageStorage<T>>());
   }
 }
 
 inline void AsyncMessageQueue::Clear() {
-  for (auto&& [_, storage] : messages_) {
+  for (auto& [_, storage] : messages_) {
     storage->Clear();
   }
 }
 
 template <AsyncMessageTrait T>
 inline void AsyncMessageQueue::Clear() {
-  const auto it = messages_.find(MessageTypeIndex::From<T>());
+  const auto it = messages_.Find(MessageTypeIndex::From<T>());
   if (it == messages_.end()) [[unlikely]] {
     return;
   }
@@ -576,7 +562,7 @@ inline void AsyncMessageQueue::EnqueueBulk(
 
 template <AsyncMessageTrait T>
 inline bool AsyncMessageQueue::HasMessages() const noexcept {
-  const auto it = messages_.find(MessageTypeIndex::From<T>());
+  const auto it = messages_.Find(MessageTypeIndex::From<T>());
   if (it == messages_.end()) [[unlikely]] {
     return false;
   }
@@ -593,7 +579,7 @@ inline auto AsyncMessageQueue::MessageCount() const noexcept -> size_type {
 
 template <AsyncMessageTrait T>
 inline auto AsyncMessageQueue::MessageCount() const noexcept -> size_type {
-  const auto it = messages_.find(MessageTypeIndex::From<T>());
+  const auto it = messages_.Find(MessageTypeIndex::From<T>());
   if (it == messages_.end()) [[unlikely]] {
     return 0;
   }
@@ -607,7 +593,7 @@ inline auto AsyncMessageQueue::TypedStorage() noexcept
   HELIOS_ASSERT(IsRegistered<T>(), "Async message type '{}' is not registered!",
                 MessageNameOf<T>());
   return static_cast<TypedAsyncMessageStorage<T>&>(
-      *messages_.at(MessageTypeIndex::From<T>()));
+      *messages_.At(MessageTypeIndex::From<T>()));
 }
 
 template <AsyncMessageTrait T>
@@ -616,7 +602,7 @@ inline auto AsyncMessageQueue::TypedStorage() const noexcept
   HELIOS_ASSERT(IsRegistered<T>(), "Async message type '{}' is not registered!",
                 MessageNameOf<T>());
   return static_cast<const TypedAsyncMessageStorage<T>&>(
-      *messages_.at(MessageTypeIndex::From<T>()));
+      *messages_.At(MessageTypeIndex::From<T>()));
 }
 
 }  // namespace helios::ecs

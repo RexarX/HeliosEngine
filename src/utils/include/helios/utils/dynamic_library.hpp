@@ -22,11 +22,11 @@ enum class DynamicLibraryError : uint8_t {
 };
 
 /**
- * @brief Gets a human-readable description for a DynamicLibraryError.
+ * @brief Gets a human-readable description for a `DynamicLibraryError`.
  * @param error The error code
  * @return String description of the error
  */
-[[nodiscard]] constexpr std::string_view DynamicLibraryErrorToString(
+[[nodiscard]] constexpr std::string_view ToString(
     DynamicLibraryError error) noexcept {
   switch (error) {
     using enum DynamicLibraryError;

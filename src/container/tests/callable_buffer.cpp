@@ -140,8 +140,8 @@ TEST_SUITE("helios::container::CallableBuffer") {
   }
 
   TEST_CASE("helios::container::CallableBuffer::ctor: allocator construction") {
-    std::allocator<std::byte> alloc;
-    CallableBuffer<std::allocator<std::byte>, void()> buf(alloc);
+    std::pmr::monotonic_buffer_resource resource;
+    CallableBuffer<void()> buf(&resource);
 
     CHECK(buf.Empty());
   }
@@ -215,6 +215,28 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CallableBuffer<void()> buf;
     CHECK_NOTHROW(buf.Clear());
     CHECK(buf.Empty());
+  }
+
+  TEST_CASE(
+      "helios::container::CallableBuffer::ReserveBytes: reserves capacity") {
+    SUBCASE("empty buffer") {
+      CallableBuffer<void()> buf;
+      buf.ReserveBytes(256);
+      CHECK_GE(buf.CapacityBytes(), 256);
+    }
+
+    SUBCASE("preserves stored non-trivial callable") {
+      InvocationTracker::Reset();
+
+      CallableBuffer<void()> buf;
+      buf.Set(NonTrivialCallable{"reserve", 4});
+      buf.ReserveBytes(buf.CapacityBytes() + 128);
+      CHECK_FALSE(buf.Empty());
+
+      buf.Invoke();
+      CHECK_EQ(InvocationTracker::call_order.size(), 1);
+      CHECK_EQ(InvocationTracker::call_order[0], 4);
+    }
   }
 
   TEST_CASE("helios::container::CallableBuffer::Set: stores and replaces") {
@@ -373,10 +395,12 @@ TEST_SUITE("helios::container::CallableBuffer") {
   TEST_CASE("helios::container::CallableBuffer::Swap: swaps two buffers") {
     InvocationTracker::Reset();
 
-    CallableBuffer<void()> buf1;
+    std::pmr::monotonic_buffer_resource first_resource;
+    std::pmr::monotonic_buffer_resource second_resource;
+    CallableBuffer<void()> buf1(&first_resource);
     buf1.Set(SimpleCallable{1});
 
-    CallableBuffer<void()> buf2;
+    CallableBuffer<void()> buf2(&second_resource);
     buf2.Set(SimpleCallable{2});
 
     buf1.Swap(buf2);
@@ -446,12 +470,12 @@ TEST_SUITE("helios::container::CallableBuffer") {
   }
 
   TEST_CASE(
-      "helios::container::CallableBuffer::GetAllocator: returns allocator") {
-    std::allocator<std::byte> alloc;
-    CallableBuffer<std::allocator<std::byte>, void()> buf(alloc);
+      "helios::container::CallableBuffer::GetMemoryResource: returns "
+      "resource") {
+    std::pmr::monotonic_buffer_resource resource;
+    CallableBuffer<void()> buf(&resource);
 
-    auto retrieved = buf.GetAllocator();
-    CHECK(retrieved == alloc);
+    CHECK_EQ(buf.GetMemoryResource(), &resource);
   }
 
   TEST_CASE(
@@ -515,10 +539,11 @@ TEST_SUITE("helios::container::CallableBuffer") {
   }
 
   TEST_CASE(
-      "container::CallableBuffer::alias deduction: allocator + signatures") {
+      "container::CallableBuffer::resource construction with signatures") {
     InvocationTracker::Reset();
 
-    CallableBuffer<std::allocator<std::byte>, void()> buf;
+    std::pmr::monotonic_buffer_resource resource;
+    CallableBuffer<void()> buf(&resource);
     buf.Set(SimpleCallable{8});
     buf.Invoke();
 
@@ -526,12 +551,11 @@ TEST_SUITE("helios::container::CallableBuffer") {
     CHECK_EQ(InvocationTracker::call_order[0], 8);
   }
 
-  TEST_CASE(
-      "helios::container::PmrCallableBuffer: works with memory_resource") {
+  TEST_CASE("helios::container::CallableBuffer: works with memory_resource") {
     InvocationTracker::Reset();
 
     auto* resource = std::pmr::get_default_resource();
-    PmrCallableBuffer<void()> buf{resource};
+    CallableBuffer<void()> buf{resource};
     buf.Set(SimpleCallable{13});
     buf.Invoke();
 

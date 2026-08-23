@@ -1,7 +1,7 @@
 #pragma once
 
 #include <helios/assert.hpp>
-#include <helios/compiler/compiler.hpp>
+#include <helios/container/flat_map.hpp>
 #include <helios/container/typed_buffer_array.hpp>
 #include <helios/ecs/component/archetype_id.hpp>
 #include <helios/ecs/component/component.hpp>
@@ -13,6 +13,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <limits>
+#include <memory_resource>
 #include <optional>
 #include <span>
 #include <string>
@@ -23,12 +24,6 @@
 #ifdef HELIOS_ENABLE_ASSERTS
 #include <array>
 #include <functional>
-#endif
-
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-#include <flat_map>
-#else
-#include <boost/container/flat_map.hpp>
 #endif
 
 namespace helios::ecs {
@@ -59,6 +54,7 @@ class Archetype {
 public:
   using size_type = size_t;
   using RowIndex = uint32_t;
+  using ColumnStorage = container::TypedBufferArray;
 
   static constexpr auto kInvalidRow = std::numeric_limits<RowIndex>::max();
 
@@ -69,8 +65,12 @@ public:
    * `ComponentManager`.
    * @param id The archetype id defining which component types this archetype
    * stores
+   * @param resource Memory resource for columns, entity list, and lookup maps.
+   * Defaults to `std::pmr::get_default_resource()`.
    */
-  explicit Archetype(ArchetypeId id);
+  explicit Archetype(ArchetypeId id, std::pmr::memory_resource* resource =
+                                         std::pmr::get_default_resource());
+  Archetype(ArchetypeId, std::nullptr_t) = delete;
   Archetype(const Archetype&) = delete;
   Archetype(Archetype&&) noexcept = default;
   ~Archetype() = default;
@@ -217,7 +217,7 @@ public:
    * @return Reference to the column
    */
   [[nodiscard]] auto Column(ComponentTypeIndex index) noexcept
-      -> container::TypedBufferArray<>&;
+      -> ColumnStorage&;
 
   /**
    * @brief Gets a const raw column by component type index.
@@ -226,7 +226,7 @@ public:
    * @return Const reference to the column
    */
   [[nodiscard]] auto Column(ComponentTypeIndex index) const noexcept
-      -> const container::TypedBufferArray<>&;
+      -> const ColumnStorage&;
 
   /**
    * @brief Tries to get a raw column by component type index.
@@ -234,7 +234,7 @@ public:
    * @return Pointer to column or `nullptr` if type index not found
    */
   [[nodiscard]] auto TryColumn(ComponentTypeIndex index) noexcept
-      -> container::TypedBufferArray<>*;
+      -> ColumnStorage*;
 
   /**
    * @brief Tries to get a const raw column by component type index.
@@ -242,7 +242,7 @@ public:
    * @return Const pointer to column or `nullptr` if type index not found
    */
   [[nodiscard]] auto TryColumn(ComponentTypeIndex index) const noexcept
-      -> const container::TypedBufferArray<>*;
+      -> const ColumnStorage*;
 
   /**
    * @brief Gets the row index for an entity.
@@ -289,7 +289,7 @@ public:
    * @return True if the archetype stores this component type, false otherwise
    */
   [[nodiscard]] bool HasColumn(ComponentTypeIndex index) const noexcept {
-    return column_map_.contains(index);
+    return column_map_.Contains(index);
   }
 
   /**
@@ -322,29 +322,31 @@ public:
    */
   [[nodiscard]] const ArchetypeId& Id() const noexcept { return id_; }
 
-private:
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-  using ColumnMap = std::flat_map<ComponentTypeIndex, size_type>;
-  using EntityRowMap = std::flat_map<Entity::IndexType, RowIndex>;
-#else
-  using ColumnMap =
-      boost::container::flat_map<ComponentTypeIndex, size_type, std::less<>>;
-  using EntityRowMap = boost::container::flat_map<Entity::IndexType, RowIndex>;
-#endif
+  /**
+   * @brief Returns the memory resource used for internal storage.
+   * @return Memory resource passed to the constructor
+   */
+  [[nodiscard]] std::pmr::memory_resource* GetMemoryResource() const noexcept {
+    return entities_.get_allocator().resource();
+  }
 
+private:
   [[nodiscard]] auto ColumnIndex(ComponentTypeIndex index) const noexcept
       -> std::optional<size_type>;
 
   ArchetypeId id_;
 
-  std::vector<container::TypedBufferArray<>>
-      columns_;           ///< One column per component type.
-  ColumnMap column_map_;  ///< Maps ComponentTypeIndex -> column vector index.
+  /// One column per component type. Not a PMR vector: `TypedBufferArray` is
+  /// constructed with the archetype resource explicitly. A `std::pmr::vector`
+  /// of PMR containers would still not propagate that resource into columns.
+  std::vector<ColumnStorage> columns_;
+  /// Maps ComponentTypeIndex -> column vector index.
+  container::FlatMap<ComponentTypeIndex, size_type> column_map_;
 
-  std::vector<Entity> entities_;  ///< Dense entity array, indexed by row.
+  std::pmr::vector<Entity> entities_;  ///< Dense entity array, indexed by row.
 
-  EntityRowMap
-      entity_to_row_;  ///< Maps entity index -> row. Sparse by entity index.
+  /// Maps entity index -> row. Sparse by entity index.
+  container::FlatMap<Entity::IndexType, RowIndex> entity_to_row_;
 };
 
 inline auto Archetype::AllocateRow(Entity entity) -> RowIndex {
@@ -354,7 +356,7 @@ inline auto Archetype::AllocateRow(Entity entity) -> RowIndex {
 
   auto row = static_cast<RowIndex>(entities_.size());
   entities_.push_back(entity);
-  entity_to_row_.emplace(entity.Index(), row);
+  entity_to_row_.Emplace(entity.Index(), row);
   return row;
 }
 
@@ -364,11 +366,9 @@ inline auto Archetype::Add(Entity entity, Ts&&... components) -> RowIndex {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
 
 #ifdef HELIOS_ENABLE_ASSERTS
-  const std::array<bool, sizeof...(Ts)> has_column = {
-      HasColumn<std::remove_cvref_t<Ts>>()...};
+  const std::array has_column = {HasColumn<std::remove_cvref_t<Ts>>()...};
 
-  constexpr std::array<std::string_view, sizeof...(Ts)> names = {
-      ComponentNameOf<std::remove_cvref_t<Ts>>()...};
+  constexpr std::array names = {ComponentNameOf<std::remove_cvref_t<Ts>>()...};
 
   const bool all_has_column = std::ranges::all_of(has_column, std::identity{});
   if (!all_has_column) {
@@ -390,7 +390,7 @@ inline auto Archetype::Add(Entity entity, Ts&&... components) -> RowIndex {
   auto row = AllocateRow(entity);
 
   // Push each component into its respective column.
-  (columns_[column_map_.at(ComponentTypeIndex::From<std::remove_cvref_t<Ts>>())]
+  (columns_[column_map_.At(ComponentTypeIndex::From<std::remove_cvref_t<Ts>>())]
        .PushBack(std::forward<Ts>(components)),
    ...);
 
@@ -410,9 +410,9 @@ inline void Archetype::Set(Entity entity, T&& component) {
                 "Component '{}' is not part of this archetype!",
                 ComponentNameOf<DecayedT>());
 
-  auto& col = columns_[column_map_.at(type_index)];
+  auto& col = columns_[column_map_.At(type_index)];
   const size_type row =
-      static_cast<size_type>(entity_to_row_.at(entity.Index()));
+      static_cast<size_type>(entity_to_row_.At(entity.Index()));
 
   HELIOS_ASSERT(row <= col.Size(),
                 "Inconsistent archetype state for component '{}': row '{}' is "
@@ -441,9 +441,9 @@ inline void Archetype::Emplace(Entity entity, Args&&... args) {
                 "Component '{}' is not part of this archetype!",
                 ComponentNameOf<DecayedT>());
 
-  auto& col = columns_[column_map_.at(type_index)];
+  auto& col = columns_[column_map_.At(type_index)];
   const size_type row =
-      static_cast<size_type>(entity_to_row_.at(entity.Index()));
+      static_cast<size_type>(entity_to_row_.At(entity.Index()));
 
   HELIOS_ASSERT(row <= col.Size(),
                 "Inconsistent archetype state for component '{}': row '{}' is "
@@ -472,8 +472,8 @@ inline T& Archetype::Get(Entity entity) {
                 "Component '{}' is not part of this archetype!",
                 ComponentNameOf<T>());
 
-  auto& col = columns_[column_map_.at(type_index)];
-  const RowIndex row = entity_to_row_.at(entity.Index());
+  auto& col = columns_[column_map_.At(type_index)];
+  const RowIndex row = entity_to_row_.At(entity.Index());
   return col.template At<T>(static_cast<size_type>(row));
 }
 
@@ -488,8 +488,8 @@ inline const T& Archetype::Get(Entity entity) const {
                 "Component '{}' is not part of this archetype!",
                 ComponentNameOf<T>());
 
-  const auto& col = columns_[column_map_.at(type_index)];
-  const RowIndex row = entity_to_row_.at(entity.Index());
+  const auto& col = columns_[column_map_.At(type_index)];
+  const RowIndex row = entity_to_row_.At(entity.Index());
   return col.template At<T>(static_cast<size_type>(row));
 }
 
@@ -508,7 +508,7 @@ inline T* Archetype::TryGet(Entity entity) {
   }
 
   const size_type col_index = col_idx.value();
-  const RowIndex row = entity_to_row_.at(entity.Index());
+  const RowIndex row = entity_to_row_.At(entity.Index());
   return &columns_[col_index].template At<T>(static_cast<size_type>(row));
 }
 
@@ -527,7 +527,7 @@ inline const T* Archetype::TryGet(Entity entity) const {
   }
 
   const size_type col_index = col_idx.value();
-  const RowIndex row = entity_to_row_.at(entity.Index());
+  const RowIndex row = entity_to_row_.At(entity.Index());
   return &columns_[col_index].template At<T>(static_cast<size_type>(row));
 }
 
@@ -558,7 +558,7 @@ inline auto Archetype::ComponentColumn() const -> std::span<const T> {
 }
 
 inline auto Archetype::Column(ComponentTypeIndex index) noexcept
-    -> container::TypedBufferArray<>& {
+    -> ColumnStorage& {
   const auto col_idx = ColumnIndex(index);
   HELIOS_ASSERT(col_idx.has_value(),
                 "Component index '{}' is not part of this archetype!",
@@ -567,7 +567,7 @@ inline auto Archetype::Column(ComponentTypeIndex index) noexcept
 }
 
 inline auto Archetype::Column(ComponentTypeIndex index) const noexcept
-    -> const container::TypedBufferArray<>& {
+    -> const ColumnStorage& {
   const auto col_idx = ColumnIndex(index);
   HELIOS_ASSERT(col_idx.has_value(),
                 "Component index '{}' is not part of this archetype!",
@@ -576,7 +576,7 @@ inline auto Archetype::Column(ComponentTypeIndex index) const noexcept
 }
 
 inline auto Archetype::TryColumn(ComponentTypeIndex index) noexcept
-    -> container::TypedBufferArray<>* {
+    -> ColumnStorage* {
   const auto col_idx = ColumnIndex(index);
   if (!col_idx.has_value()) {
     return nullptr;
@@ -585,7 +585,7 @@ inline auto Archetype::TryColumn(ComponentTypeIndex index) noexcept
 }
 
 inline auto Archetype::TryColumn(ComponentTypeIndex index) const noexcept
-    -> const container::TypedBufferArray<>* {
+    -> const ColumnStorage* {
   const auto col_idx = ColumnIndex(index);
   if (!col_idx.has_value()) {
     return nullptr;
@@ -596,7 +596,7 @@ inline auto Archetype::TryColumn(ComponentTypeIndex index) const noexcept
 inline auto Archetype::Row(Entity entity) const -> RowIndex {
   HELIOS_ASSERT(Contains(entity), "Entity '{}' not present in archetype!",
                 entity);
-  return entity_to_row_.at(entity.Index());
+  return entity_to_row_.At(entity.Index());
 }
 
 inline Entity Archetype::EntityAt(RowIndex row) const {
@@ -608,7 +608,7 @@ inline Entity Archetype::EntityAt(RowIndex row) const {
 
 inline bool Archetype::Contains(Entity entity) const noexcept {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
-  return entity_to_row_.contains(entity.Index());
+  return entity_to_row_.Contains(entity.Index());
 }
 
 }  // namespace helios::ecs

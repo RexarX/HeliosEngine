@@ -8,11 +8,8 @@
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/utils/common_traits.hpp>
 
-#include <concepts>
 #include <cstddef>
-#include <memory>
 #include <memory_resource>
-#include <type_traits>
 #include <utility>
 
 namespace helios::ecs {
@@ -23,44 +20,28 @@ namespace helios::ecs {
  * Commands are enqueued in the order they were added, ensuring predictable
  * behavior.
  * @note Not thread-safe.
- * @tparam Allocator Allocator type for command storage (default:
- * `std::allocator<std::byte>`)
  */
-template <typename Allocator = std::allocator<std::byte>>
 class EntityCmdBuffer {
 public:
-  using size_type = CmdQueue<Allocator>::size_type;
-  using allocator_type = CmdQueue<Allocator>::allocator_type;
+  using size_type = CmdQueue::size_type;
 
   /**
-   * @brief Constructs aa entity command buffer with a custom allocator.
+   * @brief Constructs an entity command buffer.
    * @warning Triggers assertion if entity is invalid.
    * @param entity Entity associated with this buffer
    * @param queue Queue to push commands into
-   * @param allocator Allocator instance
+   * @param resource Memory resource used for command storage (default: default
+   * memory resource)
    */
-  constexpr EntityCmdBuffer(Entity entity, CmdQueue<Allocator>& queue,
-                            allocator_type allocator = allocator_type{});
+  constexpr EntityCmdBuffer(
+      Entity entity, CmdQueue& queue,
+      std::pmr::memory_resource* resource = std::pmr::get_default_resource());
 
-  /**
-   * @brief Constructs an entity command buffer from a PMR memory resource.
-   * @details Enabled only when `allocator_type` is constructible from
-   * `std::pmr::memory_resource*`.
-   * @param entity Entity associated with this buffer
-   * @param queue Queue to push commands into
-   * @param resource Memory resource used to construct allocator
-   */
-  constexpr EntityCmdBuffer(Entity entity, CmdQueue<Allocator>& queue,
-                            std::pmr::memory_resource* resource)
-    requires std::constructible_from<allocator_type, std::pmr::memory_resource*>
-      : EntityCmdBuffer(entity, queue, allocator_type{resource}) {}
-
-  EntityCmdBuffer(Entity entity, CmdQueue<Allocator>& queue,
-                  std::nullptr_t) = delete;
+  EntityCmdBuffer(Entity entity, CmdQueue& queue, std::nullptr_t) = delete;
 
   EntityCmdBuffer(const EntityCmdBuffer&) = delete;
   EntityCmdBuffer(EntityCmdBuffer&&) = delete;
-  ~EntityCmdBuffer() { queue_.Merge(std::move(commands_)); }
+  constexpr ~EntityCmdBuffer() { queue_.Merge(std::move(commands_)); }
 
   EntityCmdBuffer& operator=(const EntityCmdBuffer&) = delete;
   EntityCmdBuffer& operator=(EntityCmdBuffer&&) = delete;
@@ -243,133 +224,106 @@ public:
   }
 
   /**
-   * @brief Gets the allocator used by the command storage.
-   * @return Allocator instance
+   * @brief Returns the memory resource used for command storage.
+   * @return Memory resource passed to the constructor, or the default resource
    */
-  [[nodiscard]] constexpr allocator_type GetAllocator() const
-      noexcept(std::is_nothrow_copy_constructible_v<allocator_type>) {
-    return commands_.GetAllocator();
+  [[nodiscard]] constexpr std::pmr::memory_resource* GetMemoryResource()
+      const noexcept {
+    return commands_.GetMemoryResource();
   }
 
 private:
   Entity entity_;
-  CmdQueue<Allocator> commands_;
-  CmdQueue<Allocator>& queue_;
+  CmdQueue commands_;
+  CmdQueue& queue_;
 };
 
-template <typename Allocator>
-constexpr EntityCmdBuffer<Allocator>::EntityCmdBuffer(
-    Entity entity, CmdQueue<Allocator>& queue, allocator_type allocator)
-    : entity_(entity), commands_(allocator), queue_(queue) {
+constexpr EntityCmdBuffer::EntityCmdBuffer(Entity entity, CmdQueue& queue,
+                                           std::pmr::memory_resource* resource)
+    : entity_(entity), commands_(resource), queue_(queue) {
   HELIOS_ASSERT(entity_.Valid(), "Entity '{}' is not valid!", entity_);
 }
 
-template <typename Allocator>
-inline auto EntityCmdBuffer<Allocator>::Destroy(this auto&& self)
+inline auto EntityCmdBuffer::Destroy(this auto&& self)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(DestroyEntityCmd(self.entity_));
   return std::forward<decltype(self)>(self);
 }
 
-template <typename Allocator>
-inline auto EntityCmdBuffer<Allocator>::TryDestroy(this auto&& self)
+inline auto EntityCmdBuffer::TryDestroy(this auto&& self)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(TryDestroyEntityCmd(self.entity_));
   return std::forward<decltype(self)>(self);
 }
 
-template <typename Allocator>
 template <ComponentTrait... Ts>
   requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
-inline auto EntityCmdBuffer<Allocator>::AddComponents(this auto&& self,
-                                                      Ts&&... components)
+inline auto EntityCmdBuffer::AddComponents(this auto&& self, Ts&&... components)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(
       AddComponentsCmd(self.entity_, std::forward<Ts>(components)...));
   return std::forward<decltype(self)>(self);
 }
 
-template <typename Allocator>
 template <ComponentBundleTrait B>
-inline auto EntityCmdBuffer<Allocator>::AddBundle(this auto&& self, B&& bundle)
+inline auto EntityCmdBuffer::AddBundle(this auto&& self, B&& bundle)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(AddBundleCmd(self.entity_, std::forward<B>(bundle)));
   return std::forward<decltype(self)>(self);
 }
 
-template <typename Allocator>
 template <ComponentTrait... Ts>
   requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
-inline auto EntityCmdBuffer<Allocator>::TryAddComponents(this auto&& self,
-                                                         Ts&&... components)
+inline auto EntityCmdBuffer::TryAddComponents(this auto&& self,
+                                              Ts&&... components)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(
       TryAddComponentsCmd(self.entity_, std::forward<Ts>(components)...));
   return std::forward<decltype(self)>(self);
 }
 
-template <typename Allocator>
 template <ComponentBundleTrait B>
-inline auto EntityCmdBuffer<Allocator>::TryAddBundle(this auto&& self,
-                                                     B&& bundle)
+inline auto EntityCmdBuffer::TryAddBundle(this auto&& self, B&& bundle)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(
       TryAddBundleCmd(self.entity_, std::forward<B>(bundle)));
   return std::forward<decltype(self)>(self);
 }
 
-template <typename Allocator>
 template <ComponentTrait... Ts>
   requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
-inline auto EntityCmdBuffer<Allocator>::RemoveComponents(this auto&& self)
+inline auto EntityCmdBuffer::RemoveComponents(this auto&& self)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(RemoveComponentsCmd<Ts...>(self.entity_));
   return std::forward<decltype(self)>(self);
 }
 
-template <typename Allocator>
 template <ComponentBundleTrait B>
-inline auto EntityCmdBuffer<Allocator>::RemoveBundle(this auto&& self)
+inline auto EntityCmdBuffer::RemoveBundle(this auto&& self)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(RemoveBundleCmd<B>(self.entity_));
   return std::forward<decltype(self)>(self);
 }
 
-template <typename Allocator>
 template <ComponentTrait... Ts>
   requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
-inline auto EntityCmdBuffer<Allocator>::TryRemoveComponents(this auto&& self)
+inline auto EntityCmdBuffer::TryRemoveComponents(this auto&& self)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(TryRemoveComponentsCmd<Ts...>(self.entity_));
   return std::forward<decltype(self)>(self);
 }
 
-template <typename Allocator>
 template <ComponentBundleTrait B>
-inline auto EntityCmdBuffer<Allocator>::TryRemoveBundle(this auto&& self)
+inline auto EntityCmdBuffer::TryRemoveBundle(this auto&& self)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(TryRemoveBundleCmd<B>(self.entity_));
   return std::forward<decltype(self)>(self);
 }
 
-template <typename Allocator>
-inline auto EntityCmdBuffer<Allocator>::ClearComponents(this auto&& self)
+inline auto EntityCmdBuffer::ClearComponents(this auto&& self)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(ClearComponentsCmd(self.entity_));
   return std::forward<decltype(self)>(self);
 }
-
-/**
- * @brief Command buffer for deferred entity operations that uses a polymorphic
- * allocator.
- * @details Collects commands and then pushes them into a queue.
- * Commands are enqueued in the order they were added, ensuring predictable
- * behavior.
- * @note Not thread-safe.
- * @tparam Allocator Allocator type for command storage (default:
- * `std::allocator<std::byte>`)
- */
-using PmrEntityCmdBuffer =
-    EntityCmdBuffer<std::pmr::polymorphic_allocator<std::byte>>;
 
 }  // namespace helios::ecs

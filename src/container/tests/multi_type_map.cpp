@@ -1,13 +1,15 @@
 #include <doctest/doctest.h>
 
 #include <helios/container/multi_type_map.hpp>
+#include <helios/container/typed_buffer_array.hpp>
 
 #include <algorithm>
-#include <atomic>
 #include <cstddef>
+#include <iterator>
 #include <memory>
 #include <memory_resource>
 #include <string>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -102,36 +104,6 @@ struct CountingStorage {
   }
 };
 
-// Tracking allocator: counts live allocations.
-template <typename T>
-struct TrackingAllocator {
-  using value_type = T;
-
-  static inline std::atomic<int> allocation_count{0};
-
-  TrackingAllocator() noexcept = default;
-
-  template <typename U>
-  explicit TrackingAllocator(const TrackingAllocator<U>& /*other*/) noexcept {}
-
-  T* allocate(size_t n) {
-    ++allocation_count;
-    return std::allocator<T>{}.allocate(n);
-  }
-
-  void deallocate(T* ptr, size_t n) noexcept {
-    --allocation_count;
-    std::allocator<T>{}.deallocate(ptr, n);
-  }
-
-  template <typename U>
-  bool operator==(const TrackingAllocator<U>& /*other*/) const noexcept {
-    return true;
-  }
-
-  static void ResetCount() noexcept { allocation_count = 0; }
-};
-
 using SimpleMap = MultiTypeMap<SimpleStorage>;
 using MergeMap = MultiTypeMap<MergeableStorage>;
 using NonMergeMap = MultiTypeMap<NonMergeableStorage>;
@@ -148,8 +120,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
   }
 
   TEST_CASE("helios::container::MultiTypeMap::ctor: allocator construction") {
-    std::allocator<std::byte> alloc;
-    SimpleMap map(alloc);
+    std::pmr::monotonic_buffer_resource resource;
+    SimpleMap map(&resource);
 
     CHECK(map.EmptyAll());
     CHECK_EQ(map.TypeCount(), 0);
@@ -320,9 +292,9 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     SimpleStorage val;
     val.Set(99);
 
-    auto [it, inserted] = map.Emplace<int>(val);
+    const auto it = map.Emplace<int>(val);
 
-    CHECK(inserted);
+    CHECK_EQ(it->second.value, 99);
     CHECK(map.Contains<int>());
     CHECK_EQ(map.Get<int>().value, 99);
   }
@@ -338,12 +310,10 @@ TEST_SUITE("helios::container::MultiTypeMap") {
 
     SimpleStorage second;
     second.Set(200);
-    auto [it, inserted] = map.Emplace<int>(second);
+    const auto it = map.Emplace<int>(second);
 
-    // flat_map::emplace does NOT replace an existing key.
-    CHECK_FALSE(inserted);
+    CHECK_EQ(it->second.value, 1);
     CHECK_EQ(map.TypeCount(), 1);
-    // original value is preserved
     CHECK_EQ(map.Get<int>().value, 1);
   }
 
@@ -388,9 +358,8 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     SimpleStorage val;
     val.Set(42);
 
-    auto [it, inserted] = map.Emplace<int>(val);
+    const auto it = map.Emplace<int>(val);
 
-    CHECK(inserted);
     CHECK_EQ(it->second.value, 42);
     CHECK_EQ(it->first, SimpleMap::TypeIndexOf<int>());
   }
@@ -482,10 +451,10 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     SimpleStorage attempt;
     attempt.Set(99);
 
-    auto [it_e, ok_e] = map.Emplace<int>(attempt);
+    const auto it_e = map.Emplace<int>(attempt);
     auto [it_t, ok_t] = map.TryEmplace<int>(attempt);
 
-    CHECK_FALSE(ok_e);
+    CHECK_EQ(it_e->second.value, 5);
     CHECK_FALSE(ok_t);
     CHECK_EQ(map.Get<int>().value, 5);
     CHECK_EQ(map.TypeCount(), 1);
@@ -774,6 +743,14 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.TypeCount(), 0);
   }
 
+  TEST_CASE("helios::container::MultiTypeMap::Reserve: reserves type slots") {
+    SimpleMap map;
+    map.Reserve(16);
+    map.Ensure<int>().Set(1);
+    map.Ensure<float>().Set(2);
+    CHECK_EQ(map.TypeCount(), 2);
+  }
+
   TEST_CASE(
       "helios::container::MultiTypeMap::Contains: false before insertion") {
     SimpleMap map;
@@ -940,7 +917,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     map.Ensure<int>().Set(3);
 
     auto& data = map.Data();
-    CHECK_EQ(data.size(), 1);
+    CHECK_EQ(data.Size(), 1);
   }
 
   TEST_CASE(
@@ -951,13 +928,20 @@ TEST_SUITE("helios::container::MultiTypeMap") {
 
     const auto& cmap = map;
     const auto& data = cmap.Data();
-    CHECK_EQ(data.size(), 2);
+    CHECK_EQ(data.Size(), 2);
   }
 
   TEST_CASE("helios::container::MultiTypeMap::begin/end: empty map iteration") {
     SimpleMap map;
     CHECK_EQ(map.begin(), map.end());
     CHECK_EQ(map.cbegin(), map.cend());
+    CHECK_EQ(map.rbegin(), map.rend());
+    CHECK_EQ(map.crbegin(), map.crend());
+    CHECK(std::is_same_v<decltype(map.begin()), SimpleMap::iterator>);
+    CHECK(std::is_same_v<decltype(map.cbegin()), SimpleMap::const_iterator>);
+    CHECK(std::is_same_v<decltype(map.rbegin()), SimpleMap::reverse_iterator>);
+    CHECK(std::is_same_v<decltype(map.crbegin()),
+                         SimpleMap::const_reverse_iterator>);
   }
 
   TEST_CASE(
@@ -969,7 +953,7 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     map.Ensure<double>().Set(3);
 
     int count = 0;
-    for (auto&& [id, storage] : map) {
+    for (auto& [id, storage] : map) {
       ++count;
       CHECK(storage.has_value);
     }
@@ -1004,12 +988,26 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(count, 2);
   }
 
+  TEST_CASE("helios::container::MultiTypeMap::rbegin/rend: reverse iteration") {
+    SimpleMap map;
+    map.Ensure<int>().Set(1);
+    map.Ensure<float>().Set(2);
+
+    const auto& cmap = map;
+    int count = 0;
+    for (auto it = map.rbegin(); it != map.rend(); ++it) {
+      ++count;
+    }
+    CHECK_EQ(count, 2);
+    CHECK_EQ(std::distance(cmap.crbegin(), cmap.crend()), 2);
+  }
+
   TEST_CASE(
       "helios::container::MultiTypeMap::begin/end: mutation through iterator") {
     SimpleMap map;
     map.Ensure<int>().Set(1);
 
-    for (auto&& [id, storage] : map) {
+    for (auto& [id, storage] : map) {
       storage.Set(99);
     }
 
@@ -1056,22 +1054,38 @@ TEST_SUITE("helios::container::MultiTypeMap") {
   }
 
   TEST_CASE(
-      "container::MultiTypeMap::GetAllocator: returns allocator used at "
+      "container::MultiTypeMap::GetMemoryResource: returns resource used at "
       "construction") {
-    std::allocator<std::byte> alloc;
-    SimpleMap map(alloc);
+    std::pmr::monotonic_buffer_resource resource;
+    SimpleMap map(&resource);
 
-    auto retrieved = map.GetAllocator();
-    CHECK(retrieved == alloc);
+    CHECK_EQ(map.GetMemoryResource(), &resource);
+  }
+
+  TEST_CASE(
+      "helios::container::MultiTypeMap::ShrinkToFit: compacts nested storage") {
+    MultiTypeMap<TypedBufferArray> map;
+    auto& ints = map.Ensure<int>();
+    ints.ChangeType<int>();
+    ints.Reserve(64);
+    ints.PushBack(1);
+    ints.PushBack(2);
+    CHECK_GE(ints.Capacity(), 64);
+
+    map.ShrinkToFit();
+    CHECK_LE(map.Get<int>().Capacity(), 8);
+    CHECK_EQ(map.Get<int>().At<int>(0), 1);
   }
 
   TEST_CASE(
       "helios::container::MultiTypeMap::Swap: swaps contents of two maps") {
-    SimpleMap map1;
+    std::pmr::monotonic_buffer_resource first_resource;
+    std::pmr::monotonic_buffer_resource second_resource;
+    SimpleMap map1(&first_resource);
     map1.Ensure<int>().Set(1);
     map1.Ensure<float>().Set(2);
 
-    SimpleMap map2;
+    SimpleMap map2(&second_resource);
     map2.Ensure<double>().Set(9);
 
     map1.Swap(map2);
@@ -1432,11 +1446,11 @@ TEST_SUITE("helios::container::MultiTypeMap") {
     CHECK_EQ(map.TryGet<float>(), map.TryGet(float_id));
   }
 
-  TEST_CASE("helios::container::PmrMultiTypeMap: works with memory_resource") {
+  TEST_CASE("helios::container::MultiTypeMap: works with memory_resource") {
     std::byte buffer[1024];
     std::pmr::monotonic_buffer_resource resource(buffer, sizeof(buffer));
 
-    PmrMultiTypeMap<SimpleStorage> map{&resource};
+    MultiTypeMap<SimpleStorage> map{&resource};
     map.Ensure<int>().Set(42);
 
     CHECK(map.Contains<int>());

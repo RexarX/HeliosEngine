@@ -19,6 +19,17 @@ void Retain(SDL_InitFlags flags);
 void Release(SDL_InitFlags flags);
 
 /**
+ * @brief Tests whether a subsystem can be initialized, then fully tears it
+ * down when this process has no outstanding `Retain`.
+ * @details Uses `SDL_Init`/`SDL_Quit` so X11/XKB resources from a probe do
+ * not leak into LeakSanitizer at process exit. Safe to call after `Retain`:
+ * the live session is left intact.
+ * @param flags Subsystem flags to probe
+ * @return True if the subsystem initialized successfully
+ */
+[[nodiscard]] bool Probe(SDL_InitFlags flags);
+
+/**
  * @brief Tests whether SDL has been initialized at least once.
  * @return True after the first successful `Retain`
  */

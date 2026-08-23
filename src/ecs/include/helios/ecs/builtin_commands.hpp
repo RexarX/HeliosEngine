@@ -12,7 +12,7 @@
 
 #include <algorithm>
 #include <concepts>
-#include <memory>
+#include <memory_resource>
 #include <tuple>
 #include <type_traits>
 #include <utility>
@@ -119,9 +119,7 @@ private:
  * @warning Will assertion if any of the entities do not exist in the world
  * (when world updated), or if reserved entities have not been flushed
  * (`NeedsFlush()`).
- * @tparam Alloc Allocator type
  */
-template <typename Alloc = std::allocator<Entity>>
 class DestroyEntitiesCmd {
 public:
   /**
@@ -129,8 +127,13 @@ public:
    * @warning Triggers assertion if any entity is invalid.
    * @param entities Vector of entities to destroy
    */
-  explicit constexpr DestroyEntitiesCmd(std::vector<Entity, Alloc> entities)
-      : entities_(std::move(entities)) {
+  template <std::ranges::input_range R>
+    requires std::same_as<std::ranges::range_value_t<R>, Entity>
+  explicit DestroyEntitiesCmd(
+      R&& entities,
+      std::pmr::memory_resource* resource = std::pmr::get_default_resource())
+      : entities_(std::ranges::begin(entities), std::ranges::end(entities),
+                  resource) {
     HELIOS_ASSERT(std::ranges::all_of(
                       entities_, [](Entity entity) { return entity.Valid(); }),
                   "One or more entities are invalid!");
@@ -154,7 +157,7 @@ public:
   void Execute(World& world) { world.DestroyEntities(entities_); }
 
 private:
-  std::vector<Entity, Alloc> entities_;  ///< Entities to destroy
+  std::pmr::vector<Entity> entities_;  ///< Entities to destroy
 };
 
 /**
@@ -201,9 +204,7 @@ private:
  * @details Will destroy entities only if they exist in the world.
  * @warning Triggers assertion if reserved entities have not been flushed
  * (`NeedsFlush()`).
- * @tparam Alloc Allocator type
  */
-template <typename Alloc = std::allocator<Entity>>
 class TryDestroyEntitiesCmd {
 public:
   /**
@@ -211,8 +212,13 @@ public:
    * @warning Triggers assertion if any entity is invalid.
    * @param entities Vector of entities to destroy
    */
-  explicit constexpr TryDestroyEntitiesCmd(std::vector<Entity, Alloc> entities)
-      : entities_(std::move(entities)) {
+  template <std::ranges::input_range R>
+    requires std::same_as<std::ranges::range_value_t<R>, Entity>
+  explicit TryDestroyEntitiesCmd(
+      R&& entities,
+      std::pmr::memory_resource* resource = std::pmr::get_default_resource())
+      : entities_(std::ranges::begin(entities), std::ranges::end(entities),
+                  resource) {
     HELIOS_ASSERT(
         std::ranges::all_of(
             entities_, [](const Entity& entity) { return entity.Valid(); }),
@@ -238,7 +244,7 @@ public:
   void Execute(World& world) { world.TryDestroyEntities(entities_); }
 
 private:
-  std::vector<Entity, Alloc> entities_;
+  std::pmr::vector<Entity> entities_;
 };
 
 /**

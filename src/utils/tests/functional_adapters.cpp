@@ -1380,14 +1380,14 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
 
       auto result = adapter.Collect();
 
-      CHECK_EQ(result, std::vector<int>{2, 4});
+      CHECK_EQ(result, std::pmr::vector<int>{2, 4});
     }
 
     SUBCASE("Collect with transformation") {
       auto result =
           MapAdapter(data, [](int value) { return value * 2; }).Collect();
 
-      CHECK_EQ(result, std::vector<int>{2, 4, 6, 8, 10});
+      CHECK_EQ(result, std::pmr::vector<int>{2, 4, 6, 8, 10});
     }
 
     SUBCASE("Collect empty range") {
@@ -1404,7 +1404,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
                         .Take(2)
                         .Collect();
 
-      CHECK_EQ(result, std::vector<int>{9, 12});  // (3 * 3), (4 * 3)
+      CHECK_EQ(result, std::pmr::vector<int>{9, 12});  // (3 * 3), (4 * 3)
     }
 
     SUBCASE("Collect tuple values") {
@@ -1430,26 +1430,30 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       "allocator-aware") {
     std::vector<int> data = {1, 2, 3, 4, 5, 6};
 
-    auto* resource = std::pmr::get_default_resource();
+    std::pmr::monotonic_buffer_resource memory_resource;
+    auto* resource = &memory_resource;
 
-    SUBCASE("CollectWith uses custom allocator") {
-      std::pmr::polymorphic_allocator<int> alloc(resource);
+    SUBCASE("Collect uses the default memory resource") {
+      auto* previous = std::pmr::set_default_resource(resource);
       auto result = FilterAdapter(data, [](int value) {
                       return value % 2 == 0;
-                    }).CollectWith(alloc);
+                    }).Collect();
+      std::pmr::set_default_resource(previous);
 
       CHECK_EQ(result.size(), 3);
+      CHECK_EQ(result.get_allocator().resource(), resource);
       CHECK_EQ(result[0], 2);
       CHECK_EQ(result[1], 4);
       CHECK_EQ(result[2], 6);
     }
 
-    SUBCASE("CollectWith with memory resource") {
+    SUBCASE("Collect with memory resource") {
       auto result = FilterAdapter(data, [](int value) {
                       return value % 2 == 0;
-                    }).CollectWith(resource);
+                    }).Collect(resource);
 
       CHECK_EQ(result.size(), 3);
+      CHECK_EQ(result.get_allocator().resource(), resource);
       int count = 0;
       for (int val : result) {
         if (count == 0)
@@ -1462,12 +1466,12 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       }
     }
 
-    SUBCASE("CollectWith with chained transformations") {
+    SUBCASE("Collect with chained transformations") {
       auto result = FilterAdapter(data, [](int value) {
                       return value > 2;
                     }).Map([](int value) {
                         return value * 3;
-                      }).CollectWith(resource);
+                      }).Collect(resource);
 
       CHECK_EQ(result.size(), 4);
       int expected[] = {9, 12, 15, 18};
@@ -1478,15 +1482,16 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       }
     }
 
-    SUBCASE("PartitionWith uses custom allocator") {
-      std::pmr::polymorphic_allocator<int> alloc(resource);
+    SUBCASE("Partition uses a memory resource") {
       auto [even, odd] =
           FilterAdapter(data, [](int /*value*/) {
             return true;
-          }).PartitionWith([](int value) { return value % 2 == 0; }, alloc);
+          }).Partition([](int value) { return value % 2 == 0; }, resource);
 
       CHECK_EQ(even.size(), 3);
       CHECK_EQ(odd.size(), 3);
+      CHECK_EQ(even.get_allocator().resource(), resource);
+      CHECK_EQ(odd.get_allocator().resource(), resource);
       CHECK_EQ(even[0], 2);
       CHECK_EQ(even[1], 4);
       CHECK_EQ(even[2], 6);
@@ -1495,26 +1500,50 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       CHECK_EQ(odd[2], 5);
     }
 
-    SUBCASE("GroupByWith uses custom allocators") {
-      using ValueAlloc = std::pmr::polymorphic_allocator<int>;
-      using GroupVector = std::vector<int, ValueAlloc>;
-      using MapValue = std::pair<const int, GroupVector>;
-      using MapAlloc = std::pmr::polymorphic_allocator<MapValue>;
+    SUBCASE("Partition uses the default memory resource") {
+      auto* previous = std::pmr::set_default_resource(resource);
+      auto [even, odd] = FilterAdapter(data, [](int /*value*/) {
+                           return true;
+                         }).Partition([](int value) { return value % 2 == 0; });
+      std::pmr::set_default_resource(previous);
 
-      auto groups = FilterAdapter(data, [](int /*value*/) { return true; })
-                        .GroupByWith([](int value) { return value % 3; },
-                                     MapAlloc(resource), ValueAlloc(resource));
+      CHECK_EQ(even.get_allocator().resource(), resource);
+      CHECK_EQ(odd.get_allocator().resource(), resource);
+    }
+
+    SUBCASE("GroupBy uses a memory resource") {
+      auto groups = FilterAdapter(data, [](int /*value*/) {
+                      return true;
+                    }).GroupBy([](int value) { return value % 3; }, resource);
 
       REQUIRE_EQ(groups.size(), 3);
+      CHECK_EQ(groups.get_allocator().resource(), resource);
       CHECK_EQ(groups[0].size(), 2);
       CHECK_EQ(groups[1].size(), 2);
       CHECK_EQ(groups[2].size(), 2);
+      CHECK_EQ(groups[0].get_allocator().resource(), resource);
+      CHECK_EQ(groups[1].get_allocator().resource(), resource);
+      CHECK_EQ(groups[2].get_allocator().resource(), resource);
       CHECK_EQ(groups[0][0], 3);
       CHECK_EQ(groups[0][1], 6);
       CHECK_EQ(groups[1][0], 1);
       CHECK_EQ(groups[1][1], 4);
       CHECK_EQ(groups[2][0], 2);
       CHECK_EQ(groups[2][1], 5);
+    }
+
+    SUBCASE("GroupBy uses the default memory resource") {
+      auto* previous = std::pmr::set_default_resource(resource);
+      auto groups = FilterAdapter(data, [](int /*value*/) {
+                      return true;
+                    }).GroupBy([](int value) { return value % 3; });
+      std::pmr::set_default_resource(previous);
+
+      CHECK_EQ(groups.get_allocator().resource(), resource);
+      REQUIRE_EQ(groups.size(), 3);
+      CHECK_EQ(groups[0].get_allocator().resource(), resource);
+      CHECK_EQ(groups[1].get_allocator().resource(), resource);
+      CHECK_EQ(groups[2].get_allocator().resource(), resource);
     }
   }
 
@@ -1567,7 +1596,8 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
                         .Filter([](int value) { return value > 10; })
                         .Collect();
 
-      CHECK_EQ(result, std::vector<int>{12, 14, 16});  // (6*2), (7*2), (8*2)
+      CHECK_EQ(result,
+               std::pmr::vector<int>{12, 14, 16});  // (6*2), (7*2), (8*2)
     }
   }
 
@@ -1577,7 +1607,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto reversed = ReverseAdapter(data);
       auto result = reversed.Collect();
 
-      CHECK_EQ(result, std::vector<int>{5, 4, 3, 2, 1});
+      CHECK_EQ(result, std::pmr::vector<int>{5, 4, 3, 2, 1});
     }
 
     SUBCASE("Empty range") {
@@ -1593,7 +1623,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto reversed = ReverseAdapter(data);
       auto result = reversed.Collect();
 
-      CHECK_EQ(result, std::vector<int>{42});
+      CHECK_EQ(result, std::pmr::vector<int>{42});
     }
 
     SUBCASE("Reverse with Filter") {
@@ -1602,7 +1632,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
                         .Filter([](int x) { return x % 2 == 0; })
                         .Collect();
 
-      CHECK_EQ(result, std::vector<int>{6, 4, 2});
+      CHECK_EQ(result, std::pmr::vector<int>{6, 4, 2});
     }
 
     SUBCASE("Reverse with Map") {
@@ -1610,7 +1640,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto result =
           ReverseAdapter(data).Map([](int x) { return x * 10; }).Collect();
 
-      CHECK_EQ(result, std::vector<int>{30, 20, 10});
+      CHECK_EQ(result, std::pmr::vector<int>{30, 20, 10});
     }
   }
 
@@ -1620,7 +1650,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto joined = JoinAdapter(nested);
       auto result = joined.Collect();
 
-      CHECK_EQ(result, std::vector<int>{1, 2, 3, 4, 5});
+      CHECK_EQ(result, std::pmr::vector<int>{1, 2, 3, 4, 5});
     }
 
     SUBCASE("Join with empty inner vectors") {
@@ -1628,7 +1658,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto joined = JoinAdapter(nested);
       auto result = joined.Collect();
 
-      CHECK_EQ(result, std::vector<int>{1, 2, 3, 4, 5});
+      CHECK_EQ(result, std::pmr::vector<int>{1, 2, 3, 4, 5});
     }
 
     SUBCASE("Join empty outer vector") {
@@ -1644,14 +1674,14 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto result = JoinAdapter(nested)
                         .Filter([](int x) { return x % 2 == 0; })
                         .Collect();
-      CHECK_EQ(result, std::vector<int>{2, 4, 6, 8});
+      CHECK_EQ(result, std::pmr::vector<int>{2, 4, 6, 8});
     }
 
     SUBCASE("Join with Map") {
       std::vector<std::vector<int>> nested = {{1, 2}, {3, 4}};
       auto result =
           JoinAdapter(nested).Map([](int x) { return x * x; }).Collect();
-      CHECK_EQ(result, std::vector<int>{1, 4, 9, 16});
+      CHECK_EQ(result, std::pmr::vector<int>{1, 4, 9, 16});
     }
   }
 
@@ -1706,6 +1736,17 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       CHECK_EQ(result[0], std::vector<int>{1, 2});
       CHECK_EQ(result[1], std::vector<int>{3, 4});
     }
+
+    SUBCASE("SlideView Collect uses a memory resource") {
+      std::vector<int> data = {1, 2, 3};
+      std::pmr::monotonic_buffer_resource resource;
+      auto window = *SlideAdapter(data, 2).begin();
+
+      auto result = window.Collect(&resource);
+
+      CHECK_EQ(result.get_allocator().resource(), &resource);
+      CHECK_EQ(result, std::pmr::vector<int>{1, 2});
+    }
   }
 
   TEST_CASE("helios::utils::StrideAdapter") {
@@ -1714,7 +1755,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto strided = StrideAdapter(data, 3);
       auto result = strided.Collect();
 
-      CHECK_EQ(result, std::vector<int>{1, 4, 7});
+      CHECK_EQ(result, std::pmr::vector<int>{1, 4, 7});
     }
 
     SUBCASE("Stride of 1") {
@@ -1722,7 +1763,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto strided = StrideAdapter(data, 1);
       auto result = strided.Collect();
 
-      CHECK_EQ(result, std::vector<int>{1, 2, 3, 4, 5});
+      CHECK_EQ(result, std::pmr::vector<int>{1, 2, 3, 4, 5});
     }
 
     SUBCASE("Stride of 2") {
@@ -1730,7 +1771,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto strided = StrideAdapter(data, 2);
       auto result = strided.Collect();
 
-      CHECK_EQ(result, std::vector<int>{1, 3, 5});
+      CHECK_EQ(result, std::pmr::vector<int>{1, 3, 5});
     }
 
     SUBCASE("Stride larger than data") {
@@ -1738,7 +1779,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto strided = StrideAdapter(data, 10);
       auto result = strided.Collect();
 
-      CHECK_EQ(result, std::vector<int>{1});
+      CHECK_EQ(result, std::pmr::vector<int>{1});
     }
 
     SUBCASE("Stride with Filter") {
@@ -1746,7 +1787,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto result =
           StrideAdapter(data, 2).Filter([](int x) { return x > 3; }).Collect();
 
-      CHECK_EQ(result, std::vector<int>{5, 7, 9});
+      CHECK_EQ(result, std::pmr::vector<int>{5, 7, 9});
     }
 
     SUBCASE("Stride with Map") {
@@ -1754,7 +1795,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       auto result =
           StrideAdapter(data, 2).Map([](int x) { return x * 10; }).Collect();
 
-      CHECK_EQ(result, std::vector<int>{10, 30, 50});
+      CHECK_EQ(result, std::pmr::vector<int>{10, 30, 50});
     }
   }
 
@@ -1808,6 +1849,17 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
 
       CHECK_EQ(result.size(), 1);
       CHECK_EQ(result[0], std::vector<int>{1, 2, 3});
+    }
+
+    SUBCASE("ChunkView Collect uses a memory resource") {
+      std::vector<int> data = {1, 2, 3};
+      std::pmr::monotonic_buffer_resource resource;
+      auto chunk = *ChunkAdapter(data, 2).begin();
+
+      auto result = chunk.Collect(&resource);
+
+      CHECK_EQ(result.get_allocator().resource(), &resource);
+      CHECK_EQ(result, std::pmr::vector<int>{1, 2});
     }
   }
 
@@ -1883,7 +1935,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
                         .Map([](int a, int b) { return a + b; })
                         .Collect();
 
-      CHECK_EQ(result, std::vector<int>{11, 22, 33});
+      CHECK_EQ(result, std::pmr::vector<int>{11, 22, 33});
     }
 
     SUBCASE("Zip different types") {
@@ -1911,7 +1963,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
                         .Map([](int x) { return x * x; })
                         .Collect();
 
-      CHECK_EQ(result, std::vector<int>{100, 64, 36, 16, 4});
+      CHECK_EQ(result, std::pmr::vector<int>{100, 64, 36, 16, 4});
     }
 
     SUBCASE("Stride -> Filter -> Take") {
@@ -1921,7 +1973,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
                         .Take(2)
                         .Collect();
 
-      CHECK_EQ(result, std::vector<int>{5, 7});
+      CHECK_EQ(result, std::pmr::vector<int>{5, 7});
     }
 
     SUBCASE("Slide -> Map -> Filter") {
@@ -1932,7 +1984,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
               .Filter([](int sum) { return sum > 4; })
               .Collect();
 
-      CHECK_EQ(result, std::vector<int>{5, 7, 9});
+      CHECK_EQ(result, std::pmr::vector<int>{5, 7, 9});
     }
 
     SUBCASE("Zip -> Filter -> Map") {
@@ -1943,7 +1995,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
                         .Map([](int a, int b) { return a * b; })
                         .Collect();
 
-      CHECK_EQ(result, std::vector<int>{5, 8});
+      CHECK_EQ(result, std::pmr::vector<int>{5, 8});
     }
   }
 }

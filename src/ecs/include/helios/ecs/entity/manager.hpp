@@ -10,6 +10,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <iterator>
+#include <memory_resource>
 #include <ranges>
 #include <vector>
 
@@ -34,6 +35,13 @@ namespace helios::ecs {
 class EntityManager {
 public:
   EntityManager() = default;
+
+  /**
+   * @brief Constructs an entity manager using `resource` for internal storage.
+   * @param resource Memory resource for generation and free-list vectors.
+   */
+  explicit EntityManager(std::pmr::memory_resource* resource);
+  EntityManager(std::nullptr_t) = delete;
   EntityManager(const EntityManager& other);
   EntityManager(EntityManager&& other) noexcept;
   ~EntityManager() = default;
@@ -198,6 +206,15 @@ public:
     return entity_count_.load(std::memory_order_relaxed);
   }
 
+  /**
+   * @brief Returns the memory resource used for internal storage.
+   * @return Memory resource passed to the constructor (or copied from the
+   * source manager)
+   */
+  [[nodiscard]] std::pmr::memory_resource* GetMemoryResource() const noexcept {
+    return generations_.get_allocator().resource();
+  }
+
 private:
   [[nodiscard]] Entity CreateEntityWithId(Entity::IndexType index,
                                           Entity::GenerationType generation);
@@ -221,9 +238,10 @@ private:
   /// Generation per entity index. Concurrent element access MUST go through
   /// `GenRef()` while a reservation/read phase is active. Plain vector
   /// copy/move/resize is only legal while concurrent accessors are quiescent.
-  std::vector<Entity::GenerationType> generations_;
-  std::vector<Entity::IndexType> free_indices_;  ///< Recycled entity indices
-  std::atomic<size_t> entity_count_{0};          ///< Number of living entities
+  std::pmr::vector<Entity::GenerationType> generations_;
+  std::pmr::vector<Entity::IndexType>
+      free_indices_;                     ///< Recycled entity indices
+  std::atomic<size_t> entity_count_{0};  ///< Number of living entities
 
   /// Next available index (thread-safe)
   std::atomic<Entity::IndexType> next_index_{0};

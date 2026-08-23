@@ -8,6 +8,11 @@
 #include <helios/ecs/schedule/stage.hpp>
 #include <helios/ecs/schedule/stage_settings.hpp>
 
+#if defined(HELIOS_ECS_ENABLE_PROFILE) && \
+    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#include <helios/memory/temporary_storage_helpers.hpp>
+#endif
+
 #include <algorithm>
 #include <cstddef>
 #include <functional>
@@ -17,11 +22,6 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
-
-#if defined(HELIOS_ECS_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-#include <format>
-#endif
 
 namespace helios::async {
 
@@ -357,7 +357,7 @@ template <StageTrait T>
 inline void Scheduler::RunStage(const T& stage, World& world,
                                 RunStageOptions options) {
   HELIOS_ECS_PROFILE_SCOPE();
-  HELIOS_ECS_PROFILE_ZONE_NAME(std::format(
+  HELIOS_ECS_PROFILE_ZONE_NAME(utils::TempFormat(
       "helios::ecs::Scheduler::RunStage{{name: {}}}", StageNameOf(stage)));
   HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
 
@@ -368,7 +368,7 @@ template <StageTrait T>
 inline void Scheduler::RunStage(const T& stage, World& world,
                                 Executor& executor, RunStageOptions options) {
   HELIOS_ECS_PROFILE_SCOPE();
-  HELIOS_ECS_PROFILE_ZONE_NAME(std::format(
+  HELIOS_ECS_PROFILE_ZONE_NAME(utils::TempFormat(
       "helios::ecs::Scheduler::RunStage{{name: {}}}", StageNameOf(stage)));
   HELIOS_ECS_PROFILE_ZONE_VALUE(schedules_.size());
 

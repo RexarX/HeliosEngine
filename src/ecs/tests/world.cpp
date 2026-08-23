@@ -7,13 +7,36 @@
 #include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
 
+#include <concepts>
+#include <cstddef>
 #include <memory_resource>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
 using namespace helios::ecs;
 
 namespace {
+
+class CountingResource final : public std::pmr::memory_resource {
+public:
+  size_t bytes_allocated = 0;
+
+protected:
+  auto do_allocate(size_t bytes, size_t alignment) -> void* override {
+    bytes_allocated += bytes;
+    return std::pmr::new_delete_resource()->allocate(bytes, alignment);
+  }
+
+  void do_deallocate(void* ptr, size_t bytes, size_t alignment) override {
+    std::pmr::new_delete_resource()->deallocate(ptr, bytes, alignment);
+  }
+
+  [[nodiscard]] auto do_is_equal(
+      const std::pmr::memory_resource& other) const noexcept -> bool override {
+    return this == &other;
+  }
+};
 
 struct Position {
   float x = 0.0F;
@@ -42,7 +65,7 @@ struct MovementBundle {
   Velocity velocity;
 
   [[nodiscard]] constexpr ComponentTypes Build() {
-    return {std::move(position), std::move(velocity)};
+    return {position, velocity};
   }
 };
 
@@ -52,9 +75,7 @@ struct TaggedMovementBundle {
   Tag tag;
   MovementBundle movement;
 
-  [[nodiscard]] constexpr ComponentTypes Build() {
-    return {std::move(tag), std::move(movement)};
-  }
+  [[nodiscard]] constexpr ComponentTypes Build() { return {tag, movement}; }
 };
 
 struct DeltaTime {
@@ -108,6 +129,35 @@ concept HasRegisterAccess = requires(AccessPolicyBuilder& builder) {
 }  // namespace
 
 TEST_SUITE("helios::ecs::World") {
+  TEST_CASE("helios::ecs::World::ctor") {
+    SUBCASE("Default ctor") {
+      World world;
+      CHECK_EQ(world.GetMemoryResource(), std::pmr::get_default_resource());
+      CHECK_EQ(world.EntityCount(), 0);
+    }
+
+    SUBCASE("Memory resource ctor") {
+      CountingResource resource;
+      World world{&resource};
+
+      CHECK_EQ(world.GetMemoryResource(), &resource);
+
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{1.0F, 2.0F});
+      world.InsertResources(DeltaTime{0.016F});
+      world.EnqueueCommand(AddEntityCmd{});
+
+      CHECK_EQ(world.EntityCount(), 1);
+      CHECK(world.HasResource<DeltaTime>());
+      CHECK_EQ(world.CommandCount(), 1);
+      CHECK_GT(resource.bytes_allocated, 0);
+    }
+
+    SUBCASE("Nullptr ctor is deleted") {
+      CHECK_FALSE(std::constructible_from<World, std::nullptr_t>);
+    }
+  }
+
   TEST_CASE("helios::ecs::World::Update") {
     SUBCASE("Update executes pending commands") {
       World world;
@@ -811,7 +861,7 @@ TEST_SUITE("helios::ecs::World") {
   }
 
   TEST_CASE("helios::ecs::World::Query") {
-    SUBCASE("Query with default allocator is valid") {
+    SUBCASE("Query without extra args uses the world resource") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{1.0F, 2.0F});
@@ -863,7 +913,7 @@ TEST_SUITE("helios::ecs::World") {
   }
 
   TEST_CASE("helios::ecs::World::ReadOnlyQuery") {
-    SUBCASE("ReadOnlyQuery with default allocator returns a valid builder") {
+    SUBCASE("ReadOnlyQuery without extra args returns a valid builder") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{5.0F, 6.0F});
@@ -883,7 +933,7 @@ TEST_SUITE("helios::ecs::World") {
 
       auto* resource = std::pmr::get_default_resource();
       // Should compile and run without issues.
-      auto builder = world.ReadOnlyQuery(resource);
+      auto builder = world.ReadOnlyQuery<Position>(resource);
     }
   }
 

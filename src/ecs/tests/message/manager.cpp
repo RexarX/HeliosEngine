@@ -5,14 +5,36 @@
 #include <helios/ecs/message/queue.hpp>
 
 #include <functional>
+#include <memory_resource>
 #include <string_view>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
 using namespace helios::ecs;
-using ConsumedRegistry = helios::ecs::ConsumedMessagesRegistry<>;
+using ConsumedRegistry = helios::ecs::ConsumedMessagesRegistry;
 
 namespace {
+
+class CountingResource final : public std::pmr::memory_resource {
+public:
+  size_t bytes_allocated = 0;
+
+protected:
+  auto do_allocate(size_t bytes, size_t alignment) -> void* override {
+    bytes_allocated += bytes;
+    return std::pmr::new_delete_resource()->allocate(bytes, alignment);
+  }
+
+  void do_deallocate(void* ptr, size_t bytes, size_t alignment) override {
+    std::pmr::new_delete_resource()->deallocate(ptr, bytes, alignment);
+  }
+
+  [[nodiscard]] auto do_is_equal(
+      const std::pmr::memory_resource& other) const noexcept -> bool override {
+    return this == &other;
+  }
+};
 
 struct Position {
   static constexpr bool kConsumable = true;
@@ -52,6 +74,25 @@ TEST_SUITE("helios::ecs::MessageManager") {
       const MessageManager manager;
       CHECK_EQ(manager.RegisteredMessageCount(), 0);
       CHECK_FALSE(manager.HasMessages());
+      CHECK_EQ(manager.GetMemoryResource(), std::pmr::get_default_resource());
+    }
+
+    SUBCASE("Memory resource ctor") {
+      CountingResource resource;
+      MessageManager manager{&resource};
+
+      CHECK_EQ(manager.GetMemoryResource(), &resource);
+
+      manager.Register<Position>();
+      manager.Write(Position{1.0F, 2.0F});
+      manager.Write(Position{3.0F, 4.0F});
+
+      CHECK(manager.HasMessages<Position>());
+      CHECK_GT(resource.bytes_allocated, 0);
+    }
+
+    SUBCASE("Nullptr ctor is deleted") {
+      CHECK_FALSE(std::is_constructible_v<MessageManager, std::nullptr_t>);
     }
 
     SUBCASE("Move ctor") {
@@ -640,7 +681,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
         "modifying source") {
       MessageManager manager;
       MessageQueue local_mut;
-      const MessageQueue<>& local = local_mut;
+      const MessageQueue& local = local_mut;
 
       manager.Register<Position>();
       local_mut.Register<Position>();

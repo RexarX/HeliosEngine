@@ -194,15 +194,6 @@ concept ValidWorldComponentAccess =
 template <typename T>
 concept ValidComponentAccess = ComponentTrait<ComponentTypeExtractor_t<T>>;
 
-/// @brief Concept for STL-compatible allocators.
-template <typename Alloc, typename T>
-concept AllocatorFor = requires(Alloc alloc, size_t n) {
-  { alloc.allocate(n) } -> std::same_as<T*>;
-  { alloc.deallocate(std::declval<T*>(), n) };
-  typename Alloc::value_type;
-  requires std::same_as<typename Alloc::value_type, T>;
-};
-
 /**
  * @brief Checks if a component access specifier refers to a tag (empty)
  * component.

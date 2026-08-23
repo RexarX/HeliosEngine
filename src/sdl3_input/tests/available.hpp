@@ -1,6 +1,7 @@
 #pragma once
 
 #include <helios/app/application.hpp>
+#include <helios/sdl3/details/lifetime.hpp>
 #include <helios/sdl3/input/plugin.hpp>
 #include <helios/sdl3/plugin.hpp>
 
@@ -16,22 +17,14 @@ namespace helios::sdl3::input::test {
 
 [[nodiscard]] inline bool SdlVideoAvailable() {
   static const bool available = []() -> bool {
-    if (!SDL_InitSubSystem(SDL_INIT_VIDEO)) {
-      return false;
-    }
-    SDL_QuitSubSystem(SDL_INIT_VIDEO);
-    return true;
+    return helios::sdl3::Probe(SDL_INIT_VIDEO);
   }();
   return available;
 }
 
 [[nodiscard]] inline bool SdlGamepadAvailable() {
   static const bool available = []() -> bool {
-    if (!SDL_InitSubSystem(SDL_INIT_GAMEPAD)) {
-      return false;
-    }
-    SDL_QuitSubSystem(SDL_INIT_GAMEPAD);
-    return true;
+    return helios::sdl3::Probe(SDL_INIT_GAMEPAD);
   }();
   return available;
 }

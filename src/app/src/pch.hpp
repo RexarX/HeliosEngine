@@ -13,6 +13,7 @@
 #include <format>
 #include <functional>
 #include <memory>
+#include <memory_resource>
 #include <mutex>
 #include <optional>
 #include <ratio>
@@ -23,9 +24,3 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
-
-#ifdef HELIOS_USE_STL_FLAT_MAP
-#include <flat_map>
-#else
-#include <boost/container/flat_map.hpp>
-#endif

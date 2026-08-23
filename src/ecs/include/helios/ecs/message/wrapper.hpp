@@ -24,10 +24,8 @@ namespace helios::ecs {
  * @note Thread-safe, except for the `Consume` method which is NOT thread-safe.
  * @tparam T The type of the message being wrapped. Must satisfy
  * `ConsumableMessageTrait`.
- * @tparam Alloc Allocator type for the consumed messages registry
  */
-template <ConsumableMessageTrait T,
-          typename Alloc = std::pmr::polymorphic_allocator<std::byte>>
+template <ConsumableMessageTrait T>
 class ConsumableMessageWrapper {
 public:
   /**
@@ -39,7 +37,7 @@ public:
    * @param id Stable message id
    */
   constexpr ConsumableMessageWrapper(const T& message,
-                                     ConsumedMessagesRegistry<Alloc>& registry,
+                                     ConsumedMessagesRegistry& registry,
                                      MessageId<T> id) noexcept
       : message_(message), id_(id), registry_(registry) {}
 
@@ -115,7 +113,7 @@ private:
   std::reference_wrapper<const T> message_;  ///< Const reference to the message
   MessageId<T> id_;                          ///< Stable message id
   /// Per-system consumed registry
-  std::reference_wrapper<ConsumedMessagesRegistry<Alloc>> registry_;
+  std::reference_wrapper<ConsumedMessagesRegistry> registry_;
 };
 
 /**

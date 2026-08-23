@@ -18,6 +18,7 @@
 #include <concepts>
 #include <cstddef>
 #include <functional>
+#include <memory_resource>
 #include <mutex>
 #include <optional>
 #include <string>
@@ -153,14 +154,18 @@ public:
 #endif
 
   /// @brief Constructs a sub-app with built-in schedules registered.
-  SubApp();
+  explicit SubApp(
+      std::pmr::memory_resource* resource = std::pmr::get_default_resource());
+  SubApp(std::nullptr_t) = delete;
 
   /**
    * @brief Constructs a sub-app with the given name and built-in schedules
    * registered.
    * @param name Human-readable sub-app name
+   * @param resource Memory resource forwarded to the owned `World`
    */
-  explicit SubApp(std::string name);
+  explicit SubApp(std::string name, std::pmr::memory_resource* resource =
+                                        std::pmr::get_default_resource());
 
   SubApp(const SubApp&) = delete;
 

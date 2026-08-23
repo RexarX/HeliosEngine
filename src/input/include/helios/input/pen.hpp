@@ -2,6 +2,7 @@
 
 #include <helios/input/axis.hpp>
 #include <helios/input/button_input.hpp>
+#include <helios/memory/temporary_storage.hpp>
 
 #include <cstdint>
 #include <format>
@@ -199,13 +200,13 @@ inline std::ostream& operator<<(std::ostream& os, PenDeviceType type) {
 /**
  * @brief Formats a pen snapshot using an output iterator.
  * @tparam It Output iterator type
- * @param pen Pen snapshot
  * @param out Output iterator to write the formatted string to
+ * @param pen Pen snapshot
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Pen& pen, It out) {
+inline It ToString(It out, const Pen& pen) {
   return std::format_to(
       out,
       "Pen{{position=({}, {}), delta=({}, {}), id={}, device_type={}, "
@@ -217,12 +218,26 @@ inline It ToString(const Pen& pen, It out) {
 /**
  * @brief Formats a pen snapshot as a string.
  * @param pen Pen snapshot
- * @return Formatted pen string
+ * @return Formatted string
  */
 [[nodiscard]] inline std::string ToString(const Pen& pen) {
   std::string result;
-  result.reserve(160);
-  ToString(pen, std::back_inserter(result));
+  result.reserve(256);
+  ToString(std::back_inserter(result), pen);
+  return result;
+}
+
+/**
+ * @brief Formats a pen snapshot as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param pen Pen snapshot
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Pen& pen) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), pen);
   return result;
 }
 
@@ -233,7 +248,7 @@ inline It ToString(const Pen& pen, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const Pen& pen) {
-  ToString(pen, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), pen);
   return os;
 }
 
@@ -286,7 +301,7 @@ struct formatter<helios::input::Pen> {
   }
 
   static auto format(const helios::input::Pen& pen, format_context& ctx) {
-    return helios::input::ToString(pen, ctx.out());
+    return helios::input::ToString(ctx.out(), pen);
   }
 };
 

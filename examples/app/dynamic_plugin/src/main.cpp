@@ -49,8 +49,7 @@ int main() {
   // Loading validates the exported symbols and constructs the plugin object.
   const auto load_result = dynamic_plugin.Load(plugin_path);
   if (!load_result) [[unlikely]] {
-    hlog::Error("Load failed ({})",
-                happ::DynamicPluginErrorToString(load_result.error()));
+    hlog::Error("Load failed ({})", happ::ToString(load_result.error()));
     return 1;
   }
 

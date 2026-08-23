@@ -68,3 +68,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     target_compile_definitions(helios_module_sdl3 PUBLIC HELIOS_SDL3_FORCE_X11)
   endif()
 endif()
+
+if(TARGET helios_sdl3_tests AND UNIX AND HELIOS_ENABLE_SANITIZERS AND
+    HELIOS_SANITIZER_ADDRESS)
+  set_property(TEST helios_sdl3_tests APPEND PROPERTY ENVIRONMENT
+      "LSAN_OPTIONS=suppressions=${HELIOS_ROOT_DIR}/cmake/sdl3_lsan.supp:print_suppressions=0")
+endif()

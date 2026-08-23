@@ -8,9 +8,13 @@
 #include <helios/log/logger.hpp>
 #include <helios/utils/dynamic_library.hpp>
 
+#if defined(HELIOS_APP_ENABLE_PROFILE) && \
+    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#include <helios/memory/temporary_storage_helpers.hpp>
+#endif
+
 #include <expected>
 #include <filesystem>
-#include <format>
 #include <memory>
 #include <string_view>
 #include <system_error>
@@ -23,7 +27,7 @@ DynamicPlugin::DynamicPlugin(const std::filesystem::path& path,
   const auto result = Load(path, config);
   if (!result) [[unlikely]] {
     log::Error("Failed to load dynamic plugin '{}': {}!", path.string(),
-               DynamicPluginErrorToString(result.error()));
+               ToString(result.error()));
   }
 }
 
@@ -53,8 +57,8 @@ auto DynamicPlugin::Load(const std::filesystem::path& path,
                          DynamicPluginConfig config)
     -> DynamicPluginResult<void> {
   HELIOS_APP_PROFILE_SCOPE();
-  HELIOS_APP_PROFILE_ZONE_TEXT(
-      std::format("{} ({})", plugin_type_id_.QualifiedName(), path.string()));
+  HELIOS_APP_PROFILE_ZONE_TEXT(utils::TempFormat(
+      "{} ({})", plugin_type_id_.QualifiedName(), path.string()));
 
   config_ = config;
 
@@ -81,7 +85,7 @@ auto DynamicPlugin::Load(const std::filesystem::path& path,
 
 auto DynamicPlugin::Unload() -> DynamicPluginResult<void> {
   HELIOS_APP_PROFILE_SCOPE();
-  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(
+  HELIOS_APP_PROFILE_ZONE_TEXT(utils::TempFormat(
       "{} ({})", plugin_type_id_.QualifiedName(), library_.Path().string()));
 
   HELIOS_ASSERT(Loaded(), "Plugin is not loaded!");
@@ -99,7 +103,7 @@ auto DynamicPlugin::Unload() -> DynamicPluginResult<void> {
 
 auto DynamicPlugin::Reload(App& app) -> DynamicPluginResult<void> {
   HELIOS_APP_PROFILE_SCOPE();
-  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(
+  HELIOS_APP_PROFILE_ZONE_TEXT(utils::TempFormat(
       "{} ({})", plugin_type_id_.QualifiedName(), library_.Path().string()));
 
   HELIOS_ASSERT(Loaded(), "Plugin is not loaded!");

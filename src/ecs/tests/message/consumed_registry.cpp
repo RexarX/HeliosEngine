@@ -41,12 +41,11 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
       CHECK_EQ(registry.TotalConsumedCount(), 0);
     }
 
-    SUBCASE("Allocator construction produces an empty registry") {
-      std::array<std::byte, 256> buffer{};
+    SUBCASE("Resource construction produces an empty registry") {
+      std::array<std::byte, 256> buffer = {};
       std::pmr::monotonic_buffer_resource resource(buffer.data(),
                                                    buffer.size());
-      const PmrConsumedMessagesRegistry registry(
-          std::pmr::polymorphic_allocator<std::byte>{&resource});
+      const ConsumedMessagesRegistry registry(&resource);
 
       CHECK(registry.Empty());
       CHECK_EQ(registry.TotalConsumedCount(), 0);
@@ -56,7 +55,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
       std::array<std::byte, 256> buffer{};
       std::pmr::monotonic_buffer_resource resource(buffer.data(),
                                                    buffer.size());
-      PmrConsumedMessagesRegistry registry(&resource);
+      ConsumedMessagesRegistry registry(&resource);
       registry.MarkConsumed<PositionMsg>(MessageId<PositionMsg>{9});
 
       CHECK(registry.IsConsumed<PositionMsg>(MessageId<PositionMsg>{9}));
@@ -65,9 +64,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
 
     SUBCASE("nullptr constructor is deleted") {
       CHECK_FALSE(
-          std::is_constructible_v<ConsumedMessagesRegistry<>, std::nullptr_t>);
-      CHECK_FALSE(
-          std::is_constructible_v<PmrConsumedMessagesRegistry, std::nullptr_t>);
+          std::is_constructible_v<ConsumedMessagesRegistry, std::nullptr_t>);
     }
 
     SUBCASE("Copy construction produces an independent copy") {
@@ -217,7 +214,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
       ConsumedMessagesRegistry src_mut;
       src_mut.MarkConsumed<PositionMsg>(MessageId<PositionMsg>{1});
       src_mut.MarkConsumed<PositionMsg>(MessageId<PositionMsg>{2});
-      const ConsumedMessagesRegistry<>& src = src_mut;
+      const ConsumedMessagesRegistry& src = src_mut;
 
       dst.MarkConsumed<PositionMsg>(MessageId<PositionMsg>{0});
       dst.MergeFrom(src);
@@ -253,7 +250,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
       std::pmr::monotonic_buffer_resource resource(buffer.data(),
                                                    buffer.size());
       ConsumedMessagesRegistry dst;
-      PmrConsumedMessagesRegistry src(&resource);
+      ConsumedMessagesRegistry src(&resource);
 
       dst.MarkConsumed<PositionMsg>(MessageId<PositionMsg>{0});
       src.MarkConsumed<PositionMsg>(MessageId<PositionMsg>{1});
@@ -660,7 +657,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
       registry.MarkConsumed<PositionMsg>(MessageId<PositionMsg>{0});
       const auto& data = registry.Data();
 
-      CHECK_FALSE(data.empty());
+      CHECK_FALSE(data.Empty());
     }
 
     SUBCASE("Data map contains an entry for each type that has been marked") {
@@ -670,7 +667,7 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
       registry.MarkConsumed<VelocityMsg>(MessageId<VelocityMsg>{1});
       registry.MarkConsumed<HealthMsg>(MessageId<HealthMsg>{2});
 
-      CHECK_EQ(registry.Data().size(), 3);
+      CHECK_EQ(registry.Data().Size(), 3);
     }
 
     SUBCASE("Data map entries hold correctly sorted indices") {
@@ -680,11 +677,27 @@ TEST_SUITE("helios::ecs::ConsumedMessagesRegistry") {
       registry.MarkConsumed<PositionMsg>(MessageId<PositionMsg>{2});
       const auto& data = registry.Data();
 
-      const auto it = data.find(MessageTypeIndex::From<PositionMsg>());
+      const auto it = data.Find(MessageTypeIndex::From<PositionMsg>());
       REQUIRE_NE(it, data.end());
       REQUIRE_EQ(it->second.size(), 2);
       CHECK_EQ(it->second[0].value, 2);
       CHECK_EQ(it->second[1].value, 4);
+    }
+  }
+
+  TEST_CASE("helios::ecs::ConsumedMessagesRegistry::GetMemoryResource") {
+    SUBCASE("Default construction uses the default resource") {
+      const ConsumedMessagesRegistry registry;
+      CHECK_EQ(registry.GetMemoryResource(), std::pmr::get_default_resource());
+    }
+
+    SUBCASE("Returns the resource used at construction") {
+      std::array<std::byte, 256> buffer = {};
+      std::pmr::monotonic_buffer_resource resource(buffer.data(),
+                                                   buffer.size());
+      const ConsumedMessagesRegistry registry(&resource);
+
+      CHECK_EQ(registry.GetMemoryResource(), &resource);
     }
   }
 }

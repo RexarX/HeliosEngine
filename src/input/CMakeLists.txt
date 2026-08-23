@@ -30,6 +30,7 @@ helios_module(
         PUBLIC app
         PUBLIC ecs
         PUBLIC log
+        PUBLIC memory
 
     TEST_SOURCES
         tests/axis.cpp

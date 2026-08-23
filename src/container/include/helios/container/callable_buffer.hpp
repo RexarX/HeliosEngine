@@ -3,8 +3,10 @@
 #include <helios/assert.hpp>
 #include <helios/container/details/callable_buffer_common.hpp>
 
+#include <algorithm>
 #include <concepts>
 #include <cstddef>
+#include <cstdint>
 #include <cstring>
 #include <functional>
 #include <memory>
@@ -18,85 +20,55 @@
 namespace helios::container {
 
 /**
- * @brief Implementation class for a single-instance callable buffer with
- * explicit allocator.
+ * @brief Single-instance callable buffer with type-erased invocation.
  * @details Stores exactly one callable of any `CallableBufferStorable` type in
  * a contiguous byte buffer, with embedded function pointers for type-erased
  * invocation. Unlike `CallableBufferArray`, this container holds at most one
  * callable at a time. Designed for command/handler patterns where you want
  * value semantics with type-erased dispatch.
- *
- * Use the `CallableBuffer` alias for ergonomic usage.
- *
- * @tparam Allocator Allocator type for the internal byte buffer (default:
- * `std::allocator<std::byte>`).
- * @tparam Signatures Function signatures in the form void(Args...).
+ * @tparam Signatures Function signatures in the form `void(Args...)`.
  */
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-class CallableBufferImpl {
-public:
-  static constexpr size_t kNumOperations = sizeof...(Signatures);
-
-  using allocator_type = Allocator;
-  using byte_allocator_type =
-      std::allocator_traits<allocator_type>::template rebind_alloc<std::byte>;
-  using size_type = size_t;
-
+class CallableBuffer {
 private:
-  using DestroyFn = void (*)(void*);
-  using RelocateFn = void (*)(void* dest, void* src);
-
-  /// @brief Function pointer type for the first signature (used for size
-  /// calculations).
-  using FirstExecuteFn = details::TupleToFunctionPtrType<
-      details::NthSignatureArgsT<0, Signatures...>>;
-
-  static_assert(((sizeof(details::TupleToFunctionPtrType<
-                         details::NthSignatureArgsT<0, Signatures...>>) ==
-                  sizeof(details::TupleToFunctionPtrType<
-                         details::SignatureArgsT<Signatures>>)) &&
-                 ...),
-                "All function pointer types must have the same size");
-
-  using BufferType = std::vector<std::byte, byte_allocator_type>;
-
   /// @brief Pack of signature types for use in method validation.
   using SignaturePack = std::tuple<Signatures...>;
 
 public:
-  /// @brief Default constructor. Creates an empty buffer with no callable.
-  CallableBufferImpl() = default;
+  static constexpr size_t kNumOperations = sizeof...(Signatures);
+  using size_type = size_t;
 
-  /**
-   * @brief Constructs with a custom allocator.
-   * @param alloc Allocator instance to use
-   */
-  explicit CallableBufferImpl(const allocator_type& alloc)
-      : buffer_(byte_allocator_type(alloc)) {}
+  /// @brief Default constructor using the default PMR resource.
+  CallableBuffer() = default;
 
   /**
    * @brief Constructs with a PMR memory resource.
-   * @details Enabled only when `allocator_type` is constructible from
-   * `std::pmr::memory_resource*`.
-   * @param resource Memory resource used to construct allocator
+   * @param resource Memory resource used for internal storage
    */
-  explicit CallableBufferImpl(std::pmr::memory_resource* resource)
-    requires std::constructible_from<allocator_type, std::pmr::memory_resource*>
-      : CallableBufferImpl(allocator_type{resource}) {}
+  explicit CallableBuffer(std::pmr::memory_resource* resource)
+      : buffer_(resource) {}
 
-  CallableBufferImpl(std::nullptr_t) = delete;
+  CallableBuffer(std::nullptr_t) = delete;
 
-  CallableBufferImpl(const CallableBufferImpl&) = delete;
-  CallableBufferImpl(CallableBufferImpl&& other) noexcept;
-  ~CallableBufferImpl() noexcept { Clear(); }
+  CallableBuffer(const CallableBuffer&) = delete;
+  CallableBuffer(CallableBuffer&& other) noexcept;
+  ~CallableBuffer() noexcept { Clear(); }
 
-  CallableBufferImpl& operator=(const CallableBufferImpl&) = delete;
-  CallableBufferImpl& operator=(CallableBufferImpl&& other) noexcept;
+  CallableBuffer& operator=(const CallableBuffer&) = delete;
+  CallableBuffer& operator=(CallableBuffer&& other) noexcept;
 
   /// @brief Destroys the stored callable (if any) and resets the buffer.
   void Clear() noexcept;
+
+  /**
+   * @brief Reserves bytes in the internal buffer.
+   * @details Empty buffers use `vector::reserve`. A stored non-trivial
+   * callable is relocated instead of memcpy'd if reallocation is required.
+   * @param bytes Number of bytes to reserve
+   */
+  void ReserveBytes(size_type bytes);
 
   /**
    * @brief Stores a callable using its default `operator()` for invocation.
@@ -155,14 +127,8 @@ public:
    * @brief Swaps contents with another buffer.
    * @param other Buffer to swap with
    */
-  void Swap(CallableBufferImpl& other) noexcept(
-      std::is_nothrow_swappable_v<BufferType>) {
-    buffer_.swap(other.buffer_);
-    std::swap(has_value_, other.has_value_);
-  }
-
-  friend void swap(CallableBufferImpl& lhs, CallableBufferImpl& rhs) noexcept(
-      std::is_nothrow_swappable_v<BufferType>) {
+  void Swap(CallableBuffer& other) noexcept;
+  friend void swap(CallableBuffer& lhs, CallableBuffer& rhs) noexcept {
     lhs.Swap(rhs);
   }
 
@@ -181,14 +147,31 @@ public:
   }
 
   /**
-   * @brief Gets the allocator used by the buffer.
-   * @return Allocator instance
+   * @brief Returns the memory resource used for internal storage.
+   * @return Memory resource passed to the constructor, or the default resource
    */
-  [[nodiscard]] allocator_type GetAllocator() const noexcept {
-    return allocator_type(buffer_.get_allocator());
+  [[nodiscard]] std::pmr::memory_resource* GetMemoryResource() const noexcept {
+    return buffer_.get_allocator().resource();
   }
 
 private:
+  using DestroyFn = void (*)(void*);
+  using RelocateFn = void (*)(void* dest, void* src);
+
+  /// @brief Function pointer type for the first signature (used for size
+  /// calculations).
+  using FirstExecuteFn = details::TupleToFunctionPtrType<
+      details::NthSignatureArgsT<0, Signatures...>>;
+
+  static_assert(((sizeof(details::TupleToFunctionPtrType<
+                         details::NthSignatureArgsT<0, Signatures...>>) ==
+                  sizeof(details::TupleToFunctionPtrType<
+                         details::SignatureArgsT<Signatures>>)) &&
+                 ...),
+                "All function pointer types must have the same size");
+
+  using BufferType = std::pmr::vector<std::byte>;
+
   static constexpr size_type BaseHeaderSize() noexcept {
     return (kNumOperations * sizeof(FirstExecuteFn)) + sizeof(DestroyFn) +
            sizeof(RelocateFn) + sizeof(size_type);
@@ -197,6 +180,12 @@ private:
   static constexpr size_type AlignUp(size_type offset,
                                      size_type alignment) noexcept {
     return (offset + alignment - 1) & ~(alignment - 1);
+  }
+
+  static size_type AlignOffset(const void* base, size_type offset,
+                               size_type alignment) noexcept {
+    const auto address = reinterpret_cast<uintptr_t>(base) + offset;
+    return offset + ((alignment - (address % alignment)) % alignment);
   }
 
   template <typename T, size_t N, typename... Args>
@@ -228,44 +217,80 @@ private:
   [[nodiscard]] void* GetDataPtr() const noexcept;
 
   BufferType buffer_;
+  size_type header_offset_ = 0;
   bool has_value_ = false;
 };
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-inline CallableBufferImpl<Allocator, Signatures...>::CallableBufferImpl(
-    CallableBufferImpl&& other) noexcept
-    : buffer_(std::move(other.buffer_)), has_value_(other.has_value_) {
+inline CallableBuffer<Signatures...>::CallableBuffer(
+    CallableBuffer&& other) noexcept
+    : buffer_(std::move(other.buffer_)),
+      header_offset_(other.header_offset_),
+      has_value_(other.has_value_) {
+  other.header_offset_ = 0;
   other.has_value_ = false;
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-inline auto CallableBufferImpl<Allocator, Signatures...>::operator=(
-    CallableBufferImpl&& other) noexcept -> CallableBufferImpl& {
+inline auto CallableBuffer<Signatures...>::operator=(
+    CallableBuffer&& other) noexcept -> CallableBuffer& {
   if (this == &other) [[unlikely]] {
     return *this;
   }
 
   Clear();
-  buffer_ = std::move(other.buffer_);
-  has_value_ = other.has_value_;
-  other.has_value_ = false;
+  if (!other.has_value_) {
+    return *this;
+  }
+
+  if (GetMemoryResource() == other.GetMemoryResource()) {
+    buffer_ = std::move(other.buffer_);
+    header_offset_ = other.header_offset_;
+    has_value_ = true;
+    other.header_offset_ = 0;
+    other.has_value_ = false;
+    return *this;
+  }
+
+  constexpr size_t header_alignment = alignof(std::max_align_t);
+  const auto content_size = other.buffer_.size() - other.header_offset_;
+  buffer_.resize(content_size + header_alignment - 1);
+  header_offset_ = AlignOffset(buffer_.data(), 0, header_alignment);
+  buffer_.resize(header_offset_ + content_size);
+  std::memcpy(buffer_.data() + header_offset_,
+              other.buffer_.data() + other.header_offset_, content_size);
+
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
+  auto relocate_fn = *std::launder(reinterpret_cast<RelocateFn*>(
+      other.buffer_.data() + other.header_offset_ +
+      (kNumOperations * fn_ptr_size) + sizeof(DestroyFn)));
+
+  has_value_ = true;
+  if (relocate_fn != nullptr) {
+    relocate_fn(GetDataPtr(), other.GetDataPtr());
+    other.has_value_ = false;
+    other.buffer_.clear();
+    other.header_offset_ = 0;
+  } else {
+    other.Clear();
+  }
   return *this;
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-inline void CallableBufferImpl<Allocator, Signatures...>::Clear() noexcept {
+inline void CallableBuffer<Signatures...>::Clear() noexcept {
   if (!has_value_) {
     return;
   }
 
-  constexpr size_type fn_ptr_size = sizeof(FirstExecuteFn);
-  auto* header_base = buffer_.data();
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
+  auto* header_base = buffer_.data() + header_offset_;
 
   auto destroy_fn = *std::launder(reinterpret_cast<DestroyFn*>(
       header_base + (kNumOperations * fn_ptr_size)));
@@ -276,54 +301,117 @@ inline void CallableBufferImpl<Allocator, Signatures...>::Clear() noexcept {
   }
 
   buffer_.clear();
+  header_offset_ = 0;
   has_value_ = false;
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
+  requires((sizeof...(Signatures) > 0) &&
+           (details::VoidSignature<Signatures> && ...))
+inline void CallableBuffer<Signatures...>::ReserveBytes(size_type bytes) {
+  if (bytes <= buffer_.capacity()) {
+    return;
+  }
+
+  if (!has_value_) {
+    buffer_.reserve(bytes);
+    return;
+  }
+
+  constexpr size_t header_alignment = alignof(std::max_align_t);
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
+  const auto content_size = buffer_.size() - header_offset_;
+  BufferType new_buffer(buffer_.get_allocator());
+  new_buffer.reserve(std::max(bytes, content_size + header_alignment - 1));
+  const auto new_header_offset =
+      AlignOffset(new_buffer.data(), 0, header_alignment);
+  new_buffer.resize(new_header_offset + content_size);
+  std::memcpy(new_buffer.data() + new_header_offset,
+              buffer_.data() + header_offset_, content_size);
+
+  auto* old_header = buffer_.data() + header_offset_;
+  auto relocate_fn = *std::launder(reinterpret_cast<RelocateFn*>(
+      old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn)));
+
+  if (relocate_fn != nullptr) {
+    const auto data_offset = *std::launder(reinterpret_cast<size_type*>(
+        old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn) +
+        sizeof(RelocateFn)));
+    relocate_fn(new_buffer.data() + new_header_offset + data_offset,
+                old_header + data_offset);
+  }
+
+  header_offset_ = new_header_offset;
+  buffer_ = std::move(new_buffer);
+}
+
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <size_t N, typename... UArgs>
   requires details::ArgsConvertibleTo<
                details::NthSignatureArgsT<N, Signatures...>, UArgs...> &&
            (N < sizeof...(Signatures))
-inline void CallableBufferImpl<Allocator, Signatures...>::Invoke(
-    UArgs&&... args) noexcept {
+inline void CallableBuffer<Signatures...>::Invoke(UArgs&&... args) noexcept {
   HELIOS_ASSERT(!Empty(), "Cannot invoke on an empty buffer!");
 
   using ArgsTuple = details::NthSignatureArgsT<N, Signatures...>;
   using ExecuteFn = details::TupleToFunctionPtrType<ArgsTuple>;
 
-  auto* header_base = buffer_.data();
+  auto* header_base = buffer_.data() + header_offset_;
   auto exec_fn = *std::launder(
       reinterpret_cast<ExecuteFn*>(header_base + (N * sizeof(FirstExecuteFn))));
   auto* data = GetDataPtr();
   exec_fn(std::forward<UArgs>(args)..., data);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
+  requires((sizeof...(Signatures) > 0) &&
+           (details::VoidSignature<Signatures> && ...))
+inline void CallableBuffer<Signatures...>::Swap(
+    CallableBuffer& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return;
+  }
+
+  if (GetMemoryResource() != other.GetMemoryResource()) {
+    CallableBuffer temporary(GetMemoryResource());
+    temporary = std::move(*this);
+    *this = std::move(other);
+    other = std::move(temporary);
+    return;
+  }
+  buffer_.swap(other.buffer_);
+  std::swap(header_offset_, other.header_offset_);
+  std::swap(has_value_, other.has_value_);
+}
+
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T>
-inline void CallableBufferImpl<Allocator, Signatures...>::SetImpl(
-    T&& callable) {
+inline void CallableBuffer<Signatures...>::SetImpl(T&& callable) {
   using DecayedT = std::remove_cvref_t<T>;
 
-  constexpr size_type element_size = sizeof(DecayedT);
-  constexpr size_type element_align = alignof(DecayedT);
+  constexpr size_t element_size = sizeof(DecayedT);
+  constexpr size_t element_align = alignof(DecayedT);
   constexpr size_type base_header = BaseHeaderSize();
-  constexpr size_type fn_ptr_size = sizeof(FirstExecuteFn);
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
 
   // Destroy any existing callable before overwriting
   Clear();
 
+  constexpr size_t header_alignment = alignof(std::max_align_t);
   const auto unaligned_data_offset = base_header;
   const auto aligned_data_offset =
       AlignUp(unaligned_data_offset, element_align);
   const auto total_size = aligned_data_offset + element_size;
 
-  buffer_.resize(total_size);
+  buffer_.resize(total_size + header_alignment - 1);
+  header_offset_ = AlignOffset(buffer_.data(), 0, header_alignment);
+  buffer_.resize(header_offset_ + total_size);
 
-  auto* header_base = buffer_.data();
+  auto* header_base = buffer_.data() + header_offset_;
 
   StoreFunctionPointersDefault<DecayedT>(
       std::make_index_sequence<kNumOperations>{});
@@ -357,29 +445,31 @@ inline void CallableBufferImpl<Allocator, Signatures...>::SetImpl(
   has_value_ = true;
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <auto... Methods, typename T>
-inline void CallableBufferImpl<Allocator, Signatures...>::SetImplMethods(
-    T&& callable) {
+inline void CallableBuffer<Signatures...>::SetImplMethods(T&& callable) {
   using DecayedT = std::remove_cvref_t<T>;
 
-  constexpr size_type element_size = sizeof(DecayedT);
-  constexpr size_type element_align = alignof(DecayedT);
+  constexpr size_t element_size = sizeof(DecayedT);
+  constexpr size_t element_align = alignof(DecayedT);
   constexpr size_type base_header = BaseHeaderSize();
-  constexpr size_type fn_ptr_size = sizeof(FirstExecuteFn);
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
 
   Clear();
 
+  constexpr size_t header_alignment = alignof(std::max_align_t);
   const auto unaligned_data_offset = base_header;
   const auto aligned_data_offset =
       AlignUp(unaligned_data_offset, element_align);
   const auto total_size = aligned_data_offset + element_size;
 
-  buffer_.resize(total_size);
+  buffer_.resize(total_size + header_alignment - 1);
+  header_offset_ = AlignOffset(buffer_.data(), 0, header_alignment);
+  buffer_.resize(header_offset_ + total_size);
 
-  auto* header_base = buffer_.data();
+  auto* header_base = buffer_.data() + header_offset_;
 
   StoreFunctionPointersMethods<DecayedT, Methods...>(
       std::make_index_sequence<kNumOperations>{});
@@ -412,14 +502,13 @@ inline void CallableBufferImpl<Allocator, Signatures...>::SetImplMethods(
   has_value_ = true;
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T, size_t... Indices>
-inline void
-CallableBufferImpl<Allocator, Signatures...>::StoreFunctionPointersDefault(
+inline void CallableBuffer<Signatures...>::StoreFunctionPointersDefault(
     std::index_sequence<Indices...>) noexcept {
-  auto* header_base = buffer_.data();
+  auto* header_base = buffer_.data() + header_offset_;
 
   (
       [header_base]<size_t Index>() {
@@ -435,14 +524,13 @@ CallableBufferImpl<Allocator, Signatures...>::StoreFunctionPointersDefault(
       ...);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T, auto... Methods, size_t... Indices>
-inline void
-CallableBufferImpl<Allocator, Signatures...>::StoreFunctionPointersMethods(
+inline void CallableBuffer<Signatures...>::StoreFunctionPointersMethods(
     std::index_sequence<Indices...>) noexcept {
-  auto* header_base = buffer_.data();
+  auto* header_base = buffer_.data() + header_offset_;
 
   (
       [header_base]<size_t Index>() {
@@ -459,12 +547,12 @@ CallableBufferImpl<Allocator, Signatures...>::StoreFunctionPointersMethods(
       ...);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T, size_t N, typename... Args>
-inline void CallableBufferImpl<Allocator, Signatures...>::ExecuteDefault(
-    Args... args, void* data) noexcept {
+inline void CallableBuffer<Signatures...>::ExecuteDefault(Args... args,
+                                                          void* data) noexcept {
   T* callable = static_cast<T*>(data);
   if constexpr (kNumOperations == 1) {
     std::invoke(*callable, args...);
@@ -473,12 +561,12 @@ inline void CallableBufferImpl<Allocator, Signatures...>::ExecuteDefault(
   }
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T, auto Method, typename... Args>
-inline void CallableBufferImpl<Allocator, Signatures...>::ExecuteMethod(
-    Args... args, void* data) noexcept {
+inline void CallableBuffer<Signatures...>::ExecuteMethod(Args... args,
+                                                         void* data) noexcept {
   T* callable = static_cast<T*>(data);
   if constexpr (std::invocable<decltype(Method), T&, Args...>) {
     std::invoke(Method, callable, args...);
@@ -487,112 +575,28 @@ inline void CallableBufferImpl<Allocator, Signatures...>::ExecuteMethod(
   }
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T>
-inline void CallableBufferImpl<Allocator, Signatures...>::RelocateCallable(
+inline void CallableBuffer<Signatures...>::RelocateCallable(
     void* dest, void* src) noexcept {
   T* typed_src = static_cast<T*>(src);
   std::construct_at(static_cast<T*>(dest), std::move(*typed_src));
   std::destroy_at(typed_src);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-inline void* CallableBufferImpl<Allocator, Signatures...>::GetDataPtr()
-    const noexcept {
-  constexpr size_type fn_ptr_size = sizeof(FirstExecuteFn);
-  auto* header_base = buffer_.data();
+inline void* CallableBuffer<Signatures...>::GetDataPtr() const noexcept {
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
+  auto* header_base = buffer_.data() + header_offset_;
   const auto* data_offset_ptr = std::launder(reinterpret_cast<const size_type*>(
       header_base + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn) +
       sizeof(RelocateFn)));
   auto data_offset = *data_offset_ptr;
-  return const_cast<std::byte*>(buffer_.data() + data_offset);
+  return const_cast<std::byte*>(buffer_.data() + header_offset_ + data_offset);
 }
-
-namespace details {
-
-/// @brief Deduces the `CallableBufferImpl` type from signature arguments.
-template <typename... Args>
-struct CallableBufferDeducer;
-
-template <VoidSignature FirstSig, typename... RestSigs>
-  requires(VoidSignature<RestSigs> && ...)
-struct CallableBufferDeducer<FirstSig, RestSigs...> {
-  using type =
-      CallableBufferImpl<std::allocator<std::byte>, FirstSig, RestSigs...>;
-};
-
-template <typename Alloc, VoidSignature FirstSig, typename... RestSigs>
-  requires InstantiatedAllocator<Alloc> && (VoidSignature<RestSigs> && ...)
-struct CallableBufferDeducer<Alloc, FirstSig, RestSigs...> {
-  using type = CallableBufferImpl<Alloc, FirstSig, RestSigs...>;
-};
-
-}  // namespace details
-
-/**
- * @brief Single-instance callable buffer with type-erased invocation.
- * @details Stores exactly one callable of any type in a contiguous byte buffer
- * with embedded function pointers for type-safe dispatch. Optimized for
- * use-cases where a single command or handler needs to be stored and invoked
- * without virtual dispatch or heap allocation per instance.
- *
- * The allocator parameter is optional. If the first template argument is a
- * function signature (`void(Args...)`), the default allocator is used.
- * Otherwise, the first argument is treated as an allocator.
- *
- * @tparam Args Either signatures only, or allocator followed by signatures
- *
- * @code
- * // Single operation
- * CallableBuffer<void(World&)> cmd;
- * cmd.Set(SpawnEntityCmd{entity});
- * cmd.Invoke(world);
- *
- * // Multiple operations
- * CallableBuffer<void(World&), void(Logger&)> multi_cmd;
- * multi_cmd.Set<&Cmd::Execute, &Cmd::Log>(Cmd{data});
- * multi_cmd.Invoke<0>(world);
- * multi_cmd.Invoke<1>(logger);
- * @endcode
- */
-template <typename... Args>
-using CallableBuffer = typename details::CallableBufferDeducer<Args...>::type;
-
-/**
- * @brief Single-instance callable buffer with type-erased invocation with
- * polymorphic allocator.
- * @details Stores exactly one callable of any type in a contiguous byte buffer
- * with embedded function pointers for type-safe dispatch. Optimized for
- * use-cases where a single command or handler needs to be stored and invoked
- * without virtual dispatch or heap allocation per instance.
- *
- * The allocator parameter is optional. If the first template argument is a
- * function signature (`void(Args...)`), the default allocator is used.
- * Otherwise, the first argument is treated as an allocator.
- *
- * @tparam Args Function signatures in the form void(Args...) for the operations
- * to support.
- *
- * @code
- * // Single operation
- * PmrCallableBuffer<void(World&)> cmd(&resource);
- * cmd.Set(SpawnEntityCmd{entity});
- * cmd.Invoke(world);
- *
- * // Multiple operations
- * PmrCallableBuffer<void(World&), void(Logger&)> multi_cmd(&resource);
- * multi_cmd.Set<&Cmd::Execute, &Cmd::Log>(Cmd{data});
- * multi_cmd.Invoke<0>(world);
- * multi_cmd.Invoke<1>(logger);
- * @endcode
- */
-template <typename... Signatures>
-using PmrCallableBuffer =
-    CallableBufferImpl<std::pmr::polymorphic_allocator<std::byte>,
-                       Signatures...>;
 
 }  // namespace helios::container

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <helios/app/builtin/app_exit.hpp>
 #include <helios/app/dynamic_plugin.hpp>
 #include <helios/app/plugin.hpp>
 #include <helios/app/plugin_group.hpp>
@@ -8,6 +9,7 @@
 #include <helios/app/sub_app.hpp>
 #include <helios/async/executor.hpp>
 #include <helios/compiler/compiler.hpp>
+#include <helios/container/flat_map.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
@@ -24,7 +26,6 @@
 #include <concepts>
 #include <condition_variable>
 #include <cstddef>
-#include <cstdint>
 #include <functional>
 #include <memory>
 #include <mutex>
@@ -34,61 +35,9 @@
 #include <type_traits>
 #include <utility>
 
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-#include <flat_map>
-#else
-#include <boost/container/flat_map.hpp>
-#endif
-
 namespace helios::app {
 
 class FrameOrder;
-
-/// @brief Application exit codes.
-enum class ExitCode : uint8_t {
-  kSuccess = 0,  ///< Successful execution
-  kFailure = 1,  ///< General failure
-};
-
-/**
- * @brief Message that requests the application to exit.
- * @details Written by systems; `RunDefault` stops when this message is present.
- * Uses manual clear policy so it survives per-stage message merge / advance
- * within a frame.
- */
-struct AppExit {
-  static constexpr std::string_view kName = "helios::app::AppExit";
-  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kManual;
-  static constexpr bool kAsync = false;
-  static constexpr bool kConsumable = false;
-
-  ExitCode code = ExitCode::kSuccess;
-
-  /**
-   * @brief Creates an `AppExit` message from an `ExitCode`.
-   * @param exit_code The exit code to use
-   * @return An `AppExit` message with the specified exit code
-   */
-  [[nodiscard]] static constexpr AppExit From(ExitCode exit_code) noexcept {
-    return AppExit{.code = exit_code};
-  }
-
-  /**
-   * @brief Creates an `AppExit` message indicating success.
-   * @return An `AppExit` message with a success exit code
-   */
-  [[nodiscard]] static constexpr AppExit Success() noexcept {
-    return AppExit::From(ExitCode::kSuccess);
-  }
-
-  /**
-   * @brief Creates an `AppExit` message indicating failure.
-   * @return An `AppExit` message with a failure exit code
-   */
-  [[nodiscard]] static constexpr AppExit Failure() noexcept {
-    return AppExit::From(ExitCode::kFailure);
-  }
-};
 
 /**
  * @brief Application class.
@@ -118,10 +67,10 @@ public:
   App(App&&) = delete;
 
   /**
-   * @brief Destructor that ensures all async work is completed before
-   * destruction.
-   * @details Waits for all overlapping updates and pending executor tasks to
-   * complete.
+   * @brief Completes outstanding async work and runs plugin teardown.
+   * @details Waits for overlapping updates and executor tasks, then if the app
+   * was initialized runs shutdown systems and `Destroy` on loaded plugins so
+   * retained OS resources (e.g. SDL) are released.
    */
   ~App();
 
@@ -150,6 +99,8 @@ public:
    * @brief Updates the application and its subsystems.
    * @details Walks `MainFrameOrder` on the main sub-app (extract/sub-apps when
    * that order includes `kExtractStage`).
+   * Calls `helios::ResetAllTemporaryStorage()` in the beggining of the update
+   * to clear all temporary storage.
    * @note Not thread-safe.
    * @warning Triggers assertion if app is not initialized.
    */
@@ -500,7 +451,7 @@ public:
    * @return True if the plugin exists, false otherwise
    */
   [[nodiscard]] bool HasPlugin(PluginTypeIndex index) const noexcept {
-    return plugins_.contains(index) || dynamic_plugins_.contains(index);
+    return plugins_.Contains(index) || dynamic_plugins_.Contains(index);
   }
 
   /**
@@ -535,7 +486,7 @@ public:
    */
   template <SubAppTrait T>
   [[nodiscard]] bool HasSubApp(const T& label = {}) const noexcept {
-    return sub_apps_.contains(SubAppTypeIndex::From(label));
+    return sub_apps_.Contains(SubAppTypeIndex::From(label));
   }
 
   /**
@@ -686,14 +637,6 @@ private:
     }
   };
 
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-  template <typename K, typename V>
-  using FlatMap = std::flat_map<K, V>;
-#else
-  template <typename K, typename V>
-  using FlatMap = boost::container::flat_map<K, V>;
-#endif
-
   /**
    * @brief Cleans up the application and its subsystems.
    * @details Called after the main loop ends.
@@ -716,14 +659,14 @@ private:
   bool is_initialized_ = false;
   std::atomic<bool> is_running_{false};
 
-  FlatMap<PluginTypeIndex, PluginStorage> plugins_;
-  FlatMap<PluginTypeIndex, DynamicPlugin> dynamic_plugins_;
+  container::FlatMap<PluginTypeIndex, PluginStorage> plugins_;
+  container::FlatMap<PluginTypeIndex, DynamicPlugin> dynamic_plugins_;
 
   async::Executor executor_;
   Scheduler scheduler_;
 
   SubApp main_sub_app_;
-  FlatMap<SubAppTypeIndex, SubApp> sub_apps_;
+  container::FlatMap<SubAppTypeIndex, SubApp> sub_apps_;
 
   RunnerFn runner_;
 
@@ -744,7 +687,7 @@ auto App::AddPlugin(this auto&& self, PluginTypeId id,
 
   auto storage =
       PluginStorage{.plugin = std::move(plugin), .name = id.QualifiedName()};
-  self.plugins_.try_emplace(id.Index(), std::move(storage));
+  self.plugins_.TryEmplace(id.Index(), std::move(storage));
   return std::forward<decltype(self)>(self);
 }
 
@@ -757,7 +700,7 @@ inline auto App::AddPlugins(this auto&& self, T&& plugin)
 
   auto storage =
       PluginStorage::From<std::remove_cvref_t<T>>(std::forward<T>(plugin));
-  self.plugins_.try_emplace(PluginTypeIndex::From(plugin), std::move(storage));
+  self.plugins_.TryEmplace(PluginTypeIndex::From(plugin), std::move(storage));
   return std::forward<decltype(self)>(self);
 }
 
@@ -770,7 +713,7 @@ inline auto App::EmplacePlugin(this auto&& self, Args&&... args)
   HELIOS_ASSERT(!self.IsRunning(), "Cannot add plugin while app is running!");
 
   auto storage = PluginStorage::From<T>(std::forward<Args>(args)...);
-  self.plugins_.try_emplace(PluginTypeIndex::From<T>(), std::move(storage));
+  self.plugins_.TryEmplace(PluginTypeIndex::From<T>(), std::move(storage));
   return std::forward<decltype(self)>(self);
 }
 
@@ -818,8 +761,8 @@ auto App::AddDynamicPlugin(this auto&& self, DynamicPlugin plugin)
   HELIOS_ASSERT(!self.IsRunning(),
                 "Cannot add dynamic plugin while app is running!");
 
-  self.dynamic_plugins_.try_emplace(PluginTypeIndex::From(plugin),
-                                    std::move(plugin));
+  self.dynamic_plugins_.TryEmplace(PluginTypeIndex::From(plugin),
+                                   std::move(plugin));
   return std::forward<decltype(self)>(self);
 }
 
@@ -832,7 +775,7 @@ inline auto App::InsertSubApp(this auto&& self, const T& label, SubApp sub_app)
                 "Cannot insert sub-app while app is running!");
 
   ApplySubAppLabelTraits(sub_app, label);
-  self.sub_apps_.try_emplace(SubAppTypeIndex::From(label), std::move(sub_app));
+  self.sub_apps_.TryEmplace(SubAppTypeIndex::From(label), std::move(sub_app));
   return std::forward<decltype(self)>(self);
 }
 
@@ -842,7 +785,7 @@ inline bool App::RemoveSubApp(const T& label) {
                 "Cannot remove sub-app after app initialization!");
   HELIOS_ASSERT(!IsRunning(), "Cannot remove sub-app while app is running!");
 
-  return sub_apps_.erase(SubAppTypeIndex::From(label)) > 0;
+  return sub_apps_.Erase(SubAppTypeIndex::From(label));
 }
 
 template <ecs::ScheduleTrait T>
@@ -904,20 +847,20 @@ auto App::SetRunner(this auto&& self, RunnerFn runner) noexcept
 }
 
 inline SubApp& App::GetSubApp(SubAppTypeIndex index) noexcept {
-  const auto it = sub_apps_.find(index);
+  const auto it = sub_apps_.Find(index);
   HELIOS_ASSERT(it != sub_apps_.end(), "Sub-app not found!");
   return it->second;
 }
 
 inline const SubApp& App::GetSubApp(SubAppTypeIndex index) const noexcept {
-  const auto it = sub_apps_.find(index);
+  const auto it = sub_apps_.Find(index);
   HELIOS_ASSERT(it != sub_apps_.end(), "Sub-app not found!");
   return it->second;
 }
 
 template <SubAppTrait T>
 inline SubApp& App::GetSubApp(const T& sub_app) noexcept {
-  const auto it = sub_apps_.find(SubAppTypeIndex::From(sub_app));
+  const auto it = sub_apps_.Find(SubAppTypeIndex::From(sub_app));
   HELIOS_ASSERT(it != sub_apps_.end(), "Sub-app '{}' not found!",
                 SubAppNameOf(sub_app));
   return it->second;
@@ -925,7 +868,7 @@ inline SubApp& App::GetSubApp(const T& sub_app) noexcept {
 
 template <SubAppTrait T>
 inline const SubApp& App::GetSubApp(const T& sub_app) const noexcept {
-  const auto it = sub_apps_.find(SubAppTypeIndex::From(sub_app));
+  const auto it = sub_apps_.Find(SubAppTypeIndex::From(sub_app));
   HELIOS_ASSERT(it != sub_apps_.end(), "Sub-app '{}' not found!",
                 SubAppNameOf(sub_app));
   return it->second;

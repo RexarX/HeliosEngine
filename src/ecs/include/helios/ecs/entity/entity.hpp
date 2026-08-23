@@ -197,7 +197,7 @@ namespace std {
 
 template <>
 struct formatter<helios::ecs::Entity> {
-  static constexpr auto parse(std::format_parse_context& ctx) noexcept {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
     return ctx.begin();
   }
 

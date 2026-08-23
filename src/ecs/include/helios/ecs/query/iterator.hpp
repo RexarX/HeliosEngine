@@ -40,8 +40,8 @@ namespace details {
  * @return The component with the appropriate access type
  */
 template <typename AccessSpec>
-inline auto FetchComponent(const Archetype& archetype, Entity entity,
-                           ComponentManager& components)
+auto FetchComponent(const Archetype& archetype, Entity entity,
+                    ComponentManager& components)
     -> ComponentAccessType_t<AccessSpec> {
   using RawType = ComponentTypeExtractor_t<AccessSpec>;
   using AccessType = ComponentAccessType_t<AccessSpec>;
@@ -109,8 +109,8 @@ inline auto FetchComponent(const Archetype& archetype, Entity entity,
 
 /// @brief Const-world variant: always returns const access.
 template <typename AccessSpec>
-inline auto FetchComponentConst(const Archetype& archetype, Entity entity,
-                                const ComponentManager& components)
+auto FetchComponentConst(const Archetype& archetype, Entity entity,
+                         const ComponentManager& components)
     -> ComponentAccessType_t<AccessSpec> {
   using RawType = ComponentTypeExtractor_t<AccessSpec>;
   using AccessType = ComponentAccessType_t<AccessSpec>;
@@ -453,8 +453,7 @@ private:
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryIter<IsConst, Components...>::operator++()
-    -> BasicQueryIter& {
+auto BasicQueryIter<IsConst, Components...>::operator++() -> BasicQueryIter& {
   ++entity_index_;
   AdvanceToValidEntity();
   return *this;
@@ -463,8 +462,7 @@ inline auto BasicQueryIter<IsConst, Components...>::operator++()
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryIter<IsConst, Components...>::operator++(int)
-    -> BasicQueryIter {
+auto BasicQueryIter<IsConst, Components...>::operator++(int) -> BasicQueryIter {
   auto copy = *this;
   ++(*this);
   return copy;
@@ -473,8 +471,7 @@ inline auto BasicQueryIter<IsConst, Components...>::operator++(int)
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryIter<IsConst, Components...>::operator--()
-    -> BasicQueryIter& {
+auto BasicQueryIter<IsConst, Components...>::operator--() -> BasicQueryIter& {
   while (true) {
     if (entity_index_ > 0) {
       --entity_index_;
@@ -499,8 +496,7 @@ inline auto BasicQueryIter<IsConst, Components...>::operator--()
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryIter<IsConst, Components...>::operator--(int)
-    -> BasicQueryIter {
+auto BasicQueryIter<IsConst, Components...>::operator--(int) -> BasicQueryIter {
   auto copy = *this;
   --(*this);
   return copy;
@@ -509,8 +505,7 @@ inline auto BasicQueryIter<IsConst, Components...>::operator--(int)
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryIter<IsConst, Components...>::operator*() const
-    -> reference {
+auto BasicQueryIter<IsConst, Components...>::operator*() const -> reference {
   HELIOS_ASSERT(!IsAtEnd(), "Cannot dereference end iterator!");
   HELIOS_ASSERT(archetype_index_ < archetypes_.size(),
                 "Archetype index out of bounds!");
@@ -533,7 +528,7 @@ inline auto BasicQueryIter<IsConst, Components...>::operator*() const
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline void BasicQueryIter<IsConst, Components...>::AdvanceToValidEntity() {
+void BasicQueryIter<IsConst, Components...>::AdvanceToValidEntity() {
   while (!IsAtEnd()) {
     if (archetype_index_ < archetypes_.size() &&
         entity_index_ < archetypes_[archetype_index_].get().Entities().size()) {
@@ -611,7 +606,7 @@ inline void BasicQueryIter<IsConst, Components...>::AdvanceToValidEntity() {
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator++()
+auto BasicQueryWithEntityIter<IsConst, Components...>::operator++()
     -> BasicQueryWithEntityIter& {
   ++entity_index_;
   AdvanceToValidEntity();
@@ -621,7 +616,7 @@ inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator++()
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator++(int)
+auto BasicQueryWithEntityIter<IsConst, Components...>::operator++(int)
     -> BasicQueryWithEntityIter {
   auto copy = *this;
   ++(*this);
@@ -631,7 +626,7 @@ inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator++(int)
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator--()
+auto BasicQueryWithEntityIter<IsConst, Components...>::operator--()
     -> BasicQueryWithEntityIter& {
   while (true) {
     if (entity_index_ > 0) {
@@ -657,7 +652,7 @@ inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator--()
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator--(int)
+auto BasicQueryWithEntityIter<IsConst, Components...>::operator--(int)
     -> BasicQueryWithEntityIter {
   auto copy = *this;
   --(*this);
@@ -667,7 +662,7 @@ inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator--(int)
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator*() const
+auto BasicQueryWithEntityIter<IsConst, Components...>::operator*() const
     -> reference {
   HELIOS_ASSERT(!IsAtEnd(), "Cannot dereference end iterator!");
   HELIOS_ASSERT(archetype_index_ < archetypes_.size(),
@@ -691,8 +686,7 @@ inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator*() const
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline void
-BasicQueryWithEntityIter<IsConst, Components...>::AdvanceToValidEntity() {
+void BasicQueryWithEntityIter<IsConst, Components...>::AdvanceToValidEntity() {
   while (!IsAtEnd()) {
     if (archetype_index_ < archetypes_.size() &&
         entity_index_ < archetypes_[archetype_index_].get().Entities().size()) {

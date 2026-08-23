@@ -8,6 +8,11 @@
 #include <helios/ecs/world.hpp>
 #include <helios/log/logger.hpp>
 
+#if defined(HELIOS_ECS_ENABLE_PROFILE) && \
+    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#include <helios/memory/temporary_storage_helpers.hpp>
+#endif
+
 #include <cstddef>
 #include <expected>
 #include <format>
@@ -17,11 +22,6 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
-
-#if defined(HELIOS_ECS_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
-#include <format>
-#endif
 
 namespace helios::ecs {
 
@@ -74,7 +74,7 @@ void Schedule::Run(World& world, Executor& executor) {
 
   HELIOS_ECS_PROFILE_SCOPE();
   HELIOS_ECS_PROFILE_ZONE_NAME(
-      std::format("helios::ecs::Schedule::Run{{name: {}}}", name_));
+      utils::TempFormat("helios::ecs::Schedule::Run{{name: {}}}", name_));
   HELIOS_ECS_PROFILE_ZONE_VALUE(plan_->execution_order.size());
 
   for (auto& entry : system_entries_) {
@@ -91,7 +91,7 @@ void Schedule::Run(World& world) {
 
   HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Schedule::Run");
   HELIOS_ECS_PROFILE_ZONE_NAME(
-      std::format("helios::ecs::Schedule::Run{{name: {}}}", name_));
+      utils::TempFormat("helios::ecs::Schedule::Run{{name: {}}}", name_));
   HELIOS_ECS_PROFILE_ZONE_VALUE(
       plan_.has_value() ? plan_->execution_order.size() : 0U);
 
@@ -112,8 +112,8 @@ void Schedule::RunAndWait(World& world, Executor& executor) {
       name_);
 
   HELIOS_ECS_PROFILE_SCOPE();
-  HELIOS_ECS_PROFILE_ZONE_NAME(
-      std::format("helios::ecs::Schedule::RunAndWait{{name: {}}}", name_));
+  HELIOS_ECS_PROFILE_ZONE_NAME(utils::TempFormat(
+      "helios::ecs::Schedule::RunAndWait{{name: {}}}", name_));
   HELIOS_ECS_PROFILE_ZONE_VALUE(plan_->execution_order.size());
 
   for (auto& entry : system_entries_) {
@@ -130,8 +130,8 @@ void Schedule::RunAndWait(World& world) {
                 "Use SetExecutor() before running.");
 
   HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::Schedule::RunAndWait");
-  HELIOS_ECS_PROFILE_ZONE_NAME(
-      std::format("helios::ecs::Schedule::RunAndWait{{name: {}}}", name_));
+  HELIOS_ECS_PROFILE_ZONE_NAME(utils::TempFormat(
+      "helios::ecs::Schedule::RunAndWait{{name: {}}}", name_));
   HELIOS_ECS_PROFILE_ZONE_VALUE(
       plan_.has_value() ? plan_->execution_order.size() : 0U);
 
@@ -141,8 +141,8 @@ void Schedule::RunAndWait(World& world) {
 void Schedule::ApplyDeferred(World& world, bool apply_commands,
                              bool merge_messages) {
   HELIOS_ECS_PROFILE_SCOPE();
-  HELIOS_ECS_PROFILE_ZONE_NAME(
-      std::format("helios::ecs::Schedule::ApplyDeferred{{name: {}}}", name_));
+  HELIOS_ECS_PROFILE_ZONE_NAME(utils::TempFormat(
+      "helios::ecs::Schedule::ApplyDeferred{{name: {}}}", name_));
 
   if (apply_commands) {
     world.Flush();
@@ -159,7 +159,7 @@ auto Schedule::Build() -> ScheduleResult<void> {
 
   HELIOS_ECS_PROFILE_SCOPE();
   HELIOS_ECS_PROFILE_ZONE_NAME(
-      std::format("helios::ecs::Schedule::Build{{name: {}}}", name_));
+      utils::TempFormat("helios::ecs::Schedule::Build{{name: {}}}", name_));
   HELIOS_ECS_PROFILE_ZONE_VALUE(system_entries_.size());
 
   if (auto result = ResolveSetReferences(); !result) [[unlikely]] {
@@ -210,7 +210,8 @@ size_t Schedule::AddEntry(SystemStorage&& storage) {
 
   for (const auto& entry : system_entries_) {
     if (entry.storage.id == storage.id) {
-      storage.id = SystemId::From(std::format("{}#{}", storage.name, index));
+      storage.id =
+          SystemId::From(utils::TempFormat("{}#{}", storage.name, index));
       break;
     }
   }

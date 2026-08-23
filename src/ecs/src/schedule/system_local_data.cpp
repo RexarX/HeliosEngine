@@ -11,15 +11,29 @@
 
 namespace helios::ecs {
 
+namespace {
+
+[[nodiscard]] size_t ArenaCapacityForMove(
+    const mem::ArenaAllocator& allocator) {
+  const size_t capacity = allocator.InitialCapacity();
+  return capacity != 0 ? capacity
+                       : SystemLocalDataOptions::kDefaultPreallocatedSize;
+}
+
+}  // namespace
+
 SystemLocalData::SystemLocalData(SystemLocalData&& other) noexcept
-    : allocator(std::move(other.allocator)),
+    : allocator(ArenaCapacityForMove(other.allocator)),
       cmd_queue(&allocator),
       message_queue(&allocator),
-      consumed_messages(&allocator),
-      resource_manager(std::move(other.resource_manager)) {
+      consumed_messages(&allocator) {
+  // Do not steal `other.allocator`: PMR queues bind the *object* address as
+  // their resource. Moving the arena leaves those vectors with inverted
+  // `_M_start`/`_M_finish` (UBSan: `vector::size` / reverse iterators).
   cmd_queue.Merge(std::move(other.cmd_queue));
   message_queue.Merge(std::move(other.message_queue));
   consumed_messages.MergeFrom(std::move(other.consumed_messages));
+  resource_manager = std::move(other.resource_manager);
   AddLocalArena();
   other.ReleaseMovedFrom();
 }
@@ -33,8 +47,6 @@ SystemLocalData& SystemLocalData::operator=(SystemLocalData&& other) noexcept {
   message_queue.ClearAll();
   consumed_messages.Clear();
   resource_manager.Clear();
-
-  allocator = std::move(other.allocator);
 
   cmd_queue.Merge(std::move(other.cmd_queue));
   message_queue.Merge(std::move(other.message_queue));

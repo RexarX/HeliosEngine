@@ -3,13 +3,28 @@
 #include <helios/ecs/message/manager.hpp>
 
 #include <helios/ecs/details/profile.hpp>
+#include <helios/ecs/message/consumed_registry.hpp>
 #include <helios/ecs/message/id.hpp>
 #include <helios/ecs/message/message.hpp>
+#include <helios/ecs/message/queue.hpp>
+#include <helios/memory/temporary_storage.hpp>
 
+#include <algorithm>
 #include <cstddef>
+#include <memory_resource>
 #include <span>
+#include <vector>
 
 namespace helios::ecs {
+
+MessageManager::MessageManager(std::pmr::memory_resource* resource)
+    : resource_(resource),
+      registered_messages_(resource),
+      current_messages_(resource),
+      previous_messages_(resource),
+      current_ids_(resource),
+      previous_ids_(resource),
+      message_counts_(resource) {}
 
 void MessageManager::Clear() noexcept {
   registered_messages_.ResetAll();
@@ -46,6 +61,94 @@ void MessageManager::Update() {
   current_messages_.ClearAll();
 }
 
+void MessageManager::Update(const ConsumedMessagesRegistry& consumed_registry) {
+  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::MessageManager::Update");
+
+  if (!consumed_registry.Empty()) {
+    ApplyConsumed(consumed_registry);
+  }
+
+  previous_messages_.Merge(current_messages_);
+  AgeIds();
+  current_messages_.ClearAll();
+}
+
+void MessageManager::ApplyConsumed(
+    const ConsumedMessagesRegistry& merged_consumed) {
+  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::MessageManager::ApplyConsumed");
+  HELIOS_ECS_PROFILE_ZONE_VALUE(merged_consumed.TotalConsumedCount());
+
+  for (const auto& [type_index, consumed_ids] : merged_consumed.Data()) {
+    if (consumed_ids.empty()) {
+      continue;
+    }
+
+    const auto* metadata = registered_messages_.TryGet(type_index);
+    if (metadata == nullptr || metadata->is_async) {
+      continue;
+    }
+
+    auto* prev_ids = previous_ids_.TryGet(type_index);
+    auto* curr_ids = current_ids_.TryGet(type_index);
+    if ((prev_ids == nullptr || prev_ids->empty()) &&
+        (curr_ids == nullptr || curr_ids->empty())) {
+      continue;
+    }
+
+    std::pmr::vector<size_type> prev_indices{&mem::GetTemporaryStorage()};
+    std::pmr::vector<size_type> curr_indices{&mem::GetTemporaryStorage()};
+    prev_indices.reserve(consumed_ids.size());
+    curr_indices.reserve(consumed_ids.size());
+
+    for (const AnyMessageId id : consumed_ids) {
+      if (prev_ids != nullptr) {
+        const auto it = std::ranges::lower_bound(*prev_ids, id);
+        if (it != prev_ids->end() && *it == id) {
+          prev_indices.push_back(
+              static_cast<size_type>(it - prev_ids->begin()));
+          continue;
+        }
+      }
+      if (curr_ids != nullptr) {
+        const auto it = std::ranges::lower_bound(*curr_ids, id);
+        if (it != curr_ids->end() && *it == id) {
+          curr_indices.push_back(
+              static_cast<size_type>(it - curr_ids->begin()));
+        }
+      }
+    }
+
+    if (!prev_indices.empty()) {
+      previous_messages_.RemoveIndices(type_index, prev_indices);
+      RemoveIds(type_index, *prev_ids, prev_indices);
+    }
+    if (!curr_indices.empty()) {
+      current_messages_.RemoveIndices(type_index, curr_indices);
+      RemoveIds(type_index, *curr_ids, curr_indices);
+    }
+  }
+}
+
+void MessageManager::MergeLocalMessages(const MessageQueue& local) {
+  for (const auto& [type_index, metadata] : registered_messages_) {
+    if (metadata.is_async) {
+      continue;
+    }
+    AssignIds(type_index, local.MessageCount(type_index));
+  }
+  current_messages_.Merge(local);
+}
+
+void MessageManager::MergeLocalMessages(MessageQueue&& local) {
+  for (const auto& [type_index, metadata] : registered_messages_) {
+    if (metadata.is_async) {
+      continue;
+    }
+    AssignIds(type_index, local.MessageCount(type_index));
+  }
+  current_messages_.Merge(std::move(local));
+}
+
 void MessageManager::AssignIds(MessageTypeIndex type_index, size_type count) {
   if (count == 0) [[unlikely]] {
     return;
@@ -74,7 +177,7 @@ void MessageManager::ClearAllIds() noexcept {
 }
 
 void MessageManager::AgeIds() {
-  for (auto&& [type_index, curr_ids] : current_ids_) {
+  for (auto& [type_index, curr_ids] : current_ids_) {
     auto& prev_ids = previous_ids_.Ensure(type_index);
     prev_ids.insert(prev_ids.end(), curr_ids.begin(), curr_ids.end());
     curr_ids.clear();

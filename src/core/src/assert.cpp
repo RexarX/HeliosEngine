@@ -3,7 +3,9 @@
 #include <helios/assert.hpp>
 #include <helios/stacktrace.hpp>
 #include <helios/utils/filesystem.hpp>
+#include <helios/utils/format.hpp>
 
+#include <cstddef>
 #include <cstdio>
 #include <cstdlib>
 #include <format>
@@ -41,21 +43,19 @@ std::string FormatAssertionMessage(std::string_view condition,
   result.reserve(256);
 
   if (!message.empty()) {
-    std::format_to(std::back_inserter(result), "Assertion failed: {} | {}",
-                   condition, message);
+    utils::FormatTo(result, "Assertion failed: {} | {}", condition, message);
   } else {
-    std::format_to(std::back_inserter(result), "Assertion failed: {}",
-                   condition);
+    utils::FormatTo(result, "Assertion failed: {}", condition);
   }
 
   const std::string_view filename = utils::GetFileName(loc.file_name());
-  std::format_to(std::back_inserter(result), " [{}:{}]", filename, loc.line());
+  utils::FormatTo(result, " [{}:{}]", filename, loc.line());
 
 #ifdef HELIOS_ENABLE_STACKTRACE
   try {
     const auto stacktrace =
         Stacktrace::Capture(BuildAssertionStacktraceConfig(loc));
-    std::format_to(std::back_inserter(result), "\n{}", stacktrace.ToString());
+    utils::FormatTo(result, "\n{}", stacktrace.ToString());
   } catch (...) {
     result.append("\nStack trace: <error>");
   }
@@ -67,7 +67,7 @@ std::string FormatAssertionMessage(std::string_view condition,
 void DefaultAssertionHandler(std::string_view condition,
                              const std::source_location& loc,
                              std::string_view message) noexcept {
-  const std::string formatted = FormatAssertionMessage(condition, loc, message);
+  const auto formatted = FormatAssertionMessage(condition, loc, message);
 
 #if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
   std::println(stderr, "{}", formatted);

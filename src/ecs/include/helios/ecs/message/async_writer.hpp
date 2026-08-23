@@ -27,7 +27,7 @@ public:
    * @brief Constructs an `AsyncMessageWriter` from the message manager.
    * @param manager Mutable reference to the message manager
    */
-  explicit constexpr AsyncMessageWriter(MessageManager& manager) noexcept
+  explicit AsyncMessageWriter(MessageManager& manager) noexcept
       : AsyncMessageWriter(manager.AsyncQueue()) {}
 
   /**

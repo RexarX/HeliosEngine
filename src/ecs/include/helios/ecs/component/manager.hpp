@@ -1,7 +1,7 @@
 #pragma once
 
 #include <helios/assert.hpp>
-#include <helios/compiler/compiler.hpp>
+#include <helios/container/flat_map.hpp>
 #include <helios/container/multi_type_map.hpp>
 #include <helios/container/typed_buffer.hpp>
 #include <helios/container/typed_buffer_array.hpp>
@@ -19,6 +19,7 @@
 #include <cstddef>
 #include <deque>
 #include <functional>
+#include <memory_resource>
 #include <span>
 #include <string_view>
 #include <tuple>
@@ -26,12 +27,6 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
-
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-#include <flat_map>
-#else
-#include <boost/container/flat_map.hpp>
-#endif
 
 namespace helios::ecs {
 
@@ -50,17 +45,17 @@ struct ComponentMetadata {
 
   /// @brief Type-erased function to initialize a column with the correct
   /// concrete type.
-  using InitColumnFn = void (*)(container::TypedBufferArray<>&);
+  using InitColumnFn = void (*)(container::TypedBufferArray&);
 
   /// @brief Type-erased function to move one element from a source column row
   /// into the back of a target column.
-  using MoveColumnElementFn = void (*)(container::TypedBufferArray<>& dst,
-                                       container::TypedBufferArray<>& src,
+  using MoveColumnElementFn = void (*)(container::TypedBufferArray& dst,
+                                       container::TypedBufferArray& src,
                                        size_t src_row);
 
   /// @brief Type-erased function to push a default-constructed element onto a
   /// column.
-  using DefaultPushFn = void (*)(container::TypedBufferArray<>&);
+  using DefaultPushFn = void (*)(container::TypedBufferArray&);
 
   InitColumnFn init_column = nullptr;
   MoveColumnElementFn move_column_element = nullptr;
@@ -87,13 +82,13 @@ consteval ComponentMetadata ComponentMetadata::From() noexcept {
   meta.storage_type = ComponentStorageTypeOf<Decayed>();
   meta.is_tag = TagComponentTrait<Decayed>;
 
-  meta.init_column = [](container::TypedBufferArray<>& col) {
+  meta.init_column = [](container::TypedBufferArray& col) {
     col.template ChangeType<Decayed>();
   };
 
   if constexpr (std::move_constructible<Decayed>) {
-    meta.move_column_element = [](container::TypedBufferArray<>& dst,
-                                  container::TypedBufferArray<>& src,
+    meta.move_column_element = [](container::TypedBufferArray& dst,
+                                  container::TypedBufferArray& src,
                                   size_t src_row) {
       auto& val = src.template At<Decayed>(src_row);
       dst.template PushBack<Decayed>(std::move(val));
@@ -101,7 +96,7 @@ consteval ComponentMetadata ComponentMetadata::From() noexcept {
   }
 
   if constexpr (std::default_initializable<Decayed>) {
-    meta.default_push = [](container::TypedBufferArray<>& col) {
+    meta.default_push = [](container::TypedBufferArray& col) {
       col.template EmplaceBack<Decayed>();
     };
   }
@@ -136,6 +131,14 @@ public:
   using size_type = size_t;
 
   ComponentManager() = default;
+
+  /**
+   * @brief Constructs a component manager using `resource` for owned storage.
+   * @param resource Memory resource for archetypes, maps, and sparse storage.
+   * Defaults to `std::pmr::get_default_resource()`.
+   */
+  explicit ComponentManager(std::pmr::memory_resource* resource);
+  ComponentManager(std::nullptr_t) = delete;
   ComponentManager(const ComponentManager&) = delete;
   ComponentManager(ComponentManager&&) noexcept = default;
   ~ComponentManager() = default;
@@ -158,7 +161,10 @@ public:
    * @tparam T Component type
    */
   template <ComponentTrait T>
-  void Register();
+  void Register() {
+    metadata_.TryEmplace(ComponentTypeIndex::From<T>(),
+                         ComponentMetadata::From<T>());
+  }
 
   /**
    * @brief Registers multiple component types.
@@ -240,7 +246,7 @@ public:
    */
   template <ArchetypeComponentTrait... Ts>
     requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
-  inline auto TryAddArchetypeComponents(Entity entity, Ts&&... components)
+  auto TryAddArchetypeComponents(Entity entity, Ts&&... components)
       -> std::array<bool, sizeof...(Ts)>;
 
   /**
@@ -601,7 +607,9 @@ public:
    * @return True if registered
    */
   template <ComponentTrait T>
-  [[nodiscard]] bool Registered() const noexcept;
+  [[nodiscard]] bool Registered() const noexcept {
+    return metadata_.Contains(ComponentTypeIndex::From<T>());
+  }
 
   /**
    * @brief Checks if an entity is tracked by the component manager.
@@ -745,6 +753,14 @@ public:
   }
 
   /**
+   * @brief Returns the memory resource used for owned storage.
+   * @return Memory resource passed to the constructor
+   */
+  [[nodiscard]] std::pmr::memory_resource* GetMemoryResource() const noexcept {
+    return resource_;
+  }
+
+  /**
    * @brief Type-erased entry for sparse-set component storage.
    * @details Stores a `SparseComponentStorage<T>` inside a `TypedBuffer` along
    * with type-erased function pointers for operations that need to be performed
@@ -752,14 +768,14 @@ public:
    * entity from all storages).
    */
   struct SparseStorageEntry {
-    using ClearFn = void (*)(container::TypedBuffer<>& storage);
-    using TryRemoveFn = bool (*)(container::TypedBuffer<>& storage,
+    using ClearFn = void (*)(container::TypedBuffer& storage);
+    using TryRemoveFn = bool (*)(container::TypedBuffer& storage,
                                  Entity entity);
-    using ContainsFn = bool (*)(const container::TypedBuffer<>& storage,
+    using ContainsFn = bool (*)(const container::TypedBuffer& storage,
                                 Entity entity);
-    using SizeFn = size_t (*)(const container::TypedBuffer<>& storage);
+    using SizeFn = size_t (*)(const container::TypedBuffer& storage);
 
-    container::TypedBuffer<> storage;
+    container::TypedBuffer storage;
     ClearFn clear_fn = nullptr;
     TryRemoveFn try_remove_fn = nullptr;
     ContainsFn contains_fn = nullptr;
@@ -777,31 +793,34 @@ public:
     /**
      * @brief Creates a `SparseStorageEntry` for a specific component type `T`.
      * @tparam T Component type
+     * @param resource Memory resource for the typed buffer and sparse set
      * @return Initialized `SparseStorageEntry` with a
      * `SparseComponentStorage<T>` and appropriate function pointers
      */
     template <ComponentTrait T>
-    [[nodiscard]] static SparseStorageEntry From() {
+    [[nodiscard]] static constexpr SparseStorageEntry From(
+        std::pmr::memory_resource* resource) {
       using StorageT = SparseComponentStorage<T>;
 
       SparseStorageEntry entry;
-      entry.storage.template Set<StorageT>();
+      entry.storage = container::TypedBuffer{resource};
+      entry.storage.template Set<StorageT>(StorageT{resource});
 
-      entry.clear_fn = [](container::TypedBuffer<>& buf) {
+      entry.clear_fn = [](container::TypedBuffer& buf) {
         buf.template Value<StorageT>().Clear();
       };
 
-      entry.try_remove_fn = [](container::TypedBuffer<>& buf,
+      entry.try_remove_fn = [](container::TypedBuffer& buf,
                                Entity entity) -> bool {
         return buf.template Value<StorageT>().TryRemove(entity);
       };
 
-      entry.contains_fn = [](const container::TypedBuffer<>& buf,
+      entry.contains_fn = [](const container::TypedBuffer& buf,
                              Entity entity) -> bool {
         return buf.template Value<StorageT>().Contains(entity);
       };
 
-      entry.size_fn = [](const container::TypedBuffer<>& buf) -> size_t {
+      entry.size_fn = [](const container::TypedBuffer& buf) -> size_t {
         return buf.template Value<StorageT>().Size();
       };
 
@@ -809,7 +828,7 @@ public:
     }
 
     /// @brief Clears the underlying storage.
-    void Clear() noexcept {
+    constexpr void Clear() noexcept {
       if (clear_fn != nullptr) [[unlikely]] {
         clear_fn(storage);
       }
@@ -821,7 +840,7 @@ public:
      * @param entity Entity
      * @return True if removed, false otherwise
      */
-    bool TryRemove(Entity entity) {
+    constexpr bool TryRemove(Entity entity) {
       HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
       if (try_remove_fn == nullptr) [[unlikely]] {
         return false;
@@ -835,7 +854,7 @@ public:
      * @param entity Entity
      * @return True if entity has the component, false otherwise
      */
-    [[nodiscard]] bool Contains(Entity entity) const noexcept {
+    [[nodiscard]] constexpr bool Contains(Entity entity) const noexcept {
       HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
       if (contains_fn == nullptr) [[unlikely]] {
         return false;
@@ -847,7 +866,7 @@ public:
      * @brief Gets the number of stored components.
      * @return Number of components
      */
-    [[nodiscard]] size_t Size() const noexcept {
+    [[nodiscard]] constexpr size_t Size() const noexcept {
       if (size_fn == nullptr) [[unlikely]] {
         return 0;
       }
@@ -862,7 +881,7 @@ public:
      * @return Mutable reference to the typed storage
      */
     template <ComponentTrait T>
-    [[nodiscard]] auto As() noexcept -> SparseComponentStorage<T>& {
+    [[nodiscard]] constexpr auto As() noexcept -> SparseComponentStorage<T>& {
       return storage.template Value<SparseComponentStorage<T>>();
     }
 
@@ -874,7 +893,8 @@ public:
      * @return Const reference to the typed storage
      */
     template <ComponentTrait T>
-    [[nodiscard]] auto As() const noexcept -> const SparseComponentStorage<T>& {
+    [[nodiscard]] constexpr auto As() const noexcept
+        -> const SparseComponentStorage<T>& {
       return storage.template Value<SparseComponentStorage<T>>();
     }
   };
@@ -893,16 +913,14 @@ private:
   struct ArchetypeRecord {
     std::reference_wrapper<Archetype> archetype;
 
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-    using EdgeMap =
-        std::flat_map<ComponentTypeIndex, std::reference_wrapper<Archetype>>;
-#else
-    using EdgeMap = boost::container::flat_map<
-        ComponentTypeIndex, std::reference_wrapper<Archetype>, std::less<>>;
-#endif
+    using EdgeMap = container::FlatMap<ComponentTypeIndex,
+                                       std::reference_wrapper<Archetype>>;
 
     EdgeMap add_edges;     ///< Cache: component added -> target archetype.
     EdgeMap remove_edges;  ///< Cache: component removed -> target archetype.
+
+    ArchetypeRecord(Archetype& arch, std::pmr::memory_resource* resource)
+        : archetype(arch), add_edges(resource), remove_edges(resource) {}
   };
 
   // Strategy: a consteval lambda fills a compile-time std::array by iterating
@@ -946,16 +964,25 @@ private:
   // overload.
   template <typename... Ts, size_t... ArchIs>
   void DispatchAddArchetype(Entity entity, std::tuple<Ts...>& args,
-                            std::index_sequence<ArchIs...> /*seq*/);
+                            std::index_sequence<ArchIs...> /*seq*/) {
+    AddArchetypeComponents(entity, std::forward<FwdTypeAt<ArchIs, Ts...>>(
+                                       std::get<ArchIs>(args))...);
+  }
 
   template <typename... Ts, size_t... ArchIs>
   auto DispatchTryAddArchetype(Entity entity, std::tuple<Ts...>& args,
                                std::index_sequence<ArchIs...> /*seq*/)
-      -> std::array<bool, sizeof...(ArchIs)>;
+      -> std::array<bool, sizeof...(ArchIs)> {
+    return TryAddArchetypeComponents(
+        entity,
+        std::forward<FwdTypeAt<ArchIs, Ts...>>(std::get<ArchIs>(args))...);
+  }
 
   template <typename... Ts, size_t... ArchIs>
   void DispatchRemoveArchetype(Entity entity,
-                               std::index_sequence<ArchIs...> /*seq*/);
+                               std::index_sequence<ArchIs...> /*seq*/) {
+    RemoveArchetypeComponents<TypeAt<ArchIs, Ts...>...>(entity);
+  }
 
   template <typename... Ts, size_t... ArchIs>
   auto DispatchTryRemoveArchetype(Entity entity,
@@ -965,7 +992,10 @@ private:
   }
 
   template <ComponentTrait T>
-  void EnsureRegistered();
+  void EnsureRegistered() {
+    metadata_.TryEmplace(ComponentTypeIndex::From<T>(),
+                         ComponentMetadata::From<T>());
+  }
 
   template <SparseComponentTrait T>
   SparseComponentStorage<T>& EnsureSparseStorage();
@@ -976,42 +1006,37 @@ private:
 
   void MigrateEntity(Entity entity, Archetype& src, Archetype& dst);
 
+  ArchetypeRecord& GetRecord(Archetype& archetype);
+  const ArchetypeRecord& GetRecord(const Archetype& archetype) const;
+
   Archetype* TryGetAddEdge(Archetype& from, ComponentTypeIndex type);
   void SetAddEdge(Archetype& from, ComponentTypeIndex type, Archetype& to) {
-    GetRecord(from).add_edges.emplace(type, std::ref(to));
+    GetRecord(from).add_edges.Emplace(type, std::ref(to));
   }
 
   Archetype* TryGetRemoveEdge(Archetype& from, ComponentTypeIndex type);
   void SetRemoveEdge(Archetype& from, ComponentTypeIndex type, Archetype& to) {
-    GetRecord(from).remove_edges.emplace(type, std::ref(to));
+    GetRecord(from).remove_edges.Emplace(type, std::ref(to));
   }
 
-  ArchetypeRecord& GetRecord(Archetype& archetype);
-  const ArchetypeRecord& GetRecord(const Archetype& archetype) const;
+  std::pmr::memory_resource* resource_ = std::pmr::get_default_resource();
 
   /// Metadata per component type.
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-  using MetadataMap = std::flat_map<ComponentTypeIndex, ComponentMetadata>;
-#else
-  using MetadataMap =
-      boost::container::flat_map<ComponentTypeIndex, ComponentMetadata,
-                                 std::less<>>;
-#endif
-  MetadataMap metadata_;
+  container::FlatMap<ComponentTypeIndex, ComponentMetadata> metadata_;
 
-  /// @brief Owns all archetypes. `std::deque` guarantees pointer/reference
-  /// stability on `push_back`.
-  std::deque<Archetype> archetype_storage_;
+  /// Owns all archetypes. `std::deque` guarantees pointer/reference stability
+  /// on `push_back`.
+  std::pmr::deque<Archetype> archetype_storage_;
 
   /// Archetype lookup. Key = ArchetypeId hash. Value = ArchetypeRecord
   /// (references into `archetype_storage_`).
-  std::unordered_map<size_t, ArchetypeRecord> archetype_map_;
+  std::pmr::unordered_map<size_t, ArchetypeRecord> archetype_map_;
 
   /// Flat list of all archetype references for fast iteration (query support).
-  std::vector<std::reference_wrapper<Archetype>> archetype_list_;
+  std::pmr::vector<std::reference_wrapper<Archetype>> archetype_list_;
 
   /// Maps entity index -> archetype the entity is in.
-  std::unordered_map<Entity::IndexType, std::reference_wrapper<Archetype>>
+  std::pmr::unordered_map<Entity::IndexType, std::reference_wrapper<Archetype>>
       entity_archetype_;
 
   SparseStorageMap sparse_storages_;
@@ -1023,15 +1048,6 @@ private:
   /// migration.
   size_type structural_version_ = 0;
 };
-
-template <ComponentTrait T>
-inline void ComponentManager::Register() {
-  constexpr auto type_index = ComponentTypeIndex::From<T>();
-  if (metadata_.find(type_index) != metadata_.end()) {
-    return;
-  }
-  metadata_.emplace(type_index, ComponentMetadata::From<T>());
-}
 
 inline void ComponentManager::InitEntity(Entity entity) {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
@@ -1201,7 +1217,7 @@ inline auto ComponentManager::TryRemoveArchetypeComponents(Entity entity)
                 entity);
 
   Archetype& current = it->second.get();
-  std::array<bool, sizeof...(Ts)> results = {(current.HasColumn(
+  std::array results = {(current.HasColumn(
       ComponentTypeIndex::From<std::remove_cvref_t<Ts>>()))...};
 
   auto target_id = current.Id();
@@ -1601,12 +1617,6 @@ inline const T* ComponentManager::TryGet(Entity entity) const {
   }
 }
 
-template <ComponentTrait T>
-inline bool ComponentManager::Registered() const noexcept {
-  constexpr auto type_index = ComponentTypeIndex::From<T>();
-  return metadata_.find(type_index) != metadata_.end();
-}
-
 inline bool ComponentManager::Tracked(Entity entity) const noexcept {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
   return entity_archetype_.contains(entity.Index());
@@ -1667,7 +1677,7 @@ inline auto ComponentManager::SparseStorage() const
 template <ComponentTrait T>
 inline const ComponentMetadata& ComponentManager::Metadata() const noexcept {
   constexpr auto type_index = ComponentTypeIndex::From<T>();
-  const auto it = metadata_.find(type_index);
+  const auto it = metadata_.Find(type_index);
   HELIOS_ASSERT(it != metadata_.end(), "Component '{}' is not registered!",
                 ComponentNameOf<T>());
   return it->second;
@@ -1675,19 +1685,8 @@ inline const ComponentMetadata& ComponentManager::Metadata() const noexcept {
 
 inline const ComponentMetadata* ComponentManager::MetadataByIndex(
     ComponentTypeIndex type_index) const noexcept {
-  const auto it = metadata_.find(type_index);
-  if (it == metadata_.end()) {
-    return nullptr;
-  }
-  return &it->second;
-}
-
-template <ComponentTrait T>
-inline void ComponentManager::EnsureRegistered() {
-  constexpr auto type_index = ComponentTypeIndex::From<T>();
-  if (metadata_.find(type_index) == metadata_.end()) {
-    metadata_.emplace(type_index, ComponentMetadata::From<T>());
-  }
+  const auto it = metadata_.Find(type_index);
+  return it != metadata_.end() ? &it->second : nullptr;
 }
 
 template <template <typename> typename Pred, typename... Ts>
@@ -1707,30 +1706,6 @@ consteval auto ComponentManager::FilteredIndicesArray() noexcept {
   return out;
 }
 
-template <typename... Ts, size_t... ArchIs>
-inline void ComponentManager::DispatchAddArchetype(
-    Entity entity, std::tuple<Ts...>& args,
-    std::index_sequence<ArchIs...> /*seq*/) {
-  AddArchetypeComponents(entity, std::forward<FwdTypeAt<ArchIs, Ts...>>(
-                                     std::get<ArchIs>(args))...);
-}
-
-template <typename... Ts, size_t... ArchIs>
-inline auto ComponentManager::DispatchTryAddArchetype(
-    Entity entity, std::tuple<Ts...>& args,
-    std::index_sequence<ArchIs...> /*seq*/)
-    -> std::array<bool, sizeof...(ArchIs)> {
-  return TryAddArchetypeComponents(
-      entity,
-      std::forward<FwdTypeAt<ArchIs, Ts...>>(std::get<ArchIs>(args))...);
-}
-
-template <typename... Ts, size_t... ArchIs>
-inline void ComponentManager::DispatchRemoveArchetype(
-    Entity entity, std::index_sequence<ArchIs...> /*seq*/) {
-  RemoveArchetypeComponents<TypeAt<ArchIs, Ts...>...>(entity);
-}
-
 template <SparseComponentTrait T>
 inline auto ComponentManager::EnsureSparseStorage()
     -> SparseComponentStorage<T>& {
@@ -1742,7 +1717,7 @@ inline auto ComponentManager::EnsureSparseStorage()
 
   // Create and insert new entry keyed by the component type index.
   auto& new_entry = sparse_storages_.template Ensure<T>();
-  new_entry = SparseStorageEntry::From<T>();
+  new_entry = SparseStorageEntry::From<T>(resource_);
   return new_entry.template As<T>();
 }
 

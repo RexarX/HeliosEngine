@@ -16,11 +16,11 @@ namespace {
 
 struct ConsumedRegistry {
   std::pmr::monotonic_buffer_resource resource;
-  PmrConsumedMessagesRegistry registry;
+  ConsumedMessagesRegistry registry;
 
   ConsumedRegistry() : registry(&resource) {}
 
-  operator PmrConsumedMessagesRegistry&() noexcept { return registry; }
+  operator ConsumedMessagesRegistry&() noexcept { return registry; }
 };
 
 struct Score {
@@ -657,14 +657,14 @@ TEST_SUITE("helios::ecs::ConsumableMessageReader") {
     }
   }
 
-  TEST_CASE("helios::ecs::ConsumableMessageReader::CollectWith") {
-    SUBCASE("CollectWith returns all messages using custom allocator") {
+  TEST_CASE("helios::ecs::ConsumableMessageReader::Collect(memory_resource*)") {
+    SUBCASE("Collect returns all messages using a memory resource") {
       const auto manager = MakeManager({{10}, {20}}, {});
       auto cursor = MessageCursor<Score>::IncludeBacklog();
       ConsumedRegistry registry;
 
       const ConsumableMessageReader<Score> reader(manager, cursor, registry);
-      const auto collected = reader.CollectWith(std::allocator<Score>{});
+      const auto collected = reader.Collect(std::pmr::get_default_resource());
 
       REQUIRE_EQ(collected.size(), 2);
       CHECK_EQ(collected[0].value, 10);

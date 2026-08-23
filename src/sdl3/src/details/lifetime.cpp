@@ -73,6 +73,27 @@ void Release(SDL_InitFlags flags) {
   }
 }
 
+bool Probe(SDL_InitFlags flags) {
+  auto& state = State();
+  if (state.retain_count > 0) {
+    const SDL_InitFlags missing = flags & ~SDL_WasInit(0);
+    if (missing == 0) {
+      return true;
+    }
+    if (!SDL_InitSubSystem(missing)) {
+      return false;
+    }
+    SDL_QuitSubSystem(missing);
+    return true;
+  }
+
+  if (!SDL_Init(flags)) {
+    return false;
+  }
+  SDL_Quit();
+  return true;
+}
+
 bool Initialized() noexcept {
   return State().retain_count > 0;
 }

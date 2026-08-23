@@ -17,7 +17,7 @@ class World;
 
 /// @brief Options for system local data.
 struct SystemLocalDataOptions {
-  static constexpr size_t kDefaultPreallocatedSize = 1024 * 1;  // 1 KB
+  static constexpr size_t kDefaultPreallocatedSize = 1UZ << 10UZ;  // 1 KB
   size_t preallocated_size = kDefaultPreallocatedSize;
 };
 
@@ -25,12 +25,15 @@ struct SystemLocalDataOptions {
 struct SystemLocalData {
   mem::ArenaAllocator allocator;  ///< local arena allocator
 
-  PmrCmdQueue cmd_queue{&allocator};          ///< local command queue
-  PmrMessageQueue message_queue{&allocator};  ///< local message queue
+  CmdQueue cmd_queue{&allocator};          ///< local command queue
+  MessageQueue message_queue{&allocator};  ///< local message queue
 
   /// local consumed messages registry
-  PmrConsumedMessagesRegistry consumed_messages{&allocator};
-  ResourceManager resource_manager;  ///< local resource manager
+  ConsumedMessagesRegistry consumed_messages{&allocator};
+  /// Local resources (including message cursors). Uses the default PMR
+  /// resource so entries survive `ResetArena()`, which reclaims the
+  /// command / message bump arena.
+  ResourceManager resource_manager;
 
   /**
    * @brief Creates system local data from system local data options.
@@ -128,10 +131,10 @@ struct SystemLocalData {
 
 private:
   /**
-   * @brief Rebuilds moved-from PMR members against the empty source allocator.
-   * @details Must run before the destination destructor frees stolen arena
-   * blocks. MSVC iterator debugging stores proxy nodes in the arena; leaving
-   * them in the source queues UAF when the destination is destroyed first.
+   * @brief Rebuilds moved-from PMR members against the source allocator.
+   * @details The source keeps its arena (PMR containers bind the allocator
+   * object address). Queues are reconstructed empty so the source destructor
+   * does not walk storage that was merged into the destination.
    */
   void ReleaseMovedFrom() noexcept;
 

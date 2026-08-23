@@ -1,5 +1,7 @@
 #pragma once
 
+#include <helios/memory/temporary_storage.hpp>
+
 #include <cstdint>
 #include <format>
 #include <iterator>
@@ -205,14 +207,14 @@ struct Clipboard {
  * @brief Formats exit triggers as a pipe-separated list and writes to an output
  * iterator.
  * @tparam It Output iterator type
- * @param triggers Combined exit trigger flags
  * @param out Output iterator to write the formatted string to
+ * @param triggers Combined exit trigger flags
  * @param with_prefix Whether to include an "ExitTrigger::" prefix for each flag
  * @return Updated output iterator after writing the formatted string
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(ExitTrigger triggers, It out, bool with_prefix = false) {
+inline It ToString(It out, ExitTrigger triggers, bool with_prefix = false) {
   const std::string_view kNoneStr = with_prefix ? "ExitTrigger::None" : "None";
 
   if (triggers == ExitTrigger::kNone) {
@@ -249,7 +251,24 @@ inline It ToString(ExitTrigger triggers, It out, bool with_prefix = false) {
                                           bool with_prefix = false) {
   std::string result;
   result.reserve(64);
-  ToString(triggers, std::back_inserter(result), with_prefix);
+  ToString(std::back_inserter(result), triggers, with_prefix);
+  return result;
+}
+
+/**
+ * @brief Formats exit triggers as a pipe-separated list of flag names using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param triggers Combined exit trigger flags
+ * @param with_prefix Whether to include a prefix for each flag
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(ExitTrigger triggers,
+                                                   bool with_prefix = false) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(64);
+  ToString(std::back_inserter(result), triggers, with_prefix);
   return result;
 }
 
@@ -260,7 +279,7 @@ inline It ToString(ExitTrigger triggers, It out, bool with_prefix = false) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, ExitTrigger triggers) {
-  ToString(triggers, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), triggers);
   return os;
 }
 
@@ -292,15 +311,15 @@ inline std::ostream& operator<<(std::ostream& os, EventMode mode) {
 
 /**
  * @brief Formats window settings using an output iterator.
- * @param settings Window settings
  * @param out Output iterator to write the formatted string to
+ * @param settings Window settings
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Settings& settings, It out) {
+inline It ToString(It out, const Settings& settings) {
   out = std::format_to(out, "Settings{{exit_triggers=");
-  out = ToString(settings.exit_triggers, out);
+  out = ToString(out, settings.exit_triggers);
   out = std::format_to(out, ", event_mode={}", ToString(settings.event_mode));
   return std::format_to(out, ", event_wait_timeout={}}}",
                         settings.event_wait_timeout);
@@ -314,7 +333,21 @@ inline It ToString(const Settings& settings, It out) {
 [[nodiscard]] inline std::string ToString(const Settings& settings) {
   std::string result;
   result.reserve(128);
-  ToString(settings, std::back_inserter(result));
+  ToString(std::back_inserter(result), settings);
+  return result;
+}
+
+/**
+ * @brief Formats window settings as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Settings
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Settings& settings) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), settings);
   return result;
 }
 
@@ -325,7 +358,7 @@ inline It ToString(const Settings& settings, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const Settings& settings) {
-  ToString(settings, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), settings);
   return os;
 }
 
@@ -357,13 +390,13 @@ inline std::ostream& operator<<(std::ostream& os, MonitorEvent event) {
 
 /**
  * @brief Formats a video mode using an output iterator.
- * @param mode Video mode
  * @param out Output iterator to write the formatted string to
+ * @param mode Video mode
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const VideoMode& mode, It out) {
+inline It ToString(It out, const VideoMode& mode) {
   return std::format_to(out,
                         "VideoMode{{width={}, height={}, refresh_rate={}}}",
                         mode.width, mode.height, mode.refresh_rate);
@@ -377,7 +410,21 @@ inline It ToString(const VideoMode& mode, It out) {
 [[nodiscard]] inline std::string ToString(const VideoMode& mode) {
   std::string result;
   result.reserve(128);
-  ToString(mode, std::back_inserter(result));
+  ToString(std::back_inserter(result), mode);
+  return result;
+}
+
+/**
+ * @brief Formats a video mode as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param mode VideoMode
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const VideoMode& mode) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), mode);
   return result;
 }
 
@@ -388,19 +435,19 @@ inline It ToString(const VideoMode& mode, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const VideoMode& mode) {
-  ToString(mode, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), mode);
   return os;
 }
 
 /**
  * @brief Formats a monitor using an output iterator.
- * @param monitor Monitor snapshot
  * @param out Output iterator to write the formatted string to
+ * @param monitor Monitor snapshot
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Monitor& monitor, It out) {
+inline It ToString(It out, const Monitor& monitor) {
   out = std::format_to(out, "Monitor{{");
   out = std::format_to(out, "name=\"{}\"", monitor.name);
   out = std::format_to(out, ", modes={}", monitor.modes.size());
@@ -417,7 +464,7 @@ inline It ToString(const Monitor& monitor, It out) {
   out = std::format_to(out, ", physical_height_mm={}",
                        monitor.physical_height_mm);
   out = std::format_to(out, ", current=");
-  out = ToString(monitor.current, out);
+  out = ToString(out, monitor.current);
   out = std::format_to(out, ", primary={}", monitor.primary);
   out = std::format_to(out, "}}");
   return out;
@@ -431,7 +478,21 @@ inline It ToString(const Monitor& monitor, It out) {
 [[nodiscard]] inline std::string ToString(const Monitor& monitor) {
   std::string result;
   result.reserve(256);
-  ToString(monitor, std::back_inserter(result));
+  ToString(std::back_inserter(result), monitor);
+  return result;
+}
+
+/**
+ * @brief Formats a monitor as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param monitor Monitor
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Monitor& monitor) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), monitor);
   return result;
 }
 
@@ -442,19 +503,19 @@ inline It ToString(const Monitor& monitor, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const Monitor& monitor) {
-  ToString(monitor, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), monitor);
   return os;
 }
 
 /**
  * @brief Formats the connected monitor list using an output iterator.
- * @param monitors Monitors resource
  * @param out Output iterator to write the formatted string to
+ * @param monitors Monitors resource
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Monitors& monitors, It out) {
+inline It ToString(It out, const Monitors& monitors) {
   out = std::format_to(out, "Monitors{{count={}", monitors.monitors.size());
   if (!monitors.monitors.empty()) {
     out = std::format_to(out, ", names=[");
@@ -479,7 +540,22 @@ inline It ToString(const Monitors& monitors, It out) {
 [[nodiscard]] inline std::string ToString(const Monitors& monitors) {
   std::string result;
   result.reserve(128);
-  ToString(monitors, std::back_inserter(result));
+  ToString(std::back_inserter(result), monitors);
+  return result;
+}
+
+/**
+ * @brief Formats the connected monitor list as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param monitors Monitors
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Monitors& monitors) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), monitors);
   return result;
 }
 
@@ -490,19 +566,19 @@ inline It ToString(const Monitors& monitors, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const Monitors& monitors) {
-  ToString(monitors, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), monitors);
   return os;
 }
 
 /**
  * @brief Formats a clipboard snapshot using an output iterator.
- * @param clipboard Clipboard resource
  * @param out Output iterator to write the formatted string to
+ * @param clipboard Clipboard resource
  * @return The output iterator after writing
  */
 template <typename It>
   requires std::output_iterator<It, char>
-inline It ToString(const Clipboard& clipboard, It out) {
+inline It ToString(It out, const Clipboard& clipboard) {
   return std::format_to(out, "Clipboard{{text=\"{}\", pending_write={}}}",
                         clipboard.text, clipboard.pending_write);
 }
@@ -515,7 +591,21 @@ inline It ToString(const Clipboard& clipboard, It out) {
 [[nodiscard]] inline std::string ToString(const Clipboard& clipboard) {
   std::string result;
   result.reserve(128);
-  ToString(clipboard, std::back_inserter(result));
+  ToString(std::back_inserter(result), clipboard);
+  return result;
+}
+
+/**
+ * @brief Formats a clipboard snapshot as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param clipboard Clipboard
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Clipboard& clipboard) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), clipboard);
   return result;
 }
 
@@ -526,7 +616,7 @@ inline It ToString(const Clipboard& clipboard, It out) {
  * @return Reference to the output stream
  */
 inline std::ostream& operator<<(std::ostream& os, const Clipboard& clipboard) {
-  ToString(clipboard, std::ostreambuf_iterator<char>(os));
+  ToString(std::ostreambuf_iterator<char>(os), clipboard);
   return os;
 }
 
@@ -542,7 +632,7 @@ struct formatter<helios::window::ExitTrigger> {
 
   static auto format(helios::window::ExitTrigger triggers,
                      format_context& ctx) {
-    return helios::window::ToString(triggers, ctx.out(), /*with_prefix=*/true);
+    return helios::window::ToString(ctx.out(), triggers, /*with_prefix=*/true);
   }
 };
 
@@ -567,7 +657,7 @@ struct formatter<helios::window::Settings> {
 
   static auto format(const helios::window::Settings& settings,
                      format_context& ctx) {
-    return helios::window::ToString(settings, ctx.out());
+    return helios::window::ToString(ctx.out(), settings);
   }
 };
 
@@ -592,7 +682,7 @@ struct formatter<helios::window::VideoMode> {
 
   static auto format(const helios::window::VideoMode& mode,
                      format_context& ctx) {
-    return helios::window::ToString(mode, ctx.out());
+    return helios::window::ToString(ctx.out(), mode);
   }
 };
 
@@ -604,7 +694,7 @@ struct formatter<helios::window::Monitor> {
 
   static auto format(const helios::window::Monitor& monitor,
                      format_context& ctx) {
-    return helios::window::ToString(monitor, ctx.out());
+    return helios::window::ToString(ctx.out(), monitor);
   }
 };
 
@@ -616,7 +706,7 @@ struct formatter<helios::window::Monitors> {
 
   static auto format(const helios::window::Monitors& monitors,
                      format_context& ctx) {
-    return helios::window::ToString(monitors, ctx.out());
+    return helios::window::ToString(ctx.out(), monitors);
   }
 };
 
@@ -628,7 +718,7 @@ struct formatter<helios::window::Clipboard> {
 
   static auto format(const helios::window::Clipboard& clipboard,
                      format_context& ctx) {
-    return helios::window::ToString(clipboard, ctx.out());
+    return helios::window::ToString(ctx.out(), clipboard);
   }
 };
 
