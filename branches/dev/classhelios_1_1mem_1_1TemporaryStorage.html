@@ -196,7 +196,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2ae160f11cf06375fcaf6543c67bf61f" id="r_a2ae160f11cf06375fcaf6543c67bf61f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> (const TemporaryStorage &amp;)=delete</td></tr>
 <tr class="memitem:ac99b2413a7110582577fd6c1106bfb02" id="r_ac99b2413a7110582577fd6c1106bfb02"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac99b2413a7110582577fd6c1106bfb02">TemporaryStorage</a> (TemporaryStorage &amp;&amp;)=delete</td></tr>
 <tr class="memitem:ab41f82d35155995096a7b9c4c4fa60b7" id="r_ab41f82d35155995096a7b9c4c4fa60b7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab41f82d35155995096a7b9c4c4fa60b7">~TemporaryStorage</a> () noexcept override</td></tr>
-<tr class="memdesc:ab41f82d35155995096a7b9c4c4fa60b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Claims exclusive access to this instance's registry node, then marks it retired, so <span class="tt"><a class="el" href="#af0aa3d78fa73d1b51821c769ea6aaeed" title="Rewinds every registered, still-live thread&#39;s resource.">ResetAll()</a></span> will no longer touch <span class="tt">this</span>.  <br /></td></tr>
+<tr class="memdesc:ab41f82d35155995096a7b9c4c4fa60b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for any in-flight <span class="tt"><a class="el" href="#af0aa3d78fa73d1b51821c769ea6aaeed" title="Rewinds every registered, still-live thread&#39;s resource.">ResetAll()</a></span>, then marks the registry node retired so later walks no longer touch <span class="tt">this</span>.  <br /></td></tr>
 <tr class="memitem:a89e9f5aaa2de0c1524116ccae67256dc" id="r_a89e9f5aaa2de0c1524116ccae67256dc"><td class="memItemLeft"><a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a89e9f5aaa2de0c1524116ccae67256dc">operator=</a> (const <a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;)=delete</td></tr>
 <tr class="memitem:a4fbfeb817a03f54765c50ea7be0d9cc1" id="r_a4fbfeb817a03f54765c50ea7be0d9cc1"><td class="memItemLeft"><a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4fbfeb817a03f54765c50ea7be0d9cc1">operator=</a> (<a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;&amp;)=delete</td></tr>
 <tr class="memitem:ab7bdf8ff5d49e29fafa727d3eb18024f" id="r_ab7bdf8ff5d49e29fafa727d3eb18024f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab7bdf8ff5d49e29fafa727d3eb18024f">Reset</a> () noexcept</td></tr>
@@ -296,10 +296,10 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Claims exclusive access to this instance's registry node, then marks it retired, so <span class="tt"><a class="el" href="#af0aa3d78fa73d1b51821c769ea6aaeed" title="Rewinds every registered, still-live thread&#39;s resource.">ResetAll()</a></span> will no longer touch <span class="tt">this</span>. </p>
-<p>Does not unlink the node from the registry. </p>
+<p>Waits for any in-flight <span class="tt"><a class="el" href="#af0aa3d78fa73d1b51821c769ea6aaeed" title="Rewinds every registered, still-live thread&#39;s resource.">ResetAll()</a></span>, then marks the registry node retired so later walks no longer touch <span class="tt">this</span>. </p>
+<p>Does not unlink the node from the registry. Must not yield or sleep: this runs from a <span class="tt">thread_local</span> destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00094">94</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00095">95</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -330,7 +330,7 @@ Static Public Attributes</h2></td></tr>
 <p>Get this thread's <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span> instance, constructing it on first call. </p>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the thread-local <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span> instance </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00247">247</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00250">250</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -410,7 +410,7 @@ Static Public Attributes</h2></td></tr>
 <p>Releases every block owned by this thread's resource back to upstream. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Invalidates all outstanding allocations made on this thread. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00114">114</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00115">115</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -441,7 +441,7 @@ Static Public Attributes</h2></td></tr>
 <p>Performs a traversal of the registry's linked list, starting from the current head and following each node's immutable <span class="tt">next</span> pointer, so the traversal itself cannot race with a node being freed.</p>
 <p>This function makes no attempt to synchronize with threads that might be concurrently allocating from (as opposed to merely registering or exiting) the resources it resets, the caller is responsible for guaranteeing that no other thread is allocating from temporary storage while this runs (e.g. only call it from a single coordinating thread at a full frame barrier, after every worker has quiesced). New threads may safely register, and existing threads may safely exit, concurrently with this call; those races are handled. </p><dl class="section warning"><dt>Warning</dt><dd>Invalidates all outstanding allocations on every registered thread whose node this call successfully claims. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00136">136</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00137">137</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -471,7 +471,7 @@ Static Public Attributes</h2></td></tr>
 <p>The memory resource backing this thread's temporary allocations. </p>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the thread-local memory resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00145">145</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00146">146</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>

@@ -177,9 +177,9 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('temporary__sto
 <a href="temporary__storage_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;<a class="code" href="memory_2src_2pch_8hpp.html">pch.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="temporary__storage_8hpp.html">helios/memory/temporary_storage.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="platform_8hpp.html">helios/platform/platform.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1mem.html">helios::mem</a> {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
@@ -203,49 +203,48 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('temporary__sto
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> TemporaryStorage::Destroy() noexcept {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="comment">// Claim exclusive access to this node before letting member destruction</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="comment">// (upstream_resource_&#39;s teardown, which runs immediately after this</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">// function body returns) proceed.</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keyword">auto</span> expected = NodeState::kActive;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">while</span> (!registry_node_-&gt;state.compare_exchange_weak(</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>      expected, NodeState::kBusy, std::memory_order_acq_rel,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>      std::memory_order_relaxed)) {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    expected = NodeState::kActive;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    std::this_thread::yield();</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  }</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="comment">// We now hold kBusy exclusively. upstream_resource_&#39;s destructor runs</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="comment">// implicitly right after this function body, tearing down the chunk</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="comment">// list with no other thread able to touch it concurrently.</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  registry_node_-&gt;state.store(NodeState::kRetired, std::memory_order_release);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keywordtype">void</span> TemporaryStorage::ResetAllImpl() noexcept {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="comment">// Acquire pairs with the release in the constructor&#39;s successful CAS:</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="comment">// if we observe a node here, we also observe its fully-initialized</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="comment">// `next` and `owner`.</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordflow">for</span> (RegistryNode* node = registry_head_.load(std::memory_order_acquire);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>       node != <span class="keyword">nullptr</span>; node = node-&gt;next) {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="comment">// Try to claim the node. Success means we have exclusive rights to</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="comment">// call Reset() on its owner, in particular, the owning thread&#39;s</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">// destructor cannot be mid-teardown of the same upstream_resource_,</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="comment">// because it would have had to win this same CAS first. Failure means</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="comment">// the node is either already kBusy (most likely: its owner is</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="comment">// concurrently exiting) or kRetired; either way we skip it rather than</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="comment">// wait.</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">auto</span> expected = NodeState::kActive;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">if</span> (node-&gt;state.compare_exchange_strong(expected, NodeState::kBusy,</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                                            std::memory_order_acq_rel,</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                                            std::memory_order_acquire)) {</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      node-&gt;owner-&gt;Reset();</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      node-&gt;state.store(NodeState::kActive, std::memory_order_release);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}  <span class="comment">// namespace helios::mem</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="comment">// Wait until ResetAll() has finished any in-flight Reset(), then retire</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="comment">// the node so later walks skip `owner`. Do not yield/sleep: this runs from</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">// a thread_local destructor, and Darwin can livelock a dying thread that</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="comment">// calls sched_yield() during TLS teardown.</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keyword">auto</span> expected = NodeState::kActive;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keywordflow">while</span> (!registry_node_-&gt;state.compare_exchange_weak(</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>      expected, NodeState::kRetired, std::memory_order_acq_rel,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>      std::memory_order_acquire)) {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">if</span> (expected == NodeState::kRetired) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    expected = NodeState::kActive;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_define" href="platform_8hpp.html#add6cedf0b0fe9ba6f9a8e8fa90ed24e2">HELIOS_PAUSE_CPU</a>();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keywordtype">void</span> TemporaryStorage::ResetAllImpl() noexcept {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="comment">// Acquire pairs with the release in the constructor&#39;s successful CAS:</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="comment">// if we observe a node here, we also observe its fully-initialized</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="comment">// `next` and `owner`.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordflow">for</span> (RegistryNode* node = registry_head_.load(std::memory_order_acquire);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>       node != <span class="keyword">nullptr</span>; node = node-&gt;next) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="comment">// Try to claim the node. Success means we may call Reset() on owner:</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="comment">// Destroy() only proceeds to member teardown after CAS kActive -&gt;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="comment">// kRetired, so it cannot be destroying upstream_resource_ while we</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">// hold kBusy. Failure means kBusy (another ResetAll) or kRetired</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="comment">// (owner already exited); skip rather than wait.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">auto</span> expected = NodeState::kActive;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">if</span> (node-&gt;state.compare_exchange_strong(expected, NodeState::kBusy,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                                            std::memory_order_acq_rel,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                                            std::memory_order_acquire)) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      node-&gt;owner-&gt;Reset();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      node-&gt;state.store(NodeState::kActive, std::memory_order_release);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}  <span class="comment">// namespace helios::mem</span></div>
 <div class="ttc" id="amemory_2src_2pch_8hpp_html"><div class="ttname"><a href="memory_2src_2pch_8hpp.html">pch.hpp</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1mem_html"><div class="ttname"><a href="namespacehelios_1_1mem.html">helios::mem</a></div><div class="ttdef"><b>Definition</b> <a href="aligned__alloc_8hpp_source.html#l00005">aligned_alloc.hpp:5</a></div></div>
+<div class="ttc" id="aplatform_8hpp_html"><div class="ttname"><a href="platform_8hpp.html">platform.hpp</a></div></div>
+<div class="ttc" id="aplatform_8hpp_html_add6cedf0b0fe9ba6f9a8e8fa90ed24e2"><div class="ttname"><a href="platform_8hpp.html#add6cedf0b0fe9ba6f9a8e8fa90ed24e2">HELIOS_PAUSE_CPU</a></div><div class="ttdeci">#define HELIOS_PAUSE_CPU()</div><div class="ttdoc">Inserts a CPU pause hint for busy-wait loops.</div><div class="ttdef"><b>Definition</b> <a href="platform_8hpp_source.html#l00135">platform.hpp:135</a></div></div>
 <div class="ttc" id="atemporary__storage_8hpp_html"><div class="ttname"><a href="temporary__storage_8hpp.html">temporary_storage.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
