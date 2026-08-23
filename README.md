@@ -38,6 +38,7 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
   - <a href="#requirements">Requirements</a>
   - <a href="#installing-dependencies">Installing Dependencies</a>
   - <a href="#building">Building</a>
+  - <a href="#linking">Linking</a>
   - <a href="#run-the-example">Run the Example</a>
 - <a href="#usage">Usage</a>
 - <a href="#using-as-a-dependency">Using as a Dependency</a>
@@ -297,13 +298,54 @@ cmake --preset linux-gcc-relwithdebinfo \
   #-DHELIOS_DEVELOPER_MODE=ON \
 ```
 
-| Option                     | Default        | Notes                         |
-| -------------------------- | -------------- | ----------------------------- |
-| `HELIOS_BUILD_TESTS`       | ON (top-level) | Module test suites            |
-| `HELIOS_BUILD_EXAMPLES`    | ON (top-level) | Example applications          |
-| `HELIOS_DEVELOPER_MODE`    | OFF            | Sanitizers and dev checks     |
-| `HELIOS_DOWNLOAD_PACKAGES` | ON             | CPM fallback for missing deps |
-| `HELIOS_BUILD_{MODULE}`    | module default | Per-module toggle             |
+| Option                     | Default                    | Notes                                                |
+| -------------------------- | -------------------------- | ---------------------------------------------------- |
+| `HELIOS_BUILD_TESTS`       | ON (top-level)             | Module test suites                                   |
+| `HELIOS_BUILD_EXAMPLES`    | ON (top-level)             | Example applications                                 |
+| `HELIOS_DEVELOPER_MODE`    | OFF                        | Sanitizers and dev checks                            |
+| `HELIOS_DOWNLOAD_PACKAGES` | ON                         | CPM fallback for missing deps                        |
+| `HELIOS_BUILD_{MODULE}`    | module default             | Per-module toggle                                    |
+| `HELIOS_LINKER`            | AUTO (top-level) / DEFAULT | Fast linker: `AUTO`, `MOLD`, `LLD`, `RAD`, `DEFAULT` |
+| `HELIOS_MANAGE_TOOLCHAIN`  | ON (top-level) / OFF       | Set `CMAKE_LINKER` / `CMAKE_AR` project-wide         |
+
+### Linking
+
+Helios picks a faster linker when one is installed (`cmake/helpers/Linker.cmake`). Selection is controlled by `HELIOS_LINKER`:
+
+| Value     | Meaning                                                                                                              |
+| --------- | -------------------------------------------------------------------------------------------------------------------- |
+| `AUTO`    | Default for a top-level Helios build. Prefer the fastest available linker for the platform.                          |
+| `MOLD`    | Force [mold](https://github.com/rui314/mold) (`mold` on `PATH`). ELF only; not used on macOS.                        |
+| `LLD`     | Force LLVM lld (`ld.lld` on Unix, `lld-link` on the MSVC ABI).                                                       |
+| `RAD`     | Force [RAD Linker](https://github.com/EpicGames/raddebugger) (`radlink` on `PATH` or `$RAD_ROOT`). Windows MSVC ABI. |
+| `DEFAULT` | Platform default (`ld` / Apple `ld` / MSVC `link.exe`). Default when Helios is embedded.                             |
+
+**`AUTO` by platform**
+
+- **Linux (ELF):** [mold](https://github.com/rui314/mold) if found, otherwise lld, otherwise the system linker.
+- **macOS:** mold is skipped (it does not link Mach-O). lld is used if `ld.lld` is on `PATH`; otherwise Apple `ld`.
+- **Windows (MSVC):** [RAD Linker](https://github.com/EpicGames/raddebugger) for Debug and non-LTO RelWithDebInfo when `radlink` is available, then `lld-link`, then `link.exe`. **clang-cl** prefers `lld-link` (RAD can fail on some clang-cl C++ COMDATs). Release LTO (MSVC LTCG) and RelWithDebInfo with `HELIOS_ENABLE_LTO_RELWITHDEBINFO=ON` keep `link.exe`; clang-cl LTO uses `lld-link`. RAD is not used with MSVC AddressSanitizer (`HELIOS_DEVELOPER_MODE=ON`).
+
+Override at configure time (must be on `PATH`, or for RAD also `$RAD_ROOT`):
+
+```bash
+cmake --preset linux-gcc-release -DHELIOS_LINKER=MOLD
+cmake --preset linux-clang-release -DHELIOS_LINKER=LLD
+cmake --preset windows-msvc-debug -DHELIOS_LINKER=RAD
+cmake --preset linux-gcc-release -DHELIOS_LINKER=DEFAULT   # disable fast linkers
+```
+
+**`HELIOS_MANAGE_TOOLCHAIN`** (see `CMakeLists.txt` and `cmake/helpers/ClangArchiver.cmake`)
+
+When `ON` (default for a standalone Helios build), Helios may set `CMAKE_LINKER`, `CMAKE_AR`, and `CMAKE_RANLIB` for the **whole** CMake project, and apply `-fuse-ld=` / linker type globally.
+
+When `OFF` (default if Helios is added via `add_subdirectory` / FetchContent), those cache variables are left to the parent. A selected fast linker is applied only to Helios targets. Consumers can opt in:
+
+```bash
+cmake -DHELIOS_MANAGE_TOOLCHAIN=ON -DHELIOS_LINKER=AUTO ...
+```
+
+Per-config RAD vs `link.exe` on the Visual Studio generator needs CMake 3.29+; Ninja presets work from CMake 3.25.
 
 ### Run the Example
 
