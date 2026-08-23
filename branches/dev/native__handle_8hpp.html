@@ -179,7 +179,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('native__handle
   <div class="headertitle"><div class="title">native_handle.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;format&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="temporary__storage_8hpp_source.html">helios/memory/temporary_storage.hpp</a>&gt;</code><br />
+<code>#include &lt;format&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;ostream&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
@@ -206,12 +207,14 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a53a00b9a30cf9f9152eeed3ea92f5de0" id="r_a53a00b9a30cf9f9152eeed3ea92f5de0"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+<tr class="memitem:a657d426f608cc1e1c2939390c81a2941" id="r_a657d426f608cc1e1c2939390c81a2941"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
 requires std::output_iterator&lt;It, char&gt;</td></tr>
-<tr class="memitem:a53a00b9a30cf9f9152eeed3ea92f5de0 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a53a00b9a30cf9f9152eeed3ea92f5de0">helios::window::ToString</a> (const <a class="el" href="namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77">NativeHandle</a> &amp;handle, It out)</td></tr>
-<tr class="memdesc:a53a00b9a30cf9f9152eeed3ea92f5de0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a native handle using an output iterator.  <br /></td></tr>
+<tr class="memitem:a657d426f608cc1e1c2939390c81a2941 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a657d426f608cc1e1c2939390c81a2941">helios::window::ToString</a> (It out, const <a class="el" href="namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77">NativeHandle</a> &amp;handle)</td></tr>
+<tr class="memdesc:a657d426f608cc1e1c2939390c81a2941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a native handle using an output iterator.  <br /></td></tr>
 <tr class="memitem:a428485d6b754becdaf3605677718e67d" id="r_a428485d6b754becdaf3605677718e67d"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a428485d6b754becdaf3605677718e67d">helios::window::ToString</a> (const <a class="el" href="namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77">NativeHandle</a> &amp;handle)</td></tr>
 <tr class="memdesc:a428485d6b754becdaf3605677718e67d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a <a class="el" href="namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77" title="Backend-agnostic native window handle.">NativeHandle</a> as a string.  <br /></td></tr>
+<tr class="memitem:a72e87fe46cf7cb22d91514a58eebc941" id="r_a72e87fe46cf7cb22d91514a58eebc941"><td class="memItemLeft">std::pmr::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#a72e87fe46cf7cb22d91514a58eebc941">helios::window::TempToString</a> (const <a class="el" href="namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77">NativeHandle</a> &amp;handle)</td></tr>
+<tr class="memdesc:a72e87fe46cf7cb22d91514a58eebc941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a <a class="el" href="namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77" title="Backend-agnostic native window handle.">NativeHandle</a> as a string using <span class="tt">TemporaryStorage</span>.  <br /></td></tr>
 <tr class="memitem:ab81d9f5ec559080dd6fe376e923c038b" id="r_ab81d9f5ec559080dd6fe376e923c038b"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1window.html#ab81d9f5ec559080dd6fe376e923c038b">helios::window::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77">NativeHandle</a> &amp;handle)</td></tr>
 <tr class="memdesc:ab81d9f5ec559080dd6fe376e923c038b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a <a class="el" href="namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77" title="Backend-agnostic native window handle.">NativeHandle</a> to an output stream.  <br /></td></tr>
 </table>

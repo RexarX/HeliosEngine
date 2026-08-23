@@ -1,6 +1,7 @@
 var structhelios_1_1utils_1_1StringEqual =
 [
     [ "is_transparent", "structhelios_1_1utils_1_1StringEqual.html#a404319ad52e8baa39a0a26b71c388cf3", null ],
+    [ "operator()", "structhelios_1_1utils_1_1StringEqual.html#ad12cd5bcce9ee625e780d26e8b2462a3", null ],
     [ "operator()", "structhelios_1_1utils_1_1StringEqual.html#abf142c260ebeffae35a5cb2617dc0eef", null ],
     [ "operator()", "structhelios_1_1utils_1_1StringEqual.html#ac446450844bdfc7180c4b3a2af5d8501", null ],
     [ "operator()", "structhelios_1_1utils_1_1StringEqual.html#aa682f54eb3f2bda220f1bb6a18e07ef5", null ],

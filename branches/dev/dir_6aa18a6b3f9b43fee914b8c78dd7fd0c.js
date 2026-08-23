@@ -10,5 +10,6 @@ var dir_6aa18a6b3f9b43fee914b8c78dd7fd0c =
     [ "global_alloc.cpp", "global__alloc_8cpp.html", "global__alloc_8cpp" ],
     [ "pch.hpp", "memory_2src_2pch_8hpp.html", null ],
     [ "pool_allocator.cpp", "pool__allocator_8cpp.html", null ],
-    [ "stack_allocator.cpp", "stack__allocator_8cpp.html", null ]
+    [ "stack_allocator.cpp", "stack__allocator_8cpp.html", null ],
+    [ "temporary_storage.cpp", "temporary__storage_8cpp.html", null ]
 ];

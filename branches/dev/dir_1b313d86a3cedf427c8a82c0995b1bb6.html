@@ -193,9 +193,9 @@ Public API</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">MultiTypeMap&lt;Storage&gt;</span>  </td><td class="markdownTableBodyNone">Type-indexed map keyed by <span class="tt">TypeIndex</span>. <span class="tt">Ensure&lt;T&gt;()</span>, <span class="tt">Get&lt;T&gt;()</span>, <span class="tt">ForEach()</span>.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">TypedBuffer&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Type-erased single-instance storage. Fast path for trivially-copyable types.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">TypedBuffer</span>  </td><td class="markdownTableBodyNone">Type-erased single-instance storage. Fast path for trivially-copyable types.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">TypedBufferArray&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Contiguous storage for multiple instances of one type. PMR support.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">TypedBufferArray</span>  </td><td class="markdownTableBodyNone">Contiguous storage for multiple instances of one type. PMR-backed.  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">CallableBuffer&lt;...&gt;</span>  </td><td class="markdownTableBodyNone">Single-instance type-erased callable. <span class="tt">Set()</span>, <span class="tt">Invoke()</span>.  </td></tr>
 <tr class="markdownTableRowEven">
@@ -209,22 +209,22 @@ SparseSet</h1>
 <div class="line"> </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet&lt;int&gt;</a> set;</div>
 <div class="line"> </div>
-<div class="line">set.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a831cc98f471ed59aeea3a3a26d57e961">Insert</a>(42, 100);          <span class="comment">// index 42 → value 100</span></div>
-<div class="line">set.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a831cc98f471ed59aeea3a3a26d57e961">Insert</a>(7, 200);</div>
+<div class="line">set.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a1a55ed64064ed3edec961a0644c79787">Insert</a>(42, 100);          <span class="comment">// index 42 → value 100</span></div>
+<div class="line">set.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a1a55ed64064ed3edec961a0644c79787">Insert</a>(7, 200);</div>
 <div class="line"> </div>
-<div class="line">CHECK(set.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(42));</div>
-<div class="line">CHECK_EQ(set.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a74346075ca174f07b3ba96f325701d7f">Get</a>(42), 100);</div>
+<div class="line">CHECK(set.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a9611aedcd0b389637d82ab579b96b2ae">Contains</a>(42));</div>
+<div class="line">CHECK_EQ(set.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a5f4bbbe7eb6164259b197610e0779321">Get</a>(42), 100);</div>
 <div class="line"> </div>
-<div class="line">set.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a09744969921b780b5d5bde1f174f639c">Remove</a>(42);               <span class="comment">// O(1) swap-and-pop</span></div>
+<div class="line">set.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#afb3cb9f9237808e1e3635a2d7d64019f">Remove</a>(42);               <span class="comment">// O(1) swap-and-pop</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> value : set) {       <span class="comment">// cache-friendly dense iteration</span></div>
 <div class="line">  <span class="comment">// ...</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a></div><div class="ttdoc">A sparse set data structure for efficient mapping of sparse indices to dense storage of values.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00040">sparse_set.hpp:40</a></div></div>
-<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a09744969921b780b5d5bde1f174f639c"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a09744969921b780b5d5bde1f174f639c">helios::container::SparseSet::Remove</a></div><div class="ttdeci">constexpr void Remove(IndexType index) noexcept</div><div class="ttdoc">Removes an index from the set.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00623">sparse_set.hpp:623</a></div></div>
-<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a3889d6f69f2ce7fb7532fbf40c0d9047"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">helios::container::SparseSet::Contains</a></div><div class="ttdeci">constexpr bool Contains(IndexType index) const noexcept</div><div class="ttdoc">Checks if an index exists in the set.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00788">sparse_set.hpp:788</a></div></div>
-<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a74346075ca174f07b3ba96f325701d7f"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a74346075ca174f07b3ba96f325701d7f">helios::container::SparseSet::Get</a></div><div class="ttdeci">constexpr T &amp; Get(IndexType index) noexcept</div><div class="ttdoc">Gets the value at the specified index.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00680">sparse_set.hpp:680</a></div></div>
-<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a831cc98f471ed59aeea3a3a26d57e961"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a831cc98f471ed59aeea3a3a26d57e961">helios::container::SparseSet::Insert</a></div><div class="ttdeci">constexpr DenseIndexType Insert(IndexType index, const T &amp;value)</div><div class="ttdoc">Inserts a value at the specified index (copy version).</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00529">sparse_set.hpp:529</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a></div><div class="ttdoc">A sparse set data structure for efficient mapping of sparse indices to dense storage of values.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00036">sparse_set.hpp:36</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a1a55ed64064ed3edec961a0644c79787"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a1a55ed64064ed3edec961a0644c79787">helios::container::SparseSet::Insert</a></div><div class="ttdeci">constexpr DenseIndexType Insert(IndexType index, const T &amp;value)</div><div class="ttdoc">Inserts a value at the specified index (copy version).</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00481">sparse_set.hpp:481</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a5f4bbbe7eb6164259b197610e0779321"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a5f4bbbe7eb6164259b197610e0779321">helios::container::SparseSet::Get</a></div><div class="ttdeci">constexpr T &amp; Get(IndexType index) noexcept</div><div class="ttdoc">Gets the value at the specified index.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00627">sparse_set.hpp:627</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a9611aedcd0b389637d82ab579b96b2ae"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a9611aedcd0b389637d82ab579b96b2ae">helios::container::SparseSet::Contains</a></div><div class="ttdeci">constexpr bool Contains(IndexType index) const noexcept</div><div class="ttdoc">Checks if an index exists in the set.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00745">sparse_set.hpp:745</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_afb3cb9f9237808e1e3635a2d7d64019f"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#afb3cb9f9237808e1e3635a2d7d64019f">helios::container::SparseSet::Remove</a></div><div class="ttdeci">constexpr void Remove(IndexType index) noexcept</div><div class="ttdoc">Removes an index from the set.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00572">sparse_set.hpp:572</a></div></div>
 <div class="ttc" id="asparse__set_8hpp_html"><div class="ttname"><a href="sparse__set_8hpp.html">sparse_set.hpp</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="multitypemap"></a>
 MultiTypeMap</h1>
@@ -232,47 +232,49 @@ MultiTypeMap</h1>
 <div class="line"> </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1container_1_1MultiTypeMap.html">helios::container::MultiTypeMap&lt;std::string&gt;</a> map;</div>
 <div class="line"> </div>
-<div class="line">map.<a class="code hl_function" href="classhelios_1_1container_1_1MultiTypeMap.html#ad1210cd9beccfd9fc8bf0f4e20227767">Ensure</a>&lt;<span class="keywordtype">int</span>&gt;() = <span class="stringliteral">&quot;integer slot&quot;</span>;</div>
-<div class="line">map.<a class="code hl_function" href="classhelios_1_1container_1_1MultiTypeMap.html#ad1210cd9beccfd9fc8bf0f4e20227767">Ensure</a>&lt;<span class="keywordtype">float</span>&gt;() = <span class="stringliteral">&quot;float slot&quot;</span>;</div>
+<div class="line">map.<a class="code hl_function" href="classhelios_1_1container_1_1MultiTypeMap.html#abe470fae7c48638015c60701c6642c5a">Ensure</a>&lt;<span class="keywordtype">int</span>&gt;() = <span class="stringliteral">&quot;integer slot&quot;</span>;</div>
+<div class="line">map.<a class="code hl_function" href="classhelios_1_1container_1_1MultiTypeMap.html#abe470fae7c48638015c60701c6642c5a">Ensure</a>&lt;<span class="keywordtype">float</span>&gt;() = <span class="stringliteral">&quot;float slot&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">map.ForEach([](<span class="keyword">auto</span> type_index, std::string&amp; value) {</div>
 <div class="line">  <span class="comment">// iterate all registered types</span></div>
 <div class="line">});</div>
-<div class="ttc" id="aclasshelios_1_1container_1_1MultiTypeMap_html"><div class="ttname"><a href="classhelios_1_1container_1_1MultiTypeMap.html">helios::container::MultiTypeMap</a></div><div class="ttdoc">Generic type-indexed map that stores one Storage instance per registered type key.</div><div class="ttdef"><b>Definition</b> <a href="multi__type__map_8hpp_source.html#l00047">multi_type_map.hpp:47</a></div></div>
-<div class="ttc" id="aclasshelios_1_1container_1_1MultiTypeMap_html_ad1210cd9beccfd9fc8bf0f4e20227767"><div class="ttname"><a href="classhelios_1_1container_1_1MultiTypeMap.html#ad1210cd9beccfd9fc8bf0f4e20227767">helios::container::MultiTypeMap::Ensure</a></div><div class="ttdeci">constexpr Storage &amp; Ensure()</div><div class="ttdoc">Ensures a Storage entry exists for type T and returns a reference to it.</div><div class="ttdef"><b>Definition</b> <a href="multi__type__map_8hpp_source.html#l00562">multi_type_map.hpp:562</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1MultiTypeMap_html"><div class="ttname"><a href="classhelios_1_1container_1_1MultiTypeMap.html">helios::container::MultiTypeMap</a></div><div class="ttdoc">Generic type-indexed map that stores one Storage instance per registered type key.</div><div class="ttdef"><b>Definition</b> <a href="multi__type__map_8hpp_source.html#l00036">multi_type_map.hpp:36</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1MultiTypeMap_html_abe470fae7c48638015c60701c6642c5a"><div class="ttname"><a href="classhelios_1_1container_1_1MultiTypeMap.html#abe470fae7c48638015c60701c6642c5a">helios::container::MultiTypeMap::Ensure</a></div><div class="ttdeci">constexpr Storage &amp; Ensure()</div><div class="ttdoc">Ensures a Storage entry exists for type T and returns a reference to it.</div><div class="ttdef"><b>Definition</b> <a href="multi__type__map_8hpp_source.html#l00608">multi_type_map.hpp:608</a></div></div>
 <div class="ttc" id="amulti__type__map_8hpp_html"><div class="ttname"><a href="multi__type__map_8hpp.html">multi_type_map.hpp</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="typedbuffer"></a>
 TypedBuffer</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="typed__buffer_8hpp.html">helios/container/typed_buffer.hpp</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_class" href="classhelios_1_1container_1_1TypedBuffer.html">helios::container::TypedBuffer&lt;&gt;</a> buffer;</div>
+<div class="line"><a class="code hl_class" href="classhelios_1_1container_1_1TypedBuffer.html">helios::container::TypedBuffer</a> buffer;</div>
 <div class="line"> </div>
-<div class="line">buffer.<a class="code hl_function" href="classhelios_1_1container_1_1TypedBuffer.html#a979cbae116eb84827afffb7638c39883">Set</a>&lt;PhysicsConfig&gt;({.gravity = -9.81F});</div>
-<div class="line"><span class="keyword">auto</span>&amp; config = buffer.<a class="code hl_function" href="classhelios_1_1container_1_1TypedBuffer.html#a454c6919b51311bf1f2a031ac6a940fd">Value</a>&lt;PhysicsConfig&gt;();</div>
+<div class="line">buffer.<a class="code hl_function" href="classhelios_1_1container_1_1TypedBuffer.html#a0accea23208d72f48118a1fc4d26427e">Set</a>&lt;PhysicsConfig&gt;({.gravity = -9.81F});</div>
+<div class="line"><span class="keyword">auto</span>&amp; config = buffer.<a class="code hl_function" href="classhelios_1_1container_1_1TypedBuffer.html#adf0f78a7e53e718fae88cbb7b102aa89">Value</a>&lt;PhysicsConfig&gt;();</div>
 <div class="line"> </div>
-<div class="line">buffer.<a class="code hl_function" href="classhelios_1_1container_1_1TypedBuffer.html#ab719d7fccd087a9bf5f1062c54a969d7">Reset</a>();                  <span class="comment">// destroy value and clear type info</span></div>
-<div class="line">buffer.<a class="code hl_function" href="classhelios_1_1container_1_1TypedBuffer.html#a979cbae116eb84827afffb7638c39883">Set</a>&lt;RenderConfig&gt;();      <span class="comment">// type can change across lifetimes</span></div>
-<div class="ttc" id="aclasshelios_1_1container_1_1TypedBuffer_html"><div class="ttname"><a href="classhelios_1_1container_1_1TypedBuffer.html">helios::container::TypedBuffer</a></div><div class="ttdoc">Type-erased single-instance byte storage.</div><div class="ttdef"><b>Definition</b> <a href="typed__buffer_8hpp_source.html#l00031">typed_buffer.hpp:31</a></div></div>
-<div class="ttc" id="aclasshelios_1_1container_1_1TypedBuffer_html_a454c6919b51311bf1f2a031ac6a940fd"><div class="ttname"><a href="classhelios_1_1container_1_1TypedBuffer.html#a454c6919b51311bf1f2a031ac6a940fd">helios::container::TypedBuffer::Value</a></div><div class="ttdeci">T &amp; Value() noexcept</div><div class="ttdoc">Accesses the stored value.</div><div class="ttdef"><b>Definition</b> <a href="typed__buffer_8hpp_source.html#l00402">typed_buffer.hpp:402</a></div></div>
-<div class="ttc" id="aclasshelios_1_1container_1_1TypedBuffer_html_a979cbae116eb84827afffb7638c39883"><div class="ttname"><a href="classhelios_1_1container_1_1TypedBuffer.html#a979cbae116eb84827afffb7638c39883">helios::container::TypedBuffer::Set</a></div><div class="ttdeci">T &amp; Set(Args &amp;&amp;... args)</div><div class="ttdoc">Constructs (or replaces) the stored value in-place.</div><div class="ttdef"><b>Definition</b> <a href="typed__buffer_8hpp_source.html#l00378">typed_buffer.hpp:378</a></div></div>
-<div class="ttc" id="aclasshelios_1_1container_1_1TypedBuffer_html_ab719d7fccd087a9bf5f1062c54a969d7"><div class="ttname"><a href="classhelios_1_1container_1_1TypedBuffer.html#ab719d7fccd087a9bf5f1062c54a969d7">helios::container::TypedBuffer::Reset</a></div><div class="ttdeci">constexpr void Reset() noexcept</div><div class="ttdoc">Destroys the stored value and resets type information.</div><div class="ttdef"><b>Definition</b> <a href="typed__buffer_8hpp_source.html#l00369">typed_buffer.hpp:369</a></div></div>
+<div class="line">buffer.<a class="code hl_function" href="classhelios_1_1container_1_1TypedBuffer.html#a9d2c34b01d6a0d8c5e89e6686a63c908">Reset</a>();                  <span class="comment">// destroy value and clear type info</span></div>
+<div class="line">buffer.<a class="code hl_function" href="classhelios_1_1container_1_1TypedBuffer.html#a0accea23208d72f48118a1fc4d26427e">Set</a>&lt;RenderConfig&gt;();      <span class="comment">// type can change across lifetimes</span></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1TypedBuffer_html"><div class="ttname"><a href="classhelios_1_1container_1_1TypedBuffer.html">helios::container::TypedBuffer</a></div><div class="ttdoc">Type-erased single-instance byte storage.</div><div class="ttdef"><b>Definition</b> <a href="typed__buffer_8hpp_source.html#l00028">typed_buffer.hpp:28</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1TypedBuffer_html_a0accea23208d72f48118a1fc4d26427e"><div class="ttname"><a href="classhelios_1_1container_1_1TypedBuffer.html#a0accea23208d72f48118a1fc4d26427e">helios::container::TypedBuffer::Set</a></div><div class="ttdeci">constexpr T &amp; Set(Args &amp;&amp;... args)</div><div class="ttdoc">Constructs (or replaces) the stored value in-place.</div><div class="ttdef"><b>Definition</b> <a href="typed__buffer_8hpp_source.html#l00470">typed_buffer.hpp:470</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1TypedBuffer_html_a9d2c34b01d6a0d8c5e89e6686a63c908"><div class="ttname"><a href="classhelios_1_1container_1_1TypedBuffer.html#a9d2c34b01d6a0d8c5e89e6686a63c908">helios::container::TypedBuffer::Reset</a></div><div class="ttdeci">constexpr void Reset() noexcept</div><div class="ttdoc">Destroys the stored value and resets type information.</div><div class="ttdef"><b>Definition</b> <a href="typed__buffer_8hpp_source.html#l00430">typed_buffer.hpp:430</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1TypedBuffer_html_adf0f78a7e53e718fae88cbb7b102aa89"><div class="ttname"><a href="classhelios_1_1container_1_1TypedBuffer.html#adf0f78a7e53e718fae88cbb7b102aa89">helios::container::TypedBuffer::Value</a></div><div class="ttdeci">constexpr T &amp; Value() noexcept</div><div class="ttdoc">Accesses the stored value.</div><div class="ttdef"><b>Definition</b> <a href="typed__buffer_8hpp_source.html#l00503">typed_buffer.hpp:503</a></div></div>
 <div class="ttc" id="atyped__buffer_8hpp_html"><div class="ttname"><a href="typed__buffer_8hpp.html">typed_buffer.hpp</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="callablebuffer"></a>
 CallableBuffer</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="callable__buffer_8hpp.html">helios/container/callable_buffer.hpp</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_typedef" href="namespacehelios_1_1container.html#a36b75ba1590a28b6cf6127945279fba7">helios::container::CallableBuffer</a>&lt;void(<span class="keywordtype">int</span>&amp;)&gt; cmd;</div>
-<div class="line">cmd.Set([](<span class="keywordtype">int</span>&amp; x) { x += 1; });</div>
+<div class="line"><a class="code hl_class" href="classhelios_1_1container_1_1CallableBuffer.html">helios::container::CallableBuffer</a>&lt;void(<span class="keywordtype">int</span>&amp;)&gt; cmd;</div>
+<div class="line">cmd.<a class="code hl_function" href="classhelios_1_1container_1_1CallableBuffer.html#ab9d469bda19b3ed65fb79bfe9d902aaa">Set</a>([](<span class="keywordtype">int</span>&amp; x) { x += 1; });</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> value = 0;</div>
-<div class="line">cmd.Invoke(value);</div>
+<div class="line">cmd.<a class="code hl_function" href="classhelios_1_1container_1_1CallableBuffer.html#abffa4569b278478c96d03b8a8fb6f0c5">Invoke</a>(value);</div>
 <div class="ttc" id="acallable__buffer_8hpp_html"><div class="ttname"><a href="callable__buffer_8hpp.html">callable_buffer.hpp</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1container_html_a36b75ba1590a28b6cf6127945279fba7"><div class="ttname"><a href="namespacehelios_1_1container.html#a36b75ba1590a28b6cf6127945279fba7">helios::container::CallableBuffer</a></div><div class="ttdeci">typename details::CallableBufferDeducer&lt; Args... &gt;::type CallableBuffer</div><div class="ttdoc">Single-instance callable buffer with type-erased invocation.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer_8hpp_source.html#l00563">callable_buffer.hpp:563</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1CallableBuffer_html"><div class="ttname"><a href="classhelios_1_1container_1_1CallableBuffer.html">helios::container::CallableBuffer</a></div><div class="ttdoc">Single-instance callable buffer with type-erased invocation.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer_8hpp_source.html#l00034">callable_buffer.hpp:34</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1CallableBuffer_html_ab9d469bda19b3ed65fb79bfe9d902aaa"><div class="ttname"><a href="classhelios_1_1container_1_1CallableBuffer.html#ab9d469bda19b3ed65fb79bfe9d902aaa">helios::container::CallableBuffer::Set</a></div><div class="ttdeci">void Set(T &amp;&amp;callable)</div><div class="ttdoc">Stores a callable using its default operator() for invocation.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer_8hpp_source.html#l00084">callable_buffer.hpp:84</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1CallableBuffer_html_abffa4569b278478c96d03b8a8fb6f0c5"><div class="ttname"><a href="classhelios_1_1container_1_1CallableBuffer.html#abffa4569b278478c96d03b8a8fb6f0c5">helios::container::CallableBuffer::Invoke</a></div><div class="ttdeci">void Invoke(UArgs &amp;&amp;... args) noexcept</div><div class="ttdoc">Invokes operation N on the stored callable.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer_8hpp_source.html#l00355">callable_buffer.hpp:355</a></div></div>
 </div><!-- fragment --><p>Multiple signatures:</p>
-<div class="fragment"><div class="line"><a class="code hl_typedef" href="namespacehelios_1_1container.html#a36b75ba1590a28b6cf6127945279fba7">helios::container::CallableBuffer</a>&lt;void(World&amp;), void(Logger&amp;)&gt; multi;</div>
-<div class="line">multi.Set&lt;&amp;Cmd::Execute, &amp;Cmd::Log&gt;(Cmd{data});</div>
-<div class="line">multi.Invoke&lt;0&gt;(world);</div>
-<div class="line">multi.Invoke&lt;1&gt;(logger);</div>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classhelios_1_1container_1_1CallableBuffer.html">helios::container::CallableBuffer</a>&lt;void(World&amp;), void(Logger&amp;)&gt; multi;</div>
+<div class="line">multi.<a class="code hl_function" href="classhelios_1_1container_1_1CallableBuffer.html#ab9d469bda19b3ed65fb79bfe9d902aaa">Set</a>&lt;&amp;Cmd::Execute, &amp;Cmd::Log&gt;(Cmd{data});</div>
+<div class="line">multi.<a class="code hl_function" href="classhelios_1_1container_1_1CallableBuffer.html#abffa4569b278478c96d03b8a8fb6f0c5">Invoke</a>&lt;0&gt;(world);</div>
+<div class="line">multi.<a class="code hl_function" href="classhelios_1_1container_1_1CallableBuffer.html#abffa4569b278478c96d03b8a8fb6f0c5">Invoke</a>&lt;1&gt;(logger);</div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="staticstring"></a>
 StaticString</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="static__string_8hpp.html">helios/container/static_string.hpp</a>&gt;</span></div>
@@ -287,8 +289,7 @@ StaticString</h1>
 Dependencies</h1>
 <ul>
 <li><span class="tt">core</span> — asserts</li>
-<li><span class="tt">utils</span> — <span class="tt">TypeIndex</span> for <span class="tt">MultiTypeMap</span></li>
-<li>External: Boost <span class="tt">flat_map</span> (when <span class="tt">std::flat_map</span> unavailable) </li>
+<li><span class="tt">utils</span> — <span class="tt">TypeIndex</span> for <span class="tt">MultiTypeMap</span> </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- doc-content -->

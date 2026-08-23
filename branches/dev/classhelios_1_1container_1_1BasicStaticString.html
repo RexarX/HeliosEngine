@@ -207,7 +207,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a667f6fbf383886b870550b588c868ade"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. Creates an empty string.  <br /></td></tr>
 <tr class="memitem:aef9d599d1d5a0e8cfca81a639b964047" id="r_aef9d599d1d5a0e8cfca81a639b964047"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aef9d599d1d5a0e8cfca81a639b964047">BasicStaticString</a> (std::basic_string_view&lt; CharT, Traits &gt; sv) noexcept</td></tr>
 <tr class="memdesc:aef9d599d1d5a0e8cfca81a639b964047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs from a string_view.  <br /></td></tr>
-<tr class="memitem:a0a22956196063e163bb35a7f3704abf7" id="r_a0a22956196063e163bb35a7f3704abf7"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a0a22956196063e163bb35a7f3704abf7">BasicStaticString</a> (std::basic_string_view&lt; CharT, Traits &gt; sv, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) noexcept</td></tr>
+<tr class="memitem:a0a22956196063e163bb35a7f3704abf7" id="r_a0a22956196063e163bb35a7f3704abf7"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a0a22956196063e163bb35a7f3704abf7">BasicStaticString</a> (std::basic_string_view&lt; CharT, Traits &gt; sv, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) noexcept</td></tr>
 <tr class="memdesc:a0a22956196063e163bb35a7f3704abf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a substring from a string_view with position and count.  <br /></td></tr>
 <tr class="memitem:ac739527630641525cb415c1f4bdef3a2" id="r_ac739527630641525cb415c1f4bdef3a2"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ac739527630641525cb415c1f4bdef3a2">BasicStaticString</a> (const CharT *str) noexcept</td></tr>
 <tr class="memdesc:ac739527630641525cb415c1f4bdef3a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs from a null-terminated C string.  <br /></td></tr>
@@ -240,17 +240,17 @@ requires (OtherCapacity &lt; StrCapacity)</td></tr>
 requires (OtherCapacity &lt; StrCapacity)</td></tr>
 <tr class="memitem:a1a9659bbdf37ba192cbc67aef94fba0b template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a1a9659bbdf37ba192cbc67aef94fba0b">BasicStaticString</a> (BasicStaticString&lt; OtherCapacity, CharT, Traits &gt; &amp;&amp;other) noexcept</td></tr>
 <tr class="memdesc:a1a9659bbdf37ba192cbc67aef94fba0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor from smaller capacity string.  <br /></td></tr>
-<tr class="memitem:a748062e5a88e6b405c10da0df14ac639" id="r_a748062e5a88e6b405c10da0df14ac639"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a748062e5a88e6b405c10da0df14ac639">BasicStaticString</a> (const BasicStaticString &amp;other, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) noexcept</td></tr>
+<tr class="memitem:a748062e5a88e6b405c10da0df14ac639" id="r_a748062e5a88e6b405c10da0df14ac639"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a748062e5a88e6b405c10da0df14ac639">BasicStaticString</a> (const BasicStaticString &amp;other, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) noexcept</td></tr>
 <tr class="memdesc:a748062e5a88e6b405c10da0df14ac639"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substring copy constructor from same capacity string.  <br /></td></tr>
-<tr class="memitem:a2f0b0d784259820c58175bc6fb18c611" id="r_a2f0b0d784259820c58175bc6fb18c611"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a2f0b0d784259820c58175bc6fb18c611">BasicStaticString</a> (BasicStaticString &amp;&amp;other, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) noexcept</td></tr>
+<tr class="memitem:a2f0b0d784259820c58175bc6fb18c611" id="r_a2f0b0d784259820c58175bc6fb18c611"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a2f0b0d784259820c58175bc6fb18c611">BasicStaticString</a> (BasicStaticString &amp;&amp;other, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) noexcept</td></tr>
 <tr class="memdesc:a2f0b0d784259820c58175bc6fb18c611"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substring move constructor from same capacity string (C++23).  <br /></td></tr>
 <tr class="memitem:aa9d69021b13b7bdd4abe91d9020cf19a" id="r_aa9d69021b13b7bdd4abe91d9020cf19a"><td class="memTemplParams" colspan="2">template&lt;size_t OtherCapacity&gt; <br />
 requires (OtherCapacity &lt; StrCapacity)</td></tr>
-<tr class="memitem:aa9d69021b13b7bdd4abe91d9020cf19a template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aa9d69021b13b7bdd4abe91d9020cf19a">BasicStaticString</a> (const BasicStaticString&lt; OtherCapacity, CharT, Traits &gt; &amp;other, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) noexcept</td></tr>
+<tr class="memitem:aa9d69021b13b7bdd4abe91d9020cf19a template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aa9d69021b13b7bdd4abe91d9020cf19a">BasicStaticString</a> (const BasicStaticString&lt; OtherCapacity, CharT, Traits &gt; &amp;other, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) noexcept</td></tr>
 <tr class="memdesc:aa9d69021b13b7bdd4abe91d9020cf19a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substring copy constructor from smaller capacity string.  <br /></td></tr>
 <tr class="memitem:a756a04c723d5997f19e8d6845a634f77" id="r_a756a04c723d5997f19e8d6845a634f77"><td class="memTemplParams" colspan="2">template&lt;size_t OtherCapacity&gt; <br />
 requires (OtherCapacity &lt; StrCapacity)</td></tr>
-<tr class="memitem:a756a04c723d5997f19e8d6845a634f77 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a756a04c723d5997f19e8d6845a634f77">BasicStaticString</a> (BasicStaticString&lt; OtherCapacity, CharT, Traits &gt; &amp;&amp;other, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) noexcept</td></tr>
+<tr class="memitem:a756a04c723d5997f19e8d6845a634f77 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a756a04c723d5997f19e8d6845a634f77">BasicStaticString</a> (BasicStaticString&lt; OtherCapacity, CharT, Traits &gt; &amp;&amp;other, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) noexcept</td></tr>
 <tr class="memdesc:a756a04c723d5997f19e8d6845a634f77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substring move constructor from smaller capacity string (C++23).  <br /></td></tr>
 <tr class="memitem:ac57647257a36aa11564699a04ca57d75" id="r_ac57647257a36aa11564699a04ca57d75"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ac57647257a36aa11564699a04ca57d75">~BasicStaticString</a> () noexcept=default</td></tr>
 <tr class="memitem:a394d2f9c3b02d948114ee1aa2f9a4618" id="r_a394d2f9c3b02d948114ee1aa2f9a4618"><td class="memItemLeft">constexpr <a class="el" href="#a667f6fbf383886b870550b588c868ade">BasicStaticString</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a394d2f9c3b02d948114ee1aa2f9a4618">operator=</a> (const <a class="el" href="#a667f6fbf383886b870550b588c868ade">BasicStaticString</a> &amp;) noexcept=default</td></tr>
@@ -277,7 +277,7 @@ requires (OtherCapacity &lt; StrCapacity)</td></tr>
 requires std::convertible_to&lt;std::ranges::range_value_t&lt;Range&gt;, CharT&gt;</td></tr>
 <tr class="memitem:afe7da841e821744bcccdc72e4f61033a template"><td class="memItemLeft">constexpr <a class="el" href="#a667f6fbf383886b870550b588c868ade">BasicStaticString</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#afe7da841e821744bcccdc72e4f61033a">InsertRange</a> (<a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos, Range &amp;&amp;range) noexcept</td></tr>
 <tr class="memdesc:afe7da841e821744bcccdc72e4f61033a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts characters from a range at position.  <br /></td></tr>
-<tr class="memitem:a4e793177bdaf898eca42aa246a385bda" id="r_a4e793177bdaf898eca42aa246a385bda"><td class="memItemLeft">constexpr <a class="el" href="#a667f6fbf383886b870550b588c868ade">BasicStaticString</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4e793177bdaf898eca42aa246a385bda">Erase</a> (<a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=0, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) noexcept</td></tr>
+<tr class="memitem:a4e793177bdaf898eca42aa246a385bda" id="r_a4e793177bdaf898eca42aa246a385bda"><td class="memItemLeft">constexpr <a class="el" href="#a667f6fbf383886b870550b588c868ade">BasicStaticString</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4e793177bdaf898eca42aa246a385bda">Erase</a> (<a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=0, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) noexcept</td></tr>
 <tr class="memdesc:a4e793177bdaf898eca42aa246a385bda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases characters from <span class="tt">pos</span> to <span class="tt">pos + count</span>.  <br /></td></tr>
 <tr class="memitem:ae1d8fc6f1822ac225017b8881bb9ea7a" id="r_ae1d8fc6f1822ac225017b8881bb9ea7a"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ae1d8fc6f1822ac225017b8881bb9ea7a">PushBack</a> (CharT ch) noexcept</td></tr>
 <tr class="memdesc:ae1d8fc6f1822ac225017b8881bb9ea7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends a character.  <br /></td></tr>
@@ -317,7 +317,7 @@ requires std::convertible_to&lt;std::ranges::range_value_t&lt;Range&gt;, CharT&g
 requires std::convertible_to&lt;std::ranges::range_value_t&lt;Range&gt;, CharT&gt;</td></tr>
 <tr class="memitem:aadf562d028e8c4865fdc0f2166e2938f template"><td class="memItemLeft">constexpr <a class="el" href="#a667f6fbf383886b870550b588c868ade">BasicStaticString</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aadf562d028e8c4865fdc0f2166e2938f">AssignRange</a> (Range &amp;&amp;range) noexcept</td></tr>
 <tr class="memdesc:aadf562d028e8c4865fdc0f2166e2938f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns characters from a range.  <br /></td></tr>
-<tr class="memitem:a7d4813ac5869bfa5f2beaf4ec82a983f" id="r_a7d4813ac5869bfa5f2beaf4ec82a983f"><td class="memItemLeft">constexpr <a class="el" href="#a667f6fbf383886b870550b588c868ade">BasicStaticString</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7d4813ac5869bfa5f2beaf4ec82a983f">Substr</a> (<a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=0, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) const noexcept</td></tr>
+<tr class="memitem:a7d4813ac5869bfa5f2beaf4ec82a983f" id="r_a7d4813ac5869bfa5f2beaf4ec82a983f"><td class="memItemLeft">constexpr <a class="el" href="#a667f6fbf383886b870550b588c868ade">BasicStaticString</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7d4813ac5869bfa5f2beaf4ec82a983f">Substr</a> (<a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=0, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> count=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) const noexcept</td></tr>
 <tr class="memdesc:a7d4813ac5869bfa5f2beaf4ec82a983f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a substring.  <br /></td></tr>
 <tr class="memitem:a215d84d8e325364f0e356b431811a5fb" id="r_a215d84d8e325364f0e356b431811a5fb"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#a215d84d8e325364f0e356b431811a5fb">Compare</a> (std::basic_string_view&lt; CharT, Traits &gt; other) const noexcept</td></tr>
 <tr class="memdesc:a215d84d8e325364f0e356b431811a5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares with another string.  <br /></td></tr>
@@ -328,17 +328,17 @@ requires std::convertible_to&lt;std::ranges::range_value_t&lt;Range&gt;, CharT&g
 <tr class="memdesc:a553f6c1a8b240efdfb2fc20b0f34a81e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds first occurrence of substring.  <br /></td></tr>
 <tr class="memitem:ac18777ef7abb32394769d9ef84975b4f" id="r_ac18777ef7abb32394769d9ef84975b4f"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac18777ef7abb32394769d9ef84975b4f">Find</a> (CharT ch, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=0) const noexcept</td></tr>
 <tr class="memdesc:ac18777ef7abb32394769d9ef84975b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds first occurrence of character.  <br /></td></tr>
-<tr class="memitem:a28cfe7c003b242433a1d64c7e11982ed" id="r_a28cfe7c003b242433a1d64c7e11982ed"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a28cfe7c003b242433a1d64c7e11982ed">RFind</a> (std::basic_string_view&lt; CharT, Traits &gt; sv, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) const noexcept</td></tr>
+<tr class="memitem:a28cfe7c003b242433a1d64c7e11982ed" id="r_a28cfe7c003b242433a1d64c7e11982ed"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a28cfe7c003b242433a1d64c7e11982ed">RFind</a> (std::basic_string_view&lt; CharT, Traits &gt; sv, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) const noexcept</td></tr>
 <tr class="memdesc:a28cfe7c003b242433a1d64c7e11982ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds last occurrence of substring.  <br /></td></tr>
-<tr class="memitem:a9ee979ad38a3fc2650c8f4cf26c21d0b" id="r_a9ee979ad38a3fc2650c8f4cf26c21d0b"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9ee979ad38a3fc2650c8f4cf26c21d0b">RFind</a> (CharT ch, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) const noexcept</td></tr>
+<tr class="memitem:a9ee979ad38a3fc2650c8f4cf26c21d0b" id="r_a9ee979ad38a3fc2650c8f4cf26c21d0b"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9ee979ad38a3fc2650c8f4cf26c21d0b">RFind</a> (CharT ch, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) const noexcept</td></tr>
 <tr class="memdesc:a9ee979ad38a3fc2650c8f4cf26c21d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds last occurrence of character.  <br /></td></tr>
 <tr class="memitem:a4c924e0eaf4d7230f18051f245f1c21c" id="r_a4c924e0eaf4d7230f18051f245f1c21c"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4c924e0eaf4d7230f18051f245f1c21c">FindFirstOf</a> (std::basic_string_view&lt; CharT, Traits &gt; sv, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=0) const noexcept</td></tr>
 <tr class="memdesc:a4c924e0eaf4d7230f18051f245f1c21c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds first occurrence of any character in sv.  <br /></td></tr>
-<tr class="memitem:a8e9640f9543eea1a3cbc33905c026b4e" id="r_a8e9640f9543eea1a3cbc33905c026b4e"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8e9640f9543eea1a3cbc33905c026b4e">FindLastOf</a> (std::basic_string_view&lt; CharT, Traits &gt; sv, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) const noexcept</td></tr>
+<tr class="memitem:a8e9640f9543eea1a3cbc33905c026b4e" id="r_a8e9640f9543eea1a3cbc33905c026b4e"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8e9640f9543eea1a3cbc33905c026b4e">FindLastOf</a> (std::basic_string_view&lt; CharT, Traits &gt; sv, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) const noexcept</td></tr>
 <tr class="memdesc:a8e9640f9543eea1a3cbc33905c026b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds last occurrence of any character in sv.  <br /></td></tr>
 <tr class="memitem:ac8ce3353db656f01c50c6c92c3d1056b" id="r_ac8ce3353db656f01c50c6c92c3d1056b"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac8ce3353db656f01c50c6c92c3d1056b">FindFirstNotOf</a> (std::basic_string_view&lt; CharT, Traits &gt; sv, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=0) const noexcept</td></tr>
 <tr class="memdesc:ac8ce3353db656f01c50c6c92c3d1056b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds first character not in sv.  <br /></td></tr>
-<tr class="memitem:a55612eea49288a577f0e00c0b805845a" id="r_a55612eea49288a577f0e00c0b805845a"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a55612eea49288a577f0e00c0b805845a">FindLastNotOf</a> (std::basic_string_view&lt; CharT, Traits &gt; sv, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=<a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a>) const noexcept</td></tr>
+<tr class="memitem:a55612eea49288a577f0e00c0b805845a" id="r_a55612eea49288a577f0e00c0b805845a"><td class="memItemLeft">constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a55612eea49288a577f0e00c0b805845a">FindLastNotOf</a> (std::basic_string_view&lt; CharT, Traits &gt; sv, <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> pos=<a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a>) const noexcept</td></tr>
 <tr class="memdesc:a55612eea49288a577f0e00c0b805845a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds last character not in sv.  <br /></td></tr>
 <tr class="memitem:a0241de020faedd8b7a1a4a9806646ed1" id="r_a0241de020faedd8b7a1a4a9806646ed1"><td class="memItemLeft">constexpr <a class="el" href="#a667f6fbf383886b870550b588c868ade">BasicStaticString</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a0241de020faedd8b7a1a4a9806646ed1">operator+=</a> (std::basic_string_view&lt; CharT, Traits &gt; sv) noexcept</td></tr>
 <tr class="memdesc:a0241de020faedd8b7a1a4a9806646ed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends a <span class="tt">std::basic_string_view</span>.  <br /></td></tr>
@@ -444,7 +444,7 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a32a21e1ca52552c8e18d9bf6f75dce56" id="r_a32a21e1ca52552c8e18d9bf6f75dce56"><td class="memItemLeft">static constexpr <a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a> = static_cast&lt;<a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&gt;(-1)</td></tr>
+<tr class="memitem:a26b134027161d0a6f3485321156c1cb4" id="r_a26b134027161d0a6f3485321156c1cb4"><td class="memItemLeft">static constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a> = static_cast&lt;<a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&gt;(-1)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_traits&lt;CharT&gt;&gt;<br />
@@ -773,7 +773,7 @@ requires (StrCapacity &gt; 0)</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1272,7 +1272,7 @@ requires (StrCapacity &gt; 0)</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1323,7 +1323,7 @@ requires (StrCapacity &gt; 0)</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1377,7 +1377,7 @@ requires (OtherCapacity &lt; StrCapacity)</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1437,7 +1437,7 @@ requires (OtherCapacity &lt; StrCapacity)</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -2812,7 +2812,7 @@ requires (StrCapacity &gt; 0)</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -2919,7 +2919,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Position of first occurrence, or <span class="tt"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span> if not found </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Position of first occurrence, or <span class="tt"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span> if not found </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="static__string_8hpp_source.html#l00531">531</a> of file <a class="el" href="static__string_8hpp_source.html">static_string.hpp</a>.</p>
 
@@ -2962,7 +2962,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Position of first occurrence, or <span class="tt"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span> if not found </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Position of first occurrence, or <span class="tt"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span> if not found </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="static__string_8hpp_source.html#l00519">519</a> of file <a class="el" href="static__string_8hpp_source.html">static_string.hpp</a>.</p>
 
@@ -3005,7 +3005,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Position of first non-matching character, or <span class="tt"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span> if not found </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Position of first non-matching character, or <span class="tt"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span> if not found </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="static__string_8hpp_source.html#l00589">589</a> of file <a class="el" href="static__string_8hpp_source.html">static_string.hpp</a>.</p>
 
@@ -3048,7 +3048,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Position of first occurrence, or <span class="tt"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span> if not found </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Position of first occurrence, or <span class="tt"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span> if not found </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="static__string_8hpp_source.html#l00565">565</a> of file <a class="el" href="static__string_8hpp_source.html">static_string.hpp</a>.</p>
 
@@ -3073,7 +3073,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;) const</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;) const</td>
         </tr>
       </table>
   </td>
@@ -3091,7 +3091,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Position of last non-matching character, or <span class="tt"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span> if not found </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Position of last non-matching character, or <span class="tt"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span> if not found </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="static__string_8hpp_source.html#l00601">601</a> of file <a class="el" href="static__string_8hpp_source.html">static_string.hpp</a>.</p>
 
@@ -3116,7 +3116,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;) const</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;) const</td>
         </tr>
       </table>
   </td>
@@ -3134,7 +3134,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Position of last occurrence, or <span class="tt"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span> if not found </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Position of last occurrence, or <span class="tt"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span> if not found </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="static__string_8hpp_source.html#l00577">577</a> of file <a class="el" href="static__string_8hpp_source.html">static_string.hpp</a>.</p>
 
@@ -4645,7 +4645,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;) const</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;) const</td>
         </tr>
       </table>
   </td>
@@ -4663,7 +4663,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Position of last occurrence, or <span class="tt"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span> if not found </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Position of last occurrence, or <span class="tt"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span> if not found </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="static__string_8hpp_source.html#l00554">554</a> of file <a class="el" href="static__string_8hpp_source.html">static_string.hpp</a>.</p>
 
@@ -4688,7 +4688,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;) const</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;) const</td>
         </tr>
       </table>
   </td>
@@ -4706,7 +4706,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Position of last occurrence, or <span class="tt"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span> if not found </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Position of last occurrence, or <span class="tt"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span> if not found </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="static__string_8hpp_source.html#l00542">542</a> of file <a class="el" href="static__string_8hpp_source.html">static_string.hpp</a>.</p>
 
@@ -4840,7 +4840,7 @@ requires (StrCapacity &gt; 0)</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a32a21e1ca52552c8e18d9bf6f75dce56">npos</a></span>&#160;) const</td>
+          <td class="paramtype"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a26b134027161d0a6f3485321156c1cb4">npos</a></span>&#160;) const</td>
         </tr>
       </table>
   </td>
@@ -4936,8 +4936,8 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
 </div>
 </div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
-<a id="a32a21e1ca52552c8e18d9bf6f75dce56" name="a32a21e1ca52552c8e18d9bf6f75dce56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32a21e1ca52552c8e18d9bf6f75dce56">&#9670;&#160;</a></span>npos</h2>
+<a id="a26b134027161d0a6f3485321156c1cb4" name="a26b134027161d0a6f3485321156c1cb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26b134027161d0a6f3485321156c1cb4">&#9670;&#160;</a></span>npos</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4948,7 +4948,7 @@ template&lt;size_t StrCapacity, typename CharT, typename Traits = std::char_trai
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a> <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">helios::container::BasicStaticString</a>&lt; StrCapacity, CharT, Traits &gt;::npos = static_cast&lt;<a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&gt;(-1)</td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">helios::container::BasicStaticString</a>&lt; StrCapacity, CharT, Traits &gt;::npos = static_cast&lt;<a class="el" href="#a8e5796f0df473dc7783f7ac29937c1bc">size_type</a>&gt;(-1)</td>
         </tr>
       </table>
   </td>

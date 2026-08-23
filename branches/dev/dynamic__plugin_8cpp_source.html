@@ -184,281 +184,284 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dynamic__plugi
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/log/logger.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="dynamic__library_8hpp.html">helios/utils/dynamic_library.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;expected&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;format&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;system_error&gt;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1app.html">helios::app</a> {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a199316083c56987eaa030a47b2d69e6a">   21</a></span><a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin::DynamicPlugin</a>(<span class="keyword">const</span> std::filesystem::path&amp; path,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                             <a class="code hl_struct" href="structhelios_1_1app_1_1DynamicPluginConfig.html">DynamicPluginConfig</a> config) {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keyword">const</span> <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628">Load</a>(path, config);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keywordflow">if</span> (!result) [[unlikely]] {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">log::Error</a>(<span class="stringliteral">&quot;Failed to load dynamic plugin &#39;{}&#39;: {}!&quot;</span>, path.string(),</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>               <a class="code hl_function" href="namespacehelios_1_1app.html#a6c14f36c354fa92a14823337d0ee4114">DynamicPluginErrorToString</a>(result.error()));</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#if defined(HELIOS_APP_ENABLE_PROFILE) &amp;&amp; \</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">    defined(HELIOS_MODULE_PROFILE_AVAILABLE)</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;<a class="code" href="temporary__storage__helpers_8hpp.html">helios/memory/temporary_storage_helpers.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;expected&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;system_error&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1app.html">helios::app</a> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a199316083c56987eaa030a47b2d69e6a">   25</a></span><a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin::DynamicPlugin</a>(<span class="keyword">const</span> std::filesystem::path&amp; path,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                             <a class="code hl_struct" href="structhelios_1_1app_1_1DynamicPluginConfig.html">DynamicPluginConfig</a> config) {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keyword">const</span> <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628">Load</a>(path, config);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordflow">if</span> (!result) [[unlikely]] {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">log::Error</a>(<span class="stringliteral">&quot;Failed to load dynamic plugin &#39;{}&#39;: {}!&quot;</span>, path.string(),</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>               <a class="code hl_function" href="namespacehelios_1_1app.html#ac38a999809953af3cdddc6c432e814f8">ToString</a>(result.error()));</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  }</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#ac2ec38e7678b63f9db8a0f389c058cff">   30</a></span><a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin::DynamicPlugin</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin</a>&amp;&amp; other) noexcept</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    : library_(std::move(other.library_)),</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>      plugin_(std::move(other.plugin_)),</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>      plugin_type_id_(other.plugin_type_id_),</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>      config_(other.config_),</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>      last_write_time_(other.last_write_time_) {}</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#ac2ec38e7678b63f9db8a0f389c058cff">   34</a></span><a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin::DynamicPlugin</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    : library_(std::move(other.library_)),</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>      plugin_(std::move(other.plugin_)),</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>      plugin_type_id_(other.plugin_type_id_),</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>      config_(other.config_),</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      last_write_time_(other.last_write_time_) {}</div>
 </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a04af3b4fc1faac42314fb986de9e4eb9">   37</a></span><a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a62fa0c7bcc38be9bcde87e59f6cc5600">DynamicPlugin::operator=</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  plugin_.reset();</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  library_ = std::move(other.library_);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  plugin_ = std::move(other.plugin_);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  plugin_type_id_ = other.plugin_type_id_;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  config_ = other.config_;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  last_write_time_ = other.last_write_time_;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a04af3b4fc1faac42314fb986de9e4eb9">   41</a></span><a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a62fa0c7bcc38be9bcde87e59f6cc5600">DynamicPlugin::operator=</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">DynamicPlugin</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  plugin_.reset();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  library_ = std::move(other.library_);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  plugin_ = std::move(other.plugin_);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  plugin_type_id_ = other.plugin_type_id_;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  config_ = other.config_;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  last_write_time_ = other.last_write_time_;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}</div>
 </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628">   52</a></span><span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628">DynamicPlugin::Load</a>(<span class="keyword">const</span> std::filesystem::path&amp; path,</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                         <a class="code hl_struct" href="structhelios_1_1app_1_1DynamicPluginConfig.html">DynamicPluginConfig</a> config)</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    -&gt; <a class="code hl_typedef" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult&lt;void&gt;</a> {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  HELIOS_APP_PROFILE_SCOPE();</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  HELIOS_APP_PROFILE_ZONE_TEXT(</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      std::format(<span class="stringliteral">&quot;{} ({})&quot;</span>, plugin_type_id_.QualifiedName(), path.string()));</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  config_ = config;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="comment">// Load the library</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keyword">const</span> <span class="keyword">auto</span> load_result = library_.Load(path);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordflow">if</span> (!load_result) [[unlikely]] {</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea6d0530ba38df14ef9873d03ef6a3e29a">DynamicPluginError::kLibraryLoadFailed</a>);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="comment">// Load plugin symbols and create instance</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keyword">auto</span> plugin_result = LoadPluginInstance();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">if</span> (!plugin_result) {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    [[maybe_unused]] <span class="keyword">const</span> <span class="keyword">auto</span> result = library_.Unload();</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">return</span> plugin_result;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  }</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="comment">// Cache the file modification time</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ae72ba054951558e6296135eb993c9de4">UpdateFileTime</a>();</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <a class="code hl_function" href="namespacehelios_1_1log.html#a5e0f2faa9710b7d3045802095b10d6de">log::Info</a>(<span class="stringliteral">&quot;Loaded dynamic plugin &#39;{}&#39; from: {}&quot;</span>, <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ab9135603191cf66bb39b194d54082b0c">GetPluginName</a>(),</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            path.string());</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628">   56</a></span><span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628">DynamicPlugin::Load</a>(<span class="keyword">const</span> std::filesystem::path&amp; path,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                         <a class="code hl_struct" href="structhelios_1_1app_1_1DynamicPluginConfig.html">DynamicPluginConfig</a> config)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    -&gt; <a class="code hl_typedef" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult&lt;void&gt;</a> {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  HELIOS_APP_PROFILE_SCOPE();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  HELIOS_APP_PROFILE_ZONE_TEXT(<a class="code hl_function" href="namespacehelios_1_1utils.html#af8909b8b74ce4c816a431fdd82a53bd9">utils::TempFormat</a>(</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      <span class="stringliteral">&quot;{} ({})&quot;</span>, plugin_type_id_.QualifiedName(), path.string()));</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  config_ = config;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="comment">// Load the library</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keyword">const</span> <span class="keyword">auto</span> load_result = library_.Load(path);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">if</span> (!load_result) [[unlikely]] {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea6d0530ba38df14ef9873d03ef6a3e29a">DynamicPluginError::kLibraryLoadFailed</a>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="comment">// Load plugin symbols and create instance</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keyword">auto</span> plugin_result = LoadPluginInstance();</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordflow">if</span> (!plugin_result) {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    [[maybe_unused]] <span class="keyword">const</span> <span class="keyword">auto</span> result = library_.Unload();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">return</span> plugin_result;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="comment">// Cache the file modification time</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ae72ba054951558e6296135eb993c9de4">UpdateFileTime</a>();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <a class="code hl_function" href="namespacehelios_1_1log.html#a5e0f2faa9710b7d3045802095b10d6de">log::Info</a>(<span class="stringliteral">&quot;Loaded dynamic plugin &#39;{}&#39; from: {}&quot;</span>, <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ab9135603191cf66bb39b194d54082b0c">GetPluginName</a>(),</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            path.string());</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
 </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#ae19b4f7e85e135841874fe600be29f1f">   82</a></span><span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ae19b4f7e85e135841874fe600be29f1f">DynamicPlugin::Unload</a>() -&gt; <a class="code hl_typedef" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult&lt;void&gt;</a> {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  HELIOS_APP_PROFILE_SCOPE();</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      <span class="stringliteral">&quot;{} ({})&quot;</span>, plugin_type_id_.QualifiedName(), library_.Path().string()));</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">Loaded</a>(), <span class="stringliteral">&quot;Plugin is not loaded!&quot;</span>);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="comment">// Release plugin before unloading library</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  plugin_.reset();</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keyword">const</span> <span class="keyword">auto</span> unload_result = library_.Unload();</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordflow">if</span> (!unload_result) [[unlikely]] {</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea6d0530ba38df14ef9873d03ef6a3e29a">DynamicPluginError::kLibraryLoadFailed</a>);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  }</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#ae19b4f7e85e135841874fe600be29f1f">   86</a></span><span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ae19b4f7e85e135841874fe600be29f1f">DynamicPlugin::Unload</a>() -&gt; <a class="code hl_typedef" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult&lt;void&gt;</a> {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  HELIOS_APP_PROFILE_SCOPE();</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  HELIOS_APP_PROFILE_ZONE_TEXT(<a class="code hl_function" href="namespacehelios_1_1utils.html#af8909b8b74ce4c816a431fdd82a53bd9">utils::TempFormat</a>(</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      <span class="stringliteral">&quot;{} ({})&quot;</span>, plugin_type_id_.QualifiedName(), library_.Path().string()));</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">Loaded</a>(), <span class="stringliteral">&quot;Plugin is not loaded!&quot;</span>);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="comment">// Release plugin before unloading library</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  plugin_.reset();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keyword">const</span> <span class="keyword">auto</span> unload_result = library_.Unload();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordflow">if</span> (!unload_result) [[unlikely]] {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea6d0530ba38df14ef9873d03ef6a3e29a">DynamicPluginError::kLibraryLoadFailed</a>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
 </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="foldopen" id="foldopen00100" data-start="{" data-end="}">
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a0cc24200da4d2d02017f645bb16a5568">  100</a></span><span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a0cc24200da4d2d02017f645bb16a5568">DynamicPlugin::Reload</a>(<a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; <a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>) -&gt; <a class="code hl_typedef" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult&lt;void&gt;</a> {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  HELIOS_APP_PROFILE_SCOPE();</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      <span class="stringliteral">&quot;{} ({})&quot;</span>, plugin_type_id_.QualifiedName(), library_.Path().string()));</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">Loaded</a>(), <span class="stringliteral">&quot;Plugin is not loaded!&quot;</span>);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <span class="comment">// Call Destroy on the old plugin</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <a class="code hl_function" href="namespacehelios_1_1log.html#a5e0f2faa9710b7d3045802095b10d6de">log::Info</a>(<span class="stringliteral">&quot;Reloading dynamic plugin &#39;{}&#39; from &#39;{}&#39;&quot;</span>, <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ab9135603191cf66bb39b194d54082b0c">GetPluginName</a>(),</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            library_.Path().string());</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  plugin_-&gt;Destroy(<a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>);</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <span class="comment">// Save the path and config before unloading</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  <span class="keyword">const</span> <span class="keyword">auto</span> saved_path = library_.Path();</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keyword">auto</span> saved_config = config_;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="foldopen" id="foldopen00104" data-start="{" data-end="}">
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a0cc24200da4d2d02017f645bb16a5568">  104</a></span><span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a0cc24200da4d2d02017f645bb16a5568">DynamicPlugin::Reload</a>(<a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; <a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>) -&gt; <a class="code hl_typedef" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult&lt;void&gt;</a> {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  HELIOS_APP_PROFILE_SCOPE();</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  HELIOS_APP_PROFILE_ZONE_TEXT(<a class="code hl_function" href="namespacehelios_1_1utils.html#af8909b8b74ce4c816a431fdd82a53bd9">utils::TempFormat</a>(</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      <span class="stringliteral">&quot;{} ({})&quot;</span>, plugin_type_id_.QualifiedName(), library_.Path().string()));</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">Loaded</a>(), <span class="stringliteral">&quot;Plugin is not loaded!&quot;</span>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="comment">// Call Destroy on the old plugin</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <a class="code hl_function" href="namespacehelios_1_1log.html#a5e0f2faa9710b7d3045802095b10d6de">log::Info</a>(<span class="stringliteral">&quot;Reloading dynamic plugin &#39;{}&#39; from &#39;{}&#39;&quot;</span>, <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ab9135603191cf66bb39b194d54082b0c">GetPluginName</a>(),</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            library_.Path().string());</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  plugin_-&gt;Destroy(<a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>);</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="comment">// Release plugin and unload library</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  plugin_.reset();</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <span class="keyword">const</span> <span class="keyword">auto</span> unload_result = library_.Unload();</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="keywordflow">if</span> (!unload_result) [[unlikely]] {</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea5dfd18d11d461326629594449082e177">DynamicPluginError::kReloadFailed</a>);</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  }</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  <span class="comment">// Reload the library</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <span class="keyword">const</span> <span class="keyword">auto</span> load_result = library_.Load(saved_path);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keywordflow">if</span> (!load_result) [[unlikely]] {</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea5dfd18d11d461326629594449082e177">DynamicPluginError::kReloadFailed</a>);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  }</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  <span class="comment">// Load plugin symbols and create new instance</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  config_ = saved_config;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="keyword">const</span> <span class="keyword">auto</span> plugin_result = LoadPluginInstance();</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keywordflow">if</span> (!plugin_result) [[unlikely]] {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    [[maybe_unused]] <span class="keyword">const</span> <span class="keyword">auto</span> result = library_.Unload();</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea5dfd18d11d461326629594449082e177">DynamicPluginError::kReloadFailed</a>);</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  }</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  <span class="comment">// Call Build on the new plugin</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  plugin_-&gt;Build(<a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <span class="comment">// Update file time</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ae72ba054951558e6296135eb993c9de4">UpdateFileTime</a>();</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  <a class="code hl_function" href="namespacehelios_1_1log.html#a5e0f2faa9710b7d3045802095b10d6de">log::Info</a>(<span class="stringliteral">&quot;Successfully reloaded dynamic plugin &#39;{}&#39; from &#39;{}&#39;&quot;</span>,</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ab9135603191cf66bb39b194d54082b0c">GetPluginName</a>(), saved_path.string());</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>}</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="comment">// Save the path and config before unloading</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keyword">const</span> <span class="keyword">auto</span> saved_path = library_.Path();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keyword">auto</span> saved_config = config_;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="comment">// Release plugin and unload library</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  plugin_.reset();</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keyword">const</span> <span class="keyword">auto</span> unload_result = library_.Unload();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  <span class="keywordflow">if</span> (!unload_result) [[unlikely]] {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea5dfd18d11d461326629594449082e177">DynamicPluginError::kReloadFailed</a>);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="comment">// Reload the library</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keyword">const</span> <span class="keyword">auto</span> load_result = library_.Load(saved_path);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  <span class="keywordflow">if</span> (!load_result) [[unlikely]] {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea5dfd18d11d461326629594449082e177">DynamicPluginError::kReloadFailed</a>);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  <span class="comment">// Load plugin symbols and create new instance</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  config_ = saved_config;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  <span class="keyword">const</span> <span class="keyword">auto</span> plugin_result = LoadPluginInstance();</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  <span class="keywordflow">if</span> (!plugin_result) [[unlikely]] {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    [[maybe_unused]] <span class="keyword">const</span> <span class="keyword">auto</span> result = library_.Unload();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea5dfd18d11d461326629594449082e177">DynamicPluginError::kReloadFailed</a>);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  <span class="comment">// Call Build on the new plugin</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  plugin_-&gt;Build(<a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="comment">// Update file time</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ae72ba054951558e6296135eb993c9de4">UpdateFileTime</a>();</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <a class="code hl_function" href="namespacehelios_1_1log.html#a5e0f2faa9710b7d3045802095b10d6de">log::Info</a>(<span class="stringliteral">&quot;Successfully reloaded dynamic plugin &#39;{}&#39; from &#39;{}&#39;&quot;</span>,</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ab9135603191cf66bb39b194d54082b0c">GetPluginName</a>(), saved_path.string());</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>}</div>
 </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="foldopen" id="foldopen00149" data-start="{" data-end="}">
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#ae835e4cfb55990faeafc8b8ebe2bd41c">  149</a></span><span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ae835e4cfb55990faeafc8b8ebe2bd41c">DynamicPlugin::ReloadIfChanged</a>(<a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; <a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>) -&gt; <a class="code hl_typedef" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult&lt;void&gt;</a> {</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">Loaded</a>(), <span class="stringliteral">&quot;Plugin is not loaded!&quot;</span>);</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aaa9b318e27ce87805e607cf3a65d49df">HasFileChanged</a>()) {</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  }</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#ae835e4cfb55990faeafc8b8ebe2bd41c">  153</a></span><span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ae835e4cfb55990faeafc8b8ebe2bd41c">DynamicPlugin::ReloadIfChanged</a>(<a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; <a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>) -&gt; <a class="code hl_typedef" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult&lt;void&gt;</a> {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">Loaded</a>(), <span class="stringliteral">&quot;Plugin is not loaded!&quot;</span>);</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a0cc24200da4d2d02017f645bb16a5568">Reload</a>(<a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>);</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>}</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aaa9b318e27ce87805e607cf3a65d49df">HasFileChanged</a>()) {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  }</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a0cc24200da4d2d02017f645bb16a5568">Reload</a>(<a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>}</div>
 </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="foldopen" id="foldopen00159" data-start="{" data-end="}">
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#ae72ba054951558e6296135eb993c9de4">  159</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ae72ba054951558e6296135eb993c9de4">DynamicPlugin::UpdateFileTime</a>() noexcept {</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keywordflow">if</span> (!library_.Loaded()) [[unlikely]] {</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  }</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  std::error_code ec;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  last_write_time_ = std::filesystem::last_write_time(library_.Path(), ec);</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>}</div>
-</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="foldopen" id="foldopen00163" data-start="{" data-end="}">
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#ae72ba054951558e6296135eb993c9de4">  163</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#ae72ba054951558e6296135eb993c9de4">DynamicPlugin::UpdateFileTime</a>() noexcept {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <span class="keywordflow">if</span> (!library_.Loaded()) [[unlikely]] {</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  }</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="foldopen" id="foldopen00168" data-start="{" data-end="}">
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#aaa9b318e27ce87805e607cf3a65d49df">  168</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aaa9b318e27ce87805e607cf3a65d49df">DynamicPlugin::HasFileChanged</a>() const noexcept {</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <span class="keywordflow">if</span> (!library_.Loaded()) {</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  }</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  std::error_code ec;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keyword">const</span> <span class="keyword">auto</span> current_time =</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      std::filesystem::last_write_time(library_.Path(), ec);</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  <span class="keywordflow">if</span> (ec) [[unlikely]] {</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  }</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  <span class="keywordflow">return</span> current_time != last_write_time_;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>}</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  std::error_code ec;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  last_write_time_ = std::filesystem::last_write_time(library_.Path(), ec);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>}</div>
 </div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
-<div class="foldopen" id="foldopen00183" data-start="{" data-end="}">
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a2dbdd7851da682412c4f81d9090bd547">  183</a></span><a class="code hl_class" href="classhelios_1_1app_1_1Plugin.html">Plugin</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a2dbdd7851da682412c4f81d9090bd547">DynamicPlugin::GetPlugin</a>() noexcept {</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">Loaded</a>(), <span class="stringliteral">&quot;Plugin is not loaded!&quot;</span>);</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  <span class="keywordflow">return</span> *plugin_;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>}</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="foldopen" id="foldopen00172" data-start="{" data-end="}">
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#aaa9b318e27ce87805e607cf3a65d49df">  172</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#aaa9b318e27ce87805e607cf3a65d49df">DynamicPlugin::HasFileChanged</a>() const noexcept {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  <span class="keywordflow">if</span> (!library_.Loaded()) {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  }</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  std::error_code ec;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  <span class="keyword">const</span> <span class="keyword">auto</span> current_time =</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>      std::filesystem::last_write_time(library_.Path(), ec);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  <span class="keywordflow">if</span> (ec) [[unlikely]] {</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  <span class="keywordflow">return</span> current_time != last_write_time_;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>}</div>
 </div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="foldopen" id="foldopen00188" data-start="{" data-end="}">
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a95d773a5ee0d076cc7ffcac30b93da68">  188</a></span><span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1app_1_1Plugin.html">Plugin</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a2dbdd7851da682412c4f81d9090bd547">DynamicPlugin::GetPlugin</a>() const noexcept {</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">Loaded</a>(), <span class="stringliteral">&quot;Plugin is not loaded!&quot;</span>);</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  <span class="keywordflow">return</span> *plugin_;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>}</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="foldopen" id="foldopen00187" data-start="{" data-end="}">
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a2dbdd7851da682412c4f81d9090bd547">  187</a></span><a class="code hl_class" href="classhelios_1_1app_1_1Plugin.html">Plugin</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a2dbdd7851da682412c4f81d9090bd547">DynamicPlugin::GetPlugin</a>() noexcept {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">Loaded</a>(), <span class="stringliteral">&quot;Plugin is not loaded!&quot;</span>);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  <span class="keywordflow">return</span> *plugin_;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>}</div>
 </div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="keyword">auto</span> DynamicPlugin::LoadPluginInstance() -&gt; <a class="code hl_typedef" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult&lt;void&gt;</a> {</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <span class="comment">// Get create function</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  <span class="keyword">const</span> <span class="keyword">auto</span> create_result =</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>      library_.GetSymbol&lt;<a class="code hl_typedef" href="namespacehelios_1_1app.html#a9f0d3a7600fcd00870e961464d1a5d10">CreatePluginFn</a>&gt;(config_.create_symbol);</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>  <span class="keywordflow">if</span> (!create_result) [[unlikely]] {</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">log::Error</a>(<span class="stringliteral">&quot;Create function &#39;{}&#39; not found in library!&quot;</span>,</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>               config_.create_symbol);</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea55807f54e02fe9fcbe5e28e1efb7e3dd">DynamicPluginError::kCreateSymbolNotFound</a>);</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  }</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  <span class="comment">// Get plugin type export function</span></div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  <span class="keyword">const</span> <span class="keyword">auto</span> id_result =</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>      library_.GetSymbol&lt;<a class="code hl_typedef" href="namespacehelios_1_1app.html#ab12c8d399f188fa434507fe750108351">PluginTypeExportFn</a>&gt;(config_.plugin_type_id_symbol);</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  <span class="keywordflow">if</span> (!id_result) [[unlikely]] {</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">log::Error</a>(<span class="stringliteral">&quot;Plugin ID function &#39;{}&#39; not found in library!&quot;</span>,</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>               config_.plugin_type_id_symbol);</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eeab8d8a6aad1f8cd46edd8ef10fb42dd04">DynamicPluginError::kIdSymbolNotFound</a>);</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  }</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#ab12c8d399f188fa434507fe750108351">PluginTypeExportFn</a> export_fn = *id_result;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="keyword">const</span> PluginTypeExport* export_info = export_fn();</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <span class="keywordflow">if</span> (export_info == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">log::Error</a>(<span class="stringliteral">&quot;Plugin type export function returned nullptr!&quot;</span>);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea33abd07d683916a924643f3ed0cbc043">DynamicPluginError::kCreateFailed</a>);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  }</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  <span class="keyword">const</span> std::string_view qualified_name =</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>      export_info-&gt;qualified_name != <span class="keyword">nullptr</span></div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>          ? std::string_view{export_info-&gt;qualified_name}</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>          : std::string_view{};</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  plugin_type_id_ =</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>      <a class="code hl_function" href="classhelios_1_1utils_1_1TypeId.html#ab11306524617564e4e6862cbb6e535d0">PluginTypeId::FromExported</a>(export_info-&gt;hash, qualified_name);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  <span class="comment">// Create the plugin</span></div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  <a class="code hl_typedef" href="namespacehelios_1_1app.html#a9f0d3a7600fcd00870e961464d1a5d10">CreatePluginFn</a> create_fn = *create_result;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  <a class="code hl_class" href="classhelios_1_1app_1_1Plugin.html">Plugin</a>* raw_plugin = create_fn();</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="foldopen" id="foldopen00192" data-start="{" data-end="}">
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1DynamicPlugin.html#a95d773a5ee0d076cc7ffcac30b93da68">  192</a></span><span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1app_1_1Plugin.html">Plugin</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#a2dbdd7851da682412c4f81d9090bd547">DynamicPlugin::GetPlugin</a>() const noexcept {</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">Loaded</a>(), <span class="stringliteral">&quot;Plugin is not loaded!&quot;</span>);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <span class="keywordflow">return</span> *plugin_;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>}</div>
+</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="keyword">auto</span> DynamicPlugin::LoadPluginInstance() -&gt; <a class="code hl_typedef" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult&lt;void&gt;</a> {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  <span class="comment">// Get create function</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>  <span class="keyword">const</span> <span class="keyword">auto</span> create_result =</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>      library_.GetSymbol&lt;<a class="code hl_typedef" href="namespacehelios_1_1app.html#a9f0d3a7600fcd00870e961464d1a5d10">CreatePluginFn</a>&gt;(config_.create_symbol);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  <span class="keywordflow">if</span> (!create_result) [[unlikely]] {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">log::Error</a>(<span class="stringliteral">&quot;Create function &#39;{}&#39; not found in library!&quot;</span>,</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>               config_.create_symbol);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea55807f54e02fe9fcbe5e28e1efb7e3dd">DynamicPluginError::kCreateSymbolNotFound</a>);</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  }</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  <span class="comment">// Get plugin type export function</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <span class="keyword">const</span> <span class="keyword">auto</span> id_result =</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>      library_.GetSymbol&lt;<a class="code hl_typedef" href="namespacehelios_1_1app.html#ab12c8d399f188fa434507fe750108351">PluginTypeExportFn</a>&gt;(config_.plugin_type_id_symbol);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <span class="keywordflow">if</span> (!id_result) [[unlikely]] {</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">log::Error</a>(<span class="stringliteral">&quot;Plugin ID function &#39;{}&#39; not found in library!&quot;</span>,</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>               config_.plugin_type_id_symbol);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eeab8d8a6aad1f8cd46edd8ef10fb42dd04">DynamicPluginError::kIdSymbolNotFound</a>);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  }</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#ab12c8d399f188fa434507fe750108351">PluginTypeExportFn</a> export_fn = *id_result;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  <span class="keyword">const</span> PluginTypeExport* export_info = export_fn();</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <span class="keywordflow">if</span> (export_info == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">log::Error</a>(<span class="stringliteral">&quot;Plugin type export function returned nullptr!&quot;</span>);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea33abd07d683916a924643f3ed0cbc043">DynamicPluginError::kCreateFailed</a>);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  <span class="keyword">const</span> std::string_view qualified_name =</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>      export_info-&gt;qualified_name != <span class="keyword">nullptr</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>          ? std::string_view{export_info-&gt;qualified_name}</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>          : std::string_view{};</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  plugin_type_id_ =</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>      <a class="code hl_function" href="classhelios_1_1utils_1_1TypeId.html#ab11306524617564e4e6862cbb6e535d0">PluginTypeId::FromExported</a>(export_info-&gt;hash, qualified_name);</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  <span class="keywordflow">if</span> (raw_plugin == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">log::Error</a>(<span class="stringliteral">&quot;Plugin creation function returned nullptr!&quot;</span>);</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea33abd07d683916a924643f3ed0cbc043">DynamicPluginError::kCreateFailed</a>);</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  }</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  plugin_.reset(raw_plugin);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>}</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  <span class="comment">// Create the plugin</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  <a class="code hl_typedef" href="namespacehelios_1_1app.html#a9f0d3a7600fcd00870e961464d1a5d10">CreatePluginFn</a> create_fn = *create_result;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  <a class="code hl_class" href="classhelios_1_1app_1_1Plugin.html">Plugin</a>* raw_plugin = create_fn();</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  <span class="keywordflow">if</span> (raw_plugin == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">log::Error</a>(<span class="stringliteral">&quot;Plugin creation function returned nullptr!&quot;</span>);</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea33abd07d683916a924643f3ed0cbc043">DynamicPluginError::kCreateFailed</a>);</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  }</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>}  <span class="comment">// namespace helios::app</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  plugin_.reset(raw_plugin);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>}</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>}  <span class="comment">// namespace helios::app</span></div>
 <div class="ttc" id="aapp_2include_2helios_2app_2plugin_8hpp_html"><div class="ttname"><a href="app_2include_2helios_2app_2plugin_8hpp.html">plugin.hpp</a></div></div>
 <div class="ttc" id="aapp_2src_2pch_8hpp_html"><div class="ttname"><a href="app_2src_2pch_8hpp.html">pch.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00228">assert.hpp:228</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00099">application.hpp:99</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a0cc24200da4d2d02017f645bb16a5568"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#a0cc24200da4d2d02017f645bb16a5568">helios::app::DynamicPlugin::Reload</a></div><div class="ttdeci">auto Reload(App &amp;app) -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Reloads the plugin from the same path.</div><div class="ttdef"><b>Definition</b> <a href="#l00100">dynamic_plugin.cpp:100</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a2dbdd7851da682412c4f81d9090bd547"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#a2dbdd7851da682412c4f81d9090bd547">helios::app::DynamicPlugin::GetPlugin</a></div><div class="ttdeci">Plugin &amp; GetPlugin() noexcept</div><div class="ttdoc">Gets reference to the loaded plugin.</div><div class="ttdef"><b>Definition</b> <a href="#l00183">dynamic_plugin.cpp:183</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00048">application.hpp:48</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a0cc24200da4d2d02017f645bb16a5568"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#a0cc24200da4d2d02017f645bb16a5568">helios::app::DynamicPlugin::Reload</a></div><div class="ttdeci">auto Reload(App &amp;app) -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Reloads the plugin from the same path.</div><div class="ttdef"><b>Definition</b> <a href="#l00104">dynamic_plugin.cpp:104</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a2dbdd7851da682412c4f81d9090bd547"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#a2dbdd7851da682412c4f81d9090bd547">helios::app::DynamicPlugin::GetPlugin</a></div><div class="ttdeci">Plugin &amp; GetPlugin() noexcept</div><div class="ttdoc">Gets reference to the loaded plugin.</div><div class="ttdef"><b>Definition</b> <a href="#l00187">dynamic_plugin.cpp:187</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a62fa0c7bcc38be9bcde87e59f6cc5600"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#a62fa0c7bcc38be9bcde87e59f6cc5600">helios::app::DynamicPlugin::operator=</a></div><div class="ttdeci">DynamicPlugin &amp; operator=(const DynamicPlugin &amp;)=delete</div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a6ebf28ec321d00ca7fc3acf55529b628"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628">helios::app::DynamicPlugin::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path, DynamicPluginConfig config={}) -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Loads a plugin from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="#l00052">dynamic_plugin.cpp:52</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_aaa9b318e27ce87805e607cf3a65d49df"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#aaa9b318e27ce87805e607cf3a65d49df">helios::app::DynamicPlugin::HasFileChanged</a></div><div class="ttdeci">bool HasFileChanged() const noexcept</div><div class="ttdoc">Checks if the library file has been modified since last load.</div><div class="ttdef"><b>Definition</b> <a href="#l00168">dynamic_plugin.cpp:168</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a6ebf28ec321d00ca7fc3acf55529b628"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628">helios::app::DynamicPlugin::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path, DynamicPluginConfig config={}) -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Loads a plugin from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="#l00056">dynamic_plugin.cpp:56</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_aaa9b318e27ce87805e607cf3a65d49df"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#aaa9b318e27ce87805e607cf3a65d49df">helios::app::DynamicPlugin::HasFileChanged</a></div><div class="ttdeci">bool HasFileChanged() const noexcept</div><div class="ttdoc">Checks if the library file has been modified since last load.</div><div class="ttdef"><b>Definition</b> <a href="#l00172">dynamic_plugin.cpp:172</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_ab9135603191cf66bb39b194d54082b0c"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#ab9135603191cf66bb39b194d54082b0c">helios::app::DynamicPlugin::GetPluginName</a></div><div class="ttdeci">std::string_view GetPluginName() const noexcept</div><div class="ttdoc">Gets the plugin name.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00311">dynamic_plugin.hpp:311</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_acdb4ff84ee5ba0c2f0be23043a8a5d47"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47">helios::app::DynamicPlugin::Loaded</a></div><div class="ttdeci">bool Loaded() const noexcept</div><div class="ttdoc">Checks if a plugin is currently loaded.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00257">dynamic_plugin.hpp:257</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_ae19b4f7e85e135841874fe600be29f1f"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#ae19b4f7e85e135841874fe600be29f1f">helios::app::DynamicPlugin::Unload</a></div><div class="ttdeci">auto Unload() -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Unloads the current plugin.</div><div class="ttdef"><b>Definition</b> <a href="#l00082">dynamic_plugin.cpp:82</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_ae72ba054951558e6296135eb993c9de4"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#ae72ba054951558e6296135eb993c9de4">helios::app::DynamicPlugin::UpdateFileTime</a></div><div class="ttdeci">void UpdateFileTime() noexcept</div><div class="ttdoc">Updates the cached file modification time.</div><div class="ttdef"><b>Definition</b> <a href="#l00159">dynamic_plugin.cpp:159</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_ae835e4cfb55990faeafc8b8ebe2bd41c"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#ae835e4cfb55990faeafc8b8ebe2bd41c">helios::app::DynamicPlugin::ReloadIfChanged</a></div><div class="ttdeci">auto ReloadIfChanged(App &amp;app) -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Reloads the plugin only if the file has changed.</div><div class="ttdef"><b>Definition</b> <a href="#l00149">dynamic_plugin.cpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_ae19b4f7e85e135841874fe600be29f1f"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#ae19b4f7e85e135841874fe600be29f1f">helios::app::DynamicPlugin::Unload</a></div><div class="ttdeci">auto Unload() -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Unloads the current plugin.</div><div class="ttdef"><b>Definition</b> <a href="#l00086">dynamic_plugin.cpp:86</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_ae72ba054951558e6296135eb993c9de4"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#ae72ba054951558e6296135eb993c9de4">helios::app::DynamicPlugin::UpdateFileTime</a></div><div class="ttdeci">void UpdateFileTime() noexcept</div><div class="ttdoc">Updates the cached file modification time.</div><div class="ttdef"><b>Definition</b> <a href="#l00163">dynamic_plugin.cpp:163</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_ae835e4cfb55990faeafc8b8ebe2bd41c"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#ae835e4cfb55990faeafc8b8ebe2bd41c">helios::app::DynamicPlugin::ReloadIfChanged</a></div><div class="ttdeci">auto ReloadIfChanged(App &amp;app) -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Reloads the plugin only if the file has changed.</div><div class="ttdef"><b>Definition</b> <a href="#l00153">dynamic_plugin.cpp:153</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_aee76ef756f54a8560f0bc6c839c9e71d"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicPlugin.html#aee76ef756f54a8560f0bc6c839c9e71d">helios::app::DynamicPlugin::DynamicPlugin</a></div><div class="ttdeci">DynamicPlugin()=default</div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Plugin_html"><div class="ttname"><a href="classhelios_1_1app_1_1Plugin.html">helios::app::Plugin</a></div><div class="ttdoc">Base class for all plugins.</div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00014">plugin.hpp:14</a></div></div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1TypeId_html_ab11306524617564e4e6862cbb6e535d0"><div class="ttname"><a href="classhelios_1_1utils_1_1TypeId.html#ab11306524617564e4e6862cbb6e535d0">helios::utils::TypeId::FromExported</a></div><div class="ttdeci">static constexpr TypeId FromExported(uint64_t hash, std::string_view qualified_name={}) noexcept</div><div class="ttdoc">Constructs a TypeId from a precomputed hash and optional name.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00464">type_info.hpp:464</a></div></div>
 <div class="ttc" id="adynamic__library_8hpp_html"><div class="ttname"><a href="dynamic__library_8hpp.html">dynamic_library.hpp</a></div></div>
 <div class="ttc" id="adynamic__plugin_8hpp_html"><div class="ttname"><a href="dynamic__plugin_8hpp.html">dynamic_plugin.hpp</a></div></div>
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00043">application.hpp:43</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00038">application.hpp:38</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a27c5444cd70c60ddab006c9bbdd327db"><div class="ttname"><a href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">helios::app::DynamicPluginResult</a></div><div class="ttdeci">std::expected&lt; T, DynamicPluginError &gt; DynamicPluginResult</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00098">dynamic_plugin.hpp:98</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a6c14f36c354fa92a14823337d0ee4114"><div class="ttname"><a href="namespacehelios_1_1app.html#a6c14f36c354fa92a14823337d0ee4114">helios::app::DynamicPluginErrorToString</a></div><div class="ttdeci">constexpr std::string_view DynamicPluginErrorToString(DynamicPluginError error) noexcept</div><div class="ttdoc">Gets a human-readable description for a DynamicPluginError.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00105">dynamic_plugin.hpp:105</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a9f0d3a7600fcd00870e961464d1a5d10"><div class="ttname"><a href="namespacehelios_1_1app.html#a9f0d3a7600fcd00870e961464d1a5d10">helios::app::CreatePluginFn</a></div><div class="ttdeci">Plugin *(*)() CreatePluginFn</div><div class="ttdoc">Function signature for plugin creation.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00024">dynamic_plugin.hpp:24</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_ab12c8d399f188fa434507fe750108351"><div class="ttname"><a href="namespacehelios_1_1app.html#ab12c8d399f188fa434507fe750108351">helios::app::PluginTypeExportFn</a></div><div class="ttdeci">const PluginTypeExport *(*)() PluginTypeExportFn</div><div class="ttdoc">Function signature for the plugin type export symbol.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00078">dynamic_plugin.hpp:78</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_ab891c48f4a5152ee2a0635478f7419eea33abd07d683916a924643f3ed0cbc043"><div class="ttname"><a href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea33abd07d683916a924643f3ed0cbc043">helios::app::DynamicPluginError::kCreateFailed</a></div><div class="ttdeci">@ kCreateFailed</div><div class="ttdoc">Plugin creation function returned nullptr.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00093">dynamic_plugin.hpp:93</a></div></div>
@@ -466,9 +469,12 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dynamic__plugi
 <div class="ttc" id="anamespacehelios_1_1app_html_ab891c48f4a5152ee2a0635478f7419eea5dfd18d11d461326629594449082e177"><div class="ttname"><a href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea5dfd18d11d461326629594449082e177">helios::app::DynamicPluginError::kReloadFailed</a></div><div class="ttdeci">@ kReloadFailed</div><div class="ttdoc">Failed to reload plugin.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00094">dynamic_plugin.hpp:94</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_ab891c48f4a5152ee2a0635478f7419eea6d0530ba38df14ef9873d03ef6a3e29a"><div class="ttname"><a href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea6d0530ba38df14ef9873d03ef6a3e29a">helios::app::DynamicPluginError::kLibraryLoadFailed</a></div><div class="ttdeci">@ kLibraryLoadFailed</div><div class="ttdoc">Failed to load the dynamic library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00089">dynamic_plugin.hpp:89</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_ab891c48f4a5152ee2a0635478f7419eeab8d8a6aad1f8cd46edd8ef10fb42dd04"><div class="ttname"><a href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eeab8d8a6aad1f8cd46edd8ef10fb42dd04">helios::app::DynamicPluginError::kIdSymbolNotFound</a></div><div class="ttdeci">@ kIdSymbolNotFound</div><div class="ttdoc">Plugin ID function not found.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00091">dynamic_plugin.hpp:91</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_ac38a999809953af3cdddc6c432e814f8"><div class="ttname"><a href="namespacehelios_1_1app.html#ac38a999809953af3cdddc6c432e814f8">helios::app::ToString</a></div><div class="ttdeci">constexpr std::string_view ToString(ExitCode code) noexcept</div><div class="ttdoc">Converts an ExitCode to a string representation.</div><div class="ttdef"><b>Definition</b> <a href="app__exit_8hpp_source.html#l00061">app_exit.hpp:61</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1log_html_a53f5b0ad131c8f661cdf796e0a632d7b"><div class="ttname"><a href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">helios::log::Error</a></div><div class="ttdeci">void Error(std::string_view message) noexcept</div><div class="ttdoc">Logs an error message with the default logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00601">logger.hpp:601</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1log_html_a5e0f2faa9710b7d3045802095b10d6de"><div class="ttname"><a href="namespacehelios_1_1log.html#a5e0f2faa9710b7d3045802095b10d6de">helios::log::Info</a></div><div class="ttdeci">void Info(std::string_view message) noexcept</div><div class="ttdoc">Logs an info message with the default logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00507">logger.hpp:507</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_af8909b8b74ce4c816a431fdd82a53bd9"><div class="ttname"><a href="namespacehelios_1_1utils.html#af8909b8b74ce4c816a431fdd82a53bd9">helios::utils::TempFormat</a></div><div class="ttdeci">auto TempFormat(std::format_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) -&gt; std::pmr::string</div><div class="ttdoc">Format a string into a temporary buffer allocated from the calling thread&#39;s TemporaryStorage.</div><div class="ttdef"><b>Definition</b> <a href="temporary__storage__helpers_8hpp_source.html#l00024">temporary_storage_helpers.hpp:24</a></div></div>
 <div class="ttc" id="astructhelios_1_1app_1_1DynamicPluginConfig_html"><div class="ttname"><a href="structhelios_1_1app_1_1DynamicPluginConfig.html">helios::app::DynamicPluginConfig</a></div><div class="ttdoc">Configuration for dynamic plugin loading.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00127">dynamic_plugin.hpp:127</a></div></div>
+<div class="ttc" id="atemporary__storage__helpers_8hpp_html"><div class="ttname"><a href="temporary__storage__helpers_8hpp.html">temporary_storage_helpers.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

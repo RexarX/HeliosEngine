@@ -12,7 +12,8 @@ var joystick_8hpp =
     ] ],
     [ "helios::input::operator<<", "namespacehelios_1_1input.html#ad945662e960d4d2bfaf4234639483ac4", null ],
     [ "helios::input::operator<<", "namespacehelios_1_1input.html#adfaa9c4df30e7b3c4f28ffce58faac26", null ],
+    [ "helios::input::TempToString", "namespacehelios_1_1input.html#aaf236158098843407d658dc4baf7fbda", null ],
     [ "helios::input::ToString", "namespacehelios_1_1input.html#a3536818e8bd56869dbf982c9b325fe07", null ],
-    [ "helios::input::ToString", "namespacehelios_1_1input.html#a59ea602a76b224009eeb3345d263638a", null ],
+    [ "helios::input::ToString", "namespacehelios_1_1input.html#a50fa78015944f59a1cf472028dbc0301", null ],
     [ "helios::input::ToString", "namespacehelios_1_1input.html#a4b27e0a32f8d36f689e0eb224cea0433", null ]
 ];

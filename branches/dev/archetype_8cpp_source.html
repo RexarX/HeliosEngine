@@ -182,89 +182,95 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('archetype_8cpp
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="component_8hpp.html">helios/ecs/component/component.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="entity_8hpp.html">helios/ecs/entity/entity.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs.html">helios::ecs</a> {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Archetype.html#af2a7d19c8a1961b07766f765e64f7b66">   14</a></span><a class="code hl_function" href="classhelios_1_1ecs_1_1Archetype.html#af2a7d19c8a1961b07766f765e64f7b66">Archetype::Archetype</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1ArchetypeId.html">ArchetypeId</a> <span class="keywordtype">id</span>) : id_(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(id)) {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keyword">const</span> <span class="keyword">auto</span> types = id_.Types();</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  columns_.resize(types.size());</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  for (<a class="code hl_typedef" href="classhelios_1_1ecs_1_1Archetype.html#a0d21581df8c7c60b53c22295c3e5f1ef">size_type</a> i = 0; i &lt; types.size(); ++i) {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    column_map_.emplace(types[i], i);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  }</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
-</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Archetype.html#a1472ff07ea71f7b3cf68a032d726ed41">   22</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Archetype.html#a1472ff07ea71f7b3cf68a032d726ed41">Archetype::Clear</a>() {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; col : columns_) {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    col.Clear();</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;memory_resource&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs.html">helios::ecs</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Archetype.html#a5079dfb6c4802665ba573dba6fa12ea9">   15</a></span><a class="code hl_function" href="classhelios_1_1ecs_1_1Archetype.html#a5079dfb6c4802665ba573dba6fa12ea9">Archetype::Archetype</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1ArchetypeId.html">ArchetypeId</a> <span class="keywordtype">id</span>, std::pmr::memory_resource* resource)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    : id_(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(id)),</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>      column_map_(resource),</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>      entities_(resource),</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>      entity_to_row_(resource) {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keyword">const</span> <span class="keyword">auto</span> types = id_.Types();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  columns_.reserve(types.size());</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  for (<a class="code hl_typedef" href="classhelios_1_1ecs_1_1Archetype.html#a0d21581df8c7c60b53c22295c3e5f1ef">size_type</a> i = 0; i &lt; types.size(); ++i) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    columns_.emplace_back(resource);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    column_map_.Emplace(types[i], i);</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  }</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  entities_.clear();</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  entity_to_row_.clear();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Archetype.html#af93f828b13ddd8e74419b680cc1a1cdc">   30</a></span><a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1Archetype.html#af93f828b13ddd8e74419b680cc1a1cdc">Archetype::Remove</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">Valid</a>(), <span class="stringliteral">&quot;Entity &#39;{}&#39; is invalid!&quot;</span>, entity);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1ecs_1_1Archetype.html#ac4a8c1925cde79294641a00280c5f44f">Contains</a>(entity), <span class="stringliteral">&quot;Entity &#39;{}&#39; not present in archetype!&quot;</span>,</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                entity);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Archetype.html#ae72679134a794fc357ec9fe68a64f0db">RowIndex</a> row = entity_to_row_.at(entity.<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">Index</a>());</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keyword">const</span> <span class="keyword">auto</span> last_row = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Archetype.html#ae72679134a794fc357ec9fe68a64f0db">RowIndex</a><span class="keyword">&gt;</span>(entities_.size() - 1);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> swapped_entity;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordflow">if</span> (row != last_row) {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    swapped_entity = entities_[last_row];</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// Swap entity in dense list.</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    entities_[row] = swapped_entity;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    entity_to_row_[swapped_entity.<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">Index</a>()] = row;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Archetype.html#a1472ff07ea71f7b3cf68a032d726ed41">   28</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Archetype.html#a1472ff07ea71f7b3cf68a032d726ed41">Archetype::Clear</a>() {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; col : columns_) {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    col.Clear();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  }</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  entities_.clear();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  entity_to_row_.Clear();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
+</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Archetype.html#af93f828b13ddd8e74419b680cc1a1cdc">   36</a></span><a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1Archetype.html#af93f828b13ddd8e74419b680cc1a1cdc">Archetype::Remove</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">Valid</a>(), <span class="stringliteral">&quot;Entity &#39;{}&#39; is invalid!&quot;</span>, entity);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1ecs_1_1Archetype.html#ac4a8c1925cde79294641a00280c5f44f">Contains</a>(entity), <span class="stringliteral">&quot;Entity &#39;{}&#39; not present in archetype!&quot;</span>,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                entity);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Archetype.html#ae72679134a794fc357ec9fe68a64f0db">RowIndex</a> row = entity_to_row_.At(entity.<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">Index</a>());</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keyword">const</span> <span class="keyword">auto</span> last_row = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Archetype.html#ae72679134a794fc357ec9fe68a64f0db">RowIndex</a><span class="keyword">&gt;</span>(entities_.size() - 1);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> swapped_entity;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="comment">// Swap component data in every column.</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; col : columns_) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      <span class="keywordflow">if</span> (!col.Empty()) {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        col.Swap(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Archetype.html#a0d21581df8c7c60b53c22295c3e5f1ef">size_type</a><span class="keyword">&gt;</span>(row), <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Archetype.html#a0d21581df8c7c60b53c22295c3e5f1ef">size_type</a><span class="keyword">&gt;</span>(last_row));</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      }</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="comment">// Pop back.</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  entities_.pop_back();</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  entity_to_row_.erase(entity.<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">Index</a>());</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; col : columns_) {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">if</span> (!col.Empty()) {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      col.PopBack();</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordflow">if</span> (row != last_row) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    swapped_entity = entities_[last_row];</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="comment">// Swap entity in dense list.</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    entities_[row] = swapped_entity;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    entity_to_row_[swapped_entity.<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">Index</a>()] = row;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="comment">// Swap component data in every column.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; col : columns_) {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      <span class="keywordflow">if</span> (!col.Empty()) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        col.Swap(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Archetype.html#a0d21581df8c7c60b53c22295c3e5f1ef">size_type</a><span class="keyword">&gt;</span>(row), <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Archetype.html#a0d21581df8c7c60b53c22295c3e5f1ef">size_type</a><span class="keyword">&gt;</span>(last_row));</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="comment">// Pop back.</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  entities_.pop_back();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  entity_to_row_.Erase(entity.<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">Index</a>());</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordflow">return</span> swapped_entity;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; col : columns_) {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">if</span> (!col.Empty()) {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      col.PopBack();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">return</span> swapped_entity;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
 </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">auto</span> Archetype::ColumnIndex(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> index) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    -&gt; std::optional&lt;size_type&gt; {</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keyword">const</span> <span class="keyword">auto</span> it = column_map_.find(index);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">if</span> (it == column_map_.end()) {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  }</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordflow">return</span> it-&gt;second;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}  <span class="comment">// namespace helios::ecs</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keyword">auto</span> Archetype::ColumnIndex(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> index) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    -&gt; std::optional&lt;size_type&gt; {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keyword">const</span> <span class="keyword">auto</span> it = column_map_.Find(index);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keywordflow">if</span> (it == column_map_.end()) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordflow">return</span> it-&gt;second;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}  <span class="comment">// namespace helios::ecs</span></div>
 <div class="ttc" id="aarchetype_8hpp_html"><div class="ttname"><a href="archetype_8hpp.html">archetype.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00228">assert.hpp:228</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1ArchetypeId_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1ArchetypeId.html">helios::ecs::ArchetypeId</a></div><div class="ttdoc">Unique identifier for an archetype, represented as a sorted set of component type indices.</div><div class="ttdef"><b>Definition</b> <a href="archetype__id_8hpp_source.html#l00026">archetype_id.hpp:26</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_a0d21581df8c7c60b53c22295c3e5f1ef"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#a0d21581df8c7c60b53c22295c3e5f1ef">helios::ecs::Archetype::size_type</a></div><div class="ttdeci">size_t size_type</div><div class="ttdef"><b>Definition</b> <a href="archetype_8hpp_source.html#l00060">archetype.hpp:60</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_a1472ff07ea71f7b3cf68a032d726ed41"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#a1472ff07ea71f7b3cf68a032d726ed41">helios::ecs::Archetype::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Removes all entities and component data from this archetype.</div><div class="ttdef"><b>Definition</b> <a href="#l00022">archetype.cpp:22</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_a0d21581df8c7c60b53c22295c3e5f1ef"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#a0d21581df8c7c60b53c22295c3e5f1ef">helios::ecs::Archetype::size_type</a></div><div class="ttdeci">size_t size_type</div><div class="ttdef"><b>Definition</b> <a href="archetype_8hpp_source.html#l00055">archetype.hpp:55</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_a1472ff07ea71f7b3cf68a032d726ed41"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#a1472ff07ea71f7b3cf68a032d726ed41">helios::ecs::Archetype::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Removes all entities and component data from this archetype.</div><div class="ttdef"><b>Definition</b> <a href="#l00028">archetype.cpp:28</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_a5079dfb6c4802665ba573dba6fa12ea9"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#a5079dfb6c4802665ba573dba6fa12ea9">helios::ecs::Archetype::Archetype</a></div><div class="ttdeci">Archetype(ArchetypeId id, std::pmr::memory_resource *resource=std::pmr::get_default_resource())</div><div class="ttdoc">Constructs an archetype for the given archetype id.</div><div class="ttdef"><b>Definition</b> <a href="#l00015">archetype.cpp:15</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_ac4a8c1925cde79294641a00280c5f44f"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#ac4a8c1925cde79294641a00280c5f44f">helios::ecs::Archetype::Contains</a></div><div class="ttdeci">bool Contains(Entity entity) const noexcept</div><div class="ttdoc">Checks if the archetype contains the given entity.</div><div class="ttdef"><b>Definition</b> <a href="archetype_8hpp_source.html#l00609">archetype.hpp:609</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_ae72679134a794fc357ec9fe68a64f0db"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#ae72679134a794fc357ec9fe68a64f0db">helios::ecs::Archetype::RowIndex</a></div><div class="ttdeci">uint32_t RowIndex</div><div class="ttdef"><b>Definition</b> <a href="archetype_8hpp_source.html#l00061">archetype.hpp:61</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_af2a7d19c8a1961b07766f765e64f7b66"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#af2a7d19c8a1961b07766f765e64f7b66">helios::ecs::Archetype::Archetype</a></div><div class="ttdeci">Archetype(ArchetypeId id)</div><div class="ttdoc">Constructs an archetype for the given archetype id.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">archetype.cpp:14</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_af93f828b13ddd8e74419b680cc1a1cdc"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#af93f828b13ddd8e74419b680cc1a1cdc">helios::ecs::Archetype::Remove</a></div><div class="ttdeci">Entity Remove(Entity entity)</div><div class="ttdoc">Removes an entity from this archetype using swap-and-pop.</div><div class="ttdef"><b>Definition</b> <a href="#l00030">archetype.cpp:30</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_ae72679134a794fc357ec9fe68a64f0db"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#ae72679134a794fc357ec9fe68a64f0db">helios::ecs::Archetype::RowIndex</a></div><div class="ttdeci">uint32_t RowIndex</div><div class="ttdef"><b>Definition</b> <a href="archetype_8hpp_source.html#l00056">archetype.hpp:56</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Archetype_html_af93f828b13ddd8e74419b680cc1a1cdc"><div class="ttname"><a href="classhelios_1_1ecs_1_1Archetype.html#af93f828b13ddd8e74419b680cc1a1cdc">helios::ecs::Archetype::Remove</a></div><div class="ttdeci">Entity Remove(Entity entity)</div><div class="ttdoc">Removes an entity from this archetype using swap-and-pop.</div><div class="ttdef"><b>Definition</b> <a href="#l00036">archetype.cpp:36</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html">helios::ecs::Entity</a></div><div class="ttdoc">Unique identifier for entities with generation counter to handle recycling.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00026">entity.hpp:26</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a27290ea2728bdbc0c87bf03baae31fd7"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">helios::ecs::Entity::Valid</a></div><div class="ttdeci">constexpr bool Valid() const noexcept</div><div class="ttdoc">Checks if the entity handle is structurally valid.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00075">entity.hpp:75</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_aaae9de10e9476a94a23048d438c07e49"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">helios::ecs::Entity::Index</a></div><div class="ttdeci">constexpr IndexType Index() const noexcept</div><div class="ttdoc">Gets the index component of the entity.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00114">entity.hpp:114</a></div></div>

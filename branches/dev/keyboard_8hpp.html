@@ -179,7 +179,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('keyboard_8hpp.
   <div class="headertitle"><div class="title">keyboard.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="temporary__storage_8hpp_source.html">helios/memory/temporary_storage.hpp</a>&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;format&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;ostream&gt;</code><br />
@@ -388,12 +389,14 @@ Functions</h2></td></tr>
 <tr class="memdesc:ace5460d8556a92fe3a03aaf3bddd2e2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combines modifier flags.  <br /></td></tr>
 <tr class="memitem:ac95864e7ee437ae9c190b16d88f40bd5" id="r_ac95864e7ee437ae9c190b16d88f40bd5"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ac95864e7ee437ae9c190b16d88f40bd5">helios::input::HasFlag</a> (<a class="el" href="namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3">Modifiers</a> modifiers, <a class="el" href="namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3">Modifiers</a> flag) noexcept</td></tr>
 <tr class="memdesc:ac95864e7ee437ae9c190b16d88f40bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests whether a modifier flag is set.  <br /></td></tr>
-<tr class="memitem:ac6e8071e4461a7b40174e40955c4f3d7" id="r_ac6e8071e4461a7b40174e40955c4f3d7"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+<tr class="memitem:a9f786f9e6f3a5349cddf64aa4529d77e" id="r_a9f786f9e6f3a5349cddf64aa4529d77e"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
 requires std::output_iterator&lt;It, char&gt;</td></tr>
-<tr class="memitem:ac6e8071e4461a7b40174e40955c4f3d7 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ac6e8071e4461a7b40174e40955c4f3d7">helios::input::ToString</a> (<a class="el" href="namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3">Modifiers</a> modifiers, It out, bool with_prefix=false)</td></tr>
-<tr class="memdesc:ac6e8071e4461a7b40174e40955c4f3d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats modifiers as a pipe-separated list and writes to an output iterator.  <br /></td></tr>
+<tr class="memitem:a9f786f9e6f3a5349cddf64aa4529d77e template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a9f786f9e6f3a5349cddf64aa4529d77e">helios::input::ToString</a> (It out, <a class="el" href="namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3">Modifiers</a> modifiers, bool with_prefix=false)</td></tr>
+<tr class="memdesc:a9f786f9e6f3a5349cddf64aa4529d77e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats modifiers as a pipe-separated list and writes to an output iterator.  <br /></td></tr>
 <tr class="memitem:af609f2ba152e84a508135022535800a2" id="r_af609f2ba152e84a508135022535800a2"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#af609f2ba152e84a508135022535800a2">helios::input::ToString</a> (<a class="el" href="namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3">Modifiers</a> modifiers, bool with_prefix=false)</td></tr>
 <tr class="memdesc:af609f2ba152e84a508135022535800a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats modifiers as a pipe-separated list of flag names.  <br /></td></tr>
+<tr class="memitem:aaa62dc0da0d94d7252746d573910114c" id="r_aaa62dc0da0d94d7252746d573910114c"><td class="memItemLeft">std::pmr::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#aaa62dc0da0d94d7252746d573910114c">helios::input::TempToString</a> (<a class="el" href="namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3">Modifiers</a> modifiers, bool with_prefix=false)</td></tr>
+<tr class="memdesc:aaa62dc0da0d94d7252746d573910114c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats modifiers as a pipe-separated list of flag names using <span class="tt">TemporaryStorage</span>.  <br /></td></tr>
 <tr class="memitem:ab5ebf78fdb000fe5a1fb51f61bd0d11f" id="r_ab5ebf78fdb000fe5a1fb51f61bd0d11f"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ab5ebf78fdb000fe5a1fb51f61bd0d11f">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3">Modifiers</a> modifiers)</td></tr>
 <tr class="memdesc:ab5ebf78fdb000fe5a1fb51f61bd0d11f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs modifiers to an output stream.  <br /></td></tr>
 <tr class="memitem:af047d155bbc721f2a7209e08d14df7c5" id="r_af047d155bbc721f2a7209e08d14df7c5"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#af047d155bbc721f2a7209e08d14df7c5">helios::input::ToString</a> (<a class="el" href="namespacehelios_1_1input.html#a1b9ddfdfdf73d8c501418f1e200b5807">ButtonState</a> state) noexcept</td></tr>

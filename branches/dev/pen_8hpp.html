@@ -182,6 +182,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('pen_8hpp.html'
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="axis_8hpp_source.html">helios/input/axis.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="button__input_8hpp_source.html">helios/input/button_input.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="temporary__storage_8hpp_source.html">helios/memory/temporary_storage.hpp</a>&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;format&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
@@ -258,12 +259,14 @@ Functions</h2></td></tr>
 <tr class="memdesc:aa24ebfebd22b08ec79dc9c59ee59ad7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string name of a pen device type.  <br /></td></tr>
 <tr class="memitem:a538d0dd73ea4575b9fafe602b6d5aa9a" id="r_a538d0dd73ea4575b9fafe602b6d5aa9a"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a538d0dd73ea4575b9fafe602b6d5aa9a">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1input.html#a6a2ced1fec48054b9c4a25756fc97774">PenDeviceType</a> type)</td></tr>
 <tr class="memdesc:a538d0dd73ea4575b9fafe602b6d5aa9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a pen device type to an output stream.  <br /></td></tr>
-<tr class="memitem:a8366b6771a568a19a8c2aeadc1114ce4" id="r_a8366b6771a568a19a8c2aeadc1114ce4"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+<tr class="memitem:a076ed82415b3a29cc8da7f73a5098e8b" id="r_a076ed82415b3a29cc8da7f73a5098e8b"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
 requires std::output_iterator&lt;It, char&gt;</td></tr>
-<tr class="memitem:a8366b6771a568a19a8c2aeadc1114ce4 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a8366b6771a568a19a8c2aeadc1114ce4">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Pen.html">Pen</a> &amp;pen, It out)</td></tr>
-<tr class="memdesc:a8366b6771a568a19a8c2aeadc1114ce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a pen snapshot using an output iterator.  <br /></td></tr>
+<tr class="memitem:a076ed82415b3a29cc8da7f73a5098e8b template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a076ed82415b3a29cc8da7f73a5098e8b">helios::input::ToString</a> (It out, const <a class="el" href="structhelios_1_1input_1_1Pen.html">Pen</a> &amp;pen)</td></tr>
+<tr class="memdesc:a076ed82415b3a29cc8da7f73a5098e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a pen snapshot using an output iterator.  <br /></td></tr>
 <tr class="memitem:a3d86970abdeb9484356cf27c8de55b53" id="r_a3d86970abdeb9484356cf27c8de55b53"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a3d86970abdeb9484356cf27c8de55b53">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Pen.html">Pen</a> &amp;pen)</td></tr>
 <tr class="memdesc:a3d86970abdeb9484356cf27c8de55b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a pen snapshot as a string.  <br /></td></tr>
+<tr class="memitem:a3f1c55fb7d00e8a17b96c121edfe2510" id="r_a3f1c55fb7d00e8a17b96c121edfe2510"><td class="memItemLeft">std::pmr::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a3f1c55fb7d00e8a17b96c121edfe2510">helios::input::TempToString</a> (const <a class="el" href="structhelios_1_1input_1_1Pen.html">Pen</a> &amp;pen)</td></tr>
+<tr class="memdesc:a3f1c55fb7d00e8a17b96c121edfe2510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a pen snapshot as a string using <span class="tt">TemporaryStorage</span>.  <br /></td></tr>
 <tr class="memitem:a2ca4fcc28973a07bd6fc7e2017772f6c" id="r_a2ca4fcc28973a07bd6fc7e2017772f6c"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a2ca4fcc28973a07bd6fc7e2017772f6c">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1Pen.html">Pen</a> &amp;pen)</td></tr>
 <tr class="memdesc:a2ca4fcc28973a07bd6fc7e2017772f6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a pen snapshot to an output stream.  <br /></td></tr>
 </table>

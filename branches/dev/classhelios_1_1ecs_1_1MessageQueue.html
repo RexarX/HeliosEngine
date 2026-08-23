@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: helios::ecs::MessageQueue&lt; Allocator &gt; Class Template Reference</title>
+    <title>Helios Engine: helios::ecs::MessageQueue Class Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classhelios_1_1ecs_1_1MessageQueue-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">helios::ecs::MessageQueue&lt; Allocator &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">helios::ecs::MessageQueue Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -187,155 +187,119 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aa13f67107f8a157ae546bcdb08c587a5" id="r_aa13f67107f8a157ae546bcdb08c587a5"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a> = <a class="el" href="classhelios_1_1container_1_1MultiTypeMap.html#aebd7b86eb4c71fbd5ad733b74ed9b4e0">MessageStorage::size_type</a></td></tr>
-<tr class="memitem:abaa516c98a533fc4c745bc8bcc2929c6" id="r_abaa516c98a533fc4c745bc8bcc2929c6"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#abaa516c98a533fc4c745bc8bcc2929c6">allocator_type</a> = <a class="el" href="classhelios_1_1container_1_1MultiTypeMap.html#ab9a195e68d4eac0fd1fe16da6253389c">MessageStorage::allocator_type</a></td></tr>
+<tr class="memitem:a1f5df9acf5293aabc410d665b6b62739" id="r_a1f5df9acf5293aabc410d665b6b62739"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a> = <a class="el" href="classhelios_1_1container_1_1MultiTypeMap.html#ac4fb97e017c935341ea198e8bf21e969">MessageStorage::size_type</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a49c4666628d79eddf64661ef6d65f4c4" id="r_a49c4666628d79eddf64661ef6d65f4c4"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a49c4666628d79eddf64661ef6d65f4c4">MessageQueue</a> ()=default</td></tr>
-<tr class="memitem:a6fb9177de97fc9992c37c633d545ed93" id="r_a6fb9177de97fc9992c37c633d545ed93"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a6fb9177de97fc9992c37c633d545ed93">MessageQueue</a> (const <a class="el" href="#abaa516c98a533fc4c745bc8bcc2929c6">allocator_type</a> &amp;alloc)</td></tr>
-<tr class="memdesc:a6fb9177de97fc9992c37c633d545ed93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> with a custom allocator.  <br /></td></tr>
-<tr class="memitem:adf197bc8bf1f1e450af06668a2a8cbfc" id="r_adf197bc8bf1f1e450af06668a2a8cbfc"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#adf197bc8bf1f1e450af06668a2a8cbfc">MessageQueue</a> (std::pmr::memory_resource *resource)</td></tr>
-<tr class="memdesc:adf197bc8bf1f1e450af06668a2a8cbfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> from a PMR memory resource.  <br /></td></tr>
-<tr class="memitem:a7f87ae90ec73d63e91ebe722acc2fb5e" id="r_a7f87ae90ec73d63e91ebe722acc2fb5e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7f87ae90ec73d63e91ebe722acc2fb5e">MessageQueue</a> (std::nullptr_t)=delete</td></tr>
-<tr class="memitem:a9c8169bf950ca3c9119f5f3cffcc9999" id="r_a9c8169bf950ca3c9119f5f3cffcc9999"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a9c8169bf950ca3c9119f5f3cffcc9999">MessageQueue</a> (const MessageQueue &amp;)=default</td></tr>
-<tr class="memitem:ad607b411eabbc34e5f4d5e3a61c9770e" id="r_ad607b411eabbc34e5f4d5e3a61c9770e"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad607b411eabbc34e5f4d5e3a61c9770e">MessageQueue</a> (MessageQueue &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:aef5cbb87977aa8573c34ed7c6008a1f8" id="r_aef5cbb87977aa8573c34ed7c6008a1f8"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aef5cbb87977aa8573c34ed7c6008a1f8">~MessageQueue</a> ()=default</td></tr>
-<tr class="memitem:a82d01f78f4bf9043dd295b2210b04b6d" id="r_a82d01f78f4bf9043dd295b2210b04b6d"><td class="memItemLeft">constexpr <a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a82d01f78f4bf9043dd295b2210b04b6d">operator=</a> (const <a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a> &amp;)=default</td></tr>
-<tr class="memitem:a1c71fceb74d764433fd27f3885d13011" id="r_a1c71fceb74d764433fd27f3885d13011"><td class="memItemLeft">constexpr <a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1c71fceb74d764433fd27f3885d13011">operator=</a> (<a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a16436052ed3ecfcc43a7960494e86261" id="r_a16436052ed3ecfcc43a7960494e86261"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:a16436052ed3ecfcc43a7960494e86261 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a16436052ed3ecfcc43a7960494e86261">Register</a> ()</td></tr>
-<tr class="memdesc:a16436052ed3ecfcc43a7960494e86261"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers an message type with the queue.  <br /></td></tr>
-<tr class="memitem:a11b044ba60a11a7b9f00383027980fb2" id="r_a11b044ba60a11a7b9f00383027980fb2"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a11b044ba60a11a7b9f00383027980fb2">Register</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index)</td></tr>
-<tr class="memdesc:a11b044ba60a11a7b9f00383027980fb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensures storage exists for the given runtime type index.  <br /></td></tr>
-<tr class="memitem:ad1ece98776df614cea4152a94e8cc486" id="r_ad1ece98776df614cea4152a94e8cc486"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ad1ece98776df614cea4152a94e8cc486">ClearAll</a> () noexcept</td></tr>
-<tr class="memdesc:ad1ece98776df614cea4152a94e8cc486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all messages from the queue maintaining all registered types.  <br /></td></tr>
-<tr class="memitem:af2d67c55eac134d3680d79a1cca252c9" id="r_af2d67c55eac134d3680d79a1cca252c9"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:af2d67c55eac134d3680d79a1cca252c9 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#af2d67c55eac134d3680d79a1cca252c9">Clear</a> () noexcept</td></tr>
-<tr class="memdesc:af2d67c55eac134d3680d79a1cca252c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears messages of a specific type.  <br /></td></tr>
-<tr class="memitem:a965aafe62c111ea7d49e0141b7d5381d" id="r_a965aafe62c111ea7d49e0141b7d5381d"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a965aafe62c111ea7d49e0141b7d5381d">Clear</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) noexcept</td></tr>
-<tr class="memdesc:a965aafe62c111ea7d49e0141b7d5381d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears messages of a specific type by runtime type index.  <br /></td></tr>
-<tr class="memitem:a7db8e266e863bb5f2db0fb229a1281d3" id="r_a7db8e266e863bb5f2db0fb229a1281d3"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a7db8e266e863bb5f2db0fb229a1281d3">ResetAll</a> () noexcept</td></tr>
-<tr class="memdesc:a7db8e266e863bb5f2db0fb229a1281d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the queue by clearing all messages and unregistering all types.  <br /></td></tr>
-<tr class="memitem:a65b2008c328a798df558e0e33bab616a" id="r_a65b2008c328a798df558e0e33bab616a"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:a65b2008c328a798df558e0e33bab616a template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a65b2008c328a798df558e0e33bab616a">Reset</a> () noexcept</td></tr>
-<tr class="memdesc:a65b2008c328a798df558e0e33bab616a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets a specific message type by clearing its messages and unregistering the type.  <br /></td></tr>
-<tr class="memitem:a9365821e595a7afaf48f81b020b2d5d4" id="r_a9365821e595a7afaf48f81b020b2d5d4"><td class="memTemplParams" colspan="2">template&lt;typename OtherAllocator&gt; </td></tr>
-<tr class="memitem:a9365821e595a7afaf48f81b020b2d5d4 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a9365821e595a7afaf48f81b020b2d5d4">Merge</a> (const <a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a>&lt; OtherAllocator &gt; &amp;other)</td></tr>
-<tr class="memdesc:a9365821e595a7afaf48f81b020b2d5d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges messages from another <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a> into this one.  <br /></td></tr>
-<tr class="memitem:ab5196bc37e915f19c74a84598ec95345" id="r_ab5196bc37e915f19c74a84598ec95345"><td class="memTemplParams" colspan="2">template&lt;typename OtherAllocator&gt; </td></tr>
-<tr class="memitem:ab5196bc37e915f19c74a84598ec95345 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ab5196bc37e915f19c74a84598ec95345">Merge</a> (<a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a>&lt; OtherAllocator &gt; &amp;&amp;other)</td></tr>
-<tr class="memdesc:ab5196bc37e915f19c74a84598ec95345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges messages from another <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a> into this one.  <br /></td></tr>
-<tr class="memitem:aadd34d40dfba3e670913274dff3f7048" id="r_aadd34d40dfba3e670913274dff3f7048"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:aadd34d40dfba3e670913274dff3f7048 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aadd34d40dfba3e670913274dff3f7048">Enqueue</a> (T &amp;&amp;message)</td></tr>
-<tr class="memdesc:aadd34d40dfba3e670913274dff3f7048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues an message into the queue.  <br /></td></tr>
-<tr class="memitem:a0431f0796ed004cd71533db68df82431" id="r_a0431f0796ed004cd71533db68df82431"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
+<tr class="memitem:a231278991a0bcb41854cba94e0b5dc53" id="r_a231278991a0bcb41854cba94e0b5dc53"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> ()=default</td></tr>
+<tr class="memitem:aa40bb09a9d8efaf2133d1a19578434a7" id="r_aa40bb09a9d8efaf2133d1a19578434a7"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aa40bb09a9d8efaf2133d1a19578434a7">MessageQueue</a> (std::pmr::memory_resource *resource)</td></tr>
+<tr class="memdesc:aa40bb09a9d8efaf2133d1a19578434a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> from a PMR memory resource.  <br /></td></tr>
+<tr class="memitem:aa5dc8257b8743ebc081f493bf26c9510" id="r_aa5dc8257b8743ebc081f493bf26c9510"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa5dc8257b8743ebc081f493bf26c9510">MessageQueue</a> (std::nullptr_t)=delete</td></tr>
+<tr class="memitem:ad675d17b79c053dd92e034b31ca7bb70" id="r_ad675d17b79c053dd92e034b31ca7bb70"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad675d17b79c053dd92e034b31ca7bb70">MessageQueue</a> (const MessageQueue &amp;)=default</td></tr>
+<tr class="memitem:a55e062c022c5952d479abfa9472e6969" id="r_a55e062c022c5952d479abfa9472e6969"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a55e062c022c5952d479abfa9472e6969">MessageQueue</a> (MessageQueue &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a28181d597a34d18222dc80c395610db1" id="r_a28181d597a34d18222dc80c395610db1"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a28181d597a34d18222dc80c395610db1">~MessageQueue</a> ()=default</td></tr>
+<tr class="memitem:a38324bcc9d333ec02b29506e08f767c3" id="r_a38324bcc9d333ec02b29506e08f767c3"><td class="memItemLeft">constexpr <a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a38324bcc9d333ec02b29506e08f767c3">operator=</a> (const <a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;)=default</td></tr>
+<tr class="memitem:a6d5fa288d6f2b1db3cc84a5fec484724" id="r_a6d5fa288d6f2b1db3cc84a5fec484724"><td class="memItemLeft">constexpr <a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6d5fa288d6f2b1db3cc84a5fec484724">operator=</a> (<a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a1b4bf44c041b1dbb392cba436736695b" id="r_a1b4bf44c041b1dbb392cba436736695b"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:a1b4bf44c041b1dbb392cba436736695b template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a1b4bf44c041b1dbb392cba436736695b">Register</a> ()</td></tr>
+<tr class="memdesc:a1b4bf44c041b1dbb392cba436736695b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers an message type with the queue.  <br /></td></tr>
+<tr class="memitem:a224bf379a713dddea6d71324bdfdfb73" id="r_a224bf379a713dddea6d71324bdfdfb73"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a224bf379a713dddea6d71324bdfdfb73">Register</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index)</td></tr>
+<tr class="memdesc:a224bf379a713dddea6d71324bdfdfb73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensures storage exists for the given runtime type index.  <br /></td></tr>
+<tr class="memitem:ac4808cc81fd51cf0ef2c59882bb117bd" id="r_ac4808cc81fd51cf0ef2c59882bb117bd"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ac4808cc81fd51cf0ef2c59882bb117bd">ClearAll</a> () noexcept</td></tr>
+<tr class="memdesc:ac4808cc81fd51cf0ef2c59882bb117bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all messages from the queue maintaining all registered types.  <br /></td></tr>
+<tr class="memitem:a7a1593e0f1940eedd95e933603156d41" id="r_a7a1593e0f1940eedd95e933603156d41"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:a7a1593e0f1940eedd95e933603156d41 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a7a1593e0f1940eedd95e933603156d41">Clear</a> () noexcept</td></tr>
+<tr class="memdesc:a7a1593e0f1940eedd95e933603156d41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears messages of a specific type.  <br /></td></tr>
+<tr class="memitem:a16c71486e47601bb6a2987ac3789a4d6" id="r_a16c71486e47601bb6a2987ac3789a4d6"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a16c71486e47601bb6a2987ac3789a4d6">Clear</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) noexcept</td></tr>
+<tr class="memdesc:a16c71486e47601bb6a2987ac3789a4d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears messages of a specific type by runtime type index.  <br /></td></tr>
+<tr class="memitem:a3f2463be3c08aa735cc0414bbcd6597f" id="r_a3f2463be3c08aa735cc0414bbcd6597f"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a3f2463be3c08aa735cc0414bbcd6597f">ResetAll</a> () noexcept</td></tr>
+<tr class="memdesc:a3f2463be3c08aa735cc0414bbcd6597f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the queue by clearing all messages and unregistering all types.  <br /></td></tr>
+<tr class="memitem:ac711add0775157747f8b80db9806a33c" id="r_ac711add0775157747f8b80db9806a33c"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:ac711add0775157747f8b80db9806a33c template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ac711add0775157747f8b80db9806a33c">Reset</a> () noexcept</td></tr>
+<tr class="memdesc:ac711add0775157747f8b80db9806a33c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets a specific message type by clearing its messages and unregistering the type.  <br /></td></tr>
+<tr class="memitem:ad5181b4c53687db1a409efff0a8847da" id="r_ad5181b4c53687db1a409efff0a8847da"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ad5181b4c53687db1a409efff0a8847da">Merge</a> (const <a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;other)</td></tr>
+<tr class="memdesc:ad5181b4c53687db1a409efff0a8847da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges messages from another <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a> into this one.  <br /></td></tr>
+<tr class="memitem:a86bd8e78e553420f45f9b9a56b1252b0" id="r_a86bd8e78e553420f45f9b9a56b1252b0"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a86bd8e78e553420f45f9b9a56b1252b0">Merge</a> (<a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;&amp;other)</td></tr>
+<tr class="memdesc:a86bd8e78e553420f45f9b9a56b1252b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges messages from another <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a> into this one.  <br /></td></tr>
+<tr class="memitem:a3708cab8dbcaa7e5d2d2ffb3bf218ced" id="r_a3708cab8dbcaa7e5d2d2ffb3bf218ced"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:a3708cab8dbcaa7e5d2d2ffb3bf218ced template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a3708cab8dbcaa7e5d2d2ffb3bf218ced">Enqueue</a> (T &amp;&amp;message)</td></tr>
+<tr class="memdesc:a3708cab8dbcaa7e5d2d2ffb3bf218ced"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues an message into the queue.  <br /></td></tr>
+<tr class="memitem:afaa5a2c11e48a2a1b95bfc8b7eef4339" id="r_afaa5a2c11e48a2a1b95bfc8b7eef4339"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
 requires MessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:a0431f0796ed004cd71533db68df82431 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0431f0796ed004cd71533db68df82431">EnqueueBulk</a> (R &amp;&amp;messages)</td></tr>
-<tr class="memdesc:a0431f0796ed004cd71533db68df82431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues multiple messages in bulk.  <br /></td></tr>
-<tr class="memitem:a61d1955e914805535a6aaaef1cd4edd7" id="r_a61d1955e914805535a6aaaef1cd4edd7"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:a61d1955e914805535a6aaaef1cd4edd7 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a61d1955e914805535a6aaaef1cd4edd7">RemoveIndices</a> (std::span&lt; const <a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a> &gt; sorted_indices)</td></tr>
-<tr class="memdesc:a61d1955e914805535a6aaaef1cd4edd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes messages at the given sorted indices for a specific message type.  <br /></td></tr>
-<tr class="memitem:aa6bd134a4ea09b54d518668a1a789963" id="r_aa6bd134a4ea09b54d518668a1a789963"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa6bd134a4ea09b54d518668a1a789963">RemoveIndices</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index, std::span&lt; const <a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a> &gt; sorted_indices)</td></tr>
-<tr class="memdesc:aa6bd134a4ea09b54d518668a1a789963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes messages at the given sorted indices for a specific type.  <br /></td></tr>
-<tr class="memitem:aba1aa73bb8409bdaa56a665ae1d2620b" id="r_aba1aa73bb8409bdaa56a665ae1d2620b"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#aba1aa73bb8409bdaa56a665ae1d2620b">Swap</a> (<a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a> &amp;other) noexcept</td></tr>
-<tr class="memdesc:aba1aa73bb8409bdaa56a665ae1d2620b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the contents of this queue with another.  <br /></td></tr>
-<tr class="memitem:ad69d4e85a8bfbf1e35db67298cd98f06" id="r_ad69d4e85a8bfbf1e35db67298cd98f06"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:ad69d4e85a8bfbf1e35db67298cd98f06 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ad69d4e85a8bfbf1e35db67298cd98f06">IsRegistered</a> () const noexcept</td></tr>
-<tr class="memdesc:ad69d4e85a8bfbf1e35db67298cd98f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an message type is registered.  <br /></td></tr>
-<tr class="memitem:acbc9073d97e1aa3a7eea9ccc61f6b6e1" id="r_acbc9073d97e1aa3a7eea9ccc61f6b6e1"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#acbc9073d97e1aa3a7eea9ccc61f6b6e1">IsRegistered</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept</td></tr>
-<tr class="memdesc:acbc9073d97e1aa3a7eea9ccc61f6b6e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an message type is registered by runtime type index.  <br /></td></tr>
-<tr class="memitem:a09c7a263837bee75c12b34837de8cc12" id="r_a09c7a263837bee75c12b34837de8cc12"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a09c7a263837bee75c12b34837de8cc12">HasMessages</a> () const noexcept</td></tr>
-<tr class="memdesc:a09c7a263837bee75c12b34837de8cc12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any messages exist in the queue across all types.  <br /></td></tr>
-<tr class="memitem:a0774120b2ceb60238266a5dbd5834e6e" id="r_a0774120b2ceb60238266a5dbd5834e6e"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:a0774120b2ceb60238266a5dbd5834e6e template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a0774120b2ceb60238266a5dbd5834e6e">HasMessages</a> () const noexcept</td></tr>
-<tr class="memdesc:a0774120b2ceb60238266a5dbd5834e6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if messages of a specific type exist in the queue.  <br /></td></tr>
-<tr class="memitem:a5cbee0b5a5d6b04113b433747bf5a5f5" id="r_a5cbee0b5a5d6b04113b433747bf5a5f5"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:a5cbee0b5a5d6b04113b433747bf5a5f5 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a5cbee0b5a5d6b04113b433747bf5a5f5">Messages</a> () const noexcept -&gt; std::span&lt; const T &gt;</td></tr>
-<tr class="memdesc:a5cbee0b5a5d6b04113b433747bf5a5f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a const span of all messages of a specific type.  <br /></td></tr>
-<tr class="memitem:ab795b9af40f0c6e64565f2ce6673139d" id="r_ab795b9af40f0c6e64565f2ce6673139d"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:ab795b9af40f0c6e64565f2ce6673139d template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#ab795b9af40f0c6e64565f2ce6673139d">Messages</a> () noexcept -&gt; std::span&lt; T &gt;</td></tr>
-<tr class="memdesc:ab795b9af40f0c6e64565f2ce6673139d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a mutable span of all messages of a specific type.  <br /></td></tr>
-<tr class="memitem:a4a3215fadb1302ea03832c0c69220382" id="r_a4a3215fadb1302ea03832c0c69220382"><td class="memItemLeft">constexpr <a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4a3215fadb1302ea03832c0c69220382">TypeCount</a> () const noexcept</td></tr>
-<tr class="memdesc:a4a3215fadb1302ea03832c0c69220382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of message types stored.  <br /></td></tr>
-<tr class="memitem:a0309d63a5a1552094038f557de3b2411" id="r_a0309d63a5a1552094038f557de3b2411"><td class="memItemLeft">constexpr <a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0309d63a5a1552094038f557de3b2411">MessageCount</a> () const noexcept</td></tr>
-<tr class="memdesc:a0309d63a5a1552094038f557de3b2411"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of messages stored across all types.  <br /></td></tr>
-<tr class="memitem:a06eefee7be1de7495a0937c8ee7fbfbe" id="r_a06eefee7be1de7495a0937c8ee7fbfbe"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:a06eefee7be1de7495a0937c8ee7fbfbe template"><td class="memItemLeft">constexpr <a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a06eefee7be1de7495a0937c8ee7fbfbe">MessageCount</a> () const noexcept</td></tr>
-<tr class="memdesc:a06eefee7be1de7495a0937c8ee7fbfbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of messages stored for a specific message type.  <br /></td></tr>
-<tr class="memitem:a88fb81c6093c33636540123d722bf385" id="r_a88fb81c6093c33636540123d722bf385"><td class="memItemLeft">constexpr <a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a88fb81c6093c33636540123d722bf385">MessageCount</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept</td></tr>
-<tr class="memdesc:a88fb81c6093c33636540123d722bf385"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of messages for a type by runtime type index.  <br /></td></tr>
+<tr class="memitem:afaa5a2c11e48a2a1b95bfc8b7eef4339 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#afaa5a2c11e48a2a1b95bfc8b7eef4339">EnqueueBulk</a> (R &amp;&amp;messages)</td></tr>
+<tr class="memdesc:afaa5a2c11e48a2a1b95bfc8b7eef4339"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues multiple messages in bulk.  <br /></td></tr>
+<tr class="memitem:a50cfb7c66a4c64472b30683f49780930" id="r_a50cfb7c66a4c64472b30683f49780930"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:a50cfb7c66a4c64472b30683f49780930 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a50cfb7c66a4c64472b30683f49780930">RemoveIndices</a> (std::span&lt; const <a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a> &gt; sorted_indices)</td></tr>
+<tr class="memdesc:a50cfb7c66a4c64472b30683f49780930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes messages at the given sorted indices for a specific message type.  <br /></td></tr>
+<tr class="memitem:a7e3ffde632965d5924711d14b6673c3d" id="r_a7e3ffde632965d5924711d14b6673c3d"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a7e3ffde632965d5924711d14b6673c3d">RemoveIndices</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index, std::span&lt; const <a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a> &gt; sorted_indices)</td></tr>
+<tr class="memdesc:a7e3ffde632965d5924711d14b6673c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes messages at the given sorted indices for a specific type.  <br /></td></tr>
+<tr class="memitem:abf142e8c7263ec195a04ec53689c3c7e" id="r_abf142e8c7263ec195a04ec53689c3c7e"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#abf142e8c7263ec195a04ec53689c3c7e">Swap</a> (<a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:abf142e8c7263ec195a04ec53689c3c7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the contents of this queue with another.  <br /></td></tr>
+<tr class="memitem:a7b9af878e429d41be40163c67e65539a" id="r_a7b9af878e429d41be40163c67e65539a"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:a7b9af878e429d41be40163c67e65539a template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a7b9af878e429d41be40163c67e65539a">IsRegistered</a> () const noexcept</td></tr>
+<tr class="memdesc:a7b9af878e429d41be40163c67e65539a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an message type is registered.  <br /></td></tr>
+<tr class="memitem:a7c3dd46696641e4071d66f6f5fc3f0ea" id="r_a7c3dd46696641e4071d66f6f5fc3f0ea"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a7c3dd46696641e4071d66f6f5fc3f0ea">IsRegistered</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept</td></tr>
+<tr class="memdesc:a7c3dd46696641e4071d66f6f5fc3f0ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an message type is registered by runtime type index.  <br /></td></tr>
+<tr class="memitem:acef4ff139db1f4bb37b8d5f835e8e7b8" id="r_acef4ff139db1f4bb37b8d5f835e8e7b8"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#acef4ff139db1f4bb37b8d5f835e8e7b8">HasMessages</a> () const noexcept</td></tr>
+<tr class="memdesc:acef4ff139db1f4bb37b8d5f835e8e7b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any messages exist in the queue across all types.  <br /></td></tr>
+<tr class="memitem:a2426c0d5a5dbf5d53c0cfa238ecc436d" id="r_a2426c0d5a5dbf5d53c0cfa238ecc436d"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:a2426c0d5a5dbf5d53c0cfa238ecc436d template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a2426c0d5a5dbf5d53c0cfa238ecc436d">HasMessages</a> () const noexcept</td></tr>
+<tr class="memdesc:a2426c0d5a5dbf5d53c0cfa238ecc436d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if messages of a specific type exist in the queue.  <br /></td></tr>
+<tr class="memitem:a3df89967de3bfc5bdd51721f437b0e8b" id="r_a3df89967de3bfc5bdd51721f437b0e8b"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:a3df89967de3bfc5bdd51721f437b0e8b template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a3df89967de3bfc5bdd51721f437b0e8b">Messages</a> () const noexcept -&gt; std::span&lt; const T &gt;</td></tr>
+<tr class="memdesc:a3df89967de3bfc5bdd51721f437b0e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a const span of all messages of a specific type.  <br /></td></tr>
+<tr class="memitem:ab82b508e6f9428571fa7422cd9000890" id="r_ab82b508e6f9428571fa7422cd9000890"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:ab82b508e6f9428571fa7422cd9000890 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#ab82b508e6f9428571fa7422cd9000890">Messages</a> () noexcept -&gt; std::span&lt; T &gt;</td></tr>
+<tr class="memdesc:ab82b508e6f9428571fa7422cd9000890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a mutable span of all messages of a specific type.  <br /></td></tr>
+<tr class="memitem:ad31798e27b8c0c652a3f8cf6867cd46d" id="r_ad31798e27b8c0c652a3f8cf6867cd46d"><td class="memItemLeft">constexpr <a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad31798e27b8c0c652a3f8cf6867cd46d">TypeCount</a> () const noexcept</td></tr>
+<tr class="memdesc:ad31798e27b8c0c652a3f8cf6867cd46d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of message types stored.  <br /></td></tr>
+<tr class="memitem:ada25fae7f8dba807fa260ba1d86b6155" id="r_ada25fae7f8dba807fa260ba1d86b6155"><td class="memItemLeft">constexpr <a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ada25fae7f8dba807fa260ba1d86b6155">MessageCount</a> () const noexcept</td></tr>
+<tr class="memdesc:ada25fae7f8dba807fa260ba1d86b6155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of messages stored across all types.  <br /></td></tr>
+<tr class="memitem:a762211c077272c400242c7d008e66d70" id="r_a762211c077272c400242c7d008e66d70"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:a762211c077272c400242c7d008e66d70 template"><td class="memItemLeft">constexpr <a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a762211c077272c400242c7d008e66d70">MessageCount</a> () const noexcept</td></tr>
+<tr class="memdesc:a762211c077272c400242c7d008e66d70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of messages stored for a specific message type.  <br /></td></tr>
+<tr class="memitem:a0fea746f0e3030d5d54193a41d91e5ae" id="r_a0fea746f0e3030d5d54193a41d91e5ae"><td class="memItemLeft">constexpr <a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0fea746f0e3030d5d54193a41d91e5ae">MessageCount</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept</td></tr>
+<tr class="memdesc:a0fea746f0e3030d5d54193a41d91e5ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of messages for a type by runtime type index.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a35f4d992cb5c0c6d9fecf23a0d58e909" id="r_a35f4d992cb5c0c6d9fecf23a0d58e909"><td class="memTemplParams" colspan="2">template&lt;typename OtherAllocator&gt; </td></tr>
-<tr class="memitem:a35f4d992cb5c0c6d9fecf23a0d58e909 template"><td class="memItemLeft">class&#160;</td><td class="memItemRight"><a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a></td></tr>
-<tr class="memitem:adf6d6c244c5aa498e171258677d0e9e9" id="r_adf6d6c244c5aa498e171258677d0e9e9"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#adf6d6c244c5aa498e171258677d0e9e9">swap</a> (<a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a> &amp;lhs, <a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a> &amp;rhs) noexcept</td></tr>
+<tr class="memitem:adf6d6c244c5aa498e171258677d0e9e9" id="r_adf6d6c244c5aa498e171258677d0e9e9"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#adf6d6c244c5aa498e171258677d0e9e9">swap</a> (<a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;lhs, <a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:adf6d6c244c5aa498e171258677d0e9e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the contents of two message queues.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt;<br />
-class helios::ecs::MessageQueue&lt; Allocator &gt;</div><p>Queue for managing multiple message types using type-erased contiguous storage. </p>
+<div class="textblock"><p>Queue for managing multiple message types using type-erased contiguous storage. </p>
 <p>Messages are stored in a <span class="tt">MultiTypeBuffer</span>, which provides per-type contiguous storage. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Allocator</td><td>Allocator type for internal storage (default: <span class="tt">std::allocator&lt;std::byte&gt;</span>) </td></tr>
-  </table>
-  </dd>
-</dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00029">29</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00023">23</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
-<a id="abaa516c98a533fc4c745bc8bcc2929c6" name="abaa516c98a533fc4c745bc8bcc2929c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abaa516c98a533fc4c745bc8bcc2929c6">&#9670;&#160;</a></span>allocator_type</h2>
+<a id="a1f5df9acf5293aabc410d665b6b62739" name="a1f5df9acf5293aabc410d665b6b62739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f5df9acf5293aabc410d665b6b62739">&#9670;&#160;</a></span>size_type</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::allocator_type = <a class="el" href="classhelios_1_1container_1_1MultiTypeMap.html#ab9a195e68d4eac0fd1fe16da6253389c">MessageStorage::allocator_type</a></td>
+          <td class="memname">using <a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">helios::ecs::MessageQueue::size_type</a> = <a class="el" href="classhelios_1_1container_1_1MultiTypeMap.html#ac4fb97e017c935341ea198e8bf21e969">MessageStorage::size_type</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00037">37</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aa13f67107f8a157ae546bcdb08c587a5" name="aa13f67107f8a157ae546bcdb08c587a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa13f67107f8a157ae546bcdb08c587a5">&#9670;&#160;</a></span>size_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::size_type = <a class="el" href="classhelios_1_1container_1_1MultiTypeMap.html#aebd7b86eb4c71fbd5ad733b74ed9b4e0">MessageStorage::size_type</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00036">36</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00028">28</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a49c4666628d79eddf64661ef6d65f4c4" name="a49c4666628d79eddf64661ef6d65f4c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49c4666628d79eddf64661ef6d65f4c4">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[1/6]</span></h2>
+<a id="a231278991a0bcb41854cba94e0b5dc53" name="a231278991a0bcb41854cba94e0b5dc53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a231278991a0bcb41854cba94e0b5dc53">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::MessageQueue </td>
+          <td class="memname">helios::ecs::MessageQueue::MessageQueue </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -350,56 +314,17 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a6fb9177de97fc9992c37c633d545ed93" name="a6fb9177de97fc9992c37c633d545ed93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fb9177de97fc9992c37c633d545ed93">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[2/6]</span></h2>
+<a id="aa40bb09a9d8efaf2133d1a19578434a7" name="aa40bb09a9d8efaf2133d1a19578434a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa40bb09a9d8efaf2133d1a19578434a7">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::MessageQueue </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="#abaa516c98a533fc4c745bc8bcc2929c6">allocator_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>alloc</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs an <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> with a custom allocator. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">alloc</td><td>Allocator instance </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00045">45</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
-
-</div>
-</div>
-<a id="adf197bc8bf1f1e450af06668a2a8cbfc" name="adf197bc8bf1f1e450af06668a2a8cbfc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf197bc8bf1f1e450af06668a2a8cbfc">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[3/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::MessageQueue </td>
+          <td class="memname">helios::ecs::MessageQueue::MessageQueue </td>
           <td>(</td>
           <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span></td><td>)</td>
           <td></td>
@@ -413,30 +338,28 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 </div><div class="memdoc">
 
 <p>Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> from a PMR memory resource. </p>
-<p>Enabled only when <span class="tt"><a class="el" href="#abaa516c98a533fc4c745bc8bcc2929c6">allocator_type</a></span> is constructible from <span class="tt">std::pmr::memory_resource*</span>. </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resource</td><td>Memory resource used to construct allocator </td></tr>
+    <tr><td class="paramname">resource</td><td>Memory resource used for message storage </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00054">54</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00036">36</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7f87ae90ec73d63e91ebe722acc2fb5e" name="a7f87ae90ec73d63e91ebe722acc2fb5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f87ae90ec73d63e91ebe722acc2fb5e">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[4/6]</span></h2>
+<a id="aa5dc8257b8743ebc081f493bf26c9510" name="aa5dc8257b8743ebc081f493bf26c9510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5dc8257b8743ebc081f493bf26c9510">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::MessageQueue </td>
+          <td class="memname">helios::ecs::MessageQueue::MessageQueue </td>
           <td>(</td>
           <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -451,21 +374,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a9c8169bf950ca3c9119f5f3cffcc9999" name="a9c8169bf950ca3c9119f5f3cffcc9999"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c8169bf950ca3c9119f5f3cffcc9999">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[5/6]</span></h2>
+<a id="ad675d17b79c053dd92e034b31ca7bb70" name="ad675d17b79c053dd92e034b31ca7bb70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad675d17b79c053dd92e034b31ca7bb70">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::MessageQueue </td>
+          <td class="memname">helios::ecs::MessageQueue::MessageQueue </td>
           <td>(</td>
-          <td class="paramtype">const MessageQueue&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const MessageQueue &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -478,21 +399,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="ad607b411eabbc34e5f4d5e3a61c9770e" name="ad607b411eabbc34e5f4d5e3a61c9770e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad607b411eabbc34e5f4d5e3a61c9770e">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[6/6]</span></h2>
+<a id="a55e062c022c5952d479abfa9472e6969" name="a55e062c022c5952d479abfa9472e6969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55e062c022c5952d479abfa9472e6969">&#9670;&#160;</a></span>MessageQueue() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::MessageQueue </td>
+          <td class="memname">helios::ecs::MessageQueue::MessageQueue </td>
           <td>(</td>
-          <td class="paramtype">MessageQueue&lt; Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">MessageQueue &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -505,19 +424,17 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="aef5cbb87977aa8573c34ed7c6008a1f8" name="aef5cbb87977aa8573c34ed7c6008a1f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef5cbb87977aa8573c34ed7c6008a1f8">&#9670;&#160;</a></span>~MessageQueue()</h2>
+<a id="a28181d597a34d18222dc80c395610db1" name="a28181d597a34d18222dc80c395610db1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28181d597a34d18222dc80c395610db1">&#9670;&#160;</a></span>~MessageQueue()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::~<a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a> </td>
+          <td class="memname">helios::ecs::MessageQueue::~MessageQueue </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -533,13 +450,11 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="af2d67c55eac134d3680d79a1cca252c9" name="af2d67c55eac134d3680d79a1cca252c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2d67c55eac134d3680d79a1cca252c9">&#9670;&#160;</a></span>Clear() <span class="overload">[1/2]</span></h2>
+<a id="a7a1593e0f1940eedd95e933603156d41" name="a7a1593e0f1940eedd95e933603156d41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a1593e0f1940eedd95e933603156d41">&#9670;&#160;</a></span>Clear() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
@@ -547,7 +462,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Clear </td>
+          <td class="memname">void helios::ecs::MessageQueue::Clear </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -568,23 +483,21 @@ template&lt;MessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00096">96</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00077">77</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a965aafe62c111ea7d49e0141b7d5381d" name="a965aafe62c111ea7d49e0141b7d5381d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a965aafe62c111ea7d49e0141b7d5381d">&#9670;&#160;</a></span>Clear() <span class="overload">[2/2]</span></h2>
+<a id="a16c71486e47601bb6a2987ac3789a4d6" name="a16c71486e47601bb6a2987ac3789a4d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16c71486e47601bb6a2987ac3789a4d6">&#9670;&#160;</a></span>Clear() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Clear </td>
+          <td class="memname">void helios::ecs::MessageQueue::Clear </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span></td><td>)</td>
           <td></td>
@@ -605,23 +518,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00104">104</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00085">85</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad1ece98776df614cea4152a94e8cc486" name="ad1ece98776df614cea4152a94e8cc486"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1ece98776df614cea4152a94e8cc486">&#9670;&#160;</a></span>ClearAll()</h2>
+<a id="ac4808cc81fd51cf0ef2c59882bb117bd" name="ac4808cc81fd51cf0ef2c59882bb117bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4808cc81fd51cf0ef2c59882bb117bd">&#9670;&#160;</a></span>ClearAll()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::ClearAll </td>
+          <td class="memname">void helios::ecs::MessageQueue::ClearAll </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -636,17 +547,15 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 <p>Clears all messages from the queue maintaining all registered types. </p>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00089">89</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00070">70</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aadd34d40dfba3e670913274dff3f7048" name="aadd34d40dfba3e670913274dff3f7048"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadd34d40dfba3e670913274dff3f7048">&#9670;&#160;</a></span>Enqueue()</h2>
+<a id="a3708cab8dbcaa7e5d2d2ffb3bf218ced" name="a3708cab8dbcaa7e5d2d2ffb3bf218ced"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3708cab8dbcaa7e5d2d2ffb3bf218ced">&#9670;&#160;</a></span>Enqueue()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <div class="memtemplate">
 template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
@@ -654,7 +563,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Enqueue </td>
+          <td class="memname">void helios::ecs::MessageQueue::Enqueue </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
           <td></td>
@@ -662,7 +571,7 @@ template&lt;MessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -682,18 +591,15 @@ template&lt;MessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00315">315</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00288">288</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a0431f0796ed004cd71533db68df82431" name="a0431f0796ed004cd71533db68df82431"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0431f0796ed004cd71533db68df82431">&#9670;&#160;</a></span>EnqueueBulk()</h2>
+<a id="afaa5a2c11e48a2a1b95bfc8b7eef4339" name="afaa5a2c11e48a2a1b95bfc8b7eef4339"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaa5a2c11e48a2a1b95bfc8b7eef4339">&#9670;&#160;</a></span>EnqueueBulk()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; <br />
-requires MessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
 <div class="memtemplate">
 template&lt;std::ranges::input_range R&gt; <br />
 requires MessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
@@ -702,7 +608,7 @@ requires MessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::EnqueueBulk </td>
+          <td class="memname">void helios::ecs::MessageQueue::EnqueueBulk </td>
           <td>(</td>
           <td class="paramtype">R &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>messages</em></span></td><td>)</td>
           <td></td>
@@ -710,7 +616,7 @@ requires MessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -730,17 +636,15 @@ requires MessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00326">326</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00298">298</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a0774120b2ceb60238266a5dbd5834e6e" name="a0774120b2ceb60238266a5dbd5834e6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0774120b2ceb60238266a5dbd5834e6e">&#9670;&#160;</a></span>HasMessages() <span class="overload">[1/2]</span></h2>
+<a id="a2426c0d5a5dbf5d53c0cfa238ecc436d" name="a2426c0d5a5dbf5d53c0cfa238ecc436d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2426c0d5a5dbf5d53c0cfa238ecc436d">&#9670;&#160;</a></span>HasMessages() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
@@ -748,7 +652,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::HasMessages </td>
+          <td class="memname">bool helios::ecs::MessageQueue::HasMessages </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -770,23 +674,21 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if messages of type T exist, false otherwise or if the type is not registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00241">241</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00218">218</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a09c7a263837bee75c12b34837de8cc12" name="a09c7a263837bee75c12b34837de8cc12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09c7a263837bee75c12b34837de8cc12">&#9670;&#160;</a></span>HasMessages() <span class="overload">[2/2]</span></h2>
+<a id="acef4ff139db1f4bb37b8d5f835e8e7b8" name="acef4ff139db1f4bb37b8d5f835e8e7b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acef4ff139db1f4bb37b8d5f835e8e7b8">&#9670;&#160;</a></span>HasMessages() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::HasMessages </td>
+          <td class="memname">bool helios::ecs::MessageQueue::HasMessages </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -802,17 +704,15 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Checks if any messages exist in the queue across all types. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if at least one message exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00230">230</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00207">207</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad69d4e85a8bfbf1e35db67298cd98f06" name="ad69d4e85a8bfbf1e35db67298cd98f06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad69d4e85a8bfbf1e35db67298cd98f06">&#9670;&#160;</a></span>IsRegistered() <span class="overload">[1/2]</span></h2>
+<a id="a7b9af878e429d41be40163c67e65539a" name="a7b9af878e429d41be40163c67e65539a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b9af878e429d41be40163c67e65539a">&#9670;&#160;</a></span>IsRegistered() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
@@ -820,7 +720,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::IsRegistered </td>
+          <td class="memname">bool helios::ecs::MessageQueue::IsRegistered </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -842,23 +742,21 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the message type is registered, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00212">212</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00189">189</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="acbc9073d97e1aa3a7eea9ccc61f6b6e1" name="acbc9073d97e1aa3a7eea9ccc61f6b6e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbc9073d97e1aa3a7eea9ccc61f6b6e1">&#9670;&#160;</a></span>IsRegistered() <span class="overload">[2/2]</span></h2>
+<a id="a7c3dd46696641e4071d66f6f5fc3f0ea" name="a7c3dd46696641e4071d66f6f5fc3f0ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c3dd46696641e4071d66f6f5fc3f0ea">&#9670;&#160;</a></span>IsRegistered() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::IsRegistered </td>
+          <td class="memname">bool helios::ecs::MessageQueue::IsRegistered </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span></td><td>)</td>
           <td> const</td>
@@ -880,27 +778,23 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the message type is registered, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00221">221</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00198">198</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a9365821e595a7afaf48f81b020b2d5d4" name="a9365821e595a7afaf48f81b020b2d5d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9365821e595a7afaf48f81b020b2d5d4">&#9670;&#160;</a></span>Merge() <span class="overload">[1/2]</span></h2>
+<a id="ad5181b4c53687db1a409efff0a8847da" name="ad5181b4c53687db1a409efff0a8847da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5181b4c53687db1a409efff0a8847da">&#9670;&#160;</a></span>Merge() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-<div class="memtemplate">
-template&lt;typename OtherAllocator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Merge </td>
+          <td class="memname">void helios::ecs::MessageQueue::Merge </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a>&lt; OtherAllocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -912,40 +806,30 @@ template&lt;typename OtherAllocator&gt; </div>
 </div><div class="memdoc">
 
 <p>Merges messages from another <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a> into this one. </p>
-<p>For each type in <span class="tt">other</span>, messages are appended to the corresponding storage in this queue. After merging, <span class="tt">other</span> is left in a valid but empty state. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">OtherAllocator</td><td>Allocator template of the other queue </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>For each type in <span class="tt">other</span>, messages are appended to the corresponding storage in this queue. After merging, <span class="tt">other</span> is left in a valid but empty state. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">other</td><td><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a> to merge from </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00131">131</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00110">110</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab5196bc37e915f19c74a84598ec95345" name="ab5196bc37e915f19c74a84598ec95345"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5196bc37e915f19c74a84598ec95345">&#9670;&#160;</a></span>Merge() <span class="overload">[2/2]</span></h2>
+<a id="a86bd8e78e553420f45f9b9a56b1252b0" name="a86bd8e78e553420f45f9b9a56b1252b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86bd8e78e553420f45f9b9a56b1252b0">&#9670;&#160;</a></span>Merge() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-<div class="memtemplate">
-template&lt;typename OtherAllocator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Merge </td>
+          <td class="memname">void helios::ecs::MessageQueue::Merge </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a>&lt; OtherAllocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -957,30 +841,22 @@ template&lt;typename OtherAllocator&gt; </div>
 </div><div class="memdoc">
 
 <p>Merges messages from another <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a> into this one. </p>
-<p>Rvalue overload that consumes the source queue. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">OtherAllocator</td><td>Allocator template of the other queue </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Rvalue overload that consumes the source queue. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">other</td><td><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a> to merge from </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00142">142</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00119">119</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a06eefee7be1de7495a0937c8ee7fbfbe" name="a06eefee7be1de7495a0937c8ee7fbfbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06eefee7be1de7495a0937c8ee7fbfbe">&#9670;&#160;</a></span>MessageCount() <span class="overload">[1/3]</span></h2>
+<a id="a762211c077272c400242c7d008e66d70" name="a762211c077272c400242c7d008e66d70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a762211c077272c400242c7d008e66d70">&#9670;&#160;</a></span>MessageCount() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
@@ -988,7 +864,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::MessageCount </td>
+          <td class="memname"><a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a> helios::ecs::MessageQueue::MessageCount </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -1010,23 +886,21 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Total message count or 0 if the type is not registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00292">292</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00269">269</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a0309d63a5a1552094038f557de3b2411" name="a0309d63a5a1552094038f557de3b2411"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0309d63a5a1552094038f557de3b2411">&#9670;&#160;</a></span>MessageCount() <span class="overload">[2/3]</span></h2>
+<a id="ada25fae7f8dba807fa260ba1d86b6155" name="ada25fae7f8dba807fa260ba1d86b6155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada25fae7f8dba807fa260ba1d86b6155">&#9670;&#160;</a></span>MessageCount() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::MessageCount </td>
+          <td class="memname"><a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a> helios::ecs::MessageQueue::MessageCount </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -1042,23 +916,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Gets the total number of messages stored across all types. </p>
 <dl class="section return"><dt>Returns</dt><dd>Total message count or 0 if no types are registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00281">281</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00258">258</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a88fb81c6093c33636540123d722bf385" name="a88fb81c6093c33636540123d722bf385"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88fb81c6093c33636540123d722bf385">&#9670;&#160;</a></span>MessageCount() <span class="overload">[3/3]</span></h2>
+<a id="a0fea746f0e3030d5d54193a41d91e5ae" name="a0fea746f0e3030d5d54193a41d91e5ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fea746f0e3030d5d54193a41d91e5ae">&#9670;&#160;</a></span>MessageCount() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::MessageCount </td>
+          <td class="memname"><a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a> helios::ecs::MessageQueue::MessageCount </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span></td><td>)</td>
           <td> const</td>
@@ -1080,17 +952,15 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of messages, or 0 if the type is not registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00301">301</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00278">278</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a5cbee0b5a5d6b04113b433747bf5a5f5" name="a5cbee0b5a5d6b04113b433747bf5a5f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5cbee0b5a5d6b04113b433747bf5a5f5">&#9670;&#160;</a></span>Messages() <span class="overload">[1/2]</span></h2>
+<a id="a3df89967de3bfc5bdd51721f437b0e8b" name="a3df89967de3bfc5bdd51721f437b0e8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3df89967de3bfc5bdd51721f437b0e8b">&#9670;&#160;</a></span>Messages() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
@@ -1098,7 +968,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Messages </td>
+          <td class="memname">auto helios::ecs::MessageQueue::Messages </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const -&gt; std::span&lt; const T &gt;</td>
@@ -1120,17 +990,15 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Span of const messages, or empty span if type is not registered or has no messages </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00252">252</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00229">229</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab795b9af40f0c6e64565f2ce6673139d" name="ab795b9af40f0c6e64565f2ce6673139d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab795b9af40f0c6e64565f2ce6673139d">&#9670;&#160;</a></span>Messages() <span class="overload">[2/2]</span></h2>
+<a id="ab82b508e6f9428571fa7422cd9000890" name="ab82b508e6f9428571fa7422cd9000890"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab82b508e6f9428571fa7422cd9000890">&#9670;&#160;</a></span>Messages() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
@@ -1138,7 +1006,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Messages </td>
+          <td class="memname">auto helios::ecs::MessageQueue::Messages </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> -&gt; std::span&lt; T &gt;</td>
@@ -1160,25 +1028,23 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Span of messages, or empty span if type is not registered or has no messages </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00264">264</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00241">241</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a82d01f78f4bf9043dd295b2210b04b6d" name="a82d01f78f4bf9043dd295b2210b04b6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82d01f78f4bf9043dd295b2210b04b6d">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a38324bcc9d333ec02b29506e08f767c3" name="a38324bcc9d333ec02b29506e08f767c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38324bcc9d333ec02b29506e08f767c3">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp; helios::ecs::MessageQueue::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1191,21 +1057,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a1c71fceb74d764433fd27f3885d13011" name="a1c71fceb74d764433fd27f3885d13011"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c71fceb74d764433fd27f3885d13011">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a6d5fa288d6f2b1db3cc84a5fec484724" name="a6d5fa288d6f2b1db3cc84a5fec484724"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d5fa288d6f2b1db3cc84a5fec484724">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp; helios::ecs::MessageQueue::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a>&lt; Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1218,13 +1082,11 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a16436052ed3ecfcc43a7960494e86261" name="a16436052ed3ecfcc43a7960494e86261"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16436052ed3ecfcc43a7960494e86261">&#9670;&#160;</a></span>Register() <span class="overload">[1/2]</span></h2>
+<a id="a1b4bf44c041b1dbb392cba436736695b" name="a1b4bf44c041b1dbb392cba436736695b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b4bf44c041b1dbb392cba436736695b">&#9670;&#160;</a></span>Register() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
@@ -1232,7 +1094,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Register </td>
+          <td class="memname">void helios::ecs::MessageQueue::Register </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1253,23 +1115,21 @@ template&lt;MessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00072">72</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00053">53</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a11b044ba60a11a7b9f00383027980fb2" name="a11b044ba60a11a7b9f00383027980fb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11b044ba60a11a7b9f00383027980fb2">&#9670;&#160;</a></span>Register() <span class="overload">[2/2]</span></h2>
+<a id="a224bf379a713dddea6d71324bdfdfb73" name="a224bf379a713dddea6d71324bdfdfb73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a224bf379a713dddea6d71324bdfdfb73">&#9670;&#160;</a></span>Register() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Register </td>
+          <td class="memname">void helios::ecs::MessageQueue::Register </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span></td><td>)</td>
           <td></td>
@@ -1290,35 +1150,33 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00083">83</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00064">64</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aa6bd134a4ea09b54d518668a1a789963" name="aa6bd134a4ea09b54d518668a1a789963"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6bd134a4ea09b54d518668a1a789963">&#9670;&#160;</a></span>RemoveIndices() <span class="overload">[1/2]</span></h2>
+<a id="a7e3ffde632965d5924711d14b6673c3d" name="a7e3ffde632965d5924711d14b6673c3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e3ffde632965d5924711d14b6673c3d">&#9670;&#160;</a></span>RemoveIndices() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::RemoveIndices </td>
+          <td class="memname">void helios::ecs::MessageQueue::RemoveIndices </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::span&lt; const <a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sorted_indices</em></span>&#160;)</td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sorted_indices</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1333,17 +1191,15 @@ template&lt;typename Allocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00334">334</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00305">305</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a61d1955e914805535a6aaaef1cd4edd7" name="a61d1955e914805535a6aaaef1cd4edd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61d1955e914805535a6aaaef1cd4edd7">&#9670;&#160;</a></span>RemoveIndices() <span class="overload">[2/2]</span></h2>
+<a id="a50cfb7c66a4c64472b30683f49780930" name="a50cfb7c66a4c64472b30683f49780930"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50cfb7c66a4c64472b30683f49780930">&#9670;&#160;</a></span>RemoveIndices() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
@@ -1351,15 +1207,15 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::RemoveIndices </td>
+          <td class="memname">void helios::ecs::MessageQueue::RemoveIndices </td>
           <td>(</td>
-          <td class="paramtype">std::span&lt; const <a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sorted_indices</em></span></td><td>)</td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sorted_indices</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1379,17 +1235,15 @@ template&lt;MessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00173">173</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00150">150</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a65b2008c328a798df558e0e33bab616a" name="a65b2008c328a798df558e0e33bab616a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65b2008c328a798df558e0e33bab616a">&#9670;&#160;</a></span>Reset()</h2>
+<a id="ac711add0775157747f8b80db9806a33c" name="ac711add0775157747f8b80db9806a33c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac711add0775157747f8b80db9806a33c">&#9670;&#160;</a></span>Reset()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
@@ -1397,7 +1251,7 @@ template&lt;MessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Reset </td>
+          <td class="memname">void helios::ecs::MessageQueue::Reset </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1418,23 +1272,21 @@ template&lt;MessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00118">118</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00099">99</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7db8e266e863bb5f2db0fb229a1281d3" name="a7db8e266e863bb5f2db0fb229a1281d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7db8e266e863bb5f2db0fb229a1281d3">&#9670;&#160;</a></span>ResetAll()</h2>
+<a id="a3f2463be3c08aa735cc0414bbcd6597f" name="a3f2463be3c08aa735cc0414bbcd6597f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f2463be3c08aa735cc0414bbcd6597f">&#9670;&#160;</a></span>ResetAll()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::ResetAll </td>
+          <td class="memname">void helios::ecs::MessageQueue::ResetAll </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1449,25 +1301,23 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 <p>Resets the queue by clearing all messages and unregistering all types. </p>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00110">110</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00091">91</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aba1aa73bb8409bdaa56a665ae1d2620b" name="aba1aa73bb8409bdaa56a665ae1d2620b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba1aa73bb8409bdaa56a665ae1d2620b">&#9670;&#160;</a></span>Swap()</h2>
+<a id="abf142e8c7263ec195a04ec53689c3c7e" name="abf142e8c7263ec195a04ec53689c3c7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf142e8c7263ec195a04ec53689c3c7e">&#9670;&#160;</a></span>Swap()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::Swap </td>
+          <td class="memname">void helios::ecs::MessageQueue::Swap </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1486,23 +1336,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00193">193</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00170">170</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a4a3215fadb1302ea03832c0c69220382" name="a4a3215fadb1302ea03832c0c69220382"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a3215fadb1302ea03832c0c69220382">&#9670;&#160;</a></span>TypeCount()</h2>
+<a id="ad31798e27b8c0c652a3f8cf6867cd46d" name="ad31798e27b8c0c652a3f8cf6867cd46d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad31798e27b8c0c652a3f8cf6867cd46d">&#9670;&#160;</a></span>TypeCount()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa13f67107f8a157ae546bcdb08c587a5">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">helios::ecs::MessageQueue</a>&lt; Allocator &gt;::TypeCount </td>
+          <td class="memname"><a class="el" href="#a1f5df9acf5293aabc410d665b6b62739">size_type</a> helios::ecs::MessageQueue::TypeCount </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -1518,46 +1366,16 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Gets the number of message types stored. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of distinct message types </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00273">273</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00250">250</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-related-members" id="doc-related-members"></a><h2 id="header-doc-related-members" class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="a35f4d992cb5c0c6d9fecf23a0d58e909" name="a35f4d992cb5c0c6d9fecf23a0d58e909"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35f4d992cb5c0c6d9fecf23a0d58e909">&#9670;&#160;</a></span>MessageQueue</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-<div class="memtemplate">
-template&lt;typename OtherAllocator&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">friend class MessageQueue</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00308">308</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
-
-</div>
-</div>
 <a id="adf6d6c244c5aa498e171258677d0e9e9" name="adf6d6c244c5aa498e171258677d0e9e9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf6d6c244c5aa498e171258677d0e9e9">&#9670;&#160;</a></span>swap</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1565,12 +1383,12 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
         <tr>
           <td class="memname">void swap </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+          <td class="paramtype"><a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a35f4d992cb5c0c6d9fecf23a0d58e909">MessageQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a231278991a0bcb41854cba94e0b5dc53">MessageQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1589,7 +1407,7 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00202">202</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2queue_8hpp_source.html#l00179">179</a> of file <a class="el" href="message_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>

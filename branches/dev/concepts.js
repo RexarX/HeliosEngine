@@ -16,6 +16,12 @@ var concepts =
         [ "SubTask", "concepthelios_1_1async_1_1SubTask.html", null ],
         [ "AnyTask", "concepthelios_1_1async_1_1AnyTask.html", null ]
       ] ],
+      [ "container", "namespacehelios_1_1container.html", [
+        [ "FlatMapCompare", "concepthelios_1_1container_1_1FlatMapCompare.html", null ],
+        [ "FlatMapHash", "concepthelios_1_1container_1_1FlatMapHash.html", null ],
+        [ "TransparentFunctor", "concepthelios_1_1container_1_1TransparentFunctor.html", null ],
+        [ "FlatMapLookupKey", "concepthelios_1_1container_1_1FlatMapLookupKey.html", null ]
+      ] ],
       [ "details", "namespacehelios_1_1details.html", [
         [ "HasUnambiguousCallOperator", "concepthelios_1_1details_1_1HasUnambiguousCallOperator.html", null ],
         [ "DecaysToFunctionPointer", "concepthelios_1_1details_1_1DecaysToFunctionPointer.html", null ],

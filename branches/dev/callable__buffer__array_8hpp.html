@@ -173,14 +173,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('callable__buff
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">callable_buffer_array.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;helios/container/details/callable_buffer_common.hpp&gt;</code><br />
 <code>#include &lt;concepts&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;cstring&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
@@ -195,25 +195,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('callable__buff
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Acontainer_3A_3ACallableBufferArrayImpl_3C_20Allocator_2C_20Signatures_20_3E" id="r_helios_3A_3Acontainer_3A_3ACallableBufferArrayImpl_3C_20Allocator_2C_20Signatures_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1container_1_1CallableBufferArrayImpl.html">helios::container::CallableBufferArrayImpl&lt; Allocator, Signatures &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation class for an inline callable array buffer with explicit allocator.  <a href="classhelios_1_1container_1_1CallableBufferArrayImpl.html#details">More...</a><br /></td></tr>
-<tr class="memitem:helios_3A_3Acontainer_3A_3Adetails_3A_3ACallableBufferArrayDeducer_3C_20FirstSig_2C_20RestSigs_2E_2E_2E_20_3E" id="r_helios_3A_3Acontainer_3A_3Adetails_3A_3ACallableBufferArrayDeducer_3C_20FirstSig_2C_20RestSigs_2E_2E_2E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer_3_01FirstSig_00_01RestSigs_8_8_8_01_4.html">helios::container::details::CallableBufferArrayDeducer&lt; FirstSig, RestSigs... &gt;</a></td></tr>
-<tr class="memitem:helios_3A_3Acontainer_3A_3Adetails_3A_3ACallableBufferArrayDeducer_3C_20Alloc_2C_20FirstSig_2C_20RestSigs_2E_2E_2E_20_3E" id="r_helios_3A_3Acontainer_3A_3Adetails_3A_3ACallableBufferArrayDeducer_3C_20Alloc_2C_20FirstSig_2C_20RestSigs_2E_2E_2E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer_3_01Alloc_00_01FirstSig_00_01RestSigs_8_8_8_01_4.html">helios::container::details::CallableBufferArrayDeducer&lt; Alloc, FirstSig, RestSigs... &gt;</a></td></tr>
+<tr class="memitem:helios_3A_3Acontainer_3A_3ACallableBufferArray_3C_20Signatures_20_3E" id="r_helios_3A_3Acontainer_3A_3ACallableBufferArray_3C_20Signatures_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1container_1_1CallableBufferArray.html">helios::container::CallableBufferArray&lt; Signatures &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline storage for heterogeneous callable instances.  <a href="classhelios_1_1container_1_1CallableBufferArray.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Acontainer" id="r_helios_3A_3Acontainer"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html">helios::container</a></td></tr>
-<tr class="memitem:helios_3A_3Acontainer_3A_3Adetails" id="r_helios_3A_3Acontainer_3A_3Adetails"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container_1_1details.html">helios::container::details</a></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:aacdb5f6325f330b3973615b525ad06bf" id="r_aacdb5f6325f330b3973615b525ad06bf"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:aacdb5f6325f330b3973615b525ad06bf template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#aacdb5f6325f330b3973615b525ad06bf">helios::container::CallableBufferArray</a></td></tr>
-<tr class="memdesc:aacdb5f6325f330b3973615b525ad06bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline storage for heterogeneous callable instances with type-erased invocation.  <br /></td></tr>
-<tr class="memitem:aa4701ee2ad117e23b261dc96bc04d31b" id="r_aa4701ee2ad117e23b261dc96bc04d31b"><td class="memTemplParams" colspan="2">template&lt;typename... Signatures&gt; </td></tr>
-<tr class="memitem:aa4701ee2ad117e23b261dc96bc04d31b template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#aa4701ee2ad117e23b261dc96bc04d31b">helios::container::PmrCallableBufferArray</a></td></tr>
-<tr class="memdesc:aa4701ee2ad117e23b261dc96bc04d31b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline storage for heterogeneous callable instances with type-erased invocation with polymorphic allocator.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

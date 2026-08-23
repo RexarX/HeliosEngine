@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: helios::ecs::ConsumableMessageReader&lt; T, Alloc &gt; Class Template Reference</title>
+    <title>Helios Engine: helios::ecs::ConsumableMessageReader&lt; T &gt; Class Template Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classhelios_1_1ecs_1_1ConsumableMessageReader-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">helios::ecs::ConsumableMessageReader&lt; T, Alloc &gt; Class Template Reference<span class="mlabels"><span class="mlabel final">final</span></span></div></div>
+  <div class="headertitle"><div class="title">helios::ecs::ConsumableMessageReader&lt; T &gt; Class Template Reference<span class="mlabels"><span class="mlabel final">final</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -184,172 +184,116 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 
 <p><code>#include &lt;<a class="el" href="reader_8hpp_source.html">reader.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for helios::ecs::ConsumableMessageReader&lt; T, Alloc &gt;:</div>
+Inheritance diagram for helios::ecs::ConsumableMessageReader&lt; T &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classhelios_1_1ecs_1_1ConsumableMessageReader.png" usemap="#helios_3A_3Aecs_3A_3AConsumableMessageReader_3C_20T_2C_20Alloc_20_3E_map" alt=""/>
-  <map id="helios_3A_3Aecs_3A_3AConsumableMessageReader_3C_20T_2C_20Alloc_20_3E_map" name="helios_3A_3Aecs_3A_3AConsumableMessageReader_3C_20T_2C_20Alloc_20_3E_map">
-<area href="classhelios_1_1ecs_1_1MessageReaderBase.html" title="CRTP base class for message readers providing common functionality." alt="helios::ecs::MessageReaderBase&lt; Derived, T, IterType &gt;" shape="rect" coords="0,0,1162,24"/>
+  <img src="classhelios_1_1ecs_1_1ConsumableMessageReader.png" usemap="#helios_3A_3Aecs_3A_3AConsumableMessageReader_3C_20T_20_3E_map" alt=""/>
+  <map id="helios_3A_3Aecs_3A_3AConsumableMessageReader_3C_20T_20_3E_map" name="helios_3A_3Aecs_3A_3AConsumableMessageReader_3C_20T_20_3E_map">
+<area href="classhelios_1_1ecs_1_1MessageReaderBase.html" alt="helios::ecs::MessageReaderBase&lt; ConsumableMessageReader&lt; T &gt;, T, ConsumableMessageWrapperIter&lt; T &gt; &gt;" shape="rect" coords="0,0,656,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a84daea978ba5f20cef89c8dcffed68e6" id="r_a84daea978ba5f20cef89c8dcffed68e6"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a84daea978ba5f20cef89c8dcffed68e6">value_type</a> = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html">ConsumableMessageWrapper</a>&lt;T, Alloc&gt;</td></tr>
-<tr class="memitem:af524e96a66cf80e2b837c138ae9acdb3" id="r_af524e96a66cf80e2b837c138ae9acdb3"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#af524e96a66cf80e2b837c138ae9acdb3">size_type</a> = <a class="el" href="classhelios_1_1ecs_1_1MessageManager.html#a26f8b24d221097025fab50b2f49e1363">MessageManager::size_type</a></td></tr>
-<tr class="memitem:ac2775bfc96cba3ed236a229da9b67d1e" id="r_ac2775bfc96cba3ed236a229da9b67d1e"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ac2775bfc96cba3ed236a229da9b67d1e">const_iterator</a> = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">ConsumableMessageWrapperIter</a>&lt;T, Alloc&gt;</td></tr>
-<tr class="memitem:ae6cb04d6ab4bc92f0579f587a5bdf09d" id="r_ae6cb04d6ab4bc92f0579f587a5bdf09d"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae6cb04d6ab4bc92f0579f587a5bdf09d">iterator</a> = <a class="el" href="#ac2775bfc96cba3ed236a229da9b67d1e">const_iterator</a></td></tr>
-<tr class="inherit_header pub_types_classhelios_1_1ecs_1_1MessageReaderBase"><td colspan="2">Public Types inherited from <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html">helios::ecs::MessageReaderBase&lt; Derived, T, IterType &gt;</a></td></tr>
-<tr class="memitem:a66fdb9c47f2158ef18cf58c7bb4bad28 pub_types_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a66fdb9c47f2158ef18cf58c7bb4bad28"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> = typename IterType::value_type</td></tr>
-<tr class="memitem:ab24f30674da36268ece226133aa2be4b pub_types_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ab24f30674da36268ece226133aa2be4b"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ab24f30674da36268ece226133aa2be4b">size_type</a> = <a class="el" href="classhelios_1_1ecs_1_1MessageManager.html#a26f8b24d221097025fab50b2f49e1363">MessageManager::size_type</a></td></tr>
-<tr class="memitem:a69de60175cd1721413949aa68abe449c pub_types_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a69de60175cd1721413949aa68abe449c"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a> = IterType</td></tr>
-<tr class="memitem:af8c5c9b640d519edd9bd04f582d2af78 pub_types_classhelios_1_1ecs_1_1MessageReaderBase" id="r_af8c5c9b640d519edd9bd04f582d2af78"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#af8c5c9b640d519edd9bd04f582d2af78">const_iterator</a> = IterType</td></tr>
+<tr class="memitem:a6164d9d951c1db9f2bd6e2fe4d736b4d" id="r_a6164d9d951c1db9f2bd6e2fe4d736b4d"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a6164d9d951c1db9f2bd6e2fe4d736b4d">value_type</a> = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html">ConsumableMessageWrapper</a>&lt;T&gt;</td></tr>
+<tr class="memitem:a10f51a8a7038df09b97b0ab653b1abc0" id="r_a10f51a8a7038df09b97b0ab653b1abc0"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a10f51a8a7038df09b97b0ab653b1abc0">size_type</a> = <a class="el" href="classhelios_1_1ecs_1_1MessageManager.html#a26f8b24d221097025fab50b2f49e1363">MessageManager::size_type</a></td></tr>
+<tr class="memitem:a2cd68f7590ca28b9d3dd881c3720daf6" id="r_a2cd68f7590ca28b9d3dd881c3720daf6"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a2cd68f7590ca28b9d3dd881c3720daf6">const_iterator</a> = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">ConsumableMessageWrapperIter</a>&lt;T&gt;</td></tr>
+<tr class="memitem:aac76a9bf8a19c664d30e7f061d6be875" id="r_aac76a9bf8a19c664d30e7f061d6be875"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aac76a9bf8a19c664d30e7f061d6be875">iterator</a> = <a class="el" href="#a2cd68f7590ca28b9d3dd881c3720daf6">const_iterator</a></td></tr>
+<tr class="inherit_header pub_types_classhelios_1_1ecs_1_1MessageReaderBase"><td colspan="2">Public Types inherited from <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html">helios::ecs::MessageReaderBase&lt; ConsumableMessageReader&lt; T &gt;, T, ConsumableMessageWrapperIter&lt; T &gt; &gt;</a></td></tr>
+<tr class="memitem:a66fdb9c47f2158ef18cf58c7bb4bad28 pub_types_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a66fdb9c47f2158ef18cf58c7bb4bad28"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a></td></tr>
+<tr class="memitem:ab24f30674da36268ece226133aa2be4b pub_types_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ab24f30674da36268ece226133aa2be4b"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ab24f30674da36268ece226133aa2be4b">size_type</a></td></tr>
+<tr class="memitem:a69de60175cd1721413949aa68abe449c pub_types_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a69de60175cd1721413949aa68abe449c"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a></td></tr>
+<tr class="memitem:af8c5c9b640d519edd9bd04f582d2af78 pub_types_classhelios_1_1ecs_1_1MessageReaderBase" id="r_af8c5c9b640d519edd9bd04f582d2af78"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#af8c5c9b640d519edd9bd04f582d2af78">const_iterator</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a613a120cd212a2529a2bd8075dd5535d" id="r_a613a120cd212a2529a2bd8075dd5535d"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader</a> (const <a class="el" href="classhelios_1_1ecs_1_1MessageManager.html">MessageManager</a> &amp;manager, <a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; &amp;cursor, <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;consumed_registry) noexcept</td></tr>
-<tr class="memdesc:a613a120cd212a2529a2bd8075dd5535d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html" title="Type-safe, zero-copy reader for consumable messages with cursor delivery and consume support.">ConsumableMessageReader</a></span> bound to a manager, cursor, and consumed registry.  <br /></td></tr>
-<tr class="memitem:a8e18720bada22e21f942ff48d553e091" id="r_a8e18720bada22e21f942ff48d553e091"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8e18720bada22e21f942ff48d553e091">ConsumableMessageReader</a> (const ConsumableMessageReader &amp;)=delete</td></tr>
-<tr class="memitem:a0d4e8afe2a211cf43676013a2ae65a31" id="r_a0d4e8afe2a211cf43676013a2ae65a31"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a0d4e8afe2a211cf43676013a2ae65a31">ConsumableMessageReader</a> (ConsumableMessageReader &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:aac20f1b17b14e6c4a4f9c8079389aebb" id="r_aac20f1b17b14e6c4a4f9c8079389aebb"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aac20f1b17b14e6c4a4f9c8079389aebb">~ConsumableMessageReader</a> () noexcept=default</td></tr>
-<tr class="memitem:a8dc98641792b1dd01b769a0d9a0afdfd" id="r_a8dc98641792b1dd01b769a0d9a0afdfd"><td class="memItemLeft"><a class="el" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8dc98641792b1dd01b769a0d9a0afdfd">operator=</a> (const <a class="el" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader</a> &amp;)=delete</td></tr>
-<tr class="memitem:a4f865c09873ab412912f235cc95a07df" id="r_a4f865c09873ab412912f235cc95a07df"><td class="memItemLeft">constexpr <a class="el" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4f865c09873ab412912f235cc95a07df">operator=</a> (<a class="el" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:affbf17d734a2312cd50c4e6ee8c6dccb" id="r_affbf17d734a2312cd50c4e6ee8c6dccb"><td class="memItemLeft">constexpr <a class="el" href="#ae6cb04d6ab4bc92f0579f587a5bdf09d">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#affbf17d734a2312cd50c4e6ee8c6dccb">Read</a> () const noexcept</td></tr>
-<tr class="memdesc:affbf17d734a2312cd50c4e6ee8c6dccb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an iterator range over unread messages.  <br /></td></tr>
-<tr class="memitem:a12851f28240efa03ad45818d2f6bac91" id="r_a12851f28240efa03ad45818d2f6bac91"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a12851f28240efa03ad45818d2f6bac91">ConsumeAll</a> () const</td></tr>
-<tr class="memdesc:a12851f28240efa03ad45818d2f6bac91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks all unread messages as consumed by message id.  <br /></td></tr>
-<tr class="memitem:a9f574600769a3c3a72bcba1bace92682" id="r_a9f574600769a3c3a72bcba1bace92682"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
+<tr class="memitem:a7d825ffb01a429d1fbf4278792927c8b" id="r_a7d825ffb01a429d1fbf4278792927c8b"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader</a> (const <a class="el" href="classhelios_1_1ecs_1_1MessageManager.html">MessageManager</a> &amp;manager, <a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; &amp;cursor, <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a> &amp;consumed_registry) noexcept</td></tr>
+<tr class="memdesc:a7d825ffb01a429d1fbf4278792927c8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html" title="Type-safe, zero-copy reader for consumable messages with cursor delivery and consume support.">ConsumableMessageReader</a></span> bound to a manager, cursor, and consumed registry.  <br /></td></tr>
+<tr class="memitem:ab3dbc4dddb24e4119528ac86a6bb4a3c" id="r_ab3dbc4dddb24e4119528ac86a6bb4a3c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab3dbc4dddb24e4119528ac86a6bb4a3c">ConsumableMessageReader</a> (const ConsumableMessageReader &amp;)=delete</td></tr>
+<tr class="memitem:ab503593485eb6baf47fe6cd0cc3eef8a" id="r_ab503593485eb6baf47fe6cd0cc3eef8a"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ab503593485eb6baf47fe6cd0cc3eef8a">ConsumableMessageReader</a> (ConsumableMessageReader &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a869e708bf5fe61c0667926ffc3d0e218" id="r_a869e708bf5fe61c0667926ffc3d0e218"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a869e708bf5fe61c0667926ffc3d0e218">~ConsumableMessageReader</a> () noexcept=default</td></tr>
+<tr class="memitem:a8da35c22ebebcf8d4545cf81e0102cb7" id="r_a8da35c22ebebcf8d4545cf81e0102cb7"><td class="memItemLeft"><a class="el" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8da35c22ebebcf8d4545cf81e0102cb7">operator=</a> (const <a class="el" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader</a> &amp;)=delete</td></tr>
+<tr class="memitem:a04d040aba988b4593c9c7ccd9372bd4c" id="r_a04d040aba988b4593c9c7ccd9372bd4c"><td class="memItemLeft">constexpr <a class="el" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a04d040aba988b4593c9c7ccd9372bd4c">operator=</a> (<a class="el" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a0310e68478b28d1cc38a5d73f8366892" id="r_a0310e68478b28d1cc38a5d73f8366892"><td class="memItemLeft">constexpr <a class="el" href="#aac76a9bf8a19c664d30e7f061d6be875">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0310e68478b28d1cc38a5d73f8366892">Read</a> () const noexcept</td></tr>
+<tr class="memdesc:a0310e68478b28d1cc38a5d73f8366892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an iterator range over unread messages.  <br /></td></tr>
+<tr class="memitem:ab99e6cbdaf978c89b04166cd15d7020e" id="r_ab99e6cbdaf978c89b04166cd15d7020e"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ab99e6cbdaf978c89b04166cd15d7020e">ConsumeAll</a> () const</td></tr>
+<tr class="memdesc:ab99e6cbdaf978c89b04166cd15d7020e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks all unread messages as consumed by message id.  <br /></td></tr>
+<tr class="memitem:a0f99f78c9664822b198abf2b83a5e355" id="r_a0f99f78c9664822b198abf2b83a5e355"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
 requires std::predicate&lt;Pred, const T&amp;&gt;</td></tr>
-<tr class="memitem:a9f574600769a3c3a72bcba1bace92682 template"><td class="memItemLeft">constexpr <a class="el" href="#af524e96a66cf80e2b837c138ae9acdb3">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9f574600769a3c3a72bcba1bace92682">ConsumeIf</a> (const Pred &amp;predicate) const</td></tr>
-<tr class="memdesc:a9f574600769a3c3a72bcba1bace92682"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks all unread messages matching a predicate as consumed.  <br /></td></tr>
-<tr class="memitem:a256dc278c9338aac13b9e201e6c7d6ef" id="r_a256dc278c9338aac13b9e201e6c7d6ef"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a256dc278c9338aac13b9e201e6c7d6ef">Clear</a> () const noexcept</td></tr>
-<tr class="memdesc:a256dc278c9338aac13b9e201e6c7d6ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skips all currently retained unread messages for this cursor.  <br /></td></tr>
-<tr class="memitem:a525c49cfe3c0a75608ddf30ef8155a6f" id="r_a525c49cfe3c0a75608ddf30ef8155a6f"><td class="memItemLeft">constexpr <a class="el" href="#af524e96a66cf80e2b837c138ae9acdb3">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a525c49cfe3c0a75608ddf30ef8155a6f">MissedMessages</a> () const noexcept</td></tr>
-<tr class="memdesc:a525c49cfe3c0a75608ddf30ef8155a6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns how many retained messages were dropped before this cursor caught up.  <br /></td></tr>
-<tr class="memitem:a13d7124d72697823d741d6c7b288af26" id="r_a13d7124d72697823d741d6c7b288af26"><td class="memItemLeft">constexpr <a class="el" href="#af524e96a66cf80e2b837c138ae9acdb3">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a13d7124d72697823d741d6c7b288af26">Count</a> () const noexcept</td></tr>
-<tr class="memdesc:a13d7124d72697823d741d6c7b288af26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of unread retained messages.  <br /></td></tr>
-<tr class="memitem:a23349cb50926b8a86fccaa8b34b0919d" id="r_a23349cb50926b8a86fccaa8b34b0919d"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a23349cb50926b8a86fccaa8b34b0919d">Empty</a> () const noexcept</td></tr>
-<tr class="memdesc:a23349cb50926b8a86fccaa8b34b0919d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if there are no unread messages.  <br /></td></tr>
-<tr class="memitem:a2861cc806dc63a06075ef6bf354a7f17" id="r_a2861cc806dc63a06075ef6bf354a7f17"><td class="memItemLeft">constexpr <a class="el" href="#ac2775bfc96cba3ed236a229da9b67d1e">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2861cc806dc63a06075ef6bf354a7f17">begin</a> () const noexcept</td></tr>
-<tr class="memdesc:a2861cc806dc63a06075ef6bf354a7f17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an iterator to the first unread message.  <br /></td></tr>
-<tr class="memitem:ae8b52fa61d50f1506d02ee993be75b34" id="r_ae8b52fa61d50f1506d02ee993be75b34"><td class="memItemLeft">constexpr <a class="el" href="#ac2775bfc96cba3ed236a229da9b67d1e">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae8b52fa61d50f1506d02ee993be75b34">end</a> () const noexcept</td></tr>
-<tr class="memdesc:ae8b52fa61d50f1506d02ee993be75b34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an iterator past the last unread message.  <br /></td></tr>
-<tr class="memitem:a50d678b72e8ff215cd25f98e9b8f4cff" id="r_a50d678b72e8ff215cd25f98e9b8f4cff"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
+<tr class="memitem:a0f99f78c9664822b198abf2b83a5e355 template"><td class="memItemLeft">constexpr <a class="el" href="#a10f51a8a7038df09b97b0ab653b1abc0">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0f99f78c9664822b198abf2b83a5e355">ConsumeIf</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a0f99f78c9664822b198abf2b83a5e355"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks all unread messages matching a predicate as consumed.  <br /></td></tr>
+<tr class="memitem:aee2a8f91a0b5d18d774a004339b2c8f3" id="r_aee2a8f91a0b5d18d774a004339b2c8f3"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#aee2a8f91a0b5d18d774a004339b2c8f3">Clear</a> () const noexcept</td></tr>
+<tr class="memdesc:aee2a8f91a0b5d18d774a004339b2c8f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skips all currently retained unread messages for this cursor.  <br /></td></tr>
+<tr class="memitem:ae651d8d756a08e6bbf5f2f3446cf1131" id="r_ae651d8d756a08e6bbf5f2f3446cf1131"><td class="memItemLeft">constexpr <a class="el" href="#a10f51a8a7038df09b97b0ab653b1abc0">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae651d8d756a08e6bbf5f2f3446cf1131">MissedMessages</a> () const noexcept</td></tr>
+<tr class="memdesc:ae651d8d756a08e6bbf5f2f3446cf1131"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns how many retained messages were dropped before this cursor caught up.  <br /></td></tr>
+<tr class="memitem:a527f35cba1f7e7d46536cc088da8c6ef" id="r_a527f35cba1f7e7d46536cc088da8c6ef"><td class="memItemLeft">constexpr <a class="el" href="#a10f51a8a7038df09b97b0ab653b1abc0">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a527f35cba1f7e7d46536cc088da8c6ef">Count</a> () const noexcept</td></tr>
+<tr class="memdesc:a527f35cba1f7e7d46536cc088da8c6ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of unread retained messages.  <br /></td></tr>
+<tr class="memitem:a20ee80f05c52db8a6909817d37970497" id="r_a20ee80f05c52db8a6909817d37970497"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a20ee80f05c52db8a6909817d37970497">Empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a20ee80f05c52db8a6909817d37970497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if there are no unread messages.  <br /></td></tr>
+<tr class="memitem:abce3ced9481a73b1e9606dc6be5b1231" id="r_abce3ced9481a73b1e9606dc6be5b1231"><td class="memItemLeft">constexpr <a class="el" href="#a2cd68f7590ca28b9d3dd881c3720daf6">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#abce3ced9481a73b1e9606dc6be5b1231">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:abce3ced9481a73b1e9606dc6be5b1231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an iterator to the first unread message.  <br /></td></tr>
+<tr class="memitem:ac54cf1aa44c0af66ef7af51d53a60c6b" id="r_ac54cf1aa44c0af66ef7af51d53a60c6b"><td class="memItemLeft">constexpr <a class="el" href="#a2cd68f7590ca28b9d3dd881c3720daf6">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac54cf1aa44c0af66ef7af51d53a60c6b">end</a> () const noexcept</td></tr>
+<tr class="memdesc:ac54cf1aa44c0af66ef7af51d53a60c6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an iterator past the last unread message.  <br /></td></tr>
+<tr class="memitem:a89abeccbf63effb6948cef9d0aa63de4" id="r_a89abeccbf63effb6948cef9d0aa63de4"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
 requires std::predicate&lt;Pred, const T&amp;&gt;</td></tr>
-<tr class="memitem:a50d678b72e8ff215cd25f98e9b8f4cff template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a50d678b72e8ff215cd25f98e9b8f4cff">ConsumeIf</a> (const Pred &amp;predicate) const -&gt; <a class="el" href="#af524e96a66cf80e2b837c138ae9acdb3">size_type</a></td></tr>
-<tr class="inherit_header pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td colspan="2">Public Member Functions inherited from <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html">helios::ecs::MessageReaderBase&lt; Derived, T, IterType &gt;</a></td></tr>
+<tr class="memitem:a89abeccbf63effb6948cef9d0aa63de4 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a89abeccbf63effb6948cef9d0aa63de4">ConsumeIf</a> (const Pred &amp;predicate) const -&gt; <a class="el" href="#a10f51a8a7038df09b97b0ab653b1abc0">size_type</a></td></tr>
+<tr class="inherit_header pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td colspan="2">Public Member Functions inherited from <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html">helios::ecs::MessageReaderBase&lt; ConsumableMessageReader&lt; T &gt;, T, ConsumableMessageWrapperIter&lt; T &gt; &gt;</a></td></tr>
 <tr class="memitem:aa20220c5276e0555e7cac6e478dcc813 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_aa20220c5276e0555e7cac6e478dcc813"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#aa20220c5276e0555e7cac6e478dcc813">MessageReaderBase</a> () noexcept=default</td></tr>
-<tr class="memitem:a5546b1228d9a51415244e6cfd977cad6 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a5546b1228d9a51415244e6cfd977cad6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a5546b1228d9a51415244e6cfd977cad6">MessageReaderBase</a> (const MessageReaderBase &amp;)=delete</td></tr>
-<tr class="memitem:acc50a6d7f7d4202f2d9884a7e2c14d85 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_acc50a6d7f7d4202f2d9884a7e2c14d85"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#acc50a6d7f7d4202f2d9884a7e2c14d85">MessageReaderBase</a> (MessageReaderBase &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:a60d897ad84075334eb0c4fab1a3a6db5 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a60d897ad84075334eb0c4fab1a3a6db5"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a60d897ad84075334eb0c4fab1a3a6db5">~MessageReaderBase</a> () noexcept=default</td></tr>
 <tr class="memitem:a780a27355594562e56f545a50c73c68a pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a780a27355594562e56f545a50c73c68a"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#aa20220c5276e0555e7cac6e478dcc813">MessageReaderBase</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a780a27355594562e56f545a50c73c68a">operator=</a> (const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#aa20220c5276e0555e7cac6e478dcc813">MessageReaderBase</a> &amp;)=delete</td></tr>
-<tr class="memitem:ac6d02ab41462ad1a64c09710ac2aff6d pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ac6d02ab41462ad1a64c09710ac2aff6d"><td class="memItemLeft">constexpr <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#aa20220c5276e0555e7cac6e478dcc813">MessageReaderBase</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ac6d02ab41462ad1a64c09710ac2aff6d">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#aa20220c5276e0555e7cac6e478dcc813">MessageReaderBase</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a1980748c67b15d6d8f689cdae6539fc2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a1980748c67b15d6d8f689cdae6539fc2"><td class="memTemplParams" colspan="2">template&lt;typename Action&gt; <br />
-requires std::invocable&lt;Action, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a1980748c67b15d6d8f689cdae6539fc2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1980748c67b15d6d8f689cdae6539fc2">ForEach</a> (const Action &amp;action) const</td></tr>
+<tr class="memitem:a1980748c67b15d6d8f689cdae6539fc2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a1980748c67b15d6d8f689cdae6539fc2"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1980748c67b15d6d8f689cdae6539fc2">ForEach</a> (const Action &amp;action) const</td></tr>
 <tr class="memdesc:a1980748c67b15d6d8f689cdae6539fc2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies an action to every unread message wrapper.  <br /></td></tr>
-<tr class="memitem:a4a99b2e785e5ed057bd522ed8ffd8049 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a4a99b2e785e5ed057bd522ed8ffd8049"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a4a99b2e785e5ed057bd522ed8ffd8049">Collect</a> () const -&gt; std::vector&lt; T &gt;</td></tr>
-<tr class="memdesc:a4a99b2e785e5ed057bd522ed8ffd8049 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects all unread messages into a vector of raw <span class="tt">T</span> values.  <br /></td></tr>
-<tr class="memitem:adc0bba4509e3e573409ce47281b3d758 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_adc0bba4509e3e573409ce47281b3d758"><td class="memTemplParams" colspan="2">template&lt;typename Alloc&gt; <br />
-requires std::same_as&lt;typename std::allocator_traits&lt;Alloc&gt;<a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">::value_type</a>, T&gt;</td></tr>
-<tr class="memitem:adc0bba4509e3e573409ce47281b3d758 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#adc0bba4509e3e573409ce47281b3d758">CollectWith</a> (const Alloc &amp;alloc) const -&gt; std::vector&lt; T, Alloc &gt;</td></tr>
-<tr class="memdesc:adc0bba4509e3e573409ce47281b3d758 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects all unread messages into a vector of raw <span class="tt">T</span> values using a custom allocator.  <br /></td></tr>
-<tr class="memitem:a87c618e6c20bceb61a4b1afed0c9c4ba pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a87c618e6c20bceb61a4b1afed0c9c4ba"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a87c618e6c20bceb61a4b1afed0c9c4ba">CollectWith</a> (std::pmr::memory_resource *resource) const -&gt; std::pmr::vector&lt; T &gt;</td></tr>
-<tr class="memdesc:a87c618e6c20bceb61a4b1afed0c9c4ba pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects all unread messages into a vector of raw <span class="tt">T</span> values using a memory resource.  <br /></td></tr>
-<tr class="memitem:a2f2f40868408800d3b5b8279e157164c pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a2f2f40868408800d3b5b8279e157164c"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a2f2f40868408800d3b5b8279e157164c">CollectWith</a> (std::nullptr_t) const -&gt; std::pmr::vector&lt; T &gt;=delete</td></tr>
-<tr class="memitem:a84f69c107adbea48cd1d4ec45a2401bd pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a84f69c107adbea48cd1d4ec45a2401bd"><td class="memTemplParams" colspan="2">template&lt;typename OutIt&gt; <br />
-requires std::output_iterator&lt;OutIt, T&gt;</td></tr>
-<tr class="memitem:a84f69c107adbea48cd1d4ec45a2401bd pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a84f69c107adbea48cd1d4ec45a2401bd">ReadInto</a> (OutIt out) const</td></tr>
+<tr class="memitem:ae2dbdf77cc77382e0e5caca4467b33ec pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ae2dbdf77cc77382e0e5caca4467b33ec"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ae2dbdf77cc77382e0e5caca4467b33ec">Collect</a> () const -&gt; std::pmr::vector&lt; T &gt;</td></tr>
+<tr class="memdesc:ae2dbdf77cc77382e0e5caca4467b33ec pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects all unread messages into a vector of raw <span class="tt">T</span> values.  <br /></td></tr>
+<tr class="memitem:a84f69c107adbea48cd1d4ec45a2401bd pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a84f69c107adbea48cd1d4ec45a2401bd"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a84f69c107adbea48cd1d4ec45a2401bd">ReadInto</a> (OutIt out) const</td></tr>
 <tr class="memdesc:a84f69c107adbea48cd1d4ec45a2401bd pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all unread messages into an output iterator.  <br /></td></tr>
-<tr class="memitem:a4b557005a22faf1fc1aeaf2d6c4c41d2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a4b557005a22faf1fc1aeaf2d6c4c41d2"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
-requires std::predicate&lt;Pred, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a4b557005a22faf1fc1aeaf2d6c4c41d2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a4b557005a22faf1fc1aeaf2d6c4c41d2">Filter</a> (Pred predicate) const noexcept(noexcept(GetDerived().begin().Filter(std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">utils::FilterAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Pred &gt;</td></tr>
+<tr class="memitem:a4b557005a22faf1fc1aeaf2d6c4c41d2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a4b557005a22faf1fc1aeaf2d6c4c41d2"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a4b557005a22faf1fc1aeaf2d6c4c41d2">Filter</a> (Pred predicate) const noexcept(noexcept(GetDerived().begin().Filter(std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">utils::FilterAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Pred &gt;</td></tr>
 <tr class="memdesc:a4b557005a22faf1fc1aeaf2d6c4c41d2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy filter adapter over the unread wrapped message sequence.  <br /></td></tr>
-<tr class="memitem:a625cd015a820b1267a1d0f76b9737a6d pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a625cd015a820b1267a1d0f76b9737a6d"><td class="memTemplParams" colspan="2">template&lt;typename Func&gt; <br />
-requires std::invocable&lt;Func, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a625cd015a820b1267a1d0f76b9737a6d pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a625cd015a820b1267a1d0f76b9737a6d">Map</a> (Func transform) const noexcept(noexcept(GetDerived().begin().Map(std::move(transform)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">utils::MapAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Func &gt;</td></tr>
+<tr class="memitem:a625cd015a820b1267a1d0f76b9737a6d pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a625cd015a820b1267a1d0f76b9737a6d"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a625cd015a820b1267a1d0f76b9737a6d">Map</a> (Func transform) const noexcept(noexcept(GetDerived().begin().Map(std::move(transform)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">utils::MapAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Func &gt;</td></tr>
 <tr class="memdesc:a625cd015a820b1267a1d0f76b9737a6d pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy map adapter over the unread wrapped message sequence.  <br /></td></tr>
 <tr class="memitem:aae536d12328343f0f3399e0d501c5aa6 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_aae536d12328343f0f3399e0d501c5aa6"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#aae536d12328343f0f3399e0d501c5aa6">Take</a> (size_t count) const noexcept(noexcept(GetDerived().begin().Take(count))) -&gt; <a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">utils::TakeAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a> &gt;</td></tr>
 <tr class="memdesc:aae536d12328343f0f3399e0d501c5aa6 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter yielding at most <span class="tt">count</span> unread wrappers.  <br /></td></tr>
 <tr class="memitem:ab96feba4e0c500efa2df4802b916c7fb pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ab96feba4e0c500efa2df4802b916c7fb"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ab96feba4e0c500efa2df4802b916c7fb">Skip</a> (size_t count) const noexcept(noexcept(GetDerived().begin().Skip(count))) -&gt; <a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">utils::SkipAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a> &gt;</td></tr>
 <tr class="memdesc:ab96feba4e0c500efa2df4802b916c7fb pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that skips the first <span class="tt">count</span> unread wrappers.  <br /></td></tr>
-<tr class="memitem:a7d770518eaf2b91868e089d5e0912aba pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a7d770518eaf2b91868e089d5e0912aba"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
-requires std::predicate&lt;Pred, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a7d770518eaf2b91868e089d5e0912aba pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a7d770518eaf2b91868e089d5e0912aba">TakeWhile</a> (Pred predicate) const noexcept(noexcept(GetDerived().begin().TakeWhile(std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">utils::TakeWhileAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Pred &gt;</td></tr>
+<tr class="memitem:a7d770518eaf2b91868e089d5e0912aba pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a7d770518eaf2b91868e089d5e0912aba"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a7d770518eaf2b91868e089d5e0912aba">TakeWhile</a> (Pred predicate) const noexcept(noexcept(GetDerived().begin().TakeWhile(std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">utils::TakeWhileAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Pred &gt;</td></tr>
 <tr class="memdesc:a7d770518eaf2b91868e089d5e0912aba pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that yields unread wrappers while <span class="tt">predicate</span> is true.  <br /></td></tr>
-<tr class="memitem:ab0501623c1a8e10ee75737a8bf662718 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ab0501623c1a8e10ee75737a8bf662718"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
-requires std::predicate&lt;Pred, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:ab0501623c1a8e10ee75737a8bf662718 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ab0501623c1a8e10ee75737a8bf662718">SkipWhile</a> (Pred predicate) const noexcept(noexcept(GetDerived().begin().SkipWhile(std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">utils::SkipWhileAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Pred &gt;</td></tr>
+<tr class="memitem:ab0501623c1a8e10ee75737a8bf662718 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ab0501623c1a8e10ee75737a8bf662718"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ab0501623c1a8e10ee75737a8bf662718">SkipWhile</a> (Pred predicate) const noexcept(noexcept(GetDerived().begin().SkipWhile(std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">utils::SkipWhileAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Pred &gt;</td></tr>
 <tr class="memdesc:ab0501623c1a8e10ee75737a8bf662718 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that skips unread wrappers while <span class="tt">predicate</span> is true.  <br /></td></tr>
 <tr class="memitem:a1551b179342e62aaa982bf2eeb4d9e3f pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a1551b179342e62aaa982bf2eeb4d9e3f"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1551b179342e62aaa982bf2eeb4d9e3f">Enumerate</a> () const noexcept(noexcept(GetDerived().begin().Enumerate())) -&gt; <a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">utils::EnumerateAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a> &gt;</td></tr>
 <tr class="memdesc:a1551b179342e62aaa982bf2eeb4d9e3f pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that pairs each unread wrapper with its zero-based index.  <br /></td></tr>
-<tr class="memitem:abac4746093af2ebf9689e146f4efe282 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_abac4746093af2ebf9689e146f4efe282"><td class="memTemplParams" colspan="2">template&lt;typename Func&gt; <br />
-requires std::invocable&lt;Func, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:abac4746093af2ebf9689e146f4efe282 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#abac4746093af2ebf9689e146f4efe282">Inspect</a> (Func inspector) const noexcept(noexcept(GetDerived().begin().Inspect(std::move(inspector)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">utils::InspectAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Func &gt;</td></tr>
+<tr class="memitem:abac4746093af2ebf9689e146f4efe282 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_abac4746093af2ebf9689e146f4efe282"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#abac4746093af2ebf9689e146f4efe282">Inspect</a> (Func inspector) const noexcept(noexcept(GetDerived().begin().Inspect(std::move(inspector)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">utils::InspectAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Func &gt;</td></tr>
 <tr class="memdesc:abac4746093af2ebf9689e146f4efe282 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that calls <span class="tt">inspector</span> on each unread wrapper as a side-effect.  <br /></td></tr>
 <tr class="memitem:a25a60d194a53f09f600876015e2dfaca pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a25a60d194a53f09f600876015e2dfaca"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a25a60d194a53f09f600876015e2dfaca">StepBy</a> (size_t step) const noexcept(noexcept(GetDerived().begin().StepBy(step))) -&gt; <a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">utils::StepByAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a> &gt;</td></tr>
 <tr class="memdesc:a25a60d194a53f09f600876015e2dfaca pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that yields every <span class="tt">step</span>-th unread wrapper.  <br /></td></tr>
-<tr class="memitem:a19675924aa243f26d2368113e84d7e51 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a19675924aa243f26d2368113e84d7e51"><td class="memTemplParams" colspan="2">template&lt;typename Iter&gt; <br />
-requires utils::ChainAdapterRequirements&lt;<a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Iter&gt;</td></tr>
-<tr class="memitem:a19675924aa243f26d2368113e84d7e51 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a19675924aa243f26d2368113e84d7e51">Chain</a> (Iter first, Iter last) const noexcept(noexcept(GetDerived().begin().Chain(std::move(first), std::move(last)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">utils::ChainAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Iter &gt;</td></tr>
+<tr class="memitem:a19675924aa243f26d2368113e84d7e51 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a19675924aa243f26d2368113e84d7e51"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a19675924aa243f26d2368113e84d7e51">Chain</a> (Iter first, Iter last) const noexcept(noexcept(GetDerived().begin().Chain(std::move(first), std::move(last)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">utils::ChainAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Iter &gt;</td></tr>
 <tr class="memdesc:a19675924aa243f26d2368113e84d7e51 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that chains another range of wrappers.  <br /></td></tr>
-<tr class="memitem:a99131c59071e984e450380f047fd11b0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a99131c59071e984e450380f047fd11b0"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
-requires utils::ChainAdapterRequirements&lt;<a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:a99131c59071e984e450380f047fd11b0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a99131c59071e984e450380f047fd11b0">Chain</a> (const R &amp;range) const noexcept(noexcept(GetDerived().begin().Chain(range))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">utils::ChainAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:a99131c59071e984e450380f047fd11b0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that chains another range of wrappers.  <br /></td></tr>
 <tr class="memitem:a704b83debd0de34536a642eca75cd1b7 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a704b83debd0de34536a642eca75cd1b7"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a704b83debd0de34536a642eca75cd1b7">Reverse</a> () const noexcept(noexcept(GetDerived().begin().Reverse())) -&gt; <a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">utils::ReverseAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a> &gt;</td></tr>
 <tr class="memdesc:a704b83debd0de34536a642eca75cd1b7 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that yields unread wrappers in reverse order.  <br /></td></tr>
 <tr class="memitem:ac6cbe2339b39ff65d98e05c878dffc5d pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ac6cbe2339b39ff65d98e05c878dffc5d"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ac6cbe2339b39ff65d98e05c878dffc5d">Slide</a> (size_t window_size) const noexcept(noexcept(GetDerived().begin().Slide(window_size))) -&gt; <a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">utils::SlideAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a> &gt;</td></tr>
 <tr class="memdesc:ac6cbe2339b39ff65d98e05c878dffc5d pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that yields windows of <span class="tt">window_size</span> unread wrappers.  <br /></td></tr>
 <tr class="memitem:a286b9cc966f6972c352ad29b3f2a2e68 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a286b9cc966f6972c352ad29b3f2a2e68"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a286b9cc966f6972c352ad29b3f2a2e68">Stride</a> (size_t stride) const noexcept(noexcept(GetDerived().begin().Stride(stride))) -&gt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">utils::StrideAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a> &gt;</td></tr>
 <tr class="memdesc:a286b9cc966f6972c352ad29b3f2a2e68 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that yields every <span class="tt">stride</span>-th unread wrapper.  <br /></td></tr>
-<tr class="memitem:ae3cfb6cac2d44714fca4ba220f7850e2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ae3cfb6cac2d44714fca4ba220f7850e2"><td class="memTemplParams" colspan="2">template&lt;typename Iter&gt; <br />
-requires utils::ZipAdapterRequirements&lt;<a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Iter&gt;</td></tr>
-<tr class="memitem:ae3cfb6cac2d44714fca4ba220f7850e2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ae3cfb6cac2d44714fca4ba220f7850e2">Zip</a> (Iter first, Iter last) const noexcept(noexcept(GetDerived().begin().Zip(std::move(first), std::move(last)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">utils::ZipAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Iter &gt;</td></tr>
+<tr class="memitem:ae3cfb6cac2d44714fca4ba220f7850e2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ae3cfb6cac2d44714fca4ba220f7850e2"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ae3cfb6cac2d44714fca4ba220f7850e2">Zip</a> (Iter first, Iter last) const noexcept(noexcept(GetDerived().begin().Zip(std::move(first), std::move(last)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">utils::ZipAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, Iter &gt;</td></tr>
 <tr class="memdesc:ae3cfb6cac2d44714fca4ba220f7850e2 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that yields pairs of wrappers from two ranges.  <br /></td></tr>
-<tr class="memitem:a34f17d8551856ee7a204af42ced254d0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a34f17d8551856ee7a204af42ced254d0"><td class="memTemplParams" colspan="2">template&lt;typename R&gt; <br />
-requires utils::ZipAdapterRequirements&lt;<a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:a34f17d8551856ee7a204af42ced254d0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a34f17d8551856ee7a204af42ced254d0">Zip</a> (const R &amp;range) const noexcept(noexcept(GetDerived().begin().Zip(range))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">utils::ZipAdapter</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a69de60175cd1721413949aa68abe449c">iterator</a>, std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:a34f17d8551856ee7a204af42ced254d0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a lazy adapter that yields pairs of wrappers from two ranges.  <br /></td></tr>
-<tr class="memitem:a43fedc874644667154a70eafc13f893b pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a43fedc874644667154a70eafc13f893b"><td class="memTemplParams" colspan="2">template&lt;typename Acc, typename Folder&gt; <br />
-requires std::invocable&lt;Folder, Acc, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a43fedc874644667154a70eafc13f893b pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr Acc&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a43fedc874644667154a70eafc13f893b">Fold</a> (Acc init, const Folder &amp;folder) const</td></tr>
+<tr class="memitem:a43fedc874644667154a70eafc13f893b pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a43fedc874644667154a70eafc13f893b"><td class="memItemLeft">constexpr Acc&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a43fedc874644667154a70eafc13f893b">Fold</a> (Acc init, const Folder &amp;folder) const</td></tr>
 <tr class="memdesc:a43fedc874644667154a70eafc13f893b pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Left-folds all unread messages with an accumulator.  <br /></td></tr>
-<tr class="memitem:a400b894e6612b170abd5e489fdb44df0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a400b894e6612b170abd5e489fdb44df0"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
-requires std::predicate&lt;Pred, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a400b894e6612b170abd5e489fdb44df0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a400b894e6612b170abd5e489fdb44df0">Find</a> (const Pred &amp;predicate) const -&gt; std::optional&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> &gt;</td></tr>
+<tr class="memitem:a400b894e6612b170abd5e489fdb44df0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a400b894e6612b170abd5e489fdb44df0"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a400b894e6612b170abd5e489fdb44df0">Find</a> (const Pred &amp;predicate) const -&gt; std::optional&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> &gt;</td></tr>
 <tr class="memdesc:a400b894e6612b170abd5e489fdb44df0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the first unread message matching a predicate.  <br /></td></tr>
-<tr class="memitem:a0bb1d18b1b5f3049c17cc608f0f2140b pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a0bb1d18b1b5f3049c17cc608f0f2140b"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
-requires std::predicate&lt;Pred, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a0bb1d18b1b5f3049c17cc608f0f2140b pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ab24f30674da36268ece226133aa2be4b">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a0bb1d18b1b5f3049c17cc608f0f2140b">CountIf</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memitem:a0bb1d18b1b5f3049c17cc608f0f2140b pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a0bb1d18b1b5f3049c17cc608f0f2140b"><td class="memItemLeft">constexpr <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ab24f30674da36268ece226133aa2be4b">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a0bb1d18b1b5f3049c17cc608f0f2140b">CountIf</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a0bb1d18b1b5f3049c17cc608f0f2140b pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counts unread messages matching a predicate.  <br /></td></tr>
-<tr class="memitem:acc25a4faa731d2352ac34998e833348e pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_acc25a4faa731d2352ac34998e833348e"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
-requires std::predicate&lt;Pred, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:acc25a4faa731d2352ac34998e833348e pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#acc25a4faa731d2352ac34998e833348e">Partition</a> (const Pred &amp;predicate) const -&gt; std::pair&lt; std::vector&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> &gt;, std::vector&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> &gt; &gt;</td></tr>
-<tr class="memdesc:acc25a4faa731d2352ac34998e833348e pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partitions unread wrapped messages into matching and non-matching groups.  <br /></td></tr>
-<tr class="memitem:ad652d7714c86f42b3ba6ce6a8e474229 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ad652d7714c86f42b3ba6ce6a8e474229"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc&gt; <br />
-requires std::invocable&lt;KeyFunc, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:ad652d7714c86f42b3ba6ce6a8e474229 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ad652d7714c86f42b3ba6ce6a8e474229">MaxBy</a> (const KeyFunc &amp;key_func) const -&gt; std::optional&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> &gt;</td></tr>
+<tr class="memitem:a6db694af9e5632dc1229fd6e91a0dfe8 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a6db694af9e5632dc1229fd6e91a0dfe8"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a6db694af9e5632dc1229fd6e91a0dfe8">Partition</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a6db694af9e5632dc1229fd6e91a0dfe8 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partitions unread wrapped messages into matching and non-matching groups.  <br /></td></tr>
+<tr class="memitem:ad652d7714c86f42b3ba6ce6a8e474229 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_ad652d7714c86f42b3ba6ce6a8e474229"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#ad652d7714c86f42b3ba6ce6a8e474229">MaxBy</a> (const KeyFunc &amp;key_func) const -&gt; std::optional&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> &gt;</td></tr>
 <tr class="memdesc:ad652d7714c86f42b3ba6ce6a8e474229 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the unread wrapped message with the maximum extracted key.  <br /></td></tr>
-<tr class="memitem:adc6e334d233706c106e31653253088f4 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_adc6e334d233706c106e31653253088f4"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc&gt; <br />
-requires std::invocable&lt;KeyFunc, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:adc6e334d233706c106e31653253088f4 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#adc6e334d233706c106e31653253088f4">MinBy</a> (const KeyFunc &amp;key_func) const -&gt; std::optional&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> &gt;</td></tr>
+<tr class="memitem:adc6e334d233706c106e31653253088f4 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_adc6e334d233706c106e31653253088f4"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#adc6e334d233706c106e31653253088f4">MinBy</a> (const KeyFunc &amp;key_func) const -&gt; std::optional&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> &gt;</td></tr>
 <tr class="memdesc:adc6e334d233706c106e31653253088f4 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the unread wrapped message with the minimum extracted key.  <br /></td></tr>
-<tr class="memitem:a302dd872fb30710f8af12e1ae880980d pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a302dd872fb30710f8af12e1ae880980d"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc&gt; <br />
-requires std::invocable&lt;KeyFunc, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a302dd872fb30710f8af12e1ae880980d pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a302dd872fb30710f8af12e1ae880980d">GroupBy</a> (const KeyFunc &amp;key_func) const -&gt; std::unordered_map&lt; std::decay_t&lt; std::invoke_result_t&lt; KeyFunc, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> &amp; &gt; &gt;, std::vector&lt; <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a> &gt; &gt;</td></tr>
-<tr class="memdesc:a302dd872fb30710f8af12e1ae880980d pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Groups unread wrapped messages by a key extracted from each wrapper.  <br /></td></tr>
-<tr class="memitem:a3c95a3624f8f0074d821a9518730c452 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a3c95a3624f8f0074d821a9518730c452"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
-requires std::predicate&lt;Pred, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a3c95a3624f8f0074d821a9518730c452 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a3c95a3624f8f0074d821a9518730c452">Any</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memitem:a0d1540926d699475d69531947d6e5713 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a0d1540926d699475d69531947d6e5713"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a0d1540926d699475d69531947d6e5713">GroupBy</a> (const KeyFunc &amp;key_func) const</td></tr>
+<tr class="memdesc:a0d1540926d699475d69531947d6e5713 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Groups unread wrapped messages by a key extracted from each wrapper.  <br /></td></tr>
+<tr class="memitem:a3c95a3624f8f0074d821a9518730c452 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a3c95a3624f8f0074d821a9518730c452"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a3c95a3624f8f0074d821a9518730c452">Any</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a3c95a3624f8f0074d821a9518730c452 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any unread message matches a predicate.  <br /></td></tr>
-<tr class="memitem:a1cce2d95e2bb05ad9833419b6c22c3c0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a1cce2d95e2bb05ad9833419b6c22c3c0"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
-requires std::predicate&lt;Pred, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a1cce2d95e2bb05ad9833419b6c22c3c0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1cce2d95e2bb05ad9833419b6c22c3c0">All</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memitem:a1cce2d95e2bb05ad9833419b6c22c3c0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a1cce2d95e2bb05ad9833419b6c22c3c0"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1cce2d95e2bb05ad9833419b6c22c3c0">All</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a1cce2d95e2bb05ad9833419b6c22c3c0 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if all unread messages match a predicate.  <br /></td></tr>
-<tr class="memitem:a1f601f646f1764a2ea747afcf51a1ff6 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a1f601f646f1764a2ea747afcf51a1ff6"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
-requires std::predicate&lt;Pred, const <a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a66fdb9c47f2158ef18cf58c7bb4bad28">value_type</a>&amp;&gt;</td></tr>
-<tr class="memitem:a1f601f646f1764a2ea747afcf51a1ff6 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1f601f646f1764a2ea747afcf51a1ff6">None</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memitem:a1f601f646f1764a2ea747afcf51a1ff6 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a1f601f646f1764a2ea747afcf51a1ff6"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a1f601f646f1764a2ea747afcf51a1ff6">None</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a1f601f646f1764a2ea747afcf51a1ff6 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if no unread messages match a predicate.  <br /></td></tr>
 <tr class="memitem:a00df9858284038cca56209440193b629 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase" id="r_a00df9858284038cca56209440193b629"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1MessageReaderBase.html#a00df9858284038cca56209440193b629">Empty</a> () const noexcept</td></tr>
 <tr class="memdesc:a00df9858284038cca56209440193b629 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if there are no unread messages.  <br /></td></tr>
@@ -357,117 +301,116 @@ requires std::predicate&lt;Pred, const <a class="el" href="classhelios_1_1ecs_1_
 <tr class="memdesc:a58e240eb9df6367b2bcb1acaa1f007c1 pub_methods_classhelios_1_1ecs_1_1MessageReaderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of unread retained messages.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt;<br />
-class helios::ecs::ConsumableMessageReader&lt; T, Alloc &gt;</div><p>Type-safe, zero-copy reader for consumable messages with cursor delivery and consume support. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;ConsumableMessageTrait T&gt;<br />
+class helios::ecs::ConsumableMessageReader&lt; T &gt;</div><p>Type-safe, zero-copy reader for consumable messages with cursor delivery and consume support. </p>
 <p>Provides a read-only view over unread messages (id &gt;= <span class="tt">cursor.last_message_count</span>) across the previous and current queues. Messages are accessed via spans directly into the underlying <span class="tt">TypedBuffer</span> storage — no copying is performed.</p>
-<p>Consumed messages are not filtered during iteration within the same frame. They are removed at the next <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html#ac799360fb072a2c53146d1d0f904499d" title="Updates message lifecycle — applies consumed messages, then ages buffers.">MessageManager::Update</a></span> call. Consumption is tracked by stable message id.</p>
-<dl class="section note"><dt>Note</dt><dd>Thread-safe for concurrent reads of retained messages, but <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html#a3ea46906ae0b117b179748d6195902a5" title="Marks the message as consumed.">ConsumableMessageWrapper::Consume()</a></span> and cursor updates are NOT thread-safe. </dd></dl>
+<p>Consumed messages are not filtered during iteration within the same frame. They are removed at the next <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html#a2e0db24b682b664c3dfc0d4c7ac20c66" title="Updates message lifecycle — applies consumed messages, then ages buffers.">MessageManager::Update</a></span> call. Consumption is tracked by stable message id.</p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe for concurrent reads of retained messages, but <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html#a05954e56b852c766721808cf5a9bb962" title="Marks the message as consumed.">ConsumableMessageWrapper::Consume()</a></span> and cursor updates are NOT thread-safe. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>Message type satisfying <span class="tt"><a class="el" href="concepthelios_1_1ecs_1_1ConsumableMessageTrait.html" title="Concept for consumable message types.">ConsumableMessageTrait</a></span> </td></tr>
-    <tr><td class="paramname">Alloc</td><td>Allocator type for the consumed messages registry</td></tr>
+    <tr><td class="paramname">T</td><td>Message type satisfying <span class="tt"><a class="el" href="concepthelios_1_1ecs_1_1ConsumableMessageTrait.html" title="Concept for consumable message types.">ConsumableMessageTrait</a></span></td></tr>
   </table>
   </dd>
 </dl>
 <div class="fragment"><div class="line"><a class="code hl_struct" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor&lt;Score&gt;</a> cursor = <a class="code hl_function" href="structhelios_1_1ecs_1_1MessageCursor.html#acd31a920117583ae1c6db9fd24f1e57c">MessageCursor&lt;Score&gt;::IncludeBacklog</a>();</div>
-<div class="line"><a class="code hl_function" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader&lt;Score&gt;</a> reader(manager, cursor, registry);</div>
+<div class="line"><a class="code hl_function" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader&lt;Score&gt;</a> reader(manager, cursor, registry);</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> wrapper : reader.Read()) {</div>
 <div class="line">  <span class="keywordflow">if</span> ((*wrapper).value &gt; 5) {</div>
 <div class="line">    wrapper.Consume();</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1ConsumableMessageReader_html_a613a120cd212a2529a2bd8075dd5535d"><div class="ttname"><a href="#a613a120cd212a2529a2bd8075dd5535d">helios::ecs::ConsumableMessageReader::ConsumableMessageReader</a></div><div class="ttdeci">constexpr ConsumableMessageReader(const MessageManager &amp;manager, MessageCursor&lt; T &gt; &amp;cursor, ConsumedMessagesRegistry&lt; Alloc &gt; &amp;consumed_registry) noexcept</div><div class="ttdoc">Constructs a ConsumableMessageReader bound to a manager, cursor, and consumed registry.</div><div class="ttdef"><b>Definition</b> <a href="reader_8hpp_source.html#l01232">reader.hpp:1232</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1ConsumableMessageReader_html_a7d825ffb01a429d1fbf4278792927c8b"><div class="ttname"><a href="#a7d825ffb01a429d1fbf4278792927c8b">helios::ecs::ConsumableMessageReader::ConsumableMessageReader</a></div><div class="ttdeci">constexpr ConsumableMessageReader(const MessageManager &amp;manager, MessageCursor&lt; T &gt; &amp;cursor, ConsumedMessagesRegistry &amp;consumed_registry) noexcept</div><div class="ttdoc">Constructs a ConsumableMessageReader bound to a manager, cursor, and consumed registry.</div><div class="ttdef"><b>Definition</b> <a href="reader_8hpp_source.html#l01222">reader.hpp:1222</a></div></div>
 <div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html">helios::ecs::MessageCursor</a></div><div class="ttdoc">Per-reader cursor tracking which messages of type T have been seen.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00020">cursor.hpp:20</a></div></div>
 <div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html_acd31a920117583ae1c6db9fd24f1e57c"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html#acd31a920117583ae1c6db9fd24f1e57c">helios::ecs::MessageCursor::IncludeBacklog</a></div><div class="ttdeci">static constexpr MessageCursor IncludeBacklog() noexcept</div><div class="ttdoc">Creates a cursor that includes all currently retained messages.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00028">cursor.hpp:28</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01215">1215</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01205">1205</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
-<a id="ac2775bfc96cba3ed236a229da9b67d1e" name="ac2775bfc96cba3ed236a229da9b67d1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2775bfc96cba3ed236a229da9b67d1e">&#9670;&#160;</a></span>const_iterator</h2>
+<a id="a2cd68f7590ca28b9d3dd881c3720daf6" name="a2cd68f7590ca28b9d3dd881c3720daf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cd68f7590ca28b9d3dd881c3720daf6">&#9670;&#160;</a></span>const_iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::const_iterator = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">ConsumableMessageWrapperIter</a>&lt;T, Alloc&gt;</td>
+          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::const_iterator = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">ConsumableMessageWrapperIter</a>&lt;T&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01221">1221</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01211">1211</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae6cb04d6ab4bc92f0579f587a5bdf09d" name="ae6cb04d6ab4bc92f0579f587a5bdf09d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6cb04d6ab4bc92f0579f587a5bdf09d">&#9670;&#160;</a></span>iterator</h2>
+<a id="aac76a9bf8a19c664d30e7f061d6be875" name="aac76a9bf8a19c664d30e7f061d6be875"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac76a9bf8a19c664d30e7f061d6be875">&#9670;&#160;</a></span>iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::iterator = <a class="el" href="#ac2775bfc96cba3ed236a229da9b67d1e">const_iterator</a></td>
+          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::iterator = <a class="el" href="#a2cd68f7590ca28b9d3dd881c3720daf6">const_iterator</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01222">1222</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01212">1212</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="af524e96a66cf80e2b837c138ae9acdb3" name="af524e96a66cf80e2b837c138ae9acdb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af524e96a66cf80e2b837c138ae9acdb3">&#9670;&#160;</a></span>size_type</h2>
+<a id="a10f51a8a7038df09b97b0ab653b1abc0" name="a10f51a8a7038df09b97b0ab653b1abc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10f51a8a7038df09b97b0ab653b1abc0">&#9670;&#160;</a></span>size_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::size_type = <a class="el" href="classhelios_1_1ecs_1_1MessageManager.html#a26f8b24d221097025fab50b2f49e1363">MessageManager::size_type</a></td>
+          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::size_type = <a class="el" href="classhelios_1_1ecs_1_1MessageManager.html#a26f8b24d221097025fab50b2f49e1363">MessageManager::size_type</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01220">1220</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01210">1210</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a84daea978ba5f20cef89c8dcffed68e6" name="a84daea978ba5f20cef89c8dcffed68e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84daea978ba5f20cef89c8dcffed68e6">&#9670;&#160;</a></span>value_type</h2>
+<a id="a6164d9d951c1db9f2bd6e2fe4d736b4d" name="a6164d9d951c1db9f2bd6e2fe4d736b4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6164d9d951c1db9f2bd6e2fe4d736b4d">&#9670;&#160;</a></span>value_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::value_type = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html">ConsumableMessageWrapper</a>&lt;T, Alloc&gt;</td>
+          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::value_type = <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html">ConsumableMessageWrapper</a>&lt;T&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01219">1219</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01209">1209</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a613a120cd212a2529a2bd8075dd5535d" name="a613a120cd212a2529a2bd8075dd5535d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a613a120cd212a2529a2bd8075dd5535d">&#9670;&#160;</a></span>ConsumableMessageReader() <span class="overload">[1/3]</span></h2>
+<a id="a7d825ffb01a429d1fbf4278792927c8b" name="a7d825ffb01a429d1fbf4278792927c8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d825ffb01a429d1fbf4278792927c8b">&#9670;&#160;</a></span>ConsumableMessageReader() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::ConsumableMessageReader </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::ConsumableMessageReader </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classhelios_1_1ecs_1_1MessageManager.html">MessageManager</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>manager</em></span>, </td>
         </tr>
@@ -479,7 +422,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>consumed_registry</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>consumed_registry</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -499,25 +442,25 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01232">1232</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01222">1222</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a8e18720bada22e21f942ff48d553e091" name="a8e18720bada22e21f942ff48d553e091"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e18720bada22e21f942ff48d553e091">&#9670;&#160;</a></span>ConsumableMessageReader() <span class="overload">[2/3]</span></h2>
+<a id="ab3dbc4dddb24e4119528ac86a6bb4a3c" name="ab3dbc4dddb24e4119528ac86a6bb4a3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3dbc4dddb24e4119528ac86a6bb4a3c">&#9670;&#160;</a></span>ConsumableMessageReader() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::ConsumableMessageReader </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::ConsumableMessageReader </td>
           <td>(</td>
-          <td class="paramtype">const ConsumableMessageReader&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const ConsumableMessageReader&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -530,21 +473,21 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 
 </div>
 </div>
-<a id="a0d4e8afe2a211cf43676013a2ae65a31" name="a0d4e8afe2a211cf43676013a2ae65a31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d4e8afe2a211cf43676013a2ae65a31">&#9670;&#160;</a></span>ConsumableMessageReader() <span class="overload">[3/3]</span></h2>
+<a id="ab503593485eb6baf47fe6cd0cc3eef8a" name="ab503593485eb6baf47fe6cd0cc3eef8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab503593485eb6baf47fe6cd0cc3eef8a">&#9670;&#160;</a></span>ConsumableMessageReader() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::ConsumableMessageReader </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::ConsumableMessageReader </td>
           <td>(</td>
-          <td class="paramtype">ConsumableMessageReader&lt; T, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">ConsumableMessageReader&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -557,19 +500,19 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 
 </div>
 </div>
-<a id="aac20f1b17b14e6c4a4f9c8079389aebb" name="aac20f1b17b14e6c4a4f9c8079389aebb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac20f1b17b14e6c4a4f9c8079389aebb">&#9670;&#160;</a></span>~ConsumableMessageReader()</h2>
+<a id="a869e708bf5fe61c0667926ffc3d0e218" name="a869e708bf5fe61c0667926ffc3d0e218"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a869e708bf5fe61c0667926ffc3d0e218">&#9670;&#160;</a></span>~ConsumableMessageReader()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::~<a class="el" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader</a> </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::~<a class="el" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -585,19 +528,19 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a2861cc806dc63a06075ef6bf354a7f17" name="a2861cc806dc63a06075ef6bf354a7f17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2861cc806dc63a06075ef6bf354a7f17">&#9670;&#160;</a></span>begin()</h2>
+<a id="abce3ced9481a73b1e9606dc6be5b1231" name="abce3ced9481a73b1e9606dc6be5b1231"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abce3ced9481a73b1e9606dc6be5b1231">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#ac2775bfc96cba3ed236a229da9b67d1e">const_iterator</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::begin </td>
+          <td class="memname"><a class="el" href="#a2cd68f7590ca28b9d3dd881c3720daf6">const_iterator</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::begin </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -613,23 +556,23 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Returns an iterator to the first unread message. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator to the beginning of the unread range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01302">1302</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01292">1292</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a256dc278c9338aac13b9e201e6c7d6ef" name="a256dc278c9338aac13b9e201e6c7d6ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a256dc278c9338aac13b9e201e6c7d6ef">&#9670;&#160;</a></span>Clear()</h2>
+<a id="aee2a8f91a0b5d18d774a004339b2c8f3" name="aee2a8f91a0b5d18d774a004339b2c8f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee2a8f91a0b5d18d774a004339b2c8f3">&#9670;&#160;</a></span>Clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::Clear </td>
+          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::Clear </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -643,25 +586,25 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 </div><div class="memdoc">
 
 <p>Skips all currently retained unread messages for this cursor. </p>
-<p>After <span class="tt"><a class="el" href="#a256dc278c9338aac13b9e201e6c7d6ef" title="Skips all currently retained unread messages for this cursor.">Clear()</a></span>, <span class="tt"><a class="el" href="#a23349cb50926b8a86fccaa8b34b0919d" title="Checks if there are no unread messages.">Empty()</a></span> is true until new messages are written. Does not mark messages as consumed. </p>
+<p>After <span class="tt"><a class="el" href="#aee2a8f91a0b5d18d774a004339b2c8f3" title="Skips all currently retained unread messages for this cursor.">Clear()</a></span>, <span class="tt"><a class="el" href="#a20ee80f05c52db8a6909817d37970497" title="Checks if there are no unread messages.">Empty()</a></span> is true until new messages are written. Does not mark messages as consumed. </p>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01271">1271</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01261">1261</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a12851f28240efa03ad45818d2f6bac91" name="a12851f28240efa03ad45818d2f6bac91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12851f28240efa03ad45818d2f6bac91">&#9670;&#160;</a></span>ConsumeAll()</h2>
+<a id="ab99e6cbdaf978c89b04166cd15d7020e" name="ab99e6cbdaf978c89b04166cd15d7020e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab99e6cbdaf978c89b04166cd15d7020e">&#9670;&#160;</a></span>ConsumeAll()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::ConsumeAll </td>
+          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::ConsumeAll </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -676,17 +619,17 @@ template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
 
 <p>Marks all unread messages as consumed by message id. </p>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01325">1325</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01315">1315</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a9f574600769a3c3a72bcba1bace92682" name="a9f574600769a3c3a72bcba1bace92682"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f574600769a3c3a72bcba1bace92682">&#9670;&#160;</a></span>ConsumeIf() <span class="overload">[1/2]</span></h2>
+<a id="a0f99f78c9664822b198abf2b83a5e355" name="a0f99f78c9664822b198abf2b83a5e355"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f99f78c9664822b198abf2b83a5e355">&#9670;&#160;</a></span>ConsumeIf() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <div class="memtemplate">
 template&lt;typename Pred&gt; <br />
 requires std::predicate&lt;Pred, const T&amp;&gt;</div>
@@ -695,7 +638,7 @@ requires std::predicate&lt;Pred, const T&amp;&gt;</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#af524e96a66cf80e2b837c138ae9acdb3">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::ConsumeIf </td>
+          <td class="memname"><a class="el" href="#a10f51a8a7038df09b97b0ab653b1abc0">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::ConsumeIf </td>
           <td>(</td>
           <td class="paramtype">const Pred &amp;</td>          <td class="paramname"><span class="paramname"><em>predicate</em></span></td><td>)</td>
           <td> const</td>
@@ -725,13 +668,13 @@ requires std::predicate&lt;Pred, const T&amp;&gt;</div>
 
 </div>
 </div>
-<a id="a50d678b72e8ff215cd25f98e9b8f4cff" name="a50d678b72e8ff215cd25f98e9b8f4cff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50d678b72e8ff215cd25f98e9b8f4cff">&#9670;&#160;</a></span>ConsumeIf() <span class="overload">[2/2]</span></h2>
+<a id="a89abeccbf63effb6948cef9d0aa63de4" name="a89abeccbf63effb6948cef9d0aa63de4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89abeccbf63effb6948cef9d0aa63de4">&#9670;&#160;</a></span>ConsumeIf() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <div class="memtemplate">
 template&lt;typename Pred&gt; <br />
 requires std::predicate&lt;Pred, const T&amp;&gt;</div>
@@ -740,10 +683,10 @@ requires std::predicate&lt;Pred, const T&amp;&gt;</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::ConsumeIf </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::ConsumeIf </td>
           <td>(</td>
           <td class="paramtype">const Pred &amp;</td>          <td class="paramname"><span class="paramname"><em>predicate</em></span></td><td>)</td>
-          <td> const -&gt; <a class="el" href="#af524e96a66cf80e2b837c138ae9acdb3">size_type</a></td>
+          <td> const -&gt; <a class="el" href="#a10f51a8a7038df09b97b0ab653b1abc0">size_type</a></td>
         </tr>
       </table>
   </td>
@@ -753,23 +696,23 @@ requires std::predicate&lt;Pred, const T&amp;&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01337">1337</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01327">1327</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a13d7124d72697823d741d6c7b288af26" name="a13d7124d72697823d741d6c7b288af26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13d7124d72697823d741d6c7b288af26">&#9670;&#160;</a></span>Count()</h2>
+<a id="a527f35cba1f7e7d46536cc088da8c6ef" name="a527f35cba1f7e7d46536cc088da8c6ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a527f35cba1f7e7d46536cc088da8c6ef">&#9670;&#160;</a></span>Count()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#af524e96a66cf80e2b837c138ae9acdb3">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::Count </td>
+          <td class="memname"><a class="el" href="#a10f51a8a7038df09b97b0ab653b1abc0">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::Count </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -785,23 +728,23 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Returns the number of unread retained messages. </p>
 <dl class="section return"><dt>Returns</dt><dd>Unread message count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01286">1286</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01276">1276</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a23349cb50926b8a86fccaa8b34b0919d" name="a23349cb50926b8a86fccaa8b34b0919d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23349cb50926b8a86fccaa8b34b0919d">&#9670;&#160;</a></span>Empty()</h2>
+<a id="a20ee80f05c52db8a6909817d37970497" name="a20ee80f05c52db8a6909817d37970497"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20ee80f05c52db8a6909817d37970497">&#9670;&#160;</a></span>Empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::Empty </td>
+          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::Empty </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -815,25 +758,25 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 </div><div class="memdoc">
 
 <p>Checks if there are no unread messages. </p>
-<dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> when <span class="tt"><a class="el" href="#a13d7124d72697823d741d6c7b288af26" title="Returns the number of unread retained messages.">Count()</a></span> is zero </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> when <span class="tt"><a class="el" href="#a527f35cba1f7e7d46536cc088da8c6ef" title="Returns the number of unread retained messages.">Count()</a></span> is zero </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01294">1294</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01284">1284</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae8b52fa61d50f1506d02ee993be75b34" name="ae8b52fa61d50f1506d02ee993be75b34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8b52fa61d50f1506d02ee993be75b34">&#9670;&#160;</a></span>end()</h2>
+<a id="ac54cf1aa44c0af66ef7af51d53a60c6b" name="ac54cf1aa44c0af66ef7af51d53a60c6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac54cf1aa44c0af66ef7af51d53a60c6b">&#9670;&#160;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#ac2775bfc96cba3ed236a229da9b67d1e">const_iterator</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::end </td>
+          <td class="memname"><a class="el" href="#a2cd68f7590ca28b9d3dd881c3720daf6">const_iterator</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::end </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -849,23 +792,23 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Returns an iterator past the last unread message. </p>
 <p>Does not advance the cursor. </p><dl class="section return"><dt>Returns</dt><dd>Iterator to the end of the unread range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01311">1311</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01301">1301</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a525c49cfe3c0a75608ddf30ef8155a6f" name="a525c49cfe3c0a75608ddf30ef8155a6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a525c49cfe3c0a75608ddf30ef8155a6f">&#9670;&#160;</a></span>MissedMessages()</h2>
+<a id="ae651d8d756a08e6bbf5f2f3446cf1131" name="ae651d8d756a08e6bbf5f2f3446cf1131"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae651d8d756a08e6bbf5f2f3446cf1131">&#9670;&#160;</a></span>MissedMessages()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#af524e96a66cf80e2b837c138ae9acdb3">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::MissedMessages </td>
+          <td class="memname"><a class="el" href="#a10f51a8a7038df09b97b0ab653b1abc0">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::MissedMessages </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -881,25 +824,25 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 <p>Returns how many retained messages were dropped before this cursor caught up. </p>
 <dl class="section return"><dt>Returns</dt><dd>Count of ids older than the oldest retained message </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01278">1278</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01268">1268</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a8dc98641792b1dd01b769a0d9a0afdfd" name="a8dc98641792b1dd01b769a0d9a0afdfd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8dc98641792b1dd01b769a0d9a0afdfd">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a8da35c22ebebcf8d4545cf81e0102cb7" name="a8da35c22ebebcf8d4545cf81e0102cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8da35c22ebebcf8d4545cf81e0102cb7">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -912,21 +855,21 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 
 </div>
 </div>
-<a id="a4f865c09873ab412912f235cc95a07df" name="a4f865c09873ab412912f235cc95a07df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f865c09873ab412912f235cc95a07df">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a04d040aba988b4593c9c7ccd9372bd4c" name="a04d040aba988b4593c9c7ccd9372bd4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04d040aba988b4593c9c7ccd9372bd4c">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a613a120cd212a2529a2bd8075dd5535d">ConsumableMessageReader</a>&lt; T, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a7d825ffb01a429d1fbf4278792927c8b">ConsumableMessageReader</a>&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -939,19 +882,19 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 
 </div>
 </div>
-<a id="affbf17d734a2312cd50c4e6ee8c6dccb" name="affbf17d734a2312cd50c4e6ee8c6dccb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affbf17d734a2312cd50c4e6ee8c6dccb">&#9670;&#160;</a></span>Read()</h2>
+<a id="a0310e68478b28d1cc38a5d73f8366892" name="a0310e68478b28d1cc38a5d73f8366892"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0310e68478b28d1cc38a5d73f8366892">&#9670;&#160;</a></span>Read()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#ae6cb04d6ab4bc92f0579f587a5bdf09d">iterator</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T, Alloc &gt;::Read </td>
+          <td class="memname"><a class="el" href="#aac76a9bf8a19c664d30e7f061d6be875">iterator</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">helios::ecs::ConsumableMessageReader</a>&lt; T &gt;::Read </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -965,9 +908,9 @@ template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_all
 </div><div class="memdoc">
 
 <p>Returns an iterator range over unread messages. </p>
-<p>Equivalent to <span class="tt"><a class="el" href="#a2861cc806dc63a06075ef6bf354a7f17" title="Returns an iterator to the first unread message.">begin()</a></span>; provided for an explicit read API. </p><dl class="section return"><dt>Returns</dt><dd>Iterator to the first unread message </dd></dl>
+<p>Equivalent to <span class="tt"><a class="el" href="#abce3ced9481a73b1e9606dc6be5b1231" title="Returns an iterator to the first unread message.">begin()</a></span>; provided for an explicit read API. </p><dl class="section return"><dt>Returns</dt><dd>Iterator to the first unread message </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01251">1251</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01241">1241</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>

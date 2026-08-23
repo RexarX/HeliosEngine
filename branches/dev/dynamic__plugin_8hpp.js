@@ -14,7 +14,7 @@ var dynamic__plugin_8hpp =
       [ "helios::app::DynamicPluginError::kCreateFailed", "namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea33abd07d683916a924643f3ed0cbc043", null ],
       [ "helios::app::DynamicPluginError::kReloadFailed", "namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419eea5dfd18d11d461326629594449082e177", null ]
     ] ],
-    [ "helios::app::DynamicPluginErrorToString", "namespacehelios_1_1app.html#a6c14f36c354fa92a14823337d0ee4114", null ],
+    [ "helios::app::ToString", "namespacehelios_1_1app.html#ac182f07221692f9d84a5c9cc569c4d9f", null ],
     [ "helios::app::kDefaultCreateSymbol", "namespacehelios_1_1app.html#aab4005c98d8bec33b01b1a9be47aad0d", null ],
     [ "helios::app::kDefaultPluginIdSymbol", "namespacehelios_1_1app.html#a267cb12b56cf7c71ce8296a62a812294", null ]
 ];

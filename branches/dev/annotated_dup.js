@@ -62,17 +62,18 @@ var annotated_dup =
         [ "TaskGraph", "classhelios_1_1async_1_1TaskGraph.html", "classhelios_1_1async_1_1TaskGraph" ]
       ] ],
       [ "container", "namespacehelios_1_1container.html", [
-        [ "details", "namespacehelios_1_1container_1_1details.html", [
-          [ "CallableBufferArrayDeducer", "structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer.html", null ],
-          [ "CallableBufferArrayDeducer&lt; Alloc, FirstSig, RestSigs... &gt;", "structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer_3_01Alloc_00_01FirstSig_00_01RestSigs_8_8_8_01_4.html", "structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer_3_01Alloc_00_01FirstSig_00_01RestSigs_8_8_8_01_4" ],
-          [ "CallableBufferArrayDeducer&lt; FirstSig, RestSigs... &gt;", "structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer_3_01FirstSig_00_01RestSigs_8_8_8_01_4.html", "structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer_3_01FirstSig_00_01RestSigs_8_8_8_01_4" ],
-          [ "CallableBufferDeducer", "structhelios_1_1container_1_1details_1_1CallableBufferDeducer.html", null ],
-          [ "CallableBufferDeducer&lt; Alloc, FirstSig, RestSigs... &gt;", "structhelios_1_1container_1_1details_1_1CallableBufferDeducer_3_01Alloc_00_01FirstSig_00_01RestSigs_8_8_8_01_4.html", "structhelios_1_1container_1_1details_1_1CallableBufferDeducer_3_01Alloc_00_01FirstSig_00_01RestSigs_8_8_8_01_4" ],
-          [ "CallableBufferDeducer&lt; FirstSig, RestSigs... &gt;", "structhelios_1_1container_1_1details_1_1CallableBufferDeducer_3_01FirstSig_00_01RestSigs_8_8_8_01_4.html", "structhelios_1_1container_1_1details_1_1CallableBufferDeducer_3_01FirstSig_00_01RestSigs_8_8_8_01_4" ]
-        ] ],
         [ "BasicStaticString", "classhelios_1_1container_1_1BasicStaticString.html", "classhelios_1_1container_1_1BasicStaticString" ],
-        [ "CallableBufferArrayImpl", "classhelios_1_1container_1_1CallableBufferArrayImpl.html", "classhelios_1_1container_1_1CallableBufferArrayImpl" ],
-        [ "CallableBufferImpl", "classhelios_1_1container_1_1CallableBufferImpl.html", "classhelios_1_1container_1_1CallableBufferImpl" ],
+        [ "CallableBuffer", "classhelios_1_1container_1_1CallableBuffer.html", "classhelios_1_1container_1_1CallableBuffer" ],
+        [ "CallableBufferArray", "classhelios_1_1container_1_1CallableBufferArray.html", "classhelios_1_1container_1_1CallableBufferArray" ],
+        [ "DefaultCompare", "structhelios_1_1container_1_1DefaultCompare.html", "structhelios_1_1container_1_1DefaultCompare" ],
+        [ "DefaultCompare&lt; const char * &gt;", "structhelios_1_1container_1_1DefaultCompare_3_01const_01char_01_5_01_4.html", "structhelios_1_1container_1_1DefaultCompare_3_01const_01char_01_5_01_4" ],
+        [ "DefaultCompare&lt; std::string &gt;", "structhelios_1_1container_1_1DefaultCompare_3_01std_1_1string_01_4.html", "structhelios_1_1container_1_1DefaultCompare_3_01std_1_1string_01_4" ],
+        [ "DefaultCompare&lt; std::string_view &gt;", "structhelios_1_1container_1_1DefaultCompare_3_01std_1_1string__view_01_4.html", "structhelios_1_1container_1_1DefaultCompare_3_01std_1_1string__view_01_4" ],
+        [ "DefaultHash", "structhelios_1_1container_1_1DefaultHash.html", "structhelios_1_1container_1_1DefaultHash" ],
+        [ "DefaultHash&lt; const char * &gt;", "structhelios_1_1container_1_1DefaultHash_3_01const_01char_01_5_01_4.html", "structhelios_1_1container_1_1DefaultHash_3_01const_01char_01_5_01_4" ],
+        [ "DefaultHash&lt; std::string &gt;", "structhelios_1_1container_1_1DefaultHash_3_01std_1_1string_01_4.html", "structhelios_1_1container_1_1DefaultHash_3_01std_1_1string_01_4" ],
+        [ "DefaultHash&lt; std::string_view &gt;", "structhelios_1_1container_1_1DefaultHash_3_01std_1_1string__view_01_4.html", "structhelios_1_1container_1_1DefaultHash_3_01std_1_1string__view_01_4" ],
+        [ "FlatMap", "classhelios_1_1container_1_1FlatMap.html", "classhelios_1_1container_1_1FlatMap" ],
         [ "MultiTypeMap", "classhelios_1_1container_1_1MultiTypeMap.html", "classhelios_1_1container_1_1MultiTypeMap" ],
         [ "SparseSet", "classhelios_1_1container_1_1SparseSet.html", "classhelios_1_1container_1_1SparseSet" ],
         [ "TypedBuffer", "classhelios_1_1container_1_1TypedBuffer.html", "classhelios_1_1container_1_1TypedBuffer" ],
@@ -236,7 +237,6 @@ var annotated_dup =
         [ "SystemParamTraits", "structhelios_1_1ecs_1_1SystemParamTraits.html", null ],
         [ "SystemParamTraits&lt; AsyncMessageReader&lt; T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01AsyncMessageReader_3_01T_01_4_01_4.html", "structhelios_1_1ecs_1_1SystemParamTraits_3_01AsyncMessageReader_3_01T_01_4_01_4" ],
         [ "SystemParamTraits&lt; AsyncMessageWriter&lt; T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01AsyncMessageWriter_3_01T_01_4_01_4.html", "structhelios_1_1ecs_1_1SystemParamTraits_3_01AsyncMessageWriter_3_01T_01_4_01_4" ],
-        [ "SystemParamTraits&lt; BasicMessageWriter&lt; T, Allocator &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01BasicMessageWriter_3_01T_00_01Allocator_01_4_01_4.html", "structhelios_1_1ecs_1_1SystemParamTraits_3_01BasicMessageWriter_3_01T_00_01Allocator_01_4_01_4" ],
         [ "SystemParamTraits&lt; Commands &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01Commands_01_4.html", "structhelios_1_1ecs_1_1SystemParamTraits_3_01Commands_01_4" ],
         [ "SystemParamTraits&lt; ConsumableMessageReader&lt; T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01ConsumableMessageReader_3_01T_01_4_01_4.html", "structhelios_1_1ecs_1_1SystemParamTraits_3_01ConsumableMessageReader_3_01T_01_4_01_4" ],
         [ "SystemParamTraits&lt; input::GamepadMessages &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1GamepadMessages_01_4.html", null ],
@@ -401,7 +401,8 @@ var annotated_dup =
         [ "RcFromThis", "classhelios_1_1mem_1_1RcFromThis.html", "classhelios_1_1mem_1_1RcFromThis" ],
         [ "RefCounted", "classhelios_1_1mem_1_1RefCounted.html", "classhelios_1_1mem_1_1RefCounted" ],
         [ "StackAllocator", "classhelios_1_1mem_1_1StackAllocator.html", "classhelios_1_1mem_1_1StackAllocator" ],
-        [ "StackAllocatorOptions", "structhelios_1_1mem_1_1StackAllocatorOptions.html", "structhelios_1_1mem_1_1StackAllocatorOptions" ]
+        [ "StackAllocatorOptions", "structhelios_1_1mem_1_1StackAllocatorOptions.html", "structhelios_1_1mem_1_1StackAllocatorOptions" ],
+        [ "TemporaryStorage", "classhelios_1_1mem_1_1TemporaryStorage.html", "classhelios_1_1mem_1_1TemporaryStorage" ]
       ] ],
       [ "profile", "namespacehelios_1_1profile.html", [
         [ "Backend", "classhelios_1_1profile_1_1Backend.html", "classhelios_1_1profile_1_1Backend" ],
@@ -462,6 +463,7 @@ var annotated_dup =
           [ "UniqueTypesHelper&lt; T, Rest... &gt;", "structhelios_1_1utils_1_1details_1_1UniqueTypesHelper_3_01T_00_01Rest_8_8_8_01_4.html", null ]
         ] ],
         [ "ChainAdapter", "classhelios_1_1utils_1_1ChainAdapter.html", "classhelios_1_1utils_1_1ChainAdapter" ],
+        [ "ChunkAdapter", "classhelios_1_1utils_1_1ChunkAdapter.html", "classhelios_1_1utils_1_1ChunkAdapter" ],
         [ "ChunkView", "classhelios_1_1utils_1_1ChunkView.html", "classhelios_1_1utils_1_1ChunkView" ],
         [ "Defer", "classhelios_1_1utils_1_1Defer.html", "classhelios_1_1utils_1_1Defer" ],
         [ "DynamicLibrary", "classhelios_1_1utils_1_1DynamicLibrary.html", "classhelios_1_1utils_1_1DynamicLibrary" ],
@@ -482,6 +484,7 @@ var annotated_dup =
         [ "StrideAdapter", "classhelios_1_1utils_1_1StrideAdapter.html", "classhelios_1_1utils_1_1StrideAdapter" ],
         [ "StringEqual", "structhelios_1_1utils_1_1StringEqual.html", "structhelios_1_1utils_1_1StringEqual" ],
         [ "StringHash", "structhelios_1_1utils_1_1StringHash.html", "structhelios_1_1utils_1_1StringHash" ],
+        [ "StringLess", "structhelios_1_1utils_1_1StringLess.html", "structhelios_1_1utils_1_1StringLess" ],
         [ "TakeAdapter", "classhelios_1_1utils_1_1TakeAdapter.html", "classhelios_1_1utils_1_1TakeAdapter" ],
         [ "TakeWhileAdapter", "classhelios_1_1utils_1_1TakeWhileAdapter.html", "classhelios_1_1utils_1_1TakeWhileAdapter" ],
         [ "Timer", "classhelios_1_1utils_1_1Timer.html", "classhelios_1_1utils_1_1Timer" ],
@@ -558,7 +561,14 @@ var annotated_dup =
     [ "std", "namespacestd.html", [
       [ "formatter&lt; helios::BasicCStringView&lt; CharT, Traits &gt; &gt;", "structstd_1_1formatter_3_01helios_1_1BasicCStringView_3_01CharT_00_01Traits_01_4_01_4.html", "structstd_1_1formatter_3_01helios_1_1BasicCStringView_3_01CharT_00_01Traits_01_4_01_4" ],
       [ "formatter&lt; helios::container::BasicStaticString&lt; StrCapacity, CharT, Traits &gt; &gt;", "structstd_1_1formatter_3_01helios_1_1container_1_1BasicStaticString_3_01StrCapacity_00_01CharT_00_01Traits_01_4_01_4.html", "structstd_1_1formatter_3_01helios_1_1container_1_1BasicStaticString_3_01StrCapacity_00_01CharT_00_01Traits_01_4_01_4" ],
+      [ "formatter&lt; helios::ecs::ComponentAddedMsg&lt; T &gt; &gt;", "structstd_1_1formatter_3_01helios_1_1ecs_1_1ComponentAddedMsg_3_01T_01_4_01_4.html", "structstd_1_1formatter_3_01helios_1_1ecs_1_1ComponentAddedMsg_3_01T_01_4_01_4" ],
+      [ "formatter&lt; helios::ecs::ComponentRemovedMsg&lt; T &gt; &gt;", "structstd_1_1formatter_3_01helios_1_1ecs_1_1ComponentRemovedMsg_3_01T_01_4_01_4.html", "structstd_1_1formatter_3_01helios_1_1ecs_1_1ComponentRemovedMsg_3_01T_01_4_01_4" ],
+      [ "formatter&lt; helios::ecs::ComponentsClearedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1ecs_1_1ComponentsClearedMsg_01_4.html", "structstd_1_1formatter_3_01helios_1_1ecs_1_1ComponentsClearedMsg_01_4" ],
       [ "formatter&lt; helios::ecs::Entity &gt;", "structstd_1_1formatter_3_01helios_1_1ecs_1_1Entity_01_4.html", "structstd_1_1formatter_3_01helios_1_1ecs_1_1Entity_01_4" ],
+      [ "formatter&lt; helios::ecs::EntityAddedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1ecs_1_1EntityAddedMsg_01_4.html", "structstd_1_1formatter_3_01helios_1_1ecs_1_1EntityAddedMsg_01_4" ],
+      [ "formatter&lt; helios::ecs::EntityDestroyedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1ecs_1_1EntityDestroyedMsg_01_4.html", "structstd_1_1formatter_3_01helios_1_1ecs_1_1EntityDestroyedMsg_01_4" ],
+      [ "formatter&lt; helios::ecs::ResourceInsertedMsg&lt; T &gt; &gt;", "structstd_1_1formatter_3_01helios_1_1ecs_1_1ResourceInsertedMsg_3_01T_01_4_01_4.html", "structstd_1_1formatter_3_01helios_1_1ecs_1_1ResourceInsertedMsg_3_01T_01_4_01_4" ],
+      [ "formatter&lt; helios::ecs::ResourceRemovedMsg&lt; T &gt; &gt;", "structstd_1_1formatter_3_01helios_1_1ecs_1_1ResourceRemovedMsg_3_01T_01_4_01_4.html", "structstd_1_1formatter_3_01helios_1_1ecs_1_1ResourceRemovedMsg_3_01T_01_4_01_4" ],
       [ "formatter&lt; helios::input::AxisFilter &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1AxisFilter_01_4.html", "structstd_1_1formatter_3_01helios_1_1input_1_1AxisFilter_01_4" ],
       [ "formatter&lt; helios::input::ButtonState &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1ButtonState_01_4.html", "structstd_1_1formatter_3_01helios_1_1input_1_1ButtonState_01_4" ],
       [ "formatter&lt; helios::input::Cursor &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Cursor_01_4.html", "structstd_1_1formatter_3_01helios_1_1input_1_1Cursor_01_4" ],

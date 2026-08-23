@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: helios::ecs::DestroyEntitiesCmd&lt; Alloc &gt; Class Template Reference</title>
+    <title>Helios Engine: helios::ecs::DestroyEntitiesCmd Class Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classhelios_1_1ecs_1_1DestroyEntitiesCmd-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">helios::ecs::DestroyEntitiesCmd&lt; Alloc &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">helios::ecs::DestroyEntitiesCmd Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -185,50 +185,50 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a127471af385bd71309a4fc7430069f9c" id="r_a127471af385bd71309a4fc7430069f9c"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a127471af385bd71309a4fc7430069f9c">DestroyEntitiesCmd</a> (std::vector&lt; <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>, Alloc &gt; entities)</td></tr>
-<tr class="memdesc:a127471af385bd71309a4fc7430069f9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs destroy entities command from vector of entities.  <br /></td></tr>
-<tr class="memitem:aa590fdbe01149d264080299c0e40aba1" id="r_aa590fdbe01149d264080299c0e40aba1"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aa590fdbe01149d264080299c0e40aba1">DestroyEntitiesCmd</a> (const DestroyEntitiesCmd &amp;) noexcept=default</td></tr>
-<tr class="memitem:a4113ef3cff57daae51ad66f5a1a5d61d" id="r_a4113ef3cff57daae51ad66f5a1a5d61d"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a4113ef3cff57daae51ad66f5a1a5d61d">DestroyEntitiesCmd</a> (DestroyEntitiesCmd &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a3e2da88c9b4dae62d66599b01637a997" id="r_a3e2da88c9b4dae62d66599b01637a997"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a3e2da88c9b4dae62d66599b01637a997">~DestroyEntitiesCmd</a> () noexcept=default</td></tr>
-<tr class="memitem:a50810cdf37d67b37449a892d2ea78b9e" id="r_a50810cdf37d67b37449a892d2ea78b9e"><td class="memItemLeft">constexpr <a class="el" href="#a127471af385bd71309a4fc7430069f9c">DestroyEntitiesCmd</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a50810cdf37d67b37449a892d2ea78b9e">operator=</a> (const <a class="el" href="#a127471af385bd71309a4fc7430069f9c">DestroyEntitiesCmd</a> &amp;) noexcept=default</td></tr>
-<tr class="memitem:ae7a8ff3b409429f0efbff69acac6c850" id="r_ae7a8ff3b409429f0efbff69acac6c850"><td class="memItemLeft">constexpr <a class="el" href="#a127471af385bd71309a4fc7430069f9c">DestroyEntitiesCmd</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae7a8ff3b409429f0efbff69acac6c850">operator=</a> (<a class="el" href="#a127471af385bd71309a4fc7430069f9c">DestroyEntitiesCmd</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:acfb0fe979cea0e917706299c87438787" id="r_acfb0fe979cea0e917706299c87438787"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acfb0fe979cea0e917706299c87438787">Execute</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;world)</td></tr>
-<tr class="memdesc:acfb0fe979cea0e917706299c87438787"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes entities destruction.  <br /></td></tr>
+<tr class="memitem:a1f1701c8f4263779cee6f1bdbd584380" id="r_a1f1701c8f4263779cee6f1bdbd584380"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&gt;</td></tr>
+<tr class="memitem:a1f1701c8f4263779cee6f1bdbd584380 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1f1701c8f4263779cee6f1bdbd584380">DestroyEntitiesCmd</a> (R &amp;&amp;entities, std::pmr::memory_resource *resource=std::pmr::get_default_resource())</td></tr>
+<tr class="memdesc:a1f1701c8f4263779cee6f1bdbd584380"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs destroy entities command from vector of entities.  <br /></td></tr>
+<tr class="memitem:a27001791e073075b36bf60dd736e21f8" id="r_a27001791e073075b36bf60dd736e21f8"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a27001791e073075b36bf60dd736e21f8">DestroyEntitiesCmd</a> (const DestroyEntitiesCmd &amp;) noexcept=default</td></tr>
+<tr class="memitem:a20f6d1f6475a9244b02a368b2436d677" id="r_a20f6d1f6475a9244b02a368b2436d677"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a20f6d1f6475a9244b02a368b2436d677">DestroyEntitiesCmd</a> (DestroyEntitiesCmd &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a9304f0fe7018e723cb8f4510ee1c1fdf" id="r_a9304f0fe7018e723cb8f4510ee1c1fdf"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a9304f0fe7018e723cb8f4510ee1c1fdf">~DestroyEntitiesCmd</a> () noexcept=default</td></tr>
+<tr class="memitem:a5f2ef0187b85d5f97e2bf55aa3647c14" id="r_a5f2ef0187b85d5f97e2bf55aa3647c14"><td class="memItemLeft">constexpr <a class="el" href="#a1f1701c8f4263779cee6f1bdbd584380">DestroyEntitiesCmd</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5f2ef0187b85d5f97e2bf55aa3647c14">operator=</a> (const <a class="el" href="#a1f1701c8f4263779cee6f1bdbd584380">DestroyEntitiesCmd</a> &amp;) noexcept=default</td></tr>
+<tr class="memitem:a6a7afb94f53385bfa628630a6bfc68d4" id="r_a6a7afb94f53385bfa628630a6bfc68d4"><td class="memItemLeft">constexpr <a class="el" href="#a1f1701c8f4263779cee6f1bdbd584380">DestroyEntitiesCmd</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6a7afb94f53385bfa628630a6bfc68d4">operator=</a> (<a class="el" href="#a1f1701c8f4263779cee6f1bdbd584380">DestroyEntitiesCmd</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a3016ff7f4cc11e7cc3099804e75ce0bf" id="r_a3016ff7f4cc11e7cc3099804e75ce0bf"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3016ff7f4cc11e7cc3099804e75ce0bf">Execute</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;world)</td></tr>
+<tr class="memdesc:a3016ff7f4cc11e7cc3099804e75ce0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes entities destruction.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt;<br />
-class helios::ecs::DestroyEntitiesCmd&lt; Alloc &gt;</div><p>Command to destroy multiple entities. </p>
+<div class="textblock"><p>Command to destroy multiple entities. </p>
 <p>Efficiently destroys multiple entities in a single operation. </p><dl class="section warning"><dt>Warning</dt><dd>Will assertion if any of the entities do not exist in the world (when world updated), or if reserved entities have not been flushed (<span class="tt">NeedsFlush()</span>). </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Alloc</td><td>Allocator type </td></tr>
-  </table>
-  </dd>
-</dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00125">125</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00123">123</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a127471af385bd71309a4fc7430069f9c" name="a127471af385bd71309a4fc7430069f9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a127471af385bd71309a4fc7430069f9c">&#9670;&#160;</a></span>DestroyEntitiesCmd() <span class="overload">[1/3]</span></h2>
+<a id="a1f1701c8f4263779cee6f1bdbd584380" name="a1f1701c8f4263779cee6f1bdbd584380"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f1701c8f4263779cee6f1bdbd584380">&#9670;&#160;</a></span>DestroyEntitiesCmd() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
+template&lt;std::ranges::input_range R&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1DestroyEntitiesCmd.html">helios::ecs::DestroyEntitiesCmd</a>&lt; Alloc &gt;::DestroyEntitiesCmd </td>
+          <td class="memname">helios::ecs::DestroyEntitiesCmd::DestroyEntitiesCmd </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>, Alloc &gt;</td>          <td class="paramname"><span class="paramname"><em>entities</em></span></td><td>)</td>
+          <td class="paramtype">R &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>entities</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::pmr::get_default_resource()</span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -246,21 +246,19 @@ template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 
 </div>
 </div>
-<a id="aa590fdbe01149d264080299c0e40aba1" name="aa590fdbe01149d264080299c0e40aba1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa590fdbe01149d264080299c0e40aba1">&#9670;&#160;</a></span>DestroyEntitiesCmd() <span class="overload">[2/3]</span></h2>
+<a id="a27001791e073075b36bf60dd736e21f8" name="a27001791e073075b36bf60dd736e21f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27001791e073075b36bf60dd736e21f8">&#9670;&#160;</a></span>DestroyEntitiesCmd() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1DestroyEntitiesCmd.html">helios::ecs::DestroyEntitiesCmd</a>&lt; Alloc &gt;::DestroyEntitiesCmd </td>
+          <td class="memname">helios::ecs::DestroyEntitiesCmd::DestroyEntitiesCmd </td>
           <td>(</td>
-          <td class="paramtype">const DestroyEntitiesCmd&lt; Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const DestroyEntitiesCmd &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -273,21 +271,19 @@ template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a4113ef3cff57daae51ad66f5a1a5d61d" name="a4113ef3cff57daae51ad66f5a1a5d61d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4113ef3cff57daae51ad66f5a1a5d61d">&#9670;&#160;</a></span>DestroyEntitiesCmd() <span class="overload">[3/3]</span></h2>
+<a id="a20f6d1f6475a9244b02a368b2436d677" name="a20f6d1f6475a9244b02a368b2436d677"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20f6d1f6475a9244b02a368b2436d677">&#9670;&#160;</a></span>DestroyEntitiesCmd() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1DestroyEntitiesCmd.html">helios::ecs::DestroyEntitiesCmd</a>&lt; Alloc &gt;::DestroyEntitiesCmd </td>
+          <td class="memname">helios::ecs::DestroyEntitiesCmd::DestroyEntitiesCmd </td>
           <td>(</td>
-          <td class="paramtype">DestroyEntitiesCmd&lt; Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">DestroyEntitiesCmd &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -300,19 +296,17 @@ template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a3e2da88c9b4dae62d66599b01637a997" name="a3e2da88c9b4dae62d66599b01637a997"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e2da88c9b4dae62d66599b01637a997">&#9670;&#160;</a></span>~DestroyEntitiesCmd()</h2>
+<a id="a9304f0fe7018e723cb8f4510ee1c1fdf" name="a9304f0fe7018e723cb8f4510ee1c1fdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9304f0fe7018e723cb8f4510ee1c1fdf">&#9670;&#160;</a></span>~DestroyEntitiesCmd()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1DestroyEntitiesCmd.html">helios::ecs::DestroyEntitiesCmd</a>&lt; Alloc &gt;::~<a class="el" href="#a127471af385bd71309a4fc7430069f9c">DestroyEntitiesCmd</a> </td>
+          <td class="memname">helios::ecs::DestroyEntitiesCmd::~DestroyEntitiesCmd </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -328,19 +322,17 @@ template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="acfb0fe979cea0e917706299c87438787" name="acfb0fe979cea0e917706299c87438787"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfb0fe979cea0e917706299c87438787">&#9670;&#160;</a></span>Execute()</h2>
+<a id="a3016ff7f4cc11e7cc3099804e75ce0bf" name="a3016ff7f4cc11e7cc3099804e75ce0bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3016ff7f4cc11e7cc3099804e75ce0bf">&#9670;&#160;</a></span>Execute()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1DestroyEntitiesCmd.html">helios::ecs::DestroyEntitiesCmd</a>&lt; Alloc &gt;::Execute </td>
+          <td class="memname">void helios::ecs::DestroyEntitiesCmd::Execute </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>world</em></span></td><td>)</td>
           <td></td>
@@ -362,25 +354,23 @@ template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00154">154</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00157">157</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a50810cdf37d67b37449a892d2ea78b9e" name="a50810cdf37d67b37449a892d2ea78b9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50810cdf37d67b37449a892d2ea78b9e">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a5f2ef0187b85d5f97e2bf55aa3647c14" name="a5f2ef0187b85d5f97e2bf55aa3647c14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f2ef0187b85d5f97e2bf55aa3647c14">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a127471af385bd71309a4fc7430069f9c">DestroyEntitiesCmd</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1DestroyEntitiesCmd.html">helios::ecs::DestroyEntitiesCmd</a>&lt; Alloc &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a1f1701c8f4263779cee6f1bdbd584380">DestroyEntitiesCmd</a> &amp; helios::ecs::DestroyEntitiesCmd::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a127471af385bd71309a4fc7430069f9c">DestroyEntitiesCmd</a>&lt; Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a1f1701c8f4263779cee6f1bdbd584380">DestroyEntitiesCmd</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -393,21 +383,19 @@ template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 
 </div>
 </div>
-<a id="ae7a8ff3b409429f0efbff69acac6c850" name="ae7a8ff3b409429f0efbff69acac6c850"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7a8ff3b409429f0efbff69acac6c850">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a6a7afb94f53385bfa628630a6bfc68d4" name="a6a7afb94f53385bfa628630a6bfc68d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a7afb94f53385bfa628630a6bfc68d4">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;Entity&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a127471af385bd71309a4fc7430069f9c">DestroyEntitiesCmd</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1DestroyEntitiesCmd.html">helios::ecs::DestroyEntitiesCmd</a>&lt; Alloc &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a1f1701c8f4263779cee6f1bdbd584380">DestroyEntitiesCmd</a> &amp; helios::ecs::DestroyEntitiesCmd::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a127471af385bd71309a4fc7430069f9c">DestroyEntitiesCmd</a>&lt; Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a1f1701c8f4263779cee6f1bdbd584380">DestroyEntitiesCmd</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>

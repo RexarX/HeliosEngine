@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: helios::ecs::BasicMessageWriter&lt; T, Allocator &gt; Class Template Reference</title>
+    <title>Helios Engine: helios::ecs::BasicMessageWriter&lt; T &gt; Class Template Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -174,66 +174,65 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classhelios_1_1ecs_1_1BasicMessageWriter-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">helios::ecs::BasicMessageWriter&lt; T, Allocator &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">helios::ecs::BasicMessageWriter&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Type-safe writer for regular messages with a configurable queue allocator.  
+<p>Type-safe writer for regular messages.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="writer_8hpp_source.html">writer.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1a9b917d8930660cf4e012784afa3067" id="r_a1a9b917d8930660cf4e012784afa3067"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a1a9b917d8930660cf4e012784afa3067">BasicMessageWriter</a> (<a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a>&lt; Allocator &gt; &amp;queue) noexcept</td></tr>
-<tr class="memdesc:a1a9b917d8930660cf4e012784afa3067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html" title="Type-safe writer for regular messages with a configurable queue allocator.">BasicMessageWriter</a></span> that writes to a message queue.  <br /></td></tr>
-<tr class="memitem:a5704838761819cb77508c0b02f483423" id="r_a5704838761819cb77508c0b02f483423"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5704838761819cb77508c0b02f483423">BasicMessageWriter</a> (const BasicMessageWriter &amp;)=delete</td></tr>
-<tr class="memitem:a919d296d5a84a4dc326284f0cba43f65" id="r_a919d296d5a84a4dc326284f0cba43f65"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a919d296d5a84a4dc326284f0cba43f65">BasicMessageWriter</a> (BasicMessageWriter &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a26660d04e687139743871f7c73c2b820" id="r_a26660d04e687139743871f7c73c2b820"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a26660d04e687139743871f7c73c2b820">~BasicMessageWriter</a> () noexcept=default</td></tr>
-<tr class="memitem:a051c666b9a617eccddd4ff27afd34998" id="r_a051c666b9a617eccddd4ff27afd34998"><td class="memItemLeft"><a class="el" href="#a1a9b917d8930660cf4e012784afa3067">BasicMessageWriter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a051c666b9a617eccddd4ff27afd34998">operator=</a> (const <a class="el" href="#a1a9b917d8930660cf4e012784afa3067">BasicMessageWriter</a> &amp;)=delete</td></tr>
-<tr class="memitem:aeaac0393447c48c996d4220762d6cbb3" id="r_aeaac0393447c48c996d4220762d6cbb3"><td class="memItemLeft">constexpr <a class="el" href="#a1a9b917d8930660cf4e012784afa3067">BasicMessageWriter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aeaac0393447c48c996d4220762d6cbb3">operator=</a> (<a class="el" href="#a1a9b917d8930660cf4e012784afa3067">BasicMessageWriter</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a1879828695519f011fbaad76115245dd" id="r_a1879828695519f011fbaad76115245dd"><td class="memTemplParams" colspan="2">template&lt;typename U = T&gt; <br />
+<tr class="memitem:afa706fabe913103c256a1fbf6d402912" id="r_afa706fabe913103c256a1fbf6d402912"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#afa706fabe913103c256a1fbf6d402912">BasicMessageWriter</a> (<a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a> &amp;queue) noexcept</td></tr>
+<tr class="memdesc:afa706fabe913103c256a1fbf6d402912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html" title="Type-safe writer for regular messages.">BasicMessageWriter</a></span> that writes to a message queue.  <br /></td></tr>
+<tr class="memitem:a6be9d55c5a387f429e54af13ae9e33c7" id="r_a6be9d55c5a387f429e54af13ae9e33c7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6be9d55c5a387f429e54af13ae9e33c7">BasicMessageWriter</a> (const BasicMessageWriter &amp;)=delete</td></tr>
+<tr class="memitem:aab3d21cc774bf6a148858838dbdf04f2" id="r_aab3d21cc774bf6a148858838dbdf04f2"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aab3d21cc774bf6a148858838dbdf04f2">BasicMessageWriter</a> (BasicMessageWriter &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a2006c80f951831328cdb39e0eb37746a" id="r_a2006c80f951831328cdb39e0eb37746a"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a2006c80f951831328cdb39e0eb37746a">~BasicMessageWriter</a> () noexcept=default</td></tr>
+<tr class="memitem:ab62c4902b9b535fcad61b43dd1da8362" id="r_ab62c4902b9b535fcad61b43dd1da8362"><td class="memItemLeft"><a class="el" href="#afa706fabe913103c256a1fbf6d402912">BasicMessageWriter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab62c4902b9b535fcad61b43dd1da8362">operator=</a> (const <a class="el" href="#afa706fabe913103c256a1fbf6d402912">BasicMessageWriter</a> &amp;)=delete</td></tr>
+<tr class="memitem:a52163f030aa2b3d4af9ef7b4e6bf6a57" id="r_a52163f030aa2b3d4af9ef7b4e6bf6a57"><td class="memItemLeft">constexpr <a class="el" href="#afa706fabe913103c256a1fbf6d402912">BasicMessageWriter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a52163f030aa2b3d4af9ef7b4e6bf6a57">operator=</a> (<a class="el" href="#afa706fabe913103c256a1fbf6d402912">BasicMessageWriter</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a9dbfbe347d334e51810a7f02bb897dcd" id="r_a9dbfbe347d334e51810a7f02bb897dcd"><td class="memTemplParams" colspan="2">template&lt;typename U = T&gt; <br />
 requires std::same_as&lt;std::remove_cvref_t&lt;U&gt;, T&gt;</td></tr>
-<tr class="memitem:a1879828695519f011fbaad76115245dd template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1879828695519f011fbaad76115245dd">Write</a> (U &amp;&amp;message) const</td></tr>
-<tr class="memdesc:a1879828695519f011fbaad76115245dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a single message to the local queue.  <br /></td></tr>
-<tr class="memitem:a31f1a31b27bb34c8dd04af73ea91a813" id="r_a31f1a31b27bb34c8dd04af73ea91a813"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
+<tr class="memitem:a9dbfbe347d334e51810a7f02bb897dcd template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a9dbfbe347d334e51810a7f02bb897dcd">Write</a> (U &amp;&amp;message) const</td></tr>
+<tr class="memdesc:a9dbfbe347d334e51810a7f02bb897dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a single message to the local queue.  <br /></td></tr>
+<tr class="memitem:a3a62b42df50c73b7d4c3b487f1ec1a60" id="r_a3a62b42df50c73b7d4c3b487f1ec1a60"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, T&gt;</td></tr>
-<tr class="memitem:a31f1a31b27bb34c8dd04af73ea91a813 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a31f1a31b27bb34c8dd04af73ea91a813">WriteBulk</a> (R &amp;&amp;messages) const</td></tr>
-<tr class="memdesc:a31f1a31b27bb34c8dd04af73ea91a813"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes multiple messages to the local queue in bulk.  <br /></td></tr>
-<tr class="memitem:a8661c2d01c42154815bc314ef104e7b9" id="r_a8661c2d01c42154815bc314ef104e7b9"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
+<tr class="memitem:a3a62b42df50c73b7d4c3b487f1ec1a60 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a3a62b42df50c73b7d4c3b487f1ec1a60">WriteBulk</a> (R &amp;&amp;messages) const</td></tr>
+<tr class="memdesc:a3a62b42df50c73b7d4c3b487f1ec1a60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes multiple messages to the local queue in bulk.  <br /></td></tr>
+<tr class="memitem:a42855d0028761f306fad726544e3fda7" id="r_a42855d0028761f306fad726544e3fda7"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
 requires std::constructible_from&lt;T, Args...&gt;</td></tr>
-<tr class="memitem:a8661c2d01c42154815bc314ef104e7b9 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8661c2d01c42154815bc314ef104e7b9">Emplace</a> (Args &amp;&amp;... args) const</td></tr>
-<tr class="memdesc:a8661c2d01c42154815bc314ef104e7b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an message in-place and writes it to the local queue.  <br /></td></tr>
+<tr class="memitem:a42855d0028761f306fad726544e3fda7 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a42855d0028761f306fad726544e3fda7">Emplace</a> (Args &amp;&amp;... args) const</td></tr>
+<tr class="memdesc:a42855d0028761f306fad726544e3fda7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an message in-place and writes it to the local queue.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;&gt;<br />
-class helios::ecs::BasicMessageWriter&lt; T, Allocator &gt;</div><p>Type-safe writer for regular messages with a configurable queue allocator. </p>
-<p>Messages written through <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html" title="Type-safe writer for regular messages with a configurable queue allocator.">BasicMessageWriter</a></span> are buffered in a message queue and merged into the global <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html" title="Central coordinator for message lifecycle with double buffering and consumed message removal.">MessageManager</a></span> at sync time when used from system local data. Ids are assigned during that merge. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<div class="textblock"><div class="compoundTemplParams">template&lt;MessageTrait T&gt;<br />
+class helios::ecs::BasicMessageWriter&lt; T &gt;</div><p>Type-safe writer for regular messages. </p>
+<p>Messages written through <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html" title="Type-safe writer for regular messages.">BasicMessageWriter</a></span> are buffered in a message queue and merged into the global <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html" title="Central coordinator for message lifecycle with double buffering and consumed message removal.">MessageManager</a></span> at sync time when used from system local data. Ids are assigned during that merge. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Message type satisfying <span class="tt"><a class="el" href="concepthelios_1_1ecs_1_1MessageTrait.html" title="Concept for valid message types.">MessageTrait</a></span> </td></tr>
-    <tr><td class="paramname">Allocator</td><td>Allocator type for the underlying message queue (default: <span class="tt">std::allocator&lt;std::byte&gt;</span>) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00031">31</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00025">25</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1a9b917d8930660cf4e012784afa3067" name="a1a9b917d8930660cf4e012784afa3067"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a9b917d8930660cf4e012784afa3067">&#9670;&#160;</a></span>BasicMessageWriter() <span class="overload">[1/3]</span></h2>
+<a id="afa706fabe913103c256a1fbf6d402912" name="afa706fabe913103c256a1fbf6d402912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa706fabe913103c256a1fbf6d402912">&#9670;&#160;</a></span>BasicMessageWriter() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T, Allocator &gt;::BasicMessageWriter </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T &gt;::BasicMessageWriter </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -244,7 +243,7 @@ template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html" title="Type-safe writer for regular messages with a configurable queue allocator.">BasicMessageWriter</a></span> that writes to a message queue. </p>
+<p>Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html" title="Type-safe writer for regular messages.">BasicMessageWriter</a></span> that writes to a message queue. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">queue</td><td>Reference to the message queue </td></tr>
@@ -252,25 +251,25 @@ template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00037">37</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00031">31</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a5704838761819cb77508c0b02f483423" name="a5704838761819cb77508c0b02f483423"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5704838761819cb77508c0b02f483423">&#9670;&#160;</a></span>BasicMessageWriter() <span class="overload">[2/3]</span></h2>
+<a id="a6be9d55c5a387f429e54af13ae9e33c7" name="a6be9d55c5a387f429e54af13ae9e33c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6be9d55c5a387f429e54af13ae9e33c7">&#9670;&#160;</a></span>BasicMessageWriter() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T, Allocator &gt;::BasicMessageWriter </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T &gt;::BasicMessageWriter </td>
           <td>(</td>
-          <td class="paramtype">const BasicMessageWriter&lt; T, Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const BasicMessageWriter&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -283,21 +282,21 @@ template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;
 
 </div>
 </div>
-<a id="a919d296d5a84a4dc326284f0cba43f65" name="a919d296d5a84a4dc326284f0cba43f65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a919d296d5a84a4dc326284f0cba43f65">&#9670;&#160;</a></span>BasicMessageWriter() <span class="overload">[3/3]</span></h2>
+<a id="aab3d21cc774bf6a148858838dbdf04f2" name="aab3d21cc774bf6a148858838dbdf04f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab3d21cc774bf6a148858838dbdf04f2">&#9670;&#160;</a></span>BasicMessageWriter() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T, Allocator &gt;::BasicMessageWriter </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T &gt;::BasicMessageWriter </td>
           <td>(</td>
-          <td class="paramtype">BasicMessageWriter&lt; T, Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">BasicMessageWriter&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -310,19 +309,19 @@ template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;
 
 </div>
 </div>
-<a id="a26660d04e687139743871f7c73c2b820" name="a26660d04e687139743871f7c73c2b820"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26660d04e687139743871f7c73c2b820">&#9670;&#160;</a></span>~BasicMessageWriter()</h2>
+<a id="a2006c80f951831328cdb39e0eb37746a" name="a2006c80f951831328cdb39e0eb37746a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2006c80f951831328cdb39e0eb37746a">&#9670;&#160;</a></span>~BasicMessageWriter()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T, Allocator &gt;::~<a class="el" href="#a1a9b917d8930660cf4e012784afa3067">BasicMessageWriter</a> </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T &gt;::~<a class="el" href="#afa706fabe913103c256a1fbf6d402912">BasicMessageWriter</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -338,13 +337,13 @@ template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a8661c2d01c42154815bc314ef104e7b9" name="a8661c2d01c42154815bc314ef104e7b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8661c2d01c42154815bc314ef104e7b9">&#9670;&#160;</a></span>Emplace()</h2>
+<a id="a42855d0028761f306fad726544e3fda7" name="a42855d0028761f306fad726544e3fda7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42855d0028761f306fad726544e3fda7">&#9670;&#160;</a></span>Emplace()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;MessageTrait T&gt; </div>
 <div class="memtemplate">
 template&lt;typename... Args&gt; <br />
 requires std::constructible_from&lt;T, Args...&gt;</div>
@@ -353,7 +352,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T, Allocator &gt;::Emplace </td>
+          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T &gt;::Emplace </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
           <td> const</td>
@@ -361,7 +360,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -380,25 +379,25 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00076">76</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00070">70</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aeaac0393447c48c996d4220762d6cbb3" name="aeaac0393447c48c996d4220762d6cbb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeaac0393447c48c996d4220762d6cbb3">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a52163f030aa2b3d4af9ef7b4e6bf6a57" name="a52163f030aa2b3d4af9ef7b4e6bf6a57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52163f030aa2b3d4af9ef7b4e6bf6a57">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a1a9b917d8930660cf4e012784afa3067">BasicMessageWriter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T, Allocator &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#afa706fabe913103c256a1fbf6d402912">BasicMessageWriter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a1a9b917d8930660cf4e012784afa3067">BasicMessageWriter</a>&lt; T, Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#afa706fabe913103c256a1fbf6d402912">BasicMessageWriter</a>&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -411,21 +410,21 @@ template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;
 
 </div>
 </div>
-<a id="a051c666b9a617eccddd4ff27afd34998" name="a051c666b9a617eccddd4ff27afd34998"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a051c666b9a617eccddd4ff27afd34998">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="ab62c4902b9b535fcad61b43dd1da8362" name="ab62c4902b9b535fcad61b43dd1da8362"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab62c4902b9b535fcad61b43dd1da8362">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;MessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a1a9b917d8930660cf4e012784afa3067">BasicMessageWriter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T, Allocator &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#afa706fabe913103c256a1fbf6d402912">BasicMessageWriter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a1a9b917d8930660cf4e012784afa3067">BasicMessageWriter</a>&lt; T, Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#afa706fabe913103c256a1fbf6d402912">BasicMessageWriter</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -438,13 +437,13 @@ template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;
 
 </div>
 </div>
-<a id="a1879828695519f011fbaad76115245dd" name="a1879828695519f011fbaad76115245dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1879828695519f011fbaad76115245dd">&#9670;&#160;</a></span>Write()</h2>
+<a id="a9dbfbe347d334e51810a7f02bb897dcd" name="a9dbfbe347d334e51810a7f02bb897dcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dbfbe347d334e51810a7f02bb897dcd">&#9670;&#160;</a></span>Write()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;MessageTrait T&gt; </div>
 <div class="memtemplate">
 template&lt;typename U = T&gt; <br />
 requires std::same_as&lt;std::remove_cvref_t&lt;U&gt;, T&gt;</div>
@@ -453,7 +452,7 @@ requires std::same_as&lt;std::remove_cvref_t&lt;U&gt;, T&gt;</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T, Allocator &gt;::Write </td>
+          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T &gt;::Write </td>
           <td>(</td>
           <td class="paramtype">U &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
           <td> const</td>
@@ -461,7 +460,7 @@ requires std::same_as&lt;std::remove_cvref_t&lt;U&gt;, T&gt;</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -480,17 +479,17 @@ requires std::same_as&lt;std::remove_cvref_t&lt;U&gt;, T&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00054">54</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00048">48</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a31f1a31b27bb34c8dd04af73ea91a813" name="a31f1a31b27bb34c8dd04af73ea91a813"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31f1a31b27bb34c8dd04af73ea91a813">&#9670;&#160;</a></span>WriteBulk()</h2>
+<a id="a3a62b42df50c73b7d4c3b487f1ec1a60" name="a3a62b42df50c73b7d4c3b487f1ec1a60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a62b42df50c73b7d4c3b487f1ec1a60">&#9670;&#160;</a></span>WriteBulk()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;MessageTrait T, typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;MessageTrait T&gt; </div>
 <div class="memtemplate">
 template&lt;std::ranges::input_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, T&gt;</div>
@@ -499,7 +498,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, T&gt;</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T, Allocator &gt;::WriteBulk </td>
+          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter</a>&lt; T &gt;::WriteBulk </td>
           <td>(</td>
           <td class="paramtype">R &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>messages</em></span></td><td>)</td>
           <td> const</td>
@@ -507,7 +506,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, T&gt;</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -526,7 +525,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, T&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00065">65</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00059">59</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
 
 </div>
 </div>

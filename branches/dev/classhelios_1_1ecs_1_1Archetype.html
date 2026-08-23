@@ -189,16 +189,18 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 Public Types</h2></td></tr>
 <tr class="memitem:a0d21581df8c7c60b53c22295c3e5f1ef" id="r_a0d21581df8c7c60b53c22295c3e5f1ef"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a0d21581df8c7c60b53c22295c3e5f1ef">size_type</a> = size_t</td></tr>
 <tr class="memitem:ae72679134a794fc357ec9fe68a64f0db" id="r_ae72679134a794fc357ec9fe68a64f0db"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae72679134a794fc357ec9fe68a64f0db">RowIndex</a> = uint32_t</td></tr>
+<tr class="memitem:a38a32e838568ae250ffd9413993d3511" id="r_a38a32e838568ae250ffd9413993d3511"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a38a32e838568ae250ffd9413993d3511">ColumnStorage</a> = <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">container::TypedBufferArray</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af2a7d19c8a1961b07766f765e64f7b66" id="r_af2a7d19c8a1961b07766f765e64f7b66"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af2a7d19c8a1961b07766f765e64f7b66">Archetype</a> (<a class="el" href="classhelios_1_1ecs_1_1ArchetypeId.html">ArchetypeId</a> id)</td></tr>
-<tr class="memdesc:af2a7d19c8a1961b07766f765e64f7b66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an archetype for the given archetype id.  <br /></td></tr>
+<tr class="memitem:a5079dfb6c4802665ba573dba6fa12ea9" id="r_a5079dfb6c4802665ba573dba6fa12ea9"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5079dfb6c4802665ba573dba6fa12ea9">Archetype</a> (<a class="el" href="classhelios_1_1ecs_1_1ArchetypeId.html">ArchetypeId</a> id, std::pmr::memory_resource *resource=std::pmr::get_default_resource())</td></tr>
+<tr class="memdesc:a5079dfb6c4802665ba573dba6fa12ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an archetype for the given archetype id.  <br /></td></tr>
+<tr class="memitem:aeaf125815895b77e81ac17f5b26b146e" id="r_aeaf125815895b77e81ac17f5b26b146e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aeaf125815895b77e81ac17f5b26b146e">Archetype</a> (<a class="el" href="classhelios_1_1ecs_1_1ArchetypeId.html">ArchetypeId</a>, std::nullptr_t)=delete</td></tr>
 <tr class="memitem:a0af90c72a69cd6317592095bdbdbeef4" id="r_a0af90c72a69cd6317592095bdbdbeef4"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a0af90c72a69cd6317592095bdbdbeef4">Archetype</a> (const Archetype &amp;)=delete</td></tr>
 <tr class="memitem:a20b61fce838de60dd024aec6649c830e" id="r_a20b61fce838de60dd024aec6649c830e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a20b61fce838de60dd024aec6649c830e">Archetype</a> (Archetype &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:aaec304e7e3649cabf14c29e146d6b6c9" id="r_aaec304e7e3649cabf14c29e146d6b6c9"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aaec304e7e3649cabf14c29e146d6b6c9">~Archetype</a> ()=default</td></tr>
-<tr class="memitem:a07307a8496dd8950182101ffdbb16dd5" id="r_a07307a8496dd8950182101ffdbb16dd5"><td class="memItemLeft"><a class="el" href="#af2a7d19c8a1961b07766f765e64f7b66">Archetype</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a07307a8496dd8950182101ffdbb16dd5">operator=</a> (const <a class="el" href="#af2a7d19c8a1961b07766f765e64f7b66">Archetype</a> &amp;)=delete</td></tr>
-<tr class="memitem:a563837a3c44633e627f475dd341c28b9" id="r_a563837a3c44633e627f475dd341c28b9"><td class="memItemLeft"><a class="el" href="#af2a7d19c8a1961b07766f765e64f7b66">Archetype</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a563837a3c44633e627f475dd341c28b9">operator=</a> (<a class="el" href="#af2a7d19c8a1961b07766f765e64f7b66">Archetype</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a07307a8496dd8950182101ffdbb16dd5" id="r_a07307a8496dd8950182101ffdbb16dd5"><td class="memItemLeft"><a class="el" href="#a5079dfb6c4802665ba573dba6fa12ea9">Archetype</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a07307a8496dd8950182101ffdbb16dd5">operator=</a> (const <a class="el" href="#a5079dfb6c4802665ba573dba6fa12ea9">Archetype</a> &amp;)=delete</td></tr>
+<tr class="memitem:a563837a3c44633e627f475dd341c28b9" id="r_a563837a3c44633e627f475dd341c28b9"><td class="memItemLeft"><a class="el" href="#a5079dfb6c4802665ba573dba6fa12ea9">Archetype</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a563837a3c44633e627f475dd341c28b9">operator=</a> (<a class="el" href="#a5079dfb6c4802665ba573dba6fa12ea9">Archetype</a> &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:a1472ff07ea71f7b3cf68a032d726ed41" id="r_a1472ff07ea71f7b3cf68a032d726ed41"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1472ff07ea71f7b3cf68a032d726ed41">Clear</a> ()</td></tr>
 <tr class="memdesc:a1472ff07ea71f7b3cf68a032d726ed41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all entities and component data from this archetype.  <br /></td></tr>
 <tr class="memitem:a5613a69c2d95ae923973449f64781d09" id="r_a5613a69c2d95ae923973449f64781d09"><td class="memItemLeft"><a class="el" href="#ae72679134a794fc357ec9fe68a64f0db">RowIndex</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5613a69c2d95ae923973449f64781d09">AllocateRow</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity)</td></tr>
@@ -234,14 +236,14 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
 <tr class="memitem:a64a61d054fd216d1198d50a28758ff1c" id="r_a64a61d054fd216d1198d50a28758ff1c"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait T&gt; </td></tr>
 <tr class="memitem:a64a61d054fd216d1198d50a28758ff1c template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a64a61d054fd216d1198d50a28758ff1c">ComponentColumn</a> () const -&gt; std::span&lt; const T &gt;</td></tr>
 <tr class="memdesc:a64a61d054fd216d1198d50a28758ff1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a const typed span over an entire component column.  <br /></td></tr>
-<tr class="memitem:a45071f98e709f588dd26e30ab949f3de" id="r_a45071f98e709f588dd26e30ab949f3de"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a45071f98e709f588dd26e30ab949f3de">Column</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> index) noexcept -&gt; <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">container::TypedBufferArray</a>&lt;&gt; &amp;</td></tr>
-<tr class="memdesc:a45071f98e709f588dd26e30ab949f3de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a raw column by component type index.  <br /></td></tr>
-<tr class="memitem:a7621f3e087efd6b7c0a08160d958f5b2" id="r_a7621f3e087efd6b7c0a08160d958f5b2"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a7621f3e087efd6b7c0a08160d958f5b2">Column</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> index) const noexcept -&gt; const <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">container::TypedBufferArray</a>&lt;&gt; &amp;</td></tr>
-<tr class="memdesc:a7621f3e087efd6b7c0a08160d958f5b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a const raw column by component type index.  <br /></td></tr>
-<tr class="memitem:a43407da1ca626defd840737ee5692076" id="r_a43407da1ca626defd840737ee5692076"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a43407da1ca626defd840737ee5692076">TryColumn</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> index) noexcept -&gt; <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">container::TypedBufferArray</a>&lt;&gt; *</td></tr>
-<tr class="memdesc:a43407da1ca626defd840737ee5692076"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get a raw column by component type index.  <br /></td></tr>
-<tr class="memitem:ad1aab45c2af217314cd28bfecb575418" id="r_ad1aab45c2af217314cd28bfecb575418"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ad1aab45c2af217314cd28bfecb575418">TryColumn</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> index) const noexcept -&gt; const <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">container::TypedBufferArray</a>&lt;&gt; *</td></tr>
-<tr class="memdesc:ad1aab45c2af217314cd28bfecb575418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get a const raw column by component type index.  <br /></td></tr>
+<tr class="memitem:af9877e7e3407c2f79ecd1a704ece9094" id="r_af9877e7e3407c2f79ecd1a704ece9094"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#af9877e7e3407c2f79ecd1a704ece9094">Column</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> index) noexcept -&gt; <a class="el" href="#a38a32e838568ae250ffd9413993d3511">ColumnStorage</a> &amp;</td></tr>
+<tr class="memdesc:af9877e7e3407c2f79ecd1a704ece9094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a raw column by component type index.  <br /></td></tr>
+<tr class="memitem:abd7807cfeb60eea7fe275c1c55dcf108" id="r_abd7807cfeb60eea7fe275c1c55dcf108"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#abd7807cfeb60eea7fe275c1c55dcf108">Column</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> index) const noexcept -&gt; const <a class="el" href="#a38a32e838568ae250ffd9413993d3511">ColumnStorage</a> &amp;</td></tr>
+<tr class="memdesc:abd7807cfeb60eea7fe275c1c55dcf108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a const raw column by component type index.  <br /></td></tr>
+<tr class="memitem:a3ad896004b7e3ac0fee9111602c06051" id="r_a3ad896004b7e3ac0fee9111602c06051"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a3ad896004b7e3ac0fee9111602c06051">TryColumn</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> index) noexcept -&gt; <a class="el" href="#a38a32e838568ae250ffd9413993d3511">ColumnStorage</a> *</td></tr>
+<tr class="memdesc:a3ad896004b7e3ac0fee9111602c06051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get a raw column by component type index.  <br /></td></tr>
+<tr class="memitem:a6af7793a8310dcf45676c847ab13e9b1" id="r_a6af7793a8310dcf45676c847ab13e9b1"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a6af7793a8310dcf45676c847ab13e9b1">TryColumn</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> index) const noexcept -&gt; const <a class="el" href="#a38a32e838568ae250ffd9413993d3511">ColumnStorage</a> *</td></tr>
+<tr class="memdesc:a6af7793a8310dcf45676c847ab13e9b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get a const raw column by component type index.  <br /></td></tr>
 <tr class="memitem:a309bc1309d85cfed4714d7e80a2c32cc" id="r_a309bc1309d85cfed4714d7e80a2c32cc"><td class="memItemLeft"><a class="el" href="#ae72679134a794fc357ec9fe68a64f0db">RowIndex</a>&#160;</td><td class="memItemRight"><a class="el" href="#a309bc1309d85cfed4714d7e80a2c32cc">Row</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) const</td></tr>
 <tr class="memdesc:a309bc1309d85cfed4714d7e80a2c32cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the row index for an entity.  <br /></td></tr>
 <tr class="memitem:ac165601d2b0a08316bec9984afaa5880" id="r_ac165601d2b0a08316bec9984afaa5880"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac165601d2b0a08316bec9984afaa5880">EntityAt</a> (<a class="el" href="#ae72679134a794fc357ec9fe68a64f0db">RowIndex</a> row) const</td></tr>
@@ -263,6 +265,8 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
 <tr class="memdesc:a29990e9c2b9c4a173011a101deb7d063"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a span of all entities stored in this archetype.  <br /></td></tr>
 <tr class="memitem:a6297e0f6a207784c848dc85ab84cd22f" id="r_a6297e0f6a207784c848dc85ab84cd22f"><td class="memItemLeft">const <a class="el" href="classhelios_1_1ecs_1_1ArchetypeId.html">ArchetypeId</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6297e0f6a207784c848dc85ab84cd22f">Id</a> () const noexcept</td></tr>
 <tr class="memdesc:a6297e0f6a207784c848dc85ab84cd22f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the archetype id.  <br /></td></tr>
+<tr class="memitem:a1d759143eaf1843f01a8910a85caf0a0" id="r_a1d759143eaf1843f01a8910a85caf0a0"><td class="memItemLeft">std::pmr::memory_resource *&#160;</td><td class="memItemRight"><a class="el" href="#a1d759143eaf1843f01a8910a85caf0a0">GetMemoryResource</a> () const noexcept</td></tr>
+<tr class="memdesc:a1d759143eaf1843f01a8910a85caf0a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the memory resource used for internal storage.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -280,8 +284,24 @@ Static Public Attributes</h2></td></tr>
 <p>Component data migration between archetypes is handled externally by <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ComponentManager.html" title="Central manager for all component storage (archetype and sparse-set).">ComponentManager</a></span>, which uses typed function pointers from <span class="tt"><a class="el" href="structhelios_1_1ecs_1_1ComponentMetadata.html" title="Runtime metadata for a registered component type.">ComponentMetadata</a></span> to avoid virtual calls and raw byte manipulation of non-trivial types.</p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00058">58</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00053">53</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
+<a id="a38a32e838568ae250ffd9413993d3511" name="a38a32e838568ae250ffd9413993d3511"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38a32e838568ae250ffd9413993d3511">&#9670;&#160;</a></span>ColumnStorage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a38a32e838568ae250ffd9413993d3511">helios::ecs::Archetype::ColumnStorage</a> = <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">container::TypedBufferArray</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00057">57</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ae72679134a794fc357ec9fe68a64f0db" name="ae72679134a794fc357ec9fe68a64f0db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae72679134a794fc357ec9fe68a64f0db">&#9670;&#160;</a></span>RowIndex</h2>
 
@@ -294,7 +314,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00061">61</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00056">56</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
 
 </div>
 </div>
@@ -310,13 +330,13 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00060">60</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00055">55</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="af2a7d19c8a1961b07766f765e64f7b66" name="af2a7d19c8a1961b07766f765e64f7b66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2a7d19c8a1961b07766f765e64f7b66">&#9670;&#160;</a></span>Archetype() <span class="overload">[1/3]</span></h2>
+<a id="a5079dfb6c4802665ba573dba6fa12ea9" name="a5079dfb6c4802665ba573dba6fa12ea9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5079dfb6c4802665ba573dba6fa12ea9">&#9670;&#160;</a></span>Archetype() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -327,8 +347,12 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">helios::ecs::Archetype::Archetype </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1ArchetypeId.html">ArchetypeId</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1ArchetypeId.html">ArchetypeId</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::pmr::get_default_resource()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -342,16 +366,46 @@ Static Public Attributes</h2></td></tr>
 <p>Initializes one column per component type in the id. Columns are created untyped; they will be typed on first insert via <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ComponentManager.html" title="Central manager for all component storage (archetype and sparse-set).">ComponentManager</a></span>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>The archetype id defining which component types this archetype stores </td></tr>
+    <tr><td class="paramname">resource</td><td>Memory resource for columns, entity list, and lookup maps. Defaults to <span class="tt">std::pmr::get_default_resource()</span>. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="archetype_8cpp_source.html#l00014">14</a> of file <a class="el" href="archetype_8cpp_source.html">archetype.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="archetype_8cpp_source.html#l00015">15</a> of file <a class="el" href="archetype_8cpp_source.html">archetype.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aeaf125815895b77e81ac17f5b26b146e" name="aeaf125815895b77e81ac17f5b26b146e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaf125815895b77e81ac17f5b26b146e">&#9670;&#160;</a></span>Archetype() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::Archetype::Archetype </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1ArchetypeId.html">ArchetypeId</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
 <a id="a0af90c72a69cd6317592095bdbdbeef4" name="a0af90c72a69cd6317592095bdbdbeef4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0af90c72a69cd6317592095bdbdbeef4">&#9670;&#160;</a></span>Archetype() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0af90c72a69cd6317592095bdbdbeef4">&#9670;&#160;</a></span>Archetype() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -376,7 +430,7 @@ Static Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a20b61fce838de60dd024aec6649c830e" name="a20b61fce838de60dd024aec6649c830e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20b61fce838de60dd024aec6649c830e">&#9670;&#160;</a></span>Archetype() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a20b61fce838de60dd024aec6649c830e">&#9670;&#160;</a></span>Archetype() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -478,7 +532,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Row index of the new entity </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00363">363</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00365">365</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
 
 </div>
 </div>
@@ -515,7 +569,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Row index of the newly allocated row </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00350">350</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00352">352</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
 
 </div>
 </div>
@@ -536,12 +590,12 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 
 <p>Removes all entities and component data from this archetype. </p>
 
-<p class="definition">Definition at line <a class="el" href="archetype_8cpp_source.html#l00022">22</a> of file <a class="el" href="archetype_8cpp_source.html">archetype.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="archetype_8cpp_source.html#l00028">28</a> of file <a class="el" href="archetype_8cpp_source.html">archetype.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a7621f3e087efd6b7c0a08160d958f5b2" name="a7621f3e087efd6b7c0a08160d958f5b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7621f3e087efd6b7c0a08160d958f5b2">&#9670;&#160;</a></span>Column() <span class="overload">[1/2]</span></h2>
+<a id="abd7807cfeb60eea7fe275c1c55dcf108" name="abd7807cfeb60eea7fe275c1c55dcf108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd7807cfeb60eea7fe275c1c55dcf108">&#9670;&#160;</a></span>Column() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -553,7 +607,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
           <td class="memname">auto helios::ecs::Archetype::Column </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
-          <td> const -&gt; const <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">container::TypedBufferArray</a>&lt;&gt; &amp;</td>
+          <td> const -&gt; const <a class="el" href="#a38a32e838568ae250ffd9413993d3511">ColumnStorage</a> &amp;</td>
         </tr>
       </table>
   </td>
@@ -577,8 +631,8 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 
 </div>
 </div>
-<a id="a45071f98e709f588dd26e30ab949f3de" name="a45071f98e709f588dd26e30ab949f3de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45071f98e709f588dd26e30ab949f3de">&#9670;&#160;</a></span>Column() <span class="overload">[2/2]</span></h2>
+<a id="af9877e7e3407c2f79ecd1a704ece9094" name="af9877e7e3407c2f79ecd1a704ece9094"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9877e7e3407c2f79ecd1a704ece9094">&#9670;&#160;</a></span>Column() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -590,7 +644,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
           <td class="memname">auto helios::ecs::Archetype::Column </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
-          <td> -&gt; <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">container::TypedBufferArray</a>&lt;&gt; &amp;</td>
+          <td> -&gt; <a class="el" href="#a38a32e838568ae250ffd9413993d3511">ColumnStorage</a> &amp;</td>
         </tr>
       </table>
   </td>
@@ -1039,6 +1093,36 @@ template&lt;ComponentTrait T&gt; </div>
 
 </div>
 </div>
+<a id="a1d759143eaf1843f01a8910a85caf0a0" name="a1d759143eaf1843f01a8910a85caf0a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d759143eaf1843f01a8910a85caf0a0">&#9670;&#160;</a></span>GetMemoryResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pmr::memory_resource * helios::ecs::Archetype::GetMemoryResource </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the memory resource used for internal storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>Memory resource passed to the constructor </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00329">329</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a9192f1d64835468a34f8a9d7dd1023cd" name="a9192f1d64835468a34f8a9d7dd1023cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9192f1d64835468a34f8a9d7dd1023cd">&#9670;&#160;</a></span>HasColumn() <span class="overload">[1/2]</span></h2>
 
@@ -1153,9 +1237,9 @@ template&lt;ComponentTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#af2a7d19c8a1961b07766f765e64f7b66">Archetype</a> &amp; helios::ecs::Archetype::operator= </td>
+          <td class="memname"><a class="el" href="#a5079dfb6c4802665ba573dba6fa12ea9">Archetype</a> &amp; helios::ecs::Archetype::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#af2a7d19c8a1961b07766f765e64f7b66">Archetype</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a5079dfb6c4802665ba573dba6fa12ea9">Archetype</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1178,9 +1262,9 @@ template&lt;ComponentTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#af2a7d19c8a1961b07766f765e64f7b66">Archetype</a> &amp; helios::ecs::Archetype::operator= </td>
+          <td class="memname"><a class="el" href="#a5079dfb6c4802665ba573dba6fa12ea9">Archetype</a> &amp; helios::ecs::Archetype::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#af2a7d19c8a1961b07766f765e64f7b66">Archetype</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a5079dfb6c4802665ba573dba6fa12ea9">Archetype</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1222,7 +1306,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The entity that was swapped into the removed row, or invalid entity if the removed entity was last </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="archetype_8cpp_source.html#l00030">30</a> of file <a class="el" href="archetype_8cpp_source.html">archetype.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="archetype_8cpp_source.html#l00036">36</a> of file <a class="el" href="archetype_8cpp_source.html">archetype.cpp</a>.</p>
 
 </div>
 </div>
@@ -1317,8 +1401,8 @@ template&lt;ComponentTrait T&gt; </div>
 
 </div>
 </div>
-<a id="ad1aab45c2af217314cd28bfecb575418" name="ad1aab45c2af217314cd28bfecb575418"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1aab45c2af217314cd28bfecb575418">&#9670;&#160;</a></span>TryColumn() <span class="overload">[1/2]</span></h2>
+<a id="a6af7793a8310dcf45676c847ab13e9b1" name="a6af7793a8310dcf45676c847ab13e9b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6af7793a8310dcf45676c847ab13e9b1">&#9670;&#160;</a></span>TryColumn() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1330,7 +1414,7 @@ template&lt;ComponentTrait T&gt; </div>
           <td class="memname">auto helios::ecs::Archetype::TryColumn </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
-          <td> const -&gt; const <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">container::TypedBufferArray</a>&lt;&gt; *</td>
+          <td> const -&gt; const <a class="el" href="#a38a32e838568ae250ffd9413993d3511">ColumnStorage</a> *</td>
         </tr>
       </table>
   </td>
@@ -1353,8 +1437,8 @@ template&lt;ComponentTrait T&gt; </div>
 
 </div>
 </div>
-<a id="a43407da1ca626defd840737ee5692076" name="a43407da1ca626defd840737ee5692076"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43407da1ca626defd840737ee5692076">&#9670;&#160;</a></span>TryColumn() <span class="overload">[2/2]</span></h2>
+<a id="a3ad896004b7e3ac0fee9111602c06051" name="a3ad896004b7e3ac0fee9111602c06051"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ad896004b7e3ac0fee9111602c06051">&#9670;&#160;</a></span>TryColumn() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1366,7 +1450,7 @@ template&lt;ComponentTrait T&gt; </div>
           <td class="memname">auto helios::ecs::Archetype::TryColumn </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
-          <td> -&gt; <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">container::TypedBufferArray</a>&lt;&gt; *</td>
+          <td> -&gt; <a class="el" href="#a38a32e838568ae250ffd9413993d3511">ColumnStorage</a> *</td>
         </tr>
       </table>
   </td>
@@ -1500,7 +1584,7 @@ template&lt;ComponentTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00063">63</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00059">59</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
 
 </div>
 </div>

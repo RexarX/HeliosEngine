@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('axis_8hpp.html
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="temporary__storage_8hpp_source.html">helios/memory/temporary_storage.hpp</a>&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
@@ -227,12 +228,14 @@ Functions</h2></td></tr>
 <tr class="memdesc:af3ed48873188d9fb9d8f1e4233d6cd52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies <span class="tt"><a class="el" href="namespacehelios_1_1input.html#a99d0fe4a48013a214c5a301b55e3ce6e" title="Applies a circular (radial) deadzone to a stick pair.">ApplyRadialDeadzone</a></span> using an <span class="tt"><a class="el" href="structhelios_1_1input_1_1AxisFilter.html" title="Deadzone / livezone / rescale parameters for analog axes.">AxisFilter</a></span>.  <br /></td></tr>
 <tr class="memitem:aedc06b09ccc58f41e68529939f032110" id="r_aedc06b09ccc58f41e68529939f032110"><td class="memItemLeft">constexpr float&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#aedc06b09ccc58f41e68529939f032110">helios::input::RemapTrigger</a> (float raw, float center) noexcept</td></tr>
 <tr class="memdesc:aedc06b09ccc58f41e68529939f032110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remaps a GLFW-style trigger axis to <span class="tt">[0, 1]</span>.  <br /></td></tr>
-<tr class="memitem:af409952ea3057ee73d9f824e507a74da" id="r_af409952ea3057ee73d9f824e507a74da"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+<tr class="memitem:a248b95c8be900dce1b077f2b85230ca3" id="r_a248b95c8be900dce1b077f2b85230ca3"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
 requires std::output_iterator&lt;It, char&gt;</td></tr>
-<tr class="memitem:af409952ea3057ee73d9f824e507a74da template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#af409952ea3057ee73d9f824e507a74da">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1AxisFilter.html">AxisFilter</a> &amp;filter, It out)</td></tr>
-<tr class="memdesc:af409952ea3057ee73d9f824e507a74da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats axis filter parameters using an output iterator.  <br /></td></tr>
+<tr class="memitem:a248b95c8be900dce1b077f2b85230ca3 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a248b95c8be900dce1b077f2b85230ca3">helios::input::ToString</a> (It out, const <a class="el" href="structhelios_1_1input_1_1AxisFilter.html">AxisFilter</a> &amp;filter)</td></tr>
+<tr class="memdesc:a248b95c8be900dce1b077f2b85230ca3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats axis filter parameters using an output iterator.  <br /></td></tr>
 <tr class="memitem:af5eb896115d99bc713036078025fcb83" id="r_af5eb896115d99bc713036078025fcb83"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#af5eb896115d99bc713036078025fcb83">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1AxisFilter.html">AxisFilter</a> &amp;filter)</td></tr>
 <tr class="memdesc:af5eb896115d99bc713036078025fcb83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats axis filter parameters as a string.  <br /></td></tr>
+<tr class="memitem:a24901c0dad96837da88934be626f0955" id="r_a24901c0dad96837da88934be626f0955"><td class="memItemLeft">std::pmr::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a24901c0dad96837da88934be626f0955">helios::input::TempToString</a> (const <a class="el" href="structhelios_1_1input_1_1AxisFilter.html">AxisFilter</a> &amp;filter)</td></tr>
+<tr class="memdesc:a24901c0dad96837da88934be626f0955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats axis filter parameters as a string using <span class="tt">TemporaryStorage</span>.  <br /></td></tr>
 <tr class="memitem:a74c5364a9551096e3271ce1738bbce7a" id="r_a74c5364a9551096e3271ce1738bbce7a"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a74c5364a9551096e3271ce1738bbce7a">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1AxisFilter.html">AxisFilter</a> &amp;filter)</td></tr>
 <tr class="memdesc:a74c5364a9551096e3271ce1738bbce7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs axis filter parameters to an output stream.  <br /></td></tr>
 </table>

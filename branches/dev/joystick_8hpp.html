@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('joystick_8hpp.
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="button__input_8hpp_source.html">helios/input/button_input.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="temporary__storage_8hpp_source.html">helios/memory/temporary_storage.hpp</a>&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
@@ -224,12 +225,14 @@ Functions</h2></td></tr>
 <tr class="memdesc:a4b27e0a32f8d36f689e0eb224cea0433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string name of a hat bitmask.  <br /></td></tr>
 <tr class="memitem:adfaa9c4df30e7b3c4f28ffce58faac26" id="r_adfaa9c4df30e7b3c4f28ffce58faac26"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#adfaa9c4df30e7b3c4f28ffce58faac26">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="namespacehelios_1_1input.html#a59eecea55bb3884490df1e544a88cca9">JoystickHat</a> hat)</td></tr>
 <tr class="memdesc:adfaa9c4df30e7b3c4f28ffce58faac26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a joystick hat to an output stream.  <br /></td></tr>
-<tr class="memitem:a59ea602a76b224009eeb3345d263638a" id="r_a59ea602a76b224009eeb3345d263638a"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+<tr class="memitem:a50fa78015944f59a1cf472028dbc0301" id="r_a50fa78015944f59a1cf472028dbc0301"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
 requires std::output_iterator&lt;It, char&gt;</td></tr>
-<tr class="memitem:a59ea602a76b224009eeb3345d263638a template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a59ea602a76b224009eeb3345d263638a">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Joystick.html">Joystick</a> &amp;stick, It out)</td></tr>
-<tr class="memdesc:a59ea602a76b224009eeb3345d263638a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a joystick snapshot using an output iterator.  <br /></td></tr>
+<tr class="memitem:a50fa78015944f59a1cf472028dbc0301 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a50fa78015944f59a1cf472028dbc0301">helios::input::ToString</a> (It out, const <a class="el" href="structhelios_1_1input_1_1Joystick.html">Joystick</a> &amp;stick)</td></tr>
+<tr class="memdesc:a50fa78015944f59a1cf472028dbc0301"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a joystick snapshot using an output iterator.  <br /></td></tr>
 <tr class="memitem:a3536818e8bd56869dbf982c9b325fe07" id="r_a3536818e8bd56869dbf982c9b325fe07"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a3536818e8bd56869dbf982c9b325fe07">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Joystick.html">Joystick</a> &amp;stick)</td></tr>
 <tr class="memdesc:a3536818e8bd56869dbf982c9b325fe07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a joystick snapshot as a string.  <br /></td></tr>
+<tr class="memitem:aaf236158098843407d658dc4baf7fbda" id="r_aaf236158098843407d658dc4baf7fbda"><td class="memItemLeft">std::pmr::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#aaf236158098843407d658dc4baf7fbda">helios::input::TempToString</a> (const <a class="el" href="structhelios_1_1input_1_1Joystick.html">Joystick</a> &amp;stick)</td></tr>
+<tr class="memdesc:aaf236158098843407d658dc4baf7fbda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a joystick snapshot as a string using <span class="tt">TemporaryStorage</span>.  <br /></td></tr>
 <tr class="memitem:ad945662e960d4d2bfaf4234639483ac4" id="r_ad945662e960d4d2bfaf4234639483ac4"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#ad945662e960d4d2bfaf4234639483ac4">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1Joystick.html">Joystick</a> &amp;stick)</td></tr>
 <tr class="memdesc:ad945662e960d4d2bfaf4234639483ac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a joystick snapshot to an output stream.  <br /></td></tr>
 </table>

@@ -83,7 +83,6 @@ var namespacehelios_1_1app =
       [ "kManual", "namespacehelios_1_1app.html#a548d242252cc722128cfd8eb09e4862aa840f73673d401f2e539743e82e167a45", null ],
       [ "kAuto", "namespacehelios_1_1app.html#a548d242252cc722128cfd8eb09e4862aaa8c857c2f1b000c92f9794ebf53888d7", null ]
     ] ],
-    [ "DynamicPluginErrorToString", "namespacehelios_1_1app.html#a6c14f36c354fa92a14823337d0ee4114", null ],
     [ "InstallFrameLimiter", "namespacehelios_1_1app.html#a39656018dcdb91d3606e1b486aa5e593", null ],
     [ "InstallFrameLimiter", "namespacehelios_1_1app.html#aa939dd9b3eda3310828662db750faf4a", null ],
     [ "IsSubAppAllowsOverlappingUpdates", "namespacehelios_1_1app.html#a87f1c031a5a935d4d048005583aa17ed", null ],
@@ -101,6 +100,9 @@ var namespacehelios_1_1app =
     [ "RunOnceSubApp", "namespacehelios_1_1app.html#a8e052e1da732c35b13c145cafe5b675f", null ],
     [ "SubAppMaxOverlappingUpdates", "namespacehelios_1_1app.html#a11717791f8d14c485b30dcb69d7ad08e", null ],
     [ "SubAppNameOf", "namespacehelios_1_1app.html#a29e542966caa88d8a8cff7e975d6ac1b", null ],
+    [ "ToString", "namespacehelios_1_1app.html#a483665452abcef4d1193a94165fbff4d", null ],
+    [ "ToString", "namespacehelios_1_1app.html#ac182f07221692f9d84a5c9cc569c4d9f", null ],
+    [ "ToString", "namespacehelios_1_1app.html#ac38a999809953af3cdddc6c432e814f8", null ],
     [ "kDefaultCreateSymbol", "namespacehelios_1_1app.html#aab4005c98d8bec33b01b1a9be47aad0d", null ],
     [ "kDefaultPluginIdSymbol", "namespacehelios_1_1app.html#a267cb12b56cf7c71ce8296a62a812294", null ],
     [ "kExtract", "namespacehelios_1_1app.html#a204a57a85ac876ab0950fcd4ecce94c4", null ],

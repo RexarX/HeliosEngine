@@ -192,6 +192,8 @@ Namespaces</h2></td></tr>
 Classes</h2></td></tr>
 <tr class="memitem:ChainAdapter" id="r_ChainAdapter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator adapter that chains two sequences together.  <a href="classhelios_1_1utils_1_1ChainAdapter.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ChunkAdapter" id="r_ChunkAdapter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1ChunkAdapter.html">ChunkAdapter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapter that yields non-overlapping chunks of elements.  <a href="classhelios_1_1utils_1_1ChunkAdapter.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ChunkView" id="r_ChunkView"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1ChunkView.html">ChunkView</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A non-owning view over a contiguous chunk of elements.  <a href="classhelios_1_1utils_1_1ChunkView.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Defer" id="r_Defer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1Defer.html">Defer</a></td></tr>
@@ -231,6 +233,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transparent equality comparator for string types.  <a href="structhelios_1_1utils_1_1StringEqual.html#details">More...</a><br /></td></tr>
 <tr class="memitem:StringHash" id="r_StringHash"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1utils_1_1StringHash.html">StringHash</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transparent hash functor for string types.  <a href="structhelios_1_1utils_1_1StringHash.html#details">More...</a><br /></td></tr>
+<tr class="memitem:StringLess" id="r_StringLess"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1utils_1_1StringLess.html">StringLess</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transparent strict-weak-order comparator for string types.  <a href="structhelios_1_1utils_1_1StringLess.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TakeAdapter" id="r_TakeAdapter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator adapter that yields only the first N elements.  <a href="classhelios_1_1utils_1_1TakeAdapter.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TakeWhileAdapter" id="r_TakeWhileAdapter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a></td></tr>
@@ -349,8 +353,14 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abc4221e0af800d4c7dd1f3042525427c" id="r_abc4221e0af800d4c7dd1f3042525427c"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#abc4221e0af800d4c7dd1f3042525427c">DynamicLibraryErrorToString</a> (<a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> error) noexcept</td></tr>
-<tr class="memdesc:abc4221e0af800d4c7dd1f3042525427c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a human-readable description for a <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e" title="Error codes for dynamic library operations.">DynamicLibraryError</a>.  <br /></td></tr>
+<tr class="memitem:af8909b8b74ce4c816a431fdd82a53bd9" id="r_af8909b8b74ce4c816a431fdd82a53bd9"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:af8909b8b74ce4c816a431fdd82a53bd9 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#af8909b8b74ce4c816a431fdd82a53bd9">TempFormat</a> (std::format_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) -&gt; std::pmr::string</td></tr>
+<tr class="memdesc:af8909b8b74ce4c816a431fdd82a53bd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format a string into a temporary buffer allocated from the calling thread's <span class="tt">TemporaryStorage</span>.  <br /></td></tr>
+<tr class="memitem:a92a6d8f5c272ec3d020a61781d960b9a" id="r_a92a6d8f5c272ec3d020a61781d960b9a"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a92a6d8f5c272ec3d020a61781d960b9a template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a92a6d8f5c272ec3d020a61781d960b9a">TempFormat</a> (std::wformat_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) -&gt; std::pmr::wstring</td></tr>
+<tr class="memdesc:a92a6d8f5c272ec3d020a61781d960b9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format a wide string into a temporary buffer allocated from the calling thread's <span class="tt">TemporaryStorage</span>.  <br /></td></tr>
+<tr class="memitem:a7fa23a85e6a76d3d321a89deb78cfee9" id="r_a7fa23a85e6a76d3d321a89deb78cfee9"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a7fa23a85e6a76d3d321a89deb78cfee9">ToString</a> (<a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> error) noexcept</td></tr>
+<tr class="memdesc:a7fa23a85e6a76d3d321a89deb78cfee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a human-readable description for a <span class="tt"><a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e" title="Error codes for dynamic library operations.">DynamicLibraryError</a></span>.  <br /></td></tr>
 <tr class="memitem:a8456f8516be4dd86cc838b2e928b7239" id="r_a8456f8516be4dd86cc838b2e928b7239"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a8456f8516be4dd86cc838b2e928b7239">FileErrorToString</a> (<a class="el" href="#aa8f8d89ee8389efd92330df687025d68">FileError</a> error) noexcept</td></tr>
 <tr class="memdesc:a8456f8516be4dd86cc838b2e928b7239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts <a class="el" href="#aa8f8d89ee8389efd92330df687025d68">FileError</a> to a human-readable string.  <br /></td></tr>
 <tr class="memitem:a0ace996a7219fcf7730cf5d767278420" id="r_a0ace996a7219fcf7730cf5d767278420"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a0ace996a7219fcf7730cf5d767278420">ReadFileToString</a> (std::string_view filepath) -&gt; std::expected&lt; std::string, <a class="el" href="#aa8f8d89ee8389efd92330df687025d68">FileError</a> &gt;</td></tr>
@@ -361,6 +371,18 @@ Functions</h2></td></tr>
 <tr class="memdesc:a7ac5167111686abbfdf1126b47034746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file name from a given path.  <br /></td></tr>
 <tr class="memitem:a783dd124bde96f901ac50dca9069eb3f" id="r_a783dd124bde96f901ac50dca9069eb3f"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a783dd124bde96f901ac50dca9069eb3f">GetFileExtension</a> (std::string_view path)</td></tr>
 <tr class="memdesc:a783dd124bde96f901ac50dca9069eb3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file extension from a given path.  <br /></td></tr>
+<tr class="memitem:a47e1bf3d0c089efdffdd47cdadde2c7e" id="r_a47e1bf3d0c089efdffdd47cdadde2c7e"><td class="memTemplParams" colspan="2">template&lt;typename Traits, typename Allocator, typename... Args&gt; </td></tr>
+<tr class="memitem:a47e1bf3d0c089efdffdd47cdadde2c7e template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a47e1bf3d0c089efdffdd47cdadde2c7e">FormatTo</a> (std::basic_string&lt; char, Traits, Allocator &gt; &amp;out, std::format_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) -&gt; typename std::basic_string&lt; char, Traits, Allocator &gt;::iterator</td></tr>
+<tr class="memdesc:a47e1bf3d0c089efdffdd47cdadde2c7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a string and appends it to the given output string.  <br /></td></tr>
+<tr class="memitem:a11e472a6fdbc6b48bb78080392371b5e" id="r_a11e472a6fdbc6b48bb78080392371b5e"><td class="memTemplParams" colspan="2">template&lt;typename Traits, typename Allocator, typename... Args&gt; </td></tr>
+<tr class="memitem:a11e472a6fdbc6b48bb78080392371b5e template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a11e472a6fdbc6b48bb78080392371b5e">FormatTo</a> (std::basic_string&lt; wchar_t, Traits, Allocator &gt; &amp;out, std::wformat_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) -&gt; typename std::basic_string&lt; wchar_t, Traits, Allocator &gt;::iterator</td></tr>
+<tr class="memdesc:a11e472a6fdbc6b48bb78080392371b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a wide string and appends it to the given output string.  <br /></td></tr>
+<tr class="memitem:a4d3807c31f88745390983e3f668e8867" id="r_a4d3807c31f88745390983e3f668e8867"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a4d3807c31f88745390983e3f668e8867 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a4d3807c31f88745390983e3f668e8867">FormatWith</a> (std::pmr::memory_resource *resource, std::format_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) -&gt; std::pmr::string</td></tr>
+<tr class="memdesc:a4d3807c31f88745390983e3f668e8867"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a string using the provided memory resource and returns it as a new string.  <br /></td></tr>
+<tr class="memitem:a24756894e2f1fd1adab2ed13d828a924" id="r_a24756894e2f1fd1adab2ed13d828a924"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a24756894e2f1fd1adab2ed13d828a924 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a24756894e2f1fd1adab2ed13d828a924">FormatWith</a> (std::pmr::memory_resource *resource, std::wformat_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) -&gt; std::pmr::wstring</td></tr>
+<tr class="memdesc:a24756894e2f1fd1adab2ed13d828a924"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a wide string using the provided memory resource and returns it as a new string.  <br /></td></tr>
 <tr class="memitem:a4e2676a8aaba7f9f532bc83c92238790" id="r_a4e2676a8aaba7f9f532bc83c92238790"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R, typename Pred&gt; </td></tr>
 <tr class="memitem:a4e2676a8aaba7f9f532bc83c92238790 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4e2676a8aaba7f9f532bc83c92238790">FilterAdapter</a> (R &amp;, Pred) -&gt; FilterAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;</td></tr>
 <tr class="memitem:ac677e0b92368250e9b7b9e99a64167b7" id="r_ac677e0b92368250e9b7b9e99a64167b7"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R, typename Pred&gt; </td></tr>
@@ -419,10 +441,9 @@ requires StrideAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td><
 <tr class="memitem:a8f36e2b7acc5fce1665e88d93c091b1e" id="r_a8f36e2b7acc5fce1665e88d93c091b1e"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R&gt; <br />
 requires StrideAdapterRequirements&lt;std::ranges::iterator_t&lt;const R&gt;&gt;</td></tr>
 <tr class="memitem:a8f36e2b7acc5fce1665e88d93c091b1e template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8f36e2b7acc5fce1665e88d93c091b1e">StrideAdapter</a> (const R &amp;, size_t) -&gt; StrideAdapter&lt; std::ranges::iterator_t&lt; const R &gt; &gt;</td></tr>
-<tr class="memitem:a890962838b8fca5f4093d45ce0f6ab1d" id="r_a890962838b8fca5f4093d45ce0f6ab1d"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R&gt; <br />
+<tr class="memitem:a99be2e8f1f3a30df81317367eb5265e4" id="r_a99be2e8f1f3a30df81317367eb5265e4"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R&gt; <br />
 requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:a890962838b8fca5f4093d45ce0f6ab1d template"><td class="memItemLeft">constexpr auto <a class="el" href="classhelios_1_1utils_1_1ChunkView.html">ChunkView</a>&lt; Iter &gt;::CollectWith(Allocator allocator) const -&gt; std::vector&lt; value_type, Allocator &gt; <a class="el" href="namespacestd.html">std</a>&#160;</td><td class="memItemRight"><a class="el" href="#a890962838b8fca5f4093d45ce0f6ab1d">ChunkAdapter</a> (R &amp;, size_t) -&gt; ChunkAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:a890962838b8fca5f4093d45ce0f6ab1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapter that yields non-overlapping chunks of elements.  <br /></td></tr>
+<tr class="memitem:a99be2e8f1f3a30df81317367eb5265e4 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a99be2e8f1f3a30df81317367eb5265e4">ChunkAdapter</a> (R &amp;, size_t) -&gt; ChunkAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
 <tr class="memitem:a5a01516e8618a5bd56cb68e9741d90e0" id="r_a5a01516e8618a5bd56cb68e9741d90e0"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R&gt; <br />
 requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;const R&gt;&gt;</td></tr>
 <tr class="memitem:a5a01516e8618a5bd56cb68e9741d90e0 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5a01516e8618a5bd56cb68e9741d90e0">ChunkAdapter</a> (const R &amp;, size_t) -&gt; ChunkAdapter&lt; std::ranges::iterator_t&lt; const R &gt; &gt;</td></tr>
@@ -759,20 +780,17 @@ requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;const R&gt;&gt;<
 
 </div>
 </div>
-<a id="a890962838b8fca5f4093d45ce0f6ab1d" name="a890962838b8fca5f4093d45ce0f6ab1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a890962838b8fca5f4093d45ce0f6ab1d">&#9670;&#160;</a></span>ChunkAdapter() <span class="overload">[2/2]</span></h2>
+<a id="a99be2e8f1f3a30df81317367eb5265e4" name="a99be2e8f1f3a30df81317367eb5265e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99be2e8f1f3a30df81317367eb5265e4">&#9670;&#160;</a></span>ChunkAdapter() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;ExternalRange R&gt; <br />
 requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1ChunkView.html">ChunkView</a>&lt; Iter &gt;::CollectWith(Allocator allocator) const -&gt; std::vector&lt; value_type, Allocator &gt; <a class="el" href="namespacestd.html">std</a> helios::utils::ChunkAdapter </td>
+          <td class="memname">helios::utils::ChunkAdapter </td>
           <td>(</td>
           <td class="paramtype">R &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
         </tr>
@@ -782,33 +800,8 @@ requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;) -&gt;  ChunkAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Adapter that yields non-overlapping chunks of elements. </p>
-<p>Splits a range into consecutive, non-overlapping chunks of a fixed size, advancing chunk_size elements at a time. The final chunk may contain fewer than chunk_size elements if the range length isn't an exact multiple. Each chunk is returned as a <a class="el" href="classhelios_1_1utils_1_1ChunkView.html" title="A non-owning view over a contiguous chunk of elements.">ChunkView</a>, a non-allocating view. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Iter</td><td>Type of the underlying iterator</td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="fragment"><div class="line">std::vector&lt;int&gt; data = {1, 2, 3, 4, 5};</div>
-<div class="line"><a class="code hl_function" href="#a890962838b8fca5f4093d45ce0f6ab1d">ChunkAdapter</a> chunks(data, 2);</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; chunk : chunks) {</div>
-<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> val : chunk) {</div>
-<div class="line">    std::cout &lt;&lt; val &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line">  }</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">auto</span> owned = (*chunks.begin()).Collect();  <span class="comment">// std::vector&lt;int&gt;</span></div>
-<div class="ttc" id="anamespacehelios_1_1utils_html_a890962838b8fca5f4093d45ce0f6ab1d"><div class="ttname"><a href="#a890962838b8fca5f4093d45ce0f6ab1d">helios::utils::ChunkAdapter</a></div><div class="ttdeci">constexpr auto ChunkView&lt; Iter &gt;::CollectWith(Allocator allocator) const -&gt; std::vector&lt; value_type, Allocator &gt; std ChunkAdapter(R &amp;, size_t) -&gt; ChunkAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</div><div class="ttdoc">Adapter that yields non-overlapping chunks of elements.</div></div>
-</div><!-- fragment --> 
 </div>
 </div>
 <a id="ae412d06926f505f92866943e64611a72" name="ae412d06926f505f92866943e64611a72"></a>
@@ -838,42 +831,6 @@ requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
 <p>Uses Meyer's singleton pattern per thread to avoid global static initialization order issues while providing a convenient default. </p><dl class="section return"><dt>Returns</dt><dd>Reference to thread-local <span class="tt"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0" title="Default engine type used by random utilities.">DefaultRandomEngine</a></span> instance </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00109">109</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
-
-</div>
-</div>
-<a id="abc4221e0af800d4c7dd1f3042525427c" name="abc4221e0af800d4c7dd1f3042525427c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc4221e0af800d4c7dd1f3042525427c">&#9670;&#160;</a></span>DynamicLibraryErrorToString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string_view helios::utils::DynamicLibraryErrorToString </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a></td>          <td class="paramname"><span class="paramname"><em>error</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gets a human-readable description for a <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e" title="Error codes for dynamic library operations.">DynamicLibraryError</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">error</td><td>The error code </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>String description of the error </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00029">29</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -1109,6 +1066,230 @@ template&lt;size_t N&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>The computed FNV-1a hash of the input string. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00027">27</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a47e1bf3d0c089efdffdd47cdadde2c7e" name="a47e1bf3d0c089efdffdd47cdadde2c7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47e1bf3d0c089efdffdd47cdadde2c7e">&#9670;&#160;</a></span>FormatTo() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Traits, typename Allocator, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::utils::FormatTo </td>
+          <td>(</td>
+          <td class="paramtype">std::basic_string&lt; char, Traits, Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>out</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::format_string&lt; Args... &gt;</td>          <td class="paramname"><span class="paramname"><em>fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;) -&gt; typename std::basic_string&lt; char, Traits, Allocator &gt;::iterator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Formats a string and appends it to the given output string. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Traits</td><td>The character traits of the output string </td></tr>
+    <tr><td class="paramname">Allocator</td><td>The allocator type of the output string </td></tr>
+    <tr><td class="paramname">Args</td><td>The types of the arguments to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>The output string to append the formatted string to </td></tr>
+    <tr><td class="paramname">fmt</td><td>The format string </td></tr>
+    <tr><td class="paramname">args</td><td>The arguments to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An iterator to the end of the output string after appending the formatted string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00023">23</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a11e472a6fdbc6b48bb78080392371b5e" name="a11e472a6fdbc6b48bb78080392371b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11e472a6fdbc6b48bb78080392371b5e">&#9670;&#160;</a></span>FormatTo() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Traits, typename Allocator, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::utils::FormatTo </td>
+          <td>(</td>
+          <td class="paramtype">std::basic_string&lt; wchar_t, Traits, Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>out</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::wformat_string&lt; Args... &gt;</td>          <td class="paramname"><span class="paramname"><em>fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;) -&gt; typename std::basic_string&lt; wchar_t, Traits, Allocator &gt;::iterator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Formats a wide string and appends it to the given output string. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Traits</td><td>The character traits of the output string </td></tr>
+    <tr><td class="paramname">Allocator</td><td>The allocator type of the output string </td></tr>
+    <tr><td class="paramname">Args</td><td>The types of the arguments to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>The output string to append the formatted string to </td></tr>
+    <tr><td class="paramname">fmt</td><td>The format string </td></tr>
+    <tr><td class="paramname">args</td><td>The arguments to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An iterator to the end of the output string after appending the formatted string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00051">51</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4d3807c31f88745390983e3f668e8867" name="a4d3807c31f88745390983e3f668e8867"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d3807c31f88745390983e3f668e8867">&#9670;&#160;</a></span>FormatWith() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::utils::FormatWith </td>
+          <td>(</td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::format_string&lt; Args... &gt;</td>          <td class="paramname"><span class="paramname"><em>fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;) -&gt; std::pmr::string</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Formats a string using the provided memory resource and returns it as a new string. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>The types of the arguments to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td>The memory resource to allocate the result from </td></tr>
+    <tr><td class="paramname">fmt</td><td>The format string </td></tr>
+    <tr><td class="paramname">args</td><td>The arguments to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new string containing the formatted string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00077">77</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a24756894e2f1fd1adab2ed13d828a924" name="a24756894e2f1fd1adab2ed13d828a924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24756894e2f1fd1adab2ed13d828a924">&#9670;&#160;</a></span>FormatWith() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::utils::FormatWith </td>
+          <td>(</td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::wformat_string&lt; Args... &gt;</td>          <td class="paramname"><span class="paramname"><em>fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;) -&gt; std::pmr::wstring</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Formats a wide string using the provided memory resource and returns it as a new string. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>The types of the arguments to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td>The memory resource to allocate the result from </td></tr>
+    <tr><td class="paramname">fmt</td><td>The format string </td></tr>
+    <tr><td class="paramname">args</td><td>The arguments to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new wide string containing the formatted string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00095">95</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
 
 </div>
 </div>
@@ -2494,6 +2675,142 @@ template&lt;ExternalRange R, typename Pred&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8909b8b74ce4c816a431fdd82a53bd9" name="af8909b8b74ce4c816a431fdd82a53bd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8909b8b74ce4c816a431fdd82a53bd9">&#9670;&#160;</a></span>TempFormat() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::utils::TempFormat </td>
+          <td>(</td>
+          <td class="paramtype">std::format_string&lt; Args... &gt;</td>          <td class="paramname"><span class="paramname"><em>fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;) -&gt; std::pmr::string</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Format a string into a temporary buffer allocated from the calling thread's <span class="tt">TemporaryStorage</span>. </p>
+<dl class="section warning"><dt>Warning</dt><dd>The returned string is only valid until the next call to <span class="tt">ResetTemporaryStorage()</span> on this thread. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>Argument types for the format string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fmt</td><td>The format string </td></tr>
+    <tr><td class="paramname">args</td><td>The arguments to format into the string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A formatted string, allocated from the calling thread's <span class="tt">TemporaryStorage</span> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="temporary__storage__helpers_8hpp_source.html#l00024">24</a> of file <a class="el" href="temporary__storage__helpers_8hpp_source.html">temporary_storage_helpers.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a92a6d8f5c272ec3d020a61781d960b9a" name="a92a6d8f5c272ec3d020a61781d960b9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a6d8f5c272ec3d020a61781d960b9a">&#9670;&#160;</a></span>TempFormat() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::utils::TempFormat </td>
+          <td>(</td>
+          <td class="paramtype">std::wformat_string&lt; Args... &gt;</td>          <td class="paramname"><span class="paramname"><em>fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;) -&gt; std::pmr::wstring</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Format a wide string into a temporary buffer allocated from the calling thread's <span class="tt">TemporaryStorage</span>. </p>
+<dl class="section warning"><dt>Warning</dt><dd>The returned string is only valid until the next call to <span class="tt">ResetTemporaryStorage()</span> on this thread. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>Argument types for the format string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fmt</td><td>The format string </td></tr>
+    <tr><td class="paramname">args</td><td>The arguments to format into the string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A formatted wide string, allocated from the calling thread's <span class="tt">TemporaryStorage</span> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="temporary__storage__helpers_8hpp_source.html#l00042">42</a> of file <a class="el" href="temporary__storage__helpers_8hpp_source.html">temporary_storage_helpers.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7fa23a85e6a76d3d321a89deb78cfee9" name="a7fa23a85e6a76d3d321a89deb78cfee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fa23a85e6a76d3d321a89deb78cfee9">&#9670;&#160;</a></span>ToString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::utils::ToString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a></td>          <td class="paramname"><span class="paramname"><em>error</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a human-readable description for a <span class="tt"><a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e" title="Error codes for dynamic library operations.">DynamicLibraryError</a></span>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error</td><td>The error code </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>String description of the error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00029">29</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>

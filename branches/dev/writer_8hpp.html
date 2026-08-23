@@ -183,10 +183,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('writer_8hpp.ht
 <code>#include &lt;<a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">helios/ecs/message/message.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="message_2queue_8hpp_source.html">helios/ecs/message/queue.hpp</a>&gt;</code><br />
 <code>#include &lt;concepts&gt;</code><br />
-<code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
-<code>#include &lt;memory&gt;</code><br />
-<code>#include &lt;memory_resource&gt;</code><br />
 <code>#include &lt;ranges&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
@@ -195,8 +192,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('writer_8hpp.ht
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Aecs_3A_3ABasicMessageWriter_3C_20T_2C_20Allocator_20_3E" id="r_helios_3A_3Aecs_3A_3ABasicMessageWriter_3C_20T_2C_20Allocator_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter&lt; T, Allocator &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-safe writer for regular messages with a configurable queue allocator.  <a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3ABasicMessageWriter_3C_20T_20_3E" id="r_helios_3A_3Aecs_3A_3ABasicMessageWriter_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">helios::ecs::BasicMessageWriter&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-safe writer for regular messages.  <a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Aecs_3A_3AManagedMessageWriter_3C_20T_20_3E" id="r_helios_3A_3Aecs_3A_3AManagedMessageWriter_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ManagedMessageWriter.html">helios::ecs::ManagedMessageWriter&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writer that inserts messages directly into a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html" title="Central coordinator for message lifecycle with double buffering and consumed message removal.">MessageManager</a></span>.  <a href="classhelios_1_1ecs_1_1ManagedMessageWriter.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
@@ -207,11 +204,9 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aa300be3cd7af51cf2c34f699a44b1b22" id="r_aa300be3cd7af51cf2c34f699a44b1b22"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:aa300be3cd7af51cf2c34f699a44b1b22 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#aa300be3cd7af51cf2c34f699a44b1b22">helios::ecs::PmrBasicMessageWriter</a></td></tr>
-<tr class="memitem:a1a3cca45d631afb052c728c7589f4554" id="r_a1a3cca45d631afb052c728c7589f4554"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
-<tr class="memitem:a1a3cca45d631afb052c728c7589f4554 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a1a3cca45d631afb052c728c7589f4554">helios::ecs::MessageWriter</a> = <a class="el" href="namespacehelios_1_1ecs.html#aa300be3cd7af51cf2c34f699a44b1b22">PmrBasicMessageWriter</a>&lt;T&gt;</td></tr>
-<tr class="memdesc:a1a3cca45d631afb052c728c7589f4554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html" title="Type-safe writer for regular messages with a configurable queue allocator.">BasicMessageWriter</a></span> bound to a PMR allocator.  <br /></td></tr>
+<tr class="memitem:afedfd8d803e3e5dd106becf7eb138e74" id="r_afedfd8d803e3e5dd106becf7eb138e74"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
+<tr class="memitem:afedfd8d803e3e5dd106becf7eb138e74 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#afedfd8d803e3e5dd106becf7eb138e74">helios::ecs::MessageWriter</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicMessageWriter.html">BasicMessageWriter</a>&lt;T&gt;</td></tr>
+<tr class="memdesc:afedfd8d803e3e5dd106becf7eb138e74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canonical message writer type for system parameters.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

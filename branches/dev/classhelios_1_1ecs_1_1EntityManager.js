@@ -1,6 +1,8 @@
 var classhelios_1_1ecs_1_1EntityManager =
 [
     [ "EntityManager", "classhelios_1_1ecs_1_1EntityManager.html#afe57fcc2f3c1b8466921d82fcd5a94a6", null ],
+    [ "EntityManager", "classhelios_1_1ecs_1_1EntityManager.html#a1beaa0b0929db77d6c983122b9954a3a", null ],
+    [ "EntityManager", "classhelios_1_1ecs_1_1EntityManager.html#afd5f13c68a45553d4775c76af79e09a3", null ],
     [ "EntityManager", "classhelios_1_1ecs_1_1EntityManager.html#adbc43beced8837703abc49b742132546", null ],
     [ "EntityManager", "classhelios_1_1ecs_1_1EntityManager.html#afe2382587c09acefb83d421b9b8a969b", null ],
     [ "~EntityManager", "classhelios_1_1ecs_1_1EntityManager.html#a037b219071f104b0925e32fcdb6ec234", null ],
@@ -13,6 +15,7 @@ var classhelios_1_1ecs_1_1EntityManager =
     [ "Flush", "classhelios_1_1ecs_1_1EntityManager.html#a42e43f9934ceeddc5e1aad3a34bf4d12", null ],
     [ "Flush", "classhelios_1_1ecs_1_1EntityManager.html#a0040845a7721c4245910fc95cfc89d26", null ],
     [ "GetGeneration", "classhelios_1_1ecs_1_1EntityManager.html#afe4a338799b29cf0a03b97190426807a", null ],
+    [ "GetMemoryResource", "classhelios_1_1ecs_1_1EntityManager.html#a6b9f0589eb5f83db596a4635a9b94eb9", null ],
     [ "NeedsFlush", "classhelios_1_1ecs_1_1EntityManager.html#a36b3d4267f1a0dc08d4ac655803c86ff", null ],
     [ "operator=", "classhelios_1_1ecs_1_1EntityManager.html#a73270bbea3aa16123520453a09a81174", null ],
     [ "operator=", "classhelios_1_1ecs_1_1EntityManager.html#a0df0989d8b4be5d7ec7cca27446b1231", null ],

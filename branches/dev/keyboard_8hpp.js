@@ -146,8 +146,9 @@ var keyboard_8hpp =
     [ "helios::input::operator<<", "namespacehelios_1_1input.html#a8160eb17b5a893365a8f23662e5bc3bf", null ],
     [ "helios::input::operator<<", "namespacehelios_1_1input.html#ab5ebf78fdb000fe5a1fb51f61bd0d11f", null ],
     [ "helios::input::operator|", "namespacehelios_1_1input.html#ace5460d8556a92fe3a03aaf3bddd2e2f", null ],
+    [ "helios::input::TempToString", "namespacehelios_1_1input.html#aaa62dc0da0d94d7252746d573910114c", null ],
     [ "helios::input::ToString", "namespacehelios_1_1input.html#af047d155bbc721f2a7209e08d14df7c5", null ],
+    [ "helios::input::ToString", "namespacehelios_1_1input.html#a9f786f9e6f3a5349cddf64aa4529d77e", null ],
     [ "helios::input::ToString", "namespacehelios_1_1input.html#ae0233e113d02ccffc750fa3879c522fb", null ],
-    [ "helios::input::ToString", "namespacehelios_1_1input.html#af609f2ba152e84a508135022535800a2", null ],
-    [ "helios::input::ToString", "namespacehelios_1_1input.html#ac6e8071e4461a7b40174e40955c4f3d7", null ]
+    [ "helios::input::ToString", "namespacehelios_1_1input.html#af609f2ba152e84a508135022535800a2", null ]
 ];

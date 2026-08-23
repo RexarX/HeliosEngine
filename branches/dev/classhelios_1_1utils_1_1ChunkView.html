@@ -202,12 +202,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0064a70fe08915aeaee1e9ad1380a7bd" id="r_a0064a70fe08915aeaee1e9ad1380a7bd"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a0064a70fe08915aeaee1e9ad1380a7bd">~ChunkView</a> () noexcept=default</td></tr>
 <tr class="memitem:a6f864089c46384bc45697eb4f89e7c09" id="r_a6f864089c46384bc45697eb4f89e7c09"><td class="memItemLeft">constexpr <a class="el" href="#a9d64aa9930728e82acb9294bf0410c98">ChunkView</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6f864089c46384bc45697eb4f89e7c09">operator=</a> (const <a class="el" href="#a9d64aa9930728e82acb9294bf0410c98">ChunkView</a> &amp;) noexcept(std::is_nothrow_copy_assignable_v&lt; Iter &gt;)=default</td></tr>
 <tr class="memitem:a6b87900610cc8f7ddfb2505e7d50dba1" id="r_a6b87900610cc8f7ddfb2505e7d50dba1"><td class="memItemLeft">constexpr <a class="el" href="#a9d64aa9930728e82acb9294bf0410c98">ChunkView</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6b87900610cc8f7ddfb2505e7d50dba1">operator=</a> (<a class="el" href="#a9d64aa9930728e82acb9294bf0410c98">ChunkView</a> &amp;&amp;) noexcept(std::is_nothrow_move_assignable_v&lt; Iter &gt;)=default</td></tr>
-<tr class="memitem:adad20a3ed7275241e4665f2c703d0992" id="r_adad20a3ed7275241e4665f2c703d0992"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#adad20a3ed7275241e4665f2c703d0992">Collect</a> () const -&gt; std::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt;</td></tr>
-<tr class="memdesc:adad20a3ed7275241e4665f2c703d0992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects the chunk elements into a vector.  <br /></td></tr>
-<tr class="memitem:afee8b30ea09c3e83276cbf254aae46a4" id="r_afee8b30ea09c3e83276cbf254aae46a4"><td class="memTemplParams" colspan="2">template&lt;typename Allocator&gt; <br />
-requires (!std::derived_from&lt;std::remove_pointer_t&lt;Allocator&gt;, std::pmr::memory_resource&gt;)</td></tr>
-<tr class="memitem:afee8b30ea09c3e83276cbf254aae46a4 template"><td class="memItemLeft">constexpr auto CollectWith(Allocator allocator={}) const -&gt; std::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a>, Allocator &gt; <a class="el" href="namespacestd.html">std</a> constexpr auto CollectWith(std::pmr::memory_resource *resource) const -&gt; std::pmr::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt; <a class="el" href="namespacestd.html">std</a> auto&#160;</td><td class="memItemRight"><a class="el" href="#afee8b30ea09c3e83276cbf254aae46a4">CollectWith</a> (std::nullptr_t) const -&gt; std::pmr::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt;=delete</td></tr>
-<tr class="memdesc:afee8b30ea09c3e83276cbf254aae46a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects the chunk elements into a vector with a custom allocator.  <br /></td></tr>
+<tr class="memitem:a26f4720e4a13c7aa36cb1eb3df140a98" id="r_a26f4720e4a13c7aa36cb1eb3df140a98"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a26f4720e4a13c7aa36cb1eb3df140a98">Collect</a> () const -&gt; std::pmr::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt;</td></tr>
+<tr class="memdesc:a26f4720e4a13c7aa36cb1eb3df140a98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects the chunk elements into a vector.  <br /></td></tr>
+<tr class="memitem:a5df8d570ed182f7b2322c4079ae72d1a" id="r_a5df8d570ed182f7b2322c4079ae72d1a"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a5df8d570ed182f7b2322c4079ae72d1a">Collect</a> (std::pmr::memory_resource *resource) const -&gt; std::pmr::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt;</td></tr>
+<tr class="memdesc:a5df8d570ed182f7b2322c4079ae72d1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects the chunk elements into a vector with a specific memory resource.  <br /></td></tr>
+<tr class="memitem:a385b73d0c8a64a9bebf9082e5d2c6e59" id="r_a385b73d0c8a64a9bebf9082e5d2c6e59"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a385b73d0c8a64a9bebf9082e5d2c6e59">Collect</a> (std::nullptr_t) const -&gt; std::pmr::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt;=delete</td></tr>
 <tr class="memitem:a8022c6455a102ee32d52aaa2b27363f4" id="r_a8022c6455a102ee32d52aaa2b27363f4"><td class="memItemLeft">constexpr <a class="el" href="#af91a21c46d60e11d3ac86315319d942f">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8022c6455a102ee32d52aaa2b27363f4">operator[]</a> (size_t index) const noexcept(noexcept(*std::declval&lt; Iter &gt;()) &amp;&amp;noexcept(++std::declval&lt; Iter &amp; &gt;()))</td></tr>
 <tr class="memdesc:a8022c6455a102ee32d52aaa2b27363f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesses an element by index.  <br /></td></tr>
 <tr class="memitem:ad17e11009bb9f8a392a9a9012fc6e983" id="r_ad17e11009bb9f8a392a9a9012fc6e983"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ad17e11009bb9f8a392a9a9012fc6e983">operator==</a> (const <a class="el" href="#a9d64aa9930728e82acb9294bf0410c98">ChunkView</a> &amp;other) const</td></tr>
@@ -234,7 +233,7 @@ class helios::utils::ChunkView&lt; Iter &gt;</div><p>A non-owning view over a co
   </dd>
 </dl>
 <div class="fragment"><div class="line">std::vector&lt;int&gt; data = {1, 2, 3, 4, 5};</div>
-<div class="line"><span class="keyword">auto</span> chunks = <a class="code hl_function" href="namespacehelios_1_1utils.html#a890962838b8fca5f4093d45ce0f6ab1d">ChunkAdapter</a>(data, 2);</div>
+<div class="line"><span class="keyword">auto</span> chunks = <a class="code hl_function" href="namespacehelios_1_1utils.html#a99be2e8f1f3a30df81317367eb5265e4">ChunkAdapter</a>(data, 2);</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; chunk : chunks) {</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> val : chunk) {</div>
 <div class="line">    std::cout &lt;&lt; val &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
@@ -245,9 +244,9 @@ class helios::utils::ChunkView&lt; Iter &gt;</div><p>A non-owning view over a co
 <div class="line"><span class="comment">// 1 2</span></div>
 <div class="line"><span class="comment">// 3 4</span></div>
 <div class="line"><span class="comment">// 5</span></div>
-<div class="ttc" id="anamespacehelios_1_1utils_html_a890962838b8fca5f4093d45ce0f6ab1d"><div class="ttname"><a href="namespacehelios_1_1utils.html#a890962838b8fca5f4093d45ce0f6ab1d">helios::utils::ChunkAdapter</a></div><div class="ttdeci">constexpr auto ChunkView&lt; Iter &gt;::CollectWith(Allocator allocator) const -&gt; std::vector&lt; value_type, Allocator &gt; std ChunkAdapter(R &amp;, size_t) -&gt; ChunkAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</div><div class="ttdoc">Adapter that yields non-overlapping chunks of elements.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_a99be2e8f1f3a30df81317367eb5265e4"><div class="ttname"><a href="namespacehelios_1_1utils.html#a99be2e8f1f3a30df81317367eb5265e4">helios::utils::ChunkAdapter</a></div><div class="ttdeci">ChunkAdapter(R &amp;, size_t) -&gt; ChunkAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03423">3423</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03382">3382</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a0321ee9f139bd90c4da2f63a411f2c8f" name="a0321ee9f139bd90c4da2f63a411f2c8f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0321ee9f139bd90c4da2f63a411f2c8f">&#9670;&#160;</a></span>const_iterator</h2>
@@ -263,7 +262,7 @@ template&lt;IteratorLike Iter&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03426">3426</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03385">3385</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -281,7 +280,7 @@ template&lt;IteratorLike Iter&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03430">3430</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03389">3389</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -299,7 +298,7 @@ template&lt;IteratorLike Iter&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03425">3425</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03384">3384</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -317,7 +316,7 @@ template&lt;IteratorLike Iter&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03428">3428</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03387">3387</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -335,7 +334,7 @@ template&lt;IteratorLike Iter&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03429">3429</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03388">3388</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -353,7 +352,7 @@ template&lt;IteratorLike Iter&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03427">3427</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03386">3386</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -396,7 +395,7 @@ template&lt;IteratorLike Iter&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03437">3437</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03396">3396</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -510,12 +509,12 @@ template&lt;IteratorLike Iter&gt; </div>
 <p>Returns an iterator to the beginning. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator to the first element </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03530">3530</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03475">3475</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
-<a id="adad20a3ed7275241e4665f2c703d0992" name="adad20a3ed7275241e4665f2c703d0992"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adad20a3ed7275241e4665f2c703d0992">&#9670;&#160;</a></span>Collect()</h2>
+<a id="a26f4720e4a13c7aa36cb1eb3df140a98" name="a26f4720e4a13c7aa36cb1eb3df140a98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26f4720e4a13c7aa36cb1eb3df140a98">&#9670;&#160;</a></span>Collect() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -530,7 +529,7 @@ requires std::copy_constructible&lt;<a class="el" href="#a04f09a5110458920cccfd3
           <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1ChunkView.html">helios::utils::ChunkView</a>&lt; Iter &gt;::Collect </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const -&gt; std::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt;</td>
+          <td> const -&gt; std::pmr::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt;</td>
         </tr>
       </table>
   </td>
@@ -543,26 +542,23 @@ requires std::copy_constructible&lt;<a class="el" href="#a04f09a5110458920cccfd3
 <p>Collects the chunk elements into a vector. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector containing copies of the chunk elements </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03551">3551</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03496">3496</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afee8b30ea09c3e83276cbf254aae46a4" name="afee8b30ea09c3e83276cbf254aae46a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afee8b30ea09c3e83276cbf254aae46a4">&#9670;&#160;</a></span>CollectWith()</h2>
+<a id="a385b73d0c8a64a9bebf9082e5d2c6e59" name="a385b73d0c8a64a9bebf9082e5d2c6e59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a385b73d0c8a64a9bebf9082e5d2c6e59">&#9670;&#160;</a></span>Collect() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;IteratorLike Iter&gt; </div>
-<div class="memtemplate">
-template&lt;typename Allocator&gt; <br />
-requires (!std::derived_from&lt;std::remove_pointer_t&lt;Allocator&gt;, std::pmr::memory_resource&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto CollectWith(Allocator allocator={}) const -&gt; std::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a>, Allocator &gt; <a class="el" href="namespacestd.html">std</a> constexpr auto CollectWith(std::pmr::memory_resource *resource) const -&gt; std::pmr::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt; <a class="el" href="namespacestd.html">std</a> auto <a class="el" href="classhelios_1_1utils_1_1ChunkView.html">helios::utils::ChunkView</a>&lt; Iter &gt;::CollectWith </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1ChunkView.html">helios::utils::ChunkView</a>&lt; Iter &gt;::Collect </td>
           <td>(</td>
           <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const -&gt;  std::pmr::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt;=delete</td>
@@ -570,32 +566,49 @@ requires (!std::derived_from&lt;std::remove_pointer_t&lt;Allocator&gt;, std::pmr
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel delete">delete</span></span>  </td>
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Collects the chunk elements into a vector with a custom allocator. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Allocator</td><td>Allocator type </td></tr>
-  </table>
-  </dd>
-</dl>
+</div>
+</div>
+<a id="a5df8d570ed182f7b2322c4079ae72d1a" name="a5df8d570ed182f7b2322c4079ae72d1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5df8d570ed182f7b2322c4079ae72d1a">&#9670;&#160;</a></span>Collect() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;IteratorLike Iter&gt; <br />
+requires std::copy_constructible&lt;<a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a>&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1ChunkView.html">helios::utils::ChunkView</a>&lt; Iter &gt;::Collect </td>
+          <td>(</td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span></td><td>)</td>
+          <td> const -&gt; std::pmr::vector&lt; <a class="el" href="#a04f09a5110458920cccfd3e302139f65">value_type</a> &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Collects the chunk elements into a vector with a specific memory resource. </p>
 <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">allocator</td><td>Allocator to use for the vector </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Vector containing copies of the chunk elements</dd></dl>
-<p>Collects the chunk elements into a vector with a specific memory resource. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resource</td><td>Memory resource to use for the vector </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector containing copies of the chunk elements </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03503">3503</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -627,7 +640,7 @@ template&lt;IteratorLike Iter&gt; </div>
 <p>Checks if the chunk is empty. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the chunk has no elements </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03517">3517</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03462">3462</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -659,7 +672,7 @@ template&lt;IteratorLike Iter&gt; </div>
 <p>Returns an iterator to the end. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator past the last element </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03539">3539</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03484">3484</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -751,6 +764,8 @@ template&lt;IteratorLike Iter&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if both views have the same elements </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03517">3517</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
 </div>
 </div>
 <a id="a9a7a41fd3edb88d9061cd87feb9ba43c" name="a9a7a41fd3edb88d9061cd87feb9ba43c"></a>
@@ -795,6 +810,8 @@ template&lt;std::ranges::input_range R&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the view has the same elements as the range </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03534">3534</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
 </div>
 </div>
 <a id="a8022c6455a102ee32d52aaa2b27363f4" name="a8022c6455a102ee32d52aaa2b27363f4"></a>
@@ -832,7 +849,7 @@ template&lt;IteratorLike Iter&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the element </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03491">3491</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03436">3436</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -864,7 +881,7 @@ template&lt;IteratorLike Iter&gt; </div>
 <p>Returns the number of elements in this chunk. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of elements (may be less than the adapter's chunk size for the final chunk) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03524">3524</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03469">3469</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>

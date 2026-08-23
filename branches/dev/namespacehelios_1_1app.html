@@ -340,12 +340,16 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ac38a999809953af3cdddc6c432e814f8" id="r_ac38a999809953af3cdddc6c432e814f8"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#ac38a999809953af3cdddc6c432e814f8">ToString</a> (<a class="el" href="#a4825c33ecb12c84774fbf8af4424743e">ExitCode</a> code) noexcept</td></tr>
+<tr class="memdesc:ac38a999809953af3cdddc6c432e814f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts an <span class="tt"><a class="el" href="#a4825c33ecb12c84774fbf8af4424743e" title="Application exit codes.">ExitCode</a></span> to a string representation.  <br /></td></tr>
+<tr class="memitem:a483665452abcef4d1193a94165fbff4d" id="r_a483665452abcef4d1193a94165fbff4d"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a483665452abcef4d1193a94165fbff4d">ToString</a> (<a class="el" href="structhelios_1_1app_1_1AppExit.html">AppExit</a> app_exit) noexcept</td></tr>
+<tr class="memdesc:a483665452abcef4d1193a94165fbff4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts an <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message to a string representation.  <br /></td></tr>
 <tr class="memitem:a39656018dcdb91d3606e1b486aa5e593" id="r_a39656018dcdb91d3606e1b486aa5e593"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a39656018dcdb91d3606e1b486aa5e593">InstallFrameLimiter</a> (<a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;app, <a class="el" href="structhelios_1_1app_1_1FrameLimiterSettings.html">FrameLimiterSettings</a> settings={})</td></tr>
 <tr class="memdesc:a39656018dcdb91d3606e1b486aa5e593"><td class="mdescLeft">&#160;</td><td class="mdescRight">Installs a limiter on the main app world.  <br /></td></tr>
 <tr class="memitem:aa939dd9b3eda3310828662db750faf4a" id="r_aa939dd9b3eda3310828662db750faf4a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa939dd9b3eda3310828662db750faf4a">InstallFrameLimiter</a> (<a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;sub_app, <a class="el" href="structhelios_1_1app_1_1FrameLimiterSettings.html">FrameLimiterSettings</a> settings={})</td></tr>
 <tr class="memdesc:aa939dd9b3eda3310828662db750faf4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Installs a limiter on a sub-app world.  <br /></td></tr>
-<tr class="memitem:a6c14f36c354fa92a14823337d0ee4114" id="r_a6c14f36c354fa92a14823337d0ee4114"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a6c14f36c354fa92a14823337d0ee4114">DynamicPluginErrorToString</a> (<a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee">DynamicPluginError</a> error) noexcept</td></tr>
-<tr class="memdesc:a6c14f36c354fa92a14823337d0ee4114"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a human-readable description for a <span class="tt"><a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span>.  <br /></td></tr>
+<tr class="memitem:ac182f07221692f9d84a5c9cc569c4d9f" id="r_ac182f07221692f9d84a5c9cc569c4d9f"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#ac182f07221692f9d84a5c9cc569c4d9f">ToString</a> (<a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee">DynamicPluginError</a> error) noexcept</td></tr>
+<tr class="memdesc:ac182f07221692f9d84a5c9cc569c4d9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a human-readable description for a <span class="tt"><a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span>.  <br /></td></tr>
 <tr class="memitem:a39050f58d09134b6e423302abab5a578" id="r_a39050f58d09134b6e423302abab5a578"><td class="memTemplParams" colspan="2">template&lt;PluginTrait T&gt; </td></tr>
 <tr class="memitem:a39050f58d09134b6e423302abab5a578 template"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a39050f58d09134b6e423302abab5a578">PluginNameOf</a> () noexcept</td></tr>
 <tr class="memdesc:a39050f58d09134b6e423302abab5a578"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets name for a plugin type.  <br /></td></tr>
@@ -535,7 +539,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type id for sub-apps. </p>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00042">42</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00043">43</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -553,7 +557,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type index for sub-apps. </p>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00039">39</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00040">40</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -626,7 +630,7 @@ template&lt;typename T&gt; </div>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00048">48</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app__exit_8hpp_source.html#l00011">11</a> of file <a class="el" href="app__exit_8hpp_source.html">app_exit.hpp</a>.</p>
 
 </div>
 </div>
@@ -665,42 +669,6 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a6c14f36c354fa92a14823337d0ee4114" name="a6c14f36c354fa92a14823337d0ee4114"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c14f36c354fa92a14823337d0ee4114">&#9670;&#160;</a></span>DynamicPluginErrorToString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string_view helios::app::DynamicPluginErrorToString </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee">DynamicPluginError</a></td>          <td class="paramname"><span class="paramname"><em>error</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gets a human-readable description for a <span class="tt"><a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">error</td><td>The error code </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>String description of the error </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00105">105</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a39656018dcdb91d3606e1b486aa5e593" name="a39656018dcdb91d3606e1b486aa5e593"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a39656018dcdb91d3606e1b486aa5e593">&#9670;&#160;</a></span>InstallFrameLimiter() <span class="overload">[1/2]</span></h2>
 
@@ -800,7 +768,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Whether overlapping extraction skips are enabled </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00100">100</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00101">101</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -838,7 +806,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True when <span class="tt">kAsync</span> is set on the label type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00127">127</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00128">128</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1037,7 +1005,7 @@ template&lt;PluginTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Exit code from the first <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00066">66</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00067">67</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
 
 </div>
 </div>
@@ -1077,7 +1045,7 @@ template&lt;PluginTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00115">115</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00116">116</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
 
 </div>
 </div>
@@ -1118,7 +1086,7 @@ template&lt;PluginTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Exit code from the first <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00083">83</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00084">84</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
 
 </div>
 </div>
@@ -1164,7 +1132,7 @@ template&lt;PluginTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00134">134</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00135">135</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
 
 </div>
 </div>
@@ -1200,7 +1168,7 @@ template&lt;PluginTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Exit code from an <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message, or <span class="tt"><a class="el" href="#a4825c33ecb12c84774fbf8af4424743ea8c632159fa131f09d04f94e3cbcd8782" title="Successful execution.">ExitCode::kSuccess</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00104">104</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00105">105</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
 
 </div>
 </div>
@@ -1240,7 +1208,7 @@ template&lt;PluginTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00155">155</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="runners_8hpp_source.html#l00156">156</a> of file <a class="el" href="runners_8hpp_source.html">runners.hpp</a>.</p>
 
 </div>
 </div>
@@ -1278,7 +1246,7 @@ template&lt;OverlappingUpdatesSubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Maximum extraction skip budget </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00112">112</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00113">113</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1322,7 +1290,115 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The name of the sub-app </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00085">85</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00086">86</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a483665452abcef4d1193a94165fbff4d" name="a483665452abcef4d1193a94165fbff4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a483665452abcef4d1193a94165fbff4d">&#9670;&#160;</a></span>ToString() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::app::ToString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1app_1_1AppExit.html">AppExit</a></td>          <td class="paramname"><span class="paramname"><em>app_exit</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts an <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message to a string representation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">app_exit</td><td>The <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message to convert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A string view representing the exit code </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="app__exit_8hpp_source.html#l00078">78</a> of file <a class="el" href="app__exit_8hpp_source.html">app_exit.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac182f07221692f9d84a5c9cc569c4d9f" name="ac182f07221692f9d84a5c9cc569c4d9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac182f07221692f9d84a5c9cc569c4d9f">&#9670;&#160;</a></span>ToString() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::app::ToString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee">DynamicPluginError</a></td>          <td class="paramname"><span class="paramname"><em>error</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a human-readable description for a <span class="tt"><a class="el" href="#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error</td><td>The error code </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>String description of the error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00105">105</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac38a999809953af3cdddc6c432e814f8" name="ac38a999809953af3cdddc6c432e814f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac38a999809953af3cdddc6c432e814f8">&#9670;&#160;</a></span>ToString() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::app::ToString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4825c33ecb12c84774fbf8af4424743e">ExitCode</a></td>          <td class="paramname"><span class="paramname"><em>code</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts an <span class="tt"><a class="el" href="#a4825c33ecb12c84774fbf8af4424743e" title="Application exit codes.">ExitCode</a></span> to a string representation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td>The exit code to convert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A string view representing the exit code </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="app__exit_8hpp_source.html#l00061">61</a> of file <a class="el" href="app__exit_8hpp_source.html">app_exit.hpp</a>.</p>
 
 </div>
 </div>

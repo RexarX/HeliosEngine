@@ -185,12 +185,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8d170ada7705c7412f5f7e42e8bde0c4" id="r_a8d170ada7705c7412f5f7e42e8bde0c4"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a> ()</td></tr>
+<tr class="memitem:a6a0454b8da26923c73ab5fad1005882a" id="r_a6a0454b8da26923c73ab5fad1005882a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a> (std::pmr::memory_resource *resource=std::pmr::get_default_resource())</td></tr>
+<tr class="memdesc:a6a0454b8da26923c73ab5fad1005882a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a world using <span class="tt">resource</span> for owned ECS storage.  <br /></td></tr>
+<tr class="memitem:acbac1db105a78e21ece545bbf1993c3f" id="r_acbac1db105a78e21ece545bbf1993c3f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#acbac1db105a78e21ece545bbf1993c3f">World</a> (std::nullptr_t)=delete</td></tr>
 <tr class="memitem:a344471ae07b4c1204c7442d0945e59fa" id="r_a344471ae07b4c1204c7442d0945e59fa"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a344471ae07b4c1204c7442d0945e59fa">World</a> (const World &amp;)=delete</td></tr>
 <tr class="memitem:a544ddce62f690cdedad20e226703bed5" id="r_a544ddce62f690cdedad20e226703bed5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a544ddce62f690cdedad20e226703bed5">World</a> (World &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:ac1d0d6a99c34850af5dbb22b0f549045" id="r_ac1d0d6a99c34850af5dbb22b0f549045"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac1d0d6a99c34850af5dbb22b0f549045">~World</a> ()=default</td></tr>
-<tr class="memitem:ac15990e868cf806b356f27aea4de21b7" id="r_ac15990e868cf806b356f27aea4de21b7"><td class="memItemLeft"><a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac15990e868cf806b356f27aea4de21b7">operator=</a> (const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a> &amp;)=delete</td></tr>
-<tr class="memitem:ada42ae1614162d7636e533fc8e865db2" id="r_ada42ae1614162d7636e533fc8e865db2"><td class="memItemLeft"><a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ada42ae1614162d7636e533fc8e865db2">operator=</a> (<a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:ac15990e868cf806b356f27aea4de21b7" id="r_ac15990e868cf806b356f27aea4de21b7"><td class="memItemLeft"><a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac15990e868cf806b356f27aea4de21b7">operator=</a> (const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a> &amp;)=delete</td></tr>
+<tr class="memitem:ada42ae1614162d7636e533fc8e865db2" id="r_ada42ae1614162d7636e533fc8e865db2"><td class="memItemLeft"><a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ada42ae1614162d7636e533fc8e865db2">operator=</a> (<a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a> &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:a8c135f24991d9a3e3cc57cacfee0d01c" id="r_a8c135f24991d9a3e3cc57cacfee0d01c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8c135f24991d9a3e3cc57cacfee0d01c">Update</a> ()</td></tr>
 <tr class="memdesc:a8c135f24991d9a3e3cc57cacfee0d01c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flushes buffer of pending operations.  <br /></td></tr>
 <tr class="memitem:a473fc38f99f63f6b356a8afe2793ba98" id="r_a473fc38f99f63f6b356a8afe2793ba98"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a473fc38f99f63f6b356a8afe2793ba98">Flush</a> ()</td></tr>
@@ -215,25 +217,25 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&gt;</td></tr>
 <tr class="memitem:aace6fa022dfb6d9a7fcecb396b36560f template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aace6fa022dfb6d9a7fcecb396b36560f">TryDestroyEntities</a> (const R &amp;entities)</td></tr>
 <tr class="memdesc:aace6fa022dfb6d9a7fcecb396b36560f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to destroy entities if they exist in the world.  <br /></td></tr>
-<tr class="memitem:a5e496dc22cbbd010dcdbc0942176e4a7" id="r_a5e496dc22cbbd010dcdbc0942176e4a7"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args, typename Allocator = std::allocator&lt;ComponentTypeIndex&gt;&gt; </td></tr>
-<tr class="memitem:a5e496dc22cbbd010dcdbc0942176e4a7 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a5e496dc22cbbd010dcdbc0942176e4a7">Query</a> (Allocator alloc={}) noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, Allocator, Args... &gt;</td></tr>
-<tr class="memdesc:a5e496dc22cbbd010dcdbc0942176e4a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a query over entities matching the specified component criteria.  <br /></td></tr>
-<tr class="memitem:a616c132436f0d15093fac52b3de848b0" id="r_a616c132436f0d15093fac52b3de848b0"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
-<tr class="memitem:a616c132436f0d15093fac52b3de848b0 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a616c132436f0d15093fac52b3de848b0">Query</a> (std::pmr::memory_resource *resource) noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt;</td></tr>
-<tr class="memdesc:a616c132436f0d15093fac52b3de848b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a query using a PMR memory resource.  <br /></td></tr>
-<tr class="memitem:a73433bbe7943b456f9c7bb59176667c8" id="r_a73433bbe7943b456f9c7bb59176667c8"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
-<tr class="memitem:a73433bbe7943b456f9c7bb59176667c8 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a73433bbe7943b456f9c7bb59176667c8">Query</a> (std::nullptr_t) -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt;=delete</td></tr>
-<tr class="memitem:aafadd913c9bf01e4aa1cd7a00cda384b" id="r_aafadd913c9bf01e4aa1cd7a00cda384b"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args, typename Allocator = std::allocator&lt;ComponentTypeIndex&gt;&gt; <br />
-requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</td></tr>
-<tr class="memitem:aafadd913c9bf01e4aa1cd7a00cda384b template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aafadd913c9bf01e4aa1cd7a00cda384b">ReadOnlyQuery</a> (Allocator alloc={}) const noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, Allocator, Args... &gt;</td></tr>
-<tr class="memdesc:aafadd913c9bf01e4aa1cd7a00cda384b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a read-only query over entities matching the specified component criteria.  <br /></td></tr>
-<tr class="memitem:a09b69143158c87d16797ae5ef1fea819" id="r_a09b69143158c87d16797ae5ef1fea819"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; <br />
-requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</td></tr>
-<tr class="memitem:a09b69143158c87d16797ae5ef1fea819 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a09b69143158c87d16797ae5ef1fea819">ReadOnlyQuery</a> (std::pmr::memory_resource *resource) const noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt;</td></tr>
-<tr class="memdesc:a09b69143158c87d16797ae5ef1fea819"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a read-only query using a PMR memory resource.  <br /></td></tr>
-<tr class="memitem:a4a57d65c84aee0a3a08e567c888e17ac" id="r_a4a57d65c84aee0a3a08e567c888e17ac"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; <br />
-requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</td></tr>
-<tr class="memitem:a4a57d65c84aee0a3a08e567c888e17ac template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a4a57d65c84aee0a3a08e567c888e17ac">ReadOnlyQuery</a> (std::nullptr_t) const -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt;=delete</td></tr>
+<tr class="memitem:a59bd09ba1e549a27fc7fa6c7a6e83d0f" id="r_a59bd09ba1e549a27fc7fa6c7a6e83d0f"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
+<tr class="memitem:a59bd09ba1e549a27fc7fa6c7a6e83d0f template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a59bd09ba1e549a27fc7fa6c7a6e83d0f">Query</a> () noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;</td></tr>
+<tr class="memdesc:a59bd09ba1e549a27fc7fa6c7a6e83d0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a query over entities matching the specified component criteria.  <br /></td></tr>
+<tr class="memitem:aa8bd68b34de74f443e43da7c7f6dd103" id="r_aa8bd68b34de74f443e43da7c7f6dd103"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
+<tr class="memitem:aa8bd68b34de74f443e43da7c7f6dd103 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aa8bd68b34de74f443e43da7c7f6dd103">Query</a> (std::pmr::memory_resource *resource) noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;</td></tr>
+<tr class="memdesc:aa8bd68b34de74f443e43da7c7f6dd103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a query using a PMR memory resource.  <br /></td></tr>
+<tr class="memitem:af7dbd1bd9bdf218b332727913d3b5d30" id="r_af7dbd1bd9bdf218b332727913d3b5d30"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
+<tr class="memitem:af7dbd1bd9bdf218b332727913d3b5d30 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#af7dbd1bd9bdf218b332727913d3b5d30">Query</a> (std::nullptr_t) -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;=delete</td></tr>
+<tr class="memitem:afe7b7554fe47992b693913fcfbd3ef7c" id="r_afe7b7554fe47992b693913fcfbd3ef7c"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; <br />
+requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</td></tr>
+<tr class="memitem:afe7b7554fe47992b693913fcfbd3ef7c template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#afe7b7554fe47992b693913fcfbd3ef7c">ReadOnlyQuery</a> () const noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;</td></tr>
+<tr class="memdesc:afe7b7554fe47992b693913fcfbd3ef7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a read-only query over entities matching the specified component criteria.  <br /></td></tr>
+<tr class="memitem:a9dcfd482b3868a46cf5d10b660be5e4f" id="r_a9dcfd482b3868a46cf5d10b660be5e4f"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; <br />
+requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</td></tr>
+<tr class="memitem:a9dcfd482b3868a46cf5d10b660be5e4f template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a9dcfd482b3868a46cf5d10b660be5e4f">ReadOnlyQuery</a> (std::pmr::memory_resource *resource) const noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;</td></tr>
+<tr class="memdesc:a9dcfd482b3868a46cf5d10b660be5e4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a read-only query using a PMR memory resource.  <br /></td></tr>
+<tr class="memitem:aca3b2ac81ac034a05e05eb258083984a" id="r_aca3b2ac81ac034a05e05eb258083984a"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; <br />
+requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</td></tr>
+<tr class="memitem:aca3b2ac81ac034a05e05eb258083984a template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aca3b2ac81ac034a05e05eb258083984a">ReadOnlyQuery</a> (std::nullptr_t) const -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;=delete</td></tr>
 <tr class="memitem:a6afaf7fca093943b8edd4c36682807c1" id="r_a6afaf7fca093943b8edd4c36682807c1"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
 <tr class="memitem:a6afaf7fca093943b8edd4c36682807c1 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6afaf7fca093943b8edd4c36682807c1">AddComponents</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, Ts &amp;&amp;... components)</td></tr>
@@ -346,9 +348,9 @@ requires (sizeof...(Ts) &gt; 0)</td></tr>
 <tr class="memitem:ae6ffea433e6b664e7ed7d619e79c0f3b" id="r_ae6ffea433e6b664e7ed7d619e79c0f3b"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
 <tr class="memitem:ae6ffea433e6b664e7ed7d619e79c0f3b template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ae6ffea433e6b664e7ed7d619e79c0f3b">ReadMessages</a> (<a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; &amp;cursor) const noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1MessageReader.html">MessageReader</a>&lt; T &gt;</td></tr>
 <tr class="memdesc:ae6ffea433e6b664e7ed7d619e79c0f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a reader for unread messages of type <span class="tt">T</span>.  <br /></td></tr>
-<tr class="memitem:ac8bde21f6076ca018d26391610efb245" id="r_ac8bde21f6076ca018d26391610efb245"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T, typename Alloc = std::pmr::polymorphic_allocator&lt;std::byte&gt;&gt; </td></tr>
-<tr class="memitem:ac8bde21f6076ca018d26391610efb245 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ac8bde21f6076ca018d26391610efb245">ReadConsumableMessages</a> (<a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; &amp;cursor, <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;consumed_registry) noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">ConsumableMessageReader</a>&lt; T, Alloc &gt;</td></tr>
-<tr class="memdesc:ac8bde21f6076ca018d26391610efb245"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a consumable reader for unread messages of type <span class="tt">T</span>.  <br /></td></tr>
+<tr class="memitem:a8131fcbac2eefcb2c6774746d8a7c2dd" id="r_a8131fcbac2eefcb2c6774746d8a7c2dd"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
+<tr class="memitem:a8131fcbac2eefcb2c6774746d8a7c2dd template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a8131fcbac2eefcb2c6774746d8a7c2dd">ReadConsumableMessages</a> (<a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; &amp;cursor, <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a> &amp;consumed_registry) noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">ConsumableMessageReader</a>&lt; T &gt;</td></tr>
+<tr class="memdesc:a8131fcbac2eefcb2c6774746d8a7c2dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a consumable reader for unread messages of type <span class="tt">T</span>.  <br /></td></tr>
 <tr class="memitem:af6e99e12d680785e0f83ce7d63db5e07" id="r_af6e99e12d680785e0f83ce7d63db5e07"><td class="memTemplParams" colspan="2">template&lt;MessageTrait T&gt; </td></tr>
 <tr class="memitem:af6e99e12d680785e0f83ce7d63db5e07 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#af6e99e12d680785e0f83ce7d63db5e07">WriteMessages</a> () noexcept -&gt; <a class="el" href="classhelios_1_1ecs_1_1ManagedMessageWriter.html">ManagedMessageWriter</a>&lt; T &gt;</td></tr>
 <tr class="memdesc:af6e99e12d680785e0f83ce7d63db5e07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a writer for messages of type <span class="tt">T</span>.  <br /></td></tr>
@@ -409,34 +411,77 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td><
 <tr class="memdesc:a7623bb38f0cbe9cf313e48e822ae6a8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the message manager.  <br /></td></tr>
 <tr class="memitem:a23229b735d9e113240f9b29102012701" id="r_a23229b735d9e113240f9b29102012701"><td class="memItemLeft">const <a class="el" href="classhelios_1_1ecs_1_1MessageManager.html">MessageManager</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a23229b735d9e113240f9b29102012701">Messages</a> () const noexcept</td></tr>
 <tr class="memdesc:a23229b735d9e113240f9b29102012701"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the message manager (const).  <br /></td></tr>
+<tr class="memitem:a5ed908f8e45267200bc4a705f303e2d6" id="r_a5ed908f8e45267200bc4a705f303e2d6"><td class="memItemLeft">std::pmr::memory_resource *&#160;</td><td class="memItemRight"><a class="el" href="#a5ed908f8e45267200bc4a705f303e2d6">GetMemoryResource</a> () const noexcept</td></tr>
+<tr class="memdesc:a5ed908f8e45267200bc4a705f303e2d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the memory resource used for owned world storage.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> class manages entities with their components and systems. </p>
 <p>All modifications to the world (adding/removing entities or components) should be done via command buffers to defer changes until the next update. </p><dl class="section note"><dt>Note</dt><dd>Partially thread safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00050">50</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00049">49</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8d170ada7705c7412f5f7e42e8bde0c4" name="a8d170ada7705c7412f5f7e42e8bde0c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d170ada7705c7412f5f7e42e8bde0c4">&#9670;&#160;</a></span>World() <span class="overload">[1/3]</span></h2>
+<a id="a6a0454b8da26923c73ab5fad1005882a" name="a6a0454b8da26923c73ab5fad1005882a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a0454b8da26923c73ab5fad1005882a">&#9670;&#160;</a></span>World() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">helios::ecs::World::World </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::pmr::get_default_resource()</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Constructs a world using <span class="tt">resource</span> for owned ECS storage. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td>Memory resource for entities, components, resources, messages, and the command queue. Defaults to <span class="tt">std::pmr::get_default_resource()</span>. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00012">12</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
 
 </div>
 </div>
+<a id="acbac1db105a78e21ece545bbf1993c3f" name="acbac1db105a78e21ece545bbf1993c3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbac1db105a78e21ece545bbf1993c3f">&#9670;&#160;</a></span>World() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::World::World </td>
+          <td>(</td>
+          <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a344471ae07b4c1204c7442d0945e59fa" name="a344471ae07b4c1204c7442d0945e59fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a344471ae07b4c1204c7442d0945e59fa">&#9670;&#160;</a></span>World() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a344471ae07b4c1204c7442d0945e59fa">&#9670;&#160;</a></span>World() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -461,7 +506,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td><
 </div>
 </div>
 <a id="a544ddce62f690cdedad20e226703bed5" name="a544ddce62f690cdedad20e226703bed5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a544ddce62f690cdedad20e226703bed5">&#9670;&#160;</a></span>World() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a544ddce62f690cdedad20e226703bed5">&#9670;&#160;</a></span>World() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -529,7 +574,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td><
 <p>Registers all built-in non-template message types. </p>
 <p>This is called automatically during <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span> construction. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00087">87</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00093">93</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
 
 </div>
 </div>
@@ -579,7 +624,7 @@ template&lt;ComponentBundleTrait B&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01034">1034</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01035">1035</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -634,7 +679,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00992">992</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00993">993</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -672,7 +717,7 @@ template&lt;AnyMessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01295">1295</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01296">1296</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -711,7 +756,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00660">660</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00653">653</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -733,7 +778,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
 <p>Clears the world, removing all data. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00031">31</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00037">37</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
 
 </div>
 </div>
@@ -766,7 +811,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00078">78</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00084">84</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
 
 </div>
 </div>
@@ -796,7 +841,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
 <p>Clears all entities and components from the world. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00040">40</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00046">46</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
 
 </div>
 </div>
@@ -836,7 +881,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01317">1317</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01318">1318</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -866,7 +911,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
 <p>Clears all messages without removing registration. </p>
 <p>Messages can still be written/read after calling this method. To completely reset the message system including registration, use <span class="tt"><a class="el" href="#ae59ec4dcf9819c1dcfdca9e4de4c8cbc" title="Clears the world, removing all data.">Clear()</a></span>. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00678">678</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00671">671</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -897,7 +942,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe for read operations. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of pending commands in the command queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00884">884</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00876">876</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -928,7 +973,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to component manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00918">918</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00910">910</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -959,7 +1004,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to component manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00909">909</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00901">901</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -990,7 +1035,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Newly created entity. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00045">45</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00051">51</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
 
 </div>
 </div>
@@ -1041,7 +1086,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00969">969</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00970">970</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1075,7 +1120,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00052">52</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00058">58</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
 
 </div>
 </div>
@@ -1131,7 +1176,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01062">1062</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01063">1063</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1177,7 +1222,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01212">1212</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01213">1213</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1221,7 +1266,7 @@ template&lt;CommandTrait Cmd&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00765">765</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00757">757</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1266,7 +1311,7 @@ requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00779">779</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00771">771</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1297,7 +1342,7 @@ requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to entity manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00900">900</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00892">892</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1328,7 +1373,7 @@ requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to entity manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00893">893</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00885">885</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1359,7 +1404,7 @@ requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe for read operations. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of entities in the world </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00866">866</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00858">858</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1419,7 +1464,37 @@ requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
 <p>Flushes entity reservations and executes pending commands. </p>
 <p>Does not advance the message lifecycle. Call <span class="tt"><a class="el" href="#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">Update()</a></span> to also swap message buffers and clear aged automatic messages. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00023">23</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00029">29</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5ed908f8e45267200bc4a705f303e2d6" name="a5ed908f8e45267200bc4a705f303e2d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ed908f8e45267200bc4a705f303e2d6">&#9670;&#160;</a></span>GetMemoryResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pmr::memory_resource * helios::ecs::World::GetMemoryResource </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the memory resource used for owned world storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>Memory resource passed to the constructor </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00950">950</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1450,7 +1525,7 @@ requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe for read operations. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if there are pending commands, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00857">857</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00849">849</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1586,7 +1661,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if message exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00837">837</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00829">829</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1625,7 +1700,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if messages exist, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00848">848</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00840">840</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1664,7 +1739,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if resource exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00826">826</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00818">818</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1708,7 +1783,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01187">1187</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01188">1188</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1753,7 +1828,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00520">520</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00513">513</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1784,7 +1859,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to message manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00950">950</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00942">942</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1815,7 +1890,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to message manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00943">943</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00935">935</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -1829,9 +1904,9 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a> &amp; helios::ecs::World::operator= </td>
+          <td class="memname"><a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a> &amp; helios::ecs::World::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1854,9 +1929,9 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a> &amp; helios::ecs::World::operator= </td>
+          <td class="memname"><a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a> &amp; helios::ecs::World::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1869,13 +1944,13 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 
 </div>
 </div>
-<a id="a5e496dc22cbbd010dcdbc0942176e4a7" name="a5e496dc22cbbd010dcdbc0942176e4a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e496dc22cbbd010dcdbc0942176e4a7">&#9670;&#160;</a></span>Query() <span class="overload">[1/3]</span></h2>
+<a id="a59bd09ba1e549a27fc7fa6c7a6e83d0f" name="a59bd09ba1e549a27fc7fa6c7a6e83d0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59bd09ba1e549a27fc7fa6c7a6e83d0f">&#9670;&#160;</a></span>Query() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;QueryArg... Args, typename Allocator = std::allocator&lt;ComponentTypeIndex&gt;&gt; </div>
+template&lt;QueryArg... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1883,8 +1958,8 @@ template&lt;QueryArg... Args, typename Allocator = std::allocator&lt;ComponentTy
         <tr>
           <td class="memname">auto helios::ecs::World::Query </td>
           <td>(</td>
-          <td class="paramtype">Allocator</td>          <td class="paramname"><span class="paramname"><em>alloc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span></td><td>)</td>
-          <td> -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, Allocator, Args... &gt;</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;</td>
         </tr>
       </table>
   </td>
@@ -1899,18 +1974,11 @@ template&lt;QueryArg... Args, typename Allocator = std::allocator&lt;ComponentTy
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Args</td><td>Component access types and optional With/Without filters </td></tr>
-    <tr><td class="paramname">Allocator</td><td>Allocator type for internal query storage </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">alloc</td><td>Allocator instance </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Query object over entities matching the specified criteria</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// Default allocator — no argument needed</span></div>
+<div class="fragment"><div class="line"><span class="comment">// Uses the world&#39;s memory resource</span></div>
 <div class="line"><span class="keyword">auto</span> query = world.Query&lt;Transform&amp;, <span class="keyword">const</span> Velocity&amp;,</div>
 <div class="line">                         <span class="keyword">const</span> Gravity*, With&lt;Player&gt;,</div>
 <div class="line">                         Without&lt;Dead&gt;&gt;();</div>
@@ -1922,12 +1990,12 @@ template&lt;QueryArg... Args, typename Allocator = std::allocator&lt;ComponentTy
 <div class="line">  }</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00177">177</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00181">181</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a73433bbe7943b456f9c7bb59176667c8" name="a73433bbe7943b456f9c7bb59176667c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73433bbe7943b456f9c7bb59176667c8">&#9670;&#160;</a></span>Query() <span class="overload">[2/3]</span></h2>
+<a id="af7dbd1bd9bdf218b332727913d3b5d30" name="af7dbd1bd9bdf218b332727913d3b5d30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7dbd1bd9bdf218b332727913d3b5d30">&#9670;&#160;</a></span>Query() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1941,7 +2009,7 @@ template&lt;QueryArg... Args&gt; </div>
           <td class="memname">auto helios::ecs::World::Query </td>
           <td>(</td>
           <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> -&gt;  <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt;=delete</td>
+          <td> -&gt;  <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;=delete</td>
         </tr>
       </table>
   </td>
@@ -1953,8 +2021,8 @@ template&lt;QueryArg... Args&gt; </div>
 
 </div>
 </div>
-<a id="a616c132436f0d15093fac52b3de848b0" name="a616c132436f0d15093fac52b3de848b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a616c132436f0d15093fac52b3de848b0">&#9670;&#160;</a></span>Query() <span class="overload">[3/3]</span></h2>
+<a id="aa8bd68b34de74f443e43da7c7f6dd103" name="aa8bd68b34de74f443e43da7c7f6dd103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8bd68b34de74f443e43da7c7f6dd103">&#9670;&#160;</a></span>Query() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1968,7 +2036,7 @@ template&lt;QueryArg... Args&gt; </div>
           <td class="memname">auto helios::ecs::World::Query </td>
           <td>(</td>
           <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span></td><td>)</td>
-          <td> -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt;</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;</td>
         </tr>
       </table>
   </td>
@@ -1979,7 +2047,7 @@ template&lt;QueryArg... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Creates a query using a PMR memory resource. </p>
-<p>Equivalent to the allocator overload but accepts a <span class="tt">pmr::memory_resource*</span> directly, constructing a <span class="tt">pmr::polymorphic_allocator</span> internally.</p>
+<p>Use this overload to place query matching storage on a different resource than the world (for example a system arena).</p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -2000,7 +2068,7 @@ template&lt;QueryArg... Args&gt; </div>
 <div class="line">  transform.position += velocity.direction * velocity.speed;</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00203">203</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00204">204</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2040,7 +2108,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Async message reader for type <span class="tt">T</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01302">1302</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01303">1303</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2091,17 +2159,17 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01163">1163</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01164">1164</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ac8bde21f6076ca018d26391610efb245" name="ac8bde21f6076ca018d26391610efb245"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8bde21f6076ca018d26391610efb245">&#9670;&#160;</a></span>ReadConsumableMessages()</h2>
+<a id="a8131fcbac2eefcb2c6774746d8a7c2dd" name="a8131fcbac2eefcb2c6774746d8a7c2dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8131fcbac2eefcb2c6774746d8a7c2dd">&#9670;&#160;</a></span>ReadConsumableMessages()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
+template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2114,7 +2182,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>consumed_registry</em></span>&#160;) -&gt; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">ConsumableMessageReader</a>&lt; T, Alloc &gt;</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>consumed_registry</em></span>&#160;) -&gt; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageReader.html">ConsumableMessageReader</a>&lt; T &gt;</td>
         </tr>
       </table>
   </td>
@@ -2142,7 +2210,7 @@ template&lt;ConsumableMessageTrait T, typename Alloc&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Consumable message reader for type <span class="tt">T</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01351">1351</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01352">1352</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2188,18 +2256,18 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Message reader for type <span class="tt">T</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01343">1343</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01344">1344</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aafadd913c9bf01e4aa1cd7a00cda384b" name="aafadd913c9bf01e4aa1cd7a00cda384b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafadd913c9bf01e4aa1cd7a00cda384b">&#9670;&#160;</a></span>ReadOnlyQuery() <span class="overload">[1/3]</span></h2>
+<a id="afe7b7554fe47992b693913fcfbd3ef7c" name="afe7b7554fe47992b693913fcfbd3ef7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe7b7554fe47992b693913fcfbd3ef7c">&#9670;&#160;</a></span>ReadOnlyQuery() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;QueryArg... Args, typename Allocator = std::allocator&lt;ComponentTypeIndex&gt;&gt; <br />
-requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</div>
+template&lt;QueryArg... Args&gt; <br />
+requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2207,8 +2275,8 @@ requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" hre
         <tr>
           <td class="memname">auto helios::ecs::World::ReadOnlyQuery </td>
           <td>(</td>
-          <td class="paramtype">Allocator</td>          <td class="paramname"><span class="paramname"><em>alloc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span></td><td>)</td>
-          <td> const -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, Allocator, Args... &gt;</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;</td>
         </tr>
       </table>
   </td>
@@ -2223,18 +2291,11 @@ requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" hre
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Args</td><td>Component access types and optional With/Without filters </td></tr>
-    <tr><td class="paramname">Allocator</td><td>Allocator type for internal query storage </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">alloc</td><td>Allocator instance </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Query object over entities matching the specified criteria</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// Default allocator — no argument needed</span></div>
+<div class="fragment"><div class="line"><span class="comment">// Uses the world&#39;s memory resource</span></div>
 <div class="line"><span class="keyword">auto</span> query = world.ReadOnlyQuery&lt;Health, <span class="keyword">const</span> Status*,</div>
 <div class="line">                                 With&lt;Player&gt;, Without&lt;Dead&gt;&gt;();</div>
 <div class="line"> </div>
@@ -2245,18 +2306,18 @@ requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" hre
 <div class="line">}</div>
 <div class="ttc" id="anamespacehelios_1_1log_html_af369f6c3b41ae150aa198b57020da7d9"><div class="ttname"><a href="namespacehelios_1_1log.html#af369f6c3b41ae150aa198b57020da7d9">helios::log::Trace</a></div><div class="ttdeci">void Trace(std::string_view) noexcept</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00480">logger.hpp:480</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00241">241</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00237">237</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a4a57d65c84aee0a3a08e567c888e17ac" name="a4a57d65c84aee0a3a08e567c888e17ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a57d65c84aee0a3a08e567c888e17ac">&#9670;&#160;</a></span>ReadOnlyQuery() <span class="overload">[2/3]</span></h2>
+<a id="aca3b2ac81ac034a05e05eb258083984a" name="aca3b2ac81ac034a05e05eb258083984a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca3b2ac81ac034a05e05eb258083984a">&#9670;&#160;</a></span>ReadOnlyQuery() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;QueryArg... Args&gt; <br />
-requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</div>
+requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2265,7 +2326,7 @@ requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" hre
           <td class="memname">auto helios::ecs::World::ReadOnlyQuery </td>
           <td>(</td>
           <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const -&gt;  <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt;=delete</td>
+          <td> const -&gt;  <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;=delete</td>
         </tr>
       </table>
   </td>
@@ -2277,14 +2338,14 @@ requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" hre
 
 </div>
 </div>
-<a id="a09b69143158c87d16797ae5ef1fea819" name="a09b69143158c87d16797ae5ef1fea819"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09b69143158c87d16797ae5ef1fea819">&#9670;&#160;</a></span>ReadOnlyQuery() <span class="overload">[3/3]</span></h2>
+<a id="a9dcfd482b3868a46cf5d10b660be5e4f" name="a9dcfd482b3868a46cf5d10b660be5e4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dcfd482b3868a46cf5d10b660be5e4f">&#9670;&#160;</a></span>ReadOnlyQuery() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;QueryArg... Args&gt; <br />
-requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</div>
+requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, typename details::QueryArgSplit&lt;Args...&gt;<a class="el" href="#a8c1322b944577cde5c376ab7b6038e8a">::Components</a>&gt;::kValue</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2293,7 +2354,7 @@ requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" hre
           <td class="memname">auto helios::ecs::World::ReadOnlyQuery </td>
           <td>(</td>
           <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span></td><td>)</td>
-          <td> const -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a8d170ada7705c7412f5f7e42e8bde0c4">World</a>, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt;</td>
+          <td> const -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; const <a class="el" href="#a6a0454b8da26923c73ab5fad1005882a">World</a>, Args... &gt;</td>
         </tr>
       </table>
   </td>
@@ -2304,7 +2365,7 @@ requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" hre
 </div><div class="memdoc">
 
 <p>Creates a read-only query using a PMR memory resource. </p>
-<p>All component accesses must be const-qualified — see the allocator overload for details.</p>
+<p>All component accesses must be const-qualified. Use this overload to place query matching storage on a different resource than the world.</p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -2327,7 +2388,7 @@ requires details::ValidWorldComponentAccessFromTuple&lt; const <a class="el" hre
 <div class="line">  }</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00271">271</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00267">267</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2367,7 +2428,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01288">1288</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01289">1289</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2412,7 +2473,7 @@ template&lt;ComponentBundleTrait B&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01132">1132</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01133">1133</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2463,7 +2524,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01090">1090</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01091">1091</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2503,7 +2564,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01238">1238</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01239">1239</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2539,7 +2600,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00756">756</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00748">748</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2570,7 +2631,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 <p>The actual entity creation is deferred until <span class="tt"><a class="el" href="#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">Update()</a></span> is called. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reserved entity ID </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00099">99</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00106">106</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2601,7 +2662,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe for read operations. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of resources in the world </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00875">875</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00867">867</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2632,7 +2693,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to resource manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00934">934</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00926">926</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2663,7 +2724,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to resource manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00927">927</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00919">919</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2714,7 +2775,7 @@ template&lt;ComponentBundleTrait B&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Whether each flattened component was added </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01047">1047</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01048">1048</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2770,7 +2831,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether each component was added (true if added, false otherwise) if more than one component was added, otherwise returns a single bool indicating whether the component was added. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01004">1004</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01005">1005</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2816,7 +2877,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00982">982</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00983">983</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2845,7 +2906,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00064">64</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00070">70</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
 
 </div>
 </div>
@@ -2902,7 +2963,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if component was emplaced, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01074">1074</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01075">1075</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2949,7 +3010,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if emplaced, false if resource already exists </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01223">1223</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01224">1224</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -2994,7 +3055,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if inserted, false if resource already exists </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01197">1197</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01198">1198</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3039,7 +3100,7 @@ template&lt;ResourceTrait... Ts&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether each resource was inserted </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00542">542</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00535">535</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3084,7 +3145,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to component, or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01179">1179</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01180">1180</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3123,7 +3184,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to resource, or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00639">639</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00632">632</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3169,7 +3230,7 @@ template&lt;ComponentBundleTrait B&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">std::array</span> indicating whether each component was removed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01142">1142</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01143">1143</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3220,7 +3281,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether each component was removed if more than one component was passed, otherwise returns a single bool indicating whether the component was removed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01102">1102</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01103">1103</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3259,7 +3320,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if removed, false if resource didn't exist </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01267">1267</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01268">1268</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3299,7 +3360,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether each resource was removed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00597">597</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00590">590</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3344,7 +3405,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to component, or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01171">1171</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01172">1172</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3383,7 +3444,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to resource, or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00628">628</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l00621">621</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3405,7 +3466,7 @@ template&lt;ResourceTrait T&gt; </div>
 <p>Flushes buffer of pending operations. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00016">16</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8cpp_source.html#l00022">22</a> of file <a class="el" href="world_8cpp_source.html">world.cpp</a>.</p>
 
 </div>
 </div>
@@ -3445,7 +3506,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Async message writer for type <span class="tt">T</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01309">1309</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01310">1310</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3496,7 +3557,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01155">1155</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01156">1156</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>
@@ -3576,7 +3637,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01281">1281</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world_8hpp_source.html#l01282">1282</a> of file <a class="el" href="world_8hpp_source.html">world.hpp</a>.</p>
 
 </div>
 </div>

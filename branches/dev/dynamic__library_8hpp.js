@@ -11,5 +11,5 @@ var dynamic__library_8hpp =
       [ "helios::utils::DynamicLibraryError::kNotLoaded", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea66f6c8c8f899853a80418298208a12fa", null ],
       [ "helios::utils::DynamicLibraryError::kPlatformError", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eab5fcaa6a3f229eb78c8df3983db8651e", null ]
     ] ],
-    [ "helios::utils::DynamicLibraryErrorToString", "namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c", null ]
+    [ "helios::utils::ToString", "namespacehelios_1_1utils.html#a7fa23a85e6a76d3d321a89deb78cfee9", null ]
 ];

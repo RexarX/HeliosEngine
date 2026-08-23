@@ -1,6 +1,8 @@
 var classhelios_1_1ecs_1_1SparseComponentStorage =
 [
     [ "SparseComponentStorage", "classhelios_1_1ecs_1_1SparseComponentStorage.html#affd42e98e1b829fa04f3fac755d3b4f5", null ],
+    [ "SparseComponentStorage", "classhelios_1_1ecs_1_1SparseComponentStorage.html#a70caac0c6aa86557f6541a0dd1e4c6a8", null ],
+    [ "SparseComponentStorage", "classhelios_1_1ecs_1_1SparseComponentStorage.html#afe0b018765855902a9e12829e6db46f2", null ],
     [ "SparseComponentStorage", "classhelios_1_1ecs_1_1SparseComponentStorage.html#afb283e657e17c2419c1a3be0ec4bcaf1", null ],
     [ "SparseComponentStorage", "classhelios_1_1ecs_1_1SparseComponentStorage.html#aa98a0d511b5852b9b8b5d460e00f66f4", null ],
     [ "~SparseComponentStorage", "classhelios_1_1ecs_1_1SparseComponentStorage.html#a1df787b2fd75eb3d7f0fab7531928c69", null ],
@@ -11,6 +13,7 @@ var classhelios_1_1ecs_1_1SparseComponentStorage =
     [ "Emplace", "classhelios_1_1ecs_1_1SparseComponentStorage.html#a85f5a234f6fe56280ee1f8022fb4f784", null ],
     [ "Get", "classhelios_1_1ecs_1_1SparseComponentStorage.html#ad17f8de977f05c44f5a72178319b6fab", null ],
     [ "Get", "classhelios_1_1ecs_1_1SparseComponentStorage.html#a63666fe9fbaa79e06f037a5555e507e9", null ],
+    [ "GetMemoryResource", "classhelios_1_1ecs_1_1SparseComponentStorage.html#a4d659f9a0263dc5ba8fa57333bbb7aab", null ],
     [ "operator=", "classhelios_1_1ecs_1_1SparseComponentStorage.html#a80b5a0aeca75ad6e60ec858469519b51", null ],
     [ "operator=", "classhelios_1_1ecs_1_1SparseComponentStorage.html#afaa30d227f54a4ebaf1e7a810e6a23e4", null ],
     [ "Remove", "classhelios_1_1ecs_1_1SparseComponentStorage.html#afc8da0704f7d75604da1aada54fb4f3e", null ],

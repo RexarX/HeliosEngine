@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: helios::ecs::CmdQueue&lt; Allocator &gt; Class Template Reference</title>
+    <title>Helios Engine: helios::ecs::CmdQueue Class Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classhelios_1_1ecs_1_1CmdQueue-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">helios::ecs::CmdQueue&lt; Allocator &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">helios::ecs::CmdQueue Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -186,143 +186,100 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a315eb57c24b64a12a23d7801c9773b3c" id="r_a315eb57c24b64a12a23d7801c9773b3c"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a315eb57c24b64a12a23d7801c9773b3c">size_type</a> = CommandStorage::size_type</td></tr>
-<tr class="memitem:a6e24b0bbf14c6f719a15dd712cb14deb" id="r_a6e24b0bbf14c6f719a15dd712cb14deb"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a6e24b0bbf14c6f719a15dd712cb14deb">allocator_type</a> = CommandStorage::allocator_type</td></tr>
+<tr class="memitem:a91f1fe0f07f358544f785c9a89793142" id="r_a91f1fe0f07f358544f785c9a89793142"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a91f1fe0f07f358544f785c9a89793142">size_type</a> = <a class="el" href="classhelios_1_1container_1_1CallableBufferArray.html#aa62a9a4da95d59a2fe2507b5ffe8d439">CommandStorage::size_type</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa52d06f5dc54d6104a55600f21e168f0" id="r_aa52d06f5dc54d6104a55600f21e168f0"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a> (<a class="el" href="#a6e24b0bbf14c6f719a15dd712cb14deb">allocator_type</a> allocator=<a class="el" href="#a6e24b0bbf14c6f719a15dd712cb14deb">allocator_type</a>{})</td></tr>
-<tr class="memdesc:aa52d06f5dc54d6104a55600f21e168f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a command queue with a custom allocator.  <br /></td></tr>
-<tr class="memitem:aec976b34124c2a72e8f4c134ad5f49d3" id="r_aec976b34124c2a72e8f4c134ad5f49d3"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aec976b34124c2a72e8f4c134ad5f49d3">CmdQueue</a> (std::pmr::memory_resource *resource)</td></tr>
-<tr class="memdesc:aec976b34124c2a72e8f4c134ad5f49d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a command queue from a PMR memory resource.  <br /></td></tr>
-<tr class="memitem:a2932ca95f08734dee1d4b9ed9737897c" id="r_a2932ca95f08734dee1d4b9ed9737897c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2932ca95f08734dee1d4b9ed9737897c">CmdQueue</a> (std::nullptr_t)=delete</td></tr>
-<tr class="memitem:a44478d5eab5df5c37a1fa1918c9c2eac" id="r_a44478d5eab5df5c37a1fa1918c9c2eac"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a44478d5eab5df5c37a1fa1918c9c2eac">CmdQueue</a> (const CmdQueue &amp;)=delete</td></tr>
-<tr class="memitem:a9df1423d109fbc51431dbece36694a0f" id="r_a9df1423d109fbc51431dbece36694a0f"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a9df1423d109fbc51431dbece36694a0f">CmdQueue</a> (CmdQueue &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:ae45fd5f0a1289a445e574e5fc52ef4e7" id="r_ae45fd5f0a1289a445e574e5fc52ef4e7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae45fd5f0a1289a445e574e5fc52ef4e7">~CmdQueue</a> ()=default</td></tr>
-<tr class="memitem:a49a87957d44669c095b5f70337ecbf4c" id="r_a49a87957d44669c095b5f70337ecbf4c"><td class="memItemLeft"><a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a49a87957d44669c095b5f70337ecbf4c">operator=</a> (const <a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a> &amp;)=delete</td></tr>
-<tr class="memitem:a53a2151c22008699731c4c48b67d27ab" id="r_a53a2151c22008699731c4c48b67d27ab"><td class="memItemLeft"><a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a53a2151c22008699731c4c48b67d27ab">operator=</a> (<a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:ab596281cf35f4ba098dfff0c423ac9b7" id="r_ab596281cf35f4ba098dfff0c423ac9b7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab596281cf35f4ba098dfff0c423ac9b7">Clear</a> () noexcept</td></tr>
-<tr class="memdesc:ab596281cf35f4ba098dfff0c423ac9b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all pending commands from the queue.  <br /></td></tr>
-<tr class="memitem:a81e4fbf76c324d768a7bddfa1c175329" id="r_a81e4fbf76c324d768a7bddfa1c175329"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a81e4fbf76c324d768a7bddfa1c175329">Reserve</a> (<a class="el" href="#a315eb57c24b64a12a23d7801c9773b3c">size_type</a> capacity)</td></tr>
-<tr class="memdesc:a81e4fbf76c324d768a7bddfa1c175329"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves capacity for commands.  <br /></td></tr>
-<tr class="memitem:aed7301a9c0e6edabb7d0e01e5b2da77e" id="r_aed7301a9c0e6edabb7d0e01e5b2da77e"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#aed7301a9c0e6edabb7d0e01e5b2da77e">Merge</a> (<a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a> &amp;&amp;other)</td></tr>
-<tr class="memdesc:aed7301a9c0e6edabb7d0e01e5b2da77e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges another queue into this one by moving its commands.  <br /></td></tr>
-<tr class="memitem:a6667ec7786e4d4d901221c6e796cdcde" id="r_a6667ec7786e4d4d901221c6e796cdcde"><td class="memTemplParams" colspan="2">template&lt;CommandTrait T&gt; </td></tr>
-<tr class="memitem:a6667ec7786e4d4d901221c6e796cdcde template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6667ec7786e4d4d901221c6e796cdcde">Enqueue</a> (T &amp;&amp;command)</td></tr>
-<tr class="memdesc:a6667ec7786e4d4d901221c6e796cdcde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command by moving it into the queue.  <br /></td></tr>
-<tr class="memitem:a6e7c9b0d5b95301b04a00cc2cd4c7524" id="r_a6e7c9b0d5b95301b04a00cc2cd4c7524"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
+<tr class="memitem:a8d8fa83f1d3af2b81579218eae1ce261" id="r_a8d8fa83f1d3af2b81579218eae1ce261"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> ()=default</td></tr>
+<tr class="memitem:ae7446d5c3664ca7402a81ce718d2f1b4" id="r_ae7446d5c3664ca7402a81ce718d2f1b4"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ae7446d5c3664ca7402a81ce718d2f1b4">CmdQueue</a> (std::pmr::memory_resource *resource)</td></tr>
+<tr class="memdesc:ae7446d5c3664ca7402a81ce718d2f1b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a command queue from a PMR memory resource.  <br /></td></tr>
+<tr class="memitem:abbc8b25989c7bbbe6b03a89790d1b279" id="r_abbc8b25989c7bbbe6b03a89790d1b279"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#abbc8b25989c7bbbe6b03a89790d1b279">CmdQueue</a> (std::nullptr_t)=delete</td></tr>
+<tr class="memitem:a2ae85329148c805f0fa88a137d8b24ff" id="r_a2ae85329148c805f0fa88a137d8b24ff"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2ae85329148c805f0fa88a137d8b24ff">CmdQueue</a> (const CmdQueue &amp;)=delete</td></tr>
+<tr class="memitem:ac4546a92a09f65138be638f737996e56" id="r_ac4546a92a09f65138be638f737996e56"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ac4546a92a09f65138be638f737996e56">CmdQueue</a> (CmdQueue &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:aa2a5ab37b79d46c6f7c563e314296168" id="r_aa2a5ab37b79d46c6f7c563e314296168"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa2a5ab37b79d46c6f7c563e314296168">~CmdQueue</a> ()=default</td></tr>
+<tr class="memitem:a1dd0473574f9578f278aa2f2aa5c2e55" id="r_a1dd0473574f9578f278aa2f2aa5c2e55"><td class="memItemLeft"><a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1dd0473574f9578f278aa2f2aa5c2e55">operator=</a> (const <a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> &amp;)=delete</td></tr>
+<tr class="memitem:ad2d913c05e4b7f9a6828a0f43c36e67a" id="r_ad2d913c05e4b7f9a6828a0f43c36e67a"><td class="memItemLeft">constexpr <a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad2d913c05e4b7f9a6828a0f43c36e67a">operator=</a> (<a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a2c52807f0c272403c53d2749f2db0588" id="r_a2c52807f0c272403c53d2749f2db0588"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2c52807f0c272403c53d2749f2db0588">Clear</a> () noexcept</td></tr>
+<tr class="memdesc:a2c52807f0c272403c53d2749f2db0588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all pending commands from the queue.  <br /></td></tr>
+<tr class="memitem:a9dd8885ec80582debfe051f82cf9350c" id="r_a9dd8885ec80582debfe051f82cf9350c"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a9dd8885ec80582debfe051f82cf9350c">Reserve</a> (<a class="el" href="#a91f1fe0f07f358544f785c9a89793142">size_type</a> capacity)</td></tr>
+<tr class="memdesc:a9dd8885ec80582debfe051f82cf9350c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves capacity for commands.  <br /></td></tr>
+<tr class="memitem:a5a93df6ae2fb9182ed9691d48992640d" id="r_a5a93df6ae2fb9182ed9691d48992640d"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a5a93df6ae2fb9182ed9691d48992640d">Merge</a> (<a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> &amp;&amp;other)</td></tr>
+<tr class="memdesc:a5a93df6ae2fb9182ed9691d48992640d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges another queue into this one by moving its commands.  <br /></td></tr>
+<tr class="memitem:afa375f6ee827c119dc0eb9a6a55a7241" id="r_afa375f6ee827c119dc0eb9a6a55a7241"><td class="memTemplParams" colspan="2">template&lt;CommandTrait T&gt; </td></tr>
+<tr class="memitem:afa375f6ee827c119dc0eb9a6a55a7241 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afa375f6ee827c119dc0eb9a6a55a7241">Enqueue</a> (T &amp;&amp;command)</td></tr>
+<tr class="memdesc:afa375f6ee827c119dc0eb9a6a55a7241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command by moving it into the queue.  <br /></td></tr>
+<tr class="memitem:a00724f31a07d4efd354a1fbf61b6e1de" id="r_a00724f31a07d4efd354a1fbf61b6e1de"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
 requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:a6e7c9b0d5b95301b04a00cc2cd4c7524 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6e7c9b0d5b95301b04a00cc2cd4c7524">EnqueueBulk</a> (R &amp;&amp;commands)</td></tr>
-<tr class="memdesc:a6e7c9b0d5b95301b04a00cc2cd4c7524"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues multiple commands in bulk.  <br /></td></tr>
-<tr class="memitem:aaf585088d794cafa7e05de23c18be9e0" id="r_aaf585088d794cafa7e05de23c18be9e0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaf585088d794cafa7e05de23c18be9e0">ExecuteAll</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;world)</td></tr>
-<tr class="memdesc:aaf585088d794cafa7e05de23c18be9e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all commands in the queue and clears the queue.  <br /></td></tr>
-<tr class="memitem:a99a0af304fbe446548bd3aff9783ce97" id="r_a99a0af304fbe446548bd3aff9783ce97"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a99a0af304fbe446548bd3aff9783ce97">Empty</a> () const noexcept</td></tr>
-<tr class="memdesc:a99a0af304fbe446548bd3aff9783ce97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the queue is empty.  <br /></td></tr>
-<tr class="memitem:ad1691b8cd43eab89bbf63eb55c365bf1" id="r_ad1691b8cd43eab89bbf63eb55c365bf1"><td class="memItemLeft">constexpr <a class="el" href="#a315eb57c24b64a12a23d7801c9773b3c">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad1691b8cd43eab89bbf63eb55c365bf1">Size</a> () const noexcept</td></tr>
-<tr class="memdesc:ad1691b8cd43eab89bbf63eb55c365bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of commands in the queue.  <br /></td></tr>
-<tr class="memitem:abb41295c876f485d62d1c4f43c0b32c1" id="r_abb41295c876f485d62d1c4f43c0b32c1"><td class="memItemLeft">constexpr <a class="el" href="#a6e24b0bbf14c6f719a15dd712cb14deb">allocator_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#abb41295c876f485d62d1c4f43c0b32c1">GetAllocator</a> () const</td></tr>
-<tr class="memdesc:abb41295c876f485d62d1c4f43c0b32c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the allocator used by the command storage.  <br /></td></tr>
+<tr class="memitem:a00724f31a07d4efd354a1fbf61b6e1de template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a00724f31a07d4efd354a1fbf61b6e1de">EnqueueBulk</a> (R &amp;&amp;commands)</td></tr>
+<tr class="memdesc:a00724f31a07d4efd354a1fbf61b6e1de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues multiple commands in bulk.  <br /></td></tr>
+<tr class="memitem:a33911233a9f9123e4c67ccf08267d300" id="r_a33911233a9f9123e4c67ccf08267d300"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a33911233a9f9123e4c67ccf08267d300">ExecuteAll</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;world)</td></tr>
+<tr class="memdesc:a33911233a9f9123e4c67ccf08267d300"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all commands in the queue and clears the queue.  <br /></td></tr>
+<tr class="memitem:adc454d116267a288188ba408933299e0" id="r_adc454d116267a288188ba408933299e0"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#adc454d116267a288188ba408933299e0">Empty</a> () const noexcept</td></tr>
+<tr class="memdesc:adc454d116267a288188ba408933299e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the queue is empty.  <br /></td></tr>
+<tr class="memitem:a9823de4aa193303a4c318b0b2c13fd37" id="r_a9823de4aa193303a4c318b0b2c13fd37"><td class="memItemLeft">constexpr <a class="el" href="#a91f1fe0f07f358544f785c9a89793142">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9823de4aa193303a4c318b0b2c13fd37">Size</a> () const noexcept</td></tr>
+<tr class="memdesc:a9823de4aa193303a4c318b0b2c13fd37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of commands in the queue.  <br /></td></tr>
+<tr class="memitem:a84c127f6e94420ee54ee489bbce20cdf" id="r_a84c127f6e94420ee54ee489bbce20cdf"><td class="memItemLeft">constexpr std::pmr::memory_resource *&#160;</td><td class="memItemRight"><a class="el" href="#a84c127f6e94420ee54ee489bbce20cdf">GetMemoryResource</a> () const noexcept</td></tr>
+<tr class="memdesc:a84c127f6e94420ee54ee489bbce20cdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the memory resource used for command storage.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt;<br />
-class helios::ecs::CmdQueue&lt; Allocator &gt;</div><p>Command queue for deferred ECS operations. </p>
+<div class="textblock"><p>Command queue for deferred ECS operations. </p>
 <p>Provides a queue for commands that will be executed during <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a473fc38f99f63f6b356a8afe2793ba98" title="Flushes entity reservations and executes pending commands.">World::Flush()</a></span>. <a class="el" href="classhelios_1_1ecs_1_1Commands.html" title="Thin wrapper over command queue and world for deferred ECS operations.">Commands</a> are executed in the order they were enqueued, ensuring predictable behavior. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Allocator</td><td>Allocator type for command storage (default: <span class="tt">std::allocator&lt;std::byte&gt;</span>) </td></tr>
-  </table>
-  </dd>
-</dl>
+
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00024">24</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
+<a id="a91f1fe0f07f358544f785c9a89793142" name="a91f1fe0f07f358544f785c9a89793142"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91f1fe0f07f358544f785c9a89793142">&#9670;&#160;</a></span>size_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a91f1fe0f07f358544f785c9a89793142">helios::ecs::CmdQueue::size_type</a> = <a class="el" href="classhelios_1_1container_1_1CallableBufferArray.html#aa62a9a4da95d59a2fe2507b5ffe8d439">CommandStorage::size_type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00029">29</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
-</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
-<a id="a6e24b0bbf14c6f719a15dd712cb14deb" name="a6e24b0bbf14c6f719a15dd712cb14deb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e24b0bbf14c6f719a15dd712cb14deb">&#9670;&#160;</a></span>allocator_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::allocator_type = CommandStorage::allocator_type</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00036">36</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a315eb57c24b64a12a23d7801c9773b3c" name="a315eb57c24b64a12a23d7801c9773b3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a315eb57c24b64a12a23d7801c9773b3c">&#9670;&#160;</a></span>size_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::size_type = CommandStorage::size_type</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00035">35</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa52d06f5dc54d6104a55600f21e168f0" name="aa52d06f5dc54d6104a55600f21e168f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa52d06f5dc54d6104a55600f21e168f0">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[1/5]</span></h2>
+<a id="a8d8fa83f1d3af2b81579218eae1ce261" name="a8d8fa83f1d3af2b81579218eae1ce261"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d8fa83f1d3af2b81579218eae1ce261">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::CmdQueue </td>
+          <td class="memname">helios::ecs::CmdQueue::CmdQueue </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a6e24b0bbf14c6f719a15dd712cb14deb">allocator_type</a></td>          <td class="paramname"><span class="paramname"><em>allocator</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a6e24b0bbf14c6f719a15dd712cb14deb">allocator_type</a>{}</span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a command queue with a custom allocator. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">allocator</td><td>Allocator instance </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00042">42</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
-
 </div>
 </div>
-<a id="aec976b34124c2a72e8f4c134ad5f49d3" name="aec976b34124c2a72e8f4c134ad5f49d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec976b34124c2a72e8f4c134ad5f49d3">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[2/5]</span></h2>
+<a id="ae7446d5c3664ca7402a81ce718d2f1b4" name="ae7446d5c3664ca7402a81ce718d2f1b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7446d5c3664ca7402a81ce718d2f1b4">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::CmdQueue </td>
+          <td class="memname">helios::ecs::CmdQueue::CmdQueue </td>
           <td>(</td>
           <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span></td><td>)</td>
           <td></td>
@@ -336,30 +293,28 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 </div><div class="memdoc">
 
 <p>Constructs a command queue from a PMR memory resource. </p>
-<p>Enabled only when <span class="tt"><a class="el" href="#a6e24b0bbf14c6f719a15dd712cb14deb">allocator_type</a></span> is constructible from <span class="tt">std::pmr::memory_resource*</span>. </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resource</td><td>Memory resource used to construct allocator </td></tr>
+    <tr><td class="paramname">resource</td><td>Memory resource used for command storage </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00051">51</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00037">37</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2932ca95f08734dee1d4b9ed9737897c" name="a2932ca95f08734dee1d4b9ed9737897c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2932ca95f08734dee1d4b9ed9737897c">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[3/5]</span></h2>
+<a id="abbc8b25989c7bbbe6b03a89790d1b279" name="abbc8b25989c7bbbe6b03a89790d1b279"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbc8b25989c7bbbe6b03a89790d1b279">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::CmdQueue </td>
+          <td class="memname">helios::ecs::CmdQueue::CmdQueue </td>
           <td>(</td>
           <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -374,21 +329,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a44478d5eab5df5c37a1fa1918c9c2eac" name="a44478d5eab5df5c37a1fa1918c9c2eac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44478d5eab5df5c37a1fa1918c9c2eac">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[4/5]</span></h2>
+<a id="a2ae85329148c805f0fa88a137d8b24ff" name="a2ae85329148c805f0fa88a137d8b24ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ae85329148c805f0fa88a137d8b24ff">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::CmdQueue </td>
+          <td class="memname">helios::ecs::CmdQueue::CmdQueue </td>
           <td>(</td>
-          <td class="paramtype">const CmdQueue&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const CmdQueue &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -401,21 +354,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a9df1423d109fbc51431dbece36694a0f" name="a9df1423d109fbc51431dbece36694a0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9df1423d109fbc51431dbece36694a0f">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[5/5]</span></h2>
+<a id="ac4546a92a09f65138be638f737996e56" name="ac4546a92a09f65138be638f737996e56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4546a92a09f65138be638f737996e56">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::CmdQueue </td>
+          <td class="memname">helios::ecs::CmdQueue::CmdQueue </td>
           <td>(</td>
-          <td class="paramtype">CmdQueue&lt; Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">CmdQueue &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -428,19 +379,17 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="ae45fd5f0a1289a445e574e5fc52ef4e7" name="ae45fd5f0a1289a445e574e5fc52ef4e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae45fd5f0a1289a445e574e5fc52ef4e7">&#9670;&#160;</a></span>~CmdQueue()</h2>
+<a id="aa2a5ab37b79d46c6f7c563e314296168" name="aa2a5ab37b79d46c6f7c563e314296168"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2a5ab37b79d46c6f7c563e314296168">&#9670;&#160;</a></span>~CmdQueue()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::~<a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a> </td>
+          <td class="memname">helios::ecs::CmdQueue::~CmdQueue </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -456,19 +405,17 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="ab596281cf35f4ba098dfff0c423ac9b7" name="ab596281cf35f4ba098dfff0c423ac9b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab596281cf35f4ba098dfff0c423ac9b7">&#9670;&#160;</a></span>Clear()</h2>
+<a id="a2c52807f0c272403c53d2749f2db0588" name="a2c52807f0c272403c53d2749f2db0588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c52807f0c272403c53d2749f2db0588">&#9670;&#160;</a></span>Clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::Clear </td>
+          <td class="memname">void helios::ecs::CmdQueue::Clear </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -484,23 +431,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Clears all pending commands from the queue. </p>
 <p>Removes all commands currently in the queue. </p>
 
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00068">68</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00053">53</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a99a0af304fbe446548bd3aff9783ce97" name="a99a0af304fbe446548bd3aff9783ce97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99a0af304fbe446548bd3aff9783ce97">&#9670;&#160;</a></span>Empty()</h2>
+<a id="adc454d116267a288188ba408933299e0" name="adc454d116267a288188ba408933299e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc454d116267a288188ba408933299e0">&#9670;&#160;</a></span>Empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::Empty </td>
+          <td class="memname">bool helios::ecs::CmdQueue::Empty </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -516,17 +461,15 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Checks if the queue is empty. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if queue is empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00116">116</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00101">101</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a6667ec7786e4d4d901221c6e796cdcde" name="a6667ec7786e4d4d901221c6e796cdcde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6667ec7786e4d4d901221c6e796cdcde">&#9670;&#160;</a></span>Enqueue()</h2>
+<a id="afa375f6ee827c119dc0eb9a6a55a7241" name="afa375f6ee827c119dc0eb9a6a55a7241"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa375f6ee827c119dc0eb9a6a55a7241">&#9670;&#160;</a></span>Enqueue()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <div class="memtemplate">
 template&lt;CommandTrait T&gt; </div>
 <table class="mlabels">
@@ -534,7 +477,7 @@ template&lt;CommandTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::Enqueue </td>
+          <td class="memname">void helios::ecs::CmdQueue::Enqueue </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>command</em></span></td><td>)</td>
           <td></td>
@@ -561,18 +504,15 @@ template&lt;CommandTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00142">142</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00127">127</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a6e7c9b0d5b95301b04a00cc2cd4c7524" name="a6e7c9b0d5b95301b04a00cc2cd4c7524"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e7c9b0d5b95301b04a00cc2cd4c7524">&#9670;&#160;</a></span>EnqueueBulk()</h2>
+<a id="a00724f31a07d4efd354a1fbf61b6e1de" name="a00724f31a07d4efd354a1fbf61b6e1de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00724f31a07d4efd354a1fbf61b6e1de">&#9670;&#160;</a></span>EnqueueBulk()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; <br />
-requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
 <div class="memtemplate">
 template&lt;std::ranges::input_range R&gt; <br />
 requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
@@ -581,7 +521,7 @@ requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::EnqueueBulk </td>
+          <td class="memname">void helios::ecs::CmdQueue::EnqueueBulk </td>
           <td>(</td>
           <td class="paramtype">R &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>commands</em></span></td><td>)</td>
           <td></td>
@@ -608,23 +548,21 @@ requires CommandTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00150">150</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00134">134</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aaf585088d794cafa7e05de23c18be9e0" name="aaf585088d794cafa7e05de23c18be9e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf585088d794cafa7e05de23c18be9e0">&#9670;&#160;</a></span>ExecuteAll()</h2>
+<a id="a33911233a9f9123e4c67ccf08267d300" name="a33911233a9f9123e4c67ccf08267d300"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33911233a9f9123e4c67ccf08267d300">&#9670;&#160;</a></span>ExecuteAll()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::ExecuteAll </td>
+          <td class="memname">void helios::ecs::CmdQueue::ExecuteAll </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>world</em></span></td><td>)</td>
           <td></td>
@@ -645,23 +583,21 @@ template&lt;typename Allocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00161">161</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00144">144</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="abb41295c876f485d62d1c4f43c0b32c1" name="abb41295c876f485d62d1c4f43c0b32c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb41295c876f485d62d1c4f43c0b32c1">&#9670;&#160;</a></span>GetAllocator()</h2>
+<a id="a84c127f6e94420ee54ee489bbce20cdf" name="a84c127f6e94420ee54ee489bbce20cdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84c127f6e94420ee54ee489bbce20cdf">&#9670;&#160;</a></span>GetMemoryResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a6e24b0bbf14c6f719a15dd712cb14deb">allocator_type</a> <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::GetAllocator </td>
+          <td class="memname">std::pmr::memory_resource * helios::ecs::CmdQueue::GetMemoryResource </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -669,33 +605,31 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the allocator used by the command storage. </p>
-<dl class="section return"><dt>Returns</dt><dd>Allocator instance </dd></dl>
+<p>Returns the memory resource used for command storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>Memory resource passed to the constructor, or the default resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00132">132</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00117">117</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aed7301a9c0e6edabb7d0e01e5b2da77e" name="aed7301a9c0e6edabb7d0e01e5b2da77e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed7301a9c0e6edabb7d0e01e5b2da77e">&#9670;&#160;</a></span>Merge()</h2>
+<a id="a5a93df6ae2fb9182ed9691d48992640d" name="a5a93df6ae2fb9182ed9691d48992640d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a93df6ae2fb9182ed9691d48992640d">&#9670;&#160;</a></span>Merge()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::Merge </td>
+          <td class="memname">void helios::ecs::CmdQueue::Merge </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a>&lt; Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -714,52 +648,48 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00083">83</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00068">68</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a53a2151c22008699731c4c48b67d27ab" name="a53a2151c22008699731c4c48b67d27ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53a2151c22008699731c4c48b67d27ab">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="ad2d913c05e4b7f9a6828a0f43c36e67a" name="ad2d913c05e4b7f9a6828a0f43c36e67a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2d913c05e4b7f9a6828a0f43c36e67a">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> &amp; helios::ecs::CmdQueue::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a>&lt; Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a49a87957d44669c095b5f70337ecbf4c" name="a49a87957d44669c095b5f70337ecbf4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49a87957d44669c095b5f70337ecbf4c">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a1dd0473574f9578f278aa2f2aa5c2e55" name="a1dd0473574f9578f278aa2f2aa5c2e55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dd0473574f9578f278aa2f2aa5c2e55">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> &amp; helios::ecs::CmdQueue::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#aa52d06f5dc54d6104a55600f21e168f0">CmdQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a8d8fa83f1d3af2b81579218eae1ce261">CmdQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -772,21 +702,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a81e4fbf76c324d768a7bddfa1c175329" name="a81e4fbf76c324d768a7bddfa1c175329"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81e4fbf76c324d768a7bddfa1c175329">&#9670;&#160;</a></span>Reserve()</h2>
+<a id="a9dd8885ec80582debfe051f82cf9350c" name="a9dd8885ec80582debfe051f82cf9350c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dd8885ec80582debfe051f82cf9350c">&#9670;&#160;</a></span>Reserve()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::Reserve </td>
+          <td class="memname">void helios::ecs::CmdQueue::Reserve </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a315eb57c24b64a12a23d7801c9773b3c">size_type</a></td>          <td class="paramname"><span class="paramname"><em>capacity</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a91f1fe0f07f358544f785c9a89793142">size_type</a></td>          <td class="paramname"><span class="paramname"><em>capacity</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -805,23 +733,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00076">76</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00061">61</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad1691b8cd43eab89bbf63eb55c365bf1" name="ad1691b8cd43eab89bbf63eb55c365bf1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1691b8cd43eab89bbf63eb55c365bf1">&#9670;&#160;</a></span>Size()</h2>
+<a id="a9823de4aa193303a4c318b0b2c13fd37" name="a9823de4aa193303a4c318b0b2c13fd37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9823de4aa193303a4c318b0b2c13fd37">&#9670;&#160;</a></span>Size()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a315eb57c24b64a12a23d7801c9773b3c">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">helios::ecs::CmdQueue</a>&lt; Allocator &gt;::Size </td>
+          <td class="memname"><a class="el" href="#a91f1fe0f07f358544f785c9a89793142">size_type</a> helios::ecs::CmdQueue::Size </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -837,7 +763,7 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Gets the number of commands in the queue. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of commands in queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00124">124</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="command_2queue_8hpp_source.html#l00109">109</a> of file <a class="el" href="command_2queue_8hpp_source.html">queue.hpp</a>.</p>
 
 </div>
 </div>

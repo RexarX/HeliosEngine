@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('input_2include
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="mouse_8hpp_source.html">helios/input/mouse.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="temporary__storage_8hpp_source.html">helios/memory/temporary_storage.hpp</a>&gt;</code><br />
 <code>#include &lt;format&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;optional&gt;</code><br />
@@ -204,12 +205,14 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0dd8cd13c407dae9cee304a06fc98006" id="r_a0dd8cd13c407dae9cee304a06fc98006"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
+<tr class="memitem:a008b9504ae525e3baa114bf3d2a11633" id="r_a008b9504ae525e3baa114bf3d2a11633"><td class="memTemplParams" colspan="2">template&lt;typename It&gt; <br />
 requires std::output_iterator&lt;It, char&gt;</td></tr>
-<tr class="memitem:a0dd8cd13c407dae9cee304a06fc98006 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a0dd8cd13c407dae9cee304a06fc98006">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Cursor.html">Cursor</a> &amp;cursor, It out)</td></tr>
-<tr class="memdesc:a0dd8cd13c407dae9cee304a06fc98006"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a cursor component using an output iterator.  <br /></td></tr>
+<tr class="memitem:a008b9504ae525e3baa114bf3d2a11633 template"><td class="memItemLeft">It&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a008b9504ae525e3baa114bf3d2a11633">helios::input::ToString</a> (It out, const <a class="el" href="structhelios_1_1input_1_1Cursor.html">Cursor</a> &amp;cursor)</td></tr>
+<tr class="memdesc:a008b9504ae525e3baa114bf3d2a11633"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a cursor component using an output iterator.  <br /></td></tr>
 <tr class="memitem:a108f51489bd5e6615a2d095a4ac0f54c" id="r_a108f51489bd5e6615a2d095a4ac0f54c"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a108f51489bd5e6615a2d095a4ac0f54c">helios::input::ToString</a> (const <a class="el" href="structhelios_1_1input_1_1Cursor.html">Cursor</a> &amp;cursor)</td></tr>
 <tr class="memdesc:a108f51489bd5e6615a2d095a4ac0f54c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a cursor component as a string.  <br /></td></tr>
+<tr class="memitem:a6c6a180699821cf83d475fcf8cac0cf2" id="r_a6c6a180699821cf83d475fcf8cac0cf2"><td class="memItemLeft">std::pmr::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a6c6a180699821cf83d475fcf8cac0cf2">helios::input::TempToString</a> (const <a class="el" href="structhelios_1_1input_1_1Cursor.html">Cursor</a> &amp;cursor)</td></tr>
+<tr class="memdesc:a6c6a180699821cf83d475fcf8cac0cf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a cursor component as a string using <span class="tt">TemporaryStorage</span>.  <br /></td></tr>
 <tr class="memitem:a0fcfce35d1027119e52d95ff0ac2a53e" id="r_a0fcfce35d1027119e52d95ff0ac2a53e"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1input.html#a0fcfce35d1027119e52d95ff0ac2a53e">helios::input::operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structhelios_1_1input_1_1Cursor.html">Cursor</a> &amp;cursor)</td></tr>
 <tr class="memdesc:a0fcfce35d1027119e52d95ff0ac2a53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a cursor component to an output stream.  <br /></td></tr>
 </table>

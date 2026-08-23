@@ -185,68 +185,73 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a22080a1c998359c8c7e721c54cf3acbe" id="r_a22080a1c998359c8c7e721c54cf3acbe"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a22080a1c998359c8c7e721c54cf3acbe">ResourceManager</a> ()=default</td></tr>
-<tr class="memitem:a7c4be13707cf9b08693688e6ce0140d1" id="r_a7c4be13707cf9b08693688e6ce0140d1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7c4be13707cf9b08693688e6ce0140d1">ResourceManager</a> (const ResourceManager &amp;)=default</td></tr>
-<tr class="memitem:af2c479796fed89684354c5079a6d4280" id="r_af2c479796fed89684354c5079a6d4280"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af2c479796fed89684354c5079a6d4280">ResourceManager</a> (ResourceManager &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:add5fe353bbe19096c78e829487d8404f" id="r_add5fe353bbe19096c78e829487d8404f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#add5fe353bbe19096c78e829487d8404f">~ResourceManager</a> ()=default</td></tr>
-<tr class="memitem:a756310cdf696ab9133c97be562d571c5" id="r_a756310cdf696ab9133c97be562d571c5"><td class="memItemLeft"><a class="el" href="#a22080a1c998359c8c7e721c54cf3acbe">ResourceManager</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a756310cdf696ab9133c97be562d571c5">operator=</a> (const <a class="el" href="#a22080a1c998359c8c7e721c54cf3acbe">ResourceManager</a> &amp;)=default</td></tr>
-<tr class="memitem:aa53d4361a259775862100403fd7744de" id="r_aa53d4361a259775862100403fd7744de"><td class="memItemLeft"><a class="el" href="#a22080a1c998359c8c7e721c54cf3acbe">ResourceManager</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa53d4361a259775862100403fd7744de">operator=</a> (<a class="el" href="#a22080a1c998359c8c7e721c54cf3acbe">ResourceManager</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:ac5d72b3ea3337ef8f492452777b6ad6a" id="r_ac5d72b3ea3337ef8f492452777b6ad6a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac5d72b3ea3337ef8f492452777b6ad6a">Clear</a> ()</td></tr>
-<tr class="memdesc:ac5d72b3ea3337ef8f492452777b6ad6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all resources, destroying stored values and removing all entries.  <br /></td></tr>
-<tr class="memitem:a55202b6bd17fad36ff7fdd20a3fd784e" id="r_a55202b6bd17fad36ff7fdd20a3fd784e"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a55202b6bd17fad36ff7fdd20a3fd784e template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a55202b6bd17fad36ff7fdd20a3fd784e">Insert</a> (T &amp;&amp;resource)</td></tr>
-<tr class="memdesc:a55202b6bd17fad36ff7fdd20a3fd784e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a new resource.  <br /></td></tr>
-<tr class="memitem:a233038b3b96970d36d9b8738d2fec14b" id="r_a233038b3b96970d36d9b8738d2fec14b"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait... Ts&gt; <br />
+<tr class="memitem:addd378e9a9850074568f1b3bfec069ae" id="r_addd378e9a9850074568f1b3bfec069ae"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#addd378e9a9850074568f1b3bfec069ae">ResourceManager</a> ()=default</td></tr>
+<tr class="memitem:a775669bcb673bf8a849b7a65c0fdaeae" id="r_a775669bcb673bf8a849b7a65c0fdaeae"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a775669bcb673bf8a849b7a65c0fdaeae">ResourceManager</a> (std::pmr::memory_resource *resource)</td></tr>
+<tr class="memdesc:a775669bcb673bf8a849b7a65c0fdaeae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a resource manager using <span class="tt">resource</span> for owned storage.  <br /></td></tr>
+<tr class="memitem:a1449cc5519c09bbc513bc4dddcca64c3" id="r_a1449cc5519c09bbc513bc4dddcca64c3"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1449cc5519c09bbc513bc4dddcca64c3">ResourceManager</a> (std::nullptr_t)=delete</td></tr>
+<tr class="memitem:ab6f981cb5325ad60cdf97dfbf2db766d" id="r_ab6f981cb5325ad60cdf97dfbf2db766d"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ab6f981cb5325ad60cdf97dfbf2db766d">ResourceManager</a> (const ResourceManager &amp;)=default</td></tr>
+<tr class="memitem:a4cedf7d145ddc287e6d574efa226371d" id="r_a4cedf7d145ddc287e6d574efa226371d"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a4cedf7d145ddc287e6d574efa226371d">ResourceManager</a> (ResourceManager &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:afb76545ef8d88e0b610caa02a336ffb0" id="r_afb76545ef8d88e0b610caa02a336ffb0"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#afb76545ef8d88e0b610caa02a336ffb0">~ResourceManager</a> ()=default</td></tr>
+<tr class="memitem:a66962b13dec43fda4f8574a6e6fe53f7" id="r_a66962b13dec43fda4f8574a6e6fe53f7"><td class="memItemLeft">constexpr <a class="el" href="#addd378e9a9850074568f1b3bfec069ae">ResourceManager</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a66962b13dec43fda4f8574a6e6fe53f7">operator=</a> (const <a class="el" href="#addd378e9a9850074568f1b3bfec069ae">ResourceManager</a> &amp;)=default</td></tr>
+<tr class="memitem:a939e9cc1ed79b2a60722236b6951fe79" id="r_a939e9cc1ed79b2a60722236b6951fe79"><td class="memItemLeft">constexpr <a class="el" href="#addd378e9a9850074568f1b3bfec069ae">ResourceManager</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a939e9cc1ed79b2a60722236b6951fe79">operator=</a> (<a class="el" href="#addd378e9a9850074568f1b3bfec069ae">ResourceManager</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a0bd644bb9195420943ba370ac78af0c6" id="r_a0bd644bb9195420943ba370ac78af0c6"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a0bd644bb9195420943ba370ac78af0c6">Clear</a> () noexcept</td></tr>
+<tr class="memdesc:a0bd644bb9195420943ba370ac78af0c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all resources, destroying stored values and removing all entries.  <br /></td></tr>
+<tr class="memitem:ab2f18a4d900f82b8cbc71c19ecc310ab" id="r_ab2f18a4d900f82b8cbc71c19ecc310ab"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:ab2f18a4d900f82b8cbc71c19ecc310ab template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ab2f18a4d900f82b8cbc71c19ecc310ab">Insert</a> (T &amp;&amp;resource)</td></tr>
+<tr class="memdesc:ab2f18a4d900f82b8cbc71c19ecc310ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a new resource.  <br /></td></tr>
+<tr class="memitem:a9f6586f15f35c16c676e22d551e86d38" id="r_a9f6586f15f35c16c676e22d551e86d38"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</td></tr>
-<tr class="memitem:a233038b3b96970d36d9b8738d2fec14b template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a233038b3b96970d36d9b8738d2fec14b">Insert</a> (Ts &amp;&amp;... resources)</td></tr>
-<tr class="memdesc:a233038b3b96970d36d9b8738d2fec14b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts multiple resources.  <br /></td></tr>
-<tr class="memitem:ad91eb53343464ffb9c0b42b2d7bee5b6" id="r_ad91eb53343464ffb9c0b42b2d7bee5b6"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:ad91eb53343464ffb9c0b42b2d7bee5b6 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad91eb53343464ffb9c0b42b2d7bee5b6">TryInsert</a> (T &amp;&amp;resource)</td></tr>
-<tr class="memdesc:ad91eb53343464ffb9c0b42b2d7bee5b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to insert resource if not present.  <br /></td></tr>
-<tr class="memitem:ab7313c17e632517aadaaaf46641c9d02" id="r_ab7313c17e632517aadaaaf46641c9d02"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait... Ts&gt; <br />
+<tr class="memitem:a9f6586f15f35c16c676e22d551e86d38 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a9f6586f15f35c16c676e22d551e86d38">Insert</a> (Ts &amp;&amp;... resources)</td></tr>
+<tr class="memdesc:a9f6586f15f35c16c676e22d551e86d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts multiple resources.  <br /></td></tr>
+<tr class="memitem:ae8ba4dea352e805e95a7156212056351" id="r_ae8ba4dea352e805e95a7156212056351"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:ae8ba4dea352e805e95a7156212056351 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ae8ba4dea352e805e95a7156212056351">TryInsert</a> (T &amp;&amp;resource)</td></tr>
+<tr class="memdesc:ae8ba4dea352e805e95a7156212056351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to insert resource if not present.  <br /></td></tr>
+<tr class="memitem:aec744da20749ec10fa2b136fed017da6" id="r_aec744da20749ec10fa2b136fed017da6"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</td></tr>
-<tr class="memitem:ab7313c17e632517aadaaaf46641c9d02 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ab7313c17e632517aadaaaf46641c9d02">TryInsert</a> (Ts &amp;&amp;... resources) -&gt; std::array&lt; bool, sizeof...(Ts)&gt;</td></tr>
-<tr class="memdesc:ab7313c17e632517aadaaaf46641c9d02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to insert resources if not present.  <br /></td></tr>
-<tr class="memitem:aa8ed46c98af18fb425b0689f3162e3b3" id="r_aa8ed46c98af18fb425b0689f3162e3b3"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T, typename... Args&gt; <br />
+<tr class="memitem:aec744da20749ec10fa2b136fed017da6 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#aec744da20749ec10fa2b136fed017da6">TryInsert</a> (Ts &amp;&amp;... resources) -&gt; std::array&lt; bool, sizeof...(Ts)&gt;</td></tr>
+<tr class="memdesc:aec744da20749ec10fa2b136fed017da6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to insert resources if not present.  <br /></td></tr>
+<tr class="memitem:a2a7805bed6dfd54a8db6386c8d8f8357" id="r_a2a7805bed6dfd54a8db6386c8d8f8357"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T, typename... Args&gt; <br />
 requires std::constructible_from&lt;T, Args...&gt;</td></tr>
-<tr class="memitem:aa8ed46c98af18fb425b0689f3162e3b3 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa8ed46c98af18fb425b0689f3162e3b3">Emplace</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:aa8ed46c98af18fb425b0689f3162e3b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emplaces a new resource in-place.  <br /></td></tr>
-<tr class="memitem:a5a80e573da3ab8fd9f6cd343f264a03d" id="r_a5a80e573da3ab8fd9f6cd343f264a03d"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T, typename... Args&gt; <br />
+<tr class="memitem:a2a7805bed6dfd54a8db6386c8d8f8357 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a2a7805bed6dfd54a8db6386c8d8f8357">Emplace</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a2a7805bed6dfd54a8db6386c8d8f8357"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emplaces a new resource in-place.  <br /></td></tr>
+<tr class="memitem:ac402a70c1532437444b588a16ea48f30" id="r_ac402a70c1532437444b588a16ea48f30"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T, typename... Args&gt; <br />
 requires std::constructible_from&lt;T, Args...&gt;</td></tr>
-<tr class="memitem:a5a80e573da3ab8fd9f6cd343f264a03d template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5a80e573da3ab8fd9f6cd343f264a03d">TryEmplace</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a5a80e573da3ab8fd9f6cd343f264a03d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to emplace a resource if not present.  <br /></td></tr>
-<tr class="memitem:aae70bf8e8825cda8aa31f3906707fcb1" id="r_aae70bf8e8825cda8aa31f3906707fcb1"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:aae70bf8e8825cda8aa31f3906707fcb1 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aae70bf8e8825cda8aa31f3906707fcb1">Remove</a> ()</td></tr>
-<tr class="memdesc:aae70bf8e8825cda8aa31f3906707fcb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a resource.  <br /></td></tr>
-<tr class="memitem:a96dfe3cf3a98ed4731e7128f0a244b4c" id="r_a96dfe3cf3a98ed4731e7128f0a244b4c"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a96dfe3cf3a98ed4731e7128f0a244b4c template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a96dfe3cf3a98ed4731e7128f0a244b4c">TryRemove</a> ()</td></tr>
-<tr class="memdesc:a96dfe3cf3a98ed4731e7128f0a244b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to remove a resource.  <br /></td></tr>
-<tr class="memitem:a7491efab241501f04273f17bac89beb5" id="r_a7491efab241501f04273f17bac89beb5"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a7491efab241501f04273f17bac89beb5 template"><td class="memItemLeft">T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7491efab241501f04273f17bac89beb5">Get</a> () noexcept</td></tr>
-<tr class="memdesc:a7491efab241501f04273f17bac89beb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets mutable reference to a resource.  <br /></td></tr>
-<tr class="memitem:a0af9cb105eab0ed96c299da136500fc1" id="r_a0af9cb105eab0ed96c299da136500fc1"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a0af9cb105eab0ed96c299da136500fc1 template"><td class="memItemLeft">const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a0af9cb105eab0ed96c299da136500fc1">Get</a> () const noexcept</td></tr>
-<tr class="memdesc:a0af9cb105eab0ed96c299da136500fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to a resource.  <br /></td></tr>
-<tr class="memitem:a026a1b0a3bd768227642be5072715450" id="r_a026a1b0a3bd768227642be5072715450"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a026a1b0a3bd768227642be5072715450 template"><td class="memItemLeft">T *&#160;</td><td class="memItemRight"><a class="el" href="#a026a1b0a3bd768227642be5072715450">TryGet</a> () noexcept</td></tr>
-<tr class="memdesc:a026a1b0a3bd768227642be5072715450"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get mutable pointer to a resource.  <br /></td></tr>
-<tr class="memitem:a05fa9c9a15c4f68a41dd9e7a9db76bfc" id="r_a05fa9c9a15c4f68a41dd9e7a9db76bfc"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a05fa9c9a15c4f68a41dd9e7a9db76bfc template"><td class="memItemLeft">const T *&#160;</td><td class="memItemRight"><a class="el" href="#a05fa9c9a15c4f68a41dd9e7a9db76bfc">TryGet</a> () const noexcept</td></tr>
-<tr class="memdesc:a05fa9c9a15c4f68a41dd9e7a9db76bfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get const pointer to a resource.  <br /></td></tr>
-<tr class="memitem:ab4abe825cf6024de6dfa66cf16bbb64c" id="r_ab4abe825cf6024de6dfa66cf16bbb64c"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:ab4abe825cf6024de6dfa66cf16bbb64c template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab4abe825cf6024de6dfa66cf16bbb64c">Has</a> () const noexcept</td></tr>
-<tr class="memdesc:ab4abe825cf6024de6dfa66cf16bbb64c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a resource exists.  <br /></td></tr>
-<tr class="memitem:a01431e6a62b9af7bb468645a179fb1b4" id="r_a01431e6a62b9af7bb468645a179fb1b4"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a01431e6a62b9af7bb468645a179fb1b4">Count</a> () const noexcept</td></tr>
-<tr class="memdesc:a01431e6a62b9af7bb468645a179fb1b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of stored resources.  <br /></td></tr>
+<tr class="memitem:ac402a70c1532437444b588a16ea48f30 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ac402a70c1532437444b588a16ea48f30">TryEmplace</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ac402a70c1532437444b588a16ea48f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to emplace a resource if not present.  <br /></td></tr>
+<tr class="memitem:a55f58b37add983e09500f4d25e46b388" id="r_a55f58b37add983e09500f4d25e46b388"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a55f58b37add983e09500f4d25e46b388 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a55f58b37add983e09500f4d25e46b388">Remove</a> ()</td></tr>
+<tr class="memdesc:a55f58b37add983e09500f4d25e46b388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a resource.  <br /></td></tr>
+<tr class="memitem:aaf6d5c723eb7f11efaad96c3ec76ab85" id="r_aaf6d5c723eb7f11efaad96c3ec76ab85"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:aaf6d5c723eb7f11efaad96c3ec76ab85 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#aaf6d5c723eb7f11efaad96c3ec76ab85">TryRemove</a> ()</td></tr>
+<tr class="memdesc:aaf6d5c723eb7f11efaad96c3ec76ab85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to remove a resource.  <br /></td></tr>
+<tr class="memitem:a328c7510a040017a089ce9ce2d41cf69" id="r_a328c7510a040017a089ce9ce2d41cf69"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a328c7510a040017a089ce9ce2d41cf69 template"><td class="memItemLeft">constexpr T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a328c7510a040017a089ce9ce2d41cf69">Get</a> () noexcept</td></tr>
+<tr class="memdesc:a328c7510a040017a089ce9ce2d41cf69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets mutable reference to a resource.  <br /></td></tr>
+<tr class="memitem:a73f2e696f4bca6a4354619fc0c49b521" id="r_a73f2e696f4bca6a4354619fc0c49b521"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a73f2e696f4bca6a4354619fc0c49b521 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a73f2e696f4bca6a4354619fc0c49b521">Get</a> () const noexcept</td></tr>
+<tr class="memdesc:a73f2e696f4bca6a4354619fc0c49b521"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to a resource.  <br /></td></tr>
+<tr class="memitem:a03e1ead30d07193e6fea65df8ca8e47a" id="r_a03e1ead30d07193e6fea65df8ca8e47a"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a03e1ead30d07193e6fea65df8ca8e47a template"><td class="memItemLeft">constexpr T *&#160;</td><td class="memItemRight"><a class="el" href="#a03e1ead30d07193e6fea65df8ca8e47a">TryGet</a> () noexcept</td></tr>
+<tr class="memdesc:a03e1ead30d07193e6fea65df8ca8e47a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get mutable pointer to a resource.  <br /></td></tr>
+<tr class="memitem:a23a3443f3d53126c56b0043965e82392" id="r_a23a3443f3d53126c56b0043965e82392"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a23a3443f3d53126c56b0043965e82392 template"><td class="memItemLeft">constexpr const T *&#160;</td><td class="memItemRight"><a class="el" href="#a23a3443f3d53126c56b0043965e82392">TryGet</a> () const noexcept</td></tr>
+<tr class="memdesc:a23a3443f3d53126c56b0043965e82392"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get const pointer to a resource.  <br /></td></tr>
+<tr class="memitem:aacca8c71a94653b397dbec0f5a5a28de" id="r_aacca8c71a94653b397dbec0f5a5a28de"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:aacca8c71a94653b397dbec0f5a5a28de template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#aacca8c71a94653b397dbec0f5a5a28de">Has</a> () const noexcept</td></tr>
+<tr class="memdesc:aacca8c71a94653b397dbec0f5a5a28de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a resource exists.  <br /></td></tr>
+<tr class="memitem:ad5f301ff4e0d450d76fe049d4bf3bbd5" id="r_ad5f301ff4e0d450d76fe049d4bf3bbd5"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#ad5f301ff4e0d450d76fe049d4bf3bbd5">Count</a> () const noexcept</td></tr>
+<tr class="memdesc:ad5f301ff4e0d450d76fe049d4bf3bbd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of stored resources.  <br /></td></tr>
+<tr class="memitem:a3f658bd54bae2ba8ec16a718067af698" id="r_a3f658bd54bae2ba8ec16a718067af698"><td class="memItemLeft">constexpr std::pmr::memory_resource *&#160;</td><td class="memItemRight"><a class="el" href="#a3f658bd54bae2ba8ec16a718067af698">GetMemoryResource</a> () const noexcept</td></tr>
+<tr class="memdesc:a3f658bd54bae2ba8ec16a718067af698"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the memory resource used for owned storage.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Resource manager for storing and managing resources of various types. </p>
 <p>Stores resources inline using <span class="tt">MultiTypeMap&lt;TypedBuffer&gt;</span>. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00021">21</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00022">22</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a22080a1c998359c8c7e721c54cf3acbe" name="a22080a1c998359c8c7e721c54cf3acbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22080a1c998359c8c7e721c54cf3acbe">&#9670;&#160;</a></span>ResourceManager() <span class="overload">[1/3]</span></h2>
+<a id="addd378e9a9850074568f1b3bfec069ae" name="addd378e9a9850074568f1b3bfec069ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addd378e9a9850074568f1b3bfec069ae">&#9670;&#160;</a></span>ResourceManager() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -263,15 +268,75 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a7c4be13707cf9b08693688e6ce0140d1" name="a7c4be13707cf9b08693688e6ce0140d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c4be13707cf9b08693688e6ce0140d1">&#9670;&#160;</a></span>ResourceManager() <span class="overload">[2/3]</span></h2>
+<a id="a775669bcb673bf8a849b7a65c0fdaeae" name="a775669bcb673bf8a849b7a65c0fdaeae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a775669bcb673bf8a849b7a65c0fdaeae">&#9670;&#160;</a></span>ResourceManager() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::ResourceManager::ResourceManager </td>
+          <td>(</td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a resource manager using <span class="tt">resource</span> for owned storage. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td>Memory resource for the type map and typed buffers. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00030">30</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1449cc5519c09bbc513bc4dddcca64c3" name="a1449cc5519c09bbc513bc4dddcca64c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1449cc5519c09bbc513bc4dddcca64c3">&#9670;&#160;</a></span>ResourceManager() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::ResourceManager::ResourceManager </td>
+          <td>(</td>
+          <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab6f981cb5325ad60cdf97dfbf2db766d" name="ab6f981cb5325ad60cdf97dfbf2db766d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6f981cb5325ad60cdf97dfbf2db766d">&#9670;&#160;</a></span>ResourceManager() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -288,15 +353,15 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="af2c479796fed89684354c5079a6d4280" name="af2c479796fed89684354c5079a6d4280"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2c479796fed89684354c5079a6d4280">&#9670;&#160;</a></span>ResourceManager() <span class="overload">[3/3]</span></h2>
+<a id="a4cedf7d145ddc287e6d574efa226371d" name="a4cedf7d145ddc287e6d574efa226371d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cedf7d145ddc287e6d574efa226371d">&#9670;&#160;</a></span>ResourceManager() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -313,15 +378,15 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="add5fe353bbe19096c78e829487d8404f" name="add5fe353bbe19096c78e829487d8404f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add5fe353bbe19096c78e829487d8404f">&#9670;&#160;</a></span>~ResourceManager()</h2>
+<a id="afb76545ef8d88e0b610caa02a336ffb0" name="afb76545ef8d88e0b610caa02a336ffb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb76545ef8d88e0b610caa02a336ffb0">&#9670;&#160;</a></span>~ResourceManager()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -338,7 +403,7 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -346,8 +411,8 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="ac5d72b3ea3337ef8f492452777b6ad6a" name="ac5d72b3ea3337ef8f492452777b6ad6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5d72b3ea3337ef8f492452777b6ad6a">&#9670;&#160;</a></span>Clear()</h2>
+<a id="a0bd644bb9195420943ba370ac78af0c6" name="a0bd644bb9195420943ba370ac78af0c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bd644bb9195420943ba370ac78af0c6">&#9670;&#160;</a></span>Clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -364,19 +429,19 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Clears all resources, destroying stored values and removing all entries. </p>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00033">33</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00042">42</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a01431e6a62b9af7bb468645a179fb1b4" name="a01431e6a62b9af7bb468645a179fb1b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01431e6a62b9af7bb468645a179fb1b4">&#9670;&#160;</a></span>Count()</h2>
+<a id="ad5f301ff4e0d450d76fe049d4bf3bbd5" name="ad5f301ff4e0d450d76fe049d4bf3bbd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5f301ff4e0d450d76fe049d4bf3bbd5">&#9670;&#160;</a></span>Count()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -393,7 +458,7 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -401,12 +466,12 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
 <p>Gets the number of stored resources. </p>
 <dl class="section return"><dt>Returns</dt><dd>Resource count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00165">165</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00174">174</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aa8ed46c98af18fb425b0689f3162e3b3" name="aa8ed46c98af18fb425b0689f3162e3b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8ed46c98af18fb425b0689f3162e3b3">&#9670;&#160;</a></span>Emplace()</h2>
+<a id="a2a7805bed6dfd54a8db6386c8d8f8357" name="a2a7805bed6dfd54a8db6386c8d8f8357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a7805bed6dfd54a8db6386c8d8f8357">&#9670;&#160;</a></span>Emplace()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -426,7 +491,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -446,12 +511,12 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00194">194</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00224">224</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a0af9cb105eab0ed96c299da136500fc1" name="a0af9cb105eab0ed96c299da136500fc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0af9cb105eab0ed96c299da136500fc1">&#9670;&#160;</a></span>Get() <span class="overload">[1/2]</span></h2>
+<a id="a73f2e696f4bca6a4354619fc0c49b521" name="a73f2e696f4bca6a4354619fc0c49b521"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73f2e696f4bca6a4354619fc0c49b521">&#9670;&#160;</a></span>Get() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -470,7 +535,7 @@ template&lt;ResourceTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -485,12 +550,12 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00225">225</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00257">257</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7491efab241501f04273f17bac89beb5" name="a7491efab241501f04273f17bac89beb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7491efab241501f04273f17bac89beb5">&#9670;&#160;</a></span>Get() <span class="overload">[2/2]</span></h2>
+<a id="a328c7510a040017a089ce9ce2d41cf69" name="a328c7510a040017a089ce9ce2d41cf69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a328c7510a040017a089ce9ce2d41cf69">&#9670;&#160;</a></span>Get() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -509,7 +574,7 @@ template&lt;ResourceTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -524,12 +589,42 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00217">217</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00249">249</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab4abe825cf6024de6dfa66cf16bbb64c" name="ab4abe825cf6024de6dfa66cf16bbb64c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4abe825cf6024de6dfa66cf16bbb64c">&#9670;&#160;</a></span>Has()</h2>
+<a id="a3f658bd54bae2ba8ec16a718067af698" name="a3f658bd54bae2ba8ec16a718067af698"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f658bd54bae2ba8ec16a718067af698">&#9670;&#160;</a></span>GetMemoryResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pmr::memory_resource * helios::ecs::ResourceManager::GetMemoryResource </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the memory resource used for owned storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>Memory resource of the underlying type map </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00182">182</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aacca8c71a94653b397dbec0f5a5a28de" name="aacca8c71a94653b397dbec0f5a5a28de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacca8c71a94653b397dbec0f5a5a28de">&#9670;&#160;</a></span>Has()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -548,7 +643,7 @@ template&lt;ResourceTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -562,12 +657,12 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if resource exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00157">157</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00166">166</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a55202b6bd17fad36ff7fdd20a3fd784e" name="a55202b6bd17fad36ff7fdd20a3fd784e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55202b6bd17fad36ff7fdd20a3fd784e">&#9670;&#160;</a></span>Insert() <span class="overload">[1/2]</span></h2>
+<a id="ab2f18a4d900f82b8cbc71c19ecc310ab" name="ab2f18a4d900f82b8cbc71c19ecc310ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2f18a4d900f82b8cbc71c19ecc310ab">&#9670;&#160;</a></span>Insert() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -586,7 +681,7 @@ template&lt;ResourceTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -605,12 +700,12 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00175">175</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00195">195</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a233038b3b96970d36d9b8738d2fec14b" name="a233038b3b96970d36d9b8738d2fec14b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a233038b3b96970d36d9b8738d2fec14b">&#9670;&#160;</a></span>Insert() <span class="overload">[2/2]</span></h2>
+<a id="a9f6586f15f35c16c676e22d551e86d38" name="a9f6586f15f35c16c676e22d551e86d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f6586f15f35c16c676e22d551e86d38">&#9670;&#160;</a></span>Insert() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -630,7 +725,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -649,37 +744,12 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00052">52</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00061">61</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a756310cdf696ab9133c97be562d571c5" name="a756310cdf696ab9133c97be562d571c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a756310cdf696ab9133c97be562d571c5">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#a22080a1c998359c8c7e721c54cf3acbe">ResourceManager</a> &amp; helios::ecs::ResourceManager::operator= </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a22080a1c998359c8c7e721c54cf3acbe">ResourceManager</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa53d4361a259775862100403fd7744de" name="aa53d4361a259775862100403fd7744de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa53d4361a259775862100403fd7744de">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a66962b13dec43fda4f8574a6e6fe53f7" name="a66962b13dec43fda4f8574a6e6fe53f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66962b13dec43fda4f8574a6e6fe53f7">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -688,23 +758,48 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a22080a1c998359c8c7e721c54cf3acbe">ResourceManager</a> &amp; helios::ecs::ResourceManager::operator= </td>
+          <td class="memname"><a class="el" href="#addd378e9a9850074568f1b3bfec069ae">ResourceManager</a> &amp; helios::ecs::ResourceManager::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a22080a1c998359c8c7e721c54cf3acbe">ResourceManager</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#addd378e9a9850074568f1b3bfec069ae">ResourceManager</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aae70bf8e8825cda8aa31f3906707fcb1" name="aae70bf8e8825cda8aa31f3906707fcb1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae70bf8e8825cda8aa31f3906707fcb1">&#9670;&#160;</a></span>Remove()</h2>
+<a id="a939e9cc1ed79b2a60722236b6951fe79" name="a939e9cc1ed79b2a60722236b6951fe79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a939e9cc1ed79b2a60722236b6951fe79">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#addd378e9a9850074568f1b3bfec069ae">ResourceManager</a> &amp; helios::ecs::ResourceManager::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#addd378e9a9850074568f1b3bfec069ae">ResourceManager</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a55f58b37add983e09500f4d25e46b388" name="a55f58b37add983e09500f4d25e46b388"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55f58b37add983e09500f4d25e46b388">&#9670;&#160;</a></span>Remove()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -723,7 +818,7 @@ template&lt;ResourceTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -737,12 +832,12 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00211">211</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00243">243</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a5a80e573da3ab8fd9f6cd343f264a03d" name="a5a80e573da3ab8fd9f6cd343f264a03d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a80e573da3ab8fd9f6cd343f264a03d">&#9670;&#160;</a></span>TryEmplace()</h2>
+<a id="ac402a70c1532437444b588a16ea48f30" name="ac402a70c1532437444b588a16ea48f30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac402a70c1532437444b588a16ea48f30">&#9670;&#160;</a></span>TryEmplace()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -762,7 +857,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -783,12 +878,12 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if emplaced, false if resource already exists </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00201">201</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00232">232</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a05fa9c9a15c4f68a41dd9e7a9db76bfc" name="a05fa9c9a15c4f68a41dd9e7a9db76bfc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05fa9c9a15c4f68a41dd9e7a9db76bfc">&#9670;&#160;</a></span>TryGet() <span class="overload">[1/2]</span></h2>
+<a id="a23a3443f3d53126c56b0043965e82392" name="a23a3443f3d53126c56b0043965e82392"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23a3443f3d53126c56b0043965e82392">&#9670;&#160;</a></span>TryGet() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -807,7 +902,7 @@ template&lt;ResourceTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -821,12 +916,12 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to resource, or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00242">242</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00274">274</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a026a1b0a3bd768227642be5072715450" name="a026a1b0a3bd768227642be5072715450"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a026a1b0a3bd768227642be5072715450">&#9670;&#160;</a></span>TryGet() <span class="overload">[2/2]</span></h2>
+<a id="a03e1ead30d07193e6fea65df8ca8e47a" name="a03e1ead30d07193e6fea65df8ca8e47a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03e1ead30d07193e6fea65df8ca8e47a">&#9670;&#160;</a></span>TryGet() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -845,7 +940,7 @@ template&lt;ResourceTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -859,12 +954,12 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to resource, or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00233">233</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00265">265</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad91eb53343464ffb9c0b42b2d7bee5b6" name="ad91eb53343464ffb9c0b42b2d7bee5b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad91eb53343464ffb9c0b42b2d7bee5b6">&#9670;&#160;</a></span>TryInsert() <span class="overload">[1/2]</span></h2>
+<a id="ae8ba4dea352e805e95a7156212056351" name="ae8ba4dea352e805e95a7156212056351"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8ba4dea352e805e95a7156212056351">&#9670;&#160;</a></span>TryInsert() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -883,7 +978,7 @@ template&lt;ResourceTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -903,12 +998,12 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if inserted, false if resource already exists </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00182">182</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00203">203</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab7313c17e632517aadaaaf46641c9d02" name="ab7313c17e632517aadaaaf46641c9d02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7313c17e632517aadaaaf46641c9d02">&#9670;&#160;</a></span>TryInsert() <span class="overload">[2/2]</span></h2>
+<a id="aec744da20749ec10fa2b136fed017da6" name="aec744da20749ec10fa2b136fed017da6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec744da20749ec10fa2b136fed017da6">&#9670;&#160;</a></span>TryInsert() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -928,7 +1023,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -948,12 +1043,12 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if inserted, false if resource already exists </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00073">73</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00216">216</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a96dfe3cf3a98ed4731e7128f0a244b4c" name="a96dfe3cf3a98ed4731e7128f0a244b4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96dfe3cf3a98ed4731e7128f0a244b4c">&#9670;&#160;</a></span>TryRemove()</h2>
+<a id="aaf6d5c723eb7f11efaad96c3ec76ab85" name="aaf6d5c723eb7f11efaad96c3ec76ab85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf6d5c723eb7f11efaad96c3ec76ab85">&#9670;&#160;</a></span>TryRemove()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -972,7 +1067,7 @@ template&lt;ResourceTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -986,7 +1081,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if removed, false if resource didn't exist </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00113">113</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_2manager_8hpp_source.html#l00122">122</a> of file <a class="el" href="resource_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>

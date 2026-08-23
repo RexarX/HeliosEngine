@@ -180,7 +180,6 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('query_8hpp.htm
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="compiler_8hpp_source.html">helios/compiler/compiler.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="archetype_8hpp_source.html">helios/ecs/component/archetype.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="component_8hpp_source.html">helios/ecs/component/component.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="component_2manager_8hpp_source.html">helios/ecs/component/manager.hpp</a>&gt;</code><br />
@@ -194,14 +193,12 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('query_8hpp.htm
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
-<code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;memory_resource&gt;</code><br />
 <code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;ranges&gt;</code><br />
 <code>#include &lt;span&gt;</code><br />
 <code>#include &lt;tuple&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
-<code>#include &lt;unordered_map&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div>
@@ -209,10 +206,10 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('query_8hpp.htm
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Aecs_3A_3ABasicQueryWithEntity_3C_20WorldT_2C_20Allocator_2C_20Args_20_3E" id="r_helios_3A_3Aecs_3A_3ABasicQueryWithEntity_3C_20WorldT_2C_20Allocator_2C_20Args_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">helios::ecs::BasicQueryWithEntity&lt; WorldT, Allocator, Args &gt;</a></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3ABasicQueryWithEntity_3C_20WorldT_2C_20Args_20_3E" id="r_helios_3A_3Aecs_3A_3ABasicQueryWithEntity_3C_20WorldT_2C_20Args_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">helios::ecs::BasicQueryWithEntity&lt; WorldT, Args &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper that provides entity-aware iteration over query results.  <a href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html#details">More...</a><br /></td></tr>
-<tr class="memitem:helios_3A_3Aecs_3A_3ABasicQuery_3C_20WorldT_2C_20Allocator_2C_20Args_20_3E" id="r_helios_3A_3Aecs_3A_3ABasicQuery_3C_20WorldT_2C_20Allocator_2C_20Args_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery&lt; WorldT, Allocator, Args &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5" title="Alias for BasicQuery bound to World with a PMR allocator.">Query</a> result object for iterating over matching entities and components.  <a href="classhelios_1_1ecs_1_1BasicQuery.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3ABasicQuery_3C_20WorldT_2C_20Args_20_3E" id="r_helios_3A_3Aecs_3A_3ABasicQuery_3C_20WorldT_2C_20Args_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery&lt; WorldT, Args &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff" title="Alias for BasicQuery bound to World.">Query</a> result object for iterating over matching entities and components.  <a href="classhelios_1_1ecs_1_1BasicQuery.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -222,25 +219,9 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a3070e34789bbcb0a4664277324f82e78" id="r_a3070e34789bbcb0a4664277324f82e78"><td class="memTemplParams" colspan="2">template&lt;typename Alloc, QueryArg... Args&gt; </td></tr>
-<tr class="memitem:a3070e34789bbcb0a4664277324f82e78 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a3070e34789bbcb0a4664277324f82e78">helios::ecs::MutBasicQuery</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt;<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Alloc, Args...&gt;</td></tr>
-<tr class="memitem:a37e0ea608f7589b6c8d84920531eb0b0" id="r_a37e0ea608f7589b6c8d84920531eb0b0"><td class="memTemplParams" colspan="2">template&lt;typename Alloc, QueryArg... Args&gt; </td></tr>
-<tr class="memitem:a37e0ea608f7589b6c8d84920531eb0b0 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a37e0ea608f7589b6c8d84920531eb0b0">helios::ecs::ReadOnlyBasicQuery</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt;const <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Alloc, Args...&gt;</td></tr>
-<tr class="memitem:a1628be8e655ae078350643c449db2d66" id="r_a1628be8e655ae078350643c449db2d66"><td class="memTemplParams" colspan="2">template&lt;typename Alloc, QueryArg... Args&gt; </td></tr>
-<tr class="memitem:a1628be8e655ae078350643c449db2d66 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a1628be8e655ae078350643c449db2d66">helios::ecs::MutBasicQueryWithEntity</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity</a>&lt;<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Alloc, Args...&gt;</td></tr>
-<tr class="memitem:ab8d93ea0ba68b06a119d200124387862" id="r_ab8d93ea0ba68b06a119d200124387862"><td class="memTemplParams" colspan="2">template&lt;typename Alloc, QueryArg... Args&gt; </td></tr>
-<tr class="memitem:ab8d93ea0ba68b06a119d200124387862 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#ab8d93ea0ba68b06a119d200124387862">helios::ecs::ReadOnlyBasicQueryWithEntity</a></td></tr>
-<tr class="memitem:a2ee6bfa0ac749ef9a5776150f5d221d4" id="r_a2ee6bfa0ac749ef9a5776150f5d221d4"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
-<tr class="memitem:a2ee6bfa0ac749ef9a5776150f5d221d4 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a2ee6bfa0ac749ef9a5776150f5d221d4">helios::ecs::PmrBasicQuery</a></td></tr>
-<tr class="memitem:aa970d1aed7811655938f4d6a9c09f26b" id="r_aa970d1aed7811655938f4d6a9c09f26b"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
-<tr class="memitem:aa970d1aed7811655938f4d6a9c09f26b template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#aa970d1aed7811655938f4d6a9c09f26b">helios::ecs::PmrReadOnlyBasicQuery</a></td></tr>
-<tr class="memitem:adc47791de093ec10ce87c62d40bbfea6" id="r_adc47791de093ec10ce87c62d40bbfea6"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
-<tr class="memitem:adc47791de093ec10ce87c62d40bbfea6 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#adc47791de093ec10ce87c62d40bbfea6">helios::ecs::PmrBasicQueryWithEntity</a></td></tr>
-<tr class="memitem:a1cf926e707283cefedc4bb7672220f68" id="r_a1cf926e707283cefedc4bb7672220f68"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
-<tr class="memitem:a1cf926e707283cefedc4bb7672220f68 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a1cf926e707283cefedc4bb7672220f68">helios::ecs::PmrReadOnlyBasicQueryWithEntity</a></td></tr>
-<tr class="memitem:a2222a8ceaa7f9005447fc4e1bf219cb5" id="r_a2222a8ceaa7f9005447fc4e1bf219cb5"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
-<tr class="memitem:a2222a8ceaa7f9005447fc4e1bf219cb5 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt;<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, std::pmr::polymorphic_allocator&lt;&gt;, Args...&gt;</td></tr>
-<tr class="memdesc:a2222a8ceaa7f9005447fc4e1bf219cb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html" title="Query result object for iterating over matching entities and components.">BasicQuery</a></span> bound to <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span> with a PMR allocator.  <br /></td></tr>
+<tr class="memitem:a165dce904fdd9fe821b8b48ec7faf8ff" id="r_a165dce904fdd9fe821b8b48ec7faf8ff"><td class="memTemplParams" colspan="2">template&lt;QueryArg... Args&gt; </td></tr>
+<tr class="memitem:a165dce904fdd9fe821b8b48ec7faf8ff template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff">helios::ecs::Query</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt;<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Args...&gt;</td></tr>
+<tr class="memdesc:a165dce904fdd9fe821b8b48ec7faf8ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html" title="Query result object for iterating over matching entities and components.">BasicQuery</a></span> bound to <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span>.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>

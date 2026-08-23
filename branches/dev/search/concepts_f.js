@@ -4,5 +4,6 @@ var searchData=
   ['takeadapterrequirements_1',['TakeAdapterRequirements',['../concepthelios_1_1utils_1_1TakeAdapterRequirements.html',1,'helios::utils']]],
   ['takewhileadapterrequirements_2',['TakeWhileAdapterRequirements',['../concepthelios_1_1utils_1_1TakeWhileAdapterRequirements.html',1,'helios::utils']]],
   ['transformfor_3',['TransformFor',['../concepthelios_1_1utils_1_1TransformFor.html',1,'helios::utils']]],
-  ['tuplelike_4',['TupleLike',['../concepthelios_1_1utils_1_1details_1_1TupleLike.html',1,'helios::utils::details']]]
+  ['transparentfunctor_4',['TransparentFunctor',['../concepthelios_1_1container_1_1TransparentFunctor.html',1,'helios::container']]],
+  ['tuplelike_5',['TupleLike',['../concepthelios_1_1utils_1_1details_1_1TupleLike.html',1,'helios::utils::details']]]
 ];

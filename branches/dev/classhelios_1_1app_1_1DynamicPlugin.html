@@ -265,11 +265,11 @@ Public Member Functions</h2></td></tr>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00099">application.hpp:99</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00048">application.hpp:48</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Plugin_html"><div class="ttname"><a href="classhelios_1_1app_1_1Plugin.html">helios::app::Plugin</a></div><div class="ttdoc">Base class for all plugins.</div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00014">plugin.hpp:14</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Plugin_html_a9ba1339380ae0e2b7e098592d9ff56dc"><div class="ttname"><a href="classhelios_1_1app_1_1Plugin.html#a9ba1339380ae0e2b7e098592d9ff56dc">helios::app::Plugin::Build</a></div><div class="ttdeci">virtual void Build(App &amp;app)=0</div><div class="ttdoc">Builds the plugin.</div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Plugin_html_ad4313822fa015a013d520e1b31036a86"><div class="ttname"><a href="classhelios_1_1app_1_1Plugin.html#ad4313822fa015a013d520e1b31036a86">helios::app::Plugin::Destroy</a></div><div class="ttdeci">virtual void Destroy(App &amp;)</div><div class="ttdoc">Destroys the plugin and cleans up plugins.</div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2plugin_8hpp_source.html#l00040">plugin.hpp:40</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00043">application.hpp:43</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00038">application.hpp:38</a></div></div>
 <div class="ttc" id="aplatform_8hpp_html_addef039204a27478a1fff77081d409bd"><div class="ttname"><a href="platform_8hpp.html#addef039204a27478a1fff77081d409bd">HELIOS_EXPORT</a></div><div class="ttdeci">#define HELIOS_EXPORT</div><div class="ttdef"><b>Definition</b> <a href="platform_8hpp_source.html#l00025">platform.hpp:25</a></div></div>
 <div class="ttc" id="astructhelios_1_1app_1_1PluginTypeExport_html_a0278d5501e4cb2dba6103fd40176d705"><div class="ttname"><a href="structhelios_1_1app_1_1PluginTypeExport.html#a0278d5501e4cb2dba6103fd40176d705">helios::app::PluginTypeExport::From</a></div><div class="ttdeci">static constexpr PluginTypeExport From() noexcept</div><div class="ttdoc">Builds an export descriptor from a plugin type.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8hpp_source.html#l00054">dynamic_plugin.hpp:54</a></div></div>
 </div><!-- fragment --></dd></dl>
@@ -277,7 +277,7 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span> result = dyn_plugin.<a class="code hl_function" href="#a6ebf28ec321d00ca7fc3acf55529b628">Load</a>(<span class="stringliteral">&quot;my_plugin.so&quot;</span>); result) {</div>
 <div class="line">  <a class="code hl_namespace" href="namespacehelios_1_1app.html">app</a>.AddDynamicPlugin(std::move(dyn_plugin));</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a6ebf28ec321d00ca7fc3acf55529b628"><div class="ttname"><a href="#a6ebf28ec321d00ca7fc3acf55529b628">helios::app::DynamicPlugin::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path, DynamicPluginConfig config={}) -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Loads a plugin from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8cpp_source.html#l00052">dynamic_plugin.cpp:52</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_a6ebf28ec321d00ca7fc3acf55529b628"><div class="ttname"><a href="#a6ebf28ec321d00ca7fc3acf55529b628">helios::app::DynamicPlugin::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path, DynamicPluginConfig config={}) -&gt; DynamicPluginResult&lt; void &gt;</div><div class="ttdoc">Loads a plugin from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__plugin_8cpp_source.html#l00056">dynamic_plugin.cpp:56</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1DynamicPlugin_html_aee76ef756f54a8560f0bc6c839c9e71d"><div class="ttname"><a href="#aee76ef756f54a8560f0bc6c839c9e71d">helios::app::DynamicPlugin::DynamicPlugin</a></div><div class="ttdeci">DynamicPlugin()=default</div></div>
 </div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="dynamic__plugin_8hpp_source.html#l00181">181</a> of file <a class="el" href="dynamic__plugin_8hpp_source.html">dynamic_plugin.hpp</a>.</p>
@@ -360,7 +360,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00021">21</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00025">25</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -412,7 +412,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00030">30</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00034">34</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -499,7 +499,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if plugin is not loaded. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the plugin </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00188">188</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00192">192</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -530,7 +530,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if plugin is not loaded. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the plugin </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00183">183</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00187">187</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -620,7 +620,7 @@ Public Member Functions</h2></td></tr>
 <p>Checks if the library file has been modified since last load. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the file modification time has changed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00168">168</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00172">172</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -721,7 +721,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult</a></span> that holds void on success, or <span class="tt"><a class="el" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span> on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00052">52</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00056">56</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -803,7 +803,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00037">37</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00041">41</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -900,7 +900,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult</a></span> that holds void on success, or <span class="tt"><a class="el" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span> on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00100">100</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00104">104</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -937,7 +937,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult</a></span> that holds void on success, or <span class="tt"><a class="el" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span> on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00149">149</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00153">153</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -1028,7 +1028,7 @@ Public Member Functions</h2></td></tr>
 <p>Releases the plugin and unloads the library. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the plugin is not loaded. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="namespacehelios_1_1app.html#a27c5444cd70c60ddab006c9bbdd327db">DynamicPluginResult</a></span> that holds void on success, or <span class="tt"><a class="el" href="namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419ee" title="Error codes for dynamic plugin operations.">DynamicPluginError</a></span> on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00082">82</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00086">86</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>
@@ -1058,7 +1058,7 @@ Public Member Functions</h2></td></tr>
 <p>Updates the cached file modification time. </p>
 <p>Call this after detecting a change to reset the tracking. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00159">159</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__plugin_8cpp_source.html#l00163">163</a> of file <a class="el" href="dynamic__plugin_8cpp_source.html">dynamic_plugin.cpp</a>.</p>
 
 </div>
 </div>

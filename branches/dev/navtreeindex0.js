@@ -11,8 +11,8 @@ var NAVTREEINDEX0 =
 "allocator__traits_8hpp.html":[5,0,2,9,0,0,0,1],
 "allocator__traits_8hpp_source.html":[5,0,2,9,0,0,0,1],
 "annotated.html":[4,0],
-"app_2include_2helios_2app_2builtin_2executor_8hpp.html":[5,0,2,0,0,0,0,0,0],
-"app_2include_2helios_2app_2builtin_2executor_8hpp_source.html":[5,0,2,0,0,0,0,0,0],
+"app_2include_2helios_2app_2builtin_2executor_8hpp.html":[5,0,2,0,0,0,0,0,1],
+"app_2include_2helios_2app_2builtin_2executor_8hpp_source.html":[5,0,2,0,0,0,0,0,1],
 "app_2include_2helios_2app_2plugin_8hpp.html":[5,0,2,0,0,0,0,5],
 "app_2include_2helios_2app_2plugin_8hpp_source.html":[5,0,2,0,0,0,0,5],
 "app_2include_2helios_2app_2scheduler_8hpp.html":[5,0,2,0,0,0,0,8],
@@ -25,6 +25,8 @@ var NAVTREEINDEX0 =
 "app_2src_2scheduler_8cpp_source.html":[5,0,2,0,1,5],
 "app_8hpp.html":[5,0,2,0,0,0,0,1],
 "app_8hpp_source.html":[5,0,2,0,0,0,0,1],
+"app__exit_8hpp.html":[5,0,2,0,0,0,0,0,0],
+"app__exit_8hpp_source.html":[5,0,2,0,0,0,0,0,0],
 "application_8cpp.html":[5,0,2,0,1,1],
 "application_8cpp_source.html":[5,0,2,0,1,1],
 "application_8hpp.html":[5,0,2,0,0,0,0,2],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html":[4,0,2,15],
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a093ee3b0b8ece6ba50235f9c7e3fa0b8":[2,0,3,16,21],
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a093ee3b0b8ece6ba50235f9c7e3fa0b8":[4,0,2,15,21],
-"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a17a42975e81232f8f52b1f19768f8527":[2,0,3,16,28],
-"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a17a42975e81232f8f52b1f19768f8527":[4,0,2,15,28],
-"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a1f7580b97843f148c33cd9acd441cf55":[2,0,3,16,11]
+"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a17a42975e81232f8f52b1f19768f8527":[2,0,3,16,28]
 };

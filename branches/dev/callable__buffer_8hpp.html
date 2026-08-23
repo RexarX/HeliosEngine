@@ -173,15 +173,16 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('callable__buff
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">callable_buffer.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
 <code>#include &lt;helios/container/details/callable_buffer_common.hpp&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;concepts&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;cstring&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
@@ -196,25 +197,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('callable__buff
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Acontainer_3A_3ACallableBufferImpl_3C_20Allocator_2C_20Signatures_20_3E" id="r_helios_3A_3Acontainer_3A_3ACallableBufferImpl_3C_20Allocator_2C_20Signatures_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1container_1_1CallableBufferImpl.html">helios::container::CallableBufferImpl&lt; Allocator, Signatures &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation class for a single-instance callable buffer with explicit allocator.  <a href="classhelios_1_1container_1_1CallableBufferImpl.html#details">More...</a><br /></td></tr>
-<tr class="memitem:helios_3A_3Acontainer_3A_3Adetails_3A_3ACallableBufferDeducer_3C_20FirstSig_2C_20RestSigs_2E_2E_2E_20_3E" id="r_helios_3A_3Acontainer_3A_3Adetails_3A_3ACallableBufferDeducer_3C_20FirstSig_2C_20RestSigs_2E_2E_2E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1container_1_1details_1_1CallableBufferDeducer_3_01FirstSig_00_01RestSigs_8_8_8_01_4.html">helios::container::details::CallableBufferDeducer&lt; FirstSig, RestSigs... &gt;</a></td></tr>
-<tr class="memitem:helios_3A_3Acontainer_3A_3Adetails_3A_3ACallableBufferDeducer_3C_20Alloc_2C_20FirstSig_2C_20RestSigs_2E_2E_2E_20_3E" id="r_helios_3A_3Acontainer_3A_3Adetails_3A_3ACallableBufferDeducer_3C_20Alloc_2C_20FirstSig_2C_20RestSigs_2E_2E_2E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1container_1_1details_1_1CallableBufferDeducer_3_01Alloc_00_01FirstSig_00_01RestSigs_8_8_8_01_4.html">helios::container::details::CallableBufferDeducer&lt; Alloc, FirstSig, RestSigs... &gt;</a></td></tr>
+<tr class="memitem:helios_3A_3Acontainer_3A_3ACallableBuffer_3C_20Signatures_20_3E" id="r_helios_3A_3Acontainer_3A_3ACallableBuffer_3C_20Signatures_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1container_1_1CallableBuffer.html">helios::container::CallableBuffer&lt; Signatures &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single-instance callable buffer with type-erased invocation.  <a href="classhelios_1_1container_1_1CallableBuffer.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Acontainer" id="r_helios_3A_3Acontainer"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html">helios::container</a></td></tr>
-<tr class="memitem:helios_3A_3Acontainer_3A_3Adetails" id="r_helios_3A_3Acontainer_3A_3Adetails"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container_1_1details.html">helios::container::details</a></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a36b75ba1590a28b6cf6127945279fba7" id="r_a36b75ba1590a28b6cf6127945279fba7"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a36b75ba1590a28b6cf6127945279fba7 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#a36b75ba1590a28b6cf6127945279fba7">helios::container::CallableBuffer</a> = typename <a class="el" href="structhelios_1_1container_1_1details_1_1CallableBufferDeducer.html">details::CallableBufferDeducer</a>&lt;Args...&gt;::type</td></tr>
-<tr class="memdesc:a36b75ba1590a28b6cf6127945279fba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single-instance callable buffer with type-erased invocation.  <br /></td></tr>
-<tr class="memitem:ad71b43f1a3a48d0cb2d27f2442035134" id="r_ad71b43f1a3a48d0cb2d27f2442035134"><td class="memTemplParams" colspan="2">template&lt;typename... Signatures&gt; </td></tr>
-<tr class="memitem:ad71b43f1a3a48d0cb2d27f2442035134 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#ad71b43f1a3a48d0cb2d27f2442035134">helios::container::PmrCallableBuffer</a></td></tr>
-<tr class="memdesc:ad71b43f1a3a48d0cb2d27f2442035134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single-instance callable buffer with type-erased invocation with polymorphic allocator.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

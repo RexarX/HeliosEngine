@@ -5,6 +5,7 @@ var dir_759e01594f52531961719bf3f8e55735 =
     [ "dynamic_library.hpp", "dynamic__library_8hpp.html", "dynamic__library_8hpp" ],
     [ "fast_pimpl.hpp", "fast__pimpl_8hpp.html", "fast__pimpl_8hpp" ],
     [ "filesystem.hpp", "filesystem_8hpp.html", "filesystem_8hpp" ],
+    [ "format.hpp", "format_8hpp.html", "format_8hpp" ],
     [ "functional_adapters.hpp", "functional__adapters_8hpp.html", "functional__adapters_8hpp" ],
     [ "hash.hpp", "hash_8hpp.html", "hash_8hpp" ],
     [ "macro.hpp", "macro_8hpp.html", "macro_8hpp" ],

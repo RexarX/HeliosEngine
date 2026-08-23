@@ -191,6 +191,9 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a43f7376eb16923b11cfcf1751b48e229" id="r_a43f7376eb16923b11cfcf1751b48e229"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a43f7376eb16923b11cfcf1751b48e229">MessageManager</a> ()=default</td></tr>
+<tr class="memitem:aa68bc47cb50e6dbfd8715690f568b4f0" id="r_aa68bc47cb50e6dbfd8715690f568b4f0"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa68bc47cb50e6dbfd8715690f568b4f0">MessageManager</a> (std::pmr::memory_resource *resource)</td></tr>
+<tr class="memdesc:aa68bc47cb50e6dbfd8715690f568b4f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a message manager using <span class="tt">resource</span> for owned storage.  <br /></td></tr>
+<tr class="memitem:ab5f52c4d56be6a9ef052628ca5337f3d" id="r_ab5f52c4d56be6a9ef052628ca5337f3d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab5f52c4d56be6a9ef052628ca5337f3d">MessageManager</a> (std::nullptr_t)=delete</td></tr>
 <tr class="memitem:a5fb18117b5320a83e333d7cc5f6362aa" id="r_a5fb18117b5320a83e333d7cc5f6362aa"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5fb18117b5320a83e333d7cc5f6362aa">MessageManager</a> (const MessageManager &amp;)=delete</td></tr>
 <tr class="memitem:aae786195663d6f17a19e2aa84bbb5f59" id="r_aae786195663d6f17a19e2aa84bbb5f59"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aae786195663d6f17a19e2aa84bbb5f59">MessageManager</a> (MessageManager &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:ac5bef9f69e93665c1997a61df3d7046b" id="r_ac5bef9f69e93665c1997a61df3d7046b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac5bef9f69e93665c1997a61df3d7046b">~MessageManager</a> ()=default</td></tr>
@@ -200,14 +203,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab872c679bc6fe8136c053e8903605787"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all messages, consumed flags, and registration data.  <br /></td></tr>
 <tr class="memitem:aca7dfc59406ab6537c9977397e243dba" id="r_aca7dfc59406ab6537c9977397e243dba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aca7dfc59406ab6537c9977397e243dba">ClearAllQueues</a> () noexcept</td></tr>
 <tr class="memdesc:aca7dfc59406ab6537c9977397e243dba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all message data without removing registrations.  <br /></td></tr>
-<tr class="memitem:ac799360fb072a2c53146d1d0f904499d" id="r_ac799360fb072a2c53146d1d0f904499d"><td class="memTemplParams" colspan="2">template&lt;typename Alloc&gt; </td></tr>
-<tr class="memitem:ac799360fb072a2c53146d1d0f904499d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac799360fb072a2c53146d1d0f904499d">Update</a> (const <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;consumed_registry)</td></tr>
-<tr class="memdesc:ac799360fb072a2c53146d1d0f904499d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates message lifecycle — applies consumed messages, then ages buffers.  <br /></td></tr>
+<tr class="memitem:a2e0db24b682b664c3dfc0d4c7ac20c66" id="r_a2e0db24b682b664c3dfc0d4c7ac20c66"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2e0db24b682b664c3dfc0d4c7ac20c66">Update</a> (const <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a> &amp;consumed_registry)</td></tr>
+<tr class="memdesc:a2e0db24b682b664c3dfc0d4c7ac20c66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates message lifecycle — applies consumed messages, then ages buffers.  <br /></td></tr>
 <tr class="memitem:a6ce0b615575ce07f514d20cb1fad7edd" id="r_a6ce0b615575ce07f514d20cb1fad7edd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6ce0b615575ce07f514d20cb1fad7edd">Update</a> ()</td></tr>
 <tr class="memdesc:a6ce0b615575ce07f514d20cb1fad7edd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates message lifecycle without any consumed message processing.  <br /></td></tr>
-<tr class="memitem:a3e43aaa2ab06d847c2d81c0b24c4ac42" id="r_a3e43aaa2ab06d847c2d81c0b24c4ac42"><td class="memTemplParams" colspan="2">template&lt;typename Alloc&gt; </td></tr>
-<tr class="memitem:a3e43aaa2ab06d847c2d81c0b24c4ac42 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3e43aaa2ab06d847c2d81c0b24c4ac42">ApplyConsumed</a> (const <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;merged_consumed)</td></tr>
-<tr class="memdesc:a3e43aaa2ab06d847c2d81c0b24c4ac42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies consumed message ids to both queues, removing them in-place.  <br /></td></tr>
+<tr class="memitem:a2b677fdd051b709310229c7d26f5179f" id="r_a2b677fdd051b709310229c7d26f5179f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2b677fdd051b709310229c7d26f5179f">ApplyConsumed</a> (const <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a> &amp;merged_consumed)</td></tr>
+<tr class="memdesc:a2b677fdd051b709310229c7d26f5179f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies consumed message ids to both queues, removing them in-place.  <br /></td></tr>
 <tr class="memitem:af59a863cb45903b74c3f67929f66c856" id="r_af59a863cb45903b74c3f67929f66c856"><td class="memTemplParams" colspan="2">template&lt;AnyMessageTrait... Messages&gt; <br />
 requires (sizeof...(Messages) &gt; 0)</td></tr>
 <tr class="memitem:af59a863cb45903b74c3f67929f66c856 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af59a863cb45903b74c3f67929f66c856">Register</a> ()</td></tr>
@@ -232,12 +233,10 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
 <tr class="memitem:a27d7b943bdddf4e3bae0e41aca8fdd97" id="r_a27d7b943bdddf4e3bae0e41aca8fdd97"><td class="memTemplParams" colspan="2">template&lt;AsyncMessageTrait T&gt; </td></tr>
 <tr class="memitem:a27d7b943bdddf4e3bae0e41aca8fdd97 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a27d7b943bdddf4e3bae0e41aca8fdd97">ManualAsyncClear</a> ()</td></tr>
 <tr class="memdesc:a27d7b943bdddf4e3bae0e41aca8fdd97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually clears async messages of a specific type from the queue.  <br /></td></tr>
-<tr class="memitem:aaa44e164506d9b475291740f1b9431a2" id="r_aaa44e164506d9b475291740f1b9431a2"><td class="memTemplParams" colspan="2">template&lt;typename OtherAllocator&gt; </td></tr>
-<tr class="memitem:aaa44e164506d9b475291740f1b9431a2 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaa44e164506d9b475291740f1b9431a2">MergeLocalMessages</a> (const <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a>&lt; OtherAllocator &gt; &amp;local)</td></tr>
-<tr class="memdesc:aaa44e164506d9b475291740f1b9431a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges messages from a local <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> into the current queue.  <br /></td></tr>
-<tr class="memitem:a2e281a5b825d07140bf46f4486877bd1" id="r_a2e281a5b825d07140bf46f4486877bd1"><td class="memTemplParams" colspan="2">template&lt;typename OtherAllocator&gt; </td></tr>
-<tr class="memitem:a2e281a5b825d07140bf46f4486877bd1 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2e281a5b825d07140bf46f4486877bd1">MergeLocalMessages</a> (<a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a>&lt; OtherAllocator &gt; &amp;&amp;local)</td></tr>
-<tr class="memdesc:a2e281a5b825d07140bf46f4486877bd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges messages from a local <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> into the current queue.  <br /></td></tr>
+<tr class="memitem:aad3f9bcc4f28485ab60a3af8d5c28bf3" id="r_aad3f9bcc4f28485ab60a3af8d5c28bf3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aad3f9bcc4f28485ab60a3af8d5c28bf3">MergeLocalMessages</a> (const <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a> &amp;local)</td></tr>
+<tr class="memdesc:aad3f9bcc4f28485ab60a3af8d5c28bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges messages from a local <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> into the current queue.  <br /></td></tr>
+<tr class="memitem:a47ca150c4bf5ef7fdf939966907f7b9d" id="r_a47ca150c4bf5ef7fdf939966907f7b9d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a47ca150c4bf5ef7fdf939966907f7b9d">MergeLocalMessages</a> (<a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a> &amp;&amp;local)</td></tr>
+<tr class="memdesc:a47ca150c4bf5ef7fdf939966907f7b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges messages from a local <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> into the current queue.  <br /></td></tr>
 <tr class="memitem:a1b6f2554b712b118cb390e3f297b6714" id="r_a1b6f2554b712b118cb390e3f297b6714"><td class="memTemplParams" colspan="2">template&lt;AnyMessageTrait T&gt; </td></tr>
 <tr class="memitem:a1b6f2554b712b118cb390e3f297b6714 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1b6f2554b712b118cb390e3f297b6714">IsRegistered</a> () const noexcept</td></tr>
 <tr class="memdesc:a1b6f2554b712b118cb390e3f297b6714"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an message type (regular or async) is registered.  <br /></td></tr>
@@ -275,6 +274,8 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
 <tr class="memdesc:a20fa2b8ec108dd6b98e96f6f86030a88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets metadata for a registered message type.  <br /></td></tr>
 <tr class="memitem:a73aa17dd5b3b4a2eaa9c5f38dfdd4bf4" id="r_a73aa17dd5b3b4a2eaa9c5f38dfdd4bf4"><td class="memItemLeft"><a class="el" href="#a26f8b24d221097025fab50b2f49e1363">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a73aa17dd5b3b4a2eaa9c5f38dfdd4bf4">RegisteredMessageCount</a> () const noexcept</td></tr>
 <tr class="memdesc:a73aa17dd5b3b4a2eaa9c5f38dfdd4bf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of registered message types (regular + async).  <br /></td></tr>
+<tr class="memitem:a43cc483d164de88a23854be376fd7566" id="r_a43cc483d164de88a23854be376fd7566"><td class="memItemLeft">std::pmr::memory_resource *&#160;</td><td class="memItemRight"><a class="el" href="#a43cc483d164de88a23854be376fd7566">GetMemoryResource</a> () const noexcept</td></tr>
+<tr class="memdesc:a43cc483d164de88a23854be376fd7566"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the memory resource used for owned (non-async) storage.  <br /></td></tr>
 <tr class="memitem:ab65d2ee1328e58e2ed1ca4dbe3fd5f3a" id="r_ab65d2ee1328e58e2ed1ca4dbe3fd5f3a"><td class="memItemLeft">const <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab65d2ee1328e58e2ed1ca4dbe3fd5f3a">CurrentQueue</a> () const noexcept</td></tr>
 <tr class="memdesc:ab65d2ee1328e58e2ed1ca4dbe3fd5f3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to current message queue.  <br /></td></tr>
 <tr class="memitem:aa2a2615038baf92bd90281478f34704f" id="r_aa2a2615038baf92bd90281478f34704f"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa2a2615038baf92bd90281478f34704f">CurrentQueue</a> () noexcept</td></tr>
@@ -307,7 +308,7 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
 <p>Consumed messages are removed at Update time based on merged per-system <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message ids.">ConsumedMessagesRegistry</a></span> instances. Each system writes to its own registry during parallel execution, and all registries are merged and applied here.</p>
 <dl class="section note"><dt>Note</dt><dd>Partially thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00060">60</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00062">62</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a26f8b24d221097025fab50b2f49e1363" name="a26f8b24d221097025fab50b2f49e1363"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26f8b24d221097025fab50b2f49e1363">&#9670;&#160;</a></span>size_type</h2>
@@ -321,13 +322,13 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00062">62</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00064">64</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a43f7376eb16923b11cfcf1751b48e229" name="a43f7376eb16923b11cfcf1751b48e229"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43f7376eb16923b11cfcf1751b48e229">&#9670;&#160;</a></span>MessageManager() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a43f7376eb16923b11cfcf1751b48e229">&#9670;&#160;</a></span>MessageManager() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -351,8 +352,68 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
 
 </div>
 </div>
+<a id="aa68bc47cb50e6dbfd8715690f568b4f0" name="aa68bc47cb50e6dbfd8715690f568b4f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa68bc47cb50e6dbfd8715690f568b4f0">&#9670;&#160;</a></span>MessageManager() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::MessageManager::MessageManager </td>
+          <td>(</td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a message manager using <span class="tt">resource</span> for owned storage. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td>Memory resource for queues and id maps. Async queues still allocate on moodycamel's heap. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00020">20</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab5f52c4d56be6a9ef052628ca5337f3d" name="ab5f52c4d56be6a9ef052628ca5337f3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5f52c4d56be6a9ef052628ca5337f3d">&#9670;&#160;</a></span>MessageManager() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::MessageManager::MessageManager </td>
+          <td>(</td>
+          <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5fb18117b5320a83e333d7cc5f6362aa" name="a5fb18117b5320a83e333d7cc5f6362aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fb18117b5320a83e333d7cc5f6362aa">&#9670;&#160;</a></span>MessageManager() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fb18117b5320a83e333d7cc5f6362aa">&#9670;&#160;</a></span>MessageManager() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -377,7 +438,7 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
 </div>
 </div>
 <a id="aae786195663d6f17a19e2aa84bbb5f59" name="aae786195663d6f17a19e2aa84bbb5f59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae786195663d6f17a19e2aa84bbb5f59">&#9670;&#160;</a></span>MessageManager() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aae786195663d6f17a19e2aa84bbb5f59">&#9670;&#160;</a></span>MessageManager() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -427,39 +488,24 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a3e43aaa2ab06d847c2d81c0b24c4ac42" name="a3e43aaa2ab06d847c2d81c0b24c4ac42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e43aaa2ab06d847c2d81c0b24c4ac42">&#9670;&#160;</a></span>ApplyConsumed()</h2>
+<a id="a2b677fdd051b709310229c7d26f5179f" name="a2b677fdd051b709310229c7d26f5179f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b677fdd051b709310229c7d26f5179f">&#9670;&#160;</a></span>ApplyConsumed()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void helios::ecs::MessageManager::ApplyConsumed </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>merged_consumed</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>merged_consumed</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Applies consumed message ids to both queues, removing them in-place. </p>
-<p>Consumed entries are stable message ids (not transient buffer indices). No buffer swap occurs. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Alloc</td><td>Allocator type of the consumed registry </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Consumed entries are stable message ids (not transient buffer indices). No buffer swap occurs. </p><dl class="section warning"><dt>Warning</dt><dd>Uses <span class="tt">TemporaryStorage</span> for temporary allocations. Avoid Calling <span class="tt">ResetTemporaryStorage()</span> that will result in current thread's temporary storage being reseted. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">merged_consumed</td><td>The combined consumed registry from all systems </td></tr>
@@ -467,7 +513,7 @@ template&lt;typename Alloc&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00454">454</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00076">76</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -498,7 +544,7 @@ template&lt;typename Alloc&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the async message queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00403">403</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00416">416</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -529,7 +575,7 @@ template&lt;typename Alloc&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the async message queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00394">394</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00407">407</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -559,7 +605,7 @@ template&lt;typename Alloc&gt; </div>
 <p>Clears all messages, consumed flags, and registration data. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00014">14</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00029">29</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -589,7 +635,7 @@ template&lt;typename Alloc&gt; </div>
 <p>Clears all message data without removing registrations. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00024">24</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00039">39</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -628,7 +674,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Span of message ids aligned with <span class="tt"><a class="el" href="#ad1e4814ee44e8de30e300a199de11566" title="Gets a const span of messages of a specific type from the current queue.">CurrentMessages</a>&lt;T&gt;()</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00297">297</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00302">302</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -667,7 +713,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Span of const messages </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00274">274</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00279">279</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -698,7 +744,7 @@ template&lt;MessageTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to current queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00357">357</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00370">370</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -726,10 +772,40 @@ template&lt;MessageTrait T&gt; </div>
 </div><div class="memdoc">
 
 <p>Gets mutable reference to current message queue. </p>
-<dl class="section note"><dt>Note</dt><dd>Not thread-safe. Prefer <span class="tt"><a class="el" href="#a3203409b0cbf34ea52033ef58d0604ae" title="Writes a single regular message to the current queue.">Write</a></span> / <span class="tt"><a class="el" href="#aaa44e164506d9b475291740f1b9431a2" title="Merges messages from a local MessageQueue into the current queue.">MergeLocalMessages</a></span> so ids stay consistent. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. Prefer <span class="tt"><a class="el" href="#a3203409b0cbf34ea52033ef58d0604ae" title="Writes a single regular message to the current queue.">Write</a></span> / <span class="tt"><a class="el" href="#aad3f9bcc4f28485ab60a3af8d5c28bf3" title="Merges messages from a local MessageQueue into the current queue.">MergeLocalMessages</a></span> so ids stay consistent. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to current queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00367">367</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00380">380</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a43cc483d164de88a23854be376fd7566" name="a43cc483d164de88a23854be376fd7566"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43cc483d164de88a23854be376fd7566">&#9670;&#160;</a></span>GetMemoryResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pmr::memory_resource * helios::ecs::MessageManager::GetMemoryResource </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the memory resource used for owned (non-async) storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>Memory resource passed to the constructor </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00361">361</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -768,7 +844,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if async messages exist, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00654">654</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00574">574</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -807,7 +883,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if messages exist, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00644">644</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00564">564</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -838,7 +914,7 @@ template&lt;MessageTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread safe for concurrent reads. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if at least one message exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00231">231</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00236">236</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -877,7 +953,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the message type is registered, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00222">222</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00227">227</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -916,7 +992,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00612">612</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00556">556</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -955,95 +1031,63 @@ template&lt;MessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00602">602</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00546">546</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aaa44e164506d9b475291740f1b9431a2" name="aaa44e164506d9b475291740f1b9431a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa44e164506d9b475291740f1b9431a2">&#9670;&#160;</a></span>MergeLocalMessages() <span class="overload">[1/2]</span></h2>
+<a id="aad3f9bcc4f28485ab60a3af8d5c28bf3" name="aad3f9bcc4f28485ab60a3af8d5c28bf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad3f9bcc4f28485ab60a3af8d5c28bf3">&#9670;&#160;</a></span>MergeLocalMessages() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename OtherAllocator&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void helios::ecs::MessageManager::MergeLocalMessages </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a>&lt; OtherAllocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>local</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>local</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Merges messages from a local <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> into the current queue. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe.</dd></dl>
-<p>Assigns monotonic ids, then flushes the per-system write buffer into the global message state. Typically called after a system finishes execution. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">OtherAllocator</td><td>Allocator type used by the local <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Assigns monotonic ids, then flushes the per-system write buffer into the global message state. Typically called after a system finishes execution. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">local</td><td><a class="el" href="classhelios_1_1ecs_1_1Local.html" title="Read-only or mutable access to a system-local resource.">Local</a> message queue to merge from (will be left in a valid but empty state for the rvalue overload) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00620">620</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00132">132</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a2e281a5b825d07140bf46f4486877bd1" name="a2e281a5b825d07140bf46f4486877bd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e281a5b825d07140bf46f4486877bd1">&#9670;&#160;</a></span>MergeLocalMessages() <span class="overload">[2/2]</span></h2>
+<a id="a47ca150c4bf5ef7fdf939966907f7b9d" name="a47ca150c4bf5ef7fdf939966907f7b9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47ca150c4bf5ef7fdf939966907f7b9d">&#9670;&#160;</a></span>MergeLocalMessages() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename OtherAllocator&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void helios::ecs::MessageManager::MergeLocalMessages </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a>&lt; OtherAllocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>local</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html">MessageQueue</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>local</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Merges messages from a local <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> into the current queue. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe.</dd></dl>
-<p>Rvalue overload that consumes the local queue. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">OtherAllocator</td><td>Allocator type used by the local <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageQueue.html" title="Queue for managing multiple message types using type-erased contiguous storage.">MessageQueue</a></span> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Rvalue overload that consumes the local queue. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">local</td><td><a class="el" href="classhelios_1_1ecs_1_1Local.html" title="Read-only or mutable access to a system-local resource.">Local</a> message queue to merge from (will be left in a valid but empty state) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00632">632</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00142">142</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -1082,7 +1126,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Next id value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00663">663</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00583">583</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1121,7 +1165,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to metadata, or nullptr if not registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00339">339</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00344">344</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1160,7 +1204,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Oldest retained id, or the next id when empty </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00669">669</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00589">589</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1249,7 +1293,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Span of message ids aligned with <span class="tt"><a class="el" href="#af4fe5819687564b40403d2cb871eed43" title="Gets a const span of messages of a specific type from the previous queue.">PreviousMessages</a>&lt;T&gt;()</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00285">285</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00290">290</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1288,7 +1332,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Span of const messages </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00262">262</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00267">267</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1319,7 +1363,7 @@ template&lt;MessageTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to previous queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00376">376</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00389">389</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1350,7 +1394,7 @@ template&lt;MessageTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to previous queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00385">385</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00398">398</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1390,7 +1434,7 @@ requires (sizeof...(Messages) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00512">512</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00456">456</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1421,7 +1465,7 @@ requires (sizeof...(Messages) &gt; 0)</div>
 <dl class="section note"><dt>Note</dt><dd>Thread safe for concurrent reads. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Count of registered messages </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00348">348</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00353">353</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1466,7 +1510,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unread retained count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00683">683</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00603">603</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1488,46 +1532,30 @@ template&lt;MessageTrait T&gt; </div>
 <p>Updates message lifecycle without any consumed message processing. </p>
 <p>Convenience overload when no systems have consumed any messages. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00031">31</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00046">46</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ac799360fb072a2c53146d1d0f904499d" name="ac799360fb072a2c53146d1d0f904499d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac799360fb072a2c53146d1d0f904499d">&#9670;&#160;</a></span>Update() <span class="overload">[2/2]</span></h2>
+<a id="a2e0db24b682b664c3dfc0d4c7ac20c66" name="a2e0db24b682b664c3dfc0d4c7ac20c66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e0db24b682b664c3dfc0d4c7ac20c66">&#9670;&#160;</a></span>Update() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void helios::ecs::MessageManager::Update </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>consumed_registry</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>consumed_registry</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Updates message lifecycle — applies consumed messages, then ages buffers. </p>
 <p>Performs the following steps:</p><ol type="1">
 <li>Removes consumed messages from previous and current queues.</li>
 <li>Merges current queue into previous queue (does <b>not</b> clear automatic previous messages — call the no-arg <span class="tt"><a class="el" href="#a6ce0b615575ce07f514d20cb1fad7edd" title="Updates message lifecycle without any consumed message processing.">Update()</a></span> for full frame aging).</li>
-<li>Clears current messages in place (type registrations retained). <dl class="section note"><dt>Note</dt><dd>Not thread-safe. Prefer <span class="tt"><a class="el" href="#a3e43aaa2ab06d847c2d81c0b24c4ac42" title="Applies consumed message ids to both queues, removing them in-place.">ApplyConsumed</a></span> + <span class="tt"><a class="el" href="#aaa44e164506d9b475291740f1b9431a2" title="Merges messages from a local MessageQueue into the current queue.">MergeLocalMessages</a></span> from per-system deferred work; use no-arg <span class="tt"><a class="el" href="#a6ce0b615575ce07f514d20cb1fad7edd" title="Updates message lifecycle without any consumed message processing.">Update()</a></span> once per frame. </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Alloc</td><td>Allocator type for the consumed registry </td></tr>
-  </table>
-  </dd>
-</dl>
+<li>Clears current messages in place (type registrations retained). <dl class="section note"><dt>Note</dt><dd>Not thread-safe. Prefer <span class="tt"><a class="el" href="#a2b677fdd051b709310229c7d26f5179f" title="Applies consumed message ids to both queues, removing them in-place.">ApplyConsumed</a></span> + <span class="tt"><a class="el" href="#aad3f9bcc4f28485ab60a3af8d5c28bf3" title="Merges messages from a local MessageQueue into the current queue.">MergeLocalMessages</a></span> from per-system deferred work; use no-arg <span class="tt"><a class="el" href="#a6ce0b615575ce07f514d20cb1fad7edd" title="Updates message lifecycle without any consumed message processing.">Update()</a></span> once per frame. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">consumed_registry</td><td>Const References to per-system consumed registry. The caller is responsible for clearing it after this call. </td></tr>
@@ -1537,7 +1565,7 @@ template&lt;typename Alloc&gt; </div>
 </li>
 </ol>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00440">440</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8cpp_source.html#l00064">64</a> of file <a class="el" href="message_2manager_8cpp_source.html">manager.cpp</a>.</p>
 
 </div>
 </div>
@@ -1583,7 +1611,7 @@ template&lt;MessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Assigned message id </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00556">556</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00500">500</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1628,7 +1656,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00571">571</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00515">515</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1674,7 +1702,7 @@ requires AsyncMessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00594">594</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00538">538</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1720,7 +1748,7 @@ requires MessageTrait&lt;std::ranges::range_value_t&lt;R&gt;&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00581">581</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="message_2manager_8hpp_source.html#l00525">525</a> of file <a class="el" href="message_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>

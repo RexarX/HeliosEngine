@@ -10,6 +10,7 @@ var axis_8hpp =
     [ "helios::input::ApplyRadialDeadzone", "namespacehelios_1_1input.html#a99d0fe4a48013a214c5a301b55e3ce6e", null ],
     [ "helios::input::operator<<", "namespacehelios_1_1input.html#a74c5364a9551096e3271ce1738bbce7a", null ],
     [ "helios::input::RemapTrigger", "namespacehelios_1_1input.html#aedc06b09ccc58f41e68529939f032110", null ],
+    [ "helios::input::TempToString", "namespacehelios_1_1input.html#a24901c0dad96837da88934be626f0955", null ],
     [ "helios::input::ToString", "namespacehelios_1_1input.html#af5eb896115d99bc713036078025fcb83", null ],
-    [ "helios::input::ToString", "namespacehelios_1_1input.html#af409952ea3057ee73d9f824e507a74da", null ]
+    [ "helios::input::ToString", "namespacehelios_1_1input.html#a248b95c8be900dce1b077f2b85230ca3", null ]
 ];

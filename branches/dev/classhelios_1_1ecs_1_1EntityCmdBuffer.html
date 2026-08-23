@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: helios::ecs::EntityCmdBuffer&lt; Allocator &gt; Class Template Reference</title>
+    <title>Helios Engine: helios::ecs::EntityCmdBuffer Class Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classhelios_1_1ecs_1_1EntityCmdBuffer-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">helios::ecs::EntityCmdBuffer&lt; Allocator &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">helios::ecs::EntityCmdBuffer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -186,143 +186,111 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a803044778fed4fc405449961cf9bb00e" id="r_a803044778fed4fc405449961cf9bb00e"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a803044778fed4fc405449961cf9bb00e">size_type</a> = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt;Allocator&gt;::size_type</td></tr>
-<tr class="memitem:ae580895f79e51cbb583d82581a21662f" id="r_ae580895f79e51cbb583d82581a21662f"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae580895f79e51cbb583d82581a21662f">allocator_type</a> = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt;Allocator&gt;::allocator_type</td></tr>
+<tr class="memitem:a96f9c08f0752ccce2d30a7f6d65b39bb" id="r_a96f9c08f0752ccce2d30a7f6d65b39bb"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a96f9c08f0752ccce2d30a7f6d65b39bb">size_type</a> = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html#a91f1fe0f07f358544f785c9a89793142">CmdQueue::size_type</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acfeb5ad92de3b850cf25c32b4a8ee2e0" id="r_acfeb5ad92de3b850cf25c32b4a8ee2e0"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">EntityCmdBuffer</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;queue, <a class="el" href="#ae580895f79e51cbb583d82581a21662f">allocator_type</a> allocator=<a class="el" href="#ae580895f79e51cbb583d82581a21662f">allocator_type</a>{})</td></tr>
-<tr class="memdesc:acfeb5ad92de3b850cf25c32b4a8ee2e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs aa entity command buffer with a custom allocator.  <br /></td></tr>
-<tr class="memitem:a7bc3a2d67c556f741667fe4b2bd11c1b" id="r_a7bc3a2d67c556f741667fe4b2bd11c1b"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7bc3a2d67c556f741667fe4b2bd11c1b">EntityCmdBuffer</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;queue, std::pmr::memory_resource *resource)</td></tr>
-<tr class="memdesc:a7bc3a2d67c556f741667fe4b2bd11c1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an entity command buffer from a PMR memory resource.  <br /></td></tr>
-<tr class="memitem:adef6d20a5cb44c20116b3fd37bcd1118" id="r_adef6d20a5cb44c20116b3fd37bcd1118"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adef6d20a5cb44c20116b3fd37bcd1118">EntityCmdBuffer</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;queue, std::nullptr_t)=delete</td></tr>
-<tr class="memitem:abeb6f372e6c3878d05c9f9eb0f4954bf" id="r_abeb6f372e6c3878d05c9f9eb0f4954bf"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#abeb6f372e6c3878d05c9f9eb0f4954bf">EntityCmdBuffer</a> (const EntityCmdBuffer &amp;)=delete</td></tr>
-<tr class="memitem:a733d1c96ad4a43580e79b70bb6b37bbe" id="r_a733d1c96ad4a43580e79b70bb6b37bbe"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a733d1c96ad4a43580e79b70bb6b37bbe">EntityCmdBuffer</a> (EntityCmdBuffer &amp;&amp;)=delete</td></tr>
-<tr class="memitem:ae1d1748be411a64d30b351c3b0d289be" id="r_ae1d1748be411a64d30b351c3b0d289be"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae1d1748be411a64d30b351c3b0d289be">~EntityCmdBuffer</a> ()</td></tr>
-<tr class="memitem:a8917312604d92bc7630f47cb712605dc" id="r_a8917312604d92bc7630f47cb712605dc"><td class="memItemLeft"><a class="el" href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">EntityCmdBuffer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8917312604d92bc7630f47cb712605dc">operator=</a> (const <a class="el" href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">EntityCmdBuffer</a> &amp;)=delete</td></tr>
-<tr class="memitem:af0f520347c5effcbaccac20a6991d85e" id="r_af0f520347c5effcbaccac20a6991d85e"><td class="memItemLeft"><a class="el" href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">EntityCmdBuffer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af0f520347c5effcbaccac20a6991d85e">operator=</a> (<a class="el" href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">EntityCmdBuffer</a> &amp;&amp;)=delete</td></tr>
-<tr class="memitem:ade70c3f2610fc43d50b3c43a031c1db7" id="r_ade70c3f2610fc43d50b3c43a031c1db7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ade70c3f2610fc43d50b3c43a031c1db7">Clear</a> () noexcept</td></tr>
-<tr class="memdesc:ade70c3f2610fc43d50b3c43a031c1db7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all pending commands from the buffer.  <br /></td></tr>
-<tr class="memitem:add1eb1c7bb6e7cbfd7ec35314833b4d4" id="r_add1eb1c7bb6e7cbfd7ec35314833b4d4"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#add1eb1c7bb6e7cbfd7ec35314833b4d4">Reserve</a> (<a class="el" href="#a803044778fed4fc405449961cf9bb00e">size_type</a> capacity)</td></tr>
-<tr class="memdesc:add1eb1c7bb6e7cbfd7ec35314833b4d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves capacity for commands.  <br /></td></tr>
-<tr class="memitem:aa3f61cbbe4f51fdc8533782ba3504bf6" id="r_aa3f61cbbe4f51fdc8533782ba3504bf6"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aa3f61cbbe4f51fdc8533782ba3504bf6">Destroy</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:aa3f61cbbe4f51fdc8533782ba3504bf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to destroy entity and removes it from the world.  <br /></td></tr>
-<tr class="memitem:a956ea90ad0960989c7ad5fe689982511" id="r_a956ea90ad0960989c7ad5fe689982511"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a956ea90ad0960989c7ad5fe689982511">TryDestroy</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a956ea90ad0960989c7ad5fe689982511"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try destroy entity if it exists in the world.  <br /></td></tr>
-<tr class="memitem:a1e9f63a74267618291aae7c9db5ea8db" id="r_a1e9f63a74267618291aae7c9db5ea8db"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
+<tr class="memitem:a31f9ce9a254c06ff83c2b053bbe4ecec" id="r_a31f9ce9a254c06ff83c2b053bbe4ecec"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a31f9ce9a254c06ff83c2b053bbe4ecec">EntityCmdBuffer</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a> &amp;queue, std::pmr::memory_resource *resource=std::pmr::get_default_resource())</td></tr>
+<tr class="memdesc:a31f9ce9a254c06ff83c2b053bbe4ecec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an entity command buffer.  <br /></td></tr>
+<tr class="memitem:a7c46dba59841b37e05f1acba4cf557af" id="r_a7c46dba59841b37e05f1acba4cf557af"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7c46dba59841b37e05f1acba4cf557af">EntityCmdBuffer</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a> &amp;queue, std::nullptr_t)=delete</td></tr>
+<tr class="memitem:a5b7130ff786b35f36f1ad372375d755d" id="r_a5b7130ff786b35f36f1ad372375d755d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5b7130ff786b35f36f1ad372375d755d">EntityCmdBuffer</a> (const EntityCmdBuffer &amp;)=delete</td></tr>
+<tr class="memitem:aa1c0f3de215d8ff2d2f4ea45cd17277a" id="r_aa1c0f3de215d8ff2d2f4ea45cd17277a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa1c0f3de215d8ff2d2f4ea45cd17277a">EntityCmdBuffer</a> (EntityCmdBuffer &amp;&amp;)=delete</td></tr>
+<tr class="memitem:a00cb4e2f9008a1ddf0d29e516c27b44e" id="r_a00cb4e2f9008a1ddf0d29e516c27b44e"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a00cb4e2f9008a1ddf0d29e516c27b44e">~EntityCmdBuffer</a> ()</td></tr>
+<tr class="memitem:a7883d912c379a43ef3d4de444a6ee9d5" id="r_a7883d912c379a43ef3d4de444a6ee9d5"><td class="memItemLeft"><a class="el" href="#a31f9ce9a254c06ff83c2b053bbe4ecec">EntityCmdBuffer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7883d912c379a43ef3d4de444a6ee9d5">operator=</a> (const <a class="el" href="#a31f9ce9a254c06ff83c2b053bbe4ecec">EntityCmdBuffer</a> &amp;)=delete</td></tr>
+<tr class="memitem:a07b66598d37ae893ae8a874dcaab5128" id="r_a07b66598d37ae893ae8a874dcaab5128"><td class="memItemLeft"><a class="el" href="#a31f9ce9a254c06ff83c2b053bbe4ecec">EntityCmdBuffer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a07b66598d37ae893ae8a874dcaab5128">operator=</a> (<a class="el" href="#a31f9ce9a254c06ff83c2b053bbe4ecec">EntityCmdBuffer</a> &amp;&amp;)=delete</td></tr>
+<tr class="memitem:aa7201a39b6147e8ba1f90906349d5083" id="r_aa7201a39b6147e8ba1f90906349d5083"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa7201a39b6147e8ba1f90906349d5083">Clear</a> () noexcept</td></tr>
+<tr class="memdesc:aa7201a39b6147e8ba1f90906349d5083"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all pending commands from the buffer.  <br /></td></tr>
+<tr class="memitem:a5aef2a8c1ba1e1ab4305baaed22bf6dc" id="r_a5aef2a8c1ba1e1ab4305baaed22bf6dc"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a5aef2a8c1ba1e1ab4305baaed22bf6dc">Reserve</a> (<a class="el" href="#a96f9c08f0752ccce2d30a7f6d65b39bb">size_type</a> capacity)</td></tr>
+<tr class="memdesc:a5aef2a8c1ba1e1ab4305baaed22bf6dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves capacity for commands.  <br /></td></tr>
+<tr class="memitem:a38b4a4353860b543b495b1c92d273454" id="r_a38b4a4353860b543b495b1c92d273454"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a38b4a4353860b543b495b1c92d273454">Destroy</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a38b4a4353860b543b495b1c92d273454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to destroy entity and removes it from the world.  <br /></td></tr>
+<tr class="memitem:a40573bcc5afd602e5f46b9eba8f285fa" id="r_a40573bcc5afd602e5f46b9eba8f285fa"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a40573bcc5afd602e5f46b9eba8f285fa">TryDestroy</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a40573bcc5afd602e5f46b9eba8f285fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try destroy entity if it exists in the world.  <br /></td></tr>
+<tr class="memitem:afd6be1ca8f1a36afb4087c1723038f56" id="r_afd6be1ca8f1a36afb4087c1723038f56"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
-<tr class="memitem:a1e9f63a74267618291aae7c9db5ea8db template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a1e9f63a74267618291aae7c9db5ea8db">AddComponents</a> (this auto &amp;&amp;self, Ts &amp;&amp;... components) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a1e9f63a74267618291aae7c9db5ea8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to add components to the entity.  <br /></td></tr>
-<tr class="memitem:ab9f6fd69ecab4b2d399e5f199539bdd2" id="r_ab9f6fd69ecab4b2d399e5f199539bdd2"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
-<tr class="memitem:ab9f6fd69ecab4b2d399e5f199539bdd2 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ab9f6fd69ecab4b2d399e5f199539bdd2">AddBundle</a> (this auto &amp;&amp;self, B &amp;&amp;bundle) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:ab9f6fd69ecab4b2d399e5f199539bdd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to add a component bundle to the entity.  <br /></td></tr>
-<tr class="memitem:adda9313b02eca04f00ac7d86df52ab20" id="r_adda9313b02eca04f00ac7d86df52ab20"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
+<tr class="memitem:afd6be1ca8f1a36afb4087c1723038f56 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#afd6be1ca8f1a36afb4087c1723038f56">AddComponents</a> (this auto &amp;&amp;self, Ts &amp;&amp;... components) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:afd6be1ca8f1a36afb4087c1723038f56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to add components to the entity.  <br /></td></tr>
+<tr class="memitem:ad6e66dc2f6f05c0c104da71b8eb7c772" id="r_ad6e66dc2f6f05c0c104da71b8eb7c772"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:ad6e66dc2f6f05c0c104da71b8eb7c772 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ad6e66dc2f6f05c0c104da71b8eb7c772">AddBundle</a> (this auto &amp;&amp;self, B &amp;&amp;bundle) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:ad6e66dc2f6f05c0c104da71b8eb7c772"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to add a component bundle to the entity.  <br /></td></tr>
+<tr class="memitem:aea4377cf162f8ba14a7819dd25a6e977" id="r_aea4377cf162f8ba14a7819dd25a6e977"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
-<tr class="memitem:adda9313b02eca04f00ac7d86df52ab20 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#adda9313b02eca04f00ac7d86df52ab20">TryAddComponents</a> (this auto &amp;&amp;self, Ts &amp;&amp;... components) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:adda9313b02eca04f00ac7d86df52ab20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to add components to the entity if they don't exist.  <br /></td></tr>
-<tr class="memitem:a58b682799c5e98e28a41048aab24ca60" id="r_a58b682799c5e98e28a41048aab24ca60"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
-<tr class="memitem:a58b682799c5e98e28a41048aab24ca60 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a58b682799c5e98e28a41048aab24ca60">TryAddBundle</a> (this auto &amp;&amp;self, B &amp;&amp;bundle) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a58b682799c5e98e28a41048aab24ca60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to add missing components from a bundle.  <br /></td></tr>
-<tr class="memitem:ab4058d428a1da141c017e3a4918f19c3" id="r_ab4058d428a1da141c017e3a4918f19c3"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
+<tr class="memitem:aea4377cf162f8ba14a7819dd25a6e977 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aea4377cf162f8ba14a7819dd25a6e977">TryAddComponents</a> (this auto &amp;&amp;self, Ts &amp;&amp;... components) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:aea4377cf162f8ba14a7819dd25a6e977"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to add components to the entity if they don't exist.  <br /></td></tr>
+<tr class="memitem:a5cda2d38f1bcb1c972d30e0cb131b063" id="r_a5cda2d38f1bcb1c972d30e0cb131b063"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:a5cda2d38f1bcb1c972d30e0cb131b063 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a5cda2d38f1bcb1c972d30e0cb131b063">TryAddBundle</a> (this auto &amp;&amp;self, B &amp;&amp;bundle) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a5cda2d38f1bcb1c972d30e0cb131b063"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to add missing components from a bundle.  <br /></td></tr>
+<tr class="memitem:a983c41d54c8794aedb14914596ad0577" id="r_a983c41d54c8794aedb14914596ad0577"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
-<tr class="memitem:ab4058d428a1da141c017e3a4918f19c3 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ab4058d428a1da141c017e3a4918f19c3">RemoveComponents</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:ab4058d428a1da141c017e3a4918f19c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove components from the entity.  <br /></td></tr>
-<tr class="memitem:ac1190e3587b2943bf56a3c67dca27c86" id="r_ac1190e3587b2943bf56a3c67dca27c86"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
-<tr class="memitem:ac1190e3587b2943bf56a3c67dca27c86 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ac1190e3587b2943bf56a3c67dca27c86">RemoveBundle</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:ac1190e3587b2943bf56a3c67dca27c86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove a component bundle from the entity.  <br /></td></tr>
-<tr class="memitem:af6c0dce2a34e5024b42b51e024f85e1c" id="r_af6c0dce2a34e5024b42b51e024f85e1c"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
+<tr class="memitem:a983c41d54c8794aedb14914596ad0577 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a983c41d54c8794aedb14914596ad0577">RemoveComponents</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a983c41d54c8794aedb14914596ad0577"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove components from the entity.  <br /></td></tr>
+<tr class="memitem:a9cc073dbe2d8d12305f4a0806cc6f423" id="r_a9cc073dbe2d8d12305f4a0806cc6f423"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:a9cc073dbe2d8d12305f4a0806cc6f423 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a9cc073dbe2d8d12305f4a0806cc6f423">RemoveBundle</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a9cc073dbe2d8d12305f4a0806cc6f423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove a component bundle from the entity.  <br /></td></tr>
+<tr class="memitem:af9b42e9fd8550a767333b76cac463ac3" id="r_af9b42e9fd8550a767333b76cac463ac3"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
-<tr class="memitem:af6c0dce2a34e5024b42b51e024f85e1c template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#af6c0dce2a34e5024b42b51e024f85e1c">TryRemoveComponents</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:af6c0dce2a34e5024b42b51e024f85e1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to remove components from the entity if they exist.  <br /></td></tr>
-<tr class="memitem:a642acfa1b925c16cdf4eaed08ef828e6" id="r_a642acfa1b925c16cdf4eaed08ef828e6"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
-<tr class="memitem:a642acfa1b925c16cdf4eaed08ef828e6 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a642acfa1b925c16cdf4eaed08ef828e6">TryRemoveBundle</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a642acfa1b925c16cdf4eaed08ef828e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to remove present components represented by a bundle.  <br /></td></tr>
-<tr class="memitem:a4ec6f5085ea24ec3337492e451448be2" id="r_a4ec6f5085ea24ec3337492e451448be2"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a4ec6f5085ea24ec3337492e451448be2">ClearComponents</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a4ec6f5085ea24ec3337492e451448be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove all components from the entity.  <br /></td></tr>
-<tr class="memitem:a453db6557b89ea1cba9dfcbde8796643" id="r_a453db6557b89ea1cba9dfcbde8796643"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a453db6557b89ea1cba9dfcbde8796643">Empty</a> () const noexcept</td></tr>
-<tr class="memdesc:a453db6557b89ea1cba9dfcbde8796643"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the buffer is empty.  <br /></td></tr>
-<tr class="memitem:a51874c63ad30191a06b0604d28ace188" id="r_a51874c63ad30191a06b0604d28ace188"><td class="memItemLeft">constexpr <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight"><a class="el" href="#a51874c63ad30191a06b0604d28ace188">GetEntity</a> () const noexcept</td></tr>
-<tr class="memdesc:a51874c63ad30191a06b0604d28ace188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the entity associated with this buffer.  <br /></td></tr>
-<tr class="memitem:a0a65ec37ab1945203b4ac5be60340734" id="r_a0a65ec37ab1945203b4ac5be60340734"><td class="memItemLeft">constexpr <a class="el" href="#a803044778fed4fc405449961cf9bb00e">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0a65ec37ab1945203b4ac5be60340734">Size</a> () const noexcept</td></tr>
-<tr class="memdesc:a0a65ec37ab1945203b4ac5be60340734"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of commands in the buffer.  <br /></td></tr>
-<tr class="memitem:ae8c4fe38ba6035bd4de69fd2acb576e0" id="r_ae8c4fe38ba6035bd4de69fd2acb576e0"><td class="memItemLeft">constexpr <a class="el" href="#ae580895f79e51cbb583d82581a21662f">allocator_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae8c4fe38ba6035bd4de69fd2acb576e0">GetAllocator</a> () const noexcept(std::is_nothrow_copy_constructible_v&lt; <a class="el" href="#ae580895f79e51cbb583d82581a21662f">allocator_type</a> &gt;)</td></tr>
-<tr class="memdesc:ae8c4fe38ba6035bd4de69fd2acb576e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the allocator used by the command storage.  <br /></td></tr>
+<tr class="memitem:af9b42e9fd8550a767333b76cac463ac3 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#af9b42e9fd8550a767333b76cac463ac3">TryRemoveComponents</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:af9b42e9fd8550a767333b76cac463ac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to remove components from the entity if they exist.  <br /></td></tr>
+<tr class="memitem:ad4eeb947f0d2eeac51bd0584b640388e" id="r_ad4eeb947f0d2eeac51bd0584b640388e"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:ad4eeb947f0d2eeac51bd0584b640388e template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ad4eeb947f0d2eeac51bd0584b640388e">TryRemoveBundle</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:ad4eeb947f0d2eeac51bd0584b640388e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to remove present components represented by a bundle.  <br /></td></tr>
+<tr class="memitem:ad2dfed206a8dd8f8f88f26263ae47c04" id="r_ad2dfed206a8dd8f8f88f26263ae47c04"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ad2dfed206a8dd8f8f88f26263ae47c04">ClearComponents</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:ad2dfed206a8dd8f8f88f26263ae47c04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove all components from the entity.  <br /></td></tr>
+<tr class="memitem:a08ee23746bfa2ec3ae4b2ff48349733e" id="r_a08ee23746bfa2ec3ae4b2ff48349733e"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a08ee23746bfa2ec3ae4b2ff48349733e">Empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a08ee23746bfa2ec3ae4b2ff48349733e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the buffer is empty.  <br /></td></tr>
+<tr class="memitem:ab04859e9ff65dadb8bb76f68d99e738e" id="r_ab04859e9ff65dadb8bb76f68d99e738e"><td class="memItemLeft">constexpr <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab04859e9ff65dadb8bb76f68d99e738e">GetEntity</a> () const noexcept</td></tr>
+<tr class="memdesc:ab04859e9ff65dadb8bb76f68d99e738e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the entity associated with this buffer.  <br /></td></tr>
+<tr class="memitem:acbc91b914b90cdb6d98f27ce8906e238" id="r_acbc91b914b90cdb6d98f27ce8906e238"><td class="memItemLeft">constexpr <a class="el" href="#a96f9c08f0752ccce2d30a7f6d65b39bb">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#acbc91b914b90cdb6d98f27ce8906e238">Size</a> () const noexcept</td></tr>
+<tr class="memdesc:acbc91b914b90cdb6d98f27ce8906e238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of commands in the buffer.  <br /></td></tr>
+<tr class="memitem:aa39d726949518352ec43f2f1807e01d2" id="r_aa39d726949518352ec43f2f1807e01d2"><td class="memItemLeft">constexpr std::pmr::memory_resource *&#160;</td><td class="memItemRight"><a class="el" href="#aa39d726949518352ec43f2f1807e01d2">GetMemoryResource</a> () const noexcept</td></tr>
+<tr class="memdesc:aa39d726949518352ec43f2f1807e01d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the memory resource used for command storage.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt;<br />
-class helios::ecs::EntityCmdBuffer&lt; Allocator &gt;</div><p>Command buffer for deferred entity operations. </p>
+<div class="textblock"><p>Command buffer for deferred entity operations. </p>
 <p>Collects commands and then pushes them into a queue. <a class="el" href="classhelios_1_1ecs_1_1Commands.html" title="Thin wrapper over command queue and world for deferred ECS operations.">Commands</a> are enqueued in the order they were added, ensuring predictable behavior. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Allocator</td><td>Allocator type for command storage (default: <span class="tt">std::allocator&lt;std::byte&gt;</span>) </td></tr>
-  </table>
-  </dd>
-</dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00030">30</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00024">24</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
-<a id="ae580895f79e51cbb583d82581a21662f" name="ae580895f79e51cbb583d82581a21662f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae580895f79e51cbb583d82581a21662f">&#9670;&#160;</a></span>allocator_type</h2>
+<a id="a96f9c08f0752ccce2d30a7f6d65b39bb" name="a96f9c08f0752ccce2d30a7f6d65b39bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96f9c08f0752ccce2d30a7f6d65b39bb">&#9670;&#160;</a></span>size_type</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::allocator_type = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt;Allocator&gt;::allocator_type</td>
+          <td class="memname">using <a class="el" href="#a96f9c08f0752ccce2d30a7f6d65b39bb">helios::ecs::EntityCmdBuffer::size_type</a> = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html#a91f1fe0f07f358544f785c9a89793142">CmdQueue::size_type</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00033">33</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a803044778fed4fc405449961cf9bb00e" name="a803044778fed4fc405449961cf9bb00e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a803044778fed4fc405449961cf9bb00e">&#9670;&#160;</a></span>size_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::size_type = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt;Allocator&gt;::size_type</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00032">32</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00026">26</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="acfeb5ad92de3b850cf25c32b4a8ee2e0" name="acfeb5ad92de3b850cf25c32b4a8ee2e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">&#9670;&#160;</a></span>EntityCmdBuffer() <span class="overload">[1/5]</span></h2>
+<a id="a31f9ce9a254c06ff83c2b053bbe4ecec" name="a31f9ce9a254c06ff83c2b053bbe4ecec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31f9ce9a254c06ff83c2b053bbe4ecec">&#9670;&#160;</a></span>EntityCmdBuffer() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::EntityCmdBuffer </td>
+          <td class="memname">helios::ecs::EntityCmdBuffer::EntityCmdBuffer </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#ae580895f79e51cbb583d82581a21662f">allocator_type</a></td>          <td class="paramname"><span class="paramname"><em>allocator</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#ae580895f79e51cbb583d82581a21662f">allocator_type</a>{}</span>&#160;)</td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::pmr::get_default_resource()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -332,89 +300,39 @@ template&lt;typename Allocator&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs aa entity command buffer with a custom allocator. </p>
+<p>Constructs an entity command buffer. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> associated with this buffer </td></tr>
     <tr><td class="paramname">queue</td><td>Queue to push commands into </td></tr>
-    <tr><td class="paramname">allocator</td><td>Allocator instance </td></tr>
+    <tr><td class="paramname">resource</td><td>Memory resource used for command storage (default: default memory resource) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00261">261</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00241">241</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7bc3a2d67c556f741667fe4b2bd11c1b" name="a7bc3a2d67c556f741667fe4b2bd11c1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bc3a2d67c556f741667fe4b2bd11c1b">&#9670;&#160;</a></span>EntityCmdBuffer() <span class="overload">[2/5]</span></h2>
+<a id="a7c46dba59841b37e05f1acba4cf557af" name="a7c46dba59841b37e05f1acba4cf557af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c46dba59841b37e05f1acba4cf557af">&#9670;&#160;</a></span>EntityCmdBuffer() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::EntityCmdBuffer </td>
+          <td class="memname">helios::ecs::EntityCmdBuffer::EntityCmdBuffer </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs an entity command buffer from a PMR memory resource. </p>
-<p>Enabled only when <span class="tt"><a class="el" href="#ae580895f79e51cbb583d82581a21662f">allocator_type</a></span> is constructible from <span class="tt">std::pmr::memory_resource*</span>. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> associated with this buffer </td></tr>
-    <tr><td class="paramname">queue</td><td>Queue to push commands into </td></tr>
-    <tr><td class="paramname">resource</td><td>Memory resource used to construct allocator </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00053">53</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
-
-</div>
-</div>
-<a id="adef6d20a5cb44c20116b3fd37bcd1118" name="adef6d20a5cb44c20116b3fd37bcd1118"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adef6d20a5cb44c20116b3fd37bcd1118">&#9670;&#160;</a></span>EntityCmdBuffer() <span class="overload">[3/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::EntityCmdBuffer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -431,21 +349,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="abeb6f372e6c3878d05c9f9eb0f4954bf" name="abeb6f372e6c3878d05c9f9eb0f4954bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abeb6f372e6c3878d05c9f9eb0f4954bf">&#9670;&#160;</a></span>EntityCmdBuffer() <span class="overload">[4/5]</span></h2>
+<a id="a5b7130ff786b35f36f1ad372375d755d" name="a5b7130ff786b35f36f1ad372375d755d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b7130ff786b35f36f1ad372375d755d">&#9670;&#160;</a></span>EntityCmdBuffer() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::EntityCmdBuffer </td>
+          <td class="memname">helios::ecs::EntityCmdBuffer::EntityCmdBuffer </td>
           <td>(</td>
-          <td class="paramtype">const EntityCmdBuffer&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const EntityCmdBuffer &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -458,21 +374,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a733d1c96ad4a43580e79b70bb6b37bbe" name="a733d1c96ad4a43580e79b70bb6b37bbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a733d1c96ad4a43580e79b70bb6b37bbe">&#9670;&#160;</a></span>EntityCmdBuffer() <span class="overload">[5/5]</span></h2>
+<a id="aa1c0f3de215d8ff2d2f4ea45cd17277a" name="aa1c0f3de215d8ff2d2f4ea45cd17277a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1c0f3de215d8ff2d2f4ea45cd17277a">&#9670;&#160;</a></span>EntityCmdBuffer() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::EntityCmdBuffer </td>
+          <td class="memname">helios::ecs::EntityCmdBuffer::EntityCmdBuffer </td>
           <td>(</td>
-          <td class="paramtype">EntityCmdBuffer&lt; Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">EntityCmdBuffer &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -485,19 +399,17 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="ae1d1748be411a64d30b351c3b0d289be" name="ae1d1748be411a64d30b351c3b0d289be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1d1748be411a64d30b351c3b0d289be">&#9670;&#160;</a></span>~EntityCmdBuffer()</h2>
+<a id="a00cb4e2f9008a1ddf0d29e516c27b44e" name="a00cb4e2f9008a1ddf0d29e516c27b44e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00cb4e2f9008a1ddf0d29e516c27b44e">&#9670;&#160;</a></span>~EntityCmdBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::~<a class="el" href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">EntityCmdBuffer</a> </td>
+          <td class="memname">helios::ecs::EntityCmdBuffer::~EntityCmdBuffer </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -505,23 +417,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00063">63</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00044">44</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="ab9f6fd69ecab4b2d399e5f199539bdd2" name="ab9f6fd69ecab4b2d399e5f199539bdd2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9f6fd69ecab4b2d399e5f199539bdd2">&#9670;&#160;</a></span>AddBundle()</h2>
+<a id="ad6e66dc2f6f05c0c104da71b8eb7c772" name="ad6e66dc2f6f05c0c104da71b8eb7c772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6e66dc2f6f05c0c104da71b8eb7c772">&#9670;&#160;</a></span>AddBundle()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <div class="memtemplate">
 template&lt;ComponentBundleTrait B&gt; </div>
 <table class="mlabels">
@@ -529,7 +439,7 @@ template&lt;ComponentBundleTrait B&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::AddBundle </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::AddBundle </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
         </tr>
@@ -566,18 +476,15 @@ template&lt;ComponentBundleTrait B&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00294">294</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00269">269</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a1e9f63a74267618291aae7c9db5ea8db" name="a1e9f63a74267618291aae7c9db5ea8db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e9f63a74267618291aae7c9db5ea8db">&#9670;&#160;</a></span>AddComponents()</h2>
+<a id="afd6be1ca8f1a36afb4087c1723038f56" name="afd6be1ca8f1a36afb4087c1723038f56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd6be1ca8f1a36afb4087c1723038f56">&#9670;&#160;</a></span>AddComponents()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; <br />
-requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 <div class="memtemplate">
 template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
@@ -586,7 +493,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::AddComponents </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::AddComponents </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
         </tr>
@@ -623,23 +530,21 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00284">284</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00261">261</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ade70c3f2610fc43d50b3c43a031c1db7" name="ade70c3f2610fc43d50b3c43a031c1db7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade70c3f2610fc43d50b3c43a031c1db7">&#9670;&#160;</a></span>Clear()</h2>
+<a id="aa7201a39b6147e8ba1f90906349d5083" name="aa7201a39b6147e8ba1f90906349d5083"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7201a39b6147e8ba1f90906349d5083">&#9670;&#160;</a></span>Clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::Clear </td>
+          <td class="memname">void helios::ecs::EntityCmdBuffer::Clear </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -655,23 +560,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Clears all pending commands from the buffer. </p>
 <p>Removes all commands currently in the buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00072">72</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00053">53</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a4ec6f5085ea24ec3337492e451448be2" name="a4ec6f5085ea24ec3337492e451448be2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ec6f5085ea24ec3337492e451448be2">&#9670;&#160;</a></span>ClearComponents()</h2>
+<a id="ad2dfed206a8dd8f8f88f26263ae47c04" name="ad2dfed206a8dd8f8f88f26263ae47c04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2dfed206a8dd8f8f88f26263ae47c04">&#9670;&#160;</a></span>ClearComponents()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::ClearComponents </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::ClearComponents </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
           <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
@@ -692,23 +595,21 @@ template&lt;typename Allocator&gt; </div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00356">356</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00323">323</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aa3f61cbbe4f51fdc8533782ba3504bf6" name="aa3f61cbbe4f51fdc8533782ba3504bf6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3f61cbbe4f51fdc8533782ba3504bf6">&#9670;&#160;</a></span>Destroy()</h2>
+<a id="a38b4a4353860b543b495b1c92d273454" name="a38b4a4353860b543b495b1c92d273454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38b4a4353860b543b495b1c92d273454">&#9670;&#160;</a></span>Destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::Destroy </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::Destroy </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
           <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
@@ -729,23 +630,21 @@ template&lt;typename Allocator&gt; </div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00268">268</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00247">247</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a453db6557b89ea1cba9dfcbde8796643" name="a453db6557b89ea1cba9dfcbde8796643"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a453db6557b89ea1cba9dfcbde8796643">&#9670;&#160;</a></span>Empty()</h2>
+<a id="a08ee23746bfa2ec3ae4b2ff48349733e" name="a08ee23746bfa2ec3ae4b2ff48349733e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08ee23746bfa2ec3ae4b2ff48349733e">&#9670;&#160;</a></span>Empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::Empty </td>
+          <td class="memname">bool helios::ecs::EntityCmdBuffer::Empty </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -761,55 +660,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Checks if the buffer is empty. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if buffer is empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00227">227</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00208">208</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae8c4fe38ba6035bd4de69fd2acb576e0" name="ae8c4fe38ba6035bd4de69fd2acb576e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8c4fe38ba6035bd4de69fd2acb576e0">&#9670;&#160;</a></span>GetAllocator()</h2>
+<a id="ab04859e9ff65dadb8bb76f68d99e738e" name="ab04859e9ff65dadb8bb76f68d99e738e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab04859e9ff65dadb8bb76f68d99e738e">&#9670;&#160;</a></span>GetEntity()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#ae580895f79e51cbb583d82581a21662f">allocator_type</a> <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::GetAllocator </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gets the allocator used by the command storage. </p>
-<dl class="section return"><dt>Returns</dt><dd>Allocator instance </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00249">249</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a51874c63ad30191a06b0604d28ace188" name="a51874c63ad30191a06b0604d28ace188"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51874c63ad30191a06b0604d28ace188">&#9670;&#160;</a></span>GetEntity()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::GetEntity </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> helios::ecs::EntityCmdBuffer::GetEntity </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -825,25 +690,53 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Gets the entity associated with this buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> instance </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00235">235</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00216">216</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a8917312604d92bc7630f47cb712605dc" name="a8917312604d92bc7630f47cb712605dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8917312604d92bc7630f47cb712605dc">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="aa39d726949518352ec43f2f1807e01d2" name="aa39d726949518352ec43f2f1807e01d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa39d726949518352ec43f2f1807e01d2">&#9670;&#160;</a></span>GetMemoryResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">EntityCmdBuffer</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::operator= </td>
+          <td class="memname">std::pmr::memory_resource * helios::ecs::EntityCmdBuffer::GetMemoryResource </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">EntityCmdBuffer</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the memory resource used for command storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>Memory resource passed to the constructor, or the default resource </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00230">230</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7883d912c379a43ef3d4de444a6ee9d5" name="a7883d912c379a43ef3d4de444a6ee9d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7883d912c379a43ef3d4de444a6ee9d5">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a31f9ce9a254c06ff83c2b053bbe4ecec">EntityCmdBuffer</a> &amp; helios::ecs::EntityCmdBuffer::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a31f9ce9a254c06ff83c2b053bbe4ecec">EntityCmdBuffer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -856,21 +749,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="af0f520347c5effcbaccac20a6991d85e" name="af0f520347c5effcbaccac20a6991d85e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0f520347c5effcbaccac20a6991d85e">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a07b66598d37ae893ae8a874dcaab5128" name="a07b66598d37ae893ae8a874dcaab5128"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07b66598d37ae893ae8a874dcaab5128">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">EntityCmdBuffer</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a31f9ce9a254c06ff83c2b053bbe4ecec">EntityCmdBuffer</a> &amp; helios::ecs::EntityCmdBuffer::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#acfeb5ad92de3b850cf25c32b4a8ee2e0">EntityCmdBuffer</a>&lt; Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a31f9ce9a254c06ff83c2b053bbe4ecec">EntityCmdBuffer</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -883,13 +774,11 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="ac1190e3587b2943bf56a3c67dca27c86" name="ac1190e3587b2943bf56a3c67dca27c86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1190e3587b2943bf56a3c67dca27c86">&#9670;&#160;</a></span>RemoveBundle()</h2>
+<a id="a9cc073dbe2d8d12305f4a0806cc6f423" name="a9cc073dbe2d8d12305f4a0806cc6f423"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cc073dbe2d8d12305f4a0806cc6f423">&#9670;&#160;</a></span>RemoveBundle()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <div class="memtemplate">
 template&lt;ComponentBundleTrait B&gt; </div>
 <table class="mlabels">
@@ -897,7 +786,7 @@ template&lt;ComponentBundleTrait B&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::RemoveBundle </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::RemoveBundle </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
           <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
@@ -925,18 +814,15 @@ template&lt;ComponentBundleTrait B&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00332">332</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00302">302</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab4058d428a1da141c017e3a4918f19c3" name="ab4058d428a1da141c017e3a4918f19c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4058d428a1da141c017e3a4918f19c3">&#9670;&#160;</a></span>RemoveComponents()</h2>
+<a id="a983c41d54c8794aedb14914596ad0577" name="a983c41d54c8794aedb14914596ad0577"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a983c41d54c8794aedb14914596ad0577">&#9670;&#160;</a></span>RemoveComponents()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; <br />
-requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 <div class="memtemplate">
 template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
@@ -945,7 +831,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::RemoveComponents </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::RemoveComponents </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
           <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
@@ -973,25 +859,23 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00324">324</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00295">295</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="add1eb1c7bb6e7cbfd7ec35314833b4d4" name="add1eb1c7bb6e7cbfd7ec35314833b4d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add1eb1c7bb6e7cbfd7ec35314833b4d4">&#9670;&#160;</a></span>Reserve()</h2>
+<a id="a5aef2a8c1ba1e1ab4305baaed22bf6dc" name="a5aef2a8c1ba1e1ab4305baaed22bf6dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aef2a8c1ba1e1ab4305baaed22bf6dc">&#9670;&#160;</a></span>Reserve()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::Reserve </td>
+          <td class="memname">void helios::ecs::EntityCmdBuffer::Reserve </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a803044778fed4fc405449961cf9bb00e">size_type</a></td>          <td class="paramname"><span class="paramname"><em>capacity</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a96f9c08f0752ccce2d30a7f6d65b39bb">size_type</a></td>          <td class="paramname"><span class="paramname"><em>capacity</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1010,23 +894,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00080">80</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00061">61</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a0a65ec37ab1945203b4ac5be60340734" name="a0a65ec37ab1945203b4ac5be60340734"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a65ec37ab1945203b4ac5be60340734">&#9670;&#160;</a></span>Size()</h2>
+<a id="acbc91b914b90cdb6d98f27ce8906e238" name="acbc91b914b90cdb6d98f27ce8906e238"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbc91b914b90cdb6d98f27ce8906e238">&#9670;&#160;</a></span>Size()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a803044778fed4fc405449961cf9bb00e">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::Size </td>
+          <td class="memname"><a class="el" href="#a96f9c08f0752ccce2d30a7f6d65b39bb">size_type</a> helios::ecs::EntityCmdBuffer::Size </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -1042,17 +924,15 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Gets the number of commands in the buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of commands in buffer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00241">241</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00222">222</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a58b682799c5e98e28a41048aab24ca60" name="a58b682799c5e98e28a41048aab24ca60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58b682799c5e98e28a41048aab24ca60">&#9670;&#160;</a></span>TryAddBundle()</h2>
+<a id="a5cda2d38f1bcb1c972d30e0cb131b063" name="a5cda2d38f1bcb1c972d30e0cb131b063"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cda2d38f1bcb1c972d30e0cb131b063">&#9670;&#160;</a></span>TryAddBundle()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <div class="memtemplate">
 template&lt;ComponentBundleTrait B&gt; </div>
 <table class="mlabels">
@@ -1060,7 +940,7 @@ template&lt;ComponentBundleTrait B&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::TryAddBundle </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::TryAddBundle </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
         </tr>
@@ -1097,18 +977,15 @@ template&lt;ComponentBundleTrait B&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00313">313</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00286">286</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="adda9313b02eca04f00ac7d86df52ab20" name="adda9313b02eca04f00ac7d86df52ab20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adda9313b02eca04f00ac7d86df52ab20">&#9670;&#160;</a></span>TryAddComponents()</h2>
+<a id="aea4377cf162f8ba14a7819dd25a6e977" name="aea4377cf162f8ba14a7819dd25a6e977"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea4377cf162f8ba14a7819dd25a6e977">&#9670;&#160;</a></span>TryAddComponents()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; <br />
-requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 <div class="memtemplate">
 template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
@@ -1117,7 +994,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::TryAddComponents </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::TryAddComponents </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
         </tr>
@@ -1154,23 +1031,21 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00303">303</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00277">277</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a956ea90ad0960989c7ad5fe689982511" name="a956ea90ad0960989c7ad5fe689982511"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a956ea90ad0960989c7ad5fe689982511">&#9670;&#160;</a></span>TryDestroy()</h2>
+<a id="a40573bcc5afd602e5f46b9eba8f285fa" name="a40573bcc5afd602e5f46b9eba8f285fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40573bcc5afd602e5f46b9eba8f285fa">&#9670;&#160;</a></span>TryDestroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::TryDestroy </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::TryDestroy </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
           <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
@@ -1187,17 +1062,15 @@ template&lt;typename Allocator&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00275">275</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00253">253</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a642acfa1b925c16cdf4eaed08ef828e6" name="a642acfa1b925c16cdf4eaed08ef828e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a642acfa1b925c16cdf4eaed08ef828e6">&#9670;&#160;</a></span>TryRemoveBundle()</h2>
+<a id="ad4eeb947f0d2eeac51bd0584b640388e" name="ad4eeb947f0d2eeac51bd0584b640388e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4eeb947f0d2eeac51bd0584b640388e">&#9670;&#160;</a></span>TryRemoveBundle()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <div class="memtemplate">
 template&lt;ComponentBundleTrait B&gt; </div>
 <table class="mlabels">
@@ -1205,7 +1078,7 @@ template&lt;ComponentBundleTrait B&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::TryRemoveBundle </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::TryRemoveBundle </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
           <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
@@ -1232,18 +1105,15 @@ template&lt;ComponentBundleTrait B&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00349">349</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00317">317</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="af6c0dce2a34e5024b42b51e024f85e1c" name="af6c0dce2a34e5024b42b51e024f85e1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6c0dce2a34e5024b42b51e024f85e1c">&#9670;&#160;</a></span>TryRemoveComponents()</h2>
+<a id="af9b42e9fd8550a767333b76cac463ac3" name="af9b42e9fd8550a767333b76cac463ac3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9b42e9fd8550a767333b76cac463ac3">&#9670;&#160;</a></span>TryRemoveComponents()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; <br />
-requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 <div class="memtemplate">
 template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
@@ -1252,7 +1122,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::TryRemoveComponents </td>
+          <td class="memname">auto helios::ecs::EntityCmdBuffer::TryRemoveComponents </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
           <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
@@ -1279,7 +1149,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00341">341</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00310">310</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
