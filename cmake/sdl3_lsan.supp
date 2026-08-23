@@ -1,0 +1,43 @@
+# LeakSanitizer suppressions for SDL3-backed tests on Linux.
+# SDL video/audio backends and their platform libraries (X11, Wayland, Pulse,
+# D-Bus, GL) retain process-global state that LSan reports as leaks even when
+# SDL_Quit() has run. These are third-party, not Helios "bugs".
+#
+# Referenced by LSAN_OPTIONS on helios_sdl3*_tests (see src/sdl3*/CMakeLists.txt).
+
+leak:libX11
+leak:libXau
+leak:libXdmcp
+leak:libxcb
+leak:libXext
+leak:libXcursor
+leak:libXi
+leak:libXrandr
+leak:libXrender
+leak:libXfixes
+leak:libXss
+leak:libdbus-1
+leak:libpulse
+leak:libwayland
+leak:libffi
+leak:libGL.so
+leak:libGLdispatch
+leak:libGLX
+leak:libEGL
+leak:libglib
+leak:libgio
+leak:libgobject
+leak:libgmodule
+leak:libfontconfig
+leak:libfreetype
+leak:libasound
+leak:libpipewire
+leak:libsystemd
+leak:libudev
+leak:libdrm
+leak:libgbm
+leak:libunwind
+leak:SDL_Init
+leak:SDL_CreateWindow
+leak:SDL_VideoInit
+leak:SDL_InitSubSystem

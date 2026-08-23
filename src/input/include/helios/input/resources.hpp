@@ -15,7 +15,6 @@
 #include <format>
 #include <iterator>
 #include <ostream>
-#include <ranges>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -449,10 +448,13 @@ template <typename It>
 inline It ToString(It out, const Gamepads& gamepads) {
   out = std::format_to(out, "Gamepads{{pads = [");
 
-  auto connected = std::views::filter(
-      gamepads.pads, [](const Gamepad& pad) { return pad.connected; });
-  for (const auto& [cnt, pad] : connected | std::views::enumerate) {
-    if (cnt > 0) [[likely]] {
+  size_t cnt = 0;
+  for (const auto& pad : gamepads.pads) {
+    if (!pad.connected) {
+      continue;
+    }
+
+    if (cnt++ > 0) [[likely]] {
       out = std::format_to(out, ", ");
     }
     ToString(out, pad);
@@ -571,10 +573,13 @@ template <typename It>
 inline It ToString(It out, const Pens& pens) {
   out = std::format_to(out, "Pens{{sticks = [");
 
-  auto connected = std::views::filter(
-      pens.pens, [](const Pen& pen) { return pen.in_proximity; });
-  for (const auto& [cnt, pen] : connected | std::views::enumerate) {
-    if (cnt > 0) [[likely]] {
+  size_t cnt = 0;
+  for (const auto& pen : pens.pens) {
+    if (!pen.in_proximity) {
+      continue;
+    }
+
+    if (cnt++ > 0) [[likely]] {
       out = std::format_to(out, ", ");
     }
     ToString(out, pen);

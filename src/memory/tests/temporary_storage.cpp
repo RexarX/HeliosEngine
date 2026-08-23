@@ -3,6 +3,7 @@
 #include <helios/memory/temporary_storage.hpp>
 
 #include <cstddef>
+#include <cstring>
 #include <thread>
 #include <vector>
 
@@ -35,17 +36,17 @@ TEST_SUITE("helios::mem::TemporaryStorage") {
     SUBCASE("Allocates after reset without error") {
       auto& storage = TemporaryStorage::Instance();
 
-      // Allocate something
       void* ptr1 = storage.allocate(100);
       CHECK_NE(ptr1, nullptr);
+      std::memset(ptr1, 0xAB, 100);
 
-      // Reset should invalidate
       storage.Reset();
 
-      // Should be able to allocate again
       void* ptr2 = storage.allocate(100);
       CHECK_NE(ptr2, nullptr);
-      CHECK_NE(ptr1, ptr2);  // Likely different, though not guaranteed
+      std::memset(ptr2, 0xCD, 100);
+      CHECK_EQ(static_cast<unsigned char*>(ptr2)[0], 0xCD);
+      CHECK_EQ(static_cast<unsigned char*>(ptr2)[99], 0xCD);
     }
 
     SUBCASE("Can handle large allocations before reset") {
