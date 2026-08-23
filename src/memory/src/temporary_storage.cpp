@@ -1,9 +1,9 @@
 #include <pch.hpp>
 
 #include <helios/memory/temporary_storage.hpp>
+#include <helios/platform/platform.hpp>
 
 #include <atomic>
-#include <thread>
 
 namespace helios::mem {
 
@@ -27,21 +27,20 @@ void TemporaryStorage::Init() {
 }
 
 void TemporaryStorage::Destroy() noexcept {
-  // Claim exclusive access to this node before letting member destruction
-  // (upstream_resource_'s teardown, which runs immediately after this
-  // function body returns) proceed.
+  // Wait until ResetAll() has finished any in-flight Reset(), then retire
+  // the node so later walks skip `owner`. Do not yield/sleep: this runs from
+  // a thread_local destructor, and Darwin can livelock a dying thread that
+  // calls sched_yield() during TLS teardown.
   auto expected = NodeState::kActive;
   while (!registry_node_->state.compare_exchange_weak(
-      expected, NodeState::kBusy, std::memory_order_acq_rel,
-      std::memory_order_relaxed)) {
+      expected, NodeState::kRetired, std::memory_order_acq_rel,
+      std::memory_order_acquire)) {
+    if (expected == NodeState::kRetired) {
+      return;
+    }
     expected = NodeState::kActive;
-    std::this_thread::yield();
+    HELIOS_PAUSE_CPU();
   }
-
-  // We now hold kBusy exclusively. upstream_resource_'s destructor runs
-  // implicitly right after this function body, tearing down the chunk
-  // list with no other thread able to touch it concurrently.
-  registry_node_->state.store(NodeState::kRetired, std::memory_order_release);
 }
 
 void TemporaryStorage::ResetAllImpl() noexcept {
@@ -50,13 +49,11 @@ void TemporaryStorage::ResetAllImpl() noexcept {
   // `next` and `owner`.
   for (RegistryNode* node = registry_head_.load(std::memory_order_acquire);
        node != nullptr; node = node->next) {
-    // Try to claim the node. Success means we have exclusive rights to
-    // call Reset() on its owner, in particular, the owning thread's
-    // destructor cannot be mid-teardown of the same upstream_resource_,
-    // because it would have had to win this same CAS first. Failure means
-    // the node is either already kBusy (most likely: its owner is
-    // concurrently exiting) or kRetired; either way we skip it rather than
-    // wait.
+    // Try to claim the node. Success means we may call Reset() on owner:
+    // Destroy() only proceeds to member teardown after CAS kActive ->
+    // kRetired, so it cannot be destroying upstream_resource_ while we
+    // hold kBusy. Failure means kBusy (another ResetAll) or kRetired
+    // (owner already exited); skip rather than wait.
     auto expected = NodeState::kActive;
     if (node->state.compare_exchange_strong(expected, NodeState::kBusy,
                                             std::memory_order_acq_rel,

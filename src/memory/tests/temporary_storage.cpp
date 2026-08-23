@@ -4,6 +4,7 @@
 
 #include <cstddef>
 #include <cstring>
+#include <latch>
 #include <thread>
 #include <vector>
 
@@ -97,16 +98,26 @@ TEST_SUITE("helios::mem::TemporaryStorage") {
       auto& main_storage = TemporaryStorage::Instance();
 
       for (int round = 0; round < 32; ++round) {
+        constexpr int kThreadCount = 8;
+        std::latch allocated{kThreadCount};
+        std::latch may_exit{1};
+
         std::vector<std::thread> threads;
-        threads.reserve(8);
-        for (int i = 0; i < 8; ++i) {
-          threads.emplace_back([]() {
+        threads.reserve(static_cast<size_t>(kThreadCount));
+        for (int i = 0; i < kThreadCount; ++i) {
+          threads.emplace_back([&allocated, &may_exit]() {
             auto& storage = TemporaryStorage::Instance();
             void* ptr = storage.allocate(128);
             CHECK_NE(ptr, nullptr);
+            allocated.count_down();
+            may_exit.wait();
           });
         }
 
+        allocated.wait();
+        TemporaryStorage::ResetAll();
+
+        may_exit.count_down();
         TemporaryStorage::ResetAll();
 
         for (auto& thread : threads) {

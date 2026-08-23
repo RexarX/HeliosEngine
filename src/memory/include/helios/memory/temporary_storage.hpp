@@ -87,9 +87,10 @@ public:
   TemporaryStorage(TemporaryStorage&&) = delete;
 
   /**
-   * @brief Claims exclusive access to this instance's registry node, then
-   * marks it retired, so `ResetAll()` will no longer touch `this`.
-   * @details Does not unlink the node from the registry.
+   * @brief Waits for any in-flight `ResetAll()`, then marks the registry
+   * node retired so later walks no longer touch `this`.
+   * @details Does not unlink the node from the registry. Must not yield or
+   * sleep: this runs from a `thread_local` destructor.
    */
   ~TemporaryStorage() noexcept override {
     HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::TemporaryStorage::Destroy");
@@ -177,10 +178,12 @@ private:
     TemporaryStorage* owner = nullptr;
 
     // kActive: owner is live and not currently being reset by anyone.
-    // kBusy: exclusively claimed, either by ResetAll() calling Reset(), or
-    //   by the owning thread's destructor tearing upstream_resource_ down.
-    //   Whoever holds kBusy has sole rights to touch upstream_resource_.
+    // kBusy: exclusively claimed by ResetAll() while it calls Reset() on
+    //   owner. Allocate/deallocate on the owning thread are not synchronized
+    //   with this flag; the caller of ResetAll() must quiesce those paths.
     // kRetired: owner is destroyed; must never be dereferenced again.
+    // Destroy waits until the node is not kBusy, then CAS kActive -> kRetired,
+    // so it never holds kBusy itself (TLS destructors must not yield/sleep).
     std::atomic<NodeState> state{NodeState::kActive};
   };
 
