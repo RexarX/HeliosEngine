@@ -15,21 +15,36 @@
 
 namespace helios::mem {
 
-void FixedStackAllocator::ClearStats() noexcept {
-  offset_.store(0, std::memory_order_release);
-  peak_usage_.store(0, std::memory_order_relaxed);
-  allocation_count_.store(0, std::memory_order_relaxed);
-  total_allocations_.store(0, std::memory_order_relaxed);
-  total_deallocations_.store(0, std::memory_order_relaxed);
-  alignment_waste_.store(0, std::memory_order_relaxed);
+FixedStackAllocator::FixedStackAllocator(size_t capacity) noexcept
+    : capacity_(capacity) {
+  HELIOS_ASSERT(capacity_ > sizeof(size_t) * 2,
+                "capacity '{}' is too small for fixed stack!", capacity_);
+  buffer_ = static_cast<std::byte*>(
+      AlignedAlloc(kDefaultAlignment, capacity_, false));
+  HELIOS_VERIFY(buffer_ != nullptr, "Failed to allocate fixed stack!");
+  HELIOS_MEMORY_PROFILE_ALLOC(buffer_, capacity_, "FixedStackAllocator");
 }
 
-void FixedStackAllocator::Release() noexcept {
-  if (buffer_ != nullptr) {
-    HELIOS_MEMORY_PROFILE_FREE(buffer_, "FixedStackAllocator");
-    AlignedFree(buffer_, false);
-    buffer_ = nullptr;
+FixedStackAllocator& FixedStackAllocator::operator=(
+    FixedStackAllocator&& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return *this;
   }
+
+  Release();
+  MoveFrom(other);
+  return *this;
+}
+
+void FixedStackAllocator::RewindToMarker(Marker marker) noexcept {
+  HELIOS_MEMORY_PROFILE_SCOPE_N(
+      "helios::mem::FixedStackAllocator::RewindToMarker");
+
+  HELIOS_ASSERT(marker.offset <= offset_.load(std::memory_order_acquire),
+                "marker does not belong to fixed stack!");
+
+  offset_.store(marker.offset, std::memory_order_release);
+  allocation_count_.store(0, std::memory_order_relaxed);
 }
 
 void FixedStackAllocator::MoveFrom(FixedStackAllocator& other) noexcept {
@@ -51,6 +66,23 @@ void FixedStackAllocator::MoveFrom(FixedStackAllocator& other) noexcept {
   alignment_waste_.store(
       other.alignment_waste_.exchange(0, std::memory_order_relaxed),
       std::memory_order_relaxed);
+}
+
+void FixedStackAllocator::ClearStats() noexcept {
+  offset_.store(0, std::memory_order_release);
+  peak_usage_.store(0, std::memory_order_relaxed);
+  allocation_count_.store(0, std::memory_order_relaxed);
+  total_allocations_.store(0, std::memory_order_relaxed);
+  total_deallocations_.store(0, std::memory_order_relaxed);
+  alignment_waste_.store(0, std::memory_order_relaxed);
+}
+
+void FixedStackAllocator::Release() noexcept {
+  if (buffer_ != nullptr) {
+    HELIOS_MEMORY_PROFILE_FREE(buffer_, "FixedStackAllocator");
+    AlignedFree(buffer_, false);
+    buffer_ = nullptr;
+  }
 }
 
 void* FixedStackAllocator::do_allocate(size_t bytes, size_t alignment) {

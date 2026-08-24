@@ -1,11 +1,8 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
-#include <helios/memory/details/profile.hpp>
+#include <helios/memory/treiber_stack.hpp>
 
-#include <algorithm>
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
@@ -25,8 +22,8 @@ struct FixedPoolAllocatorOptions {
 
 /**
  * @brief Fixed-capacity intrusive block pool.
- * @details ABA-safe lock-free Treiber free-list over a single preallocated
- * chunk.
+ * @details ABA-safe lock-free `TreiberStack` free-list over a single
+ * preallocated chunk.
  * @warning `Reset()` must not run concurrently with `allocate` or `deallocate`.
  */
 class FixedPoolAllocator final : public std::pmr::memory_resource {
@@ -171,54 +168,13 @@ private:
   size_t alignment_ = 0;
   size_t chunk_capacity_ = 0;
   std::byte* buffer_ = nullptr;
-  std::atomic<uintptr_t> free_head_{0};
+  TreiberStack free_list_;
+
   std::atomic<size_t> free_blocks_{0};
   std::atomic<size_t> peak_used_blocks_{0};
   std::atomic<size_t> total_allocations_{0};
   std::atomic<size_t> total_deallocations_{0};
 };
-
-inline FixedPoolAllocator::FixedPoolAllocator(
-    FixedPoolAllocatorOptions options) noexcept
-    : block_size_(std::max(options.block_size, sizeof(void*))),
-      block_count_(options.block_count),
-      alignment_(options.alignment) {
-  HELIOS_ASSERT(block_size_ > 0, "block_size must be greater than zero!");
-  HELIOS_ASSERT(block_count_ > 0, "block_count must be greater than zero!");
-  HELIOS_ASSERT(IsPowerOfTwo(alignment_),
-                "alignment '{}' must be power of two!", alignment_);
-  HELIOS_ASSERT(alignment_ >= alignof(void*), "alignment '{}' must be >= '{}'!",
-                alignment_, alignof(void*));
-
-  block_size_ = AlignUp(block_size_, alignment_);
-  chunk_capacity_ = block_size_ * block_count_;
-
-  buffer_ =
-      static_cast<std::byte*>(AlignedAlloc(alignment_, chunk_capacity_, false));
-  HELIOS_VERIFY(buffer_ != nullptr, "Failed to allocate fixed pool!");
-  HELIOS_MEMORY_PROFILE_ALLOC(buffer_, chunk_capacity_, "FixedPoolAllocator");
-  Rebuild();
-}
-
-inline FixedPoolAllocator::FixedPoolAllocator(size_t block_size,
-                                              size_t block_count,
-                                              size_t alignment) noexcept
-    : FixedPoolAllocator(FixedPoolAllocatorOptions{
-          .block_size = block_size,
-          .block_count = block_count,
-          .alignment = alignment,
-      }) {}
-
-inline FixedPoolAllocator& FixedPoolAllocator::operator=(
-    FixedPoolAllocator&& other) noexcept {
-  if (this == &other) [[unlikely]] {
-    return *this;
-  }
-
-  Release();
-  MoveFrom(other);
-  return *this;
-}
 
 template <typename T>
 inline FixedPoolAllocator FixedPoolAllocator::ForType(
@@ -228,18 +184,7 @@ inline FixedPoolAllocator FixedPoolAllocator::ForType(
   return {sizeof(T), block_count, type_align};
 }
 
-inline void FixedPoolAllocator::Reset() noexcept {
-  HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::FixedPoolAllocator::Reset");
-
-  Rebuild();
-  peak_used_blocks_.store(0, std::memory_order_relaxed);
-  total_allocations_.store(0, std::memory_order_relaxed);
-  total_deallocations_.store(0, std::memory_order_relaxed);
-}
-
 inline bool FixedPoolAllocator::Owns(const void* ptr) const noexcept {
-  HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::FixedPoolAllocator::Owns");
-
   if (buffer_ == nullptr || ptr == nullptr) [[unlikely]] {
     return false;
   }

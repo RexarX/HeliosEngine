@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <atomic>
 #include <cstddef>
+#include <cstdint>
 #include <limits>
 #include <mutex>
 #include <new>
@@ -17,6 +18,65 @@
 #include <utility>
 
 namespace helios::mem {
+
+FixedFreeListAllocator::FixedFreeListAllocator(size_t capacity) noexcept
+    : capacity_(capacity) {
+  HELIOS_ASSERT(capacity_ >= sizeof(void*) * 4,
+                "capacity '{}' is too small for fixed free-list!", capacity_);
+  buffer_ = static_cast<std::byte*>(
+      AlignedAlloc(kDefaultAlignment, capacity_, false));
+  HELIOS_VERIFY(buffer_ != nullptr, "Failed to allocate fixed free-list!");
+  HELIOS_MEMORY_PROFILE_ALLOC(buffer_, capacity_, "FixedFreeListAllocator");
+  HELIOS_MEMORY_PROFILE_LOCK_NAME(mutex_,
+                                  std::string_view{"FixedFreeListAllocator"});
+  Initialize();
+}
+
+FixedFreeListAllocator::FixedFreeListAllocator(
+    FixedFreeListAllocator&& other) noexcept {
+  const std::scoped_lock lock(other.mutex_);
+  MoveFrom(other);
+}
+
+FixedFreeListAllocator& FixedFreeListAllocator::operator=(
+    FixedFreeListAllocator&& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return *this;
+  }
+
+  const std::scoped_lock lock(mutex_, other.mutex_);
+  ReleaseUnlocked();
+  MoveFrom(other);
+  return *this;
+}
+
+void FixedFreeListAllocator::Reset() noexcept {
+  HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::FixedFreeListAllocator::Reset");
+  const std::scoped_lock lock(mutex_);
+  HELIOS_MEMORY_PROFILE_LOCK_MARK(mutex_);
+
+  Initialize();
+  peak_usage_.store(0, std::memory_order_relaxed);
+  total_allocations_.store(0, std::memory_order_relaxed);
+  total_deallocations_.store(0, std::memory_order_relaxed);
+}
+
+bool FixedFreeListAllocator::Owns(const void* ptr) const noexcept {
+  HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::FixedFreeListAllocator::Owns");
+
+  if (ptr == nullptr) [[unlikely]] {
+    return false;
+  }
+
+  const std::shared_lock lock(mutex_);
+  if (buffer_ == nullptr) [[unlikely]] {
+    return false;
+  }
+
+  const auto address = reinterpret_cast<uintptr_t>(ptr);
+  const auto begin = reinterpret_cast<uintptr_t>(buffer_);
+  return address >= begin && address < begin + capacity_;
+}
 
 void FixedFreeListAllocator::Initialize() noexcept {
   free_list_ = std::launder(reinterpret_cast<FreeBlock*>(buffer_));

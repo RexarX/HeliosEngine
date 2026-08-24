@@ -26,18 +26,28 @@ ArenaAllocator::ArenaAllocator(ArenaOptions options) noexcept
   Block* const initial_block = CreateBlock(initial_capacity_);
   HELIOS_VERIFY(initial_block != nullptr, "Failed to allocate initial block!");
 
-  head_.store(initial_block, std::memory_order_release);
+  blocks_.Push(initial_block);
   total_capacity_.store(initial_capacity_, std::memory_order_relaxed);
   block_count_.store(1, std::memory_order_relaxed);
+}
+
+ArenaAllocator& ArenaAllocator::operator=(ArenaAllocator&& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return *this;
+  }
+
+  FreeChain(HeadBlock());
+  MoveFrom(other);
+  return *this;
 }
 
 void ArenaAllocator::Reset() noexcept {
   HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::ArenaAllocator::Reset");
 
-  Block* current = head_.load(std::memory_order_acquire);
+  Block* current = HeadBlock();
   while (current != nullptr) {
     current->offset.store(0, std::memory_order_release);
-    current = current->next.load(std::memory_order_acquire);
+    current = NextBlock(current);
   }
 
   total_allocated_.store(0, std::memory_order_release);
@@ -49,8 +59,7 @@ void ArenaAllocator::Reset() noexcept {
 }
 
 void ArenaAllocator::MoveFrom(ArenaAllocator& other) noexcept {
-  head_.store(other.head_.exchange(nullptr, std::memory_order_acq_rel),
-              std::memory_order_release);
+  blocks_ = std::move(other.blocks_);
   grow_state_.store(
       other.grow_state_.exchange(GrowState::kIdle, std::memory_order_acq_rel),
       std::memory_order_release);
@@ -95,17 +104,11 @@ auto ArenaAllocator::CreateBlock(size_t capacity) noexcept -> Block* {
   block->buffer = static_cast<std::byte*>(raw) + kHeaderSize;
   block->capacity = capacity;
   block->offset.store(0, std::memory_order_relaxed);
-  block->next.store(nullptr, std::memory_order_relaxed);
   return block;
 }
 
 void ArenaAllocator::PublishBlock(Block* block) noexcept {
-  Block* expected_head = head_.load(std::memory_order_acquire);
-  do {
-    block->next.store(expected_head, std::memory_order_relaxed);
-  } while (!head_.compare_exchange_weak(expected_head, block,
-                                        std::memory_order_release,
-                                        std::memory_order_acquire));
+  blocks_.Push(block);
 
   total_capacity_.fetch_add(block->capacity, std::memory_order_relaxed);
   block_count_.fetch_add(1, std::memory_order_relaxed);
@@ -118,7 +121,7 @@ void ArenaAllocator::FreeChain(Block* head) noexcept {
 
   Block* current = head;
   while (current != nullptr) {
-    Block* const next = current->next.load(std::memory_order_relaxed);
+    Block* const next = NextBlock(current);
     HELIOS_MEMORY_PROFILE_FREE(current, "ArenaAllocator");
     std::destroy_at(current);
     AlignedFree(current, false);
@@ -152,7 +155,7 @@ auto ArenaAllocator::TryReserve(Block& block, size_t size,
 }
 
 bool ArenaAllocator::EnsureCapacity(size_t min_capacity) noexcept {
-  Block* observed_head = head_.load(std::memory_order_acquire);
+  Block* observed_head = HeadBlock();
   const size_t current_capacity =
       observed_head != nullptr ? observed_head->capacity : initial_capacity_;
   const size_t desired_capacity =
@@ -200,8 +203,8 @@ void* ArenaAllocator::do_allocate(size_t bytes, size_t alignment) {
     // Walk the full block chain so soft-Reset arenas reuse free space in
     // older blocks. Head-only reservation grows a new block every frame when
     // per-cycle usage exceeds the latest head capacity but fits in the chain.
-    for (Block* block = head_.load(std::memory_order_acquire); block != nullptr;
-         block = block->next.load(std::memory_order_acquire)) {
+    for (Block* block = HeadBlock(); block != nullptr;
+         block = NextBlock(block)) {
       reservation = TryReserve(*block, bytes, effective_alignment);
       if (reservation.ptr != nullptr) {
         break;

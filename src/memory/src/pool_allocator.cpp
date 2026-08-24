@@ -3,7 +3,6 @@
 #include <helios/memory/pool_allocator.hpp>
 
 #include <details/accumulate_peak.hpp>
-#include <details/treiber_stack.hpp>
 #include <helios/assert.hpp>
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
@@ -37,28 +36,25 @@ PoolAllocator::PoolAllocator(PoolAllocatorOptions options) noexcept
       CreateChunk(block_size_, initial_block_count_, alignment_);
   HELIOS_VERIFY(initial_chunk != nullptr, "Failed to allocate pool chunk!");
 
-  chunks_.store(initial_chunk, std::memory_order_release);
+  chunks_.Push(initial_chunk);
   total_blocks_.store(initial_chunk->block_count, std::memory_order_relaxed);
   free_blocks_.store(initial_chunk->block_count, std::memory_order_relaxed);
   PushChunkBlocks(*initial_chunk);
 }
 
 bool PoolAllocator::Owns(const void* ptr) const noexcept {
-  HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::PoolAllocator::Owns");
-
   if (ptr == nullptr) [[unlikely]] {
     return false;
   }
 
   const auto addr = reinterpret_cast<uintptr_t>(ptr);
-  ChunkHeader* chunk = chunks_.load(std::memory_order_acquire);
-  while (chunk != nullptr) {
+  for (ChunkHeader* chunk = HeadChunk(); chunk != nullptr;
+       chunk = NextChunk(chunk)) {
     const auto begin = reinterpret_cast<uintptr_t>(chunk->buffer);
     const auto end = begin + chunk->capacity;
     if (addr >= begin && addr < end) {
       return ((addr - begin) % block_size_) == 0;
     }
-    chunk = chunk->next.load(std::memory_order_acquire);
   }
 
   return false;
@@ -69,10 +65,8 @@ void PoolAllocator::MoveFrom(PoolAllocator& other) noexcept {
   initial_block_count_ = std::exchange(other.initial_block_count_, 0);
   alignment_ = std::exchange(other.alignment_, 0);
   growth_ = std::exchange(other.growth_, {});
-  free_head_.store(other.free_head_.exchange(0, std::memory_order_acq_rel),
-                   std::memory_order_release);
-  chunks_.store(other.chunks_.exchange(nullptr, std::memory_order_acq_rel),
-                std::memory_order_release);
+  free_list_ = std::move(other.free_list_);
+  chunks_ = std::move(other.chunks_);
   grow_state_.store(
       other.grow_state_.exchange(GrowState::kIdle, std::memory_order_acq_rel),
       std::memory_order_release);
@@ -112,7 +106,6 @@ auto PoolAllocator::CreateChunk(size_t block_size, size_t block_count,
   chunk->buffer = static_cast<std::byte*>(raw) + header_size;
   chunk->capacity = payload;
   chunk->block_count = block_count;
-  chunk->next.store(nullptr, std::memory_order_relaxed);
   return chunk;
 }
 
@@ -123,7 +116,7 @@ void PoolAllocator::FreeChunkChain(ChunkHeader* chunk) noexcept {
 
   ChunkHeader* current = chunk;
   while (current != nullptr) {
-    ChunkHeader* const next = current->next.load(std::memory_order_relaxed);
+    ChunkHeader* const next = NextChunk(current);
     HELIOS_MEMORY_PROFILE_FREE(current, "PoolAllocator");
     std::destroy_at(current);
     AlignedFree(current, false);
@@ -157,11 +150,7 @@ bool PoolAllocator::GrowIfNeeded() noexcept {
     return false;
   }
 
-  ChunkHeader* observed = chunks_.load(std::memory_order_acquire);
-  do {
-    chunk->next.store(observed, std::memory_order_relaxed);
-  } while (!chunks_.compare_exchange_weak(
-      observed, chunk, std::memory_order_release, std::memory_order_acquire));
+  chunks_.Push(chunk);
 
   total_blocks_.fetch_add(chunk->block_count, std::memory_order_relaxed);
   free_blocks_.fetch_add(chunk->block_count, std::memory_order_relaxed);
@@ -175,20 +164,20 @@ bool PoolAllocator::GrowIfNeeded() noexcept {
 void PoolAllocator::PushChunkBlocks(ChunkHeader& chunk) noexcept {
   auto* current = static_cast<std::byte*>(chunk.buffer);
   for (size_t i = 0; i < chunk.block_count; ++i) {
-    details::PushBlock(free_head_, current);
+    free_list_.Push(current);
     current += block_size_;
   }
 }
 
 void PoolAllocator::RebuildFreeList() noexcept {
-  details::StoreEmptyHead(free_head_);
-  ChunkHeader* chunk = chunks_.load(std::memory_order_acquire);
+  free_list_.Clear();
+  ChunkHeader* chunk = HeadChunk();
   size_t total = 0;
 
   while (chunk != nullptr) {
     PushChunkBlocks(*chunk);
     total += chunk->block_count;
-    chunk = chunk->next.load(std::memory_order_acquire);
+    chunk = NextChunk(chunk);
   }
 
   total_blocks_.store(total, std::memory_order_release);
@@ -215,7 +204,7 @@ void* PoolAllocator::do_allocate(size_t bytes, size_t alignment) {
                 block_size_);
 
   void* block = nullptr;
-  while ((block = details::PopBlock(free_head_)) == nullptr) {
+  while ((block = free_list_.Pop()) == nullptr) {
     HELIOS_VERIFY(GrowIfNeeded(), "Pool exhausted and growth failed!");
   }
 
@@ -241,7 +230,7 @@ void PoolAllocator::do_deallocate(void* ptr, [[maybe_unused]] size_t bytes,
 
   HELIOS_ASSERT(Owns(ptr), "ptr does not belong to pool allocator!");
 
-  details::PushBlock(free_head_, ptr);
+  free_list_.Push(ptr);
   free_blocks_.fetch_add(1, std::memory_order_relaxed);
   total_deallocations_.fetch_add(1, std::memory_order_relaxed);
 }

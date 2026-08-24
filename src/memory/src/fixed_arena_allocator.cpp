@@ -10,8 +10,29 @@
 #include <algorithm>
 #include <atomic>
 #include <cstddef>
+#include <cstdint>
 
 namespace helios::mem {
+
+FixedArenaAllocator::FixedArenaAllocator(size_t capacity) noexcept
+    : capacity_(capacity) {
+  HELIOS_ASSERT(capacity_ > 0, "capacity must be greater than zero!");
+  buffer_ = static_cast<std::byte*>(
+      AlignedAlloc(kDefaultAlignment, capacity_, false));
+  HELIOS_VERIFY(buffer_ != nullptr, "Failed to allocate fixed arena!");
+  HELIOS_MEMORY_PROFILE_ALLOC(buffer_, capacity_, "FixedArenaAllocator");
+}
+
+FixedArenaAllocator& FixedArenaAllocator::operator=(
+    FixedArenaAllocator&& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return *this;
+  }
+
+  Release();
+  MoveFrom(other);
+  return *this;
+}
 
 void FixedArenaAllocator::MoveFrom(FixedArenaAllocator& other) noexcept {
   capacity_ = std::exchange(other.capacity_, 0);
@@ -81,9 +102,6 @@ void* FixedArenaAllocator::do_allocate(size_t bytes, size_t alignment) {
 
 void FixedArenaAllocator::do_deallocate(void* ptr, size_t /*bytes*/,
                                         size_t /*alignment*/) {
-  HELIOS_MEMORY_PROFILE_SCOPE_N(
-      "helios::mem::FixedArenaAllocator::do_deallocate");
-
   if (ptr != nullptr) {
     HELIOS_ASSERT(Owns(ptr), "ptr does not belong to fixed arena!");
     total_deallocations_.fetch_add(1, std::memory_order_relaxed);

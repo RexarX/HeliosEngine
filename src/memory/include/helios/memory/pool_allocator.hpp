@@ -2,6 +2,7 @@
 
 #include <helios/memory/common.hpp>
 #include <helios/memory/details/profile.hpp>
+#include <helios/memory/treiber_stack.hpp>
 
 #include <atomic>
 #include <cstddef>
@@ -26,8 +27,8 @@ struct PoolAllocatorOptions {
  * @brief Lock-free PMR pool allocator for fixed-size blocks.
  * @details Allocates from fixed-size blocks stored in growable chunks.
  *
- * Fast path uses an ABA-safe lock-free Treiber freelist with embedded next
- * pointers.
+ * Fast path uses an ABA-safe lock-free `TreiberStack` freelist with embedded
+ * next pointers.
  * Growth allocates and links a new chunk, then pushes all its blocks into the
  * freelist.
  */
@@ -66,9 +67,7 @@ public:
    * @param other Source allocator; left in empty moved-from state
    */
   PoolAllocator(PoolAllocator&& other) noexcept { MoveFrom(other); }
-  ~PoolAllocator() noexcept override {
-    FreeChunkChain(chunks_.load(std::memory_order_acquire));
-  }
+  ~PoolAllocator() noexcept override { FreeChunkChain(HeadChunk()); }
 
   PoolAllocator& operator=(const PoolAllocator&) = delete;
 
@@ -174,16 +173,25 @@ public:
 
 private:
   struct ChunkHeader {
+    ChunkHeader* next = nullptr;
     void* buffer = nullptr;
     size_t capacity = 0;
     size_t block_count = 0;
-    std::atomic<ChunkHeader*> next{nullptr};
   };
 
   enum class GrowState : uint8_t {
     kIdle,
     kGrowing,
   };
+
+  [[nodiscard]] ChunkHeader* HeadChunk() const noexcept {
+    return static_cast<ChunkHeader*>(chunks_.Top());
+  }
+
+  [[nodiscard]] static ChunkHeader* NextChunk(
+      const ChunkHeader* chunk) noexcept {
+    return static_cast<ChunkHeader*>(TreiberStack::Next(chunk));
+  }
 
   [[nodiscard]] static ChunkHeader* CreateChunk(size_t block_size,
                                                 size_t block_count,
@@ -207,8 +215,8 @@ private:
   size_t alignment_ = 0;
   GrowthPolicy growth_;
 
-  std::atomic<uintptr_t> free_head_{0};
-  std::atomic<ChunkHeader*> chunks_{nullptr};
+  TreiberStack free_list_;
+  TreiberStack chunks_;
   std::atomic<GrowState> grow_state_{GrowState::kIdle};
 
   std::atomic<size_t> total_blocks_{0};
@@ -230,7 +238,7 @@ inline PoolAllocator& PoolAllocator::operator=(PoolAllocator&& other) noexcept {
     return *this;
   }
 
-  FreeChunkChain(chunks_.load(std::memory_order_acquire));
+  FreeChunkChain(HeadChunk());
   MoveFrom(other);
   return *this;
 }

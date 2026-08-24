@@ -624,6 +624,8 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("Interleaved alloc/dealloc returns unique live pointers") {
       constexpr size_t kThreads = 8;
+      // 8 threads × 4096 rounds × {pop, push} == 65536 ops, which wraps a
+      // 16-bit Treiber ABA tag. The tagged head must survive that wrap.
       constexpr size_t kRounds = 4096;
       FixedPoolAllocator pool(kBlockSize, kThreads, kAlign);
 

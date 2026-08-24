@@ -206,7 +206,7 @@ private:
     return this == &other;
   }
 
-  std::array<ArenaAllocator, N> arenas_;
+  std::array<ArenaAllocator, N> arenas_ = {};
   size_t initial_capacity_ = 0;
   GrowthPolicy growth_;
   size_t frame_index_ = 0;

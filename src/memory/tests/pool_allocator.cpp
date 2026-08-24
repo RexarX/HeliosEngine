@@ -853,6 +853,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("Interleaved alloc/dealloc returns unique live pointers") {
       constexpr size_t kThreads = 8;
+      // Same op count as FixedPoolAllocator: wraps a 16-bit ABA tag.
       constexpr size_t kRounds = 4096;
       PoolAllocator pool(GrowingOptions(kBlockSize, kThreads));
 

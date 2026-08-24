@@ -39,6 +39,7 @@ Namespace: `helios::mem`.
 | `GrowthPolicy`                 | Growable allocator policy (`Linear` or `Geometric`). |
 | `AllocatorStats`               | Snapshot of allocation counters and capacity.        |
 | `AlignedAlloc` / `AlignedFree` | Cross-platform aligned allocation.                   |
+| `TreiberStack`                 | Lock-free intrusive LIFO stack with a 64-bit ABA tag. |
 
 ## mimalloc and global allocation
 

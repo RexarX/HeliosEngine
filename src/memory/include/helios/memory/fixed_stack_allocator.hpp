@@ -1,7 +1,5 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
 #include <helios/memory/details/profile.hpp>
 
@@ -128,6 +126,7 @@ private:
 
   size_t capacity_ = 0;
   std::byte* buffer_ = nullptr;
+
   std::atomic<size_t> offset_{0};
   std::atomic<size_t> peak_usage_{0};
   std::atomic<size_t> allocation_count_{0};
@@ -136,46 +135,12 @@ private:
   std::atomic<size_t> alignment_waste_{0};
 };
 
-inline FixedStackAllocator::FixedStackAllocator(size_t capacity) noexcept
-    : capacity_(capacity) {
-  HELIOS_ASSERT(capacity_ > sizeof(size_t) * 2,
-                "capacity '{}' is too small for fixed stack!", capacity_);
-  buffer_ = static_cast<std::byte*>(
-      AlignedAlloc(kDefaultAlignment, capacity_, false));
-  HELIOS_VERIFY(buffer_ != nullptr, "Failed to allocate fixed stack!");
-  HELIOS_MEMORY_PROFILE_ALLOC(buffer_, capacity_, "FixedStackAllocator");
-}
-
-inline FixedStackAllocator& FixedStackAllocator::operator=(
-    FixedStackAllocator&& other) noexcept {
-  if (this == &other) [[unlikely]] {
-    return *this;
-  }
-
-  Release();
-  MoveFrom(other);
-  return *this;
-}
-
-inline void FixedStackAllocator::RewindToMarker(Marker marker) noexcept {
-  HELIOS_MEMORY_PROFILE_SCOPE_N(
-      "helios::mem::FixedStackAllocator::RewindToMarker");
-
-  HELIOS_ASSERT(marker.offset <= offset_.load(std::memory_order_acquire),
-                "marker does not belong to fixed stack!");
-
-  offset_.store(marker.offset, std::memory_order_release);
-  allocation_count_.store(0, std::memory_order_relaxed);
-}
-
 inline void FixedStackAllocator::Reset() noexcept {
   HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::FixedStackAllocator::Reset");
   ClearStats();
 }
 
 inline bool FixedStackAllocator::Owns(const void* ptr) const noexcept {
-  HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::FixedStackAllocator::Owns");
-
   if (buffer_ == nullptr || ptr == nullptr) [[unlikely]] {
     return false;
   }
