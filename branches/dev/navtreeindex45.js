@@ -1,5 +1,15 @@
 var NAVTREEINDEX45 =
 {
+"structhelios_1_1input_1_1MouseWheelMsg.html#a2537f1b283a8346fdd4b8d1b1e6d41c2":[4,0,2,6,40,1],
+"structhelios_1_1input_1_1MouseWheelMsg.html#a43e640bafeffb3bb375847005a2d2706":[2,0,3,7,41,0],
+"structhelios_1_1input_1_1MouseWheelMsg.html#a43e640bafeffb3bb375847005a2d2706":[4,0,2,6,40,0],
+"structhelios_1_1input_1_1MouseWheelMsg.html#a547b0e10c5779a1d1ffd63d8e3269689":[2,0,3,7,41,6],
+"structhelios_1_1input_1_1MouseWheelMsg.html#a547b0e10c5779a1d1ffd63d8e3269689":[4,0,2,6,40,6],
+"structhelios_1_1input_1_1MouseWheelMsg.html#a871c2ddf9ab8b8ac6ac346dbcf633b07":[2,0,3,7,41,3],
+"structhelios_1_1input_1_1MouseWheelMsg.html#a871c2ddf9ab8b8ac6ac346dbcf633b07":[4,0,2,6,40,3],
+"structhelios_1_1input_1_1MouseWheelMsg.html#aa5099e7202af080c4e63865ef0461546":[2,0,3,7,41,4],
+"structhelios_1_1input_1_1MouseWheelMsg.html#aa5099e7202af080c4e63865ef0461546":[4,0,2,6,40,4],
+"structhelios_1_1input_1_1MouseWheelMsg.html#ac29936af5990173f50ae69a0267b973e":[2,0,3,7,41,7],
 "structhelios_1_1input_1_1MouseWheelMsg.html#ac29936af5990173f50ae69a0267b973e":[4,0,2,6,40,7],
 "structhelios_1_1input_1_1MouseWheelMsg.html#af543c6d15392393090e1992cc421374f":[2,0,3,7,41,5],
 "structhelios_1_1input_1_1MouseWheelMsg.html#af543c6d15392393090e1992cc421374f":[4,0,2,6,40,5],
@@ -239,15 +249,5 @@ var NAVTREEINDEX45 =
 "structhelios_1_1input_1_1TextInputMsg.html":[4,0,2,6,55],
 "structhelios_1_1input_1_1TextInputMsg.html#a03dbf27da0622cf8999a44df38355005":[2,0,3,7,56,4],
 "structhelios_1_1input_1_1TextInputMsg.html#a03dbf27da0622cf8999a44df38355005":[4,0,2,6,55,4],
-"structhelios_1_1input_1_1TextInputMsg.html#a1f27676ed34ca301e159b8b95962ddcf":[2,0,3,7,56,5],
-"structhelios_1_1input_1_1TextInputMsg.html#a1f27676ed34ca301e159b8b95962ddcf":[4,0,2,6,55,5],
-"structhelios_1_1input_1_1TextInputMsg.html#a362169c2e43108d26349156897c2cc8b":[2,0,3,7,56,0],
-"structhelios_1_1input_1_1TextInputMsg.html#a362169c2e43108d26349156897c2cc8b":[4,0,2,6,55,0],
-"structhelios_1_1input_1_1TextInputMsg.html#a565fc1b6f9e55598606b948bfe61d43c":[2,0,3,7,56,2],
-"structhelios_1_1input_1_1TextInputMsg.html#a565fc1b6f9e55598606b948bfe61d43c":[4,0,2,6,55,2],
-"structhelios_1_1input_1_1TextInputMsg.html#a67164093b294c24626ba4b13cf9de8f3":[2,0,3,7,56,3],
-"structhelios_1_1input_1_1TextInputMsg.html#a67164093b294c24626ba4b13cf9de8f3":[4,0,2,6,55,3],
-"structhelios_1_1input_1_1TextInputMsg.html#ac004c762649222a3c47197db35c6d947":[2,0,3,7,56,1],
-"structhelios_1_1input_1_1TextInputMsg.html#ac004c762649222a3c47197db35c6d947":[4,0,2,6,55,1],
-"structhelios_1_1input_1_1UpdateGamepadState.html":[2,0,3,7,57]
+"structhelios_1_1input_1_1TextInputMsg.html#a1f27676ed34ca301e159b8b95962ddcf":[2,0,3,7,56,5]
 };

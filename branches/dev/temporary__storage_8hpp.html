@@ -178,11 +178,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('temporary__sto
   <div class="headertitle"><div class="title">temporary_storage.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;helios/memory/details/profile.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="format_8hpp_source.html">helios/utils/format.hpp</a>&gt;</code><br />
-<code>#include &lt;atomic&gt;</code><br />
-<code>#include &lt;cstddef&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;memory_resource&gt;</code><br />
 </div>
 <p><a href="temporary__storage_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -190,7 +186,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('temporary__sto
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:helios_3A_3Amem_3A_3ATemporaryStorage" id="r_helios_3A_3Amem_3A_3ATemporaryStorage"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html">helios::mem::TemporaryStorage</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai's <span class="tt">Temporary_Storage</span>.  <a href="classhelios_1_1mem_1_1TemporaryStorage.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-thread bump allocator for frame and task-scoped allocations. Same idea as Jai's <span class="tt">Temporary_Storage</span>.  <a href="classhelios_1_1mem_1_1TemporaryStorage.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -199,15 +195,15 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2ec90bf1c9cc8b9f6f45cc51aff08d70" id="r_a2ec90bf1c9cc8b9f6f45cc51aff08d70"><td class="memItemLeft"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html">TemporaryStorage</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1mem.html#a2ec90bf1c9cc8b9f6f45cc51aff08d70">helios::mem::GetTemporaryStorage</a> ()</td></tr>
-<tr class="memdesc:a2ec90bf1c9cc8b9f6f45cc51aff08d70"><td class="mdescLeft">&#160;</td><td class="mdescRight">The calling thread's temporary <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span>.  <br /></td></tr>
-<tr class="memitem:afd588b9b50805dd61275a50a062ef0eb" id="r_afd588b9b50805dd61275a50a062ef0eb"><td class="memTemplParams" colspan="2">template&lt;typename T = std::byte&gt; </td></tr>
-<tr class="memitem:afd588b9b50805dd61275a50a062ef0eb template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1mem.html#afd588b9b50805dd61275a50a062ef0eb">helios::mem::GetTemporaryAllocator</a> () -&gt; std::pmr::polymorphic_allocator&lt; T &gt;</td></tr>
-<tr class="memdesc:afd588b9b50805dd61275a50a062ef0eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <span class="tt">polymorphic_allocator&lt;T&gt;</span> bound to the calling thread's temporary storage.  <br /></td></tr>
+<tr class="memitem:a5c58107a01f3a925f7d28669f6c75e81" id="r_a5c58107a01f3a925f7d28669f6c75e81"><td class="memItemLeft">std::pmr::memory_resource &amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1mem.html#a5c58107a01f3a925f7d28669f6c75e81">helios::mem::GetTemporaryStorage</a> () noexcept</td></tr>
+<tr class="memdesc:a5c58107a01f3a925f7d28669f6c75e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">The calling thread's temporary memory resource.  <br /></td></tr>
+<tr class="memitem:a223b8c88be1af22d577a0c73485c362b" id="r_a223b8c88be1af22d577a0c73485c362b"><td class="memTemplParams" colspan="2">template&lt;typename T = std::byte&gt; </td></tr>
+<tr class="memitem:a223b8c88be1af22d577a0c73485c362b template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1mem.html#a223b8c88be1af22d577a0c73485c362b">helios::mem::GetTemporaryAllocator</a> () noexcept -&gt; std::pmr::polymorphic_allocator&lt; T &gt;</td></tr>
+<tr class="memdesc:a223b8c88be1af22d577a0c73485c362b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <span class="tt">polymorphic_allocator&lt;T&gt;</span> bound to the calling thread's temporary storage.  <br /></td></tr>
 <tr class="memitem:a584b00a787c2bdc0c440f6e5b1a7342a" id="r_a584b00a787c2bdc0c440f6e5b1a7342a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1mem.html#a584b00a787c2bdc0c440f6e5b1a7342a">helios::mem::ResetTemporaryStorage</a> () noexcept</td></tr>
 <tr class="memdesc:a584b00a787c2bdc0c440f6e5b1a7342a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the calling thread's temporary storage.  <br /></td></tr>
 <tr class="memitem:a11e9f696efab645abd5580d08dad7831" id="r_a11e9f696efab645abd5580d08dad7831"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1mem.html#a11e9f696efab645abd5580d08dad7831">helios::mem::ResetAllTemporaryStorage</a> () noexcept</td></tr>
-<tr class="memdesc:a11e9f696efab645abd5580d08dad7831"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases every registered thread's temporary storage.  <br /></td></tr>
+<tr class="memdesc:a11e9f696efab645abd5580d08dad7831"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases every currently live thread's temporary storage.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

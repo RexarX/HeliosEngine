@@ -381,6 +381,10 @@ var annotated_dup =
         [ "Logger", "classhelios_1_1log_1_1Logger.html", "classhelios_1_1log_1_1Logger" ]
       ] ],
       [ "mem", "namespacehelios_1_1mem.html", [
+        [ "anonymous_namespace{temporary_storage.cpp}", "namespacehelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03.html", [
+          [ "Block", "structhelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03_1_1Block.html", "structhelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03_1_1Block" ],
+          [ "Slot", "structhelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03_1_1Slot.html", "structhelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03_1_1Slot" ]
+        ] ],
         [ "AllocatorStats", "structhelios_1_1mem_1_1AllocatorStats.html", "structhelios_1_1mem_1_1AllocatorStats" ],
         [ "ArcFromThis", "classhelios_1_1mem_1_1ArcFromThis.html", "classhelios_1_1mem_1_1ArcFromThis" ],
         [ "ArenaAllocator", "classhelios_1_1mem_1_1ArenaAllocator.html", "classhelios_1_1mem_1_1ArenaAllocator" ],

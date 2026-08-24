@@ -1,5 +1,15 @@
 var NAVTREEINDEX43 =
 {
+"structhelios_1_1input_1_1Gamepad.html#abf3729a940c110404b4f9e7cbbc6cc36":[4,0,2,6,7,34],
+"structhelios_1_1input_1_1Gamepad.html#ace722b59fca952b4104b851b988f92be":[2,0,3,7,8,32],
+"structhelios_1_1input_1_1Gamepad.html#ace722b59fca952b4104b851b988f92be":[4,0,2,6,7,32],
+"structhelios_1_1input_1_1Gamepad.html#acf2761008317f12129b95ddfa6c68cab":[2,0,3,7,8,16],
+"structhelios_1_1input_1_1Gamepad.html#acf2761008317f12129b95ddfa6c68cab":[4,0,2,6,7,16],
+"structhelios_1_1input_1_1Gamepad.html#ad55ccf094cf6bd04148ba7dd8a9a21c8":[2,0,3,7,8,3],
+"structhelios_1_1input_1_1Gamepad.html#ad55ccf094cf6bd04148ba7dd8a9a21c8":[4,0,2,6,7,3],
+"structhelios_1_1input_1_1Gamepad.html#ad86d37538ded48af2e4144b1b60f4e31":[2,0,3,7,8,22],
+"structhelios_1_1input_1_1Gamepad.html#ad86d37538ded48af2e4144b1b60f4e31":[4,0,2,6,7,22],
+"structhelios_1_1input_1_1Gamepad.html#ad99abfe3232807d075ae887281d508a9":[2,0,3,7,8,28],
 "structhelios_1_1input_1_1Gamepad.html#ad99abfe3232807d075ae887281d508a9":[4,0,2,6,7,28],
 "structhelios_1_1input_1_1Gamepad.html#af54103050ee16fff7b2c5632f578c492":[2,0,3,7,8,0],
 "structhelios_1_1input_1_1Gamepad.html#af54103050ee16fff7b2c5632f578c492":[4,0,2,6,7,0],
@@ -239,15 +249,5 @@ var NAVTREEINDEX43 =
 "structhelios_1_1input_1_1Joystick.html#a12249122eb426c12e8c09528b4c0e912":[4,0,2,6,23,10],
 "structhelios_1_1input_1_1Joystick.html#a14edd422305262b0e455bc9b65d0934f":[2,0,3,7,24,1],
 "structhelios_1_1input_1_1Joystick.html#a14edd422305262b0e455bc9b65d0934f":[4,0,2,6,23,1],
-"structhelios_1_1input_1_1Joystick.html#a16cbaee2dbb5483e1ae3d1a6c945edbd":[2,0,3,7,24,5],
-"structhelios_1_1input_1_1Joystick.html#a16cbaee2dbb5483e1ae3d1a6c945edbd":[4,0,2,6,23,5],
-"structhelios_1_1input_1_1Joystick.html#a1d0d1e37b591140c48e90f617abb17bf":[2,0,3,7,24,0],
-"structhelios_1_1input_1_1Joystick.html#a1d0d1e37b591140c48e90f617abb17bf":[4,0,2,6,23,0],
-"structhelios_1_1input_1_1Joystick.html#a4f0d28b6185bec667e098584f3b30ba4":[2,0,3,7,24,12],
-"structhelios_1_1input_1_1Joystick.html#a4f0d28b6185bec667e098584f3b30ba4":[4,0,2,6,23,12],
-"structhelios_1_1input_1_1Joystick.html#a5759fe56b61d6b0eb05832d2c5c5afc9":[2,0,3,7,24,3],
-"structhelios_1_1input_1_1Joystick.html#a5759fe56b61d6b0eb05832d2c5c5afc9":[4,0,2,6,23,3],
-"structhelios_1_1input_1_1Joystick.html#a5907ff22035e70ed4d7b8ce29de0fece":[2,0,3,7,24,6],
-"structhelios_1_1input_1_1Joystick.html#a5907ff22035e70ed4d7b8ce29de0fece":[4,0,2,6,23,6],
-"structhelios_1_1input_1_1Joystick.html#a61363a10299aedfc46eaec04c6b63b4f":[2,0,3,7,24,8]
+"structhelios_1_1input_1_1Joystick.html#a16cbaee2dbb5483e1ae3d1a6c945edbd":[2,0,3,7,24,5]
 };

@@ -1,5 +1,6 @@
 var namespacehelios_1_1mem =
 [
+    [ "anonymous_namespace{temporary_storage.cpp}", "namespacehelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03.html", "namespacehelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03" ],
     [ "AllocatorStats", "structhelios_1_1mem_1_1AllocatorStats.html", "structhelios_1_1mem_1_1AllocatorStats" ],
     [ "ArcFromThis", "classhelios_1_1mem_1_1ArcFromThis.html", "classhelios_1_1mem_1_1ArcFromThis" ],
     [ "ArenaAllocator", "classhelios_1_1mem_1_1ArenaAllocator.html", "classhelios_1_1mem_1_1ArenaAllocator" ],
@@ -46,8 +47,8 @@ var namespacehelios_1_1mem =
     [ "CalculatePaddingWithHeader", "namespacehelios_1_1mem.html#a60734f83a397f43ed176c4925e61b1e2", null ],
     [ "Deallocate", "namespacehelios_1_1mem.html#accf158ad3586cba844fdf7d5db69015f", null ],
     [ "Deallocate", "namespacehelios_1_1mem.html#a5a1496b91256171405c09149e04d4077", null ],
-    [ "GetTemporaryAllocator", "namespacehelios_1_1mem.html#afd588b9b50805dd61275a50a062ef0eb", null ],
-    [ "GetTemporaryStorage", "namespacehelios_1_1mem.html#a2ec90bf1c9cc8b9f6f45cc51aff08d70", null ],
+    [ "GetTemporaryAllocator", "namespacehelios_1_1mem.html#a223b8c88be1af22d577a0c73485c362b", null ],
+    [ "GetTemporaryStorage", "namespacehelios_1_1mem.html#a5c58107a01f3a925f7d28669f6c75e81", null ],
     [ "IsAligned", "namespacehelios_1_1mem.html#aa953071e43d5a6fd86bcfccffea883ff", null ],
     [ "IsPowerOfTwo", "namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec", null ],
     [ "MakeArc", "namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814", null ],

@@ -1,5 +1,15 @@
 var NAVTREEINDEX44 =
 {
+"structhelios_1_1input_1_1Joystick.html#a16cbaee2dbb5483e1ae3d1a6c945edbd":[4,0,2,6,23,5],
+"structhelios_1_1input_1_1Joystick.html#a1d0d1e37b591140c48e90f617abb17bf":[2,0,3,7,24,0],
+"structhelios_1_1input_1_1Joystick.html#a1d0d1e37b591140c48e90f617abb17bf":[4,0,2,6,23,0],
+"structhelios_1_1input_1_1Joystick.html#a4f0d28b6185bec667e098584f3b30ba4":[2,0,3,7,24,12],
+"structhelios_1_1input_1_1Joystick.html#a4f0d28b6185bec667e098584f3b30ba4":[4,0,2,6,23,12],
+"structhelios_1_1input_1_1Joystick.html#a5759fe56b61d6b0eb05832d2c5c5afc9":[2,0,3,7,24,3],
+"structhelios_1_1input_1_1Joystick.html#a5759fe56b61d6b0eb05832d2c5c5afc9":[4,0,2,6,23,3],
+"structhelios_1_1input_1_1Joystick.html#a5907ff22035e70ed4d7b8ce29de0fece":[2,0,3,7,24,6],
+"structhelios_1_1input_1_1Joystick.html#a5907ff22035e70ed4d7b8ce29de0fece":[4,0,2,6,23,6],
+"structhelios_1_1input_1_1Joystick.html#a61363a10299aedfc46eaec04c6b63b4f":[2,0,3,7,24,8],
 "structhelios_1_1input_1_1Joystick.html#a61363a10299aedfc46eaec04c6b63b4f":[4,0,2,6,23,8],
 "structhelios_1_1input_1_1Joystick.html#a6e58872fea3d3187a50c74ada6fdca4e":[2,0,3,7,24,7],
 "structhelios_1_1input_1_1Joystick.html#a6e58872fea3d3187a50c74ada6fdca4e":[4,0,2,6,23,7],
@@ -239,15 +249,5 @@ var NAVTREEINDEX44 =
 "structhelios_1_1input_1_1MouseWheelMsg.html":[4,0,2,6,40],
 "structhelios_1_1input_1_1MouseWheelMsg.html#a1c3c6a18e76b9cf3d3c8e429cfbe3749":[2,0,3,7,41,2],
 "structhelios_1_1input_1_1MouseWheelMsg.html#a1c3c6a18e76b9cf3d3c8e429cfbe3749":[4,0,2,6,40,2],
-"structhelios_1_1input_1_1MouseWheelMsg.html#a2537f1b283a8346fdd4b8d1b1e6d41c2":[2,0,3,7,41,1],
-"structhelios_1_1input_1_1MouseWheelMsg.html#a2537f1b283a8346fdd4b8d1b1e6d41c2":[4,0,2,6,40,1],
-"structhelios_1_1input_1_1MouseWheelMsg.html#a43e640bafeffb3bb375847005a2d2706":[2,0,3,7,41,0],
-"structhelios_1_1input_1_1MouseWheelMsg.html#a43e640bafeffb3bb375847005a2d2706":[4,0,2,6,40,0],
-"structhelios_1_1input_1_1MouseWheelMsg.html#a547b0e10c5779a1d1ffd63d8e3269689":[2,0,3,7,41,6],
-"structhelios_1_1input_1_1MouseWheelMsg.html#a547b0e10c5779a1d1ffd63d8e3269689":[4,0,2,6,40,6],
-"structhelios_1_1input_1_1MouseWheelMsg.html#a871c2ddf9ab8b8ac6ac346dbcf633b07":[2,0,3,7,41,3],
-"structhelios_1_1input_1_1MouseWheelMsg.html#a871c2ddf9ab8b8ac6ac346dbcf633b07":[4,0,2,6,40,3],
-"structhelios_1_1input_1_1MouseWheelMsg.html#aa5099e7202af080c4e63865ef0461546":[2,0,3,7,41,4],
-"structhelios_1_1input_1_1MouseWheelMsg.html#aa5099e7202af080c4e63865ef0461546":[4,0,2,6,40,4],
-"structhelios_1_1input_1_1MouseWheelMsg.html#ac29936af5990173f50ae69a0267b973e":[2,0,3,7,41,7]
+"structhelios_1_1input_1_1MouseWheelMsg.html#a2537f1b283a8346fdd4b8d1b1e6d41c2":[2,0,3,7,41,1]
 };

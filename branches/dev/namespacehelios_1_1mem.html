@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacehelio
 
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#concepts">Concepts</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
@@ -182,6 +183,10 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacehelio
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:anonymous_5Fnamespace_7Btemporary_5Fstorage_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Btemporary_5Fstorage_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03.html">anonymous_namespace{temporary_storage.cpp}</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:AllocatorStats" id="r_AllocatorStats"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1mem_1_1AllocatorStats.html">AllocatorStats</a></td></tr>
@@ -227,7 +232,7 @@ Classes</h2></td></tr>
 <tr class="memitem:StackAllocatorOptions" id="r_StackAllocatorOptions"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1mem_1_1StackAllocatorOptions.html">StackAllocatorOptions</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for <a class="el" href="classhelios_1_1mem_1_1StackAllocator.html" title="PMR stack allocator with LIFO-aware deallocation.">StackAllocator</a>.  <a href="structhelios_1_1mem_1_1StackAllocatorOptions.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TemporaryStorage" id="r_TemporaryStorage"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html">TemporaryStorage</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai's <span class="tt">Temporary_Storage</span>.  <a href="classhelios_1_1mem_1_1TemporaryStorage.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-thread bump allocator for frame and task-scoped allocations. Same idea as Jai's <span class="tt">Temporary_Storage</span>.  <a href="classhelios_1_1mem_1_1TemporaryStorage.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-concepts" class="groupheader"><a id="concepts" name="concepts"></a>
 Concepts</h2></td></tr>
@@ -323,15 +328,15 @@ requires std::derived_from&lt;T, <a class="el" href="classhelios_1_1mem_1_1ArcFr
 requires std::derived_from&lt;T, <a class="el" href="classhelios_1_1mem_1_1ArcFromThis.html">ArcFromThis</a>&lt;T&gt;&gt; &amp;&amp; std::constructible_from&lt;T, Args...&gt;</td></tr>
 <tr class="memitem:a10f597088c98df7a40f43d8ac7236814 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a10f597088c98df7a40f43d8ac7236814">MakeArc</a> (Args &amp;&amp;... args) -&gt; <a class="el" href="#a4eb655420df9f3928063bccd42b58fc2">Arc</a>&lt; T &gt;</td></tr>
 <tr class="memdesc:a10f597088c98df7a40f43d8ac7236814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates an atomically reference-counted object with the default PMR resource.  <br /></td></tr>
-<tr class="memitem:a2ec90bf1c9cc8b9f6f45cc51aff08d70" id="r_a2ec90bf1c9cc8b9f6f45cc51aff08d70"><td class="memItemLeft"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html">TemporaryStorage</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2ec90bf1c9cc8b9f6f45cc51aff08d70">GetTemporaryStorage</a> ()</td></tr>
-<tr class="memdesc:a2ec90bf1c9cc8b9f6f45cc51aff08d70"><td class="mdescLeft">&#160;</td><td class="mdescRight">The calling thread's temporary <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span>.  <br /></td></tr>
-<tr class="memitem:afd588b9b50805dd61275a50a062ef0eb" id="r_afd588b9b50805dd61275a50a062ef0eb"><td class="memTemplParams" colspan="2">template&lt;typename T = std::byte&gt; </td></tr>
-<tr class="memitem:afd588b9b50805dd61275a50a062ef0eb template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#afd588b9b50805dd61275a50a062ef0eb">GetTemporaryAllocator</a> () -&gt; std::pmr::polymorphic_allocator&lt; T &gt;</td></tr>
-<tr class="memdesc:afd588b9b50805dd61275a50a062ef0eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <span class="tt">polymorphic_allocator&lt;T&gt;</span> bound to the calling thread's temporary storage.  <br /></td></tr>
+<tr class="memitem:a5c58107a01f3a925f7d28669f6c75e81" id="r_a5c58107a01f3a925f7d28669f6c75e81"><td class="memItemLeft">std::pmr::memory_resource &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5c58107a01f3a925f7d28669f6c75e81">GetTemporaryStorage</a> () noexcept</td></tr>
+<tr class="memdesc:a5c58107a01f3a925f7d28669f6c75e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">The calling thread's temporary memory resource.  <br /></td></tr>
+<tr class="memitem:a223b8c88be1af22d577a0c73485c362b" id="r_a223b8c88be1af22d577a0c73485c362b"><td class="memTemplParams" colspan="2">template&lt;typename T = std::byte&gt; </td></tr>
+<tr class="memitem:a223b8c88be1af22d577a0c73485c362b template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a223b8c88be1af22d577a0c73485c362b">GetTemporaryAllocator</a> () noexcept -&gt; std::pmr::polymorphic_allocator&lt; T &gt;</td></tr>
+<tr class="memdesc:a223b8c88be1af22d577a0c73485c362b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <span class="tt">polymorphic_allocator&lt;T&gt;</span> bound to the calling thread's temporary storage.  <br /></td></tr>
 <tr class="memitem:a584b00a787c2bdc0c440f6e5b1a7342a" id="r_a584b00a787c2bdc0c440f6e5b1a7342a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a584b00a787c2bdc0c440f6e5b1a7342a">ResetTemporaryStorage</a> () noexcept</td></tr>
 <tr class="memdesc:a584b00a787c2bdc0c440f6e5b1a7342a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the calling thread's temporary storage.  <br /></td></tr>
 <tr class="memitem:a11e9f696efab645abd5580d08dad7831" id="r_a11e9f696efab645abd5580d08dad7831"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a11e9f696efab645abd5580d08dad7831">ResetAllTemporaryStorage</a> () noexcept</td></tr>
-<tr class="memdesc:a11e9f696efab645abd5580d08dad7831"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases every registered thread's temporary storage.  <br /></td></tr>
+<tr class="memdesc:a11e9f696efab645abd5580d08dad7831"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases every currently live thread's temporary storage.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -811,8 +816,8 @@ template&lt;typename T, PmrAllocator Alloc&gt; </div>
 
 </div>
 </div>
-<a id="afd588b9b50805dd61275a50a062ef0eb" name="afd588b9b50805dd61275a50a062ef0eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd588b9b50805dd61275a50a062ef0eb">&#9670;&#160;</a></span>GetTemporaryAllocator()</h2>
+<a id="a223b8c88be1af22d577a0c73485c362b" name="a223b8c88be1af22d577a0c73485c362b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a223b8c88be1af22d577a0c73485c362b">&#9670;&#160;</a></span>GetTemporaryAllocator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -831,7 +836,7 @@ template&lt;typename T = std::byte&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -843,16 +848,16 @@ template&lt;typename T = std::byte&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A <span class="tt">polymorphic_allocator&lt;T&gt; </span>bound to the calling thread's temporary <div class="fragment"><div class="line">std::pmr::vector&lt;int&gt; scratch{<a class="code hl_function" href="#a2ec90bf1c9cc8b9f6f45cc51aff08d70">helios::mem::GetTemporaryStorage&lt;int&gt;</a>()};</div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a2ec90bf1c9cc8b9f6f45cc51aff08d70"><div class="ttname"><a href="#a2ec90bf1c9cc8b9f6f45cc51aff08d70">helios::mem::GetTemporaryStorage</a></div><div class="ttdeci">TemporaryStorage &amp; GetTemporaryStorage()</div><div class="ttdoc">The calling thread&#39;s temporary TemporaryStorage.</div><div class="ttdef"><b>Definition</b> <a href="temporary__storage_8hpp_source.html#l00259">temporary_storage.hpp:259</a></div></div>
+<dl class="section return"><dt>Returns</dt><dd>A <span class="tt">polymorphic_allocator&lt;T&gt;</span> bound to this thread's temporary resource <div class="fragment"><div class="line">std::pmr::vector&lt;int&gt; scratch{<a class="code hl_function" href="#a223b8c88be1af22d577a0c73485c362b">helios::mem::GetTemporaryAllocator&lt;int&gt;</a>()};</div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a223b8c88be1af22d577a0c73485c362b"><div class="ttname"><a href="#a223b8c88be1af22d577a0c73485c362b">helios::mem::GetTemporaryAllocator</a></div><div class="ttdeci">auto GetTemporaryAllocator() noexcept -&gt; std::pmr::polymorphic_allocator&lt; T &gt;</div><div class="ttdoc">Creates a polymorphic_allocator&lt;T&gt; bound to the calling thread&#39;s temporary storage.</div><div class="ttdef"><b>Definition</b> <a href="temporary__storage_8hpp_source.html#l00091">temporary_storage.hpp:91</a></div></div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00273">273</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00091">91</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2ec90bf1c9cc8b9f6f45cc51aff08d70" name="a2ec90bf1c9cc8b9f6f45cc51aff08d70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ec90bf1c9cc8b9f6f45cc51aff08d70">&#9670;&#160;</a></span>GetTemporaryStorage()</h2>
+<a id="a5c58107a01f3a925f7d28669f6c75e81" name="a5c58107a01f3a925f7d28669f6c75e81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c58107a01f3a925f7d28669f6c75e81">&#9670;&#160;</a></span>GetTemporaryStorage()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -861,7 +866,7 @@ template&lt;typename T = std::byte&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html">TemporaryStorage</a> &amp; helios::mem::GetTemporaryStorage </td>
+          <td class="memname">std::pmr::memory_resource &amp; helios::mem::GetTemporaryStorage </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -869,15 +874,15 @@ template&lt;typename T = std::byte&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>The calling thread's temporary <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span>. </p>
-<dl class="section return"><dt>Returns</dt><dd>A reference to the thread-local <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span> instance </dd></dl>
+<p>The calling thread's temporary memory resource. </p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the thread's bump resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00259">259</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00076">76</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -1240,10 +1245,10 @@ requires std::derived_from&lt;T, <a class="el" href="classhelios_1_1mem_1_1RcFro
 </table>
 </div><div class="memdoc">
 
-<p>Releases every registered thread's temporary storage. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Caller must guarantee no thread is concurrently allocating from, or holding, temporary storage. See <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html#af0aa3d78fa73d1b51821c769ea6aaeed" title="Rewinds every registered, still-live thread&#39;s resource.">TemporaryStorage::ResetAll()</a></span>. </dd></dl>
+<p>Releases every currently live thread's temporary storage. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Caller must guarantee no thread is concurrently allocating from temporary storage. See <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html#a5afa0931b42eff5244e5db90aa69fa52" title="Rewind every currently live thread&#39;s storage.">TemporaryStorage::ResetAll()</a></span>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00292">292</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00110">110</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -1271,11 +1276,11 @@ requires std::derived_from&lt;T, <a class="el" href="classhelios_1_1mem_1_1RcFro
 </div><div class="memdoc">
 
 <p>Releases the calling thread's temporary storage. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Invalidates all outstanding allocations made on this thread. See <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span>'s class-level </dd>
+<dl class="section warning"><dt>Warning</dt><dd>Invalidates all outstanding allocations made on this thread. See <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread bump allocator for frame and task-scoped allocations. Same idea as Jai&#39;s Temporary_Storage...">TemporaryStorage</a></span>'s class-level </dd>
 <dd>
 . </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00283">283</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00101">101</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>

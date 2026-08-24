@@ -44,6 +44,7 @@ var hierarchy =
     [ "helios::ecs::BasicQuery&lt; WorldT, Args &gt;", "classhelios_1_1ecs_1_1BasicQuery.html", null ],
     [ "helios::ecs::BasicQueryWithEntity&lt; WorldT, Args &gt;", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html", null ],
     [ "helios::container::BasicStaticString&lt; StrCapacity, CharT, Traits &gt;", "classhelios_1_1container_1_1BasicStaticString.html", null ],
+    [ "helios::mem::anonymous_namespace{temporary_storage.cpp}::Block", "structhelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03_1_1Block.html", null ],
     [ "std::bool_constant", null, [
       [ "helios::ecs::details::IsStructComponentBundle< T, true >", "structhelios_1_1ecs_1_1details_1_1IsStructComponentBundle_3_01T_00_01true_01_4.html", null ],
       [ "helios::utils::details::UniqueTypesHelper< T, Rest... >", "structhelios_1_1utils_1_1details_1_1UniqueTypesHelper_3_01T_00_01Rest_8_8_8_01_4.html", null ],
@@ -548,8 +549,7 @@ var hierarchy =
       [ "helios::mem::FrameAllocator< N >", "classhelios_1_1mem_1_1FrameAllocator.html", null ],
       [ "helios::mem::FreeListAllocator", "classhelios_1_1mem_1_1FreeListAllocator.html", null ],
       [ "helios::mem::PoolAllocator", "classhelios_1_1mem_1_1PoolAllocator.html", null ],
-      [ "helios::mem::StackAllocator", "classhelios_1_1mem_1_1StackAllocator.html", null ],
-      [ "helios::mem::TemporaryStorage", "classhelios_1_1mem_1_1TemporaryStorage.html", null ]
+      [ "helios::mem::StackAllocator", "classhelios_1_1mem_1_1StackAllocator.html", null ]
     ] ],
     [ "helios::ecs::MessageCursor&lt; T &gt;", "structhelios_1_1ecs_1_1MessageCursor.html", null ],
     [ "helios::ecs::MessageId&lt; T &gt;", "structhelios_1_1ecs_1_1MessageId.html", null ],
@@ -713,6 +713,7 @@ var hierarchy =
     [ "helios::sdl3::window::ShutdownSet", "structhelios_1_1sdl3_1_1window_1_1ShutdownSet.html", null ],
     [ "helios::app::ShutdownStage", "structhelios_1_1app_1_1ShutdownStage.html", null ],
     [ "helios::utils::SlideView&lt; Iter &gt;", "classhelios_1_1utils_1_1SlideView.html", null ],
+    [ "helios::mem::anonymous_namespace{temporary_storage.cpp}::Slot", "structhelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03_1_1Slot.html", null ],
     [ "helios::ecs::SparseComponentStorage&lt; T &gt;", "classhelios_1_1ecs_1_1SparseComponentStorage.html", null ],
     [ "helios::container::SparseSet&lt; T, IndexType &gt;", "classhelios_1_1container_1_1SparseSet.html", null ],
     [ "helios::ecs::ComponentManager::SparseStorageEntry", "structhelios_1_1ecs_1_1ComponentManager_1_1SparseStorageEntry.html", null ],
@@ -765,7 +766,9 @@ var hierarchy =
     [ "helios::ecs::SystemStorage", "structhelios_1_1ecs_1_1SystemStorage.html", null ],
     [ "helios::async::Task", "classhelios_1_1async_1_1Task.html", null ],
     [ "helios::async::TaskGraph", "classhelios_1_1async_1_1TaskGraph.html", null ],
+    [ "helios::mem::TemporaryStorage", "classhelios_1_1mem_1_1TemporaryStorage.html", null ],
     [ "helios::input::TextInputMsg", "structhelios_1_1input_1_1TextInputMsg.html", null ],
+    [ "helios::mem::TemporaryStorage::ThreadBinding", "structhelios_1_1mem_1_1TemporaryStorage_1_1ThreadBinding.html", null ],
     [ "helios::app::Time", "structhelios_1_1app_1_1Time.html", null ],
     [ "helios::utils::Timer&lt; Clock &gt;", "classhelios_1_1utils_1_1Timer.html", null ],
     [ "helios::ecs::anonymous_namespace{scheduler.cpp}::TopoNode", "structhelios_1_1ecs_1_1anonymous__namespace_02scheduler_8cpp_03_1_1TopoNode.html", null ],

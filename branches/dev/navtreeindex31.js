@@ -1,5 +1,7 @@
 var NAVTREEINDEX31 =
 {
+"index.html#design-philosophy":[0,1,1],
+"index.html#development":[0,7],
 "index.html#documentation":[0,6],
 "index.html#getting-started":[0,3],
 "index.html#helios-engine":[0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX31 =
 "namespacehelios_1_1app.html#aaa2e7e163848df09000145bed33817e4":[2,0,3,1,88],
 "namespacehelios_1_1app.html#aab4005c98d8bec33b01b1a9be47aad0d":[2,0,3,1,84],
 "namespacehelios_1_1app.html#aabe91818a10550bfa62a53d549b4c23c":[2,0,3,1,57],
-"namespacehelios_1_1app.html#aad0e9cb0d1b47caf5140069e17729d66":[2,0,3,1,104],
-"namespacehelios_1_1app.html#ab12c8d399f188fa434507fe750108351":[2,0,3,1,56],
-"namespacehelios_1_1app.html#ab891c48f4a5152ee2a0635478f7419ee":[2,0,3,1,61]
+"namespacehelios_1_1app.html#aad0e9cb0d1b47caf5140069e17729d66":[2,0,3,1,104]
 };

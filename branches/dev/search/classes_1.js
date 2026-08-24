@@ -75,12 +75,13 @@ var searchData=
   ['basicstaticstring_3c_20n_2c_20char32_5ft_20_3e_72',['BasicStaticString&lt; N, char32_t &gt;',['../classhelios_1_1container_1_1BasicStaticString.html',1,'helios::container']]],
   ['basicstaticstring_3c_20n_2c_20char8_5ft_20_3e_73',['BasicStaticString&lt; N, char8_t &gt;',['../classhelios_1_1container_1_1BasicStaticString.html',1,'helios::container']]],
   ['basicstaticstring_3c_20n_2c_20wchar_5ft_20_3e_74',['BasicStaticString&lt; N, wchar_t &gt;',['../classhelios_1_1container_1_1BasicStaticString.html',1,'helios::container']]],
-  ['bundletypelistimpl_75',['BundleTypeListImpl',['../structhelios_1_1ecs_1_1details_1_1BundleTypeListImpl.html',1,'helios::ecs::details']]],
-  ['bundletypelistimpl_3c_20componentbundletypes_3c_20ts_2e_2e_2e_20_3e_20_3e_76',['BundleTypeListImpl&lt; ComponentBundleTypes&lt; Ts... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1BundleTypeListImpl_3_01ComponentBundleTypes_3_01Ts_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]],
-  ['bundletypelistimpl_3c_20t_20_3e_77',['BundleTypeListImpl&lt; T &gt;',['../structhelios_1_1ecs_1_1details_1_1BundleTypeListImpl_3_01T_01_4.html',1,'helios::ecs::details']]],
-  ['buttoninput_78',['ButtonInput',['../classhelios_1_1input_1_1ButtonInput.html',1,'helios::input']]],
-  ['buttoninput_3c_20gamepadbutton_20_3e_79',['ButtonInput&lt; GamepadButton &gt;',['../classhelios_1_1input_1_1ButtonInput.html',1,'helios::input']]],
-  ['buttoninput_3c_20key_20_3e_80',['ButtonInput&lt; Key &gt;',['../classhelios_1_1input_1_1ButtonInput.html',1,'helios::input']]],
-  ['buttoninput_3c_20mousebutton_20_3e_81',['ButtonInput&lt; MouseButton &gt;',['../classhelios_1_1input_1_1ButtonInput.html',1,'helios::input']]],
-  ['buttoninput_3c_20penbutton_20_3e_82',['ButtonInput&lt; PenButton &gt;',['../classhelios_1_1input_1_1ButtonInput.html',1,'helios::input']]]
+  ['block_75',['Block',['../structhelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03_1_1Block.html',1,'helios::mem::anonymous_namespace{temporary_storage.cpp}']]],
+  ['bundletypelistimpl_76',['BundleTypeListImpl',['../structhelios_1_1ecs_1_1details_1_1BundleTypeListImpl.html',1,'helios::ecs::details']]],
+  ['bundletypelistimpl_3c_20componentbundletypes_3c_20ts_2e_2e_2e_20_3e_20_3e_77',['BundleTypeListImpl&lt; ComponentBundleTypes&lt; Ts... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1BundleTypeListImpl_3_01ComponentBundleTypes_3_01Ts_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]],
+  ['bundletypelistimpl_3c_20t_20_3e_78',['BundleTypeListImpl&lt; T &gt;',['../structhelios_1_1ecs_1_1details_1_1BundleTypeListImpl_3_01T_01_4.html',1,'helios::ecs::details']]],
+  ['buttoninput_79',['ButtonInput',['../classhelios_1_1input_1_1ButtonInput.html',1,'helios::input']]],
+  ['buttoninput_3c_20gamepadbutton_20_3e_80',['ButtonInput&lt; GamepadButton &gt;',['../classhelios_1_1input_1_1ButtonInput.html',1,'helios::input']]],
+  ['buttoninput_3c_20key_20_3e_81',['ButtonInput&lt; Key &gt;',['../classhelios_1_1input_1_1ButtonInput.html',1,'helios::input']]],
+  ['buttoninput_3c_20mousebutton_20_3e_82',['ButtonInput&lt; MouseButton &gt;',['../classhelios_1_1input_1_1ButtonInput.html',1,'helios::input']]],
+  ['buttoninput_3c_20penbutton_20_3e_83',['ButtonInput&lt; PenButton &gt;',['../classhelios_1_1input_1_1ButtonInput.html',1,'helios::input']]]
 ];

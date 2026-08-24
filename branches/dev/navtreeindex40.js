@@ -1,5 +1,15 @@
 var NAVTREEINDEX40 =
 {
+"structhelios_1_1ecs_1_1ResourceConflictInfo.html#ae3fdd3b1a82758f192989ddc99781e06":[4,0,2,4,68,2],
+"structhelios_1_1ecs_1_1ResourceInsertedMsg.html":[2,0,3,5,71],
+"structhelios_1_1ecs_1_1ResourceInsertedMsg.html":[4,0,2,4,69],
+"structhelios_1_1ecs_1_1ResourceInsertedMsg.html#a103262439a77f7975a465647ad997672":[2,0,3,5,71,0],
+"structhelios_1_1ecs_1_1ResourceInsertedMsg.html#a103262439a77f7975a465647ad997672":[4,0,2,4,69,0],
+"structhelios_1_1ecs_1_1ResourceInsertedMsg.html#a7cf1b4458d57ab0c2d3984b0f7ee00d7":[2,0,3,5,71,2],
+"structhelios_1_1ecs_1_1ResourceInsertedMsg.html#a7cf1b4458d57ab0c2d3984b0f7ee00d7":[4,0,2,4,69,2],
+"structhelios_1_1ecs_1_1ResourceInsertedMsg.html#aa00b48142af4112421b9e948562f5308":[2,0,3,5,71,3],
+"structhelios_1_1ecs_1_1ResourceInsertedMsg.html#aa00b48142af4112421b9e948562f5308":[4,0,2,4,69,3],
+"structhelios_1_1ecs_1_1ResourceInsertedMsg.html#ad28eeec6ce112a5be5e9a6727fd0d045":[2,0,3,5,71,1],
 "structhelios_1_1ecs_1_1ResourceInsertedMsg.html#ad28eeec6ce112a5be5e9a6727fd0d045":[4,0,2,4,69,1],
 "structhelios_1_1ecs_1_1ResourceRemovedMsg.html":[2,0,3,5,73],
 "structhelios_1_1ecs_1_1ResourceRemovedMsg.html":[4,0,2,4,71],
@@ -239,15 +249,5 @@ var NAVTREEINDEX40 =
 "structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01T_01_4_01_4.html":[4,0,2,4,117],
 "structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01T_01_4_01_4.html#a24f23756f10b5488b783d8acdf617ff6":[2,0,3,5,119,0],
 "structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01T_01_4_01_4.html#a24f23756f10b5488b783d8acdf617ff6":[4,0,2,4,117,0],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01T_01_4_01_4.html#afb4090edc9bcf907e6604cd973d8ae2e":[2,0,3,5,119,1],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01T_01_4_01_4.html#afb4090edc9bcf907e6604cd973d8ae2e":[4,0,2,4,117,1],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01const_01T_01_4_01_4.html":[2,0,3,5,118],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01const_01T_01_4_01_4.html":[4,0,2,4,116],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01const_01T_01_4_01_4.html#a9c12a255621329b28b85ae1ea180ff72":[2,0,3,5,118,0],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01const_01T_01_4_01_4.html#a9c12a255621329b28b85ae1ea180ff72":[4,0,2,4,116,0],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01const_01T_01_4_01_4.html#af5bae9fe97cdca0aae801dc59eb7fdaf":[2,0,3,5,118,1],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01const_01T_01_4_01_4.html#af5bae9fe97cdca0aae801dc59eb7fdaf":[4,0,2,4,116,1],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01Query_3_01Args_8_8_8_01_4_01_4.html":[2,0,3,5,120],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01Query_3_01Args_8_8_8_01_4_01_4.html":[4,0,2,4,118],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01Query_3_01Args_8_8_8_01_4_01_4.html#a017cd67f8d597b5178d042f505584108":[2,0,3,5,120,2]
+"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01T_01_4_01_4.html#afb4090edc9bcf907e6604cd973d8ae2e":[2,0,3,5,119,1]
 };

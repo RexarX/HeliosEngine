@@ -1,5 +1,15 @@
 var NAVTREEINDEX37 =
 {
+"pen_8hpp.html":[5,0,2,7,0,0,0,10],
+"pen_8hpp_source.html":[5,0,2,7,0,0,0,10],
+"platform_8hpp.html":[5,0,2,10,0,0,0,0],
+"platform_8hpp.html#ada983df2522c351b671d6943887b483e":[5,0,2,10,0,0,0,0,1],
+"platform_8hpp.html#add6cedf0b0fe9ba6f9a8e8fa90ed24e2":[5,0,2,10,0,0,0,0,3],
+"platform_8hpp.html#addef039204a27478a1fff77081d409bd":[5,0,2,10,0,0,0,0,2],
+"platform_8hpp.html#af82a8ce6d0033191eafb5eff2173159c":[5,0,2,10,0,0,0,0,0],
+"platform_8hpp_source.html":[5,0,2,10,0,0,0,0],
+"plot_8hpp.html":[5,0,2,11,0,0,0,9],
+"plot_8hpp_source.html":[5,0,2,11,0,0,0,9],
 "plugin__group_8cpp.html":[5,0,2,0,1,4],
 "plugin__group_8cpp_source.html":[5,0,2,0,1,4],
 "plugin__group_8hpp.html":[5,0,2,0,0,0,0,6],
@@ -239,15 +249,5 @@ var NAVTREEINDEX37 =
 "structhelios_1_1app_1_1ExtractStage.html":[4,0,2,0,8],
 "structhelios_1_1app_1_1ExtractStage.html#ad72b2aa734d1b4f82b3fbfb50e81d8ac":[2,0,3,1,10,0],
 "structhelios_1_1app_1_1ExtractStage.html#ad72b2aa734d1b4f82b3fbfb50e81d8ac":[4,0,2,0,8,0],
-"structhelios_1_1app_1_1First.html":[2,0,3,1,11],
-"structhelios_1_1app_1_1First.html":[4,0,2,0,9],
-"structhelios_1_1app_1_1First.html#afbeb3dfe8847475d3d684e3a26843bad":[2,0,3,1,11,0],
-"structhelios_1_1app_1_1First.html#afbeb3dfe8847475d3d684e3a26843bad":[4,0,2,0,9,0],
-"structhelios_1_1app_1_1FixedRunnerConfig.html":[2,0,3,1,12],
-"structhelios_1_1app_1_1FixedRunnerConfig.html":[4,0,2,0,10],
-"structhelios_1_1app_1_1FixedRunnerConfig.html#a0ed93df5cb52f93389ee44ad163f564a":[2,0,3,1,12,0],
-"structhelios_1_1app_1_1FixedRunnerConfig.html#a0ed93df5cb52f93389ee44ad163f564a":[4,0,2,0,10,0],
-"structhelios_1_1app_1_1FixedRunnerConfig.html#a68b368bfd65418a0c4d8cc1f74d3d54e":[2,0,3,1,12,2],
-"structhelios_1_1app_1_1FixedRunnerConfig.html#a68b368bfd65418a0c4d8cc1f74d3d54e":[4,0,2,0,10,2],
-"structhelios_1_1app_1_1FixedRunnerConfig.html#a6fdb938d1131ad20bf9a12bcdda9a086":[2,0,3,1,12,1]
+"structhelios_1_1app_1_1First.html":[2,0,3,1,11]
 };

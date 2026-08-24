@@ -172,59 +172,82 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classhelios_1_1mem_1_1TemporaryStorage-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">helios::mem::TemporaryStorage Class Reference<span class="mlabels"><span class="mlabel final">final</span></span></div></div>
+  <div class="headertitle"><div class="title">helios::mem::TemporaryStorage Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai's <span class="tt">Temporary_Storage</span>.  
+<p>Per-thread bump allocator for frame and task-scoped allocations. Same idea as Jai's <span class="tt">Temporary_Storage</span>.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for helios::mem::TemporaryStorage:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classhelios_1_1mem_1_1TemporaryStorage.png" alt=""/>
- </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:ThreadBinding" id="r_ThreadBinding"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1mem_1_1TemporaryStorage_1_1ThreadBinding.html">ThreadBinding</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a86df14ba6f8c5f8fc2333e24eb07cc0e" id="r_a86df14ba6f8c5f8fc2333e24eb07cc0e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a86df14ba6f8c5f8fc2333e24eb07cc0e">TemporaryStorage</a> ()=delete</td></tr>
 <tr class="memitem:a2ae160f11cf06375fcaf6543c67bf61f" id="r_a2ae160f11cf06375fcaf6543c67bf61f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> (const TemporaryStorage &amp;)=delete</td></tr>
 <tr class="memitem:ac99b2413a7110582577fd6c1106bfb02" id="r_ac99b2413a7110582577fd6c1106bfb02"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac99b2413a7110582577fd6c1106bfb02">TemporaryStorage</a> (TemporaryStorage &amp;&amp;)=delete</td></tr>
-<tr class="memitem:ab41f82d35155995096a7b9c4c4fa60b7" id="r_ab41f82d35155995096a7b9c4c4fa60b7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab41f82d35155995096a7b9c4c4fa60b7">~TemporaryStorage</a> () noexcept override</td></tr>
-<tr class="memdesc:ab41f82d35155995096a7b9c4c4fa60b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for any in-flight <span class="tt"><a class="el" href="#af0aa3d78fa73d1b51821c769ea6aaeed" title="Rewinds every registered, still-live thread&#39;s resource.">ResetAll()</a></span>, then marks the registry node retired so later walks no longer touch <span class="tt">this</span>.  <br /></td></tr>
-<tr class="memitem:a89e9f5aaa2de0c1524116ccae67256dc" id="r_a89e9f5aaa2de0c1524116ccae67256dc"><td class="memItemLeft"><a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a89e9f5aaa2de0c1524116ccae67256dc">operator=</a> (const <a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;)=delete</td></tr>
-<tr class="memitem:a4fbfeb817a03f54765c50ea7be0d9cc1" id="r_a4fbfeb817a03f54765c50ea7be0d9cc1"><td class="memItemLeft"><a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4fbfeb817a03f54765c50ea7be0d9cc1">operator=</a> (<a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;&amp;)=delete</td></tr>
-<tr class="memitem:ab7bdf8ff5d49e29fafa727d3eb18024f" id="r_ab7bdf8ff5d49e29fafa727d3eb18024f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab7bdf8ff5d49e29fafa727d3eb18024f">Reset</a> () noexcept</td></tr>
-<tr class="memdesc:ab7bdf8ff5d49e29fafa727d3eb18024f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases every block owned by this thread's resource back to upstream.  <br /></td></tr>
-<tr class="memitem:ae025eb972ea1227c6f2822f1eea509b4" id="r_ae025eb972ea1227c6f2822f1eea509b4"><td class="memItemLeft">std::pmr::memory_resource &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae025eb972ea1227c6f2822f1eea509b4">Resource</a> () noexcept</td></tr>
-<tr class="memdesc:ae025eb972ea1227c6f2822f1eea509b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The memory resource backing this thread's temporary allocations.  <br /></td></tr>
+<tr class="memitem:a5c7263bb6c59b0c4e0013c1c7314fbfb" id="r_a5c7263bb6c59b0c4e0013c1c7314fbfb"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5c7263bb6c59b0c4e0013c1c7314fbfb">~TemporaryStorage</a> ()=delete</td></tr>
+<tr class="memitem:a89e9f5aaa2de0c1524116ccae67256dc" id="r_a89e9f5aaa2de0c1524116ccae67256dc"><td class="memItemLeft"><a class="el" href="#a86df14ba6f8c5f8fc2333e24eb07cc0e">TemporaryStorage</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a89e9f5aaa2de0c1524116ccae67256dc">operator=</a> (const <a class="el" href="#a86df14ba6f8c5f8fc2333e24eb07cc0e">TemporaryStorage</a> &amp;)=delete</td></tr>
+<tr class="memitem:a4fbfeb817a03f54765c50ea7be0d9cc1" id="r_a4fbfeb817a03f54765c50ea7be0d9cc1"><td class="memItemLeft"><a class="el" href="#a86df14ba6f8c5f8fc2333e24eb07cc0e">TemporaryStorage</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4fbfeb817a03f54765c50ea7be0d9cc1">operator=</a> (<a class="el" href="#a86df14ba6f8c5f8fc2333e24eb07cc0e">TemporaryStorage</a> &amp;&amp;)=delete</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a28cce4697ba557de178a7458c3dfeac6" id="r_a28cce4697ba557de178a7458c3dfeac6"><td class="memItemLeft">static <a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a28cce4697ba557de178a7458c3dfeac6">Instance</a> ()</td></tr>
-<tr class="memdesc:a28cce4697ba557de178a7458c3dfeac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get this thread's <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span> instance, constructing it on first call.  <br /></td></tr>
-<tr class="memitem:af0aa3d78fa73d1b51821c769ea6aaeed" id="r_af0aa3d78fa73d1b51821c769ea6aaeed"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#af0aa3d78fa73d1b51821c769ea6aaeed">ResetAll</a> () noexcept</td></tr>
-<tr class="memdesc:af0aa3d78fa73d1b51821c769ea6aaeed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rewinds every registered, still-live thread's resource.  <br /></td></tr>
+<tr class="memitem:a67f45e5c03e67f8f3b653f40c7fe0582" id="r_a67f45e5c03e67f8f3b653f40c7fe0582"><td class="memItemLeft">static std::pmr::memory_resource &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a67f45e5c03e67f8f3b653f40c7fe0582">Instance</a> () noexcept</td></tr>
+<tr class="memdesc:a67f45e5c03e67f8f3b653f40c7fe0582"><td class="mdescLeft">&#160;</td><td class="mdescRight">This calling thread's resource, claiming a slot on first call.  <br /></td></tr>
+<tr class="memitem:ab7bdf8ff5d49e29fafa727d3eb18024f" id="r_ab7bdf8ff5d49e29fafa727d3eb18024f"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ab7bdf8ff5d49e29fafa727d3eb18024f">Reset</a> () noexcept</td></tr>
+<tr class="memdesc:ab7bdf8ff5d49e29fafa727d3eb18024f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rewind this thread's own storage.  <br /></td></tr>
+<tr class="memitem:a5afa0931b42eff5244e5db90aa69fa52" id="r_a5afa0931b42eff5244e5db90aa69fa52"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a5afa0931b42eff5244e5db90aa69fa52">ResetAll</a> () noexcept</td></tr>
+<tr class="memdesc:a5afa0931b42eff5244e5db90aa69fa52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rewind every currently live thread's storage.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a47de7aa9d7e0eb19600bd250310cc52c" id="r_a47de7aa9d7e0eb19600bd250310cc52c"><td class="memItemLeft">static constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a47de7aa9d7e0eb19600bd250310cc52c">kInitialBlockSize</a> = 4UZ * (1U &lt;&lt; 10U)</td></tr>
+<tr class="memitem:a7d72dd871b703596128fdfa0b5e89b77" id="r_a7d72dd871b703596128fdfa0b5e89b77"><td class="memItemLeft">static constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a7d72dd871b703596128fdfa0b5e89b77">kMaxThreads</a> = 256</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai's <span class="tt">Temporary_Storage</span>. </p>
-<p>Wraps a <span class="tt">std::pmr::monotonic_buffer_resource</span> in thread-local storage. Every thread gets its own instance lazily on first use (Meyer's singleton). The hot allocation path is a plain bump pointer with no atomics: thread-local storage is the only synchronization mechanism, and it's sufficient because no other thread ever touches this instance.</p>
-<p>Self-registers into a global, lock-free, singly-linked registry on construction so <span class="tt"><a class="el" href="namespacehelios_1_1mem.html#a11e9f696efab645abd5580d08dad7831" title="Releases every registered thread&#39;s temporary storage.">ResetAllTemporaryStorage()</a></span> can reach every thread's instance. Registration is a CAS push onto the registry head, of a small heap-allocated, deliberately-leaked <span class="tt">RegistryNode</span>(NOT of the <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span> object itself). This distinction matters: <span class="tt">this</span> is <span class="tt">thread_local</span>, and its storage is reclaimed by the runtime as soon as the owning thread exits (and may be reused for another thread's block afterwards). A registry built by linking <span class="tt">this</span> directly would leave <span class="tt"><a class="el" href="#af0aa3d78fa73d1b51821c769ea6aaeed" title="Rewinds every registered, still-live thread&#39;s resource.">ResetAll()</a></span> walking into freed/reused memory the moment any registered thread exits. The <span class="tt">RegistryNode</span> instead lives on the heap and is never freed, so it's always safe to read; it holds a raw pointer back to the (possibly already-destroyed) <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span> plus an atomic flag that the destructor sets before the object goes away, and which <span class="tt"><a class="el" href="#af0aa3d78fa73d1b51821c769ea6aaeed" title="Rewinds every registered, still-live thread&#39;s resource.">ResetAll()</a></span> must check before dereferencing that pointer. There is deliberately no unlinking of nodes from the list, so <span class="tt"><a class="el" href="#af0aa3d78fa73d1b51821c769ea6aaeed" title="Rewinds every registered, still-live thread&#39;s resource.">ResetAll()</a></span> can walk it concurrently with new threads registering without any locking or hazard-pointer/epoch reclamation machinery. This is the right trade-off for a long-lived, roughly-fixed-size worker thread pool, but a poor fit for workloads that spawn large numbers of short-lived threads over the life of the process, since each one permanently grows the registry.</p>
-<dl class="section warning"><dt>Warning</dt><dd><span class="tt"><a class="el" href="#ab7bdf8ff5d49e29fafa727d3eb18024f" title="Releases every block owned by this thread&#39;s resource back to upstream.">Reset()</a></span> invalidates every pointer and object previously handed out by this thread's resource. Only call it at a point where nothing on this thread still holds a temporary allocation (e.g. end of frame, end of task). </dd></dl>
+<div class="textblock"><p>Per-thread bump allocator for frame and task-scoped allocations. Same idea as Jai's <span class="tt">Temporary_Storage</span>. </p>
+<p>Any thread that calls <span class="tt"><a class="el" href="#a67f45e5c03e67f8f3b653f40c7fe0582" title="This calling thread&#39;s resource, claiming a slot on first call.">Instance()</a></span> (job workers, third-party threads, test threads) lazily claims one slot from a fixed-size pool on first use. No setup call is required. The hot allocation path is a private bump pointer with no atomics: once a slot is claimed, no other thread allocates from it.</p>
+<p>The <span class="tt">thread_local</span> destructor never calls malloc/free/new/delete. It only CAS-es slot state (<span class="tt">kActive</span> -&gt; <span class="tt">kRetired</span>, or <span class="tt">kBusy</span> -&gt; <span class="tt">kBusyRetired</span> if <span class="tt"><a class="el" href="#a5afa0931b42eff5244e5db90aa69fa52" title="Rewind every currently live thread&#39;s storage.">ResetAll()</a></span> currently holds the slot). Memory a retired slot holds is released lazily by whichever thread later claims that slot, never by the exiting thread.</p>
+<dl class="section warning"><dt>Warning</dt><dd><span class="tt"><a class="el" href="#ab7bdf8ff5d49e29fafa727d3eb18024f" title="Rewind this thread&#39;s own storage.">Reset()</a></span> / <span class="tt"><a class="el" href="#a5afa0931b42eff5244e5db90aa69fa52" title="Rewind every currently live thread&#39;s storage.">ResetAll()</a></span> invalidate every pointer previously handed out by the affected resource(s). Only call them at a point where nothing still holds a temporary allocation (e.g. end of frame, full barrier). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00082">82</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00028">28</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a86df14ba6f8c5f8fc2333e24eb07cc0e" name="a86df14ba6f8c5f8fc2333e24eb07cc0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86df14ba6f8c5f8fc2333e24eb07cc0e">&#9670;&#160;</a></span>TemporaryStorage() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::mem::TemporaryStorage::TemporaryStorage </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2ae160f11cf06375fcaf6543c67bf61f" name="a2ae160f11cf06375fcaf6543c67bf61f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ae160f11cf06375fcaf6543c67bf61f">&#9670;&#160;</a></span>TemporaryStorage() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ae160f11cf06375fcaf6543c67bf61f">&#9670;&#160;</a></span>TemporaryStorage() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,7 +272,7 @@ Static Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="ac99b2413a7110582577fd6c1106bfb02" name="ac99b2413a7110582577fd6c1106bfb02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac99b2413a7110582577fd6c1106bfb02">&#9670;&#160;</a></span>TemporaryStorage() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac99b2413a7110582577fd6c1106bfb02">&#9670;&#160;</a></span>TemporaryStorage() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -273,8 +296,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab41f82d35155995096a7b9c4c4fa60b7" name="ab41f82d35155995096a7b9c4c4fa60b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab41f82d35155995096a7b9c4c4fa60b7">&#9670;&#160;</a></span>~TemporaryStorage()</h2>
+<a id="a5c7263bb6c59b0c4e0013c1c7314fbfb" name="a5c7263bb6c59b0c4e0013c1c7314fbfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c7263bb6c59b0c4e0013c1c7314fbfb">&#9670;&#160;</a></span>~TemporaryStorage()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,21 +314,16 @@ Static Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Waits for any in-flight <span class="tt"><a class="el" href="#af0aa3d78fa73d1b51821c769ea6aaeed" title="Rewinds every registered, still-live thread&#39;s resource.">ResetAll()</a></span>, then marks the registry node retired so later walks no longer touch <span class="tt">this</span>. </p>
-<p>Does not unlink the node from the registry. Must not yield or sleep: this runs from a <span class="tt">thread_local</span> destructor. </p>
-
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00095">95</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
-
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a28cce4697ba557de178a7458c3dfeac6" name="a28cce4697ba557de178a7458c3dfeac6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28cce4697ba557de178a7458c3dfeac6">&#9670;&#160;</a></span>Instance()</h2>
+<a id="a67f45e5c03e67f8f3b653f40c7fe0582" name="a67f45e5c03e67f8f3b653f40c7fe0582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67f45e5c03e67f8f3b653f40c7fe0582">&#9670;&#160;</a></span>Instance()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -314,7 +332,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp; helios::mem::TemporaryStorage::Instance </td>
+          <td class="memname">std::pmr::memory_resource &amp; helios::mem::TemporaryStorage::Instance </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -322,15 +340,15 @@ Static Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get this thread's <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span> instance, constructing it on first call. </p>
-<dl class="section return"><dt>Returns</dt><dd>A reference to the thread-local <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html" title="Per-thread linear allocator for short-lived, frame-scoped allocations. Same idea as Jai&#39;s Temporary_S...">TemporaryStorage</a></span> instance </dd></dl>
+<p>This calling thread's resource, claiming a slot on first call. </p>
+<dl class="section return"><dt>Returns</dt><dd>The thread's <span class="tt">monotonic_buffer_resource</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00250">250</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8cpp_source.html#l00169">169</a> of file <a class="el" href="temporary__storage_8cpp_source.html">temporary_storage.cpp</a>.</p>
 
 </div>
 </div>
@@ -344,9 +362,9 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp; helios::mem::TemporaryStorage::operator= </td>
+          <td class="memname"><a class="el" href="#a86df14ba6f8c5f8fc2333e24eb07cc0e">TemporaryStorage</a> &amp; helios::mem::TemporaryStorage::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a86df14ba6f8c5f8fc2333e24eb07cc0e">TemporaryStorage</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -369,9 +387,9 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp; helios::mem::TemporaryStorage::operator= </td>
+          <td class="memname"><a class="el" href="#a86df14ba6f8c5f8fc2333e24eb07cc0e">TemporaryStorage</a> &amp; helios::mem::TemporaryStorage::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a2ae160f11cf06375fcaf6543c67bf61f">TemporaryStorage</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a86df14ba6f8c5f8fc2333e24eb07cc0e">TemporaryStorage</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -402,20 +420,20 @@ Static Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Releases every block owned by this thread's resource back to upstream. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Invalidates all outstanding allocations made on this thread. </dd></dl>
+<p>Rewind this thread's own storage. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Invalidates prior allocations made on this thread only. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00115">115</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8cpp_source.html#l00173">173</a> of file <a class="el" href="temporary__storage_8cpp_source.html">temporary_storage.cpp</a>.</p>
 
 </div>
 </div>
-<a id="af0aa3d78fa73d1b51821c769ea6aaeed" name="af0aa3d78fa73d1b51821c769ea6aaeed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0aa3d78fa73d1b51821c769ea6aaeed">&#9670;&#160;</a></span>ResetAll()</h2>
+<a id="a5afa0931b42eff5244e5db90aa69fa52" name="a5afa0931b42eff5244e5db90aa69fa52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5afa0931b42eff5244e5db90aa69fa52">&#9670;&#160;</a></span>ResetAll()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -432,46 +450,15 @@ Static Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Rewinds every registered, still-live thread's resource. </p>
-<p>Performs a traversal of the registry's linked list, starting from the current head and following each node's immutable <span class="tt">next</span> pointer, so the traversal itself cannot race with a node being freed.</p>
-<p>This function makes no attempt to synchronize with threads that might be concurrently allocating from (as opposed to merely registering or exiting) the resources it resets, the caller is responsible for guaranteeing that no other thread is allocating from temporary storage while this runs (e.g. only call it from a single coordinating thread at a full frame barrier, after every worker has quiesced). New threads may safely register, and existing threads may safely exit, concurrently with this call; those races are handled. </p><dl class="section warning"><dt>Warning</dt><dd>Invalidates all outstanding allocations on every registered thread whose node this call successfully claims. </dd></dl>
+<p>Rewind every currently live thread's storage. </p>
+<p>Concurrent <span class="tt"><a class="el" href="#a67f45e5c03e67f8f3b653f40c7fe0582" title="This calling thread&#39;s resource, claiming a slot on first call.">Instance()</a></span> / allocate on another thread is a caller error (frame-barrier contract). Thread exit concurrent with this call is handled: a dying thread never frees. <span class="tt"><a class="el" href="#a5afa0931b42eff5244e5db90aa69fa52" title="Rewind every currently live thread&#39;s storage.">ResetAll()</a></span> keeps the slot <span class="tt">kBusy</span> for the duration of <span class="tt">release()</span> so it cannot be reclaimed mid-reset; if the owner left, the restoring CAS fails and the slot is published as <span class="tt">kRetired</span>. </p><dl class="section warning"><dt>Warning</dt><dd>Invalidates all outstanding allocations on every live slot this call successfully claims. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00137">137</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ae025eb972ea1227c6f2822f1eea509b4" name="ae025eb972ea1227c6f2822f1eea509b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae025eb972ea1227c6f2822f1eea509b4">&#9670;&#160;</a></span>Resource()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::pmr::memory_resource &amp; helios::mem::TemporaryStorage::Resource </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The memory resource backing this thread's temporary allocations. </p>
-<dl class="section return"><dt>Returns</dt><dd>A reference to the thread-local memory resource </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00146">146</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8cpp_source.html#l00178">178</a> of file <a class="el" href="temporary__storage_8cpp_source.html">temporary_storage.cpp</a>.</p>
 
 </div>
 </div>
@@ -496,7 +483,31 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00084">84</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00030">30</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7d72dd871b703596128fdfa0b5e89b77" name="a7d72dd871b703596128fdfa0b5e89b77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d72dd871b703596128fdfa0b5e89b77">&#9670;&#160;</a></span>kMaxThreads</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::mem::TemporaryStorage::kMaxThreads = 256</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00031">31</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
