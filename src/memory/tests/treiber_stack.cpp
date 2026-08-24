@@ -2,6 +2,8 @@
 
 #include <helios/memory/treiber_stack.hpp>
 
+#include "spin_barrier.hpp"
+
 #include <algorithm>
 #include <array>
 #include <barrier>
@@ -161,23 +163,23 @@ TEST_SUITE("helios::mem::TreiberStack") {
       }
 
       std::vector<void*> held(kThreads);
-      std::barrier sync(static_cast<std::ptrdiff_t>(kThreads + 1));
+      test::SpinBarrier sync(static_cast<std::ptrdiff_t>(kThreads + 1));
       std::vector<std::thread> threads;
       threads.reserve(kThreads);
 
       for (size_t index = 0; index < kThreads; ++index) {
         threads.emplace_back([&, index] {
           for (size_t round = 0; round < kRounds; ++round) {
-            sync.arrive_and_wait();
+            sync.ArriveAndWait();
             held[index] = stack.Pop();
-            sync.arrive_and_wait();
+            sync.ArriveAndWait();
           }
         });
       }
 
       for (size_t round = 0; round < kRounds; ++round) {
-        sync.arrive_and_wait();
-        sync.arrive_and_wait();
+        sync.ArriveAndWait();
+        sync.ArriveAndWait();
 
         std::vector<void*> round_ptrs = held;
         std::ranges::sort(round_ptrs);
