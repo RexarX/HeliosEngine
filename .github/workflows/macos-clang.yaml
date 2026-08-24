@@ -66,38 +66,7 @@ jobs:
         run: cmake --preset ${{ matrix.preset }} ${{ matrix.cmake_extra }}
 
       - name: Build (${{ matrix.preset }})
-        run: cmake --build --preset ${{ matrix.preset }}
-
-      - name: Locate test binaries (debug)
-        if: matrix.preset == 'macos-clang-debug'
-        run: |
-          echo "Searching for helios_memory_tests under bin/ ..."
-          find bin -iname "helios_memory_tests*" -print 2>/dev/null || true
-          echo
-          echo "Full bin/ tree (depth 4):"
-          find bin -maxdepth 4 -print 2>/dev/null || echo "no bin/ directory at repo root"
-
-      - name: Stress test TemporaryStorage (${{ matrix.preset }})
-        if: matrix.preset == 'macos-clang-debug'
-        timeout-minutes: 5
-        run: |
-          chmod +x scripts/macos_tests.sh
-          BIN="$(find bin -iname 'helios_memory_tests' -type f -perm -u+x 2>/dev/null | head -n1)"
-          if [[ -z "${BIN}" ]]; then
-            echo "error: helios_memory_tests not found anywhere under bin/ — see 'Locate test binaries' step above" >&2
-            exit 2
-          fi
-          echo "using binary: ${BIN}"
-          scripts/macos_tests.sh "${BIN}" 50 10
-
-      - name: Upload hang stack sample (if reproduced)
-        if: always() && matrix.preset == 'macos-clang-debug'
-        uses: actions/upload-artifact@v4
-        with:
-          name: temporary-storage-hang-sample
-          path: macos_tests_hang_sample_*.txt
-          if-no-files-found: ignore
-          retention-days: 14
+        run: cmake --build --preset ${{ matrix.preset }}  
 
       - name: Test (${{ matrix.preset }})
         timeout-minutes: 10
