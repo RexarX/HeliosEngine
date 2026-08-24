@@ -348,7 +348,7 @@ Static Public Attributes</h2></td></tr>
 <p>This calling thread's resource, claiming a slot on first call. </p>
 <dl class="section return"><dt>Returns</dt><dd>The thread's <span class="tt">monotonic_buffer_resource</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8cpp_source.html#l00169">169</a> of file <a class="el" href="temporary__storage_8cpp_source.html">temporary_storage.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8cpp_source.html#l00172">172</a> of file <a class="el" href="temporary__storage_8cpp_source.html">temporary_storage.cpp</a>.</p>
 
 </div>
 </div>
@@ -428,7 +428,7 @@ Static Public Attributes</h2></td></tr>
 <p>Rewind this thread's own storage. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Invalidates prior allocations made on this thread only. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8cpp_source.html#l00173">173</a> of file <a class="el" href="temporary__storage_8cpp_source.html">temporary_storage.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8cpp_source.html#l00176">176</a> of file <a class="el" href="temporary__storage_8cpp_source.html">temporary_storage.cpp</a>.</p>
 
 </div>
 </div>
@@ -458,7 +458,7 @@ Static Public Attributes</h2></td></tr>
 <p>Rewind every currently live thread's storage. </p>
 <p>Concurrent <span class="tt"><a class="el" href="#a67f45e5c03e67f8f3b653f40c7fe0582" title="This calling thread&#39;s resource, claiming a slot on first call.">Instance()</a></span> / allocate on another thread is a caller error (frame-barrier contract). Thread exit concurrent with this call is handled: a dying thread never frees. <span class="tt"><a class="el" href="#a5afa0931b42eff5244e5db90aa69fa52" title="Rewind every currently live thread&#39;s storage.">ResetAll()</a></span> keeps the slot <span class="tt">kBusy</span> for the duration of <span class="tt">release()</span> so it cannot be reclaimed mid-reset; if the owner left, the restoring CAS fails and the slot is published as <span class="tt">kRetired</span>. </p><dl class="section warning"><dt>Warning</dt><dd>Invalidates all outstanding allocations on every live slot this call successfully claims. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8cpp_source.html#l00178">178</a> of file <a class="el" href="temporary__storage_8cpp_source.html">temporary_storage.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8cpp_source.html#l00181">181</a> of file <a class="el" href="temporary__storage_8cpp_source.html">temporary_storage.cpp</a>.</p>
 
 </div>
 </div>

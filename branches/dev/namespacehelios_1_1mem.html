@@ -849,10 +849,10 @@ template&lt;typename T = std::byte&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <span class="tt">polymorphic_allocator&lt;T&gt;</span> bound to this thread's temporary resource <div class="fragment"><div class="line">std::pmr::vector&lt;int&gt; scratch{<a class="code hl_function" href="#a223b8c88be1af22d577a0c73485c362b">helios::mem::GetTemporaryAllocator&lt;int&gt;</a>()};</div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a223b8c88be1af22d577a0c73485c362b"><div class="ttname"><a href="#a223b8c88be1af22d577a0c73485c362b">helios::mem::GetTemporaryAllocator</a></div><div class="ttdeci">auto GetTemporaryAllocator() noexcept -&gt; std::pmr::polymorphic_allocator&lt; T &gt;</div><div class="ttdoc">Creates a polymorphic_allocator&lt;T&gt; bound to the calling thread&#39;s temporary storage.</div><div class="ttdef"><b>Definition</b> <a href="temporary__storage_8hpp_source.html#l00091">temporary_storage.hpp:91</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a223b8c88be1af22d577a0c73485c362b"><div class="ttname"><a href="#a223b8c88be1af22d577a0c73485c362b">helios::mem::GetTemporaryAllocator</a></div><div class="ttdeci">auto GetTemporaryAllocator() noexcept -&gt; std::pmr::polymorphic_allocator&lt; T &gt;</div><div class="ttdoc">Creates a polymorphic_allocator&lt;T&gt; bound to the calling thread&#39;s temporary storage.</div><div class="ttdef"><b>Definition</b> <a href="temporary__storage_8hpp_source.html#l00092">temporary_storage.hpp:92</a></div></div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00091">91</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00092">92</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -882,7 +882,7 @@ template&lt;typename T = std::byte&gt; </div>
 <p>The calling thread's temporary memory resource. </p>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the thread's bump resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00076">76</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00077">77</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -1248,7 +1248,7 @@ requires std::derived_from&lt;T, <a class="el" href="classhelios_1_1mem_1_1RcFro
 <p>Releases every currently live thread's temporary storage. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Caller must guarantee no thread is concurrently allocating from temporary storage. See <span class="tt"><a class="el" href="classhelios_1_1mem_1_1TemporaryStorage.html#a5afa0931b42eff5244e5db90aa69fa52" title="Rewind every currently live thread&#39;s storage.">TemporaryStorage::ResetAll()</a></span>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00110">110</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00111">111</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -1280,7 +1280,7 @@ requires std::derived_from&lt;T, <a class="el" href="classhelios_1_1mem_1_1RcFro
 <dd>
 . </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00101">101</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage_8hpp_source.html#l00102">102</a> of file <a class="el" href="temporary__storage_8hpp_source.html">temporary_storage.hpp</a>.</p>
 
 </div>
 </div>
