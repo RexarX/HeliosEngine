@@ -6,16 +6,22 @@
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/entity/entity.hpp>
 
+#include <memory_resource>
 #include <optional>
 #include <utility>
 
 namespace helios::ecs {
 
-Archetype::Archetype(ArchetypeId id) : id_(std::move(id)) {
+Archetype::Archetype(ArchetypeId id, std::pmr::memory_resource* resource)
+    : id_(std::move(id)),
+      column_map_(resource),
+      entities_(resource),
+      entity_to_row_(resource) {
   const auto types = id_.Types();
-  columns_.resize(types.size());
+  columns_.reserve(types.size());
   for (size_type i = 0; i < types.size(); ++i) {
-    column_map_.emplace(types[i], i);
+    columns_.emplace_back(resource);
+    column_map_.Emplace(types[i], i);
   }
 }
 
@@ -24,7 +30,7 @@ void Archetype::Clear() {
     col.Clear();
   }
   entities_.clear();
-  entity_to_row_.clear();
+  entity_to_row_.Clear();
 }
 
 Entity Archetype::Remove(Entity entity) {
@@ -32,7 +38,7 @@ Entity Archetype::Remove(Entity entity) {
   HELIOS_ASSERT(Contains(entity), "Entity '{}' not present in archetype!",
                 entity);
 
-  const RowIndex row = entity_to_row_.at(entity.Index());
+  const RowIndex row = entity_to_row_.At(entity.Index());
   const auto last_row = static_cast<RowIndex>(entities_.size() - 1);
   Entity swapped_entity;
 
@@ -52,7 +58,7 @@ Entity Archetype::Remove(Entity entity) {
 
   // Pop back.
   entities_.pop_back();
-  entity_to_row_.erase(entity.Index());
+  entity_to_row_.Erase(entity.Index());
 
   for (auto& col : columns_) {
     if (!col.Empty()) {
@@ -65,7 +71,7 @@ Entity Archetype::Remove(Entity entity) {
 
 auto Archetype::ColumnIndex(ComponentTypeIndex index) const noexcept
     -> std::optional<size_type> {
-  const auto it = column_map_.find(index);
+  const auto it = column_map_.Find(index);
   if (it == column_map_.end()) {
     return std::nullopt;
   }

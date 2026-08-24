@@ -7,6 +7,8 @@
 #include <helios/ecs/command/queue.hpp>
 #include <helios/ecs/command/world_buffer.hpp>
 #include <helios/ecs/entity/entity.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
 
 #include <functional>
@@ -14,6 +16,9 @@
 #include <ranges>
 
 namespace helios::ecs {
+
+class AccessPolicy;
+class AccessPolicyBuilder;
 
 /**
  * @brief Thin wrapper over command queue and world for deferred ECS operations.
@@ -23,10 +28,20 @@ namespace helios::ecs {
  */
 class Commands {
 public:
-  constexpr Commands(PmrCmdQueue& queue, World& world,
+  /**
+   * @brief Constructs a `Commands` object with a command queue and world
+   * reference.
+   * @param queue Reference to the command queue
+   * @param world Reference to the world
+   * @param resource Memory resource used for command storage (default: default
+   * memory resource)
+   */
+  constexpr Commands(CmdQueue& queue, World& world,
                      std::pmr::memory_resource* resource =
                          std::pmr::get_default_resource()) noexcept
       : queue_(queue), world_(world), resource_(resource) {}
+
+  Commands(CmdQueue&, World&, std::nullptr_t) = delete;
 
   Commands(const Commands&) = delete;
   Commands(Commands&&) = delete;
@@ -41,16 +56,14 @@ public:
    * operations on it.
    * @return Command buffer for the newly reserved entity
    */
-  PmrEntityCmdBuffer Spawn();
+  EntityCmdBuffer Spawn();
 
   /**
    * @brief Enqueues a command to despawn an entity.
    * @warning Triggers assertion if entity is invalid.
    * @param entity Entity to despawn
    */
-  void Despawn(Entity entity) {
-    queue_.get().Enqueue(DestroyEntityCmd(entity));
-  }
+  void Despawn(Entity entity) { queue_.Enqueue(DestroyEntityCmd(entity)); }
 
   /**
    * @brief Returns a command buffer for an existing entity.
@@ -59,14 +72,14 @@ public:
    * @param entity Entity to get command buffer for
    * @return Command buffer for the entity
    */
-  [[nodiscard]] constexpr PmrEntityCmdBuffer Entity(Entity entity);
+  [[nodiscard]] EntityCmdBuffer Entity(Entity entity);
 
   /**
    * @brief Returns a command buffer for world-level operations.
    * @return Command buffer for world operations
    */
-  [[nodiscard]] constexpr PmrWorldCmdBuffer World() {
-    return {queue_.get(), resource_};
+  [[nodiscard]] WorldCmdBuffer World() {
+    return WorldCmdBuffer(queue_, resource_);
   }
 
   /**
@@ -76,7 +89,7 @@ public:
    */
   template <CommandTrait Cmd>
   void Enqueue(Cmd&& cmd) {
-    queue_.get().Enqueue(std::forward<Cmd>(cmd));
+    queue_.Enqueue(std::forward<Cmd>(cmd));
   }
 
   /**
@@ -87,25 +100,36 @@ public:
   template <std::ranges::input_range R>
     requires CommandTrait<std::ranges::range_value_t<R>>
   void EnqueueBulk(R&& range) {
-    queue_.get().EnqueueBulk(std::forward<R>(range));
+    queue_.EnqueueBulk(std::forward<R>(range));
   }
 
 private:
-  std::reference_wrapper<PmrCmdQueue> queue_;  ///< Command queue reference
+  CmdQueue& queue_;                            ///< Command queue reference
   std::reference_wrapper<class World> world_;  ///< World reference
   std::pmr::memory_resource* resource_;        ///< Memory resource for buffers
 };
 
-inline PmrEntityCmdBuffer Commands::Spawn() {
+inline EntityCmdBuffer Commands::Spawn() {
   auto entity = world_.get().ReserveEntity();
-  return {entity, queue_.get(), resource_};
+  return {entity, queue_, resource_};
 }
 
-constexpr PmrEntityCmdBuffer Commands::Entity(::helios::ecs::Entity entity) {
+inline EntityCmdBuffer Commands::Entity(::helios::ecs::Entity entity) {
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is not valid!", entity);
   HELIOS_ASSERT(world_.get().Exists(entity), "World does not own entity '{}'!",
                 entity);
-  return {entity, queue_.get(), resource_};
+  return {entity, queue_, resource_};
 }
+
+template <>
+struct SystemParamTraits<Commands> {
+  static constexpr Commands Make(World& world, SystemLocalData& data,
+                                 const AccessPolicy& /*policy*/) {
+    return {data.cmd_queue, world, &data.allocator};
+  }
+
+  static constexpr void RegisterAccess(
+      AccessPolicyBuilder& /*builder*/) noexcept {}
+};
 
 }  // namespace helios::ecs

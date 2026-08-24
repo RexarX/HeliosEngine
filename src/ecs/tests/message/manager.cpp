@@ -5,14 +5,36 @@
 #include <helios/ecs/message/queue.hpp>
 
 #include <functional>
+#include <memory_resource>
 #include <string_view>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
 using namespace helios::ecs;
-using ConsumedRegistry = helios::ecs::ConsumedMessagesRegistry<>;
+using ConsumedRegistry = helios::ecs::ConsumedMessagesRegistry;
 
 namespace {
+
+class CountingResource final : public std::pmr::memory_resource {
+public:
+  size_t bytes_allocated = 0;
+
+protected:
+  auto do_allocate(size_t bytes, size_t alignment) -> void* override {
+    bytes_allocated += bytes;
+    return std::pmr::new_delete_resource()->allocate(bytes, alignment);
+  }
+
+  void do_deallocate(void* ptr, size_t bytes, size_t alignment) override {
+    std::pmr::new_delete_resource()->deallocate(ptr, bytes, alignment);
+  }
+
+  [[nodiscard]] auto do_is_equal(
+      const std::pmr::memory_resource& other) const noexcept -> bool override {
+    return this == &other;
+  }
+};
 
 struct Position {
   static constexpr bool kConsumable = true;
@@ -52,6 +74,25 @@ TEST_SUITE("helios::ecs::MessageManager") {
       const MessageManager manager;
       CHECK_EQ(manager.RegisteredMessageCount(), 0);
       CHECK_FALSE(manager.HasMessages());
+      CHECK_EQ(manager.GetMemoryResource(), std::pmr::get_default_resource());
+    }
+
+    SUBCASE("Memory resource ctor") {
+      CountingResource resource;
+      MessageManager manager{&resource};
+
+      CHECK_EQ(manager.GetMemoryResource(), &resource);
+
+      manager.Register<Position>();
+      manager.Write(Position{1.0F, 2.0F});
+      manager.Write(Position{3.0F, 4.0F});
+
+      CHECK(manager.HasMessages<Position>());
+      CHECK_GT(resource.bytes_allocated, 0);
+    }
+
+    SUBCASE("Nullptr ctor is deleted") {
+      CHECK_FALSE(std::is_constructible_v<MessageManager, std::nullptr_t>);
     }
 
     SUBCASE("Move ctor") {
@@ -221,7 +262,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
       manager.Update();
 
       ConsumedRegistry registry;
-      registry.MarkConsumed<Position>(0);  // Index 0 in previous queue
+      registry.MarkConsumed<Position>(MessageId<Position>{0});  // message id 0
       manager.Update(registry);
 
       CHECK_FALSE(manager.HasMessages<Position>());
@@ -235,7 +276,8 @@ TEST_SUITE("helios::ecs::MessageManager") {
       manager.Update();
 
       ConsumedRegistry registry;
-      registry.MarkConsumed<Position>(0);  // Consume only the first
+      registry.MarkConsumed<Position>(
+          MessageId<Position>{0});  // consume message id 0 only
       manager.Update(registry);
 
       const auto prev = manager.PreviousMessages<Position>();
@@ -266,11 +308,10 @@ TEST_SUITE("helios::ecs::MessageManager") {
       manager.Write(Position{});
       manager.Write(Position{20.0F, 0.0F});
 
-      // Index layout before Update: prev=0 items, current=[10, 20] -> global
-      // indices 0, 1
+      // Ids before Update: prev=[], current ids 0,1 for values default and 20
       ConsumedRegistry registry;
       registry.MarkConsumed<Position>(
-          0);  // consume global index 0 -> current[0]
+          MessageId<Position>{0});  // consume message id 0
 
       manager.Update(registry);
 
@@ -293,8 +334,8 @@ TEST_SUITE("helios::ecs::MessageManager") {
       manager.Write(Position{2.0F, 0.0F});
 
       ConsumedRegistry registry;
-      registry.MarkConsumed<Position>(0);
-      registry.MarkConsumed<Position>(1);
+      registry.MarkConsumed<Position>(MessageId<Position>{0});
+      registry.MarkConsumed<Position>(MessageId<Position>{1});
 
       manager.ApplyConsumed(registry);
 
@@ -314,7 +355,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
       manager.Write(Position{20.0F, 0.0F});
 
       ConsumedRegistry registry;
-      registry.MarkConsumed<Position>(0);
+      registry.MarkConsumed<Position>(MessageId<Position>{0});
 
       manager.ApplyConsumed(registry);
 
@@ -347,7 +388,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
       manager.Update();
 
       ConsumedRegistry registry;
-      registry.MarkConsumed<Position>(1);
+      registry.MarkConsumed<Position>(MessageId<Position>{1});
 
       manager.ApplyConsumed(registry);
 
@@ -359,7 +400,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
 
     SUBCASE(
         "ApplyConsumed removes consumed messages from current queue using "
-        "global indices") {
+        "message ids") {
       MessageManager manager;
 
       manager.Register<Position>();
@@ -369,8 +410,8 @@ TEST_SUITE("helios::ecs::MessageManager") {
       manager.Write(Position{30.0F, 0.0F});
 
       ConsumedRegistry registry;
-      registry.MarkConsumed<Position>(1);
-      registry.MarkConsumed<Position>(2);
+      registry.MarkConsumed<Position>(MessageId<Position>{1});
+      registry.MarkConsumed<Position>(MessageId<Position>{2});
 
       manager.ApplyConsumed(registry);
 
@@ -379,6 +420,36 @@ TEST_SUITE("helios::ecs::MessageManager") {
       CHECK_EQ(prev.size(), 1);
       CHECK_EQ(prev[0].x, 10.0F);
       CHECK_EQ(curr.size(), 0);
+    }
+
+    SUBCASE("ApplyConsumed removes by message id after buffer layout changes") {
+      MessageManager manager;
+
+      manager.Register<Position>();
+      manager.Write(Position{1.0F, 0.0F});  // id 0
+      manager.Write(Position{2.0F, 0.0F});  // id 1
+      manager.Write(Position{3.0F, 0.0F});  // id 2
+      manager.Update();
+
+      ConsumedRegistry first;
+      first.MarkConsumed<Position>(MessageId<Position>{0});
+      manager.ApplyConsumed(first);
+
+      const auto after_first = manager.PreviousMessages<Position>();
+      REQUIRE_EQ(after_first.size(), 2);
+      CHECK_EQ(after_first[0].x, 2.0F);
+      CHECK_EQ(after_first[1].x, 3.0F);
+      CHECK_EQ(manager.PreviousIds<Position>()[0].value, 1);
+      CHECK_EQ(manager.PreviousIds<Position>()[1].value, 2);
+
+      ConsumedRegistry second;
+      second.MarkConsumed<Position>(MessageId<Position>{2});
+      manager.ApplyConsumed(second);
+
+      const auto after_second = manager.PreviousMessages<Position>();
+      REQUIRE_EQ(after_second.size(), 1);
+      CHECK_EQ(after_second[0].x, 2.0F);
+      CHECK_EQ(manager.PreviousIds<Position>()[0].value, 1);
     }
   }
 
@@ -466,6 +537,18 @@ TEST_SUITE("helios::ecs::MessageManager") {
       CHECK_EQ(curr.size(), 1);
       CHECK_EQ(curr[0].x, 1.0F);
       CHECK_EQ(curr[0].y, 2.0F);
+    }
+
+    SUBCASE("Write assigns message ids starting at 0") {
+      MessageManager manager;
+
+      manager.Register<Position>();
+      const auto id0 = manager.Write(Position{});
+      const auto id1 = manager.Write(Position{});
+
+      CHECK_EQ(id0.value, 0);
+      CHECK_EQ(id1.value, 1);
+      CHECK_EQ(manager.MessageCount<Position>().value, 2);
     }
 
     SUBCASE("Write multiple messages accumulate in current queue") {
@@ -598,7 +681,7 @@ TEST_SUITE("helios::ecs::MessageManager") {
         "modifying source") {
       MessageManager manager;
       MessageQueue local_mut;
-      const MessageQueue<>& local = local_mut;
+      const MessageQueue& local = local_mut;
 
       manager.Register<Position>();
       local_mut.Register<Position>();
@@ -792,6 +875,86 @@ TEST_SUITE("helios::ecs::MessageManager") {
       manager.Update();
 
       CHECK(manager.CurrentMessages<Position>().empty());
+    }
+  }
+
+  TEST_CASE("helios::ecs::MessageManager::PreviousIds / CurrentIds") {
+    SUBCASE("CurrentIds align with messages written this frame") {
+      MessageManager manager;
+
+      manager.Register<Position>();
+      manager.Write(Position{});
+      manager.Write(Position{});
+
+      const auto ids = manager.CurrentIds<Position>();
+      REQUIRE_EQ(ids.size(), 2);
+      CHECK_EQ(ids[0].value, 0);
+      CHECK_EQ(ids[1].value, 1);
+      CHECK(manager.PreviousIds<Position>().empty());
+    }
+
+    SUBCASE("After Update aging, ids move with messages to previous") {
+      MessageManager manager;
+
+      manager.Register<Position>();
+      manager.Write(Position{});
+      manager.Write(Position{});
+      manager.Update();
+
+      CHECK(manager.CurrentIds<Position>().empty());
+      const auto prev_ids = manager.PreviousIds<Position>();
+      REQUIRE_EQ(prev_ids.size(), 2);
+      CHECK_EQ(prev_ids[0].value, 0);
+      CHECK_EQ(prev_ids[1].value, 1);
+    }
+
+    SUBCASE("Ids remain stable when new messages are written after Update") {
+      MessageManager manager;
+
+      manager.Register<Position>();
+      manager.Write(Position{});
+      manager.Update();
+      manager.Write(Position{});
+
+      CHECK_EQ(manager.PreviousIds<Position>()[0].value, 0);
+      CHECK_EQ(manager.CurrentIds<Position>()[0].value, 1);
+    }
+  }
+
+  TEST_CASE("helios::ecs::MessageManager::MessageCount") {
+    SUBCASE("Starts at zero for a registered type") {
+      MessageManager manager;
+      manager.Register<Position>();
+      CHECK_EQ(manager.MessageCount<Position>().value, 0);
+    }
+
+    SUBCASE("Increments with each Write and survives Update") {
+      MessageManager manager;
+
+      manager.Register<Position>();
+      manager.Write(Position{});
+      manager.Write(Position{});
+      CHECK_EQ(manager.MessageCount<Position>().value, 2);
+      manager.Update();
+      CHECK_EQ(manager.MessageCount<Position>().value, 2);
+      manager.Write(Position{});
+      CHECK_EQ(manager.MessageCount<Position>().value, 3);
+    }
+  }
+
+  TEST_CASE("helios::ecs::MessageManager::UnreadCount") {
+    SUBCASE("Counts retained messages with id greater or equal to cursor") {
+      MessageManager manager;
+
+      manager.Register<Position>();
+      manager.Write(Position{});
+      manager.Write(Position{});
+      manager.Update();
+      manager.Write(Position{});
+
+      CHECK_EQ(manager.UnreadCount<Position>(MessageId<Position>{0}), 3);
+      CHECK_EQ(manager.UnreadCount<Position>(MessageId<Position>{1}), 2);
+      CHECK_EQ(manager.UnreadCount<Position>(MessageId<Position>{3}), 0);
     }
   }
 

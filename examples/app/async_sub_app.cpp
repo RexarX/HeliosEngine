@@ -25,7 +25,7 @@ struct AsyncCounter {
 
 struct LogMain {
   void operator()(hecs::Res<const happ::FrameCount> frames) const {
-    hlog::Info("async_sub_apps: main frame={}", frames->count);
+    hlog::Info("Main frame={}", frames->count);
   }
 };
 
@@ -33,7 +33,7 @@ struct AsyncTick {
   void operator()(hecs::Res<AsyncCounter> counter) const {
     // The sleep makes the background cadence visible beside the main app logs.
     ++counter->ticks;
-    hlog::Info("async_sub_apps: async tick {}", counter->ticks);
+    hlog::Info("Async tick {}", counter->ticks);
     std::this_thread::sleep_for(std::chrono::milliseconds(30));
   }
 };
@@ -49,7 +49,7 @@ struct ExitAfterFrames {
   void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::MessageWriter<happ::AppExit> exit_writer) const {
     if (frames->count >= 15) {
-      hlog::Info("async_sub_apps: requesting shutdown");
+      hlog::Info("Requesting shutdown");
       exit_writer.Write(happ::AppExit::Success());
     }
   }
@@ -71,8 +71,8 @@ int main() {
   async_sub.AddSystem(happ::kUpdate, AsyncTick{});
   app.InsertSubApp(AsyncLabel{}, std::move(async_sub));
 
-  hlog::Info("async_sub_apps: starting app with async sub-app");
+  hlog::Info("Starting app with async sub-app");
   const auto code = app.Run();
-  hlog::Info("async_sub_apps: app finished");
+  hlog::Info("App finished");
   return std::to_underlying(code);
 }

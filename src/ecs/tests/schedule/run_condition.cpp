@@ -1,15 +1,15 @@
 #include <doctest/doctest.h>
 
-#include <helios/ecs/message/async_reader.hpp>
-#include <helios/ecs/message/async_writer.hpp>
-#include <helios/ecs/message/message.hpp>
-#include <helios/ecs/message/reader.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/message/params.hpp>
+#include <helios/ecs/query/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/schedule/run_condition.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/world_view.hpp>
+
+#include <cstddef>
+#include <string>
+#include <string_view>
 
 using namespace helios::ecs;
 
@@ -35,6 +35,7 @@ struct Position {
 
 struct ThreadSafeData {
   static constexpr bool kThreadSafe = true;
+
   int value = 0;
 };
 
@@ -44,6 +45,7 @@ struct TestMessage {
 
 struct AsyncTestEvent {
   static constexpr bool kAsync = true;
+
   int value = 0;
 };
 
@@ -75,7 +77,8 @@ struct WorldViewRunCondition {
 
 struct MessageReaderRunCondition {
   bool operator()(MessageReader<TestMessage> reader) const {
-    return reader.Collect().empty() || reader.Collect().front().value >= 0;
+    const auto msgs = reader.Collect();
+    return msgs.empty() || msgs.front().value >= 0;
   }
 };
 
@@ -141,7 +144,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
           }));
 
       World world;
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK(result);
@@ -154,7 +157,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
           }));
 
       World world;
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK_FALSE(result);
@@ -168,7 +171,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
       CHECK(storage.run_condition);
 
       World world;
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK(result);
@@ -180,7 +183,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
       CHECK(storage.run_condition);
 
       World world;
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK_FALSE(result);
@@ -208,7 +211,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
       World world;
       Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{1.0F});
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK(result);
@@ -227,7 +230,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
 
       World world;
       world.InsertResources(ThreadSafeData{5});
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK(result);
@@ -246,7 +249,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
 
       World world;
       [[maybe_unused]] Entity entity = world.CreateEntity();
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK(result);
@@ -274,7 +277,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
 
       World world;
       world.AddMessage<TestMessage>();
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK(result);
@@ -286,7 +289,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
 
       World world;
       world.AddMessage<AsyncTestEvent>();
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK(result);
@@ -305,7 +308,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
 
       World world;
       world.InsertResources(CounterResource{0});
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK(result);
@@ -324,7 +327,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
 
       World world;
       world.InsertResources(ThreadSafeData{3});
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK(result);
@@ -347,7 +350,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
 
       World world;
       world.InsertResources(CounterResource{5});
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK(result);
@@ -360,7 +363,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
 
       World world;
       world.InsertResources(CounterResource{5});
-      SystemLocalData local_data = SystemLocalData::From();
+      auto local_data = SystemLocalData::From();
 
       const bool result = storage.run_condition(world, local_data);
       CHECK_FALSE(result);

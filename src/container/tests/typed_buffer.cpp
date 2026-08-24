@@ -2,10 +2,11 @@
 
 #include <helios/container/typed_buffer.hpp>
 
-#include <atomic>
+#include <cstddef>
 #include <memory>
 #include <memory_resource>
 #include <string>
+#include <utility>
 
 using namespace helios::container;
 
@@ -68,33 +69,29 @@ struct CountingType {
   }
 };
 
-template <typename T>
-struct TrackingAllocator {
-  using value_type = T;
-
-  static inline std::atomic<int> allocation_count{0};
-
-  TrackingAllocator() noexcept = default;
-
-  template <typename U>
-  explicit TrackingAllocator(const TrackingAllocator<U>&) noexcept {}
-
-  T* allocate(size_t n) {
-    ++allocation_count;
-    return std::allocator<T>{}.allocate(n);
+class TrackingResource final : public std::pmr::memory_resource {
+public:
+  [[nodiscard]] int AllocationCount() const noexcept {
+    return allocation_count_;
   }
 
-  void deallocate(T* p, size_t n) noexcept {
-    --allocation_count;
-    std::allocator<T>{}.deallocate(p, n);
+private:
+  void* do_allocate(size_t bytes, size_t alignment) override {
+    ++allocation_count_;
+    return std::pmr::get_default_resource()->allocate(bytes, alignment);
   }
 
-  template <typename U>
-  bool operator==(const TrackingAllocator<U>&) const noexcept {
-    return true;
+  void do_deallocate(void* pointer, size_t bytes, size_t alignment) override {
+    --allocation_count_;
+    std::pmr::get_default_resource()->deallocate(pointer, bytes, alignment);
   }
 
-  static void ResetCount() noexcept { allocation_count = 0; }
+  [[nodiscard]] bool do_is_equal(
+      const std::pmr::memory_resource& other) const noexcept override {
+    return this == &other;
+  }
+
+  int allocation_count_ = 0;
 };
 
 }  // namespace
@@ -110,11 +107,12 @@ TEST_SUITE("helios::container::TypedBuffer") {
   }
 
   TEST_CASE("helios::container::TypedBuffer::ctor: allocator construction") {
-    std::allocator<std::byte> alloc;
-    TypedBuffer buf(alloc);
+    std::pmr::monotonic_buffer_resource resource;
+    TypedBuffer buf(&resource);
 
     CHECK(buf.Empty());
     CHECK_FALSE(buf.HasType());
+    CHECK_EQ(buf.GetMemoryResource(), &resource);
   }
 
   TEST_CASE(
@@ -139,11 +137,12 @@ TEST_SUITE("helios::container::TypedBuffer") {
   }
 
   TEST_CASE("helios::container::TypedBuffer::ctor: in_place with allocator") {
-    std::allocator<std::byte> alloc;
-    TypedBuffer buf(std::in_place_type<int>, alloc, 99);
+    std::pmr::monotonic_buffer_resource resource;
+    TypedBuffer buf(std::in_place_type<int>, &resource, 99);
 
     CHECK_FALSE(buf.Empty());
     CHECK_EQ(buf.Value<int>(), 99);
+    CHECK_EQ(buf.GetMemoryResource(), &resource);
   }
 
   TEST_CASE(
@@ -264,6 +263,23 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(CountingType::construct_count, CountingType::destruct_count);
   }
 
+  TEST_CASE("helios::container::TypedBuffer::ReserveBytes: reserves capacity") {
+    SUBCASE("empty buffer") {
+      TypedBuffer buf;
+      buf.ReserveBytes(128);
+      CHECK_GE(buf.CapacityBytes(), 128);
+      CHECK(buf.Empty());
+    }
+
+    SUBCASE("preserves stored non-trivial value") {
+      TypedBuffer buf;
+      buf.Set<NonTrivial>("keep", 9);
+      buf.ReserveBytes(buf.CapacityBytes() + 64);
+      CHECK_EQ(buf.Value<NonTrivial>().data, "keep");
+      CHECK_EQ(buf.Value<NonTrivial>().value, 9);
+    }
+  }
+
   TEST_CASE("helios::container::TypedBuffer::Set: set new value") {
     TypedBuffer buf;
 
@@ -322,8 +338,10 @@ TEST_SUITE("helios::container::TypedBuffer") {
   }
 
   TEST_CASE("helios::container::TypedBuffer::Swap: swaps two buffers") {
-    TypedBuffer buf1(std::in_place_type<int>, 10);
-    TypedBuffer buf2(std::in_place_type<int>, 20);
+    std::pmr::monotonic_buffer_resource first_resource;
+    std::pmr::monotonic_buffer_resource second_resource;
+    TypedBuffer buf1(std::in_place_type<int>, &first_resource, 10);
+    TypedBuffer buf2(std::in_place_type<int>, &second_resource, 20);
 
     buf1.Swap(buf2);
 
@@ -407,7 +425,7 @@ TEST_SUITE("helios::container::TypedBuffer") {
     TypedBuffer buf(std::in_place_type<int>, 0);
 
     const auto stored_id = buf.StoredTypeId();
-    const auto int_id = TypedBuffer<>::TypeIndexOf<int>();
+    const auto int_id = TypedBuffer::TypeIndexOf<int>();
 
     CHECK_EQ(stored_id, int_id);
   }
@@ -467,17 +485,16 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Value<std::string>(), "changed");
   }
 
-  TEST_CASE("helios::container::TypedBuffer::custom allocator") {
-    using TrackingBuffer = TypedBuffer<TrackingAllocator<std::byte>>;
-    TrackingAllocator<std::byte>::ResetCount();
-
+  TEST_CASE("helios::container::TypedBuffer::custom memory resource") {
+    TrackingResource resource;
     {
-      TrackingBuffer buf(std::in_place_type<int>, 42);
+      TypedBuffer buf(&resource);
+      buf.Set<int>(42);
       CHECK_FALSE(buf.Empty());
       CHECK_EQ(buf.Value<int>(), 42);
     }
 
-    CHECK_EQ(TrackingAllocator<std::byte>::allocation_count.load(), 0);
+    CHECK_EQ(resource.AllocationCount(), 0);
   }
 
   TEST_CASE(
@@ -504,11 +521,11 @@ TEST_SUITE("helios::container::TypedBuffer") {
     CHECK_EQ(buf.Value<float>(), doctest::Approx(1.5f));
   }
 
-  TEST_CASE("helios::container::PmrTypedBuffer: works with memory_resource") {
+  TEST_CASE("helios::container::TypedBuffer: works with memory_resource") {
     std::byte buffer[256];
     std::pmr::monotonic_buffer_resource resource(buffer, sizeof(buffer));
 
-    PmrTypedBuffer typed_buffer{&resource};
+    TypedBuffer typed_buffer{&resource};
     typed_buffer.Set<int>(42);
 
     CHECK_FALSE(typed_buffer.Empty());

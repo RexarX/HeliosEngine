@@ -1,14 +1,17 @@
 #include <doctest/doctest.h>
 
-#include <helios/app/app.hpp>
-#include <helios/ecs/ecs.hpp>
+#include <helios/app/application.hpp>
+#include <helios/app/builtin/executor.hpp>
+#include <helios/ecs/resource/params.hpp>
+#include <helios/ecs/resource/resource.hpp>
 
+using namespace helios;
 using namespace helios::app;
 
 TEST_SUITE("helios::app::Executor") {
   TEST_CASE("helios::app::Executor::kThreadSafe") {
     SUBCASE("Executor is a thread-safe resource") {
-      CHECK_EQ(helios::ecs::IsResourceThreadSafe<Executor>(), true);
+      CHECK_EQ(ecs::IsResourceThreadSafe<Executor>(), true);
     }
   }
 
@@ -48,7 +51,7 @@ TEST_SUITE("helios::app::ExecutorPlugin") {
       struct ReadExecutor {
         size_t* observed_worker_count = nullptr;
 
-        void operator()(helios::ecs::AsyncRes<Executor> executor) const {
+        void operator()(ecs::AsyncRes<Executor> executor) const {
           *observed_worker_count = (*executor)->WorkerCount();
         }
       };

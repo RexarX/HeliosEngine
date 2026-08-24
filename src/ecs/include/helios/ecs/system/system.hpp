@@ -1,6 +1,6 @@
 #pragma once
 
-#include <helios/ecs/system/system_param.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/utils/common_traits.hpp>
 #include <helios/utils/hash.hpp>
 #include <helios/utils/type_info.hpp>
@@ -8,6 +8,7 @@
 #include <compare>
 #include <concepts>
 #include <cstddef>
+#include <functional>
 #include <string_view>
 #include <tuple>
 #include <type_traits>

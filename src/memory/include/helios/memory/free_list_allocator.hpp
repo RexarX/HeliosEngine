@@ -1,8 +1,8 @@
 #pragma once
 
-#include <helios/assert.hpp>
 #include <helios/memory/common.hpp>
 #include <helios/memory/details/profile.hpp>
+#include <helios/memory/treiber_stack.hpp>
 
 #include <atomic>
 #include <cstddef>
@@ -143,14 +143,22 @@ private:
   };
 
   struct RegionHeader {
+    RegionHeader* next = nullptr;
     void* buffer = nullptr;
     size_t capacity = 0;
-    std::atomic<RegionHeader*> next{nullptr};
   };
 
   enum class GrowState : uint8_t { kIdle, kGrowing };
 
   static RegionHeader* CreateRegion(size_t capacity) noexcept;
+  [[nodiscard]] RegionHeader* HeadRegion() const noexcept {
+    return static_cast<RegionHeader*>(regions_.Top());
+  }
+
+  [[nodiscard]] static RegionHeader* NextRegion(
+      const RegionHeader* region) noexcept {
+    return static_cast<RegionHeader*>(TreiberStack::Next(region));
+  }
   void FreeRegions(RegionHeader* region) noexcept;
   void ReleaseRegions() noexcept;
 
@@ -169,7 +177,7 @@ private:
   }
 
   FreeBlockHeader* free_list_ = nullptr;
-  std::atomic<RegionHeader*> regions_{nullptr};
+  TreiberStack regions_;
   std::atomic<GrowState> grow_state_{GrowState::kIdle};
   size_t initial_capacity_ = 0;
   GrowthPolicy growth_;
@@ -185,49 +193,6 @@ private:
 
   mutable HELIOS_MEMORY_PROFILE_LOCKABLE(std::mutex, mutex_);
 };
-
-inline FreeListAllocator::FreeListAllocator(
-    FreeListAllocatorOptions options) noexcept
-    : initial_capacity_(options.initial_capacity), growth_(options.growth) {
-  HELIOS_ASSERT(initial_capacity_ > sizeof(FreeBlockHeader),
-                "initial_capacity '{}' is too small!", initial_capacity_);
-  HELIOS_ASSERT(growth_.max_capacity >= initial_capacity_,
-                "max_capacity '{}' must be >= initial_capacity '{}'!",
-                growth_.max_capacity, initial_capacity_);
-
-  HELIOS_MEMORY_PROFILE_LOCK_NAME(mutex_,
-                                  std::string_view{"FreeListAllocator"});
-
-  RegionHeader* const initial_region = CreateRegion(initial_capacity_);
-  HELIOS_VERIFY(initial_region != nullptr,
-                "Failed to allocate free-list region!");
-
-  regions_.store(initial_region, std::memory_order_release);
-  capacity_.store(initial_capacity_, std::memory_order_relaxed);
-
-  {
-    const std::scoped_lock lock(mutex_);
-    InitializeRegionLocked(*initial_region);
-  }
-}
-
-inline FreeListAllocator::FreeListAllocator(
-    FreeListAllocator&& other) noexcept {
-  const std::scoped_lock lock(other.mutex_);
-  MoveFrom(other);
-}
-
-inline FreeListAllocator& FreeListAllocator::operator=(
-    FreeListAllocator&& other) noexcept {
-  if (this == &other) [[unlikely]] {
-    return *this;
-  }
-
-  const std::scoped_lock lock(mutex_, other.mutex_);
-  ReleaseRegions();
-  MoveFrom(other);
-  return *this;
-}
 
 inline AllocatorStats FreeListAllocator::Stats() const noexcept {
   return {

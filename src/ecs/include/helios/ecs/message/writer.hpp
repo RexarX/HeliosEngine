@@ -1,35 +1,34 @@
 #pragma once
 
+#include <helios/ecs/message/id.hpp>
+#include <helios/ecs/message/manager.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/message/queue.hpp>
 
 #include <concepts>
 #include <functional>
-#include <memory_resource>
 #include <ranges>
+#include <type_traits>
 #include <utility>
 
 namespace helios::ecs {
 
 /**
- * @brief Type-safe writer for regular messages with a configurable queue
- * allocator.
+ * @brief Type-safe writer for regular messages.
  * @details Messages written through `BasicMessageWriter` are buffered in a
  * message queue and merged into the global `MessageManager` at sync time when
- * used from system local data.
+ * used from system local data. Ids are assigned during that merge.
  * @note Not thread-safe.
  * @tparam T Message type satisfying `MessageTrait`
- * @tparam Allocator Allocator type for the underlying message queue (default:
- * `std::allocator<std::byte>`)
  */
-template <MessageTrait T, typename Allocator = std::allocator<std::byte>>
+template <MessageTrait T>
 class BasicMessageWriter {
 public:
   /**
    * @brief Constructs a `BasicMessageWriter` that writes to a message queue.
    * @param queue Reference to the message queue
    */
-  explicit constexpr BasicMessageWriter(MessageQueue<Allocator>& queue) noexcept
+  explicit constexpr BasicMessageWriter(MessageQueue& queue) noexcept
       : queue_(queue) {}
   BasicMessageWriter(const BasicMessageWriter&) = delete;
   constexpr BasicMessageWriter(BasicMessageWriter&&) noexcept = default;
@@ -46,7 +45,7 @@ public:
    */
   template <typename U = T>
     requires std::same_as<std::remove_cvref_t<U>, T>
-  void Write(U&& message) const {
+  constexpr void Write(U&& message) const {
     queue_.get().Enqueue(std::forward<U>(message));
   }
 
@@ -57,7 +56,7 @@ public:
    */
   template <std::ranges::input_range R>
     requires std::same_as<std::ranges::range_value_t<R>, T>
-  void WriteBulk(R&& messages) const {
+  constexpr void WriteBulk(R&& messages) const {
     queue_.get().EnqueueBulk(std::forward<R>(messages));
   }
 
@@ -68,23 +67,80 @@ public:
    */
   template <typename... Args>
     requires std::constructible_from<T, Args...>
-  void Emplace(Args&&... args) const {
+  constexpr void Emplace(Args&&... args) const {
     queue_.get().Enqueue(T{std::forward<Args>(args)...});
   }
 
 private:
-  std::reference_wrapper<MessageQueue<Allocator>>
-      queue_;  ///< Reference to the message queue
+  std::reference_wrapper<MessageQueue> queue_;  ///< Reference to message queue
 };
 
+/**
+ * @brief Writer that inserts messages directly into a `MessageManager`.
+ * @details Assigns stable message ids immediately. Used by
+ * `World::WriteMessages`.
+ * @note Not thread-safe.
+ * @tparam T Message type satisfying `MessageTrait`
+ */
 template <MessageTrait T>
-using PmrBasicMessageWriter =
-    BasicMessageWriter<T, std::pmr::polymorphic_allocator<>>;
+class ManagedMessageWriter {
+public:
+  /**
+   * @brief Constructs a writer bound to a message manager.
+   * @param manager Message manager that owns the global queues
+   */
+  explicit constexpr ManagedMessageWriter(MessageManager& manager) noexcept
+      : manager_(manager) {}
+
+  ManagedMessageWriter(const ManagedMessageWriter&) = delete;
+  constexpr ManagedMessageWriter(ManagedMessageWriter&&) noexcept = default;
+  constexpr ~ManagedMessageWriter() noexcept = default;
+
+  ManagedMessageWriter& operator=(const ManagedMessageWriter&) = delete;
+  constexpr ManagedMessageWriter& operator=(ManagedMessageWriter&&) noexcept =
+      default;
+
+  /**
+   * @brief Writes a single message into the manager's current queue.
+   * @tparam U Message type, must be the same as `T`
+   * @param message Message to write
+   * @return Assigned message id
+   */
+  template <typename U = T>
+    requires std::same_as<std::remove_cvref_t<U>, T>
+  constexpr auto Write(U&& message) const -> MessageId<T> {
+    return manager_.get().Write(std::forward<U>(message));
+  }
+
+  /**
+   * @brief Writes multiple messages into the manager's current queue.
+   * @tparam R Range of messages
+   * @param messages Range of messages to write
+   */
+  template <std::ranges::input_range R>
+    requires std::same_as<std::ranges::range_value_t<R>, T>
+  constexpr void WriteBulk(R&& messages) const {
+    manager_.get().WriteBulk(std::forward<R>(messages));
+  }
+
+  /**
+   * @brief Constructs a message in-place and writes it into the manager.
+   * @tparam Args Constructor argument types
+   * @param args Arguments to forward to the message constructor
+   * @return Assigned message id
+   */
+  template <typename... Args>
+    requires std::constructible_from<T, Args...>
+  constexpr auto Emplace(Args&&... args) const -> MessageId<T> {
+    return manager_.get().Write(T{std::forward<Args>(args)...});
+  }
+
+private:
+  std::reference_wrapper<MessageManager> manager_;
+};
 
 /**
- * @brief Alias for `BasicMessageWriter` bound to a PMR allocator.
- * @details The canonical message writer type for system parameters. Users who
- * need a different allocator can use `BasicMessageWriter` directly.
+ * @brief Canonical message writer type for system parameters.
  * @tparam T Message type satisfying `MessageTrait`
  *
  * @code
@@ -94,6 +150,6 @@ using PmrBasicMessageWriter =
  * @endcode
  */
 template <MessageTrait T>
-using MessageWriter = PmrBasicMessageWriter<T>;
+using MessageWriter = BasicMessageWriter<T>;
 
 }  // namespace helios::ecs

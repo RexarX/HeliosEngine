@@ -5,6 +5,7 @@
 #include <helios/ecs/message/message.hpp>
 
 #include <concepts>
+#include <functional>
 #include <ranges>
 #include <utility>
 
@@ -26,7 +27,7 @@ public:
    * @brief Constructs an `AsyncMessageWriter` from the message manager.
    * @param manager Mutable reference to the message manager
    */
-  explicit constexpr AsyncMessageWriter(MessageManager& manager) noexcept
+  explicit AsyncMessageWriter(MessageManager& manager) noexcept
       : AsyncMessageWriter(manager.AsyncQueue()) {}
 
   /**

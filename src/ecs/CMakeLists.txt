@@ -27,6 +27,7 @@ helios_module(
         include/helios/ecs/message/consumed_registry.hpp
         include/helios/ecs/message/manager.hpp
         include/helios/ecs/message/message.hpp
+        include/helios/ecs/message/params.hpp
         include/helios/ecs/message/queue.hpp
         include/helios/ecs/message/reader.hpp
         include/helios/ecs/message/wrapper.hpp
@@ -34,27 +35,30 @@ helios_module(
         include/helios/ecs/query/details/query_args.hpp
         include/helios/ecs/query/details/traits.hpp
         include/helios/ecs/query/iterator.hpp
+        include/helios/ecs/query/params.hpp
         include/helios/ecs/query/query.hpp
-        include/helios/ecs/resource/local_param.hpp
         include/helios/ecs/resource/manager.hpp
-        include/helios/ecs/resource/param.hpp
+        include/helios/ecs/resource/params.hpp
         include/helios/ecs/resource/resource.hpp
         include/helios/ecs/system/access_decl.hpp
         include/helios/ecs/system/access_policy.hpp
         include/helios/ecs/system/composite_param.hpp
         include/helios/ecs/system/param_policy.hpp
-        include/helios/ecs/system/param_traits.hpp
         include/helios/ecs/system/system.hpp
-        include/helios/ecs/system/system_param.hpp
+        include/helios/ecs/system/param.hpp
         include/helios/ecs/schedule/executor/executor.hpp
         include/helios/ecs/schedule/executor/main_thread.hpp
         include/helios/ecs/schedule/executor/multi_threaded.hpp
         include/helios/ecs/schedule/executor/single_threaded.hpp
         include/helios/ecs/schedule/dag.hpp
+        include/helios/ecs/schedule/local_arena.hpp
         include/helios/ecs/schedule/run_condition.hpp
+        include/helios/ecs/schedule/run_scope.hpp
+        include/helios/ecs/schedule/run_stage_options.hpp
         include/helios/ecs/schedule/schedule.hpp
         include/helios/ecs/schedule/scheduler.hpp
         include/helios/ecs/schedule/stage.hpp
+        include/helios/ecs/schedule/stage_settings.hpp
         include/helios/ecs/schedule/system_group_handle.hpp
         include/helios/ecs/schedule/system_handle.hpp
         include/helios/ecs/schedule/system_local_data.hpp
@@ -70,12 +74,17 @@ helios_module(
     SOURCES
         src/component/archetype.cpp
         src/component/manager.cpp
+        src/entity/manager.cpp
+        src/message/consumed_registry.cpp
+        src/message/manager.cpp
         src/schedule/executor/main_thread.cpp
         src/schedule/executor/multi_threaded.cpp
         src/schedule/executor/single_threaded.cpp
         src/schedule/dag.cpp
         src/schedule/schedule.cpp
         src/schedule/scheduler.cpp
+        src/schedule/system_local_data.cpp
+        src/world.cpp
 
     PCH src/pch.hpp
 
@@ -89,11 +98,10 @@ helios_module(
         PUBLIC utils
 
     OPTIONAL_DEPENDS
-        profile
+        PUBLIC profile
 
     USES
         concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
-        FlatMap PUBLIC helios::lib::flat_map
 
     COMPILE_DEFINITIONS
         PUBLIC
@@ -120,22 +128,23 @@ helios_module(
         tests/message/consumed_registry.cpp
         tests/message/manager.cpp
         tests/message/message.cpp
+        tests/message/params.cpp
         tests/message/queue.cpp
         tests/message/reader.cpp
+        tests/message/wrapper.cpp
         tests/message/writer.cpp
         tests/query/details/traits.cpp
         tests/query/details/query_args.cpp
         tests/query/iterator.cpp
+        tests/query/params.cpp
         tests/query/query.cpp
-        tests/resource/local_param.cpp
         tests/resource/manager.cpp
-        tests/resource/param.cpp
+        tests/resource/params.cpp
         tests/resource/resource.cpp
         tests/system/access_decl.cpp
         tests/system/access_policy.cpp
         tests/system/composite_param.cpp
         tests/system/param_policy.cpp
-        tests/system/param_traits.cpp
         tests/system/system.cpp
         tests/schedule/dag.cpp
         tests/schedule/run_condition.cpp

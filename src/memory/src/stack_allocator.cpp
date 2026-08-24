@@ -17,19 +17,57 @@
 
 namespace helios::mem {
 
+StackAllocator::StackAllocator(StackAllocatorOptions options) noexcept
+    : initial_capacity_(options.initial_capacity), growth_(options.growth) {
+  HELIOS_ASSERT(initial_capacity_ > 0,
+                "initial_capacity must be greater than zero!");
+  HELIOS_ASSERT(growth_.max_capacity >= initial_capacity_,
+                "max_capacity '{}' must be >= initial_capacity '{}'!",
+                growth_.max_capacity, initial_capacity_);
+
+  Block* const initial_block = CreateBlock(initial_capacity_);
+  HELIOS_VERIFY(initial_block != nullptr, "Failed to allocate initial block!");
+  blocks_.Push(initial_block);
+  total_capacity_.store(initial_capacity_, std::memory_order_relaxed);
+  block_count_.store(1, std::memory_order_relaxed);
+}
+
+StackAllocator& StackAllocator::operator=(StackAllocator&& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return *this;
+  }
+
+  FreeChain(HeadBlock());
+  MoveFrom(other);
+  return *this;
+}
+
+auto StackAllocator::GetMarker() const noexcept -> Marker {
+  Block* const head = HeadBlock();
+  if (head == nullptr) {
+    return {};
+  }
+
+  return {
+      .block = head,
+      .offset = head->offset.load(std::memory_order_acquire),
+  };
+}
+
 void StackAllocator::Reset() noexcept {
   HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::StackAllocator::Reset");
 
-  Block* const head = head_.load(std::memory_order_acquire);
+  Block* const head = HeadBlock();
   if (head == nullptr) {
     return;
   }
 
+  blocks_.Clear();
   FreeChain(head);
   Block* const fresh = CreateBlock(initial_capacity_);
   HELIOS_VERIFY(fresh != nullptr, "Failed to allocate block during reset!");
 
-  head_.store(fresh, std::memory_order_release);
+  blocks_.Push(fresh);
   total_capacity_.store(initial_capacity_, std::memory_order_release);
   total_allocated_.store(0, std::memory_order_release);
   allocation_count_.store(0, std::memory_order_release);
@@ -46,30 +84,31 @@ void StackAllocator::RewindToMarker(Marker marker) noexcept {
   HELIOS_ASSERT(marker.block != nullptr, "marker block cannot be null");
   auto* const target = static_cast<Block*>(marker.block);
 
-  Block* current = head_.load(std::memory_order_acquire);
-  while (current != nullptr && current != target) {
-    Block* const next = current->next.load(std::memory_order_relaxed);
-    const size_t capacity = current->capacity;
-    HELIOS_MEMORY_PROFILE_FREE(current, "StackAllocator");
-    std::destroy_at(current);
-    AlignedFree(current, false);
+  for (;;) {
+    Block* const current = HeadBlock();
+    HELIOS_ASSERT(current != nullptr, "Marker block not found in stack chain!");
+    if (current == target) {
+      break;
+    }
+
+    Block* const popped = static_cast<Block*>(blocks_.Pop());
+    HELIOS_ASSERT(popped == current, "Stack chain mutated during rewind!");
+    const size_t capacity = popped->capacity;
+    HELIOS_MEMORY_PROFILE_FREE(popped, "StackAllocator");
+    std::destroy_at(popped);
+    AlignedFree(popped, false);
     total_capacity_.fetch_sub(capacity, std::memory_order_relaxed);
     block_count_.fetch_sub(1, std::memory_order_relaxed);
-    current = next;
   }
 
-  HELIOS_ASSERT(current == target, "Marker block not found in stack chain!");
-
   target->offset.store(marker.offset, std::memory_order_release);
-  head_.store(target, std::memory_order_release);
 
   allocation_count_.store(0, std::memory_order_relaxed);
   total_allocated_.store(marker.offset, std::memory_order_relaxed);
 }
 
 void StackAllocator::MoveFrom(StackAllocator& other) noexcept {
-  head_.store(other.head_.exchange(nullptr, std::memory_order_acq_rel),
-              std::memory_order_release);
+  blocks_ = std::move(other.blocks_);
   grow_state_.store(
       other.grow_state_.exchange(GrowState::kIdle, std::memory_order_acq_rel),
       std::memory_order_release);
@@ -113,7 +152,6 @@ auto StackAllocator::CreateBlock(size_t capacity) noexcept -> Block* {
   block->buffer = static_cast<std::byte*>(raw) + kHeader;
   block->capacity = capacity;
   block->offset.store(0, std::memory_order_relaxed);
-  block->next.store(nullptr, std::memory_order_relaxed);
   return block;
 }
 
@@ -124,7 +162,7 @@ void StackAllocator::FreeChain(Block* head) noexcept {
 
   Block* current = head;
   while (current != nullptr) {
-    Block* const next = current->next.load(std::memory_order_relaxed);
+    Block* const next = NextBlock(current);
     HELIOS_MEMORY_PROFILE_FREE(current, "StackAllocator");
     std::destroy_at(current);
     AlignedFree(current, false);
@@ -170,7 +208,7 @@ auto StackAllocator::TryReserve(Block& block, size_t size,
 }
 
 bool StackAllocator::EnsureCapacity(size_t min_capacity) noexcept {
-  Block* observed_head = head_.load(std::memory_order_acquire);
+  Block* observed_head = HeadBlock();
   const size_t current_capacity =
       observed_head != nullptr ? observed_head->capacity : initial_capacity_;
   const size_t desired_capacity =
@@ -201,12 +239,7 @@ bool StackAllocator::EnsureCapacity(size_t min_capacity) noexcept {
 }
 
 void StackAllocator::PublishBlock(Block* block) noexcept {
-  Block* expected_head = head_.load(std::memory_order_acquire);
-  do {
-    block->next.store(expected_head, std::memory_order_relaxed);
-  } while (!head_.compare_exchange_weak(expected_head, block,
-                                        std::memory_order_release,
-                                        std::memory_order_acquire));
+  blocks_.Push(block);
 
   total_capacity_.fetch_add(block->capacity, std::memory_order_relaxed);
   block_count_.fetch_add(1, std::memory_order_relaxed);
@@ -226,7 +259,7 @@ void* StackAllocator::do_allocate(size_t bytes, size_t alignment) {
   const size_t effective_alignment = std::max(alignment, kMinAlignment);
   Reservation reservation{};
   for (;;) {
-    Block* const head = head_.load(std::memory_order_acquire);
+    Block* const head = HeadBlock();
     if (head != nullptr) {
       reservation = TryReserve(*head, bytes, effective_alignment);
       if (reservation.ptr != nullptr) {
@@ -261,7 +294,7 @@ void StackAllocator::do_deallocate(void* ptr, size_t bytes,
     return;
   }
 
-  Block* const head = head_.load(std::memory_order_acquire);
+  Block* const head = HeadBlock();
   if (head == nullptr) {
     return;
   }
@@ -287,9 +320,7 @@ void StackAllocator::do_deallocate(void* ptr, size_t bytes,
     if (bytes > 0) {
       const size_t waste =
           header->total_size > bytes ? header->total_size - bytes : 0;
-      alignment_waste_.fetch_sub(
-          std::min(waste, alignment_waste_.load(std::memory_order_relaxed)),
-          std::memory_order_relaxed);
+      details::SaturatingFetchSub(alignment_waste_, waste);
     }
   }
 }

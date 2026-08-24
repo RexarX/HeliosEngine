@@ -20,6 +20,7 @@
 #include <string_view>
 #include <thread>
 #include <type_traits>
+#include <utility>
 #include <variant>
 
 #ifdef HELIOS_PROFILE_BUNDLE_TRACY

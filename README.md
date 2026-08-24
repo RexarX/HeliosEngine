@@ -38,9 +38,9 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
   - <a href="#requirements">Requirements</a>
   - <a href="#installing-dependencies">Installing Dependencies</a>
   - <a href="#building">Building</a>
+  - <a href="#linking">Linking</a>
   - <a href="#run-the-example">Run the Example</a>
 - <a href="#usage">Usage</a>
-- <a href="#architecture">Architecture</a>
 - <a href="#using-as-a-dependency">Using as a Dependency</a>
   - <a href="#method-1-add_subdirectory">add_subdirectory</a>
   - <a href="#method-2-fetchcontent">FetchContent</a>
@@ -58,7 +58,7 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 ## About The Project
 
-**Helios Engine** is a high-performance, ECS-based game engine framework written in C++23. It combines an archetype-based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.
+**Helios Engine** is a high-performance, ECS-based game engine framework written in C++23. It combines an configurable sparse-set/archetype based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.
 
 <a href="#readme-top">↑ Back to Top</a>
 
@@ -83,20 +83,25 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 ## Modules
 
-| Module      | Description                                              | Default | Documentation                     |
-| ----------- | -------------------------------------------------------- | ------- | --------------------------------- |
-| `core`      | Asserts, UUID, stack traces, CStringView, etc.           | ON      | [README](src/core/README.md)      |
-| `platform`  | Platform detection, `HELIOS_API`, debug break, etc.      | ON      | [README](src/platform/README.md)  |
-| `compiler`  | Branch hints, feature detection macros, etc.             | ON      | [README](src/compiler/README.md)  |
-| `utils`     | TypeId, timer, filesystem, adapters, etc.                | ON      | [README](src/utils/README.md)     |
-| `container` | SparseSet, MultiTypeMap, TypedBuffer, StaticString, etc. | ON      | [README](src/container/README.md) |
-| `memory`    | PMR allocators, `Rc`/`Arc`, etc.                         | ON      | [README](src/memory/README.md)    |
-| `log`       | spdlog-based typed logging                               | ON      | [README](src/log/README.md)       |
-| `async`     | Task graphs and work-stealing executor                   | ON      | [README](src/async/README.md)     |
-| `ecs`       | World, entities, components, schedules, etc.             | ON      | [README](src/ecs/README.md)       |
-| `app`       | Application framework, plugins, sub-apps, etc.           | ON      | [README](src/app/README.md)       |
-| `profile`   | Tracy / flamegraph profiling (opt-in), etc.              | ON      | [README](src/profile/README.md)   |
-| `window`    | GLFW windowing (skeleton)                                | ON      | [README](src/window/README.md)    |
+| Module        | Description                                              | Default | Documentation                       |
+| ------------- | -------------------------------------------------------- | ------- | ----------------------------------- |
+| `core`        | Asserts, UUID, stack traces, CStringView, etc.           | ON      | [README](src/core/README.md)        |
+| `platform`    | Platform detection, `HELIOS_API`, debug break, etc.      | ON      | [README](src/platform/README.md)    |
+| `compiler`    | Branch hints, feature detection macros, etc.             | ON      | [README](src/compiler/README.md)    |
+| `utils`       | TypeId, timer, filesystem, adapters, etc.                | ON      | [README](src/utils/README.md)       |
+| `container`   | SparseSet, MultiTypeMap, TypedBuffer, StaticString, etc. | ON      | [README](src/container/README.md)   |
+| `memory`      | PMR allocators, `Rc`/`Arc`, etc.                         | ON      | [README](src/memory/README.md)      |
+| `log`         | spdlog-based typed logging                               | ON      | [README](src/log/README.md)         |
+| `async`       | Task graphs and work-stealing executor                   | ON      | [README](src/async/README.md)       |
+| `ecs`         | World, entities, components, schedules, etc.             | ON      | [README](src/ecs/README.md)         |
+| `app`         | Application framework, plugins, sub-apps, etc.           | ON      | [README](src/app/README.md)         |
+| `profile`     | Tracy / flamegraph profiling (opt-in), etc.              | ON      | [README](src/profile/README.md)     |
+| `window`      | Window ECS contract (no OS deps)                         | ON      | [README](src/window/README.md)      |
+| `sdl3`        | SDL3 process runtime (init, event pump, window map)      | ON      | [README](src/sdl3/README.md)        |
+| `sdl3_window` | Default SDL3 window backend                              | ON      | [README](src/sdl3_window/README.md) |
+| `sdl3_input`  | Default SDL3 input backend                               | ON      | [README](src/sdl3_input/README.md)  |
+| `glfw`        | Optional GLFW backend for `window` (+ optional `input`)  | OFF     | [README](src/glfw/README.md)        |
+| `input`       | Keyboard, mouse, cursor, gamepad ECS contract            | ON      | [README](src/input/README.md)       |
 
 ```bash
 cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW=OFF
@@ -133,7 +138,10 @@ cd HeliosEngine
 
 Helios resolves dependencies per module: **system packages are tried first**, then **CPM download** if missing (`HELIOS_DOWNLOAD_PACKAGES=ON`, default). Pre-installing system packages speeds up configuration and avoids network fetches.
 
-Some packages could require additional system packages, most notably when building on Linux make sure to install the X11/Wayland development packages to properly build `glfw3` (`libwayland-dev`, `libx11-dev`, etc.)
+Some packages need extra OS development libraries. On Linux, vendored `glfw` and
+`sdl3` both require X11/Wayland headers. SDL3 also needs Xfixes, XScrnSaver, and
+XTest (`libxfixes-dev`, `libxss-dev`, `libxtst-dev`); configure fails if those
+are missing. Windows and macOS need no extra packages for these backends.
 
 Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/dependencies/).
 
@@ -153,17 +161,18 @@ sudo apt-get update
 sudo apt-get install -y ninja-build libboost-all-dev libtbb-dev
 ```
 
-Additinal tools:
+Additional tools:
 
 ```bash
-sudo apt-get install -y clang-format doxygen
+sudo apt-get install -y clang-format clang-tidy doxygen
 ```
 
-Wayland/X11:
+Wayland/X11 (GLFW + SDL3):
 
 ```bash
 sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \
-  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev
+  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev \
+  libxfixes-dev libxss-dev libxtst-dev
 ```
 
 #### Linux (DNF — Fedora)
@@ -173,17 +182,18 @@ sudo dnf install -y ninja-build  boost-devel tbb-devel
 
 ```
 
-Additinal tools:
+Additional tools:
 
 ```bash
 sudo dnf install -y clang-tools-extra doxygen
 ```
 
-Wayland/X11:
+Wayland/X11 (GLFW + SDL3):
 
 ```bash
-sudo apt-get install -y wayland-devel libxkbcommon-devel libX11-devel \
-  libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel libXext-devel
+sudo dnf install -y wayland-devel libxkbcommon-devel libX11-devel \
+  libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel libXext-devel \
+  libXfixes-devel libXScrnSaver-devel libXtst-devel
 ```
 
 #### Linux (Pacman — Arch)
@@ -193,17 +203,18 @@ sudo pacman -S --needed ninja boost tbb
 
 ```
 
-Additinal tools:
+Additional tools:
 
 ```bash
 sudo pacman -S --needed clang doxygen
 ```
 
-Wayland/X11:
+Wayland/X11 (GLFW + SDL3):
 
 ```bash
 sudo pacman -S --needed wayland libxkbcommon libx11 \
-  libxrandr libxinerama libxi libxcursor libxext
+  libxrandr libxinerama libxi libxcursor libxext \
+  libxfixes libxss libxtst
 ```
 
 #### macOS (Homebrew)
@@ -212,7 +223,7 @@ sudo pacman -S --needed wayland libxkbcommon libx11 \
 brew install cmake ninja boost
 ```
 
-Additinal tools:
+Additional tools:
 
 ```bash
 brew install clang-format doxygen
@@ -225,9 +236,9 @@ brew install clang-format doxygen
 No system packages required for a minimal build — MSVC + Ninja (via Visual Studio) is sufficient; missing libraries are fetched by CPM.
 
 ```bat
-# Optional: LLVM clang-format for local formatting
+# Optional: LLVM clang-format for local formatting and clang-tidy for linting
 choco install llvm
-# Or use clang-format bundled with Visual Studio 2022
+# Or use clang-format and clang-tidy bundled with Visual Studio 2022
 ```
 
 ### Building
@@ -287,13 +298,54 @@ cmake --preset linux-gcc-relwithdebinfo \
   #-DHELIOS_DEVELOPER_MODE=ON \
 ```
 
-| Option                     | Default        | Notes                         |
-| -------------------------- | -------------- | ----------------------------- |
-| `HELIOS_BUILD_TESTS`       | ON (top-level) | Module test suites            |
-| `HELIOS_BUILD_EXAMPLES`    | ON (top-level) | Example applications          |
-| `HELIOS_DEVELOPER_MODE`    | OFF            | Sanitizers and dev checks     |
-| `HELIOS_DOWNLOAD_PACKAGES` | ON             | CPM fallback for missing deps |
-| `HELIOS_BUILD_{MODULE}`    | module default | Per-module toggle             |
+| Option                     | Default                    | Notes                                                |
+| -------------------------- | -------------------------- | ---------------------------------------------------- |
+| `HELIOS_BUILD_TESTS`       | ON (top-level)             | Module test suites                                   |
+| `HELIOS_BUILD_EXAMPLES`    | ON (top-level)             | Example applications                                 |
+| `HELIOS_DEVELOPER_MODE`    | OFF                        | Sanitizers and dev checks                            |
+| `HELIOS_DOWNLOAD_PACKAGES` | ON                         | CPM fallback for missing deps                        |
+| `HELIOS_BUILD_{MODULE}`    | module default             | Per-module toggle                                    |
+| `HELIOS_LINKER`            | AUTO (top-level) / DEFAULT | Fast linker: `AUTO`, `MOLD`, `LLD`, `RAD`, `DEFAULT` |
+| `HELIOS_MANAGE_TOOLCHAIN`  | ON (top-level) / OFF       | Set `CMAKE_LINKER` / `CMAKE_AR` project-wide         |
+
+### Linking
+
+Helios picks a faster linker when one is installed (`cmake/helpers/Linker.cmake`). Selection is controlled by `HELIOS_LINKER`:
+
+| Value     | Meaning                                                                                                              |
+| --------- | -------------------------------------------------------------------------------------------------------------------- |
+| `AUTO`    | Default for a top-level Helios build. Prefer the fastest available linker for the platform.                          |
+| `MOLD`    | Force [mold](https://github.com/rui314/mold) (`mold` on `PATH`). ELF only; not used on macOS.                        |
+| `LLD`     | Force LLVM lld (`ld.lld` on Unix, `lld-link` on the MSVC ABI).                                                       |
+| `RAD`     | Force [RAD Linker](https://github.com/EpicGames/raddebugger) (`radlink` on `PATH` or `$RAD_ROOT`). Windows MSVC ABI. |
+| `DEFAULT` | Platform default (`ld` / Apple `ld` / MSVC `link.exe`). Default when Helios is embedded.                             |
+
+**`AUTO` by platform**
+
+- **Linux (ELF):** [mold](https://github.com/rui314/mold) if found, otherwise lld, otherwise the system linker.
+- **macOS:** mold is skipped (it does not link Mach-O). lld is used if `ld.lld` is on `PATH`; otherwise Apple `ld`.
+- **Windows (MSVC):** [RAD Linker](https://github.com/EpicGames/raddebugger) for Debug and non-LTO RelWithDebInfo when `radlink` is available, then `lld-link`, then `link.exe`. **clang-cl** prefers `lld-link` (RAD can fail on some clang-cl C++ COMDATs). Release LTO (MSVC LTCG) and RelWithDebInfo with `HELIOS_ENABLE_LTO_RELWITHDEBINFO=ON` keep `link.exe`; clang-cl LTO uses `lld-link`. RAD is not used with MSVC AddressSanitizer (`HELIOS_DEVELOPER_MODE=ON`).
+
+Override at configure time (must be on `PATH`, or for RAD also `$RAD_ROOT`):
+
+```bash
+cmake --preset linux-gcc-release -DHELIOS_LINKER=MOLD
+cmake --preset linux-clang-release -DHELIOS_LINKER=LLD
+cmake --preset windows-msvc-debug -DHELIOS_LINKER=RAD
+cmake --preset linux-gcc-release -DHELIOS_LINKER=DEFAULT   # disable fast linkers
+```
+
+**`HELIOS_MANAGE_TOOLCHAIN`** (see `CMakeLists.txt` and `cmake/helpers/ClangArchiver.cmake`)
+
+When `ON` (default for a standalone Helios build), Helios may set `CMAKE_LINKER`, `CMAKE_AR`, and `CMAKE_RANLIB` for the **whole** CMake project, and apply `-fuse-ld=` / linker type globally.
+
+When `OFF` (default if Helios is added via `add_subdirectory` / FetchContent), those cache variables are left to the parent. A selected fast linker is applied only to Helios targets. Consumers can opt in:
+
+```bash
+cmake -DHELIOS_MANAGE_TOOLCHAIN=ON -DHELIOS_LINKER=AUTO ...
+```
+
+Per-config RAD vs `link.exe` on the Visual Studio generator needs CMake 3.29+; Ninja presets work from CMake 3.25.
 
 ### Run the Example
 
@@ -401,39 +453,6 @@ By default, `MainStartup` and `Shutdown` use the main-thread schedule executor; 
 
 ---
 
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│  App                                                    │
-│  ├─ async::Executor        (work-stealing thread pool)  │
-│  ├─ Scheduler              (frame stages)               │
-│  ├─ SubApp (main)          (ecs::World + schedules)     │
-│  ├─ SubApp...              (optional parallel worlds)   │
-│  └─ Plugins                (static + dynamic)           │
-└─────────────────────────────────────────────────────────┘
-         │ schedules                │ task graphs
-         ▼                          ▼
-┌─────────────────┐        ┌─────────────────┐
-│  ecs::Schedule  │        │ async::Executor │
-│  systems + DAG  │        │ TaskGraph       │
-└─────────────────┘        └─────────────────┘
-         │
-         ▼
-┌─────────────────────────────────────────────────────────┐
-│ ecs::World                                              │
-│ entities · components · resources · messages · commands │
-└─────────────────────────────────────────────────────────┘
-```
-
-- **Entities** — 64-bit ID (32-bit index + 32-bit generation), free-list recycling
-- **Components** — archetype columns or per-type sparse sets; structural changes via deferred `Commands`
-- **Messages** — double-buffered (read previous frame); async messages use lock-free queues
-
-<a href="#readme-top">↑ Back to Top</a>
-
----
-
 ## Using as a Dependency
 
 Helios can be consumed from another CMake project in several ways. All methods expose targets as `helios::module::<name>` and the helper `helios_link_modules()`.
@@ -443,6 +462,11 @@ Typical consumer settings when embedding:
 ```cmake
 set(HELIOS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+# Optional overrides (safer defaults already apply when embedded):
+# set(HELIOS_ENABLE_LTO OFF CACHE BOOL "" FORCE)
+# set(HELIOS_ENABLE_LTO_RELWITHDEBINFO OFF CACHE BOOL "" FORCE)
+# set(HELIOS_MANAGE_TOOLCHAIN OFF CACHE BOOL "" FORCE)
+# set(HELIOS_LINKER DEFAULT CACHE STRING "" FORCE)
 ```
 
 ### Method 1: `add_subdirectory`
@@ -459,6 +483,8 @@ set(CMAKE_CXX_STANDARD 23)
 add_subdirectory(third_party/HeliosEngine)
 
 add_executable(my_game src/main.cpp)
+# Optional: adopt Helios warning/optimization/sanitizer profile
+# helios_apply_conventions(my_game)
 helios_link_modules(
     TARGET my_game
     MODULES PUBLIC app
@@ -588,7 +614,7 @@ Helios modules live under `src/` by default. Register additional search paths wi
 
 **[examples/custom_module/README.md](examples/custom_module/README.md)**
 
-That example defines a minimal `greeting` module (registration, build target, tests, and a demo executable) under `examples/custom_module/`, discovered through the extra module path mechanism — no manual `include(Module.cmake)` required.
+That example defines a minimal `greeting` module (registration, build target, tests, and a demo executable) under `examples/custom_module/`, discovered through the extra module path mechanism.
 
 ```bash
 # From a parent CMake project (before add_subdirectory(HeliosEngine)):
@@ -607,7 +633,6 @@ Quick layout:
 
 ```
 examples/custom_module/
-├── Module.cmake              # helios_register_module(...)
 ├── CMakeLists.txt            # helios_module(...) + demo target
 ├── README.md                 # Step-by-step guide
 ├── include/helios/greeting/  # Public headers

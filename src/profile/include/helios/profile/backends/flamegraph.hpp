@@ -11,11 +11,14 @@
 #include <cstdint>
 #include <filesystem>
 #include <fstream>
+#include <new>
+#include <optional>
 #include <ostream>
 #include <source_location>
 #include <span>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <variant>
 
 namespace helios::profile {

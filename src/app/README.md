@@ -19,8 +19,11 @@ High-level application layer that wires together the ECS, async executor, plugin
 | `TimePlugin`       | Adds `Time` and updates it in `kFirst`.                                                   |
 | `FrameCountPlugin` | Adds `FrameCount` and increments it in `kLast`.                                           |
 | `ExecutorPlugin`   | Adds `Executor`.                                                                          |
+| `FrameLimiter`     | Per-world FPS cap (`Off` / `Manual` / `Auto`).                                            |
+| `FrameLimiterPlugin` | Paces the main loop via `kFramePaceStage` at the front of `MainFrameOrder`.            |
+| `InstallFrameLimiter` | Installs a limiter on `App` or a (non-overlapping) `SubApp`.                           |
 | `RunDefault`       | Runner: loop `Update()` until `AppExit`.                                                  |
-| `RunFixed`         | Fixed-timestep runner via `FixedRunnerConfig`.                                            |
+| `RunFixed`         | Fixed-timestep runner via `FixedRunnerConfig` (optional if using `FrameLimiterPlugin`).   |
 | `RunOnce`          | Single-frame runner.                                                                      |
 | `RunDefaultSubApp` | Default async sub-app runner.                                                             |
 
@@ -39,7 +42,7 @@ Default executor kinds:
 
 | Executor kind  | Builtin schedules                                                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Main thread    | `kMainStartup`, `kShutdown`                                                                                                                       |
+| Main thread    | `kMainStartup`, `kShutdown`, plus plugin-owned `kFramePace` when installed                 |
 | Multi-threaded | `kPreStartup`, `kStartup`, `kPostStartup`, `kFirst`, `kPreUpdate`, `kUpdate`, `kPostUpdate`, `kLast`, `kExtract`, `kPreShutdown`, `kPostShutdown` |
 
 Sub-app schedulers use the same defaults except they do not register `kExtract`.
@@ -48,8 +51,8 @@ Sub-app schedulers use the same defaults except they do not register `kExtract`.
 
 | Kind      | Names                                              | Notes                                                         |
 | --------- | -------------------------------------------------- | ------------------------------------------------------------- |
-| Resources | `Time`, `FrameCount`, `Executor`                   | Added by their matching plugins.                              |
-| Plugins   | `TimePlugin`, `FrameCountPlugin`, `ExecutorPlugin` | Register builtin resources and maintenance systems as needed. |
+| Resources | `Time`, `FrameCount`, `Executor`, `FrameLimiter` | Added by their matching plugins / `InstallFrameLimiter`. |
+| Plugins   | `TimePlugin`, `FrameCountPlugin`, `ExecutorPlugin`, `FrameLimiterPlugin` | Register builtin resources and maintenance systems as needed. |
 | Messages  | `AppExit`                                          | Registered automatically by `App`; write it to request exit.  |
 
 ### Sub-App Label Traits
@@ -121,10 +124,33 @@ Run() → Initialize() → runner_(*this) → CleanUp()
 Each `Update()` runs one frame through `Scheduler::RunFrame`:
 
 1. Reset extract flags.
-2. **Update stage** (main) — schedules `kFirst` → `kLast`, then `World::Update()` (message lifecycle).
+2. For each stage in `MainFrameOrder` (default Update -> Extract): run schedules (`ApplyDeferred` per schedule), optional stage `apply_commands` / `merge_messages`, then `MessageManager::Update()` when the stage is last in the order and has `advance_messages` (Extract on main).
 3. **Extract stage** — main extract schedules, then sub-app extraction (mode-dependent).
 4. **Launch sub-app updates** — blocking sub-apps in parallel; overlapping only when fresh extract exists.
 5. **WaitForSubApps** — joins blocking sub-apps.
+
+Nested `FramePumpOrder` pumps (Update only) advance message buffers on `kUpdateStage`.
+`FrameLimiterPlugin` prepends `kFramePaceStage` on `MainFrameOrder` only, so nested
+pumps and window polling are not delayed by the cap. See `examples/app/frame_limit.cpp`.
+
+## Frame limiter
+
+```cpp
+app.AddPlugins(helios::app::FrameLimiterPlugin{
+    helios::app::FrameLimiterSettings::FromFPS(60)});
+
+app.InsertSubApp(SimLabel{}, helios::app::SubApp{});
+helios::app::InstallFrameLimiter(
+    app.GetSubApp(SimLabel{}),
+    helios::app::FrameLimiterSettings::FromFPS(120));
+```
+
+`Off` / `Manual` / `Auto` live on `FrameLimiter`. `Wait()` calls
+`utils::PreciseSleepUntil`. Auto uses `RefreshRate()` (the window plugin writes
+the primary monitor Hz). Prefer `RunDefault` + this plugin over combining with
+`RunFixed`. Overlapping sub-apps cannot install a limiter; blocking sub-app
+limiters still join the main frame. Precise sleep lives in `utils`
+(`SleepFor` / `PreciseSleep`); `RunFixed` calls `utils::PreciseSleepUntil`.
 
 ## Sub-Apps
 

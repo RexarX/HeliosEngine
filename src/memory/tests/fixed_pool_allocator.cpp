@@ -4,6 +4,8 @@
 
 #include <helios/memory/fixed_pool_allocator.hpp>
 
+#include "spin_barrier.hpp"
+
 #include <algorithm>
 #include <atomic>
 #include <barrier>
@@ -619,6 +621,52 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
         thread.join();
       }
       CHECK_EQ(successes.load(), kThreads * kAllocations);
+      CHECK(pool.Empty());
+    }
+
+    SUBCASE("Interleaved alloc/dealloc returns unique live pointers") {
+      constexpr size_t kThreads = 8;
+      // 8 threads × 4096 rounds × {pop, push} == 65536 ops, which wraps a
+      // 16-bit Treiber ABA tag. The tagged head must survive that wrap.
+      constexpr size_t kRounds = 4096;
+      FixedPoolAllocator pool(kBlockSize, kThreads, kAlign);
+
+      std::vector<void*> held(kThreads);
+      test::SpinBarrier sync(static_cast<ptrdiff_t>(kThreads + 1));
+      std::vector<std::thread> threads;
+      threads.reserve(kThreads);
+
+      for (size_t index = 0; index < kThreads; ++index) {
+        threads.emplace_back([&, index] {
+          for (size_t round = 0; round < kRounds; ++round) {
+            sync.ArriveAndWait();
+            held[index] = pool.allocate(kBlockSize, kAlign);
+            sync.ArriveAndWait();
+          }
+        });
+      }
+
+      for (size_t round = 0; round < kRounds; ++round) {
+        sync.ArriveAndWait();
+        sync.ArriveAndWait();
+
+        std::vector<void*> round_ptrs = held;
+        std::ranges::sort(round_ptrs);
+        CHECK_EQ(std::ranges::adjacent_find(round_ptrs), round_ptrs.end());
+
+        for (void* ptr : held) {
+          CHECK_NE(ptr, nullptr);
+          if (ptr != nullptr) {
+            pool.deallocate(ptr, kBlockSize, kAlign);
+          }
+        }
+      }
+
+      for (auto& thread : threads) {
+        thread.join();
+      }
+
+      CHECK(pool.Empty());
     }
   }
 }

@@ -1,24 +1,28 @@
 #pragma once
 
 #include <helios/assert.hpp>
-#include <helios/compiler/compiler.hpp>
 #include <helios/container/multi_type_map.hpp>
 #include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/message/async_queue.hpp>
-#include <helios/ecs/message/consumed_registry.hpp>
+#include <helios/ecs/message/id.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/message/queue.hpp>
 
+#include <algorithm>
 #include <array>
 #include <cstddef>
+#include <memory_resource>
 #include <ranges>
 #include <span>
 #include <string>
 #include <string_view>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
 namespace helios::ecs {
+
+class ConsumedMessagesRegistry;
 
 /// @brief Metadata for a registered message type.
 struct MessageMetadata {
@@ -34,6 +38,7 @@ struct MessageMetadata {
  * consumed message removal.
  * @details Implements message management with:
  * - Double buffering: messages persist for one full update cycle (two frames)
+ * - Monotonic per-type message ids assigned on entry to the global queues
  * - Explicit registration: messages must be registered before use
  * - Automatic clearing: messages are cleared after their lifecycle expires
  * - Manual control: users can opt-out of auto-clearing
@@ -41,9 +46,12 @@ struct MessageMetadata {
  * removed from queues without additional heap allocation
  *
  * Message Lifecycle:
- * - Frame N: Messages written to current queue
+ * - Frame N: Messages written to current queue (ids assigned)
  * - Frame N+1: Messages readable from previous queue (after swap)
  * - Frame N+2: Messages cleared from previous queue (automatic policy)
+ *
+ * Delivery to systems is tracked separately via `MessageCursor<T>`. Retention
+ * does not imply re-delivery to a cursor that already observed a message.
  *
  * Consumed messages are removed at Update time based on merged per-system
  * `ConsumedMessagesRegistry` instances. Each system writes to its own registry
@@ -56,6 +64,14 @@ public:
   using size_type = size_t;
 
   MessageManager() = default;
+
+  /**
+   * @brief Constructs a message manager using `resource` for owned storage.
+   * @param resource Memory resource for queues and id maps. Async queues still
+   * allocate on moodycamel's heap.
+   */
+  explicit MessageManager(std::pmr::memory_resource* resource);
+  MessageManager(std::nullptr_t) = delete;
   MessageManager(const MessageManager&) = delete;
   MessageManager(MessageManager&&) noexcept = default;
   ~MessageManager() = default;
@@ -76,20 +92,19 @@ public:
   void ClearAllQueues() noexcept;
 
   /**
-   * @brief Updates message lifecycle — applies consumed messages, swaps
-   * buffers, clears old messages.
+   * @brief Updates message lifecycle — applies consumed messages, then ages
+   * buffers.
    * @details Performs the following steps:
    * 1. Removes consumed messages from previous and current queues.
-   * 2. Clears automatic messages from previous queue.
-   * 3. Merges current queue into previous queue.
-   * 4. Prepares a fresh current queue for the next frame.
-   * @note Not thread-safe.
-   * @tparam Alloc Allocator type for the consumed registry
+   * 2. Merges current queue into previous queue (does **not** clear automatic
+   *    previous messages — call the no-arg `Update()` for full frame aging).
+   * 3. Clears current messages in place (type registrations retained).
+   * @note Not thread-safe. Prefer `ApplyConsumed` + `MergeLocalMessages` from
+   * per-system deferred work; use no-arg `Update()` once per frame.
    * @param consumed_registry Const References to per-system consumed
    * registry. The caller is responsible for clearing it after this call.
    */
-  template <typename Alloc>
-  void Update(const ConsumedMessagesRegistry<Alloc>& consumed_registry);
+  void Update(const ConsumedMessagesRegistry& consumed_registry);
 
   /**
    * @brief Updates message lifecycle without any consumed message processing.
@@ -99,17 +114,16 @@ public:
   void Update();
 
   /**
-   * @brief Applies consumed indices to both queues, removing consumed messages
-   * in-place.
-   * @details For each type with consumed entries, indices [0, prev_count)
-   * target previous messages and indices [prev_count, prev_count + curr_count)
-   * target current messages (offset by prev_count). No buffer swap occurs.
+   * @brief Applies consumed message ids to both queues, removing them in-place.
+   * @details Consumed entries are stable message ids (not transient buffer
+   * indices). No buffer swap occurs.
+   * @warning Uses `TemporaryStorage` for temporary allocations. Avoid Calling
+   * `ResetTemporaryStorage()` that will result in current thread's temporary
+   * storage being reseted.
    * @note Not thread-safe.
-   * @tparam Alloc Allocator type of the consumed registry
    * @param merged_consumed The combined consumed registry from all systems
    */
-  template <typename Alloc>
-  void ApplyConsumed(const ConsumedMessagesRegistry<Alloc>& merged_consumed);
+  void ApplyConsumed(const ConsumedMessagesRegistry& merged_consumed);
 
   /**
    * @brief Registers multiple message types.
@@ -127,9 +141,10 @@ public:
    * @warning Triggers assertion if the message type is not registered.
    * @tparam T Message type satisfying `MessageTrait`
    * @param message Message to write
+   * @return Assigned message id
    */
   template <MessageTrait T>
-  void Write(T&& message);
+  auto Write(T&& message) -> MessageId<std::remove_cvref_t<T>>;
 
   /**
    * @brief Writes a single async message to the async queue.
@@ -185,29 +200,22 @@ public:
   /**
    * @brief Merges messages from a local `MessageQueue` into the current queue.
    * @note Not thread-safe.
-   * @details Used to flush a per-system write buffer into the global message
-   * state. Typically called after a system finishes execution.
-   * @tparam OtherAllocator Allocator type used by the local `MessageQueue`
+   * @details Assigns monotonic ids, then flushes the per-system write buffer
+   * into the global message state. Typically called after a system finishes
+   * execution.
    * @param local Local message queue to merge from (will be left in a valid but
-   * empty state)
+   * empty state for the rvalue overload)
    */
-  template <typename OtherAllocator>
-  void MergeLocalMessages(const MessageQueue<OtherAllocator>& local) {
-    current_messages_.Merge(local);
-  }
+  void MergeLocalMessages(const MessageQueue& local);
 
   /**
    * @brief Merges messages from a local `MessageQueue` into the current queue.
    * @note Not thread-safe.
    * @details Rvalue overload that consumes the local queue.
-   * @tparam OtherAllocator Allocator type used by the local `MessageQueue`
    * @param local Local message queue to merge from (will be left in a valid but
    * empty state)
    */
-  template <typename OtherAllocator>
-  void MergeLocalMessages(MessageQueue<OtherAllocator>&& local) {
-    current_messages_.Merge(std::move(local));
-  }
+  void MergeLocalMessages(MessageQueue&& local);
 
   /**
    * @brief Checks if an message type (regular or async) is registered.
@@ -251,7 +259,7 @@ public:
   /**
    * @brief Gets a const span of messages of a specific type from the previous
    * queue.
-   * @note Thread safe for concurrent reads.
+   * @note Thread safe for concurrent reads. Bypasses cursor delivery tracking.
    * @tparam T Message type satisfying `MessageTrait`
    * @return Span of const messages
    */
@@ -263,7 +271,7 @@ public:
   /**
    * @brief Gets a const span of messages of a specific type from the current
    * queue.
-   * @note Thread safe for concurrent reads.
+   * @note Thread safe for concurrent reads. Bypasses cursor delivery tracking.
    * @tparam T Message type satisfying `MessageTrait`
    * @return Span of const messages
    */
@@ -271,6 +279,60 @@ public:
   [[nodiscard]] auto CurrentMessages() const noexcept -> std::span<const T> {
     return current_messages_.Messages<T>();
   }
+
+  /**
+   * @brief Gets ids for previous-buffer messages of type `T`.
+   * @note Thread safe for concurrent reads.
+   * @tparam T Message type satisfying `MessageTrait`
+   * @return Span of message ids aligned with `PreviousMessages<T>()`
+   */
+  template <MessageTrait T>
+  [[nodiscard]] auto PreviousIds() const noexcept
+      -> std::span<const AnyMessageId> {
+    return IdsFor(previous_ids_, MessageTypeIndex::From<T>());
+  }
+
+  /**
+   * @brief Gets ids for current-buffer messages of type `T`.
+   * @note Thread safe for concurrent reads.
+   * @tparam T Message type satisfying `MessageTrait`
+   * @return Span of message ids aligned with `CurrentMessages<T>()`
+   */
+  template <MessageTrait T>
+  [[nodiscard]] auto CurrentIds() const noexcept
+      -> std::span<const AnyMessageId> {
+    return IdsFor(current_ids_, MessageTypeIndex::From<T>());
+  }
+
+  /**
+   * @brief Gets the next message id that will be assigned for type `T`.
+   * @note Thread safe for concurrent reads.
+   * @tparam T Message type satisfying `MessageTrait`
+   * @return Next id value
+   */
+  template <MessageTrait T>
+  [[nodiscard]] auto MessageCount() const noexcept -> MessageId<T>;
+
+  /**
+   * @brief Gets the oldest retained message id for type `T`.
+   * @details Equal to `MessageCount<T>()` when no messages are retained.
+   * @note Thread safe for concurrent reads.
+   * @tparam T Message type satisfying `MessageTrait`
+   * @return Oldest retained id, or the next id when empty
+   */
+  template <MessageTrait T>
+  [[nodiscard]] auto OldestMessageCount() const noexcept -> MessageId<T>;
+
+  /**
+   * @brief Counts retained messages with id >= `last_message_count`.
+   * @note Thread safe for concurrent reads.
+   * @tparam T Message type satisfying `MessageTrait`
+   * @param last_message_count Cursor position
+   * @return Unread retained count
+   */
+  template <MessageTrait T>
+  [[nodiscard]] size_type UnreadCount(
+      MessageId<T> last_message_count) const noexcept;
 
   /**
    * @brief Gets metadata for a registered message type.
@@ -293,20 +355,29 @@ public:
   }
 
   /**
+   * @brief Returns the memory resource used for owned (non-async) storage.
+   * @return Memory resource passed to the constructor
+   */
+  [[nodiscard]] std::pmr::memory_resource* GetMemoryResource() const noexcept {
+    return resource_;
+  }
+
+  /**
    * @brief Gets const reference to current message queue.
    * @note Thread-safe.
    * @return Const reference to current queue
    */
-  [[nodiscard]] const MessageQueue<>& CurrentQueue() const noexcept {
+  [[nodiscard]] const MessageQueue& CurrentQueue() const noexcept {
     return current_messages_;
   }
 
   /**
    * @brief Gets mutable reference to current message queue.
-   * @note Not thread-safe.
+   * @note Not thread-safe. Prefer `Write` / `MergeLocalMessages` so ids stay
+   * consistent.
    * @return Mutable reference to current queue
    */
-  [[nodiscard]] MessageQueue<>& CurrentQueue() noexcept {
+  [[nodiscard]] MessageQueue& CurrentQueue() noexcept {
     return current_messages_;
   }
 
@@ -315,7 +386,7 @@ public:
    * @note Thread-safe.
    * @return Const reference to previous queue
    */
-  [[nodiscard]] const MessageQueue<>& PreviousQueue() const noexcept {
+  [[nodiscard]] const MessageQueue& PreviousQueue() const noexcept {
     return previous_messages_;
   }
 
@@ -324,7 +395,7 @@ public:
    * @note Not thread-safe.
    * @return Mutable reference to previous queue
    */
-  [[nodiscard]] MessageQueue<>& PreviousQueue() noexcept {
+  [[nodiscard]] MessageQueue& PreviousQueue() noexcept {
     return previous_messages_;
   }
 
@@ -348,152 +419,37 @@ public:
 
 private:
   using RegisteredMessages = container::MultiTypeMap<MessageMetadata>;
+  using MessageIdList = std::pmr::vector<AnyMessageId>;
+  using MessageIdMap = container::MultiTypeMap<MessageIdList>;
+  using MessageCountMap = container::MultiTypeMap<size_type>;
+
+  void AssignIds(MessageTypeIndex type_index, size_type count);
+  void ClearIds(MessageTypeIndex type_index) noexcept;
+  void ClearAllIds() noexcept;
+  void AgeIds();
+  void RemoveIds(MessageTypeIndex type_index, MessageIdList& ids,
+                 std::span<const size_type> sorted_indices);
+
+  [[nodiscard]] auto IdsFor(const MessageIdMap& map,
+                            MessageTypeIndex type_index) const noexcept
+      -> std::span<const AnyMessageId>;
+
+  std::pmr::memory_resource* resource_ = std::pmr::get_default_resource();
 
   RegisteredMessages
       registered_messages_;  ///< Metadata for all registered message types
 
-  MessageQueue<>
+  MessageQueue
       current_messages_;  ///< Storage for messages written in the current frame
-  MessageQueue<>
-      previous_messages_;  ///< Storage for messages from the previous frame
+  MessageQueue
+      previous_messages_;      ///< Storage for messages from the previous frame
+  MessageIdMap current_ids_;   ///< Ids aligned with `current_messages_`
+  MessageIdMap previous_ids_;  ///< Ids aligned with `previous_messages_`
+  MessageCountMap
+      message_counts_;  ///< Next id to assign per regular message type
   AsyncMessageQueue async_messages_;  ///< Storage for async messages
                                       ///< (lock-free, not double-buffered)
 };
-
-inline void MessageManager::Clear() noexcept {
-  registered_messages_.ResetAll();
-  current_messages_.ResetAll();
-  previous_messages_.ResetAll();
-  async_messages_.Reset();
-}
-
-inline void MessageManager::ClearAllQueues() noexcept {
-  current_messages_.ClearAll();
-  previous_messages_.ClearAll();
-  async_messages_.Clear();
-}
-
-template <typename Alloc>
-inline void MessageManager::Update(
-    const ConsumedMessagesRegistry<Alloc>& consumed_registry) {
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::MessageManager::Update");
-
-  // Remove consumed messages from both queues.
-  if (!consumed_registry.Empty()) {
-    ApplyConsumed(consumed_registry);
-  }
-
-  // Merge current queue into previous queue.
-  // Previous queue now holds surviving previous messages (manual policy,
-  // non-consumed) plus all current messages.
-  previous_messages_.Merge(std::move(current_messages_));
-
-  // Re-register types in current_messages_ so it's ready for new
-  // writes.
-  for (const auto& [type_index, metadata] : registered_messages_) {
-    if (!metadata.is_async) {
-      current_messages_.Register(type_index);
-    }
-  }
-}
-
-inline void MessageManager::Update() {
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::MessageManager::Update");
-
-  // No consumed messages to process; clear aged automatic messages from
-  // previous, then merge current into previous.
-  for (const auto& [type_index, metadata] : registered_messages_) {
-    if (!metadata.is_async &&
-        metadata.clear_policy == MessageClearPolicy::kAutomatic) {
-      previous_messages_.Clear(type_index);
-    }
-  }
-
-  previous_messages_.Merge(std::move(current_messages_));
-
-  for (const auto& [type_index, metadata] : registered_messages_) {
-    if (!metadata.is_async) {
-      current_messages_.Register(type_index);
-    }
-  }
-}
-
-template <typename Alloc>
-inline void MessageManager::ApplyConsumed(
-    const ConsumedMessagesRegistry<Alloc>& merged_consumed) {
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::MessageManager::ApplyConsumed");
-  HELIOS_ECS_PROFILE_ZONE_VALUE(merged_consumed.TotalConsumedCount());
-
-  for (const auto& [type_index, consumed_indices] : merged_consumed.Data()) {
-    if (consumed_indices.empty()) {
-      continue;
-    }
-
-    // Skip types that aren't registered as regular messages.
-    const auto* metadata = registered_messages_.TryGet(type_index);
-    if (metadata == nullptr || metadata->is_async) {
-      continue;
-    }
-
-    const auto prev_count = previous_messages_.MessageCount(type_index);
-    const auto curr_count = current_messages_.MessageCount(type_index);
-
-    if (prev_count == 0 && curr_count == 0) {
-      continue;
-    }
-
-    // Split consumed indices into those targeting previous vs current
-    // messages. Global indices [0, prev_count) -> previous queue Global
-    // indices [prev_count, prev_count + curr_count) -> current queue (offset
-    // by prev_count)
-
-    // Find the partition point between previous and current indices.
-    const auto partition_it =
-        std::ranges::lower_bound(consumed_indices, prev_count);
-
-    // Apply to previous queue: indices are already direct indices into the
-    // previous buffer.
-    if (partition_it != consumed_indices.begin()) {
-      auto prev_indices = std::span<const size_type>(
-          consumed_indices.data(),
-          static_cast<size_type>(partition_it - consumed_indices.begin()));
-      previous_messages_.RemoveIndices(type_index, prev_indices);
-    }
-
-    // Apply to current queue: offset indices by subtracting prev_count.
-    if (partition_it != consumed_indices.end()) {
-      // Build offset indices in a small local buffer. Since we're in the
-      // single-threaded Update path and consumed counts are typically small,
-      // use a stack-friendly approach. We reuse the tail of consumed_indices
-      // by creating offset copies.
-      const auto curr_consumed_count = static_cast<size_type>(
-          consumed_indices.data() + consumed_indices.size() - &(*partition_it));
-
-      // To avoid heap allocation, we compute offset indices into a local
-      // small buffer. If the count is small enough, use the stack; otherwise
-      // fall back to a vector.
-      constexpr size_type kStackThreshold = 64;
-      if (curr_consumed_count <= kStackThreshold) {
-        std::array<size_type, kStackThreshold> local_buf = {};
-        for (size_type i = 0; i < curr_consumed_count; ++i) {
-          local_buf[i] =
-              *(partition_it + static_cast<ptrdiff_t>(i)) - prev_count;
-        }
-        current_messages_.RemoveIndices(
-            type_index,
-            std::span<const size_type>{local_buf.data(), curr_consumed_count});
-      } else {
-        // Many consumed messages - heap allocate.
-        std::vector<size_type> offset_indices;
-        offset_indices.reserve(curr_consumed_count);
-        for (auto it = partition_it; it != consumed_indices.end(); ++it) {
-          offset_indices.push_back(*it - prev_count);
-        }
-        current_messages_.RemoveIndices(type_index, offset_indices);
-      }
-    }
-  }
-}
 
 template <AnyMessageTrait... Ts>
   requires(sizeof...(Ts) > 0)
@@ -521,29 +477,38 @@ inline void MessageManager::Register() {
 
   (
       [this]<typename T>() {
-        registered_messages_.Emplace<T>(
+        registered_messages_.template Emplace<T>(
             MessageMetadata{.type_index = MessageTypeIndex::From<T>(),
                             .name = MessageNameOf<T>(),
                             .clear_policy = MessageClearPolicyOf<T>(),
                             .is_async = AsyncMessageTrait<T>});
 
         if constexpr (AsyncMessageTrait<T>) {
-          async_messages_.Register<T>();
+          async_messages_.template Register<T>();
         } else if constexpr (MessageTrait<T>) {
-          current_messages_.Register<T>();
-          previous_messages_.Register<T>();
+          current_messages_.template Register<T>();
+          previous_messages_.template Register<T>();
+          current_ids_.template Ensure<T>();
+          previous_ids_.template Ensure<T>();
+          message_counts_.template Ensure<T>() = 0;
         }
       }.template operator()<Ts>(),
       ...);
 }
 
 template <MessageTrait T>
-inline void MessageManager::Write(T&& message) {
-  using DecayedT [[maybe_unused]] = std::remove_cvref_t<T>;
+inline auto MessageManager::Write(T&& message)
+    -> MessageId<std::remove_cvref_t<T>> {
+  using DecayedT = std::remove_cvref_t<T>;
   HELIOS_ASSERT(
       registered_messages_.Contains(MessageTypeIndex::From<DecayedT>()),
       "Message type '{}' is not registered!", MessageNameOf<DecayedT>());
+
+  auto& next_id = message_counts_.template Get<DecayedT>();
+  const MessageId<DecayedT> id{next_id++};
   current_messages_.Enqueue(std::forward<T>(message));
+  current_ids_.template Get<DecayedT>().push_back(AnyMessageId::From(id));
+  return id;
 }
 
 template <AsyncMessageTrait T>
@@ -558,10 +523,14 @@ inline void MessageManager::WriteAsync(T&& message) {
 template <std::ranges::input_range R>
   requires MessageTrait<std::ranges::range_value_t<R>>
 inline void MessageManager::WriteBulk(R&& messages) {
-  using T [[maybe_unused]] = std::ranges::range_value_t<R>;
+  using T = std::ranges::range_value_t<R>;
   HELIOS_ASSERT(registered_messages_.Contains(MessageTypeIndex::From<T>()),
                 "Message type '{}' is not registered!", MessageNameOf<T>());
+
+  const auto before = current_messages_.template MessageCount<T>();
   current_messages_.EnqueueBulk(std::forward<R>(messages));
+  const auto after = current_messages_.template MessageCount<T>();
+  AssignIds(MessageTypeIndex::From<T>(), after - before);
 }
 
 template <std::ranges::input_range R>
@@ -578,8 +547,9 @@ inline void MessageManager::ManualClear() {
   constexpr auto type_index = MessageTypeIndex::From<T>();
   HELIOS_ASSERT(registered_messages_.Contains(type_index),
                 "Message type '{}' is not registered!", MessageNameOf<T>());
-  current_messages_.Clear<T>();
-  previous_messages_.Clear<T>();
+  current_messages_.template Clear<T>();
+  previous_messages_.template Clear<T>();
+  ClearIds(type_index);
 }
 
 template <AsyncMessageTrait T>
@@ -587,7 +557,7 @@ inline void MessageManager::ManualAsyncClear() {
   constexpr auto type_index = MessageTypeIndex::From<T>();
   HELIOS_ASSERT(registered_messages_.Contains(type_index),
                 "Message type '{}' is not registered!", MessageNameOf<T>());
-  async_messages_.Clear<T>();
+  async_messages_.template Clear<T>();
 }
 
 template <MessageTrait T>
@@ -596,8 +566,8 @@ inline bool MessageManager::HasMessages() const noexcept {
       [[unlikely]] {
     return false;
   }
-  return current_messages_.HasMessages<T>() ||
-         previous_messages_.HasMessages<T>();
+  return current_messages_.template HasMessages<T>() ||
+         previous_messages_.template HasMessages<T>();
 }
 
 template <AsyncMessageTrait T>
@@ -606,7 +576,38 @@ inline bool MessageManager::HasAsyncMessages() const noexcept {
       [[unlikely]] {
     return false;
   }
-  return async_messages_.HasMessages<T>();
+  return async_messages_.template HasMessages<T>();
+}
+
+template <MessageTrait T>
+inline auto MessageManager::MessageCount() const noexcept -> MessageId<T> {
+  const auto* count = message_counts_.template TryGet<T>();
+  return MessageId<T>{count != nullptr ? *count : 0};
+}
+
+template <MessageTrait T>
+inline auto MessageManager::OldestMessageCount() const noexcept
+    -> MessageId<T> {
+  const auto prev = PreviousIds<T>();
+  if (!prev.empty()) {
+    return MessageId<T>::From(prev.front());
+  }
+  const auto curr = CurrentIds<T>();
+  if (!curr.empty()) {
+    return MessageId<T>::From(curr.front());
+  }
+  return MessageCount<T>();
+}
+
+template <MessageTrait T>
+inline auto MessageManager::UnreadCount(
+    MessageId<T> last_message_count) const noexcept -> size_type {
+  const AnyMessageId cursor_pos = last_message_count.ToAny();
+  const auto count_from = [cursor_pos](std::span<const AnyMessageId> ids) {
+    const auto it = std::ranges::lower_bound(ids, cursor_pos);
+    return static_cast<size_type>(ids.end() - it);
+  };
+  return count_from(PreviousIds<T>()) + count_from(CurrentIds<T>());
 }
 
 }  // namespace helios::ecs

@@ -2,10 +2,11 @@
 
 #include <helios/app/application.hpp>
 #include <helios/app/dynamic_plugin.hpp>
+#include <helios/app/frame_order.hpp>
 #include <helios/app/runners.hpp>
 #include <helios/app/schedules.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/message/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/schedule/system_set.hpp>
 #include <helios/ecs/system/system.hpp>
 
@@ -187,6 +188,18 @@ TEST_SUITE("helios::app::App") {
     SUBCASE("Default-constructed app registers built-in update schedule") {
       App app;
       CHECK_NE(app.TryGetSchedule(kUpdate), nullptr);
+    }
+
+    SUBCASE("Default-constructed app registers frame orders") {
+      App app;
+      CHECK(app.GetWorld().HasResource<MainFrameOrder>());
+      CHECK(app.GetWorld().HasResource<FramePumpOrder>());
+      CHECK(
+          app.GetWorld().ReadResource<MainFrameOrder>().Contains(kUpdateStage));
+      CHECK(app.GetWorld().ReadResource<MainFrameOrder>().Contains(
+          kExtractStage));
+      CHECK(
+          app.GetWorld().ReadResource<FramePumpOrder>().Contains(kUpdateStage));
     }
 
     SUBCASE("Worker thread count ctor leaves app uninitialized") {

@@ -13,6 +13,7 @@ namespace helios::ecs {
 
 void MainThreadExecutor::Execute(Schedule& schedule, World& world) {
   HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::MainThreadExecutor::Execute");
+
   HELIOS_ASSERT(schedule.plan_.has_value(),
                 "MainThreadExecutor: schedule has no compiled plan!");
 
@@ -50,6 +51,7 @@ void MainThreadExecutor::Execute(Schedule& schedule, World& world) {
       }
     }
 
+    HELIOS_ECS_PROFILE_SCOPE();
     HELIOS_ECS_PROFILE_ZONE_NAME(storage.name);
     storage.system(world, storage.local_data);
   }

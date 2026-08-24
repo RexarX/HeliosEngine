@@ -13,8 +13,10 @@ namespace hlog = helios::log;
 
 namespace {
 
-// Regular messages are frame-lifetime events stored in the World's message
-// buffers. They are visible to readers after the message lifecycle advances.
+// Regular messages are retained across two message lifecycle steps
+// (MessageManager::Update / stage advance_messages — previous + current
+// buffers). Per-system MessageCursor delivery ensures each MessageReader
+// observes a given message at most once.
 struct ChatMessage {
   std::string text;
 };
@@ -23,6 +25,7 @@ struct AsyncPing {
   // Async messages use a lock-free queue and can be written from another
   // thread. They are not part of the regular double-buffered lifecycle.
   static constexpr bool kAsync = true;
+
   int id = 0;
 };
 
@@ -32,18 +35,18 @@ struct WriteRegularMessage {
     if (frames->count == 0) {
       // This write enters the current message buffer for ChatMessage.
       writer.Write(ChatMessage{.text = "hello from frame 0"});
-      hlog::Info("messages: wrote regular ChatMessage");
+      hlog::Info("Wrote regular ChatMessage");
     }
   }
 };
 
 struct ReadRegularMessage {
   void operator()(hecs::MessageReader<ChatMessage> reader) const {
-    // MessageReader iterates the readable buffer and exposes lazy adapters like
-    // queries do. Here we only print every message.
-    reader.ForEach([](const auto msg) {
-      hlog::Info("messages: read regular '{}'", msg->text);
-    });
+    // Unread-only: the system-param cursor advances as messages are yielded, so
+    // re-entering this system before aging does not reprint the same
+    // ChatMessage.
+    reader.ForEach(
+        [](const auto msg) { hlog::Info("Read regular '{}'", msg->text); });
   }
 };
 
@@ -51,7 +54,7 @@ struct ReadAsyncMessage {
   void operator()(hecs::AsyncMessageReader<AsyncPing> reader) const {
     // Async reads drain whatever the background writer has produced so far.
     reader.ForEach([](const AsyncPing& ping) {
-      hlog::Info("messages: read async ping id={}", ping.id);
+      hlog::Info("Read async ping id={}", ping.id);
     });
   }
 };
@@ -84,7 +87,7 @@ int main() {
     auto writer = app.GetWorld().WriteAsyncMessages<AsyncPing>();
     for (int i = 0; i < 3; ++i) {
       writer.Write(AsyncPing{.id = i});
-      hlog::Info("messages: wrote async ping id={}", i);
+      hlog::Info("Wrote async ping id={}", i);
       std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
   });

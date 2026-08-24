@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <functional>
 #include <iterator>
+#include <memory_resource>
 #include <optional>
 #include <ranges>
 #include <tuple>
@@ -382,6 +383,13 @@ concept SlideAdapterRequirements = IteratorLike<Iter>;
  */
 template <typename Iter>
 concept StrideAdapterRequirements = IteratorLike<Iter>;
+
+/**
+ * @brief Concept to validate `ChunkAdapter` requirements.
+ * @tparam Iter Iterator type
+ */
+template <typename Iter>
+concept ChunkAdapterRequirements = IteratorLike<Iter>;
 
 /**
  * @brief Concept to validate `ZipAdapter` requirements.
@@ -2739,7 +2747,7 @@ constexpr void JoinAdapter<Iter>::AdvanceToValid() noexcept(
  *
  * @code
  * std::vector<int> data = {1, 2, 3, 4, 5};
- * auto slide = SlideAdapterFromRange(data, 3);
+ * auto slide = SlideAdapter(data, 3);
  * for (const auto& window : slide) {
  *   // window is a SlideView, iterate over it
  *   for (int val : window) {
@@ -2761,6 +2769,7 @@ public:
   using value_type = std::iter_value_t<Iter>;
   using reference = decltype(*std::declval<Iter>());
   using size_type = size_t;
+  using difference_type = std::iter_difference_t<Iter>;
 
   /**
    * @brief Constructs a SlideView.
@@ -2787,38 +2796,20 @@ public:
    * @details Use when you need ownership of the elements.
    * @return Vector containing copies of the window elements
    */
-  [[nodiscard]] constexpr auto Collect() const -> std::vector<value_type>
-    requires std::copy_constructible<value_type>;
-
-  /**
-   * @brief Collects the window elements into a vector with a custom allocator.
-   * @details Use when you need ownership of the elements with a specific
-   * allocator.
-   * @tparam Allocator Allocator type
-   * @param allocator Allocator to use for the vector
-   * @return Vector containing copies of the window elements
-   */
-  template <typename Allocator>
-    requires(!std::derived_from<std::remove_pointer_t<Allocator>,
-                                std::pmr::memory_resource>)
-  [[nodiscard]] constexpr auto CollectWith(Allocator allocator = {}) const
-      -> std::vector<value_type, Allocator>
+  [[nodiscard]] constexpr auto Collect() const -> std::pmr::vector<value_type>
     requires std::copy_constructible<value_type>;
 
   /**
    * @brief Collects the window elements into a vector with a specific memory
    * resource.
-   * @details Use when you need ownership of the elements with a specific
-   * memory resource.
    * @param resource Memory resource to use for the vector
    * @return Vector containing copies of the window elements
    */
-  [[nodiscard]] constexpr auto CollectWith(
+  [[nodiscard]] constexpr auto Collect(
       std::pmr::memory_resource* resource) const -> std::pmr::vector<value_type>
     requires std::copy_constructible<value_type>;
 
-  auto CollectWith(std::nullptr_t) const
-      -> std::pmr::vector<value_type> = delete;
+  auto Collect(std::nullptr_t) const -> std::pmr::vector<value_type> = delete;
 
   /**
    * @brief Accesses an element by index.
@@ -2828,7 +2819,9 @@ public:
    */
   [[nodiscard]] constexpr reference operator[](size_t index) const
       noexcept(noexcept(*std::declval<Iter>()) &&
-               noexcept(++std::declval<Iter&>()));
+               noexcept(++std::declval<Iter&>())) {
+    return *std::next(begin_, static_cast<difference_type>(index));
+  }
 
   /**
    * @brief Compares two SlideViews for equality.
@@ -2843,7 +2836,7 @@ public:
    * @param vec Vector to compare with
    * @return True if the view has the same elements as the vector
    */
-  template <std::ranges::sized_range R>
+  template <std::ranges::input_range R>
   [[nodiscard]] constexpr bool operator==(const R& range) const;
 
   /**
@@ -2881,37 +2874,14 @@ private:
 };
 
 template <IteratorLike Iter>
-constexpr auto SlideView<Iter>::Collect() const -> std::vector<value_type>
+constexpr auto SlideView<Iter>::Collect() const -> std::pmr::vector<value_type>
   requires std::copy_constructible<value_type>
 {
-  std::vector<value_type> result;
-  result.reserve(size_);
-  auto it = begin_;
-  for (size_t i = 0; i < size_; ++i) {
-    result.push_back(*it++);
-  }
-  return result;
+  return Collect(std::pmr::get_default_resource());
 }
 
 template <IteratorLike Iter>
-template <typename Allocator>
-  requires(!std::derived_from<std::remove_pointer_t<Allocator>,
-                              std::pmr::memory_resource>)
-constexpr auto SlideView<Iter>::CollectWith(Allocator allocator) const
-    -> std::vector<value_type, Allocator>
-  requires std::copy_constructible<value_type>
-{
-  std::vector<value_type, Allocator> result{std::move(allocator)};
-  result.reserve(size_);
-  auto it = begin_;
-  for (size_t i = 0; i < size_; ++i) {
-    result.push_back(*it++);
-  }
-  return result;
-}
-
-template <IteratorLike Iter>
-constexpr auto SlideView<Iter>::CollectWith(
+constexpr auto SlideView<Iter>::Collect(
     std::pmr::memory_resource* resource) const -> std::pmr::vector<value_type>
   requires std::copy_constructible<value_type>
 {
@@ -2922,17 +2892,6 @@ constexpr auto SlideView<Iter>::CollectWith(
     result.push_back(*it++);
   }
   return result;
-}
-
-template <IteratorLike Iter>
-constexpr auto SlideView<Iter>::operator[](size_t index) const
-    noexcept(noexcept(*std::declval<Iter>()) &&
-             noexcept(++std::declval<Iter&>())) -> reference {
-  auto it = begin_;
-  for (size_t i = 0; i < index; ++i) {
-    ++it;
-  }
-  return *it;
 }
 
 template <IteratorLike Iter>
@@ -2952,14 +2911,29 @@ constexpr bool SlideView<Iter>::operator==(const SlideView& other) const {
 }
 
 template <IteratorLike Iter>
-template <std::ranges::sized_range R>
+template <std::ranges::input_range R>
 constexpr bool SlideView<Iter>::operator==(const R& range) const {
-  if (size_ != std::ranges::size(range)) {
-    return false;
+  if constexpr (std::ranges::sized_range<R>) {
+    if (size_ != std::ranges::size(range)) {
+      return false;
+    }
   }
 
-  return std::equal(std::ranges::cbegin(range), std::ranges::cend(range),
-                    begin_);
+  auto it = begin_;
+  auto rit = std::ranges::cbegin(range);
+  auto rend = std::ranges::cend(range);
+
+  for (size_t i = 0; i < size_; ++i, ++it) {
+    if (rit == rend) {
+      return false;  // range shorter than *this
+    }
+    if (!(*it == *rit)) {
+      return false;
+    }
+    ++rit;
+  }
+
+  return rit == rend;  // false if range has leftover elements
 }
 
 template <IteratorLike Iter>
@@ -2982,7 +2956,7 @@ constexpr Iter SlideView<Iter>::end() const
  *
  * @code
  * std::vector<int> data = {1, 2, 3, 4, 5};
- * auto slide = SlideAdapterFromRange(data, 3);
+ * auto slide = SlideAdapter(data, 3);
  *
  * // Iterate over windows
  * for (const auto& window : slide) {
@@ -2997,7 +2971,7 @@ constexpr Iter SlideView<Iter>::end() const
  * auto windows = slide.Collect();  // Vector of SlideViews
  *
  * // Convert a window to vector if ownership needed
- * auto first_window = (*slide.begin()).Collect();  // std::vector<int>
+ * auto first_window = (*slide.begin()).Collect();  // std::pmr::vector<int>
  * @endcode
  */
 template <typename Iter>
@@ -3143,13 +3117,18 @@ constexpr SlideAdapter<Iter>::SlideAdapter(
       current_(begin_),
       end_(std::move(end)),
       window_size_(window_size) {
-  // If we can't form a complete window, start at end
-  Iter iter = begin_;
   size_t count = 0;
-  while (iter != end_) {
-    ++iter;
-    ++count;
+  if constexpr (std::random_access_iterator<Iter>) {
+    count = static_cast<size_t>(std::distance(begin_, end_));
+  } else {
+    count = 0;
+    Iter iter = begin_;
+    while (iter != end_) {
+      ++iter;
+      ++count;
+    }
   }
+
   if (count < window_size_) {
     current_ = end_;
   }
@@ -3185,20 +3164,21 @@ constexpr auto SlideAdapter<Iter>::end() const
              noexcept(++std::declval<Iter&>())) -> SlideAdapter {
   auto result = *this;
 
-  // Calculate end position: when we can't form a complete window
-  Iter iter = begin_;
   size_t count = 0;
-  while (iter != end_) {
-    ++iter;
-    ++count;
+  if constexpr (std::random_access_iterator<Iter>) {
+    count = static_cast<size_t>(std::distance(begin_, end_));
+  } else {
+    count = 0;
+    Iter iter = begin_;
+    while (iter != end_) {
+      ++iter;
+      ++count;
+    }
   }
 
-  // Position where we can't form more windows
   if (count >= window_size_) {
-    result.current_ = begin_;
-    for (size_t i = 0; i < count - window_size_ + 1; ++i) {
-      ++result.current_;
-    }
+    result.current_ = std::next(
+        begin_, static_cast<difference_type>(count - window_size_ + 1));
   } else {
     result.current_ = end_;
   }
@@ -3214,7 +3194,7 @@ constexpr auto SlideAdapter<Iter>::end() const
  *
  * @code
  * std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
- * auto strided = StrideAdapterFromRange(data, 3);
+ * auto strided = StrideAdapter(data, 3);
  * // Yields: 1, 4, 7
  * for (int val : strided) {
  *   std::cout << val << " ";
@@ -3376,6 +3356,405 @@ constexpr auto StrideAdapter<Iter>::end() const
 }
 
 /**
+ * @brief A non-owning view over a contiguous chunk of elements.
+ * @details Provides a lightweight, non-allocating view over a fixed-size
+ * (except possibly the last) chunk of elements. Reuses the same interface
+ * as `SlideView`, but chunks do not overlap and the final chunk may be
+ * shorter than the requested chunk size.
+ * @tparam Iter Type of the underlying iterator
+ *
+ * @code
+ * std::vector<int> data = {1, 2, 3, 4, 5};
+ * auto chunks = ChunkAdapter(data, 2);
+ * for (const auto& chunk : chunks) {
+ *   for (int val : chunk) {
+ *     std::cout << val << " ";
+ *   }
+ *   std::cout << "\n";
+ * }
+ * // Output:
+ * // 1 2
+ * // 3 4
+ * // 5
+ * @endcode
+ */
+template <IteratorLike Iter>
+class ChunkView {
+public:
+  using iterator = Iter;
+  using const_iterator = Iter;
+  using value_type = std::iter_value_t<Iter>;
+  using reference = decltype(*std::declval<Iter>());
+  using size_type = size_t;
+  using difference_type = std::iter_difference_t<Iter>;
+
+  /**
+   * @brief Constructs a ChunkView.
+   * @param begin Iterator to the beginning of the chunk
+   * @param size Number of elements actually present in this chunk
+   */
+  constexpr ChunkView(Iter begin, size_t size) noexcept(
+      std::is_nothrow_copy_constructible_v<Iter>)
+      : begin_(begin), size_(size) {}
+
+  constexpr ChunkView(const ChunkView&) noexcept(
+      std::is_nothrow_copy_constructible_v<Iter>) = default;
+  constexpr ChunkView(ChunkView&&) noexcept(
+      std::is_nothrow_move_constructible_v<Iter>) = default;
+  constexpr ~ChunkView() noexcept = default;
+
+  constexpr ChunkView& operator=(const ChunkView&) noexcept(
+      std::is_nothrow_copy_assignable_v<Iter>) = default;
+  constexpr ChunkView& operator=(ChunkView&&) noexcept(
+      std::is_nothrow_move_assignable_v<Iter>) = default;
+
+  /**
+   * @brief Collects the chunk elements into a vector.
+   * @return Vector containing copies of the chunk elements
+   */
+  [[nodiscard]] constexpr auto Collect() const -> std::pmr::vector<value_type>
+    requires std::copy_constructible<value_type>;
+
+  /**
+   * @brief Collects the chunk elements into a vector with a specific memory
+   * resource.
+   * @param resource Memory resource to use for the vector
+   * @return Vector containing copies of the chunk elements
+   */
+  [[nodiscard]] constexpr auto Collect(
+      std::pmr::memory_resource* resource) const -> std::pmr::vector<value_type>
+    requires std::copy_constructible<value_type>;
+
+  auto Collect(std::nullptr_t) const -> std::pmr::vector<value_type> = delete;
+
+  /**
+   * @brief Accesses an element by index.
+   * @warning Index must be less than size
+   * @param index Index of the element
+   * @return Reference to the element
+   */
+  [[nodiscard]] constexpr reference operator[](size_t index) const
+      noexcept(noexcept(*std::declval<Iter>()) &&
+               noexcept(++std::declval<Iter&>())) {
+    return *std::next(begin_, static_cast<difference_type>(index));
+  }
+
+  /**
+   * @brief Compares two ChunkViews for equality.
+   * @param other ChunkView to compare with
+   * @return True if both views have the same elements
+   */
+  [[nodiscard]] constexpr bool operator==(const ChunkView& other) const;
+
+  /**
+   * @brief Compares ChunkView with a range for equality.
+   * @tparam R
+   * @param range Range to compare with
+   * @return True if the view has the same elements as the range
+   */
+  template <std::ranges::input_range R>
+  [[nodiscard]] constexpr bool operator==(const R& range) const;
+
+  /**
+   * @brief Checks if the chunk is empty.
+   * @return True if the chunk has no elements
+   */
+  [[nodiscard]] constexpr bool Empty() const noexcept { return size_ == 0; }
+
+  /**
+   * @brief Returns the number of elements in this chunk.
+   * @return Number of elements (may be less than the adapter's chunk size
+   * for the final chunk)
+   */
+  [[nodiscard]] constexpr size_t Size() const noexcept { return size_; }
+
+  /**
+   * @brief Returns an iterator to the beginning.
+   * @return Iterator to the first element
+   */
+  [[nodiscard]] constexpr Iter begin() const
+      noexcept(std::is_nothrow_copy_constructible_v<Iter>) {
+    return begin_;
+  }
+
+  /**
+   * @brief Returns an iterator to the end.
+   * @return Iterator past the last element
+   */
+  [[nodiscard]] constexpr Iter end() const
+      noexcept(std::is_nothrow_copy_constructible_v<Iter> &&
+               noexcept(++std::declval<Iter&>())) {
+    return std::next(begin_, static_cast<difference_type>(size_));
+  }
+
+private:
+  Iter begin_;
+  size_t size_ = 0;
+};
+
+template <IteratorLike Iter>
+constexpr auto ChunkView<Iter>::Collect() const -> std::pmr::vector<value_type>
+  requires std::copy_constructible<value_type>
+{
+  return Collect(std::pmr::get_default_resource());
+}
+
+template <IteratorLike Iter>
+constexpr auto ChunkView<Iter>::Collect(
+    std::pmr::memory_resource* resource) const -> std::pmr::vector<value_type>
+  requires std::copy_constructible<value_type>
+{
+  std::pmr::vector<value_type> result{resource};
+  result.reserve(size_);
+  auto it = begin_;
+  for (size_t i = 0; i < size_; ++i) {
+    result.push_back(*it++);
+  }
+  return result;
+}
+
+template <IteratorLike Iter>
+constexpr bool ChunkView<Iter>::operator==(const ChunkView& other) const {
+  if (size_ != other.size_) {
+    return false;
+  }
+
+  auto it1 = begin_;
+  auto it2 = other.begin_;
+  for (size_t i = 0; i < size_; ++i) {
+    if (*it1++ != *it2++) {
+      return false;
+    }
+  }
+  return true;
+}
+
+template <IteratorLike Iter>
+template <std::ranges::input_range R>
+constexpr bool ChunkView<Iter>::operator==(const R& range) const {
+  if constexpr (std::ranges::sized_range<R>) {
+    if (size_ != std::ranges::size(range)) {
+      return false;
+    }
+  }
+
+  auto it = begin_;
+  auto rit = std::ranges::cbegin(range);
+  auto rend = std::ranges::cend(range);
+
+  for (size_t i = 0; i < size_; ++i, ++it) {
+    if (rit == rend) {
+      return false;  // range shorter than *this
+    }
+    if (!(*it == *rit)) {
+      return false;
+    }
+    ++rit;
+  }
+
+  return rit == rend;  // false if range has leftover elements
+}
+
+/**
+ * @brief Adapter that yields non-overlapping chunks of elements.
+ * @details Splits a range into consecutive, non-overlapping chunks of a
+ * fixed size, advancing chunk_size elements at a time. The final chunk may
+ * contain fewer than chunk_size elements if the range length isn't an exact
+ * multiple. Each chunk is returned as a ChunkView, a non-allocating view.
+ * @tparam Iter Type of the underlying iterator
+ *
+ * @code
+ * std::vector<int> data = {1, 2, 3, 4, 5};
+ * ChunkAdapter chunks(data, 2);
+ *
+ * for (const auto& chunk : chunks) {
+ *   for (int val : chunk) {
+ *     std::cout << val << " ";
+ *   }
+ *   std::cout << "\n";
+ * }
+ *
+ * auto owned = (*chunks.begin()).Collect();  // std::pmr::vector<int>
+ * @endcode
+ */
+template <typename Iter>
+  requires ChunkAdapterRequirements<Iter>
+class ChunkAdapter final : public FunctionalAdapterBase<ChunkAdapter<Iter>> {
+public:
+  using iterator_concept = std::forward_iterator_tag;
+  using iterator_category = std::input_iterator_tag;
+  using value_type = ChunkView<Iter>;
+  using reference = value_type;
+  using pointer = void;
+  using difference_type = std::iter_difference_t<Iter>;
+
+  /**
+   * @brief Constructs a chunk adapter.
+   * @warning chunk_size must be greater than 0
+   * @param begin Iterator to the beginning of the range
+   * @param end Iterator to the end of the range
+   * @param chunk_size Size of each chunk
+   */
+  constexpr ChunkAdapter(Iter begin, Iter end, size_t chunk_size) noexcept(
+      std::is_nothrow_move_constructible_v<Iter> &&
+      std::is_nothrow_copy_constructible_v<Iter>)
+      : begin_(std::move(begin)),
+        current_(begin_),
+        end_(std::move(end)),
+        chunk_size_(chunk_size) {}
+
+  /**
+   * @brief Constructs a chunk adapter from a range.
+   * @tparam R The type of the range
+   * @param range The range to adapt
+   * @param chunk_size The size of each chunk
+   */
+  template <ExternalRange R>
+    requires ChunkAdapterRequirements<std::ranges::iterator_t<R>>
+  explicit constexpr ChunkAdapter(R& range, size_t chunk_size) noexcept(
+      noexcept(ChunkAdapter(std::ranges::begin(range), std::ranges::end(range),
+                            chunk_size)))
+      : ChunkAdapter(std::ranges::begin(range), std::ranges::end(range),
+                     chunk_size) {}
+
+  /**
+   * @brief Constructs a chunk adapter from a const range.
+   * @tparam R The type of the range
+   * @param range The range to adapt
+   * @param chunk_size The size of each chunk
+   */
+  template <ExternalRange R>
+    requires ChunkAdapterRequirements<std::ranges::iterator_t<const R>>
+  explicit constexpr ChunkAdapter(const R& range, size_t chunk_size) noexcept(
+      noexcept(ChunkAdapter(std::ranges::cbegin(range),
+                            std::ranges::cend(range), chunk_size)))
+      : ChunkAdapter(std::ranges::cbegin(range), std::ranges::cend(range),
+                     chunk_size) {}
+
+  constexpr ChunkAdapter(const ChunkAdapter&) noexcept(
+      std::is_nothrow_copy_constructible_v<Iter>) = default;
+  constexpr ChunkAdapter(ChunkAdapter&&) noexcept(
+      std::is_nothrow_move_constructible_v<Iter>) = default;
+  constexpr ~ChunkAdapter() noexcept(std::is_nothrow_destructible_v<Iter>) =
+      default;
+
+  constexpr ChunkAdapter& operator=(const ChunkAdapter&) noexcept(
+      std::is_nothrow_copy_assignable_v<Iter>) = default;
+  constexpr ChunkAdapter& operator=(ChunkAdapter&&) noexcept(
+      std::is_nothrow_move_assignable_v<Iter>) = default;
+
+  constexpr ChunkAdapter& operator++() noexcept(
+      noexcept(std::declval<Iter&>() != std::declval<Iter&>()) &&
+      noexcept(++std::declval<Iter&>()));
+  [[nodiscard]] constexpr ChunkAdapter operator++(int) noexcept(
+      std::is_nothrow_copy_constructible_v<ChunkAdapter> &&
+      noexcept(++std::declval<ChunkAdapter&>()));
+
+  /**
+   * @brief Dereferences the iterator to get the current chunk.
+   * @details The returned ChunkView's size is clamped to however many
+   * elements remain before the end, so the final chunk may be partial.
+   * For random-access iterators this is computed in O(1) via
+   * `std::distance`; otherwise it costs an O(chunk_size) scan, which does
+   * not change the asymptotic cost of visiting the chunk's own elements.
+   * @return ChunkView representing the current chunk
+   */
+  [[nodiscard]] constexpr reference operator*() const
+      noexcept(std::is_nothrow_constructible_v<ChunkView<Iter>, Iter, size_t>);
+
+  pointer operator->() const = delete;
+
+  [[nodiscard]] constexpr bool operator==(const ChunkAdapter& other) const
+      noexcept(noexcept(std::declval<const Iter&>() ==
+                        std::declval<const Iter&>())) {
+    return current_ == other.current_;
+  }
+
+  [[nodiscard]] constexpr bool operator!=(const ChunkAdapter& other) const
+      noexcept(noexcept(std::declval<const Iter&>() !=
+                        std::declval<const Iter&>())) {
+    return current_ != other.current_;
+  }
+
+  [[nodiscard]] constexpr ChunkAdapter begin() const
+      noexcept(std::is_nothrow_constructible_v<ChunkAdapter, const Iter&,
+                                               const Iter&, size_t>) {
+    return {begin_, end_, chunk_size_};
+  }
+
+  [[nodiscard]] constexpr ChunkAdapter end() const
+      noexcept(std::is_nothrow_copy_constructible_v<ChunkAdapter> &&
+               std::is_nothrow_copy_assignable_v<Iter>) {
+    auto result = *this;
+    result.current_ = end_;
+    return result;
+  }
+
+  /**
+   * @brief Returns the chunk size.
+   * @return Size of each chunk (the last chunk may be smaller)
+   */
+  [[nodiscard]] constexpr size_t ChunkSize() const noexcept {
+    return chunk_size_;
+  }
+
+private:
+  Iter begin_;
+  Iter current_;
+  Iter end_;
+  size_t chunk_size_ = 0;
+};
+
+template <ExternalRange R>
+  requires ChunkAdapterRequirements<std::ranges::iterator_t<R>>
+ChunkAdapter(R&, size_t) -> ChunkAdapter<std::ranges::iterator_t<R>>;
+
+template <ExternalRange R>
+  requires ChunkAdapterRequirements<std::ranges::iterator_t<const R>>
+ChunkAdapter(const R&, size_t)
+    -> ChunkAdapter<std::ranges::iterator_t<const R>>;
+
+template <typename Iter>
+  requires ChunkAdapterRequirements<Iter>
+constexpr auto ChunkAdapter<Iter>::operator++() noexcept(
+    noexcept(std::declval<Iter&>() != std::declval<Iter&>()) &&
+    noexcept(++std::declval<Iter&>())) -> ChunkAdapter& {
+  for (size_t i = 0; i < chunk_size_ && current_ != end_; ++i) {
+    ++current_;
+  }
+  return *this;
+}
+
+template <typename Iter>
+  requires ChunkAdapterRequirements<Iter>
+constexpr auto ChunkAdapter<Iter>::operator++(int) noexcept(
+    std::is_nothrow_copy_constructible_v<ChunkAdapter> &&
+    noexcept(++std::declval<ChunkAdapter&>())) -> ChunkAdapter {
+  auto temp = *this;
+  ++(*this);
+  return temp;
+}
+
+template <typename Iter>
+  requires ChunkAdapterRequirements<Iter>
+constexpr auto ChunkAdapter<Iter>::operator*() const
+    noexcept(std::is_nothrow_constructible_v<ChunkView<Iter>, Iter, size_t>)
+        -> reference {
+  size_t available = 0;
+  if constexpr (std::random_access_iterator<Iter>) {
+    available = static_cast<size_t>(
+        std::min<difference_type>(static_cast<difference_type>(chunk_size_),
+                                  std::distance(current_, end_)));
+  } else {
+    auto it = current_;
+    for (; available < chunk_size_ && it != end_; ++available) {
+      ++it;
+    }
+  }
+  return {current_, available};
+}
+
+/**
  * @brief Adapter that combines two ranges into pairs.
  * @details Iterates both ranges in parallel, yielding tuples of corresponding
  * elements. Stops when either range is exhausted.
@@ -3385,7 +3764,7 @@ constexpr auto StrideAdapter<Iter>::end() const
  * @code
  * std::vector<int> ids = {1, 2, 3};
  * std::vector<std::string> names = {"Alice", "Bob", "Charlie"};
- * auto zipped = ZipAdapterFromRange(ids, names);
+ * auto zipped = ZipAdapter(ids, names);
  * for (const auto& [id, name] : zipped) {
  *   std::cout << id << ": " << name << "\n";
  * }
@@ -3786,6 +4165,20 @@ public:
   }
 
   /**
+   * @brief Packs elements into non-overlapping chunks.
+   * @param chunk_size Number of elements to pack into each chunk
+   * @return ChunkAdapter that packs elements into chunks and yields them
+   * @warning chunk_size must be greater than 0
+   */
+  [[nodiscard]] constexpr auto Chunk(size_t chunk_size) const
+      noexcept(noexcept(ChunkAdapter<Derived>(GetDerived().begin(),
+                                              GetDerived().end(),
+                                              chunk_size))) {
+    return ChunkAdapter<Derived>(GetDerived().begin(), GetDerived().end(),
+                                 chunk_size);
+  }
+
+  /**
    * @brief Zips another range with this one.
    * @tparam OtherIter Iterator type to zip with
    * @param begin Begin iterator for the other range
@@ -3879,21 +4272,23 @@ public:
    * second contains the rest
    */
   template <typename Pred>
-  [[nodiscard]] constexpr auto Partition(const Pred& predicate) const;
+  [[nodiscard]] constexpr auto Partition(const Pred& predicate) const {
+    return Partition(predicate, std::pmr::get_default_resource());
+  }
 
   /**
-   * @brief Terminal operation: partitions elements with a custom allocator.
+   * @brief Terminal operation: partitions elements with a memory resource.
    * @tparam Pred Predicate type
-   * @tparam Allocator Allocator for result vectors
    * @param predicate Function to test elements
-   * @param allocator Allocator to use for both result vectors
-   * @return Pair of vectors using the provided allocator
+   * @param resource Memory resource to use for both result vectors
+   * @return Pair of vectors using the provided memory resource
    */
-  template <typename Pred, typename Allocator>
-    requires std::same_as<typename Allocator::value_type,
-                          std::iter_value_t<Derived>>
-  [[nodiscard]] constexpr auto PartitionWith(const Pred& predicate,
-                                             Allocator allocator) const;
+  template <typename Pred>
+  [[nodiscard]] constexpr auto Partition(
+      const Pred& predicate, std::pmr::memory_resource* resource) const;
+
+  template <typename Pred>
+  auto Partition(const Pred&, std::nullptr_t) const = delete;
 
   /**
    * @brief Terminal operation: finds the element with the maximum value
@@ -3924,49 +4319,41 @@ public:
    * @return Map from keys to vectors of elements with that key
    */
   template <typename KeyFunc>
-  [[nodiscard]] constexpr auto GroupBy(const KeyFunc& key_func) const;
+  [[nodiscard]] constexpr auto GroupBy(const KeyFunc& key_func) const {
+    return GroupBy(key_func, std::pmr::get_default_resource());
+  }
 
   /**
-   * @brief Terminal operation: groups elements by key with custom allocators.
+   * @brief Terminal operation: groups elements by key with a memory resource.
    * @tparam KeyFunc Key extraction function type
-   * @tparam MapAllocator Allocator for unordered_map nodes
-   * @tparam ValueAllocator Allocator for grouped vectors
    * @param key_func Function to extract grouping key from each element
-   * @param map_allocator Allocator for map storage
-   * @param value_allocator Allocator for each grouped vector
-   * @return Map from keys to vectors using provided allocators
+   * @param resource Memory resource for map storage and grouped vectors
+   * @return Map from keys to vectors using the provided memory resource
    */
-  template <typename KeyFunc, typename MapAllocator, typename ValueAllocator>
-  [[nodiscard]] constexpr auto GroupByWith(
-      const KeyFunc& key_func, MapAllocator map_allocator,
-      ValueAllocator value_allocator) const;
+  template <typename KeyFunc>
+  [[nodiscard]] constexpr auto GroupBy(
+      const KeyFunc& key_func, std::pmr::memory_resource* resource) const;
+
+  template <typename KeyFunc>
+  auto GroupBy(const KeyFunc&, std::nullptr_t) const = delete;
 
   /**
    * @brief Terminal operation: collects all elements into a vector.
    * @return Vector containing all elements
    */
-  [[nodiscard]] constexpr auto Collect() const;
+  [[nodiscard]] constexpr auto Collect() const {
+    return Collect(std::pmr::get_default_resource());
+  }
 
   /**
-   * @brief Terminal operation: collects all elements into a vector with a
-   * custom allocator.
-   * @tparam Allocator Allocator type
-   * @param allocator Allocator to use for the vector
-   * @return Vector containing all elements
-   */
-  template <typename Allocator>
-  [[nodiscard]] constexpr auto CollectWith(Allocator allocator = {}) const;
-
-  /**
-   * @brief Terminal operation: collects all elements into a vector with a
-   * specific memory resource.
+   * @brief Terminal operation: collects all elements using a memory resource.
    * @param resource Memory resource to use for the vector
    * @return Vector containing all elements
    */
-  [[nodiscard]] constexpr auto CollectWith(
+  [[nodiscard]] constexpr auto Collect(
       std::pmr::memory_resource* resource) const;
 
-  auto CollectWith(std::nullptr_t) const = delete;
+  auto Collect(std::nullptr_t) const = delete;
 
   /**
    * @brief Terminal operation: writes all elements into an output iterator.
@@ -3978,8 +4365,7 @@ public:
    *
    * @code
    * std::vector<int> results;
-   * query.Filter([](int x) { return x > 5;
-   * }).Into(std::back_inserter(results));
+   * query.Filter([](int x) { return x > 5;}).Into(std::back_inserter(results));
    * @endcode
    */
   template <typename OutIt>
@@ -4116,38 +4502,10 @@ constexpr size_t FunctionalAdapterBase<Derived>::CountIf(
 template <typename Derived>
 template <typename Pred>
 constexpr auto FunctionalAdapterBase<Derived>::Partition(
-    const Pred& predicate) const {
+    const Pred& predicate, std::pmr::memory_resource* resource) const {
   using ValueType = std::iter_value_t<Derived>;
-  std::vector<ValueType> matched;
-  std::vector<ValueType> not_matched;
-
-  for (auto&& value : GetDerived()) {
-    bool result = false;
-    if constexpr (std::invocable<Pred, decltype(value)>) {
-      result = predicate(std::forward<decltype(value)>(value));
-    } else {
-      result = std::apply(predicate, std::forward<decltype(value)>(value));
-    }
-
-    if (result) {
-      matched.push_back(std::forward<decltype(value)>(value));
-    } else {
-      not_matched.push_back(std::forward<decltype(value)>(value));
-    }
-  }
-
-  return std::pair{std::move(matched), std::move(not_matched)};
-}
-
-template <typename Derived>
-template <typename Pred, typename Allocator>
-  requires std::same_as<typename Allocator::value_type,
-                        std::iter_value_t<Derived>>
-constexpr auto FunctionalAdapterBase<Derived>::PartitionWith(
-    const Pred& predicate, Allocator allocator) const {
-  using ValueType = std::iter_value_t<Derived>;
-  std::vector<ValueType, Allocator> matched(allocator);
-  std::vector<ValueType, Allocator> not_matched(std::move(allocator));
+  std::pmr::vector<ValueType> matched(resource);
+  std::pmr::vector<ValueType> not_matched(resource);
 
   for (auto&& value : GetDerived()) {
     bool result = false;
@@ -4273,43 +4631,12 @@ constexpr auto FunctionalAdapterBase<Derived>::MinBy(
 template <typename Derived>
 template <typename KeyFunc>
 constexpr auto FunctionalAdapterBase<Derived>::GroupBy(
-    const KeyFunc& key_func) const {
-  using ValueType = std::iter_value_t<Derived>;
-  using KeyType = std::decay_t<std::invoke_result_t<KeyFunc, ValueType>>;
-  std::unordered_map<KeyType, std::vector<ValueType>> groups;
-
-  for (auto&& value : GetDerived()) {
-    KeyType key;
-    if constexpr (std::invocable<KeyFunc, decltype(value)>) {
-      key = key_func(std::forward<decltype(value)>(value));
-    } else {
-      key = std::apply(key_func, std::forward<decltype(value)>(value));
-    }
-    groups[std::move(key)].push_back(std::forward<decltype(value)>(value));
-  }
-
-  return groups;
-}
-
-template <typename Derived>
-template <typename KeyFunc, typename MapAllocator, typename ValueAllocator>
-constexpr auto FunctionalAdapterBase<Derived>::GroupByWith(
-    const KeyFunc& key_func, MapAllocator map_allocator,
-    ValueAllocator value_allocator) const {
+    const KeyFunc& key_func, std::pmr::memory_resource* resource) const {
   using ValueType = std::iter_value_t<Derived>;
   using KeyType =
       std::decay_t<details::call_or_apply_result_t<const KeyFunc&, ValueType>>;
-  using GroupVector = std::vector<ValueType, ValueAllocator>;
-  using MapValueType = std::pair<const KeyType, GroupVector>;
-  static_assert(std::same_as<typename MapAllocator::value_type, MapValueType>,
-                "Map allocator value_type must match map value type");
-  static_assert(std::same_as<typename ValueAllocator::value_type, ValueType>,
-                "Value allocator value_type must match grouped element type");
-
-  std::unordered_map<KeyType, GroupVector, std::hash<KeyType>, std::equal_to<>,
-                     MapAllocator>
-      groups(0, std::hash<KeyType>{}, std::equal_to<>{},
-             std::move(map_allocator));
+  using GroupVector = std::pmr::vector<ValueType>;
+  std::pmr::unordered_map<KeyType, GroupVector> groups(resource);
 
   for (auto&& value : GetDerived()) {
     KeyType key;
@@ -4319,10 +4646,7 @@ constexpr auto FunctionalAdapterBase<Derived>::GroupByWith(
       key = std::apply(key_func, std::forward<decltype(value)>(value));
     }
 
-    auto [iter, inserted] = groups.try_emplace(std::move(key));
-    if (inserted) {
-      iter->second = GroupVector(value_allocator);
-    }
+    auto iter = groups.try_emplace(std::move(key)).first;
     iter->second.push_back(std::forward<decltype(value)>(value));
   }
 
@@ -4330,36 +4654,16 @@ constexpr auto FunctionalAdapterBase<Derived>::GroupByWith(
 }
 
 template <typename Derived>
-constexpr auto FunctionalAdapterBase<Derived>::Collect() const {
-  using ValueType = std::iter_value_t<Derived>;
-  std::vector<ValueType> result;
-  result.reserve(static_cast<size_t>(
-      std::distance(GetDerived().begin(), GetDerived().end())));
-  for (auto&& value : GetDerived()) {
-    result.push_back(std::forward<decltype(value)>(value));
-  }
-  return result;
-}
-
-template <typename Derived>
-template <typename Allocator>
-constexpr auto FunctionalAdapterBase<Derived>::CollectWith(
-    Allocator allocator) const {
-  using ValueType = std::iter_value_t<Derived>;
-  std::vector<ValueType, Allocator> result{std::move(allocator)};
-  result.reserve(static_cast<size_t>(
-      std::distance(GetDerived().begin(), GetDerived().end())));
-  for (auto&& value : GetDerived()) {
-    result.push_back(std::forward<decltype(value)>(value));
-  }
-  return result;
-}
-
-template <typename Derived>
-constexpr auto FunctionalAdapterBase<Derived>::CollectWith(
+constexpr auto FunctionalAdapterBase<Derived>::Collect(
     std::pmr::memory_resource* resource) const {
   using ValueType = std::iter_value_t<Derived>;
-  return CollectWith(std::pmr::polymorphic_allocator<ValueType>{resource});
+  std::pmr::vector<ValueType> result(resource);
+  result.reserve(static_cast<size_t>(
+      std::distance(GetDerived().begin(), GetDerived().end())));
+  for (auto&& value : GetDerived()) {
+    result.push_back(std::forward<decltype(value)>(value));
+  }
+  return result;
 }
 
 template <typename Derived>

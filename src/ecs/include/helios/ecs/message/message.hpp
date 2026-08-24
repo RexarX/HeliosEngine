@@ -3,7 +3,6 @@
 #include <helios/utils/type_info.hpp>
 
 #include <concepts>
-#include <cstddef>
 #include <cstdint>
 #include <string_view>
 #include <type_traits>

@@ -1,0 +1,19 @@
+#pragma once
+
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cmath>
+#include <concepts>
+#include <cstddef>
+#include <cstdint>
+#include <format>
+#include <iterator>
+#include <optional>
+#include <ostream>
+#include <span>
+#include <string>
+#include <string_view>
+#include <type_traits>
+#include <utility>
+#include <vector>

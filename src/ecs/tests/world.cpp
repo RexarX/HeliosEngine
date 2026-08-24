@@ -1,15 +1,42 @@
 #include <doctest/doctest.h>
 
 #include <helios/ecs/entity/entity.hpp>
+#include <helios/ecs/message/cursor.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
+#include <helios/ecs/system/access_policy.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
 
+#include <concepts>
+#include <cstddef>
 #include <memory_resource>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
 using namespace helios::ecs;
 
 namespace {
+
+class CountingResource final : public std::pmr::memory_resource {
+public:
+  size_t bytes_allocated = 0;
+
+protected:
+  auto do_allocate(size_t bytes, size_t alignment) -> void* override {
+    bytes_allocated += bytes;
+    return std::pmr::new_delete_resource()->allocate(bytes, alignment);
+  }
+
+  void do_deallocate(void* ptr, size_t bytes, size_t alignment) override {
+    std::pmr::new_delete_resource()->deallocate(ptr, bytes, alignment);
+  }
+
+  [[nodiscard]] auto do_is_equal(
+      const std::pmr::memory_resource& other) const noexcept -> bool override {
+    return this == &other;
+  }
+};
 
 struct Position {
   float x = 0.0F;
@@ -29,9 +56,27 @@ struct Tag {
   constexpr bool operator==(const Tag&) const noexcept = default;
 };
 
-using PositionBundle = ComponentBundle<Position>;
-using MovementBundle = ComponentBundle<Position, Velocity>;
-using TaggedMovementBundle = ComponentBundle<Tag, MovementBundle>;
+using PositionBundle = ComponentBundleTypes<Position>;
+
+struct MovementBundle {
+  using ComponentTypes = ComponentBundleTypes<Position, Velocity>;
+
+  Position position;
+  Velocity velocity;
+
+  [[nodiscard]] constexpr ComponentTypes Build() {
+    return {position, velocity};
+  }
+};
+
+struct TaggedMovementBundle {
+  using ComponentTypes = ComponentBundleTypes<Tag, MovementBundle>;
+
+  Tag tag;
+  MovementBundle movement;
+
+  [[nodiscard]] constexpr ComponentTypes Build() { return {tag, movement}; }
+};
 
 struct DeltaTime {
   float value = 0.0F;
@@ -51,6 +96,7 @@ struct GameMsg {
 
 struct ManualGameMsg {
   static constexpr auto kClearPolicy = MessageClearPolicy::kManual;
+
   int value = 0;
 };
 
@@ -72,9 +118,46 @@ struct DestroyEntityCmd {
   void Execute(World& world) const { world.DestroyEntity(entity); }
 };
 
+template <typename T>
+concept HasSystemParamTraits = requires { typename SystemParamTraits<T>; };
+
+template <typename T>
+concept HasRegisterAccess = requires(AccessPolicyBuilder& builder) {
+  SystemParamTraits<T>::RegisterAccess(builder);
+};
+
 }  // namespace
 
 TEST_SUITE("helios::ecs::World") {
+  TEST_CASE("helios::ecs::World::ctor") {
+    SUBCASE("Default ctor") {
+      World world;
+      CHECK_EQ(world.GetMemoryResource(), std::pmr::get_default_resource());
+      CHECK_EQ(world.EntityCount(), 0);
+    }
+
+    SUBCASE("Memory resource ctor") {
+      CountingResource resource;
+      World world{&resource};
+
+      CHECK_EQ(world.GetMemoryResource(), &resource);
+
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{1.0F, 2.0F});
+      world.InsertResources(DeltaTime{0.016F});
+      world.EnqueueCommand(AddEntityCmd{});
+
+      CHECK_EQ(world.EntityCount(), 1);
+      CHECK(world.HasResource<DeltaTime>());
+      CHECK_EQ(world.CommandCount(), 1);
+      CHECK_GT(resource.bytes_allocated, 0);
+    }
+
+    SUBCASE("Nullptr ctor is deleted") {
+      CHECK_FALSE(std::constructible_from<World, std::nullptr_t>);
+    }
+  }
+
   TEST_CASE("helios::ecs::World::Update") {
     SUBCASE("Update executes pending commands") {
       World world;
@@ -469,8 +552,8 @@ TEST_SUITE("helios::ecs::World") {
     SUBCASE("AddBundle adds a flat bundle and stores its values") {
       World world;
       const Entity entity = world.CreateEntity();
-      world.AddBundle(
-          entity, MovementBundle{Position{1.0F, 2.0F}, Velocity{3.0F, 4.0F}});
+      world.AddBundle(entity, MovementBundle{.position = {1.0F, 2.0F},
+                                             .velocity = {3.0F, 4.0F}});
       CHECK_EQ(world.ReadComponent<Position>(entity), (Position{1.0F, 2.0F}));
       CHECK_EQ(world.ReadComponent<Velocity>(entity), (Velocity{3.0F, 4.0F}));
     }
@@ -479,7 +562,8 @@ TEST_SUITE("helios::ecs::World") {
       World world;
       const Entity entity = world.CreateEntity();
       constexpr TaggedMovementBundle bundle{
-          Tag{}, MovementBundle{Position{1.0F, 2.0F}, Velocity{3.0F, 4.0F}}};
+          .tag = {},
+          .movement = {.position = {1.0F, 2.0F}, .velocity = {3.0F, 4.0F}}};
       world.AddBundle(entity, bundle);
       CHECK(world.HasComponent<Tag>(entity));
       CHECK_EQ(world.ReadComponent<Position>(entity), (Position{1.0F, 2.0F}));
@@ -490,8 +574,8 @@ TEST_SUITE("helios::ecs::World") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{1.0F, 2.0F});
-      world.AddBundle(
-          entity, MovementBundle{Position{5.0F, 6.0F}, Velocity{7.0F, 8.0F}});
+      world.AddBundle(entity, MovementBundle{.position = {5.0F, 6.0F},
+                                             .velocity = {7.0F, 8.0F}});
       CHECK_EQ(world.ReadComponent<Position>(entity), (Position{5.0F, 6.0F}));
       CHECK_EQ(world.ReadComponent<Velocity>(entity), (Velocity{7.0F, 8.0F}));
     }
@@ -517,9 +601,9 @@ TEST_SUITE("helios::ecs::World") {
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{9.0F, 9.0F});
       const auto result = world.TryAddBundle(
-          entity,
-          TaggedMovementBundle{Tag{}, MovementBundle{Position{1.0F, 2.0F},
-                                                     Velocity{3.0F, 4.0F}}});
+          entity, TaggedMovementBundle{.tag = {},
+                                       .movement = {.position = {1.0F, 2.0F},
+                                                    .velocity = {3.0F, 4.0F}}});
       CHECK(result[0]);
       CHECK_FALSE(result[1]);
       CHECK(result[2]);
@@ -777,7 +861,7 @@ TEST_SUITE("helios::ecs::World") {
   }
 
   TEST_CASE("helios::ecs::World::Query") {
-    SUBCASE("Query with default allocator is valid") {
+    SUBCASE("Query without extra args uses the world resource") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{1.0F, 2.0F});
@@ -829,7 +913,7 @@ TEST_SUITE("helios::ecs::World") {
   }
 
   TEST_CASE("helios::ecs::World::ReadOnlyQuery") {
-    SUBCASE("ReadOnlyQuery with default allocator returns a valid builder") {
+    SUBCASE("ReadOnlyQuery without extra args returns a valid builder") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{5.0F, 6.0F});
@@ -849,7 +933,7 @@ TEST_SUITE("helios::ecs::World") {
 
       auto* resource = std::pmr::get_default_resource();
       // Should compile and run without issues.
-      auto builder = world.ReadOnlyQuery(resource);
+      auto builder = world.ReadOnlyQuery<Position>(resource);
     }
   }
 
@@ -977,6 +1061,14 @@ TEST_SUITE("helios::ecs::World") {
       CHECK(result[1]);
       CHECK_EQ(world.ReadResource<DeltaTime>().value, 1.0F);
       CHECK_EQ(world.ReadResource<Config>().max_entities, 1);
+    }
+
+    SUBCASE("TryInsertResources copies from an lvalue") {
+      World world;
+      DeltaTime dt{1.5F};
+      const bool inserted = world.TryInsertResources(dt);
+      CHECK(inserted);
+      CHECK_EQ(world.ReadResource<DeltaTime>().value, 1.5F);
     }
   }
 
@@ -1137,7 +1229,8 @@ TEST_SUITE("helios::ecs::World") {
       world.WriteMessages<GameMsg>().Write(GameMsg{42});
       world.Update();
       int count = 0;
-      for (const auto msg : world.ReadMessages<GameMsg>()) {
+      MessageCursor<GameMsg> cursor;
+      for (const auto msg : world.ReadMessages<GameMsg>(cursor)) {
         CHECK_EQ(msg->value, 42);
         ++count;
       }
@@ -1187,7 +1280,8 @@ TEST_SUITE("helios::ecs::World") {
       world.Update();
 
       std::vector<int> values;
-      for (const auto msg : world.ReadMessages<GameMsg>()) {
+      MessageCursor<GameMsg> cursor;
+      for (const auto msg : world.ReadMessages<GameMsg>(cursor)) {
         values.push_back(msg->value);
       }
       REQUIRE_EQ(values.size(), 2);
@@ -1201,7 +1295,9 @@ TEST_SUITE("helios::ecs::World") {
       world.Update();
 
       int count = 0;
-      for ([[maybe_unused]] const auto& _ : world.ReadMessages<GameMsg>()) {
+      MessageCursor<GameMsg> cursor;
+      for ([[maybe_unused]] const auto& _ :
+           world.ReadMessages<GameMsg>(cursor)) {
         ++count;
       }
       CHECK_EQ(count, 0);
@@ -1226,7 +1322,9 @@ TEST_SUITE("helios::ecs::World") {
       world.Update();
 
       int count = 0;
-      for ([[maybe_unused]] const auto& _ : world.ReadMessages<GameMsg>()) {
+      MessageCursor<GameMsg> cursor;
+      for ([[maybe_unused]] const auto& _ :
+           world.ReadMessages<GameMsg>(cursor)) {
         ++count;
       }
       CHECK_EQ(count, 2);
@@ -1576,3 +1674,31 @@ TEST_SUITE("helios::ecs::World") {
     }
   }
 }  // TEST_SUITE("ecs::World")
+
+TEST_SUITE("helios::ecs::SystemParamTraits") {
+  TEST_CASE("helios::ecs::SystemParamTraits: World") {
+    SUBCASE("World exists as a system parameter trait") {
+      CHECK(HasSystemParamTraits<World>);
+      CHECK(HasRegisterAccess<World>);
+    }
+
+    SUBCASE("World RegisterAccess sets exclusive flag") {
+      AccessPolicyBuilder builder;
+      SystemParamTraits<World>::RegisterAccess(builder);
+
+      const auto policy = builder.Build();
+      CHECK(policy.Exclusive());
+      CHECK_FALSE(policy.HasComponents());
+      CHECK_FALSE(policy.HasResources());
+    }
+
+    SUBCASE("World Make returns the same world reference") {
+      World world;
+      SystemLocalData local = SystemLocalData::From();
+      const AccessPolicy policy;
+
+      World& made = SystemParamTraits<World>::Make(world, local, policy);
+      CHECK_EQ(&made, &world);
+    }
+  }
+}

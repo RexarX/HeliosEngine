@@ -2,57 +2,32 @@
 # Sanitizer Configuration for Helios Engine
 # ============================================================================
 #
-# This module provides support for various C++ sanitizers:
-# - AddressSanitizer (ASan): Detects memory errors (buffer overflows, use-after-free, etc.)
-# - UndefinedBehaviorSanitizer (UBSan): Detects undefined behavior
-# - ThreadSanitizer (TSan): Detects data races (mutually exclusive with ASan)
-# - MemorySanitizer (MSan): Detects uninitialized memory reads (Clang only, requires instrumented libc++)
+# Per-target sanitizer flags. Call helios_target_enable_sanitizers(<target>)
+# (or helios_apply_conventions) on every TU that participates in a Debug
+# sanitized link — including consumer game executables when embedding Helios
+# with HELIOS_DEVELOPER_MODE=ON.
 #
-# Usage:
-#   include(Sanitizers)
-#   helios_target_enable_sanitizers(my_target)
+# For CPM / third-party targets under Helios, use
+# helios_enable_sanitizers_in_binary_dir(<dir>) so MSVC ASan ABI stays consistent.
 #
-# Options:
-#   HELIOS_DEVELOPER_MODE          - Expose sanitizer options and functionality (default: OFF)
-#   HELIOS_ENABLE_SANITIZERS       - Master switch for sanitizers (default: ON for Debug)
-#   HELIOS_SANITIZER_ADDRESS       - Enable AddressSanitizer (default: ON)
-#   HELIOS_SANITIZER_UNDEFINED     - Enable UndefinedBehaviorSanitizer (default: ON)
-#   HELIOS_SANITIZER_THREAD        - Enable ThreadSanitizer (default: OFF, mutually exclusive with ASan)
-#   HELIOS_SANITIZER_MEMORY        - Enable MemorySanitizer (default: OFF, Clang only)
-#
-# Notes:
-#   - ASan and TSan cannot be used together
-#   - MSan requires the entire program (including libc++) to be built with MSan
-#   - MSVC only supports ASan (/fsanitize=address)
-#   - Sanitizers are typically only enabled for Debug builds
+# Options (only when HELIOS_DEVELOPER_MODE=ON):
+#   HELIOS_ENABLE_SANITIZERS       - Master switch (default: ON)
+#   HELIOS_SANITIZER_ADDRESS       - ASan (default: ON)
+#   HELIOS_SANITIZER_UNDEFINED     - UBSan (default: ON; not on MSVC)
+#   HELIOS_SANITIZER_THREAD        - TSan (default: OFF; exclusive with ASan)
+#   HELIOS_SANITIZER_MEMORY        - MSan (default: OFF; Clang only)
 #
 # ============================================================================
 
 include_guard(GLOBAL)
 
-# Sanitizers are a developer-only feature.
 if(NOT HELIOS_DEVELOPER_MODE)
-  #[[
-      helios_target_enable_sanitizers(<target>)
-
-      Developer-mode sanitizer hook. When HELIOS_DEVELOPER_MODE is OFF this is
-      a no-op so targets can call it unconditionally.
-
-      Example:
-          helios_target_enable_sanitizers(helios_module_core)
-  ]]
   function(helios_target_enable_sanitizers TARGET)
   endfunction()
 
-  #[[
-      helios_print_sanitizer_status()
+  function(helios_enable_sanitizers_in_binary_dir DIR)
+  endfunction()
 
-      Prints the sanitizer configuration summary. When developer mode is OFF it
-      reports that sanitizer support is disabled.
-
-      Example:
-          helios_print_sanitizer_status()
-  ]]
   function(helios_print_sanitizer_status)
     message(STATUS "Sanitizers: DISABLED (HELIOS_DEVELOPER_MODE=OFF)")
   endfunction()
@@ -60,7 +35,6 @@ if(NOT HELIOS_DEVELOPER_MODE)
   return()
 endif()
 
-# Detect compiler capabilities
 set(HELIOS_COMPILER_IS_GNU OFF)
 set(HELIOS_COMPILER_IS_CLANG OFF)
 set(HELIOS_COMPILER_IS_MSVC OFF)
@@ -78,24 +52,12 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   set(HELIOS_COMPILER_IS_MSVC ON)
 endif()
 
-# ============================================================================
-# Sanitizer Options
-# ============================================================================
-
-# Master switch - enabled by default for Debug builds
 option(HELIOS_ENABLE_SANITIZERS "Enable sanitizers for Debug builds" ON)
-
-# Individual sanitizer options
 option(HELIOS_SANITIZER_ADDRESS "Enable AddressSanitizer" ON)
 option(HELIOS_SANITIZER_UNDEFINED "Enable UndefinedBehaviorSanitizer" ON)
 option(HELIOS_SANITIZER_THREAD "Enable ThreadSanitizer (mutually exclusive with ASan)" OFF)
 option(HELIOS_SANITIZER_MEMORY "Enable MemorySanitizer (Clang only, requires instrumented libc++)" OFF)
 
-# ============================================================================
-# Validation
-# ============================================================================
-
-# Check for mutually exclusive sanitizers
 if(HELIOS_SANITIZER_ADDRESS AND HELIOS_SANITIZER_THREAD)
   message(WARNING "AddressSanitizer and ThreadSanitizer cannot be used together. Disabling ThreadSanitizer.")
   set(HELIOS_SANITIZER_THREAD OFF CACHE BOOL "Enable ThreadSanitizer" FORCE)
@@ -111,13 +73,11 @@ if(HELIOS_SANITIZER_THREAD AND HELIOS_SANITIZER_MEMORY)
   set(HELIOS_SANITIZER_MEMORY OFF CACHE BOOL "Enable MemorySanitizer" FORCE)
 endif()
 
-# MSan is only available on Clang
 if(HELIOS_SANITIZER_MEMORY AND NOT HELIOS_COMPILER_IS_CLANG)
   message(WARNING "MemorySanitizer is only available with Clang. Disabling MemorySanitizer.")
   set(HELIOS_SANITIZER_MEMORY OFF CACHE BOOL "Enable MemorySanitizer" FORCE)
 endif()
 
-# MSVC only supports ASan
 if(HELIOS_COMPILER_IS_MSVC OR HELIOS_COMPILER_IS_CLANG_CL)
   if(HELIOS_SANITIZER_UNDEFINED)
     message(STATUS "UndefinedBehaviorSanitizer is not supported on MSVC. Disabling.")
@@ -133,45 +93,30 @@ if(HELIOS_COMPILER_IS_MSVC OR HELIOS_COMPILER_IS_CLANG_CL)
   endif()
 endif()
 
-# ============================================================================
-# Global Sanitizer Flags (MSVC / clang-cl)
-# ============================================================================
-
-# MSVC ASAN changes the ABI of STL types (std::string, std::vector,
-# std::optional, etc.). All translation units linked into the same binary
-# must be compiled with the same /fsanitize=address flag, otherwise the
-# linker rejects the object files. Apply globally so CPM dependencies
-# (Tracy, glfw, etc.) also receive the flag.
-if(HELIOS_COMPILER_IS_MSVC AND HELIOS_ENABLE_SANITIZERS AND HELIOS_SANITIZER_ADDRESS)
-  add_compile_options("$<$<CONFIG:Debug>:/fsanitize=address>")
-elseif(HELIOS_COMPILER_IS_CLANG_CL AND HELIOS_ENABLE_SANITIZERS AND HELIOS_SANITIZER_ADDRESS)
-  add_compile_options("$<$<CONFIG:Debug>:-fsanitize=address>")
+# LLVM's clang-cl ASan rejects /MDd (debug CRT). Mixing instrumented and
+# uninstrumented TUs then trips MSVC STL annotate_string /failifmismatch.
+if(HELIOS_COMPILER_IS_CLANG_CL AND HELIOS_SANITIZER_ADDRESS)
+  message(STATUS "AddressSanitizer is not supported with clang-cl debug CRT (/MDd). Disabling.")
+  set(HELIOS_SANITIZER_ADDRESS OFF CACHE BOOL "Enable AddressSanitizer" FORCE)
 endif()
 
-# ============================================================================
-# Internal Helper Functions
-# ============================================================================
-
-# Build the sanitizer flags string for GCC/Clang
 function(_helios_get_sanitizer_flags OUT_COMPILE_FLAGS OUT_LINK_FLAGS)
   set(_compile_flags "")
   set(_link_flags "")
 
-  if(HELIOS_COMPILER_IS_GNU OR HELIOS_COMPILER_IS_CLANG)
+  if(HELIOS_COMPILER_IS_MSVC AND HELIOS_SANITIZER_ADDRESS)
+    set(_compile_flags "/fsanitize=address")
+  elseif(HELIOS_COMPILER_IS_GNU OR HELIOS_COMPILER_IS_CLANG)
     set(_sanitizers "")
-
     if(HELIOS_SANITIZER_ADDRESS)
       list(APPEND _sanitizers "address")
     endif()
-
     if(HELIOS_SANITIZER_UNDEFINED)
       list(APPEND _sanitizers "undefined")
     endif()
-
     if(HELIOS_SANITIZER_THREAD)
       list(APPEND _sanitizers "thread")
     endif()
-
     if(HELIOS_SANITIZER_MEMORY)
       list(APPEND _sanitizers "memory")
     endif()
@@ -180,14 +125,10 @@ function(_helios_get_sanitizer_flags OUT_COMPILE_FLAGS OUT_LINK_FLAGS)
       list(JOIN _sanitizers "," _sanitizer_list)
       set(_compile_flags "-fsanitize=${_sanitizer_list} -fno-omit-frame-pointer -fno-optimize-sibling-calls")
       set(_link_flags "-fsanitize=${_sanitizer_list}")
-
-      # Add extra flags for better error reporting
       if(HELIOS_SANITIZER_ADDRESS)
         string(APPEND _compile_flags " -fsanitize-address-use-after-scope")
       endif()
-
       if(HELIOS_SANITIZER_UNDEFINED)
-        # Print stack trace on UBSan error
         string(APPEND _compile_flags " -fno-sanitize-recover=undefined")
       endif()
     endif()
@@ -197,76 +138,105 @@ function(_helios_get_sanitizer_flags OUT_COMPILE_FLAGS OUT_LINK_FLAGS)
   set(${OUT_LINK_FLAGS} "${_link_flags}" PARENT_SCOPE)
 endfunction()
 
-# ============================================================================
-# Global Sanitizer Flags (GCC / Clang)
-# ============================================================================
-#
-# Static libraries embed instrumented .o files. Every executable (and shared
-# library) that links them must also link the sanitizer runtime — PRIVATE
-# link options on static targets do not propagate to consumers.
-
-if((HELIOS_COMPILER_IS_GNU OR HELIOS_COMPILER_IS_CLANG) AND HELIOS_ENABLE_SANITIZERS)
-  _helios_get_sanitizer_flags(_helios_global_sanitizer_compile_flags _helios_global_sanitizer_link_flags)
-
-  if(_helios_global_sanitizer_compile_flags)
-    separate_arguments(_helios_global_sanitizer_compile_flags_list
-        UNIX_COMMAND "${_helios_global_sanitizer_compile_flags}")
-    foreach(_helios_sanitizer_compile_flag IN LISTS _helios_global_sanitizer_compile_flags_list)
-      add_compile_options("$<$<CONFIG:Debug>:${_helios_sanitizer_compile_flag}>")
+# Top-level builds: directory-scope under Helios so CPM/third-party share MSVC
+# ASan ABI. Does not affect parent project targets when Helios is embedded
+# (HELIOS_MANAGE_TOOLCHAIN defaults OFF when not top-level).
+if(HELIOS_MANAGE_TOOLCHAIN AND HELIOS_ENABLE_SANITIZERS)
+  _helios_get_sanitizer_flags(_helios_dir_sanitizer_compile _helios_dir_sanitizer_link)
+  if(_helios_dir_sanitizer_compile)
+    separate_arguments(_helios_dir_sanitizer_compile_list
+        UNIX_COMMAND "${_helios_dir_sanitizer_compile}")
+    foreach(_flag IN LISTS _helios_dir_sanitizer_compile_list)
+      add_compile_options("$<$<CONFIG:Debug>:${_flag}>")
     endforeach()
   endif()
-
-  if(_helios_global_sanitizer_link_flags)
-    add_link_options("$<$<CONFIG:Debug>:SHELL:${_helios_global_sanitizer_link_flags}>")
+  if(_helios_dir_sanitizer_link)
+    add_link_options("$<$<CONFIG:Debug>:SHELL:${_helios_dir_sanitizer_link}>")
   endif()
 endif()
-
-# ============================================================================
-# Public API
-# ============================================================================
 
 #[[
     helios_target_enable_sanitizers(<target>)
 
-    Applies sanitizer instrumentation to a target when sanitizer policy is not
-    already handled globally for the active compiler.
+    Applies sanitizer compile/link options for Debug configs to a target.
+    No-op when HELIOS_MANAGE_TOOLCHAIN already applied directory-scope flags
+    (top-level Helios builds), except consumers outside the Helios tree still
+    need this when embedding with developer mode.
 ]]
 function(helios_target_enable_sanitizers TARGET)
   if(NOT HELIOS_ENABLE_SANITIZERS)
     return()
   endif()
-
-  # Sanitizers are applied globally (see sections above) so instrumentation
-  # and runtime linking stay consistent across static libs and executables.
-  if(HELIOS_COMPILER_IS_MSVC OR HELIOS_COMPILER_IS_CLANG_CL
-      OR HELIOS_COMPILER_IS_GNU OR HELIOS_COMPILER_IS_CLANG)
+  if(NOT TARGET ${TARGET})
     return()
   endif()
 
-  # Only apply sanitizers for Debug builds
-  set(_is_debug "$<CONFIG:Debug>")
+  get_target_property(_imported ${TARGET} IMPORTED)
+  if(_imported)
+    return()
+  endif()
+
+  get_target_property(_type ${TARGET} TYPE)
+  if(_type STREQUAL "INTERFACE_LIBRARY" OR _type STREQUAL "UTILITY")
+    return()
+  endif()
+
+  get_target_property(_already ${TARGET} HELIOS_SANITIZERS_APPLIED)
+  if(_already)
+    return()
+  endif()
+
+  # Directory-scope already covers targets created under the Helios tree when
+  # managing the toolchain. Still apply per-target for consumers that call
+  # helios_apply_conventions from outside Helios (embedding).
+  if(HELIOS_MANAGE_TOOLCHAIN)
+    # Mark applied so we do not double-attach; flags come from add_*_options.
+    set_target_properties(${TARGET} PROPERTIES HELIOS_SANITIZERS_APPLIED TRUE)
+    return()
+  endif()
 
   _helios_get_sanitizer_flags(_compile_flags _link_flags)
 
   if(_compile_flags)
     separate_arguments(_compile_flags_list UNIX_COMMAND "${_compile_flags}")
-    foreach(_helios_sanitizer_compile_flag IN LISTS _compile_flags_list)
-      target_compile_options(${TARGET} PRIVATE
-              "$<$<CONFIG:Debug>:${_helios_sanitizer_compile_flag}>")
+    foreach(_flag IN LISTS _compile_flags_list)
+      target_compile_options(${TARGET} PRIVATE "$<$<CONFIG:Debug>:${_flag}>")
     endforeach()
   endif()
 
   if(_link_flags)
-    target_link_options(${TARGET} PRIVATE
-            "$<$<CONFIG:Debug>:SHELL:${_link_flags}>")
+    target_link_options(${TARGET} PRIVATE "$<$<CONFIG:Debug>:SHELL:${_link_flags}>")
   endif()
+
+  set_target_properties(${TARGET} PROPERTIES HELIOS_SANITIZERS_APPLIED TRUE)
 endfunction()
 
 #[[
-    helios_print_sanitizer_status()
+    helios_enable_sanitizers_in_binary_dir(<dir>)
 
-    Prints the active sanitizer configuration.
+    Enables sanitizers on all non-imported targets registered in a CMake binary
+    directory. Used for CPM-fetched dependencies that must share MSVC ASan ABI.
 ]]
+function(helios_enable_sanitizers_in_binary_dir DIR)
+  if(NOT HELIOS_ENABLE_SANITIZERS)
+    return()
+  endif()
+  if(NOT IS_DIRECTORY "${DIR}")
+    return()
+  endif()
+
+  get_directory_property(_targets DIRECTORY "${DIR}" BUILDSYSTEM_TARGETS)
+  if(NOT _targets)
+    return()
+  endif()
+
+  foreach(_target IN LISTS _targets)
+    if(TARGET ${_target})
+      helios_target_enable_sanitizers(${_target})
+    endif()
+  endforeach()
+endfunction()
+
 function(helios_print_sanitizer_status)
   if(NOT HELIOS_ENABLE_SANITIZERS)
     message(STATUS "Sanitizers: DISABLED")
@@ -281,6 +251,8 @@ function(helios_print_sanitizer_status)
     message(STATUS "  Compiler: MSVC/clang-cl (limited sanitizer support)")
     if(HELIOS_SANITIZER_ADDRESS)
       message(STATUS "  ✓ AddressSanitizer")
+    elseif(HELIOS_COMPILER_IS_CLANG_CL)
+      message(STATUS "  (no sanitizers: clang-cl ASan is incompatible with /MDd)")
     endif()
   else()
     message(STATUS "  Compiler: ${CMAKE_CXX_COMPILER_ID}")

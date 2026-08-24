@@ -2,6 +2,7 @@
 
 #include <helios/assert.hpp>
 #include <helios/container/details/typed_buffer_common.hpp>
+#include <helios/utils/type_info.hpp>
 
 #include <algorithm>
 #include <concepts>
@@ -23,21 +24,29 @@ namespace helios::container {
 /**
  * @brief Type-erased sequential byte storage for a single type (array variant).
  * @details Stores multiple instances of a type in a contiguous
- * `std::vector<std::byte>` buffer. The stored type is not fixed at class
+ * `std::pmr::vector<std::byte>` buffer. The stored type is not fixed at class
  * instantiation but is verified at runtime. Object lifetimes are properly
  * managed. Trivially-copyable types are fast-pathed.
- * @tparam Allocator The allocator type for the byte storage (default:
- * `std::allocator<std::byte>`)
  */
-template <typename Allocator = std::allocator<std::byte>>
 class TypedBufferArray {
 public:
-  using allocator_type = Allocator;
   using size_type = size_t;
   using difference_type = ptrdiff_t;
-  using TypeIndex = utils::TypeIndex;
 
-  using ContainerType = std::vector<std::byte, allocator_type>;
+  template <TypedBufferStorable T>
+  using iterator = T*;
+
+  template <TypedBufferStorable T>
+  using const_iterator = const T*;
+
+  template <TypedBufferStorable T>
+  using reverse_iterator = std::reverse_iterator<T*>;
+
+  template <TypedBufferStorable T>
+  using const_reverse_iterator = std::reverse_iterator<const T*>;
+
+  using TypeIndex = utils::TypeIndex;
+  using ContainerType = std::pmr::vector<std::byte>;
 
 private:
   using TypeInfo = details::TypeBufferInfo;
@@ -51,27 +60,12 @@ public:
       std::is_nothrow_default_constructible_v<ContainerType>) = default;
 
   /**
-   * @brief Constructs an empty storage with a custom allocator.
-   * @param alloc Allocator instance to use for the underlying container
-   */
-  explicit constexpr TypedBufferArray(const allocator_type& alloc) noexcept(
-      std::is_nothrow_constructible_v<ContainerType, const allocator_type&>)
-      : storage_(alloc) {}
-
-  /**
-   * @brief Constructs an empty storage from a PMR memory resource.
-   * @details Enabled only when `allocator_type` is constructible from
-   * `std::pmr::memory_resource*`.
-   * @param resource Memory resource used to construct allocator
+   * @brief Constructs an empty storage with a PMR memory resource.
+   * @param resource Memory resource used for internal storage
    */
   explicit constexpr TypedBufferArray(
-      std::pmr::memory_resource*
-          resource) noexcept(std::
-                                 is_nothrow_constructible_v<
-                                     allocator_type,
-                                     std::pmr::memory_resource*>)
-    requires std::constructible_from<allocator_type, std::pmr::memory_resource*>
-      : TypedBufferArray(allocator_type{resource}) {}
+      std::pmr::memory_resource* resource) noexcept
+      : storage_(resource) {}
 
   TypedBufferArray(std::nullptr_t) = delete;
 
@@ -115,25 +109,28 @@ public:
       : TypedBufferArray(init.begin(), init.end()) {}
 
   constexpr TypedBufferArray(const TypedBufferArray& other);
-  constexpr TypedBufferArray(
-      const TypedBufferArray& other,
-      const allocator_type&
-          alloc) noexcept(std::
-                              is_nothrow_constructible_v<
-                                  ContainerType, const allocator_type&>);
+
+  /**
+   * @brief Copy constructor with memory resource.
+   * @param other The buffer to copy from
+   * @param resource Memory resource used for internal storage
+   */
+  constexpr TypedBufferArray(const TypedBufferArray& other,
+                             std::pmr::memory_resource* resource);
   constexpr TypedBufferArray(TypedBufferArray&& other) noexcept(
       std::is_nothrow_move_constructible_v<ContainerType>);
-  constexpr TypedBufferArray(
-      TypedBufferArray&& other,
-      const allocator_type&
-          alloc) noexcept(std::
-                              is_nothrow_constructible_v<
-                                  ContainerType, const allocator_type&>);
+
+  /**
+   * @brief Move constructor with memory resource.
+   * @param other The buffer to move from
+   * @param resource Memory resource used for internal storage
+   */
+  constexpr TypedBufferArray(TypedBufferArray&& other,
+                             std::pmr::memory_resource* resource);
   constexpr ~TypedBufferArray() noexcept { DestroyAll(); }
 
   constexpr TypedBufferArray& operator=(const TypedBufferArray& other);
-  constexpr TypedBufferArray& operator=(TypedBufferArray&& other) noexcept(
-      std::is_nothrow_move_assignable_v<ContainerType>);
+  constexpr TypedBufferArray& operator=(TypedBufferArray&& other) noexcept;
 
   /**
    * @brief Assignment from initializer list.
@@ -168,7 +165,7 @@ public:
    * @param value The value to push
    */
   template <TypedBufferStorable T>
-  void PushBack(T&& value);
+  constexpr void PushBack(T&& value);
 
   /**
    * @brief Constructs an element in-place at the end.
@@ -180,7 +177,7 @@ public:
    */
   template <TypedBufferStorable T, typename... Args>
     requires std::constructible_from<T, Args...>
-  T& EmplaceBack(Args&&... args);
+  constexpr T& EmplaceBack(Args&&... args);
 
   /**
    * @brief Constructs an element in-place at the specified position.
@@ -194,7 +191,7 @@ public:
    */
   template <TypedBufferStorable T, typename... Args>
     requires std::constructible_from<T, Args...>
-  T& Emplace(size_type pos, Args&&... args);
+  constexpr T& Emplace(size_type pos, Args&&... args);
 
   /**
    * @brief Inserts a value at the specified position.
@@ -206,7 +203,7 @@ public:
    * @return Reference to the inserted element
    */
   template <TypedBufferStorable T>
-  T& Insert(size_type pos, T&& value) {
+  constexpr T& Insert(size_type pos, T&& value) {
     return Emplace<T>(pos, std::forward<T>(value));
   }
 
@@ -222,7 +219,7 @@ public:
    */
   template <TypedBufferStorable T>
     requires std::copy_constructible<T>
-  T* Insert(size_type pos, size_type count, const T& value);
+  constexpr T* Insert(size_type pos, size_type count, const T& value);
 
   /**
    * @brief Inserts elements from iterator range at the specified position.
@@ -237,7 +234,7 @@ public:
    */
   template <std::input_iterator InputIt>
     requires TypedBufferStorable<std::iter_value_t<InputIt>>
-  auto Insert(size_type pos, InputIt first, InputIt last)
+  constexpr auto Insert(size_type pos, InputIt first, InputIt last)
       -> std::iter_value_t<InputIt>*;
 
   /**
@@ -252,7 +249,7 @@ public:
    */
   template <TypedBufferStorable T>
     requires std::copy_constructible<T>
-  T* Insert(size_type pos, std::initializer_list<T> init) {
+  constexpr T* Insert(size_type pos, std::initializer_list<T> init) {
     return Insert(pos, init.begin(), init.end());
   }
 
@@ -264,7 +261,7 @@ public:
    */
   template <std::ranges::input_range Range>
     requires TypedBufferStorable<std::ranges::range_value_t<Range>>
-  void AppendRange(Range&& range);
+  constexpr void AppendRange(Range&& range);
 
   /**
    * @brief Inserts elements from a range at the specified position.
@@ -278,7 +275,7 @@ public:
    */
   template <std::ranges::input_range Range>
     requires TypedBufferStorable<std::ranges::range_value_t<Range>>
-  auto InsertRange(size_type pos, Range&& range)
+  constexpr auto InsertRange(size_type pos, Range&& range)
       -> std::ranges::range_value_t<Range>*;
 
   /**
@@ -323,7 +320,7 @@ public:
    */
   template <TypedBufferStorable T>
     requires std::default_initializable<T>
-  void Resize(size_type count);
+  constexpr void Resize(size_type count);
 
   /**
    * @brief Resizes the storage to contain count elements.
@@ -334,7 +331,7 @@ public:
    */
   template <TypedBufferStorable T>
     requires std::copy_constructible<T>
-  void Resize(size_type count, const T& value);
+  constexpr void Resize(size_type count, const T& value);
 
   /**
    * @brief Access element at index.
@@ -344,7 +341,7 @@ public:
    * @return Reference to element
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] T& At(size_type index) noexcept;
+  [[nodiscard]] constexpr T& At(size_type index) noexcept;
 
   /**
    * @brief Access element at index (const).
@@ -354,7 +351,7 @@ public:
    * @return Const reference to element
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] const T& At(size_type index) const noexcept;
+  [[nodiscard]] constexpr const T& At(size_type index) const noexcept;
 
   /**
    * @brief Access the first element.
@@ -363,7 +360,7 @@ public:
    * @return Reference to the first element
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] T& Front() noexcept;
+  [[nodiscard]] constexpr T& Front() noexcept;
 
   /**
    * @brief Access the first element (const).
@@ -372,7 +369,7 @@ public:
    * @return Const reference to the first element
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] const T& Front() const noexcept;
+  [[nodiscard]] constexpr const T& Front() const noexcept;
 
   /**
    * @brief Access the last element.
@@ -381,7 +378,7 @@ public:
    * @return Reference to the last element
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] T& Back() noexcept;
+  [[nodiscard]] constexpr T& Back() noexcept;
 
   /**
    * @brief Access the last element (const).
@@ -390,7 +387,7 @@ public:
    * @return Const reference to the last element
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] const T& Back() const noexcept;
+  [[nodiscard]] constexpr const T& Back() const noexcept;
 
   /**
    * @brief Merges all elements from another `TypedBufferArray` into this one.
@@ -399,27 +396,16 @@ public:
    * state. After merging, `other` is left in a valid but empty state.
    * @warning Triggers assertion if both buffers have types set and they don't
    * match.
-   * @tparam OtherAllocator The allocator type of the other buffer
    * @param other The buffer to merge from (will be left empty)
    */
-  template <typename OtherAllocator>
-  constexpr void Merge(const TypedBufferArray<OtherAllocator>& other);
+  constexpr void Merge(const TypedBufferArray& other);
 
   /**
    * @brief Merges all elements from another `TypedBufferArray` into this one.
    * @details Rvalue overload that consumes the source buffer.
-   * @tparam OtherAllocator The allocator type of the other buffer
    * @param other The buffer to merge from (will be left empty)
    */
-  template <typename OtherAllocator>
-  constexpr void Merge(TypedBufferArray<OtherAllocator>&& other);
-
-  /**
-   * @brief Swaps contents with another storage.
-   * @param other Storage to swap with
-   */
-  constexpr void Swap(TypedBufferArray& other) noexcept(
-      std::is_nothrow_swappable_v<ContainerType>);
+  constexpr void Merge(TypedBufferArray&& other);
 
   /**
    * @brief Swaps two elements within the buffer at the given indices
@@ -431,7 +417,7 @@ public:
    * @param index Index of the first element
    * @param other_index Index of the second element
    */
-  void Swap(size_type index, size_type other_index);
+  constexpr void Swap(size_type index, size_type other_index);
 
   /**
    * @brief Swaps two elements within the buffer at the given indices (typed).
@@ -443,11 +429,15 @@ public:
    * @param other_index Index of the second element
    */
   template <TypedBufferStorable T>
-  void Swap(size_type index, size_type other_index);
+  constexpr void Swap(size_type index, size_type other_index);
 
-  friend constexpr void
-  swap(TypedBufferArray& lhs, TypedBufferArray& rhs) noexcept(
-      std::is_nothrow_swappable_v<ContainerType>) {
+  /**
+   * @brief Swaps contents with another storage.
+   * @param other Storage to swap with
+   */
+  constexpr void Swap(TypedBufferArray& other) noexcept;
+  friend constexpr void swap(TypedBufferArray& lhs,
+                             TypedBufferArray& rhs) noexcept {
     lhs.Swap(rhs);
   }
 
@@ -517,6 +507,15 @@ public:
   }
 
   /**
+   * @brief Returns the memory resource used for internal storage.
+   * @return Memory resource passed to the constructor, or the default resource
+   */
+  [[nodiscard]] constexpr std::pmr::memory_resource* GetMemoryResource()
+      const noexcept {
+    return storage_.get_allocator().resource();
+  }
+
+  /**
    * @brief Returns the capacity in number of elements.
    * @return Capacity in number of elements, or 0 if no type is set
    */
@@ -529,7 +528,7 @@ public:
    * @return A span containing all values, or empty span if no values stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] auto Data() noexcept -> std::span<T>;
+  [[nodiscard]] constexpr auto Data() noexcept -> std::span<T>;
 
   /**
    * @brief Retrieves a const span of all stored values.
@@ -539,7 +538,7 @@ public:
    * stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] auto Data() const noexcept -> std::span<const T>;
+  [[nodiscard]] constexpr auto Data() const noexcept -> std::span<const T>;
 
   /**
    * @brief Retrieves a const byte span of all stored data (type-erased).
@@ -557,7 +556,7 @@ public:
    * @return Iterator to the first element, or `nullptr` if no elements stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] T* begin() noexcept {
+  [[nodiscard]] constexpr iterator<T> begin() noexcept {
     return DataPtr<T>();
   }
 
@@ -568,7 +567,7 @@ public:
    * stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] const T* begin() const noexcept {
+  [[nodiscard]] constexpr const_iterator<T> begin() const noexcept {
     return DataPtr<T>();
   }
 
@@ -579,7 +578,7 @@ public:
    * stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] const T* cbegin() const noexcept {
+  [[nodiscard]] constexpr const_iterator<T> cbegin() const noexcept {
     return DataPtr<T>();
   }
 
@@ -589,7 +588,7 @@ public:
    * @return Iterator past the last element, or `nullptr` if no elements stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] T* end() noexcept {
+  [[nodiscard]] constexpr iterator<T> end() noexcept {
     return DataPtr<T>() + size_;
   }
 
@@ -600,7 +599,7 @@ public:
    * stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] const T* end() const noexcept {
+  [[nodiscard]] constexpr const_iterator<T> end() const noexcept {
     return DataPtr<T>() + size_;
   }
 
@@ -611,7 +610,7 @@ public:
    * stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] const T* cend() const noexcept {
+  [[nodiscard]] constexpr const_iterator<T> cend() const noexcept {
     return DataPtr<T>() + size_;
   }
 
@@ -622,8 +621,8 @@ public:
    * stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] auto rbegin() noexcept -> std::reverse_iterator<T*> {
-    return std::reverse_iterator<T*>(end<T>());
+  [[nodiscard]] constexpr reverse_iterator<T> rbegin() noexcept {
+    return reverse_iterator<T>(end<T>());
   }
 
   /**
@@ -633,9 +632,8 @@ public:
    * elements stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] auto rbegin() const noexcept
-      -> std::reverse_iterator<const T*> {
-    return std::reverse_iterator<const T*>(end<T>());
+  [[nodiscard]] constexpr const_reverse_iterator<T> rbegin() const noexcept {
+    return const_reverse_iterator<T>(end<T>());
   }
 
   /**
@@ -645,9 +643,8 @@ public:
    * elements stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] auto crbegin() const noexcept
-      -> std::reverse_iterator<const T*> {
-    return std::reverse_iterator<const T*>(cend<T>());
+  [[nodiscard]] constexpr const_reverse_iterator<T> crbegin() const noexcept {
+    return const_reverse_iterator<T>(cend<T>());
   }
 
   /**
@@ -657,8 +654,8 @@ public:
    * elements stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] auto rend() noexcept -> std::reverse_iterator<T*> {
-    return std::reverse_iterator<T*>(begin<T>());
+  [[nodiscard]] constexpr reverse_iterator<T> rend() noexcept {
+    return reverse_iterator<T>(begin<T>());
   }
 
   /**
@@ -668,8 +665,8 @@ public:
    * elements stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] auto rend() const noexcept -> std::reverse_iterator<const T*> {
-    return std::reverse_iterator<const T*>(begin<T>());
+  [[nodiscard]] constexpr const_reverse_iterator<T> rend() const noexcept {
+    return const_reverse_iterator<T>(begin<T>());
   }
 
   /**
@@ -679,19 +676,16 @@ public:
    * elements stored
    */
   template <TypedBufferStorable T>
-  [[nodiscard]] auto crend() const noexcept -> std::reverse_iterator<const T*> {
-    return std::reverse_iterator<const T*>(cbegin<T>());
+  [[nodiscard]] constexpr const_reverse_iterator<T> crend() const noexcept {
+    return const_reverse_iterator<T>(cbegin<T>());
   }
 
 private:
-  template <typename OtherA>
-  friend class TypedBufferArray;
+  template <TypedBufferStorable T>
+  [[nodiscard]] constexpr T* DataPtr() noexcept;
 
   template <TypedBufferStorable T>
-  [[nodiscard]] T* DataPtr() noexcept;
-
-  template <TypedBufferStorable T>
-  [[nodiscard]] const T* DataPtr() const noexcept;
+  [[nodiscard]] constexpr const T* DataPtr() const noexcept;
 
   [[nodiscard]] constexpr void* RawDataPtr() noexcept {
     return storage_.empty() ? nullptr : static_cast<void*>(storage_.data());
@@ -713,14 +707,13 @@ private:
   constexpr void EnsureType();
 
   TypeInfo type_info_{};
-  ContainerType storage_;
+  ContainerType storage_{std::pmr::get_default_resource()};
   size_type size_ = 0;
 };
 
-template <typename Allocator>
 template <TypedBufferStorable T>
   requires std::default_initializable<T>
-constexpr TypedBufferArray<Allocator>::TypedBufferArray(size_type count) {
+constexpr TypedBufferArray::TypedBufferArray(size_type count) {
   if (count == 0) [[unlikely]] {
     return;
   }
@@ -728,16 +721,13 @@ constexpr TypedBufferArray<Allocator>::TypedBufferArray(size_type count) {
   type_info_ = TypeInfo::template From<T>();
   storage_.resize(count * sizeof(T));
 
-  auto* ptr = static_cast<T*>(RawDataPtr());
-  std::uninitialized_default_construct_n(ptr, count);
+  std::uninitialized_default_construct_n(DataPtr<T>(), count);
   size_ = count;
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
   requires std::copy_constructible<T>
-constexpr TypedBufferArray<Allocator>::TypedBufferArray(size_type count,
-                                                        const T& value) {
+constexpr TypedBufferArray::TypedBufferArray(size_type count, const T& value) {
   using DecayedT = std::remove_cvref_t<T>;
 
   if (count == 0) [[unlikely]] {
@@ -747,16 +737,13 @@ constexpr TypedBufferArray<Allocator>::TypedBufferArray(size_type count,
   type_info_ = TypeInfo::template From<DecayedT>();
   storage_.resize(count * sizeof(DecayedT));
 
-  auto* ptr = static_cast<DecayedT*>(RawDataPtr());
-  std::uninitialized_fill_n(ptr, count, value);
+  std::uninitialized_fill_n(DataPtr<DecayedT>(), count, value);
   size_ = count;
 }
 
-template <typename Allocator>
 template <std::input_iterator InputIt>
   requires TypedBufferStorable<std::iter_value_t<InputIt>>
-constexpr TypedBufferArray<Allocator>::TypedBufferArray(InputIt first,
-                                                        InputIt last) {
+constexpr TypedBufferArray::TypedBufferArray(InputIt first, InputIt last) {
   using T = std::iter_value_t<InputIt>;
 
   if (first == last) [[unlikely]] {
@@ -768,8 +755,7 @@ constexpr TypedBufferArray<Allocator>::TypedBufferArray(InputIt first,
   if constexpr (std::forward_iterator<InputIt>) {
     const auto count = static_cast<size_type>(std::distance(first, last));
     storage_.resize(count * sizeof(T));
-    auto* ptr = static_cast<T*>(RawDataPtr());
-    std::uninitialized_copy(first, last, ptr);
+    std::uninitialized_copy(first, last, DataPtr<T>());
     size_ = count;
   } else {
     for (; first != last; ++first) {
@@ -778,9 +764,7 @@ constexpr TypedBufferArray<Allocator>::TypedBufferArray(InputIt first,
   }
 }
 
-template <typename Allocator>
-constexpr TypedBufferArray<Allocator>::TypedBufferArray(
-    const TypedBufferArray& other) {
+constexpr TypedBufferArray::TypedBufferArray(const TypedBufferArray& other) {
   if (other.Empty()) [[unlikely]] {
     type_info_ = other.type_info_;
     return;
@@ -801,13 +785,9 @@ constexpr TypedBufferArray<Allocator>::TypedBufferArray(
   size_ = other.size_;
 }
 
-template <typename Allocator>
-constexpr TypedBufferArray<Allocator>::TypedBufferArray(
-    const TypedBufferArray& other,
-    const allocator_type&
-        alloc) noexcept(std::is_nothrow_constructible_v<ContainerType,
-                                                        const allocator_type&>)
-    : storage_(alloc) {
+constexpr TypedBufferArray::TypedBufferArray(
+    const TypedBufferArray& other, std::pmr::memory_resource* resource)
+    : storage_(resource) {
   if (other.Empty()) [[unlikely]] {
     type_info_ = other.type_info_;
     return;
@@ -828,10 +808,8 @@ constexpr TypedBufferArray<Allocator>::TypedBufferArray(
   size_ = other.size_;
 }
 
-template <typename Allocator>
-constexpr TypedBufferArray<Allocator>::TypedBufferArray(
-    TypedBufferArray&&
-        other) noexcept(std::is_nothrow_move_constructible_v<ContainerType>)
+constexpr TypedBufferArray::TypedBufferArray(TypedBufferArray&& other) noexcept(
+    std::is_nothrow_move_constructible_v<ContainerType>)
     : type_info_(other.type_info_),
       storage_(std::move(other.storage_)),
       size_(other.size_) {
@@ -839,19 +817,15 @@ constexpr TypedBufferArray<Allocator>::TypedBufferArray(
   other.type_info_ = TypeInfo{};
 }
 
-template <typename Allocator>
-constexpr TypedBufferArray<Allocator>::TypedBufferArray(
-    TypedBufferArray&& other,
-    const allocator_type&
-        alloc) noexcept(std::is_nothrow_constructible_v<ContainerType,
-                                                        const allocator_type&>)
-    : type_info_(other.type_info_), storage_(alloc), size_(0) {
+constexpr TypedBufferArray::TypedBufferArray(
+    TypedBufferArray&& other, std::pmr::memory_resource* resource)
+    : type_info_(other.type_info_), storage_(resource), size_(0) {
   if (other.size_ == 0) [[unlikely]] {
     other.type_info_.Reset();
     return;
   }
 
-  if (storage_.get_allocator() == other.storage_.get_allocator()) {
+  if (GetMemoryResource() == other.GetMemoryResource()) {
     storage_ = std::move(other.storage_);
     size_ = other.size_;
     other.size_ = 0;
@@ -877,9 +851,8 @@ constexpr TypedBufferArray<Allocator>::TypedBufferArray(
   other.type_info_.Reset();
 }
 
-template <typename Allocator>
-constexpr auto TypedBufferArray<Allocator>::operator=(
-    const TypedBufferArray& other) -> TypedBufferArray& {
+constexpr auto TypedBufferArray::operator=(const TypedBufferArray& other)
+    -> TypedBufferArray& {
   if (this == &other) [[unlikely]] {
     return *this;
   }
@@ -908,29 +881,22 @@ constexpr auto TypedBufferArray<Allocator>::operator=(
   return *this;
 }
 
-template <typename Allocator>
-constexpr auto
-TypedBufferArray<Allocator>::operator=(TypedBufferArray&& other) noexcept(
-    std::is_nothrow_move_assignable_v<ContainerType>) -> TypedBufferArray& {
+constexpr auto TypedBufferArray::operator=(TypedBufferArray&& other) noexcept
+    -> TypedBufferArray& {
   if (this == &other) [[unlikely]] {
     return *this;
   }
 
-  DestroyAll();
-  type_info_ = other.type_info_;
-  storage_ = std::move(other.storage_);
-  size_ = other.size_;
-  other.size_ = 0;
-  other.type_info_.Reset();
+  TypedBufferArray relocated(std::move(other), GetMemoryResource());
+  Swap(relocated);
 
   return *this;
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
   requires std::copy_constructible<T>
-constexpr auto TypedBufferArray<Allocator>::operator=(
-    std::initializer_list<T> init) -> TypedBufferArray& {
+constexpr auto TypedBufferArray::operator=(std::initializer_list<T> init)
+    -> TypedBufferArray& {
   Clear();
 
   if (init.size() == 0) [[unlikely]] {
@@ -940,32 +906,28 @@ constexpr auto TypedBufferArray<Allocator>::operator=(
   type_info_ = TypeInfo::template From<T>();
   storage_.resize(init.size() * sizeof(T));
 
-  auto* ptr = static_cast<T*>(RawDataPtr());
-  std::uninitialized_copy(init.begin(), init.end(), ptr);
+  std::uninitialized_copy(init.begin(), init.end(), DataPtr<T>());
   size_ = init.size();
 
   return *this;
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-constexpr void TypedBufferArray<Allocator>::ChangeType() noexcept {
+constexpr void TypedBufferArray::ChangeType() noexcept {
   DestroyAll();
   size_ = 0;
   type_info_ = TypeInfo::template From<T>();
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::Reset() noexcept {
+constexpr void TypedBufferArray::Reset() noexcept {
   DestroyAll();
   storage_.clear();
   size_ = 0;
   type_info_.Reset();
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline void TypedBufferArray<Allocator>::PushBack(T&& value) {
+constexpr void TypedBufferArray::PushBack(T&& value) {
   using DecayedT = std::remove_cvref_t<T>;
 
   EnsureType<DecayedT>();
@@ -974,10 +936,9 @@ inline void TypedBufferArray<Allocator>::PushBack(T&& value) {
   ++size_;
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T, typename... Args>
   requires std::constructible_from<T, Args...>
-inline T& TypedBufferArray<Allocator>::EmplaceBack(Args&&... args) {
+constexpr T& TypedBufferArray::EmplaceBack(Args&&... args) {
   EnsureType<T>();
   GrowIfNeeded(1);
   auto* ptr = DataPtr<T>() + size_;
@@ -986,10 +947,9 @@ inline T& TypedBufferArray<Allocator>::EmplaceBack(Args&&... args) {
   return *ptr;
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T, typename... Args>
   requires std::constructible_from<T, Args...>
-inline T& TypedBufferArray<Allocator>::Emplace(size_type pos, Args&&... args) {
+constexpr T& TypedBufferArray::Emplace(size_type pos, Args&&... args) {
   HELIOS_ASSERT(pos <= size_, "Emplace position '{}' is out of bounds!", pos);
   EnsureType<T>();
 
@@ -1005,11 +965,10 @@ inline T& TypedBufferArray<Allocator>::Emplace(size_type pos, Args&&... args) {
   return *ptr;
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
   requires std::copy_constructible<T>
-inline T* TypedBufferArray<Allocator>::Insert(size_type pos, size_type count,
-                                              const T& value) {
+constexpr T* TypedBufferArray::Insert(size_type pos, size_type count,
+                                      const T& value) {
   using DecayedT = std::remove_cvref_t<T>;
 
   HELIOS_ASSERT(pos <= size_, "Insert position '{}' is out of bounds!", pos);
@@ -1032,11 +991,10 @@ inline T* TypedBufferArray<Allocator>::Insert(size_type pos, size_type count,
   return ptr;
 }
 
-template <typename Allocator>
 template <std::input_iterator InputIt>
   requires TypedBufferStorable<std::iter_value_t<InputIt>>
-inline auto TypedBufferArray<Allocator>::Insert(size_type pos, InputIt first,
-                                                InputIt last)
+constexpr auto TypedBufferArray::Insert(size_type pos, InputIt first,
+                                        InputIt last)
     -> std::iter_value_t<InputIt>* {
   using T = std::iter_value_t<InputIt>;
 
@@ -1074,10 +1032,9 @@ inline auto TypedBufferArray<Allocator>::Insert(size_type pos, InputIt first,
   }
 }
 
-template <typename Allocator>
 template <std::ranges::input_range Range>
   requires TypedBufferStorable<std::ranges::range_value_t<Range>>
-inline void TypedBufferArray<Allocator>::AppendRange(Range&& range) {
+constexpr void TypedBufferArray::AppendRange(Range&& range) {
   using T = std::ranges::range_value_t<Range>;
   EnsureType<T>();
 
@@ -1096,11 +1053,9 @@ inline void TypedBufferArray<Allocator>::AppendRange(Range&& range) {
   }
 }
 
-template <typename Allocator>
 template <std::ranges::input_range Range>
   requires TypedBufferStorable<std::ranges::range_value_t<Range>>
-inline auto TypedBufferArray<Allocator>::InsertRange(size_type pos,
-                                                     Range&& range)
+constexpr auto TypedBufferArray::InsertRange(size_type pos, Range&& range)
     -> std::ranges::range_value_t<Range>* {
   using T = std::ranges::range_value_t<Range>;
 
@@ -1143,15 +1098,13 @@ inline auto TypedBufferArray<Allocator>::InsertRange(size_type pos,
   }
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::PopBack() noexcept {
+constexpr void TypedBufferArray::PopBack() noexcept {
   HELIOS_ASSERT(!Empty(), "Cannot pop from empty TypedBufferArray!");
   --size_;
   DestroyRange(size_, size_ + 1);
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::Erase(size_type pos) {
+constexpr void TypedBufferArray::Erase(size_type pos) {
   HELIOS_ASSERT(pos < size_, "Erase position '{}' out of bounds!", pos);
   HELIOS_ASSERT(HasType(), "Cannot erase from storage with no type!");
 
@@ -1162,9 +1115,8 @@ constexpr void TypedBufferArray<Allocator>::Erase(size_type pos) {
   --size_;
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::Erase(size_type first_pos,
-                                                  size_type last_pos) {
+constexpr void TypedBufferArray::Erase(size_type first_pos,
+                                       size_type last_pos) {
   HELIOS_ASSERT(first_pos <= size_, "Erase range start '{}' is out of bounds!",
                 first_pos);
   HELIOS_ASSERT(last_pos <= size_, "Erase range end '{}' is out of bounds!",
@@ -1186,15 +1138,13 @@ constexpr void TypedBufferArray<Allocator>::Erase(size_type first_pos,
   size_ -= count;
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::Clear() noexcept {
+constexpr void TypedBufferArray::Clear() noexcept {
   DestroyAll();
   storage_.clear();
   size_ = 0;
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::Reserve(size_type count) {
+constexpr void TypedBufferArray::Reserve(size_type count) {
   if (count == 0) [[unlikely]] {
     return;
   }
@@ -1226,8 +1176,7 @@ constexpr void TypedBufferArray<Allocator>::Reserve(size_type count) {
   }
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::ShrinkToFit() {
+constexpr void TypedBufferArray::ShrinkToFit() {
   if (!HasType() || size_ == 0) {
     storage_.clear();
     storage_.shrink_to_fit();
@@ -1254,10 +1203,9 @@ constexpr void TypedBufferArray<Allocator>::ShrinkToFit() {
   storage_.shrink_to_fit();
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
   requires std::default_initializable<T>
-inline void TypedBufferArray<Allocator>::Resize(size_type count) {
+constexpr void TypedBufferArray::Resize(size_type count) {
   EnsureType<T>();
   if (count < size_) {
     DestroyRange(count, size_);
@@ -1270,11 +1218,9 @@ inline void TypedBufferArray<Allocator>::Resize(size_type count) {
   }
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
   requires std::copy_constructible<T>
-inline void TypedBufferArray<Allocator>::Resize(size_type count,
-                                                const T& value) {
+constexpr void TypedBufferArray::Resize(size_type count, const T& value) {
   using DecayedT = std::remove_cvref_t<T>;
 
   EnsureType<DecayedT>();
@@ -1289,9 +1235,8 @@ inline void TypedBufferArray<Allocator>::Resize(size_type count,
   }
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline T& TypedBufferArray<Allocator>::At(size_type index) noexcept {
+constexpr T& TypedBufferArray::At(size_type index) noexcept {
   HELIOS_ASSERT(index < size_, "Index '{}' is out of bounds!", index);
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
@@ -1299,10 +1244,8 @@ inline T& TypedBufferArray<Allocator>::At(size_type index) noexcept {
   return *(DataPtr<T>() + index);
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline const T& TypedBufferArray<Allocator>::At(
-    size_type index) const noexcept {
+constexpr const T& TypedBufferArray::At(size_type index) const noexcept {
   HELIOS_ASSERT(index < size_, "Index '{}' is out of bounds!", index);
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
@@ -1310,9 +1253,8 @@ inline const T& TypedBufferArray<Allocator>::At(
   return *(DataPtr<T>() + index);
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline T& TypedBufferArray<Allocator>::Front() noexcept {
+constexpr T& TypedBufferArray::Front() noexcept {
   HELIOS_ASSERT(!Empty(), "Cannot access front of empty TypedBufferArray!");
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
@@ -1320,9 +1262,8 @@ inline T& TypedBufferArray<Allocator>::Front() noexcept {
   return *DataPtr<T>();
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline const T& TypedBufferArray<Allocator>::Front() const noexcept {
+constexpr const T& TypedBufferArray::Front() const noexcept {
   HELIOS_ASSERT(!Empty(), "Cannot access front of empty TypedBufferArray!");
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
@@ -1330,9 +1271,8 @@ inline const T& TypedBufferArray<Allocator>::Front() const noexcept {
   return *DataPtr<T>();
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline T& TypedBufferArray<Allocator>::Back() noexcept {
+constexpr T& TypedBufferArray::Back() noexcept {
   HELIOS_ASSERT(!Empty(), "Cannot access back of empty TypedBufferArray!");
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
@@ -1340,9 +1280,8 @@ inline T& TypedBufferArray<Allocator>::Back() noexcept {
   return *(DataPtr<T>() + size_ - 1);
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline const T& TypedBufferArray<Allocator>::Back() const noexcept {
+constexpr const T& TypedBufferArray::Back() const noexcept {
   HELIOS_ASSERT(!Empty(), "Cannot access back of empty TypedBufferArray!");
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
@@ -1350,10 +1289,7 @@ inline const T& TypedBufferArray<Allocator>::Back() const noexcept {
   return *(DataPtr<T>() + size_ - 1);
 }
 
-template <typename Allocator>
-template <typename OtherAllocator>
-constexpr void TypedBufferArray<Allocator>::Merge(
-    const TypedBufferArray<OtherAllocator>& other) {
+constexpr void TypedBufferArray::Merge(const TypedBufferArray& other) {
   if (other.Empty()) [[unlikely]] {
     if (!other.type_info_.IsValid()) {
       return;
@@ -1391,10 +1327,7 @@ constexpr void TypedBufferArray<Allocator>::Merge(
   size_ += other_size;
 }
 
-template <typename Allocator>
-template <typename OtherAllocator>
-constexpr void TypedBufferArray<Allocator>::Merge(
-    TypedBufferArray<OtherAllocator>&& other) {
+constexpr void TypedBufferArray::Merge(TypedBufferArray&& other) {
   if (other.Empty()) [[unlikely]] {
     if (!other.type_info_.IsValid()) {
       return;
@@ -1402,19 +1335,16 @@ constexpr void TypedBufferArray<Allocator>::Merge(
     if (!type_info_.IsValid()) {
       type_info_ = other.type_info_;
     }
-    other.type_info_.Reset();
+    other.Reset();
     return;
   }
 
-  if constexpr (std::same_as<Allocator, OtherAllocator>) {
-    if (!HasType()) {
-      *this = std::move(other);
-      return;
-    }
-  } else {
-    if (!HasType()) {
-      type_info_ = other.type_info_;
-    }
+  if (!HasType() && GetMemoryResource() == other.GetMemoryResource()) {
+    *this = std::move(other);
+    return;
+  }
+  if (!HasType()) {
+    type_info_ = other.type_info_;
   }
 
   HELIOS_ASSERT(
@@ -1448,18 +1378,7 @@ constexpr void TypedBufferArray<Allocator>::Merge(
   other.type_info_.Reset();
 }
 
-template <typename Allocator>
-constexpr void
-TypedBufferArray<Allocator>::Swap(TypedBufferArray& other) noexcept(
-    std::is_nothrow_swappable_v<ContainerType>) {
-  std::swap(type_info_, other.type_info_);
-  std::swap(storage_, other.storage_);
-  std::swap(size_, other.size_);
-}
-
-template <typename Allocator>
-inline void TypedBufferArray<Allocator>::Swap(size_type index,
-                                              size_type other_index) {
+constexpr void TypedBufferArray::Swap(size_type index, size_type other_index) {
   HELIOS_ASSERT(HasType(),
                 "Cannot swap elements in storage without a type set!");
   HELIOS_ASSERT(index < size_, "Swap index '{}' is out of bounds!", index);
@@ -1480,8 +1399,9 @@ inline void TypedBufferArray<Allocator>::Swap(size_type index,
     HELIOS_ASSERT(type_info_.move_construct,
                   "Type must be move constructible to swap elements!");
 
-    auto alloc = storage_.get_allocator();
-    using alloc_traits = std::allocator_traits<allocator_type>;
+    std::pmr::polymorphic_allocator<std::byte> alloc(GetMemoryResource());
+    using alloc_traits =
+        std::allocator_traits<std::pmr::polymorphic_allocator<std::byte>>;
 
     auto* temp = alloc_traits::allocate(alloc, type_info_.element_size);
 
@@ -1509,10 +1429,8 @@ inline void TypedBufferArray<Allocator>::Swap(size_type index,
   }
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline void TypedBufferArray<Allocator>::Swap(size_type index,
-                                              size_type other_index) {
+constexpr void TypedBufferArray::Swap(size_type index, size_type other_index) {
   HELIOS_ASSERT(HasType(),
                 "Cannot swap elements in storage without a type set!");
   HELIOS_ASSERT(type_info_.type_index == TypeIndexOf<T>(),
@@ -1528,68 +1446,77 @@ inline void TypedBufferArray<Allocator>::Swap(size_type index,
   std::swap(At<T>(index), At<T>(other_index));
 }
 
-template <typename Allocator>
-constexpr auto TypedBufferArray<Allocator>::Capacity() const noexcept
-    -> size_type {
+constexpr void TypedBufferArray::Swap(TypedBufferArray& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return;
+  }
+
+  if (GetMemoryResource() != other.GetMemoryResource()) {
+    TypedBufferArray lhs(std::move(*this), other.GetMemoryResource());
+    TypedBufferArray rhs(std::move(other), GetMemoryResource());
+    Swap(rhs);
+    other.Swap(lhs);
+    return;
+  }
+
+  std::swap(type_info_, other.type_info_);
+  std::swap(storage_, other.storage_);
+  std::swap(size_, other.size_);
+}
+
+constexpr auto TypedBufferArray::Capacity() const noexcept -> size_type {
   if (!HasType()) [[unlikely]] {
     return 0;
   }
   return storage_.capacity() / type_info_.element_size;
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline auto TypedBufferArray<Allocator>::Data() noexcept -> std::span<T> {
+constexpr auto TypedBufferArray::Data() noexcept -> std::span<T> {
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
       "Type mismatch: storage contains different type!");
   return {DataPtr<T>(), size_};
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline auto TypedBufferArray<Allocator>::Data() const noexcept
-    -> std::span<const T> {
+constexpr auto TypedBufferArray::Data() const noexcept -> std::span<const T> {
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
       "Type mismatch: storage contains different type!");
   return {DataPtr<T>(), size_};
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline T* TypedBufferArray<Allocator>::DataPtr() noexcept {
+constexpr T* TypedBufferArray::DataPtr() noexcept {
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
       "Type mismatch: storage contains different type!");
   if (storage_.empty()) [[unlikely]] {
     return nullptr;
   }
-  return std::launder(reinterpret_cast<T*>(storage_.data()));
+  return std::launder(static_cast<T*>(RawDataPtr()));
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-inline const T* TypedBufferArray<Allocator>::DataPtr() const noexcept {
+constexpr const T* TypedBufferArray::DataPtr() const noexcept {
   HELIOS_ASSERT(
       !type_info_.IsValid() || type_info_.type_index == TypeIndexOf<T>(),
       "Type mismatch: storage contains different type!");
   if (storage_.empty()) [[unlikely]] {
     return nullptr;
   }
-  return std::launder(reinterpret_cast<const T*>(storage_.data()));
+  return std::launder(static_cast<const T*>(RawDataPtr()));
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::DestroyAll() noexcept {
+constexpr void TypedBufferArray::DestroyAll() noexcept {
   if (size_ > 0 && type_info_.destroy != nullptr) {
     type_info_.destroy(RawDataPtr(), size_);
   }
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::DestroyRange(
-    size_type first, size_type last) noexcept {
+constexpr void TypedBufferArray::DestroyRange(size_type first,
+                                              size_type last) noexcept {
   if (first >= last || type_info_.destroy == nullptr) {
     return;
   }
@@ -1599,9 +1526,7 @@ constexpr void TypedBufferArray<Allocator>::DestroyRange(
   type_info_.destroy(ptr, last - first);
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::GrowIfNeeded(
-    size_type additional_count) {
+constexpr void TypedBufferArray::GrowIfNeeded(size_type additional_count) {
   HELIOS_ASSERT(HasType(), "Cannot grow storage without a type set!");
 
   const size_type required_bytes =
@@ -1640,9 +1565,7 @@ constexpr void TypedBufferArray<Allocator>::GrowIfNeeded(
   }
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::ShiftRight(size_type pos,
-                                                       size_type count) {
+constexpr void TypedBufferArray::ShiftRight(size_type pos, size_type count) {
   HELIOS_ASSERT(HasType(), "Cannot shift in storage without a type set!");
   HELIOS_ASSERT(pos <= size_, "ShiftRight position '{}' is out of bounds!",
                 pos);
@@ -1683,9 +1606,7 @@ constexpr void TypedBufferArray<Allocator>::ShiftRight(size_type pos,
   }
 }
 
-template <typename Allocator>
-constexpr void TypedBufferArray<Allocator>::ShiftLeft(size_type pos,
-                                                      size_type count) {
+constexpr void TypedBufferArray::ShiftLeft(size_type pos, size_type count) {
   HELIOS_ASSERT(HasType(), "Cannot shift in storage without a type set!");
   HELIOS_ASSERT(pos >= count, "ShiftLeft position '{}' is invalid!", pos);
   HELIOS_ASSERT(pos <= size_, "ShiftLeft position '{}' is out of bounds!", pos);
@@ -1721,9 +1642,8 @@ constexpr void TypedBufferArray<Allocator>::ShiftLeft(size_type pos,
   }
 }
 
-template <typename Allocator>
 template <TypedBufferStorable T>
-constexpr void TypedBufferArray<Allocator>::EnsureType() {
+constexpr void TypedBufferArray::EnsureType() {
   if (!type_info_.IsValid()) {
     type_info_ = TypeInfo::template From<T>();
   } else {
@@ -1732,27 +1652,21 @@ constexpr void TypedBufferArray<Allocator>::EnsureType() {
   }
 }
 
-using PmrTypedBufferArray =
-    TypedBufferArray<std::pmr::polymorphic_allocator<std::byte>>;
-
 /**
  * @brief Erases all elements equal to value from the TypedBufferArray.
  * @details Uses the swap-then-pop pattern for each match. Element order is not
  * preserved.
  * @tparam T The element type
- * @tparam Allocator The allocator type
  * @param storage The buffer to erase from
  * @param value The value to erase
  * @return Number of elements erased
  */
-template <TypedBufferStorable T, typename Allocator>
-  requires(std::is_class_v<Allocator> &&
-           !std::same_as<std::remove_cvref_t<T>,
-                         typename TypedBufferArray<Allocator>::size_type>)
-inline auto erase(TypedBufferArray<Allocator>& storage, const T& value) ->
-    typename TypedBufferArray<Allocator>::size_type {
+template <TypedBufferStorable T>
+  requires(!std::same_as<std::remove_cvref_t<T>, TypedBufferArray::size_type>)
+constexpr auto erase(TypedBufferArray& storage, const T& value)
+    -> TypedBufferArray::size_type {
   using DecayedT = std::remove_cvref_t<T>;
-  using size_type = typename TypedBufferArray<Allocator>::size_type;
+  using size_type = typename TypedBufferArray::size_type;
 
   size_type erased = 0;
   size_type i = 0;
@@ -1772,14 +1686,11 @@ inline auto erase(TypedBufferArray<Allocator>& storage, const T& value) ->
 /**
  * @brief Erases the element at position pos from the TypedBufferArray
  * (swap-then-pop, O(1), unstable).
- * @tparam Allocator The allocator type
  * @param storage The buffer to erase from
  * @param pos Index of the element to erase
  */
-template <typename Allocator>
-  requires std::is_class_v<Allocator>
-inline void erase(TypedBufferArray<Allocator>& storage,
-                  typename TypedBufferArray<Allocator>::size_type pos) {
+constexpr void erase(TypedBufferArray& storage,
+                     TypedBufferArray::size_type pos) {
   storage.Swap(pos, storage.Size() - 1);
   storage.PopBack();
 }
@@ -1789,17 +1700,16 @@ inline void erase(TypedBufferArray<Allocator>& storage,
  * TypedBufferArray.
  * @details Uses the swap-then-pop pattern. Element order is not preserved.
  * @tparam T The element type
- * @tparam Allocator The allocator type
  * @tparam Pred Predicate type
  * @param storage The buffer to erase from
  * @param pred Predicate to test elements
  * @return Number of elements erased
  */
-template <TypedBufferStorable T, typename Allocator, typename Pred>
-  requires(std::is_class_v<Allocator> && std::predicate<Pred, const T&>)
-inline auto erase_if(TypedBufferArray<Allocator>& storage, Pred pred) ->
-    typename TypedBufferArray<Allocator>::size_type {
-  using size_type = typename TypedBufferArray<Allocator>::size_type;
+template <TypedBufferStorable T, typename Pred>
+  requires std::predicate<Pred, const T&>
+constexpr auto erase_if(TypedBufferArray& storage, const Pred& pred)
+    -> TypedBufferArray::size_type {
+  using size_type = typename TypedBufferArray::size_type;
 
   size_type erased = 0;
   size_type idx = 0;

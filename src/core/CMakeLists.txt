@@ -35,6 +35,7 @@ helios_module(
     TEST_SOURCES
         tests/assert.cpp
         tests/cstring_view.cpp
+        tests/delegate.cpp
         tests/main.cpp
         tests/stacktrace.cpp
         tests/uuid.cpp

@@ -98,146 +98,6 @@ TEST_SUITE("helios::ecs::Entity") {
     }
   }
 
-  TEST_CASE("helios::ecs::Entity::Valid") {
-    SUBCASE("Invalid entity (default constructed)") {
-      constexpr Entity entity;
-      CHECK_FALSE(entity.Valid());
-    }
-
-    SUBCASE("Valid entity with positive index and generation") {
-      constexpr Entity entity{10, 5};
-      CHECK(entity.Valid());
-    }
-
-    SUBCASE("Valid entity with zero index and generation") {
-      constexpr Entity entity{0, 0};
-      CHECK(entity.Valid());
-    }
-
-    SUBCASE("Invalid entity with invalid index only") {
-      constexpr Entity entity{Entity::kInvalidIndex, 5};
-      CHECK_FALSE(entity.Valid());
-    }
-
-    SUBCASE("Invalid entity with invalid generation only") {
-      constexpr Entity entity{10, Entity::kInvalidGeneration};
-      CHECK_FALSE(entity.Valid());
-    }
-  }
-
-  TEST_CASE("helios::ecs::Entity::Alive") {
-    SUBCASE("Default constructed entity is not alive") {
-      constexpr Entity entity;
-      CHECK_FALSE(entity.Alive());
-    }
-
-    SUBCASE("Initial alive generation is alive") {
-      constexpr Entity entity{0, Entity::kInitialAliveGeneration};
-      CHECK(entity.Valid());
-      CHECK(entity.Alive());
-    }
-
-    SUBCASE("Free generation encoding is not alive") {
-      constexpr Entity free{5, 2U};
-      CHECK(free.Valid());
-      CHECK_FALSE(free.Alive());
-    }
-
-    SUBCASE("Invalid sentinel is not alive") {
-      constexpr Entity entity{1, Entity::kInvalidGeneration};
-      CHECK_FALSE(entity.Valid());
-      CHECK_FALSE(entity.Alive());
-    }
-
-    SUBCASE("Alive matches IsAliveGeneration on generation") {
-      constexpr Entity entity{7, Entity::kAliveBit | 3U};
-      CHECK_EQ(entity.Alive(), IsAliveGeneration(entity.Generation()));
-    }
-  }
-
-  TEST_CASE("helios::ecs::Entity::Index") {
-    SUBCASE("Index retrieval from valid entity") {
-      constexpr Entity entity{123, 1};
-      CHECK_EQ(entity.Index(), 123);
-    }
-
-    SUBCASE("Index from entity with zero index") {
-      constexpr Entity entity{0, 10};
-      CHECK_EQ(entity.Index(), 0);
-    }
-
-    SUBCASE("Index from invalid entity") {
-      constexpr Entity entity;
-      CHECK_EQ(entity.Index(), Entity::kInvalidIndex);
-    }
-
-    SUBCASE("Index preservation after copy") {
-      constexpr Entity original{999, 5};
-      constexpr Entity copy(original);
-      CHECK_EQ(copy.Index(), original.Index());
-    }
-  }
-
-  TEST_CASE("helios::ecs::Entity::Generation") {
-    SUBCASE("Generation retrieval from valid entity") {
-      constexpr Entity entity{5, 42};
-      CHECK_EQ(entity.Generation(), 42);
-    }
-
-    SUBCASE("Generation from entity with zero generation") {
-      constexpr Entity entity{10, 0};
-      CHECK_EQ(entity.Generation(), 0);
-    }
-
-    SUBCASE("Generation from invalid entity") {
-      constexpr Entity entity;
-      CHECK_EQ(entity.Generation(), Entity::kInvalidGeneration);
-    }
-
-    SUBCASE("Generation preservation after copy") {
-      constexpr Entity original{100, 777};
-      constexpr Entity copy(original);
-      CHECK_EQ(copy.Generation(), original.Generation());
-    }
-  }
-
-  TEST_CASE("helios::ecs::Entity::Hash") {
-    SUBCASE("Hash of invalid entity is zero") {
-      constexpr Entity entity;
-      CHECK_EQ(entity.Hash(), 0);
-    }
-
-    SUBCASE("Hash of valid entity is non-zero") {
-      constexpr Entity entity{5, 3};
-      CHECK_NE(entity.Hash(), 0);
-    }
-
-    SUBCASE("Hash consistency - same entity produces same hash") {
-      constexpr Entity entity{100, 50};
-
-      constexpr auto hash1 = entity.Hash();
-      constexpr auto hash2 = entity.Hash();
-
-      CHECK_EQ(hash1, hash2);
-    }
-
-    SUBCASE("Hash uniqueness - different entities produce different hashes") {
-      constexpr Entity entity1{10, 5};
-      constexpr Entity entity2{10, 6};
-      constexpr Entity entity3{11, 5};
-
-      CHECK_NE(entity1.Hash(), entity2.Hash());
-      CHECK_NE(entity1.Hash(), entity3.Hash());
-      CHECK_NE(entity2.Hash(), entity3.Hash());
-    }
-
-    SUBCASE("Hash of copied entity is identical") {
-      constexpr Entity original{42, 7};
-      constexpr Entity copy(original);
-      CHECK_EQ(original.Hash(), copy.Hash());
-    }
-  }
-
   TEST_CASE("helios::ecs::Entity::operator==") {
     SUBCASE("Equal entities") {
       constexpr Entity entity1{10, 5};
@@ -313,6 +173,187 @@ TEST_SUITE("helios::ecs::Entity") {
 
       CHECK(left < right);
       CHECK_FALSE(right < left);
+    }
+  }
+
+  TEST_CASE("helios::ecs::Entity::Valid") {
+    SUBCASE("Invalid entity (default constructed)") {
+      constexpr Entity entity;
+      CHECK_FALSE(entity.Valid());
+    }
+
+    SUBCASE("Valid entity with positive index and generation") {
+      constexpr Entity entity{10, 5};
+      CHECK(entity.Valid());
+    }
+
+    SUBCASE("Valid entity with zero index and generation") {
+      constexpr Entity entity{0, 0};
+      CHECK(entity.Valid());
+    }
+
+    SUBCASE("Invalid entity with invalid index only") {
+      constexpr Entity entity{Entity::kInvalidIndex, 5};
+      CHECK_FALSE(entity.Valid());
+    }
+
+    SUBCASE("Invalid entity with invalid generation only") {
+      constexpr Entity entity{10, Entity::kInvalidGeneration};
+      CHECK_FALSE(entity.Valid());
+    }
+  }
+
+  TEST_CASE("helios::ecs::Entity::Alive") {
+    SUBCASE("Default constructed entity is not alive") {
+      constexpr Entity entity;
+      CHECK_FALSE(entity.Alive());
+    }
+
+    SUBCASE("Initial alive generation is alive") {
+      constexpr Entity entity{0, Entity::kInitialAliveGeneration};
+      CHECK(entity.Valid());
+      CHECK(entity.Alive());
+    }
+
+    SUBCASE("Free generation encoding is not alive") {
+      constexpr Entity free{5, 2U};
+      CHECK(free.Valid());
+      CHECK_FALSE(free.Alive());
+    }
+
+    SUBCASE("Invalid sentinel is not alive") {
+      constexpr Entity entity{1, Entity::kInvalidGeneration};
+      CHECK_FALSE(entity.Valid());
+      CHECK_FALSE(entity.Alive());
+    }
+
+    SUBCASE("Alive matches IsAliveGeneration on generation") {
+      constexpr Entity entity{7, Entity::kAliveBit | 3U};
+      CHECK_EQ(entity.Alive(), IsAliveGeneration(entity.Generation()));
+    }
+  }
+
+  TEST_CASE("helios::ecs::Entity::Hash") {
+    SUBCASE("Hash of invalid entity is zero") {
+      constexpr Entity entity;
+      CHECK_EQ(entity.Hash(), 0);
+    }
+
+    SUBCASE("Hash of valid entity is non-zero") {
+      constexpr Entity entity{5, 3};
+      CHECK_NE(entity.Hash(), 0);
+    }
+
+    SUBCASE("Hash consistency - same entity produces same hash") {
+      constexpr Entity entity{100, 50};
+
+      constexpr auto hash1 = entity.Hash();
+      constexpr auto hash2 = entity.Hash();
+
+      CHECK_EQ(hash1, hash2);
+    }
+
+    SUBCASE("Hash uniqueness - different entities produce different hashes") {
+      constexpr Entity entity1{10, 5};
+      constexpr Entity entity2{10, 6};
+      constexpr Entity entity3{11, 5};
+
+      CHECK_NE(entity1.Hash(), entity2.Hash());
+      CHECK_NE(entity1.Hash(), entity3.Hash());
+      CHECK_NE(entity2.Hash(), entity3.Hash());
+    }
+
+    SUBCASE("Hash of copied entity is identical") {
+      constexpr Entity original{42, 7};
+      constexpr Entity copy(original);
+      CHECK_EQ(original.Hash(), copy.Hash());
+    }
+  }
+
+  TEST_CASE("helios::ecs::Entity::ReuseCount") {
+    SUBCASE("Initial alive generation has reuse count 1") {
+      constexpr Entity entity{0, Entity::kInitialAliveGeneration};
+      CHECK_EQ(entity.ReuseCount(), 1U);
+      CHECK_NE(entity.ReuseCount(), entity.Generation());
+    }
+
+    SUBCASE("Free generation reuse count equals packed generation") {
+      constexpr Entity entity{5, 2U};
+      CHECK_EQ(entity.ReuseCount(), 2U);
+      CHECK_EQ(entity.ReuseCount(), entity.Generation());
+    }
+
+    SUBCASE("Alive and free encodings of the same counter match") {
+      constexpr Entity alive{7, Entity::kAliveBit | 3U};
+      constexpr Entity free{7, 3U};
+      CHECK_EQ(alive.ReuseCount(), 3U);
+      CHECK_EQ(free.ReuseCount(), 3U);
+      CHECK_EQ(alive.ReuseCount(), free.ReuseCount());
+      CHECK_NE(alive.Generation(), free.Generation());
+    }
+
+    SUBCASE("Zero generation has reuse count 0") {
+      constexpr Entity entity{10, 0};
+      CHECK_EQ(entity.ReuseCount(), 0U);
+    }
+
+    SUBCASE("Invalid entity reuse count is the counter mask") {
+      constexpr Entity entity;
+      CHECK_EQ(entity.ReuseCount(), Entity::kCounterMask);
+      CHECK_EQ(entity.ReuseCount(), entity.Generation() & Entity::kCounterMask);
+    }
+
+    SUBCASE("Reuse count preservation after copy") {
+      constexpr Entity original{100, Entity::kAliveBit | 9U};
+      constexpr Entity copy(original);
+      CHECK_EQ(copy.ReuseCount(), original.ReuseCount());
+      CHECK_EQ(copy.ReuseCount(), 9U);
+    }
+  }
+
+  TEST_CASE("helios::ecs::Entity::Index") {
+    SUBCASE("Index retrieval from valid entity") {
+      constexpr Entity entity{123, 1};
+      CHECK_EQ(entity.Index(), 123);
+    }
+
+    SUBCASE("Index from entity with zero index") {
+      constexpr Entity entity{0, 10};
+      CHECK_EQ(entity.Index(), 0);
+    }
+
+    SUBCASE("Index from invalid entity") {
+      constexpr Entity entity;
+      CHECK_EQ(entity.Index(), Entity::kInvalidIndex);
+    }
+
+    SUBCASE("Index preservation after copy") {
+      constexpr Entity original{999, 5};
+      constexpr Entity copy(original);
+      CHECK_EQ(copy.Index(), original.Index());
+    }
+  }
+
+  TEST_CASE("helios::ecs::Entity::Generation") {
+    SUBCASE("Generation retrieval from valid entity") {
+      constexpr Entity entity{5, 42};
+      CHECK_EQ(entity.Generation(), 42);
+    }
+
+    SUBCASE("Generation from entity with zero generation") {
+      constexpr Entity entity{10, 0};
+      CHECK_EQ(entity.Generation(), 0);
+    }
+
+    SUBCASE("Generation from invalid entity") {
+      constexpr Entity entity;
+      CHECK_EQ(entity.Generation(), Entity::kInvalidGeneration);
+    }
+
+    SUBCASE("Generation preservation after copy") {
+      constexpr Entity original{100, 777};
+      constexpr Entity copy(original);
+      CHECK_EQ(copy.Generation(), original.Generation());
     }
   }
 

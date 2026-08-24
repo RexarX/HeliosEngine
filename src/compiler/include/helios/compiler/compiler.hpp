@@ -20,12 +20,6 @@
 #define HELIOS_CONTAINERS_RANGES_AVAILABLE
 #endif
 
-#if defined(__cpp_lib_flat_map) && __cpp_lib_flat_map >= 202207L
-#define HELIOS_STL_FLAT_MAP_AVAILABLE
-#elif defined(HELIOS_USE_STL_FLAT_MAP)
-#define HELIOS_STL_FLAT_MAP_AVAILABLE
-#endif
-
 #ifdef _MSC_VER
 #define HELIOS_FORCE_INLINE __forceinline
 #elif defined(__GNUC__) || defined(__clang__)
@@ -34,11 +28,11 @@
 #define HELIOS_FORCE_INLINE inline
 #endif
 
-#if defined(__clang__)
+#ifdef __clang__
 #define HELIOS_ALWAYS_INLINE [[clang::always_inline]]
-#elif defined(__GNUC__)
+#elifdef __GNUC__
 #define HELIOS_ALWAYS_INLINE [[gnu::always_inline]]
-#elif defined(_MSC_VER)
+#elifdef _MSC_VER
 #define HELIOS_ALWAYS_INLINE [[msvc::forceinline]]
 #else
 #define HELIOS_ALWAYS_INLINE
@@ -50,4 +44,11 @@
 #define HELIOS_NO_INLINE __attribute__((noinline))
 #else
 #define HELIOS_NO_INLINE
+#endif
+
+// MSVC and clang-cl ignore standard [[no_unique_address]] under the MSVC ABI.
+#ifdef _MSC_VER
+#define HELIOS_NO_UNIQUE_ADDRESS [[msvc::no_unique_address]]
+#else
+#define HELIOS_NO_UNIQUE_ADDRESS [[no_unique_address]]
 #endif

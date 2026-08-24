@@ -19,6 +19,7 @@ cmake --preset ... -DHELIOS_THIRD_PARTY_DIR=/path/to/your/deps
 | `doctest/`         | doctest/doctest            | `v2.5.3`   |
 | `glfw/`            | glfw/glfw                  | `3.5.1`    |
 | `mimalloc/`        | microsoft/mimalloc         | `v3.4.4`   |
+| `SDL3/`            | libsdl-org/SDL             | `release-3.4.14` |
 | `spdlog/`          | gabime/spdlog              | `v1.17.0`  |
 | `stduuid/`         | mariusbancila/stduuid      | `v1.2.3`   |
 | `Taskflow/`        | taskflow/taskflow          | `v4.1.0`   |

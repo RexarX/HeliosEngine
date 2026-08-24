@@ -41,7 +41,8 @@ void FreeRetiredRegion(void* raw_region) noexcept {
 
 void WaitForInactiveReaders() noexcept {
   auto& state = DeferredRegionState::Instance();
-  while (state.active_readers.load(std::memory_order_acquire) != 0) {
+  const size_t self = tls_active_epoch != kEpochInactive ? 1U : 0U;
+  while (state.active_readers.load(std::memory_order_acquire) > self) {
     std::this_thread::yield();
   }
 }

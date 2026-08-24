@@ -10,16 +10,19 @@ helios_module(
         include/helios/utils/dynamic_library.hpp
         include/helios/utils/fast_pimpl.hpp
         include/helios/utils/filesystem.hpp
+        include/helios/utils/format.hpp
         include/helios/utils/functional_adapters.hpp
         include/helios/utils/hash.hpp
         include/helios/utils/macro.hpp
         include/helios/utils/random.hpp
+        include/helios/utils/sleep.hpp
         include/helios/utils/string_hash.hpp
         include/helios/utils/timer.hpp
         include/helios/utils/type_info.hpp
 
     SOURCES
         src/dynamic_library.cpp
+        src/sleep.cpp
 
     PCH src/pch.hpp
 
@@ -33,11 +36,13 @@ helios_module(
         tests/dynamic_library.cpp
         tests/fast_pimpl.cpp
         tests/filesystem.cpp
+        tests/format.cpp
         tests/functional_adapters.cpp
         tests/hash.cpp
         tests/macro.cpp
         tests/main.cpp
         tests/random.cpp
+        tests/sleep.cpp
         tests/string_hash.cpp
         tests/timer.cpp
         tests/type_info.cpp

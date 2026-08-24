@@ -16,6 +16,7 @@ include(Primitives)
         [HEADER_ONLY]
         [DEPENDS <visibility> <module>...]
         [OPTIONAL_DEPENDS <visibility> <module>...]
+        [IMPLEMENTS <tag>...]
     )
 
     Registers a module in the dependency graph. Visibility markers are accepted
@@ -33,7 +34,7 @@ include(Primitives)
 function(helios_register_module)
   set(options HEADER_ONLY)
   set(oneValueArgs NAME DESCRIPTION DEFAULT VERSION)
-  set(multiValueArgs DEPENDS OPTIONAL_DEPENDS)
+  set(multiValueArgs DEPENDS OPTIONAL_DEPENDS IMPLEMENTS)
   cmake_parse_arguments(MODULE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   if(NOT MODULE_NAME)
@@ -90,6 +91,14 @@ function(helios_register_module)
     set(HELIOS_MODULE_${_upper_name}_HEADER_ONLY TRUE CACHE INTERNAL "Module ${MODULE_NAME} is header-only")
   else()
     set(HELIOS_MODULE_${_upper_name}_HEADER_ONLY FALSE CACHE INTERNAL "Module ${MODULE_NAME} is header-only")
+  endif()
+
+  if(MODULE_IMPLEMENTS)
+    set(HELIOS_MODULE_${_upper_name}_IMPLEMENTS "${MODULE_IMPLEMENTS}"
+        CACHE INTERNAL "Backend tags implemented by ${MODULE_NAME}")
+  else()
+    set(HELIOS_MODULE_${_upper_name}_IMPLEMENTS "" CACHE INTERNAL
+        "Backend tags implemented by ${MODULE_NAME}")
   endif()
 
   get_property(_registered GLOBAL PROPERTY HELIOS_REGISTERED_MODULES)
@@ -200,6 +209,33 @@ function(helios_validate_module_dependencies)
             "Module '${_module}' requires module '${_dep}', but it is disabled. "
             "Enable it with -DHELIOS_BUILD_${_upper_dep}=ON")
       endif()
+    endforeach()
+  endforeach()
+endfunction()
+
+#[[
+    helios_validate_module_backend_implementations()
+
+    Fails configure when two enabled modules implement the same backend tag.
+]]
+function(helios_validate_module_backend_implementations)
+  get_property(_modules GLOBAL PROPERTY HELIOS_REGISTERED_MODULES)
+  set(_tag_to_module)
+
+  foreach(_module IN LISTS _modules)
+    helios_module_enabled(${_module} _is_enabled)
+    if(NOT _is_enabled)
+      continue()
+    endif()
+
+    string(TOUPPER "${_module}" _upper_name)
+    foreach(_tag IN LISTS HELIOS_MODULE_${_upper_name}_IMPLEMENTS)
+      if(DEFINED _tag_to_module_${_tag})
+        message(FATAL_ERROR
+            "Module '${_module}' and module '${_tag_to_module_${_tag}}' both "
+            "implement '${_tag}'. Enable only one backend.")
+      endif()
+      set(_tag_to_module_${_tag} "${_module}")
     endforeach()
   endforeach()
 endfunction()

@@ -28,7 +28,7 @@ constexpr DiagnosticsSet kDiagnosticsSet{};
 struct FunctionSystemStruct {
   void operator()(hecs::Res<Counter> counter) const {
     counter->value += 2;
-    hlog::Info("systems: FunctionSystemStruct value={}", counter->value);
+    hlog::Info("FunctionSystemStruct value={}", counter->value);
   }
 };
 
@@ -36,13 +36,13 @@ struct FunctionSystemStruct {
 // function type as the system identity.
 void FreeFunctionSystem(hecs::Res<Counter> counter) {
   ++counter->value;
-  hlog::Info("systems: FreeFunctionSystem value={}", counter->value);
+  hlog::Info("FreeFunctionSystem value={}", counter->value);
 }
 
 struct ConditionalSystem {
   void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::Res<Counter> counter) const {
-    hlog::Info("systems: ConditionalSystem frame={} value={}", frames->count,
+    hlog::Info("ConditionalSystem frame={} value={}", frames->count,
                counter->value);
   }
 };
@@ -78,8 +78,7 @@ int main() {
       app.AddSystem(happ::kUpdate, "LambdaSystem",
                     [](hecs::Res<Counter> counter) {
                       counter->value += 3;
-                      hlog::Info("systems: LambdaSystem value={}",
-                                 counter->value);
+                      hlog::Info("LambdaSystem value={}", counter->value);
                     })
           .InSet(kDiagnosticsSet)
           // RunIf gates this system each frame without removing it from the
@@ -93,7 +92,6 @@ int main() {
   app.AddSystem(happ::kUpdate, ConditionalSystem{})
       .InSet(kDiagnosticsSet)
       .After(lambda_handle);
-
   app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
 
   const auto code = app.Run();

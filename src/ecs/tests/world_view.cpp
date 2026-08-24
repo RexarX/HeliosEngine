@@ -1,5 +1,8 @@
 #include <doctest/doctest.h>
 
+#include <helios/ecs/system/access_policy.hpp>
+#include <helios/ecs/system/param.hpp>
+
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/world.hpp>
 #include <helios/ecs/world_view.hpp>
@@ -24,6 +27,14 @@ struct DeltaTime {
 
 struct GameMsg {
   int value = 0;
+};
+
+template <typename T>
+concept HasSystemParamTraits = requires { typename SystemParamTraits<T>; };
+
+template <typename T>
+concept HasRegisterAccess = requires(AccessPolicyBuilder& builder) {
+  SystemParamTraits<T>::RegisterAccess(builder);
 };
 
 }  // namespace
@@ -202,6 +213,24 @@ TEST_SUITE("helios::ecs::WorldView") {
       world.RemoveResources<DeltaTime>();
       const WorldView view(world);
       CHECK_EQ(view.ResourceCount(), 0);
+    }
+  }
+}
+
+TEST_SUITE("helios::ecs::SystemParamTraits") {
+  TEST_CASE("helios::ecs::SystemParamTraits: WorldView") {
+    SUBCASE("WorldView exists as a system parameter trait") {
+      CHECK(HasSystemParamTraits<WorldView>);
+      CHECK(HasRegisterAccess<WorldView>);
+    }
+
+    SUBCASE("WorldView RegisterAccess leaves policy empty") {
+      AccessPolicyBuilder builder;
+      SystemParamTraits<WorldView>::RegisterAccess(builder);
+
+      const auto policy = builder.Build();
+      CHECK_FALSE(policy.HasComponents());
+      CHECK_FALSE(policy.HasResources());
     }
   }
 }

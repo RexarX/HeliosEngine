@@ -142,6 +142,29 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
       CHECK(dst.HasReadComponent(ComponentTypeIndex::From<Health>()));
       CHECK(dst.HasReadResource(ResourceTypeIndex::From<RenderSettings>()));
     }
+
+    SUBCASE("Merge unions exclusive flag") {
+      AccessPolicy dst = AccessPolicyBuilder().Exclusive().Build();
+      const AccessPolicy src =
+          AccessPolicyBuilder().Query<const Position&>().Build();
+
+      dst.Merge(src);
+
+      CHECK(dst.Exclusive());
+      CHECK(dst.HasReadComponent(ComponentTypeIndex::From<Position>()));
+    }
+  }
+
+  TEST_CASE("helios::ecs::AccessPolicy::Exclusive") {
+    SUBCASE("Default policy is not exclusive") {
+      const AccessPolicy policy;
+      CHECK_FALSE(policy.Exclusive());
+    }
+
+    SUBCASE("Builder Exclusive sets flag on built policy") {
+      const AccessPolicy policy = AccessPolicyBuilder().Exclusive().Build();
+      CHECK(policy.Exclusive());
+    }
   }
 
   TEST_CASE("helios::ecs::AccessPolicy::HasQueryConflictWith") {
@@ -325,6 +348,35 @@ TEST_SUITE("helios::ecs::AccessPolicy") {
                                        .WriteResources<Camera>()
                                        .Build();
       CHECK(policy1.ConflictsWith(policy2));
+    }
+
+    SUBCASE("Two exclusive policies conflict") {
+      const AccessPolicy policy1 = AccessPolicyBuilder().Exclusive().Build();
+      const AccessPolicy policy2 = AccessPolicyBuilder().Exclusive().Build();
+      CHECK(policy1.ConflictsWith(policy2));
+    }
+
+    SUBCASE("Exclusive policy conflicts with component access") {
+      const AccessPolicy exclusive = AccessPolicyBuilder().Exclusive().Build();
+      const AccessPolicy query =
+          AccessPolicyBuilder().Query<const Position&>().Build();
+      CHECK(exclusive.ConflictsWith(query));
+      CHECK(query.ConflictsWith(exclusive));
+    }
+
+    SUBCASE("Exclusive policy conflicts with resource access") {
+      const AccessPolicy exclusive = AccessPolicyBuilder().Exclusive().Build();
+      const AccessPolicy resource =
+          AccessPolicyBuilder().ReadResources<Camera>().Build();
+      CHECK(exclusive.ConflictsWith(resource));
+      CHECK(resource.ConflictsWith(exclusive));
+    }
+
+    SUBCASE("Exclusive policy does not conflict with empty policy") {
+      const AccessPolicy exclusive = AccessPolicyBuilder().Exclusive().Build();
+      const AccessPolicy empty;
+      CHECK_FALSE(exclusive.ConflictsWith(empty));
+      CHECK_FALSE(empty.ConflictsWith(exclusive));
     }
   }
 
@@ -1025,6 +1077,24 @@ TEST_SUITE("helios::ecs::AccessPolicyBuilder") {
       CHECK_EQ(policy.GetWriteComponents().size(), 1);
       CHECK_EQ(policy.GetReadResources().size(), 1);
       CHECK_EQ(policy.GetWriteResources().size(), 1);
+    }
+  }
+
+  TEST_CASE("helios::ecs::AccessPolicyBuilder::Exclusive") {
+    SUBCASE("Exclusive sets flag on built policy") {
+      const AccessPolicy policy = AccessPolicyBuilder().Exclusive().Build();
+      CHECK(policy.Exclusive());
+    }
+
+    SUBCASE("Exclusive is chainable with other declarations") {
+      const AccessPolicy policy = AccessPolicyBuilder()
+                                      .Exclusive()
+                                      .Query<const Position&>()
+                                      .ReadResources<Camera>()
+                                      .Build();
+      CHECK(policy.Exclusive());
+      CHECK(policy.HasReadComponent(ComponentTypeIndex::From<Position>()));
+      CHECK(policy.HasReadResource(ResourceTypeIndex::From<Camera>()));
     }
   }
 

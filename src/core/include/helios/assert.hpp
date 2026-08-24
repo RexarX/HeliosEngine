@@ -4,17 +4,10 @@
 #include <helios/platform/platform.hpp>
 #include <helios/utils/macro.hpp>
 
-#include <cstdio>
-#include <cstdlib>
 #include <format>
-#include <functional>
 #include <source_location>
 #include <string>
 #include <string_view>
-
-#if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
-#include <print>
-#endif
 
 namespace helios {
 
@@ -65,20 +58,9 @@ inline AssertionHandler g_custom_assertion_handler = nullptr;
  * @param loc Source location of the assertion
  * @param message Additional message
  */
-[[noreturn]] inline void DefaultAssertionHandler(
-    std::string_view condition, const std::source_location& loc,
-    std::string_view message) noexcept {
-  const std::string formatted = FormatAssertionMessage(condition, loc, message);
-
-#if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
-  std::println(stderr, "{}", formatted);
-#else
-  std::fprintf(stderr, "%s\n", formatted.c_str());
-#endif
-  std::fflush(stderr);
-  std::abort();
-}
-
+[[noreturn]] void DefaultAssertionHandler(std::string_view condition,
+                                          const std::source_location& loc,
+                                          std::string_view message) noexcept;
 /**
  * @brief Log plugin assertion handler (weak symbol).
  * @details This is defined as a weak symbol that defaults to `nullptr`.
@@ -93,24 +75,34 @@ inline AssertionHandler g_custom_assertion_handler = nullptr;
 // The log plugin will set this via `SetLogPluginHandler` at initialization.
 inline AssertionHandler g_log_plugin_handler = nullptr;
 
-inline void LogPluginAssertionHandler(std::string_view condition,
-                                      const std::source_location& loc,
-                                      std::string_view message) noexcept {
-  if (g_log_plugin_handler) {
-    g_log_plugin_handler(condition, loc, message);
-  }
-}
-
-inline bool HasLogPluginHandler() noexcept {
-  return g_log_plugin_handler != nullptr;
-}
-
 /**
  * @brief Sets the log plugin handler (called by log plugin at initialization).
  * @param handler The handler function from the log plugin
  */
 inline void SetLogPluginHandler(AssertionHandler handler) noexcept {
   g_log_plugin_handler = handler;
+}
+
+/**
+ * @brief Checks if the log plugin handler is available (non-null).
+ * @return `true` if the log plugin handler is available
+ */
+inline bool HasLogPluginHandler() noexcept {
+  return g_log_plugin_handler != nullptr;
+}
+
+/**
+ * @brief Calls the log plugin assertion handler if available.
+ * @param condition The failed condition as a string
+ * @param loc Source location of the assertion
+ * @param message Additional message
+ */
+inline void LogPluginAssertionHandler(std::string_view condition,
+                                      const std::source_location& loc,
+                                      std::string_view message) noexcept {
+  if (g_log_plugin_handler != nullptr) {
+    g_log_plugin_handler(condition, loc, message);
+  }
 }
 
 #else
@@ -144,32 +136,9 @@ inline void SetLogPluginHandler(AssertionHandler handler) noexcept {
  * @param loc Source location of the assertion
  * @param message Additional message
  */
-inline void HandleAssertion(std::string_view condition,
-                            const std::source_location& loc,
-                            std::string_view message) noexcept {
-  // Priority 1: Custom user handler
-  if (g_custom_assertion_handler != nullptr) {
-    g_custom_assertion_handler(condition, loc, message);
-    return;
-  }
-
-  // Priority 2: Log plugin handler (if available)
-#ifdef _MSC_VER
-  if (HasLogPluginHandler()) {
-    LogPluginAssertionHandler(condition, loc, message);
-    return;
-  }
-#else
-  if (HasLogPluginHandler != nullptr && LogPluginAssertionHandler != nullptr &&
-      HasLogPluginHandler()) {
-    LogPluginAssertionHandler(condition, loc, message);
-    return;
-  }
-#endif
-
-  // Priority 3: Default handler (printf/println to stderr)
-  DefaultAssertionHandler(condition, loc, message);
-}
+void HandleAssertion(std::string_view condition,
+                     const std::source_location& loc,
+                     std::string_view message) noexcept;
 
 }  // namespace details
 
@@ -239,7 +208,7 @@ void AbortWithStacktrace(std::string_view message) noexcept;
       if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
         if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
           try {                                                      \
-            const std::string msg = std::format("" __VA_ARGS__);     \
+            const auto msg = std::format("" __VA_ARGS__);            \
             ::helios::details::HandleAssertion(                      \
                 #condition, ::std::source_location::current(), msg); \
           } catch (...) {                                            \
@@ -276,7 +245,7 @@ void AbortWithStacktrace(std::string_view message) noexcept;
     if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
       if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
         try {                                                      \
-          const std::string msg = std::format("" __VA_ARGS__);     \
+          const auto msg = std::format("" __VA_ARGS__);            \
           ::helios::details::HandleAssertion(                      \
               #condition, ::std::source_location::current(), msg); \
         } catch (...) {                                            \
@@ -297,7 +266,7 @@ void AbortWithStacktrace(std::string_view message) noexcept;
     if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
       if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
         try {                                                      \
-          const std::string msg = std::format("" __VA_ARGS__);     \
+          const auto msg = std::format("" __VA_ARGS__);            \
           ::helios::details::HandleAssertion(                      \
               #condition, ::std::source_location::current(), msg); \
         } catch (...) {                                            \
@@ -325,7 +294,7 @@ void AbortWithStacktrace(std::string_view message) noexcept;
     if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
       if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
         try {                                                      \
-          const std::string msg = std::format("" __VA_ARGS__);     \
+          const auto msg = std::format("" __VA_ARGS__);            \
           ::helios::details::HandleAssertion(                      \
               #condition, ::std::source_location::current(), msg); \
         } catch (...) {                                            \

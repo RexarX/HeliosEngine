@@ -4,42 +4,23 @@
 
 #include <atomic>
 #include <concepts>
+#include <cstddef>
 #include <cstdint>
 #include <memory>
 #include <memory_resource>
-#include <type_traits>
+#include <utility>
 
 namespace helios::mem {
 
 template <typename Derived>
-class RcFromThis;
-
-template <typename Derived>
-class ArcFromThis;
-
-template <typename Derived, typename Allocator = std::allocator<Derived>>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
 class RefCounted;
 
-template <typename Derived, typename Allocator = std::allocator<Derived>>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
+template <typename Derived>
 class AtomicRefCounted;
 
 /**
- * @brief CRTP base class that embeds a non-atomic reference counter into the
- * derived type.
- * @details Inherit from this class to make a type usable with `RefCounted<T>`.
- * The counter tracks the number of `RefCounted` handles pointing to the object.
- * The counter is NOT thread-safe; use `ArcFromThis` if thread-safety is
- * required.
- *
- * The counter starts at 0.
- * `RefCounted<T>` increments it on construction and decrements it on
- * destruction, deleting the object when it reaches 0.
- * @warning Do not copy or move `RcFromThis` directly;
- * copies share the same counter slot but should be managed exclusively through
- * `RefCounted<T>`.
- * @tparam Derived The concrete class inheriting from this base
+ * @brief CRTP base embedding a non-atomic intrusive reference counter.
+ * @tparam Derived Concrete type inheriting from this base
  *
  * @code
  * class Mesh final : public helios::mem::RcFromThis<Mesh> {
@@ -56,43 +37,30 @@ class AtomicRefCounted;
 template <typename Derived>
 class RcFromThis {
 public:
-  /// @brief Default-constructs with reference count zero.
   RcFromThis() noexcept = default;
-
-  /// @brief Copy-constructs; does not copy the reference count.
   RcFromThis(const RcFromThis& /*other*/) noexcept {}
-
-  /// @brief Move-constructs; does not transfer the reference count.
   RcFromThis(RcFromThis&& /*other*/) noexcept {}
-
-  /// @brief Destroys the embedded counter; does not delete the derived object.
   ~RcFromThis() noexcept = default;
 
-  /// @brief Copy-assigns; does not affect the reference count.
   RcFromThis& operator=(const RcFromThis& /*other*/) noexcept { return *this; }
-
-  /// @brief Move-assigns; does not affect the reference count.
   RcFromThis& operator=(RcFromThis&& /*other*/) noexcept { return *this; }
 
   /**
    * @brief Returns the current reference count.
-   * @return Current number of `RefCounted` handles owning this object
+   * @return Number of owning handles
    */
   [[nodiscard]] uint32_t RefCount() const noexcept { return ref_count_; }
 
 private:
-  template <typename D, typename A>
-    requires std::derived_from<D, RcFromThis<D>>
+  template <typename>
   friend class RefCounted;
 
-  /// @brief Increments the reference count by 1.
   void AddRef() noexcept { ++ref_count_; }
 
   /**
-   * @brief Decrements the reference count and checks if it reached zero.
-   * @warning Triggers an assertion if called when the ref count is already
-   * zero.
-   * @return true if the object should be deleted (ref count reached 0)
+   * @brief Decrements the count and reports whether the object is unowned.
+   * @warning Triggers an assertion if the count is already zero.
+   * @return True when the count reached zero
    */
   [[nodiscard]] bool Release() noexcept;
 
@@ -107,19 +75,8 @@ inline bool RcFromThis<Derived>::Release() noexcept {
 }
 
 /**
- * @brief CRTP base class that embeds an atomic reference counter into the
- * derived type.
- * @details Inherit from this class to make a type usable with
- * `AtomicRefCounted<T>`. The counter tracks the number of `AtomicRefCounted`
- * handles pointing to the object. All counter operations use
- * `std::memory_order_acq_rel` / `std::memory_order_acquire` to ensure correct
- * visibility across threads.
- * @note The counter starts at 0. `AtomicRefCounted<T>` increments it on
- * construction and decrements it on destruction, deleting the object when it
- * reaches 0.
- * @warning Do not manage the same raw pointer from multiple threads without
- * using `AtomicRefCounted<T>` handles exclusively.
- * @tparam Derived The concrete class inheriting from this base
+ * @brief CRTP base embedding an atomic intrusive reference counter.
+ * @tparam Derived Concrete type inheriting from this base
  *
  * @code
  * class Texture final : public helios::mem::ArcFromThis<Texture> {
@@ -136,50 +93,34 @@ inline bool RcFromThis<Derived>::Release() noexcept {
 template <typename Derived>
 class ArcFromThis {
 public:
-  /// @brief Default-constructs with reference count zero.
   ArcFromThis() noexcept = default;
-
-  /// @brief Copy-constructs; does not copy the reference count.
   ArcFromThis(const ArcFromThis& /*other*/) noexcept {}
-
-  /// @brief Move-constructs; does not transfer the reference count.
   ArcFromThis(ArcFromThis&& /*other*/) noexcept {}
-
-  /// @brief Destroys the embedded counter; does not delete the derived object.
   ~ArcFromThis() noexcept = default;
 
-  /// @brief Copy-assigns; does not affect the reference count.
   ArcFromThis& operator=(const ArcFromThis& /*other*/) noexcept {
     return *this;
   }
-
-  /// @brief Move-assigns; does not affect the reference count.
   ArcFromThis& operator=(ArcFromThis&& /*other*/) noexcept { return *this; }
 
   /**
-   * @brief Returns the current reference count.
-   * @note This is a snapshot; the value may change immediately after the call
-   * in a multithreaded context.
-   * @return Current number of `AtomicRefCounted` handles owning this object
+   * @brief Returns a snapshot of the current reference count.
+   * @return Number of owning handles at the time of the call
    */
   [[nodiscard]] uint32_t RefCount() const noexcept {
     return ref_count_.load(std::memory_order_acquire);
   }
 
 private:
-  template <typename D, typename A>
-    requires std::derived_from<D, ArcFromThis<D>>
+  template <typename>
   friend class AtomicRefCounted;
 
-  /// @brief Atomically increments the reference count by 1.
   void AddRef() noexcept { ref_count_.fetch_add(1, std::memory_order_relaxed); }
 
   /**
-   * @brief Atomically decrements the reference count and checks if it reached
-   * zero.
-   * @warning Triggers an assertion if called when the ref count is already
-   * zero.
-   * @return true if the object should be deleted (ref count reached 0)
+   * @brief Decrements the count and reports whether the object is unowned.
+   * @warning Triggers an assertion if the count is already zero.
+   * @return True when the count reached zero
    */
   [[nodiscard]] bool Release() noexcept;
 
@@ -194,255 +135,90 @@ inline bool ArcFromThis<Derived>::Release() noexcept {
 }
 
 /**
- * @brief Non-atomic intrusive reference-counted smart pointer.
- * @details Manages the lifetime of an object that inherits from
- * `RcFromThis<T>`. The reference counter lives inside the object itself (no
- * separate control block).
- *
- * Semantics are similar to `std::shared_ptr` but:
- * - No heap allocation for the control block.
- * - NOT thread-safe. Use `AtomicRefCounted` / `Arc` for shared ownership across
- * threads.
- * - The managed object MUST inherit from `RcFromThis<T>`.
- *
- * @note A null `RefCounted<T>` is valid and comparable.
- * @warning Not thread-safe. Do NOT share a single `RefCounted<T>` instance
- * across threads. Each thread must hold its own copy of the handle.
- * @tparam Derived Concrete type managed by this handle; must inherit
- * `RcFromThis<Derived>`
- * @tparam Allocator Allocator type used for construction and destruction of the
- * managed object (defaults to `std::allocator<Derived>`)
- *
- * @code
- * // Default allocator
- * auto mesh = helios::mem::MakeRc<Mesh>(42);
- *
- * // Custom pool allocator
- * auto mesh = helios::mem::MakeRc<Mesh, PoolAllocator<Mesh>>(42);
- * auto copy = mesh;                     // ref count: 2
- * mesh.Reset();                         // ref count: 1
- * copy.Reset();                         // ref count: 0 → Mesh deleted via
- * PoolAllocator
- * @endcode
+ * @brief Non-atomic PMR intrusive reference-counted handle.
+ * @details The memory resource is part of the handle state and is propagated
+ * by every copy, move, and assignment. The last handle destroys and
+ * deallocates the object through the resource that allocated it.
+ * @warning The managed type must inherit from `RcFromThis<Derived>`.
+ * @tparam Derived Managed object type
  */
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
+template <typename Derived>
 class RefCounted {
+  static_assert(std::derived_from<Derived, RcFromThis<Derived>>);
+
 public:
-  using AllocatorType = Allocator;
+  using allocator_type = std::pmr::polymorphic_allocator<Derived>;
+
+  /// @brief Constructs a null handle using the default memory resource.
+  RefCounted() noexcept = default;
+
+  /// @brief Constructs a null handle using the default memory resource.
+  explicit RefCounted(std::nullptr_t) noexcept {}
 
   /**
-   * @brief Constructs a null handle.
-   * @note Only available when `AllocatorType` is default-constructible.
-   * For stateful allocators, use `RefCounted(AllocatorType)` or `MakeRcWith`.
+   * @brief Constructs a null handle with a specific memory resource.
+   * @param resource Resource retained by the handle
    */
-  constexpr RefCounted() noexcept
-    requires std::default_initializable<AllocatorType>
-  = default;
+  explicit RefCounted(std::pmr::memory_resource* resource) noexcept
+      : resource_(resource) {}
 
   /**
-   * @brief Constructs a null handle storing a pre-built allocator.
-   * @details Use this when the allocator is stateful and you need a typed null
-   * handle that is ready to receive an assignment from a `MakeRcWith`-created
-   * handle.
+   * @brief Takes ownership of a PMR-allocated object.
+   * @warning `ptr` must have been allocated by `resource`.
+   * @param ptr Object to own, or null
+   * @param resource Resource used to destroy and deallocate the object
    */
-  constexpr explicit RefCounted(AllocatorType alloc) noexcept
-      : alloc_(std::move(alloc)) {}
-
-  /// @brief Constructs a null handle explicitly (default-constructible
-  /// allocators only).
-  constexpr explicit RefCounted(std::nullptr_t) noexcept
-    requires std::default_initializable<AllocatorType>
-  {}
-
-  /// @brief Constructs a null handle explicitly with an explicit allocator.
-  constexpr RefCounted(std::nullptr_t, AllocatorType alloc) noexcept
-      : alloc_(std::move(alloc)) {}
+  RefCounted(Derived* ptr, std::pmr::memory_resource* resource) noexcept;
 
   /**
-   * @brief Constructs a null handle with a PMR memory resource.
-   * @details Only available when `AllocatorType` is
-   * `std::pmr::polymorphic_allocator<T>`.
-   * @param resource Polymorphic memory resource to use for allocations
-   */
-  constexpr explicit RefCounted(std::pmr::memory_resource* resource) noexcept
-    requires std::same_as<AllocatorType,
-                          std::pmr::polymorphic_allocator<Derived>>
-      : alloc_(resource) {}
-
-  /**
-   * @brief Constructs from a raw pointer, taking ownership, with a PMR memory
-   * resource.
-   * @details Only available when `AllocatorType` is
-   * `std::pmr::polymorphic_allocator<T>`.
-   * @param ptr Raw pointer to take ownership of (may be `nullptr`)
-   * @param resource Polymorphic memory resource to use for destruction
-   */
-  RefCounted(Derived* ptr, std::pmr::memory_resource* resource) noexcept
-    requires std::same_as<AllocatorType,
-                          std::pmr::polymorphic_allocator<Derived>>
-      : RefCounted(ptr, std::pmr::polymorphic_allocator<Derived>(resource)) {}
-
-  /**
-   * @brief Constructs from a raw pointer, taking ownership, with an explicit
-   * allocator.
-   * @warning The pointer must have been allocated with the same allocator and
-   * must not be managed by any other owning handle at the time of this call.
-   * @param ptr   Raw pointer to take ownership of (may be `nullptr`)
-   * @param alloc Allocator instance to use for destruction
-   */
-  RefCounted(Derived* ptr, AllocatorType alloc) noexcept;
-
-  /**
-   * @brief Constructs from a raw pointer using a default-constructed allocator.
-   * @note Only available when `AllocatorType` is default-constructible.
+   * @brief Takes ownership using the default memory resource.
+   * @warning `ptr` must have been allocated by the default memory resource.
+   * @param ptr Object to own, or null
    */
   explicit RefCounted(Derived* ptr) noexcept
-    requires std::default_initializable<AllocatorType>
-      : RefCounted(ptr, AllocatorType{}) {}
+      : RefCounted(ptr, std::pmr::get_default_resource()) {}
 
-  /**
-   * @brief Copy-constructs a handle sharing ownership with `other`.
-   * @param other Handle to copy from
-   */
   RefCounted(const RefCounted& other) noexcept;
-
-  /**
-   * @brief Move-constructs a handle transferring ownership from `other`.
-   * @param other Handle to move from; left null after the operation
-   */
   RefCounted(RefCounted&& other) noexcept;
-
-  // NOLINTBEGIN(hicpp-explicit-conversions)
-  // NOLINTBEGIN(google-explicit-constructor)
-
-  /**
-   * @brief Converting copy constructor from a compatible (derived) type.
-   * @tparam Other Type convertible to `Derived*`
-   * @param other Handle to copy from
-   */
-  template <typename Other>
-    requires std::convertible_to<Other*, Derived*>
-  RefCounted(const RefCounted<Other, Allocator>& other) noexcept;
-
-  /**
-   * @brief Converting move constructor from a compatible (derived) type.
-   * @tparam Other Type convertible to `Derived*`
-   * @param other Handle to move from
-   */
-  template <typename Other>
-    requires std::convertible_to<Other*, Derived*>
-  RefCounted(RefCounted<Other, Allocator>&& other) noexcept;
-
-  // NOLINTEND(google-explicit-constructor)
-  // NOLINTEND(hicpp-explicit-conversions)
-
-  /// @brief Destroys the handle and decrements the reference count.
   ~RefCounted() noexcept { DecRef(); }
 
-  /**
-   * @brief Copy-assigns shared ownership from `other`.
-   * @param other Handle to copy from
-   * @return Reference to this handle
-   */
   RefCounted& operator=(const RefCounted& other) noexcept;
-
-  /**
-   * @brief Move-assigns ownership from `other`.
-   * @param other Handle to move from; left null after the operation
-   * @return Reference to this handle
-   */
   RefCounted& operator=(RefCounted&& other) noexcept;
-
-  /**
-   * @brief Converting copy-assignment from a compatible (derived) handle.
-   * @tparam Other Type convertible to `Derived*`
-   * @param other Handle to copy from
-   * @return Reference to this handle
-   */
-  template <typename Other>
-    requires std::convertible_to<Other*, Derived*>
-  RefCounted& operator=(const RefCounted<Other, Allocator>& other) noexcept;
-
-  /**
-   * @brief Converting move-assignment from a compatible (derived) handle.
-   * @tparam Other Type convertible to `Derived*`
-   * @param other Handle to move from; left null after the operation
-   * @return Reference to this handle
-   */
-  template <typename Other>
-    requires std::convertible_to<Other*, Derived*>
-  RefCounted& operator=(RefCounted<Other, Allocator>&& other) noexcept;
-
-  /**
-   * @brief Assigns null, releasing any currently managed object.
-   * @return Reference to this handle
-   */
   RefCounted& operator=(std::nullptr_t) noexcept;
 
-  /**
-   * @brief Releases ownership and resets the handle to null.
-   * @details Decrements the ref count; destroys the object via the stored
-   * allocator if it reaches 0.
-   */
+  /// @brief Releases this handle's ownership.
   void Reset() noexcept;
 
   /**
-   * @brief Releases ownership without decrementing the ref count.
-   * @details The caller becomes responsible for managing the object's lifetime.
-   * @return Raw pointer that was managed, or `nullptr`
+   * @brief Releases the pointer without decrementing its reference count.
+   * @return Previously managed pointer, or null
    */
   [[nodiscard]] Derived* Release() noexcept;
 
   /**
    * @brief Dereferences the managed object.
-   * @warning Triggers assertion when the handle is null.
-   * @return Reference to the managed object
+   * @warning Triggers an assertion when the handle is null.
+   * @return Managed object
    */
   [[nodiscard]] Derived& operator*() const noexcept;
 
   /**
-   * @brief Accesses the managed object through pointer syntax.
-   * @warning Triggers assertion when the handle is null.
-   * @return Pointer to the managed object
+   * @brief Accesses the managed object.
+   * @warning Triggers an assertion when the handle is null.
+   * @return Managed object pointer
    */
   [[nodiscard]] Derived* operator->() const noexcept;
 
-  /**
-   * @brief Checks whether the handle owns an object.
-   * @return True when non-null, false otherwise
-   */
   [[nodiscard]] explicit operator bool() const noexcept {
     return ptr_ != nullptr;
   }
 
-  /**
-   * @brief Compares handle identity by managed pointer address.
-   * @param other Handle to compare against
-   * @return True when both handles refer to the same object
-   */
   [[nodiscard]] bool operator==(const RefCounted& other) const noexcept {
     return ptr_ == other.ptr_;
   }
 
-  /**
-   * @brief Checks whether the handle is null.
-   * @return True when no object is managed
-   */
   [[nodiscard]] bool operator==(std::nullptr_t) const noexcept {
     return ptr_ == nullptr;
-  }
-
-  /**
-   * @brief Compares handle identity against a compatible derived handle.
-   * @tparam Other Derived type convertible to `Derived*`
-   * @param other Handle to compare against
-   * @return True when both handles refer to the same object
-   */
-  template <typename Other>
-  [[nodiscard]] bool operator==(
-      const RefCounted<Other, Allocator>& other) const noexcept {
-    return ptr_ == other.Get();
   }
 
   /**
@@ -476,440 +252,199 @@ public:
    * @brief Returns a reference to the stored allocator.
    * @return The allocator instance used for this handle
    */
-  [[nodiscard]] const AllocatorType& GetAllocator() const noexcept {
-    return alloc_;
+  [[nodiscard]] allocator_type GetAllocator() const noexcept {
+    return allocator_type(resource_);
+  }
+
+  /// @brief Returns the handle's memory resource.
+  [[nodiscard]] std::pmr::memory_resource* GetMemoryResource() const noexcept {
+    return resource_;
   }
 
 private:
-  // EBO: inherit from AllocatorType so stateless allocators add zero bytes
-  // We use a compressed pair pattern manually since we can't inherit from
-  // Derived* directly. For simplicity, store the allocator as a member —
-  // stateless allocators are typically 1 byte but compilers often optimise them
-  // away in practice. A full EBO wrapper can be substituted here if binary size
-  // is critical.
   void DecRef() noexcept;
 
   Derived* ptr_ = nullptr;
-  AllocatorType alloc_;
+  std::pmr::memory_resource* resource_ = std::pmr::get_default_resource();
 };
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline RefCounted<Derived, Allocator>::RefCounted(Derived* ptr,
-                                                  AllocatorType alloc) noexcept
-    : ptr_(ptr), alloc_(std::move(alloc)) {
-  if (ptr_ != nullptr) [[likely]] {
-    ptr_->AddRef();
-  }
-}
-
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline RefCounted<Derived, Allocator>::RefCounted(
-    const RefCounted& other) noexcept
-    : ptr_(other.ptr_),
-      alloc_(std::allocator_traits<AllocatorType>::
-                 select_on_container_copy_construction(other.alloc_)) {
+template <typename Derived>
+inline RefCounted<Derived>::RefCounted(
+    Derived* ptr, std::pmr::memory_resource* resource) noexcept
+    : ptr_(ptr), resource_(resource) {
+  HELIOS_ASSERT(resource_ != nullptr, "RefCounted resource cannot be null!");
   if (ptr_ != nullptr) {
     ptr_->AddRef();
   }
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline RefCounted<Derived, Allocator>::RefCounted(RefCounted&& other) noexcept
-    : ptr_(other.ptr_), alloc_(std::move(other.alloc_)) {
+template <typename Derived>
+inline RefCounted<Derived>::RefCounted(const RefCounted& other) noexcept
+    : ptr_(other.ptr_), resource_(other.resource_) {
+  if (ptr_ != nullptr) {
+    ptr_->AddRef();
+  }
+}
+
+template <typename Derived>
+inline RefCounted<Derived>::RefCounted(RefCounted&& other) noexcept
+    : ptr_(other.ptr_), resource_(other.resource_) {
   other.ptr_ = nullptr;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-template <typename Other>
-  requires std::convertible_to<Other*, Derived*>
-inline RefCounted<Derived, Allocator>::RefCounted(
-    const RefCounted<Other, Allocator>& other) noexcept
-    : ptr_(other.Get()),
-      alloc_(std::allocator_traits<AllocatorType>::
-                 select_on_container_copy_construction(other.GetAllocator())) {
-  if (ptr_ != nullptr) {
-    ptr_->AddRef();
-  }
-}
-
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-template <typename Other>
-  requires std::convertible_to<Other*, Derived*>
-inline RefCounted<Derived, Allocator>::RefCounted(
-    RefCounted<Other, Allocator>&& other) noexcept
-    : ptr_(other.Release()), alloc_(std::move(other.GetAllocator())) {}
-
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline RefCounted<Derived, Allocator>&
-RefCounted<Derived, Allocator>::operator=(const RefCounted& other) noexcept {
-  if (this != &other) [[likely]] {
+template <typename Derived>
+inline RefCounted<Derived>& RefCounted<Derived>::operator=(
+    const RefCounted& other) noexcept {
+  if (this != &other) {
+    if (other.ptr_ != nullptr) {
+      other.ptr_->AddRef();
+    }
     DecRef();
-    if constexpr (std::allocator_traits<AllocatorType>::
-                      propagate_on_container_copy_assignment::value) {
-      alloc_ = other.alloc_;
-    }
     ptr_ = other.ptr_;
-    if (ptr_ != nullptr) {
-      ptr_->AddRef();
-    }
+    resource_ = other.resource_;
   }
   return *this;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline RefCounted<Derived, Allocator>&
-RefCounted<Derived, Allocator>::operator=(RefCounted&& other) noexcept {
-  if (this != &other) [[likely]] {
+template <typename Derived>
+inline RefCounted<Derived>& RefCounted<Derived>::operator=(
+    RefCounted&& other) noexcept {
+  if (this != &other) {
     DecRef();
-    if constexpr (std::allocator_traits<AllocatorType>::
-                      propagate_on_container_move_assignment::value) {
-      alloc_ = std::move(other.alloc_);
-    }
     ptr_ = other.ptr_;
+    resource_ = other.resource_;
     other.ptr_ = nullptr;
   }
   return *this;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-template <typename Other>
-  requires std::convertible_to<Other*, Derived*>
-inline RefCounted<Derived, Allocator>&
-RefCounted<Derived, Allocator>::operator=(
-    const RefCounted<Other, Allocator>& other) noexcept {
-  DecRef();
-  if constexpr (std::allocator_traits<AllocatorType>::
-                    propagate_on_container_copy_assignment::value) {
-    alloc_ = other.GetAllocator();
-  }
-  ptr_ = other.Get();
-  if (ptr_ != nullptr) {
-    ptr_->AddRef();
-  }
-  return *this;
-}
-
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-template <typename Other>
-  requires std::convertible_to<Other*, Derived*>
-inline RefCounted<Derived, Allocator>&
-RefCounted<Derived, Allocator>::operator=(
-    RefCounted<Other, Allocator>&& other) noexcept {
-  DecRef();
-  if constexpr (std::allocator_traits<AllocatorType>::
-                    propagate_on_container_move_assignment::value) {
-    alloc_ = std::move(other.GetAllocator());
-  }
-  ptr_ = other.Release();
-  return *this;
-}
-
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline RefCounted<Derived, Allocator>&
-RefCounted<Derived, Allocator>::operator=(std::nullptr_t) noexcept {
+template <typename Derived>
+inline RefCounted<Derived>& RefCounted<Derived>::operator=(
+    std::nullptr_t) noexcept {
   Reset();
   return *this;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline void RefCounted<Derived, Allocator>::Reset() noexcept {
+template <typename Derived>
+inline void RefCounted<Derived>::Reset() noexcept {
   DecRef();
   ptr_ = nullptr;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline Derived* RefCounted<Derived, Allocator>::Release() noexcept {
+template <typename Derived>
+inline Derived* RefCounted<Derived>::Release() noexcept {
   auto* raw = ptr_;
   ptr_ = nullptr;
   return raw;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline Derived& RefCounted<Derived, Allocator>::operator*() const noexcept {
+template <typename Derived>
+inline Derived& RefCounted<Derived>::operator*() const noexcept {
   HELIOS_ASSERT(ptr_ != nullptr, "Dereferencing null RefCounted!");
   return *ptr_;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline Derived* RefCounted<Derived, Allocator>::operator->() const noexcept {
+template <typename Derived>
+inline Derived* RefCounted<Derived>::operator->() const noexcept {
   HELIOS_ASSERT(ptr_ != nullptr, "Dereferencing null RefCounted!");
   return ptr_;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, RcFromThis<Derived>>
-inline void RefCounted<Derived, Allocator>::DecRef() noexcept {
+template <typename Derived>
+inline void RefCounted<Derived>::DecRef() noexcept {
   if (ptr_ != nullptr && ptr_->Release()) {
-    std::allocator_traits<AllocatorType>::destroy(alloc_, ptr_);
-    std::allocator_traits<AllocatorType>::deallocate(alloc_, ptr_, 1);
+    allocator_type allocator(resource_);
+    std::allocator_traits<allocator_type>::destroy(allocator, ptr_);
+    std::allocator_traits<allocator_type>::deallocate(allocator, ptr_, 1);
     ptr_ = nullptr;
   }
 }
 
 /**
- * @brief Thread-safe intrusive reference-counted smart pointer.
- * @details Manages the lifetime of an object that inherits from
- * `ArcFromThis<T>`. The reference counter lives inside the object itself (no
- * separate control block).
- *
- * Semantics are similar to `std::shared_ptr` but:
- * - No heap allocation for the control block.
- * - Thread-safe reference counting via `std::atomic<uint32_t>`.
- * - The managed object MUST inherit from `ArcFromThis<T>`.
- *
- * @note A null `AtomicRefCounted<T>` is valid and comparable.
- * Copying/moving the handle itself is NOT atomic.
- * If multiple threads need to share/copy the same handle concurrently, protect
- * the handle with an external lock. What IS thread-safe is having separate
- * `AtomicRefCounted` instances across threads pointing to the same object.
- * @tparam Derived Concrete type managed by this handle; must inherit
- * `ArcFromThis<Derived>`
- * @tparam Allocator Allocator type used for construction and destruction of the
- * managed object (defaults to `std::allocator<Derived>`)
- *
- * @code
- * auto tex = helios::mem::MakeArc<Texture>("diffuse");
- * auto copy = tex;  // thread-safe ref-count increment
- * // Both tex and copy can be used/destroyed from different threads safely.
- * @endcode
+ * @brief Atomic PMR intrusive reference-counted handle.
+ * @details The memory resource is part of the handle state and is propagated
+ * by every copy, move, and assignment. Separate handles may be released safely
+ * on different threads.
+ * @warning The managed type must inherit from `ArcFromThis<Derived>`.
+ * @tparam Derived Managed object type
  */
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
+template <typename Derived>
 class AtomicRefCounted {
+  static_assert(std::derived_from<Derived, ArcFromThis<Derived>>);
+
 public:
-  using AllocatorType = Allocator;
+  using AllocatorType = std::pmr::polymorphic_allocator<Derived>;
+
+  /// @brief Constructs a null handle using the default memory resource.
+  AtomicRefCounted() noexcept = default;
+
+  /// @brief Constructs a null handle using the default memory resource.
+  explicit AtomicRefCounted(std::nullptr_t) noexcept {}
 
   /**
-   * @brief Constructs a null handle.
-   * @note Only available when `AllocatorType` is default-constructible.
-   * For stateful allocators, use `AtomicRefCounted(AllocatorType)` or
-   * `MakeArcWith`.
+   * @brief Constructs a null handle with a specific memory resource.
+   * @param resource Resource retained by the handle
    */
-  constexpr AtomicRefCounted() noexcept
-    requires std::default_initializable<AllocatorType>
-  = default;
+  explicit AtomicRefCounted(std::pmr::memory_resource* resource) noexcept
+      : resource_(resource) {}
 
   /**
-   * @brief Constructs a null handle storing a pre-built allocator.
-   * @details Use this when the allocator is stateful and you need a typed null
-   * handle that is ready to receive an assignment from a `MakeArcWith`-created
-   * handle.
+   * @brief Takes ownership of a PMR-allocated object.
+   * @warning `ptr` must have been allocated by `resource`.
+   * @param ptr Object to own, or null
+   * @param resource Resource used to destroy and deallocate the object
    */
-  constexpr explicit AtomicRefCounted(AllocatorType alloc) noexcept
-      : alloc_(std::move(alloc)) {}
-
-  /// @brief Constructs a null handle explicitly (default-constructible
-  /// allocators only).
-  constexpr explicit AtomicRefCounted(std::nullptr_t) noexcept
-    requires std::default_initializable<AllocatorType>
-  {}
-
-  /// @brief Constructs a null handle explicitly with an explicit allocator.
-  constexpr AtomicRefCounted(std::nullptr_t, AllocatorType alloc) noexcept
-      : alloc_(std::move(alloc)) {}
+  AtomicRefCounted(Derived* ptr, std::pmr::memory_resource* resource) noexcept;
 
   /**
-   * @brief Constructs a null handle with a PMR memory resource.
-   * @details Only available when `AllocatorType` is
-   * `std::pmr::polymorphic_allocator<T>`.
-   * @param resource Polymorphic memory resource to use for allocations
-   */
-  constexpr explicit AtomicRefCounted(
-      std::pmr::memory_resource* resource) noexcept
-    requires std::same_as<AllocatorType,
-                          std::pmr::polymorphic_allocator<Derived>>
-      : alloc_(resource) {}
-
-  /**
-   * @brief Constructs from a raw pointer, taking ownership, with a PMR memory
-   * resource.
-   * @details Only available when `AllocatorType` is
-   * `std::pmr::polymorphic_allocator<T>`.
-   * @param ptr Raw pointer to take ownership of (may be `nullptr`)
-   * @param resource Polymorphic memory resource to use for destruction
-   */
-  AtomicRefCounted(Derived* ptr, std::pmr::memory_resource* resource) noexcept
-    requires std::same_as<AllocatorType,
-                          std::pmr::polymorphic_allocator<Derived>>
-      : AtomicRefCounted(ptr,
-                         std::pmr::polymorphic_allocator<Derived>(resource)) {}
-
-  /**
-   * @brief Constructs from a raw pointer, taking ownership, with an explicit
-   * allocator.
-   * @warning The pointer must have been allocated with the same allocator and
-   * must not be managed by any other owning handle at the time of this call.
-   * @param ptr   Raw pointer to take ownership of (may be `nullptr`)
-   * @param alloc Allocator instance to use for destruction
-   */
-  AtomicRefCounted(Derived* ptr, AllocatorType alloc) noexcept;
-
-  /**
-   * @brief Constructs from a raw pointer using a default-constructed allocator.
-   * @note Only available when `AllocatorType` is default-constructible.
+   * @brief Takes ownership using the default memory resource.
+   * @warning `ptr` must have been allocated by the default memory resource.
+   * @param ptr Object to own, or null
    */
   explicit AtomicRefCounted(Derived* ptr) noexcept
-    requires std::default_initializable<AllocatorType>
-      : AtomicRefCounted(ptr, AllocatorType{}) {}
+      : AtomicRefCounted(ptr, std::pmr::get_default_resource()) {}
 
-  /**
-   * @brief Copy-constructs a handle sharing ownership with `other`.
-   * @param other Handle to copy from
-   */
   AtomicRefCounted(const AtomicRefCounted& other) noexcept;
-
-  /**
-   * @brief Move-constructs a handle transferring ownership from `other`.
-   * @param other Handle to move from; left null after the operation
-   */
   AtomicRefCounted(AtomicRefCounted&& other) noexcept;
-
-  // NOLINTBEGIN(hicpp-explicit-conversions)
-  // NOLINTBEGIN(google-explicit-constructor)
-
-  /**
-   * @brief Converting copy constructor from a compatible (derived) type.
-   * @tparam Other Type convertible to `Derived*`
-   * @param other Handle to copy from
-   */
-  template <typename Other>
-    requires std::convertible_to<Other*, Derived*>
-  AtomicRefCounted(const AtomicRefCounted<Other, Allocator>& other) noexcept;
-
-  /**
-   * @brief Converting move constructor from a compatible (derived) type.
-   * @tparam Other Type convertible to `Derived*`
-   * @param other Handle to move from
-   */
-  template <typename Other>
-    requires std::convertible_to<Other*, Derived*>
-  AtomicRefCounted(AtomicRefCounted<Other, Allocator>&& other) noexcept;
-
-  // NOLINTEND(hicpp-explicit-conversions)
-  // NOLINTEND(google-explicit-constructor)
-
-  /// @brief Destroys the handle and decrements the reference count.
   ~AtomicRefCounted() noexcept { DecRef(); }
 
-  /**
-   * @brief Copy-assigns shared ownership from `other`.
-   * @param other Handle to copy from
-   * @return Reference to this handle
-   */
   AtomicRefCounted& operator=(const AtomicRefCounted& other) noexcept;
-
-  /**
-   * @brief Move-assigns ownership from `other`.
-   * @param other Handle to move from; left null after the operation
-   * @return Reference to this handle
-   */
   AtomicRefCounted& operator=(AtomicRefCounted&& other) noexcept;
-
-  /**
-   * @brief Converting copy-assignment from a compatible (derived) handle.
-   * @tparam Other Type convertible to `Derived*`
-   * @param other Handle to copy from
-   * @return Reference to this handle
-   */
-  template <typename Other>
-    requires std::convertible_to<Other*, Derived*>
-  AtomicRefCounted& operator=(
-      const AtomicRefCounted<Other, Allocator>& other) noexcept;
-
-  /**
-   * @brief Converting move-assignment from a compatible (derived) handle.
-   * @tparam Other Type convertible to `Derived*`
-   * @param other Handle to move from; left null after the operation
-   * @return Reference to this handle
-   */
-  template <typename Other>
-    requires std::convertible_to<Other*, Derived*>
-  AtomicRefCounted& operator=(
-      AtomicRefCounted<Other, Allocator>&& other) noexcept;
-
-  /**
-   * @brief Assigns null, releasing any currently managed object.
-   * @return Reference to this handle
-   */
   AtomicRefCounted& operator=(std::nullptr_t) noexcept;
 
-  /**
-   * @brief Releases ownership and resets the handle to null.
-   * @details Decrements the ref count; destroys the object via the stored
-   * allocator if it reaches 0.
-   */
+  /// @brief Releases this handle's ownership.
   void Reset() noexcept;
 
   /**
-   * @brief Releases ownership without decrementing the ref count.
-   * @details The caller becomes responsible for managing the object's lifetime.
-   * @return Raw pointer that was managed, or `nullptr`
+   * @brief Releases the pointer without decrementing its reference count.
+   * @return Previously managed pointer, or null
    */
   [[nodiscard]] Derived* Release() noexcept;
 
   /**
    * @brief Dereferences the managed object.
-   * @warning Triggers assertion when the handle is null.
-   * @return Reference to the managed object
+   * @warning Triggers an assertion when the handle is null.
+   * @return Managed object
    */
   [[nodiscard]] Derived& operator*() const noexcept;
 
   /**
-   * @brief Accesses the managed object through pointer syntax.
-   * @warning Triggers assertion when the handle is null.
-   * @return Pointer to the managed object
+   * @brief Accesses the managed object.
+   * @warning Triggers an assertion when the handle is null.
+   * @return Managed object pointer
    */
   [[nodiscard]] Derived* operator->() const noexcept;
 
-  /**
-   * @brief Checks whether the handle owns an object.
-   * @return True when non-null, false otherwise
-   */
   [[nodiscard]] explicit operator bool() const noexcept {
     return ptr_ != nullptr;
   }
 
-  /**
-   * @brief Compares handle identity by managed pointer address.
-   * @param other Handle to compare against
-   * @return True when both handles refer to the same object
-   */
   [[nodiscard]] bool operator==(const AtomicRefCounted& other) const noexcept {
     return ptr_ == other.ptr_;
   }
 
-  /**
-   * @brief Checks whether the handle is null.
-   * @return True when no object is managed
-   */
   [[nodiscard]] bool operator==(std::nullptr_t) const noexcept {
     return ptr_ == nullptr;
-  }
-
-  /**
-   * @brief Compares handle identity against a compatible derived handle.
-   * @tparam Other Derived type convertible to `Derived*`
-   * @param other Handle to compare against
-   * @return True when both handles refer to the same object
-   */
-  template <typename Other>
-  [[nodiscard]] bool operator==(
-      const AtomicRefCounted<Other, Allocator>& other) const noexcept {
-    return ptr_ == other.Get();
   }
 
   /**
@@ -940,378 +475,210 @@ public:
   }
 
   /**
-   * @brief Returns a reference to the stored allocator.
+   * @brief Returns reference to the stored allocator.
    * @return The allocator instance used for this handle
    */
-  [[nodiscard]] const AllocatorType& GetAllocator() const noexcept {
-    return alloc_;
+  [[nodiscard]] AllocatorType GetAllocator() const noexcept {
+    return AllocatorType(resource_);
+  }
+
+  /**
+   * @brief Returns poinetr to the stored memory resource.
+   * @return The memory resource instance used for this handle
+   */
+  [[nodiscard]] std::pmr::memory_resource* GetMemoryResource() const noexcept {
+    return resource_;
   }
 
 private:
   void DecRef() noexcept;
 
   Derived* ptr_ = nullptr;
-  AllocatorType alloc_;
+  std::pmr::memory_resource* resource_ = std::pmr::get_default_resource();
 };
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline AtomicRefCounted<Derived, Allocator>::AtomicRefCounted(
-    Derived* ptr, AllocatorType alloc) noexcept
-    : ptr_(ptr), alloc_(std::move(alloc)) {
+template <typename Derived>
+inline AtomicRefCounted<Derived>::AtomicRefCounted(
+    Derived* ptr, std::pmr::memory_resource* resource) noexcept
+    : ptr_(ptr), resource_(resource) {
+  HELIOS_ASSERT(resource_ != nullptr,
+                "AtomicRefCounted resource cannot be null!");
   if (ptr_ != nullptr) {
     ptr_->AddRef();
   }
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline AtomicRefCounted<Derived, Allocator>::AtomicRefCounted(
+template <typename Derived>
+inline AtomicRefCounted<Derived>::AtomicRefCounted(
     const AtomicRefCounted& other) noexcept
-    : ptr_(other.ptr_),
-      alloc_(std::allocator_traits<AllocatorType>::
-                 select_on_container_copy_construction(other.alloc_)) {
+    : ptr_(other.ptr_), resource_(other.resource_) {
   if (ptr_ != nullptr) {
     ptr_->AddRef();
   }
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline AtomicRefCounted<Derived, Allocator>::AtomicRefCounted(
+template <typename Derived>
+inline AtomicRefCounted<Derived>::AtomicRefCounted(
     AtomicRefCounted&& other) noexcept
-    : ptr_(other.ptr_), alloc_(std::move(other.alloc_)) {
+    : ptr_(other.ptr_), resource_(other.resource_) {
   other.ptr_ = nullptr;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-template <typename Other>
-  requires std::convertible_to<Other*, Derived*>
-inline AtomicRefCounted<Derived, Allocator>::AtomicRefCounted(
-    const AtomicRefCounted<Other, Allocator>&
-        other) noexcept  // NOLINT(google-explicit-constructor)
-    : ptr_(other.Get()),
-      alloc_(std::allocator_traits<AllocatorType>::
-                 select_on_container_copy_construction(other.GetAllocator())) {
-  if (ptr_ != nullptr) {
-    ptr_->AddRef();
-  }
-}
-
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-template <typename Other>
-  requires std::convertible_to<Other*, Derived*>
-inline AtomicRefCounted<Derived, Allocator>::AtomicRefCounted(
-    AtomicRefCounted<Other, Allocator>&&
-        other) noexcept  // NOLINT(google-explicit-constructor)
-    : ptr_(other.Release()), alloc_(std::move(other.GetAllocator())) {}
-
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline AtomicRefCounted<Derived, Allocator>&
-AtomicRefCounted<Derived, Allocator>::operator=(
+template <typename Derived>
+inline AtomicRefCounted<Derived>& AtomicRefCounted<Derived>::operator=(
     const AtomicRefCounted& other) noexcept {
   if (this != &other) [[likely]] {
+    if (other.ptr_ != nullptr) {
+      other.ptr_->AddRef();
+    }
     DecRef();
-    if constexpr (std::allocator_traits<AllocatorType>::
-                      propagate_on_container_copy_assignment::value) {
-      alloc_ = other.alloc_;
-    }
     ptr_ = other.ptr_;
-    if (ptr_ != nullptr) {
-      ptr_->AddRef();
-    }
+    resource_ = other.resource_;
   }
   return *this;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline AtomicRefCounted<Derived, Allocator>&
-AtomicRefCounted<Derived, Allocator>::operator=(
+template <typename Derived>
+inline AtomicRefCounted<Derived>& AtomicRefCounted<Derived>::operator=(
     AtomicRefCounted&& other) noexcept {
   if (this != &other) [[likely]] {
     DecRef();
-    if constexpr (std::allocator_traits<AllocatorType>::
-                      propagate_on_container_move_assignment::value) {
-      alloc_ = std::move(other.alloc_);
-    }
     ptr_ = other.ptr_;
+    resource_ = other.resource_;
     other.ptr_ = nullptr;
   }
   return *this;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-template <typename Other>
-  requires std::convertible_to<Other*, Derived*>
-inline AtomicRefCounted<Derived, Allocator>&
-AtomicRefCounted<Derived, Allocator>::operator=(
-    const AtomicRefCounted<Other, Allocator>& other) noexcept {
-  DecRef();
-  if constexpr (std::allocator_traits<AllocatorType>::
-                    propagate_on_container_copy_assignment::value) {
-    alloc_ = other.GetAllocator();
-  }
-  ptr_ = other.Get();
-  if (ptr_ != nullptr) {
-    ptr_->AddRef();
-  }
-  return *this;
-}
-
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-template <typename Other>
-  requires std::convertible_to<Other*, Derived*>
-inline AtomicRefCounted<Derived, Allocator>&
-AtomicRefCounted<Derived, Allocator>::operator=(
-    AtomicRefCounted<Other, Allocator>&& other) noexcept {
-  DecRef();
-  if constexpr (std::allocator_traits<AllocatorType>::
-                    propagate_on_container_move_assignment::value) {
-    alloc_ = std::move(other.GetAllocator());
-  }
-  ptr_ = other.Release();
-  return *this;
-}
-
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline AtomicRefCounted<Derived, Allocator>&
-AtomicRefCounted<Derived, Allocator>::operator=(std::nullptr_t) noexcept {
+template <typename Derived>
+inline AtomicRefCounted<Derived>& AtomicRefCounted<Derived>::operator=(
+    std::nullptr_t) noexcept {
   Reset();
   return *this;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline void AtomicRefCounted<Derived, Allocator>::Reset() noexcept {
+template <typename Derived>
+inline void AtomicRefCounted<Derived>::Reset() noexcept {
   DecRef();
   ptr_ = nullptr;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline Derived* AtomicRefCounted<Derived, Allocator>::Release() noexcept {
+template <typename Derived>
+inline Derived* AtomicRefCounted<Derived>::Release() noexcept {
   auto* raw = ptr_;
   ptr_ = nullptr;
   return raw;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline Derived& AtomicRefCounted<Derived, Allocator>::operator*()
-    const noexcept {
+template <typename Derived>
+inline Derived& AtomicRefCounted<Derived>::operator*() const noexcept {
   HELIOS_ASSERT(ptr_ != nullptr, "Dereferencing null AtomicRefCounted!");
   return *ptr_;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline Derived* AtomicRefCounted<Derived, Allocator>::operator->()
-    const noexcept {
+template <typename Derived>
+inline Derived* AtomicRefCounted<Derived>::operator->() const noexcept {
   HELIOS_ASSERT(ptr_ != nullptr, "Dereferencing null AtomicRefCounted!");
   return ptr_;
 }
 
-template <typename Derived, typename Allocator>
-  requires std::derived_from<Derived, ArcFromThis<Derived>>
-inline void AtomicRefCounted<Derived, Allocator>::DecRef() noexcept {
+template <typename Derived>
+inline void AtomicRefCounted<Derived>::DecRef() noexcept {
   if (ptr_ != nullptr && ptr_->Release()) {
-    std::allocator_traits<AllocatorType>::destroy(alloc_, ptr_);
-    std::allocator_traits<AllocatorType>::deallocate(alloc_, ptr_, 1);
+    AllocatorType allocator(resource_);
+    std::allocator_traits<AllocatorType>::destroy(allocator, ptr_);
+    std::allocator_traits<AllocatorType>::deallocate(allocator, ptr_, 1);
     ptr_ = nullptr;
   }
 }
 
-/// @brief Alias for `RefCounted<T>` — non-atomic intrusive reference-counted
-/// handle.
-template <typename T, typename Allocator = std::allocator<T>>
-using Rc = RefCounted<T, Allocator>;
-
-/// @brief Alias for `AtomicRefCounted<T>` — thread-safe intrusive
-/// reference-counted handle.
-template <typename T, typename Allocator = std::allocator<T>>
-using Arc = AtomicRefCounted<T, Allocator>;
-
-/**
- * @brief Alias for `RefCounted<T>` using polymorphic memory allocator.
- * @details Allows using `std::pmr::memory_resource` for dynamic allocator
- * selection.
- */
+/// @brief Non-atomic intrusive reference-counted handle.
 template <typename T>
-using PmrRc = RefCounted<T, std::pmr::polymorphic_allocator<T>>;
+using Rc = RefCounted<T>;
 
-/**
- * @brief Alias for `AtomicRefCounted<T>` using polymorphic memory allocator.
- * @details Thread-safe intrusive reference-counted handle with PMR support.
- */
+/// @brief Atomic intrusive reference-counted handle.
 template <typename T>
-using PmrArc = AtomicRefCounted<T, std::pmr::polymorphic_allocator<T>>;
+using Arc = AtomicRefCounted<T>;
 
 /**
- * @brief Allocates and constructs a `T` object, returning a `Rc<T,
- * std::allocator<T>>` handle.
- * @details Preferred way to create `RefCounted` objects.
- * The object is allocated via `std::allocator<T>` and owned by the returned
- * handle.
- * @tparam T Type to construct; must inherit `RcFromThis<T>`
+ * @brief Allocates an object with a specific PMR memory resource.
+ * @warning Triggers an assertion when `resource` is null.
+ * @tparam T Object type
  * @tparam Args Constructor argument types
- * @param args Arguments forwarded to `T`'s constructor
- * @return A new `Rc<T>` with ref count 1
- *
- * @code
- * auto mesh = helios::mem::MakeRc<Mesh>(42);
- * @endcode
- */
-template <typename T, typename... Args>
-  requires std::derived_from<T, RcFromThis<T>> &&
-           std::constructible_from<T, Args...>
-[[nodiscard]] inline auto MakeRc(Args&&... args) -> Rc<T> {
-  using AllocT = std::allocator<T>;
-  AllocT alloc;
-  T* ptr = std::allocator_traits<AllocT>::allocate(alloc, 1);
-  std::allocator_traits<AllocT>::construct(alloc, ptr,
-                                           std::forward<Args>(args)...);
-  return {ptr, std::move(alloc)};
-}
-
-/**
- * @brief Allocates and constructs a `T` object, returning an `Arc<T,
- * std::allocator<T>>` handle.
- * @details Preferred way to create `AtomicRefCounted` objects.
- * The object is allocated via `std::allocator<T>` and owned by the returned
- * handle.
- * @note Only available when `std::allocator<T>` is default-constructible (it
- * always is). For stateful allocators (e.g. arena, pool), use `MakeArcWith`
- * instead.
- * @tparam T Type to construct; must inherit `ArcFromThis<T>`
- * @tparam Args Constructor argument types
- * @param args Arguments forwarded to `T`'s constructor
- * @return A new `Arc<T>` with ref count 1
- *
- * @code
- * auto tex = helios::mem::MakeArc<Texture>("diffuse");
- * @endcode
- */
-template <typename T, typename... Args>
-  requires std::derived_from<T, ArcFromThis<T>> &&
-           std::constructible_from<T, Args...>
-[[nodiscard]] inline auto MakeArc(Args&&... args) -> Arc<T> {
-  using AllocT = std::allocator<T>;
-  AllocT alloc;
-  T* ptr = std::allocator_traits<AllocT>::allocate(alloc, 1);
-  std::allocator_traits<AllocT>::construct(alloc, ptr,
-                                           std::forward<Args>(args)...);
-  return {ptr, std::move(alloc)};
-}
-
-/**
- * @brief Overload of `MakeRc` accepting a pre-constructed allocator instance.
- * @details Use this when your allocator is stateful and must be initialised
- * before the object is created (e.g. a PMR arena).
- * @tparam T Type to construct; must inherit `RcFromThis<T>`
- * @tparam Allocator Concrete allocator type (e.g. `MyAllocator<T>`)
- * @tparam Args Constructor argument types
- * @param alloc Allocator instance to use
- * @param args Arguments forwarded to `T`'s constructor
- * @return A new `Rc<T, Allocator>` with ref count 1
- */
-template <typename T, typename Allocator, typename... Args>
-  requires std::derived_from<T, RcFromThis<T>> &&
-           std::constructible_from<T, Args...> &&
-           (!std::derived_from<std::remove_pointer_t<Allocator>,
-                               std::pmr::memory_resource>)
-[[nodiscard]] inline auto MakeRcWith(Allocator alloc, Args&&... args)
-    -> Rc<T, Allocator> {
-  T* ptr = std::allocator_traits<Allocator>::allocate(alloc, 1);
-  std::allocator_traits<Allocator>::construct(alloc, ptr,
-                                              std::forward<Args>(args)...);
-  return {ptr, std::move(alloc)};
-}
-
-/**
- * @brief Allocates and constructs a `T` object using PMR memory resource,
- * returning a `PmrRc<T>` handle.
- * @details Convenience overload that wraps `std::pmr::memory_resource*` in a
- * `std::pmr::polymorphic_allocator<T>`.
- * @tparam T Type to construct; must inherit `RcFromThis<T>`
- * @tparam Args Constructor argument types
- * @param resource PMR memory resource to use for allocation
- * @param args Arguments forwarded to `T`'s constructor
- * @return A new `PmrRc<T>` with ref count 1
- *
- * @code
- * auto mesh = helios::mem::MakeRcWith<Mesh>(pmr_resource, 42);
- * @endcode
+ * @param resource Resource used for allocation and eventual deallocation
+ * @param args Arguments forwarded to the object constructor
+ * @return Owning handle with reference count one
  */
 template <typename T, typename... Args>
   requires std::derived_from<T, RcFromThis<T>> &&
            std::constructible_from<T, Args...>
 [[nodiscard]] inline auto MakeRcWith(std::pmr::memory_resource* resource,
-                                     Args&&... args) -> PmrRc<T> {
-  return MakeRcWith<T, std::pmr::polymorphic_allocator<T>>(
-      std::pmr::polymorphic_allocator<T>(resource),
-      std::forward<Args>(args)...);
+                                     Args&&... args) -> Rc<T> {
+  HELIOS_ASSERT(resource != nullptr, "MakeRcWith resource cannot be null!");
+  std::pmr::polymorphic_allocator<T> allocator(resource);
+  T* ptr = std::allocator_traits<decltype(allocator)>::allocate(allocator, 1);
+  std::allocator_traits<decltype(allocator)>::construct(
+      allocator, ptr, std::forward<Args>(args)...);
+  return {ptr, resource};
 }
 
 template <typename T, typename... Args>
-auto MakeRcWith(std::nullptr_t, Args&&...) -> PmrRc<T> = delete;
+auto MakeRcWith(std::nullptr_t, Args&&...) -> Rc<T> = delete;
 
 /**
- * @brief Overload of `MakeArc` accepting a pre-constructed allocator instance.
- * @details Use this when your allocator is stateful and must be initialised
- * before the object is created (e.g. a PMR arena).
- * @tparam T Type to construct; must inherit `ArcFromThis<T>`
- * @tparam Allocator Concrete allocator type (e.g. `MyAllocator<T>`)
+ * @brief Allocates an object with the default PMR memory resource.
+ * @tparam T Object type
  * @tparam Args Constructor argument types
- * @param alloc Allocator instance to use
- * @param args Arguments forwarded to `T`'s constructor
- * @return A new `Arc<T, Allocator>` with ref count 1
+ * @param args Arguments forwarded to the object constructor
+ * @return Owning handle with reference count one
  */
-template <typename T, typename Allocator, typename... Args>
-  requires std::derived_from<T, ArcFromThis<T>> &&
-           std::constructible_from<T, Args...> &&
-           (!std::derived_from<std::remove_pointer_t<Allocator>,
-                               std::pmr::memory_resource>)
-[[nodiscard]] inline auto MakeArcWith(Allocator alloc, Args&&... args)
-    -> Arc<T, Allocator> {
-  T* ptr = std::allocator_traits<Allocator>::allocate(alloc, 1);
-  std::allocator_traits<Allocator>::construct(alloc, ptr,
-                                              std::forward<Args>(args)...);
-  return {ptr, std::move(alloc)};
+template <typename T, typename... Args>
+  requires std::derived_from<T, RcFromThis<T>> &&
+           std::constructible_from<T, Args...>
+[[nodiscard]] inline auto MakeRc(Args&&... args) -> Rc<T> {
+  return MakeRcWith<T>(std::pmr::get_default_resource(),
+                       std::forward<Args>(args)...);
 }
 
 /**
- * @brief Allocates and constructs a `T` object using PMR memory resource,
- * returning a `PmrArc<T>` handle.
- * @details Convenience overload that wraps `std::pmr::memory_resource*` in a
- * `std::pmr::polymorphic_allocator<T>`.
- * @tparam T Type to construct; must inherit `ArcFromThis<T>`
+ * @brief Atomically reference-counts an object allocated with a PMR resource.
+ * @warning Triggers an assertion when `resource` is null.
+ * @tparam T Object type
  * @tparam Args Constructor argument types
- * @param resource PMR memory resource to use for allocation
- * @param args Arguments forwarded to `T`'s constructor
- * @return A new `PmrArc<T>` with ref count 1
- *
- * @code
- * auto tex = helios::mem::MakeArcWith<Texture>(pmr_resource, "diffuse");
- * @endcode
+ * @param resource Resource used for allocation and eventual deallocation
+ * @param args Arguments forwarded to the object constructor
+ * @return Owning handle with reference count one
  */
 template <typename T, typename... Args>
   requires std::derived_from<T, ArcFromThis<T>> &&
            std::constructible_from<T, Args...>
 [[nodiscard]] inline auto MakeArcWith(std::pmr::memory_resource* resource,
-                                      Args&&... args) -> PmrArc<T> {
-  return MakeArcWith<T, std::pmr::polymorphic_allocator<T>>(
-      std::pmr::polymorphic_allocator<T>(resource),
-      std::forward<Args>(args)...);
+                                      Args&&... args) -> Arc<T> {
+  HELIOS_ASSERT(resource != nullptr, "MakeArcWith resource cannot be null!");
+  std::pmr::polymorphic_allocator<T> allocator(resource);
+  T* ptr = std::allocator_traits<decltype(allocator)>::allocate(allocator, 1);
+  std::allocator_traits<decltype(allocator)>::construct(
+      allocator, ptr, std::forward<Args>(args)...);
+  return {ptr, resource};
 }
 
 template <typename T, typename... Args>
-auto MakeArcWith(std::nullptr_t, Args&&...) -> PmrArc<T> = delete;
+auto MakeArcWith(std::nullptr_t, Args&&...) -> Arc<T> = delete;
+
+/**
+ * @brief Allocates an atomically reference-counted object with the default PMR
+ * resource.
+ * @tparam T Object type
+ * @tparam Args Constructor argument types
+ * @param args Arguments forwarded to the object constructor
+ * @return Owning handle with reference count one
+ */
+template <typename T, typename... Args>
+  requires std::derived_from<T, ArcFromThis<T>> &&
+           std::constructible_from<T, Args...>
+[[nodiscard]] inline auto MakeArc(Args&&... args) -> Arc<T> {
+  return MakeArcWith<T>(std::pmr::get_default_resource(),
+                        std::forward<Args>(args)...);
+}
 
 }  // namespace helios::mem

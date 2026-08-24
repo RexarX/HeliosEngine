@@ -91,10 +91,11 @@ concept ResourceWithRemovalCallbackTrait =
  */
 template <ResourceTrait T>
 [[nodiscard]] constexpr std::string_view ResourceNameOf() noexcept {
-  if constexpr (ResourceWithNameTrait<T>) {
-    return T::kName;
+  using Resource = std::remove_cvref_t<T>;
+  if constexpr (ResourceWithNameTrait<Resource>) {
+    return Resource::kName;
   } else {
-    return utils::QualifiedTypeNameOf<T>();
+    return utils::QualifiedTypeNameOf<Resource>();
   }
 }
 

@@ -1,15 +1,16 @@
 #include <doctest/doctest.h>
 
 #include <helios/ecs/component/component.hpp>
+#include <helios/ecs/query/params.hpp>
 #include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/schedule/system_storage.hpp>
 #include <helios/ecs/system/composite_param.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/system/param_policy.hpp>
-#include <helios/ecs/system/system_param.hpp>
 #include <helios/ecs/world.hpp>
 
 using namespace helios::ecs;

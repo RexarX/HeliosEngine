@@ -23,6 +23,12 @@ helios_add_example(
 )
 
 helios_add_example(
+    NAME local_arena
+    SOURCES local_arena.cpp
+    MODULES app ecs log
+)
+
+helios_add_example(
     NAME message
     SOURCES message.cpp
     MODULES app ecs log

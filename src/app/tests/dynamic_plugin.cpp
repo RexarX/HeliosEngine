@@ -1,6 +1,6 @@
 #include <doctest/doctest.h>
 
-#include <helios/app/app.hpp>
+#include <helios/app/application.hpp>
 #include <helios/app/dynamic_plugin.hpp>
 #include <helios/app/plugin.hpp>
 
@@ -31,25 +31,6 @@ TEST_SUITE("helios::app::PluginTypeExport") {
       CHECK_EQ(export_info.hash,
                PluginTypeId::From<SamplePlugin>().Index().Hash());
     }
-  }
-}
-
-TEST_SUITE("helios::app::DynamicPluginErrorToString") {
-  TEST_CASE("helios::app::DynamicPluginErrorToString") {
-    CHECK_EQ(DynamicPluginErrorToString(DynamicPluginError::kLibraryLoadFailed),
-             "Failed to load dynamic library");
-    CHECK_EQ(
-        DynamicPluginErrorToString(DynamicPluginError::kCreateSymbolNotFound),
-        "Plugin creation function not found");
-    CHECK_EQ(DynamicPluginErrorToString(DynamicPluginError::kIdSymbolNotFound),
-             "Plugin ID function not found");
-    CHECK_EQ(
-        DynamicPluginErrorToString(DynamicPluginError::kNameSymbolNotFound),
-        "Plugin name function not found");
-    CHECK_EQ(DynamicPluginErrorToString(DynamicPluginError::kCreateFailed),
-             "Plugin creation function returned nullptr");
-    CHECK_EQ(DynamicPluginErrorToString(DynamicPluginError::kReloadFailed),
-             "Failed to reload plugin");
   }
 }
 

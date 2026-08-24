@@ -6,62 +6,6 @@
 #include <string>
 
 TEST_SUITE("helios::utils::Macro") {
-  TEST_CASE("helios::utils::HELIOS_BIT: bit shifting macro") {
-    SUBCASE("Bit 0") {
-      CHECK_EQ(HELIOS_BIT(0), 1);
-    }
-
-    SUBCASE("Bit 1") {
-      CHECK_EQ(HELIOS_BIT(1), 2);
-    }
-
-    SUBCASE("Bit 2") {
-      CHECK_EQ(HELIOS_BIT(2), 4);
-    }
-
-    SUBCASE("Bit 3") {
-      CHECK_EQ(HELIOS_BIT(3), 8);
-    }
-
-    SUBCASE("Bit 4") {
-      CHECK_EQ(HELIOS_BIT(4), 16);
-    }
-
-    SUBCASE("Bit 7") {
-      CHECK_EQ(HELIOS_BIT(7), 128);
-    }
-
-    SUBCASE("Bit 8") {
-      CHECK_EQ(HELIOS_BIT(8), 256);
-    }
-
-    SUBCASE("Bit 15") {
-      CHECK_EQ(HELIOS_BIT(15), 32768);
-    }
-
-    SUBCASE("Bit 16") {
-      CHECK_EQ(HELIOS_BIT(16), 65536);
-    }
-
-    SUBCASE("Power of two relationship") {
-      for (int i = 0; i < 16; ++i) {
-        CHECK_EQ(HELIOS_BIT(i), 1 << i);
-      }
-    }
-
-    SUBCASE("Usage in bitmask") {
-      constexpr int kFlagA = HELIOS_BIT(0);
-      constexpr int kFlagB = HELIOS_BIT(1);
-      constexpr int kFlagC = HELIOS_BIT(2);
-
-      int flags = kFlagA | kFlagC;
-
-      CHECK((flags & kFlagA) != 0);
-      CHECK((flags & kFlagB) == 0);
-      CHECK((flags & kFlagC) != 0);
-    }
-  }
-
   TEST_CASE("helios::utils::HELIOS_STRINGIFY: stringification macro") {
     SUBCASE("Stringify integer literal") {
       const char* str = HELIOS_STRINGIFY(42);
@@ -177,60 +121,11 @@ TEST_SUITE("helios::utils::Macro") {
     }
   }
 
-  TEST_CASE("helios::utils::HELIOS_BIT: constexpr usage") {
-    SUBCASE("Can be used in constexpr context") {
-      constexpr int bit0 = HELIOS_BIT(0);
-      constexpr int bit5 = HELIOS_BIT(5);
-      constexpr int bit10 = HELIOS_BIT(10);
-
-      static_assert(bit0 == 1, "Bit 0 should be 1");
-      static_assert(bit5 == 32, "Bit 5 should be 32");
-      static_assert(bit10 == 1024, "Bit 10 should be 1024");
-
-      CHECK_EQ(bit0, 1);
-      CHECK_EQ(bit5, 32);
-      CHECK_EQ(bit10, 1024);
-    }
-
-    SUBCASE("Can be used in template arguments") {
-      std::array<int, HELIOS_BIT(3)> arr;
-      CHECK_EQ(arr.size(), 8);
-    }
-
-    SUBCASE("Can be used in switch case") {
-      int value = 4;
-      int result = 0;
-
-      switch (value) {
-        case HELIOS_BIT(0):
-          result = 1;
-          break;
-        case HELIOS_BIT(1):
-          result = 2;
-          break;
-        case HELIOS_BIT(2):
-          result = 3;
-          break;
-        default:
-          result = 0;
-          break;
-      }
-
-      CHECK_EQ(result, 3);
-    }
-  }
-
   TEST_CASE("helios::utils::Macro combinations") {
     SUBCASE("STRINGIFY and CONCAT together") {
       const char* str = HELIOS_STRINGIFY(HELIOS_CONCAT(hello, _world));
       // The inner CONCAT should be expanded first
       CHECK_EQ(std::string(str), "hello_world");
-    }
-
-    SUBCASE("BIT in expressions") {
-      constexpr int flags = HELIOS_BIT(0) | HELIOS_BIT(2) | HELIOS_BIT(4);
-      CHECK_EQ(flags, 1 + 4 + 16);
-      CHECK_EQ(flags, 21);
     }
   }
 

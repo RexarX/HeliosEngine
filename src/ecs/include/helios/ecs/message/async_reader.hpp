@@ -1,10 +1,10 @@
 #pragma once
 
 #include <helios/ecs/message/async_queue.hpp>
-#include <helios/ecs/message/async_wrapper.hpp>
 #include <helios/ecs/message/manager.hpp>
 #include <helios/ecs/message/message.hpp>
 
+#include <concepts>
 #include <functional>
 #include <iterator>
 #include <limits>

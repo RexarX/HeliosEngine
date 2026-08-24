@@ -1,14 +1,23 @@
 #include <doctest/doctest.h>
 
-#include <helios/core/assert.hpp>
+#include <helios/ecs/message/id.hpp>
 #include <helios/ecs/message/wrapper.hpp>
 
+#include <memory_resource>
 #include <string_view>
 
 using namespace helios::ecs;
-using ConsumedRegistry = helios::ecs::ConsumedMessagesRegistry<>;
 
 namespace {
+
+struct ConsumedRegistry {
+  std::pmr::monotonic_buffer_resource resource;
+  ConsumedMessagesRegistry registry;
+
+  ConsumedRegistry() : registry(&resource) {}
+
+  operator ConsumedMessagesRegistry&() noexcept { return registry; }
+};
 
 struct Position {
   static constexpr bool kConsumable = true;
@@ -32,39 +41,42 @@ struct SimpleMessage {
 
 TEST_SUITE("helios::ecs::MessageWrapper") {
   TEST_CASE("helios::ecs::MessageWrapper::ctor") {
-    SUBCASE("Construct from message and global index") {
+    SUBCASE("Construct from message and message id") {
       const SimpleMessage msg{42};
 
-      const MessageWrapper<SimpleMessage> wrapper(msg, 0);
+      const MessageWrapper<SimpleMessage> wrapper(msg,
+                                                  MessageId<SimpleMessage>{0});
 
       CHECK_EQ(wrapper->id, 42);
-      CHECK_EQ(wrapper.GlobalIndex(), 0);
+      CHECK_EQ(wrapper.Id().value, 0);
     }
 
     SUBCASE("Copy ctor") {
       const SimpleMessage msg{99};
-      const MessageWrapper<SimpleMessage> original(msg, 5);
+      const MessageWrapper<SimpleMessage> original(msg,
+                                                   MessageId<SimpleMessage>{5});
 
       const MessageWrapper<SimpleMessage> copy(original);
 
       CHECK_EQ(copy->id, 99);
-      CHECK_EQ(copy.GlobalIndex(), 5);
+      CHECK_EQ(copy.Id().value, 5);
     }
 
     SUBCASE("Move ctor") {
       const SimpleMessage msg{77};
-      MessageWrapper<SimpleMessage> original(msg, 10);
+      MessageWrapper<SimpleMessage> original(msg, MessageId<SimpleMessage>{10});
 
       const MessageWrapper<SimpleMessage> moved(std::move(original));
 
       CHECK_EQ(moved->id, 77);
-      CHECK_EQ(moved.GlobalIndex(), 10);
+      CHECK_EQ(moved.Id().value, 10);
     }
   }
 
   TEST_CASE("helios::ecs::MessageWrapper::operators") {
     const SimpleMessage msg{42};
-    const MessageWrapper<SimpleMessage> wrapper(msg, 3);
+    const MessageWrapper<SimpleMessage> wrapper(msg,
+                                                MessageId<SimpleMessage>{3});
 
     SUBCASE("operator*") {
       const SimpleMessage& unwrapped = *wrapper;
@@ -78,7 +90,8 @@ TEST_SUITE("helios::ecs::MessageWrapper") {
 
   TEST_CASE("helios::ecs::MessageWrapper::methods") {
     const SimpleMessage msg{55};
-    const MessageWrapper<SimpleMessage> wrapper(msg, 7);
+    const MessageWrapper<SimpleMessage> wrapper(msg,
+                                                MessageId<SimpleMessage>{7});
 
     SUBCASE("Name") {
       std::string_view name = wrapper.Name();
@@ -90,59 +103,58 @@ TEST_SUITE("helios::ecs::MessageWrapper") {
       CHECK_EQ(type_idx, MessageTypeIndex::From<SimpleMessage>());
     }
 
-    SUBCASE("GlobalIndex") {
-      CHECK_EQ(wrapper.GlobalIndex(), 7);
-    }
-
-    SUBCASE("Unwrap") {
-      const SimpleMessage& unwrapped = wrapper.Unwrap();
-      CHECK_EQ(unwrapped.id, 55);
+    SUBCASE("Id") {
+      CHECK_EQ(wrapper.Id().value, 7);
     }
   }
 }
 
 TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
   TEST_CASE("helios::ecs::ConsumableMessageWrapper::ctor") {
-    SUBCASE("Construct from message, registry and global index") {
+    SUBCASE("Construct from message, registry and message id") {
       ConsumedRegistry registry;
       const Position msg{1.0F, 2.0F};
 
-      const ConsumableMessageWrapper<Position> wrapper(msg, registry, 0);
+      const ConsumableMessageWrapper<Position> wrapper(msg, registry,
+                                                       MessageId<Position>{0});
 
       CHECK_EQ(wrapper->x, 1.0F);
       CHECK_EQ(wrapper->y, 2.0F);
-      CHECK_EQ(wrapper.GlobalIndex(), 0);
+      CHECK_EQ(wrapper.Id().value, 0);
     }
 
     SUBCASE("Copy ctor") {
       ConsumedRegistry registry;
       const Position msg{3.0F, 4.0F};
-      const ConsumableMessageWrapper<Position> original(msg, registry, 5);
+      const ConsumableMessageWrapper<Position> original(msg, registry,
+                                                        MessageId<Position>{5});
 
       const ConsumableMessageWrapper<Position> copy(original);
 
       CHECK_EQ(copy->x, 3.0F);
       CHECK_EQ(copy->y, 4.0F);
-      CHECK_EQ(copy.GlobalIndex(), 5);
+      CHECK_EQ(copy.Id().value, 5);
     }
 
     SUBCASE("Move ctor") {
       ConsumedRegistry registry;
       const Position msg{5.0F, 6.0F};
-      ConsumableMessageWrapper<Position> original(msg, registry, 7);
+      ConsumableMessageWrapper<Position> original(msg, registry,
+                                                  MessageId<Position>{7});
 
       const ConsumableMessageWrapper<Position> moved(std::move(original));
 
       CHECK_EQ(moved->x, 5.0F);
       CHECK_EQ(moved->y, 6.0F);
-      CHECK_EQ(moved.GlobalIndex(), 7);
+      CHECK_EQ(moved.Id().value, 7);
     }
   }
 
   TEST_CASE("helios::ecs::ConsumableMessageWrapper::operators") {
     ConsumedRegistry registry;
     const Position msg{10.0F, 20.0F};
-    const ConsumableMessageWrapper<Position> wrapper(msg, registry, 2);
+    const ConsumableMessageWrapper<Position> wrapper(msg, registry,
+                                                     MessageId<Position>{2});
 
     SUBCASE("operator*") {
       const Position& unwrapped = *wrapper;
@@ -161,7 +173,8 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
       ConsumedRegistry registry;
       const Position msg{};
 
-      const ConsumableMessageWrapper<Position> wrapper(msg, registry, 0);
+      const ConsumableMessageWrapper<Position> wrapper(msg, registry,
+                                                       MessageId<Position>{0});
 
       wrapper.Consume();
 
@@ -171,7 +184,8 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
     SUBCASE("Multiple Consume calls are idempotent") {
       ConsumedRegistry registry;
       const Position msg{};
-      const ConsumableMessageWrapper<Position> wrapper(msg, registry, 1);
+      const ConsumableMessageWrapper<Position> wrapper(msg, registry,
+                                                       MessageId<Position>{1});
 
       wrapper.Consume();
       wrapper.Consume();
@@ -185,7 +199,8 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
     SUBCASE("Initially not consumed") {
       ConsumedRegistry registry;
       const Position msg{};
-      const ConsumableMessageWrapper<Position> wrapper(msg, registry, 0);
+      const ConsumableMessageWrapper<Position> wrapper(msg, registry,
+                                                       MessageId<Position>{0});
 
       CHECK_FALSE(wrapper.IsConsumed());
     }
@@ -193,7 +208,8 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
     SUBCASE("Returns true after Consume") {
       ConsumedRegistry registry;
       const Position msg{};
-      const ConsumableMessageWrapper<Position> wrapper(msg, registry, 2);
+      const ConsumableMessageWrapper<Position> wrapper(msg, registry,
+                                                       MessageId<Position>{2});
 
       wrapper.Consume();
 
@@ -204,7 +220,8 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
   TEST_CASE("helios::ecs::ConsumableMessageWrapper::methods") {
     ConsumedRegistry registry;
     const NamedMessage msg{42};
-    const ConsumableMessageWrapper<NamedMessage> wrapper(msg, registry, 3);
+    const ConsumableMessageWrapper<NamedMessage> wrapper(
+        msg, registry, MessageId<NamedMessage>{3});
 
     SUBCASE("Name") {
       CHECK_EQ(wrapper.Name(), "NamedMessage");
@@ -215,13 +232,8 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
       CHECK_EQ(type_idx, MessageTypeIndex::From<NamedMessage>());
     }
 
-    SUBCASE("GlobalIndex") {
-      CHECK_EQ(wrapper.GlobalIndex(), 3);
-    }
-
-    SUBCASE("Unwrap") {
-      const NamedMessage& unwrapped = wrapper.Unwrap();
-      CHECK_EQ(unwrapped.value, 42);
+    SUBCASE("Id") {
+      CHECK_EQ(wrapper.Id().value, 3);
     }
   }
 
@@ -230,24 +242,27 @@ TEST_SUITE("helios::ecs::ConsumableMessageWrapper") {
     const Position msg1{1.0F, 2.0F};
     const Position msg2{3.0F, 4.0F};
 
-    ConsumableMessageWrapper<Position> wrapper1(msg1, registry, 0);
-    const ConsumableMessageWrapper<Position> wrapper2(msg2, registry, 1);
+    ConsumableMessageWrapper<Position> wrapper1(msg1, registry,
+                                                MessageId<Position>{0});
+    const ConsumableMessageWrapper<Position> wrapper2(msg2, registry,
+                                                      MessageId<Position>{1});
 
     SUBCASE("Copy assignment") {
       wrapper1 = wrapper2;
 
       CHECK_EQ(wrapper1->x, 3.0F);
       CHECK_EQ(wrapper1->y, 4.0F);
-      CHECK_EQ(wrapper1.GlobalIndex(), 1);
+      CHECK_EQ(wrapper1.Id().value, 1);
     }
 
     SUBCASE("Move assignment") {
-      ConsumableMessageWrapper<Position> temp(msg2, registry, 5);
+      ConsumableMessageWrapper<Position> temp(msg2, registry,
+                                              MessageId<Position>{5});
       wrapper1 = std::move(temp);
 
       CHECK_EQ(wrapper1->x, 3.0F);
       CHECK_EQ(wrapper1->y, 4.0F);
-      CHECK_EQ(wrapper1.GlobalIndex(), 5);
+      CHECK_EQ(wrapper1.Id().value, 5);
     }
   }
 }

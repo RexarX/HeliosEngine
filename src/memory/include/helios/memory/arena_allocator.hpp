@@ -1,6 +1,7 @@
 #pragma once
 
 #include <helios/memory/common.hpp>
+#include <helios/memory/treiber_stack.hpp>
 
 #include <atomic>
 #include <cstddef>
@@ -53,9 +54,7 @@ public:
    * @param other Source allocator; left in empty moved-from state
    */
   ArenaAllocator(ArenaAllocator&& other) noexcept { MoveFrom(other); }
-  ~ArenaAllocator() noexcept override {
-    FreeChain(head_.load(std::memory_order_acquire));
-  }
+  ~ArenaAllocator() noexcept override { FreeChain(HeadBlock()); }
 
   ArenaAllocator& operator=(const ArenaAllocator&) = delete;
 
@@ -122,10 +121,10 @@ public:
 
 private:
   struct Block {
+    Block* next = nullptr;
     void* buffer = nullptr;
     size_t capacity = 0;
     std::atomic<size_t> offset{0};
-    std::atomic<Block*> next{nullptr};
   };
 
   struct Reservation {
@@ -137,6 +136,14 @@ private:
   enum class GrowState : uint8_t { kIdle, kGrowing };
 
   void MoveFrom(ArenaAllocator& other) noexcept;
+
+  [[nodiscard]] Block* HeadBlock() const noexcept {
+    return static_cast<Block*>(blocks_.Top());
+  }
+
+  [[nodiscard]] static Block* NextBlock(const Block* block) noexcept {
+    return static_cast<Block*>(TreiberStack::Next(block));
+  }
 
   [[nodiscard]] static Block* CreateBlock(size_t capacity) noexcept;
   void PublishBlock(Block* block) noexcept;
@@ -158,7 +165,7 @@ private:
     return this == &other;
   }
 
-  std::atomic<Block*> head_{nullptr};
+  TreiberStack blocks_;
   std::atomic<GrowState> grow_state_{GrowState::kIdle};
   size_t initial_capacity_ = 0;
   GrowthPolicy growth_;
@@ -172,17 +179,6 @@ private:
   std::atomic<size_t> alignment_waste_{0};
   std::atomic<size_t> block_count_{0};
 };
-
-inline ArenaAllocator& ArenaAllocator::operator=(
-    ArenaAllocator&& other) noexcept {
-  if (this == &other) [[unlikely]] {
-    return *this;
-  }
-
-  FreeChain(head_.load(std::memory_order_acquire));
-  MoveFrom(other);
-  return *this;
-}
 
 inline AllocatorStats ArenaAllocator::Stats() const noexcept {
   return {

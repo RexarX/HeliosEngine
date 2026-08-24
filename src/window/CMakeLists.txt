@@ -1,54 +1,41 @@
 helios_module(
     NAME window
     VERSION 0.1.0
-    DESCRIPTION "Cross-platform window management module using GLFW"
+    DESCRIPTION "Window ECS contract module"
 
     HEADERS
+        include/helios/window/components.hpp
+        include/helios/window/messages.hpp
+        include/helios/window/native_handle.hpp
+        include/helios/window/params.hpp
+        include/helios/window/plugin.hpp
+        include/helios/window/properties.hpp
+        include/helios/window/resources.hpp
+        include/helios/window/schedules.hpp
         include/helios/window/window.hpp
 
-    USES
-        glfw PUBLIC helios::lib::glfw::glfw
+    SOURCES
+        src/plugin.cpp
+
+    PCH src/pch.hpp
+
+    DEPENDS
+        PUBLIC app
+        PUBLIC ecs
+        PUBLIC memory
+
+    TEST_SOURCES
+        tests/components.cpp
+        tests/main.cpp
+        tests/native_handle.cpp
+        tests/plugin.cpp
+        tests/properties.cpp
+        tests/resources.cpp
+        tests/schedules.cpp
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    include(CMakeDependentOption)
-    cmake_dependent_option(
-        HELIOS_WINDOW_FORCE_WAYLAND
-        "Force Wayland backend (disable X11 fallback)"
-        OFF
-        "CMAKE_SYSTEM_NAME STREQUAL Linux;NOT HELIOS_WINDOW_FORCE_X11"
-        OFF
-    )
-    cmake_dependent_option(
-        HELIOS_WINDOW_FORCE_X11
-        "Force X11 backend (disable Wayland probing)"
-        OFF
-        "CMAKE_SYSTEM_NAME STREQUAL Linux;NOT HELIOS_WINDOW_FORCE_WAYLAND"
-        OFF
-    )
-
-    if(HELIOS_WINDOW_FORCE_WAYLAND AND HELIOS_WINDOW_FORCE_X11)
-        message(FATAL_ERROR "Window: HELIOS_WINDOW_FORCE_WAYLAND and HELIOS_WINDOW_FORCE_X11 are mutually exclusive")
-    endif()
-
-    if(HELIOS_WINDOW_FORCE_WAYLAND)
-        target_compile_definitions(helios_module_window INTERFACE HELIOS_WINDOW_FORCE_WAYLAND)
-    elseif(HELIOS_WINDOW_FORCE_X11)
-        target_compile_definitions(helios_module_window INTERFACE HELIOS_WINDOW_FORCE_X11)
-    else()
-        target_compile_definitions(helios_module_window INTERFACE HELIOS_WINDOW_PREFER_WAYLAND)
-    endif()
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    target_compile_definitions(helios_module_window INTERFACE HELIOS_WINDOW_WIN32_SUPPORT)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    target_compile_definitions(helios_module_window INTERFACE HELIOS_WINDOW_COCOA_SUPPORT)
-endif()
-
-target_compile_definitions(helios_module_window INTERFACE
-    HELIOS_WINDOW_VULKAN_SUPPORT
-    HELIOS_WINDOW_OPENGL_SUPPORT
-)
-
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    target_compile_definitions(helios_module_window INTERFACE HELIOS_WINDOW_DIRECTX_SUPPORT)
+  target_compile_definitions(helios_module_window PUBLIC
+      HELIOS_PLATFORM_LINUX_X11 HELIOS_PLATFORM_LINUX_WAYLAND
+  )
 endif()

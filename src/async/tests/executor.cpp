@@ -1,5 +1,6 @@
 #include <doctest/doctest.h>
 
+#include <helios/async/async_task.hpp>
 #include <helios/async/executor.hpp>
 #include <helios/async/task_graph.hpp>
 
@@ -7,7 +8,9 @@
 #include <atomic>
 #include <chrono>
 #include <cstddef>
+#include <future>
 #include <thread>
+#include <utility>
 #include <vector>
 
 using namespace helios::async;

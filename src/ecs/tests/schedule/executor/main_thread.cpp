@@ -2,6 +2,7 @@
 
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
+#include <helios/ecs/world.hpp>
 
 using namespace helios::ecs;
 

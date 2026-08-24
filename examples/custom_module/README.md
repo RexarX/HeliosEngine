@@ -24,9 +24,6 @@ custom_module/
     `-- greeting.cpp
 ```
 
-There is no `Module.cmake`. The module is registered and built from the same
-`CMakeLists.txt`.
-
 ## Module Definition
 
 ```cmake

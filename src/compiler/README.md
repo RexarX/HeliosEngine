@@ -1,6 +1,6 @@
 # `compiler` — Compiler Detection & Intrinsics
 
-Header-only module providing compiler-specific macros and feature-detection. Leaf module with no dependencies.
+Header-only module providing compiler-specific macros and feature-detection.
 
 ## Public API
 
@@ -31,6 +31,7 @@ if (HELIOS_EXPECT_TRUE(ptr != nullptr)) {
 | `HELIOS_FORCE_INLINE`                | Always inline (equivalent to `__attribute__((always_inline))`). |
 | `HELIOS_ALWAYS_INLINE`               | Same as HELIOS_FORCE_INLINE.                                    |
 | `HELIOS_NO_INLINE`                   | Prevent inlining.                                               |
+| `HELIOS_NO_UNIQUE_ADDRESS`           | Empty-base/allocator overlay (`[[msvc::no_unique_address]]` on MSVC ABI). |
 | `HELIOS_MOVEONLY_FUNCTION_AVAILABLE` | Feature-test for `std::move_only_function`.                     |
 | `HELIOS_CONTAINERS_RANGES_AVAILABLE` | Feature-test for C++23 `<ranges>` on containers.                |
-| `HELIOS_STL_FLAT_MAP_AVAILABLE`      | Feature-test for `std::flat_map`.                               |
+| `HELIOS_FLAT_MAP_CONSTEXPR`          | `constexpr` when STL `flat_map` is used; empty on Boost.        |

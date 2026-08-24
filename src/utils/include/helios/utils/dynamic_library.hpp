@@ -22,11 +22,11 @@ enum class DynamicLibraryError : uint8_t {
 };
 
 /**
- * @brief Gets a human-readable description for a DynamicLibraryError.
+ * @brief Gets a human-readable description for a `DynamicLibraryError`.
  * @param error The error code
  * @return String description of the error
  */
-[[nodiscard]] constexpr std::string_view DynamicLibraryErrorToString(
+[[nodiscard]] constexpr std::string_view ToString(
     DynamicLibraryError error) noexcept {
   switch (error) {
     using enum DynamicLibraryError;
@@ -48,6 +48,9 @@ enum class DynamicLibraryError : uint8_t {
       return "Unknown error";
   }
 }
+
+template <typename T>
+using DynamicLibraryResult = std::expected<T, DynamicLibraryError>;
 
 /**
  * @brief Cross-platform dynamic library loader.
@@ -85,7 +88,7 @@ public:
   DynamicLibrary& operator=(DynamicLibrary&& other) noexcept;
 
   [[nodiscard]] static auto FromPath(const std::filesystem::path& path)
-      -> std::expected<DynamicLibrary, DynamicLibraryError>;
+      -> DynamicLibraryResult<DynamicLibrary>;
 
   /**
    * @brief Loads a dynamic library from the specified path.
@@ -93,20 +96,20 @@ public:
    * @return Expected with void on success, or error on failure
    */
   [[nodiscard]] auto Load(const std::filesystem::path& path)
-      -> std::expected<void, DynamicLibraryError>;
+      -> DynamicLibraryResult<void>;
 
   /**
    * @brief Unloads the currently loaded library.
    * @return Expected with void on success, or error on failure
    */
-  [[nodiscard]] auto Unload() -> std::expected<void, DynamicLibraryError>;
+  [[nodiscard]] auto Unload() -> DynamicLibraryResult<void>;
 
   /**
    * @brief Reloads the library from the same path.
    * @details Unloads the current library and loads it again.
    * @return Expected with void on success, or error on failure
    */
-  [[nodiscard]] auto Reload() -> std::expected<void, DynamicLibraryError>;
+  [[nodiscard]] auto Reload() -> DynamicLibraryResult<void>;
 
   /**
    * @brief Gets a raw symbol address from the library.
@@ -114,7 +117,7 @@ public:
    * @return Expected with void pointer on success, or error on failure
    */
   [[nodiscard]] auto GetSymbolAddress(std::string_view name) const
-      -> std::expected<void*, DynamicLibraryError>;
+      -> DynamicLibraryResult<void*>;
 
   /**
    * @brief Gets a typed function pointer from the library.
@@ -125,7 +128,7 @@ public:
   template <typename T>
     requires std::is_pointer_v<T>
   [[nodiscard]] auto GetSymbol(std::string_view name) const
-      -> std::expected<T, DynamicLibraryError>;
+      -> DynamicLibraryResult<T>;
 
   /**
    * @brief Checks if a library is currently loaded.
@@ -198,48 +201,10 @@ inline DynamicLibrary::~DynamicLibrary() noexcept {
   }
 }
 
-inline DynamicLibrary& DynamicLibrary::operator=(
-    DynamicLibrary&& other) noexcept {
-  if (this != &other) {
-    if (Loaded()) {
-      [[maybe_unused]] auto _ = Unload();
-    }
-    handle_ = other.handle_;
-    path_ = std::move(other.path_);
-    other.handle_ = kInvalidHandle;
-  }
-  return *this;
-}
-
-inline auto FromPath(const std::filesystem::path& path)
-    -> std::expected<DynamicLibrary, DynamicLibraryError> {
-  DynamicLibrary lib;
-  if (const auto result = lib.Load(path); !result) {
-    return std::unexpected(result.error());
-  }
-  return lib;
-}
-
-inline auto DynamicLibrary::Reload()
-    -> std::expected<void, DynamicLibraryError> {
-  if (!Loaded()) {
-    return std::unexpected(DynamicLibraryError::kNotLoaded);
-  }
-
-  const auto saved_path = path_;
-
-  auto unload_result = Unload();
-  if (!unload_result) {
-    return unload_result;
-  }
-
-  return Load(saved_path);
-}
-
 template <typename T>
   requires std::is_pointer_v<T>
 inline auto DynamicLibrary::GetSymbol(std::string_view name) const
-    -> std::expected<T, DynamicLibraryError> {
+    -> DynamicLibraryResult<T> {
   auto result = GetSymbolAddress(name);
   if (!result) {
     return std::unexpected(result.error());

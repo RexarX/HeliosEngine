@@ -58,9 +58,8 @@ TEST_SUITE("helios::ecs::MessageQueue") {
       CHECK_FALSE(queue.HasMessages());
     }
 
-    SUBCASE("Construction with allocator produces an empty queue") {
-      const std::allocator<std::byte> alloc;
-      const MessageQueue queue(alloc);
+    SUBCASE("Construction with memory resource produces an empty queue") {
+      const MessageQueue queue(std::pmr::get_default_resource());
 
       CHECK_EQ(queue.TypeCount(), 0);
       CHECK_FALSE(queue.HasMessages());
@@ -253,7 +252,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     SUBCASE("Const lvalue source appends messages without modifying source") {
       MessageQueue dst;
       MessageQueue src_mut;
-      const MessageQueue<>& src = src_mut;
+      const MessageQueue& src = src_mut;
 
       dst.Register<PositionMsg>();
       dst.Enqueue(PositionMsg{});
@@ -402,7 +401,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
       queue.Enqueue(PositionMsg{});
       queue.Enqueue(PositionMsg{.x = 3.0F});
 
-      const std::vector<MessageQueue<>::size_type> indices = {1};
+      const std::vector<MessageQueue::size_type> indices = {1};
       queue.RemoveIndices<PositionMsg>(indices);
 
       const auto messages = queue.Messages<PositionMsg>();
@@ -420,7 +419,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
       queue.Enqueue(PositionMsg{});
       queue.Enqueue(PositionMsg{.x = 4.0F});
 
-      const std::vector<MessageQueue<>::size_type> indices = {0, 2};
+      const std::vector<MessageQueue::size_type> indices = {0, 2};
       queue.RemoveIndices<PositionMsg>(indices);
 
       const auto messages = queue.Messages<PositionMsg>();
@@ -437,7 +436,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
       queue.Enqueue(PositionMsg{});
       queue.Enqueue(PositionMsg{.x = 3.0F});
 
-      const std::vector<MessageQueue<>::size_type> indices = {0, 1};
+      const std::vector<MessageQueue::size_type> indices = {0, 1};
       queue.RemoveIndices<PositionMsg>(indices);
 
       const auto messages = queue.Messages<PositionMsg>();
@@ -451,7 +450,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
       queue.Register<PositionMsg>();
       queue.Enqueue(PositionMsg{});
 
-      const std::vector<MessageQueue<>::size_type> indices;
+      const std::vector<MessageQueue::size_type> indices;
       queue.RemoveIndices<PositionMsg>(indices);
 
       CHECK_EQ(queue.MessageCount<PositionMsg>(), 1);
@@ -464,7 +463,7 @@ TEST_SUITE("helios::ecs::MessageQueue") {
       queue.Enqueue(PositionMsg{});
       queue.Enqueue(PositionMsg{.x = 2.0F});
 
-      const std::vector<MessageQueue<>::size_type> indices = {0};
+      const std::vector<MessageQueue::size_type> indices = {0};
       queue.RemoveIndices(MessageTypeIndex::From<PositionMsg>(), indices);
 
       const auto messages = queue.Messages<PositionMsg>();
@@ -684,11 +683,11 @@ TEST_SUITE("helios::ecs::MessageQueue") {
     }
   }
 
-  TEST_CASE("helios::ecs::PmrMessageQueue::works with memory_resource") {
+  TEST_CASE("helios::ecs::MessageQueue::works with memory_resource") {
     std::byte buffer[2048];
     std::pmr::monotonic_buffer_resource resource(buffer, sizeof(buffer));
 
-    PmrMessageQueue queue{&resource};
+    MessageQueue queue{&resource};
     queue.Register<PositionMsg>();
     queue.Enqueue(PositionMsg{.x = 3.0F, .y = 4.0F});
 

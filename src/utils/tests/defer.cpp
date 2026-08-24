@@ -190,7 +190,7 @@ TEST_SUITE("helios::utils::Defer") {
       HELIOS_DEFER_CALL(defer1);
       HELIOS_DEFER_CALL(defer2);
     }
-    CHECK_EQ(x, doctest::Approx(4.5F));
+    CHECK_EQ(x, doctest::Approx(4.5));
   }
 
   TEST_CASE("HELIOS_DEFER_CALL: LIFO execution order verification") {

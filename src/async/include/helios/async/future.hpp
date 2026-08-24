@@ -2,7 +2,7 @@
 
 #include <helios/async/details/profile.hpp>
 
-#include <taskflow/taskflow.hpp>
+#include <taskflow/core/taskflow.hpp>
 
 #include <chrono>
 #include <future>

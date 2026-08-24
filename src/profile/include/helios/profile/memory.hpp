@@ -3,6 +3,7 @@
 #include <helios/cstring_view.hpp>
 #include <helios/profile/profiler.hpp>
 
+#include <cstddef>
 #include <optional>
 #include <source_location>
 

@@ -5,7 +5,7 @@
 #include <helios/container/typed_buffer_array.hpp>
 #include <helios/ecs/message/message.hpp>
 
-#include <algorithm>
+#include <cstddef>
 #include <memory_resource>
 #include <ranges>
 #include <span>
@@ -19,38 +19,22 @@ namespace helios::ecs {
  * @details Messages are stored in a `MultiTypeBuffer`, which provides per-type
  * contiguous storage.
  * @note Not thread-safe.
- * @tparam Allocator Allocator type for internal storage (default:
- * `std::allocator<std::byte>`)
  */
-template <typename Allocator = std::allocator<std::byte>>
 class MessageQueue {
 private:
-  using MessageStorage =
-      container::MultiTypeMap<container::TypedBufferArray<Allocator>,
-                              Allocator>;
+  using MessageStorage = container::MultiTypeMap<container::TypedBufferArray>;
 
 public:
   using size_type = MessageStorage::size_type;
-  using allocator_type = MessageStorage::allocator_type;
 
   constexpr MessageQueue() = default;
 
   /**
-   * @brief Constructs an `MessageQueue` with a custom allocator.
-   * @param alloc Allocator instance
-   */
-  explicit constexpr MessageQueue(const allocator_type& alloc)
-      : messages_(alloc) {}
-
-  /**
    * @brief Constructs a `MessageQueue` from a PMR memory resource.
-   * @details Enabled only when `allocator_type` is constructible from
-   * `std::pmr::memory_resource*`.
-   * @param resource Memory resource used to construct allocator
+   * @param resource Memory resource used for message storage
    */
   explicit constexpr MessageQueue(std::pmr::memory_resource* resource)
-    requires std::constructible_from<allocator_type, std::pmr::memory_resource*>
-      : MessageQueue(allocator_type{resource}) {}
+      : messages_(resource) {}
 
   MessageQueue(std::nullptr_t) = delete;
 
@@ -121,22 +105,18 @@ public:
    * @details For each type in `other`, messages are appended to the
    * corresponding storage in this queue. After merging, `other` is left in a
    * valid but empty state.
-   * @tparam OtherAllocator Allocator template of the other queue
    * @param other MessageQueue to merge from
    */
-  template <typename OtherAllocator>
-  constexpr void Merge(const MessageQueue<OtherAllocator>& other) {
+  constexpr void Merge(const MessageQueue& other) {
     messages_.Merge(other.messages_);
   }
 
   /**
    * @brief Merges messages from another MessageQueue into this one.
    * @details Rvalue overload that consumes the source queue.
-   * @tparam OtherAllocator Allocator template of the other queue
    * @param other MessageQueue to merge from
    */
-  template <typename OtherAllocator>
-  constexpr void Merge(MessageQueue<OtherAllocator>&& other) {
+  constexpr void Merge(MessageQueue&& other) {
     messages_.Merge(std::move(other.messages_));
   }
 
@@ -147,7 +127,7 @@ public:
    * @param message Message to enqueue
    */
   template <MessageTrait T>
-  void Enqueue(T&& message);
+  constexpr void Enqueue(T&& message);
 
   /**
    * @brief Enqueues multiple messages in bulk.
@@ -157,7 +137,7 @@ public:
    */
   template <std::ranges::input_range R>
     requires MessageTrait<std::ranges::range_value_t<R>>
-  void EnqueueBulk(R&& messages);
+  constexpr void EnqueueBulk(R&& messages);
 
   /**
    * @brief Removes messages at the given sorted indices for a specific message
@@ -167,7 +147,7 @@ public:
    * @param sorted_indices Span of sorted, unique global indices to remove
    */
   template <MessageTrait T>
-  void RemoveIndices(std::span<const size_type> sorted_indices) {
+  constexpr void RemoveIndices(std::span<const size_type> sorted_indices) {
     RemoveIndices(MessageTypeIndex::From<T>(), sorted_indices);
   }
 
@@ -180,8 +160,8 @@ public:
    * @param type_index Type index of the message type
    * @param sorted_indices Span of sorted, unique global indices to remove
    */
-  void RemoveIndices(MessageTypeIndex type_index,
-                     std::span<const size_type> sorted_indices);
+  constexpr void RemoveIndices(MessageTypeIndex type_index,
+                               std::span<const size_type> sorted_indices);
 
   /**
    * @brief Swaps the contents of this queue with another.
@@ -301,15 +281,11 @@ public:
   }
 
 private:
-  template <typename OtherAllocator>
-  friend class MessageQueue;
-
   MessageStorage messages_;  ///< Storage for messages of different types
 };
 
-template <typename Allocator>
 template <MessageTrait T>
-inline void MessageQueue<Allocator>::Enqueue(T&& message) {
+constexpr void MessageQueue::Enqueue(T&& message) {
   HELIOS_ASSERT(IsRegistered<std::remove_cvref_t<T>>(),
                 "Message type '{}' is not registered!",
                 MessageNameOf<std::remove_cvref_t<T>>());
@@ -317,18 +293,16 @@ inline void MessageQueue<Allocator>::Enqueue(T&& message) {
       .template EmplaceBack<std::remove_cvref_t<T>>(std::forward<T>(message));
 }
 
-template <typename Allocator>
 template <std::ranges::input_range R>
   requires MessageTrait<std::ranges::range_value_t<R>>
-inline void MessageQueue<Allocator>::EnqueueBulk(R&& messages) {
+constexpr void MessageQueue::EnqueueBulk(R&& messages) {
   using T = std::ranges::range_value_t<R>;
   HELIOS_ASSERT(IsRegistered<T>(), "Message type '{}' is not registered!",
                 MessageNameOf<T>());
   messages_.template Get<T>().AppendRange(std::forward<R>(messages));
 }
 
-template <typename Allocator>
-inline void MessageQueue<Allocator>::RemoveIndices(
+constexpr void MessageQueue::RemoveIndices(
     MessageTypeIndex type_index, std::span<const size_type> sorted_indices) {
   if (sorted_indices.empty()) [[likely]] {
     return;
@@ -358,8 +332,5 @@ inline void MessageQueue<Allocator>::RemoveIndices(
     buffer.Erase(range_start, range_end);
   }
 }
-
-using PmrMessageQueue =
-    MessageQueue<std::pmr::polymorphic_allocator<std::byte>>;
 
 }  // namespace helios::ecs

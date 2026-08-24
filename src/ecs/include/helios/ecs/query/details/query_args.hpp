@@ -1,11 +1,12 @@
 #pragma once
 
 #include <helios/ecs/component/component.hpp>
+#include <helios/ecs/component/manager.hpp>
 #include <helios/ecs/query/details/traits.hpp>
 #include <helios/ecs/query/iterator.hpp>
-#include <helios/utils/common_traits.hpp>
 
 #include <array>
+#include <cstddef>
 #include <tuple>
 #include <type_traits>
 

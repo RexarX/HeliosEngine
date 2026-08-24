@@ -49,6 +49,7 @@ function(_helios_module_parse_args)
       TEST_SOURCES
       TEST_DEPENDENCIES
       TESTS
+      IMPLEMENTS
   )
   cmake_parse_arguments(MODULE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -57,7 +58,7 @@ function(_helios_module_parse_args)
       NAME VERSION DESCRIPTION DEFAULT PCH FOLDER OUTPUT_NAME TARGET_NAME
       SOURCES HEADERS DEPENDS OPTIONAL_DEPENDS DEPENDENCIES USES
       COMPILE_DEFINITIONS COMPILE_OPTIONS INCLUDE_DIRECTORIES SUPPRESS_WARNINGS
-      TEST_SOURCES TEST_DEPENDENCIES TESTS)
+      TEST_SOURCES TEST_DEPENDENCIES TESTS IMPLEMENTS)
     set(MODULE_${_var} "${MODULE_${_var}}" PARENT_SCOPE)
   endforeach()
 endfunction()
@@ -103,6 +104,9 @@ function(_helios_module_register MODULE_HEADER_ONLY)
   endif()
   if(MODULE_OPTIONAL_DEPENDS)
     list(APPEND _register_args OPTIONAL_DEPENDS ${MODULE_OPTIONAL_DEPENDS})
+  endif()
+  if(MODULE_IMPLEMENTS)
+    list(APPEND _register_args IMPLEMENTS ${MODULE_IMPLEMENTS})
   endif()
 
   helios_register_module(${_register_args})
@@ -245,6 +249,9 @@ function(_helios_module_apply_conventions TARGET MODULE_HEADER_ONLY)
   helios_target_set_optimization(${TARGET})
   helios_target_set_warnings(${TARGET})
   helios_target_enable_sanitizers(${TARGET})
+  if(COMMAND helios_target_apply_linker)
+    helios_target_apply_linker(${TARGET})
+  endif()
   helios_target_set_output_dirs(${TARGET})
   helios_target_set_folder(${TARGET} "${MODULE_FOLDER}")
 

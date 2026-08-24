@@ -3,6 +3,9 @@
 #include <helios/ecs/component/archetype.hpp>
 #include <helios/ecs/component/component.hpp>
 
+#include <memory_resource>
+#include <type_traits>
+
 using namespace helios::ecs;
 
 namespace {
@@ -35,6 +38,27 @@ TEST_SUITE("helios::ecs::Archetype") {
       CHECK(archetype.Empty());
       CHECK_EQ(archetype.ColumnCount(), 0);
       CHECK_EQ(archetype.EntityCount(), 0);
+      CHECK_EQ(archetype.GetMemoryResource(), std::pmr::get_default_resource());
+    }
+
+    SUBCASE("Memory resource ctor") {
+      std::pmr::monotonic_buffer_resource resource;
+      ArchetypeId id{pos_idx};
+      Archetype archetype(std::move(id), &resource);
+
+      CHECK_EQ(archetype.GetMemoryResource(), &resource);
+      CHECK_EQ(archetype.ColumnCount(), 1);
+
+      const Entity entity{1, 1};
+      archetype.Add(entity, Position{.x = 1.0F, .y = 2.0F});
+      CHECK_EQ(archetype.EntityCount(), 1);
+      CHECK_EQ(archetype.Get<Position>(entity),
+               (Position{.x = 1.0F, .y = 2.0F}));
+    }
+
+    SUBCASE("Nullptr resource ctor is deleted") {
+      CHECK_FALSE(
+          (std::is_constructible_v<Archetype, ArchetypeId, std::nullptr_t>));
     }
 
     SUBCASE("Ctor with single component") {

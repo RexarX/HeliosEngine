@@ -1,11 +1,12 @@
 #pragma once
 
-#include <helios/assert.hpp>
 #include <helios/ecs/message/consumed_registry.hpp>
+#include <helios/ecs/message/id.hpp>
 #include <helios/ecs/message/message.hpp>
 
 #include <cstddef>
 #include <functional>
+#include <memory_resource>
 #include <string_view>
 
 namespace helios::ecs {
@@ -15,8 +16,7 @@ namespace helios::ecs {
  * message's data, type information, and the ability to mark the message as
  * consumed.
  * @details It holds a const reference to the underlying message, a reference to
- * the `ConsumedMessagesRegistry`, and the global index of the message within
- * the combined (previous + current) view.
+ * the `ConsumedMessagesRegistry`, and the stable message id.
  *
  * Marking a message as consumed writes into the per-system registry,
  * which is later merged and applied at `MessageManager::Update` time.
@@ -34,13 +34,12 @@ public:
    * the public construction API.
    * @param message Const reference to the message
    * @param registry Reference to the per-system consumed messages registry
-   * @param global_index Global index of the message in the combined (previous +
-   * current) view
+   * @param id Stable message id
    */
   constexpr ConsumableMessageWrapper(const T& message,
-                                     ConsumedMessagesRegistry<>& registry,
-                                     size_t global_index) noexcept
-      : message_(message), global_index_(global_index), registry_(registry) {}
+                                     ConsumedMessagesRegistry& registry,
+                                     MessageId<T> id) noexcept
+      : message_(message), id_(id), registry_(registry) {}
 
   constexpr ConsumableMessageWrapper(const ConsumableMessageWrapper&) noexcept =
       default;
@@ -74,7 +73,7 @@ public:
    * Multiple calls are idempotent (sorted-unique insertion).
    */
   constexpr void Consume() const {
-    registry_.get().template MarkConsumed<T>(global_index_);
+    registry_.get().template MarkConsumed<T>(id_);
   }
 
   /**
@@ -83,7 +82,7 @@ public:
    * @return True if the message has been consumed, false otherwise
    */
   [[nodiscard]] bool IsConsumed() const noexcept {
-    return registry_.get().template IsConsumed<T>(global_index_);
+    return registry_.get().template IsConsumed<T>(id_);
   }
 
   /**
@@ -103,35 +102,25 @@ public:
   }
 
   /**
-   * @brief Gets the global index of this message in the combined (previous +
-   * current) view.
-   * @return Global index
+   * @brief Gets the stable id of this message.
+   * @return Message id
    */
-  [[nodiscard]] constexpr size_t GlobalIndex() const noexcept {
-    return global_index_;
-  }
-
-  /**
-   * @brief Unwraps the message wrapper, returning a const reference to the
-   * underlying message.
-   * @return A const reference to the underlying message data
-   */
-  [[nodiscard]] constexpr const T& Unwrap() const noexcept {
-    return message_.get();
+  [[nodiscard]] constexpr auto Id() const noexcept -> MessageId<T> {
+    return id_;
   }
 
 private:
   std::reference_wrapper<const T> message_;  ///< Const reference to the message
-  size_t global_index_ = 0;                  ///< Global index in combined view
-  std::reference_wrapper<ConsumedMessagesRegistry<>>
-      registry_;  ///< Per-system consumed registry
+  MessageId<T> id_;                          ///< Stable message id
+  /// Per-system consumed registry
+  std::reference_wrapper<ConsumedMessagesRegistry> registry_;
 };
 
 /**
  * @brief A wrapper around a message that provides convenient access to the
  * message's data and type information.
- * @details It holds a const reference to the underlying message and the global
- * index of the message within the combined (previous + current) view.
+ * @details It holds a const reference to the underlying message and its stable
+ * message id.
  *
  * Unlike `ConsumableMessageWrapper`, this wrapper does not provide message
  * consumption functionality.
@@ -147,11 +136,10 @@ public:
    * @details Intended to be called by `MessageReader`; not part of the public
    * construction API.
    * @param message Const reference to the message
-   * @param global_index Global index of the message in the combined (previous +
-   * current) view
+   * @param id Stable message id
    */
-  constexpr MessageWrapper(const T& message, size_t global_index) noexcept
-      : message_(message), global_index_(global_index) {}
+  constexpr MessageWrapper(const T& message, MessageId<T> id) noexcept
+      : message_(message), id_(id) {}
 
   constexpr MessageWrapper(const MessageWrapper&) noexcept = default;
   constexpr MessageWrapper(MessageWrapper&&) noexcept = default;
@@ -191,26 +179,16 @@ public:
   }
 
   /**
-   * @brief Gets the global index of this message in the combined (previous +
-   * current) view.
-   * @return Global index
+   * @brief Gets the stable id of this message.
+   * @return Message id
    */
-  [[nodiscard]] constexpr size_t GlobalIndex() const noexcept {
-    return global_index_;
-  }
-
-  /**
-   * @brief Unwraps the message wrapper, returning a const reference to the
-   * underlying message.
-   * @return A const reference to the underlying message data
-   */
-  [[nodiscard]] constexpr const T& Unwrap() const noexcept {
-    return message_.get();
+  [[nodiscard]] constexpr auto Id() const noexcept -> MessageId<T> {
+    return id_;
   }
 
 private:
   std::reference_wrapper<const T> message_;  ///< Const reference to the message
-  size_t global_index_ = 0;                  ///< Global index in combined view
+  MessageId<T> id_;                          ///< Stable message id
 };
 
 }  // namespace helios::ecs

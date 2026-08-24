@@ -27,7 +27,7 @@ struct NonPolymorphic {
 };
 
 struct AnotherNonPolymorphic {
-  float data = 0.0f;
+  float data = 0.0F;
 };
 
 struct TestFunctor {

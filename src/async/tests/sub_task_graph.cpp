@@ -1,15 +1,21 @@
 #include <doctest/doctest.h>
 
+#include <helios/async/common.hpp>
 #include <helios/async/executor.hpp>
 #include <helios/async/sub_task_graph.hpp>
 #include <helios/async/task_graph.hpp>
 
 #include <algorithm>
+#include <array>
 #include <atomic>
+#include <chrono>
 #include <cstddef>
 #include <functional>
+#include <future>
 #include <mutex>
+#include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
 using namespace helios::async;

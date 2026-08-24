@@ -2,6 +2,7 @@
 
 #include <helios/memory/fixed_stack_allocator.hpp>
 
+#include <details/accumulate_peak.hpp>
 #include <helios/assert.hpp>
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
@@ -14,21 +15,36 @@
 
 namespace helios::mem {
 
-void FixedStackAllocator::ClearStats() noexcept {
-  offset_.store(0, std::memory_order_release);
-  peak_usage_.store(0, std::memory_order_relaxed);
-  allocation_count_.store(0, std::memory_order_relaxed);
-  total_allocations_.store(0, std::memory_order_relaxed);
-  total_deallocations_.store(0, std::memory_order_relaxed);
-  alignment_waste_.store(0, std::memory_order_relaxed);
+FixedStackAllocator::FixedStackAllocator(size_t capacity) noexcept
+    : capacity_(capacity) {
+  HELIOS_ASSERT(capacity_ > sizeof(size_t) * 2,
+                "capacity '{}' is too small for fixed stack!", capacity_);
+  buffer_ = static_cast<std::byte*>(
+      AlignedAlloc(kDefaultAlignment, capacity_, false));
+  HELIOS_VERIFY(buffer_ != nullptr, "Failed to allocate fixed stack!");
+  HELIOS_MEMORY_PROFILE_ALLOC(buffer_, capacity_, "FixedStackAllocator");
 }
 
-void FixedStackAllocator::Release() noexcept {
-  if (buffer_ != nullptr) {
-    HELIOS_MEMORY_PROFILE_FREE(buffer_, "FixedStackAllocator");
-    AlignedFree(buffer_, false);
-    buffer_ = nullptr;
+FixedStackAllocator& FixedStackAllocator::operator=(
+    FixedStackAllocator&& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return *this;
   }
+
+  Release();
+  MoveFrom(other);
+  return *this;
+}
+
+void FixedStackAllocator::RewindToMarker(Marker marker) noexcept {
+  HELIOS_MEMORY_PROFILE_SCOPE_N(
+      "helios::mem::FixedStackAllocator::RewindToMarker");
+
+  HELIOS_ASSERT(marker.offset <= offset_.load(std::memory_order_acquire),
+                "marker does not belong to fixed stack!");
+
+  offset_.store(marker.offset, std::memory_order_release);
+  allocation_count_.store(0, std::memory_order_relaxed);
 }
 
 void FixedStackAllocator::MoveFrom(FixedStackAllocator& other) noexcept {
@@ -50,6 +66,23 @@ void FixedStackAllocator::MoveFrom(FixedStackAllocator& other) noexcept {
   alignment_waste_.store(
       other.alignment_waste_.exchange(0, std::memory_order_relaxed),
       std::memory_order_relaxed);
+}
+
+void FixedStackAllocator::ClearStats() noexcept {
+  offset_.store(0, std::memory_order_release);
+  peak_usage_.store(0, std::memory_order_relaxed);
+  allocation_count_.store(0, std::memory_order_relaxed);
+  total_allocations_.store(0, std::memory_order_relaxed);
+  total_deallocations_.store(0, std::memory_order_relaxed);
+  alignment_waste_.store(0, std::memory_order_relaxed);
+}
+
+void FixedStackAllocator::Release() noexcept {
+  if (buffer_ != nullptr) {
+    HELIOS_MEMORY_PROFILE_FREE(buffer_, "FixedStackAllocator");
+    AlignedFree(buffer_, false);
+    buffer_ = nullptr;
+  }
 }
 
 void* FixedStackAllocator::do_allocate(size_t bytes, size_t alignment) {
@@ -75,7 +108,9 @@ void* FixedStackAllocator::do_allocate(size_t bytes, size_t alignment) {
     const size_t user_offset = SaturatingAdd(observed, padding);
     const size_t next = SaturatingAdd(user_offset, bytes);
 
-    HELIOS_VERIFY(next <= capacity_, "Fixed stack allocator exhausted!");
+    if (next > capacity_) [[unlikely]] {
+      return nullptr;
+    }
 
     if (offset_.compare_exchange_weak(observed, next, std::memory_order_acq_rel,
                                       std::memory_order_relaxed)) {
@@ -121,9 +156,7 @@ void FixedStackAllocator::do_deallocate(void* ptr, size_t /*bytes*/,
     const auto user_offset =
         static_cast<size_t>(static_cast<std::byte*>(ptr) - buffer_);
     const size_t waste = user_offset - header->previous_offset - kHeaderSize;
-    alignment_waste_.fetch_sub(
-        std::min(waste, alignment_waste_.load(std::memory_order_relaxed)),
-        std::memory_order_relaxed);
+    details::SaturatingFetchSub(alignment_waste_, waste);
   }
 }
 

@@ -1,9 +1,7 @@
 #pragma once
 
 #include <helios/memory/common.hpp>
-
-#include <helios/assert.hpp>
-#include <helios/memory/details/profile.hpp>
+#include <helios/memory/treiber_stack.hpp>
 
 #include <atomic>
 #include <cstddef>
@@ -67,9 +65,7 @@ public:
    * @param other Source allocator; left in empty moved-from state
    */
   StackAllocator(StackAllocator&& other) noexcept { MoveFrom(other); }
-  ~StackAllocator() noexcept override {
-    FreeChain(head_.load(std::memory_order_acquire));
-  }
+  ~StackAllocator() noexcept override { FreeChain(HeadBlock()); }
 
   StackAllocator& operator=(const StackAllocator&) = delete;
 
@@ -151,10 +147,10 @@ private:
   };
 
   struct Block {
+    Block* next = nullptr;
     void* buffer = nullptr;
     size_t capacity = 0;
     std::atomic<size_t> offset{0};
-    std::atomic<Block*> next{nullptr};
   };
 
   struct Reservation {
@@ -171,6 +167,14 @@ private:
 
   void MoveFrom(StackAllocator& other) noexcept;
 
+  [[nodiscard]] Block* HeadBlock() const noexcept {
+    return static_cast<Block*>(blocks_.Top());
+  }
+
+  [[nodiscard]] static Block* NextBlock(const Block* block) noexcept {
+    return static_cast<Block*>(TreiberStack::Next(block));
+  }
+
   [[nodiscard]] static Block* CreateBlock(size_t capacity) noexcept;
   static void FreeChain(Block* head) noexcept;
   [[nodiscard]] static Reservation TryReserve(Block& block, size_t size,
@@ -185,10 +189,10 @@ private:
     return this == &other;
   }
 
-  std::atomic<Block*> head_{nullptr};
+  TreiberStack blocks_;
   std::atomic<GrowState> grow_state_{GrowState::kIdle};
   size_t initial_capacity_ = 0;
-  GrowthPolicy growth_{};
+  GrowthPolicy growth_;
 
   std::atomic<size_t> total_capacity_{0};
   std::atomic<size_t> total_allocated_{0};
@@ -199,44 +203,6 @@ private:
   std::atomic<size_t> alignment_waste_{0};
   std::atomic<size_t> block_count_{0};
 };
-
-inline StackAllocator::StackAllocator(StackAllocatorOptions options) noexcept
-    : initial_capacity_(options.initial_capacity), growth_(options.growth) {
-  HELIOS_ASSERT(initial_capacity_ > 0,
-                "initial_capacity must be greater than zero!");
-  HELIOS_ASSERT(growth_.max_capacity >= initial_capacity_,
-                "max_capacity '{}' must be >= initial_capacity '{}'!",
-                growth_.max_capacity, initial_capacity_);
-
-  Block* const initial_block = CreateBlock(initial_capacity_);
-  HELIOS_VERIFY(initial_block != nullptr, "Failed to allocate initial block!");
-  head_.store(initial_block, std::memory_order_release);
-  total_capacity_.store(initial_capacity_, std::memory_order_relaxed);
-  block_count_.store(1, std::memory_order_relaxed);
-}
-
-inline StackAllocator& StackAllocator::operator=(
-    StackAllocator&& other) noexcept {
-  if (this == &other) [[unlikely]] {
-    return *this;
-  }
-
-  FreeChain(head_.load(std::memory_order_acquire));
-  MoveFrom(other);
-  return *this;
-}
-
-inline auto StackAllocator::GetMarker() const noexcept -> Marker {
-  Block* const head = head_.load(std::memory_order_acquire);
-  if (head == nullptr) {
-    return {};
-  }
-
-  return {
-      .block = head,
-      .offset = head->offset.load(std::memory_order_acquire),
-  };
-}
 
 inline AllocatorStats StackAllocator::Stats() const noexcept {
   return {

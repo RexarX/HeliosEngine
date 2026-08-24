@@ -2,11 +2,35 @@
 
 #include <helios/ecs/resource/manager.hpp>
 
+#include <concepts>
+#include <cstddef>
+#include <memory_resource>
 #include <string>
+#include <utility>
 
 using namespace helios::ecs;
 
 namespace {
+
+class CountingResource final : public std::pmr::memory_resource {
+public:
+  size_t bytes_allocated = 0;
+
+protected:
+  auto do_allocate(size_t bytes, size_t alignment) -> void* override {
+    bytes_allocated += bytes;
+    return std::pmr::new_delete_resource()->allocate(bytes, alignment);
+  }
+
+  void do_deallocate(void* ptr, size_t bytes, size_t alignment) override {
+    std::pmr::new_delete_resource()->deallocate(ptr, bytes, alignment);
+  }
+
+  [[nodiscard]] auto do_is_equal(
+      const std::pmr::memory_resource& other) const noexcept -> bool override {
+    return this == &other;
+  }
+};
 
 struct Counter {
   int value = 0;
@@ -64,6 +88,26 @@ TEST_SUITE("helios::ecs::ResourceManager") {
     SUBCASE("Default-constructed manager is empty") {
       const ResourceManager manager;
       CHECK_EQ(manager.Count(), 0);
+      CHECK_EQ(manager.GetMemoryResource(), std::pmr::get_default_resource());
+    }
+
+    SUBCASE("Memory resource ctor") {
+      CountingResource resource;
+      ResourceManager manager{&resource};
+
+      CHECK_EQ(manager.GetMemoryResource(), &resource);
+
+      manager.Emplace<Counter>(42);
+      manager.Emplace<Physics>();
+      manager.Emplace<Config>("pmr", 1);
+
+      CHECK_EQ(manager.Count(), 3);
+      CHECK_EQ(manager.Get<Counter>().value, 42);
+      CHECK_GT(resource.bytes_allocated, 0);
+    }
+
+    SUBCASE("Nullptr ctor is deleted") {
+      CHECK_FALSE(std::constructible_from<ResourceManager, std::nullptr_t>);
     }
 
     SUBCASE("Copy ctor duplicates all resources") {

@@ -35,8 +35,9 @@ struct Score {
   int value = 0;
 };
 
-using MotionBundle = ComponentBundle<Position, Velocity>;
-using GameplayBundle = ComponentBundle<MotionBundle, Health>;
+using MotionBundle = ComponentBundleTypes<Position, Velocity>;
+using GameplayBundle = ComponentBundleTypes<MotionBundle, Health>;
+using MoveOnlyBundle = ComponentBundleTypes<MoveOnly>;
 
 }  // namespace
 
@@ -45,7 +46,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Custom allocator ctor") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
 
@@ -57,7 +58,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("PMR resource ctor") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
 
@@ -69,7 +70,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Clear removes all pending commands") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       buf.AddComponents(Position{});
@@ -88,7 +89,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Reserve does not add commands") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       buf.Reserve(10);
@@ -100,7 +101,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Can enqueue after reserve") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       buf.Reserve(5);
@@ -114,7 +115,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Enqueues destroy and entity is removed after execution") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -130,7 +131,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Returns self for chaining") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.Destroy();
@@ -143,7 +144,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Enqueues try-destroy and entity is removed after execution") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -159,7 +160,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       World world;
       const Entity entity = world.CreateEntity();
       world.DestroyEntity(entity);
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -173,7 +174,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Returns self for chaining") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.TryDestroy();
@@ -186,7 +187,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Adds multiple components after execution") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -203,7 +204,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Returns self for chaining") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.AddComponents(Position{}, Velocity{});
@@ -216,7 +217,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Adds a nested bundle as one deferred command") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -237,7 +238,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Copies an lvalue bundle into deferred storage") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -256,12 +257,11 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Moves a move-only bundle into deferred storage") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
-        buf.AddBundle(
-            ComponentBundle<MoveOnly>{MoveOnly{std::make_unique<int>(42)}});
+        buf.AddBundle(MoveOnlyBundle{MoveOnly{std::make_unique<int>(42)}});
       }
 
       queue.ExecuteAll(world);
@@ -274,7 +274,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Returns self for chaining") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.AddBundle(MotionBundle{Position{}, Velocity{}});
@@ -288,7 +288,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{7.0F, 7.0F});
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -304,7 +304,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Returns self for chaining") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.TryAddComponents(Position{}, Velocity{});
@@ -318,7 +318,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{7.0F, 7.0F});
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -337,7 +337,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Returns self for chaining") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.TryAddBundle(MotionBundle{Position{}, Velocity{}});
@@ -351,7 +351,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{}, Velocity{});
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -368,7 +368,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{}, Velocity{});
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.RemoveComponents<Position, Velocity>();
@@ -382,7 +382,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{}, Velocity{}, Health{});
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -402,7 +402,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{}, Velocity{});
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.RemoveBundle<MotionBundle>();
@@ -416,7 +416,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{});
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -432,7 +432,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Returns self for chaining") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.TryRemoveComponents<Position, Velocity>();
@@ -446,7 +446,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{});
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -464,7 +464,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Returns self for chaining") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.TryRemoveBundle<MotionBundle>();
@@ -478,7 +478,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       World world;
       const Entity entity = world.CreateEntity();
       world.AddComponents(entity, Position{}, Velocity{}, Health{100});
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -495,7 +495,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Returns self for chaining") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.ClearComponents();
@@ -508,7 +508,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Buffer is empty initially") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
 
@@ -518,7 +518,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Buffer not empty after enqueue") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       buf.AddComponents(Position{});
@@ -529,7 +529,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Buffer empty after clear") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       buf.AddComponents(Position{});
@@ -543,7 +543,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Returns the entity passed at construction") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
 
@@ -555,7 +555,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Size is zero initially") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
 
@@ -565,7 +565,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Size increases after each enqueue") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       buf.AddComponents(Position{});
@@ -578,7 +578,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Size is zero after clear") {
       World world;
       const Entity entity = world.ReserveEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       buf.AddComponents(Position{});
@@ -589,17 +589,16 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
-  TEST_CASE("helios::ecs::EntityCmdBuffer::GetAllocator") {
-    SUBCASE("Returns the allocator used at construction") {
+  TEST_CASE("helios::ecs::EntityCmdBuffer::GetMemoryResource") {
+    SUBCASE("Returns the resource used at construction") {
       World world;
       const Entity entity = world.ReserveEntity();
       auto* resource = std::pmr::get_default_resource();
-      PmrCmdQueue queue(resource);
+      CmdQueue queue(resource);
 
       EntityCmdBuffer buf(entity, queue, resource);
-      const auto alloc = buf.GetAllocator();
 
-      CHECK_EQ(alloc.resource(), resource);
+      CHECK_EQ(buf.GetMemoryResource(), resource);
     }
   }
 
@@ -608,7 +607,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Commands are in queue after buffer is destroyed") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -630,7 +629,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     SUBCASE("Multiple operations can be chained") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
 
       {
         EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
@@ -643,23 +642,6 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
       CHECK(world.HasComponent<Position>(entity));
       CHECK(world.HasComponent<Velocity>(entity));
       CHECK(world.HasComponent<Health>(entity));
-    }
-  }
-
-  TEST_CASE("helios::ecs::PmrEntityCmdBuffer: works with pmr resource") {
-    SUBCASE("PMR alias operates correctly") {
-      World world;
-      const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
-
-      {
-        PmrEntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
-        buf.AddComponents(Position{7.0F, 8.0F});
-      }
-
-      queue.ExecuteAll(world);
-
-      CHECK(world.HasComponent<Position>(entity));
     }
   }
 }

@@ -14,13 +14,8 @@ namespace {
 // Regular resources live in the World. Any system that asks for
 // `Res<GameConfig>` observes the same shared object.
 struct GameConfig {
-  void OnInsert(hecs::World& /*world*/) {
-    hlog::Info("resources: GameConfig::OnInsert");
-  }
-
-  void OnRemove(hecs::World& /*world*/) {
-    hlog::Info("resources: GameConfig::OnRemove");
-  }
+  void OnInsert(hecs::World& /*world*/) { hlog::Info("GameConfig::OnInsert"); }
+  void OnRemove(hecs::World& /*world*/) { hlog::Info("GameConfig::OnRemove"); }
 
   int difficulty = 1;
 };
@@ -29,6 +24,7 @@ struct GameConfig {
 // works like `Res<T>`, but documents that parallel access is intended.
 struct ThreadSafeCounter {
   static constexpr bool kThreadSafe = true;
+
   int value = 0;
 };
 
@@ -46,35 +42,36 @@ struct DebugOverlay {
 struct UseRegularResource {
   void operator()(hecs::Res<GameConfig> config) const {
     ++config->difficulty;
-    hlog::Info("resources: regular difficulty={}", config->difficulty);
+    hlog::Info("Regular difficulty={}", config->difficulty);
   }
 };
 
 struct IncrementThreadSafe {
   void operator()(hecs::AsyncRes<ThreadSafeCounter> counter) const {
     ++counter->value;
-    hlog::Info("resources: bumped thread-safe counter to {}", counter->value);
+    hlog::Info("Bumped thread-safe counter to {}", counter->value);
   }
 };
 
 struct ReadThreadSafeResource {
   void operator()(hecs::AsyncRes<const ThreadSafeCounter> counter) const {
-    hlog::Info("resources: thread-safe counter={}", counter->value);
+    hlog::Info("Thread-safe counter={}", counter->value);
   }
 };
 
 struct ReadOptionalResources {
-  void operator()(std::optional<hecs::Res<const GameConfig>> config,
-                  std::optional<hecs::Res<const DebugOverlay>> overlay) const {
+  void operator()(hecs::OptRes<const GameConfig> config,
+                  hecs::OptRes<const DebugOverlay> overlay) const {
+    // OptRes is just an alias for `std::optional<Res<T>>`
     // Optional world resources let a system run whether the resource exists or
     // not. GameConfig exists, but DebugOverlay is intentionally not inserted.
+
     if (config.has_value()) {
-      hlog::Info("resources: optional config difficulty={}",
-                 (*config)->difficulty);
+      hlog::Info("Optional config difficulty={}", (*config)->difficulty);
     }
 
     if (!overlay.has_value()) {
-      hlog::Info("resources: optional debug overlay is absent");
+      hlog::Info("Optional debug overlay is absent");
     }
   }
 };
@@ -83,8 +80,7 @@ struct UseLocalScratch {
   void operator()(hecs::Local<LocalScratch> scratch) const {
     // Required local resources are default-created before the system runs.
     ++scratch->updates_this_run;
-    hlog::Info("resources: local scratch updates={}",
-               scratch->updates_this_run);
+    hlog::Info("Local scratch updates={}", scratch->updates_this_run);
   }
 };
 
@@ -115,7 +111,6 @@ int main() {
 
   app.AddSystems(happ::kUpdate, UseRegularResource{}, IncrementThreadSafe{},
                  UseLocalScratch{});
-
   app.AddSystems(happ::kPostUpdate, ReadThreadSafeResource{},
                  ReadOptionalResources{}, ExitAfterFrames{});
 

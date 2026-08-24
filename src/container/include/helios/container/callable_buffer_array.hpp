@@ -4,6 +4,7 @@
 
 #include <concepts>
 #include <cstddef>
+#include <cstdint>
 #include <cstring>
 #include <functional>
 #include <memory>
@@ -17,89 +18,46 @@
 namespace helios::container {
 
 /**
- * @brief Implementation class for an inline callable array buffer with explicit
- * allocator.
+ * @brief Inline storage for heterogeneous callable instances.
  * @details Stores multiple callable instances of heterogeneous types in a
  * single contiguous byte buffer, with embedded function pointers for
  * type-erased invocation. Optimized for fast sequential iteration without
  * virtual dispatch or per-callable heap allocations. Preserves insertion order.
- *
- * Use the `CallableBufferArray` alias for ergonomic usage.
- *
- * @tparam Allocator Allocator type for the internal byte buffer (default:
- * `std::allocator<std::byte>`).
- * @tparam Signatures Function signatures in the form void(Args...).
+ * @tparam Signatures Function signatures in the form `void(Args...)`.
  */
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-class CallableBufferArrayImpl {
-public:
-  static constexpr size_t kNumOperations = sizeof...(Signatures);
-
-  using allocator_type = Allocator;
-  using byte_allocator_type =
-      std::allocator_traits<allocator_type>::template rebind_alloc<std::byte>;
-  using offset_allocator_type =
-      std::allocator_traits<allocator_type>::template rebind_alloc<size_t>;
-
-  using size_type = size_t;
-
+class CallableBufferArray {
 private:
-  using DestroyFn = void (*)(void*);
-  using RelocateFn = void (*)(void* dest, void* src);
-
-  /// @brief Function pointer type for the first signature (used for size
-  /// calculations).
-  using FirstExecuteFn = details::TupleToFunctionPtrType<
-      details::NthSignatureArgsT<0, Signatures...>>;
-
-  static_assert(((sizeof(details::TupleToFunctionPtrType<
-                         details::NthSignatureArgsT<0, Signatures...>>) ==
-                  sizeof(details::TupleToFunctionPtrType<
-                         details::SignatureArgsT<Signatures>>)) &&
-                 ...),
-                "All function pointer types must have the same size");
-
-  using BufferType = std::vector<std::byte, byte_allocator_type>;
-  using OffsetsType = std::vector<size_type, offset_allocator_type>;
-
   /// @brief Pack of signature types for use in method validation.
   using SignaturePack = std::tuple<Signatures...>;
 
 public:
-  constexpr CallableBufferArrayImpl() = default;
+  static constexpr size_t kNumOperations = sizeof...(Signatures);
+  using size_type = size_t;
 
-  /**
-   * @brief Constructs with a custom allocator.
-   * @param alloc Allocator instance to use
-   */
-  explicit constexpr CallableBufferArrayImpl(const allocator_type& alloc)
-      : buffer_(byte_allocator_type(alloc)),
-        offsets_(offset_allocator_type(alloc)) {}
+  constexpr CallableBufferArray() = default;
 
   /**
    * @brief Constructs with a PMR memory resource.
-   * @details Enabled only when `allocator_type` is constructible from
-   * `std::pmr::memory_resource*`.
-   * @param resource Memory resource used to construct allocator
+   * @param resource Memory resource used for internal storage
    */
-  explicit constexpr CallableBufferArrayImpl(
-      std::pmr::memory_resource* resource)
-    requires std::constructible_from<allocator_type, std::pmr::memory_resource*>
-      : CallableBufferArrayImpl(allocator_type{resource}) {}
+  explicit constexpr CallableBufferArray(std::pmr::memory_resource* resource)
+      : buffer_(resource), offsets_(resource) {}
 
-  CallableBufferArrayImpl(std::nullptr_t) = delete;
+  CallableBufferArray(std::nullptr_t) = delete;
 
-  constexpr CallableBufferArrayImpl(const CallableBufferArrayImpl&) = delete;
-  constexpr CallableBufferArrayImpl(CallableBufferArrayImpl&& other) noexcept
+  constexpr CallableBufferArray(const CallableBufferArray&) = delete;
+  constexpr CallableBufferArray(CallableBufferArray&& other) noexcept
       : buffer_(std::move(other.buffer_)),
         offsets_(std::move(other.offsets_)) {}
 
-  ~CallableBufferArrayImpl() noexcept { Clear(); }
+  ~CallableBufferArray() noexcept { Clear(); }
 
-  CallableBufferArrayImpl& operator=(const CallableBufferArrayImpl&) = delete;
-  CallableBufferArrayImpl& operator=(CallableBufferArrayImpl&& other) noexcept;
+  CallableBufferArray& operator=(const CallableBufferArray&) = delete;
+  constexpr CallableBufferArray& operator=(
+      CallableBufferArray&& other) noexcept;
 
   /**
    * @brief Clears all stored callables, calling destructors as needed.
@@ -161,9 +119,11 @@ public:
 
   /**
    * @brief Reserves bytes in the internal buffer.
+   * @details Empty arrays use `vector::reserve`. Arrays with live callables
+   * relocate through `GrowBuffer` so non-trivial objects are not memcpy'd.
    * @param bytes Number of bytes to reserve
    */
-  constexpr void ReserveBytes(size_type bytes) { buffer_.reserve(bytes); }
+  constexpr void ReserveBytes(size_type bytes);
 
   /**
    * @brief Reserves space for approximately count callables.
@@ -173,17 +133,19 @@ public:
   constexpr void Reserve(size_type count);
 
   /**
+   * @brief Releases unused capacity in the byte buffer and offset table.
+   * @details Relocates live callables into a tightly sized buffer when the
+   * current capacity exceeds used bytes.
+   */
+  constexpr void ShrinkToFit();
+
+  /**
    * @brief Swaps contents with another array.
    * @param other Array to swap with
    */
-  constexpr void Swap(CallableBufferArrayImpl& other) noexcept(
-      std::is_nothrow_swappable_v<BufferType> &&
-      std::is_nothrow_swappable_v<OffsetsType>);
-
-  friend void swap(CallableBufferArrayImpl& lhs,
-                   CallableBufferArrayImpl&
-                       rhs) noexcept(std::is_nothrow_swappable_v<BufferType> &&
-                                     std::is_nothrow_swappable_v<OffsetsType>) {
+  constexpr void Swap(CallableBufferArray& other) noexcept;
+  friend constexpr void swap(CallableBufferArray& lhs,
+                             CallableBufferArray& rhs) noexcept {
     lhs.Swap(rhs);
   }
 
@@ -193,7 +155,7 @@ public:
    * The other array is cleared after the operation.
    * @param other Array to merge from
    */
-  constexpr void Merge(CallableBufferArrayImpl&& other);
+  constexpr void Merge(CallableBufferArray&& other);
 
   /**
    * @brief Checks if the array is empty.
@@ -220,14 +182,33 @@ public:
   }
 
   /**
-   * @brief Gets the allocator used by the array.
-   * @return Allocator instance
+   * @brief Returns the memory resource used for internal storage.
+   * @return Memory resource passed to the constructor, or the default resource
    */
-  [[nodiscard]] constexpr allocator_type GetAllocator() const noexcept {
-    return allocator_type(buffer_.get_allocator());
+  [[nodiscard]] constexpr std::pmr::memory_resource* GetMemoryResource()
+      const noexcept {
+    return buffer_.get_allocator().resource();
   }
 
 private:
+  using DestroyFn = void (*)(void*);
+  using RelocateFn = void (*)(void* dest, void* src);
+
+  /// @brief Function pointer type for the first signature (used for size
+  /// calculations).
+  using FirstExecuteFn = details::TupleToFunctionPtrType<
+      details::NthSignatureArgsT<0, Signatures...>>;
+
+  static_assert(((sizeof(details::TupleToFunctionPtrType<
+                         details::NthSignatureArgsT<0, Signatures...>>) ==
+                  sizeof(details::TupleToFunctionPtrType<
+                         details::SignatureArgsT<Signatures>>)) &&
+                 ...),
+                "All function pointer types must have the same size");
+
+  using BufferType = std::pmr::vector<std::byte>;
+  using OffsetsType = std::pmr::vector<size_type>;
+
   /**
    * @brief Header layout per callable entry:
    *   - kNumOperations function pointers (one per signature)
@@ -245,6 +226,12 @@ private:
   static constexpr size_type AlignUp(size_type offset,
                                      size_type alignment) noexcept {
     return (offset + alignment - 1) & ~(alignment - 1);
+  }
+
+  static size_type AlignOffset(const void* base, size_type offset,
+                               size_type alignment) noexcept {
+    const auto address = reinterpret_cast<uintptr_t>(base) + offset;
+    return offset + ((alignment - (address % alignment)) % alignment);
   }
 
   template <typename T, size_t N, typename... Args>
@@ -283,36 +270,47 @@ private:
   OffsetsType offsets_;
 };
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-inline auto CallableBufferArrayImpl<Allocator, Signatures...>::operator=(
-    CallableBufferArrayImpl&& other) noexcept -> CallableBufferArrayImpl& {
+constexpr auto CallableBufferArray<Signatures...>::operator=(
+    CallableBufferArray&& other) noexcept -> CallableBufferArray& {
   if (this == &other) [[unlikely]] {
     return *this;
   }
 
   Clear();
-  buffer_ = std::move(other.buffer_);
-  offsets_ = std::move(other.offsets_);
+  if (GetMemoryResource() == other.GetMemoryResource()) {
+    buffer_ = std::move(other.buffer_);
+    offsets_ = std::move(other.offsets_);
+  } else {
+    Merge(std::move(other));
+  }
+
   return *this;
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-inline void
-CallableBufferArrayImpl<Allocator, Signatures...>::Clear() noexcept {
-  for (auto it = offsets_.rbegin(); it != offsets_.rend(); ++it) {
-    const auto header_offset = *it;
-    auto* header_base = buffer_.data() + header_offset;
+inline void CallableBufferArray<Signatures...>::Clear() noexcept {
+  // Index-based reverse destroy: `std::reverse_iterator` decrements `end()`,
+  // which is UBSan-undefined when a PMR vector is empty (`end()` is nullptr).
+  const size_type count = offsets_.size();
+  auto* const offset_data = offsets_.data();
+  auto* const buffer_data = buffer_.data();
+  if (count > 0 && offset_data != nullptr && buffer_data != nullptr) {
+    for (size_type i = count; i > 0; --i) {
+      const auto header_offset = offset_data[i - 1];
+      auto* header_base = buffer_data + header_offset;
 
-    auto destroy_fn = *std::launder(reinterpret_cast<DestroyFn*>(
-        header_base + (kNumOperations * sizeof(FirstExecuteFn))));
+      auto destroy_fn = *std::launder(reinterpret_cast<DestroyFn*>(
+          header_base + (kNumOperations * sizeof(FirstExecuteFn))));
 
-    if (destroy_fn != nullptr) {
-      auto* data = GetDataPtr(header_offset);
-      destroy_fn(data);
+      if (destroy_fn != nullptr) {
+        auto* data = GetDataPtr(header_offset);
+        destroy_fn(data);
+      }
     }
   }
 
@@ -320,14 +318,14 @@ CallableBufferArrayImpl<Allocator, Signatures...>::Clear() noexcept {
   offsets_.clear();
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <size_t N, typename... UArgs>
   requires details::ArgsConvertibleTo<
                details::NthSignatureArgsT<N, Signatures...>, UArgs...> &&
            (N < sizeof...(Signatures))
-inline void CallableBufferArrayImpl<Allocator, Signatures...>::Invoke(
+inline void CallableBufferArray<Signatures...>::Invoke(
     UArgs&&... args) noexcept {
   using ArgsTuple = details::NthSignatureArgsT<N, Signatures...>;
   using ExecuteFn = details::TupleToFunctionPtrType<ArgsTuple>;
@@ -341,60 +339,148 @@ inline void CallableBufferArrayImpl<Allocator, Signatures...>::Invoke(
   }
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-constexpr void CallableBufferArrayImpl<Allocator, Signatures...>::Reserve(
-    size_type count) {
+constexpr void CallableBufferArray<Signatures...>::Reserve(size_type count) {
   offsets_.reserve(count);
   buffer_.reserve(count * (BaseHeaderSize() + 32));
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-constexpr void CallableBufferArrayImpl<Allocator, Signatures...>::Swap(
-    CallableBufferArrayImpl&
-        other) noexcept(std::is_nothrow_swappable_v<BufferType> &&
-                        std::is_nothrow_swappable_v<OffsetsType>) {
-  buffer_.swap(other.buffer_);
-  offsets_.swap(other.offsets_);
+constexpr void CallableBufferArray<Signatures...>::ReserveBytes(
+    size_type bytes) {
+  if (bytes <= buffer_.capacity()) {
+    return;
+  }
+  if (Empty()) {
+    buffer_.reserve(bytes);
+    return;
+  }
+  GrowBuffer(bytes);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-constexpr void CallableBufferArrayImpl<Allocator, Signatures...>::Merge(
-    CallableBufferArrayImpl&& other) {
+constexpr void CallableBufferArray<Signatures...>::ShrinkToFit() {
+  offsets_.shrink_to_fit();
+
+  if (Empty()) {
+    buffer_.clear();
+    buffer_.shrink_to_fit();
+    return;
+  }
+
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
+  constexpr size_t header_alignment = alignof(std::max_align_t);
+  const auto old_start = offsets_.front();
+  const auto content_size = buffer_.size() - old_start;
+
+  BufferType new_buffer(buffer_.get_allocator());
+  new_buffer.reserve(content_size + header_alignment - 1);
+  const auto new_start = AlignOffset(new_buffer.data(), 0, header_alignment);
+  new_buffer.resize(new_start + content_size);
+  std::memcpy(new_buffer.data() + new_start, buffer_.data() + old_start,
+              content_size);
+
+  for (auto& header_offset : offsets_) {
+    auto* old_header = buffer_.data() + header_offset;
+    const auto new_offset = new_start + (header_offset - old_start);
+    auto* new_header = new_buffer.data() + new_offset;
+
+    auto relocate_fn = *std::launder(reinterpret_cast<RelocateFn*>(
+        old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn)));
+
+    if (relocate_fn != nullptr) {
+      const auto data_offset = *std::launder(reinterpret_cast<size_type*>(
+          old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn) +
+          sizeof(RelocateFn)));
+      relocate_fn(new_header + data_offset, old_header + data_offset);
+    }
+    header_offset = new_offset;
+  }
+
+  buffer_ = std::move(new_buffer);
+}
+
+template <typename... Signatures>
+  requires((sizeof...(Signatures) > 0) &&
+           (details::VoidSignature<Signatures> && ...))
+constexpr void CallableBufferArray<Signatures...>::Swap(
+    CallableBufferArray& other) noexcept {
   if (this == &other) [[unlikely]] {
     return;
   }
 
-  constexpr size_type fn_ptr_size = sizeof(FirstExecuteFn);
-
-  const auto aligned_boundary =
-      AlignUp(buffer_.size(), alignof(FirstExecuteFn));
-  const auto padding = aligned_boundary - buffer_.size();
-  const auto total_required = buffer_.size() + padding + other.buffer_.size();
-
-  if (total_required > buffer_.capacity()) {
-    GrowBuffer(total_required);
+  if (GetMemoryResource() != other.GetMemoryResource()) {
+    CallableBufferArray temporary(GetMemoryResource());
+    temporary = std::move(*this);
+    *this = std::move(other);
+    other = std::move(temporary);
+    return;
   }
 
-  if (padding > 0) {
+  buffer_.swap(other.buffer_);
+  offsets_.swap(other.offsets_);
+}
+
+template <typename... Signatures>
+  requires((sizeof...(Signatures) > 0) &&
+           (details::VoidSignature<Signatures> && ...))
+constexpr void CallableBufferArray<Signatures...>::Merge(
+    CallableBufferArray&& other) {
+  if (this == &other) [[unlikely]] {
+    return;
+  }
+
+  if (other.Empty()) {
+    return;
+  }
+  if (Empty() && GetMemoryResource() == other.GetMemoryResource()) {
+    // Direct transfer is safe only when PMR resources match.
+    buffer_ = std::move(other.buffer_);
+    offsets_ = std::move(other.offsets_);
+    return;
+  }
+
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
+  constexpr size_t header_alignment = alignof(std::max_align_t);
+  const auto source_start = other.offsets_.front();
+  const auto content_size = other.buffer_.size() - source_start;
+
+  if (buffer_.capacity() == 0) {
+    GrowBuffer(content_size + header_alignment - 1);
+  }
+
+  auto aligned_boundary =
+      AlignOffset(buffer_.data(), buffer_.size(), header_alignment);
+  auto total_required = aligned_boundary + content_size;
+  if (total_required > buffer_.capacity()) {
+    GrowBuffer(total_required);
+    aligned_boundary =
+        AlignOffset(buffer_.data(), buffer_.size(), header_alignment);
+    total_required = aligned_boundary + content_size;
+  }
+
+  if (aligned_boundary > buffer_.size()) {
     buffer_.resize(aligned_boundary, std::byte{0});
   }
 
-  const auto offset_adjustment = aligned_boundary;
   for (const auto offset : other.offsets_) {
-    offsets_.push_back(offset + offset_adjustment);
+    offsets_.push_back(aligned_boundary + (offset - source_start));
   }
-  buffer_.insert(buffer_.end(), std::make_move_iterator(other.buffer_.begin()),
-                 std::make_move_iterator(other.buffer_.end()));
+
+  buffer_.resize(total_required);
+  std::memcpy(buffer_.data() + aligned_boundary,
+              other.buffer_.data() + source_start, content_size);
 
   for (const auto other_offset : other.offsets_) {
     auto* old_header = other.buffer_.data() + other_offset;
-    auto* new_header = buffer_.data() + other_offset + offset_adjustment;
+    auto* new_header =
+        buffer_.data() + aligned_boundary + (other_offset - source_start);
 
     auto relocate_fn = *std::launder(reinterpret_cast<RelocateFn*>(
         old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn)));
@@ -411,12 +497,11 @@ constexpr void CallableBufferArrayImpl<Allocator, Signatures...>::Merge(
   other.offsets_.clear();
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T, size_t N, typename... Args>
-constexpr void
-CallableBufferArrayImpl<Allocator, Signatures...>::ExecuteDefault(
+constexpr void CallableBufferArray<Signatures...>::ExecuteDefault(
     Args... args, void* data) noexcept {
   T* callable = static_cast<T*>(data);
   if constexpr (kNumOperations == 1) {
@@ -426,11 +511,11 @@ CallableBufferArrayImpl<Allocator, Signatures...>::ExecuteDefault(
   }
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T, auto Method, typename... Args>
-constexpr void CallableBufferArrayImpl<Allocator, Signatures...>::ExecuteMethod(
+constexpr void CallableBufferArray<Signatures...>::ExecuteMethod(
     Args... args, void* data) noexcept {
   T* callable = static_cast<T*>(data);
   if constexpr (std::invocable<decltype(Method), T&, Args...>) {
@@ -440,76 +525,87 @@ constexpr void CallableBufferArrayImpl<Allocator, Signatures...>::ExecuteMethod(
   }
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T>
-constexpr void
-CallableBufferArrayImpl<Allocator, Signatures...>::RelocateCallable(
+constexpr void CallableBufferArray<Signatures...>::RelocateCallable(
     void* dest, void* src) noexcept {
   T* typed_src = static_cast<T*>(src);
   std::construct_at(static_cast<T*>(dest), std::move(*typed_src));
   std::destroy_at(typed_src);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-inline void CallableBufferArrayImpl<Allocator, Signatures...>::GrowBuffer(
+inline void CallableBufferArray<Signatures...>::GrowBuffer(
     size_type required_capacity) {
-  constexpr size_type fn_ptr_size = sizeof(FirstExecuteFn);
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
+  constexpr size_t header_alignment = alignof(std::max_align_t);
 
   BufferType new_buffer(buffer_.get_allocator());
-  const auto new_cap = std::max(required_capacity, buffer_.capacity() * 2);
-  new_buffer.resize(new_cap);
+  const auto new_cap = std::max(required_capacity + header_alignment - 1,
+                                buffer_.capacity() * 2);
+  new_buffer.reserve(new_cap);
 
-  if (!buffer_.empty()) {
-    std::memcpy(new_buffer.data(), buffer_.data(), buffer_.size());
-  }
+  const auto used = buffer_.size();
+  if (used > 0) {
+    const auto old_start = offsets_.front();
+    const auto content_size = used - old_start;
+    const auto new_start = AlignOffset(new_buffer.data(), 0, header_alignment);
+    new_buffer.resize(new_start + content_size);
+    std::memcpy(new_buffer.data() + new_start, buffer_.data() + old_start,
+                content_size);
 
-  for (auto header_offset : offsets_) {
-    auto* old_header = buffer_.data() + header_offset;
-    auto* new_header = new_buffer.data() + header_offset;
+    for (auto& header_offset : offsets_) {
+      auto* old_header = buffer_.data() + header_offset;
+      const auto new_offset = new_start + (header_offset - old_start);
+      auto* new_header = new_buffer.data() + new_offset;
 
-    auto relocate_fn = *std::launder(reinterpret_cast<RelocateFn*>(
-        old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn)));
+      auto relocate_fn = *std::launder(reinterpret_cast<RelocateFn*>(
+          old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn)));
 
-    if (relocate_fn != nullptr) {
-      const auto data_offset = *std::launder(reinterpret_cast<size_type*>(
-          old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn) +
-          sizeof(RelocateFn)));
-      relocate_fn(new_header + data_offset, old_header + data_offset);
+      if (relocate_fn != nullptr) {
+        const auto data_offset = *std::launder(reinterpret_cast<size_type*>(
+            old_header + (kNumOperations * fn_ptr_size) + sizeof(DestroyFn) +
+            sizeof(RelocateFn)));
+        relocate_fn(new_header + data_offset, old_header + data_offset);
+      }
+      header_offset = new_offset;
     }
   }
 
-  const auto used = buffer_.size();
   buffer_ = std::move(new_buffer);
-  buffer_.resize(used);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T>
-inline void CallableBufferArrayImpl<Allocator, Signatures...>::PushImpl(
-    T&& callable) {
+inline void CallableBufferArray<Signatures...>::PushImpl(T&& callable) {
   using DecayedT = std::remove_cvref_t<T>;
 
-  constexpr size_type element_size = sizeof(DecayedT);
-  constexpr size_type element_align = alignof(DecayedT);
+  constexpr size_t element_size = sizeof(DecayedT);
+  constexpr size_t element_align = alignof(DecayedT);
   constexpr size_type base_header = BaseHeaderSize();
-  constexpr size_type fn_ptr_size = sizeof(FirstExecuteFn);
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
+  constexpr size_t header_alignment = alignof(std::max_align_t);
+  constexpr size_type data_offset_from_header =
+      AlignUp(base_header, element_align);
+  constexpr size_type total_entry_size = data_offset_from_header + element_size;
 
-  const auto header_offset = AlignUp(buffer_.size(), alignof(FirstExecuteFn));
-  const auto unaligned_data_offset = header_offset + base_header;
-  const auto aligned_data_offset =
-      AlignUp(unaligned_data_offset, element_align);
-  const auto data_offset_from_header = aligned_data_offset - header_offset;
-  const auto total_entry_size = data_offset_from_header + element_size;
-  const auto required_size = header_offset + total_entry_size;
-
+  if (buffer_.capacity() == 0) {
+    GrowBuffer(total_entry_size + header_alignment - 1);
+  }
+  auto header_offset =
+      AlignOffset(buffer_.data(), buffer_.size(), header_alignment);
+  auto required_size = header_offset + total_entry_size;
   if (required_size > buffer_.capacity()) {
     GrowBuffer(required_size);
+    header_offset =
+        AlignOffset(buffer_.data(), buffer_.size(), header_alignment);
+    required_size = header_offset + total_entry_size;
   }
 
   buffer_.resize(required_size);
@@ -547,29 +643,33 @@ inline void CallableBufferArrayImpl<Allocator, Signatures...>::PushImpl(
   offsets_.push_back(header_offset);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <auto... Methods, typename T>
-inline void CallableBufferArrayImpl<Allocator, Signatures...>::PushImplMethods(
-    T&& callable) {
+inline void CallableBufferArray<Signatures...>::PushImplMethods(T&& callable) {
   using DecayedT = std::remove_cvref_t<T>;
 
-  constexpr size_type element_size = sizeof(DecayedT);
-  constexpr size_type element_align = alignof(DecayedT);
+  constexpr size_t element_size = sizeof(DecayedT);
+  constexpr size_t element_align = alignof(DecayedT);
   constexpr size_type base_header = BaseHeaderSize();
-  constexpr size_type fn_ptr_size = sizeof(FirstExecuteFn);
+  constexpr size_t fn_ptr_size = sizeof(FirstExecuteFn);
+  constexpr size_t header_alignment = alignof(std::max_align_t);
+  constexpr size_type data_offset_from_header =
+      AlignUp(base_header, element_align);
+  constexpr size_type total_entry_size = data_offset_from_header + element_size;
 
-  const auto header_offset = AlignUp(buffer_.size(), alignof(FirstExecuteFn));
-  const auto unaligned_data_offset = header_offset + base_header;
-  const auto aligned_data_offset =
-      AlignUp(unaligned_data_offset, element_align);
-  const auto data_offset_from_header = aligned_data_offset - header_offset;
-  const auto total_entry_size = data_offset_from_header + element_size;
-  const auto required_size = header_offset + total_entry_size;
-
+  if (buffer_.capacity() == 0) {
+    GrowBuffer(total_entry_size + header_alignment - 1);
+  }
+  auto header_offset =
+      AlignOffset(buffer_.data(), buffer_.size(), header_alignment);
+  auto required_size = header_offset + total_entry_size;
   if (required_size > buffer_.capacity()) {
     GrowBuffer(required_size);
+    header_offset =
+        AlignOffset(buffer_.data(), buffer_.size(), header_alignment);
+    required_size = header_offset + total_entry_size;
   }
 
   buffer_.resize(required_size);
@@ -607,12 +707,11 @@ inline void CallableBufferArrayImpl<Allocator, Signatures...>::PushImplMethods(
   offsets_.push_back(header_offset);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T, size_t... Indices>
-inline void
-CallableBufferArrayImpl<Allocator, Signatures...>::StoreFunctionPointersDefault(
+inline void CallableBufferArray<Signatures...>::StoreFunctionPointersDefault(
     size_type header_offset, std::index_sequence<Indices...>) noexcept {
   auto* header_base = buffer_.data() + header_offset;
 
@@ -630,12 +729,11 @@ CallableBufferArrayImpl<Allocator, Signatures...>::StoreFunctionPointersDefault(
       ...);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
 template <typename T, auto... Methods, size_t... Indices>
-inline void
-CallableBufferArrayImpl<Allocator, Signatures...>::StoreFunctionPointersMethods(
+inline void CallableBufferArray<Signatures...>::StoreFunctionPointersMethods(
     size_type header_offset, std::index_sequence<Indices...>) noexcept {
   auto* header_base = buffer_.data() + header_offset;
 
@@ -654,10 +752,10 @@ CallableBufferArrayImpl<Allocator, Signatures...>::StoreFunctionPointersMethods(
       ...);
 }
 
-template <typename Allocator, typename... Signatures>
+template <typename... Signatures>
   requires((sizeof...(Signatures) > 0) &&
            (details::VoidSignature<Signatures> && ...))
-inline void* CallableBufferArrayImpl<Allocator, Signatures...>::GetDataPtr(
+inline void* CallableBufferArray<Signatures...>::GetDataPtr(
     size_type header_offset) const noexcept {
   auto* header_base = buffer_.data() + header_offset;
   const auto data_offset = *std::launder(reinterpret_cast<const size_type*>(
@@ -665,90 +763,5 @@ inline void* CallableBufferArrayImpl<Allocator, Signatures...>::GetDataPtr(
       sizeof(DestroyFn) + sizeof(RelocateFn)));
   return const_cast<std::byte*>(buffer_.data() + header_offset + data_offset);
 }
-
-namespace details {
-
-/// @brief Deduces the `CallableBufferArrayImpl` type from signature arguments.
-template <typename... Args>
-struct CallableBufferArrayDeducer;
-
-template <VoidSignature FirstSig, typename... RestSigs>
-  requires(VoidSignature<RestSigs> && ...)
-struct CallableBufferArrayDeducer<FirstSig, RestSigs...> {
-  using type =
-      CallableBufferArrayImpl<std::allocator<std::byte>, FirstSig, RestSigs...>;
-};
-
-template <typename Alloc, VoidSignature FirstSig, typename... RestSigs>
-  requires InstantiatedAllocator<Alloc> && (VoidSignature<RestSigs> && ...)
-struct CallableBufferArrayDeducer<Alloc, FirstSig, RestSigs...> {
-  using type = CallableBufferArrayImpl<Alloc, FirstSig, RestSigs...>;
-};
-
-}  // namespace details
-
-/**
- * @brief Inline storage for heterogeneous callable instances with type-erased
- * invocation.
- * @details Stores callable instances of different types in a single contiguous
- * buffer with embedded function pointers for type-safe invocation. Optimized
- * for fast sequential iteration without virtual dispatch or per-callable heap
- * allocations.
- *
- * The allocator parameter is optional. If the first template argument is a
- * function signature (`void(Args...)`), the default allocator is used.
- * Otherwise, the first argument is treated as an allocator.
- *
- * @tparam Args Either signatures only, or allocator followed by signatures
- *
- * @code
- * // Single operation with default allocator (most common usage)
- * CallableBufferArray<void(World&)> commands;
- * commands.Push(SpawnEntityCmd{entity});
- * commands.Invoke(world);
- *
- * // Multiple operations
- * CallableBufferArray<void(World&), void(Logger&)> multi;
- * multi.Push<&Cmd::Execute, &Cmd::Log>(Cmd{data});
- * multi.Invoke<0>(world);
- * multi.Invoke<1>(logger);
- * @endcode
- */
-template <typename... Args>
-using CallableBufferArray =
-    typename details::CallableBufferArrayDeducer<Args...>::type;
-
-/**
- * @brief Inline storage for heterogeneous callable instances with type-erased
- * invocation with polymorphic allocator.
- * @details Stores callable instances of different types in a single contiguous
- * buffer with embedded function pointers for type-safe invocation. Optimized
- * for fast sequential iteration without virtual dispatch or per-callable heap
- * allocations.
- *
- * The allocator parameter is optional. If the first template argument is a
- * function signature (`void(Args...)`), the default allocator is used.
- * Otherwise, the first argument is treated as an allocator.
- *
- * @tparam Args Function signatures in the form void(Args...) for the operations
- * to support.
- *
- * @code
- * // Single operation
- * PmrCallableBufferArray<void(World&)> commands(&resource);
- * commands.Push(SpawnEntityCmd{entity});
- * commands.Invoke(world);
- *
- * // Multiple operations
- * PmrCallableBufferArray<void(World&), void(Logger&)> multi(&resource);
- * multi.Push<&Cmd::Execute, &Cmd::Log>(Cmd{data});
- * multi.Invoke<0>(world);
- * multi.Invoke<1>(logger);
- * @endcode
- */
-template <typename... Signatures>
-using PmrCallableBufferArray =
-    CallableBufferArrayImpl<std::pmr::polymorphic_allocator<std::byte>,
-                            Signatures...>;
 
 }  // namespace helios::container

@@ -29,7 +29,7 @@ struct SpawnReinforcementCommand {
     const hecs::Entity entity = world.CreateEntity();
     world.AddComponents(entity, Health{.hp = 5}, Spawned{});
     world.WriteResource<ReinforcementsCalled>().count += 1;
-    hlog::Info("commands: custom command spawned reinforcement {}", entity);
+    hlog::Info("Custom command spawned reinforcement {}", entity);
   }
 };
 
@@ -39,7 +39,7 @@ struct SpawnUnit {
     if (frames->count == 0) {
       // Spawn reserves the entity work now; AddComponents is applied when the
       // schedule flushes its deferred command queues.
-      hlog::Info("commands: spawning entity (deferred)");
+      hlog::Info("Spawning entity (deferred)");
       commands.Spawn().AddComponents(Health{.hp = 3}, Spawned{});
     }
   }
@@ -51,7 +51,7 @@ struct EnqueueReinforcement {
     if (frames->count == 1) {
       // Enqueue accepts user-defined command objects with an Execute(World&)
       // method, which is useful for batching a small world edit.
-      hlog::Info("commands: enqueuing custom reinforcement command");
+      hlog::Info("Enqueuing custom reinforcement command");
       commands.Enqueue(SpawnReinforcementCommand{});
     }
   }
@@ -65,7 +65,7 @@ struct DamageUnits {
       if (health.hp <= 0) {
         // Entity commands target an existing entity and keep destruction
         // deferred until the current schedule has finished.
-        hlog::Info("commands: queue destroy for {}", entity);
+        hlog::Info("Queue destroy for {}", entity);
         commands.Entity(entity).Destroy();
       }
     });
@@ -75,8 +75,8 @@ struct DamageUnits {
 struct LogRemaining {
   void operator()(hecs::Query<const Health&> units,
                   hecs::Res<const ReinforcementsCalled> reinforcements) const {
-    hlog::Info("commands: {} entities with Health", units.Count());
-    hlog::Info("commands: reinforcements called {}", reinforcements->count);
+    hlog::Info("{} entities with Health", units.Count());
+    hlog::Info("Reinforcements called {}", reinforcements->count);
   }
 };
 

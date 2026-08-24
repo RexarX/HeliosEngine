@@ -6,7 +6,6 @@
 #include <concepts>
 #include <cstddef>
 #include <limits>
-#include <memory>
 #include <memory_resource>
 #include <span>
 #include <string_view>
@@ -32,23 +31,14 @@ namespace helios::container {
  *
  * @tparam T Type of values stored in the dense array
  * @tparam IndexType Type used for element indices (default: size_t)
- * @tparam Allocator Allocator type for memory management (default:
- * std::allocator<T>)
  */
-template <typename T, typename IndexType = size_t,
-          typename Allocator = std::allocator<T>>
+template <typename T, typename IndexType = size_t>
 class SparseSet {
 private:
   using DenseIndexType = IndexType;
-  using SparseAllocator = typename std::allocator_traits<
-      Allocator>::template rebind_alloc<DenseIndexType>;
-  using DenseAllocator = Allocator;
-  using ReverseMapAllocator = typename std::allocator_traits<
-      Allocator>::template rebind_alloc<IndexType>;
-
-  using SparseContainerType = std::vector<DenseIndexType, SparseAllocator>;
-  using DenseContainerType = std::vector<T, DenseAllocator>;
-  using ReverseMapContainerType = std::vector<IndexType, ReverseMapAllocator>;
+  using SparseContainerType = std::pmr::vector<DenseIndexType>;
+  using DenseContainerType = std::pmr::vector<T>;
+  using ReverseMapContainerType = std::pmr::vector<IndexType>;
 
 public:
   using value_type = T;
@@ -59,7 +49,6 @@ public:
   using const_reference = const T&;
   using pointer = T*;
   using const_pointer = const T*;
-  using allocator_type = Allocator;
 
   using iterator = typename DenseContainerType::iterator;
   using const_iterator = typename DenseContainerType::const_iterator;
@@ -67,43 +56,19 @@ public:
   using const_reverse_iterator =
       typename DenseContainerType::const_reverse_iterator;
 
-  static constexpr IndexType kInvalidIndex =
-      std::numeric_limits<IndexType>::max();
-  static constexpr DenseIndexType kInvalidDenseIndex =
+  static constexpr auto kInvalidIndex = std::numeric_limits<IndexType>::max();
+  static constexpr auto kInvalidDenseIndex =
       std::numeric_limits<DenseIndexType>::max();
 
-  /**
-   * @brief Default constructor.
-   * @details Creates an empty sparse set.
-   * Exception safety: No-throw guarantee if `T` and `Allocator` are nothrow
-   * default constructible.
-   */
-  constexpr SparseSet() noexcept(
-      std::is_nothrow_default_constructible_v<Allocator>) = default;
+  /// @brief Default constructor using the default PMR resource.
+  constexpr SparseSet() noexcept = default;
 
   /**
-   * @brief Constructor with custom allocator.
-   * @details Creates an empty sparse set with the specified allocator.
-   * Exception safety: Basic guarantee.
-   * @param alloc The allocator to use for memory management
-   * @throws May throw if allocator copy constructor throws
+   * @brief Constructs an empty sparse set with a PMR memory resource.
+   * @param resource Memory resource used for internal storage
    */
-  explicit SparseSet(const Allocator& alloc) noexcept(
-      noexcept(SparseAllocator(alloc)))
-      : sparse_(SparseAllocator(alloc)),
-        dense_(alloc),
-        reverse_map_(ReverseMapAllocator(alloc)) {}
-
-  /**
-   * @brief Constructor with PMR memory resource.
-   * @details Enabled only when `Allocator` is constructible from
-   * `std::pmr::memory_resource*`.
-   * @param resource Memory resource used to construct allocator
-   */
-  explicit SparseSet(std::pmr::memory_resource* resource) noexcept(
-      std::is_nothrow_constructible_v<Allocator, std::pmr::memory_resource*>)
-    requires std::constructible_from<Allocator, std::pmr::memory_resource*>
-      : SparseSet(Allocator{resource}) {}
+  explicit constexpr SparseSet(std::pmr::memory_resource* resource) noexcept
+      : sparse_(resource), dense_(resource), reverse_map_(resource) {}
 
   SparseSet(std::nullptr_t) = delete;
 
@@ -112,7 +77,6 @@ public:
    * @details Creates a copy of another sparse set.
    * Exception safety: Strong guarantee.
    * @param other The sparse set to copy from
-   * @throws May throw if `T` copy constructor or memory allocation fails
    */
   constexpr SparseSet(const SparseSet& other) = default;
   /**
@@ -134,7 +98,6 @@ public:
    * Exception safety: Strong guarantee.
    * @param other The sparse set to copy from
    * @return Reference to this sparse set
-   * @throws May throw if `T` copy assignment or memory allocation fails
    */
   constexpr SparseSet& operator=(const SparseSet& other) = default;
 
@@ -162,12 +125,10 @@ public:
    * replaced. The sparse array will be resized if necessary to accommodate the
    * index. Time complexity: O(1) amortized (O(index) worst case if sparse array
    * needs resizing). Exception safety: Strong guarantee.
-   * @warning Triggers assertion if index is invalid or negative
+   * @warning Triggers assertion if index is invalid or negative.
    * @param index The index to insert at
    * @param value The value to move insert
    * @return The dense index where the value was stored
-   * @throws std::bad_alloc If memory allocation fails during sparse array
-   * resize or dense array growth
    */
   constexpr DenseIndexType Insert(IndexType index, const T& value);
 
@@ -178,12 +139,10 @@ public:
    * replaced. The sparse array will be resized if necessary to accommodate the
    * index. Time complexity: O(1) amortized (O(index) worst case if sparse array
    * needs resizing). Exception safety: Strong guarantee.
-   * @warning Triggers assertion if index is invalid or negative
+   * @warning Triggers assertion if index is invalid or negative.
    * @param index The index to insert at
    * @param value The value to copy insert
    * @return The dense index where the value was stored
-   * @throws std::bad_alloc If memory allocation fails during sparse array
-   * resize or dense array growth
    */
   constexpr DenseIndexType Insert(IndexType index, T&& value);
 
@@ -198,8 +157,6 @@ public:
    * @param index The index to insert at
    * @param args Arguments to forward to T's constructor
    * @return The dense index where the value was stored
-   * @throws std::bad_alloc If memory allocation fails during sparse array
-   * resize or dense array growth
    */
   template <typename... Args>
   constexpr DenseIndexType Emplace(IndexType index, Args&&... args);
@@ -224,7 +181,6 @@ public:
    * Exception safety: Strong guarantee.
    * @warning Triggers assertion if n is negative.
    * @param n The minimum capacity to reserve
-   * @throws std::bad_alloc If memory allocation fails
    */
   constexpr void Reserve(size_type n) { dense_.reserve(n); }
 
@@ -236,7 +192,6 @@ public:
    * guarantee.
    * @warning Triggers assertion if max_index is invalid or negative.
    * @param max_index The maximum index to accommodate
-   * @throws std::bad_alloc If memory allocation fails
    */
   constexpr void ReserveSparse(IndexType max_index);
 
@@ -245,7 +200,6 @@ public:
    * @details Reduces memory usage by shrinking both the dense and sparse arrays
    * to their minimum required size. Time complexity: O(Size() + SparseSize()).
    * Exception safety: Strong guarantee.
-   * @throws std::bad_alloc If memory allocation fails during shrinking
    */
   constexpr void ShrinkToFit();
 
@@ -385,14 +339,12 @@ public:
   [[nodiscard]] constexpr bool Contains(IndexType index) const noexcept;
 
   /**
-   * @brief Returns the allocator associated with the container.
-   * @details Gets the allocator used for the dense array.
-   * Time complexity: O(1).
-   * Exception safety: No-throw guarantee.
-   * @return Copy of the allocator
+   * @brief Returns the memory resource used for internal storage.
+   * @return Memory resource passed to the constructor, or the default resource
    */
-  [[nodiscard]] constexpr allocator_type GetAllocator() const noexcept {
-    return dense_.get_allocator();
+  [[nodiscard]] constexpr std::pmr::memory_resource* GetMemoryResource()
+      const noexcept {
+    return dense_.get_allocator().resource();
   }
 
   /**
@@ -514,20 +466,19 @@ public:
 private:
   SparseContainerType sparse_;           ///< Maps index -> dense index
   DenseContainerType dense_;             ///< Packed values in insertion order
-  ReverseMapContainerType reverse_map_;  ///< Maps dense index -> original index
-                                         ///< for efficient removal
+  ReverseMapContainerType reverse_map_;  ///< Maps dense index -> original
+                                         ///< index for efficient removal
 };
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr void SparseSet<T, IndexType, Allocator>::Clear() noexcept {
+template <typename T, typename IndexType>
+constexpr void SparseSet<T, IndexType>::Clear() noexcept {
   dense_.clear();
   reverse_map_.clear();
   std::ranges::fill(sparse_, kInvalidDenseIndex);
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr auto SparseSet<T, IndexType, Allocator>::Insert(IndexType index,
-                                                          const T& value)
+template <typename T, typename IndexType>
+constexpr auto SparseSet<T, IndexType>::Insert(IndexType index, const T& value)
     -> DenseIndexType {
   HELIOS_ASSERT(IsValidIndex(index),
                 "Failed to insert value: index is invalid!");
@@ -556,9 +507,8 @@ constexpr auto SparseSet<T, IndexType, Allocator>::Insert(IndexType index,
   return dense_index;
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr auto SparseSet<T, IndexType, Allocator>::Insert(IndexType index,
-                                                          T&& value)
+template <typename T, typename IndexType>
+constexpr auto SparseSet<T, IndexType>::Insert(IndexType index, T&& value)
     -> DenseIndexType {
   HELIOS_ASSERT(IsValidIndex(index),
                 "Failed to insert value: index is invalid!");
@@ -587,10 +537,9 @@ constexpr auto SparseSet<T, IndexType, Allocator>::Insert(IndexType index,
   return dense_index;
 }
 
-template <typename T, typename IndexType, typename Allocator>
+template <typename T, typename IndexType>
 template <typename... Args>
-constexpr auto SparseSet<T, IndexType, Allocator>::Emplace(IndexType index,
-                                                           Args&&... args)
+constexpr auto SparseSet<T, IndexType>::Emplace(IndexType index, Args&&... args)
     -> DenseIndexType {
   HELIOS_ASSERT(IsValidIndex(index),
                 "Failed to emplace value: index is invalid!");
@@ -619,9 +568,8 @@ constexpr auto SparseSet<T, IndexType, Allocator>::Emplace(IndexType index,
   return dense_index;
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr void SparseSet<T, IndexType, Allocator>::Remove(
-    IndexType index) noexcept {
+template <typename T, typename IndexType>
+constexpr void SparseSet<T, IndexType>::Remove(IndexType index) noexcept {
   HELIOS_ASSERT(IsValidIndex(index),
                 "Failed to remove value: index is invalid!");
   if constexpr (std::is_signed_v<IndexType>) {
@@ -647,9 +595,8 @@ constexpr void SparseSet<T, IndexType, Allocator>::Remove(
   sparse_[index] = kInvalidDenseIndex;
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr void SparseSet<T, IndexType, Allocator>::ReserveSparse(
-    IndexType max_index) {
+template <typename T, typename IndexType>
+constexpr void SparseSet<T, IndexType>::ReserveSparse(IndexType max_index) {
   HELIOS_ASSERT(IsValidIndex(max_index),
                 "Failed to reserve sparse: max_index is invalid!");
   if constexpr (std::is_signed_v<IndexType>) {
@@ -661,8 +608,8 @@ constexpr void SparseSet<T, IndexType, Allocator>::ReserveSparse(
   }
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr void SparseSet<T, IndexType, Allocator>::ShrinkToFit() {
+template <typename T, typename IndexType>
+constexpr void SparseSet<T, IndexType>::ShrinkToFit() {
   dense_.shrink_to_fit();
   reverse_map_.shrink_to_fit();
 
@@ -676,8 +623,8 @@ constexpr void SparseSet<T, IndexType, Allocator>::ShrinkToFit() {
   sparse_.shrink_to_fit();
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr T& SparseSet<T, IndexType, Allocator>::Get(IndexType index) noexcept {
+template <typename T, typename IndexType>
+constexpr T& SparseSet<T, IndexType>::Get(IndexType index) noexcept {
   HELIOS_ASSERT(IsValidIndex(index), "Failed to get value: index is invalid!");
   if constexpr (std::is_signed_v<IndexType>) {
     HELIOS_ASSERT(index >= 0, "Failed to get value: index cannot be negative!");
@@ -686,8 +633,8 @@ constexpr T& SparseSet<T, IndexType, Allocator>::Get(IndexType index) noexcept {
   return dense_[sparse_[index]];
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr const T& SparseSet<T, IndexType, Allocator>::Get(
+template <typename T, typename IndexType>
+constexpr const T& SparseSet<T, IndexType>::Get(
     IndexType index) const noexcept {
   HELIOS_ASSERT(IsValidIndex(index), "Failed to get value: index is invalid!");
   if constexpr (std::is_signed_v<IndexType>) {
@@ -697,8 +644,8 @@ constexpr const T& SparseSet<T, IndexType, Allocator>::Get(
   return dense_[sparse_[index]];
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr T& SparseSet<T, IndexType, Allocator>::GetByDenseIndex(
+template <typename T, typename IndexType>
+constexpr T& SparseSet<T, IndexType>::GetByDenseIndex(
     DenseIndexType dense_index) noexcept {
   HELIOS_ASSERT(dense_index != kInvalidDenseIndex,
                 "Failed to get value: dense_index is invalid!");
@@ -711,8 +658,8 @@ constexpr T& SparseSet<T, IndexType, Allocator>::GetByDenseIndex(
   return dense_[dense_index];
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr const T& SparseSet<T, IndexType, Allocator>::GetByDenseIndex(
+template <typename T, typename IndexType>
+constexpr const T& SparseSet<T, IndexType>::GetByDenseIndex(
     DenseIndexType dense_index) const noexcept {
   HELIOS_ASSERT(dense_index != kInvalidDenseIndex,
                 "Failed to get value: dense_index is invalid!");
@@ -725,9 +672,8 @@ constexpr const T& SparseSet<T, IndexType, Allocator>::GetByDenseIndex(
   return dense_[dense_index];
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr T* SparseSet<T, IndexType, Allocator>::TryGet(
-    IndexType index) noexcept {
+template <typename T, typename IndexType>
+constexpr T* SparseSet<T, IndexType>::TryGet(IndexType index) noexcept {
   HELIOS_ASSERT(index != kInvalidIndex,
                 "Failed to try get value: index is invalid!");
   if constexpr (std::is_signed_v<IndexType>) {
@@ -741,8 +687,8 @@ constexpr T* SparseSet<T, IndexType, Allocator>::TryGet(
   return &dense_[sparse_[index]];
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr const T* SparseSet<T, IndexType, Allocator>::TryGet(
+template <typename T, typename IndexType>
+constexpr const T* SparseSet<T, IndexType>::TryGet(
     IndexType index) const noexcept {
   HELIOS_ASSERT(index != kInvalidIndex,
                 "Failed to get value: index is invalid!");
@@ -757,16 +703,27 @@ constexpr const T* SparseSet<T, IndexType, Allocator>::TryGet(
   return &dense_[sparse_[index]];
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr void SparseSet<T, IndexType, Allocator>::Swap(
-    SparseSet& other) noexcept {
+template <typename T, typename IndexType>
+constexpr void SparseSet<T, IndexType>::Swap(SparseSet& other) noexcept {
+  if (this == &other) [[unlikely]] {
+    return;
+  }
+
+  if (GetMemoryResource() != other.GetMemoryResource()) {
+    SparseSet temporary(GetMemoryResource());
+    temporary = std::move(*this);
+    *this = std::move(other);
+    other = std::move(temporary);
+    return;
+  }
+
   std::swap(sparse_, other.sparse_);
   std::swap(dense_, other.dense_);
   std::swap(reverse_map_, other.reverse_map_);
 }
 
-template <typename T, typename IndexType, typename Allocator>
-inline bool SparseSet<T, IndexType, Allocator>::operator==(
+template <typename T, typename IndexType>
+inline bool SparseSet<T, IndexType>::operator==(
     const SparseSet& other) const noexcept
   requires std::equality_comparable<T>
 {
@@ -784,8 +741,8 @@ inline bool SparseSet<T, IndexType, Allocator>::operator==(
   return true;
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr bool SparseSet<T, IndexType, Allocator>::Contains(
+template <typename T, typename IndexType>
+constexpr bool SparseSet<T, IndexType>::Contains(
     IndexType index) const noexcept {
   HELIOS_ASSERT(IsValidIndex(index),
                 "Failed to check if set contains index: index is invalid!");
@@ -801,8 +758,8 @@ constexpr bool SparseSet<T, IndexType, Allocator>::Contains(
          reverse_map_[sparse_[index]] == index;
 }
 
-template <typename T, typename IndexType, typename Allocator>
-constexpr auto SparseSet<T, IndexType, Allocator>::GetDenseIndex(
+template <typename T, typename IndexType>
+constexpr auto SparseSet<T, IndexType>::GetDenseIndex(
     IndexType index) const noexcept -> DenseIndexType {
   HELIOS_ASSERT(IsValidIndex(index),
                 "Failed to get dense index: index is invalid!");
@@ -814,9 +771,5 @@ constexpr auto SparseSet<T, IndexType, Allocator>::GetDenseIndex(
                 "Failed to get dense index: index does not exist!");
   return sparse_[index];
 }
-
-template <typename T, typename IndexType = size_t>
-using PmrSparseSet =
-    SparseSet<T, IndexType, std::pmr::polymorphic_allocator<T>>;
 
 }  // namespace helios::container

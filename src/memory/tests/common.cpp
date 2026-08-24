@@ -106,19 +106,6 @@ TEST_SUITE("helios::mem::AllocatorStats") {
   }
 }
 
-TEST_SUITE("helios::mem::MemoryErrorToString") {
-  TEST_CASE("helios::mem::MemoryErrorToString::maps each error to a message") {
-    CHECK(MemoryErrorToString(MemoryError::kOutOfMemory) == "Out of memory");
-    CHECK(MemoryErrorToString(MemoryError::kInvalidAlignment) ==
-          "Invalid alignment");
-    CHECK(MemoryErrorToString(MemoryError::kInvalidSize) == "Invalid size");
-    CHECK(MemoryErrorToString(MemoryError::kGrowthDisabled) ==
-          "Growth is disabled");
-    CHECK(MemoryErrorToString(MemoryError::kOwnershipMismatch) ==
-          "Pointer is not owned by allocator");
-  }
-}
-
 TEST_SUITE("helios::mem::IsPowerOfTwo") {
   TEST_CASE("helios::mem::IsPowerOfTwo::detects powers of two correctly") {
     CHECK_FALSE(IsPowerOfTwo(0));

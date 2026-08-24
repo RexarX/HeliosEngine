@@ -216,6 +216,10 @@ function(_helios_configure_test_target TARGET_NAME)
 
   # Sanitizers
   helios_target_enable_sanitizers(${TARGET_NAME})
+
+  if(COMMAND helios_target_apply_linker)
+    helios_target_apply_linker(${TARGET_NAME})
+  endif()
 endfunction()
 
 #[[

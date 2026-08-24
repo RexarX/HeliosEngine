@@ -1,11 +1,13 @@
 #pragma once
 
-#include <helios/ecs/schedule/executor/executor.hpp>
-#include <helios/ecs/schedule/schedule.hpp>
-#include <helios/ecs/schedule/scheduler.hpp>
-#include <helios/ecs/schedule/stage.hpp>
-
 #include <string_view>
+
+namespace helios::ecs {
+
+class World;
+class Scheduler;
+
+}  // namespace helios::ecs
 
 namespace helios::app {
 
@@ -151,69 +153,14 @@ inline constexpr PostShutdown kPostShutdown{};
  * executor kinds, stage membership, and ordering.
  * @param scheduler ECS scheduler to populate
  */
-inline void RegisterBuiltinSchedules(ecs::Scheduler& scheduler) {
-  const auto add_in_stage = []<ecs::ScheduleTrait T, ecs::StageTrait S>(
-                                ecs::Scheduler& sched, const T& schedule_type,
-                                const S& stage, ecs::ExecutorKind kind) {
-    if (sched.TryGetSchedule(schedule_type) != nullptr) {
-      return;
-    }
-    auto schedule = ecs::Schedule::From(schedule_type);
-    schedule.Settings().executor_kind = kind;
-    sched.Add(schedule_type, std::move(schedule)).InStage(stage);
-  };
+void RegisterBuiltinSchedules(ecs::Scheduler& scheduler);
 
-  if (!scheduler.HasStage(kStartupStage)) {
-    scheduler.AddStage(kStartupStage);
-  }
-  if (!scheduler.HasStage(kUpdateStage)) {
-    scheduler.AddStage(kUpdateStage);
-  }
-  if (!scheduler.HasStage(kExtractStage)) {
-    scheduler.AddStage(kExtractStage);
-  }
-  if (!scheduler.HasStage(kShutdownStage)) {
-    scheduler.AddStage(kShutdownStage);
-  }
-
-  add_in_stage(scheduler, kMainStartup, kStartupStage,
-               ecs::ExecutorKind::kMainThread);
-  add_in_stage(scheduler, kPreStartup, kStartupStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kStartup, kStartupStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kPostStartup, kStartupStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kFirst, kUpdateStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kPreUpdate, kUpdateStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kUpdate, kUpdateStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kPostUpdate, kUpdateStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kLast, kUpdateStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kExtract, kExtractStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kPreShutdown, kShutdownStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kShutdown, kShutdownStage,
-               ecs::ExecutorKind::kMainThread);
-  add_in_stage(scheduler, kPostShutdown, kShutdownStage,
-               ecs::ExecutorKind::kMultiThreaded);
-
-  scheduler.Order(kPreStartup).After(kMainStartup);
-  scheduler.Order(kStartup).After(kPreStartup);
-  scheduler.Order(kPostStartup).After(kStartup);
-  scheduler.Order(kPreUpdate).After(kFirst);
-  scheduler.Order(kUpdate).After(kPreUpdate);
-  scheduler.Order(kPostUpdate).After(kUpdate);
-  scheduler.Order(kLast).After(kPostUpdate);
-  scheduler.Order(kShutdown).After(kPreShutdown);
-  scheduler.Order(kPostShutdown).After(kShutdown);
-  scheduler.OrderStage(kExtractStage).After(kUpdateStage);
-}
+/**
+ * @brief Inserts default `MainFrameOrder` and `FramePumpOrder` resources.
+ * @details Safe to call multiple times (`TryInsertResources`).
+ * @param world World that owns the frame-order resources
+ */
+void RegisterBuiltinFrameOrders(ecs::World& world);
 
 /**
  * @brief Registers built-in schedules for a sub-app ECS scheduler.
@@ -222,62 +169,6 @@ inline void RegisterBuiltinSchedules(ecs::Scheduler& scheduler) {
  * `SubApp::Extract`.
  * @param scheduler ECS scheduler to populate
  */
-inline void RegisterBuiltinSubAppSchedules(ecs::Scheduler& scheduler) {
-  const auto add_in_stage = []<ecs::ScheduleTrait T, ecs::StageTrait S>(
-                                ecs::Scheduler& sched, const T& schedule_type,
-                                const S& stage, ecs::ExecutorKind kind) {
-    if (sched.TryGetSchedule(schedule_type) != nullptr) {
-      return;
-    }
-    auto schedule = ecs::Schedule::From(schedule_type);
-    schedule.Settings().executor_kind = kind;
-    sched.Add(schedule_type, std::move(schedule)).InStage(stage);
-  };
-
-  if (!scheduler.HasStage(kStartupStage)) {
-    scheduler.AddStage(kStartupStage);
-  }
-  if (!scheduler.HasStage(kUpdateStage)) {
-    scheduler.AddStage(kUpdateStage);
-  }
-  if (!scheduler.HasStage(kShutdownStage)) {
-    scheduler.AddStage(kShutdownStage);
-  }
-
-  add_in_stage(scheduler, kMainStartup, kStartupStage,
-               ecs::ExecutorKind::kMainThread);
-  add_in_stage(scheduler, kPreStartup, kStartupStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kStartup, kStartupStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kPostStartup, kStartupStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kFirst, kUpdateStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kPreUpdate, kUpdateStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kUpdate, kUpdateStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kPostUpdate, kUpdateStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kLast, kUpdateStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kPreShutdown, kShutdownStage,
-               ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kShutdown, kShutdownStage,
-               ecs::ExecutorKind::kMainThread);
-  add_in_stage(scheduler, kPostShutdown, kShutdownStage,
-               ecs::ExecutorKind::kMultiThreaded);
-
-  scheduler.Order(kPreStartup).After(kMainStartup);
-  scheduler.Order(kStartup).After(kPreStartup);
-  scheduler.Order(kPostStartup).After(kStartup);
-  scheduler.Order(kPreUpdate).After(kFirst);
-  scheduler.Order(kUpdate).After(kPreUpdate);
-  scheduler.Order(kPostUpdate).After(kUpdate);
-  scheduler.Order(kLast).After(kPostUpdate);
-  scheduler.Order(kShutdown).After(kPreShutdown);
-  scheduler.Order(kPostShutdown).After(kShutdown);
-}
+void RegisterBuiltinSubAppSchedules(ecs::Scheduler& scheduler);
 
 }  // namespace helios::app

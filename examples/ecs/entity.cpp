@@ -22,28 +22,26 @@ struct ExitAfterFrames {
 void DemonstrateEntities(hecs::World& world) {
   // CreateEntity mutates the world immediately and returns a live handle.
   const hecs::Entity immediate = world.CreateEntity();
-  hlog::Info("entities: CreateEntity -> entity={} gen={}", immediate,
+  hlog::Info("CreateEntity -> entity={} gen={}", immediate,
              immediate.Generation());
 
   // ReserveEntity only allocates an id. The entity becomes real on Flush.
   const hecs::Entity reserved = world.ReserveEntity();
-  hlog::Info("entities: ReserveEntity -> entity={} (pending flush)", reserved);
+  hlog::Info("ReserveEntity -> entity={} (pending flush)", reserved);
 
   // Flush publishes reserved entities and runs queued world commands.
   world.Flush();
-  hlog::Info("entities: after Flush reserved exists={}",
-             world.Exists(reserved));
+  hlog::Info("After Flush reserved exists={}", world.Exists(reserved));
 
   // Destroying bumps the generation, so old handles stop validating.
   world.DestroyEntity(immediate);
-  hlog::Info("entities: destroyed immediate, stale handle exists={}",
+  hlog::Info("Destroyed immediate, stale handle exists={}",
              world.Exists(immediate));
 
   // The index can be recycled, but the generation distinguishes the new entity
   // from stale handles that used the same slot.
   const hecs::Entity recycled = world.CreateEntity();
-  hlog::Info("entities: recycled entity={} gen={}", recycled,
-             recycled.Generation());
+  hlog::Info("Recycled entity={} gen={}", recycled, recycled.Generation());
 }
 
 }  // namespace

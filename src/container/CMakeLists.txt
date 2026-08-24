@@ -4,11 +4,12 @@ helios_module(
     DESCRIPTION "Container data structures module"
 
     HEADERS
-        include/helios/container/container.hpp
         include/helios/container/details/callable_buffer_common.hpp
         include/helios/container/details/typed_buffer_common.hpp
         include/helios/container/callable_buffer.hpp
         include/helios/container/callable_buffer_array.hpp
+        include/helios/container/container.hpp
+        include/helios/container/flat_map.hpp
         include/helios/container/multi_type_map.hpp
         include/helios/container/sparse_set.hpp
         include/helios/container/static_string.hpp
@@ -16,15 +17,14 @@ helios_module(
         include/helios/container/typed_buffer_array.hpp
 
     DEPENDS
+        PUBLIC compiler
         PUBLIC core
         PUBLIC utils
-
-    USES
-        FlatMap PUBLIC helios::lib::flat_map
 
     TEST_SOURCES
         tests/callable_buffer.cpp
         tests/callable_buffer_array.cpp
+        tests/flat_map.cpp
         tests/main.cpp
         tests/multi_type_map.cpp
         tests/sparse_set.cpp

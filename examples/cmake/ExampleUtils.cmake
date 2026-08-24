@@ -1,6 +1,6 @@
 include_guard(GLOBAL)
 
-if(NOT COMMAND helios_target_set_cxx_standard)
+if(NOT COMMAND helios_apply_conventions)
   include(TargetUtils)
 endif()
 if(NOT COMMAND helios_link_modules)
@@ -16,12 +16,13 @@ endif()
         SOURCES src/main.cpp ...
         [HEADERS ...]
         [MODULES app ecs log ...]
+        [DISABLE_SANITIZERS]
     )
 ]]
 function(helios_add_example)
   cmake_parse_arguments(
     ARG
-    ""
+    "DISABLE_SANITIZERS"
     "NAME"
     "SOURCES;HEADERS;MODULES"
     ${ARGN}
@@ -39,16 +40,14 @@ function(helios_add_example)
 
   add_executable(${_target} ${ARG_HEADERS} ${ARG_SOURCES})
 
-  helios_target_set_cxx_standard(${_target} STANDARD 23)
-  helios_target_set_warnings(${_target})
-  helios_target_set_platform(${_target})
-  helios_target_set_optimization(${_target})
+  if(ARG_DISABLE_SANITIZERS)
+    helios_apply_conventions(${_target} NO_SANITIZERS)
+  else()
+    helios_apply_conventions(${_target})
+  endif()
+
   helios_target_set_output_dirs(${_target} CUSTOM_FOLDER examples)
   helios_target_set_folder(${_target} "Examples")
-
-  if(NOT ARG_DISABLE_SANITIZERS)
-    helios_target_enable_sanitizers(${_target})
-  endif()
 
   if(ARG_MODULES)
     helios_link_modules(TARGET ${_target} MODULES ${ARG_MODULES})

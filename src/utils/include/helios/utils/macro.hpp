@@ -1,7 +1,5 @@
 #pragma once
 
-#define HELIOS_BIT(x) (1 << (x))
-
 // Stringify macros
 #define HELIOS_STRINGIFY_IMPL(x) #x
 #define HELIOS_STRINGIFY(x) HELIOS_STRINGIFY_IMPL(x)

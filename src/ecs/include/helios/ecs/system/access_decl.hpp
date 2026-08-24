@@ -1,11 +1,14 @@
 #pragma once
 
 #include <helios/ecs/component/component.hpp>
-#include <helios/ecs/resource/resource.hpp>
-#include <helios/ecs/system/system_param.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/utils/common_traits.hpp>
 
+#include <type_traits>
+
 namespace helios::ecs {
+
+class AccessPolicyBuilder;
 
 /**
  * @brief Registers access declarations for each parameter type.

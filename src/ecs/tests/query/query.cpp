@@ -58,17 +58,15 @@ struct SparseFlag {
 
 template <QueryArg... Args>
 [[nodiscard]] auto MakeQuery(ComponentManager& manager)
-    -> BasicQuery<World, std::allocator<ComponentTypeIndex>, Args...> {
-  return BasicQuery<World, std::allocator<ComponentTypeIndex>, Args...>(
-      manager);
+    -> BasicQuery<World, Args...> {
+  return BasicQuery<World, Args...>(manager);
 }
 
 // The "const World" variant for read-only queries
 template <QueryArg... Args>
 [[nodiscard]] auto MakeReadOnlyQuery(const ComponentManager& manager)
-    -> BasicQuery<const World, std::allocator<ComponentTypeIndex>, Args...> {
-  return BasicQuery<const World, std::allocator<ComponentTypeIndex>, Args...>(
-      manager);
+    -> BasicQuery<const World, Args...> {
+  return BasicQuery<const World, Args...>(manager);
 }
 
 // Convenience: add an entity with Position only
@@ -296,35 +294,14 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
-  TEST_CASE("helios::ecs::BasicQuery::CollectWith") {
-    SUBCASE("Returns empty container when no entities match") {
-      ComponentManager mgr;
-      const auto query = MakeQuery<const Position&>(mgr);
-      const auto result =
-          query.CollectWith(std::allocator<std::tuple<const Position&>>{});
-      CHECK(result.empty());
-    }
-
-    SUBCASE("Collected values match those from default Collect") {
-      ComponentManager mgr;
-      AddPos(mgr, Entity{1, 0}, {.x = 7.0F, .y = 8.0F});
-      const auto query = MakeQuery<const Position&>(mgr);
-
-      const auto default_result = query.Collect();
-      const auto custom_result =
-          query.CollectWith(std::allocator<std::tuple<const Position&>>{});
-
-      REQUIRE_EQ(custom_result.size(), default_result.size());
-      CHECK_EQ(std::get<0>(custom_result[0]), std::get<0>(default_result[0]));
-    }
-
+  TEST_CASE("helios::ecs::BasicQuery::Collect(memory_resource*)") {
     SUBCASE("Works with PMR allocator") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 1.0F, .y = 0.0F});
       auto* resource = std::pmr::get_default_resource();
 
       const auto query = MakeQuery<const Position&>(mgr);
-      const auto result = query.CollectWith(resource);
+      const auto result = query.Collect(resource);
 
       CHECK_EQ(result.size(), 1);
     }
@@ -1214,6 +1191,94 @@ TEST_SUITE("helios::ecs::BasicQuery") {
     }
   }
 
+  TEST_CASE("helios::ecs::BasicQuery - sparse With filter iteration") {
+    SUBCASE("Count respects sparse With filter") {
+      ComponentManager mgr;
+      constexpr Entity e_no_sparse{20, 0};
+      constexpr Entity e_with_sparse{21, 0};
+      AddPos(mgr, e_no_sparse, {});
+      AddPos(mgr, e_with_sparse, {});
+      AddSparseBuff(mgr, e_with_sparse, {.stacks = 1});
+
+      const auto query = MakeQuery<const Position&, With<SparseBuff>>(mgr);
+
+      CHECK_EQ(query.Count(), 1);
+    }
+
+    SUBCASE("Range-for respects sparse With filter") {
+      ComponentManager mgr;
+      constexpr Entity e_no_sparse{22, 0};
+      constexpr Entity e_with_sparse{23, 0};
+      AddPos(mgr, e_no_sparse, {.x = 1.0F});
+      AddPos(mgr, e_with_sparse, {.x = 2.0F});
+      AddSparseBuff(mgr, e_with_sparse, {.stacks = 1});
+
+      const auto query = MakeQuery<const Position&, With<SparseBuff>>(mgr);
+
+      std::vector<float> xs;
+      for (const auto& [pos] : query) {
+        xs.push_back(pos.x);
+      }
+      REQUIRE_EQ(xs.size(), 1);
+      CHECK_EQ(xs[0], doctest::Approx(2.0F));
+    }
+
+    SUBCASE("ForEach respects sparse With filter") {
+      ComponentManager mgr;
+      constexpr Entity e_with_sparse{24, 0};
+      AddPos(mgr, e_with_sparse, {.x = 3.0F});
+      AddPos(mgr, Entity{25, 0}, {.x = 4.0F});
+      AddSparseBuff(mgr, e_with_sparse, {.stacks = 1});
+
+      const auto query = MakeQuery<const Position&, With<SparseBuff>>(mgr);
+
+      size_t count = 0;
+      query.ForEach([&count](const Position& pos) {
+        ++count;
+        CHECK_EQ(pos.x, doctest::Approx(3.0F));
+      });
+      CHECK_EQ(count, 1);
+    }
+
+    SUBCASE("WithEntity iteration respects sparse With filter") {
+      ComponentManager mgr;
+      constexpr Entity e_with_sparse{26, 0};
+      AddPos(mgr, e_with_sparse, {});
+      AddPos(mgr, Entity{27, 0}, {});
+      AddSparseBuff(mgr, e_with_sparse, {.stacks = 1});
+
+      auto query = MakeQuery<const Position&, With<SparseBuff>>(mgr);
+      const auto we = query.WithEntity();
+
+      CHECK_EQ(we.Count(), 1);
+      const auto collected = we.Collect();
+      REQUIRE_EQ(collected.size(), 1);
+      CHECK_EQ(std::get<0>(collected[0]), e_with_sparse);
+    }
+
+    SUBCASE("sparse With and sparse Without combined") {
+      ComponentManager mgr;
+      constexpr Entity e_match{28, 0};
+      constexpr Entity e_missing_buff{29, 0};
+      constexpr Entity e_has_flag{30, 0};
+      AddPos(mgr, e_match, {.x = 1.0F});
+      AddPos(mgr, e_missing_buff, {.x = 2.0F});
+      AddPos(mgr, e_has_flag, {.x = 3.0F});
+      AddSparseBuff(mgr, e_match, {.stacks = 1});
+      AddSparseBuff(mgr, e_has_flag, {.stacks = 1});
+      AddSparseFlag(mgr, e_has_flag, {.value = 1});
+
+      const auto query =
+          MakeQuery<const Position&, With<SparseBuff>, Without<SparseFlag>>(
+              mgr);
+
+      CHECK_EQ(query.Count(), 1);
+      for (const auto& [pos] : query) {
+        CHECK_EQ(pos.x, doctest::Approx(1.0F));
+      }
+    }
+  }
+
   TEST_CASE("helios::ecs::BasicQuery — dynamic archetype refresh") {
     SUBCASE("Query reflects entities added after construction") {
       ComponentManager mgr;
@@ -1273,32 +1338,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("helios::ecs::BasicQueryWithEntity::CollectWith") {
-    SUBCASE("Returns empty container when no entities match") {
-      ComponentManager mgr;
-      auto query = MakeQuery<const Position&>(mgr);
-      const auto we = query.WithEntity();
-      const auto result = we.CollectWith(
-          std::allocator<std::tuple<Entity /*entity*/, const Position&>>{});
-      CHECK(result.empty());
-    }
-
-    SUBCASE("Collected values match those from default Collect") {
-      ComponentManager mgr;
-      AddPos(mgr, Entity{1, 0}, {.x = 7.0F, .y = 8.0F});
-      auto query = MakeQuery<const Position&>(mgr);
-      const auto we = query.WithEntity();
-
-      const auto default_result = we.Collect();
-      const auto custom_result = we.CollectWith(
-          std::allocator<std::tuple<Entity /*entity*/, const Position&>>{});
-
-      REQUIRE_EQ(custom_result.size(), default_result.size());
-      CHECK_EQ(std::get<0>(custom_result[0]), std::get<0>(default_result[0]));
-      CHECK_EQ(std::get<1>(custom_result[0]).x,
-               std::get<1>(default_result[0]).x);
-    }
-
+  TEST_CASE("helios::ecs::BasicQueryWithEntity::Collect(memory_resource*)") {
     SUBCASE("Works with PMR allocator") {
       ComponentManager mgr;
       AddPos(mgr, Entity{1, 0}, {.x = 5.0F, .y = 6.0F});
@@ -1306,7 +1346,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
 
       auto query = MakeQuery<const Position&>(mgr);
       const auto we = query.WithEntity();
-      auto result = we.CollectWith(resource);
+      auto result = we.Collect(resource);
 
       REQUIRE_EQ(result.size(), 1);
       CHECK_EQ(std::get<0>(result[0]), Entity{1, 0});
@@ -1341,7 +1381,8 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
     }
   }
 
-  TEST_CASE("helios::ecs::BasicQueryWithEntity::CollectEntitiesWith") {
+  TEST_CASE(
+      "helios::ecs::BasicQueryWithEntity::CollectEntities(memory_resource*)") {
     SUBCASE("Works with PMR allocator") {
       constexpr Entity e1{4, 0};
       ComponentManager mgr;
@@ -1350,7 +1391,7 @@ TEST_SUITE("helios::ecs::BasicQueryWithEntity") {
 
       auto query = MakeQuery<const Position&>(mgr);
       const auto we = query.WithEntity();
-      const auto entities = we.CollectEntitiesWith(resource);
+      const auto entities = we.CollectEntities(resource);
 
       REQUIRE_EQ(entities.size(), 1);
       CHECK_EQ(entities[0], e1);

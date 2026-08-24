@@ -23,7 +23,7 @@ inline constexpr size_t kMinAlignment = alignof(std::max_align_t);
  * @return lhs + rhs, clamped to `size_t` max on overflow
  */
 [[nodiscard]] constexpr size_t SaturatingAdd(size_t lhs, size_t rhs) noexcept {
-  constexpr size_t kMax = std::numeric_limits<size_t>::max();
+  constexpr auto kMax = std::numeric_limits<size_t>::max();
   if (rhs > kMax - lhs) {
     return kMax;
   }
@@ -37,7 +37,7 @@ inline constexpr size_t kMinAlignment = alignof(std::max_align_t);
  * @return lhs * rhs, clamped to `size_t` max on overflow
  */
 [[nodiscard]] constexpr size_t SaturatingMul(size_t lhs, size_t rhs) noexcept {
-  constexpr size_t kMax = std::numeric_limits<size_t>::max();
+  constexpr auto kMax = std::numeric_limits<size_t>::max();
   if (lhs == 0 || rhs == 0) {
     return 0;
   }
@@ -189,8 +189,7 @@ enum class MemoryError : uint8_t {
  * @param error Error value
  * @return String view with the error description
  */
-[[nodiscard]] constexpr std::string_view MemoryErrorToString(
-    MemoryError error) noexcept {
+[[nodiscard]] constexpr std::string_view ToString(MemoryError error) noexcept {
   using enum MemoryError;
   switch (error) {
     case kOutOfMemory:

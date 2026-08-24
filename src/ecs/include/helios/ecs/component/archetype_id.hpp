@@ -1,15 +1,16 @@
 #pragma once
 
-#include <helios/assert.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/utils/common_traits.hpp>
 
 #include <algorithm>
+#include <concepts>
 #include <cstddef>
 #include <functional>
 #include <initializer_list>
 #include <ranges>
 #include <span>
+#include <utility>
 #include <vector>
 
 namespace helios::ecs {

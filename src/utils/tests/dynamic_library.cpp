@@ -104,23 +104,6 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     CHECK_FALSE(lib2.Loaded());
   }
 
-  TEST_CASE("helios::utils::DynamicLibraryErrorToString::error to string") {
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kFileNotFound),
-             "Library file not found");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kLoadFailed),
-             "Failed to load library");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kSymbolNotFound),
-             "Symbol not found in library");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kInvalidHandle),
-             "Invalid library handle");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kAlreadyLoaded),
-             "Library is already loaded");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kNotLoaded),
-             "Library is not loaded");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kPlatformError),
-             "Platform-specific error");
-  }
-
   TEST_CASE(
       "helios::utils::DynamicLibrary::GetLastErrorMessage: returns string") {
     // Just verify it doesn't crash and returns something

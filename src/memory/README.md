@@ -22,16 +22,15 @@ Namespace: `helios::mem`.
 
 ### Reference Counting
 
-| Type                               | Purpose                                                     |
-| ---------------------------------- | ----------------------------------------------------------- |
-| `Rc<T>`                            | Non-atomic reference-counted handle (`RefCounted` alias).   |
-| `Arc<T>`                           | Atomic reference-counted handle (`AtomicRefCounted` alias). |
-| `PmrRc<T>` / `PmrArc<T>`           | PMR allocator variants.                                     |
-| `RcFromThis<T>` / `ArcFromThis<T>` | CRTP bases embedding ref counters.                          |
-| `MakeRc<T>(args...)`               | Factory for `Rc<T>`.                                        |
-| `MakeArc<T>(args...)`              | Factory for `Arc<T>`.                                       |
-| `MakeRcWith<T>(alloc, args...)`    | Factory with custom allocator.                              |
-| `MakeArcWith<T>(alloc, args...)`   | Factory with custom allocator.                              |
+| Type                                  | Purpose                                                     |
+| ------------------------------------- | ----------------------------------------------------------- |
+| `Rc<T>`                               | Non-atomic reference-counted handle (`RefCounted` alias).   |
+| `Arc<T>`                              | Atomic reference-counted handle (`AtomicRefCounted` alias). |
+| `RcFromThis<T>` / `ArcFromThis<T>`    | CRTP bases embedding ref counters.                          |
+| `MakeRc<T>(args...)`                  | Factory using the default PMR resource.                     |
+| `MakeArc<T>(args...)`                 | Atomic factory using the default PMR resource.              |
+| `MakeRcWith<T>(resource, args...)`    | Factory with a specific PMR resource.                       |
+| `MakeArcWith<T>(resource, args...)`   | Atomic factory with a specific PMR resource.                |
 
 ### Utilities
 
@@ -40,6 +39,7 @@ Namespace: `helios::mem`.
 | `GrowthPolicy`                 | Growable allocator policy (`Linear` or `Geometric`). |
 | `AllocatorStats`               | Snapshot of allocation counters and capacity.        |
 | `AlignedAlloc` / `AlignedFree` | Cross-platform aligned allocation.                   |
+| `TreiberStack`                 | Lock-free intrusive LIFO stack with a 64-bit ABA tag. |
 
 ## mimalloc and global allocation
 
@@ -103,7 +103,10 @@ private:
 };
 
 auto mesh = helios::mem::MakeRc<Mesh>(42);
-auto copy = mesh;  // shared ownership (single-threaded ref count)
+auto copy = mesh;  // shared ownership; copy keeps the allocating resource
+
+helios::mem::ArenaAllocator arena;
+auto pooled = helios::mem::MakeRcWith<Mesh>(&arena, 7);
 
 class Texture final : public helios::mem::ArcFromThis<Texture> {};
 auto tex = helios::mem::MakeArc<Texture>();  // thread-safe ref count

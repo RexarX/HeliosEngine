@@ -45,9 +45,8 @@ TEST_SUITE("helios::ecs::CmdQueue") {
       CHECK_EQ(queue2.Size(), 1);
     }
 
-    SUBCASE("Custom allocator ctor") {
-      std::allocator<std::byte> alloc;
-      CmdQueue<std::allocator<std::byte>> queue{alloc};
+    SUBCASE("Memory resource ctor") {
+      CmdQueue queue{std::pmr::get_default_resource()};
 
       CHECK(queue.Empty());
     }
@@ -252,18 +251,17 @@ TEST_SUITE("helios::ecs::CmdQueue") {
     }
   }
 
-  TEST_CASE("helios::ecs::CmdQueue::GetAllocator") {
-    std::allocator<std::byte> alloc;
-    CmdQueue<std::allocator<std::byte>> queue{alloc};
+  TEST_CASE("helios::ecs::CmdQueue::GetMemoryResource") {
+    auto* resource = std::pmr::get_default_resource();
+    CmdQueue queue{resource};
 
-    const auto retrieved_alloc = queue.GetAllocator();
-    CHECK_EQ(retrieved_alloc, alloc);
+    CHECK_EQ(queue.GetMemoryResource(), resource);
   }
 
-  TEST_CASE("helios::ecs::PmrCmdQueue::works with memory_resource") {
+  TEST_CASE("helios::ecs::CmdQueue::works with memory_resource") {
     auto* resource = std::pmr::get_default_resource();
 
-    PmrCmdQueue queue{resource};
+    CmdQueue queue{resource};
     queue.Enqueue(SimpleCommand{5});
 
     World world;

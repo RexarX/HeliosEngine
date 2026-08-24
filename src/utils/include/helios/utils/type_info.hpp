@@ -6,6 +6,7 @@
 #include <compare>
 #include <cstddef>
 #include <cstdint>
+#include <functional>
 #include <string_view>
 #include <type_traits>
 
@@ -322,12 +323,13 @@ template <typename T>
 [[nodiscard]] consteval bool IsLambdaType() noexcept {
 #if HELIOS_HAS_REFLECTION
   return std::meta::is_class(^^T) && !std::meta::has_identifier(^^T);
+#elif defined(__clang__)
+  // clang-cl also defines _MSC_VER; Clang pretty-prints "(lambda at ...)".
+  constexpr auto name = GetUnqualifiedTypeName<T>();
+  return name.find("(lambda at") != std::string_view::npos;
 #elif defined(_MSC_VER)
   constexpr auto name = GetUnqualifiedTypeName<T>();
   return name.find("<lambda_") != std::string_view::npos;
-#elif defined(__clang__)
-  constexpr auto name = GetUnqualifiedTypeName<T>();
-  return name.find("(lambda at") != std::string_view::npos;
 #elif defined(__GNUC__)
   constexpr auto name = GetUnqualifiedTypeName<T>();
   return name.find("<lambda(") != std::string_view::npos ||
@@ -401,6 +403,9 @@ public:
   constexpr TypeIndex& operator=(const TypeIndex&) noexcept = default;
   constexpr TypeIndex& operator=(TypeIndex&&) noexcept = default;
 
+  [[nodiscard]] constexpr std::strong_ordering operator<=>(
+      const TypeIndex& other) const noexcept = default;
+
   /**
    * @brief Checks if this `TypeIndex` is empty (i.e., has a hash value of 0).
    * @return true if this `TypeIndex` is empty, false otherwise
@@ -414,11 +419,6 @@ public:
   [[nodiscard]] constexpr size_t Hash() const noexcept { return hash_; }
 
   explicit constexpr operator size_t() const noexcept { return Hash(); }
-
-  [[nodiscard]] constexpr std::strong_ordering operator<=>(
-      const TypeIndex& other) const noexcept = default;
-  [[nodiscard]] constexpr bool operator==(
-      const TypeIndex& other) const noexcept = default;
 
 private:
   explicit constexpr TypeIndex(size_t hash) noexcept : hash_(hash) {}
@@ -469,6 +469,15 @@ public:
   constexpr TypeId& operator=(const TypeId&) noexcept = default;
   constexpr TypeId& operator=(TypeId&&) noexcept = default;
 
+  [[nodiscard]] constexpr std::strong_ordering operator<=>(
+      const TypeId& other) const noexcept {
+    return type_index_ <=> other.type_index_;
+  }
+
+  [[nodiscard]] constexpr bool operator==(const TypeId& other) const noexcept {
+    return type_index_ == other.type_index_;
+  }
+
   /**
    * @brief Checks if this `TypeId` is empty (i.e., has a hash value of 0).
    * @return true if this `TypeId` is empty, false otherwise
@@ -501,15 +510,6 @@ public:
    */
   [[nodiscard]] constexpr TypeIndex Index() const noexcept {
     return type_index_;
-  }
-
-  [[nodiscard]] constexpr std::strong_ordering operator<=>(
-      const TypeId& other) const noexcept {
-    return type_index_ <=> other.type_index_;
-  }
-
-  [[nodiscard]] constexpr bool operator==(const TypeId& other) const noexcept {
-    return type_index_ == other.type_index_;
   }
 
 private:

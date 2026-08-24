@@ -2,7 +2,11 @@
 
 #include <helios/ecs/command/commands.hpp>
 #include <helios/ecs/command/queue.hpp>
+#include <helios/ecs/component/bundle.hpp>
+#include <helios/ecs/system/access_policy.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
+#include <helios/memory/arena_allocator.hpp>
 
 #include <memory_resource>
 #include <vector>
@@ -39,13 +43,21 @@ struct SimpleCommand {
   }
 };
 
+template <typename T>
+concept HasSystemParamTraits = requires { typename SystemParamTraits<T>; };
+
+template <typename T>
+concept HasRegisterAccess = requires(AccessPolicyBuilder& builder) {
+  SystemParamTraits<T>::RegisterAccess(builder);
+};
+
 }  // namespace
 
 TEST_SUITE("helios::ecs::Commands") {
   TEST_CASE("helios::ecs::Commands::Spawn") {
     SUBCASE("Returns a buffer for the new entity") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       const auto buf = cmds.Spawn();
@@ -55,7 +67,7 @@ TEST_SUITE("helios::ecs::Commands") {
 
     SUBCASE("Each Spawn call reserves a different entity") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       const auto buf1 = cmds.Spawn();
@@ -66,7 +78,7 @@ TEST_SUITE("helios::ecs::Commands") {
 
     SUBCASE("Entity is accessible in world after queue execution") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       const Entity entity = [&cmds] {
@@ -82,7 +94,7 @@ TEST_SUITE("helios::ecs::Commands") {
 
     SUBCASE("Spawn and add component lands in world after execution") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       const Entity entity = [&cmds] {
@@ -96,13 +108,33 @@ TEST_SUITE("helios::ecs::Commands") {
 
       CHECK_EQ(world.ReadComponent<Position>(entity).x, doctest::Approx(1.0F));
     }
+
+    SUBCASE("Spawn add bundle and component shares a system arena") {
+      World world;
+      helios::mem::ArenaAllocator arena(1024);
+      CmdQueue queue(&arena);
+      Commands cmds(queue, world, &arena);
+
+      const Entity entity = [&cmds] {
+        return cmds.Spawn()
+            .AddBundle(ComponentBundleTypes<Position>{Position{1.0F, 2.0F}})
+            .AddComponents(Velocity{3.0F, 4.0F})
+            .GetEntity();
+      }();
+
+      world.Update();
+      queue.ExecuteAll(world);
+
+      CHECK_EQ(world.ReadComponent<Position>(entity).x, doctest::Approx(1.0F));
+      CHECK_EQ(world.ReadComponent<Velocity>(entity).dx, doctest::Approx(3.0F));
+    }
   }
 
   TEST_CASE("helios::ecs::Commands::Despawn") {
     SUBCASE("Enqueues destroy command; entity removed after execution") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       cmds.Despawn(entity);
@@ -115,7 +147,7 @@ TEST_SUITE("helios::ecs::Commands") {
       World world;
       const Entity e1 = world.CreateEntity();
       const Entity e2 = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       cmds.Despawn(e1);
@@ -131,7 +163,7 @@ TEST_SUITE("helios::ecs::Commands") {
     SUBCASE("Returns buffer for existing entity") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       const auto buf = cmds.Entity(entity);
@@ -142,7 +174,7 @@ TEST_SUITE("helios::ecs::Commands") {
     SUBCASE("Enqueued operations execute on the correct entity") {
       World world;
       const Entity entity = world.CreateEntity();
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       {
@@ -159,7 +191,7 @@ TEST_SUITE("helios::ecs::Commands") {
   TEST_CASE("helios::ecs::Commands::World") {
     SUBCASE("Returns a world command buffer") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       {
@@ -174,7 +206,7 @@ TEST_SUITE("helios::ecs::Commands") {
 
     SUBCASE("Multiple World() calls each return independent buffers") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       {
@@ -197,7 +229,7 @@ TEST_SUITE("helios::ecs::Commands") {
   TEST_CASE("helios::ecs::Commands::Enqueue") {
     SUBCASE("Enqueues a single command that executes against the world") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       int counter = 0;
@@ -209,7 +241,7 @@ TEST_SUITE("helios::ecs::Commands") {
 
     SUBCASE("Multiple Enqueue calls preserve order") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       int counter = 0;
@@ -225,7 +257,7 @@ TEST_SUITE("helios::ecs::Commands") {
   TEST_CASE("helios::ecs::Commands::EnqueueBulk") {
     SUBCASE("Enqueues all commands in the range") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       int counter = 0;
@@ -240,7 +272,7 @@ TEST_SUITE("helios::ecs::Commands") {
 
     SUBCASE("Empty range is a no-op") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       const std::vector<SimpleCommand> empty;
@@ -250,7 +282,7 @@ TEST_SUITE("helios::ecs::Commands") {
 
     SUBCASE("Rvalue range is accepted") {
       World world;
-      PmrCmdQueue queue(std::pmr::get_default_resource());
+      CmdQueue queue;
       Commands cmds(queue, world);
 
       int counter = 0;
@@ -258,6 +290,24 @@ TEST_SUITE("helios::ecs::Commands") {
       queue.ExecuteAll(world);
 
       CHECK_EQ(counter, 2);
+    }
+  }
+}
+
+TEST_SUITE("helios::ecs::SystemParamTraits") {
+  TEST_CASE("helios::ecs::SystemParamTraits: Commands") {
+    SUBCASE("Commands exists as a system parameter trait") {
+      CHECK(HasSystemParamTraits<Commands>);
+      CHECK(HasRegisterAccess<Commands>);
+    }
+
+    SUBCASE("Commands RegisterAccess leaves policy empty") {
+      AccessPolicyBuilder builder;
+      SystemParamTraits<Commands>::RegisterAccess(builder);
+
+      const auto policy = builder.Build();
+      CHECK_FALSE(policy.HasComponents());
+      CHECK_FALSE(policy.HasResources());
     }
   }
 }

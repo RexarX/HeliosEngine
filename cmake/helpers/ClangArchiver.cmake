@@ -1,15 +1,17 @@
 # Helios Engine Clang archiver setup
 #
 # Selects LLVM archiver tools when Clang is active so LTO archives are produced
-# with compatible tooling.
+# with compatible tooling. Project-wide CMAKE_AR / CMAKE_RANLIB mutation only
+# runs when HELIOS_MANAGE_TOOLCHAIN is ON (default for top-level builds).
 
 include_guard(GLOBAL)
 
 #[[
     helios_configure_clang_archiver()
 
-    Configures CMAKE_AR and CMAKE_RANLIB for Clang toolchains. clang-cl prefers
-    llvm-lib or MSVC lib.exe; Unix-like Clang prefers llvm-ar and llvm-ranlib.
+    Configures CMAKE_AR and CMAKE_RANLIB for Clang toolchains when
+    HELIOS_MANAGE_TOOLCHAIN is ON. clang-cl prefers llvm-lib or MSVC lib.exe;
+    Unix-like Clang prefers llvm-ar and llvm-ranlib.
 
     Example:
         include(ClangArchiver)
@@ -17,6 +19,11 @@ include_guard(GLOBAL)
 ]]
 function(helios_configure_clang_archiver)
   if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    return()
+  endif()
+
+  if(NOT HELIOS_MANAGE_TOOLCHAIN)
+    message(STATUS "Clang archiver: leaving CMAKE_AR/CMAKE_RANLIB unchanged (HELIOS_MANAGE_TOOLCHAIN=OFF)")
     return()
   endif()
 

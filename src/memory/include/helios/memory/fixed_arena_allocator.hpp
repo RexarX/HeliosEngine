@@ -1,13 +1,9 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
-#include <helios/memory/details/profile.hpp>
 
 #include <atomic>
 #include <cstddef>
-#include <cstdint>
 #include <memory_resource>
 
 namespace helios::mem {
@@ -97,6 +93,7 @@ private:
 
   size_t capacity_ = 0;
   std::byte* buffer_ = nullptr;
+
   std::atomic<size_t> offset_{0};
   std::atomic<size_t> peak_usage_{0};
   std::atomic<size_t> allocation_count_{0};
@@ -105,29 +102,7 @@ private:
   std::atomic<size_t> alignment_waste_{0};
 };
 
-inline FixedArenaAllocator::FixedArenaAllocator(size_t capacity) noexcept
-    : capacity_(capacity) {
-  HELIOS_ASSERT(capacity_ > 0, "capacity must be greater than zero!");
-  buffer_ = static_cast<std::byte*>(
-      AlignedAlloc(kDefaultAlignment, capacity_, false));
-  HELIOS_VERIFY(buffer_ != nullptr, "Failed to allocate fixed arena!");
-  HELIOS_MEMORY_PROFILE_ALLOC(buffer_, capacity_, "FixedArenaAllocator");
-}
-
-inline FixedArenaAllocator& FixedArenaAllocator::operator=(
-    FixedArenaAllocator&& other) noexcept {
-  if (this == &other) [[unlikely]] {
-    return *this;
-  }
-
-  Release();
-  MoveFrom(other);
-  return *this;
-}
-
 inline void FixedArenaAllocator::Reset() noexcept {
-  HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::FixedArenaAllocator::Reset");
-
   offset_.store(0, std::memory_order_relaxed);
   peak_usage_.store(0, std::memory_order_relaxed);
   allocation_count_.store(0, std::memory_order_relaxed);
@@ -137,8 +112,6 @@ inline void FixedArenaAllocator::Reset() noexcept {
 }
 
 inline bool FixedArenaAllocator::Owns(const void* ptr) const noexcept {
-  HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::FixedArenaAllocator::Owns");
-
   if (buffer_ == nullptr || ptr == nullptr) {
     return false;
   }

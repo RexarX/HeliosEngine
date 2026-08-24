@@ -3,6 +3,7 @@
 #if defined(HELIOS_ECS_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
 #define HELIOS_ENABLE_PROFILE
+
 #include <helios/profile/macros.hpp>
 
 #define HELIOS_ECS_PROFILE_SCOPE() HELIOS_PROFILE_SCOPE()

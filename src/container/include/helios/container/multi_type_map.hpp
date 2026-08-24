@@ -1,29 +1,22 @@
 #pragma once
 
 #include <helios/assert.hpp>
-#include <helios/compiler/compiler.hpp>
+#include <helios/container/flat_map.hpp>
 #include <helios/utils/type_info.hpp>
 
 #include <algorithm>
 #include <concepts>
 #include <cstddef>
-#include <memory>
 #include <memory_resource>
 #include <type_traits>
 #include <utility>
-
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-#include <flat_map>
-#else
-#include <boost/container/flat_map.hpp>
-#endif
 
 namespace helios::container {
 
 /**
  * @brief Generic type-indexed map that stores one `Storage` instance per
  * registered type key.
- * @details Uses a flat_map keyed by `TypeIndex` to store `Storage` instances.
+ * @details Uses a `FlatMap` keyed by `TypeIndex` to store `Storage` instances.
  * Each type gets its own storage entry identified by its compile-time type
  * index. Type identification uses `helios::utils::TypeIndex`.
  *
@@ -38,77 +31,69 @@ namespace helios::container {
  *
  * @tparam Storage  The value type stored per type key. Must be
  * default-constructible.
- * @tparam Allocator The allocator type for the underlying flat_map (default:
- * `std::allocator<std::byte>`)
  */
-template <typename Storage, typename Allocator = std::allocator<std::byte>>
+template <typename Storage>
 class MultiTypeMap {
 public:
   using TypeIndex = utils::TypeIndex;
 
   using size_type = size_t;
-  using allocator_type = Allocator;
 
 private:
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-  using KeyContainer =
-      std::vector<TypeIndex, typename std::allocator_traits<allocator_type>::
-                                 template rebind_alloc<TypeIndex>>;
-  using MappedContainer =
-      std::vector<Storage, typename std::allocator_traits<
-                               allocator_type>::template rebind_alloc<Storage>>;
-
-  using MapType = std::flat_map<TypeIndex, Storage, std::less<TypeIndex>,
-                                KeyContainer, MappedContainer>;
-#else
-  using MapValueType = std::pair<TypeIndex, Storage>;
-  using MapAllocator = typename std::allocator_traits<
-      allocator_type>::template rebind_alloc<MapValueType>;
-
-  using MapType =
-      boost::container::flat_map<TypeIndex, Storage, std::less<TypeIndex>,
-                                 MapAllocator>;
-#endif
+  using MapType = FlatMap<TypeIndex, Storage>;
 
 public:
-  constexpr MultiTypeMap() = default;
+  using key_type = TypeIndex;
+  using mapped_type = Storage;
+  using value_type = typename MapType::value_type;
+  using reference = typename MapType::reference;
+  using const_reference = typename MapType::const_reference;
+  using pointer = typename MapType::pointer;
+  using const_pointer = typename MapType::const_pointer;
+  using difference_type = typename MapType::difference_type;
+  using iterator = typename MapType::iterator;
+  using const_iterator = typename MapType::const_iterator;
+  using reverse_iterator = typename MapType::reverse_iterator;
+  using const_reverse_iterator = typename MapType::const_reverse_iterator;
 
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-  /**
-   * @brief Constructs with a custom allocator.
-   * @param alloc Allocator instance to use
-   */
-  explicit constexpr MultiTypeMap(const allocator_type& alloc)
-      : storage_(alloc), allocator_(alloc) {}
-#else
-  /**
-   * @brief Constructs with a custom allocator.
-   * @param alloc Allocator instance to use
-   */
-  explicit constexpr MultiTypeMap(const allocator_type& alloc)
-      : storage_(MapAllocator(alloc)), allocator_(alloc) {}
-#endif
+  constexpr MultiTypeMap() = default;
 
   /**
    * @brief Constructs with a PMR memory resource.
-   * @details Enabled only when `allocator_type` is constructible from
-   * `std::pmr::memory_resource*`.
-   * @param resource Memory resource used to construct allocator
+   * @warning Triggers `HELIOS_ASSERT` if `resource` is `nullptr`.
+   * @param resource Memory resource used for internal storage
    */
-  explicit constexpr MultiTypeMap(std::pmr::memory_resource* resource) noexcept(
-      std::is_nothrow_constructible_v<allocator_type,
-                                      std::pmr::memory_resource*>)
-    requires std::constructible_from<allocator_type, std::pmr::memory_resource*>
-      : MultiTypeMap(allocator_type{resource}) {}
+  explicit constexpr MultiTypeMap(std::pmr::memory_resource* resource)
+      : storage_(resource), resource_(resource) {}
 
   MultiTypeMap(std::nullptr_t) = delete;
 
-  constexpr MultiTypeMap(const MultiTypeMap& other) = default;
-  constexpr MultiTypeMap(MultiTypeMap&& other) noexcept = default;
+  constexpr MultiTypeMap(const MultiTypeMap& other) { Merge(other); }
+
+  /**
+   * @brief Move-constructs by swapping storage with an empty map that uses
+   * `other`'s allocator.
+   * @param other Map to steal from
+   */
+  constexpr MultiTypeMap(MultiTypeMap&& other) noexcept(
+      std::is_nothrow_swappable_v<MapType>)
+      : MultiTypeMap(other.GetMemoryResource()) {
+    using std::swap;
+    swap(storage_, other.storage_);
+  }
+
   constexpr ~MultiTypeMap() = default;
 
-  constexpr MultiTypeMap& operator=(const MultiTypeMap& other) = default;
-  constexpr MultiTypeMap& operator=(MultiTypeMap&& other) noexcept = default;
+  constexpr MultiTypeMap& operator=(const MultiTypeMap& other);
+
+  /**
+   * @brief Move-assigns by taking `other`'s contents and leaving it empty.
+   * @details Clears this map, then swaps when both maps share a memory
+   * resource. Otherwise entries are merged across resources.
+   * @param other Map to steal from
+   * @return `*this`
+   */
+  constexpr MultiTypeMap& operator=(MultiTypeMap&& other) noexcept;
 
   /**
    * @brief Clears the Storage for type `T` (calls `Storage::Clear()` or
@@ -136,32 +121,39 @@ public:
    */
   template <typename T>
   constexpr void Reset() noexcept {
-    storage_.erase(TypeIndexOf<T>());
+    storage_.Erase(TypeIndexOf<T>());
   }
 
   /**
    * @brief Resets (removes) the Storage entry for the given type index.
    * @param index The type index to reset
    */
-  constexpr void Reset(TypeIndex index) noexcept { storage_.erase(index); }
+  constexpr void Reset(TypeIndex index) noexcept { storage_.Erase(index); }
 
   /// @brief Removes all Storage entries from the map.
-  constexpr void ResetAll() noexcept { storage_.clear(); }
+  constexpr void ResetAll() noexcept { storage_.Clear(); }
 
   /**
-   * @brief Creates or replaces Storage for type `T` with the given value.
+   * @brief Reserves storage for at least `count` type entries.
+   * @param count Minimum number of type keys the map should hold without
+   * reallocating
+   */
+  constexpr void Reserve(size_type count) { storage_.Reserve(count); }
+
+  /**
+   * @brief Creates Storage for type `T` with the given value if absent.
    * @details The type key is derived from `T`
    * @tparam T The type key — `TypeIndexOf<T>` is used as the map key
    * @tparam Args The argument types for constructing Storage
    * @param args The arguments to construct the Storage value
    * (perfect-forwarded)
-   * @return Pair of iterator to the entry and bool — `true` if a new entry was
-   * inserted
+   * @return Iterator to the entry. If `T` was already present, the existing
+   * entry is left unchanged
    */
   template <typename T, typename... Args>
     requires std::constructible_from<Storage, Args...>
   constexpr auto Emplace(Args&&... args) {
-    return storage_.emplace(TypeIndexOf<T>(), std::forward<Args>(args)...);
+    return storage_.Emplace(TypeIndexOf<T>(), std::forward<Args>(args)...);
   }
 
   /**
@@ -179,7 +171,7 @@ public:
   template <typename T, typename... Args>
     requires std::constructible_from<Storage, Args...>
   constexpr auto TryEmplace(Args&&... args) {
-    return storage_.try_emplace(TypeIndexOf<T>(), std::forward<Args>(args)...);
+    return storage_.TryEmplace(TypeIndexOf<T>(), std::forward<Args>(args)...);
   }
 
   /**
@@ -198,7 +190,7 @@ public:
    * @return true if storage was removed
    */
   constexpr bool Remove(TypeIndex index) noexcept {
-    return storage_.erase(index) > 0;
+    return storage_.Erase(index);
   }
 
   /**
@@ -293,7 +285,23 @@ public:
   [[nodiscard]] constexpr const Storage* TryGet(TypeIndex index) const noexcept;
 
   /**
-   * @brief Merges all entries from another MultiTypeMap into this one.
+   * @brief Merges all entries from another `MultiTypeMap` into this one.
+   * @details For each entry in `other`:
+   * - If this map already contains the same type key, calls `Storage::Merge` or
+   * `Storage::merge` on the existing entry if such a method is available.
+   * - Otherwise, the entry from `other` is inserted into this map. For
+   * differing Storage types, a new default Storage is created and
+   * `Merge`/`merge` is attempted on it.
+   * @tparam OtherStorage Storage type of the other map (may differ from
+   * Storage)
+   * @param other The map to merge from
+   */
+  template <typename OtherStorage>
+  constexpr void Merge(const MultiTypeMap<OtherStorage>& other);
+
+  /**
+   * @brief Merges all entries from another `MultiTypeMap` into this one by
+   * moving them.
    * @details For each entry in `other`:
    * - If this map already contains the same type key, calls `Storage::Merge` or
    * `Storage::merge` on the existing entry if such a method is available.
@@ -305,29 +313,25 @@ public:
    *
    * @tparam OtherStorage Storage type of the other map (may differ from
    * Storage)
-   * @tparam OtherAllocator The allocator template of the other map
    * @param other The map to merge from
    */
-  template <typename OtherStorage, typename OtherAllocator>
-  constexpr void Merge(const MultiTypeMap<OtherStorage, OtherAllocator>& other);
+  template <typename OtherStorage>
+  constexpr void Merge(MultiTypeMap<OtherStorage>&& other);
 
-  template <typename OtherStorage, typename OtherAllocator>
-  constexpr void Merge(MultiTypeMap<OtherStorage, OtherAllocator>&& other);
+  /**
+   * @brief Releases unused capacity in the map and, when available, in each
+   * stored `Storage`.
+   * @details If `Storage` provides `ShrinkToFit()` or `shrink_to_fit()`, it is
+   * invoked on every entry before the map's own storage is compacted.
+   */
+  constexpr void ShrinkToFit();
 
   /**
    * @brief Swaps contents with another MultiTypeMap.
    * @param other Map to swap with
    */
-  constexpr void Swap(MultiTypeMap& other) noexcept(
-      std::is_nothrow_swappable_v<MapType> &&
-      std::is_nothrow_swappable_v<allocator_type>) {
-    std::swap(storage_, other.storage_);
-    std::swap(allocator_, other.allocator_);
-  }
-
-  friend constexpr void swap(MultiTypeMap& lhs, MultiTypeMap& rhs) noexcept(
-      std::is_nothrow_swappable_v<MapType> &&
-      std::is_nothrow_swappable_v<allocator_type>) {
+  constexpr void Swap(MultiTypeMap& other) noexcept;
+  friend constexpr void swap(MultiTypeMap& lhs, MultiTypeMap& rhs) noexcept {
     lhs.Swap(rhs);
   }
 
@@ -347,7 +351,7 @@ public:
    * @return true if an entry exists
    */
   [[nodiscard]] constexpr bool Contains(TypeIndex index) const noexcept {
-    return storage_.contains(index);
+    return storage_.Contains(index);
   }
 
   /**
@@ -419,7 +423,7 @@ public:
    * @return Number of registered type entries
    */
   [[nodiscard]] constexpr size_type TypeCount() const noexcept {
-    return storage_.size();
+    return storage_.Size();
   }
 
   /**
@@ -437,24 +441,25 @@ public:
   }
 
   /**
-   * @brief Gets the allocator.
-   * @return Copy of the allocator
+   * @brief Returns the memory resource used for internal storage.
+   * @return Memory resource passed to the constructor, or the default resource
    */
-  [[nodiscard]] constexpr allocator_type GetAllocator() const noexcept {
-    return allocator_;
+  [[nodiscard]] constexpr std::pmr::memory_resource* GetMemoryResource()
+      const noexcept {
+    return resource_;
   }
 
   /**
    * @brief Returns an iterator to the beginning of the map entries.
    * @return Iterator to the beginning of the map entries
    */
-  [[nodiscard]] constexpr auto begin() noexcept { return storage_.begin(); }
+  [[nodiscard]] constexpr iterator begin() noexcept { return storage_.begin(); }
 
   /**
    * @brief Returns a const iterator to the beginning of the map entries.
    * @return Const iterator to the beginning of the map entries
    */
-  [[nodiscard]] constexpr auto begin() const noexcept {
+  [[nodiscard]] constexpr const_iterator begin() const noexcept {
     return storage_.begin();
   }
 
@@ -462,7 +467,7 @@ public:
    * @brief Returns a const iterator to the beginning of the map entries.
    * @return Const iterator to the beginning of the map entries
    */
-  [[nodiscard]] constexpr auto cbegin() const noexcept {
+  [[nodiscard]] constexpr const_iterator cbegin() const noexcept {
     return storage_.cbegin();
   }
 
@@ -470,35 +475,114 @@ public:
    * @brief Returns an iterator to the end of the map entries.
    * @return Iterator to the end of the map entries
    */
-  [[nodiscard]] constexpr auto end() noexcept { return storage_.end(); }
+  [[nodiscard]] constexpr iterator end() noexcept { return storage_.end(); }
 
   /**
    * @brief Returns a const iterator to the end of the map entries.
    * @return Const iterator to the end of the map entries
    */
-  [[nodiscard]] constexpr auto end() const noexcept { return storage_.end(); }
+  [[nodiscard]] constexpr const_iterator end() const noexcept {
+    return storage_.end();
+  }
 
   /**
    * @brief Returns a const iterator to the end of the map entries.
    * @return Const iterator to the end of the map entries
    */
-  [[nodiscard]] constexpr auto cend() const noexcept { return storage_.cend(); }
+  [[nodiscard]] constexpr const_iterator cend() const noexcept {
+    return storage_.cend();
+  }
+
+  /**
+   * @brief Returns a reverse iterator to the last map entry.
+   * @return Reverse iterator to the last map entry
+   */
+  [[nodiscard]] constexpr reverse_iterator rbegin() noexcept {
+    return storage_.rbegin();
+  }
+
+  /**
+   * @brief Returns a const reverse iterator to the last map entry.
+   * @return Const reverse iterator to the last map entry
+   */
+  [[nodiscard]] constexpr const_reverse_iterator rbegin() const noexcept {
+    return storage_.rbegin();
+  }
+
+  /**
+   * @brief Returns a const reverse iterator to the last map entry.
+   * @return Const reverse iterator to the last map entry
+   */
+  [[nodiscard]] constexpr const_reverse_iterator crbegin() const noexcept {
+    return storage_.crbegin();
+  }
+
+  /**
+   * @brief Returns a reverse iterator before the first map entry.
+   * @return Reverse iterator before the first map entry
+   */
+  [[nodiscard]] constexpr reverse_iterator rend() noexcept {
+    return storage_.rend();
+  }
+
+  /**
+   * @brief Returns a const reverse iterator before the first map entry.
+   * @return Const reverse iterator before the first map entry
+   */
+  [[nodiscard]] constexpr const_reverse_iterator rend() const noexcept {
+    return storage_.rend();
+  }
+
+  /**
+   * @brief Returns a const reverse iterator before the first map entry.
+   * @return Const reverse iterator before the first map entry
+   */
+  [[nodiscard]] constexpr const_reverse_iterator crend() const noexcept {
+    return storage_.crend();
+  }
 
 private:
-  template <typename OtherStorage, typename OtherA>
+  template <typename OtherStorage>
   friend class MultiTypeMap;
 
-  /// @brief Creates new Storage initialized with allocator if constructible
-  /// from it, else default.
+  /// @brief Creates new Storage initialized with the map resource if
+  /// constructible from it, else default.
   [[nodiscard]] constexpr Storage MakeStorage() const;
 
   MapType storage_;
-  [[no_unique_address]] allocator_type allocator_{};
+  std::pmr::memory_resource* resource_ = std::pmr::get_default_resource();
 };
 
-template <typename Storage, typename Allocator>
-constexpr void MultiTypeMap<Storage, Allocator>::Clear(
-    TypeIndex index) noexcept {
+template <typename Storage>
+constexpr auto MultiTypeMap<Storage>::operator=(const MultiTypeMap& other)
+    -> MultiTypeMap& {
+  if (this == &other) [[unlikely]] {
+    return *this;
+  }
+
+  storage_ = other.storage_;
+  return *this;
+}
+
+template <typename Storage>
+constexpr auto MultiTypeMap<Storage>::operator=(MultiTypeMap&& other) noexcept
+    -> MultiTypeMap& {
+  if (this == &other) [[unlikely]] {
+    return *this;
+  }
+
+  ResetAll();
+  if (resource_ == other.resource_) {
+    using std::swap;
+    swap(storage_, other.storage_);
+  } else {
+    Merge(std::move(other));
+  }
+  return *this;
+}
+
+template <typename Storage>
+constexpr void MultiTypeMap<Storage>::Clear(TypeIndex index) noexcept {
   if (auto* ptr = TryGet(index)) [[likely]] {
     if constexpr (requires { ptr->Clear(); }) {
       ptr->Clear();
@@ -508,9 +592,9 @@ constexpr void MultiTypeMap<Storage, Allocator>::Clear(
   }
 }
 
-template <typename Storage, typename Allocator>
-constexpr void MultiTypeMap<Storage, Allocator>::ClearAll() noexcept {
-  for (auto&& [_, storage] : storage_) {
+template <typename Storage>
+constexpr void MultiTypeMap<Storage>::ClearAll() noexcept {
+  for (auto& [_, storage] : storage_) {
     if constexpr (requires { storage.Clear(); }) {
       storage.Clear();
     } else if constexpr (requires { storage.clear(); }) {
@@ -519,93 +603,82 @@ constexpr void MultiTypeMap<Storage, Allocator>::ClearAll() noexcept {
   }
 }
 
-template <typename Storage, typename Allocator>
+template <typename Storage>
 template <typename T>
-constexpr Storage& MultiTypeMap<Storage, Allocator>::Ensure() {
+constexpr Storage& MultiTypeMap<Storage>::Ensure() {
   constexpr auto type_index = TypeIndexOf<T>();
-  const auto it = storage_.find(type_index);
+  const auto it = storage_.Find(type_index);
   if (it == storage_.end()) {
-    const auto [inserted_iter, success] =
-        storage_.emplace(type_index, MakeStorage());
-    HELIOS_ASSERT(success, "Failed to create storage for type '{}'!",
-                  utils::TypeNameOf<T>());
-    return inserted_iter->second;
+    return storage_.Emplace(type_index, MakeStorage())->second;
   }
   return it->second;
 }
 
-template <typename Storage, typename Allocator>
-constexpr Storage& MultiTypeMap<Storage, Allocator>::Ensure(TypeIndex index) {
-  const auto it = storage_.find(index);
+template <typename Storage>
+constexpr Storage& MultiTypeMap<Storage>::Ensure(TypeIndex index) {
+  const auto it = storage_.Find(index);
   if (it == storage_.end()) {
-    const auto [inserted_iter, success] =
-        storage_.emplace(index, MakeStorage());
-    HELIOS_ASSERT(success, "Failed to create storage for type index '{}'!",
-                  index.Hash());
-    return inserted_iter->second;
+    return storage_.Emplace(index, MakeStorage())->second;
   }
   return it->second;
 }
 
-template <typename Storage, typename Allocator>
+template <typename Storage>
 template <typename T>
-constexpr Storage& MultiTypeMap<Storage, Allocator>::Get() noexcept {
+constexpr Storage& MultiTypeMap<Storage>::Get() noexcept {
   constexpr auto type_index = TypeIndexOf<T>();
-  const auto it = storage_.find(type_index);
+  const auto it = storage_.Find(type_index);
   HELIOS_ASSERT(it != storage_.end(), "Storage for type '{}' does not exist!",
                 utils::TypeNameOf<T>());
   return it->second;
 }
 
-template <typename Storage, typename Allocator>
+template <typename Storage>
 template <typename T>
-constexpr const Storage& MultiTypeMap<Storage, Allocator>::Get()
-    const noexcept {
+constexpr const Storage& MultiTypeMap<Storage>::Get() const noexcept {
   constexpr auto type_index = TypeIndexOf<T>();
-  const auto it = storage_.find(type_index);
+  const auto it = storage_.Find(type_index);
   HELIOS_ASSERT(it != storage_.end(), "Storage for type '{}' does not exist!",
                 utils::TypeNameOf<T>());
   return it->second;
 }
 
-template <typename Storage, typename Allocator>
-constexpr Storage& MultiTypeMap<Storage, Allocator>::Get(
-    TypeIndex index) noexcept {
-  const auto it = storage_.find(index);
+template <typename Storage>
+constexpr Storage& MultiTypeMap<Storage>::Get(TypeIndex index) noexcept {
+  const auto it = storage_.Find(index);
   HELIOS_ASSERT(it != storage_.end(),
                 "Storage for type index '{}' does not exist!", index.Hash());
   return it->second;
 }
 
-template <typename Storage, typename Allocator>
-constexpr const Storage& MultiTypeMap<Storage, Allocator>::Get(
+template <typename Storage>
+constexpr const Storage& MultiTypeMap<Storage>::Get(
     TypeIndex index) const noexcept {
-  const auto it = storage_.find(index);
+  const auto it = storage_.Find(index);
   HELIOS_ASSERT(it != storage_.end(),
                 "Storage for type index '{}' does not exist!", index.Hash());
   return it->second;
 }
 
-template <typename Storage, typename Allocator>
-constexpr Storage* MultiTypeMap<Storage, Allocator>::TryGet(
-    TypeIndex index) noexcept {
-  const auto it = storage_.find(index);
+template <typename Storage>
+constexpr Storage* MultiTypeMap<Storage>::TryGet(TypeIndex index) noexcept {
+  const auto it = storage_.Find(index);
   return it != storage_.end() ? &it->second : nullptr;
 }
 
-template <typename Storage, typename Allocator>
-constexpr const Storage* MultiTypeMap<Storage, Allocator>::TryGet(
+template <typename Storage>
+constexpr const Storage* MultiTypeMap<Storage>::TryGet(
     TypeIndex index) const noexcept {
-  const auto it = storage_.find(index);
+  const auto it = storage_.Find(index);
   return it != storage_.end() ? &it->second : nullptr;
 }
 
-template <typename Storage, typename Allocator>
-template <typename OtherStorage, typename OtherAllocator>
-constexpr void MultiTypeMap<Storage, Allocator>::Merge(
-    const MultiTypeMap<OtherStorage, OtherAllocator>& other) {
+template <typename Storage>
+template <typename OtherStorage>
+constexpr void MultiTypeMap<Storage>::Merge(
+    const MultiTypeMap<OtherStorage>& other) {
   for (const auto& [index, other_storage] : other.storage_) {
-    if (const auto it = storage_.find(index); it != storage_.end()) {
+    if (const auto it = storage_.Find(index); it != storage_.end()) {
       // Existing key: prefer const overloads, then fall back to copy+move.
       if constexpr (requires { it->second.Merge(other_storage); }) {
         it->second.Merge(other_storage);
@@ -630,7 +703,7 @@ constexpr void MultiTypeMap<Storage, Allocator>::Merge(
       if constexpr (std::same_as<Storage, OtherStorage> &&
                     std::copy_constructible<Storage>) {
         // Same storage type — copy directly.
-        storage_.emplace(index, other_storage);
+        storage_.Emplace(index, other_storage);
       } else {
         // Different storage type — create a new default Storage and attempt to
         // merge into it.
@@ -655,18 +728,18 @@ constexpr void MultiTypeMap<Storage, Allocator>::Merge(
                                                      const OtherStorage&>) {
           new_storage = Storage(other_storage);
         }
-        storage_.emplace(index, std::move(new_storage));
+        storage_.Emplace(index, std::move(new_storage));
       }
     }
   }
 }
 
-template <typename Storage, typename Allocator>
-template <typename OtherStorage, typename OtherAllocator>
-constexpr void MultiTypeMap<Storage, Allocator>::Merge(
-    MultiTypeMap<OtherStorage, OtherAllocator>&& other) {
-  for (auto&& [index, other_storage] : other.storage_) {
-    if (const auto it = storage_.find(index); it != storage_.end()) {
+template <typename Storage>
+template <typename OtherStorage>
+constexpr void MultiTypeMap<Storage>::Merge(
+    MultiTypeMap<OtherStorage>&& other) {
+  for (auto& [index, other_storage] : other.storage_) {
+    if (const auto it = storage_.Find(index); it != storage_.end()) {
       // Existing key: call Merge or merge on Storage if available.
       if constexpr (requires { it->second.Merge(std::move(other_storage)); }) {
         it->second.Merge(std::move(other_storage));
@@ -680,7 +753,7 @@ constexpr void MultiTypeMap<Storage, Allocator>::Merge(
       // New key: insert storage.
       if constexpr (std::same_as<Storage, OtherStorage>) {
         // Same storage type — move directly.
-        storage_.emplace(index, std::move(other_storage));
+        storage_.Emplace(index, std::move(other_storage));
       } else {
         // Different storage type — create a new default Storage and attempt to
         // merge into it.
@@ -696,16 +769,44 @@ constexpr void MultiTypeMap<Storage, Allocator>::Merge(
         } else if constexpr (std::constructible_from<Storage, OtherStorage&&>) {
           new_storage = Storage(std::move(other_storage));
         }
-        storage_.emplace(index, std::move(new_storage));
+        storage_.Emplace(index, std::move(new_storage));
       }
     }
   }
-  other.storage_.clear();
+  other.storage_.Clear();
 }
 
-template <typename Storage, typename Allocator>
-constexpr bool MultiTypeMap<Storage, Allocator>::Empty(
-    TypeIndex index) const noexcept {
+template <typename Storage>
+constexpr void MultiTypeMap<Storage>::ShrinkToFit() {
+  for (auto& [_, storage] : storage_) {
+    if constexpr (requires { storage.ShrinkToFit(); }) {
+      storage.ShrinkToFit();
+    } else if constexpr (requires { storage.shrink_to_fit(); }) {
+      storage.shrink_to_fit();
+    }
+  }
+
+  storage_.ShrinkToFit();
+}
+
+template <typename Storage>
+constexpr void MultiTypeMap<Storage>::Swap(MultiTypeMap& other) noexcept {
+  if (resource_ == other.resource_) {
+    using std::swap;
+    swap(storage_, other.storage_);
+    return;
+  }
+
+  MultiTypeMap tmp_this(GetMemoryResource());
+  tmp_this.Merge(std::move(*this));
+  MultiTypeMap tmp_other(other.GetMemoryResource());
+  tmp_other.Merge(std::move(other));
+  Merge(std::move(tmp_other));
+  other.Merge(std::move(tmp_this));
+}
+
+template <typename Storage>
+constexpr bool MultiTypeMap<Storage>::Empty(TypeIndex index) const noexcept {
   const auto* ptr = TryGet(index);
   if (ptr == nullptr) {
     return true;
@@ -719,8 +820,8 @@ constexpr bool MultiTypeMap<Storage, Allocator>::Empty(
   }
 }
 
-template <typename Storage, typename Allocator>
-constexpr bool MultiTypeMap<Storage, Allocator>::EmptyAll() const noexcept {
+template <typename Storage>
+constexpr bool MultiTypeMap<Storage>::EmptyAll() const noexcept {
   return std::ranges::all_of(storage_, [](const auto& entry) {
     if constexpr (requires { entry.second.Empty(); }) {
       return entry.second.Empty();
@@ -732,9 +833,8 @@ constexpr bool MultiTypeMap<Storage, Allocator>::EmptyAll() const noexcept {
   });
 }
 
-template <typename Storage, typename Allocator>
-constexpr auto MultiTypeMap<Storage, Allocator>::Size() const noexcept
-    -> size_type {
+template <typename Storage>
+constexpr auto MultiTypeMap<Storage>::Size() const noexcept -> size_type {
   size_type total = 0;
   for (const auto& [_, storage] : storage_) {
     if constexpr (requires { storage.Size(); }) {
@@ -748,9 +848,9 @@ constexpr auto MultiTypeMap<Storage, Allocator>::Size() const noexcept
   return total;
 }
 
-template <typename Storage, typename Allocator>
-constexpr auto MultiTypeMap<Storage, Allocator>::Size(
-    TypeIndex index) const noexcept -> size_type {
+template <typename Storage>
+constexpr auto MultiTypeMap<Storage>::Size(TypeIndex index) const noexcept
+    -> size_type {
   const auto* ptr = TryGet(index);
   if (ptr == nullptr) {
     return 0;
@@ -764,18 +864,13 @@ constexpr auto MultiTypeMap<Storage, Allocator>::Size(
   }
 }
 
-template <typename Storage, typename Allocator>
-constexpr auto MultiTypeMap<Storage, Allocator>::MakeStorage() const
-    -> Storage {
-  if constexpr (std::constructible_from<Storage, allocator_type>) {
-    return Storage(allocator_);
+template <typename Storage>
+constexpr auto MultiTypeMap<Storage>::MakeStorage() const -> Storage {
+  if constexpr (std::constructible_from<Storage, std::pmr::memory_resource*>) {
+    return Storage(resource_);
   } else {
     return Storage{};
   }
 }
-
-template <typename Storage>
-using PmrMultiTypeMap =
-    MultiTypeMap<Storage, std::pmr::polymorphic_allocator<std::byte>>;
 
 }  // namespace helios::container

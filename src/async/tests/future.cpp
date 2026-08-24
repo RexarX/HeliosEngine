@@ -3,11 +3,17 @@
 #include <helios/async/executor.hpp>
 #include <helios/async/future.hpp>
 
+#include <array>
 #include <atomic>
 #include <chrono>
+#include <cstddef>
+#include <format>
 #include <future>
+#include <stdexcept>
 #include <string>
 #include <thread>
+#include <utility>
+#include <vector>
 
 using namespace helios::async;
 

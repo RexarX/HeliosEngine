@@ -1,17 +1,15 @@
 #include <doctest/doctest.h>
 
+#include <helios/ecs/command/commands.hpp>
 #include <helios/ecs/component/component.hpp>
-#include <helios/ecs/message/async_reader.hpp>
-#include <helios/ecs/message/async_writer.hpp>
-#include <helios/ecs/message/message.hpp>
-#include <helios/ecs/message/reader.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/local_param.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/message/params.hpp>
+#include <helios/ecs/query/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/system/access_decl.hpp>
 #include <helios/ecs/system/param_policy.hpp>
+#include <helios/ecs/world.hpp>
+#include <helios/ecs/world_view.hpp>
 
 #include <optional>
 
@@ -84,6 +82,10 @@ struct CommandsOnlySystem {
 
 struct WorldViewOnlySystem {
   void operator()(WorldView /*view*/) {}
+};
+
+struct WorldOnlySystem {
+  void operator()(World& /*world*/) {}
 };
 
 struct MessageReaderOnlySystem {
@@ -228,6 +230,31 @@ TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
       const auto policy = BuildPolicyFromParamsManual<WorldView>();
       CHECK_FALSE(policy.HasComponents());
       CHECK_FALSE(policy.HasResources());
+    }
+  }
+
+  TEST_CASE("helios::ecs::BuildPolicyFromParams::World") {
+    SUBCASE("World produces exclusive policy") {
+      const auto policy = BuildPolicyFromParamsManual<World>();
+      CHECK(policy.Exclusive());
+      CHECK_FALSE(policy.HasComponents());
+      CHECK_FALSE(policy.HasResources());
+    }
+
+    SUBCASE(
+        "World combined with query declares both exclusive and components") {
+      const auto policy =
+          BuildPolicyFromParamsManual<World, Query<const Position&>>();
+      CHECK(policy.Exclusive());
+      CHECK(policy.HasReadComponent(ComponentTypeIndex::From<Position>()));
+    }
+
+    SUBCASE(
+        "World combined with resource declares both exclusive and resources") {
+      const auto policy =
+          BuildPolicyFromParamsManual<World, Res<const Camera>>();
+      CHECK(policy.Exclusive());
+      CHECK(policy.HasReadResource(ResourceTypeIndex::From<Camera>()));
     }
   }
 
@@ -399,6 +426,23 @@ TEST_SUITE("helios::ecs::SystemParamTraits::RegisterAccess") {
       }(static_cast<Args*>(nullptr), builder);
 
       const auto policy = builder.Build();
+      CHECK_FALSE(policy.HasComponents());
+      CHECK_FALSE(policy.HasResources());
+    }
+  }
+
+  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::World") {
+    SUBCASE("World-only system produces exclusive policy") {
+      AccessPolicyBuilder builder;
+      using Args = details::MemberFnArgs<
+          decltype(&WorldOnlySystem::operator())>::ArgsTuple;
+      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
+        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
+         ...);
+      }(static_cast<Args*>(nullptr), builder);
+
+      const auto policy = builder.Build();
+      CHECK(policy.Exclusive());
       CHECK_FALSE(policy.HasComponents());
       CHECK_FALSE(policy.HasResources());
     }

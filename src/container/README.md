@@ -8,8 +8,8 @@ Header-only containers used throughout the engine: sparse sets for ECS storage, 
 | -------------------------- | --------------------------------------------------------------------------------- |
 | `SparseSet<T>`             | O(1) insert/remove/lookup. Sparse + dense + reverse arrays; swap-and-pop removal. |
 | `MultiTypeMap<Storage>`    | Type-indexed map keyed by `TypeIndex`. `Ensure<T>()`, `Get<T>()`, `ForEach()`.    |
-| `TypedBuffer<T>`           | Type-erased single-instance storage. Fast path for trivially-copyable types.      |
-| `TypedBufferArray<T>`      | Contiguous storage for multiple instances of one type. PMR support.               |
+| `TypedBuffer`              | Type-erased single-instance storage. Fast path for trivially-copyable types.      |
+| `TypedBufferArray`         | Contiguous storage for multiple instances of one type. PMR-backed.                |
 | `CallableBuffer<...>`      | Single-instance type-erased callable. `Set()`, `Invoke()`.                        |
 | `CallableBufferArray<...>` | Inline array of heterogeneous callables without virtual dispatch.                 |
 | `StaticString<N>`          | Stack-allocated fixed-capacity string (`BasicStaticString` alias).                |
@@ -54,7 +54,7 @@ map.ForEach([](auto type_index, std::string& value) {
 ```cpp
 #include <helios/container/typed_buffer.hpp>
 
-helios::container::TypedBuffer<> buffer;
+helios::container::TypedBuffer buffer;
 
 buffer.Set<PhysicsConfig>({.gravity = -9.81F});
 auto& config = buffer.Value<PhysicsConfig>();
@@ -100,4 +100,3 @@ No heap allocation — storage lives on the stack.
 
 - `core` — asserts
 - `utils` — `TypeIndex` for `MultiTypeMap`
-- External: Boost `flat_map` (when `std::flat_map` unavailable)

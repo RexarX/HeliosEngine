@@ -3,10 +3,13 @@
 #include <helios/ecs/schedule/executor/single_threaded.hpp>
 
 #include <helios/assert.hpp>
+#include <helios/async/executor.hpp>
+#include <helios/async/future.hpp>
 #include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/schedule/run_condition.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 
+#include <chrono>
 #include <cstddef>
 
 namespace helios::ecs {
@@ -86,12 +89,32 @@ void SingleThreadedExecutor::Execute(Schedule& schedule, World& world) {
 void SingleThreadedExecutor::ExecuteAndWait(Schedule& schedule, World& world) {
   BuildGraph(schedule, world);
 
-  if (executor_.get().IsWorkerThread()) {
-    executor_.get().CoRun(task_graph_);
+  auto& executor = executor_.get();
+  if (executor.IsWorkerThread()) {
+    executor.CoRun(task_graph_);
     return;
   }
 
-  executor_.get().Run(task_graph_).Wait();
+  executor.Run(task_graph_).Wait();
+}
+
+void SingleThreadedExecutor::Wait() {
+  if (!future_.has_value()) [[unlikely]] {
+    return;
+  }
+
+  auto& executor = executor_.get();
+  if (executor.IsWorkerThread()) {
+    async::Future<void>& future = *future_;
+    executor.CoRunUntil([&future]() {
+      return future.WaitFor(std::chrono::seconds{0}) ==
+             std::future_status::ready;
+    });
+  } else {
+    future_->Wait();
+  }
+
+  future_.reset();
 }
 
 }  // namespace helios::ecs

@@ -112,7 +112,7 @@ TEST_SUITE("helios::Assert") {
   TEST_CASE("helios::FormatAssertionMessage: message formatting") {
     SUBCASE("Includes condition and source location") {
       constexpr auto loc = std::source_location::current();
-      const std::string formatted =
+      const auto formatted =
           details::FormatAssertionMessage("test_condition", loc, "");
 
       CHECK(formatted.starts_with("Assertion failed: test_condition"));
@@ -123,7 +123,7 @@ TEST_SUITE("helios::Assert") {
 
     SUBCASE("Includes custom message") {
       constexpr auto loc = std::source_location::current();
-      const std::string formatted = details::FormatAssertionMessage(
+      const auto formatted = details::FormatAssertionMessage(
           "another_condition", loc, "Test message");
 
       CHECK(formatted.contains(
@@ -133,7 +133,7 @@ TEST_SUITE("helios::Assert") {
 #ifdef HELIOS_ENABLE_STACKTRACE
     SUBCASE("Includes stack trace header") {
       constexpr auto loc = std::source_location::current();
-      const std::string formatted =
+      const auto formatted =
           details::FormatAssertionMessage("stack_test", loc, "");
 
       CHECK(formatted.contains("Stack trace:"));

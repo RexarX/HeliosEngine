@@ -1,10 +1,13 @@
 #pragma once
 
 #include <helios/app/application.hpp>
+#include <helios/app/builtin/app_exit.hpp>
 #include <helios/app/sub_app.hpp>
+#include <helios/utils/sleep.hpp>
 
 #include <algorithm>
 #include <chrono>
+#include <cstddef>
 #include <optional>
 #include <thread>
 
@@ -34,8 +37,7 @@ struct FixedRunnerConfig {
    * @param hz Target frequency in Hz (must be > 0)
    * @return FixedRunnerConfig with the corresponding update interval
    */
-  [[nodiscard]] static constexpr auto FromHz(double hz) noexcept
-      -> FixedRunnerConfig {
+  [[nodiscard]] static constexpr FixedRunnerConfig FromHz(double hz) noexcept {
     auto nanosec = std::chrono::duration_cast<std::chrono::nanoseconds>(
         std::chrono::duration<double>{1.0 / hz});
     return {.update_interval = nanosec};
@@ -49,9 +51,8 @@ struct FixedRunnerConfig {
    * @return FixedRunnerConfig with the given interval
    */
   template <typename Rep, typename Period>
-  [[nodiscard]] static constexpr auto FromInterval(
-      std::chrono::duration<Rep, Period> interval) noexcept
-      -> FixedRunnerConfig {
+  [[nodiscard]] static constexpr FixedRunnerConfig FromInterval(
+      std::chrono::duration<Rep, Period> interval) noexcept {
     auto nanosec =
         std::chrono::duration_cast<std::chrono::nanoseconds>(interval);
     return {.update_interval = nanosec};
@@ -73,9 +74,9 @@ inline ExitCode RunDefault(App& app) {
 
 /**
  * @brief Runs the application with a fixed timestep.
- * @details Uses `sleep_until` against an advancing absolute target time point
- * so that scheduler wake-up overshoot on one frame is automatically absorbed by
- * a shorter sleep on the next, preventing drift accumulation.
+ * @details Uses `utils::PreciseSleepUntil` against an advancing absolute
+ * target time point so that scheduler wake-up overshoot on one frame is
+ * absorbed by a shorter sleep on the next, preventing drift accumulation.
  * @param app Application to update
  * @param config Fixed-runner configuration
  * @return Exit code from the first `AppExit` message
@@ -89,7 +90,7 @@ inline ExitCode RunFixed(App& app, const FixedRunnerConfig& config = {}) {
 
     app.Update();
 
-    std::this_thread::sleep_until(next_tick);
+    utils::PreciseSleepUntil(next_tick);
     // Prevent unbounded catch-up after a long stall (e.g. debugger pause)
     next_tick = std::max(next_tick, std::chrono::steady_clock::now());
   }
@@ -124,8 +125,8 @@ inline void RunDefaultSubApp(SubApp& sub_app, async::Executor& executor) {
 /**
  * @brief Runs the sub-app with a fixed timestep.
  * @details Intended for async sub-apps via `SubApp::SetRunner`.
- * Uses `sleep_until` against an advancing absolute target time point so that
- * scheduler wake-up overshoot on one frame is automatically absorbed by a
+ * Uses `utils::PreciseSleepUntil` against an advancing absolute target time
+ * point so that scheduler wake-up overshoot on one frame is absorbed by a
  * shorter sleep on the next, preventing drift accumulation.
  * @param sub_app Sub-app to update
  * @param executor Async executor used to build and run schedules
@@ -140,7 +141,7 @@ inline void RunFixedSubApp(SubApp& sub_app, async::Executor& executor,
 
     sub_app.Update(executor);
 
-    std::this_thread::sleep_until(next_tick);
+    utils::PreciseSleepUntil(next_tick);
     // Prevent unbounded catch-up after a long stall (e.g. debugger pause)
     next_tick = std::max(next_tick, std::chrono::steady_clock::now());
   }

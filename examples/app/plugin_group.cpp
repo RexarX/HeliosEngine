@@ -7,15 +7,11 @@ namespace hlog = helios::log;
 namespace {
 
 struct First final : public happ::Plugin {
-  void Build(happ::App& /*app*/) override {
-    hlog::Info("plugin_groups: First::Build");
-  }
+  void Build(happ::App& /*app*/) override { hlog::Info("First::Build"); }
 };
 
 struct Second final : public happ::Plugin {
-  void Build(happ::App& /*app*/) override {
-    hlog::Info("plugin_groups: Second::Build");
-  }
+  void Build(happ::App& /*app*/) override { hlog::Info("Second::Build"); }
 };
 
 struct MyGroup final : public happ::PluginGroup {

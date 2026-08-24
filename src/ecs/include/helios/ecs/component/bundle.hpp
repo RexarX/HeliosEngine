@@ -12,198 +12,314 @@
 
 namespace helios::ecs {
 
+/**
+ * @brief Component and nested-bundle values for a bundle operation.
+ * @details Lists component types and/or nested bundle types at compile time.
+ * Nested types are flattened depth-first, left-to-right, for add/remove. The
+ * same type also stores leaf and nested bundle values in declaration order.
+ * @tparam Ts Component types and/or nested bundle types
+ */
+template <typename... Ts>
+struct ComponentBundleTypes {
+  using ElementTuple = std::tuple<std::remove_cvref_t<Ts>...>;
+
+  ElementTuple values;
+
+  /// @brief Default-constructs all elements.
+  constexpr ComponentBundleTypes() noexcept(
+      (std::is_nothrow_default_constructible_v<Ts> && ...)) = default;
+
+  /**
+   * @brief Constructs a bundle from element values.
+   * @tparam Us Argument types
+   * @param elements Element values in declaration order
+   */
+  template <typename... Us>
+    requires(sizeof...(Us) == sizeof...(Ts)) &&
+            (std::constructible_from<Ts, Us &&> && ...)
+  constexpr ComponentBundleTypes(Us&&... elements) noexcept(
+      (std::is_nothrow_constructible_v<Ts, Us&&> && ...))
+      : values(std::forward<Us>(elements)...) {}
+
+  constexpr ComponentBundleTypes(const ComponentBundleTypes&) noexcept(
+      (std::is_nothrow_copy_constructible_v<Ts> && ...)) = default;
+  constexpr ComponentBundleTypes(ComponentBundleTypes&&) noexcept(
+      (std::is_nothrow_move_constructible_v<Ts> && ...)) = default;
+  constexpr ~ComponentBundleTypes() noexcept(
+      (std::is_nothrow_destructible_v<Ts> && ...)) = default;
+
+  constexpr ComponentBundleTypes&
+  operator=(const ComponentBundleTypes&) noexcept(
+      (std::is_nothrow_copy_assignable_v<Ts> && ...)) = default;
+  constexpr ComponentBundleTypes& operator=(ComponentBundleTypes&&) noexcept(
+      (std::is_nothrow_move_assignable_v<Ts> && ...)) = default;
+};
+
 namespace details {
 
+template <typename T>
+struct IsComponentBundleTypes : std::false_type {};
+
 template <typename... Ts>
-struct ComponentBundleTypeList {};
+struct IsComponentBundleTypes<ComponentBundleTypes<Ts...>> : std::true_type {};
 
 template <typename... Lists>
-struct ConcatComponentBundleTypeLists;
+struct ConcatComponentBundleTypes;
 
 template <>
-struct ConcatComponentBundleTypeLists<> {
-  using Type = ComponentBundleTypeList<>;
+struct ConcatComponentBundleTypes<> {
+  using Type = ComponentBundleTypes<>;
 };
 
 template <typename... Ts>
-struct ConcatComponentBundleTypeLists<ComponentBundleTypeList<Ts...>> {
-  using Type = ComponentBundleTypeList<Ts...>;
+struct ConcatComponentBundleTypes<ComponentBundleTypes<Ts...>> {
+  using Type = ComponentBundleTypes<Ts...>;
 };
 
 template <typename... Ts, typename... Us, typename... Rest>
-struct ConcatComponentBundleTypeLists<ComponentBundleTypeList<Ts...>,
-                                      ComponentBundleTypeList<Us...>, Rest...>
-    : public ConcatComponentBundleTypeLists<
-          ComponentBundleTypeList<Ts..., Us...>, Rest...> {};
-
-template <typename T>
-struct ComponentBundleElementInfo {
-  using Type = std::remove_cvref_t<T>;
-  using ComponentTypes = ComponentBundleTypeList<Type>;
-
-  static constexpr bool kValid =
-      std::same_as<T, Type> && !std::is_array_v<Type> && ComponentTrait<Type>;
+struct ConcatComponentBundleTypes<ComponentBundleTypes<Ts...>,
+                                  ComponentBundleTypes<Us...>, Rest...>
+    : ConcatComponentBundleTypes<ComponentBundleTypes<Ts..., Us...>, Rest...> {
 };
 
 template <typename T>
-struct ComponentBundleInfo {
-  using ComponentTypes = ComponentBundleTypeList<>;
+struct ComponentBundleTypeInfo {
+  using LeafTypes = ComponentBundleTypes<>;
 
   static constexpr bool kValid = false;
   static constexpr size_t kSize = 0;
 };
 
-template <typename... Ts>
-struct ComponentBundleElementInfo<ComponentBundle<Ts...>>;
+template <typename T>
+inline constexpr bool kIsNestedBundleType = [] {
+  using Decayed = std::remove_cvref_t<T>;
+  if constexpr (IsComponentBundleTypes<Decayed>::value) {
+    return true;
+  } else {
+    return requires { typename Decayed::ComponentTypes; }&&
+      requires(Decayed bundle)
+    {
+      {std::move(bundle).Build()}
+          ->std::same_as<typename Decayed::ComponentTypes>;
+    }
+    &&!ComponentTrait<Decayed>;
+  }
+}();
+
+template <typename T, bool IsNested = kIsNestedBundleType<T>>
+struct ComponentBundleElementTypes;
+
+template <typename T>
+struct ComponentBundleElementTypes<T, false> {
+  using Decayed = std::remove_cvref_t<T>;
+
+  static constexpr bool kValid = std::same_as<T, Decayed> &&
+                                 !std::is_array_v<Decayed> &&
+                                 ComponentTrait<Decayed>;
+
+  using Type = std::conditional_t<kValid, ComponentBundleTypes<Decayed>,
+                                  ComponentBundleTypes<>>;
+};
 
 template <typename... Ts>
-struct ComponentBundleInfo<ComponentBundle<Ts...>> {
+struct ComponentBundleElementTypes<ComponentBundleTypes<Ts...>, true> {
+  using NestedTypes = ComponentBundleTypes<Ts...>;
+
+  static constexpr bool kValid = ComponentBundleTypeInfo<NestedTypes>::kValid;
+  using Type = typename ComponentBundleTypeInfo<NestedTypes>::LeafTypes;
+};
+
+template <typename T>
+  requires(!IsComponentBundleTypes<T>::value)
+struct ComponentBundleElementTypes<T, true> {
+  using NestedTypes = typename T::ComponentTypes;
+
+  static constexpr bool kValid = ComponentBundleTypeInfo<NestedTypes>::kValid;
+  using Type = typename ComponentBundleTypeInfo<NestedTypes>::LeafTypes;
+};
+
+template <typename... Ts>
+struct ComponentBundleTypeInfo<ComponentBundleTypes<Ts...>> {
 private:
   template <typename... Us>
   [[nodiscard]] static consteval bool Unique(
-      ComponentBundleTypeList<Us...> /*types*/) noexcept {
+      ComponentBundleTypes<Us...> /*types*/) noexcept {
     return utils::UniqueTypes<Us...>;
   }
 
 public:
-  using ComponentTypes = typename ConcatComponentBundleTypeLists<
-      typename ComponentBundleElementInfo<Ts>::ComponentTypes...>::Type;
+  using LeafTypes = typename ConcatComponentBundleTypes<
+      typename ComponentBundleElementTypes<Ts>::Type...>::Type;
 
-  static constexpr size_t kSize = []<typename... Us>(
-                                      ComponentBundleTypeList<Us...>
-                                      /*types*/) consteval {
+  static constexpr size_t kSize = []<typename... Us>(ComponentBundleTypes<Us...>
+                                                     /*types*/) consteval {
     return sizeof...(Us);
-  }(ComponentTypes{});
+  }(LeafTypes{});
 
   static constexpr bool kValid =
-      (sizeof...(Ts) > 0) && (... && ComponentBundleElementInfo<Ts>::kValid) &&
-      Unique(ComponentTypes{});
+      (sizeof...(Ts) > 0) && (... && ComponentBundleElementTypes<Ts>::kValid) &&
+      Unique(LeafTypes{});
 };
+
+}  // namespace details
+
+/**
+ * @brief Concept for a valid component bundle.
+ * @details A bundle is either a `ComponentBundleTypes<...>` specialization or a
+ * type that declares `ComponentTypes` and returns it from `Build()`.
+ */
+template <typename T>
+concept ComponentBundleTrait =
+    (details::IsComponentBundleTypes<std::remove_cvref_t<T>>::value &&
+     details::ComponentBundleTypeInfo<std::remove_cvref_t<T>>::kValid) ||
+    (requires(std::remove_cvref_t<T> bundle) {
+      typename std::remove_cvref_t<T>::ComponentTypes;
+      {
+        std::move(bundle).Build()
+      } -> std::same_as<typename std::remove_cvref_t<T>::ComponentTypes>;
+    } &&
+     details::ComponentBundleTypeInfo<
+         typename std::remove_cvref_t<T>::ComponentTypes>::kValid);
+
+namespace details {
+
+template <typename Bundle>
+struct BundleTypeListImpl;
 
 template <typename... Ts>
-struct ComponentBundleElementInfo<ComponentBundle<Ts...>> {
-  using Info = ComponentBundleInfo<ComponentBundle<Ts...>>;
-  using ComponentTypes = typename Info::ComponentTypes;
-
-  static constexpr bool kValid = Info::kValid;
+struct BundleTypeListImpl<ComponentBundleTypes<Ts...>> {
+  using Type = ComponentBundleTypes<Ts...>;
 };
 
-struct ComponentBundleAccess;
+template <typename T>
+  requires(!IsComponentBundleTypes<T>::value)
+struct BundleTypeListImpl<T> {
+  using Type = typename T::ComponentTypes;
+};
+
+template <typename Bundle>
+using BundleTypeList =
+    typename BundleTypeListImpl<std::remove_cvref_t<Bundle>>::Type;
+
+template <typename Bundle>
+using BundleLeafTypes =
+    typename ComponentBundleTypeInfo<BundleTypeList<Bundle>>::LeafTypes;
 
 template <typename Bundle>
 inline constexpr size_t kComponentBundleSize =
-    ComponentBundleInfo<std::remove_cvref_t<Bundle>>::kSize;
+    ComponentBundleTypeInfo<BundleTypeList<Bundle>>::kSize;
 
 template <typename Bundle>
 using ComponentBundleResult =
     std::conditional_t<kComponentBundleSize<Bundle> == 1, bool,
                        std::array<bool, kComponentBundleSize<Bundle>>>;
 
-}  // namespace details
-
-/**
- * @brief Concept to check if a type is a valid component bundle.
- * @details A component bundle is a non-empty `ComponentBundle` whose elements
- * are unqualified component values or valid component bundles. Flattened
- * component types must be unique.
- */
 template <typename T>
-concept ComponentBundleTrait =
-    details::IsComponentBundle<std::remove_cvref_t<T>>::value &&
-    details::ComponentBundleInfo<std::remove_cvref_t<T>>::kValid;
-
-/**
- * @brief Owning collection of components that can be added or removed as one
- * ECS operation.
- * @details Bundles may contain components and other bundles. Nested elements
- * are flattened depth-first in declaration order when consumed by the ECS.
- * @tparam Ts Component or component bundle types
- */
-template <typename... Ts>
-class ComponentBundle {
-public:
-  /// @brief Constructs a bundle by default-constructing its elements.
-  constexpr ComponentBundle() noexcept(
-      (std::is_nothrow_default_constructible_v<Ts> && ...)) = default;
-
-  /**
-   * @brief Constructs a bundle from component and nested bundle values.
-   * @tparam Us Argument types
-   * @param elements Component and nested bundle values
-   */
-  template <typename... Us>
-    requires ComponentBundleTrait<ComponentBundle> &&
-             (sizeof...(Us) == sizeof...(Ts)) &&
-             (std::constructible_from<Ts, Us &&> && ...)
-  explicit(sizeof...(Ts) == 1 || !(std::convertible_to<Us&&, Ts> && ...)) constexpr ComponentBundle(
-      Us&&... elements) noexcept((std::is_nothrow_constructible_v<Ts, Us&&> &&
-                                  ...))
-      : elements_(std::forward<Us>(elements)...) {}
-
-  constexpr ComponentBundle(const ComponentBundle&) noexcept(
-      (std::is_nothrow_copy_constructible_v<Ts> && ...)) = default;
-  constexpr ComponentBundle(ComponentBundle&&) noexcept(
-      (std::is_nothrow_move_constructible_v<Ts> && ...)) = default;
-  constexpr ~ComponentBundle() noexcept((std::is_nothrow_destructible_v<Ts> &&
-                                         ...)) = default;
-
-  constexpr ComponentBundle& operator=(const ComponentBundle&) noexcept(
-      (std::is_nothrow_copy_assignable_v<Ts> && ...)) = default;
-  constexpr ComponentBundle& operator=(ComponentBundle&&) noexcept(
-      (std::is_nothrow_move_assignable_v<Ts> && ...)) = default;
-
-private:
-  friend struct details::ComponentBundleAccess;
-
-  std::tuple<Ts...> elements_;
-};
+constexpr auto FlattenValue(T&& value);
 
 template <typename... Ts>
-ComponentBundle(Ts&&...) -> ComponentBundle<std::remove_cvref_t<Ts>...>;
+constexpr auto FlattenBundleValues(ComponentBundleTypes<Ts...>& bundle) {
+  return std::apply(
+      []<typename... Us>(Us&... elements) {
+        return std::tuple_cat(FlattenValue(elements)...);
+      },
+      bundle.values);
+}
 
-namespace details {
+template <typename... Ts>
+constexpr auto FlattenBundleValues(const ComponentBundleTypes<Ts...>& bundle) {
+  return std::apply(
+      []<typename... Us>(const Us&... elements) {
+        return std::tuple_cat(FlattenValue(elements)...);
+      },
+      bundle.values);
+}
 
-struct ComponentBundleAccess {
-public:
-  template <ComponentBundleTrait Bundle>
-  [[nodiscard]] static constexpr auto Flatten(Bundle&& bundle) {
-    return std::apply(
-        []<typename... Ts>(Ts&&... elements) {
-          return std::tuple_cat(FlattenElement(std::forward<Ts>(elements))...);
-        },
-        std::forward<Bundle>(bundle).elements_);
-  }
+template <typename... Ts>
+constexpr auto FlattenBundleValues(ComponentBundleTypes<Ts...>&& bundle) {
+  return std::apply(
+      []<typename... Us>(Us&&... elements) {
+        return std::tuple_cat(FlattenValue(std::forward<Us>(elements))...);
+      },
+      std::move(bundle.values));
+}
 
-private:
-  template <typename T>
-  [[nodiscard]] static constexpr auto FlattenElement(T&& element) {
-    if constexpr (ComponentBundleTrait<T>) {
-      return Flatten(std::forward<T>(element));
+template <typename T>
+constexpr auto FlattenValue(T&& value) {
+  using Decayed = std::remove_cvref_t<T>;
+  if constexpr (IsComponentBundleTypes<Decayed>::value) {
+    return FlattenBundleValues(std::forward<T>(value));
+  } else if constexpr (kIsNestedBundleType<Decayed>) {
+    if constexpr (std::is_lvalue_reference_v<T&&>) {
+      auto copy = value;
+      return FlattenBundleValues(std::move(copy).Build());
     } else {
-      return std::forward_as_tuple(std::forward<T>(element));
+      return FlattenBundleValues(std::move(value).Build());
     }
+  } else {
+    return std::make_tuple(std::forward<T>(value));
   }
-};
+}
+
+template <ComponentBundleTrait Bundle>
+constexpr auto ExtractBundleValues(Bundle&& bundle) {
+  using BundleType = std::remove_cvref_t<Bundle>;
+  if constexpr (IsComponentBundleTypes<BundleType>::value) {
+    return FlattenBundleValues(std::forward<Bundle>(bundle));
+  } else if constexpr (std::is_lvalue_reference_v<Bundle&&>) {
+    auto copy = bundle;
+    return FlattenBundleValues(std::move(copy).Build());
+  } else {
+    return FlattenBundleValues(std::move(bundle).Build());
+  }
+}
 
 template <ComponentBundleTrait Bundle, typename F>
 constexpr auto ApplyComponentBundle(Bundle&& bundle, F&& func)
     -> decltype(auto) {
-  return std::apply(std::forward<F>(func), ComponentBundleAccess::Flatten(
-                                               std::forward<Bundle>(bundle)));
+  return std::apply(std::forward<F>(func),
+                    ExtractBundleValues(std::forward<Bundle>(bundle)));
 }
 
 template <typename... Ts, typename F>
-constexpr auto ApplyComponentBundleTypes(
-    ComponentBundleTypeList<Ts...> /*types*/, F&& func) -> decltype(auto) {
+constexpr auto ApplyComponentBundleTypes(ComponentBundleTypes<Ts...> /*types*/,
+                                         F&& func) -> decltype(auto) {
   return std::forward<F>(func).template operator()<Ts...>();
 }
 
 template <ComponentBundleTrait Bundle, typename F>
 constexpr auto ApplyComponentBundleTypes(F&& func) -> decltype(auto) {
-  using Types =
-      typename ComponentBundleInfo<std::remove_cvref_t<Bundle>>::ComponentTypes;
-  return ApplyComponentBundleTypes(Types{}, std::forward<F>(func));
+  return ApplyComponentBundleTypes(BundleLeafTypes<Bundle>{},
+                                   std::forward<F>(func));
 }
+
+template <typename... Ts>
+struct IsComponentBundle<ComponentBundleTypes<Ts...>> : std::true_type {};
+
+template <typename T>
+struct HasStructBundleBuild : std::false_type {};
+
+template <typename T>
+  requires requires(std::remove_cvref_t<T> bundle) {
+    typename std::remove_cvref_t<T>::ComponentTypes;
+    {
+      std::move(bundle).Build()
+    } -> std::same_as<typename std::remove_cvref_t<T>::ComponentTypes>;
+  }
+struct HasStructBundleBuild<T> : std::true_type {};
+
+template <typename T, bool HasBuild = HasStructBundleBuild<T>::value>
+struct IsStructComponentBundle : std::false_type {};
+
+template <typename T>
+struct IsStructComponentBundle<T, true>
+    : std::bool_constant<
+          ComponentBundleTypeInfo<typename T::ComponentTypes>::kValid> {};
+
+template <typename T>
+  requires(!IsComponentBundleTypes<std::remove_cvref_t<T>>::value)
+struct IsComponentBundle<T> : IsStructComponentBundle<std::remove_cvref_t<T>> {
+};
 
 }  // namespace details
 

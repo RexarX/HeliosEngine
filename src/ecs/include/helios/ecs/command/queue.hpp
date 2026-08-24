@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <memory_resource>
 #include <ranges>
+#include <type_traits>
 
 namespace helios::ecs {
 
@@ -15,39 +16,26 @@ class World;
 /**
  * @brief Command queue for deferred ECS operations.
  * @details Provides a queue for commands that will be executed during
- * `World::Update()`.
+ * `World::Flush()`.
  * Commands are executed in the order they were enqueued, ensuring predictable
  * behavior.
  * @note Not thread-safe.
- * @tparam Allocator Allocator type for command storage (default:
- * `std::allocator<std::byte>`)
  */
-template <typename Allocator = std::allocator<std::byte>>
 class CmdQueue {
 private:
-  using CommandStorage =
-      container::CallableBufferArray<Allocator, void(World&)>;
+  using CommandStorage = container::CallableBufferArray<void(World&)>;
 
 public:
   using size_type = CommandStorage::size_type;
-  using allocator_type = CommandStorage::allocator_type;
 
-  /**
-   * @brief Constructs a command queue with a custom allocator.
-   * @param allocator Allocator instance
-   */
-  explicit constexpr CmdQueue(allocator_type allocator = allocator_type{})
-      : commands_(std::move(allocator)) {}
+  constexpr CmdQueue() = default;
 
   /**
    * @brief Constructs a command queue from a PMR memory resource.
-   * @details Enabled only when `allocator_type` is constructible from
-   * `std::pmr::memory_resource*`.
-   * @param resource Memory resource used to construct allocator
+   * @param resource Memory resource used for command storage
    */
   explicit constexpr CmdQueue(std::pmr::memory_resource* resource)
-    requires std::constructible_from<allocator_type, std::pmr::memory_resource*>
-      : CmdQueue(allocator_type{resource}) {}
+      : commands_(resource) {}
 
   CmdQueue(std::nullptr_t) = delete;
 
@@ -56,7 +44,7 @@ public:
   ~CmdQueue() = default;
 
   CmdQueue& operator=(const CmdQueue&) = delete;
-  CmdQueue& operator=(CmdQueue&&) noexcept = default;
+  constexpr CmdQueue& operator=(CmdQueue&&) noexcept = default;
 
   /**
    * @brief Clears all pending commands from the queue.
@@ -123,28 +111,27 @@ public:
   }
 
   /**
-   * @brief Gets the allocator used by the command storage.
-   * @return Allocator instance
+   * @brief Returns the memory resource used for command storage.
+   * @return Memory resource passed to the constructor, or the default resource
    */
-  [[nodiscard]] constexpr allocator_type GetAllocator() const {
-    return commands_.GetAllocator();
+  [[nodiscard]] constexpr std::pmr::memory_resource* GetMemoryResource()
+      const noexcept {
+    return commands_.GetMemoryResource();
   }
 
 private:
   CommandStorage commands_;  ///< Container storing commands
 };
 
-template <typename Allocator>
 template <CommandTrait T>
-inline void CmdQueue<Allocator>::Enqueue(T&& command) {
+inline void CmdQueue::Enqueue(T&& command) {
   using DecayedT = std::remove_cvref_t<T>;
   commands_.template Push<&DecayedT::Execute>(std::forward<T>(command));
 }
 
-template <typename Allocator>
 template <std::ranges::input_range R>
   requires CommandTrait<std::ranges::range_value_t<R>>
-inline void CmdQueue<Allocator>::EnqueueBulk(R&& commands) {
+inline void CmdQueue::EnqueueBulk(R&& commands) {
   if constexpr (std::ranges::sized_range<R>) {
     commands_.Reserve(commands_.Size() + std::ranges::size(commands));
   }
@@ -154,23 +141,11 @@ inline void CmdQueue<Allocator>::EnqueueBulk(R&& commands) {
   }
 }
 
-template <typename Allocator>
-inline void CmdQueue<Allocator>::ExecuteAll(World& world) {
+inline void CmdQueue::ExecuteAll(World& world) {
   HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::CmdQueue::ExecuteAll");
   HELIOS_ECS_PROFILE_ZONE_VALUE(commands_.Size());
   commands_.Invoke(world);
   Clear();
 }
-
-/**
- * @brief Command queue for deferred ECS operations that uses a polymorphic
- * allocator.
- * @details Provides a queue for commands that will be executed during
- * `World::Update()`.
- * Commands are executed in the order they were enqueued, ensuring predictable
- * behavior.
- * @note Not thread-safe.
- */
-using PmrCmdQueue = CmdQueue<std::pmr::polymorphic_allocator<std::byte>>;
 
 }  // namespace helios::ecs

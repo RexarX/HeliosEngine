@@ -11,15 +11,16 @@ Data-oriented ECS with deferred commands, double-buffered messages, archetype-ba
 | `World`                                           | Owns entities, components, resources, messages, and the global command queue. |
 | `WorldView`                                       | Read-only, thread-safe projection of a `const World&`.                        |
 | `Entity`                                          | 64-bit ID: 32-bit index + 32-bit generation.                                  |
-| `ComponentBundle<Ts...>`                          | Owning, composable group of component values for structural operations.       |
+| `ComponentBundleTypes<...>`                       | Component bundle type list and value holder.                                  |
 | `Schedule`                                        | System collection with ordering, access policies, and executor selection.     |
 | `Scheduler`                                       | Groups schedules into stages; builds and runs them.                           |
 | `Commands`                                        | Deferred mutation queue for systems (`Spawn`, `Entity`, `World`).             |
 | `Query<Args...>`                                  | Entity iteration with component access and `With<>` / `Without<>` filters.    |
 | `Res<T>`                                          | Resource access (`Res<const T>` for read-only).                               |
 | `Local<T>`                                        | Per-system local storage (never conflicts in scheduling).                     |
-| `MessageWriter<T>`                                | Write regular messages (current frame buffer).                                |
-| `MessageReader<T>`                                | Read regular messages (previous frame buffer).                                |
+| `MessageWriter<T>`                                | Write regular messages (current buffer; assigns stable `MessageId`).          |
+| `MessageReader<T>`                                | Unread-only read of retained messages via a persistent `MessageCursor`.       |
+| `MessageCursor<T>`                                | Per-reader delivery cursor (`IncludeBacklog` / `FutureOnly`).                 |
 | `AsyncMessageWriter<T>` / `AsyncMessageReader<T>` | Lock-free async message queue.                                                |
 
 ### World Lifecycle
@@ -30,7 +31,7 @@ Data-oriented ECS with deferred commands, double-buffered messages, archetype-ba
 | `Update()` | `Flush()` + advance message lifecycle (swap buffers, clear aged messages).      |
 | `Clear()`  | Remove all world data.                                                          |
 
-`World::Update()` is called once per frame after the update stage completes (handled by `app::Scheduler`).
+`MessageManager::Update()` (stage `advance_messages` on the last stage of each frame order) ages regular message buffers. Prefer that over calling `World::Update()` from app code when only the swap is needed.
 
 ## Quick Start
 
@@ -97,8 +98,8 @@ schedule.RunAndWait(world);
 | `Query<Args...>`          | Entity iteration (`T&`, `const T&`, `const T*`, `With<T>`, `Without<T>`) |
 | `Commands`                | Deferred spawn/destroy/component/resource mutations                      |
 | `Local<T>`                | Per-system persistent state                                              |
-| `MessageWriter<T>`        | Write messages (visible next frame)                                      |
-| `MessageReader<T>`        | Read messages (from previous frame)                                      |
+| `MessageWriter<T>`        | Write messages into the current retention buffer                         |
+| `MessageReader<T>`        | Unread-only iteration; cursor persisted in `SystemLocalData`             |
 
 ### Custom System Parameters
 
@@ -111,7 +112,7 @@ A type models the `SystemParam` concept when the specialization provides:
 | `RegisterAccess(AccessPolicyBuilder&)`                | Declare component/resource accesses for parallel scheduling |
 | `Make(World&, SystemLocalData&, const AccessPolicy&)` | Construct the parameter at system invocation time           |
 
-`Commands`, `Local<T>`, `WorldView`, and message params register no scheduling access — they never participate in conflict detection.
+`World` registers exclusive access and conflicts with component/resource access. `Commands`, `Local<T>`, `WorldView`, and message params register no scheduling access — they never participate in conflict detection.
 
 #### Aggregate parameters (`CompositeSystemParam`)
 
@@ -238,12 +239,17 @@ Commands apply at schedule boundaries (`RunAndWait` → `Flush()` → per-system
 
 ## Messages
 
-Regular messages use a double-buffer with a 2-frame TTL:
+Regular messages separate **retention** from **delivery**:
+
+- Buffers keep auto-policy messages across two `MessageManager::Update()` lifecycle steps (`previous` + `current`).
+- Each `MessageReader` uses a `MessageCursor` so a message is observed once per reader, even if the system runs twice before aging or the message moves current->previous.
+- Outside systems, pass an explicit cursor: `world.ReadMessages<T>(cursor)`. Raw manager spans bypass delivery tracking.
 
 ```
-Frame N:   write via MessageWriter<T>
-Frame N+1: read via MessageReader<T>
-Frame N+2: auto-cleared (unless kManual clear policy)
+Update N:   write via MessageWriter<T>
+            MessageReader yields unread previous+current once per cursor
+Update N+1: aged into previous; same cursor does not redeliver
+Update N+2: auto-cleared (unless kManual clear policy)
 ```
 
 ```cpp
@@ -259,16 +265,25 @@ world.AddMessage<DamageEvent>();
 struct ApplyDamage {
   void operator()(helios::ecs::MessageReader<DamageEvent> events,
                   helios::ecs::Query<Health&> healths) {
-    events.ForEach([&](const DamageEvent& evt) {
-      if (auto* hp = healths.Get(evt.target)) {
-        hp->value -= evt.amount;
+    // System params persist the cursor; ForEach / Read advance it.
+    events.ForEach([&](const auto evt) {
+      if (auto* hp = healths.Get(evt->target)) {
+        hp->value -= evt->amount;
       }
     });
   }
 };
+
+// Manual / non-system reads require a cursor:
+auto cursor = helios::ecs::MessageCursor<DamageEvent>::IncludeBacklog();
+for (const auto msg : world.ReadMessages(cursor)) {
+  // ...
+}
 ```
 
-Async messages (`kAsync = true`) use a lock-free queue and are not managed by `World::Update()` — clear explicitly.
+Consumable messages record stable ids on `Consume()` and remove globally when deferred merges apply; independent readers still each see the message once beforehand.
+
+Async messages (`kAsync = true`) use a lock-free queue and are not managed by `MessageManager::Update()` — clear explicitly.
 
 ## Components
 
@@ -283,26 +298,44 @@ Override with `static constexpr ComponentStorageType kStorageType = ...` in the 
 
 ### Component Bundles
 
-`ComponentBundle<Ts...>` groups component values that are commonly added or
-removed together. A bundle can contain other bundles; nested leaves are
-flattened depth-first and left-to-right.
+`ComponentBundleTypes<Ts...>` declares component and nested-bundle types at
+compile time and stores their values. Nested types are flattened depth-first,
+left-to-right for add/remove.
+
+**Leaf bundle** — use `ComponentBundleTypes` directly:
 
 ```cpp
-#include <helios/ecs/ecs.hpp>
+using MovementBundle = helios::ecs::ComponentBundleTypes<Position, Velocity>;
 
-using MovementBundle = helios::ecs::ComponentBundle<Position, Velocity>;
-using PlayerBundle =
-    helios::ecs::ComponentBundle<Player, MovementBundle, Health>;
-
-world.AddBundle(entity, PlayerBundle{
-    Player{}, MovementBundle{Position{}, Velocity{}}, Health{100}});
+world.AddBundle(entity, MovementBundle{pos, vel});
 world.RemoveBundle<MovementBundle>(entity);
 ```
 
-Bundles are transfer objects rather than components: queries access their leaf
-components, and `ComponentTrait<ComponentBundle<...>>` is false. Bundle element
-types must be unqualified values, every leaf must be a component, and flattened
-leaf component types must be unique. Empty bundles are rejected.
+**Struct bundle** — named fields plus `Build() &&` returning `ComponentTypes`:
+
+```cpp
+struct PlayerBundle {
+  using ComponentTypes =
+      helios::ecs::ComponentBundleTypes<Player, MovementBundle, Health>;
+
+  Player player;
+  Position position;
+  Velocity velocity;
+  Health health;
+
+  [[nodiscard]] constexpr ComponentTypes Build() {
+    return {std::move(player),
+            MovementBundle{std::move(position), std::move(velocity)},
+            std::move(health)};
+  }
+};
+
+world.AddBundle(entity, PlayerBundle{.player = {}, .position = {...}, ...});
+```
+
+Extras (e.g. tags) can be synthesized in `Build()`; include their types in
+`ComponentTypes`. Bundles are not components (`ComponentTrait` is false).
+Flattened leaf types must be unique.
 
 ## Queries
 

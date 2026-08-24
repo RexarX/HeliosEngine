@@ -1,6 +1,7 @@
 #pragma once
 
 #include <helios/cstring_view.hpp>
+#include <helios/profile/common.hpp>
 #include <helios/profile/profiler.hpp>
 
 #include <cstdint>

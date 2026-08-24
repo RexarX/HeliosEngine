@@ -1,13 +1,10 @@
 #include <doctest/doctest.h>
 
 #include <helios/async/executor.hpp>
-#include <helios/ecs/message/async_reader.hpp>
-#include <helios/ecs/message/async_writer.hpp>
-#include <helios/ecs/message/message.hpp>
-#include <helios/ecs/message/reader.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/command/commands.hpp>
+#include <helios/ecs/message/params.hpp>
+#include <helios/ecs/query/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/ecs/schedule/executor/single_threaded.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
@@ -463,14 +460,20 @@ TEST_SUITE("ecs::Schedule") {
       const auto& settings = schedule.Settings();
 
       CHECK_EQ(settings.executor_kind, ExecutorKind::kMultiThreaded);
+      CHECK(settings.apply_commands);
+      CHECK(settings.merge_messages);
     }
 
     SUBCASE("Settings can be modified") {
       Schedule schedule;
 
       schedule.Settings().executor_kind = ExecutorKind::kMainThread;
+      schedule.Settings().apply_commands = false;
+      schedule.Settings().merge_messages = false;
 
       CHECK_EQ(schedule.Settings().executor_kind, ExecutorKind::kMainThread);
+      CHECK_FALSE(schedule.Settings().apply_commands);
+      CHECK_FALSE(schedule.Settings().merge_messages);
     }
 
     SUBCASE("Const Settings returns the correct value") {
@@ -479,6 +482,65 @@ TEST_SUITE("ecs::Schedule") {
 
       CHECK_EQ(const_schedule.Settings().executor_kind,
                ExecutorKind::kMultiThreaded);
+      CHECK(const_schedule.Settings().apply_commands);
+      CHECK(const_schedule.Settings().merge_messages);
+    }
+
+    SUBCASE("apply_commands only leaves messages pending") {
+      World world;
+      world.AddMessage<TestMessage>();
+
+      Schedule schedule;
+      schedule.Settings().apply_commands = true;
+      schedule.Settings().merge_messages = false;
+      schedule.Add(FlushCommandSystem{});
+      schedule.Add(FlushMessageSystem{});
+      schedule.SetExecutor(std::make_unique<MainThreadExecutor>());
+      CHECK(schedule.Build().has_value());
+
+      schedule.RunAndWait(world);
+
+      CHECK_EQ(world.EntityCount(), 1);
+      CHECK(world.Messages().CurrentMessages<TestMessage>().empty());
+      CHECK(schedule.HasPendingLocalData());
+    }
+
+    SUBCASE("merge_messages only leaves commands pending") {
+      World world;
+      world.AddMessage<TestMessage>();
+
+      Schedule schedule;
+      schedule.Settings().apply_commands = false;
+      schedule.Settings().merge_messages = true;
+      schedule.Add(FlushCommandSystem{});
+      schedule.Add(FlushMessageSystem{});
+      schedule.SetExecutor(std::make_unique<MainThreadExecutor>());
+      CHECK(schedule.Build().has_value());
+
+      schedule.RunAndWait(world);
+
+      CHECK_EQ(world.EntityCount(), 0);
+      CHECK_EQ(world.Messages().CurrentMessages<TestMessage>().size(), 1);
+      CHECK(schedule.HasPendingLocalData());
+    }
+
+    SUBCASE("Explicit ApplyDeferred drains remaining half") {
+      World world;
+      world.AddMessage<TestMessage>();
+
+      Schedule schedule;
+      schedule.Settings().apply_commands = true;
+      schedule.Settings().merge_messages = false;
+      schedule.Add(FlushMessageSystem{});
+      schedule.SetExecutor(std::make_unique<MainThreadExecutor>());
+      CHECK(schedule.Build().has_value());
+
+      schedule.RunAndWait(world);
+      CHECK(schedule.HasPendingLocalData());
+
+      schedule.ApplyDeferred(world, false, true);
+      CHECK_FALSE(schedule.HasPendingLocalData());
+      CHECK_EQ(world.Messages().CurrentMessages<TestMessage>().size(), 1);
     }
   }
 

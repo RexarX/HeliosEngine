@@ -1,14 +1,18 @@
 #include <doctest/doctest.h>
 
-#include <helios/app/app.hpp>
+#include <helios/app/application.hpp>
+#include <helios/app/frame_order.hpp>
+#include <helios/app/runners.hpp>
 #include <helios/app/scheduler.hpp>
 #include <helios/app/schedules.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/message/params.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 
 #include <array>
 #include <atomic>
 #include <chrono>
+#include <string_view>
 #include <thread>
 
 using namespace helios;
@@ -62,6 +66,42 @@ struct OrderSystem {
 
   void operator()(Res<CounterResource> /*counter*/) const {
     *order_slot = (*call_index)++;
+  }
+};
+
+struct MarkerMsg {
+  static constexpr std::string_view kName = "MarkerMsg";
+
+  int value = 0;
+};
+
+struct WriteMarker {
+  void operator()(MessageWriter<MarkerMsg> writer) const {
+    writer.Write({.value = 1});
+  }
+};
+
+struct MainMarkerMsg {
+  static constexpr std::string_view kName = "MainMarkerMsg";
+
+  int value = 0;
+};
+
+struct WriteMainMarker {
+  void operator()(MessageWriter<MainMarkerMsg> writer) const {
+    writer.Write({.value = 1});
+  }
+};
+
+struct PumpMsg {
+  static constexpr std::string_view kName = "PumpMsg";
+
+  int value = 0;
+};
+
+struct WritePumpMsg {
+  void operator()(MessageWriter<PumpMsg> writer) const {
+    writer.Write({.value = 5});
   }
 };
 
@@ -249,6 +289,67 @@ TEST_SUITE("helios::app::Scheduler") {
       app.Update();
 
       CHECK_LT(order[0], order[1]);
+    }
+
+    SUBCASE("RunFrameOrder without Extract skips sub-app updates") {
+      App app(2);
+      app.InsertResources(CounterResource{});
+      app.AddSystem(kUpdate, IncrementSystem{});
+
+      SubApp render;
+      render.InsertResources(CounterResource{});
+      render.AddSystem(kUpdate, IncrementSystem{});
+      app.InsertSubApp(RenderSubAppLabel{}, std::move(render));
+
+      app.Initialize();
+      app.RunFrameOrder(app.GetWorld().ReadResource<FramePumpOrder>());
+
+      CHECK_EQ(app.GetWorld().ReadResource<CounterResource>().value, 1);
+      CHECK_EQ(app.GetSubApp(RenderSubAppLabel{})
+                   .GetWorld()
+                   .ReadResource<CounterResource>()
+                   .value,
+               0);
+    }
+
+    SUBCASE("Update stage alone does not advance message buffers") {
+      App app;
+      app.AddMessages<MarkerMsg>();
+      app.AddSystem(kUpdate, WriteMarker{});
+      app.Initialize();
+
+      auto& world = app.GetWorld();
+      auto& ecs = app.GetMainSubApp().GetScheduler();
+      ecs.RunStage(kUpdateStage, world);
+
+      CHECK_EQ(world.Messages().CurrentMessages<MarkerMsg>().size(), 1);
+      CHECK(world.Messages().PreviousMessages<MarkerMsg>().empty());
+    }
+
+    SUBCASE("MainFrameOrder advances messages after Extract") {
+      App app;
+      app.AddMessages<MainMarkerMsg>();
+      app.AddSystem(kUpdate, WriteMainMarker{});
+      app.Initialize();
+      app.Update();
+
+      auto& world = app.GetWorld();
+      CHECK(world.Messages().CurrentMessages<MainMarkerMsg>().empty());
+      CHECK_EQ(world.Messages().PreviousMessages<MainMarkerMsg>().size(), 1);
+    }
+
+    SUBCASE("FramePumpOrder advances messages after Update") {
+      App app;
+      app.AddMessages<PumpMsg>();
+      app.AddSystem(kPreUpdate, WritePumpMsg{});
+      app.Initialize();
+
+      app.RunFrameOrder(app.GetWorld().ReadResource<FramePumpOrder>());
+
+      auto& world = app.GetWorld();
+      CHECK(world.Messages().CurrentMessages<PumpMsg>().empty());
+      CHECK_EQ(world.Messages().PreviousMessages<PumpMsg>().size(), 1);
+      CHECK_EQ(world.Messages().PreviousMessages<PumpMsg>()[0].value, 5);
     }
 
     SUBCASE("Blocking sub-apps update concurrently within one frame") {

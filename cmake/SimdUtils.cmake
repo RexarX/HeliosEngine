@@ -119,7 +119,10 @@ function(helios_simd_apply_to_target)
 
   _helios_simd_resolve_options("${_level}" _opts)
   if(_opts)
-    target_compile_options(${SIMD_TARGET} PRIVATE ${_opts})
+    # PUBLIC so dependents (tests reusing this target's PCH, inlined SIMD in
+    # consumers) compile for the same CPU. clang-cl rejects PCH reuse when the
+    # PCH was built with -march=native and the translation unit was not.
+    target_compile_options(${SIMD_TARGET} PUBLIC ${_opts})
   endif()
 endfunction()
 

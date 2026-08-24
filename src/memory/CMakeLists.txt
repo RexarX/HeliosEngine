@@ -30,6 +30,9 @@ helios_module(
         include/helios/memory/pool_allocator.hpp
         include/helios/memory/ref_counted.hpp
         include/helios/memory/stack_allocator.hpp
+        include/helios/memory/temporary_storage.hpp
+        include/helios/memory/temporary_storage_helpers.hpp
+        include/helios/memory/treiber_stack.hpp
         src/details/accumulate_peak.hpp
         src/details/deferred_region_ebr.hpp
 
@@ -44,6 +47,8 @@ helios_module(
         src/free_list_allocator.cpp
         src/pool_allocator.cpp
         src/stack_allocator.cpp
+        src/temporary_storage.cpp
+        src/treiber_stack.cpp
 
     PCH src/pch.hpp
 
@@ -77,6 +82,9 @@ helios_module(
         tests/pool_allocator.cpp
         tests/ref_counted.cpp
         tests/stack_allocator.cpp
+        tests/temporary_storage.cpp
+        tests/temporary_storage_helpers.cpp
+        tests/treiber_stack.cpp
 )
 
 if(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC)
@@ -87,6 +95,10 @@ if(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC)
   helios_target_set_platform(helios_memory_global_alloc)
   helios_target_set_warnings(helios_memory_global_alloc)
   helios_target_set_optimization(helios_memory_global_alloc)
+  helios_target_enable_sanitizers(helios_memory_global_alloc)
+  if(COMMAND helios_target_apply_linker)
+    helios_target_apply_linker(helios_memory_global_alloc)
+  endif()
   helios_target_set_folder(helios_memory_global_alloc "Modules/memory")
 
   target_include_directories(helios_memory_global_alloc PRIVATE

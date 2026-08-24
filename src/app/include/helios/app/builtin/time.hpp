@@ -1,13 +1,13 @@
 #pragma once
 
-#include <helios/app/application.hpp>
 #include <helios/app/plugin.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/assert.hpp>
+#include <helios/ecs/resource/params.hpp>
 #include <helios/utils/common_traits.hpp>
 
 #include <chrono>
 #include <cstdint>
+#include <ratio>
 #include <string_view>
 
 namespace helios::app {
@@ -141,6 +141,12 @@ struct Time {
     return Delta<int64_t, std::chrono::microseconds>();
   }
 
+  [[nodiscard]] double Fps() const noexcept {
+    const auto delta_sec = DeltaSec();
+    HELIOS_ASSERT(delta_sec > 0.0, "Delta time must be greater than zero!");
+    return 1.0 / delta_sec;
+  }
+
   /**
    * @brief Gets delta time in nanoseconds.
    * @return Delta time in nanoseconds
@@ -160,10 +166,7 @@ class TimePlugin final : public Plugin {
 public:
   static constexpr std::string_view kName = "helios::app::TimePlugin";
 
-  void Build(App& app) override {
-    app.TryInsertResources(Time{});
-    app.AddSystem(kFirst, UpdateTime{});
-  }
+  void Build(App& app) override;
 };
 
 }  // namespace helios::app

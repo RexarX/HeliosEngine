@@ -14,7 +14,7 @@ namespace {
 // `Res<const FrameCount>` just like any other ECS resource.
 struct LogFrame {
   void operator()(hecs::Res<const happ::FrameCount> frames) const {
-    hlog::Info("simple: frame {}", frames->count);
+    hlog::Info("Frame {}", frames->count);
   }
 };
 
@@ -24,7 +24,7 @@ struct ExitAfterFrames {
     // App shutdown is requested by sending AppExit. The app runner observes the
     // message after this stage and returns the embedded exit code.
     if (frames->count >= 5) {
-      hlog::Info("simple: exiting after {} frames", frames->count);
+      hlog::Info("Exiting after {} frames", frames->count);
       exit_writer.Write(happ::AppExit::Success());
     }
   }

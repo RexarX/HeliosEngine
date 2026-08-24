@@ -2,6 +2,14 @@
 
 #include <helios/platform/platform.hpp>
 
+namespace helios::platform::test {
+
+struct HELIOS_EXPORT TestExportStruct {
+  int value = 100;
+};
+
+}  // namespace helios::platform::test
+
 TEST_SUITE("helios::platform::Platform") {
   TEST_CASE("HELIOS_API: macro is defined") {
     // HELIOS_API should be defined (may be empty on some platforms)
@@ -32,6 +40,20 @@ TEST_SUITE("helios::platform::Platform") {
 #else
     CHECK(false);  // HELIOS_DEBUG_BREAK should always be defined
 #endif
+  }
+
+  TEST_CASE("HELIOS_PAUSE_CPU") {
+    SUBCASE("Macro is defined") {
+#ifdef HELIOS_PAUSE_CPU
+      CHECK_EQ(1, 1);
+#else
+      CHECK_EQ(1, 0);
+#endif
+    }
+
+    SUBCASE("Can be invoked") {
+      HELIOS_PAUSE_CPU();
+    }
   }
 
   TEST_CASE(
@@ -106,14 +128,8 @@ TEST_SUITE("helios::platform::Platform") {
   TEST_CASE(
       "Platform-specific EXPORT macros: correct "
       "expansion") {
-    // Test that EXPORT macros expand to something valid (even if empty)
-    // Create a simple struct with the EXPORT macro to verify it compiles
-
-    struct HELIOS_EXPORT TestExportStruct {
-      int value = 100;
-    };
-
-    TestExportStruct test_obj;
+    // dllexport requires external linkage (clang-cl rejects local types).
+    helios::platform::test::TestExportStruct test_obj;
     CHECK_EQ(test_obj.value, 100);
   }
 

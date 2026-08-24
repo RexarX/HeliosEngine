@@ -7,28 +7,37 @@
 #include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/component/manager.hpp>
-#include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/entity/manager.hpp>
 #include <helios/ecs/message/async_reader.hpp>
 #include <helios/ecs/message/async_writer.hpp>
+#include <helios/ecs/message/consumed_registry.hpp>
+#include <helios/ecs/message/cursor.hpp>
 #include <helios/ecs/message/manager.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/message/reader.hpp>
 #include <helios/ecs/message/writer.hpp>
+#include <helios/ecs/query/details/query_args.hpp>
 #include <helios/ecs/query/query.hpp>
 #include <helios/ecs/resource/manager.hpp>
 #include <helios/ecs/resource/resource.hpp>
+#include <helios/ecs/system/access_policy.hpp>
+#include <helios/ecs/system/param.hpp>
 #include <helios/utils/common_traits.hpp>
 
+#include <algorithm>
 #include <array>
 #include <concepts>
 #include <cstddef>
+#include <memory_resource>
 #include <ranges>
 #include <string>
 #include <type_traits>
+#include <utility>
 
 namespace helios::ecs {
+
+struct SystemLocalData;
 
 /**
  * @brief The World class manages entities with their components and systems.
@@ -39,7 +48,15 @@ namespace helios::ecs {
  */
 class World {
 public:
-  World() { AddBuiltinMessages(); }
+  /**
+   * @brief Constructs a world using `resource` for owned ECS storage.
+   * @param resource Memory resource for entities, components, resources,
+   * messages, and the command queue. Defaults to
+   * `std::pmr::get_default_resource()`.
+   */
+  explicit World(
+      std::pmr::memory_resource* resource = std::pmr::get_default_resource());
+  World(std::nullptr_t) = delete;
   World(const World&) = delete;
   World(World&&) noexcept = default;
   ~World() = default;
@@ -144,12 +161,10 @@ public:
    * (`T&`, `const T&`, `T*`, ...) are all specified as template arguments.
    * @note Not thread-safe.
    * @tparam Args Component access types and optional With/Without filters
-   * @tparam Allocator Allocator type for internal query storage
-   * @param alloc Allocator instance
    * @return Query object over entities matching the specified criteria
    *
    * @code
-   * // Default allocator — no argument needed
+   * // Uses the world's memory resource
    * auto query = world.Query<Transform&, const Velocity&,
    *                          const Gravity*, With<Player>,
    *                          Without<Dead>>();
@@ -162,19 +177,15 @@ public:
    * }
    * @endcode
    */
-  template <QueryArg... Args,
-            typename Allocator = std::allocator<ComponentTypeIndex>>
-  [[nodiscard]] auto Query(Allocator alloc = {}) noexcept
-      -> BasicQuery<World, Allocator, Args...> {
-    return BasicQuery<World, Allocator, Args...>(component_manager_,
-                                                 std::move(alloc));
+  template <QueryArg... Args>
+  [[nodiscard]] auto Query() noexcept -> BasicQuery<World, Args...> {
+    return Query<Args...>(resource_);
   }
 
   /**
    * @brief Creates a query using a PMR memory resource.
-   * @details Equivalent to the allocator overload but accepts a
-   * `pmr::memory_resource*` directly, constructing a
-   * `pmr::polymorphic_allocator` internally.
+   * @details Use this overload to place query matching storage on a different
+   * resource than the world (for example a system arena).
    *
    * @note Not thread-safe.
    * @tparam Args Component access types and optional With/Without filters
@@ -191,14 +202,12 @@ public:
    */
   template <QueryArg... Args>
   [[nodiscard]] auto Query(std::pmr::memory_resource* resource) noexcept
-      -> BasicQuery<World, std::pmr::polymorphic_allocator<>, Args...> {
-    return BasicQuery<World, std::pmr::polymorphic_allocator<>, Args...>(
-        component_manager_, resource);
+      -> BasicQuery<World, Args...> {
+    return BasicQuery<World, Args...>(component_manager_, resource);
   }
 
   template <QueryArg... Args>
-  auto Query(std::nullptr_t)
-      -> BasicQuery<World, std::pmr::polymorphic_allocator<>, Args...> = delete;
+  auto Query(std::nullptr_t) -> BasicQuery<World, Args...> = delete;
 
   /**
    * @brief Creates a read-only query over entities matching the specified
@@ -207,12 +216,10 @@ public:
    * copied) — `T&` and `T*` are rejected at compile time.
    * @note Not thread-safe.
    * @tparam Args Component access types and optional With/Without filters
-   * @tparam Allocator Allocator type for internal query storage
-   * @param alloc Allocator instance
    * @return Query object over entities matching the specified criteria
    *
    * @code
-   * // Default allocator — no argument needed
+   * // Uses the world's memory resource
    * auto query = world.ReadOnlyQuery<Health, const Status*,
    *                                  With<Player>, Without<Dead>>();
    *
@@ -223,21 +230,20 @@ public:
    * }
    * @endcode
    */
-  template <QueryArg... Args,
-            typename Allocator = std::allocator<ComponentTypeIndex>>
+  template <QueryArg... Args>
     requires details::ValidWorldComponentAccessFromTuple<
         const World,
         typename details::QueryArgSplit<Args...>::Components>::kValue
-  [[nodiscard]] auto ReadOnlyQuery(Allocator alloc = {}) const noexcept
-      -> BasicQuery<const World, Allocator, Args...> {
-    return BasicQuery<const World, Allocator, Args...>(component_manager_,
-                                                       std::move(alloc));
+  [[nodiscard]] auto ReadOnlyQuery() const noexcept
+      -> BasicQuery<const World, Args...> {
+    return ReadOnlyQuery<Args...>(resource_);
   }
 
   /**
    * @brief Creates a read-only query using a PMR memory resource.
-   * @details All component accesses must be const-qualified — see the allocator
-   * overload for details.
+   * @details All component accesses must be const-qualified. Use this
+   * overload to place query matching storage on a different resource than the
+   * world.
    *
    * @note Not thread-safe.
    * @tparam Args Component access types and optional With/Without filters
@@ -258,11 +264,9 @@ public:
     requires details::ValidWorldComponentAccessFromTuple<
         const World,
         typename details::QueryArgSplit<Args...>::Components>::kValue
-  [[nodiscard]] auto ReadOnlyQuery(
-      std::pmr::memory_resource* resource) const noexcept
-      -> BasicQuery<const World, std::pmr::polymorphic_allocator<>, Args...> {
-    return BasicQuery<const World, std::pmr::polymorphic_allocator<>, Args...>(
-        component_manager_, resource);
+  [[nodiscard]] auto ReadOnlyQuery(std::pmr::memory_resource* resource)
+      const noexcept -> BasicQuery<const World, Args...> {
+    return BasicQuery<const World, Args...>(component_manager_, resource);
   }
 
   template <QueryArg... Args>
@@ -270,8 +274,7 @@ public:
                  const World,
                  typename details::QueryArgSplit<Args...>::Components>::kValue
   auto ReadOnlyQuery(std::nullptr_t) const
-      -> BasicQuery<const World, std::pmr::polymorphic_allocator<>, Args...> =
-          delete;
+      -> BasicQuery<const World, Args...> = delete;
 
   /**
    * @brief Adds components to the entity.
@@ -425,7 +428,7 @@ public:
    * world.
    * @tparam B Component bundle type
    * @param entity Entity to remove components from
-   * @return Whether each flattened component was removed
+   * @return `std::array` indicating whether each component was removed
    */
   template <ComponentBundleTrait B>
   auto TryRemoveBundle(Entity entity) -> details::ComponentBundleResult<B>;
@@ -680,25 +683,31 @@ public:
   void ClearMessages();
 
   /**
-   * @brief Gets a reader for messages of type `T` without consume support.
-   * @note Thread-safe.
+   * @brief Gets a reader for unread messages of type `T`.
+   * @note Thread-safe for retained message reads; cursor updates are not.
    * @warning Triggers assertion if message type is not added.
    * @tparam T Message type
+   * @param cursor Per-reader cursor tracking which messages have been seen
    * @return Message reader for type `T`
    */
   template <MessageTrait T>
-  [[nodiscard]] auto ReadMessages() const noexcept -> MessageReader<T>;
+  [[nodiscard]] auto ReadMessages(MessageCursor<T>& cursor) const noexcept
+      -> MessageReader<T>;
 
   /**
-   * @brief Gets a consumable reader for messages of type `T` without consume
-   * support.
-   * @note Thread-safe.
+   * @brief Gets a consumable reader for unread messages of type `T`.
+   * @note Thread-safe for retained message reads; cursor/consume updates are
+   * not.
    * @warning Triggers assertion if message type is not added.
    * @tparam T Consumable message type
+   * @param cursor Per-reader cursor tracking which messages have been seen
+   * @param consumed_registry Per-system consumed-message registry
    * @return Consumable message reader for type `T`
    */
   template <ConsumableMessageTrait T>
-  [[nodiscard]] auto ReadConsumableMessages() noexcept
+  [[nodiscard]] auto ReadConsumableMessages(
+      MessageCursor<T>& cursor,
+      ConsumedMessagesRegistry& consumed_registry) noexcept
       -> ConsumableMessageReader<T>;
 
   /**
@@ -706,10 +715,10 @@ public:
    * @note Not thread-safe.
    * @warning Triggers assertion if message type is not added.
    * @tparam T Message type
-   * @return Message writer for type `T`
+   * @return Message writer for type `T` that assigns ids immediately
    */
   template <MessageTrait T>
-  [[nodiscard]] auto WriteMessages() noexcept -> BasicMessageWriter<T>;
+  [[nodiscard]] auto WriteMessages() noexcept -> ManagedMessageWriter<T>;
 
   /**
    * @brief Gets a reader for messages of type `T`.
@@ -934,83 +943,27 @@ public:
     return messages_;
   }
 
-private:
-  EntityManager entity_manager_;  ///< Entity manager that handles entity
-                                  ///< creation, destruction, and validation.
-
-  ComponentManager component_manager_;  ///< Component manager that handles
-                                        ///< storage and access of components.
-
-  ResourceManager resources_;  ///< Resource manager that handles storage and
-                               ///< access of resources.
-
-  MessageManager messages_;  ///< Message manager that handles registration and
-                             ///< storage of messages.
-
-  CmdQueue<> command_queue_;  ///< Command queue for deferred operations on the
-                              ///< world, executed during `Flush()`.
-};
-
-inline void World::Update() {
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::World::Update");
-
-  Flush();
-  messages_.Update();
-}
-
-inline void World::Flush() {
-  HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::World::Flush");
-
-  entity_manager_.Flush(
-      [this](Entity entity) { component_manager_.InitEntity(entity); });
-  command_queue_.ExecuteAll(*this);
-}
-
-inline void World::Clear() {
-  command_queue_.Clear();
-  component_manager_.Clear();
-  entity_manager_.Clear();
-  resources_.Clear();
-  messages_.Clear();
-  AddBuiltinMessages();
-}
-
-inline void World::ClearEntities() noexcept {
-  component_manager_.ClearData();
-  entity_manager_.Clear();
-}
-
-inline Entity World::CreateEntity() {
-  Entity entity = entity_manager_.Create();
-  component_manager_.InitEntity(entity);
-  messages_.Write(EntityAddedMsg(entity));
-  return entity;
-}
-
-inline void World::DestroyEntity(Entity entity) {
-  HELIOS_ASSERT(!entity_manager_.NeedsFlush(),
-                "Flush reserved entities before destruction!");
-  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
-  HELIOS_ASSERT(entity_manager_.Validate(entity),
-                "World does not own entity '{}'!", entity);
-
-  component_manager_.RemoveEntity(entity);
-  entity_manager_.Destroy(entity);
-  messages_.Write(EntityDestroyedMsg(entity));
-}
-
-inline void World::TryDestroyEntity(Entity entity) {
-  HELIOS_ASSERT(!entity_manager_.NeedsFlush(),
-                "Flush reserved entities before destruction!");
-  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
-  if (!entity_manager_.Validate(entity)) {
-    return;
+  /**
+   * @brief Returns the memory resource used for owned world storage.
+   * @return Memory resource passed to the constructor
+   */
+  [[nodiscard]] std::pmr::memory_resource* GetMemoryResource() const noexcept {
+    return resource_;
   }
 
-  component_manager_.TryRemoveEntity(entity);
-  entity_manager_.Destroy(entity);
-  messages_.Write(EntityDestroyedMsg(entity));
-}
+private:
+  std::pmr::memory_resource* resource_;
+  EntityManager entity_manager_;  ///< Entity manager that handles entity
+                                  ///< creation, destruction, and validation.
+  ComponentManager component_manager_;  ///< Component manager that handles
+                                        ///< storage and access of components.
+  ResourceManager resources_;  ///< Resource manager that handles storage and
+                               ///< access of resources.
+  MessageManager messages_;  ///< Message manager that handles registration and
+                             ///< storage of messages.
+  CmdQueue command_queue_;   ///< Command queue for deferred operations on the
+                             ///< world, executed during `Flush()`.
+};
 
 template <std::ranges::input_range R>
   requires std::same_as<std::ranges::range_value_t<R>, Entity>
@@ -1044,7 +997,7 @@ inline void World::AddComponents(Entity entity, Ts&&... components) {
 
   AddMessages<ComponentAddedMsg<std::remove_cvref_t<Ts>>...>();
   component_manager_.Add(entity, std::forward<Ts>(components)...);
-  (messages_.Write(ComponentAddedMsg<std::remove_cvref_t<Ts>>(entity)), ...);
+  (messages_.Write(ComponentAddedMsg<std::remove_cvref_t<Ts>>{entity}), ...);
 }
 
 template <ComponentTrait... Ts>
@@ -1063,13 +1016,13 @@ inline auto World::TryAddComponents(Entity entity, Ts&&... components)
 
   if constexpr (sizeof...(Ts) == 1) {
     if (added) {
-      (messages_.Write(ComponentAddedMsg<std::remove_cvref_t<Ts>>(entity)),
+      (messages_.Write(ComponentAddedMsg<std::remove_cvref_t<Ts>>{entity}),
        ...);
     }
   } else {
     [this, entity, &added]<size_t... Is>(std::index_sequence<Is...>) {
       ((added[Is] &&
-        (messages_.Write(ComponentAddedMsg<std::remove_cvref_t<Ts>>(entity)),
+        (messages_.Write(ComponentAddedMsg<std::remove_cvref_t<Ts>>{entity}),
          true)),
        ...);
     }(std::index_sequence_for<Ts...>{});
@@ -1114,7 +1067,7 @@ inline void World::EmplaceComponent(Entity entity, Args&&... args) {
 
   AddMessage<ComponentAddedMsg<T>>();
   component_manager_.template Emplace<T>(entity, std::forward<Args>(args)...);
-  messages_.Write(ComponentAddedMsg<T>(entity));
+  messages_.Write(ComponentAddedMsg<T>{entity});
 }
 
 template <ComponentTrait T, typename... Args>
@@ -1128,7 +1081,7 @@ inline bool World::TryEmplaceComponent(Entity entity, Args&&... args) {
   const bool added = component_manager_.template TryEmplace<T>(
       entity, std::forward<Args>(args)...);
   if (added) {
-    messages_.Write(ComponentAddedMsg<T>(entity));
+    messages_.Write(ComponentAddedMsg<T>{entity});
   }
   return added;
 }
@@ -1142,7 +1095,7 @@ inline void World::RemoveComponents(Entity entity) {
 
   AddMessages<ComponentRemovedMsg<Ts>...>();
   component_manager_.template Remove<Ts...>(entity);
-  (messages_.Write(ComponentRemovedMsg<Ts>(entity)), ...);
+  (messages_.Write(ComponentRemovedMsg<Ts>{entity}), ...);
 }
 
 template <ComponentTrait... Ts>
@@ -1168,7 +1121,8 @@ inline auto World::TryRemoveComponents(Entity entity)
 
   // Apply to each component type using index_sequence
   [this, entity, &results]<size_t... Is>(std::index_sequence<Is...>) {
-    ((results[Is] ? messages_.Write(ComponentRemovedMsg<Ts>(entity)) : void()),
+    ((results[Is] ? void(messages_.Write(ComponentRemovedMsg<Ts>{entity}))
+                  : void()),
      ...);
   }(std::index_sequence_for<Ts...>{});
 
@@ -1196,15 +1150,6 @@ inline auto World::TryRemoveBundle(Entity entity)
       [this, entity]<typename... Ts>() {
         return TryRemoveComponents<Ts...>(entity);
       });
-}
-
-inline void World::ClearComponents(Entity entity) {
-  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
-  HELIOS_ASSERT(entity_manager_.Validate(entity),
-                "World does not own entity '{}'!", entity);
-
-  component_manager_.Clear(entity);
-  messages_.Write(ComponentsClearedMsg(entity));
 }
 
 template <ComponentTrait T>
@@ -1241,22 +1186,24 @@ inline const T* World::TryReadComponent(Entity entity) const {
 
 template <ResourceTrait T>
 inline void World::InsertResources(T&& resource) {
-  AddMessage<ResourceInsertedMsg<T>>();
+  using Resource = std::remove_cvref_t<T>;
+  AddMessage<ResourceInsertedMsg<Resource>>();
 
   resources_.Insert(std::forward<T>(resource));
-  ResourceCallOnInsert(resources_.template Get<T>(), *this);
-  messages_.Write(ResourceInsertedMsg<T>());
+  ResourceCallOnInsert(resources_.template Get<Resource>(), *this);
+  messages_.Write(ResourceInsertedMsg<Resource>{});
 }
 
 template <ResourceTrait T>
 inline bool World::TryInsertResources(T&& resource) {
-  AddMessage<ResourceInsertedMsg<T>>();
+  using Resource = std::remove_cvref_t<T>;
+  AddMessage<ResourceInsertedMsg<Resource>>();
 
   const bool inserted = resources_.TryInsert(std::forward<T>(resource));
   if (inserted) {
-    auto& inserted_resource = resources_.template Get<T>();
+    auto& inserted_resource = resources_.template Get<Resource>();
     ResourceCallOnInsert(inserted_resource, *this);
-    messages_.Write(ResourceInsertedMsg<T>());
+    messages_.Write(ResourceInsertedMsg<Resource>{});
   }
   return inserted;
 }
@@ -1269,7 +1216,7 @@ inline void World::EmplaceResource(Args&&... args) {
   resources_.template Emplace<T>(std::forward<Args>(args)...);
   auto& inserted_resource = resources_.template Get<T>();
   ResourceCallOnInsert(inserted_resource, *this);
-  messages_.Write(ResourceInsertedMsg<T>());
+  messages_.Write(ResourceInsertedMsg<T>{});
 }
 
 template <ResourceTrait T, typename... Args>
@@ -1282,7 +1229,7 @@ inline bool World::TryEmplaceResource(Args&&... args) {
   if (emplaced) {
     auto& inserted_resource = resources_.template Get<T>();
     ResourceCallOnInsert(inserted_resource, *this);
-    messages_.Write(ResourceInsertedMsg<T>());
+    messages_.Write(ResourceInsertedMsg<T>{});
   }
   return emplaced;
 }
@@ -1291,8 +1238,8 @@ template <ResourceTrait... Ts>
   requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
 inline void World::RemoveResources() {
 #ifdef HELIOS_ENABLE_ASSERTS
-  const auto has_resource = std::to_array({HasResource<Ts>()...});
-  constexpr auto names = std::to_array({ResourceNameOf<Ts>()...});
+  const std::array has_resource = {HasResource<Ts>()...};
+  constexpr std::array names = {ResourceNameOf<Ts>()...};
 
   const bool all_has_resource =
       std::ranges::all_of(has_resource, std::identity{});
@@ -1314,7 +1261,7 @@ inline void World::RemoveResources() {
   (AddMessage<ResourceRemovedMsg<Ts>>(), ...);
   (ResourceCallOnRemove(resources_.template Get<Ts>(), *this), ...);
   (resources_.template Remove<Ts>(), ...);
-  (messages_.Write(ResourceRemovedMsg<Ts>()), ...);
+  (messages_.Write(ResourceRemovedMsg<Ts>{}), ...);
 }
 
 template <ResourceTrait T>
@@ -1326,7 +1273,7 @@ inline bool World::TryRemoveResources() {
   if (T* resource = resources_.template TryGet<T>(); resource != nullptr) {
     ResourceCallOnRemove(*resource, *this);
     removed = resources_.template TryRemove<T>();
-    messages_.Write(ResourceRemovedMsg<T>());
+    messages_.Write(ResourceRemovedMsg<T>{});
   }
   return removed;
 }
@@ -1352,12 +1299,6 @@ inline void World::AddMessage() {
   }
 }
 
-inline void World::AddBuiltinMessages() {
-  AddMessage<EntityAddedMsg>();
-  AddMessage<EntityDestroyedMsg>();
-  AddMessage<ComponentsClearedMsg>();
-}
-
 template <AsyncMessageTrait T>
 inline auto World::ReadAsyncMessages() noexcept -> AsyncMessageReader<T> {
   HELIOS_ASSERT(HasMessage<T>(), "Message of type '{}' is not registered!",
@@ -1376,8 +1317,8 @@ template <AnyMessageTrait... Ts>
   requires(sizeof...(Ts) > 0)
 inline void World::ClearMessages() {
 #ifdef HELIOS_ENABLE_ASSERTS
-  const auto has_message = std::to_array({HasMessage<Ts>()...});
-  constexpr auto names = std::to_array({MessageNameOf<Ts>()...});
+  const std::array has_message = {HasMessage<Ts>()...};
+  constexpr std::array names = {MessageNameOf<Ts>()...};
 
   const bool all_has_message =
       std::ranges::all_of(has_message, std::identity{});
@@ -1400,25 +1341,28 @@ inline void World::ClearMessages() {
 }
 
 template <MessageTrait T>
-inline auto World::ReadMessages() const noexcept -> MessageReader<T> {
+inline auto World::ReadMessages(MessageCursor<T>& cursor) const noexcept
+    -> MessageReader<T> {
   HELIOS_ASSERT(HasMessage<T>(), "Message of type '{}' is not registered!",
                 MessageNameOf<T>());
-  return MessageReader<T>(messages_);
+  return MessageReader<T>(messages_, cursor);
 }
 
 template <ConsumableMessageTrait T>
-inline auto World::ReadConsumableMessages() noexcept
+inline auto World::ReadConsumableMessages(
+    MessageCursor<T>& cursor,
+    ConsumedMessagesRegistry& consumed_registry) noexcept
     -> ConsumableMessageReader<T> {
   HELIOS_ASSERT(HasMessage<T>(), "Message of type '{}' is not registered!",
                 MessageNameOf<T>());
-  return ConsumableMessageReader<T>(messages_);
+  return ConsumableMessageReader<T>(messages_, cursor, consumed_registry);
 }
 
 template <MessageTrait T>
-inline auto World::WriteMessages() noexcept -> BasicMessageWriter<T> {
+inline auto World::WriteMessages() noexcept -> ManagedMessageWriter<T> {
   HELIOS_ASSERT(HasMessage<T>(), "Message of type '{}' is not registered!",
                 MessageNameOf<T>());
-  return BasicMessageWriter<T>(messages_.CurrentQueue());
+  return ManagedMessageWriter<T>(messages_);
 }
 
 inline bool World::Exists(Entity entity) const noexcept {
@@ -1443,5 +1387,17 @@ inline auto World::HasComponents(Entity entity) const
                 "World does not own entity '{}'!", entity);
   return component_manager_.template Has<Ts...>(entity);
 }
+
+template <>
+struct SystemParamTraits<World> {
+  static constexpr World& Make(World& world, SystemLocalData& /*data*/,
+                               const AccessPolicy& /*policy*/) noexcept {
+    return world;
+  }
+
+  static constexpr void RegisterAccess(AccessPolicyBuilder& builder) {
+    builder.Exclusive();
+  }
+};
 
 }  // namespace helios::ecs

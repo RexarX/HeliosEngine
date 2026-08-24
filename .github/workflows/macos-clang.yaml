@@ -66,7 +66,7 @@ jobs:
         run: cmake --preset ${{ matrix.preset }} ${{ matrix.cmake_extra }}
 
       - name: Build (${{ matrix.preset }})
-        run: cmake --build --preset ${{ matrix.preset }}
+        run: cmake --build --preset ${{ matrix.preset }}  
 
       - name: Test (${{ matrix.preset }})
         timeout-minutes: 10

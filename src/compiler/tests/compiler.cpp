@@ -103,6 +103,25 @@ TEST_SUITE("helios::compiler::Compiler") {
     }
   }
 
+  TEST_CASE("HELIOS_NO_UNIQUE_ADDRESS: macro definition") {
+    SUBCASE("Macro is defined") {
+#ifdef HELIOS_NO_UNIQUE_ADDRESS
+      CHECK(true);
+#else
+      CHECK(false);
+#endif
+    }
+
+    SUBCASE("Applies to a member") {
+      struct Empty {};
+      struct WithEmpty {
+        int value = 1;
+        HELIOS_NO_UNIQUE_ADDRESS Empty empty{};
+      };
+      CHECK_EQ(WithEmpty{}.value, 1);
+    }
+  }
+
 #ifdef HELIOS_MOVEONLY_FUNCTION_AVAILABLE
   TEST_CASE(
       "HELIOS_MOVEONLY_FUNCTION_AVAILABLE: feature "

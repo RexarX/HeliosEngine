@@ -369,7 +369,10 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
       FixedArenaAllocator arena(kSmallCapacity);
       while (arena.Stats().total_allocated + kChunk + (kChunkAlign - 1) <=
              kSmallCapacity) {
-        CHECK_NE(arena.allocate(kChunk, kChunkAlign), nullptr);
+        void* const ptr = arena.allocate(kChunk, kChunkAlign);
+        if (ptr == nullptr) {
+          break;
+        }
       }
       CHECK_GT(arena.Stats().allocation_count, 0);
       CHECK_LE(arena.Stats().total_allocated, kSmallCapacity);

@@ -19,7 +19,7 @@ struct PluginState {
 struct PluginTick {
   void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::Res<const PluginState> state) const {
-    hlog::Info("plugins: PluginTick frame={} registered={}", frames->count,
+    hlog::Info("PluginTick frame={} registered={}", frames->count,
                state->systems_registered);
   }
 };
@@ -30,22 +30,18 @@ struct DemoPlugin final : public happ::Plugin {
   // Build is where a plugin extends the app: resources, systems, schedules,
   // and other plugins are registered here.
   void Build(happ::App& app) override {
-    hlog::Info("plugins: DemoPlugin::Build");
+    hlog::Info("DemoPlugin::Build");
     app.InsertResources(PluginState{.systems_registered = 1});
     app.AddSystem(happ::kUpdate, PluginTick{});
   }
 
   // Finish runs after the plugin is ready, giving it one last setup hook
   // before normal app execution starts.
-  void Finish(happ::App& /*app*/) override {
-    hlog::Info("plugins: DemoPlugin::Finish");
-  }
+  void Finish(happ::App& /*app*/) override { hlog::Info("DemoPlugin::Finish"); }
 
   // Poll is called while IsReady is false. Async plugins can use this to
   // finish background setup before exposing their systems.
-  void Poll(happ::App& /*app*/) override {
-    hlog::Info("plugins: DemoPlugin::Poll");
-  }
+  void Poll(happ::App& /*app*/) override { hlog::Info("DemoPlugin::Poll"); }
 
   // Returning false delays Finish and app startup.
   [[nodiscard]] bool IsReady(const happ::App& /*app*/) const noexcept override {
@@ -55,7 +51,7 @@ struct DemoPlugin final : public happ::Plugin {
   // Destroy is the plugin shutdown hook. It runs after app systems have
   // stopped, so plugin-owned external resources can be released here.
   void Destroy(happ::App& /*app*/) override {
-    hlog::Info("plugins: DemoPlugin::Destroy");
+    hlog::Info("DemoPlugin::Destroy");
   }
 
   bool ready_ = false;

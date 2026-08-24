@@ -4,6 +4,9 @@
 #include <helios/ecs/component/sparse_storage.hpp>
 #include <helios/ecs/entity/entity.hpp>
 
+#include <memory_resource>
+#include <type_traits>
+
 using namespace helios::ecs;
 
 namespace {
@@ -25,6 +28,30 @@ struct Velocity {
 }  // namespace
 
 TEST_SUITE("helios::ecs::SparseComponentStorage") {
+  TEST_CASE("helios::ecs::SparseComponentStorage::ctor") {
+    SUBCASE("Default ctor") {
+      const SparseComponentStorage<Position> storage;
+      CHECK_EQ(storage.Size(), 0);
+      CHECK_EQ(storage.GetMemoryResource(), std::pmr::get_default_resource());
+    }
+
+    SUBCASE("Memory resource ctor") {
+      std::pmr::monotonic_buffer_resource resource;
+      SparseComponentStorage<Position> storage{&resource};
+
+      CHECK_EQ(storage.GetMemoryResource(), &resource);
+
+      storage.Set(Entity{1, 0}, Position{.x = 1.0F, .y = 2.0F});
+      CHECK_EQ(storage.Size(), 1);
+      CHECK_EQ(storage.Get(Entity{1, 0}), (Position{.x = 1.0F, .y = 2.0F}));
+    }
+
+    SUBCASE("Nullptr ctor is deleted") {
+      CHECK_FALSE((std::is_constructible_v<SparseComponentStorage<Position>,
+                                           std::nullptr_t>));
+    }
+  }
+
   TEST_CASE("helios::ecs::SparseComponentStorage::Clear") {
     const Entity e1{1, 0};
     const Position pos1{.x = 1.0F, .y = 2.0F};

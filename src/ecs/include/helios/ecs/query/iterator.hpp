@@ -6,9 +6,9 @@
 #include <helios/ecs/component/manager.hpp>
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/query/details/traits.hpp>
-#include <helios/utils/common_traits.hpp>
 #include <helios/utils/functional_adapters.hpp>
 
+#include <algorithm>
 #include <concepts>
 #include <cstddef>
 #include <functional>
@@ -40,8 +40,8 @@ namespace details {
  * @return The component with the appropriate access type
  */
 template <typename AccessSpec>
-inline auto FetchComponent(const Archetype& archetype, Entity entity,
-                           ComponentManager& components)
+auto FetchComponent(const Archetype& archetype, Entity entity,
+                    ComponentManager& components)
     -> ComponentAccessType_t<AccessSpec> {
   using RawType = ComponentTypeExtractor_t<AccessSpec>;
   using AccessType = ComponentAccessType_t<AccessSpec>;
@@ -109,8 +109,8 @@ inline auto FetchComponent(const Archetype& archetype, Entity entity,
 
 /// @brief Const-world variant: always returns const access.
 template <typename AccessSpec>
-inline auto FetchComponentConst(const Archetype& archetype, Entity entity,
-                                const ComponentManager& components)
+auto FetchComponentConst(const Archetype& archetype, Entity entity,
+                         const ComponentManager& components)
     -> ComponentAccessType_t<AccessSpec> {
   using RawType = ComponentTypeExtractor_t<AccessSpec>;
   using AccessType = ComponentAccessType_t<AccessSpec>;
@@ -180,17 +180,19 @@ public:
    * @param components Component manager for accessing component data
    * @param archetype_index Starting archetype index
    * @param entity_index Starting entity index within archetype
+   * @param with_types Span of component types required by With filters
    * @param without_types Span of component types to exclude (default empty)
    */
   BasicQueryIter(
       std::span<const std::reference_wrapper<const Archetype>> archetypes,
       ComponentManagerType& components, size_t archetype_index,
-      size_t entity_index,
+      size_t entity_index, std::span<const ComponentTypeIndex> with_types = {},
       std::span<const ComponentTypeIndex> without_types = {}) noexcept
       : archetypes_(archetypes),
         components_(components),
         archetype_index_(archetype_index),
         entity_index_(entity_index),
+        with_types_(with_types),
         without_types_(without_types) {
     AdvanceToValidEntity();
   }
@@ -268,8 +270,8 @@ public:
    * @return End iterator (points past the last valid entity)
    */
   [[nodiscard]] BasicQueryIter end() const noexcept {
-    return {archetypes_, components_.get(), archetypes_.size(), 0,
-            without_types_};
+    return {archetypes_, components_.get(), archetypes_.size(),
+            0,           with_types_,       without_types_};
   }
 
 private:
@@ -285,6 +287,7 @@ private:
   std::reference_wrapper<ComponentManagerType> components_;
   size_t archetype_index_ = 0;
   size_t entity_index_ = 0;
+  std::span<const ComponentTypeIndex> with_types_;
   std::span<const ComponentTypeIndex> without_types_;
 };
 
@@ -346,17 +349,19 @@ public:
    * @param components Component manager for accessing component data
    * @param archetype_index Starting archetype index
    * @param entity_index Starting entity index within archetype
+   * @param with_types Span of component types required by With filters
    * @param without_types Span of component types to exclude (default empty)
    */
   BasicQueryWithEntityIter(
       std::span<const std::reference_wrapper<const Archetype>> archetypes,
       ComponentManagerType& components, size_t archetype_index,
-      size_t entity_index,
+      size_t entity_index, std::span<const ComponentTypeIndex> with_types = {},
       std::span<const ComponentTypeIndex> without_types = {}) noexcept
       : archetypes_(archetypes),
         components_(components),
         archetype_index_(archetype_index),
         entity_index_(entity_index),
+        with_types_(with_types),
         without_types_(without_types) {
     AdvanceToValidEntity();
   }
@@ -426,8 +431,8 @@ public:
    * @return End iterator (points past the last valid entity)
    */
   [[nodiscard]] BasicQueryWithEntityIter end() const noexcept {
-    return {archetypes_, components_.get(), archetypes_.size(), 0,
-            without_types_};
+    return {archetypes_, components_.get(), archetypes_.size(),
+            0,           with_types_,       without_types_};
   }
 
 private:
@@ -441,14 +446,14 @@ private:
   std::reference_wrapper<ComponentManagerType> components_;
   size_t archetype_index_ = 0;
   size_t entity_index_ = 0;
+  std::span<const ComponentTypeIndex> with_types_;
   std::span<const ComponentTypeIndex> without_types_;
 };
 
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryIter<IsConst, Components...>::operator++()
-    -> BasicQueryIter& {
+auto BasicQueryIter<IsConst, Components...>::operator++() -> BasicQueryIter& {
   ++entity_index_;
   AdvanceToValidEntity();
   return *this;
@@ -457,8 +462,7 @@ inline auto BasicQueryIter<IsConst, Components...>::operator++()
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryIter<IsConst, Components...>::operator++(int)
-    -> BasicQueryIter {
+auto BasicQueryIter<IsConst, Components...>::operator++(int) -> BasicQueryIter {
   auto copy = *this;
   ++(*this);
   return copy;
@@ -467,8 +471,7 @@ inline auto BasicQueryIter<IsConst, Components...>::operator++(int)
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryIter<IsConst, Components...>::operator--()
-    -> BasicQueryIter& {
+auto BasicQueryIter<IsConst, Components...>::operator--() -> BasicQueryIter& {
   while (true) {
     if (entity_index_ > 0) {
       --entity_index_;
@@ -493,8 +496,7 @@ inline auto BasicQueryIter<IsConst, Components...>::operator--()
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryIter<IsConst, Components...>::operator--(int)
-    -> BasicQueryIter {
+auto BasicQueryIter<IsConst, Components...>::operator--(int) -> BasicQueryIter {
   auto copy = *this;
   --(*this);
   return copy;
@@ -503,8 +505,7 @@ inline auto BasicQueryIter<IsConst, Components...>::operator--(int)
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryIter<IsConst, Components...>::operator*() const
-    -> reference {
+auto BasicQueryIter<IsConst, Components...>::operator*() const -> reference {
   HELIOS_ASSERT(!IsAtEnd(), "Cannot dereference end iterator!");
   HELIOS_ASSERT(archetype_index_ < archetypes_.size(),
                 "Archetype index out of bounds!");
@@ -527,7 +528,7 @@ inline auto BasicQueryIter<IsConst, Components...>::operator*() const
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline void BasicQueryIter<IsConst, Components...>::AdvanceToValidEntity() {
+void BasicQueryIter<IsConst, Components...>::AdvanceToValidEntity() {
   while (!IsAtEnd()) {
     if (archetype_index_ < archetypes_.size() &&
         entity_index_ < archetypes_[archetype_index_].get().Entities().size()) {
@@ -552,6 +553,24 @@ inline void BasicQueryIter<IsConst, Components...>::AdvanceToValidEntity() {
           }(),
           ...);
       if (has_all_sparse) {
+        bool has_all_required = std::ranges::all_of(
+            with_types_, [&entity, this](const ComponentTypeIndex type) {
+              const auto* meta =
+                  std::as_const(components_.get()).MetadataByIndex(type);
+              if (meta == nullptr) {
+                return false;
+              }
+              if (meta->storage_type == ComponentStorageType::kSparseSet) {
+                const auto* entry =
+                    std::as_const(components_.get()).SparseEntry(type);
+                return entry != nullptr && entry->Contains(entity);
+              }
+              return true;
+            });
+        if (!has_all_required) {
+          ++entity_index_;
+          continue;
+        }
         // Check that the entity does NOT have any excluded sparse component.
         bool has_none_excluded = std::ranges::all_of(
             without_types_, [&entity, this](const ComponentTypeIndex type) {
@@ -587,7 +606,7 @@ inline void BasicQueryIter<IsConst, Components...>::AdvanceToValidEntity() {
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator++()
+auto BasicQueryWithEntityIter<IsConst, Components...>::operator++()
     -> BasicQueryWithEntityIter& {
   ++entity_index_;
   AdvanceToValidEntity();
@@ -597,7 +616,7 @@ inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator++()
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator++(int)
+auto BasicQueryWithEntityIter<IsConst, Components...>::operator++(int)
     -> BasicQueryWithEntityIter {
   auto copy = *this;
   ++(*this);
@@ -607,7 +626,7 @@ inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator++(int)
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator--()
+auto BasicQueryWithEntityIter<IsConst, Components...>::operator--()
     -> BasicQueryWithEntityIter& {
   while (true) {
     if (entity_index_ > 0) {
@@ -633,7 +652,7 @@ inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator--()
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator--(int)
+auto BasicQueryWithEntityIter<IsConst, Components...>::operator--(int)
     -> BasicQueryWithEntityIter {
   auto copy = *this;
   --(*this);
@@ -643,7 +662,7 @@ inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator--(int)
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator*() const
+auto BasicQueryWithEntityIter<IsConst, Components...>::operator*() const
     -> reference {
   HELIOS_ASSERT(!IsAtEnd(), "Cannot dereference end iterator!");
   HELIOS_ASSERT(archetype_index_ < archetypes_.size(),
@@ -667,8 +686,7 @@ inline auto BasicQueryWithEntityIter<IsConst, Components...>::operator*() const
 template <bool IsConst, typename... Components>
   requires details::UniqueComponentAccess<Components...> &&
            (details::ValidComponentAccess<Components> && ...)
-inline void
-BasicQueryWithEntityIter<IsConst, Components...>::AdvanceToValidEntity() {
+void BasicQueryWithEntityIter<IsConst, Components...>::AdvanceToValidEntity() {
   while (!IsAtEnd()) {
     if (archetype_index_ < archetypes_.size() &&
         entity_index_ < archetypes_[archetype_index_].get().Entities().size()) {
@@ -692,6 +710,24 @@ BasicQueryWithEntityIter<IsConst, Components...>::AdvanceToValidEntity() {
           }(),
           ...);
       if (has_all_sparse) {
+        bool has_all_required = std::ranges::all_of(
+            with_types_, [&entity, this](const ComponentTypeIndex type) {
+              const auto* meta =
+                  std::as_const(components_.get()).MetadataByIndex(type);
+              if (meta == nullptr) {
+                return false;
+              }
+              if (meta->storage_type == ComponentStorageType::kSparseSet) {
+                const auto* entry =
+                    std::as_const(components_.get()).SparseEntry(type);
+                return entry != nullptr && entry->Contains(entity);
+              }
+              return true;
+            });
+        if (!has_all_required) {
+          ++entity_index_;
+          continue;
+        }
         bool has_none_excluded = std::ranges::all_of(
             without_types_, [&entity, this](const ComponentTypeIndex type) {
               const auto* meta =

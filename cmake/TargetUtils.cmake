@@ -170,20 +170,44 @@ endfunction()
     Applies configuration-specific optimization and debug compile options.
 ]]
 function(helios_target_set_optimization TARGET)
+  # /RTC1 is incompatible with MSVC ASan. Keep it for unsanitized Debug.
+  set(_helios_msvc_debug_rtc "$<$<CONFIG:Debug>:/RTC1>")
+  if(HELIOS_ENABLE_SANITIZERS AND HELIOS_SANITIZER_ADDRESS
+      AND NOT HELIOS_COMPILER_IS_CLANG_CL)
+    set(_helios_msvc_debug_rtc "")
+  endif()
+
   target_compile_options(${TARGET} PRIVATE
-      # MSVC and clang-cl (MSVC frontend)
-      $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
+      # MSVC-only: clang-cl does not implement /Zc:preprocessor or /MP
+      # (Ninja already parallelizes compiles).
+      $<$<CXX_COMPILER_ID:MSVC>:
           /Zc:preprocessor
           /MP
-          $<$<CONFIG:Debug>:/Od /Zi /RTC1 /MDd>
-          $<$<CONFIG:RelWithDebInfo>:/O2 /Zi /DNDEBUG>
+      >
+      # MSVC and clang-cl (MSVC frontend)
+      $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
+          $<$<CONFIG:Debug>:/Od>
+          $<$<CONFIG:Debug>:/Zi>
+          ${_helios_msvc_debug_rtc}
+          $<$<CONFIG:Debug>:/MDd>
+          # /Ob2 + /Zo: Release-like inlining with better optimized debugging
+          $<$<CONFIG:RelWithDebInfo>:/O2 /Ob2 /Zi /Zo /DNDEBUG>
           $<$<CONFIG:Release>:/O2 /Ob2 /DNDEBUG>
       >
       # GCC and Clang on Unix-like systems
       $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:
           $<$<CONFIG:Debug>:-Og -g3 -ggdb>
-          $<$<CONFIG:RelWithDebInfo>:-O2 -g -DNDEBUG>
-          $<$<CONFIG:Release>:-O3 -DNDEBUG>
+          # Match Release -O3 while keeping DWARF and usable backtraces
+          $<$<CONFIG:RelWithDebInfo>:-O3 -g -fno-omit-frame-pointer -ffunction-sections -fdata-sections -DNDEBUG>
+          $<$<CONFIG:Release>:-O3 -ffunction-sections -fdata-sections -DNDEBUG>
+      >
+      # Split DWARF: smaller link inputs, same debug experience (Linux ELF)
+      $<$<AND:$<PLATFORM_ID:Linux>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>>:
+          $<$<CONFIG:RelWithDebInfo>:-gsplit-dwarf>
+      >
+      # Clang: richer line tables in heavily inlined -O3 code
+      $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>:
+          $<$<CONFIG:RelWithDebInfo>:-fdebug-info-for-profiling>
       >
   )
 
@@ -196,11 +220,17 @@ function(helios_target_set_optimization TARGET)
               -rdynamic
           >
       >
-      # Windows: No special linker flags needed for debugging (PDB is handled by /Zi)
+      # ELF: COMDAT GC pairs with -ffunction-sections / -fdata-sections
+      $<$<AND:$<PLATFORM_ID:Linux>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>>:
+          $<$<CONFIG:RelWithDebInfo>:-Wl,--gc-sections>
+      >
+      # Mach-O: strip unreferenced sections at link time
+      $<$<AND:$<PLATFORM_ID:Darwin>,$<OR:$<CXX_COMPILER_ID:Clang,AppleClang>>>:
+          $<$<CONFIG:RelWithDebInfo>:-Wl,-dead_strip>
+      >
   )
 
-  # Enable incremental linking for Debug builds on MSVC
-  # This significantly speeds up link times during development
+  # MSVC: incremental linking for Debug; REF/ICF for RelWithDebInfo (/DEBUG disables them by default)
   get_target_property(_target_type ${TARGET} TYPE)
   if(_target_type STREQUAL "EXECUTABLE" OR _target_type STREQUAL "SHARED_LIBRARY")
     target_link_options(${TARGET} PRIVATE
@@ -209,6 +239,14 @@ function(helios_target_set_optimization TARGET)
             $<$<NOT:$<CONFIG:Debug>>:/INCREMENTAL:NO>
         >
     )
+    # RAD Linker does not implement /opt:ref yet.
+    if(NOT HELIOS_LINKER_RELWITHDEBINFO STREQUAL "rad")
+      target_link_options(${TARGET} PRIVATE
+          $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
+              $<$<CONFIG:RelWithDebInfo>:/OPT:REF /OPT:ICF>
+          >
+      )
+    endif()
   endif()
 
   # Workaround for Clang < 21: std::forward_like builtin causes issues
@@ -222,7 +260,9 @@ endfunction()
 #[[
     helios_target_enable_lto(<target>)
 
-    Enables IPO/LTO properties for Release and RelWithDebInfo when supported.
+    Enables IPO/LTO for Release when supported. RelWithDebInfo LTO is opt-in
+    via HELIOS_ENABLE_LTO_RELWITHDEBINFO (ThinLTO / parallel LTO / incremental
+    LTCG via helios_target_apply_lto_mode()).
 ]]
 function(helios_target_enable_lto TARGET)
   if(NOT HELIOS_ENABLE_LTO)
@@ -238,9 +278,75 @@ function(helios_target_enable_lto TARGET)
 
   if(HELIOS_IPO_SUPPORTED)
     set_target_properties(${TARGET} PROPERTIES
-        INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON
         INTERPROCEDURAL_OPTIMIZATION_RELEASE ON
     )
+    if(HELIOS_ENABLE_LTO_RELWITHDEBINFO)
+      set_target_properties(${TARGET} PROPERTIES
+          INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON
+      )
+    else()
+      set_target_properties(${TARGET} PROPERTIES
+          INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO OFF
+      )
+    endif()
+    if(COMMAND helios_target_apply_lto_mode)
+      helios_target_apply_lto_mode(${TARGET})
+    endif()
+  endif()
+endfunction()
+
+# ============================================================================
+# Consumer conventions (opt-in)
+# ============================================================================
+
+#[[
+    helios_apply_conventions(<target>
+        [NO_WARNINGS] [NO_OPTIMIZATION] [NO_LTO] [NO_SANITIZERS]
+        [NO_PLATFORM] [NO_LINKER] [STANDARD <n>]
+    )
+
+    Opt-in Helios build conventions for a consumer target (game executable,
+    plugin, etc.). Linking helios::module::* alone does not apply these flags.
+
+    Example:
+        helios_apply_conventions(my_game)
+        helios_link_modules(TARGET my_game MODULES PUBLIC app)
+]]
+function(helios_apply_conventions TARGET)
+  cmake_parse_arguments(ARG
+      "NO_WARNINGS;NO_OPTIMIZATION;NO_LTO;NO_SANITIZERS;NO_PLATFORM;NO_LINKER"
+      "STANDARD"
+      ""
+      ${ARGN}
+  )
+
+  if(NOT TARGET ${TARGET})
+    message(FATAL_ERROR "helios_apply_conventions: target '${TARGET}' does not exist")
+  endif()
+
+  if(NOT ARG_STANDARD)
+    set(ARG_STANDARD 23)
+  endif()
+
+  helios_target_set_cxx_standard(${TARGET} STANDARD ${ARG_STANDARD})
+
+  if(NOT ARG_NO_PLATFORM)
+    helios_target_set_platform(${TARGET})
+  endif()
+  if(NOT ARG_NO_OPTIMIZATION)
+    helios_target_set_optimization(${TARGET})
+  endif()
+  if(NOT ARG_NO_WARNINGS)
+    helios_target_set_warnings(${TARGET})
+  endif()
+  if(NOT ARG_NO_SANITIZERS)
+    helios_target_enable_sanitizers(${TARGET})
+  endif()
+  if(NOT ARG_NO_LINKER AND COMMAND helios_target_apply_linker)
+    helios_target_apply_linker(${TARGET})
+  endif()
+  if(NOT ARG_NO_LTO AND HELIOS_ENABLE_LTO)
+    helios_target_enable_lto(${TARGET})
   endif()
 endfunction()
 

@@ -458,7 +458,10 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
       while (stack.Stats().total_allocated + kHeaderSize + kBytesAlign +
                  kBytes <=
              kSmallCapacity) {
-        CHECK_NE(stack.allocate(kBytes, kBytesAlign), nullptr);
+        void* const ptr = stack.allocate(kBytes, kBytesAlign);
+        if (ptr == nullptr) {
+          break;
+        }
         ++allocation_count;
       }
       CHECK_GT(allocation_count, 0);

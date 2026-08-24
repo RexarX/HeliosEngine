@@ -44,6 +44,9 @@ build-docs
 .zed
 .cache
 
+# LSP
+.clangd
+
 # CMake
 CMakeCache.txt
 CMakeFiles

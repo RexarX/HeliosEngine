@@ -4,22 +4,22 @@ Header-only helpers shared across modules: compile-time type identification, typ
 
 ## Public API
 
-| Type / Function                                                           | Purpose                                                                 |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `TypeId` / `TypeIndex`                                                    | Compile-time type hashing (FNV-1a on type name).                        |
-| `Delegate<R(Args...)>`                                                    | Non-owning type-erased free/member function wrapper.                    |
-| `FastPimpl<T, Size, Align>`                                               | Stack-based pimpl with `consteval` size/alignment validation.           |
-| `Defer<F>` / `HELIOS_DEFER`                                               | Scope-guard deferred execution.                                         |
-| `Fnv1aHash` / `HashType`                                                  | FNV-1a hashing (`kFnvBasis`, `kFnvPrime`).                              |
-| `Timer<Clock>`                                                            | High-resolution elapsed-time measurement.                               |
-| `RandomGenerator<Engine>`                                                 | Typed random value generation.                                          |
-| `DefaultEngine()` / `FastEngineInstance()`                                | Thread-local random engines.                                            |
-| `ReadFileToString()`                                                      | Read entire file into `std::string` via `std::expected`.                |
-| `DynamicLibrary`                                                          | Cross-platform shared library loading.                                  |
-| `StringHash` / `StringEqual`                                              | Transparent hash/equality for heterogeneous `unordered_map` lookup.     |
-| `UniqueTypes` / `AllConvertibleTo`                                        | Compile-time type-list traits.                                          |
-| `FilterAdapter`, `MapAdapter`, `TakeAdapter`, `SkipAdapter`, …            | Lazy iterator adapters with chained `.Filter()`, `.Map()`, `.Take()`, … |
-| `HELIOS_BIT`, `HELIOS_STRINGIFY`, `HELIOS_CONCAT`, `HELIOS_ANONYMOUS_VAR` | Utility macros (`macro.hpp`).                                           |
+| Type / Function                                                  | Purpose                                                                   |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `TypeId` / `TypeIndex`                                           | Compile-time type hashing (FNV-1a on type name).                          |
+| `Delegate<R(Args...)>`                                           | Non-owning type-erased free/member function wrapper.                      |
+| `FastPimpl<T, Size, Align>`                                      | Stack-based pimpl with `consteval` size/alignment validation.             |
+| `Defer<F>` / `HELIOS_DEFER`                                      | Scope-guard deferred execution.                                           |
+| `Fnv1aHash` / `HashType`                                         | FNV-1a hashing (`kFnvBasis`, `kFnvPrime`).                                |
+| `Timer<Clock>`                                                   | High-resolution elapsed-time measurement.                                 |
+| `RandomGenerator<Engine>`                                        | Typed random value generation.                                            |
+| `DefaultEngine()` / `FastEngineInstance()`                       | Thread-local random engines.                                              |
+| `ReadFileToString()`                                             | Read entire file into `std::string` via `std::expected`.                  |
+| `DynamicLibrary`                                                 | Cross-platform shared library loading.                                    |
+| `StringHash` / `StringEqual`                                     | Transparent hash/equality for heterogeneous `unordered_map` lookup.       |
+| `UniqueTypes` / `AllConvertibleTo`                               | Compile-time type-list traits.                                            |
+| `FilterAdapter`, `MapAdapter`, `TakeAdapter`, `SkipAdapter`, ... | Lazy iterator adapters with chained `.Filter()`, `.Map()`, `.Take()`, ... |
+| `HELIOS_STRINGIFY`, `HELIOS_CONCAT`, `HELIOS_ANONYMOUS_VAR`      | Utility macros (`macro.hpp`).                                             |
 
 ## Type Identification
 

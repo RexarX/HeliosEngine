@@ -1,5 +1,10 @@
 option(HELIOS_PROFILE_BUNDLE_TRACY "Bundle Tracy profiler" ON)
 
+set(_helios_profile_uses)
+if(HELIOS_PROFILE_BUNDLE_TRACY)
+  list(APPEND _helios_profile_uses tracy PUBLIC helios::lib::tracy::TracyClient)
+endif()
+
 helios_module(
     NAME profile
     VERSION 0.1.0
@@ -40,6 +45,7 @@ helios_module(
 
     USES
         concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
+        ${_helios_profile_uses}
 
     COMPILE_DEFINITIONS
         PUBLIC
@@ -55,11 +61,3 @@ helios_module(
         tests/profile.cpp
         tests/zone.cpp
 )
-
-if(HELIOS_PROFILE_BUNDLE_TRACY)
-  helios_require_dependency(tracy)
-  target_link_libraries(helios_module_profile PUBLIC helios::lib::tracy::TracyClient)
-  if(TARGET helios_profile_tests)
-    target_link_libraries(helios_profile_tests PRIVATE helios::lib::tracy::TracyClient)
-  endif()
-endif()

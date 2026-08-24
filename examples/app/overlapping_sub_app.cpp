@@ -31,7 +31,7 @@ struct SubTick {
 struct BumpMain {
   void operator()(hecs::Res<MainTick> tick) const {
     ++tick->value;
-    hlog::Info("overlapping_sub_apps: main tick={}", tick->value);
+    hlog::Info("Main tick={}", tick->value);
   }
 };
 
@@ -39,19 +39,17 @@ struct SlowSubUpdate {
   void operator()(hecs::Res<SubTick> tick) const {
     // Sleeping exaggerates a long-running worker so overlap is visible in the
     // log output.
-    hlog::Info("overlapping_sub_apps: sub update start gen={}",
-               tick->generation);
+    hlog::Info("Sub update start gen={}", tick->generation);
     std::this_thread::sleep_for(std::chrono::milliseconds(80));
     ++tick->generation;
-    hlog::Info("overlapping_sub_apps: sub update end gen={}", tick->generation);
+    hlog::Info("Sub update end gen={}", tick->generation);
   }
 };
 
 void ExtractSub(const hecs::World& main, hecs::World& sub) {
   // Each submitted worker update receives a snapshot copied from the main
   // world at extraction time.
-  hlog::Info("overlapping_sub_apps: extract main={}",
-             main.ReadResource<MainTick>().value);
+  hlog::Info("Extract main={}", main.ReadResource<MainTick>().value);
   sub.InsertResources(
       SubTick{.generation = main.ReadResource<MainTick>().value});
 }
@@ -60,7 +58,7 @@ struct ExitAfterFrames {
   void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::MessageWriter<happ::AppExit> exit_writer) const {
     if (frames->count >= 8) {
-      hlog::Info("overlapping_sub_apps: exit frame {}", frames->count);
+      hlog::Info("Exit frame {}", frames->count);
       exit_writer.Write(happ::AppExit::Success());
     }
   }

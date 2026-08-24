@@ -6,6 +6,7 @@
 #include <concepts>
 #include <cstddef>
 #include <expected>
+#include <limits>
 #include <memory_resource>
 #include <span>
 
