@@ -209,6 +209,7 @@ TEST_SUITE("helios::mem::TemporaryStorage") {
         std::thread resetter([&stop]() {
           while (!stop.load(std::memory_order_relaxed)) {
             TemporaryStorage::ResetAll();
+            std::this_thread::yield();
           }
         });
 

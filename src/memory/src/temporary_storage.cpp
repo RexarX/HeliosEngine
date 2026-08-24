@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <memory_resource>
 #include <optional>
+#include <thread>
 
 namespace helios::mem {
 
@@ -113,6 +114,7 @@ TemporaryStorage::ThreadBinding::~ThreadBinding() noexcept {
                                            std::memory_order_acquire)) {
         return;
       }
+      std::this_thread::yield();
       continue;
     }
 
@@ -122,6 +124,7 @@ TemporaryStorage::ThreadBinding::~ThreadBinding() noexcept {
                                            std::memory_order_acquire)) {
         return;
       }
+      std::this_thread::yield();
       continue;
     }
     return;

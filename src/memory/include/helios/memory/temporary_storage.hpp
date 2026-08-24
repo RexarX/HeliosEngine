@@ -34,6 +34,7 @@ public:
   TemporaryStorage(const TemporaryStorage&) = delete;
   TemporaryStorage(TemporaryStorage&&) = delete;
   ~TemporaryStorage() = delete;
+
   TemporaryStorage& operator=(const TemporaryStorage&) = delete;
   TemporaryStorage& operator=(TemporaryStorage&&) = delete;
 

@@ -68,6 +68,22 @@ jobs:
       - name: Build (${{ matrix.preset }})
         run: cmake --build --preset ${{ matrix.preset }}
 
+      - name: Stress test TemporaryStorage (${{ matrix.preset }})
+        if: matrix.preset == 'macos-clang-debug'
+        timeout-minutes: 5
+        run: |
+          chmod +x scripts/macos_tests.sh
+          scripts/macos_tests.sh bin/tests/debug-macos-arm64/helios_memory_tests 50 10
+
+      - name: Upload hang stack sample (if reproduced)
+        if: always() && matrix.preset == 'macos-clang-debug'
+        uses: actions/upload-artifact@v4
+        with:
+          name: temporary-storage-hang-sample
+          path: macos_tests_hang_sample_*.txt
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Test (${{ matrix.preset }})
         timeout-minutes: 10
         run: ctest --preset ${{ matrix.preset }} --output-on-failure --timeout 120
