@@ -224,6 +224,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab6785a8a5adc56bb25294bbfef261000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates sliding windows over elements.  <br /></td></tr>
 <tr class="memitem:a6f4c201c163d5be88b9f3e351caefeba" id="r_a6f4c201c163d5be88b9f3e351caefeba"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a6f4c201c163d5be88b9f3e351caefeba">Stride</a> (size_t stride) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Derived &gt;(<a class="el" href="#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), stride)))</td></tr>
 <tr class="memdesc:a6f4c201c163d5be88b9f3e351caefeba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes every Nth element with stride.  <br /></td></tr>
+<tr class="memitem:af0ab37316628bef45a5e4b0ffe3a0fc0" id="r_af0ab37316628bef45a5e4b0ffe3a0fc0"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#af0ab37316628bef45a5e4b0ffe3a0fc0">Chunk</a> (size_t chunk_size) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChunkAdapter.html">ChunkAdapter</a>&lt; Derived &gt;(<a class="el" href="#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), chunk_size)))</td></tr>
+<tr class="memdesc:af0ab37316628bef45a5e4b0ffe3a0fc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packs elements into non-overlapping chunks.  <br /></td></tr>
 <tr class="memitem:aaba0fd7e864b439cc55db33bd095f4a3" id="r_aaba0fd7e864b439cc55db33bd095f4a3"><td class="memTemplParams" colspan="2">template&lt;typename OtherIter&gt; </td></tr>
 <tr class="memitem:aaba0fd7e864b439cc55db33bd095f4a3 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#aaba0fd7e864b439cc55db33bd095f4a3">Zip</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; Derived, OtherIter &gt;(<a class="el" href="#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move(end))))</td></tr>
 <tr class="memdesc:aaba0fd7e864b439cc55db33bd095f4a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
@@ -248,10 +250,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7bddc9da14c1742058e0f0c816aa44ce" id="r_a7bddc9da14c1742058e0f0c816aa44ce"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
 <tr class="memitem:a7bddc9da14c1742058e0f0c816aa44ce template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a7bddc9da14c1742058e0f0c816aa44ce">Partition</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a7bddc9da14c1742058e0f0c816aa44ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: partitions elements into two groups based on a predicate.  <br /></td></tr>
-<tr class="memitem:a2a7bf89fe9f2c7761bb65dd0991a5702" id="r_a2a7bf89fe9f2c7761bb65dd0991a5702"><td class="memTemplParams" colspan="2">template&lt;typename Pred, typename Allocator&gt; <br />
-requires std::same_as&lt;typename Allocator::value_type, std::iter_value_t&lt;Derived&gt;&gt;</td></tr>
-<tr class="memitem:a2a7bf89fe9f2c7761bb65dd0991a5702 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a2a7bf89fe9f2c7761bb65dd0991a5702">PartitionWith</a> (const Pred &amp;predicate, Allocator allocator) const</td></tr>
-<tr class="memdesc:a2a7bf89fe9f2c7761bb65dd0991a5702"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: partitions elements with a custom allocator.  <br /></td></tr>
+<tr class="memitem:a6dbfb2a4ebdb266159f696f2324dd24e" id="r_a6dbfb2a4ebdb266159f696f2324dd24e"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:a6dbfb2a4ebdb266159f696f2324dd24e template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a6dbfb2a4ebdb266159f696f2324dd24e">Partition</a> (const Pred &amp;predicate, std::pmr::memory_resource *resource) const</td></tr>
+<tr class="memdesc:a6dbfb2a4ebdb266159f696f2324dd24e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: partitions elements with a memory resource.  <br /></td></tr>
+<tr class="memitem:aa64147d59773fc0b1a31d50b367c217d" id="r_aa64147d59773fc0b1a31d50b367c217d"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:aa64147d59773fc0b1a31d50b367c217d template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aa64147d59773fc0b1a31d50b367c217d">Partition</a> (const Pred &amp;, std::nullptr_t) const =delete</td></tr>
 <tr class="memitem:a5413a0ac213cda3a6b508881af956acc" id="r_a5413a0ac213cda3a6b508881af956acc"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc&gt; </td></tr>
 <tr class="memitem:a5413a0ac213cda3a6b508881af956acc template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a5413a0ac213cda3a6b508881af956acc">MaxBy</a> (const KeyFunc &amp;key_func) const</td></tr>
 <tr class="memdesc:a5413a0ac213cda3a6b508881af956acc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the element with the maximum value according to a key function.  <br /></td></tr>
@@ -261,17 +264,16 @@ requires std::same_as&lt;typename Allocator::value_type, std::iter_value_t&lt;De
 <tr class="memitem:a34abb87022d768a03070fcccd64df0ac" id="r_a34abb87022d768a03070fcccd64df0ac"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc&gt; </td></tr>
 <tr class="memitem:a34abb87022d768a03070fcccd64df0ac template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a34abb87022d768a03070fcccd64df0ac">GroupBy</a> (const KeyFunc &amp;key_func) const</td></tr>
 <tr class="memdesc:a34abb87022d768a03070fcccd64df0ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: groups elements by a key function.  <br /></td></tr>
-<tr class="memitem:a1921322daaf078463880349560c9ae5a" id="r_a1921322daaf078463880349560c9ae5a"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc, typename MapAllocator, typename ValueAllocator&gt; </td></tr>
-<tr class="memitem:a1921322daaf078463880349560c9ae5a template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a1921322daaf078463880349560c9ae5a">GroupByWith</a> (const KeyFunc &amp;key_func, MapAllocator map_allocator, ValueAllocator value_allocator) const</td></tr>
-<tr class="memdesc:a1921322daaf078463880349560c9ae5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: groups elements by key with custom allocators.  <br /></td></tr>
+<tr class="memitem:a7b9e216e90ba8d2f72bf2213b16e2710" id="r_a7b9e216e90ba8d2f72bf2213b16e2710"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc&gt; </td></tr>
+<tr class="memitem:a7b9e216e90ba8d2f72bf2213b16e2710 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a7b9e216e90ba8d2f72bf2213b16e2710">GroupBy</a> (const KeyFunc &amp;key_func, std::pmr::memory_resource *resource) const</td></tr>
+<tr class="memdesc:a7b9e216e90ba8d2f72bf2213b16e2710"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: groups elements by key with a memory resource.  <br /></td></tr>
+<tr class="memitem:aee2a44b63557676862ebf21c2f0a0716" id="r_aee2a44b63557676862ebf21c2f0a0716"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc&gt; </td></tr>
+<tr class="memitem:aee2a44b63557676862ebf21c2f0a0716 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aee2a44b63557676862ebf21c2f0a0716">GroupBy</a> (const KeyFunc &amp;, std::nullptr_t) const =delete</td></tr>
 <tr class="memitem:a834e53c6229570dceb2a30a7fd5bfa4d" id="r_a834e53c6229570dceb2a30a7fd5bfa4d"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a834e53c6229570dceb2a30a7fd5bfa4d">Collect</a> () const</td></tr>
 <tr class="memdesc:a834e53c6229570dceb2a30a7fd5bfa4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements into a vector.  <br /></td></tr>
-<tr class="memitem:a0c8c7866dc192660a6015b942c50c72e" id="r_a0c8c7866dc192660a6015b942c50c72e"><td class="memTemplParams" colspan="2">template&lt;typename Allocator&gt; </td></tr>
-<tr class="memitem:a0c8c7866dc192660a6015b942c50c72e template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a0c8c7866dc192660a6015b942c50c72e">CollectWith</a> (Allocator allocator={}) const</td></tr>
-<tr class="memdesc:a0c8c7866dc192660a6015b942c50c72e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements into a vector with a custom allocator.  <br /></td></tr>
-<tr class="memitem:aa9bda3e17a34788d84832d3ff13c0de1" id="r_aa9bda3e17a34788d84832d3ff13c0de1"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#aa9bda3e17a34788d84832d3ff13c0de1">CollectWith</a> (std::pmr::memory_resource *resource) const</td></tr>
-<tr class="memdesc:aa9bda3e17a34788d84832d3ff13c0de1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements into a vector with a specific memory resource.  <br /></td></tr>
-<tr class="memitem:a0e95843b6ae3b485ad2599112d50ae34" id="r_a0e95843b6ae3b485ad2599112d50ae34"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a0e95843b6ae3b485ad2599112d50ae34">CollectWith</a> (std::nullptr_t) const =delete</td></tr>
+<tr class="memitem:a4b5d666f8ba6fa77b7fcc838c57b44bf" id="r_a4b5d666f8ba6fa77b7fcc838c57b44bf"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a4b5d666f8ba6fa77b7fcc838c57b44bf">Collect</a> (std::pmr::memory_resource *resource) const</td></tr>
+<tr class="memdesc:a4b5d666f8ba6fa77b7fcc838c57b44bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements using a memory resource.  <br /></td></tr>
+<tr class="memitem:aa2c1ee2b73415aedabd9e387f66d8703" id="r_aa2c1ee2b73415aedabd9e387f66d8703"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aa2c1ee2b73415aedabd9e387f66d8703">Collect</a> (std::nullptr_t) const =delete</td></tr>
 <tr class="memitem:a6352ac1157243d7ab76a014120fa68ac" id="r_a6352ac1157243d7ab76a014120fa68ac"><td class="memTemplParams" colspan="2">template&lt;typename OutIt&gt; </td></tr>
 <tr class="memitem:a6352ac1157243d7ab76a014120fa68ac template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a6352ac1157243d7ab76a014120fa68ac">Into</a> (OutIt out) const</td></tr>
 <tr class="memdesc:a6352ac1157243d7ab76a014120fa68ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: writes all elements into an output iterator.  <br /></td></tr>
@@ -302,7 +304,7 @@ class helios::utils::FunctionalAdapterBase&lt; Derived &gt;</div><p>CRTP base cl
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03583">3583</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03962">3962</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a25a0467b816b37cd68d74177e21e096b" name="a25a0467b816b37cd68d74177e21e096b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a25a0467b816b37cd68d74177e21e096b">&#9670;&#160;</a></span>All()</h2>
@@ -346,7 +348,7 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if all elements satisfy the predicate, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04393">4393</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04697">4697</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -392,7 +394,7 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if any element satisfies the predicate, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04375">4375</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04679">4679</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -438,7 +440,7 @@ template&lt;typename R&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html" title="Iterator adapter that chains two sequences together.">ChainAdapter</a> that yields elements from both ranges </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03743">3743</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04122">4122</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -489,7 +491,7 @@ template&lt;typename OtherIter&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html" title="Iterator adapter that chains two sequences together.">ChainAdapter</a> that yields elements from both ranges </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03712">3712</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04091">4091</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -535,12 +537,51 @@ template&lt;typename R&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html" title="Iterator adapter that chains two sequences together.">ChainAdapter</a> that yields elements from both ranges </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03729">3729</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04108">4108</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af0ab37316628bef45a5e4b0ffe3a0fc0" name="af0ab37316628bef45a5e4b0ffe3a0fc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0ab37316628bef45a5e4b0ffe3a0fc0">&#9670;&#160;</a></span>Chunk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Chunk </td>
+          <td>(</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>chunk_size</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Packs elements into non-overlapping chunks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chunk_size</td><td>Number of elements to pack into each chunk </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ChunkAdapter.html" title="Adapter that yields non-overlapping chunks of elements.">ChunkAdapter</a> that packs elements into chunks and yields them </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>chunk_size must be greater than 0 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04173">4173</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a834e53c6229570dceb2a30a7fd5bfa4d" name="a834e53c6229570dceb2a30a7fd5bfa4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a834e53c6229570dceb2a30a7fd5bfa4d">&#9670;&#160;</a></span>Collect()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a834e53c6229570dceb2a30a7fd5bfa4d">&#9670;&#160;</a></span>Collect() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -559,7 +600,7 @@ template&lt;typename Derived&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -567,58 +608,12 @@ template&lt;typename Derived&gt; </div>
 <p>Terminal operation: collects all elements into a vector. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector containing all elements </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04333">4333</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04344">4344</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a0c8c7866dc192660a6015b942c50c72e" name="a0c8c7866dc192660a6015b942c50c72e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c8c7866dc192660a6015b942c50c72e">&#9670;&#160;</a></span>CollectWith() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Derived&gt; </div>
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::CollectWith </td>
-          <td>(</td>
-          <td class="paramtype">Allocator</td>          <td class="paramname"><span class="paramname"><em>allocator</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Terminal operation: collects all elements into a vector with a custom allocator. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Allocator</td><td>Allocator type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">allocator</td><td>Allocator to use for the vector </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Vector containing all elements </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04346">4346</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a0e95843b6ae3b485ad2599112d50ae34" name="a0e95843b6ae3b485ad2599112d50ae34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e95843b6ae3b485ad2599112d50ae34">&#9670;&#160;</a></span>CollectWith() <span class="overload">[2/3]</span></h2>
+<a id="aa2c1ee2b73415aedabd9e387f66d8703" name="aa2c1ee2b73415aedabd9e387f66d8703"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2c1ee2b73415aedabd9e387f66d8703">&#9670;&#160;</a></span>Collect() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -629,7 +624,7 @@ template&lt;typename Derived&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::CollectWith </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Collect </td>
           <td>(</td>
           <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -644,8 +639,8 @@ template&lt;typename Derived&gt; </div>
 
 </div>
 </div>
-<a id="aa9bda3e17a34788d84832d3ff13c0de1" name="aa9bda3e17a34788d84832d3ff13c0de1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9bda3e17a34788d84832d3ff13c0de1">&#9670;&#160;</a></span>CollectWith() <span class="overload">[3/3]</span></h2>
+<a id="a4b5d666f8ba6fa77b7fcc838c57b44bf" name="a4b5d666f8ba6fa77b7fcc838c57b44bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b5d666f8ba6fa77b7fcc838c57b44bf">&#9670;&#160;</a></span>Collect() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -656,7 +651,7 @@ template&lt;typename Derived&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::CollectWith </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Collect </td>
           <td>(</td>
           <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span></td><td>)</td>
           <td> const</td>
@@ -669,7 +664,7 @@ template&lt;typename Derived&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Terminal operation: collects all elements into a vector with a specific memory resource. </p>
+<p>Terminal operation: collects all elements using a memory resource. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resource</td><td>Memory resource to use for the vector </td></tr>
@@ -678,7 +673,7 @@ template&lt;typename Derived&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector containing all elements </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04359">4359</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04657">4657</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -724,7 +719,7 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of elements that satisfy the predicate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04099">4099</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04485">4485</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -756,7 +751,7 @@ template&lt;typename Derived&gt; </div>
 <p>Adds an index to each element. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html" title="Iterator adapter that adds index information to each element.">EnumerateAdapter</a> that pairs indices with values </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03671">3671</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04050">4050</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -802,7 +797,7 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html" title="Iterator adapter that filters elements based on a predicate function.">FilterAdapter</a> that applies this adapter then filters </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03592">3592</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03971">3971</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -848,7 +843,7 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Optional or pointer to the element with maximum key, based on the iterator type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04069">4069</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04455">4455</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -900,7 +895,7 @@ template&lt;typename T, typename Folder&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Final accumulated value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04050">4050</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04436">4436</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -945,7 +940,7 @@ template&lt;typename Action&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04037">4037</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04423">4423</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -977,7 +972,7 @@ template&lt;typename Derived&gt; </div>
 <p>Gets const reference to derived class instance. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to derived class </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04030">4030</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04416">4416</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1009,12 +1004,45 @@ template&lt;typename Derived&gt; </div>
 <p>Gets reference to derived class instance. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to derived class </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04022">4022</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04408">4408</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aee2a44b63557676862ebf21c2f0a0716" name="aee2a44b63557676862ebf21c2f0a0716"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee2a44b63557676862ebf21c2f0a0716">&#9670;&#160;</a></span>GroupBy() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived&gt; </div>
+<div class="memtemplate">
+template&lt;typename KeyFunc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::GroupBy </td>
+          <td>(</td>
+          <td class="paramtype">const KeyFunc &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
 <a id="a34abb87022d768a03070fcccd64df0ac" name="a34abb87022d768a03070fcccd64df0ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34abb87022d768a03070fcccd64df0ac">&#9670;&#160;</a></span>GroupBy()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a34abb87022d768a03070fcccd64df0ac">&#9670;&#160;</a></span>GroupBy() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1035,7 +1063,7 @@ template&lt;typename KeyFunc&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1055,37 +1083,32 @@ template&lt;typename KeyFunc&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Map from keys to vectors of elements with that key </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04275">4275</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04322">4322</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a1921322daaf078463880349560c9ae5a" name="a1921322daaf078463880349560c9ae5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1921322daaf078463880349560c9ae5a">&#9670;&#160;</a></span>GroupByWith()</h2>
+<a id="a7b9e216e90ba8d2f72bf2213b16e2710" name="a7b9e216e90ba8d2f72bf2213b16e2710"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b9e216e90ba8d2f72bf2213b16e2710">&#9670;&#160;</a></span>GroupBy() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Derived&gt; </div>
 <div class="memtemplate">
-template&lt;typename KeyFunc, typename MapAllocator, typename ValueAllocator&gt; </div>
+template&lt;typename KeyFunc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::GroupByWith </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::GroupBy </td>
           <td>(</td>
           <td class="paramtype">const KeyFunc &amp;</td>          <td class="paramname"><span class="paramname"><em>key_func</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">MapAllocator</td>          <td class="paramname"><span class="paramname"><em>map_allocator</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ValueAllocator</td>          <td class="paramname"><span class="paramname"><em>value_allocator</em></span>&#160;) const</td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span>&#160;) const</td>
         </tr>
       </table>
   </td>
@@ -1095,26 +1118,23 @@ template&lt;typename KeyFunc, typename MapAllocator, typename ValueAllocator&gt;
 </table>
 </div><div class="memdoc">
 
-<p>Terminal operation: groups elements by key with custom allocators. </p>
+<p>Terminal operation: groups elements by key with a memory resource. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">KeyFunc</td><td>Key extraction function type </td></tr>
-    <tr><td class="paramname">MapAllocator</td><td>Allocator for unordered_map nodes </td></tr>
-    <tr><td class="paramname">ValueAllocator</td><td>Allocator for grouped vectors </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key_func</td><td>Function to extract grouping key from each element </td></tr>
-    <tr><td class="paramname">map_allocator</td><td>Allocator for map storage </td></tr>
-    <tr><td class="paramname">value_allocator</td><td>Allocator for each grouped vector </td></tr>
+    <tr><td class="paramname">resource</td><td>Memory resource for map storage and grouped vectors </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Map from keys to vectors using provided allocators </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Map from keys to vectors using the provided memory resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04296">4296</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04633">4633</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1160,7 +1180,7 @@ template&lt;typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html" title="Iterator adapter that applies a function to each element for observation.">InspectAdapter</a> for side effects </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03684">3684</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04063">4063</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1205,11 +1225,10 @@ template&lt;typename OutIt&gt; </div>
   </dd>
 </dl>
 <div class="fragment"><div class="line">std::vector&lt;int&gt; results;</div>
-<div class="line">query.Filter([](<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> x &gt; 5;</div>
-<div class="line">}).<a class="code hl_function" href="#a6352ac1157243d7ab76a014120fa68ac">Into</a>(std::back_inserter(results));</div>
-<div class="ttc" id="aclasshelios_1_1utils_1_1FunctionalAdapterBase_html_a6352ac1157243d7ab76a014120fa68ac"><div class="ttname"><a href="#a6352ac1157243d7ab76a014120fa68ac">helios::utils::FunctionalAdapterBase::Into</a></div><div class="ttdeci">constexpr void Into(OutIt out) const</div><div class="ttdoc">Terminal operation: writes all elements into an output iterator.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l04367">functional_adapters.hpp:4367</a></div></div>
+<div class="line">query.Filter([](<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> x &gt; 5;}).<a class="code hl_function" href="#a6352ac1157243d7ab76a014120fa68ac">Into</a>(std::back_inserter(results));</div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1FunctionalAdapterBase_html_a6352ac1157243d7ab76a014120fa68ac"><div class="ttname"><a href="#a6352ac1157243d7ab76a014120fa68ac">helios::utils::FunctionalAdapterBase::Into</a></div><div class="ttdeci">constexpr void Into(OutIt out) const</div><div class="ttdoc">Terminal operation: writes all elements into an output iterator.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l04671">functional_adapters.hpp:4671</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04367">4367</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04671">4671</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1255,7 +1274,7 @@ template&lt;typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1MapAdapter.html" title="Iterator adapter that transforms each element using a function.">MapAdapter</a> that transforms adapted results </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03607">3607</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03986">3986</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1301,7 +1320,7 @@ template&lt;typename KeyFunc&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Optional or pointer to the element with maximum key, based on the iterator type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04172">4172</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04530">4530</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1347,7 +1366,7 @@ template&lt;typename KeyFunc&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Optional or pointer to the element with maximum key, based on the iterator type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04223">4223</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04581">4581</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1393,12 +1412,45 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if no elements satisfy the predicate, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04013">4013</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04399">4399</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa64147d59773fc0b1a31d50b367c217d" name="aa64147d59773fc0b1a31d50b367c217d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa64147d59773fc0b1a31d50b367c217d">&#9670;&#160;</a></span>Partition() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived&gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Partition </td>
+          <td>(</td>
+          <td class="paramtype">const Pred &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
 <a id="a7bddc9da14c1742058e0f0c816aa44ce" name="a7bddc9da14c1742058e0f0c816aa44ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bddc9da14c1742058e0f0c816aa44ce">&#9670;&#160;</a></span>Partition()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bddc9da14c1742058e0f0c816aa44ce">&#9670;&#160;</a></span>Partition() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1419,7 +1471,7 @@ template&lt;typename Pred&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1439,34 +1491,32 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pair of vectors: first contains elements satisfying predicate, second contains the rest </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04118">4118</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04275">4275</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2a7bf89fe9f2c7761bb65dd0991a5702" name="a2a7bf89fe9f2c7761bb65dd0991a5702"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a7bf89fe9f2c7761bb65dd0991a5702">&#9670;&#160;</a></span>PartitionWith()</h2>
+<a id="a6dbfb2a4ebdb266159f696f2324dd24e" name="a6dbfb2a4ebdb266159f696f2324dd24e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dbfb2a4ebdb266159f696f2324dd24e">&#9670;&#160;</a></span>Partition() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Derived&gt; <br />
-requires std::same_as&lt;typename Allocator::value_type, std::iter_value_t&lt;Derived&gt;&gt;</div>
+template&lt;typename Derived&gt; </div>
 <div class="memtemplate">
-template&lt;typename Pred, typename Allocator&gt; <br />
-requires std::same_as&lt;typename Allocator::value_type, std::iter_value_t&lt;Derived&gt;&gt;</div>
+template&lt;typename Pred&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::PartitionWith </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Partition </td>
           <td>(</td>
           <td class="paramtype">const Pred &amp;</td>          <td class="paramname"><span class="paramname"><em>predicate</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Allocator</td>          <td class="paramname"><span class="paramname"><em>allocator</em></span>&#160;) const</td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span>&#160;) const</td>
         </tr>
       </table>
   </td>
@@ -1476,24 +1526,23 @@ requires std::same_as&lt;typename Allocator::value_type, std::iter_value_t&lt;De
 </table>
 </div><div class="memdoc">
 
-<p>Terminal operation: partitions elements with a custom allocator. </p>
+<p>Terminal operation: partitions elements with a memory resource. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
-    <tr><td class="paramname">Allocator</td><td>Allocator for result vectors </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">predicate</td><td>Function to test elements </td></tr>
-    <tr><td class="paramname">allocator</td><td>Allocator to use for both result vectors </td></tr>
+    <tr><td class="paramname">resource</td><td>Memory resource to use for both result vectors </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Pair of vectors using the provided allocator </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Pair of vectors using the provided memory resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04146">4146</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04504">4504</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1526,7 +1575,7 @@ template&lt;typename Derived&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Requires bidirectional iterator support </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html" title="Adapter that iterates through elements in reverse order.">ReverseAdapter</a> that yields elements in reverse order </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03755">3755</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04134">4134</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1564,7 +1613,7 @@ template&lt;typename Derived&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html" title="Iterator adapter that skips the first N elements.">SkipAdapter</a> that skips adapted results </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03632">3632</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04011">4011</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1610,7 +1659,7 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html" title="Iterator adapter that skips elements while a predicate returns true.">SkipWhileAdapter</a> that conditionally skips elements </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03660">3660</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04039">4039</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1649,7 +1698,7 @@ template&lt;typename Derived&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html" title="Adapter that yields sliding windows of elements.">SlideAdapter</a> that yields windows of elements </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>window_size must be greater than 0 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03767">3767</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04146">4146</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1687,7 +1736,7 @@ template&lt;typename Derived&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html" title="Iterator adapter that steps through elements by a specified stride.">StepByAdapter</a> that skips elements </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03697">3697</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04076">4076</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1726,7 +1775,7 @@ template&lt;typename Derived&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html" title="Adapter that yields every Nth element from the range.">StrideAdapter</a> that yields every Nth element </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>stride must be greater than 0 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03781">3781</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04160">4160</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1764,7 +1813,7 @@ template&lt;typename Derived&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html" title="Iterator adapter that yields only the first N elements.">TakeAdapter</a> that limits adapted results </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03620">3620</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03999">3999</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1810,7 +1859,7 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html" title="Iterator adapter that takes elements while a predicate returns true.">TakeWhileAdapter</a> that conditionally takes elements </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03646">3646</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04025">4025</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1856,7 +1905,7 @@ template&lt;typename R&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html" title="Adapter that combines two ranges into pairs.">ZipAdapter</a> that </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03827">3827</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04220">4220</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1907,7 +1956,7 @@ template&lt;typename OtherIter&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html" title="Adapter that combines two ranges into pairs.">ZipAdapter</a> that yields tuples of corresponding elements </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03796">3796</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04189">4189</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -1953,7 +2002,7 @@ template&lt;typename R&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html" title="Adapter that combines two ranges into pairs.">ZipAdapter</a> that </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03813">3813</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l04206">4206</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>

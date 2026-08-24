@@ -193,6 +193,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a428c32b63ccc85d22f49d9d56af2744c" id="r_a428c32b63ccc85d22f49d9d56af2744c"><td class="memItemLeft">constexpr <a class="el" href="#adc7c7564964cabb921cdf17e78491dd2">AccessPolicyBuilder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a428c32b63ccc85d22f49d9d56af2744c">operator=</a> (<a class="el" href="#adc7c7564964cabb921cdf17e78491dd2">AccessPolicyBuilder</a> &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:a146b186def1e80767c675679f4372d61" id="r_a146b186def1e80767c675679f4372d61"><td class="memItemLeft">constexpr <a class="el" href="classhelios_1_1ecs_1_1AccessPolicy.html">AccessPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a146b186def1e80767c675679f4372d61">Build</a> () noexcept</td></tr>
 <tr class="memdesc:a146b186def1e80767c675679f4372d61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds and returns the accumulated <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1AccessPolicy.html" title="Stores data access requirements for a system at compile time.">AccessPolicy</a></span>.  <br /></td></tr>
+<tr class="memitem:a1a231e9412a6ab38974cdd3e8ef13045" id="r_a1a231e9412a6ab38974cdd3e8ef13045"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a1a231e9412a6ab38974cdd3e8ef13045">Exclusive</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a1a231e9412a6ab38974cdd3e8ef13045"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares exclusive access to the world.  <br /></td></tr>
 <tr class="memitem:a75fa1f8e75597ae18ae49c8e4b0d1947" id="r_a75fa1f8e75597ae18ae49c8e4b0d1947"><td class="memTemplParams" colspan="2">template&lt;typename... Components&gt; <br />
 requires details::UniqueComponentAccess&lt;Components...&gt; &amp;&amp; (ComponentTrait&lt;details::ComponentTypeExtractor_t&lt;Components&gt;&gt; &amp;&amp; ...)</td></tr>
 <tr class="memitem:a75fa1f8e75597ae18ae49c8e4b0d1947 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a75fa1f8e75597ae18ae49c8e4b0d1947">Query</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
@@ -215,11 +217,11 @@ requires utils::UniqueTypes&lt;Resources...&gt;</td></tr>
 <div class="line">    .ReadResources&lt;Camera, RenderSettings&gt;()</div>
 <div class="line">    .<a class="code hl_function" href="#ad06a2ebd52cfe114109fb5fe5739bdf8">WriteResources&lt;RenderQueue&gt;</a>()</div>
 <div class="line">    .Build();</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html">helios::ecs::AccessPolicyBuilder</a></div><div class="ttdoc">Fluent builder for constructing an AccessPolicy.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00529">access_policy.hpp:529</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html_a75fa1f8e75597ae18ae49c8e4b0d1947"><div class="ttname"><a href="#a75fa1f8e75597ae18ae49c8e4b0d1947">helios::ecs::AccessPolicyBuilder::Query</a></div><div class="ttdeci">constexpr auto Query(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares a query over component types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00609">access_policy.hpp:609</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html_ad06a2ebd52cfe114109fb5fe5739bdf8"><div class="ttname"><a href="#ad06a2ebd52cfe114109fb5fe5739bdf8">helios::ecs::AccessPolicyBuilder::WriteResources</a></div><div class="ttdeci">constexpr auto WriteResources(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares write access to resource types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00649">access_policy.hpp:649</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html">helios::ecs::AccessPolicyBuilder</a></div><div class="ttdoc">Fluent builder for constructing an AccessPolicy.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00556">access_policy.hpp:556</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html_a75fa1f8e75597ae18ae49c8e4b0d1947"><div class="ttname"><a href="#a75fa1f8e75597ae18ae49c8e4b0d1947">helios::ecs::AccessPolicyBuilder::Query</a></div><div class="ttdeci">constexpr auto Query(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares a query over component types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00650">access_policy.hpp:650</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html_ad06a2ebd52cfe114109fb5fe5739bdf8"><div class="ttname"><a href="#ad06a2ebd52cfe114109fb5fe5739bdf8">helios::ecs::AccessPolicyBuilder::WriteResources</a></div><div class="ttdeci">constexpr auto WriteResources(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares write access to resource types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00690">access_policy.hpp:690</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00529">529</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00556">556</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="adc7c7564964cabb921cdf17e78491dd2" name="adc7c7564964cabb921cdf17e78491dd2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc7c7564964cabb921cdf17e78491dd2">&#9670;&#160;</a></span>AccessPolicyBuilder() <span class="overload">[1/3]</span></h2>
@@ -348,7 +350,37 @@ requires utils::UniqueTypes&lt;Resources...&gt;</td></tr>
 <p>Builds and returns the accumulated <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1AccessPolicy.html" title="Stores data access requirements for a system at compile time.">AccessPolicy</a></span>. </p>
 <dl class="section return"><dt>Returns</dt><dd>The accumulated <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1AccessPolicy.html" title="Stores data access requirements for a system at compile time.">AccessPolicy</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00545">545</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00572">572</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1a231e9412a6ab38974cdd3e8ef13045" name="a1a231e9412a6ab38974cdd3e8ef13045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a231e9412a6ab38974cdd3e8ef13045">&#9670;&#160;</a></span>Exclusive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::ecs::AccessPolicyBuilder::Exclusive </td>
+          <td>(</td>
+          <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
+          <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Declares exclusive access to the world. </p>
+<p>Used by the <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span> system parameter. Conflicts with other exclusive policies and with any component or resource access. </p><dl class="section return"><dt>Returns</dt><dd><span class="tt">*this</span> for method chaining </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00584">584</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -443,7 +475,7 @@ requires details::UniqueComponentAccess&lt;Components...&gt; &amp;&amp; (Compone
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">*this</span> for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00609">609</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00650">650</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -482,7 +514,7 @@ requires utils::UniqueTypes&lt;Resources...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">*this</span> for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00633">633</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00674">674</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -521,7 +553,7 @@ requires utils::UniqueTypes&lt;Resources...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">*this</span> for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00649">649</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00690">690</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>

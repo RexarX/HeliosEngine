@@ -1,6 +1,5 @@
 var profiler_8cpp =
 [
-    [ "helios::profile::anonymous_namespace{profiler.cpp}::AlignUp", "namespacehelios_1_1profile_1_1anonymous__namespace_02profiler_8cpp_03.html#aedb39d6659ac0e40ed68fc0497cc650d", null ],
     [ "helios::profile::details::DisableProfilerMemoryDispatch", "namespacehelios_1_1profile_1_1details.html#ad8e0db4bcda26558e7e22c65e12e9e1d", null ],
     [ "helios::profile::details::IsMemoryDispatchSuspended", "namespacehelios_1_1profile_1_1details.html#a65b08bf2f95aa853483056d49db4cb5b", null ],
     [ "helios::profile::details::IsProfilerFinalized", "namespacehelios_1_1profile_1_1details.html#aada7f4f5d5f75ecfc100da0f5a40a63f", null ],

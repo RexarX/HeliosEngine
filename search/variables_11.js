@@ -1,15 +1,21 @@
 var searchData=
 [
-  ['size_0',['size',['../structhelios_1_1ecs_1_1ComponentMetadata.html#a7d68eeee0301b9b6c4d37e3450d59930',1,'helios::ecs::ComponentMetadata::size'],['../structanonymous__namespace_02free__list__allocator_8cpp_03_1_1AllocationHeader.html#aba64eb72560dba0e60fef1761ad00db4',1,'anonymous_namespace{free_list_allocator.cpp}::AllocationHeader::size']]],
-  ['size_5ffn_1',['size_fn',['../structhelios_1_1ecs_1_1ComponentManager_1_1SparseStorageEntry.html#aa839b208a131ad0a3c5018732a272923',1,'helios::ecs::ComponentManager::SparseStorageEntry']]],
-  ['skip_5fframes_2',['skip_frames',['../structhelios_1_1StacktraceConfig.html#a9d6c00ae2e101e8396f6163e341e2eb3',1,'helios::StacktraceConfig']]],
-  ['slot_3',['slot',['../structhelios_1_1ecs_1_1ScheduleSystemId.html#a28059f9b60c1e91734b304eb2053c392',1,'helios::ecs::ScheduleSystemId']]],
-  ['source_5ffile_4',['source_file',['../structhelios_1_1StacktraceConfig.html#a53a4be9e042bb622706ae9d6469589de',1,'helios::StacktraceConfig']]],
-  ['source_5ffunction_5',['source_function',['../structhelios_1_1StacktraceConfig.html#ada13fe44d7dcf17d948eb588e334581a',1,'helios::StacktraceConfig']]],
-  ['source_5fline_6',['source_line',['../structhelios_1_1StacktraceConfig.html#aa68b885371243a0327d3f7a51566217e',1,'helios::StacktraceConfig']]],
-  ['start_5fframe_7',['start_frame',['../structhelios_1_1StacktraceConfig.html#a0648a8b2fa3ad3701e647dd226368df1',1,'helios::StacktraceConfig']]],
-  ['stop_5fbefore_8',['stop_before',['../structhelios_1_1StacktraceConfig.html#a7f7ff216be82ba1215341ea34d29c5c2',1,'helios::StacktraceConfig']]],
-  ['storage_9',['storage',['../structhelios_1_1ecs_1_1ComponentManager_1_1SparseStorageEntry.html#a7fa8a5637cbc1fc68ccef994d5703b8b',1,'helios::ecs::ComponentManager::SparseStorageEntry']]],
-  ['storage_5ftype_10',['storage_type',['../structhelios_1_1ecs_1_1ComponentMetadata.html#af1b209fc6a6f867f7d3d8df33ff74803',1,'helios::ecs::ComponentMetadata']]],
-  ['system_11',['system',['../structhelios_1_1ecs_1_1SystemStorage.html#a758f129793a717f3f7bf78692faf0b35',1,'helios::ecs::SystemStorage']]]
+  ['raw_0',['raw',['../structhelios_1_1input_1_1GamepadAxisFilter.html#a02e027bbba088e564f55eaabea8f72e2',1,'helios::input::GamepadAxisFilter']]],
+  ['raw_5fmouse_5fmotion_1',['raw_mouse_motion',['../structhelios_1_1input_1_1Settings.html#a13f1629c2d6e720fa8de976318492950',1,'helios::input::Settings']]],
+  ['reason_2',['reason',['../structhelios_1_1window_1_1CreationFailedMsg.html#a7e99c4334ac2ca96876541fc5c16080c',1,'helios::window::CreationFailedMsg']]],
+  ['refresh_5frate_3',['refresh_rate',['../structhelios_1_1window_1_1Properties.html#a7f038ab890e6aa0ba8303a7f0982ef27',1,'helios::window::Properties::refresh_rate'],['../structhelios_1_1window_1_1ExclusiveVideoMode.html#a6543acd525a1db6714b201fc9733c8f1',1,'helios::window::ExclusiveVideoMode::refresh_rate'],['../structhelios_1_1window_1_1VideoMode.html#a90a8a20ddea5d3c4f61f53734d3c75ac',1,'helios::window::VideoMode::refresh_rate']]],
+  ['remapped_4',['remapped',['../structhelios_1_1input_1_1GamepadMessages.html#a412023a2f99df1eec01a45564b1209dc',1,'helios::input::GamepadMessages::remapped'],['../structhelios_1_1input_1_1GamepadWriters.html#a7e8aaec4809d752f8561cdb9c6077627',1,'helios::input::GamepadWriters::remapped']]],
+  ['rescale_5',['rescale',['../structhelios_1_1input_1_1AxisFilter.html#adf155b6d96443ca2c60193d1228063c2',1,'helios::input::AxisFilter']]],
+  ['resizable_6',['resizable',['../structhelios_1_1window_1_1ResizableChangedMsg.html#a7d4f0dfc856c300af2b5611a0b28bf56',1,'helios::window::ResizableChangedMsg::resizable'],['../structhelios_1_1window_1_1AppearanceMessages.html#a947304fcbf53c2e7622f813611efd5cd',1,'helios::window::AppearanceMessages::resizable'],['../structhelios_1_1window_1_1AppearanceWriters.html#ae483604eb495195a084fe456cd26f896',1,'helios::window::AppearanceWriters::resizable'],['../structhelios_1_1window_1_1Properties.html#a3ecafc907b1e514f6ab8270ece14e6ba',1,'helios::window::Properties::resizable']]],
+  ['resized_7',['resized',['../structhelios_1_1window_1_1GeometryMessages.html#a7e6cd224b4132fd1d842a09a364f7601',1,'helios::window::GeometryMessages::resized'],['../structhelios_1_1window_1_1GeometryWriters.html#a5495bb6edabed3b2308b02390f09e1eb',1,'helios::window::GeometryWriters::resized']]],
+  ['resource_8',['resource',['../structhelios_1_1mem_1_1anonymous__namespace_02temporary__storage_8cpp_03_1_1Block.html#a234ee06fda5a8cf107b1f92f66e42f48',1,'helios::mem::anonymous_namespace{temporary_storage.cpp}::Block']]],
+  ['resource_5fmanager_9',['resource_manager',['../structhelios_1_1ecs_1_1SystemLocalData.html#af84f2166d3d35940f48eb159a0c223d9',1,'helios::ecs::SystemLocalData']]],
+  ['rest_5fframes_10',['rest_frames',['../structhelios_1_1input_1_1GamepadAxisFilter.html#a289cce964ed2af7c493f5f471bdde754',1,'helios::input::GamepadAxisFilter::rest_frames'],['../structhelios_1_1input_1_1Settings.html#ae1731210d76b9b6ba962a7b355affbcf',1,'helios::input::Settings::rest_frames']]],
+  ['rgba_11',['rgba',['../structhelios_1_1input_1_1CursorImage.html#a4f95c2f3ada7c2c2c214a7dacdd30693',1,'helios::input::CursorImage::rgba'],['../structhelios_1_1window_1_1IconImage.html#a73e3a1ecdc7cff2743a1e15fc75ff045',1,'helios::window::IconImage::rgba']]],
+  ['rhs_12',['rhs',['../structhelios_1_1ecs_1_1ComponentConflictInfo.html#a7126db9ab3672f5a0b724728ab22e7c4',1,'helios::ecs::ComponentConflictInfo::rhs'],['../structhelios_1_1ecs_1_1ResourceConflictInfo.html#a8f0f976655c026fdb8eca2dc8688e7e0',1,'helios::ecs::ResourceConflictInfo::rhs']]],
+  ['rhs_5fwrites_13',['rhs_writes',['../structhelios_1_1ecs_1_1ComponentConflictInfo.html#abe847617a1dfaa2df14c39cb3f71bfb2',1,'helios::ecs::ComponentConflictInfo::rhs_writes'],['../structhelios_1_1ecs_1_1ResourceConflictInfo.html#a80d297812eb1328cff5ab3696b41a8b0',1,'helios::ecs::ResourceConflictInfo::rhs_writes']]],
+  ['rumble_5fduration_5fms_14',['rumble_duration_ms',['../structhelios_1_1input_1_1Gamepad.html#a023c37f9ccb58db42e543020a94d3654',1,'helios::input::Gamepad']]],
+  ['rumble_5fhigh_15',['rumble_high',['../structhelios_1_1input_1_1Gamepad.html#aff491f3ae1cca078ae3f8608f2e6661c',1,'helios::input::Gamepad']]],
+  ['rumble_5flow_16',['rumble_low',['../structhelios_1_1input_1_1Gamepad.html#ace722b59fca952b4104b851b988f92be',1,'helios::input::Gamepad']]],
+  ['run_5fcondition_17',['run_condition',['../structhelios_1_1ecs_1_1RunConditionStorage.html#a1ebba45ea4c8a7481bb4dea7f83283d9',1,'helios::ecs::RunConditionStorage']]]
 ];

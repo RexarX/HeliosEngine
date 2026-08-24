@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['query_0',['Query',['../namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5',1,'helios::ecs']]],
-  ['queryiter_1',['QueryIter',['../namespacehelios_1_1ecs.html#af755e1704951140c3f95f1a07d9da7f6',1,'helios::ecs']]],
-  ['querywithentityiter_2',['QueryWithEntityIter',['../namespacehelios_1_1ecs.html#a89bf0d955761dbfd01c673b5202e789a',1,'helios::ecs']]]
+  ['optasyncres_0',['OptAsyncRes',['../namespacehelios_1_1ecs.html#a0b786c7fdda949d9ad0bd60095031991',1,'helios::ecs']]],
+  ['optres_1',['OptRes',['../namespacehelios_1_1ecs.html#a08439f87b8ff5fd5ecd5cc6af031bb08',1,'helios::ecs']]]
 ];

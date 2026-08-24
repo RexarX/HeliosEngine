@@ -185,6 +185,8 @@ Macros</h2></td></tr>
 <tr class="memitem:af82a8ce6d0033191eafb5eff2173159c" id="r_af82a8ce6d0033191eafb5eff2173159c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af82a8ce6d0033191eafb5eff2173159c">HELIOS_API</a></td></tr>
 <tr class="memitem:addef039204a27478a1fff77081d409bd" id="r_addef039204a27478a1fff77081d409bd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#addef039204a27478a1fff77081d409bd">HELIOS_EXPORT</a></td></tr>
 <tr class="memitem:ada983df2522c351b671d6943887b483e" id="r_ada983df2522c351b671d6943887b483e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK</a>()</td></tr>
+<tr class="memitem:add6cedf0b0fe9ba6f9a8e8fa90ed24e2" id="r_add6cedf0b0fe9ba6f9a8e8fa90ed24e2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#add6cedf0b0fe9ba6f9a8e8fa90ed24e2">HELIOS_PAUSE_CPU</a>()</td></tr>
+<tr class="memdesc:add6cedf0b0fe9ba6f9a8e8fa90ed24e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a CPU pause hint for busy-wait loops.  <br /></td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="af82a8ce6d0033191eafb5eff2173159c" name="af82a8ce6d0033191eafb5eff2173159c"></a>
@@ -219,7 +221,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">::std::raise(SIGTRAP)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="platform_8hpp_source.html#l00089">89</a> of file <a class="el" href="platform_8hpp_source.html">platform.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="platform_8hpp_source.html#l00087">87</a> of file <a class="el" href="platform_8hpp_source.html">platform.hpp</a>.</p>
 
 </div>
 </div>
@@ -236,6 +238,38 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="platform_8hpp_source.html#l00025">25</a> of file <a class="el" href="platform_8hpp_source.html">platform.hpp</a>.</p>
+
+</div>
+</div>
+<a id="add6cedf0b0fe9ba6f9a8e8fa90ed24e2" name="add6cedf0b0fe9ba6f9a8e8fa90ed24e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add6cedf0b0fe9ba6f9a8e8fa90ed24e2">&#9670;&#160;</a></span>HELIOS_PAUSE_CPU</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_PAUSE_CPU</td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inserts a CPU pause hint for busy-wait loops. </p>
+<p>No-op on unknown architectures.</p>
+<p>Adapted from SDL3 <span class="tt">SDL_CPUPauseInstruction</span> (<span class="tt">SDL_atomic.h</span>).</p>
+<p>Simple DirectMedia Layer Copyright (C) 1997-2026 Sam Lantinga <a href="#" onclick="location.href='mai'+'lto:'+'slo'+'uk'+'en@'+'li'+'bsd'+'l.'+'org'; return false;">slouk<span class="obfuscator">.nosp@m.</span>en@l<span class="obfuscator">.nosp@m.</span>ibsdl<span class="obfuscator">.nosp@m.</span>.org</a></p>
+<p>This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.</p>
+<p>Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions:</p>
+<ol type="1">
+<li>The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.</li>
+<li>Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.</li>
+<li>This notice may not be removed or altered from any source distribution.</li>
+</ol>
+<p>Altered: renamed to <span class="tt"><a class="el" href="#add6cedf0b0fe9ba6f9a8e8fa90ed24e2" title="Inserts a CPU pause hint for busy-wait loops.">HELIOS_PAUSE_CPU</a></span> </p>
+
+<p class="definition">Definition at line <a class="el" href="platform_8hpp_source.html#l00135">135</a> of file <a class="el" href="platform_8hpp_source.html">platform.hpp</a>.</p>
 
 </div>
 </div>

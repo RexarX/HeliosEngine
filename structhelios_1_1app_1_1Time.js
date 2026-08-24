@@ -14,6 +14,7 @@ var structhelios_1_1app_1_1Time =
     [ "ElapsedMilliSec", "structhelios_1_1app_1_1Time.html#abff8733f9b1639dad85df52c7460116e", null ],
     [ "ElapsedNanoSec", "structhelios_1_1app_1_1Time.html#a114e61f3a19d51583417f61db26dd467", null ],
     [ "ElapsedSec", "structhelios_1_1app_1_1Time.html#a9046ad367a5095743056be226667c0f9", null ],
+    [ "Fps", "structhelios_1_1app_1_1Time.html#a87fbcec15fe58ead266ec1d5bdbf0d0e", null ],
     [ "Update", "structhelios_1_1app_1_1Time.html#adaff7dc5f250f2f463356f508daa1e74", null ],
     [ "delta_time", "structhelios_1_1app_1_1Time.html#a5934f3054ece16b67dc91120470fc5bf", null ],
     [ "elapsed", "structhelios_1_1app_1_1Time.html#a0333e9180f411b094a6f2b780758e6a9", null ],

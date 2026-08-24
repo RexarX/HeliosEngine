@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 </div><!--header-->
 <div class="contents">
 
-<p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> instances with consume support.  
+<p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> for unread messages with consume support.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="reader_8hpp_source.html">reader.hpp</a>&gt;</code></p>
@@ -205,28 +205,33 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a792111e5754b180ae37c1ec1b78ae920" id="r_a792111e5754b180ae37c1ec1b78ae920"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> () noexcept=default</td></tr>
-<tr class="memitem:a4cf5f46470fb749f850b64e00efaf78e" id="r_a4cf5f46470fb749f850b64e00efaf78e"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a4cf5f46470fb749f850b64e00efaf78e">ConsumableMessageWrapperIter</a> (std::span&lt; const T &gt; first, std::span&lt; const T &gt; second, std::reference_wrapper&lt; <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt;&gt; &gt; registry, size_t position) noexcept</td></tr>
-<tr class="memdesc:a4cf5f46470fb749f850b64e00efaf78e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a wrapper iterator over two contiguous message spans.  <br /></td></tr>
+<tr class="memitem:a3caec234cccb1aebba0533fb6bdb6739" id="r_a3caec234cccb1aebba0533fb6bdb6739"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a3caec234cccb1aebba0533fb6bdb6739">ConsumableMessageWrapperIter</a> (std::span&lt; const T &gt; previous_messages, std::span&lt; const T &gt; current_messages, std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt; previous_ids, std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt; current_ids, <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a> &amp;registry, <a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; *cursor, size_t previous_offset, size_t current_offset, size_t position) noexcept</td></tr>
+<tr class="memdesc:a3caec234cccb1aebba0533fb6bdb6739"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an unread consumable-message wrapper iterator.  <br /></td></tr>
 <tr class="memitem:ab001bd07d5b6a173016638d9f32b4833" id="r_ab001bd07d5b6a173016638d9f32b4833"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ab001bd07d5b6a173016638d9f32b4833">ConsumableMessageWrapperIter</a> (const ConsumableMessageWrapperIter &amp;) noexcept=default</td></tr>
 <tr class="memitem:adeb7f0e7ee483f913c3b938799bb01a8" id="r_adeb7f0e7ee483f913c3b938799bb01a8"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#adeb7f0e7ee483f913c3b938799bb01a8">ConsumableMessageWrapperIter</a> (ConsumableMessageWrapperIter &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:ad1fac6185457d24e2eae24e970919e3e" id="r_ad1fac6185457d24e2eae24e970919e3e"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad1fac6185457d24e2eae24e970919e3e">~ConsumableMessageWrapperIter</a> () noexcept=default</td></tr>
 <tr class="memitem:a6d02db28fca3d669aa8e73435f1d900e" id="r_a6d02db28fca3d669aa8e73435f1d900e"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6d02db28fca3d669aa8e73435f1d900e">operator=</a> (const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;) noexcept=default</td></tr>
 <tr class="memitem:a945f5bf3abe98a08daf0989b64cf1d4d" id="r_a945f5bf3abe98a08daf0989b64cf1d4d"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a945f5bf3abe98a08daf0989b64cf1d4d">operator=</a> (<a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a84e73cf16a206a4de05823dbad8bc004" id="r_a84e73cf16a206a4de05823dbad8bc004"><td class="memItemLeft">constexpr <a class="el" href="#a0b3bf9e120a2855363803a52092139fc">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a84e73cf16a206a4de05823dbad8bc004">operator*</a> () const noexcept</td></tr>
+<tr class="memitem:a574f3f8c0741c700218a3092f333728e" id="r_a574f3f8c0741c700218a3092f333728e"><td class="memItemLeft">constexpr <a class="el" href="#a0b3bf9e120a2855363803a52092139fc">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a574f3f8c0741c700218a3092f333728e">operator*</a> () const noexcept</td></tr>
+<tr class="memdesc:a574f3f8c0741c700218a3092f333728e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current unread message consumable wrapper.  <br /></td></tr>
 <tr class="memitem:a8e8808e6c09724b70d6977736d20628e" id="r_a8e8808e6c09724b70d6977736d20628e"><td class="memItemLeft"><a class="el" href="#af8008e50795ec2740e1e802137a20937">pointer</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8e8808e6c09724b70d6977736d20628e">operator-&gt;</a> () const =delete</td></tr>
-<tr class="memitem:a01794d67482f8ab0d9d890c2b3fefeed" id="r_a01794d67482f8ab0d9d890c2b3fefeed"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a01794d67482f8ab0d9d890c2b3fefeed">operator++</a> () noexcept</td></tr>
-<tr class="memitem:a3167fbcd1986970e948f8e6f4ee07ad4" id="r_a3167fbcd1986970e948f8e6f4ee07ad4"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3167fbcd1986970e948f8e6f4ee07ad4">operator++</a> (int) noexcept</td></tr>
-<tr class="memitem:aaf82d58665d06a904f81f90031032e77" id="r_aaf82d58665d06a904f81f90031032e77"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aaf82d58665d06a904f81f90031032e77">operator--</a> () noexcept</td></tr>
-<tr class="memitem:a7aa5f6968b8165e71b2770fbdc830f65" id="r_a7aa5f6968b8165e71b2770fbdc830f65"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7aa5f6968b8165e71b2770fbdc830f65">operator--</a> (int) noexcept</td></tr>
+<tr class="memitem:a7b7aad54f0aa9f0163d84b6a2314112a" id="r_a7b7aad54f0aa9f0163d84b6a2314112a"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7b7aad54f0aa9f0163d84b6a2314112a">operator++</a> () noexcept</td></tr>
+<tr class="memdesc:a7b7aad54f0aa9f0163d84b6a2314112a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances to the next unread message and updates the cursor.  <br /></td></tr>
+<tr class="memitem:ab4fb00bd7e68345b21eb794d63469784" id="r_ab4fb00bd7e68345b21eb794d63469784"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab4fb00bd7e68345b21eb794d63469784">operator++</a> (int) noexcept</td></tr>
+<tr class="memdesc:ab4fb00bd7e68345b21eb794d63469784"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances to the next unread message and updates the cursor.  <br /></td></tr>
+<tr class="memitem:a8cf15ae338c6aa620b911fa937cca305" id="r_a8cf15ae338c6aa620b911fa937cca305"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8cf15ae338c6aa620b911fa937cca305">operator--</a> () noexcept</td></tr>
+<tr class="memdesc:a8cf15ae338c6aa620b911fa937cca305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the previous unread message.  <br /></td></tr>
+<tr class="memitem:a31f913a67dd051c6c80a1b1ae1cc438b" id="r_a31f913a67dd051c6c80a1b1ae1cc438b"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a31f913a67dd051c6c80a1b1ae1cc438b">operator--</a> (int) noexcept</td></tr>
+<tr class="memdesc:a31f913a67dd051c6c80a1b1ae1cc438b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the previous unread message.  <br /></td></tr>
 <tr class="memitem:a28f36a355d0c4f30297de4d47632633c" id="r_a28f36a355d0c4f30297de4d47632633c"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a28f36a355d0c4f30297de4d47632633c">operator&lt;=&gt;</a> (const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;other) const noexcept</td></tr>
 <tr class="memitem:a2a3a9780eee2e579e2326d435b32edf1" id="r_a2a3a9780eee2e579e2326d435b32edf1"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a2a3a9780eee2e579e2326d435b32edf1">operator==</a> (const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;other) const noexcept</td></tr>
 <tr class="memitem:ab4328a90ac161034dcf521afbe43009a" id="r_ab4328a90ac161034dcf521afbe43009a"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ab4328a90ac161034dcf521afbe43009a">operator!=</a> (const <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp;other) const noexcept</td></tr>
 <tr class="memitem:adce7c5cd17c35e32777e91f6d8968724" id="r_adce7c5cd17c35e32777e91f6d8968724"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#adce7c5cd17c35e32777e91f6d8968724">Position</a> () const noexcept</td></tr>
-<tr class="memdesc:adce7c5cd17c35e32777e91f6d8968724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current logical position in the combined sequence.  <br /></td></tr>
-<tr class="memitem:a633a39c5686c35e7273f51510f12e5ee" id="r_a633a39c5686c35e7273f51510f12e5ee"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a633a39c5686c35e7273f51510f12e5ee">begin</a> () const noexcept</td></tr>
-<tr class="memdesc:a633a39c5686c35e7273f51510f12e5ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned at the beginning of the sequence.  <br /></td></tr>
-<tr class="memitem:a2a1c00c27ca706931f10a3397876c7e6" id="r_a2a1c00c27ca706931f10a3397876c7e6"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2a1c00c27ca706931f10a3397876c7e6">end</a> () const noexcept</td></tr>
-<tr class="memdesc:a2a1c00c27ca706931f10a3397876c7e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned one past the last element.  <br /></td></tr>
+<tr class="memdesc:adce7c5cd17c35e32777e91f6d8968724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current logical position in the unread sequence.  <br /></td></tr>
+<tr class="memitem:a5ea7c6c38c1375dafbd3ea75b7f981ae" id="r_a5ea7c6c38c1375dafbd3ea75b7f981ae"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5ea7c6c38c1375dafbd3ea75b7f981ae">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:a5ea7c6c38c1375dafbd3ea75b7f981ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned at the beginning of the unread snapshot.  <br /></td></tr>
+<tr class="memitem:a1036283c61cae5e7513ae8b36d734929" id="r_a1036283c61cae5e7513ae8b36d734929"><td class="memItemLeft">constexpr <a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1036283c61cae5e7513ae8b36d734929">end</a> () const noexcept</td></tr>
+<tr class="memdesc:a1036283c61cae5e7513ae8b36d734929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of this iterator positioned one past the last unread element.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td colspan="2">Public Member Functions inherited from <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;</a></td></tr>
 <tr class="memitem:ab01800764520f2fa73ef51912adabcf1 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab01800764520f2fa73ef51912adabcf1"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab01800764520f2fa73ef51912adabcf1">Filter</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt;, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
 <tr class="memdesc:ab01800764520f2fa73ef51912adabcf1 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another filter operation on top of this iterator.  <br /></td></tr>
@@ -254,6 +259,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab6785a8a5adc56bb25294bbfef261000 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates sliding windows over elements.  <br /></td></tr>
 <tr class="memitem:a6f4c201c163d5be88b9f3e351caefeba pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6f4c201c163d5be88b9f3e351caefeba"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6f4c201c163d5be88b9f3e351caefeba">Stride</a> (size_t stride) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), stride)))</td></tr>
 <tr class="memdesc:a6f4c201c163d5be88b9f3e351caefeba pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes every Nth element with stride.  <br /></td></tr>
+<tr class="memitem:af0ab37316628bef45a5e4b0ffe3a0fc0 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af0ab37316628bef45a5e4b0ffe3a0fc0"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af0ab37316628bef45a5e4b0ffe3a0fc0">Chunk</a> (size_t chunk_size) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChunkAdapter.html">ChunkAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt; &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), chunk_size)))</td></tr>
+<tr class="memdesc:af0ab37316628bef45a5e4b0ffe3a0fc0 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packs elements into non-overlapping chunks.  <br /></td></tr>
 <tr class="memitem:aaba0fd7e864b439cc55db33bd095f4a3 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aaba0fd7e864b439cc55db33bd095f4a3"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aaba0fd7e864b439cc55db33bd095f4a3">Zip</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; ConsumableMessageWrapperIter&lt; T &gt;, OtherIter &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move(end))))</td></tr>
 <tr class="memdesc:aaba0fd7e864b439cc55db33bd095f4a3 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
 <tr class="memitem:ac699b03f66eb2139beb18126191d27f9 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ac699b03f66eb2139beb18126191d27f9"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ac699b03f66eb2139beb18126191d27f9">ForEach</a> (const Action &amp;action) const</td></tr>
@@ -266,20 +273,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a067a927e5be14e8851642b1a49ff0636 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: counts elements satisfying a predicate.  <br /></td></tr>
 <tr class="memitem:a7bddc9da14c1742058e0f0c816aa44ce pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a7bddc9da14c1742058e0f0c816aa44ce"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a7bddc9da14c1742058e0f0c816aa44ce">Partition</a> (const Pred &amp;predicate) const</td></tr>
 <tr class="memdesc:a7bddc9da14c1742058e0f0c816aa44ce pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: partitions elements into two groups based on a predicate.  <br /></td></tr>
-<tr class="memitem:a2a7bf89fe9f2c7761bb65dd0991a5702 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a2a7bf89fe9f2c7761bb65dd0991a5702"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a2a7bf89fe9f2c7761bb65dd0991a5702">PartitionWith</a> (const Pred &amp;predicate, Allocator allocator) const</td></tr>
-<tr class="memdesc:a2a7bf89fe9f2c7761bb65dd0991a5702 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: partitions elements with a custom allocator.  <br /></td></tr>
 <tr class="memitem:a5413a0ac213cda3a6b508881af956acc pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a5413a0ac213cda3a6b508881af956acc"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a5413a0ac213cda3a6b508881af956acc">MaxBy</a> (const KeyFunc &amp;key_func) const</td></tr>
 <tr class="memdesc:a5413a0ac213cda3a6b508881af956acc pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the element with the maximum value according to a key function.  <br /></td></tr>
 <tr class="memitem:aac70342387e9f9db44ba448e391eafbd pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aac70342387e9f9db44ba448e391eafbd"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aac70342387e9f9db44ba448e391eafbd">MinBy</a> (const KeyFunc &amp;key_func) const</td></tr>
 <tr class="memdesc:aac70342387e9f9db44ba448e391eafbd pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the element with the minimum value according to a key function.  <br /></td></tr>
 <tr class="memitem:a34abb87022d768a03070fcccd64df0ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a34abb87022d768a03070fcccd64df0ac"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a34abb87022d768a03070fcccd64df0ac">GroupBy</a> (const KeyFunc &amp;key_func) const</td></tr>
 <tr class="memdesc:a34abb87022d768a03070fcccd64df0ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: groups elements by a key function.  <br /></td></tr>
-<tr class="memitem:a1921322daaf078463880349560c9ae5a pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a1921322daaf078463880349560c9ae5a"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a1921322daaf078463880349560c9ae5a">GroupByWith</a> (const KeyFunc &amp;key_func, MapAllocator map_allocator, ValueAllocator value_allocator) const</td></tr>
-<tr class="memdesc:a1921322daaf078463880349560c9ae5a pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: groups elements by key with custom allocators.  <br /></td></tr>
 <tr class="memitem:a834e53c6229570dceb2a30a7fd5bfa4d pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a834e53c6229570dceb2a30a7fd5bfa4d"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a834e53c6229570dceb2a30a7fd5bfa4d">Collect</a> () const</td></tr>
 <tr class="memdesc:a834e53c6229570dceb2a30a7fd5bfa4d pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements into a vector.  <br /></td></tr>
-<tr class="memitem:a0c8c7866dc192660a6015b942c50c72e pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a0c8c7866dc192660a6015b942c50c72e"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a0c8c7866dc192660a6015b942c50c72e">CollectWith</a> (Allocator allocator={}) const</td></tr>
-<tr class="memdesc:a0c8c7866dc192660a6015b942c50c72e pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements into a vector with a custom allocator.  <br /></td></tr>
 <tr class="memitem:a6352ac1157243d7ab76a014120fa68ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6352ac1157243d7ab76a014120fa68ac"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6352ac1157243d7ab76a014120fa68ac">Into</a> (OutIt out) const</td></tr>
 <tr class="memdesc:a6352ac1157243d7ab76a014120fa68ac pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: writes all elements into an output iterator.  <br /></td></tr>
 <tr class="memitem:af289817b75ec2f37aede9d9329dead09 pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af289817b75ec2f37aede9d9329dead09"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af289817b75ec2f37aede9d9329dead09">Any</a> (const Pred &amp;predicate) const</td></tr>
@@ -297,8 +298,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;ConsumableMessageTrait T&gt;<br />
-class helios::ecs::ConsumableMessageWrapperIter&lt; T &gt;</div><p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> instances with consume support. </p>
-<p>Each wrapper carries a const reference to the message, a reference to <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message indices.">ConsumedMessagesRegistry</a></span>, and the global index, enabling the caller to mark individual messages as consumed during iteration.</p>
+class helios::ecs::ConsumableMessageWrapperIter&lt; T &gt;</div><p>Bidirectional iterator that yields <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> for unread messages with consume support. </p>
+<p>Walks previous then current buffers for ids &gt;= <span class="tt">cursor-&gt;last_message_count</span>. Prefixed <span class="tt">operator++</span> advances the cursor to <span class="tt">current_id + 1</span>.</p>
 <p>Derives from <span class="tt">FunctionalAdapterBase</span> so the iterator itself can be used as a lazy range, enabling chained adapter calls such as <span class="tt">.Filter(...)</span>, <span class="tt">.Map(...)</span>, <span class="tt">.Take(...)</span>, etc.</p>
 <dl class="section note"><dt>Note</dt><dd>The adapter methods operate on <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapper.html" title="A wrapper around a message that provides convenient access to the message&#39;s data, type information,...">ConsumableMessageWrapper</a>&lt;T&gt;</span> values. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -308,7 +309,7 @@ class helios::ecs::ConsumableMessageWrapperIter&lt; T &gt;</div><p>Bidirectional
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00163">163</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00300">300</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="ad6eb5f885cdb2faa74693b20391b4ebc" name="ad6eb5f885cdb2faa74693b20391b4ebc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad6eb5f885cdb2faa74693b20391b4ebc">&#9670;&#160;</a></span>difference_type</h2>
@@ -324,7 +325,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00171">171</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00308">308</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -342,7 +343,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00167">167</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00304">304</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -360,7 +361,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00166">166</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00303">303</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -378,7 +379,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00170">170</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00307">307</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -396,7 +397,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00169">169</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00306">306</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +415,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00168">168</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00305">305</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -446,8 +447,8 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 
 </div>
 </div>
-<a id="a4cf5f46470fb749f850b64e00efaf78e" name="a4cf5f46470fb749f850b64e00efaf78e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cf5f46470fb749f850b64e00efaf78e">&#9670;&#160;</a></span>ConsumableMessageWrapperIter() <span class="overload">[2/4]</span></h2>
+<a id="a3caec234cccb1aebba0533fb6bdb6739" name="a3caec234cccb1aebba0533fb6bdb6739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3caec234cccb1aebba0533fb6bdb6739">&#9670;&#160;</a></span>ConsumableMessageWrapperIter() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -460,17 +461,42 @@ template&lt;ConsumableMessageTrait T&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::ConsumableMessageWrapperIter </td>
           <td>(</td>
-          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>previous_messages</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>second</em></span>, </td>
+          <td class="paramtype">std::span&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>current_messages</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::reference_wrapper&lt; <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a>&lt;&gt; &gt;</td>          <td class="paramname"><span class="paramname"><em>registry</em></span>, </td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>previous_ids</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>current_ids</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">ConsumedMessagesRegistry</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>registry</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1MessageCursor.html">MessageCursor</a>&lt; T &gt; *</td>          <td class="paramname"><span class="paramname"><em>cursor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>previous_offset</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>current_offset</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -485,18 +511,23 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a wrapper iterator over two contiguous message spans. </p>
+<p>Constructs an unread consumable-message wrapper iterator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">first</td><td>Span of messages from the previous frame </td></tr>
-    <tr><td class="paramname">second</td><td>Span of messages from the current frame </td></tr>
+    <tr><td class="paramname">previous_messages</td><td>Span of messages from the previous frame </td></tr>
+    <tr><td class="paramname">current_messages</td><td>Span of messages from the current frame </td></tr>
+    <tr><td class="paramname">previous_ids</td><td>Ids aligned with <span class="tt">previous_messages</span> </td></tr>
+    <tr><td class="paramname">current_ids</td><td>Ids aligned with <span class="tt">current_messages</span> </td></tr>
     <tr><td class="paramname">registry</td><td>Per-system consumed messages registry </td></tr>
-    <tr><td class="paramname">position</td><td>Logical position in the combined [first | second] sequence </td></tr>
+    <tr><td class="paramname">cursor</td><td>Delivery cursor advanced by <span class="tt">operator++</span> (may be null only for a singular iterator) </td></tr>
+    <tr><td class="paramname">previous_offset</td><td>First unread index in the previous buffer </td></tr>
+    <tr><td class="paramname">current_offset</td><td>First unread index in the current buffer </td></tr>
+    <tr><td class="paramname">position</td><td>Logical position in the combined unread sequence </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00182">182</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00325">325</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -582,8 +613,8 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a633a39c5686c35e7273f51510f12e5ee" name="a633a39c5686c35e7273f51510f12e5ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a633a39c5686c35e7273f51510f12e5ee">&#9670;&#160;</a></span>begin()</h2>
+<a id="a5ea7c6c38c1375dafbd3ea75b7f981ae" name="a5ea7c6c38c1375dafbd3ea75b7f981ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ea7c6c38c1375dafbd3ea75b7f981ae">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -594,7 +625,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::begin </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::begin </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -602,20 +633,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a copy of this iterator positioned at the beginning of the sequence. </p>
-<p>Required so <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html" title="Bidirectional iterator that yields ConsumableMessageWrapper&lt;T&gt; instances with consume support.">ConsumableMessageWrapperIter</a></span> can act as a self-contained range for <span class="tt">FunctionalAdapterBase</span> adapter methods. </p><dl class="section return"><dt>Returns</dt><dd>Iterator reset to position 0 </dd></dl>
+<p>Returns a copy of this iterator positioned at the beginning of the unread snapshot. </p>
+<p>Required so <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html" title="Bidirectional iterator that yields ConsumableMessageWrapper&lt;T&gt; for unread messages with consume suppo...">ConsumableMessageWrapperIter</a></span> can act as a self-contained range for <span class="tt">FunctionalAdapterBase</span> adapter methods. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if consumed messages registry is null. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Iterator reset to position 0 over the same unread window </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00263">263</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00499">499</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2a1c00c27ca706931f10a3397876c7e6" name="a2a1c00c27ca706931f10a3397876c7e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a1c00c27ca706931f10a3397876c7e6">&#9670;&#160;</a></span>end()</h2>
+<a id="a1036283c61cae5e7513ae8b36d734929" name="a1036283c61cae5e7513ae8b36d734929"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1036283c61cae5e7513ae8b36d734929">&#9670;&#160;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -626,7 +658,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::end </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::end </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -634,15 +666,16 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a copy of this iterator positioned one past the last element. </p>
-<dl class="section return"><dt>Returns</dt><dd>Iterator at position <span class="tt">first_.size() + second_.size()</span> </dd></dl>
+<p>Returns a copy of this iterator positioned one past the last unread element. </p>
+<p>The end iterator does not advance the cursor. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if consumed messages registry is null. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Iterator at position equal to the unread count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00272">272</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00509">509</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -671,12 +704,12 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00245">245</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00402">402</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a84e73cf16a206a4de05823dbad8bc004" name="a84e73cf16a206a4de05823dbad8bc004"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84e73cf16a206a4de05823dbad8bc004">&#9670;&#160;</a></span>operator*()</h2>
+<a id="a574f3f8c0741c700218a3092f333728e" name="a574f3f8c0741c700218a3092f333728e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a574f3f8c0741c700218a3092f333728e">&#9670;&#160;</a></span>operator*()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -687,7 +720,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a0b3bf9e120a2855363803a52092139fc">reference</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator* </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator* </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -695,17 +728,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00202">202</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Gets the current unread message consumable wrapper. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if registry is null or the iterator is out of range. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Consumable message wrapper for the current unread message </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00455">455</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a01794d67482f8ab0d9d890c2b3fefeed" name="a01794d67482f8ab0d9d890c2b3fefeed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01794d67482f8ab0d9d890c2b3fefeed">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+<a id="a7b7aad54f0aa9f0163d84b6a2314112a" name="a7b7aad54f0aa9f0163d84b6a2314112a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7aad54f0aa9f0163d84b6a2314112a">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -716,7 +753,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator++ </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator++ </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -724,17 +761,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00211">211</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Advances to the next unread message and updates the cursor. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the cursor is null or the iterator is at end. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this iterator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00465">465</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a3167fbcd1986970e948f8e6f4ee07ad4" name="a3167fbcd1986970e948f8e6f4ee07ad4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3167fbcd1986970e948f8e6f4ee07ad4">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+<a id="ab4fb00bd7e68345b21eb794d63469784" name="ab4fb00bd7e68345b21eb794d63469784"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4fb00bd7e68345b21eb794d63469784">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -745,7 +786,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator++ </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator++ </td>
           <td>(</td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -753,17 +794,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00216">216</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Advances to the next unread message and updates the cursor. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the cursor is null or the iterator is at end. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Copy of this iterator before advancing </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00476">476</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aaf82d58665d06a904f81f90031032e77" name="aaf82d58665d06a904f81f90031032e77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf82d58665d06a904f81f90031032e77">&#9670;&#160;</a></span>operator--() <span class="overload">[1/2]</span></h2>
+<a id="a8cf15ae338c6aa620b911fa937cca305" name="a8cf15ae338c6aa620b911fa937cca305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cf15ae338c6aa620b911fa937cca305">&#9670;&#160;</a></span>operator--() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -774,7 +819,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator-- </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator-- </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -782,17 +827,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00223">223</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Moves to the previous unread message. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the iterator is at the beginning. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this iterator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00484">484</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7aa5f6968b8165e71b2770fbdc830f65" name="a7aa5f6968b8165e71b2770fbdc830f65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7aa5f6968b8165e71b2770fbdc830f65">&#9670;&#160;</a></span>operator--() <span class="overload">[2/2]</span></h2>
+<a id="a31f913a67dd051c6c80a1b1ae1cc438b" name="a31f913a67dd051c6c80a1b1ae1cc438b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31f913a67dd051c6c80a1b1ae1cc438b">&#9670;&#160;</a></span>operator--() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -803,7 +852,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a792111e5754b180ae37c1ec1b78ae920">ConsumableMessageWrapperIter</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator-- </td>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html">helios::ecs::ConsumableMessageWrapperIter</a>&lt; T &gt;::operator-- </td>
           <td>(</td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -811,12 +860,16 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00228">228</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p>Moves to the previous unread message. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if the iterator is at the beginning. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Copy of this iterator before moving </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00491">491</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -872,7 +925,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00235">235</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00392">392</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -955,7 +1008,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00240">240</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00397">397</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -984,10 +1037,10 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the current logical position in the combined sequence. </p>
+<p>Returns the current logical position in the unread sequence. </p>
 <dl class="section return"><dt>Returns</dt><dd>Zero-based position index </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00254">254</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l00411">411</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>

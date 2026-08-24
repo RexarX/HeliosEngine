@@ -175,28 +175,38 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 </div><!--header-->
 <div class="contents">
 
-<p>Type-erased callable wrapper for free and member functions.  
+<p>Type-erased, non-owning callable wrapper.  
  <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename FunctionSignature&gt;<br />
-class helios::Delegate&lt; FunctionSignature &gt;</div><p>Type-erased callable wrapper for free and member functions. </p>
-<p><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> is a lightweight, non-owning wrapper for:</p><ul>
+class helios::Delegate&lt; FunctionSignature &gt;</div><p>Type-erased, non-owning callable wrapper. </p>
+<p><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased, non-owning callable wrapper.">Delegate</a> is a lightweight wrapper for:</p><ul>
 <li>Free functions</li>
 <li>Member functions (including const and virtual)</li>
+<li>Capture-less lambdas and empty functors</li>
+<li>Stateful lambdas and functors (bound by address)</li>
 </ul>
 <p>It does not allocate and stores only:</p><ul>
-<li>A raw instance pointer (for member functions, may be null for free functions)</li>
+<li>A raw instance pointer (may be null, or a decayed function pointer)</li>
 <li>A function pointer to a small thunk that performs the actual call</li>
 </ul>
+<p>Implicit converting constructors enable <span class="tt">std::function_ref</span>-style parameters: a <span class="tt"><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased, non-owning callable wrapper.">Delegate</a>&lt;R(Args...)&gt;</span> function argument can be passed a matching callable directly.</p>
 <p>The delegate is intentionally minimal and exception-free. It returns default-constructed values when empty (for non-void return types) and is a no-op for void return types.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">FunctionSignature</td><td>Function type in the form <span class="tt">R(Args...)</span> </td></tr>
+    <tr><td class="paramname">FunctionSignature</td><td>Function type in the form <span class="tt">R(Args...)</span> <div class="fragment"><div class="line"><span class="keywordtype">void</span> take(<a class="code hl_class" href="classhelios_1_1Delegate.html">Delegate</a>&lt;<span class="keywordtype">int</span>(<span class="keywordtype">int</span>)&gt; cb);</div>
+<div class="line">take([](<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> x * 2; });</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> n = 3;</div>
+<div class="line"><span class="keyword">auto</span> add = [n](<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> x + n; };</div>
+<div class="line">take(add);  <span class="comment">// named capturing lambda: caller keeps it alive</span></div>
+<div class="ttc" id="aclasshelios_1_1Delegate_html"><div class="ttname"><a href="classhelios_1_1Delegate.html">helios::Delegate</a></div><div class="ttdoc">Type-erased, non-owning callable wrapper.</div><div class="ttdef"><b>Definition</b> <a href="delegate_8hpp_source.html#l00164">delegate.hpp:164</a></div></div>
+</div><!-- fragment --> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00071">71</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00164">164</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

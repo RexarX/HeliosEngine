@@ -179,13 +179,12 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="param__traits_8hpp_source.html">param_traits.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html">params.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a1468402b842bde1ce0b80d2f23578e12" id="r_a1468402b842bde1ce0b80d2f23578e12"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a1468402b842bde1ce0b80d2f23578e12">ParamType</a> = <a class="el" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">Query</a>&lt;Args...&gt;</td></tr>
+<tr class="memitem:a1468402b842bde1ce0b80d2f23578e12" id="r_a1468402b842bde1ce0b80d2f23578e12"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a1468402b842bde1ce0b80d2f23578e12">ParamType</a> = <a class="el" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff">Query</a>&lt;Args...&gt;</td></tr>
 <tr class="memitem:ab187432763dd767f0a8267ac28c8f309" id="r_ab187432763dd767f0a8267ac28c8f309"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ab187432763dd767f0a8267ac28c8f309">Split</a> = details::QueryArgSplit&lt;Args...&gt;</td></tr>
-<tr class="memitem:a67af8672f51bf339763427b3405c5721" id="r_a67af8672f51bf339763427b3405c5721"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a67af8672f51bf339763427b3405c5721">Allocator</a> = typename <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html#acdf6b469a70ddcd8a53ce29fb9774c06">ParamType::allocator_type</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -195,26 +194,8 @@ Static Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;QueryArg... Args&gt;<br />
 struct helios::ecs::SystemParamTraits&lt; Query&lt; Args... &gt; &gt;</div>
-<p class="definition">Definition at line <a class="el" href="param__traits_8hpp_source.html#l00044">44</a> of file <a class="el" href="param__traits_8hpp_source.html">param_traits.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html#l00030">30</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html">params.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
-<a id="a67af8672f51bf339763427b3405c5721" name="a67af8672f51bf339763427b3405c5721"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67af8672f51bf339763427b3405c5721">&#9670;&#160;</a></span>Allocator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;QueryArg... Args&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">Query</a>&lt; Args... &gt; &gt;::Allocator = typename <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html#acdf6b469a70ddcd8a53ce29fb9774c06">ParamType::allocator_type</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="param__traits_8hpp_source.html#l00047">47</a> of file <a class="el" href="param__traits_8hpp_source.html">param_traits.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a1468402b842bde1ce0b80d2f23578e12" name="a1468402b842bde1ce0b80d2f23578e12"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1468402b842bde1ce0b80d2f23578e12">&#9670;&#160;</a></span>ParamType</h2>
 
@@ -224,12 +205,12 @@ template&lt;QueryArg... Args&gt; </div>
 template&lt;QueryArg... Args&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">Query</a>&lt; Args... &gt; &gt;::ParamType = <a class="el" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">Query</a>&lt;Args...&gt;</td>
+          <td class="memname">using <a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff">Query</a>&lt; Args... &gt; &gt;::ParamType = <a class="el" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff">Query</a>&lt;Args...&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="param__traits_8hpp_source.html#l00045">45</a> of file <a class="el" href="param__traits_8hpp_source.html">param_traits.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html#l00031">31</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>
@@ -242,12 +223,12 @@ template&lt;QueryArg... Args&gt; </div>
 template&lt;QueryArg... Args&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">Query</a>&lt; Args... &gt; &gt;::Split = details::QueryArgSplit&lt;Args...&gt;</td>
+          <td class="memname">using <a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff">Query</a>&lt; Args... &gt; &gt;::Split = details::QueryArgSplit&lt;Args...&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="param__traits_8hpp_source.html#l00046">46</a> of file <a class="el" href="param__traits_8hpp_source.html">param_traits.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html#l00032">32</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>
@@ -264,7 +245,7 @@ template&lt;QueryArg... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a1468402b842bde1ce0b80d2f23578e12">ParamType</a> <a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">Query</a>&lt; Args... &gt; &gt;::Make </td>
+          <td class="memname"><a class="el" href="#a1468402b842bde1ce0b80d2f23578e12">ParamType</a> <a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff">Query</a>&lt; Args... &gt; &gt;::Make </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>world</em></span>, </td>
         </tr>
@@ -286,7 +267,7 @@ template&lt;QueryArg... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="param__traits_8hpp_source.html#l00049">49</a> of file <a class="el" href="param__traits_8hpp_source.html">param_traits.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html#l00034">34</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>
@@ -302,7 +283,7 @@ template&lt;QueryArg... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr void <a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">Query</a>&lt; Args... &gt; &gt;::RegisterAccess </td>
+          <td class="memname">constexpr void <a class="el" href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff">Query</a>&lt; Args... &gt; &gt;::RegisterAccess </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html">AccessPolicyBuilder</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>builder</em></span></td><td>)</td>
           <td></td>
@@ -315,7 +296,7 @@ template&lt;QueryArg... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="param__traits_8hpp_source.html#l00055">55</a> of file <a class="el" href="param__traits_8hpp_source.html">param_traits.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html#l00039">39</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>

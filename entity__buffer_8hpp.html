@@ -173,39 +173,32 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('entity__buffer
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">entity_buffer.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="builtin__commands_8hpp_source.html">helios/ecs/builtin_commands.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="command_8hpp_source.html">helios/ecs/command/command.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="command_2queue_8hpp_source.html">helios/ecs/command/queue.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="bundle_8hpp_source.html">helios/ecs/component/bundle.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="component_8hpp_source.html">helios/ecs/component/component.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="entity_8hpp_source.html">helios/ecs/entity/entity.hpp</a>&gt;</code><br />
-<code>#include &lt;concepts&gt;</code><br />
+<code>#include &lt;<a class="el" href="common__traits_8hpp_source.html">helios/utils/common_traits.hpp</a>&gt;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;memory_resource&gt;</code><br />
-<code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 </div>
 <p><a href="entity__buffer_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Aecs_3A_3AEntityCmdBuffer_3C_20Allocator_20_3E" id="r_helios_3A_3Aecs_3A_3AEntityCmdBuffer_3C_20Allocator_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer&lt; Allocator &gt;</a></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3AEntityCmdBuffer" id="r_helios_3A_3Aecs_3A_3AEntityCmdBuffer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command buffer for deferred entity operations.  <a href="classhelios_1_1ecs_1_1EntityCmdBuffer.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Aecs" id="r_helios_3A_3Aecs"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html">helios::ecs</a></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a92879896c22fd30212a634a894dde599" id="r_a92879896c22fd30212a634a894dde599"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a92879896c22fd30212a634a894dde599">helios::ecs::PmrEntityCmdBuffer</a></td></tr>
-<tr class="memdesc:a92879896c22fd30212a634a894dde599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command buffer for deferred entity operations that uses a polymorphic allocator.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

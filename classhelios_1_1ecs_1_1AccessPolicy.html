@@ -210,6 +210,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4fb054ba90bb27cc9e370542725dc6af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy declares any component access.  <br /></td></tr>
 <tr class="memitem:a8102b8ef51c194b277f95f306dcef7ae" id="r_a8102b8ef51c194b277f95f306dcef7ae"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a8102b8ef51c194b277f95f306dcef7ae">HasResources</a> () const noexcept</td></tr>
 <tr class="memdesc:a8102b8ef51c194b277f95f306dcef7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy declares any resource access.  <br /></td></tr>
+<tr class="memitem:a68e67cc6620b56e8017967556887485c" id="r_a68e67cc6620b56e8017967556887485c"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a68e67cc6620b56e8017967556887485c">Exclusive</a> () const noexcept</td></tr>
+<tr class="memdesc:a68e67cc6620b56e8017967556887485c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy declares exclusive access.  <br /></td></tr>
 <tr class="memitem:a91dfa00bd07e46e93dd3fa022aa9290b" id="r_a91dfa00bd07e46e93dd3fa022aa9290b"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a91dfa00bd07e46e93dd3fa022aa9290b">HasReadComponent</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> type_index) const noexcept</td></tr>
 <tr class="memdesc:a91dfa00bd07e46e93dd3fa022aa9290b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy declares read access to a component.  <br /></td></tr>
 <tr class="memitem:acf2cff4541e6705ac260c934453b31ee" id="r_acf2cff4541e6705ac260c934453b31ee"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#acf2cff4541e6705ac260c934453b31ee">HasWriteComponent</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> type_index) const noexcept</td></tr>
@@ -233,13 +235,14 @@ Friends</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores data access requirements for a system at compile time. </p>
-<p>Components and resources are each kept in two flat sorted sets (read / write), deduped across all <span class="tt"><a class="el" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5" title="Alias for BasicQuery bound to World with a PMR allocator.">Query</a></span> / <span class="tt">ReadResources</span> / <span class="tt">WriteResources</span> declarations. This mirrors how resources have always been stored and removes the per-query descriptor indirection.</p>
+<p>Components and resources are each kept in two flat sorted sets (read / write), deduped across all <span class="tt"><a class="el" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff" title="Alias for BasicQuery bound to World.">Query</a></span> / <span class="tt">ReadResources</span> / <span class="tt">WriteResources</span> declarations. This mirrors how resources have always been stored and removes the per-query descriptor indirection.</p>
 <p><span class="tt"><a class="el" href="classhelios_1_1ecs_1_1AccessPolicy.html" title="Stores data access requirements for a system at compile time.">AccessPolicy</a></span> is used to:</p><ul>
 <li>Enable automatic scheduling and conflict detection</li>
 </ul>
+<p>An optional <span class="tt">exclusive_</span> flag declares exclusive access to the world (used by the <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span> system parameter). Exclusive policies conflict with other exclusive policies and with any component or resource access.</p>
 <p>It is compile-time scheduling metadata only. Runtime access validation is not implemented yet. </p>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00119">119</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00124">124</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0162c6e7779fa578074f0a46937a8b5d" name="a0162c6e7779fa578074f0a46937a8b5d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0162c6e7779fa578074f0a46937a8b5d">&#9670;&#160;</a></span>AccessPolicy() <span class="overload">[1/3]</span></h2>
@@ -366,7 +369,7 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Checks if this policy conflicts with another policy at all. </p>
-<p>Shorthand for <span class="tt"><a class="el" href="#acf6930707e037720d5d9bb935dc6cd78" title="Checks if this policy has a component access conflict with another.">HasQueryConflictWith</a> || <a class="el" href="#a964956ab4e0e84a5cf2b7aafeae3b55d" title="Checks if this policy has a resource access conflict with another.">HasResourceConflictWith</a></span>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Returns true when component or resource access conflicts, or when either policy declares exclusive access and the other declares exclusive access or any component or resource access. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">other</td><td>Other access policy to check against </td></tr>
   </table>
@@ -374,7 +377,37 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if any conflict exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00172">172</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00179">179</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a68e67cc6620b56e8017967556887485c" name="a68e67cc6620b56e8017967556887485c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68e67cc6620b56e8017967556887485c">&#9670;&#160;</a></span>Exclusive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::ecs::AccessPolicy::Exclusive </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this policy declares exclusive access. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if exclusive access was declared </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00234">234</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -410,7 +443,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector of <span class="tt"><a class="el" href="structhelios_1_1ecs_1_1ComponentConflictInfo.html" title="Describes a single component access conflict between two policies.">ComponentConflictInfo</a></span>, empty when no conflicts exist </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00335">335</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00362">362</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -440,7 +473,7 @@ Friends</h2></td></tr>
 <p>Returns all component types declared for reading (sorted). </p>
 <dl class="section return"><dt>Returns</dt><dd>A <span class="tt">std::span</span> view of the read component types </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00250">250</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00272">272</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +503,7 @@ Friends</h2></td></tr>
 <p>Returns all resource types declared for reading (sorted). </p>
 <dl class="section return"><dt>Returns</dt><dd>A <span class="tt">std::span</span> view of the read resource types </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00268">268</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00290">290</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -506,7 +539,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector of <span class="tt"><a class="el" href="structhelios_1_1ecs_1_1ResourceConflictInfo.html" title="Describes a single resource access conflict between two policies.">ResourceConflictInfo</a></span>, empty when no conflicts exist </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00383">383</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00410">410</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -536,7 +569,7 @@ Friends</h2></td></tr>
 <p>Returns all component types declared for writing (sorted). </p>
 <dl class="section return"><dt>Returns</dt><dd>A <span class="tt">std::span</span> view of the write component types </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00259">259</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00281">281</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -566,7 +599,7 @@ Friends</h2></td></tr>
 <p>Returns all resource types declared for writing (sorted). </p>
 <dl class="section return"><dt>Returns</dt><dd>A <span class="tt">std::span</span> view of the write resource types </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00277">277</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00299">299</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -596,7 +629,7 @@ Friends</h2></td></tr>
 <p>Checks if this policy declares any component access. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if any read or write component has been declared </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00202">202</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00218">218</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -636,7 +669,7 @@ Friends</h2></td></tr>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00425">425</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00452">452</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -672,7 +705,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the component is in the read set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00482">482</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00509">509</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -708,7 +741,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the resource is in the read set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00498">498</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00525">525</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -744,7 +777,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if a resource conflict exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00452">452</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00479">479</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -774,7 +807,7 @@ Friends</h2></td></tr>
 <p>Checks if this policy declares any resource access. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if any read or write resource has been declared </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00210">210</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00226">226</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -810,7 +843,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the component is in the write set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00490">490</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00517">517</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -846,7 +879,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the resource is in the write set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00506">506</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00533">533</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -881,7 +914,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00331">331</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00358">358</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -916,7 +949,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00301">301</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00327">327</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -991,7 +1024,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00298">298</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00324">324</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
 
 </div>
 </div>

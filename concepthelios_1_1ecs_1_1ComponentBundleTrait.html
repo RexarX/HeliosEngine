@@ -175,23 +175,31 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('concepthelios_
 </div><!--header-->
 <div class="contents">
 
-<p>Concept to check if a type is a valid component bundle.  
+<p>Concept for a valid component bundle.  
 <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="bundle_8hpp_source.html">bundle.hpp</a>&gt;</code></p>
 <h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1ecs_1_1ComponentBundleTrait.html">ComponentBundleTrait</a> =</div>
-<div class="line">    <a class="code hl_struct" href="structhelios_1_1ecs_1_1details_1_1IsComponentBundle.html">details::IsComponentBundle&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::value &amp;&amp;</div>
-<div class="line">    <a class="code hl_struct" href="structhelios_1_1ecs_1_1details_1_1ComponentBundleInfo.html">details::ComponentBundleInfo&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::kValid</div>
-<div class="ttc" id="aconcepthelios_1_1ecs_1_1ComponentBundleTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1ComponentBundleTrait.html">helios::ecs::ComponentBundleTrait</a></div><div class="ttdoc">Concept to check if a type is a valid component bundle.</div><div class="ttdef"><b>Definition</b> <a href="bundle_8hpp_source.html#l00111">bundle.hpp:111</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1ComponentBundleInfo_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1ComponentBundleInfo.html">helios::ecs::details::ComponentBundleInfo</a></div><div class="ttdef"><b>Definition</b> <a href="bundle_8hpp_source.html#l00049">bundle.hpp:49</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1IsComponentBundle_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1IsComponentBundle.html">helios::ecs::details::IsComponentBundle</a></div><div class="ttdef"><b>Definition</b> <a href="component_8hpp_source.html#l00019">component.hpp:19</a></div></div>
+<div class="line">    (<a class="code hl_struct" href="structhelios_1_1ecs_1_1details_1_1IsComponentBundleTypes.html">details::IsComponentBundleTypes&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::value &amp;&amp;</div>
+<div class="line">     <a class="code hl_struct" href="structhelios_1_1ecs_1_1details_1_1ComponentBundleTypeInfo.html">details::ComponentBundleTypeInfo&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::kValid) ||</div>
+<div class="line">    (<span class="keyword">requires</span>(std::remove_cvref_t&lt;T&gt; bundle) {</div>
+<div class="line">      <span class="keyword">typename</span> std::remove_cvref_t&lt;T&gt;::ComponentTypes;</div>
+<div class="line">      {</div>
+<div class="line">        std::move(bundle).Build()</div>
+<div class="line">      } -&gt; std::same_as&lt;typename std::remove_cvref_t&lt;T&gt;::ComponentTypes&gt;;</div>
+<div class="line">    } &amp;&amp;</div>
+<div class="line">     details::ComponentBundleTypeInfo&lt;</div>
+<div class="line">         <span class="keyword">typename</span> std::remove_cvref_t&lt;T&gt;::ComponentTypes&gt;::kValid)</div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1ComponentBundleTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1ComponentBundleTrait.html">helios::ecs::ComponentBundleTrait</a></div><div class="ttdoc">Concept for a valid component bundle.</div><div class="ttdef"><b>Definition</b> <a href="bundle_8hpp_source.html#l00172">bundle.hpp:172</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1ComponentBundleTypeInfo_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1ComponentBundleTypeInfo.html">helios::ecs::details::ComponentBundleTypeInfo</a></div><div class="ttdef"><b>Definition</b> <a href="bundle_8hpp_source.html#l00086">bundle.hpp:86</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1IsComponentBundleTypes_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1IsComponentBundleTypes.html">helios::ecs::details::IsComponentBundleTypes</a></div><div class="ttdef"><b>Definition</b> <a href="bundle_8hpp_source.html#l00061">bundle.hpp:61</a></div></div>
 </div><!-- fragment --><a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Concept to check if a type is a valid component bundle. </p>
-<p>A component bundle is a non-empty <span class="tt">ComponentBundle</span> whose elements are unqualified component values or valid component bundles. Flattened component types must be unique. </p>
+<div class="textblock"><p>Concept for a valid component bundle. </p>
+<p>A bundle is either a <span class="tt">ComponentBundleTypes&lt;...&gt;</span> specialization or a type that declares <span class="tt">ComponentTypes</span> and returns it from <span class="tt">Build()</span>. </p>
 
-<p class="definition">Definition at line <a class="el" href="bundle_8hpp_source.html#l00111">111</a> of file <a class="el" href="bundle_8hpp_source.html">bundle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bundle_8hpp_source.html#l00172">172</a> of file <a class="el" href="bundle_8hpp_source.html">bundle.hpp</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

@@ -186,12 +186,35 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a801938f745283274c9a4269cd3559c03" id="r_a801938f745283274c9a4269cd3559c03"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1ecs.html#a7a5c6a0217be376c4eac44438a936f23">ExecutorKind</a>&#160;</td><td class="memItemRight"><a class="el" href="#a801938f745283274c9a4269cd3559c03">executor_kind</a> = <a class="el" href="namespacehelios_1_1ecs.html#a7a5c6a0217be376c4eac44438a936f23a63211e6ba329ba34026a0fec052723ff">ExecutorKind::kMultiThreaded</a></td></tr>
+<tr class="memitem:a73bde8e684e8ffb94902963a3490bc93" id="r_a73bde8e684e8ffb94902963a3490bc93"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a73bde8e684e8ffb94902963a3490bc93">apply_commands</a> = true</td></tr>
+<tr class="memdesc:a73bde8e684e8ffb94902963a3490bc93"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true, <span class="tt">ApplyDeferred</span> flushes the world and executes local commands.  <br /></td></tr>
+<tr class="memitem:a506fdc9f0a508f7e375a71319c6d3f39" id="r_a506fdc9f0a508f7e375a71319c6d3f39"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a506fdc9f0a508f7e375a71319c6d3f39">merge_messages</a> = true</td></tr>
+<tr class="memdesc:a506fdc9f0a508f7e375a71319c6d3f39"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true, <span class="tt">ApplyDeferred</span> merges local messages into the world.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Settings that control how a schedule is compiled and executed. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00151">151</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00147">147</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a73bde8e684e8ffb94902963a3490bc93" name="a73bde8e684e8ffb94902963a3490bc93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73bde8e684e8ffb94902963a3490bc93">&#9670;&#160;</a></span>apply_commands</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::ecs::ScheduleSettings::apply_commands = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>When true, <span class="tt">ApplyDeferred</span> flushes the world and executes local commands. </p>
+<p>Independent of <span class="tt"><a class="el" href="#a506fdc9f0a508f7e375a71319c6d3f39" title="When true, ApplyDeferred merges local messages into the world.">merge_messages</a></span>. Defaults to true to preserve unconditional flush/execute after each schedule run. </p>
+
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00156">156</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a801938f745283274c9a4269cd3559c03" name="a801938f745283274c9a4269cd3559c03"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a801938f745283274c9a4269cd3559c03">&#9670;&#160;</a></span>executor_kind</h2>
 
@@ -204,7 +227,26 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00152">152</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00148">148</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a506fdc9f0a508f7e375a71319c6d3f39" name="a506fdc9f0a508f7e375a71319c6d3f39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a506fdc9f0a508f7e375a71319c6d3f39">&#9670;&#160;</a></span>merge_messages</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::ecs::ScheduleSettings::merge_messages = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>When true, <span class="tt">ApplyDeferred</span> merges local messages into the world. </p>
+<p>Applies consumed registries and merges system-local writes. Does <b>not</b> swap previous/current buffers (stage <span class="tt">advance_messages</span>). Defaults to true. </p>
+
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00164">164</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>

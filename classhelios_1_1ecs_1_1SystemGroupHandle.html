@@ -201,9 +201,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5837e956c50793b2cd9498705ba9db78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an ordering constraint: all members of this group must run before the given system handle.  <br /></td></tr>
 <tr class="memitem:a606017ca3897505a4158460b5f281980" id="r_a606017ca3897505a4158460b5f281980"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a606017ca3897505a4158460b5f281980">Before</a> (this auto &amp;&amp;self, <a class="el" href="structhelios_1_1ecs_1_1SystemSetId.html">SystemSetId</a> target) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:a606017ca3897505a4158460b5f281980"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an ordering constraint: all members of this group must run before all members of the given set.  <br /></td></tr>
-<tr class="memitem:a394f5916c92f0cdedbd69d4646127528" id="r_a394f5916c92f0cdedbd69d4646127528"><td class="memTemplParams" colspan="2">template&lt;SystemSetTrait T&gt; </td></tr>
-<tr class="memitem:a394f5916c92f0cdedbd69d4646127528 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a394f5916c92f0cdedbd69d4646127528">BeforeSet</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a394f5916c92f0cdedbd69d4646127528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an ordering constraint: all members of this group must run before all members of the given set type.  <br /></td></tr>
+<tr class="memitem:a130836c36a9703fe3a8e91c9dea8b681" id="r_a130836c36a9703fe3a8e91c9dea8b681"><td class="memTemplParams" colspan="2">template&lt;SystemSetTrait T&gt; </td></tr>
+<tr class="memitem:a130836c36a9703fe3a8e91c9dea8b681 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a130836c36a9703fe3a8e91c9dea8b681">BeforeSet</a> (this auto &amp;&amp;self, const T &amp;={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a130836c36a9703fe3a8e91c9dea8b681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an ordering constraint: all members of this group must run before all members of the given set type.  <br /></td></tr>
 <tr class="memitem:a5efc8adeef5d8ba4273fc0860442df0b" id="r_a5efc8adeef5d8ba4273fc0860442df0b"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a5efc8adeef5d8ba4273fc0860442df0b">Before</a> (this auto &amp;&amp;self, const <a class="el" href="classhelios_1_1ecs_1_1SystemSetHandle.html">SystemSetHandle</a> &amp;target) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:a5efc8adeef5d8ba4273fc0860442df0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an ordering constraint: all members of this group must run before the given system set handle.  <br /></td></tr>
 <tr class="memitem:a29fcfb0337ad66151dfe9c9948d2108e" id="r_a29fcfb0337ad66151dfe9c9948d2108e"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a29fcfb0337ad66151dfe9c9948d2108e">Before</a> (this auto &amp;&amp;self, const <a class="el" href="#af6c92366e4bddde84893da63d03dd7dd">SystemGroupHandle</a> &amp;target) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
@@ -217,9 +217,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a64ea2db1aafd0101863bdb72e1bdb94b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an ordering constraint: all members of this group must run after the given system handle.  <br /></td></tr>
 <tr class="memitem:aec85d84f2c78a0e2ee0bb0e233a55066" id="r_aec85d84f2c78a0e2ee0bb0e233a55066"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#aec85d84f2c78a0e2ee0bb0e233a55066">After</a> (this auto &amp;&amp;self, <a class="el" href="structhelios_1_1ecs_1_1SystemSetId.html">SystemSetId</a> target) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:aec85d84f2c78a0e2ee0bb0e233a55066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an ordering constraint: all members of this group must run after all members of the given set.  <br /></td></tr>
-<tr class="memitem:afa7d3349955f07f769512c7784b37e98" id="r_afa7d3349955f07f769512c7784b37e98"><td class="memTemplParams" colspan="2">template&lt;SystemSetTrait T&gt; </td></tr>
-<tr class="memitem:afa7d3349955f07f769512c7784b37e98 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#afa7d3349955f07f769512c7784b37e98">AfterSet</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:afa7d3349955f07f769512c7784b37e98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an ordering constraint: all members of this group must run after all members of the given set type.  <br /></td></tr>
+<tr class="memitem:a7ef41738b95fc59da403fbc81401f36a" id="r_a7ef41738b95fc59da403fbc81401f36a"><td class="memTemplParams" colspan="2">template&lt;SystemSetTrait T&gt; </td></tr>
+<tr class="memitem:a7ef41738b95fc59da403fbc81401f36a template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a7ef41738b95fc59da403fbc81401f36a">AfterSet</a> (this auto &amp;&amp;self, const T &amp;={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a7ef41738b95fc59da403fbc81401f36a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an ordering constraint: all members of this group must run after all members of the given set type.  <br /></td></tr>
 <tr class="memitem:a67c4e6a313bb2ecb6b0aece767a43bc6" id="r_a67c4e6a313bb2ecb6b0aece767a43bc6"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a67c4e6a313bb2ecb6b0aece767a43bc6">After</a> (this auto &amp;&amp;self, const <a class="el" href="classhelios_1_1ecs_1_1SystemSetHandle.html">SystemSetHandle</a> &amp;target) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:a67c4e6a313bb2ecb6b0aece767a43bc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an ordering constraint: all members of this group must run after the given system set handle.  <br /></td></tr>
 <tr class="memitem:aaa07b530dd933f1c906b8f620eba4c23" id="r_aaa07b530dd933f1c906b8f620eba4c23"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#aaa07b530dd933f1c906b8f620eba4c23">After</a> (this auto &amp;&amp;self, const <a class="el" href="#af6c92366e4bddde84893da63d03dd7dd">SystemGroupHandle</a> &amp;target) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
@@ -248,7 +248,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Handle returned by variadic <a class="el" href="classhelios_1_1ecs_1_1Schedule.html#a3f5cdecd1020d57258f83d2f03b8978d" title="Adds a param-style functor system to the schedule.">Schedule::Add</a> for configuring a batch of systems added together. </p>
 <p>Each variadic <span class="tt">Add</span> call creates a unique anonymous group so configuration such as <span class="tt"><a class="el" href="#a70f3a8c20403150bac3a235bb764979e" title="Marks this group as a sequence: members run in insertion order.">Sequence()</a></span> does not leak between batches with the same system types. Use <span class="tt"><a class="el" href="#ac4d72be45a4598033fa550c120949949" title="Assigns every member of this group to the given named set.">InSet</a></span> to assign every member of the batch to a named set in one call. </p>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00026">26</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00029">29</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af6c92366e4bddde84893da63d03dd7dd" name="af6c92366e4bddde84893da63d03dd7dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6c92366e4bddde84893da63d03dd7dd">&#9670;&#160;</a></span>SystemGroupHandle() <span class="overload">[1/3]</span></h2>
@@ -286,7 +286,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00034">34</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00037">37</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -400,7 +400,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00136">136</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00141">141</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -440,7 +440,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00190">190</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00197">197</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -480,7 +480,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00147">147</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00152">152</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -520,7 +520,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00179">179</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00186">186</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -560,7 +560,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00933">933</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00887">887</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -600,12 +600,12 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00944">944</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00898">898</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afa7d3349955f07f769512c7784b37e98" name="afa7d3349955f07f769512c7784b37e98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa7d3349955f07f769512c7784b37e98">&#9670;&#160;</a></span>AfterSet()</h2>
+<a id="a7ef41738b95fc59da403fbc81401f36a" name="a7ef41738b95fc59da403fbc81401f36a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ef41738b95fc59da403fbc81401f36a">&#9670;&#160;</a></span>AfterSet()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -618,8 +618,12 @@ template&lt;SystemSetTrait T&gt; </div>
         <tr>
           <td class="memname">auto helios::ecs::SystemGroupHandle::AfterSet </td>
           <td>(</td>
-          <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
-          <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
+          <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
         </tr>
       </table>
   </td>
@@ -636,9 +640,15 @@ template&lt;SystemSetTrait T&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">set</td><td>Optional set instance </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00168">168</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00174">174</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -676,7 +686,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00061">61</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00064">64</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -716,7 +726,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00115">115</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00120">120</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -756,7 +766,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00072">72</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00075">75</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -796,7 +806,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00104">104</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00109">109</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -836,7 +846,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00911">911</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00865">865</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -876,12 +886,12 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00922">922</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00876">876</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a394f5916c92f0cdedbd69d4646127528" name="a394f5916c92f0cdedbd69d4646127528"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a394f5916c92f0cdedbd69d4646127528">&#9670;&#160;</a></span>BeforeSet()</h2>
+<a id="a130836c36a9703fe3a8e91c9dea8b681" name="a130836c36a9703fe3a8e91c9dea8b681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a130836c36a9703fe3a8e91c9dea8b681">&#9670;&#160;</a></span>BeforeSet()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -894,8 +904,12 @@ template&lt;SystemSetTrait T&gt; </div>
         <tr>
           <td class="memname">auto helios::ecs::SystemGroupHandle::BeforeSet </td>
           <td>(</td>
-          <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
-          <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
+          <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
         </tr>
       </table>
   </td>
@@ -912,9 +926,15 @@ template&lt;SystemSetTrait T&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">set</td><td>Optional set instance </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00093">93</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00097">97</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -944,7 +964,7 @@ template&lt;SystemSetTrait T&gt; </div>
 <p>Finishes configuration and returns a reference to the parent schedule. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the parent schedule for continued configuration </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00267">267</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00276">276</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -974,7 +994,7 @@ template&lt;SystemSetTrait T&gt; </div>
 <p>Gets the identifier for this anonymous group. </p>
 <dl class="section return"><dt>Returns</dt><dd>Anonymous group id </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00273">273</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00282">282</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1014,9 +1034,15 @@ template&lt;SystemSetTrait T&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">set</td><td>Optional set instance </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00250">250</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__group__handle_8hpp_source.html#l00258">258</a> of file <a class="el" href="system__group__handle_8hpp_source.html">system_group_handle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1055,11 +1081,11 @@ template&lt;SystemSetTrait T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining <div class="fragment"><div class="line">schedule.Add(SystemA{}, SystemB{}).<a class="code hl_function" href="#ac4d72be45a4598033fa550c120949949">InSet</a>(MovementSet{}).<a class="code hl_function" href="#a70f3a8c20403150bac3a235bb764979e">Sequence</a>();</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1SystemGroupHandle_html_a70f3a8c20403150bac3a235bb764979e"><div class="ttname"><a href="#a70f3a8c20403150bac3a235bb764979e">helios::ecs::SystemGroupHandle::Sequence</a></div><div class="ttdeci">constexpr auto Sequence(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Marks this group as a sequence: members run in insertion order.</div><div class="ttdef"><b>Definition</b> <a href="schedule_8hpp_source.html#l01003">schedule.hpp:1003</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1SystemGroupHandle_html_ac4d72be45a4598033fa550c120949949"><div class="ttname"><a href="#ac4d72be45a4598033fa550c120949949">helios::ecs::SystemGroupHandle::InSet</a></div><div class="ttdeci">constexpr auto InSet(this auto &amp;&amp;self, SystemSetId target) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Assigns every member of this group to the given named set.</div><div class="ttdef"><b>Definition</b> <a href="schedule_8hpp_source.html#l00996">schedule.hpp:996</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1SystemGroupHandle_html_a70f3a8c20403150bac3a235bb764979e"><div class="ttname"><a href="#a70f3a8c20403150bac3a235bb764979e">helios::ecs::SystemGroupHandle::Sequence</a></div><div class="ttdeci">constexpr auto Sequence(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Marks this group as a sequence: members run in insertion order.</div><div class="ttdef"><b>Definition</b> <a href="schedule_8hpp_source.html#l00957">schedule.hpp:957</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1SystemGroupHandle_html_ac4d72be45a4598033fa550c120949949"><div class="ttname"><a href="#ac4d72be45a4598033fa550c120949949">helios::ecs::SystemGroupHandle::InSet</a></div><div class="ttdeci">constexpr auto InSet(this auto &amp;&amp;self, SystemSetId target) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Assigns every member of this group to the given named set.</div><div class="ttdef"><b>Definition</b> <a href="schedule_8hpp_source.html#l00950">schedule.hpp:950</a></div></div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00996">996</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00950">950</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1161,7 +1187,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00955">955</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00909">909</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1215,7 +1241,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00983">983</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00937">937</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1263,7 +1289,7 @@ template&lt;FunctorSystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00971">971</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00925">925</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1293,7 +1319,7 @@ template&lt;FunctorSystemTrait T&gt; </div>
 <p>Marks this group as a sequence: members run in insertion order. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this handle for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l01003">1003</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00957">957</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>

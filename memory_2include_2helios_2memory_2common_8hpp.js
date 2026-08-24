@@ -19,9 +19,9 @@ var memory_2include_2helios_2memory_2common_8hpp =
     [ "helios::mem::CalculatePaddingWithHeader", "namespacehelios_1_1mem.html#a60734f83a397f43ed176c4925e61b1e2", null ],
     [ "helios::mem::IsAligned", "namespacehelios_1_1mem.html#aa953071e43d5a6fd86bcfccffea883ff", null ],
     [ "helios::mem::IsPowerOfTwo", "namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec", null ],
-    [ "helios::mem::MemoryErrorToString", "namespacehelios_1_1mem.html#a593ee806fbd9e0dcaeadde53986780c3", null ],
     [ "helios::mem::SaturatingAdd", "namespacehelios_1_1mem.html#afb5fcf4ad640ef2c85f829cfbcd4baf6", null ],
     [ "helios::mem::SaturatingMul", "namespacehelios_1_1mem.html#a6c94d5c7cb3e82230ccaed9f3c0ea7fa", null ],
+    [ "helios::mem::ToString", "namespacehelios_1_1mem.html#ada7a7b7474e9cd76b75013aa3d8c4e6d", null ],
     [ "helios::mem::kDefaultAlignment", "namespacehelios_1_1mem.html#af41137401afc9dd5b312a8b55c2a2d39", null ],
     [ "helios::mem::kMinAlignment", "namespacehelios_1_1mem.html#a350aa103d084f514b4fa546dc91c4de4", null ]
 ];

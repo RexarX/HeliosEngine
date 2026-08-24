@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: helios::ecs::ConsumedMessagesRegistry&lt; Alloc &gt; Class Template Reference</title>
+    <title>Helios Engine: helios::ecs::ConsumedMessagesRegistry Class Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -172,176 +172,116 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">helios::ecs::ConsumedMessagesRegistry&lt; Alloc &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">helios::ecs::ConsumedMessagesRegistry Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Per-system registry for tracking consumed message indices.  
+<p>Per-system registry for tracking consumed message ids.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a47d73d42bcb0f46c60a916c5dfb49dfc" id="r_a47d73d42bcb0f46c60a916c5dfb49dfc"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> = size_t</td></tr>
-<tr class="memitem:a01aeee5c24d3529a9073e5858d873779" id="r_a01aeee5c24d3529a9073e5858d873779"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a01aeee5c24d3529a9073e5858d873779">allocator_type</a> = Alloc</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a42999c8d1ba215281f98d2b3983a42f3" id="r_a42999c8d1ba215281f98d2b3983a42f3"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> (<a class="el" href="#a01aeee5c24d3529a9073e5858d873779">allocator_type</a> alloc={})</td></tr>
-<tr class="memitem:a28595969958bf6bcf75bdada508adf99" id="r_a28595969958bf6bcf75bdada508adf99"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a28595969958bf6bcf75bdada508adf99">ConsumedMessagesRegistry</a> (std::pmr::memory_resource *resource)</td></tr>
-<tr class="memdesc:a28595969958bf6bcf75bdada508adf99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message indices.">ConsumedMessagesRegistry</a></span> from a PMR memory resource.  <br /></td></tr>
-<tr class="memitem:acaf04ac0c96fe9bc0240de3573af2aa7" id="r_acaf04ac0c96fe9bc0240de3573af2aa7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#acaf04ac0c96fe9bc0240de3573af2aa7">ConsumedMessagesRegistry</a> (std::nullptr_t)=delete</td></tr>
-<tr class="memitem:ae3d48aa19b4d049f38fce30c0d8343c2" id="r_ae3d48aa19b4d049f38fce30c0d8343c2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae3d48aa19b4d049f38fce30c0d8343c2">ConsumedMessagesRegistry</a> (const ConsumedMessagesRegistry &amp;)=default</td></tr>
-<tr class="memitem:a1ba1c74ae7e37dec2d6a433a8490ac78" id="r_a1ba1c74ae7e37dec2d6a433a8490ac78"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1ba1c74ae7e37dec2d6a433a8490ac78">ConsumedMessagesRegistry</a> (ConsumedMessagesRegistry &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a1952427197c882ac7ff790fd82f38e35" id="r_a1952427197c882ac7ff790fd82f38e35"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1952427197c882ac7ff790fd82f38e35">~ConsumedMessagesRegistry</a> ()=default</td></tr>
-<tr class="memitem:ab7276ac350eb5c667944836f5300c9c0" id="r_ab7276ac350eb5c667944836f5300c9c0"><td class="memItemLeft"><a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab7276ac350eb5c667944836f5300c9c0">operator=</a> (const <a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> &amp;)=default</td></tr>
-<tr class="memitem:a88d6bb601d237596b211eb64c5769763" id="r_a88d6bb601d237596b211eb64c5769763"><td class="memItemLeft"><a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a88d6bb601d237596b211eb64c5769763">operator=</a> (<a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a34d8f38cbc12cbce19a2b242f6f20c3a" id="r_a34d8f38cbc12cbce19a2b242f6f20c3a"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
-<tr class="memitem:a34d8f38cbc12cbce19a2b242f6f20c3a template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a34d8f38cbc12cbce19a2b242f6f20c3a">MarkConsumed</a> (<a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> global_index)</td></tr>
-<tr class="memdesc:a34d8f38cbc12cbce19a2b242f6f20c3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks an message as consumed by its type and global index.  <br /></td></tr>
-<tr class="memitem:a2cd427b1da112da073a90238e2ab03cf" id="r_a2cd427b1da112da073a90238e2ab03cf"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a2cd427b1da112da073a90238e2ab03cf">MarkConsumed</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index, <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> global_index)</td></tr>
-<tr class="memdesc:a2cd427b1da112da073a90238e2ab03cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks an message as consumed by its type index and global index.  <br /></td></tr>
-<tr class="memitem:a2135114e6759c30d858e971f8fba216d" id="r_a2135114e6759c30d858e971f8fba216d"><td class="memTemplParams" colspan="2">template&lt;typename OtherAlloc&gt; </td></tr>
-<tr class="memitem:a2135114e6759c30d858e971f8fba216d template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a2135114e6759c30d858e971f8fba216d">MergeFrom</a> (const <a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a>&lt; OtherAlloc &gt; &amp;other)</td></tr>
-<tr class="memdesc:a2135114e6759c30d858e971f8fba216d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges consumed entries from another registry into this one.  <br /></td></tr>
-<tr class="memitem:ad9d099c0a5fc7451c39aac634b7cb467" id="r_ad9d099c0a5fc7451c39aac634b7cb467"><td class="memTemplParams" colspan="2">template&lt;typename OtherAlloc&gt; </td></tr>
-<tr class="memitem:ad9d099c0a5fc7451c39aac634b7cb467 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ad9d099c0a5fc7451c39aac634b7cb467">MergeFrom</a> (<a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a>&lt; OtherAlloc &gt; &amp;&amp;other)</td></tr>
-<tr class="memdesc:ad9d099c0a5fc7451c39aac634b7cb467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges consumed entries from another registry into this one.  <br /></td></tr>
-<tr class="memitem:a4ba607d3147e00c4a937baf2a6143a44" id="r_a4ba607d3147e00c4a937baf2a6143a44"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a4ba607d3147e00c4a937baf2a6143a44">Clear</a> () noexcept</td></tr>
-<tr class="memdesc:a4ba607d3147e00c4a937baf2a6143a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all consumed entries.  <br /></td></tr>
-<tr class="memitem:a8497912b4235355eed85b9a0622be4f4" id="r_a8497912b4235355eed85b9a0622be4f4"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
-<tr class="memitem:a8497912b4235355eed85b9a0622be4f4 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a8497912b4235355eed85b9a0622be4f4">Clear</a> () noexcept</td></tr>
-<tr class="memdesc:a8497912b4235355eed85b9a0622be4f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears consumed entries for a specific message type.  <br /></td></tr>
-<tr class="memitem:a60b2c2c8615331a9c3f7fbcf07022762" id="r_a60b2c2c8615331a9c3f7fbcf07022762"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a60b2c2c8615331a9c3f7fbcf07022762">Clear</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) noexcept</td></tr>
-<tr class="memdesc:a60b2c2c8615331a9c3f7fbcf07022762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears consumed entries for a specific message type.  <br /></td></tr>
-<tr class="memitem:aec7db1387091688a605ec3d75f5d3551" id="r_aec7db1387091688a605ec3d75f5d3551"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
-<tr class="memitem:aec7db1387091688a605ec3d75f5d3551 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#aec7db1387091688a605ec3d75f5d3551">IsConsumed</a> (<a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> global_index) const noexcept</td></tr>
-<tr class="memdesc:aec7db1387091688a605ec3d75f5d3551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message is marked as consumed.  <br /></td></tr>
-<tr class="memitem:ac6196741861f41eb9b0031ac293cf697" id="r_ac6196741861f41eb9b0031ac293cf697"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ac6196741861f41eb9b0031ac293cf697">IsConsumed</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index, <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> global_index) const noexcept</td></tr>
-<tr class="memdesc:ac6196741861f41eb9b0031ac293cf697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message is marked as consumed.  <br /></td></tr>
-<tr class="memitem:a100b71470438f154bf5d46d2306392f8" id="r_a100b71470438f154bf5d46d2306392f8"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
-<tr class="memitem:a100b71470438f154bf5d46d2306392f8 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a100b71470438f154bf5d46d2306392f8">ConsumedIndicesFor</a> () const noexcept -&gt; std::span&lt; const <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> &gt;</td></tr>
-<tr class="memdesc:a100b71470438f154bf5d46d2306392f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the sorted consumed indices for a specific message type.  <br /></td></tr>
-<tr class="memitem:a52baae77b079a420fa27be835cbd7ec1" id="r_a52baae77b079a420fa27be835cbd7ec1"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a52baae77b079a420fa27be835cbd7ec1">ConsumedIndicesFor</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept -&gt; std::span&lt; const <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> &gt;</td></tr>
-<tr class="memdesc:a52baae77b079a420fa27be835cbd7ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the sorted consumed indices for a specific message type.  <br /></td></tr>
-<tr class="memitem:aab38b9c832e272da67ad920248360354" id="r_aab38b9c832e272da67ad920248360354"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#aab38b9c832e272da67ad920248360354">Empty</a> () const noexcept</td></tr>
-<tr class="memdesc:aab38b9c832e272da67ad920248360354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any message type has consumed entries.  <br /></td></tr>
-<tr class="memitem:aa5bbc892a5558805cca168287cc3f4fd" id="r_aa5bbc892a5558805cca168287cc3f4fd"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
-<tr class="memitem:aa5bbc892a5558805cca168287cc3f4fd template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#aa5bbc892a5558805cca168287cc3f4fd">HasConsumed</a> () const noexcept</td></tr>
-<tr class="memdesc:aa5bbc892a5558805cca168287cc3f4fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message type has consumed entries.  <br /></td></tr>
-<tr class="memitem:a0b9bc10ec394e0df3aa9d36662ea2f51" id="r_a0b9bc10ec394e0df3aa9d36662ea2f51"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a0b9bc10ec394e0df3aa9d36662ea2f51">HasConsumed</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept</td></tr>
-<tr class="memdesc:a0b9bc10ec394e0df3aa9d36662ea2f51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message type has consumed entries.  <br /></td></tr>
-<tr class="memitem:aad1182fd8729af99d10c2e701f76d5f3" id="r_aad1182fd8729af99d10c2e701f76d5f3"><td class="memItemLeft">constexpr <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#aad1182fd8729af99d10c2e701f76d5f3">TotalConsumedCount</a> () const noexcept</td></tr>
-<tr class="memdesc:aad1182fd8729af99d10c2e701f76d5f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of consumed messages across all types.  <br /></td></tr>
-<tr class="memitem:ad3a56a51e5c2badea2d72b677a98db0e" id="r_ad3a56a51e5c2badea2d72b677a98db0e"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
-<tr class="memitem:ad3a56a51e5c2badea2d72b677a98db0e template"><td class="memItemLeft">constexpr <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad3a56a51e5c2badea2d72b677a98db0e">ConsumedCount</a> () const noexcept</td></tr>
-<tr class="memdesc:ad3a56a51e5c2badea2d72b677a98db0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of consumed messages for a specific type.  <br /></td></tr>
-<tr class="memitem:a10d49e835bf26e0a36582ffb6ce8d3e9" id="r_a10d49e835bf26e0a36582ffb6ce8d3e9"><td class="memItemLeft">constexpr <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a10d49e835bf26e0a36582ffb6ce8d3e9">ConsumedCount</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept</td></tr>
-<tr class="memdesc:a10d49e835bf26e0a36582ffb6ce8d3e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of consumed messages for a specific type.  <br /></td></tr>
-<tr class="memitem:a6723cd2ff3fed61873b1a8cce38e94c8" id="r_a6723cd2ff3fed61873b1a8cce38e94c8"><td class="memItemLeft">constexpr const ConsumedMap &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6723cd2ff3fed61873b1a8cce38e94c8">Data</a> () const noexcept</td></tr>
-<tr class="memdesc:a6723cd2ff3fed61873b1a8cce38e94c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides direct access to the underlying consumed map.  <br /></td></tr>
+<tr class="memitem:a686c1ca61b09f1b4e6b734940055d772" id="r_a686c1ca61b09f1b4e6b734940055d772"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> ()=default</td></tr>
+<tr class="memitem:accd9a3c578ee9ccc705c19772a9035d1" id="r_accd9a3c578ee9ccc705c19772a9035d1"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#accd9a3c578ee9ccc705c19772a9035d1">ConsumedMessagesRegistry</a> (std::pmr::memory_resource *resource)</td></tr>
+<tr class="memitem:a7965a4ed1ed9b7cd568a2af0b6909e20" id="r_a7965a4ed1ed9b7cd568a2af0b6909e20"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7965a4ed1ed9b7cd568a2af0b6909e20">ConsumedMessagesRegistry</a> (std::nullptr_t)=delete</td></tr>
+<tr class="memitem:a1ffcd65432ce27337e4f514ece1d2a3c" id="r_a1ffcd65432ce27337e4f514ece1d2a3c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1ffcd65432ce27337e4f514ece1d2a3c">ConsumedMessagesRegistry</a> (const ConsumedMessagesRegistry &amp;)=default</td></tr>
+<tr class="memitem:a1124b6ce76cac54460aae1e3ce3fda0b" id="r_a1124b6ce76cac54460aae1e3ce3fda0b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1124b6ce76cac54460aae1e3ce3fda0b">ConsumedMessagesRegistry</a> (ConsumedMessagesRegistry &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a6becc364f02935a759416109982fb437" id="r_a6becc364f02935a759416109982fb437"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6becc364f02935a759416109982fb437">~ConsumedMessagesRegistry</a> ()=default</td></tr>
+<tr class="memitem:a9a8e0d0e4da04e7287a472eb0ebb9953" id="r_a9a8e0d0e4da04e7287a472eb0ebb9953"><td class="memItemLeft"><a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9a8e0d0e4da04e7287a472eb0ebb9953">operator=</a> (const <a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp;)=default</td></tr>
+<tr class="memitem:ae76dea7dc6e15dc5da218a0f5e699a60" id="r_ae76dea7dc6e15dc5da218a0f5e699a60"><td class="memItemLeft"><a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae76dea7dc6e15dc5da218a0f5e699a60">operator=</a> (<a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a5550c5cf00b77f94f908b3c68b2a2659" id="r_a5550c5cf00b77f94f908b3c68b2a2659"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
+<tr class="memitem:a5550c5cf00b77f94f908b3c68b2a2659 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5550c5cf00b77f94f908b3c68b2a2659">MarkConsumed</a> (<a class="el" href="structhelios_1_1ecs_1_1MessageId.html">MessageId</a>&lt; T &gt; message_id)</td></tr>
+<tr class="memdesc:a5550c5cf00b77f94f908b3c68b2a2659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks an message as consumed by its type and message id.  <br /></td></tr>
+<tr class="memitem:aeb2b7dbd78ecb32b98edc107a23074e4" id="r_aeb2b7dbd78ecb32b98edc107a23074e4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aeb2b7dbd78ecb32b98edc107a23074e4">MarkConsumed</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index, <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> message_id)</td></tr>
+<tr class="memdesc:aeb2b7dbd78ecb32b98edc107a23074e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks an message as consumed by its type index and message id.  <br /></td></tr>
+<tr class="memitem:a62efbf073a474030e5c052b2b864d451" id="r_a62efbf073a474030e5c052b2b864d451"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a62efbf073a474030e5c052b2b864d451">MergeFrom</a> (const <a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp;other)</td></tr>
+<tr class="memdesc:a62efbf073a474030e5c052b2b864d451"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges consumed entries from another registry into this one.  <br /></td></tr>
+<tr class="memitem:ae77cc1282898f234b8248610b0f8ff65" id="r_ae77cc1282898f234b8248610b0f8ff65"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae77cc1282898f234b8248610b0f8ff65">MergeFrom</a> (<a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp;&amp;other)</td></tr>
+<tr class="memdesc:ae77cc1282898f234b8248610b0f8ff65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges consumed entries from another registry into this one.  <br /></td></tr>
+<tr class="memitem:a2fa56a10796e4a9f9a12abf8ccbade1f" id="r_a2fa56a10796e4a9f9a12abf8ccbade1f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2fa56a10796e4a9f9a12abf8ccbade1f">Clear</a> () noexcept</td></tr>
+<tr class="memdesc:a2fa56a10796e4a9f9a12abf8ccbade1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all consumed entries.  <br /></td></tr>
+<tr class="memitem:a7666b75c05e21e38941949cc1e3087c2" id="r_a7666b75c05e21e38941949cc1e3087c2"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
+<tr class="memitem:a7666b75c05e21e38941949cc1e3087c2 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7666b75c05e21e38941949cc1e3087c2">Clear</a> () noexcept</td></tr>
+<tr class="memdesc:a7666b75c05e21e38941949cc1e3087c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears consumed entries for a specific message type.  <br /></td></tr>
+<tr class="memitem:a7104bdae2c6f3498fb9f3bc71365723e" id="r_a7104bdae2c6f3498fb9f3bc71365723e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7104bdae2c6f3498fb9f3bc71365723e">Clear</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) noexcept</td></tr>
+<tr class="memdesc:a7104bdae2c6f3498fb9f3bc71365723e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears consumed entries for a specific message type.  <br /></td></tr>
+<tr class="memitem:a3bb78d165b7a0cc09d12aefc3a52dd27" id="r_a3bb78d165b7a0cc09d12aefc3a52dd27"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
+<tr class="memitem:a3bb78d165b7a0cc09d12aefc3a52dd27 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a3bb78d165b7a0cc09d12aefc3a52dd27">ConsumedIndicesFor</a> () const noexcept -&gt; std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td></tr>
+<tr class="memdesc:a3bb78d165b7a0cc09d12aefc3a52dd27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the sorted consumed message ids for a specific message type.  <br /></td></tr>
+<tr class="memitem:a4d6e07c7af713af7273ec05faa74b28e" id="r_a4d6e07c7af713af7273ec05faa74b28e"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a4d6e07c7af713af7273ec05faa74b28e">ConsumedIndicesFor</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept -&gt; std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td></tr>
+<tr class="memdesc:a4d6e07c7af713af7273ec05faa74b28e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the sorted consumed message ids for a specific message type.  <br /></td></tr>
+<tr class="memitem:a09b6b714da3e78080347778034faaa0b" id="r_a09b6b714da3e78080347778034faaa0b"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
+<tr class="memitem:a09b6b714da3e78080347778034faaa0b template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a09b6b714da3e78080347778034faaa0b">IsConsumed</a> (<a class="el" href="structhelios_1_1ecs_1_1MessageId.html">MessageId</a>&lt; T &gt; message_id) const noexcept</td></tr>
+<tr class="memdesc:a09b6b714da3e78080347778034faaa0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message is marked as consumed.  <br /></td></tr>
+<tr class="memitem:abdbf048f521f8d6f6f16f36fc4da36a3" id="r_abdbf048f521f8d6f6f16f36fc4da36a3"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abdbf048f521f8d6f6f16f36fc4da36a3">IsConsumed</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index, <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> message_id) const noexcept</td></tr>
+<tr class="memdesc:abdbf048f521f8d6f6f16f36fc4da36a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message is marked as consumed.  <br /></td></tr>
+<tr class="memitem:aecc0967a9d83b09274cd1c41657f1b98" id="r_aecc0967a9d83b09274cd1c41657f1b98"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aecc0967a9d83b09274cd1c41657f1b98">Empty</a> () const noexcept</td></tr>
+<tr class="memdesc:aecc0967a9d83b09274cd1c41657f1b98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any message type has consumed entries.  <br /></td></tr>
+<tr class="memitem:ada40108ccd0eaf9f115aa15020be7f24" id="r_ada40108ccd0eaf9f115aa15020be7f24"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
+<tr class="memitem:ada40108ccd0eaf9f115aa15020be7f24 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ada40108ccd0eaf9f115aa15020be7f24">HasConsumed</a> () const noexcept</td></tr>
+<tr class="memdesc:ada40108ccd0eaf9f115aa15020be7f24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message type has consumed entries.  <br /></td></tr>
+<tr class="memitem:acc34f0da92d7eb19a5e3d5d7d3a7b0f1" id="r_acc34f0da92d7eb19a5e3d5d7d3a7b0f1"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#acc34f0da92d7eb19a5e3d5d7d3a7b0f1">HasConsumed</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept</td></tr>
+<tr class="memdesc:acc34f0da92d7eb19a5e3d5d7d3a7b0f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a specific message type has consumed entries.  <br /></td></tr>
+<tr class="memitem:a4e9feda4142437431c5f99a4146b9d31" id="r_a4e9feda4142437431c5f99a4146b9d31"><td class="memItemLeft">size_type&#160;</td><td class="memItemRight"><a class="el" href="#a4e9feda4142437431c5f99a4146b9d31">TotalConsumedCount</a> () const noexcept</td></tr>
+<tr class="memdesc:a4e9feda4142437431c5f99a4146b9d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of consumed messages across all types.  <br /></td></tr>
+<tr class="memitem:a83e2ee1958b7578397ba67c0bdd7fef4" id="r_a83e2ee1958b7578397ba67c0bdd7fef4"><td class="memTemplParams" colspan="2">template&lt;ConsumableMessageTrait T&gt; </td></tr>
+<tr class="memitem:a83e2ee1958b7578397ba67c0bdd7fef4 template"><td class="memItemLeft">size_type&#160;</td><td class="memItemRight"><a class="el" href="#a83e2ee1958b7578397ba67c0bdd7fef4">ConsumedCount</a> () const noexcept</td></tr>
+<tr class="memdesc:a83e2ee1958b7578397ba67c0bdd7fef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of consumed messages for a specific type.  <br /></td></tr>
+<tr class="memitem:a96bacde563191f3fe9e34b4e42336af1" id="r_a96bacde563191f3fe9e34b4e42336af1"><td class="memItemLeft">size_type&#160;</td><td class="memItemRight"><a class="el" href="#a96bacde563191f3fe9e34b4e42336af1">ConsumedCount</a> (<a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a> type_index) const noexcept</td></tr>
+<tr class="memdesc:a96bacde563191f3fe9e34b4e42336af1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of consumed messages for a specific type.  <br /></td></tr>
+<tr class="memitem:ac8875083cf5fd22223a89887db1d5b46" id="r_ac8875083cf5fd22223a89887db1d5b46"><td class="memItemLeft">const ConsumedMap &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac8875083cf5fd22223a89887db1d5b46">Data</a> () const noexcept</td></tr>
+<tr class="memdesc:ac8875083cf5fd22223a89887db1d5b46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides direct access to the underlying consumed map.  <br /></td></tr>
+<tr class="memitem:a9a078859d7bce5e3b038562d6b6e0207" id="r_a9a078859d7bce5e3b038562d6b6e0207"><td class="memItemLeft">std::pmr::memory_resource *&#160;</td><td class="memItemRight"><a class="el" href="#a9a078859d7bce5e3b038562d6b6e0207">GetMemoryResource</a> () const noexcept</td></tr>
+<tr class="memdesc:a9a078859d7bce5e3b038562d6b6e0207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the memory resource used for internal storage.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt;<br />
-class helios::ecs::ConsumedMessagesRegistry&lt; Alloc &gt;</div><p>Per-system registry for tracking consumed message indices. </p>
-<p>Each system running in parallel gets its own <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message indices.">ConsumedMessagesRegistry</a></span> instance. Systems mark messages as consumed by writing indices into their registry, avoiding data races. At Update time, all registries are merged and applied to message queues in <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html" title="Central coordinator for message lifecycle with double buffering and consumed message removal.">MessageManager</a></span>.</p>
-<p>Indices are global within the combined (previous + current) message view for a given type. For a type with P previous messages and C current messages:</p><ul>
-<li>Indices [0, P) refer to previous messages</li>
-<li>Indices [P, P + C) refer to current messages</li>
-</ul>
+<div class="textblock"><p>Per-system registry for tracking consumed message ids. </p>
+<p>Each system running in parallel gets its own <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message ids.">ConsumedMessagesRegistry</a></span> instance. Systems mark messages as consumed by writing stable message ids into their registry, avoiding data races. At Update time, all registries are merged and applied to message queues in <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html" title="Central coordinator for message lifecycle with double buffering and consumed message removal.">MessageManager</a></span>.</p>
+<p>Entries are monotonic message ids assigned when messages enter the global manager — not transient indices into the previous/current buffers.</p>
 <dl class="section note"><dt>Note</dt><dd>Not therad-safe. </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Alloc</td><td>Allocator type for internal storage (default: <span class="tt">std::allocator&lt;std::byte&gt;</span>) </td></tr>
-  </table>
-  </dd>
-</dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00042">42</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
-</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
-<a id="a01aeee5c24d3529a9073e5858d873779" name="a01aeee5c24d3529a9073e5858d873779"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01aeee5c24d3529a9073e5858d873779">&#9670;&#160;</a></span>allocator_type</h2>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00030">30</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a686c1ca61b09f1b4e6b734940055d772" name="a686c1ca61b09f1b4e6b734940055d772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a686c1ca61b09f1b4e6b734940055d772">&#9670;&#160;</a></span>ConsumedMessagesRegistry() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::allocator_type = Alloc</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00045">45</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a47d73d42bcb0f46c60a916c5dfb49dfc" name="a47d73d42bcb0f46c60a916c5dfb49dfc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47d73d42bcb0f46c60a916c5dfb49dfc">&#9670;&#160;</a></span>size_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::size_type = size_t</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00044">44</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
-
-</div>
-</div>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a42999c8d1ba215281f98d2b3983a42f3" name="a42999c8d1ba215281f98d2b3983a42f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42999c8d1ba215281f98d2b3983a42f3">&#9670;&#160;</a></span>ConsumedMessagesRegistry() <span class="overload">[1/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedMessagesRegistry </td>
+          <td class="memname">helios::ecs::ConsumedMessagesRegistry::ConsumedMessagesRegistry </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a01aeee5c24d3529a9073e5858d873779">allocator_type</a></td>          <td class="paramname"><span class="paramname"><em>alloc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00081">81</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
-
 </div>
 </div>
-<a id="a28595969958bf6bcf75bdada508adf99" name="a28595969958bf6bcf75bdada508adf99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28595969958bf6bcf75bdada508adf99">&#9670;&#160;</a></span>ConsumedMessagesRegistry() <span class="overload">[2/5]</span></h2>
+<a id="accd9a3c578ee9ccc705c19772a9035d1" name="accd9a3c578ee9ccc705c19772a9035d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accd9a3c578ee9ccc705c19772a9035d1">&#9670;&#160;</a></span>ConsumedMessagesRegistry() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedMessagesRegistry </td>
+          <td class="memname">helios::ecs::ConsumedMessagesRegistry::ConsumedMessagesRegistry </td>
           <td>(</td>
           <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span></td><td>)</td>
           <td></td>
@@ -354,31 +294,21 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html" title="Per-system registry for tracking consumed message indices.">ConsumedMessagesRegistry</a></span> from a PMR memory resource. </p>
-<p>Enabled only when <span class="tt"><a class="el" href="#a01aeee5c24d3529a9073e5858d873779">allocator_type</a></span> is constructible from <span class="tt">std::pmr::memory_resource*</span>. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">resource</td><td>Memory resource used to construct allocator </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00091">91</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00039">39</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="acaf04ac0c96fe9bc0240de3573af2aa7" name="acaf04ac0c96fe9bc0240de3573af2aa7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acaf04ac0c96fe9bc0240de3573af2aa7">&#9670;&#160;</a></span>ConsumedMessagesRegistry() <span class="overload">[3/5]</span></h2>
+<a id="a7965a4ed1ed9b7cd568a2af0b6909e20" name="a7965a4ed1ed9b7cd568a2af0b6909e20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7965a4ed1ed9b7cd568a2af0b6909e20">&#9670;&#160;</a></span>ConsumedMessagesRegistry() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedMessagesRegistry </td>
+          <td class="memname">helios::ecs::ConsumedMessagesRegistry::ConsumedMessagesRegistry </td>
           <td>(</td>
           <td class="paramtype">std::nullptr_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -393,21 +323,19 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="ae3d48aa19b4d049f38fce30c0d8343c2" name="ae3d48aa19b4d049f38fce30c0d8343c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3d48aa19b4d049f38fce30c0d8343c2">&#9670;&#160;</a></span>ConsumedMessagesRegistry() <span class="overload">[4/5]</span></h2>
+<a id="a1ffcd65432ce27337e4f514ece1d2a3c" name="a1ffcd65432ce27337e4f514ece1d2a3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ffcd65432ce27337e4f514ece1d2a3c">&#9670;&#160;</a></span>ConsumedMessagesRegistry() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedMessagesRegistry </td>
+          <td class="memname">helios::ecs::ConsumedMessagesRegistry::ConsumedMessagesRegistry </td>
           <td>(</td>
-          <td class="paramtype">const ConsumedMessagesRegistry&lt; Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const ConsumedMessagesRegistry &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -420,21 +348,19 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a1ba1c74ae7e37dec2d6a433a8490ac78" name="a1ba1c74ae7e37dec2d6a433a8490ac78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ba1c74ae7e37dec2d6a433a8490ac78">&#9670;&#160;</a></span>ConsumedMessagesRegistry() <span class="overload">[5/5]</span></h2>
+<a id="a1124b6ce76cac54460aae1e3ce3fda0b" name="a1124b6ce76cac54460aae1e3ce3fda0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1124b6ce76cac54460aae1e3ce3fda0b">&#9670;&#160;</a></span>ConsumedMessagesRegistry() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedMessagesRegistry </td>
+          <td class="memname">helios::ecs::ConsumedMessagesRegistry::ConsumedMessagesRegistry </td>
           <td>(</td>
-          <td class="paramtype">ConsumedMessagesRegistry&lt; Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">ConsumedMessagesRegistry &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -447,19 +373,17 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a1952427197c882ac7ff790fd82f38e35" name="a1952427197c882ac7ff790fd82f38e35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1952427197c882ac7ff790fd82f38e35">&#9670;&#160;</a></span>~ConsumedMessagesRegistry()</h2>
+<a id="a6becc364f02935a759416109982fb437" name="a6becc364f02935a759416109982fb437"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6becc364f02935a759416109982fb437">&#9670;&#160;</a></span>~ConsumedMessagesRegistry()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::~<a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> </td>
+          <td class="memname">helios::ecs::ConsumedMessagesRegistry::~ConsumedMessagesRegistry </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -475,13 +399,11 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a8497912b4235355eed85b9a0622be4f4" name="a8497912b4235355eed85b9a0622be4f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8497912b4235355eed85b9a0622be4f4">&#9670;&#160;</a></span>Clear() <span class="overload">[1/3]</span></h2>
+<a id="a7666b75c05e21e38941949cc1e3087c2" name="a7666b75c05e21e38941949cc1e3087c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7666b75c05e21e38941949cc1e3087c2">&#9670;&#160;</a></span>Clear() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
@@ -489,7 +411,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::Clear </td>
+          <td class="memname">void helios::ecs::ConsumedMessagesRegistry::Clear </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -497,7 +419,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -510,23 +432,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00154">154</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00094">94</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a4ba607d3147e00c4a937baf2a6143a44" name="a4ba607d3147e00c4a937baf2a6143a44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ba607d3147e00c4a937baf2a6143a44">&#9670;&#160;</a></span>Clear() <span class="overload">[2/3]</span></h2>
+<a id="a2fa56a10796e4a9f9a12abf8ccbade1f" name="a2fa56a10796e4a9f9a12abf8ccbade1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fa56a10796e4a9f9a12abf8ccbade1f">&#9670;&#160;</a></span>Clear() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::Clear </td>
+          <td class="memname">void helios::ecs::ConsumedMessagesRegistry::Clear </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -534,30 +454,28 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Clears all consumed entries. </p>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00147">147</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00087">87</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a60b2c2c8615331a9c3f7fbcf07022762" name="a60b2c2c8615331a9c3f7fbcf07022762"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60b2c2c8615331a9c3f7fbcf07022762">&#9670;&#160;</a></span>Clear() <span class="overload">[3/3]</span></h2>
+<a id="a7104bdae2c6f3498fb9f3bc71365723e" name="a7104bdae2c6f3498fb9f3bc71365723e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7104bdae2c6f3498fb9f3bc71365723e">&#9670;&#160;</a></span>Clear() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::Clear </td>
+          <td class="memname">void helios::ecs::ConsumedMessagesRegistry::Clear </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span></td><td>)</td>
           <td></td>
@@ -565,7 +483,7 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -578,17 +496,15 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00162">162</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00102">102</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad3a56a51e5c2badea2d72b677a98db0e" name="ad3a56a51e5c2badea2d72b677a98db0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3a56a51e5c2badea2d72b677a98db0e">&#9670;&#160;</a></span>ConsumedCount() <span class="overload">[1/2]</span></h2>
+<a id="a83e2ee1958b7578397ba67c0bdd7fef4" name="a83e2ee1958b7578397ba67c0bdd7fef4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83e2ee1958b7578397ba67c0bdd7fef4">&#9670;&#160;</a></span>ConsumedCount() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
@@ -596,7 +512,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedCount </td>
+          <td class="memname">size_type helios::ecs::ConsumedMessagesRegistry::ConsumedCount </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -604,7 +520,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -618,23 +534,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of consumed messages for this type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00244">244</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00180">180</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a10d49e835bf26e0a36582ffb6ce8d3e9" name="a10d49e835bf26e0a36582ffb6ce8d3e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10d49e835bf26e0a36582ffb6ce8d3e9">&#9670;&#160;</a></span>ConsumedCount() <span class="overload">[2/2]</span></h2>
+<a id="a96bacde563191f3fe9e34b4e42336af1" name="a96bacde563191f3fe9e34b4e42336af1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96bacde563191f3fe9e34b4e42336af1">&#9670;&#160;</a></span>ConsumedCount() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedCount </td>
+          <td class="memname">auto helios::ecs::ConsumedMessagesRegistry::ConsumedCount </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span></td><td>)</td>
           <td> const</td>
@@ -642,7 +556,7 @@ template&lt;typename Alloc&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -656,17 +570,15 @@ template&lt;typename Alloc&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of consumed messages for this type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00395">395</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00262">262</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a100b71470438f154bf5d46d2306392f8" name="a100b71470438f154bf5d46d2306392f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a100b71470438f154bf5d46d2306392f8">&#9670;&#160;</a></span>ConsumedIndicesFor() <span class="overload">[1/2]</span></h2>
+<a id="a3bb78d165b7a0cc09d12aefc3a52dd27" name="a3bb78d165b7a0cc09d12aefc3a52dd27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bb78d165b7a0cc09d12aefc3a52dd27">&#9670;&#160;</a></span>ConsumedIndicesFor() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
@@ -674,83 +586,79 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedIndicesFor </td>
+          <td class="memname">auto helios::ecs::ConsumedMessagesRegistry::ConsumedIndicesFor </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const -&gt; std::span&lt; const <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> &gt;</td>
+          <td> const -&gt; std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the sorted consumed indices for a specific message type. </p>
+<p>Gets the sorted consumed message ids for a specific message type. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Consumable message type </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Span of sorted consumed indices, or empty span if none </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Span of sorted consumed ids, or empty span if none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00193">193</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00112">112</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a52baae77b079a420fa27be835cbd7ec1" name="a52baae77b079a420fa27be835cbd7ec1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52baae77b079a420fa27be835cbd7ec1">&#9670;&#160;</a></span>ConsumedIndicesFor() <span class="overload">[2/2]</span></h2>
+<a id="a4d6e07c7af713af7273ec05faa74b28e" name="a4d6e07c7af713af7273ec05faa74b28e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d6e07c7af713af7273ec05faa74b28e">&#9670;&#160;</a></span>ConsumedIndicesFor() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::ConsumedIndicesFor </td>
+          <td class="memname">auto helios::ecs::ConsumedMessagesRegistry::ConsumedIndicesFor </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span></td><td>)</td>
-          <td> const -&gt; std::span&lt; const <a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a> &gt;</td>
+          <td> const -&gt; std::span&lt; const <a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a> &gt;</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the sorted consumed indices for a specific message type. </p>
+<p>Gets the sorted consumed message ids for a specific message type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">type_index</td><td>Type index of the message </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Span of sorted consumed indices, or empty span if none </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Span of sorted consumed ids, or empty span if none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00368">368</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00237">237</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a6723cd2ff3fed61873b1a8cce38e94c8" name="a6723cd2ff3fed61873b1a8cce38e94c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6723cd2ff3fed61873b1a8cce38e94c8">&#9670;&#160;</a></span>Data()</h2>
+<a id="ac8875083cf5fd22223a89887db1d5b46" name="ac8875083cf5fd22223a89887db1d5b46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8875083cf5fd22223a89887db1d5b46">&#9670;&#160;</a></span>Data()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const ConsumedMap &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::Data </td>
+          <td class="memname">const ConsumedMap &amp; helios::ecs::ConsumedMessagesRegistry::Data </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -758,7 +666,7 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -766,23 +674,21 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Provides direct access to the underlying consumed map. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the consumed map </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00260">260</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00196">196</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aab38b9c832e272da67ad920248360354" name="aab38b9c832e272da67ad920248360354"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab38b9c832e272da67ad920248360354">&#9670;&#160;</a></span>Empty()</h2>
+<a id="aecc0967a9d83b09274cd1c41657f1b98" name="aecc0967a9d83b09274cd1c41657f1b98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecc0967a9d83b09274cd1c41657f1b98">&#9670;&#160;</a></span>Empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::Empty </td>
+          <td class="memname">bool helios::ecs::ConsumedMessagesRegistry::Empty </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -790,7 +696,7 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -798,25 +704,21 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Checks if any message type has consumed entries. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if no consumed entries exist, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00210">210</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00149">149</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aa5bbc892a5558805cca168287cc3f4fd" name="aa5bbc892a5558805cca168287cc3f4fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5bbc892a5558805cca168287cc3f4fd">&#9670;&#160;</a></span>HasConsumed() <span class="overload">[1/2]</span></h2>
+<a id="a9a078859d7bce5e3b038562d6b6e0207" name="a9a078859d7bce5e3b038562d6b6e0207"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a078859d7bce5e3b038562d6b6e0207">&#9670;&#160;</a></span>GetMemoryResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
-<div class="memtemplate">
-template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::HasConsumed </td>
+          <td class="memname">std::pmr::memory_resource * helios::ecs::ConsumedMessagesRegistry::GetMemoryResource </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -824,7 +726,39 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the memory resource used for internal storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>Memory resource passed to the constructor, or the default resource </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00202">202</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ada40108ccd0eaf9f115aa15020be7f24" name="ada40108ccd0eaf9f115aa15020be7f24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada40108ccd0eaf9f115aa15020be7f24">&#9670;&#160;</a></span>HasConsumed() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ConsumableMessageTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::ecs::ConsumedMessagesRegistry::HasConsumed </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -838,23 +772,21 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if consumed entries exist for this type, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00220">220</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00157">157</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a0b9bc10ec394e0df3aa9d36662ea2f51" name="a0b9bc10ec394e0df3aa9d36662ea2f51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b9bc10ec394e0df3aa9d36662ea2f51">&#9670;&#160;</a></span>HasConsumed() <span class="overload">[2/2]</span></h2>
+<a id="acc34f0da92d7eb19a5e3d5d7d3a7b0f1" name="acc34f0da92d7eb19a5e3d5d7d3a7b0f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc34f0da92d7eb19a5e3d5d7d3a7b0f1">&#9670;&#160;</a></span>HasConsumed() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::HasConsumed </td>
+          <td class="memname">bool helios::ecs::ConsumedMessagesRegistry::HasConsumed </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span></td><td>)</td>
           <td> const</td>
@@ -862,7 +794,7 @@ template&lt;typename Alloc&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -876,60 +808,15 @@ template&lt;typename Alloc&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if consumed entries exist for this type, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00378">378</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00256">256</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ac6196741861f41eb9b0031ac293cf697" name="ac6196741861f41eb9b0031ac293cf697"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6196741861f41eb9b0031ac293cf697">&#9670;&#160;</a></span>IsConsumed() <span class="overload">[1/2]</span></h2>
+<a id="a09b6b714da3e78080347778034faaa0b" name="a09b6b714da3e78080347778034faaa0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09b6b714da3e78080347778034faaa0b">&#9670;&#160;</a></span>IsConsumed() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::IsConsumed </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>global_index</em></span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if a specific message is marked as consumed. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">type_index</td><td>Type index of the message </td></tr>
-    <tr><td class="paramname">global_index</td><td>Global index of the message </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the message is consumed, false otherwise </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00358">358</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aec7db1387091688a605ec3d75f5d3551" name="aec7db1387091688a605ec3d75f5d3551"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec7db1387091688a605ec3d75f5d3551">&#9670;&#160;</a></span>IsConsumed() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
@@ -937,15 +824,15 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::IsConsumed </td>
+          <td class="memname">bool helios::ecs::ConsumedMessagesRegistry::IsConsumed </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>global_index</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1MessageId.html">MessageId</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>message_id</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -959,65 +846,62 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">global_index</td><td>Global index of the message </td></tr>
+    <tr><td class="paramname">message_id</td><td>Stable id of the message </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the message is consumed, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00173">173</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00132">132</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2cd427b1da112da073a90238e2ab03cf" name="a2cd427b1da112da073a90238e2ab03cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cd427b1da112da073a90238e2ab03cf">&#9670;&#160;</a></span>MarkConsumed() <span class="overload">[1/2]</span></h2>
+<a id="abdbf048f521f8d6f6f16f36fc4da36a3" name="abdbf048f521f8d6f6f16f36fc4da36a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdbf048f521f8d6f6f16f36fc4da36a3">&#9670;&#160;</a></span>IsConsumed() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::MarkConsumed </td>
+          <td class="memname">bool helios::ecs::ConsumedMessagesRegistry::IsConsumed </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>global_index</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a></td>          <td class="paramname"><span class="paramname"><em>message_id</em></span>&#160;) const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Marks an message as consumed by its type index and global index. </p>
+<p>Checks if a specific message is marked as consumed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">type_index</td><td>Type index of the message </td></tr>
-    <tr><td class="paramname">global_index</td><td>Index of the message in the combined (previous + current) view </td></tr>
+    <tr><td class="paramname">message_id</td><td>Stable id of the message </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the message is consumed, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00288">288</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00247">247</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a34d8f38cbc12cbce19a2b242f6f20c3a" name="a34d8f38cbc12cbce19a2b242f6f20c3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34d8f38cbc12cbce19a2b242f6f20c3a">&#9670;&#160;</a></span>MarkConsumed() <span class="overload">[2/2]</span></h2>
+<a id="a5550c5cf00b77f94f908b3c68b2a2659" name="a5550c5cf00b77f94f908b3c68b2a2659"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5550c5cf00b77f94f908b3c68b2a2659">&#9670;&#160;</a></span>MarkConsumed() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;ConsumableMessageTrait T&gt; </div>
 <table class="mlabels">
@@ -1025,20 +909,20 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::MarkConsumed </td>
+          <td class="memname">void helios::ecs::ConsumedMessagesRegistry::MarkConsumed </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a47d73d42bcb0f46c60a916c5dfb49dfc">size_type</a></td>          <td class="paramname"><span class="paramname"><em>global_index</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1MessageId.html">MessageId</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>message_id</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Marks an message as consumed by its type and global index. </p>
+<p>Marks an message as consumed by its type and message id. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Consumable message type </td></tr>
@@ -1047,120 +931,122 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">global_index</td><td>Index of the message in the combined (previous + current) view </td></tr>
+    <tr><td class="paramname">message_id</td><td>Stable id of the message </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00114">114</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00060">60</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2135114e6759c30d858e971f8fba216d" name="a2135114e6759c30d858e971f8fba216d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2135114e6759c30d858e971f8fba216d">&#9670;&#160;</a></span>MergeFrom() <span class="overload">[1/2]</span></h2>
+<a id="aeb2b7dbd78ecb32b98edc107a23074e4" name="aeb2b7dbd78ecb32b98edc107a23074e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb2b7dbd78ecb32b98edc107a23074e4">&#9670;&#160;</a></span>MarkConsumed() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
-<div class="memtemplate">
-template&lt;typename OtherAlloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::MergeFrom </td>
+          <td class="memname">void helios::ecs::ConsumedMessagesRegistry::MarkConsumed </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a>&lt; OtherAlloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a95e25988a88218da8780e8e87893630b">MessageTypeIndex</a></td>          <td class="paramname"><span class="paramname"><em>type_index</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1AnyMessageId.html">AnyMessageId</a></td>          <td class="paramname"><span class="paramname"><em>message_id</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Merges consumed entries from another registry into this one. </p>
-<p>Performs a sorted union of consumed indices for each type. Avoids additional heap allocation by appending and using in-place merge. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">OtherAlloc</td><td>Allocator type of the source registry </td></tr>
+<p>Marks an message as consumed by its type index and message id. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type_index</td><td>Type index of the message </td></tr>
+    <tr><td class="paramname">message_id</td><td>Stable id of the message </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="params"><dt>Parameters</dt><dd>
+
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00225">225</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a62efbf073a474030e5c052b2b864d451" name="a62efbf073a474030e5c052b2b864d451"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62efbf073a474030e5c052b2b864d451">&#9670;&#160;</a></span>MergeFrom() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::ecs::ConsumedMessagesRegistry::MergeFrom </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Merges consumed entries from another registry into this one. </p>
+<p>Performs a sorted union of consumed indices for each type. Avoids additional heap allocation by appending and using in-place merge. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">other</td><td>Registry to merge from </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00300">300</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8cpp_source.html#l00013">13</a> of file <a class="el" href="consumed__registry_8cpp_source.html">consumed_registry.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ad9d099c0a5fc7451c39aac634b7cb467" name="ad9d099c0a5fc7451c39aac634b7cb467"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9d099c0a5fc7451c39aac634b7cb467">&#9670;&#160;</a></span>MergeFrom() <span class="overload">[2/2]</span></h2>
+<a id="ae77cc1282898f234b8248610b0f8ff65" name="ae77cc1282898f234b8248610b0f8ff65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae77cc1282898f234b8248610b0f8ff65">&#9670;&#160;</a></span>MergeFrom() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
-<div class="memtemplate">
-template&lt;typename OtherAlloc&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::MergeFrom </td>
+          <td class="memname">void helios::ecs::ConsumedMessagesRegistry::MergeFrom </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a>&lt; OtherAlloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Merges consumed entries from another registry into this one. </p>
-<p>Rvalue overload that consumes the source registry. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">OtherAlloc</td><td>Allocator type of the source registry </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Rvalue overload that consumes the source registry. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">other</td><td>Registry to merge from </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00330">330</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8cpp_source.html#l00037">37</a> of file <a class="el" href="consumed__registry_8cpp_source.html">consumed_registry.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ab7276ac350eb5c667944836f5300c9c0" name="ab7276ac350eb5c667944836f5300c9c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7276ac350eb5c667944836f5300c9c0">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a9a8e0d0e4da04e7287a472eb0ebb9953" name="a9a8e0d0e4da04e7287a472eb0ebb9953"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a8e0d0e4da04e7287a472eb0ebb9953">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp; helios::ecs::ConsumedMessagesRegistry::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1173,21 +1059,19 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a88d6bb601d237596b211eb64c5769763" name="a88d6bb601d237596b211eb64c5769763"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88d6bb601d237596b211eb64c5769763">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="ae76dea7dc6e15dc5da218a0f5e699a60" name="ae76dea7dc6e15dc5da218a0f5e699a60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae76dea7dc6e15dc5da218a0f5e699a60">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp; helios::ecs::ConsumedMessagesRegistry::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a42999c8d1ba215281f98d2b3983a42f3">ConsumedMessagesRegistry</a>&lt; Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a686c1ca61b09f1b4e6b734940055d772">ConsumedMessagesRegistry</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1200,19 +1084,17 @@ template&lt;typename Alloc = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="aad1182fd8729af99d10c2e701f76d5f3" name="aad1182fd8729af99d10c2e701f76d5f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad1182fd8729af99d10c2e701f76d5f3">&#9670;&#160;</a></span>TotalConsumedCount()</h2>
+<a id="a4e9feda4142437431c5f99a4146b9d31" name="a4e9feda4142437431c5f99a4146b9d31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e9feda4142437431c5f99a4146b9d31">&#9670;&#160;</a></span>TotalConsumedCount()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Alloc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html">helios::ecs::ConsumedMessagesRegistry</a>&lt; Alloc &gt;::TotalConsumedCount </td>
+          <td class="memname">auto helios::ecs::ConsumedMessagesRegistry::TotalConsumedCount </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -1220,7 +1102,7 @@ template&lt;typename Alloc&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1228,7 +1110,7 @@ template&lt;typename Alloc&gt; </div>
 <p>Gets the total number of consumed messages across all types. </p>
 <dl class="section return"><dt>Returns</dt><dd>Total consumed message count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="consumed__registry_8hpp_source.html#l00385">385</a> of file <a class="el" href="consumed__registry_8hpp_source.html">consumed_registry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="consumed__registry_8cpp_source.html#l00062">62</a> of file <a class="el" href="consumed__registry_8cpp_source.html">consumed_registry.cpp</a>.</p>
 
 </div>
 </div>

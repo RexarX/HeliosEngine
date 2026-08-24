@@ -174,13 +174,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('typed__buffer_
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">typed_buffer_array.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
 <code>#include &lt;helios/container/details/typed_buffer_common.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="type__info_8hpp_source.html">helios/utils/type_info.hpp</a>&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;concepts&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('typed__buffer_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Acontainer_3A_3ATypedBufferArray_3C_20Allocator_20_3E" id="r_helios_3A_3Acontainer_3A_3ATypedBufferArray_3C_20Allocator_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">helios::container::TypedBufferArray&lt; Allocator &gt;</a></td></tr>
+<tr class="memitem:helios_3A_3Acontainer_3A_3ATypedBufferArray" id="r_helios_3A_3Acontainer_3A_3ATypedBufferArray"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">helios::container::TypedBufferArray</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased sequential byte storage for a single type (array variant).  <a href="classhelios_1_1container_1_1TypedBufferArray.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -208,24 +208,18 @@ Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Acontainer" id="r_helios_3A_3Acontainer"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html">helios::container</a></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:adabce041ddf91fc99a4e24b01c9de382" id="r_adabce041ddf91fc99a4e24b01c9de382"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#adabce041ddf91fc99a4e24b01c9de382">helios::container::PmrTypedBufferArray</a></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7cc1fd47aae446af0d94458951fc8477" id="r_a7cc1fd47aae446af0d94458951fc8477"><td class="memTemplParams" colspan="2">template&lt;TypedBufferStorable T, typename Allocator&gt; <br />
-requires (std::is_class_v&lt;Allocator&gt; &amp;&amp; !std::same_as&lt;std::remove_cvref_t&lt;T&gt;, typename <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">TypedBufferArray</a>&lt;Allocator&gt;::size_type&gt;)</td></tr>
-<tr class="memitem:a7cc1fd47aae446af0d94458951fc8477 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#a7cc1fd47aae446af0d94458951fc8477">helios::container::erase</a> (<a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">TypedBufferArray</a>&lt; Allocator &gt; &amp;storage, const T &amp;value) -&gt; typename <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">TypedBufferArray</a>&lt; Allocator &gt;::size_type</td></tr>
-<tr class="memdesc:a7cc1fd47aae446af0d94458951fc8477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases all elements equal to value from the <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html" title="Type-erased sequential byte storage for a single type (array variant).">TypedBufferArray</a>.  <br /></td></tr>
-<tr class="memitem:a4a02d4718e4e112f1aa51fcfeefede03" id="r_a4a02d4718e4e112f1aa51fcfeefede03"><td class="memTemplParams" colspan="2">template&lt;typename Allocator&gt; <br />
-requires std::is_class_v&lt;Allocator&gt;</td></tr>
-<tr class="memitem:a4a02d4718e4e112f1aa51fcfeefede03 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#a4a02d4718e4e112f1aa51fcfeefede03">helios::container::erase</a> (<a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">TypedBufferArray</a>&lt; Allocator &gt; &amp;storage, typename <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">TypedBufferArray</a>&lt; Allocator &gt;::size_type pos)</td></tr>
-<tr class="memdesc:a4a02d4718e4e112f1aa51fcfeefede03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases the element at position pos from the <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html" title="Type-erased sequential byte storage for a single type (array variant).">TypedBufferArray</a> (swap-then-pop, O(1), unstable).  <br /></td></tr>
-<tr class="memitem:a946d6b6021a5cde349cf5050b838d07c" id="r_a946d6b6021a5cde349cf5050b838d07c"><td class="memTemplParams" colspan="2">template&lt;TypedBufferStorable T, typename Allocator, typename Pred&gt; <br />
-requires (std::is_class_v&lt;Allocator&gt; &amp;&amp; std::predicate&lt;Pred, const T&amp;&gt;)</td></tr>
-<tr class="memitem:a946d6b6021a5cde349cf5050b838d07c template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#a946d6b6021a5cde349cf5050b838d07c">helios::container::erase_if</a> (<a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">TypedBufferArray</a>&lt; Allocator &gt; &amp;storage, Pred pred) -&gt; typename <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">TypedBufferArray</a>&lt; Allocator &gt;::size_type</td></tr>
-<tr class="memdesc:a946d6b6021a5cde349cf5050b838d07c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases all elements satisfying the predicate from the <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html" title="Type-erased sequential byte storage for a single type (array variant).">TypedBufferArray</a>.  <br /></td></tr>
+<tr class="memitem:aa65fba3263c0954f81ec228b578ad896" id="r_aa65fba3263c0954f81ec228b578ad896"><td class="memTemplParams" colspan="2">template&lt;TypedBufferStorable T&gt; <br />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;T&gt;, <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html#aedb94b011e22f0ba7f804a025f2b307b">TypedBufferArray::size_type</a>&gt;)</td></tr>
+<tr class="memitem:aa65fba3263c0954f81ec228b578ad896 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#aa65fba3263c0954f81ec228b578ad896">helios::container::erase</a> (<a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">TypedBufferArray</a> &amp;storage, const T &amp;value) -&gt; <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html#aedb94b011e22f0ba7f804a025f2b307b">TypedBufferArray::size_type</a></td></tr>
+<tr class="memdesc:aa65fba3263c0954f81ec228b578ad896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases all elements equal to value from the <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html" title="Type-erased sequential byte storage for a single type (array variant).">TypedBufferArray</a>.  <br /></td></tr>
+<tr class="memitem:a754610a1969beb84c2d10e72efbf2625" id="r_a754610a1969beb84c2d10e72efbf2625"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#a754610a1969beb84c2d10e72efbf2625">helios::container::erase</a> (<a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">TypedBufferArray</a> &amp;storage, <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html#aedb94b011e22f0ba7f804a025f2b307b">TypedBufferArray::size_type</a> pos)</td></tr>
+<tr class="memdesc:a754610a1969beb84c2d10e72efbf2625"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases the element at position pos from the <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html" title="Type-erased sequential byte storage for a single type (array variant).">TypedBufferArray</a> (swap-then-pop, O(1), unstable).  <br /></td></tr>
+<tr class="memitem:a997223a58c5f8f6301a234c06d0b7d58" id="r_a997223a58c5f8f6301a234c06d0b7d58"><td class="memTemplParams" colspan="2">template&lt;TypedBufferStorable T, typename Pred&gt; <br />
+requires std::predicate&lt;Pred, const T&amp;&gt;</td></tr>
+<tr class="memitem:a997223a58c5f8f6301a234c06d0b7d58 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1container.html#a997223a58c5f8f6301a234c06d0b7d58">helios::container::erase_if</a> (<a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html">TypedBufferArray</a> &amp;storage, const Pred &amp;pred) -&gt; <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html#aedb94b011e22f0ba7f804a025f2b307b">TypedBufferArray::size_type</a></td></tr>
+<tr class="memdesc:a997223a58c5f8f6301a234c06d0b7d58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases all elements satisfying the predicate from the <a class="el" href="classhelios_1_1container_1_1TypedBufferArray.html" title="Type-erased sequential byte storage for a single type (array variant).">TypedBufferArray</a>.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

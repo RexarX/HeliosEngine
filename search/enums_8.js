@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['plotformat_0',['PlotFormat',['../namespacehelios_1_1profile.html#a4028dc96634ea1fda3b42f975e840cbb',1,'helios::profile']]]
+  ['key_0',['Key',['../namespacehelios_1_1input.html#a9428ae91737625870558a82a3612d997',1,'helios::input']]]
 ];

@@ -183,16 +183,17 @@ Directories</h2></td></tr>
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="platform--platform-detection--api-macros"></a>
 `platform` — Platform Detection &amp; API Macros</h1>
 <p>Header-only module providing platform identification and DLL visibility macros. Leaf module with no dependencies.</p>
-<h1 class="doxsection"><a class="anchor" id="public-api-8"></a>
+<h1 class="doxsection"><a class="anchor" id="public-api-10"></a>
 Public API</h1>
 <p>Macros only — no classes, structs, or functions.</p>
-<h1 class="doxsection"><a class="anchor" id="usage-1"></a>
+<h1 class="doxsection"><a class="anchor" id="usage-2"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="platform_8hpp.html">helios/platform/platform.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">class </span><a class="code hl_define" href="platform_8hpp.html#af82a8ce6d0033191eafb5eff2173159c">HELIOS_API</a> MyClass { };             <span class="comment">// DLL export/import</span></div>
 <div class="line"> </div>
 <div class="line"><a class="code hl_define" href="platform_8hpp.html#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK</a>();                     <span class="comment">// architecture-specific breakpoint</span></div>
+<div class="line"><a class="code hl_define" href="platform_8hpp.html#add6cedf0b0fe9ba6f9a8e8fa90ed24e2">HELIOS_PAUSE_CPU</a>();                       <span class="comment">// busy-wait pause hint (SDL3-derived)</span></div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#if defined(HELIOS_PLATFORM_WINDOWS)</span></div>
 <div class="line">  <span class="comment">// Windows-specific code</span></div>
@@ -202,7 +203,8 @@ Usage</h1>
 <div class="line">  <span class="comment">// macOS-specific code</span></div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aplatform_8hpp_html"><div class="ttname"><a href="platform_8hpp.html">platform.hpp</a></div></div>
-<div class="ttc" id="aplatform_8hpp_html_ada983df2522c351b671d6943887b483e"><div class="ttname"><a href="platform_8hpp.html#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK</a></div><div class="ttdeci">#define HELIOS_DEBUG_BREAK()</div><div class="ttdef"><b>Definition</b> <a href="platform_8hpp_source.html#l00089">platform.hpp:89</a></div></div>
+<div class="ttc" id="aplatform_8hpp_html_ada983df2522c351b671d6943887b483e"><div class="ttname"><a href="platform_8hpp.html#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK</a></div><div class="ttdeci">#define HELIOS_DEBUG_BREAK()</div><div class="ttdef"><b>Definition</b> <a href="platform_8hpp_source.html#l00087">platform.hpp:87</a></div></div>
+<div class="ttc" id="aplatform_8hpp_html_add6cedf0b0fe9ba6f9a8e8fa90ed24e2"><div class="ttname"><a href="platform_8hpp.html#add6cedf0b0fe9ba6f9a8e8fa90ed24e2">HELIOS_PAUSE_CPU</a></div><div class="ttdeci">#define HELIOS_PAUSE_CPU()</div><div class="ttdoc">Inserts a CPU pause hint for busy-wait loops.</div><div class="ttdef"><b>Definition</b> <a href="platform_8hpp_source.html#l00135">platform.hpp:135</a></div></div>
 <div class="ttc" id="aplatform_8hpp_html_af82a8ce6d0033191eafb5eff2173159c"><div class="ttname"><a href="platform_8hpp.html#af82a8ce6d0033191eafb5eff2173159c">HELIOS_API</a></div><div class="ttdeci">#define HELIOS_API</div><div class="ttdef"><b>Definition</b> <a href="platform_8hpp_source.html#l00017">platform.hpp:17</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="macros-1"></a>
 Macros</h1>
@@ -214,12 +216,14 @@ Macros</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="platform_8hpp.html#addef039204a27478a1fff77081d409bd">HELIOS_EXPORT</a></span>  </td><td class="markdownTableBodyNone">Explicit export annotation (used for plugin entry points).  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="platform_8hpp.html#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK()</a></span>  </td><td class="markdownTableBodyNone"><span class="tt">__debugbreak()</span> on MSVC, <span class="tt">__builtin_trap()</span> on GCC/Clang.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="platform_8hpp.html#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK()</a></span>  </td><td class="markdownTableBodyNone"><span class="tt">__debugbreak()</span> on MSVC, <span class="tt">__builtin_debugtrap()</span> on Apple ARM64, architecture trap elsewhere.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">HELIOS_PLATFORM_WINDOWS</span>  </td><td class="markdownTableBodyNone">Defined when <span class="tt">_WIN32</span> is set.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="platform_8hpp.html#add6cedf0b0fe9ba6f9a8e8fa90ed24e2" title="Inserts a CPU pause hint for busy-wait loops.">HELIOS_PAUSE_CPU()</a></span>  </td><td class="markdownTableBodyNone">Architecture-specific busy-wait pause (adapted from SDL3 <span class="tt">SDL_CPUPauseInstruction</span>).  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">HELIOS_PLATFORM_LINUX</span>  </td><td class="markdownTableBodyNone">Defined when <span class="tt">__linux__</span> is set.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_PLATFORM_WINDOWS</span>  </td><td class="markdownTableBodyNone">Defined when <span class="tt">_WIN32</span> is set.  </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_PLATFORM_LINUX</span>  </td><td class="markdownTableBodyNone">Defined when <span class="tt">__linux__</span> is set.  </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">HELIOS_PLATFORM_MACOS</span>  </td><td class="markdownTableBodyNone">Defined when <span class="tt">__APPLE__</span> is set.  </td></tr>
 </table>
 </div></div><!-- contents -->

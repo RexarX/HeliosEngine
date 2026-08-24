@@ -201,14 +201,14 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename F&gt;<br />
 requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;&gt;<br />
 class helios::ecs::FunctionCmd&lt; F &gt;</div><p>Command that executes a function with <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span> reference. </p>
-<p>Wraps arbitrary functions for deferred execution during <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">World::Update()</a></span>. The function must be invocable with a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp;</span> parameter. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Wraps arbitrary functions for deferred execution during <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a473fc38f99f63f6b356a8afe2793ba98" title="Flushes entity reservations and executes pending commands.">World::Flush()</a></span>. The function must be invocable with a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp;</span> parameter. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">F</td><td>Function type that accepts <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp;</span> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00030">30</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00031">31</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac42ab3d9d70036d2d5b0d2a7190993b5" name="ac42ab3d9d70036d2d5b0d2a7190993b5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac42ab3d9d70036d2d5b0d2a7190993b5">&#9670;&#160;</a></span>FunctionCmd() <span class="overload">[1/4]</span></h2>
@@ -243,7 +243,7 @@ template&lt;typename F&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00036">36</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00037">37</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -280,7 +280,7 @@ template&lt;typename F&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00044">44</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00045">45</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -399,7 +399,7 @@ template&lt;typename F&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00064">64</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__commands_8hpp_source.html#l00065">65</a> of file <a class="el" href="builtin__commands_8hpp_source.html">builtin_commands.hpp</a>.</p>
 
 </div>
 </div>

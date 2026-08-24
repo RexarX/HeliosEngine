@@ -176,9 +176,9 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('free__list__al
 <div class="contents">
 <a href="free__list__allocator_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/assert.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="memory_2include_2helios_2memory_2common_8hpp.html">helios/memory/common.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;helios/memory/details/profile.hpp&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="memory_2include_2helios_2memory_2common_8hpp.html">helios/memory/common.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;helios/memory/details/profile.hpp&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="treiber__stack_8hpp.html">helios/memory/treiber_stack.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
@@ -334,117 +334,73 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('free__list__al
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  };</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keyword">struct </span>RegionHeader {</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordtype">void</span>* buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordtype">size_t</span> capacity = 0;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    std::atomic&lt;RegionHeader*&gt; next{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    RegionHeader* next = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordtype">void</span>* buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordtype">size_t</span> capacity = 0;</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  };</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  <span class="keyword">enum class</span> GrowState : uint8_t { kIdle, kGrowing };</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  <span class="keyword">static</span> RegionHeader* CreateRegion(<span class="keywordtype">size_t</span> capacity) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <span class="keywordtype">void</span> FreeRegions(RegionHeader* region) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  <span class="keywordtype">void</span> ReleaseRegions() noexcept;</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  [[nodiscard]] <span class="keywordtype">void</span>* AllocateLocked(<span class="keywordtype">size_t</span> bytes, <span class="keywordtype">size_t</span> alignment) noexcept;</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <span class="keywordtype">void</span> DeallocateLocked(<span class="keywordtype">void</span>* ptr) noexcept;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  [[nodiscard]] <span class="keywordtype">bool</span> EnsureCapacity(<span class="keywordtype">size_t</span> min_capacity) noexcept;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keywordtype">void</span> InsertAndCoalesceLocked(FreeBlockHeader* block) noexcept;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  <span class="keywordtype">void</span> InitializeRegionLocked(RegionHeader&amp; region) noexcept;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <span class="keywordtype">void</span> MoveFrom(<a class="code hl_function" href="classhelios_1_1mem_1_1FreeListAllocator.html#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator</a>&amp; other) noexcept;</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  [[nodiscard]] <span class="keywordtype">void</span>* do_allocate(<span class="keywordtype">size_t</span> bytes, <span class="keywordtype">size_t</span> alignment) override;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <span class="keywordtype">void</span> do_deallocate(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">size_t</span> bytes, <span class="keywordtype">size_t</span> alignment) override;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  [[nodiscard]] <span class="keywordtype">bool</span> do_is_equal(</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>      const std::pmr::memory_resource&amp; other) const noexcept<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">return</span> <span class="keyword">this</span> == &amp;other;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  }</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  FreeBlockHeader* free_list_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  std::atomic&lt;RegionHeader*&gt; regions_{<span class="keyword">nullptr</span>};</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  std::atomic&lt;GrowState&gt; grow_state_{GrowState::kIdle};</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keywordtype">size_t</span> initial_capacity_ = 0;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  GrowthPolicy growth_;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  std::atomic&lt;size_t&gt; capacity_{0};</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  std::atomic&lt;size_t&gt; used_memory_{0};</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  std::atomic&lt;size_t&gt; peak_usage_{0};</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  std::atomic&lt;size_t&gt; free_block_count_{0};</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  std::atomic&lt;size_t&gt; allocation_count_{0};</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  std::atomic&lt;size_t&gt; total_allocations_{0};</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  std::atomic&lt;size_t&gt; total_deallocations_{0};</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  std::atomic&lt;size_t&gt; alignment_waste_{0};</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  <span class="keyword">mutable</span> HELIOS_MEMORY_PROFILE_LOCKABLE(std::mutex, mutex_);</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>};</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  [[nodiscard]] RegionHeader* HeadRegion() const noexcept {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>RegionHeader*<span class="keyword">&gt;</span>(regions_.Top());</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  [[nodiscard]] <span class="keyword">static</span> RegionHeader* NextRegion(</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>      <span class="keyword">const</span> RegionHeader* region) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>RegionHeader*<span class="keyword">&gt;</span>(<a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a6e805d6ade88c96b67a6403a12f29aa7">TreiberStack::Next</a>(region));</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <span class="keywordtype">void</span> FreeRegions(RegionHeader* region) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  <span class="keywordtype">void</span> ReleaseRegions() noexcept;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  [[nodiscard]] <span class="keywordtype">void</span>* AllocateLocked(<span class="keywordtype">size_t</span> bytes, <span class="keywordtype">size_t</span> alignment) noexcept;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  <span class="keywordtype">void</span> DeallocateLocked(<span class="keywordtype">void</span>* ptr) noexcept;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  [[nodiscard]] <span class="keywordtype">bool</span> EnsureCapacity(<span class="keywordtype">size_t</span> min_capacity) noexcept;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="keywordtype">void</span> InsertAndCoalesceLocked(FreeBlockHeader* block) noexcept;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <span class="keywordtype">void</span> InitializeRegionLocked(RegionHeader&amp; region) noexcept;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  <span class="keywordtype">void</span> MoveFrom(<a class="code hl_function" href="classhelios_1_1mem_1_1FreeListAllocator.html#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator</a>&amp; other) noexcept;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  [[nodiscard]] <span class="keywordtype">void</span>* do_allocate(<span class="keywordtype">size_t</span> bytes, <span class="keywordtype">size_t</span> alignment) override;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  <span class="keywordtype">void</span> do_deallocate(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">size_t</span> bytes, <span class="keywordtype">size_t</span> alignment) override;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  [[nodiscard]] <span class="keywordtype">bool</span> do_is_equal(</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      const std::pmr::memory_resource&amp; other) const noexcept<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">return</span> <span class="keyword">this</span> == &amp;other;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  FreeBlockHeader* free_list_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  TreiberStack regions_;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  std::atomic&lt;GrowState&gt; grow_state_{GrowState::kIdle};</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  <span class="keywordtype">size_t</span> initial_capacity_ = 0;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  GrowthPolicy growth_;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  std::atomic&lt;size_t&gt; capacity_{0};</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  std::atomic&lt;size_t&gt; used_memory_{0};</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  std::atomic&lt;size_t&gt; peak_usage_{0};</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>  std::atomic&lt;size_t&gt; free_block_count_{0};</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  std::atomic&lt;size_t&gt; allocation_count_{0};</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  std::atomic&lt;size_t&gt; total_allocations_{0};</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  std::atomic&lt;size_t&gt; total_deallocations_{0};</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>  std::atomic&lt;size_t&gt; alignment_waste_{0};</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <span class="keyword">mutable</span> HELIOS_MEMORY_PROFILE_LOCKABLE(std::mutex, mutex_);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>};</div>
 </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
-<div class="foldopen" id="foldopen00189" data-start="{" data-end="}">
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1FreeListAllocator.html#ae9cce242e609ced3849dc4ef02bec95c">  189</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1mem_1_1FreeListAllocator.html#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator::FreeListAllocator</a>(</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <a class="code hl_struct" href="structhelios_1_1mem_1_1FreeListAllocatorOptions.html">FreeListAllocatorOptions</a> options) noexcept</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    : initial_capacity_(options.<a class="code hl_variable" href="structhelios_1_1mem_1_1FreeListAllocatorOptions.html#a42fddcb843829d7201e2581e5b9157e0">initial_capacity</a>), growth_(options.<a class="code hl_variable" href="structhelios_1_1mem_1_1FreeListAllocatorOptions.html#ad3f3d305b6826a0a13c6dbb251881468">growth</a>) {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(initial_capacity_ &gt; <span class="keyword">sizeof</span>(FreeBlockHeader),</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>                <span class="stringliteral">&quot;initial_capacity &#39;{}&#39; is too small!&quot;</span>, initial_capacity_);</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(growth_.max_capacity &gt;= initial_capacity_,</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                <span class="stringliteral">&quot;max_capacity &#39;{}&#39; must be &gt;= initial_capacity &#39;{}&#39;!&quot;</span>,</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                growth_.max_capacity, initial_capacity_);</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  HELIOS_MEMORY_PROFILE_LOCK_NAME(mutex_,</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>                                  std::string_view{<span class="stringliteral">&quot;FreeListAllocator&quot;</span>});</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  RegionHeader* <span class="keyword">const</span> initial_region = CreateRegion(initial_capacity_);</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(initial_region != <span class="keyword">nullptr</span>,</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                <span class="stringliteral">&quot;Failed to allocate free-list region!&quot;</span>);</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  regions_.store(initial_region, std::memory_order_release);</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  capacity_.store(initial_capacity_, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  {</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    InitializeRegionLocked(*initial_region);</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  }</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>}</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="foldopen" id="foldopen00197" data-start="{" data-end="}">
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1FreeListAllocator.html#ac6a3140580dbf88ccbf781f9503b42cf">  197</a></span><span class="keyword">inline</span> <a class="code hl_struct" href="structhelios_1_1mem_1_1AllocatorStats.html">AllocatorStats</a> <a class="code hl_function" href="classhelios_1_1mem_1_1FreeListAllocator.html#ac6a3140580dbf88ccbf781f9503b42cf">FreeListAllocator::Stats</a>() const noexcept {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  <span class="keywordflow">return</span> {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      .total_allocated = used_memory_.load(std::memory_order_relaxed),</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>      .peak_usage = peak_usage_.load(std::memory_order_relaxed),</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>      .allocation_count = allocation_count_.load(std::memory_order_relaxed),</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>      .total_allocations = total_allocations_.load(std::memory_order_relaxed),</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      .total_deallocations =</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>          total_deallocations_.load(std::memory_order_relaxed),</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>      .alignment_waste = alignment_waste_.load(std::memory_order_relaxed),</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  };</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>}</div>
 </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
-<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1FreeListAllocator.html#aea345c4edd7be64276be2d2c2a4b76a4">  214</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1mem_1_1FreeListAllocator.html#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator::FreeListAllocator</a>(</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <a class="code hl_function" href="classhelios_1_1mem_1_1FreeListAllocator.html#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <span class="keyword">const</span> std::scoped_lock lock(other.mutex_);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  MoveFrom(other);</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>}</div>
-</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
-<div class="foldopen" id="foldopen00220" data-start="{" data-end="}">
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1FreeListAllocator.html#a3618c5a5a6fe034535df1dbd24b755eb">  220</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1mem_1_1FreeListAllocator.html#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator</a>&amp; <a class="code hl_function" href="classhelios_1_1mem_1_1FreeListAllocator.html#a5cd948df36c1523d00546ab0603ad1f7">FreeListAllocator::operator=</a>(</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <a class="code hl_function" href="classhelios_1_1mem_1_1FreeListAllocator.html#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  }</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_, other.mutex_);</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  ReleaseRegions();</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  MoveFrom(other);</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>}</div>
-</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
-<div class="foldopen" id="foldopen00232" data-start="{" data-end="}">
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1FreeListAllocator.html#ac6a3140580dbf88ccbf781f9503b42cf">  232</a></span><span class="keyword">inline</span> <a class="code hl_struct" href="structhelios_1_1mem_1_1AllocatorStats.html">AllocatorStats</a> <a class="code hl_function" href="classhelios_1_1mem_1_1FreeListAllocator.html#ac6a3140580dbf88ccbf781f9503b42cf">FreeListAllocator::Stats</a>() const noexcept {</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  <span class="keywordflow">return</span> {</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>      .total_allocated = used_memory_.load(std::memory_order_relaxed),</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>      .peak_usage = peak_usage_.load(std::memory_order_relaxed),</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>      .allocation_count = allocation_count_.load(std::memory_order_relaxed),</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>      .total_allocations = total_allocations_.load(std::memory_order_relaxed),</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>      .total_deallocations =</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>          total_deallocations_.load(std::memory_order_relaxed),</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      .alignment_waste = alignment_waste_.load(std::memory_order_relaxed),</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  };</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>}</div>
-</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>}  <span class="comment">// namespace helios::mem</span></div>
-<div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00259">assert.hpp:259</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a8b8608656bafeab9911c16dce4827a04"><div class="ttname"><a href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a></div><div class="ttdeci">#define HELIOS_VERIFY(condition,...)</div><div class="ttdoc">Verify macro that always checks the condition.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00323">assert.hpp:323</a></div></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}  <span class="comment">// namespace helios::mem</span></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_a13b5016e506dae3dcde2e17f51ed2867"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#a13b5016e506dae3dcde2e17f51ed2867">helios::mem::FreeListAllocator::FreeBlockCount</a></div><div class="ttdeci">size_t FreeBlockCount() const noexcept</div><div class="ttdoc">Returns free-list block count.</div><div class="ttdef"><b>Definition</b> <a href="#l00121">free_list_allocator.hpp:121</a></div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_a20b9e7a6237969290e6d59a93fec0a98"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#a20b9e7a6237969290e6d59a93fec0a98">helios::mem::FreeListAllocator::~FreeListAllocator</a></div><div class="ttdeci">~FreeListAllocator() noexcept override</div><div class="ttdef"><b>Definition</b> <a href="#l00057">free_list_allocator.hpp:57</a></div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_a420eb36cccc7bc9d8f21858da60ece8a"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#a420eb36cccc7bc9d8f21858da60ece8a">helios::mem::FreeListAllocator::UsedMemory</a></div><div class="ttdeci">size_t UsedMemory() const noexcept</div><div class="ttdoc">Returns used memory bytes.</div><div class="ttdef"><b>Definition</b> <a href="#l00107">free_list_allocator.hpp:107</a></div></div>
@@ -454,12 +410,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('free__list__al
 <div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_a5cd948df36c1523d00546ab0603ad1f7"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#a5cd948df36c1523d00546ab0603ad1f7">helios::mem::FreeListAllocator::operator=</a></div><div class="ttdeci">FreeListAllocator &amp; operator=(const FreeListAllocator &amp;)=delete</div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_a85c393075c98449a150784e77521d5c8"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#a85c393075c98449a150784e77521d5c8">helios::mem::FreeListAllocator::Growth</a></div><div class="ttdeci">GrowthPolicy Growth() const noexcept</div><div class="ttdoc">Returns growth policy.</div><div class="ttdef"><b>Definition</b> <a href="#l00137">free_list_allocator.hpp:137</a></div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_ab0592c45409ac153052bc38d87caf437"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#ab0592c45409ac153052bc38d87caf437">helios::mem::FreeListAllocator::FreeListAllocator</a></div><div class="ttdeci">FreeListAllocator(size_t initial_capacity) noexcept</div><div class="ttdoc">Constructs free-list allocator with geometric growth.</div><div class="ttdef"><b>Definition</b> <a href="#l00044">free_list_allocator.hpp:44</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_ac6a3140580dbf88ccbf781f9503b42cf"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#ac6a3140580dbf88ccbf781f9503b42cf">helios::mem::FreeListAllocator::Stats</a></div><div class="ttdeci">AllocatorStats Stats() const noexcept</div><div class="ttdoc">Returns runtime stats.</div><div class="ttdef"><b>Definition</b> <a href="#l00232">free_list_allocator.hpp:232</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_ac8809dc681caa92ff3cd5780f60c20c2"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#ac8809dc681caa92ff3cd5780f60c20c2">helios::mem::FreeListAllocator::FreeMemory</a></div><div class="ttdeci">size_t FreeMemory() const noexcept</div><div class="ttdoc">Returns free memory bytes.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8cpp_source.html#l00111">free_list_allocator.cpp:111</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_ad3ffb91c1f22aad8ded905b53c925b11"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#ad3ffb91c1f22aad8ded905b53c925b11">helios::mem::FreeListAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets allocator to initial state.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8cpp_source.html#l00031">free_list_allocator.cpp:31</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_ae9cce242e609ced3849dc4ef02bec95c"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#ae9cce242e609ced3849dc4ef02bec95c">helios::mem::FreeListAllocator::FreeListAllocator</a></div><div class="ttdeci">FreeListAllocator(FreeListAllocatorOptions options) noexcept</div><div class="ttdoc">Constructs free-list allocator from options.</div><div class="ttdef"><b>Definition</b> <a href="#l00189">free_list_allocator.hpp:189</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_af202ca917c71ad5a19551182b8c851a1"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#af202ca917c71ad5a19551182b8c851a1">helios::mem::FreeListAllocator::Owns</a></div><div class="ttdeci">bool Owns(const void *ptr) const noexcept</div><div class="ttdoc">Checks whether pointer belongs to allocator storage.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8cpp_source.html#l00052">free_list_allocator.cpp:52</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_ac6a3140580dbf88ccbf781f9503b42cf"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#ac6a3140580dbf88ccbf781f9503b42cf">helios::mem::FreeListAllocator::Stats</a></div><div class="ttdeci">AllocatorStats Stats() const noexcept</div><div class="ttdoc">Returns runtime stats.</div><div class="ttdef"><b>Definition</b> <a href="#l00197">free_list_allocator.hpp:197</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_ac8809dc681caa92ff3cd5780f60c20c2"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#ac8809dc681caa92ff3cd5780f60c20c2">helios::mem::FreeListAllocator::FreeMemory</a></div><div class="ttdeci">size_t FreeMemory() const noexcept</div><div class="ttdoc">Returns free memory bytes.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8cpp_source.html#l00153">free_list_allocator.cpp:153</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_ad3ffb91c1f22aad8ded905b53c925b11"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#ad3ffb91c1f22aad8ded905b53c925b11">helios::mem::FreeListAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets allocator to initial state.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8cpp_source.html#l00073">free_list_allocator.cpp:73</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_ae9cce242e609ced3849dc4ef02bec95c"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#ae9cce242e609ced3849dc4ef02bec95c">helios::mem::FreeListAllocator::FreeListAllocator</a></div><div class="ttdeci">FreeListAllocator(FreeListAllocatorOptions options) noexcept</div><div class="ttdoc">Constructs free-list allocator from options.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8cpp_source.html#l00032">free_list_allocator.cpp:32</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_af202ca917c71ad5a19551182b8c851a1"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#af202ca917c71ad5a19551182b8c851a1">helios::mem::FreeListAllocator::Owns</a></div><div class="ttdeci">bool Owns(const void *ptr) const noexcept</div><div class="ttdoc">Checks whether pointer belongs to allocator storage.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8cpp_source.html#l00094">free_list_allocator.cpp:94</a></div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1FreeListAllocator_html_af8481a62c6f10c9c26321b7a17030f66"><div class="ttname"><a href="classhelios_1_1mem_1_1FreeListAllocator.html#af8481a62c6f10c9c26321b7a17030f66">helios::mem::FreeListAllocator::AllocationCount</a></div><div class="ttdeci">size_t AllocationCount() const noexcept</div><div class="ttdoc">Returns current active allocation count.</div><div class="ttdef"><b>Definition</b> <a href="#l00129">free_list_allocator.hpp:129</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a6e805d6ade88c96b67a6403a12f29aa7"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a6e805d6ade88c96b67a6403a12f29aa7">helios::mem::TreiberStack::Next</a></div><div class="ttdeci">static void * Next(const void *node) noexcept</div><div class="ttdoc">Returns the successor stored in node&#39;s first word.</div><div class="ttdef"><b>Definition</b> <a href="treiber__stack_8cpp_source.html#l00062">treiber_stack.cpp:62</a></div></div>
 <div class="ttc" id="amemory_2include_2helios_2memory_2common_8hpp_html"><div class="ttname"><a href="memory_2include_2helios_2memory_2common_8hpp.html">common.hpp</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1mem_html"><div class="ttname"><a href="namespacehelios_1_1mem.html">helios::mem</a></div><div class="ttdef"><b>Definition</b> <a href="aligned__alloc_8hpp_source.html#l00005">aligned_alloc.hpp:5</a></div></div>
 <div class="ttc" id="astructhelios_1_1mem_1_1AllocatorStats_html"><div class="ttname"><a href="structhelios_1_1mem_1_1AllocatorStats.html">helios::mem::AllocatorStats</a></div><div class="ttdoc">Runtime statistics snapshot for PMR allocators.</div><div class="ttdef"><b>Definition</b> <a href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00163">common.hpp:163</a></div></div>
@@ -468,6 +425,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('free__list__al
 <div class="ttc" id="astructhelios_1_1mem_1_1FreeListAllocatorOptions_html_ad3f3d305b6826a0a13c6dbb251881468"><div class="ttname"><a href="structhelios_1_1mem_1_1FreeListAllocatorOptions.html#ad3f3d305b6826a0a13c6dbb251881468">helios::mem::FreeListAllocatorOptions::growth</a></div><div class="ttdeci">GrowthPolicy growth</div><div class="ttdoc">Growth policy applied when additional regions are required.</div><div class="ttdef"><b>Definition</b> <a href="#l00020">free_list_allocator.hpp:20</a></div></div>
 <div class="ttc" id="astructhelios_1_1mem_1_1GrowthPolicy_html"><div class="ttname"><a href="structhelios_1_1mem_1_1GrowthPolicy.html">helios::mem::GrowthPolicy</a></div><div class="ttdoc">Capacity growth configuration.</div><div class="ttdef"><b>Definition</b> <a href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00060">common.hpp:60</a></div></div>
 <div class="ttc" id="astructhelios_1_1mem_1_1GrowthPolicy_html_a1acb0a41728ac1706fb7bb88a59ef824"><div class="ttname"><a href="structhelios_1_1mem_1_1GrowthPolicy.html#a1acb0a41728ac1706fb7bb88a59ef824">helios::mem::GrowthPolicy::Geometric</a></div><div class="ttdeci">static constexpr GrowthPolicy Geometric(size_t numerator=2, size_t denominator=1, size_t max=std::numeric_limits&lt; size_t &gt;::max()) noexcept</div><div class="ttdoc">Creates a geometric growth policy.</div><div class="ttdef"><b>Definition</b> <a href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00096">common.hpp:96</a></div></div>
+<div class="ttc" id="atreiber__stack_8hpp_html"><div class="ttname"><a href="treiber__stack_8hpp.html">treiber_stack.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

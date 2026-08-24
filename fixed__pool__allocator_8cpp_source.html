@@ -183,142 +183,172 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('fixed__pool__a
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="memory_2include_2helios_2memory_2common_8hpp.html">helios/memory/common.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;helios/memory/details/profile.hpp&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html">   14</a></span><span class="keyword">namespace </span>{</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a2fa9bd490604dfdbd1ec1910662973f2">   16</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a2fa9bd490604dfdbd1ec1910662973f2">PushBlock</a>(std::atomic&lt;void*&gt;&amp; head, <span class="keywordtype">void</span>* block) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordtype">void</span>* observed = head.load(std::memory_order_acquire);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordflow">for</span> (;;) {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    *<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(block) = observed;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">if</span> (head.compare_exchange_weak(observed, block, std::memory_order_release,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                                   std::memory_order_acquire)) {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    }</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  }</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1mem.html">helios::mem</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a236e485db34f4703ad6ce1a8c7077091">   17</a></span><a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a236e485db34f4703ad6ce1a8c7077091">FixedPoolAllocator::FixedPoolAllocator</a>(</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_struct" href="structhelios_1_1mem_1_1FixedPoolAllocatorOptions.html">FixedPoolAllocatorOptions</a> options) noexcept</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    : block_size_(std::max(options.block_size, <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>*))),</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>      block_count_(options.block_count),</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>      alignment_(options.alignment) {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(block_size_ &gt; 0, <span class="stringliteral">&quot;block_size must be greater than zero!&quot;</span>);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(block_count_ &gt; 0, <span class="stringliteral">&quot;block_count must be greater than zero!&quot;</span>);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec">IsPowerOfTwo</a>(alignment_),</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                <span class="stringliteral">&quot;alignment &#39;{}&#39; must be power of two!&quot;</span>, alignment_);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment_ &gt;= <span class="keyword">alignof</span>(<span class="keywordtype">void</span>*), <span class="stringliteral">&quot;alignment &#39;{}&#39; must be &gt;= &#39;{}&#39;!&quot;</span>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                alignment_, <span class="keyword">alignof</span>(<span class="keywordtype">void</span>*));</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  block_size_ = <a class="code hl_function" href="namespacehelios_1_1mem.html#a2466b59c12d542a39e3ab3d6869af20f">AlignUp</a>(block_size_, alignment_);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  chunk_capacity_ = block_size_ * block_count_;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  buffer_ =</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>      <span class="keyword">static_cast&lt;</span>std::byte*<span class="keyword">&gt;</span>(<a class="code hl_function" href="namespacehelios_1_1mem.html#a978f872cc9cb2a0cf949fd034063873d">AlignedAlloc</a>(alignment_, chunk_capacity_, <span class="keyword">false</span>));</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(buffer_ != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to allocate fixed pool!&quot;</span>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  HELIOS_MEMORY_PROFILE_ALLOC(buffer_, chunk_capacity_, <span class="stringliteral">&quot;FixedPoolAllocator&quot;</span>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  Rebuild();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
 </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a84015026769dbfa2c57a72f2fd57da10">   27</a></span>[[nodiscard]] <span class="keywordtype">void</span>* <a class="code hl_function" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a84015026769dbfa2c57a72f2fd57da10">PopBlock</a>(std::atomic&lt;void*&gt;&amp; head) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordtype">void</span>* observed = head.load(std::memory_order_acquire);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordflow">for</span> (;;) {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">if</span> (observed == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>      <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span>* <span class="keyword">const</span> next = *<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(observed);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">if</span> (head.compare_exchange_weak(observed, next, std::memory_order_acq_rel,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                                   std::memory_order_acquire)) {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>      <span class="keywordflow">return</span> observed;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  }</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a0b62d38059f79b0fe2ebff0c875dd48b">   39</a></span><a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a236e485db34f4703ad6ce1a8c7077091">FixedPoolAllocator::FixedPoolAllocator</a>(<span class="keywordtype">size_t</span> block_size, <span class="keywordtype">size_t</span> block_count,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                                       <span class="keywordtype">size_t</span> alignment) noexcept</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    : <a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a236e485db34f4703ad6ce1a8c7077091">FixedPoolAllocator</a>(<a class="code hl_struct" href="structhelios_1_1mem_1_1FixedPoolAllocatorOptions.html">FixedPoolAllocatorOptions</a>{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>          .block_size = block_size,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>          .block_count = block_count,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>          .alignment = alignment,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      }) {}</div>
 </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}  <span class="comment">// namespace</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a4a7ba0d8b3ac1bc04bdcd3fe75ad8675">   47</a></span><a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a236e485db34f4703ad6ce1a8c7077091">FixedPoolAllocator</a>&amp; <a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a084752f61e97e34367aa1bad8b4fc376">FixedPoolAllocator::operator=</a>(</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a236e485db34f4703ad6ce1a8c7077091">FixedPoolAllocator</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  Release();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  MoveFrom(other);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1mem.html">helios::mem</a> {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keywordtype">void</span> FixedPoolAllocator::MoveFrom(<a class="code hl_class" href="classhelios_1_1mem_1_1FixedPoolAllocator.html">FixedPoolAllocator</a>&amp; other) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  block_size_ = std::exchange(other.block_size_, 0);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  block_count_ = std::exchange(other.block_count_, 0);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  alignment_ = std::exchange(other.alignment_, 0);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  chunk_capacity_ = std::exchange(other.chunk_capacity_, 0);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  buffer_ = std::exchange(other.buffer_, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  free_head_.store(</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      other.free_head_.exchange(<span class="keyword">nullptr</span>, std::memory_order_acq_rel),</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      std::memory_order_release);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  free_blocks_.store(other.free_blocks_.exchange(0, std::memory_order_acq_rel),</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                     std::memory_order_release);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  peak_used_blocks_.store(</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      other.peak_used_blocks_.exchange(0, std::memory_order_acq_rel),</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      std::memory_order_release);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  total_allocations_.store(</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      other.total_allocations_.exchange(0, std::memory_order_acq_rel),</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      std::memory_order_release);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  total_deallocations_.store(</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      other.total_deallocations_.exchange(0, std::memory_order_acq_rel),</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      std::memory_order_release);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#ac395236d0e5b79f5a239c12484361e22">   58</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#ac395236d0e5b79f5a239c12484361e22">FixedPoolAllocator::Reset</a>() noexcept {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(<span class="stringliteral">&quot;helios::mem::FixedPoolAllocator::Reset&quot;</span>);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  Rebuild();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  peak_used_blocks_.store(0, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  total_allocations_.store(0, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  total_deallocations_.store(0, std::memory_order_relaxed);</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
+</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keywordtype">void</span> FixedPoolAllocator::Rebuild() noexcept {</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  free_head_.store(<span class="keyword">nullptr</span>, std::memory_order_release);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> index = 0; index &lt; block_count_; ++index) {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_function" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a2fa9bd490604dfdbd1ec1910662973f2">PushBlock</a>(free_head_, buffer_ + index * block_size_);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  }</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  free_blocks_.store(block_count_, std::memory_order_release);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keywordtype">void</span> FixedPoolAllocator::Release() noexcept {</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keywordflow">if</span> (buffer_ != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    HELIOS_MEMORY_PROFILE_FREE(buffer_, <span class="stringliteral">&quot;FixedPoolAllocator&quot;</span>);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_function" href="namespacehelios_1_1mem.html#a97a35214c272bd39125d8f7052030592">AlignedFree</a>(buffer_, <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    buffer_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  }</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keywordtype">void</span>* FixedPoolAllocator::do_allocate(<span class="keywordtype">size_t</span> bytes, <span class="keywordtype">size_t</span> alignment) {</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(<span class="stringliteral">&quot;helios::mem::FixedPoolAllocator::do_allocate&quot;</span>);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  HELIOS_MEMORY_PROFILE_ZONE_VALUE(bytes);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keywordtype">void</span> FixedPoolAllocator::MoveFrom(<a class="code hl_class" href="classhelios_1_1mem_1_1FixedPoolAllocator.html">FixedPoolAllocator</a>&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  block_size_ = std::exchange(other.block_size_, 0);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  block_count_ = std::exchange(other.block_count_, 0);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  alignment_ = std::exchange(other.alignment_, 0);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  chunk_capacity_ = std::exchange(other.chunk_capacity_, 0);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  buffer_ = std::exchange(other.buffer_, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  free_list_ = std::move(other.free_list_);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  free_blocks_.store(other.free_blocks_.exchange(0, std::memory_order_acq_rel),</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                     std::memory_order_release);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  peak_used_blocks_.store(</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      other.peak_used_blocks_.exchange(0, std::memory_order_acq_rel),</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      std::memory_order_release);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  total_allocations_.store(</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      other.total_allocations_.exchange(0, std::memory_order_acq_rel),</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      std::memory_order_release);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  total_deallocations_.store(</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      other.total_deallocations_.exchange(0, std::memory_order_acq_rel),</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      std::memory_order_release);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keywordflow">if</span> (bytes == 0) [[unlikely]] {</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  }</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(bytes &lt;= block_size_,</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <span class="stringliteral">&quot;Requested size exceeds fixed pool block size!&quot;</span>);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(alignment &lt;= alignment_ &amp;&amp; <a class="code hl_function" href="namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec">IsPowerOfTwo</a>(alignment),</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                <span class="stringliteral">&quot;Requested alignment exceeds fixed pool alignment!&quot;</span>);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keywordtype">void</span>* <span class="keyword">const</span> block = <a class="code hl_function" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a84015026769dbfa2c57a72f2fd57da10">PopBlock</a>(free_head_);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(block != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Fixed pool allocator exhausted!&quot;</span>);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> free = free_blocks_.fetch_sub(1) - 1;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> used = block_count_ - free;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordtype">size_t</span> peak = peak_used_blocks_.load(std::memory_order_relaxed);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="keywordflow">while</span> (used &gt; peak &amp;&amp; !peak_used_blocks_.compare_exchange_weak(</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                            peak, used, std::memory_order_relaxed)) {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  }</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  total_allocations_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <span class="keywordflow">return</span> block;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keywordtype">void</span> FixedPoolAllocator::do_deallocate(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">size_t</span> <span class="comment">/*bytes*/</span>,</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                                       <span class="keywordtype">size_t</span> <span class="comment">/*alignment*/</span>) {</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="stringliteral">&quot;helios::mem::FixedPoolAllocator::do_deallocate&quot;</span>);</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  }</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#adb414ea9cc60790c10c805da792a4375">Owns</a>(ptr), <span class="stringliteral">&quot;ptr does not belong to fixed pool!&quot;</span>);</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <a class="code hl_function" href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a2fa9bd490604dfdbd1ec1910662973f2">PushBlock</a>(free_head_, ptr);</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  free_blocks_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  total_deallocations_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>}</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}  <span class="comment">// namespace helios::mem</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keywordtype">void</span> FixedPoolAllocator::Rebuild() noexcept {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  free_list_.<a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a3ea61c19978dbed7673da79320f1acf0">Clear</a>();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> index = 0; index &lt; block_count_; ++index) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    free_list_.<a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a8c8815d6143a1ad6944b858e13b7b8cc">Push</a>(buffer_ + index * block_size_);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  free_blocks_.store(block_count_, std::memory_order_release);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keywordtype">void</span> FixedPoolAllocator::Release() noexcept {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keywordflow">if</span> (buffer_ != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    HELIOS_MEMORY_PROFILE_FREE(buffer_, <span class="stringliteral">&quot;FixedPoolAllocator&quot;</span>);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <a class="code hl_function" href="namespacehelios_1_1mem.html#a97a35214c272bd39125d8f7052030592">AlignedFree</a>(buffer_, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    buffer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keywordtype">void</span>* FixedPoolAllocator::do_allocate(<span class="keywordtype">size_t</span> bytes, <span class="keywordtype">size_t</span> alignment) {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(<span class="stringliteral">&quot;helios::mem::FixedPoolAllocator::do_allocate&quot;</span>);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  HELIOS_MEMORY_PROFILE_ZONE_VALUE(bytes);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <span class="keywordflow">if</span> (bytes == 0) [[unlikely]] {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(bytes &lt;= block_size_,</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                <span class="stringliteral">&quot;Requested size exceeds fixed pool block size!&quot;</span>);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(alignment &lt;= alignment_ &amp;&amp; <a class="code hl_function" href="namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec">IsPowerOfTwo</a>(alignment),</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                <span class="stringliteral">&quot;Requested alignment exceeds fixed pool alignment!&quot;</span>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="keywordtype">void</span>* <span class="keyword">const</span> block = free_list_.Pop();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keywordflow">if</span> (block == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  }</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> free = free_blocks_.fetch_sub(1) - 1;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> used = block_count_ - free;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keywordtype">size_t</span> peak = peak_used_blocks_.load(std::memory_order_relaxed);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  <span class="keywordflow">while</span> (used &gt; peak &amp;&amp; !peak_used_blocks_.compare_exchange_weak(</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                            peak, used, std::memory_order_relaxed)) {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  total_allocations_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keywordflow">return</span> block;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="keywordtype">void</span> FixedPoolAllocator::do_deallocate(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">size_t</span> <span class="comment">/*bytes*/</span>,</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                                       <span class="keywordtype">size_t</span> <span class="comment">/*alignment*/</span>) {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>      <span class="stringliteral">&quot;helios::mem::FixedPoolAllocator::do_deallocate&quot;</span>);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  }</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1mem_1_1FixedPoolAllocator.html#adb414ea9cc60790c10c805da792a4375">Owns</a>(ptr), <span class="stringliteral">&quot;ptr does not belong to fixed pool!&quot;</span>);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  free_list_.Push(ptr);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  free_blocks_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  total_deallocations_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>}</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>}  <span class="comment">// namespace helios::mem</span></div>
 <div class="ttc" id="aaligned__alloc_8hpp_html"><div class="ttname"><a href="aligned__alloc_8hpp.html">aligned_alloc.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00259">assert.hpp:259</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a8b8608656bafeab9911c16dce4827a04"><div class="ttname"><a href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a></div><div class="ttdeci">#define HELIOS_VERIFY(condition,...)</div><div class="ttdoc">Verify macro that always checks the condition.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00323">assert.hpp:323</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1FixedPoolAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1FixedPoolAllocator.html">helios::mem::FixedPoolAllocator</a></div><div class="ttdoc">Fixed-capacity intrusive block pool.</div><div class="ttdef"><b>Definition</b> <a href="fixed__pool__allocator_8hpp_source.html#l00030">fixed_pool_allocator.hpp:30</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1FixedPoolAllocator_html_adb414ea9cc60790c10c805da792a4375"><div class="ttname"><a href="classhelios_1_1mem_1_1FixedPoolAllocator.html#adb414ea9cc60790c10c805da792a4375">helios::mem::FixedPoolAllocator::Owns</a></div><div class="ttdeci">bool Owns(const void *ptr) const noexcept</div><div class="ttdoc">Checks pointer ownership.</div><div class="ttdef"><b>Definition</b> <a href="fixed__pool__allocator_8hpp_source.html#l00238">fixed_pool_allocator.hpp:238</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00228">assert.hpp:228</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a8b8608656bafeab9911c16dce4827a04"><div class="ttname"><a href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a></div><div class="ttdeci">#define HELIOS_VERIFY(condition,...)</div><div class="ttdoc">Verify macro that always checks the condition.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00292">assert.hpp:292</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FixedPoolAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1FixedPoolAllocator.html">helios::mem::FixedPoolAllocator</a></div><div class="ttdoc">Fixed-capacity intrusive block pool.</div><div class="ttdef"><b>Definition</b> <a href="fixed__pool__allocator_8hpp_source.html#l00029">fixed_pool_allocator.hpp:29</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FixedPoolAllocator_html_a084752f61e97e34367aa1bad8b4fc376"><div class="ttname"><a href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a084752f61e97e34367aa1bad8b4fc376">helios::mem::FixedPoolAllocator::operator=</a></div><div class="ttdeci">FixedPoolAllocator &amp; operator=(const FixedPoolAllocator &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FixedPoolAllocator_html_a236e485db34f4703ad6ce1a8c7077091"><div class="ttname"><a href="classhelios_1_1mem_1_1FixedPoolAllocator.html#a236e485db34f4703ad6ce1a8c7077091">helios::mem::FixedPoolAllocator::FixedPoolAllocator</a></div><div class="ttdeci">FixedPoolAllocator(FixedPoolAllocatorOptions options) noexcept</div><div class="ttdoc">Constructs fixed pool from options.</div><div class="ttdef"><b>Definition</b> <a href="#l00017">fixed_pool_allocator.cpp:17</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FixedPoolAllocator_html_ac395236d0e5b79f5a239c12484361e22"><div class="ttname"><a href="classhelios_1_1mem_1_1FixedPoolAllocator.html#ac395236d0e5b79f5a239c12484361e22">helios::mem::FixedPoolAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets pool to fully free state.</div><div class="ttdef"><b>Definition</b> <a href="#l00058">fixed_pool_allocator.cpp:58</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FixedPoolAllocator_html_adb414ea9cc60790c10c805da792a4375"><div class="ttname"><a href="classhelios_1_1mem_1_1FixedPoolAllocator.html#adb414ea9cc60790c10c805da792a4375">helios::mem::FixedPoolAllocator::Owns</a></div><div class="ttdeci">bool Owns(const void *ptr) const noexcept</div><div class="ttdoc">Checks pointer ownership.</div><div class="ttdef"><b>Definition</b> <a href="fixed__pool__allocator_8hpp_source.html#l00187">fixed_pool_allocator.hpp:187</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a3ea61c19978dbed7673da79320f1acf0"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a3ea61c19978dbed7673da79320f1acf0">helios::mem::TreiberStack::Clear</a></div><div class="ttdeci">void Clear() noexcept</div><div class="ttdoc">Drops the head without visiting or freeing nodes.</div><div class="ttdef"><b>Definition</b> <a href="treiber__stack_8hpp_source.html#l00064">treiber_stack.hpp:64</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a8c8815d6143a1ad6944b858e13b7b8cc"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a8c8815d6143a1ad6944b858e13b7b8cc">helios::mem::TreiberStack::Push</a></div><div class="ttdeci">void Push(void *node) noexcept</div><div class="ttdoc">Pushes node as the new top.</div><div class="ttdef"><b>Definition</b> <a href="treiber__stack_8cpp_source.html#l00031">treiber_stack.cpp:31</a></div></div>
 <div class="ttc" id="afixed__pool__allocator_8hpp_html"><div class="ttname"><a href="fixed__pool__allocator_8hpp.html">fixed_pool_allocator.hpp</a></div></div>
 <div class="ttc" id="amemory_2include_2helios_2memory_2common_8hpp_html"><div class="ttname"><a href="memory_2include_2helios_2memory_2common_8hpp.html">common.hpp</a></div></div>
 <div class="ttc" id="amemory_2src_2pch_8hpp_html"><div class="ttname"><a href="memory_2src_2pch_8hpp.html">pch.hpp</a></div></div>
-<div class="ttc" id="anamespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03_html_a2fa9bd490604dfdbd1ec1910662973f2"><div class="ttname"><a href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a2fa9bd490604dfdbd1ec1910662973f2">anonymous_namespace{fixed_pool_allocator.cpp}::PushBlock</a></div><div class="ttdeci">void PushBlock(std::atomic&lt; void * &gt; &amp;head, void *block) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00016">fixed_pool_allocator.cpp:16</a></div></div>
-<div class="ttc" id="anamespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03_html_a84015026769dbfa2c57a72f2fd57da10"><div class="ttname"><a href="namespaceanonymous__namespace_02fixed__pool__allocator_8cpp_03.html#a84015026769dbfa2c57a72f2fd57da10">anonymous_namespace{fixed_pool_allocator.cpp}::PopBlock</a></div><div class="ttdeci">void * PopBlock(std::atomic&lt; void * &gt; &amp;head) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00027">fixed_pool_allocator.cpp:27</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1mem_html"><div class="ttname"><a href="namespacehelios_1_1mem.html">helios::mem</a></div><div class="ttdef"><b>Definition</b> <a href="aligned__alloc_8hpp_source.html#l00005">aligned_alloc.hpp:5</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a215212ef34ee8e3309e0f4ebdbd463ec"><div class="ttname"><a href="namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec">helios::mem::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t value) noexcept</div><div class="ttdoc">Checks if a value is a power of two.</div><div class="ttdef"><b>Definition</b> <a href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00216">common.hpp:216</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a97a35214c272bd39125d8f7052030592"><div class="ttname"><a href="namespacehelios_1_1mem.html#a97a35214c272bd39125d8f7052030592">helios::mem::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr, bool enable_profile=true) noexcept</div><div class="ttdoc">Frees memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="aligned__alloc_8cpp_source.html#l00045">aligned_alloc.cpp:45</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a215212ef34ee8e3309e0f4ebdbd463ec"><div class="ttname"><a href="namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec">helios::mem::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t value) noexcept</div><div class="ttdoc">Checks if a value is a power of two.</div><div class="ttdef"><b>Definition</b> <a href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00215">common.hpp:215</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a2466b59c12d542a39e3ab3d6869af20f"><div class="ttname"><a href="namespacehelios_1_1mem.html#a2466b59c12d542a39e3ab3d6869af20f">helios::mem::AlignUp</a></div><div class="ttdeci">constexpr size_t AlignUp(size_t value, size_t alignment) noexcept</div><div class="ttdoc">Aligns value up to alignment.</div><div class="ttdef"><b>Definition</b> <a href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00226">common.hpp:226</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a978f872cc9cb2a0cf949fd034063873d"><div class="ttname"><a href="namespacehelios_1_1mem.html#a978f872cc9cb2a0cf949fd034063873d">helios::mem::AlignedAlloc</a></div><div class="ttdeci">void * AlignedAlloc(size_t alignment, size_t size, bool enable_profile=true) noexcept</div><div class="ttdoc">Allocates memory with the specified alignment.</div><div class="ttdef"><b>Definition</b> <a href="aligned__alloc_8cpp_source.html#l00019">aligned_alloc.cpp:19</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a97a35214c272bd39125d8f7052030592"><div class="ttname"><a href="namespacehelios_1_1mem.html#a97a35214c272bd39125d8f7052030592">helios::mem::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr, bool enable_profile=true) noexcept</div><div class="ttdoc">Frees memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="aligned__alloc_8cpp_source.html#l00046">aligned_alloc.cpp:46</a></div></div>
+<div class="ttc" id="astructhelios_1_1mem_1_1FixedPoolAllocatorOptions_html"><div class="ttname"><a href="structhelios_1_1mem_1_1FixedPoolAllocatorOptions.html">helios::mem::FixedPoolAllocatorOptions</a></div><div class="ttdoc">Configuration for FixedPoolAllocator.</div><div class="ttdef"><b>Definition</b> <a href="fixed__pool__allocator_8hpp_source.html#l00014">fixed_pool_allocator.hpp:14</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

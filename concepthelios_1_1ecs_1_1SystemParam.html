@@ -178,28 +178,28 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('concepthelios_
 <p>Concept for types usable as system function parameters.  
 <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="system__param_8hpp_source.html">system_param.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="param_8hpp_source.html">param.hpp</a>&gt;</code></p>
 <h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1ecs_1_1SystemParam.html">SystemParam</a> =</div>
 <div class="line">    <span class="keyword">requires</span>(<a class="code hl_class" href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html">AccessPolicyBuilder</a>&amp; builder, <a class="code hl_class" href="classhelios_1_1ecs_1_1World.html">World</a>&amp; world, <a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>&amp; local,</div>
 <div class="line">             <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1AccessPolicy.html">AccessPolicy</a>&amp; policy) {</div>
 <div class="line">      { <a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemParamTraits.html">SystemParamTraits&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::RegisterAccess(builder) };</div>
-<div class="line">      {</div>
-<div class="line">        <a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemParamTraits.html">SystemParamTraits&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::Make(world, local, policy)</div>
-<div class="line">      } -&gt; std::same_as&lt;std::remove_cvref_t&lt;T&gt;&gt;;</div>
+<div class="line">      <a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemParamTraits.html">SystemParamTraits&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::Make(world, local, policy);</div>
+<div class="line">      <span class="keyword">requires</span> <a class="code hl_concept" href="concepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches.html">details::SystemParamMakeResultMatches&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;;</div>
 <div class="line">    }</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html">helios::ecs::AccessPolicyBuilder</a></div><div class="ttdoc">Fluent builder for constructing an AccessPolicy.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00529">access_policy.hpp:529</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicy_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicy.html">helios::ecs::AccessPolicy</a></div><div class="ttdoc">Stores data access requirements for a system at compile time.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00119">access_policy.hpp:119</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html">helios::ecs::World</a></div><div class="ttdoc">The World class manages entities with their components and systems.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00040">world.hpp:40</a></div></div>
-<div class="ttc" id="aconcepthelios_1_1ecs_1_1SystemParam_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1SystemParam.html">helios::ecs::SystemParam</a></div><div class="ttdoc">Concept for types usable as system function parameters.</div><div class="ttdef"><b>Definition</b> <a href="system__param_8hpp_source.html#l00028">system_param.hpp:28</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1SystemLocalData_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1SystemLocalData.html">helios::ecs::SystemLocalData</a></div><div class="ttdoc">Local data for a system.</div><div class="ttdef"><b>Definition</b> <a href="system__local__data_8hpp_source.html#l00023">system_local_data.hpp:23</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1SystemParamTraits_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a></div><div class="ttdoc">Primary template — deliberately incomplete.</div><div class="ttdef"><b>Definition</b> <a href="system__param_8hpp_source.html#l00020">system_param.hpp:20</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicyBuilder_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html">helios::ecs::AccessPolicyBuilder</a></div><div class="ttdoc">Fluent builder for constructing an AccessPolicy.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00556">access_policy.hpp:556</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1AccessPolicy_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1AccessPolicy.html">helios::ecs::AccessPolicy</a></div><div class="ttdoc">Stores data access requirements for a system at compile time.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00124">access_policy.hpp:124</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html">helios::ecs::World</a></div><div class="ttdoc">The World class manages entities with their components and systems.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00049">world.hpp:49</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1SystemParam_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1SystemParam.html">helios::ecs::SystemParam</a></div><div class="ttdoc">Concept for types usable as system function parameters.</div><div class="ttdef"><b>Definition</b> <a href="param_8hpp_source.html#l00045">param.hpp:45</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches.html">helios::ecs::details::SystemParamMakeResultMatches</a></div><div class="ttdef"><b>Definition</b> <a href="param_8hpp_source.html#l00033">param.hpp:33</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1SystemLocalData_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1SystemLocalData.html">helios::ecs::SystemLocalData</a></div><div class="ttdoc">Local data for a system.</div><div class="ttdef"><b>Definition</b> <a href="system__local__data_8hpp_source.html#l00025">system_local_data.hpp:25</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1SystemParamTraits_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1SystemParamTraits.html">helios::ecs::SystemParamTraits</a></div><div class="ttdoc">Primary template — deliberately incomplete.</div><div class="ttdef"><b>Definition</b> <a href="param_8hpp_source.html#l00022">param.hpp:22</a></div></div>
 </div><!-- fragment --><a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concept for types usable as system function parameters. </p>
-<p>Satisfied when <span class="tt">SystemParamTraits&lt;T&gt;</span> provides <span class="tt">RegisterAccess</span> and <span class="tt">Make</span>. </p>
+<p>Satisfied when <span class="tt">SystemParamTraits&lt;T&gt;</span> provides <span class="tt">RegisterAccess</span> and <span class="tt">Make</span> returning <span class="tt">T</span> or <span class="tt">T&amp;</span>. </p>
 
-<p class="definition">Definition at line <a class="el" href="system__param_8hpp_source.html#l00028">28</a> of file <a class="el" href="system__param_8hpp_source.html">system_param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="param_8hpp_source.html#l00045">45</a> of file <a class="el" href="param_8hpp_source.html">param.hpp</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

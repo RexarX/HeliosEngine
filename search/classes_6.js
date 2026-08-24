@@ -1,4 +1,23 @@
 var searchData=
 [
-  ['growthpolicy_0',['GrowthPolicy',['../structhelios_1_1mem_1_1GrowthPolicy.html',1,'helios::mem']]]
+  ['gamepad_0',['Gamepad',['../structhelios_1_1input_1_1Gamepad.html',1,'helios::input']]],
+  ['gamepadaxischangedmsg_1',['GamepadAxisChangedMsg',['../structhelios_1_1input_1_1GamepadAxisChangedMsg.html',1,'helios::input']]],
+  ['gamepadaxisfilter_2',['GamepadAxisFilter',['../structhelios_1_1input_1_1GamepadAxisFilter.html',1,'helios::input']]],
+  ['gamepadbuttoninputmsg_3',['GamepadButtonInputMsg',['../structhelios_1_1input_1_1GamepadButtonInputMsg.html',1,'helios::input']]],
+  ['gamepadcache_4',['GamepadCache',['../structhelios_1_1sdl3_1_1input_1_1GamepadCache.html',1,'helios::sdl3::input']]],
+  ['gamepadconnectionmsg_5',['GamepadConnectionMsg',['../structhelios_1_1input_1_1GamepadConnectionMsg.html',1,'helios::input']]],
+  ['gamepadmappings_6',['GamepadMappings',['../structhelios_1_1input_1_1GamepadMappings.html',1,'helios::input']]],
+  ['gamepadmessages_7',['GamepadMessages',['../structhelios_1_1input_1_1GamepadMessages.html',1,'helios::input']]],
+  ['gamepadpower_8',['GamepadPower',['../structhelios_1_1input_1_1GamepadPower.html',1,'helios::input']]],
+  ['gamepadpowerchangedmsg_9',['GamepadPowerChangedMsg',['../structhelios_1_1input_1_1GamepadPowerChangedMsg.html',1,'helios::input']]],
+  ['gamepadremappedmsg_10',['GamepadRemappedMsg',['../structhelios_1_1input_1_1GamepadRemappedMsg.html',1,'helios::input']]],
+  ['gamepads_11',['Gamepads',['../structhelios_1_1input_1_1Gamepads.html',1,'helios::input']]],
+  ['gamepadsensorupdatemsg_12',['GamepadSensorUpdateMsg',['../structhelios_1_1input_1_1GamepadSensorUpdateMsg.html',1,'helios::input']]],
+  ['gamepadslotcache_13',['GamepadSlotCache',['../structhelios_1_1sdl3_1_1input_1_1GamepadSlotCache.html',1,'helios::sdl3::input']]],
+  ['gamepadtouchpadfinger_14',['GamepadTouchpadFinger',['../structhelios_1_1input_1_1GamepadTouchpadFinger.html',1,'helios::input']]],
+  ['gamepadtouchpadmsg_15',['GamepadTouchpadMsg',['../structhelios_1_1input_1_1GamepadTouchpadMsg.html',1,'helios::input']]],
+  ['gamepadwriters_16',['GamepadWriters',['../structhelios_1_1input_1_1GamepadWriters.html',1,'helios::input']]],
+  ['geometrymessages_17',['GeometryMessages',['../structhelios_1_1window_1_1GeometryMessages.html',1,'helios::window']]],
+  ['geometrywriters_18',['GeometryWriters',['../structhelios_1_1window_1_1GeometryWriters.html',1,'helios::window']]],
+  ['growthpolicy_19',['GrowthPolicy',['../structhelios_1_1mem_1_1GrowthPolicy.html',1,'helios::mem']]]
 ];

@@ -181,11 +181,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 struct helios::ecs::SystemParamTraits&lt; T &gt;</div><p>Primary template — deliberately incomplete. </p>
 <p>Every system parameter type must provide a specialisation with:</p><ul>
-<li><span class="tt">static auto Make(<a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp;, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html" title="Local data for a system.">SystemLocalData</a>&amp;, const <a class="el" href="classhelios_1_1ecs_1_1AccessPolicy.html" title="Stores data access requirements for a system at compile time.">AccessPolicy</a>&amp;) -&gt; T</span></li>
+<li><span class="tt">static auto Make(<a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp;, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html" title="Local data for a system.">SystemLocalData</a>&amp;, const <a class="el" href="classhelios_1_1ecs_1_1AccessPolicy.html" title="Stores data access requirements for a system at compile time.">AccessPolicy</a>&amp;) -&gt; T</span> or <span class="tt">T&amp;</span></li>
 <li><span class="tt">static constexpr void RegisterAccess(<a class="el" href="classhelios_1_1ecs_1_1AccessPolicyBuilder.html" title="Fluent builder for constructing an AccessPolicy.">AccessPolicyBuilder</a>&amp;)</span> </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="system__param_8hpp_source.html#l00020">20</a> of file <a class="el" href="system__param_8hpp_source.html">system_param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="param_8hpp_source.html#l00022">22</a> of file <a class="el" href="param_8hpp_source.html">param.hpp</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

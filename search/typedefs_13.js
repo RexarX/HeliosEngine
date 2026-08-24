@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['wcstringview_0',['WCStringView',['../namespacehelios.html#a25d6b558f111a080d2d77ce5e9caa6c6',1,'helios']]],
-  ['withentityiterator_1',['WithEntityIterator',['../classhelios_1_1ecs_1_1BasicQuery.html#abefa2c8768cbcd53f20def86a71e2c5a',1,'helios::ecs::BasicQuery']]]
+  ['u16cstringview_0',['U16CStringView',['../namespacehelios.html#a2e2ac7e78c9c7a539c7474a9bc7d0df9',1,'helios']]],
+  ['u32cstringview_1',['U32CStringView',['../namespacehelios.html#a972743e2f2714ec185e080de5028f319',1,'helios']]],
+  ['u8cstringview_2',['U8CStringView',['../namespacehelios.html#a2f8cda93d2cc7430b93197943023cb6b',1,'helios']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['scheduleerrorkind_0',['ScheduleErrorKind',['../namespacehelios_1_1ecs.html#abd1fa5ad164fafc85b0908aac3fbf20b',1,'helios::ecs']]]
+  ['level_0',['Level',['../namespacehelios_1_1log.html#addfd119fad8921232327088631b3aeb9',1,'helios::log']]]
 ];

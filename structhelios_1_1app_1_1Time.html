@@ -221,6 +221,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:afb6c59432a5a75a1ef4b849c01518135"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets delta time in milliseconds.  <br /></td></tr>
 <tr class="memitem:a622f472b1e6fcdf1dc3c040130e5de68" id="r_a622f472b1e6fcdf1dc3c040130e5de68"><td class="memItemLeft">int64_t&#160;</td><td class="memItemRight"><a class="el" href="#a622f472b1e6fcdf1dc3c040130e5de68">DeltaMicroSec</a> () const</td></tr>
 <tr class="memdesc:a622f472b1e6fcdf1dc3c040130e5de68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets delta time in microseconds.  <br /></td></tr>
+<tr class="memitem:a87fbcec15fe58ead266ec1d5bdbf0d0e" id="r_a87fbcec15fe58ead266ec1d5bdbf0d0e"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a87fbcec15fe58ead266ec1d5bdbf0d0e">Fps</a> () const noexcept</td></tr>
 <tr class="memitem:a9f7e2343bc0469f122a8d8af7fae4177" id="r_a9f7e2343bc0469f122a8d8af7fae4177"><td class="memItemLeft">int64_t&#160;</td><td class="memItemRight"><a class="el" href="#a9f7e2343bc0469f122a8d8af7fae4177">DeltaNanoSec</a> () const</td></tr>
 <tr class="memdesc:a9f7e2343bc0469f122a8d8af7fae4177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets delta time in nanoseconds.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -229,7 +230,7 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a5934f3054ece16b67dc91120470fc5bf" id="r_a5934f3054ece16b67dc91120470fc5bf"><td class="memItemLeft"><a class="el" href="#a25a0f9a6ab2e2548c3a345b6656bf527">Duration</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5934f3054ece16b67dc91120470fc5bf">delta_time</a> {}</td></tr>
 <tr class="memitem:a0333e9180f411b094a6f2b780758e6a9" id="r_a0333e9180f411b094a6f2b780758e6a9"><td class="memItemLeft"><a class="el" href="#a25a0f9a6ab2e2548c3a345b6656bf527">Duration</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0333e9180f411b094a6f2b780758e6a9">elapsed</a> {}</td></tr>
 <tr class="memitem:ac74cb16d92de7f8e856e8f748ff6b3ae" id="r_ac74cb16d92de7f8e856e8f748ff6b3ae"><td class="memItemLeft">Clock::time_point&#160;</td><td class="memItemRight"><a class="el" href="#ac74cb16d92de7f8e856e8f748ff6b3ae">last_update</a> = Clock::now()</td></tr>
-<tr class="memdesc:ac74cb16d92de7f8e856e8f748ff6b3ae"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="logger_8cpp.html#ac336b1607370732f463a7237c67f83a5">Timestamp</a> used to compute the next frame delta.  <br /></td></tr>
+<tr class="memdesc:ac74cb16d92de7f8e856e8f748ff6b3ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestamp used to compute the next frame delta.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -436,7 +437,7 @@ template&lt;utils::DurationTrait Units = Duration&gt; </div>
 <p>Gets delta time in nanoseconds. </p>
 <dl class="section return"><dt>Returns</dt><dd>Delta time in nanoseconds </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00148">148</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00154">154</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
 
 </div>
 </div>
@@ -667,6 +668,33 @@ template&lt;utils::DurationTrait Units = Duration&gt; </div>
 
 </div>
 </div>
+<a id="a87fbcec15fe58ead266ec1d5bdbf0d0e" name="a87fbcec15fe58ead266ec1d5bdbf0d0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87fbcec15fe58ead266ec1d5bdbf0d0e">&#9670;&#160;</a></span>Fps()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double helios::app::Time::Fps </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00144">144</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+
+</div>
+</div>
 <a id="adaff7dc5f250f2f463356f508daa1e74" name="adaff7dc5f250f2f463356f508daa1e74"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adaff7dc5f250f2f463356f508daa1e74">&#9670;&#160;</a></span>Update()</h2>
 
@@ -766,7 +794,7 @@ template&lt;utils::DurationTrait Units = Duration&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="logger_8cpp.html#ac336b1607370732f463a7237c67f83a5">Timestamp</a> used to compute the next frame delta. </p>
+<p>Timestamp used to compute the next frame delta. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Manually changing this value is not recommended. Prefer allowing <span class="tt"><a class="el" href="classhelios_1_1app_1_1TimePlugin.html" title="Adds the Time resource and its per-frame update system.">TimePlugin</a></span> to maintain frame timing. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00030">30</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>

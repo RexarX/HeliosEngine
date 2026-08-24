@@ -249,26 +249,11 @@ Module structure</h1>
 <p>Every module under <span class="tt">src/</span> follows this layout:</p>
 <div class="fragment"><div class="line">src/&lt;module&gt;/</div>
 <div class="line">├── CMakeLists.txt           # helios_module(...) call</div>
-<div class="line">├── Module.cmake             # helios_register_module(...) call</div>
 <div class="line">├── README.md                # Module overview and usage</div>
 <div class="line">├── include/helios/&lt;module&gt;/ # Public headers</div>
 <div class="line">├── src/                     # Private sources + pch.hpp</div>
 <div class="line">└── tests/                   # doctest test files + main.cpp</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="registration-modulecmake"></a>
-Registration (<span class="tt">Module.cmake</span>)</h2>
-<div class="fragment"><div class="line">helios_register_module(</div>
-<div class="line">    NAME ecs</div>
-<div class="line">    DESCRIPTION &quot;Entity Component System module&quot;</div>
-<div class="line">    DEFAULT ON</div>
-<div class="line">    DEPENDS async compiler container core log memory utils</div>
-<div class="line">    OPTIONAL_DEPENDS profile</div>
-<div class="line">)</div>
-</div><!-- fragment --><ul>
-<li><span class="tt">DEFAULT ON/OFF</span> — whether the module builds unless explicitly overridden.</li>
-<li><span class="tt">DEPENDS</span> — required Helios modules (auto-enabled).</li>
-<li><span class="tt">OPTIONAL_DEPENDS</span> — integrated when present (e.g. <span class="tt">profile</span>).</li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="build-definition-cmakeliststxt"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="build-definition-cmakeliststxt"></a>
 Build definition (<span class="tt">CMakeLists.txt</span>)</h2>
 <div class="fragment"><div class="line">helios_module(</div>
 <div class="line">    NAME ecs</div>
@@ -287,7 +272,12 @@ Build definition (<span class="tt">CMakeLists.txt</span>)</h2>
 <div class="line">        tests/main.cpp</div>
 <div class="line">        ...</div>
 <div class="line">)</div>
-</div><!-- fragment --><p>External dependencies are declared per-module via <span class="tt">USES</span> and resolved from <span class="tt">cmake/dependencies/</span>. Most engine libraries are vendored under <span class="tt">HELIOS_THIRD_PARTY_DIR</span> (defaults to <span class="tt">third-party/</span>); use <span class="tt">-DHELIOS_THIRD_PARTY_DIR=...</span>, <span class="tt">HELIOS_FORCE_DOWNLOAD_&lt;PKG&gt;</span>, or <span class="tt">HELIOS_USE_SYSTEM_&lt;PKG&gt;</span> to relocate or opt into CPM/system packages. Remaining deps (e.g. Boost, TBB) still use system packages first with CPM fallback.</p>
+</div><!-- fragment --><ul>
+<li><span class="tt">DEFAULT ON/OFF</span> — whether the module builds unless explicitly overridden.</li>
+<li><span class="tt">DEPENDS</span> — required Helios modules (auto-enabled).</li>
+<li><span class="tt">OPTIONAL_DEPENDS</span> — integrated when present (e.g. <span class="tt">profile</span>).</li>
+</ul>
+<p>External dependencies are declared per-module via <span class="tt">USES</span> and resolved from <span class="tt">cmake/dependencies/</span>. Most engine libraries are vendored under <span class="tt">HELIOS_THIRD_PARTY_DIR</span> (defaults to <span class="tt">third-party/</span>); use <span class="tt">-DHELIOS_THIRD_PARTY_DIR=...</span>, <span class="tt">HELIOS_FORCE_DOWNLOAD_&lt;PKG&gt;</span>, or <span class="tt">HELIOS_USE_SYSTEM_&lt;PKG&gt;</span> to relocate or opt into CPM/system packages. Remaining deps (e.g. Boost, TBB) still use system packages first with CPM fallback.</p>
 <h2 class="doxsection"><a class="anchor" id="selective-module-builds"></a>
 Selective module builds</h2>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-debug -DHELIOS_BUILD_WINDOW=OFF</div>
@@ -298,7 +288,7 @@ Testing</h1>
 <ul>
 <li><b>Framework:</b> doctest — one test binary per module, driven by <span class="tt">tests/main.cpp</span>.</li>
 <li>Test files mirror source layout under each module's <span class="tt">tests/</span> directory.</li>
-<li>Write tests only for non-trivial behavior.</li>
+<li>Write tests only for non-trivial behavior (avoid getters, setters, etc.).</li>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="structure"></a>
 Structure</h2>

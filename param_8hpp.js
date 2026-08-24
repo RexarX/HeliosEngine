@@ -1,5 +1,6 @@
 var param_8hpp =
 [
-    [ "helios::ecs::Res&lt; T &gt;", "classhelios_1_1ecs_1_1Res.html", "classhelios_1_1ecs_1_1Res" ],
-    [ "helios::ecs::AsyncRes", "namespacehelios_1_1ecs.html#a674cbdc503746f81c89e6b12f67c26d0", null ]
+    [ "helios::ecs::details::SystemParamMakeResultMatches", "concepthelios_1_1ecs_1_1details_1_1SystemParamMakeResultMatches.html", null ],
+    [ "helios::ecs::SystemParam", "concepthelios_1_1ecs_1_1SystemParam.html", null ],
+    [ "helios::ecs::details::SystemParamMakeResult", "namespacehelios_1_1ecs_1_1details.html#ad26b4d323ca7700d0aa30a2c0af43954", null ]
 ];

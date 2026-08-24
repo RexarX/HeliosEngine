@@ -190,61 +190,63 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('main__thread_8
 <div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1MainThreadExecutor.html#a59740db781593a78c522b66d213c7688">   14</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1MainThreadExecutor.html#a59740db781593a78c522b66d213c7688">MainThreadExecutor::Execute</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1Schedule.html">Schedule</a>&amp; schedule, <a class="code hl_class" href="classhelios_1_1ecs_1_1World.html">World</a>&amp; world) {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  HELIOS_ECS_PROFILE_SCOPE_N(<span class="stringliteral">&quot;helios::ecs::MainThreadExecutor::Execute&quot;</span>);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(schedule.plan_.has_value(),</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>                <span class="stringliteral">&quot;MainThreadExecutor: schedule has no compiled plan!&quot;</span>);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; plan = *schedule.plan_;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; execution_order = plan.execution_order;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> exec_idx = 0; exec_idx &lt; execution_order.size(); ++exec_idx) {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemId.html">SystemId</a> <span class="keywordtype">id</span> = execution_order[exec_idx];</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">const</span> <span class="keyword">auto</span> it = plan.system_id_to_entry_idx.find(<span class="keywordtype">id</span>.<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">if</span> (it == plan.system_id_to_entry_idx.end()) {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>      <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">auto</span>&amp; entries = schedule.system_entries_;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> entry_idx = it-&gt;second;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entry_idx &lt; entries.size(),</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                  <span class="stringliteral">&quot;System index out of bounds in MainThreadExecutor!&quot;</span>);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">auto</span>&amp; entry = entries[entry_idx];</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">auto</span>&amp; storage = entry.storage;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">auto</span>&amp; conditions = schedule.conditions_cache_;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">if</span> (exec_idx &lt; conditions.size()) {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      <span class="keywordtype">bool</span> should_run = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>      <span class="keywordflow">for</span> (<a class="code hl_struct" href="structhelios_1_1ecs_1_1RunConditionStorage.html">RunConditionStorage</a>* cond_storage : conditions[exec_idx]) {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        HELIOS_ECS_PROFILE_SCOPE();</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        HELIOS_ECS_PROFILE_ZONE_NAME(cond_storage-&gt;name);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">if</span> (!cond_storage-&gt;run_condition(world, cond_storage-&gt;local_data)) {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>          should_run = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      }</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      <span class="keywordflow">if</span> (!should_run) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      }</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    HELIOS_ECS_PROFILE_ZONE_NAME(storage.name);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    storage.system(world, storage.local_data);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  }</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(schedule.plan_.has_value(),</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>                <span class="stringliteral">&quot;MainThreadExecutor: schedule has no compiled plan!&quot;</span>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; plan = *schedule.plan_;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; execution_order = plan.execution_order;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> exec_idx = 0; exec_idx &lt; execution_order.size(); ++exec_idx) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1ecs_1_1SystemId.html">SystemId</a> <span class="keywordtype">id</span> = execution_order[exec_idx];</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">const</span> <span class="keyword">auto</span> it = plan.system_id_to_entry_idx.find(<span class="keywordtype">id</span>.<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">if</span> (it == plan.system_id_to_entry_idx.end()) {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">auto</span>&amp; entries = schedule.system_entries_;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> entry_idx = it-&gt;second;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entry_idx &lt; entries.size(),</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                  <span class="stringliteral">&quot;System index out of bounds in MainThreadExecutor!&quot;</span>);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">auto</span>&amp; entry = entries[entry_idx];</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">auto</span>&amp; storage = entry.storage;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">auto</span>&amp; conditions = schedule.conditions_cache_;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">if</span> (exec_idx &lt; conditions.size()) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>      <span class="keywordtype">bool</span> should_run = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      <span class="keywordflow">for</span> (<a class="code hl_struct" href="structhelios_1_1ecs_1_1RunConditionStorage.html">RunConditionStorage</a>* cond_storage : conditions[exec_idx]) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        HELIOS_ECS_PROFILE_SCOPE();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        HELIOS_ECS_PROFILE_ZONE_NAME(cond_storage-&gt;name);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">if</span> (!cond_storage-&gt;run_condition(world, cond_storage-&gt;local_data)) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>          should_run = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      <span class="keywordflow">if</span> (!should_run) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    HELIOS_ECS_PROFILE_SCOPE();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    HELIOS_ECS_PROFILE_ZONE_NAME(storage.name);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    storage.system(world, storage.local_data);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}</div>
 </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}  <span class="comment">// namespace helios::ecs</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}  <span class="comment">// namespace helios::ecs</span></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00259">assert.hpp:259</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00228">assert.hpp:228</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1MainThreadExecutor_html_a59740db781593a78c522b66d213c7688"><div class="ttname"><a href="classhelios_1_1ecs_1_1MainThreadExecutor.html#a59740db781593a78c522b66d213c7688">helios::ecs::MainThreadExecutor::Execute</a></div><div class="ttdeci">void Execute(Schedule &amp;schedule, World &amp;world) override</div><div class="ttdoc">Submits all systems in the schedule for execution.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">main_thread.cpp:14</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Schedule_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Schedule.html">helios::ecs::Schedule</a></div><div class="ttdoc">A collection of systems, sets, and run conditions with ordering constraints.</div><div class="ttdef"><b>Definition</b> <a href="schedule_8hpp_source.html#l00182">schedule.hpp:182</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html">helios::ecs::World</a></div><div class="ttdoc">The World class manages entities with their components and systems.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00040">world.hpp:40</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Schedule_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Schedule.html">helios::ecs::Schedule</a></div><div class="ttdoc">A collection of systems, sets, and run conditions with ordering constraints.</div><div class="ttdef"><b>Definition</b> <a href="schedule_8hpp_source.html#l00194">schedule.hpp:194</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html">helios::ecs::World</a></div><div class="ttdoc">The World class manages entities with their components and systems.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00049">world.hpp:49</a></div></div>
 <div class="ttc" id="amain__thread_8hpp_html"><div class="ttname"><a href="main__thread_8hpp.html">main_thread.hpp</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="builtin__commands_8hpp_source.html#l00020">builtin_commands.hpp:20</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00005">schedules.hpp:5</a></div></div>
 <div class="ttc" id="arun__condition_8hpp_html"><div class="ttname"><a href="run__condition_8hpp.html">run_condition.hpp</a></div></div>
 <div class="ttc" id="aschedule_8hpp_html"><div class="ttname"><a href="schedule_8hpp.html">schedule.hpp</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1RunConditionStorage_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1RunConditionStorage.html">helios::ecs::RunConditionStorage</a></div><div class="ttdoc">Storage for a run condition — predicate + access policy + local data.</div><div class="ttdef"><b>Definition</b> <a href="run__condition_8hpp_source.html#l00025">run_condition.hpp:25</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1SystemId_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1SystemId.html">helios::ecs::SystemId</a></div><div class="ttdoc">Id for systems.</div><div class="ttdef"><b>Definition</b> <a href="system_8hpp_source.html#l00242">system.hpp:242</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1RunConditionStorage_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1RunConditionStorage.html">helios::ecs::RunConditionStorage</a></div><div class="ttdoc">Storage for a run condition — predicate + access policy + local data.</div><div class="ttdef"><b>Definition</b> <a href="run__condition_8hpp_source.html#l00029">run_condition.hpp:29</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1SystemId_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1SystemId.html">helios::ecs::SystemId</a></div><div class="ttdoc">Id for systems.</div><div class="ttdef"><b>Definition</b> <a href="system_8hpp_source.html#l00243">system.hpp:243</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

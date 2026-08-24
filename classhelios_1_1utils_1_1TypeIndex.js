@@ -13,6 +13,5 @@ var classhelios_1_1utils_1_1TypeIndex =
     [ "operator size_t", "classhelios_1_1utils_1_1TypeIndex.html#a3cecf19d1c9867e18b73c1b631a4d0c7", null ],
     [ "operator<=>", "classhelios_1_1utils_1_1TypeIndex.html#a5898aa601d3658b0e2d8fcbd12459a0c", null ],
     [ "operator=", "classhelios_1_1utils_1_1TypeIndex.html#a93edb8561dff499ce4ff2d1946e6694c", null ],
-    [ "operator=", "classhelios_1_1utils_1_1TypeIndex.html#a52487f8d9cb9af52580c9fed6a1316ef", null ],
-    [ "operator==", "classhelios_1_1utils_1_1TypeIndex.html#a5577146a730f33e3a3da6cfcb5c17b3d", null ]
+    [ "operator=", "classhelios_1_1utils_1_1TypeIndex.html#a52487f8d9cb9af52580c9fed6a1316ef", null ]
 ];

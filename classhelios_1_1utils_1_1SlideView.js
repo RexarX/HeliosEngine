@@ -1,6 +1,7 @@
 var classhelios_1_1utils_1_1SlideView =
 [
     [ "const_iterator", "classhelios_1_1utils_1_1SlideView.html#a39a52e0d663bcb98760f86c872d613aa", null ],
+    [ "difference_type", "classhelios_1_1utils_1_1SlideView.html#ab6dd4526bf14253930a33a9268d4b6a7", null ],
     [ "iterator", "classhelios_1_1utils_1_1SlideView.html#a5012dbf6a3f3f93d927ff3443dd6f98c", null ],
     [ "reference", "classhelios_1_1utils_1_1SlideView.html#af0f7d210bb91d0cf9b6ea63c36557913", null ],
     [ "size_type", "classhelios_1_1utils_1_1SlideView.html#a6b77029ffda429321505f1988f6a053c", null ],
@@ -10,9 +11,9 @@ var classhelios_1_1utils_1_1SlideView =
     [ "SlideView", "classhelios_1_1utils_1_1SlideView.html#a95cf759e14dd1fd60b2ace9b0c03f225", null ],
     [ "~SlideView", "classhelios_1_1utils_1_1SlideView.html#a206196afc01aad3284fd718bb3f4edc2", null ],
     [ "begin", "classhelios_1_1utils_1_1SlideView.html#ad4699d2fae8583e898ffa3e9821c8470", null ],
-    [ "Collect", "classhelios_1_1utils_1_1SlideView.html#a5f4561dab389279a569cae23a0ac4b61", null ],
-    [ "CollectWith", "classhelios_1_1utils_1_1SlideView.html#a486d85cee5750ee5c77945932f1a19d3", null ],
-    [ "CollectWith", "classhelios_1_1utils_1_1SlideView.html#abd39ee45a963d8dd8822363abcbb4008", null ],
+    [ "Collect", "classhelios_1_1utils_1_1SlideView.html#a732264a1fe8567ec1b7e179e298bd5c2", null ],
+    [ "Collect", "classhelios_1_1utils_1_1SlideView.html#ae7574969513787d94ca276c5c3a763aa", null ],
+    [ "Collect", "classhelios_1_1utils_1_1SlideView.html#a9e6cd404daa143245b55b75650c085b1", null ],
     [ "Empty", "classhelios_1_1utils_1_1SlideView.html#a615aad0c3ede75023c4da59e2b4dfaad", null ],
     [ "end", "classhelios_1_1utils_1_1SlideView.html#a36c9f6d961fb58245ed8c0921f024cd1", null ],
     [ "operator=", "classhelios_1_1utils_1_1SlideView.html#a16fd92ad741ee16e758653ac66f7f21d", null ],

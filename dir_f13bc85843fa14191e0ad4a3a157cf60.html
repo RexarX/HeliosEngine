@@ -182,7 +182,7 @@ Directories</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="compiler--compiler-detection--intrinsics"></a>
 `compiler` — Compiler Detection &amp; Intrinsics</h1>
-<p>Header-only module providing compiler-specific macros and feature-detection. Leaf module with no dependencies.</p>
+<p>Header-only module providing compiler-specific macros and feature-detection.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api-2"></a>
 Public API</h1>
 <p>Macros only — no classes, structs, or functions.</p>
@@ -217,11 +217,13 @@ Macros</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="compiler_8hpp.html#a95ef3dcee5d3dd81a75581aaa5a91b3a">HELIOS_NO_INLINE</a></span>  </td><td class="markdownTableBodyNone">Prevent inlining.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">HELIOS_MOVEONLY_FUNCTION_AVAILABLE</span>  </td><td class="markdownTableBodyNone">Feature-test for <span class="tt">std::move_only_function</span>.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="compiler_8hpp.html#a554256c179a82b23733f2f405d10a3fe">HELIOS_NO_UNIQUE_ADDRESS</a></span>  </td><td class="markdownTableBodyNone">Empty-base/allocator overlay (<span class="tt">[[msvc::no_unique_address]]</span> on MSVC ABI).  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">HELIOS_CONTAINERS_RANGES_AVAILABLE</span>  </td><td class="markdownTableBodyNone">Feature-test for C++23 <span class="tt">&lt;ranges&gt;</span> on containers.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_MOVEONLY_FUNCTION_AVAILABLE</span>  </td><td class="markdownTableBodyNone">Feature-test for <span class="tt">std::move_only_function</span>.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">HELIOS_STL_FLAT_MAP_AVAILABLE</span>  </td><td class="markdownTableBodyNone">Feature-test for <span class="tt">std::flat_map</span>.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_CONTAINERS_RANGES_AVAILABLE</span>  </td><td class="markdownTableBodyNone">Feature-test for C++23 <span class="tt">&lt;ranges&gt;</span> on containers.  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_FLAT_MAP_CONSTEXPR</span>  </td><td class="markdownTableBodyNone"><span class="tt">constexpr</span> when STL <span class="tt">flat_map</span> is used; empty on Boost.  </td></tr>
 </table>
 </div></div><!-- contents -->
 </div><!-- doc-content -->

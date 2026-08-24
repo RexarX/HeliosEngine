@@ -260,7 +260,7 @@ Friends</h2></td></tr>
 <div class="textblock"><p>Represents a task dependency graph that can be executed by an <a class="el" href="classhelios_1_1async_1_1Executor.html" title="Manages worker threads and executes task graphs using work-stealing scheduling.">Executor</a>. </p>
 <p>Wraps <span class="tt">tf::Taskflow</span> and provides methods to create tasks, manage dependencies, and build complex computational graphs. Tasks within the graph can have dependencies that determine execution order. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. Do not modify a graph while it's being executed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00036">36</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00037">37</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a359482038aa78a712b1543340b946dd3" name="a359482038aa78a712b1543340b946dd3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a359482038aa78a712b1543340b946dd3">&#9670;&#160;</a></span>TaskGraph() <span class="overload">[1/3]</span></h2>
@@ -293,7 +293,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00042">42</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00043">43</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -398,7 +398,7 @@ Friends</h2></td></tr>
 
 <p>Clears all tasks and dependencies from this graph. </p>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00051">51</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00052">52</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -434,7 +434,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle representing the composed graph </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00217">217</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00218">218</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -464,7 +464,7 @@ Friends</h2></td></tr>
 <p>Creates a placeholder task with no assigned work. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle that can later be assigned work </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00099">99</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00100">100</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -494,7 +494,7 @@ Friends</h2></td></tr>
 <p>Dumps the task graph to a DOT format string. </p>
 <dl class="section return"><dt>Returns</dt><dd>String representation of the graph in DOT format </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00225">225</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00226">226</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -572,7 +572,7 @@ template&lt;SubTask C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the created task </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00069">69</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00070">70</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -617,7 +617,7 @@ requires (sizeof...(Cs) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of task handles for the created tasks </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00091">91</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00092">92</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -647,7 +647,7 @@ requires (sizeof...(Cs) &gt; 1)</div>
 <p>Checks if this graph has no tasks. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the graph is empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00238">238</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00239">239</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -698,7 +698,7 @@ requires std::invocable&lt;C, std::ranges::range_reference_t&lt;R&gt;&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00120">120</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00121">121</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -761,7 +761,7 @@ requires std::invocable&lt;C, I&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00138">138</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00139">139</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -805,7 +805,7 @@ requires std::invocable&lt;Visitor, <a class="el" href="classhelios_1_1async_1_1
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00269">269</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00270">270</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -849,7 +849,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00279">279</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00280">280</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -879,7 +879,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 <p>Gets the name of task graph. </p>
 <dl class="section return"><dt>Returns</dt><dd>Name of the graph </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00250">250</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00251">251</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -915,7 +915,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00308">308</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00309">309</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1023,7 +1023,7 @@ requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00178">178</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00179">179</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1063,7 +1063,7 @@ requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00208">208</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00209">209</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1098,7 +1098,7 @@ requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00201">201</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00202">202</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1149,7 +1149,7 @@ requires std::predicate&lt;Compare, std::ranges::range_reference_t&lt;R&gt;, std
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00297">297</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00298">298</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1179,7 +1179,7 @@ requires std::predicate&lt;Compare, std::ranges::range_reference_t&lt;R&gt;, std
 <p>Gets the number of tasks in this graph. </p>
 <dl class="section return"><dt>Returns</dt><dd>Count of tasks </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00244">244</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00245">245</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1236,7 +1236,7 @@ template&lt;std::ranges::input_range InputRange, std::ranges::input_range Output
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00157">157</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00158">158</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1261,7 +1261,7 @@ template&lt;std::ranges::input_range InputRange, std::ranges::input_range Output
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00264">264</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00265">265</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1285,7 +1285,7 @@ template&lt;std::ranges::input_range InputRange, std::ranges::input_range Output
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00263">263</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="task__graph_8hpp_source.html#l00264">264</a> of file <a class="el" href="task__graph_8hpp_source.html">task_graph.hpp</a>.</p>
 
 </div>
 </div>

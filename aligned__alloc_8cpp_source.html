@@ -185,71 +185,72 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('aligned__alloc
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifdef HELIOS_MEMORY_USE_MIMALLOC</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#if defined(HELIOS_MEMORY_USE_MIMALLOC) &amp;&amp; !defined(__SANITIZE_ADDRESS__)</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;mimalloc.h&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1mem.html">helios::mem</a> {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespacehelios_1_1mem.html#a978f872cc9cb2a0cf949fd034063873d">   18</a></span><span class="keywordtype">void</span>* <a class="code hl_function" href="namespacehelios_1_1mem.html#a978f872cc9cb2a0cf949fd034063873d">AlignedAlloc</a>(<span class="keywordtype">size_t</span> alignment, <span class="keywordtype">size_t</span> size,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>                   <span class="keywordtype">bool</span> enable_profile) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(<span class="stringliteral">&quot;helios::mem::AlignedAlloc&quot;</span>);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  HELIOS_MEMORY_PROFILE_ZONE_VALUE(size);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment != 0, <span class="stringliteral">&quot;alignment cannot be zero!&quot;</span>);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec">IsPowerOfTwo</a>(alignment), <span class="stringliteral">&quot;alignment must be a power of two!&quot;</span>);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size != 0, <span class="stringliteral">&quot;size cannot be zero!&quot;</span>);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#ifdef HELIOS_MEMORY_USE_MIMALLOC</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordtype">void</span>* <span class="keyword">const</span> ptr = mi_malloc_aligned(size, alignment);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#elif defined(_MSC_VER)</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordtype">void</span>* <span class="keyword">const</span> ptr = _aligned_malloc(size, alignment);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordtype">void</span>* ptr = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordflow">if</span> (alignment &lt; <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>*)) {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    ptr = std::malloc(size);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    ptr = std::aligned_alloc(alignment, <a class="code hl_function" href="namespacehelios_1_1mem.html#a2466b59c12d542a39e3ab3d6869af20f">AlignUp</a>(size, alignment));</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span> &amp;&amp; enable_profile) {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    HELIOS_MEMORY_PROFILE_ALLOC(ptr, size, <span class="stringliteral">&quot;AlignedAlloc&quot;</span>);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  }</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordflow">return</span> ptr;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define HELIOS_ALIGNED_ALLOC_USE_MIMALLOC</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1mem.html">helios::mem</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespacehelios_1_1mem.html#a978f872cc9cb2a0cf949fd034063873d">   19</a></span><span class="keywordtype">void</span>* <a class="code hl_function" href="namespacehelios_1_1mem.html#a978f872cc9cb2a0cf949fd034063873d">AlignedAlloc</a>(<span class="keywordtype">size_t</span> alignment, <span class="keywordtype">size_t</span> size,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                   <span class="keywordtype">bool</span> enable_profile) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  HELIOS_MEMORY_PROFILE_SCOPE_N(<span class="stringliteral">&quot;helios::mem::AlignedAlloc&quot;</span>);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  HELIOS_MEMORY_PROFILE_ZONE_VALUE(size);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment != 0, <span class="stringliteral">&quot;alignment cannot be zero!&quot;</span>);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec">IsPowerOfTwo</a>(alignment), <span class="stringliteral">&quot;alignment must be a power of two!&quot;</span>);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size != 0, <span class="stringliteral">&quot;size cannot be zero!&quot;</span>);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#ifdef HELIOS_ALIGNED_ALLOC_USE_MIMALLOC</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordtype">void</span>* <span class="keyword">const</span> ptr = mi_malloc_aligned(size, alignment);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#elif defined(_MSC_VER)</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="keywordtype">void</span>* <span class="keyword">const</span> ptr = _aligned_malloc(size, alignment);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordtype">void</span>* ptr = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordflow">if</span> (alignment &lt; <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>*)) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    ptr = std::malloc(size);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    ptr = std::aligned_alloc(alignment, <a class="code hl_function" href="namespacehelios_1_1mem.html#a2466b59c12d542a39e3ab3d6869af20f">AlignUp</a>(size, alignment));</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span> &amp;&amp; enable_profile) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    HELIOS_MEMORY_PROFILE_ALLOC(ptr, size, <span class="stringliteral">&quot;AlignedAlloc&quot;</span>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordflow">return</span> ptr;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="namespacehelios_1_1mem.html#a97a35214c272bd39125d8f7052030592">   45</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacehelios_1_1mem.html#a97a35214c272bd39125d8f7052030592">AlignedFree</a>(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">bool</span> enable_profile) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  }</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordflow">if</span> (enable_profile) {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    HELIOS_MEMORY_PROFILE_FREE(ptr, <span class="stringliteral">&quot;AlignedAlloc&quot;</span>);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#ifdef HELIOS_MEMORY_USE_MIMALLOC</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  mi_free(ptr);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#elif defined(_MSC_VER)</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  _aligned_free(ptr);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  std::free(ptr);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="namespacehelios_1_1mem.html#a97a35214c272bd39125d8f7052030592">   46</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacehelios_1_1mem.html#a97a35214c272bd39125d8f7052030592">AlignedFree</a>(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">bool</span> enable_profile) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordflow">if</span> (enable_profile) {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    HELIOS_MEMORY_PROFILE_FREE(ptr, <span class="stringliteral">&quot;AlignedAlloc&quot;</span>);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#ifdef HELIOS_ALIGNED_ALLOC_USE_MIMALLOC</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  mi_free(ptr);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#elif defined(_MSC_VER)</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  _aligned_free(ptr);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  std::free(ptr);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
 </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}  <span class="comment">// namespace helios::mem</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}  <span class="comment">// namespace helios::mem</span></div>
 <div class="ttc" id="aaligned__alloc_8hpp_html"><div class="ttname"><a href="aligned__alloc_8hpp.html">aligned_alloc.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00259">assert.hpp:259</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00228">assert.hpp:228</a></div></div>
 <div class="ttc" id="amemory_2include_2helios_2memory_2common_8hpp_html"><div class="ttname"><a href="memory_2include_2helios_2memory_2common_8hpp.html">common.hpp</a></div></div>
 <div class="ttc" id="amemory_2src_2pch_8hpp_html"><div class="ttname"><a href="memory_2src_2pch_8hpp.html">pch.hpp</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1mem_html"><div class="ttname"><a href="namespacehelios_1_1mem.html">helios::mem</a></div><div class="ttdef"><b>Definition</b> <a href="aligned__alloc_8hpp_source.html#l00005">aligned_alloc.hpp:5</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a215212ef34ee8e3309e0f4ebdbd463ec"><div class="ttname"><a href="namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec">helios::mem::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t value) noexcept</div><div class="ttdoc">Checks if a value is a power of two.</div><div class="ttdef"><b>Definition</b> <a href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00216">common.hpp:216</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a2466b59c12d542a39e3ab3d6869af20f"><div class="ttname"><a href="namespacehelios_1_1mem.html#a2466b59c12d542a39e3ab3d6869af20f">helios::mem::AlignUp</a></div><div class="ttdeci">constexpr size_t AlignUp(size_t value, size_t alignment) noexcept</div><div class="ttdoc">Aligns value up to alignment.</div><div class="ttdef"><b>Definition</b> <a href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00227">common.hpp:227</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a978f872cc9cb2a0cf949fd034063873d"><div class="ttname"><a href="namespacehelios_1_1mem.html#a978f872cc9cb2a0cf949fd034063873d">helios::mem::AlignedAlloc</a></div><div class="ttdeci">void * AlignedAlloc(size_t alignment, size_t size, bool enable_profile=true) noexcept</div><div class="ttdoc">Allocates memory with the specified alignment.</div><div class="ttdef"><b>Definition</b> <a href="#l00018">aligned_alloc.cpp:18</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a97a35214c272bd39125d8f7052030592"><div class="ttname"><a href="namespacehelios_1_1mem.html#a97a35214c272bd39125d8f7052030592">helios::mem::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr, bool enable_profile=true) noexcept</div><div class="ttdoc">Frees memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="#l00045">aligned_alloc.cpp:45</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a215212ef34ee8e3309e0f4ebdbd463ec"><div class="ttname"><a href="namespacehelios_1_1mem.html#a215212ef34ee8e3309e0f4ebdbd463ec">helios::mem::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t value) noexcept</div><div class="ttdoc">Checks if a value is a power of two.</div><div class="ttdef"><b>Definition</b> <a href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00215">common.hpp:215</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a2466b59c12d542a39e3ab3d6869af20f"><div class="ttname"><a href="namespacehelios_1_1mem.html#a2466b59c12d542a39e3ab3d6869af20f">helios::mem::AlignUp</a></div><div class="ttdeci">constexpr size_t AlignUp(size_t value, size_t alignment) noexcept</div><div class="ttdoc">Aligns value up to alignment.</div><div class="ttdef"><b>Definition</b> <a href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00226">common.hpp:226</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a978f872cc9cb2a0cf949fd034063873d"><div class="ttname"><a href="namespacehelios_1_1mem.html#a978f872cc9cb2a0cf949fd034063873d">helios::mem::AlignedAlloc</a></div><div class="ttdeci">void * AlignedAlloc(size_t alignment, size_t size, bool enable_profile=true) noexcept</div><div class="ttdoc">Allocates memory with the specified alignment.</div><div class="ttdef"><b>Definition</b> <a href="#l00019">aligned_alloc.cpp:19</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a97a35214c272bd39125d8f7052030592"><div class="ttname"><a href="namespacehelios_1_1mem.html#a97a35214c272bd39125d8f7052030592">helios::mem::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr, bool enable_profile=true) noexcept</div><div class="ttdoc">Frees memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="#l00046">aligned_alloc.cpp:46</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

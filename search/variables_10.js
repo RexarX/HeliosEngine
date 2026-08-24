@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['resource_5fmanager_0',['resource_manager',['../structhelios_1_1ecs_1_1SystemLocalData.html#af84f2166d3d35940f48eb159a0c223d9',1,'helios::ecs::SystemLocalData']]],
-  ['rhs_1',['rhs',['../structhelios_1_1ecs_1_1ComponentConflictInfo.html#a7126db9ab3672f5a0b724728ab22e7c4',1,'helios::ecs::ComponentConflictInfo::rhs'],['../structhelios_1_1ecs_1_1ResourceConflictInfo.html#a8f0f976655c026fdb8eca2dc8688e7e0',1,'helios::ecs::ResourceConflictInfo::rhs']]],
-  ['rhs_5fwrites_2',['rhs_writes',['../structhelios_1_1ecs_1_1ComponentConflictInfo.html#abe847617a1dfaa2df14c39cb3f71bfb2',1,'helios::ecs::ComponentConflictInfo::rhs_writes'],['../structhelios_1_1ecs_1_1ResourceConflictInfo.html#a80d297812eb1328cff5ab3696b41a8b0',1,'helios::ecs::ResourceConflictInfo::rhs_writes']]],
-  ['run_5fcondition_3',['run_condition',['../structhelios_1_1ecs_1_1RunConditionStorage.html#a1ebba45ea4c8a7481bb4dea7f83283d9',1,'helios::ecs::RunConditionStorage']]]
+  ['qualified_5fname_0',['qualified_name',['../structhelios_1_1app_1_1PluginTypeExport.html#a1b22353571358970b5d1ee6233682df2',1,'helios::app::PluginTypeExport']]],
+  ['query_1',['query',['../structhelios_1_1window_1_1Windows.html#a6c9bf042938d9bf093b47d5506ae6218',1,'helios::window::Windows::query'],['../structhelios_1_1window_1_1WindowsView.html#a52061a806873bdd30abb208f3c609c3b',1,'helios::window::WindowsView::query'],['../structhelios_1_1window_1_1PrimaryWindows.html#a2e9080681b2d610da6109216cd9e4e10',1,'helios::window::PrimaryWindows::query'],['../structhelios_1_1window_1_1PrimaryWindowsView.html#a39267876a970f5169f3928a4a1bd5c8d',1,'helios::window::PrimaryWindowsView::query']]]
 ];

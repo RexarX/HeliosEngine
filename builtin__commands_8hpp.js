@@ -2,9 +2,9 @@ var builtin__commands_8hpp =
 [
     [ "helios::ecs::FunctionCmd&lt; F &gt;", "classhelios_1_1ecs_1_1FunctionCmd.html", "classhelios_1_1ecs_1_1FunctionCmd" ],
     [ "helios::ecs::DestroyEntityCmd", "classhelios_1_1ecs_1_1DestroyEntityCmd.html", "classhelios_1_1ecs_1_1DestroyEntityCmd" ],
-    [ "helios::ecs::DestroyEntitiesCmd&lt; Alloc &gt;", "classhelios_1_1ecs_1_1DestroyEntitiesCmd.html", "classhelios_1_1ecs_1_1DestroyEntitiesCmd" ],
+    [ "helios::ecs::DestroyEntitiesCmd", "classhelios_1_1ecs_1_1DestroyEntitiesCmd.html", "classhelios_1_1ecs_1_1DestroyEntitiesCmd" ],
     [ "helios::ecs::TryDestroyEntityCmd", "classhelios_1_1ecs_1_1TryDestroyEntityCmd.html", "classhelios_1_1ecs_1_1TryDestroyEntityCmd" ],
-    [ "helios::ecs::TryDestroyEntitiesCmd&lt; Alloc &gt;", "classhelios_1_1ecs_1_1TryDestroyEntitiesCmd.html", "classhelios_1_1ecs_1_1TryDestroyEntitiesCmd" ],
+    [ "helios::ecs::TryDestroyEntitiesCmd", "classhelios_1_1ecs_1_1TryDestroyEntitiesCmd.html", "classhelios_1_1ecs_1_1TryDestroyEntitiesCmd" ],
     [ "helios::ecs::AddComponentsCmd&lt; Ts &gt;", "classhelios_1_1ecs_1_1AddComponentsCmd.html", "classhelios_1_1ecs_1_1AddComponentsCmd" ],
     [ "helios::ecs::AddBundleCmd&lt; B &gt;", "classhelios_1_1ecs_1_1AddBundleCmd.html", "classhelios_1_1ecs_1_1AddBundleCmd" ],
     [ "helios::ecs::TryAddComponentsCmd&lt; Ts &gt;", "classhelios_1_1ecs_1_1TryAddComponentsCmd.html", "classhelios_1_1ecs_1_1TryAddComponentsCmd" ],

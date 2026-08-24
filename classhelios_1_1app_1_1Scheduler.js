@@ -9,6 +9,7 @@ var classhelios_1_1app_1_1Scheduler =
     [ "operator=", "classhelios_1_1app_1_1Scheduler.html#a2fe9f8bc8d4244afec4884a4f0755646", null ],
     [ "operator=", "classhelios_1_1app_1_1Scheduler.html#acccc1cd6f8b750ff12b02d97eb92b380", null ],
     [ "RunFrame", "classhelios_1_1app_1_1Scheduler.html#a42835b0c1df276d5f303afe853901f05", null ],
+    [ "RunFrameOrder", "classhelios_1_1app_1_1Scheduler.html#aaaab9958d8adb5dabcc726e65ad4749f", null ],
     [ "RunStartup", "classhelios_1_1app_1_1Scheduler.html#a051b22aba8937d2c67b39d582a10b646", null ],
     [ "Shutdown", "classhelios_1_1app_1_1Scheduler.html#a592a558083433d722cdc508862fc9ca1", null ],
     [ "Stop", "classhelios_1_1app_1_1Scheduler.html#a5ec41f3c7e552628e8cbabee50f46546", null ],

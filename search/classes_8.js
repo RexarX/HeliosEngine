@@ -1,9 +1,21 @@
 var searchData=
 [
-  ['insertresourcecmd_0',['InsertResourceCmd',['../classhelios_1_1ecs_1_1InsertResourceCmd.html',1,'helios::ecs']]],
-  ['inspectadapter_1',['InspectAdapter',['../classhelios_1_1utils_1_1InspectAdapter.html',1,'helios::utils']]],
-  ['is_5ffolder_5fapplicable_5fimpl_2',['is_folder_applicable_impl',['../structhelios_1_1utils_1_1details_1_1is__folder__applicable__impl.html',1,'helios::utils::details']]],
-  ['is_5ffolder_5fapplicable_5fimpl_3c_20folder_2c_20accumulator_2c_20std_3a_3atuple_3c_20tupleargs_2e_2e_2e_20_3e_20_3e_3',['is_folder_applicable_impl&lt; Folder, Accumulator, std::tuple&lt; TupleArgs... &gt; &gt;',['../structhelios_1_1utils_1_1details_1_1is__folder__applicable__impl_3_01Folder_00_01Accumulator_00_5474f6b3ac109ab26feda2bd4f995a76.html',1,'helios::utils::details']]],
-  ['iscomponentbundle_4',['IsComponentBundle',['../structhelios_1_1ecs_1_1details_1_1IsComponentBundle.html',1,'helios::ecs::details']]],
-  ['iscomponentbundle_3c_20componentbundle_3c_20ts_2e_2e_2e_20_3e_20_3e_5',['IsComponentBundle&lt; ComponentBundle&lt; Ts... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1IsComponentBundle_3_01ComponentBundle_3_01Ts_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]]
+  ['iconchangedmsg_0',['IconChangedMsg',['../structhelios_1_1window_1_1IconChangedMsg.html',1,'helios::window']]],
+  ['iconimage_1',['IconImage',['../structhelios_1_1window_1_1IconImage.html',1,'helios::window']]],
+  ['indexedbuttoninput_2',['IndexedButtonInput',['../classhelios_1_1input_1_1IndexedButtonInput.html',1,'helios::input']]],
+  ['indexedbuttoninput_3c_20kmaxbuttons_20_3e_3',['IndexedButtonInput&lt; kMaxButtons &gt;',['../classhelios_1_1input_1_1IndexedButtonInput.html',1,'helios::input']]],
+  ['init_4',['Init',['../structhelios_1_1glfw_1_1Init.html',1,'helios::glfw::Init'],['../structhelios_1_1sdl3_1_1Init.html',1,'helios::sdl3::Init'],['../structhelios_1_1sdl3_1_1input_1_1Init.html',1,'helios::sdl3::input::Init'],['../structhelios_1_1sdl3_1_1window_1_1Init.html',1,'helios::sdl3::window::Init']]],
+  ['inputplugin_5',['InputPlugin',['../structhelios_1_1sdl3_1_1input_1_1InputPlugin.html',1,'helios::sdl3::input']]],
+  ['insertresourcecmd_6',['InsertResourceCmd',['../classhelios_1_1ecs_1_1InsertResourceCmd.html',1,'helios::ecs']]],
+  ['inspectadapter_7',['InspectAdapter',['../classhelios_1_1utils_1_1InspectAdapter.html',1,'helios::utils']]],
+  ['is_5ffolder_5fapplicable_5fimpl_8',['is_folder_applicable_impl',['../structhelios_1_1utils_1_1details_1_1is__folder__applicable__impl.html',1,'helios::utils::details']]],
+  ['is_5ffolder_5fapplicable_5fimpl_3c_20folder_2c_20accumulator_2c_20std_3a_3atuple_3c_20tupleargs_2e_2e_2e_20_3e_20_3e_9',['is_folder_applicable_impl&lt; Folder, Accumulator, std::tuple&lt; TupleArgs... &gt; &gt;',['../structhelios_1_1utils_1_1details_1_1is__folder__applicable__impl_3_01Folder_00_01Accumulator_00_5474f6b3ac109ab26feda2bd4f995a76.html',1,'helios::utils::details']]],
+  ['iscomponentbundle_10',['IsComponentBundle',['../structhelios_1_1ecs_1_1details_1_1IsComponentBundle.html',1,'helios::ecs::details']]],
+  ['iscomponentbundle_3c_20componentbundletypes_3c_20ts_2e_2e_2e_20_3e_20_3e_11',['IsComponentBundle&lt; ComponentBundleTypes&lt; Ts... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1IsComponentBundle_3_01ComponentBundleTypes_3_01Ts_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]],
+  ['iscomponentbundle_3c_20t_20_3e_12',['IsComponentBundle&lt; T &gt;',['../structhelios_1_1ecs_1_1details_1_1IsComponentBundle_3_01T_01_4.html',1,'helios::ecs::details']]],
+  ['iscomponentbundletypes_13',['IsComponentBundleTypes',['../structhelios_1_1ecs_1_1details_1_1IsComponentBundleTypes.html',1,'helios::ecs::details']]],
+  ['iscomponentbundletypes_3c_20componentbundletypes_3c_20ts_2e_2e_2e_20_3e_20_3e_14',['IsComponentBundleTypes&lt; ComponentBundleTypes&lt; Ts... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1IsComponentBundleTypes_3_01ComponentBundleTypes_3_01Ts_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]],
+  ['isstructcomponentbundle_15',['IsStructComponentBundle',['../structhelios_1_1ecs_1_1details_1_1IsStructComponentBundle.html',1,'helios::ecs::details']]],
+  ['isstructcomponentbundle_3c_20std_3a_3aremove_5fcvref_5ft_3c_20t_20_3e_20_3e_16',['IsStructComponentBundle&lt; std::remove_cvref_t&lt; T &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1IsStructComponentBundle.html',1,'helios::ecs::details']]],
+  ['isstructcomponentbundle_3c_20t_2c_20true_20_3e_17',['IsStructComponentBundle&lt; T, true &gt;',['../structhelios_1_1ecs_1_1details_1_1IsStructComponentBundle_3_01T_00_01true_01_4.html',1,'helios::ecs::details']]]
 ];

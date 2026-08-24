@@ -195,11 +195,11 @@ Table of Contents</h2>
 <li><a href="#requirements">Requirements</a></li>
 <li><a href="#installing-dependencies">Installing Dependencies</a></li>
 <li><a href="#building">Building</a></li>
+<li><a href="#linking">Linking</a></li>
 <li><a href="#run-the-example">Run the Example</a></li>
 </ul>
 </li>
 <li><a href="#usage">Usage</a></li>
-<li><a href="#architecture">Architecture</a></li>
 <li><a href="#using-as-a-dependency">Using as a Dependency</a><ul>
 <li><a href="#method-1-add_subdirectory">add_subdirectory</a></li>
 <li><a href="#method-2-fetchcontent">FetchContent</a></li>
@@ -220,7 +220,7 @@ Table of Contents</h2>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="about-the-project"></a>
 About The Project</h2>
-<p><b>Helios Engine</b> is a high-performance, ECS-based game engine framework written in C++23. It combines an archetype-based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.</p>
+<p><b>Helios Engine</b> is a high-performance, ECS-based game engine framework written in C++23. It combines an configurable sparse-set/archetype based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <h3 class="doxsection"><a class="anchor" id="key-features"></a>
 Key Features</h3>
@@ -269,7 +269,17 @@ Modules</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">profile</span>  </td><td class="markdownTableBodyNone">Tracy / flamegraph profiling (opt-in), etc.  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone"><a class="el" href="dir_2730ace12cf03b0ba989133b5ac743ea.html" title="/home/runner/work/HeliosEngine/HeliosEngine/src/profile/README.md">README</a>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">window</span>  </td><td class="markdownTableBodyNone">GLFW windowing (skeleton)  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone"><a class="el" href="dir_c7f79d9fead0a70cab4af348b59fbdf1.html" title="/home/runner/work/HeliosEngine/HeliosEngine/src/window/README.md">README</a>  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">window</span>  </td><td class="markdownTableBodyNone">Window ECS contract (no OS deps)  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone"><a class="el" href="dir_c7f79d9fead0a70cab4af348b59fbdf1.html" title="/home/runner/work/HeliosEngine/HeliosEngine/src/window/README.md">README</a>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">sdl3</span>  </td><td class="markdownTableBodyNone">SDL3 process runtime (init, event pump, window map)  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone"><a class="el" href="dir_4826e48e68cc38af5b9c29b11756ca6f.html" title="/home/runner/work/HeliosEngine/HeliosEngine/src/sdl3/README.md">README</a>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">sdl3_window</span>  </td><td class="markdownTableBodyNone">Default SDL3 window backend  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone"><a class="el" href="dir_39160ce22810435969292f6931873579.html" title="/home/runner/work/HeliosEngine/HeliosEngine/src/sdl3_window/README.md">README</a>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">sdl3_input</span>  </td><td class="markdownTableBodyNone">Default SDL3 input backend  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone"><a class="el" href="dir_404e9df7b1c4707ca4ad3b316f586c31.html" title="/home/runner/work/HeliosEngine/HeliosEngine/src/sdl3_input/README.md">README</a>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">glfw</span>  </td><td class="markdownTableBodyNone">Optional GLFW backend for <span class="tt">window</span> (+ optional <span class="tt">input</span>)  </td><td class="markdownTableBodyNone">OFF  </td><td class="markdownTableBodyNone"><a class="el" href="dir_4f42fb64a2a7ed6ea9e03b9eaacd6206.html" title="/home/runner/work/HeliosEngine/HeliosEngine/src/glfw/README.md">README</a>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">input</span>  </td><td class="markdownTableBodyNone">Keyboard, mouse, cursor, gamepad ECS contract  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone"><a class="el" href="dir_d365e15d984c8d0205117ee0c40d6716.html" title="/home/runner/work/HeliosEngine/HeliosEngine/src/input/README.md">README</a>  </td></tr>
 </table>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW=OFF</div>
 </div><!-- fragment --><p><a href="#readme-top">↑ Back to Top</a></p>
@@ -298,7 +308,7 @@ Requirements</h3>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="installing-dependencies"></a>
 Installing Dependencies</h3>
 <p>Helios resolves dependencies per module: <b>system packages are tried first</b>, then <b>CPM download</b> if missing (<span class="tt">HELIOS_DOWNLOAD_PACKAGES=ON</span>, default). Pre-installing system packages speeds up configuration and avoids network fetches.</p>
-<p>Some packages could require additional system packages, most notably when building on Linux make sure to install the X11/Wayland development packages to properly build <span class="tt">glfw3</span> (<span class="tt">libwayland-dev</span>, <span class="tt">libx11-dev</span>, etc.)</p>
+<p>Some packages need extra OS development libraries. On Linux, vendored <span class="tt">glfw</span> and <span class="tt">sdl3</span> both require X11/Wayland headers. SDL3 also needs Xfixes, XScrnSaver, and XTest (<span class="tt">libxfixes-dev</span>, <span class="tt">libxss-dev</span>, <span class="tt">libxtst-dev</span>); configure fails if those are missing. Windows and macOS need no extra packages for these backends.</p>
 <p>Package names below match <span class="tt">INSTALL_HINTS</span> in <a href="cmake/dependencies/"><span class="tt">cmake/dependencies/</span></a>.</p>
 <h4 class="doxsection"><a class="anchor" id="all-platforms--build-tools"></a>
 All platforms — build tools</h4>
@@ -318,31 +328,34 @@ All platforms — build tools</h4>
 Linux (APT — Ubuntu / Debian)</h4>
 <div class="fragment"><div class="line">sudo apt-get update</div>
 <div class="line">sudo apt-get install -y ninja-build libboost-all-dev libtbb-dev</div>
-</div><!-- fragment --><p>Additinal tools:</p>
-<div class="fragment"><div class="line">sudo apt-get install -y clang-format doxygen</div>
-</div><!-- fragment --><p>Wayland/X11:</p>
+</div><!-- fragment --><p>Additional tools:</p>
+<div class="fragment"><div class="line">sudo apt-get install -y clang-format clang-tidy doxygen</div>
+</div><!-- fragment --><p>Wayland/X11 (GLFW + SDL3):</p>
 <div class="fragment"><div class="line">sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \</div>
-<div class="line">  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev</div>
+<div class="line">  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev \</div>
+<div class="line">  libxfixes-dev libxss-dev libxtst-dev</div>
 </div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="linux-dnf--fedora"></a>
 Linux (DNF — Fedora)</h4>
 <div class="fragment"><div class="line">sudo dnf install -y ninja-build  boost-devel tbb-devel</div>
-</div><!-- fragment --><p>Additinal tools:</p>
+</div><!-- fragment --><p>Additional tools:</p>
 <div class="fragment"><div class="line">sudo dnf install -y clang-tools-extra doxygen</div>
-</div><!-- fragment --><p>Wayland/X11:</p>
-<div class="fragment"><div class="line">sudo apt-get install -y wayland-devel libxkbcommon-devel libX11-devel \</div>
-<div class="line">  libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel libXext-devel</div>
+</div><!-- fragment --><p>Wayland/X11 (GLFW + SDL3):</p>
+<div class="fragment"><div class="line">sudo dnf install -y wayland-devel libxkbcommon-devel libX11-devel \</div>
+<div class="line">  libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel libXext-devel \</div>
+<div class="line">  libXfixes-devel libXScrnSaver-devel libXtst-devel</div>
 </div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="linux-pacman--arch"></a>
 Linux (Pacman — Arch)</h4>
 <div class="fragment"><div class="line">sudo pacman -S --needed ninja boost tbb</div>
-</div><!-- fragment --><p>Additinal tools:</p>
+</div><!-- fragment --><p>Additional tools:</p>
 <div class="fragment"><div class="line">sudo pacman -S --needed clang doxygen</div>
-</div><!-- fragment --><p>Wayland/X11:</p>
+</div><!-- fragment --><p>Wayland/X11 (GLFW + SDL3):</p>
 <div class="fragment"><div class="line">sudo pacman -S --needed wayland libxkbcommon libx11 \</div>
-<div class="line">  libxrandr libxinerama libxi libxcursor libxext</div>
+<div class="line">  libxrandr libxinerama libxi libxcursor libxext \</div>
+<div class="line">  libxfixes libxss libxtst</div>
 </div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="macos-homebrew"></a>
 macOS (Homebrew)</h4>
 <div class="fragment"><div class="line">brew install cmake ninja boost</div>
-</div><!-- fragment --><p>Additinal tools:</p>
+</div><!-- fragment --><p>Additional tools:</p>
 <div class="fragment"><div class="line">brew install clang-format doxygen</div>
 </div><!-- fragment --><blockquote class="doxtable">
 <p><b>Note:</b> On Linux with <b>GCC + libstdc++</b>, <a href="https://github.com/oneapi-src/oneTBB">TBB</a> is required for parallel STL (<span class="tt">libtbb-dev</span> / <span class="tt">tbb-devel</span> / <span class="tt">onetbb</span>). Clang on Linux and all macOS builds use libc++ and do not require TBB. spdlog is auto-downloaded via CPM when using Clang on Linux (system Ubuntu packages are incompatible). </p>
@@ -350,9 +363,9 @@ macOS (Homebrew)</h4>
 <h4 class="doxsection"><a class="anchor" id="windows-msvc"></a>
 Windows (MSVC)</h4>
 <p>No system packages required for a minimal build — MSVC + Ninja (via Visual Studio) is sufficient; missing libraries are fetched by CPM.</p>
-<div class="fragment"><div class="line"># Optional: LLVM clang-format for local formatting</div>
+<div class="fragment"><div class="line"># Optional: LLVM clang-format for local formatting and clang-tidy for linting</div>
 <div class="line">choco install llvm</div>
-<div class="line"># Or use clang-format bundled with Visual Studio 2022</div>
+<div class="line"># Or use clang-format and clang-tidy bundled with Visual Studio 2022</div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="building"></a>
 Building</h3>
 <p>Preset pattern: <span class="tt">{os}-{compiler}-{build_type}</span></p>
@@ -399,7 +412,44 @@ Recommended developer flags</h4>
 <td class="markdownTableBodyNone"><span class="tt">HELIOS_DOWNLOAD_PACKAGES</span>  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone">CPM fallback for missing deps  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">HELIOS_BUILD_{MODULE}</span>  </td><td class="markdownTableBodyNone">module default  </td><td class="markdownTableBodyNone">Per-module toggle  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_LINKER</span>  </td><td class="markdownTableBodyNone">AUTO (top-level) / DEFAULT  </td><td class="markdownTableBodyNone">Fast linker: <span class="tt">AUTO</span>, <span class="tt">MOLD</span>, <span class="tt">LLD</span>, <span class="tt">RAD</span>, <span class="tt">DEFAULT</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_MANAGE_TOOLCHAIN</span>  </td><td class="markdownTableBodyNone">ON (top-level) / OFF  </td><td class="markdownTableBodyNone">Set <span class="tt">CMAKE_LINKER</span> / <span class="tt">CMAKE_AR</span> project-wide  </td></tr>
 </table>
+<h3 class="doxsection"><a class="anchor" id="linking"></a>
+Linking</h3>
+<p>Helios picks a faster linker when one is installed (<span class="tt">cmake/helpers/Linker.cmake</span>). Selection is controlled by <span class="tt">HELIOS_LINKER</span>:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Value  </th><th class="markdownTableHeadNone">Meaning  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">AUTO</span>  </td><td class="markdownTableBodyNone">Default for a top-level Helios build. Prefer the fastest available linker for the platform.  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">MOLD</span>  </td><td class="markdownTableBodyNone">Force <a href="https://github.com/rui314/mold">mold</a> (<span class="tt">mold</span> on <span class="tt">PATH</span>). ELF only; not used on macOS.  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">LLD</span>  </td><td class="markdownTableBodyNone">Force LLVM lld (<span class="tt">ld.lld</span> on Unix, <span class="tt">lld-link</span> on the MSVC ABI).  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">RAD</span>  </td><td class="markdownTableBodyNone">Force <a href="https://github.com/EpicGames/raddebugger">RAD Linker</a> (<span class="tt">radlink</span> on <span class="tt">PATH</span> or <span class="tt">$RAD_ROOT</span>). Windows MSVC ABI.  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">DEFAULT</span>  </td><td class="markdownTableBodyNone">Platform default (<span class="tt">ld</span> / Apple <span class="tt">ld</span> / MSVC <span class="tt">link.exe</span>). Default when Helios is embedded.  </td></tr>
+</table>
+<p><b><span class="tt">AUTO</span> by platform</b></p>
+<ul>
+<li><b>Linux (ELF):</b> <a href="https://github.com/rui314/mold">mold</a> if found, otherwise lld, otherwise the system linker.</li>
+<li><b>macOS:</b> mold is skipped (it does not link Mach-O). lld is used if <span class="tt">ld.lld</span> is on <span class="tt">PATH</span>; otherwise Apple <span class="tt">ld</span>.</li>
+<li><b>Windows (MSVC):</b> <a href="https://github.com/EpicGames/raddebugger">RAD Linker</a> for Debug and non-LTO RelWithDebInfo when <span class="tt">radlink</span> is available, then <span class="tt">lld-link</span>, then <span class="tt">link.exe</span>. <b>clang-cl</b> prefers <span class="tt">lld-link</span> (RAD can fail on some clang-cl C++ COMDATs). Release LTO (MSVC LTCG) and RelWithDebInfo with <span class="tt">HELIOS_ENABLE_LTO_RELWITHDEBINFO=ON</span> keep <span class="tt">link.exe</span>; clang-cl LTO uses <span class="tt">lld-link</span>. RAD is not used with MSVC AddressSanitizer (<span class="tt">HELIOS_DEVELOPER_MODE=ON</span>).</li>
+</ul>
+<p>Override at configure time (must be on <span class="tt">PATH</span>, or for RAD also <span class="tt">$RAD_ROOT</span>):</p>
+<div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_LINKER=MOLD</div>
+<div class="line">cmake --preset linux-clang-release -DHELIOS_LINKER=LLD</div>
+<div class="line">cmake --preset windows-msvc-debug -DHELIOS_LINKER=RAD</div>
+<div class="line">cmake --preset linux-gcc-release -DHELIOS_LINKER=DEFAULT   # disable fast linkers</div>
+</div><!-- fragment --><p><b><span class="tt">HELIOS_MANAGE_TOOLCHAIN</span></b> (see <span class="tt">CMakeLists.txt</span> and <span class="tt">cmake/helpers/ClangArchiver.cmake</span>)</p>
+<p>When <span class="tt">ON</span> (default for a standalone Helios build), Helios may set <span class="tt">CMAKE_LINKER</span>, <span class="tt">CMAKE_AR</span>, and <span class="tt">CMAKE_RANLIB</span> for the <b>whole</b> CMake project, and apply <span class="tt">-fuse-ld=</span> / linker type globally.</p>
+<p>When <span class="tt">OFF</span> (default if Helios is added via <span class="tt">add_subdirectory</span> / FetchContent), those cache variables are left to the parent. A selected fast linker is applied only to Helios targets. Consumers can opt in:</p>
+<div class="fragment"><div class="line">cmake -DHELIOS_MANAGE_TOOLCHAIN=ON -DHELIOS_LINKER=AUTO ...</div>
+</div><!-- fragment --><p>Per-config RAD vs <span class="tt">link.exe</span> on the Visual Studio generator needs CMake 3.29+; Ninja presets work from CMake 3.25.</p>
 <h3 class="doxsection"><a class="anchor" id="run-the-example"></a>
 Run the Example</h3>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_BUILD_EXAMPLES=ON</div>
@@ -408,7 +458,7 @@ Run the Example</h3>
 </div><!-- fragment --><p>See <a href="examples/simple/src/main.cpp">examples/simple/src/main.cpp</a> for schedules, system sets, sub-apps, and profiling.</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="usage-2"></a>
+<h2 class="doxsection"><a class="anchor" id="usage-6"></a>
 Usage</h2>
 <p>Systems are plain structs — <span class="tt">operator()</span> parameters declare data access or regular C++ lambdas. <span class="tt">App</span> owns the main world, executor, and frame scheduler.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="app_8hpp.html">helios/app/app.hpp</a>&gt;</span></div>
@@ -433,14 +483,14 @@ Usage</h2>
 <div class="line">                  helios::ecs::Commands commands) {</div>
 <div class="line">    <span class="comment">// Spawning new entity every even frame</span></div>
 <div class="line">    <span class="keywordflow">if</span> (frame_count-&gt;count % 2 == 0) {</div>
-<div class="line">      commands.<a class="code hl_function" href="classhelios_1_1ecs_1_1Commands.html#abbeb6d3300b05c05040341c7d770af3e">Spawn</a>().<a class="code hl_function" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html#a1e9f63a74267618291aae7c9db5ea8db">AddComponents</a>(Position{}, Velocity{});</div>
+<div class="line">      commands.<a class="code hl_function" href="classhelios_1_1ecs_1_1Commands.html#ace15f30712c4e8cdff6da2385f72907a">Spawn</a>().<a class="code hl_function" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html#afd6be1ca8f1a36afb4087c1723038f56">AddComponents</a>(Position{}, Velocity{});</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">struct </span>ChangePosition {</div>
-<div class="line">  <span class="keywordtype">void</span> operator()(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query&lt;Position&amp;, const Velocity&amp;&gt;</a> movables) {</div>
-<div class="line">    movables.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicQuery.html#a96897d89cdf618e38944a1a9ba9b6f46">ForEach</a>([](Position&amp; pos, <span class="keyword">const</span> Velocity&amp; vel) {</div>
+<div class="line">  <span class="keywordtype">void</span> operator()(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff">helios::ecs::Query&lt;Position&amp;, const Velocity&amp;&gt;</a> movables) {</div>
+<div class="line">    movables.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicQuery.html#a0ad7c672365863c684a142d796aa9220">ForEach</a>([](Position&amp; pos, <span class="keyword">const</span> Velocity&amp; vel) {</div>
 <div class="line">      pos.x += vel.dx;</div>
 <div class="line">      pos.y += vel.dy;</div>
 <div class="line">    });</div>
@@ -448,8 +498,8 @@ Usage</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">struct </span>ChangeVelocity {</div>
-<div class="line">  <span class="keywordtype">void</span> operator()(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query&lt;Velocity&amp;&gt;</a> movables) {</div>
-<div class="line">    movables.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicQuery.html#a96897d89cdf618e38944a1a9ba9b6f46">ForEach</a>([](Velocity&amp; vel) {</div>
+<div class="line">  <span class="keywordtype">void</span> operator()(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff">helios::ecs::Query&lt;Velocity&amp;&gt;</a> movables) {</div>
+<div class="line">    movables.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicQuery.html#a0ad7c672365863c684a142d796aa9220">ForEach</a>([](Velocity&amp; vel) {</div>
 <div class="line">      vel.dx *= kVelocityBoost;</div>
 <div class="line">      vel.dy *= kVelocityBoost;</div>
 <div class="line">    });</div>
@@ -457,9 +507,9 @@ Usage</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">struct </span>RequestExit {</div>
-<div class="line">  <span class="keywordtype">void</span> operator()(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a1a3cca45d631afb052c728c7589f4554">helios::ecs::MessageWriter&lt;helios::app::AppExit&gt;</a> exit) {</div>
+<div class="line">  <span class="keywordtype">void</span> operator()(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#afedfd8d803e3e5dd106becf7eb138e74">helios::ecs::MessageWriter&lt;helios::app::AppExit&gt;</a> exit) {</div>
 <div class="line">    <span class="comment">// Sending message that would be handled in the next schedule</span></div>
-<div class="line">    exit.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a1879828695519f011fbaad76115245dd">Write</a>(<a class="code hl_function" href="structhelios_1_1app_1_1AppExit.html#a3543c341dd1220bde5767f0b88ba1619">helios::app::AppExit::Success</a>());</div>
+<div class="line">    exit.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a9dbfbe347d334e51810a7f02bb897dcd">Write</a>(<a class="code hl_function" href="structhelios_1_1app_1_1AppExit.html#a3543c341dd1220bde5767f0b88ba1619">helios::app::AppExit::Success</a>());</div>
 <div class="line">  }</div>
 <div class="line">};</div>
 <div class="line"> </div>
@@ -480,26 +530,26 @@ Usage</h2>
 <div class="line">  <span class="keywordflow">return</span> std::to_underlying(app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">Run</a>());</div>
 <div class="line">}</div>
 <div class="ttc" id="aapp_8hpp_html"><div class="ttname"><a href="app_8hpp.html">app.hpp</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00101">application.hpp:101</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a5f2c1a0106d181ec8a4956f2ab494e51"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a5f2c1a0106d181ec8a4956f2ab494e51">helios::app::App::AddMessages</a></div><div class="ttdeci">auto AddMessages(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Registers multiple message types on the main world.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00915">application.hpp:915</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a77f59c028a07f66d00b4afec965aad45"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a77f59c028a07f66d00b4afec965aad45">helios::app::App::AddPlugins</a></div><div class="ttdeci">auto AddPlugins(this auto &amp;&amp;self, T &amp;&amp;plugin) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds plugin instance, if plugin of the same type is not already added.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00762">application.hpp:762</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aabbdf71882c4e7219a73fc527fae150e"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aabbdf71882c4e7219a73fc527fae150e">helios::app::App::AddSystem</a></div><div class="ttdeci">auto AddSystem(const L &amp;label, S &amp;&amp;system, ecs::SystemLocalDataOptions options={}) -&gt; ecs::SystemHandle</div><div class="ttdoc">Adds a functor system to a main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00354">application.hpp:354</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad88147a9c541ed672401349ccb6d42fd"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd">helios::app::App::AddSystems</a></div><div class="ttdeci">ecs::SystemGroupHandle AddSystems(const L &amp;label, Systems &amp;&amp;... systems)</div><div class="ttdoc">Adds multiple functor systems to the same main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00886">application.hpp:886</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae1bc7b5b668ca63cc91dfd87757e99be"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">helios::app::App::Run</a></div><div class="ttdeci">ExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00098">application.cpp:98</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00048">application.hpp:48</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a5f2c1a0106d181ec8a4956f2ab494e51"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a5f2c1a0106d181ec8a4956f2ab494e51">helios::app::App::AddMessages</a></div><div class="ttdeci">auto AddMessages(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Registers multiple message types on the main world.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00832">application.hpp:832</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a77f59c028a07f66d00b4afec965aad45"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a77f59c028a07f66d00b4afec965aad45">helios::app::App::AddPlugins</a></div><div class="ttdeci">auto AddPlugins(this auto &amp;&amp;self, T &amp;&amp;plugin) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds plugin instance, if plugin of the same type is not already added.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00695">application.hpp:695</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aabbdf71882c4e7219a73fc527fae150e"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aabbdf71882c4e7219a73fc527fae150e">helios::app::App::AddSystem</a></div><div class="ttdeci">auto AddSystem(const L &amp;label, S &amp;&amp;system, ecs::SystemLocalDataOptions options={}) -&gt; ecs::SystemHandle</div><div class="ttdoc">Adds a functor system to a main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00314">application.hpp:314</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad88147a9c541ed672401349ccb6d42fd"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd">helios::app::App::AddSystems</a></div><div class="ttdeci">ecs::SystemGroupHandle AddSystems(const L &amp;label, Systems &amp;&amp;... systems)</div><div class="ttdoc">Adds multiple functor systems to the same main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00356">application.hpp:356</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae1bc7b5b668ca63cc91dfd87757e99be"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">helios::app::App::Run</a></div><div class="ttdeci">ExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00127">application.cpp:127</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1FrameCountPlugin_html"><div class="ttname"><a href="classhelios_1_1app_1_1FrameCountPlugin.html">helios::app::FrameCountPlugin</a></div><div class="ttdoc">Adds the FrameCount resource and its per-frame update system.</div><div class="ttdef"><b>Definition</b> <a href="frame__count_8hpp_source.html#l00030">frame_count.hpp:30</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html_a1879828695519f011fbaad76115245dd"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a1879828695519f011fbaad76115245dd">helios::ecs::BasicMessageWriter::Write</a></div><div class="ttdeci">void Write(U &amp;&amp;message) const</div><div class="ttdoc">Writes a single message to the local queue.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00049">writer.hpp:49</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a96897d89cdf618e38944a1a9ba9b6f46"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a96897d89cdf618e38944a1a9ba9b6f46">helios::ecs::BasicQuery::ForEach</a></div><div class="ttdeci">void ForEach(const Action &amp;action) const</div><div class="ttdoc">Executes an action for each matching entity&#39;s components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01408">query.hpp:1408</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Commands_html_abbeb6d3300b05c05040341c7d770af3e"><div class="ttname"><a href="classhelios_1_1ecs_1_1Commands.html#abbeb6d3300b05c05040341c7d770af3e">helios::ecs::Commands::Spawn</a></div><div class="ttdeci">PmrEntityCmdBuffer Spawn()</div><div class="ttdoc">Spawns a new entity and returns a command buffer for it.</div><div class="ttdef"><b>Definition</b> <a href="commands_8hpp_source.html#l00099">commands.hpp:99</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1EntityCmdBuffer_html_a1e9f63a74267618291aae7c9db5ea8db"><div class="ttname"><a href="classhelios_1_1ecs_1_1EntityCmdBuffer.html#a1e9f63a74267618291aae7c9db5ea8db">helios::ecs::EntityCmdBuffer::AddComponents</a></div><div class="ttdeci">auto AddComponents(this auto &amp;&amp;self, Ts &amp;&amp;... components) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Enqueues a command to add components to the entity.</div><div class="ttdef"><b>Definition</b> <a href="entity__buffer_8hpp_source.html#l00282">entity_buffer.hpp:282</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res</a></div><div class="ttdoc">Read-only or mutable access to resource.</div><div class="ttdef"><b>Definition</b> <a href="param_8hpp_source.html#l00017">param.hpp:17</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html_a9dbfbe347d334e51810a7f02bb897dcd"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a9dbfbe347d334e51810a7f02bb897dcd">helios::ecs::BasicMessageWriter::Write</a></div><div class="ttdeci">constexpr void Write(U &amp;&amp;message) const</div><div class="ttdoc">Writes a single message to the local queue.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00048">writer.hpp:48</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a0ad7c672365863c684a142d796aa9220"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a0ad7c672365863c684a142d796aa9220">helios::ecs::BasicQuery::ForEach</a></div><div class="ttdeci">void ForEach(const Action &amp;action) const</div><div class="ttdoc">Executes an action for each matching entity&#39;s components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01363">query.hpp:1363</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Commands_html_ace15f30712c4e8cdff6da2385f72907a"><div class="ttname"><a href="classhelios_1_1ecs_1_1Commands.html#ace15f30712c4e8cdff6da2385f72907a">helios::ecs::Commands::Spawn</a></div><div class="ttdeci">EntityCmdBuffer Spawn()</div><div class="ttdoc">Spawns a new entity and returns a command buffer for it.</div><div class="ttdef"><b>Definition</b> <a href="commands_8hpp_source.html#l00112">commands.hpp:112</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EntityCmdBuffer_html_afd6be1ca8f1a36afb4087c1723038f56"><div class="ttname"><a href="classhelios_1_1ecs_1_1EntityCmdBuffer.html#afd6be1ca8f1a36afb4087c1723038f56">helios::ecs::EntityCmdBuffer::AddComponents</a></div><div class="ttdeci">auto AddComponents(this auto &amp;&amp;self, Ts &amp;&amp;... components) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Enqueues a command to add components to the entity.</div><div class="ttdef"><b>Definition</b> <a href="entity__buffer_8hpp_source.html#l00261">entity_buffer.hpp:261</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res</a></div><div class="ttdoc">Access to resource.</div><div class="ttdef"><b>Definition</b> <a href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html#l00022">params.hpp:22</a></div></div>
 <div class="ttc" id="aecs_8hpp_html"><div class="ttname"><a href="ecs_8hpp.html">ecs.hpp</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a12383482410e87f279ccb7f69e4381af"><div class="ttname"><a href="namespacehelios_1_1app.html#a12383482410e87f279ccb7f69e4381af">helios::app::kPostUpdate</a></div><div class="ttdeci">constexpr PostUpdate kPostUpdate</div><div class="ttdoc">Builtin post-update schedule.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00106">schedules.hpp:106</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a6336fe1dd31d2537c02c2571437ab93f"><div class="ttname"><a href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">helios::app::kUpdate</a></div><div class="ttdeci">constexpr Update kUpdate</div><div class="ttdoc">Builtin update schedule.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00098">schedules.hpp:98</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a9ae6423443d7b91d02971971253e2e1c"><div class="ttname"><a href="namespacehelios_1_1app.html#a9ae6423443d7b91d02971971253e2e1c">helios::app::kPreUpdate</a></div><div class="ttdeci">constexpr PreUpdate kPreUpdate</div><div class="ttdoc">Builtin pre-update schedule.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00090">schedules.hpp:90</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a1a3cca45d631afb052c728c7589f4554"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a1a3cca45d631afb052c728c7589f4554">helios::ecs::MessageWriter</a></div><div class="ttdeci">PmrBasicMessageWriter&lt; T &gt; MessageWriter</div><div class="ttdoc">Alias for BasicMessageWriter bound to a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00097">writer.hpp:97</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02264">query.hpp:2264</a></div></div>
-<div class="ttc" id="astructhelios_1_1app_1_1AppExit_html"><div class="ttname"><a href="structhelios_1_1app_1_1AppExit.html">helios::app::AppExit</a></div><div class="ttdoc">Message that requests the application to exit.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00060">application.hpp:60</a></div></div>
-<div class="ttc" id="astructhelios_1_1app_1_1AppExit_html_a3543c341dd1220bde5767f0b88ba1619"><div class="ttname"><a href="structhelios_1_1app_1_1AppExit.html#a3543c341dd1220bde5767f0b88ba1619">helios::app::AppExit::Success</a></div><div class="ttdeci">static constexpr AppExit Success() noexcept</div><div class="ttdoc">Creates an AppExit message indicating success.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00082">application.hpp:82</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a12383482410e87f279ccb7f69e4381af"><div class="ttname"><a href="namespacehelios_1_1app.html#a12383482410e87f279ccb7f69e4381af">helios::app::kPostUpdate</a></div><div class="ttdeci">constexpr PostUpdate kPostUpdate</div><div class="ttdoc">Builtin post-update schedule.</div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00108">schedules.hpp:108</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a6336fe1dd31d2537c02c2571437ab93f"><div class="ttname"><a href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">helios::app::kUpdate</a></div><div class="ttdeci">constexpr Update kUpdate</div><div class="ttdoc">Builtin update schedule.</div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00100">schedules.hpp:100</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a9ae6423443d7b91d02971971253e2e1c"><div class="ttname"><a href="namespacehelios_1_1app.html#a9ae6423443d7b91d02971971253e2e1c">helios::app::kPreUpdate</a></div><div class="ttdeci">constexpr PreUpdate kPreUpdate</div><div class="ttdoc">Builtin pre-update schedule.</div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00092">schedules.hpp:92</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a165dce904fdd9fe821b8b48ec7faf8ff"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a165dce904fdd9fe821b8b48ec7faf8ff">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02079">query.hpp:2079</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_afedfd8d803e3e5dd106becf7eb138e74"><div class="ttname"><a href="namespacehelios_1_1ecs.html#afedfd8d803e3e5dd106becf7eb138e74">helios::ecs::MessageWriter</a></div><div class="ttdeci">BasicMessageWriter&lt; T &gt; MessageWriter</div><div class="ttdoc">Canonical message writer type for system parameters.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00153">writer.hpp:153</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1AppExit_html"><div class="ttname"><a href="structhelios_1_1app_1_1AppExit.html">helios::app::AppExit</a></div><div class="ttdoc">Message that requests the application to exit.</div><div class="ttdef"><b>Definition</b> <a href="app__exit_8hpp_source.html#l00022">app_exit.hpp:22</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1AppExit_html_a3543c341dd1220bde5767f0b88ba1619"><div class="ttname"><a href="structhelios_1_1app_1_1AppExit.html#a3543c341dd1220bde5767f0b88ba1619">helios::app::AppExit::Success</a></div><div class="ttdeci">static constexpr AppExit Success() noexcept</div><div class="ttdoc">Creates an AppExit message indicating success.</div><div class="ttdef"><b>Definition</b> <a href="app__exit_8hpp_source.html#l00043">app_exit.hpp:43</a></div></div>
 </div><!-- fragment --><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Parameter  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
@@ -519,41 +569,17 @@ Usage</h2>
 <p>Builtin schedules are available through <span class="tt">&lt;<a class="el" href="app_8hpp.html">helios/app/app.hpp</a>&gt;</span>: <span class="tt">MainStartup</span> → <span class="tt">PreStartup</span> → <span class="tt">Startup</span> → <span class="tt">PostStartup</span> → <span class="tt">First</span> → <span class="tt">PreUpdate</span> → <span class="tt">Update</span> → <span class="tt">PostUpdate</span> → <span class="tt">Last</span> → <span class="tt">Extract</span> → shutdown stages. By default, <span class="tt">MainStartup</span> and <span class="tt">Shutdown</span> use the main-thread schedule executor; the other built-in schedules, including <span class="tt">First</span> and <span class="tt">Last</span>, use the multi-threaded executor.</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="architecture"></a>
-Architecture</h2>
-<div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────┐</div>
-<div class="line">│  App                                                    │</div>
-<div class="line">│  ├─ async::Executor        (work-stealing thread pool)  │</div>
-<div class="line">│  ├─ Scheduler              (frame stages)               │</div>
-<div class="line">│  ├─ SubApp (main)          (ecs::World + schedules)     │</div>
-<div class="line">│  ├─ SubApp...              (optional parallel worlds)   │</div>
-<div class="line">│  └─ Plugins                (static + dynamic)           │</div>
-<div class="line">└─────────────────────────────────────────────────────────┘</div>
-<div class="line">         │ schedules                │ task graphs</div>
-<div class="line">         ▼                          ▼</div>
-<div class="line">┌─────────────────┐        ┌─────────────────┐</div>
-<div class="line">│  ecs::Schedule  │        │ async::Executor │</div>
-<div class="line">│  systems + DAG  │        │ TaskGraph       │</div>
-<div class="line">└─────────────────┘        └─────────────────┘</div>
-<div class="line">         │</div>
-<div class="line">         ▼</div>
-<div class="line">┌─────────────────────────────────────────────────────────┐</div>
-<div class="line">│ ecs::World                                              │</div>
-<div class="line">│ entities · components · resources · messages · commands │</div>
-<div class="line">└─────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><ul>
-<li><b>Entities</b> — 64-bit ID (32-bit index + 32-bit generation), free-list recycling</li>
-<li><b>Components</b> — archetype columns or per-type sparse sets; structural changes via deferred <span class="tt">Commands</span></li>
-<li><b>Messages</b> — double-buffered (read previous frame); async messages use lock-free queues</li>
-</ul>
-<p><a href="#readme-top">↑ Back to Top</a></p>
-<hr  />
 <h2 class="doxsection"><a class="anchor" id="using-as-a-dependency"></a>
 Using as a Dependency</h2>
 <p>Helios can be consumed from another CMake project in several ways. All methods expose targets as <span class="tt">helios::module::&lt;name&gt;</span> and the helper <span class="tt">helios_link_modules()</span>.</p>
 <p>Typical consumer settings when embedding:</p>
 <div class="fragment"><div class="line">set(HELIOS_BUILD_TESTS OFF CACHE BOOL &quot;&quot; FORCE)</div>
 <div class="line">set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL &quot;&quot; FORCE)</div>
+<div class="line"># Optional overrides (safer defaults already apply when embedded):</div>
+<div class="line"># set(HELIOS_ENABLE_LTO OFF CACHE BOOL &quot;&quot; FORCE)</div>
+<div class="line"># set(HELIOS_ENABLE_LTO_RELWITHDEBINFO OFF CACHE BOOL &quot;&quot; FORCE)</div>
+<div class="line"># set(HELIOS_MANAGE_TOOLCHAIN OFF CACHE BOOL &quot;&quot; FORCE)</div>
+<div class="line"># set(HELIOS_LINKER DEFAULT CACHE STRING &quot;&quot; FORCE)</div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-1-add_subdirectory"></a>
 Method 1: <span class="tt">add_subdirectory</span></h3>
 <p>Best for vendoring a copy inside your tree (e.g. <span class="tt">third_party/HeliosEngine</span>).</p>
@@ -566,6 +592,8 @@ Method 1: <span class="tt">add_subdirectory</span></h3>
 <div class="line">add_subdirectory(third_party/HeliosEngine)</div>
 <div class="line"> </div>
 <div class="line">add_executable(my_game src/main.cpp)</div>
+<div class="line"># Optional: adopt Helios warning/optimization/sanitizer profile</div>
+<div class="line"># helios_apply_conventions(my_game)</div>
 <div class="line">helios_link_modules(</div>
 <div class="line">    TARGET my_game</div>
 <div class="line">    MODULES PUBLIC app</div>
@@ -666,7 +694,7 @@ Code formatting</h3>
 Creating a Custom Module</h3>
 <p>Helios modules live under <span class="tt">src/</span> by default. Register additional search paths with <span class="tt">helios_add_extra_module_dirs()</span> (before discovery) or <span class="tt">HELIOS_EXTRA_MODULE_DIRS</span>. The <span class="tt">greeting</span> example path is registered automatically when <span class="tt">HELIOS_BUILD_EXAMPLES=ON</span>. See the full walkthrough:</p>
 <p><b><a class="el" href="dir_217ee790cdc210ca56feb9a8b7616066.html" title="/home/runner/work/HeliosEngine/HeliosEngine/examples/custom_module/README.md">examples/custom_module/README.md</a></b></p>
-<p>That example defines a minimal <span class="tt">greeting</span> module (registration, build target, tests, and a demo executable) under <span class="tt">examples/custom_module/</span>, discovered through the extra module path mechanism — no manual <span class="tt">include(Module.cmake)</span> required.</p>
+<p>That example defines a minimal <span class="tt">greeting</span> module (registration, build target, tests, and a demo executable) under <span class="tt">examples/custom_module/</span>, discovered through the extra module path mechanism.</p>
 <div class="fragment"><div class="line"># From a parent CMake project (before add_subdirectory(HeliosEngine)):</div>
 <div class="line"># list(APPEND CMAKE_MODULE_PATH &quot;.../HeliosEngine/cmake&quot;)</div>
 <div class="line"># include(ModuleRegistry)</div>
@@ -678,7 +706,6 @@ Creating a Custom Module</h3>
 </div><!-- fragment --><p>When <span class="tt">HELIOS_BUILD_EXAMPLES=ON</span>, Helios calls <span class="tt">helios_add_extra_module_dirs(examples/custom_module)</span> before discovery.</p>
 <p>Quick layout:</p>
 <div class="fragment"><div class="line">examples/custom_module/</div>
-<div class="line">├── Module.cmake              # helios_register_module(...)</div>
 <div class="line">├── CMakeLists.txt            # helios_module(...) + demo target</div>
 <div class="line">├── README.md                 # Step-by-step guide</div>
 <div class="line">├── include/helios/greeting/  # Public headers</div>

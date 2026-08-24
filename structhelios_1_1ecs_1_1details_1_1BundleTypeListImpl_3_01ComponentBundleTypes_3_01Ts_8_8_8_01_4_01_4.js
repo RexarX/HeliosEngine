@@ -1,0 +1,4 @@
+var structhelios_1_1ecs_1_1details_1_1BundleTypeListImpl_3_01ComponentBundleTypes_3_01Ts_8_8_8_01_4_01_4 =
+[
+    [ "Type", "structhelios_1_1ecs_1_1details_1_1BundleTypeListImpl_3_01ComponentBundleTypes_3_01Ts_8_8_8_01_4_01_4.html#a57d918e7317ea5f246b9046af752ae78", null ]
+];

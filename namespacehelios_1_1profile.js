@@ -4,7 +4,6 @@ var namespacehelios_1_1profile =
       [ "AlignUp", "namespacehelios_1_1profile_1_1anonymous__namespace_02flamegraph_8cpp_03.html#af6dfce868ecbf4f6ea45fc0028e09fad", null ]
     ] ],
     [ "anonymous_namespace{profiler.cpp}", "namespacehelios_1_1profile_1_1anonymous__namespace_02profiler_8cpp_03.html", [
-      [ "AlignUp", "namespacehelios_1_1profile_1_1anonymous__namespace_02profiler_8cpp_03.html#aedb39d6659ac0e40ed68fc0497cc650d", null ],
       [ "RegisterShutdownMemoryDispatchGuard", "namespacehelios_1_1profile_1_1anonymous__namespace_02profiler_8cpp_03.html#a301e266198d5bea634b232815d8cd5bd", null ],
       [ "g_memory_dispatch_suspend_count", "namespacehelios_1_1profile_1_1anonymous__namespace_02profiler_8cpp_03.html#af7a10e6992f61b2e686d3f75d43f421f", null ],
       [ "g_profiler_finalized", "namespacehelios_1_1profile_1_1anonymous__namespace_02profiler_8cpp_03.html#a220742fda8b53e44428f74ecc0afeb40", null ],

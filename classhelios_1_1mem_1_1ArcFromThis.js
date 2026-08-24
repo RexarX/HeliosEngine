@@ -7,5 +7,5 @@ var classhelios_1_1mem_1_1ArcFromThis =
     [ "operator=", "classhelios_1_1mem_1_1ArcFromThis.html#a7598ebba120a045e01202787b56d721f", null ],
     [ "operator=", "classhelios_1_1mem_1_1ArcFromThis.html#abaf8348b73f7f747015502c2e721253f", null ],
     [ "RefCount", "classhelios_1_1mem_1_1ArcFromThis.html#a59707b2a747fc8bdbe852254de6db55e", null ],
-    [ "AtomicRefCounted", "classhelios_1_1mem_1_1ArcFromThis.html#a64aade11e710e6776b0a87a218382154", null ]
+    [ "AtomicRefCounted", "classhelios_1_1mem_1_1ArcFromThis.html#a65db8d5e13eee8d5b5ef6ab358adbe59", null ]
 ];

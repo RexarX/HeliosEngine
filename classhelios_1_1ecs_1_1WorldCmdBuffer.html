@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: helios::ecs::WorldCmdBuffer&lt; Allocator &gt; Class Template Reference</title>
+    <title>Helios Engine: helios::ecs::WorldCmdBuffer Class Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classhelios_1_1ecs_1_1WorldCmdBuffer-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">helios::ecs::WorldCmdBuffer&lt; Allocator &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">helios::ecs::WorldCmdBuffer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -186,118 +186,86 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ab3d8a0f54a760d34a633a1930e388817" id="r_ab3d8a0f54a760d34a633a1930e388817"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ab3d8a0f54a760d34a633a1930e388817">size_type</a> = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt;Allocator&gt;::size_type</td></tr>
-<tr class="memitem:abbedb0c25708ce1495ae8c5dc8b05f55" id="r_abbedb0c25708ce1495ae8c5dc8b05f55"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#abbedb0c25708ce1495ae8c5dc8b05f55">allocator_type</a> = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt;Allocator&gt;::allocator_type</td></tr>
+<tr class="memitem:a87e6069543fabcc24d3a07563d66efa6" id="r_a87e6069543fabcc24d3a07563d66efa6"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a87e6069543fabcc24d3a07563d66efa6">size_type</a> = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html#a91f1fe0f07f358544f785c9a89793142">CmdQueue::size_type</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a32914b1c86e2e0530241bf2da00f127f" id="r_a32914b1c86e2e0530241bf2da00f127f"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a32914b1c86e2e0530241bf2da00f127f">WorldCmdBuffer</a> (<a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;queue, <a class="el" href="#abbedb0c25708ce1495ae8c5dc8b05f55">allocator_type</a> allocator=<a class="el" href="#abbedb0c25708ce1495ae8c5dc8b05f55">allocator_type</a>{})</td></tr>
-<tr class="memdesc:a32914b1c86e2e0530241bf2da00f127f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a world command buffer with a custom allocator.  <br /></td></tr>
-<tr class="memitem:a76bcf2751eba6be83f6ce94d9b57e7f4" id="r_a76bcf2751eba6be83f6ce94d9b57e7f4"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a76bcf2751eba6be83f6ce94d9b57e7f4">WorldCmdBuffer</a> (<a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;queue, std::pmr::memory_resource *resource)</td></tr>
-<tr class="memdesc:a76bcf2751eba6be83f6ce94d9b57e7f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a world command buffer from a PMR memory resource.  <br /></td></tr>
-<tr class="memitem:a294058abeaba717895eca7eb518f9629" id="r_a294058abeaba717895eca7eb518f9629"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a294058abeaba717895eca7eb518f9629">WorldCmdBuffer</a> (<a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;queue, std::nullptr_t)=delete</td></tr>
-<tr class="memitem:a712e5770defe7e12e843c7ea7ce06ef4" id="r_a712e5770defe7e12e843c7ea7ce06ef4"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a712e5770defe7e12e843c7ea7ce06ef4">WorldCmdBuffer</a> (const WorldCmdBuffer &amp;)=delete</td></tr>
-<tr class="memitem:a75fc8268a3ab5b8ab947e06d7a36fa89" id="r_a75fc8268a3ab5b8ab947e06d7a36fa89"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a75fc8268a3ab5b8ab947e06d7a36fa89">WorldCmdBuffer</a> (WorldCmdBuffer &amp;&amp;)=delete</td></tr>
-<tr class="memitem:a80938d48d24b3e8122ff0540b3df22fc" id="r_a80938d48d24b3e8122ff0540b3df22fc"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a80938d48d24b3e8122ff0540b3df22fc">~WorldCmdBuffer</a> ()</td></tr>
-<tr class="memitem:a418798085115d7026a991cddba20f696" id="r_a418798085115d7026a991cddba20f696"><td class="memItemLeft"><a class="el" href="#a32914b1c86e2e0530241bf2da00f127f">WorldCmdBuffer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a418798085115d7026a991cddba20f696">operator=</a> (const <a class="el" href="#a32914b1c86e2e0530241bf2da00f127f">WorldCmdBuffer</a> &amp;)=delete</td></tr>
-<tr class="memitem:a0baedc1a440b20cf2bfaf5d489e111d1" id="r_a0baedc1a440b20cf2bfaf5d489e111d1"><td class="memItemLeft"><a class="el" href="#a32914b1c86e2e0530241bf2da00f127f">WorldCmdBuffer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a0baedc1a440b20cf2bfaf5d489e111d1">operator=</a> (<a class="el" href="#a32914b1c86e2e0530241bf2da00f127f">WorldCmdBuffer</a> &amp;&amp;)=delete</td></tr>
-<tr class="memitem:a57f49e2b44b45a3975abfc79b4abe200" id="r_a57f49e2b44b45a3975abfc79b4abe200"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a57f49e2b44b45a3975abfc79b4abe200">Clear</a> () noexcept</td></tr>
-<tr class="memdesc:a57f49e2b44b45a3975abfc79b4abe200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all pending commands from the buffer.  <br /></td></tr>
-<tr class="memitem:a05f2b74a3480bede521383e997352633" id="r_a05f2b74a3480bede521383e997352633"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a05f2b74a3480bede521383e997352633">Reserve</a> (<a class="el" href="#ab3d8a0f54a760d34a633a1930e388817">size_type</a> capacity)</td></tr>
-<tr class="memdesc:a05f2b74a3480bede521383e997352633"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves capacity for commands.  <br /></td></tr>
-<tr class="memitem:a22541d0a042eb2cf084b8534681017cb" id="r_a22541d0a042eb2cf084b8534681017cb"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a22541d0a042eb2cf084b8534681017cb template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a22541d0a042eb2cf084b8534681017cb">InsertResource</a> (this auto &amp;&amp;self, T &amp;&amp;resource) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a22541d0a042eb2cf084b8534681017cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to insert a resource into the world.  <br /></td></tr>
-<tr class="memitem:a428c502c33fb57d681994cb16045164f" id="r_a428c502c33fb57d681994cb16045164f"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a428c502c33fb57d681994cb16045164f template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a428c502c33fb57d681994cb16045164f">TryInsertResource</a> (this auto &amp;&amp;self, T &amp;&amp;resource) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a428c502c33fb57d681994cb16045164f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to insert a resource if not present.  <br /></td></tr>
-<tr class="memitem:a45a009a76d8bfa9857c8473a6ead2413" id="r_a45a009a76d8bfa9857c8473a6ead2413"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a45a009a76d8bfa9857c8473a6ead2413 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a45a009a76d8bfa9857c8473a6ead2413">RemoveResource</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a45a009a76d8bfa9857c8473a6ead2413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove a resource from the world.  <br /></td></tr>
-<tr class="memitem:a2b79edce942f888d4a1b19f4ef960e0b" id="r_a2b79edce942f888d4a1b19f4ef960e0b"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
-<tr class="memitem:a2b79edce942f888d4a1b19f4ef960e0b template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a2b79edce942f888d4a1b19f4ef960e0b">TryRemoveResource</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a2b79edce942f888d4a1b19f4ef960e0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to remove a resource.  <br /></td></tr>
-<tr class="memitem:afe7f450e709867c8e680957d508d38a2" id="r_afe7f450e709867c8e680957d508d38a2"><td class="memTemplParams" colspan="2">template&lt;typename F&gt; <br />
+<tr class="memitem:aa5aa161437ee2ab17ae94ee37891c71e" id="r_aa5aa161437ee2ab17ae94ee37891c71e"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aa5aa161437ee2ab17ae94ee37891c71e">WorldCmdBuffer</a> (<a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a> &amp;queue, std::pmr::memory_resource *resource=std::pmr::get_default_resource())</td></tr>
+<tr class="memdesc:aa5aa161437ee2ab17ae94ee37891c71e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a world command buffer.  <br /></td></tr>
+<tr class="memitem:a5f58ac9e96b44b23edded69f83008ec2" id="r_a5f58ac9e96b44b23edded69f83008ec2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5f58ac9e96b44b23edded69f83008ec2">WorldCmdBuffer</a> (<a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a> &amp;queue, std::nullptr_t)=delete</td></tr>
+<tr class="memitem:ac69e402a201ac43b445dceaaaf57ca56" id="r_ac69e402a201ac43b445dceaaaf57ca56"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac69e402a201ac43b445dceaaaf57ca56">WorldCmdBuffer</a> (const WorldCmdBuffer &amp;)=delete</td></tr>
+<tr class="memitem:a33598d5f208697dfbabdf99601e599d9" id="r_a33598d5f208697dfbabdf99601e599d9"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a33598d5f208697dfbabdf99601e599d9">WorldCmdBuffer</a> (WorldCmdBuffer &amp;&amp;)=delete</td></tr>
+<tr class="memitem:a09de8fbd065c6a3e81af989523432034" id="r_a09de8fbd065c6a3e81af989523432034"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a09de8fbd065c6a3e81af989523432034">~WorldCmdBuffer</a> ()</td></tr>
+<tr class="memitem:a19a8bef475bae260e60ce9346287b4d0" id="r_a19a8bef475bae260e60ce9346287b4d0"><td class="memItemLeft"><a class="el" href="#aa5aa161437ee2ab17ae94ee37891c71e">WorldCmdBuffer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a19a8bef475bae260e60ce9346287b4d0">operator=</a> (const <a class="el" href="#aa5aa161437ee2ab17ae94ee37891c71e">WorldCmdBuffer</a> &amp;)=delete</td></tr>
+<tr class="memitem:abc3ba031058489a0200132b4b26f29ca" id="r_abc3ba031058489a0200132b4b26f29ca"><td class="memItemLeft"><a class="el" href="#aa5aa161437ee2ab17ae94ee37891c71e">WorldCmdBuffer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abc3ba031058489a0200132b4b26f29ca">operator=</a> (<a class="el" href="#aa5aa161437ee2ab17ae94ee37891c71e">WorldCmdBuffer</a> &amp;&amp;)=delete</td></tr>
+<tr class="memitem:aacd630a96b771430a03d955bc435b1b9" id="r_aacd630a96b771430a03d955bc435b1b9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aacd630a96b771430a03d955bc435b1b9">Clear</a> () noexcept</td></tr>
+<tr class="memdesc:aacd630a96b771430a03d955bc435b1b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all pending commands from the buffer.  <br /></td></tr>
+<tr class="memitem:a9e73bb6c88fe1a570640232d2614867a" id="r_a9e73bb6c88fe1a570640232d2614867a"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a9e73bb6c88fe1a570640232d2614867a">Reserve</a> (<a class="el" href="#a87e6069543fabcc24d3a07563d66efa6">size_type</a> capacity)</td></tr>
+<tr class="memdesc:a9e73bb6c88fe1a570640232d2614867a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves capacity for commands.  <br /></td></tr>
+<tr class="memitem:af06c1c4500e5eeb48e4b6246b933e47e" id="r_af06c1c4500e5eeb48e4b6246b933e47e"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:af06c1c4500e5eeb48e4b6246b933e47e template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#af06c1c4500e5eeb48e4b6246b933e47e">InsertResource</a> (this auto &amp;&amp;self, T &amp;&amp;resource) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:af06c1c4500e5eeb48e4b6246b933e47e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to insert a resource into the world.  <br /></td></tr>
+<tr class="memitem:a0eb03f98a90ad9f69858cdea4571f3f6" id="r_a0eb03f98a90ad9f69858cdea4571f3f6"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a0eb03f98a90ad9f69858cdea4571f3f6 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a0eb03f98a90ad9f69858cdea4571f3f6">TryInsertResource</a> (this auto &amp;&amp;self, T &amp;&amp;resource) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a0eb03f98a90ad9f69858cdea4571f3f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to insert a resource if not present.  <br /></td></tr>
+<tr class="memitem:aaac966ee2ae9ed25e7f277cff409b445" id="r_aaac966ee2ae9ed25e7f277cff409b445"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:aaac966ee2ae9ed25e7f277cff409b445 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aaac966ee2ae9ed25e7f277cff409b445">RemoveResource</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:aaac966ee2ae9ed25e7f277cff409b445"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove a resource from the world.  <br /></td></tr>
+<tr class="memitem:aaa22f99dadbedd3208527973d82dddea" id="r_aaa22f99dadbedd3208527973d82dddea"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:aaa22f99dadbedd3208527973d82dddea template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aaa22f99dadbedd3208527973d82dddea">TryRemoveResource</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:aaa22f99dadbedd3208527973d82dddea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to remove a resource.  <br /></td></tr>
+<tr class="memitem:af441720d6c3585d8e715862a4181f5c7" id="r_af441720d6c3585d8e715862a4181f5c7"><td class="memTemplParams" colspan="2">template&lt;typename F&gt; <br />
 requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;&gt;</td></tr>
-<tr class="memitem:afe7f450e709867c8e680957d508d38a2 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#afe7f450e709867c8e680957d508d38a2">DeferredUpdate</a> (this auto &amp;&amp;self, F &amp;&amp;command) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:afe7f450e709867c8e680957d508d38a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to be executed during the next <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">World::Update()</a></span>.  <br /></td></tr>
-<tr class="memitem:aa0224a41e3e293d43b8a12f126e14998" id="r_aa0224a41e3e293d43b8a12f126e14998"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#aa0224a41e3e293d43b8a12f126e14998">Empty</a> () const noexcept</td></tr>
-<tr class="memdesc:aa0224a41e3e293d43b8a12f126e14998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the buffer is empty.  <br /></td></tr>
-<tr class="memitem:acde89ce69c07d7a47ff3b5aef78a99a3" id="r_acde89ce69c07d7a47ff3b5aef78a99a3"><td class="memItemLeft">constexpr <a class="el" href="#ab3d8a0f54a760d34a633a1930e388817">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#acde89ce69c07d7a47ff3b5aef78a99a3">Size</a> () const noexcept</td></tr>
-<tr class="memdesc:acde89ce69c07d7a47ff3b5aef78a99a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of commands in the buffer.  <br /></td></tr>
-<tr class="memitem:ae4e575df7949cffeb86f5f515760a840" id="r_ae4e575df7949cffeb86f5f515760a840"><td class="memItemLeft">constexpr <a class="el" href="#abbedb0c25708ce1495ae8c5dc8b05f55">allocator_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae4e575df7949cffeb86f5f515760a840">GetAllocator</a> () const noexcept(std::is_nothrow_copy_constructible_v&lt; <a class="el" href="#abbedb0c25708ce1495ae8c5dc8b05f55">allocator_type</a> &gt;)</td></tr>
-<tr class="memdesc:ae4e575df7949cffeb86f5f515760a840"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the allocator used by the command storage.  <br /></td></tr>
+<tr class="memitem:af441720d6c3585d8e715862a4181f5c7 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#af441720d6c3585d8e715862a4181f5c7">DeferredUpdate</a> (this auto &amp;&amp;self, F &amp;&amp;command) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:af441720d6c3585d8e715862a4181f5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to be executed during the next <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a473fc38f99f63f6b356a8afe2793ba98" title="Flushes entity reservations and executes pending commands.">World::Flush()</a></span>.  <br /></td></tr>
+<tr class="memitem:a6201649c5c93ec0e4a3676b119d6809b" id="r_a6201649c5c93ec0e4a3676b119d6809b"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a6201649c5c93ec0e4a3676b119d6809b">Empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a6201649c5c93ec0e4a3676b119d6809b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the buffer is empty.  <br /></td></tr>
+<tr class="memitem:a7e19534b7f80a0c89a28e8fbd810b047" id="r_a7e19534b7f80a0c89a28e8fbd810b047"><td class="memItemLeft">constexpr <a class="el" href="#a87e6069543fabcc24d3a07563d66efa6">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7e19534b7f80a0c89a28e8fbd810b047">Size</a> () const noexcept</td></tr>
+<tr class="memdesc:a7e19534b7f80a0c89a28e8fbd810b047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of commands in the buffer.  <br /></td></tr>
+<tr class="memitem:ad6040242acd95669e0ca3985888271b6" id="r_ad6040242acd95669e0ca3985888271b6"><td class="memItemLeft">constexpr std::pmr::memory_resource *&#160;</td><td class="memItemRight"><a class="el" href="#ad6040242acd95669e0ca3985888271b6">GetMemoryResource</a> () const noexcept</td></tr>
+<tr class="memdesc:ad6040242acd95669e0ca3985888271b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the memory resource used for command storage.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt;<br />
-class helios::ecs::WorldCmdBuffer&lt; Allocator &gt;</div><p>Command buffer for deferred <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span> operations. </p>
+<div class="textblock"><p>Command buffer for deferred <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span> operations. </p>
 <p>Collects commands and then pushes them into a queue. <a class="el" href="classhelios_1_1ecs_1_1Commands.html" title="Thin wrapper over command queue and world for deferred ECS operations.">Commands</a> are enqueued in the order they were added, ensuring predictable behavior. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Allocator</td><td>Allocator type for command storage (default: <span class="tt">std::allocator&lt;std::byte&gt;</span>) </td></tr>
-  </table>
-  </dd>
-</dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00024">24</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00020">20</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
-<a id="abbedb0c25708ce1495ae8c5dc8b05f55" name="abbedb0c25708ce1495ae8c5dc8b05f55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbedb0c25708ce1495ae8c5dc8b05f55">&#9670;&#160;</a></span>allocator_type</h2>
+<a id="a87e6069543fabcc24d3a07563d66efa6" name="a87e6069543fabcc24d3a07563d66efa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87e6069543fabcc24d3a07563d66efa6">&#9670;&#160;</a></span>size_type</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::allocator_type = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt;Allocator&gt;::allocator_type</td>
+          <td class="memname">using <a class="el" href="#a87e6069543fabcc24d3a07563d66efa6">helios::ecs::WorldCmdBuffer::size_type</a> = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html#a91f1fe0f07f358544f785c9a89793142">CmdQueue::size_type</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00027">27</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ab3d8a0f54a760d34a633a1930e388817" name="ab3d8a0f54a760d34a633a1930e388817"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3d8a0f54a760d34a633a1930e388817">&#9670;&#160;</a></span>size_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::size_type = <a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt;Allocator&gt;::size_type</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00026">26</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00022">22</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a32914b1c86e2e0530241bf2da00f127f" name="a32914b1c86e2e0530241bf2da00f127f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32914b1c86e2e0530241bf2da00f127f">&#9670;&#160;</a></span>WorldCmdBuffer() <span class="overload">[1/5]</span></h2>
+<a id="aa5aa161437ee2ab17ae94ee37891c71e" name="aa5aa161437ee2ab17ae94ee37891c71e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5aa161437ee2ab17ae94ee37891c71e">&#9670;&#160;</a></span>WorldCmdBuffer() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::WorldCmdBuffer </td>
+          <td class="memname">helios::ecs::WorldCmdBuffer::WorldCmdBuffer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#abbedb0c25708ce1495ae8c5dc8b05f55">allocator_type</a></td>          <td class="paramname"><span class="paramname"><em>allocator</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#abbedb0c25708ce1495ae8c5dc8b05f55">allocator_type</a>{}</span>&#160;)</td>
+          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::pmr::get_default_resource()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -307,76 +275,32 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a world command buffer with a custom allocator. </p>
+<p>Constructs a world command buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">queue</td><td>Queue to push commands into </td></tr>
-    <tr><td class="paramname">allocator</td><td>Allocator instance </td></tr>
+    <tr><td class="paramname">resource</td><td>Memory resource used for command storage </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00034">34</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00029">29</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a76bcf2751eba6be83f6ce94d9b57e7f4" name="a76bcf2751eba6be83f6ce94d9b57e7f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76bcf2751eba6be83f6ce94d9b57e7f4">&#9670;&#160;</a></span>WorldCmdBuffer() <span class="overload">[2/5]</span></h2>
+<a id="a5f58ac9e96b44b23edded69f83008ec2" name="a5f58ac9e96b44b23edded69f83008ec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f58ac9e96b44b23edded69f83008ec2">&#9670;&#160;</a></span>WorldCmdBuffer() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::WorldCmdBuffer </td>
+          <td class="memname">helios::ecs::WorldCmdBuffer::WorldCmdBuffer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::pmr::memory_resource *</td>          <td class="paramname"><span class="paramname"><em>resource</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs a world command buffer from a PMR memory resource. </p>
-<p>Enabled only when <span class="tt"><a class="el" href="#abbedb0c25708ce1495ae8c5dc8b05f55">allocator_type</a></span> is constructible from <span class="tt">std::pmr::memory_resource*</span>. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">queue</td><td>Queue to push commands into </td></tr>
-    <tr><td class="paramname">resource</td><td>Memory resource used to construct allocator </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00045">45</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a294058abeaba717895eca7eb518f9629" name="a294058abeaba717895eca7eb518f9629"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a294058abeaba717895eca7eb518f9629">&#9670;&#160;</a></span>WorldCmdBuffer() <span class="overload">[3/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::WorldCmdBuffer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1CmdQueue.html">CmdQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>queue</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -393,21 +317,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a712e5770defe7e12e843c7ea7ce06ef4" name="a712e5770defe7e12e843c7ea7ce06ef4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a712e5770defe7e12e843c7ea7ce06ef4">&#9670;&#160;</a></span>WorldCmdBuffer() <span class="overload">[4/5]</span></h2>
+<a id="ac69e402a201ac43b445dceaaaf57ca56" name="ac69e402a201ac43b445dceaaaf57ca56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac69e402a201ac43b445dceaaaf57ca56">&#9670;&#160;</a></span>WorldCmdBuffer() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::WorldCmdBuffer </td>
+          <td class="memname">helios::ecs::WorldCmdBuffer::WorldCmdBuffer </td>
           <td>(</td>
-          <td class="paramtype">const WorldCmdBuffer&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const WorldCmdBuffer &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -420,21 +342,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a75fc8268a3ab5b8ab947e06d7a36fa89" name="a75fc8268a3ab5b8ab947e06d7a36fa89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75fc8268a3ab5b8ab947e06d7a36fa89">&#9670;&#160;</a></span>WorldCmdBuffer() <span class="overload">[5/5]</span></h2>
+<a id="a33598d5f208697dfbabdf99601e599d9" name="a33598d5f208697dfbabdf99601e599d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33598d5f208697dfbabdf99601e599d9">&#9670;&#160;</a></span>WorldCmdBuffer() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::WorldCmdBuffer </td>
+          <td class="memname">helios::ecs::WorldCmdBuffer::WorldCmdBuffer </td>
           <td>(</td>
-          <td class="paramtype">WorldCmdBuffer&lt; Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">WorldCmdBuffer &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -447,19 +367,17 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a80938d48d24b3e8122ff0540b3df22fc" name="a80938d48d24b3e8122ff0540b3df22fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80938d48d24b3e8122ff0540b3df22fc">&#9670;&#160;</a></span>~WorldCmdBuffer()</h2>
+<a id="a09de8fbd065c6a3e81af989523432034" name="a09de8fbd065c6a3e81af989523432034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09de8fbd065c6a3e81af989523432034">&#9670;&#160;</a></span>~WorldCmdBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::~<a class="el" href="#a32914b1c86e2e0530241bf2da00f127f">WorldCmdBuffer</a> </td>
+          <td class="memname">helios::ecs::WorldCmdBuffer::~WorldCmdBuffer </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -472,24 +390,22 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00054">54</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00038">38</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a57f49e2b44b45a3975abfc79b4abe200" name="a57f49e2b44b45a3975abfc79b4abe200"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57f49e2b44b45a3975abfc79b4abe200">&#9670;&#160;</a></span>Clear()</h2>
+<a id="aacd630a96b771430a03d955bc435b1b9" name="aacd630a96b771430a03d955bc435b1b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacd630a96b771430a03d955bc435b1b9">&#9670;&#160;</a></span>Clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::Clear </td>
+          <td class="memname">void helios::ecs::WorldCmdBuffer::Clear </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -505,18 +421,15 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Clears all pending commands from the buffer. </p>
 <p>Removes all commands currently in the buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00063">63</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00047">47</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afe7f450e709867c8e680957d508d38a2" name="afe7f450e709867c8e680957d508d38a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe7f450e709867c8e680957d508d38a2">&#9670;&#160;</a></span>DeferredUpdate()</h2>
+<a id="af441720d6c3585d8e715862a4181f5c7" name="af441720d6c3585d8e715862a4181f5c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af441720d6c3585d8e715862a4181f5c7">&#9670;&#160;</a></span>DeferredUpdate()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; <br />
-requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;&gt;</div>
 <div class="memtemplate">
 template&lt;typename F&gt; <br />
 requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;&gt;</div>
@@ -525,7 +438,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::DeferredUpdate </td>
+          <td class="memname">auto helios::ecs::WorldCmdBuffer::DeferredUpdate </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
         </tr>
@@ -542,7 +455,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
 </table>
 </div><div class="memdoc">
 
-<p>Enqueues a command to be executed during the next <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">World::Update()</a></span>. </p>
+<p>Enqueues a command to be executed during the next <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a473fc38f99f63f6b356a8afe2793ba98" title="Flushes entity reservations and executes pending commands.">World::Flush()</a></span>. </p>
 <p>Equivalent to enqueueing a <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1FunctionCmd.html" title="Command that executes a function with World reference.">FunctionCmd</a></span> with the given callable. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -557,23 +470,21 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00192">192</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00169">169</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aa0224a41e3e293d43b8a12f126e14998" name="aa0224a41e3e293d43b8a12f126e14998"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0224a41e3e293d43b8a12f126e14998">&#9670;&#160;</a></span>Empty()</h2>
+<a id="a6201649c5c93ec0e4a3676b119d6809b" name="a6201649c5c93ec0e4a3676b119d6809b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6201649c5c93ec0e4a3676b119d6809b">&#9670;&#160;</a></span>Empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::Empty </td>
+          <td class="memname">bool helios::ecs::WorldCmdBuffer::Empty </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -589,23 +500,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Checks if the buffer is empty. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if buffer is empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00129">129</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00113">113</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae4e575df7949cffeb86f5f515760a840" name="ae4e575df7949cffeb86f5f515760a840"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4e575df7949cffeb86f5f515760a840">&#9670;&#160;</a></span>GetAllocator()</h2>
+<a id="ad6040242acd95669e0ca3985888271b6" name="ad6040242acd95669e0ca3985888271b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6040242acd95669e0ca3985888271b6">&#9670;&#160;</a></span>GetMemoryResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#abbedb0c25708ce1495ae8c5dc8b05f55">allocator_type</a> <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::GetAllocator </td>
+          <td class="memname">std::pmr::memory_resource * helios::ecs::WorldCmdBuffer::GetMemoryResource </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -618,20 +527,18 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the allocator used by the command storage. </p>
-<dl class="section return"><dt>Returns</dt><dd>Allocator instance </dd></dl>
+<p>Returns the memory resource used for command storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>Memory resource passed to the constructor, or the default resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00145">145</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00129">129</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a22541d0a042eb2cf084b8534681017cb" name="a22541d0a042eb2cf084b8534681017cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22541d0a042eb2cf084b8534681017cb">&#9670;&#160;</a></span>InsertResource()</h2>
+<a id="af06c1c4500e5eeb48e4b6246b933e47e" name="af06c1c4500e5eeb48e4b6246b933e47e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af06c1c4500e5eeb48e4b6246b933e47e">&#9670;&#160;</a></span>InsertResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <div class="memtemplate">
 template&lt;ResourceTrait T&gt; </div>
 <table class="mlabels">
@@ -639,7 +546,7 @@ template&lt;ResourceTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::InsertResource </td>
+          <td class="memname">auto helios::ecs::WorldCmdBuffer::InsertResource </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
         </tr>
@@ -671,25 +578,23 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00157">157</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00140">140</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a418798085115d7026a991cddba20f696" name="a418798085115d7026a991cddba20f696"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a418798085115d7026a991cddba20f696">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a19a8bef475bae260e60ce9346287b4d0" name="a19a8bef475bae260e60ce9346287b4d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19a8bef475bae260e60ce9346287b4d0">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a32914b1c86e2e0530241bf2da00f127f">WorldCmdBuffer</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#aa5aa161437ee2ab17ae94ee37891c71e">WorldCmdBuffer</a> &amp; helios::ecs::WorldCmdBuffer::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a32914b1c86e2e0530241bf2da00f127f">WorldCmdBuffer</a>&lt; Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#aa5aa161437ee2ab17ae94ee37891c71e">WorldCmdBuffer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -702,21 +607,19 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a0baedc1a440b20cf2bfaf5d489e111d1" name="a0baedc1a440b20cf2bfaf5d489e111d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0baedc1a440b20cf2bfaf5d489e111d1">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="abc3ba031058489a0200132b4b26f29ca" name="abc3ba031058489a0200132b4b26f29ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc3ba031058489a0200132b4b26f29ca">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a32914b1c86e2e0530241bf2da00f127f">WorldCmdBuffer</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#aa5aa161437ee2ab17ae94ee37891c71e">WorldCmdBuffer</a> &amp; helios::ecs::WorldCmdBuffer::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a32914b1c86e2e0530241bf2da00f127f">WorldCmdBuffer</a>&lt; Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#aa5aa161437ee2ab17ae94ee37891c71e">WorldCmdBuffer</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -729,13 +632,11 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
-<a id="a45a009a76d8bfa9857c8473a6ead2413" name="a45a009a76d8bfa9857c8473a6ead2413"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45a009a76d8bfa9857c8473a6ead2413">&#9670;&#160;</a></span>RemoveResource()</h2>
+<a id="aaac966ee2ae9ed25e7f277cff409b445" name="aaac966ee2ae9ed25e7f277cff409b445"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaac966ee2ae9ed25e7f277cff409b445">&#9670;&#160;</a></span>RemoveResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <div class="memtemplate">
 template&lt;ResourceTrait T&gt; </div>
 <table class="mlabels">
@@ -743,7 +644,7 @@ template&lt;ResourceTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::RemoveResource </td>
+          <td class="memname">auto helios::ecs::WorldCmdBuffer::RemoveResource </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
           <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
@@ -766,25 +667,23 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00175">175</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00154">154</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a05f2b74a3480bede521383e997352633" name="a05f2b74a3480bede521383e997352633"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05f2b74a3480bede521383e997352633">&#9670;&#160;</a></span>Reserve()</h2>
+<a id="a9e73bb6c88fe1a570640232d2614867a" name="a9e73bb6c88fe1a570640232d2614867a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e73bb6c88fe1a570640232d2614867a">&#9670;&#160;</a></span>Reserve()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::Reserve </td>
+          <td class="memname">void helios::ecs::WorldCmdBuffer::Reserve </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#ab3d8a0f54a760d34a633a1930e388817">size_type</a></td>          <td class="paramname"><span class="paramname"><em>capacity</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a87e6069543fabcc24d3a07563d66efa6">size_type</a></td>          <td class="paramname"><span class="paramname"><em>capacity</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -803,23 +702,21 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00071">71</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00055">55</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="acde89ce69c07d7a47ff3b5aef78a99a3" name="acde89ce69c07d7a47ff3b5aef78a99a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acde89ce69c07d7a47ff3b5aef78a99a3">&#9670;&#160;</a></span>Size()</h2>
+<a id="a7e19534b7f80a0c89a28e8fbd810b047" name="a7e19534b7f80a0c89a28e8fbd810b047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e19534b7f80a0c89a28e8fbd810b047">&#9670;&#160;</a></span>Size()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#ab3d8a0f54a760d34a633a1930e388817">size_type</a> <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::Size </td>
+          <td class="memname"><a class="el" href="#a87e6069543fabcc24d3a07563d66efa6">size_type</a> helios::ecs::WorldCmdBuffer::Size </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -835,17 +732,15 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Gets the number of commands in the buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of commands in buffer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00137">137</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00121">121</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a428c502c33fb57d681994cb16045164f" name="a428c502c33fb57d681994cb16045164f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a428c502c33fb57d681994cb16045164f">&#9670;&#160;</a></span>TryInsertResource()</h2>
+<a id="a0eb03f98a90ad9f69858cdea4571f3f6" name="a0eb03f98a90ad9f69858cdea4571f3f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eb03f98a90ad9f69858cdea4571f3f6">&#9670;&#160;</a></span>TryInsertResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <div class="memtemplate">
 template&lt;ResourceTrait T&gt; </div>
 <table class="mlabels">
@@ -853,7 +748,7 @@ template&lt;ResourceTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::TryInsertResource </td>
+          <td class="memname">auto helios::ecs::WorldCmdBuffer::TryInsertResource </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
         </tr>
@@ -885,17 +780,15 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00166">166</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00147">147</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2b79edce942f888d4a1b19f4ef960e0b" name="a2b79edce942f888d4a1b19f4ef960e0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b79edce942f888d4a1b19f4ef960e0b">&#9670;&#160;</a></span>TryRemoveResource()</h2>
+<a id="aaa22f99dadbedd3208527973d82dddea" name="aaa22f99dadbedd3208527973d82dddea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa22f99dadbedd3208527973d82dddea">&#9670;&#160;</a></span>TryRemoveResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Allocator&gt; </div>
 <div class="memtemplate">
 template&lt;ResourceTrait T&gt; </div>
 <table class="mlabels">
@@ -903,7 +796,7 @@ template&lt;ResourceTrait T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::TryRemoveResource </td>
+          <td class="memname">auto helios::ecs::WorldCmdBuffer::TryRemoveResource </td>
           <td>(</td>
           <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
           <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
@@ -925,7 +818,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00183">183</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00161">161</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
