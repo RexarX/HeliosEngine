@@ -15,5 +15,6 @@ var dir_e30c6f67fe133a20fd38c9c6d4f13dc1 =
     [ "ref_counted.hpp", "ref__counted_8hpp.html", "ref__counted_8hpp" ],
     [ "stack_allocator.hpp", "stack__allocator_8hpp.html", "stack__allocator_8hpp" ],
     [ "temporary_storage.hpp", "temporary__storage_8hpp.html", "temporary__storage_8hpp" ],
-    [ "temporary_storage_helpers.hpp", "temporary__storage__helpers_8hpp.html", "temporary__storage__helpers_8hpp" ]
+    [ "temporary_storage_helpers.hpp", "temporary__storage__helpers_8hpp.html", "temporary__storage__helpers_8hpp" ],
+    [ "treiber_stack.hpp", "treiber__stack_8hpp.html", "treiber__stack_8hpp" ]
 ];

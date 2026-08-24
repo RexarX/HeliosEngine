@@ -406,7 +406,8 @@ var annotated_dup =
         [ "RefCounted", "classhelios_1_1mem_1_1RefCounted.html", "classhelios_1_1mem_1_1RefCounted" ],
         [ "StackAllocator", "classhelios_1_1mem_1_1StackAllocator.html", "classhelios_1_1mem_1_1StackAllocator" ],
         [ "StackAllocatorOptions", "structhelios_1_1mem_1_1StackAllocatorOptions.html", "structhelios_1_1mem_1_1StackAllocatorOptions" ],
-        [ "TemporaryStorage", "classhelios_1_1mem_1_1TemporaryStorage.html", "classhelios_1_1mem_1_1TemporaryStorage" ]
+        [ "TemporaryStorage", "classhelios_1_1mem_1_1TemporaryStorage.html", "classhelios_1_1mem_1_1TemporaryStorage" ],
+        [ "TreiberStack", "classhelios_1_1mem_1_1TreiberStack.html", "classhelios_1_1mem_1_1TreiberStack" ]
       ] ],
       [ "profile", "namespacehelios_1_1profile.html", [
         [ "Backend", "classhelios_1_1profile_1_1Backend.html", "classhelios_1_1profile_1_1Backend" ],

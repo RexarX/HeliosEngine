@@ -242,6 +242,8 @@ Utilities</h2>
 <td class="markdownTableBodyNone"><span class="tt">AllocatorStats</span>  </td><td class="markdownTableBodyNone">Snapshot of allocation counters and capacity.  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">AlignedAlloc</span> / <span class="tt">AlignedFree</span>  </td><td class="markdownTableBodyNone">Cross-platform aligned allocation.  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">TreiberStack</span>  </td><td class="markdownTableBodyNone">Lock-free intrusive LIFO stack with a 64-bit ABA tag.  </td></tr>
 </table>
 <h1 class="doxsection"><a class="anchor" id="mimalloc-and-global-allocation"></a>
 mimalloc and global allocation</h1>
@@ -267,7 +269,7 @@ Arena Allocator</h1>
 <div class="line"><span class="comment">// no individual deallocate — memory reclaimed on Reset() or destruction</span></div>
 <div class="line">arena.Reset();</div>
 <div class="ttc" id="aarena__allocator_8hpp_html"><div class="ttname"><a href="arena__allocator_8hpp.html">arena_allocator.hpp</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1ArenaAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1ArenaAllocator.html">helios::mem::ArenaAllocator</a></div><div class="ttdoc">PMR arena allocator with lock-free hot allocation path.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00030">arena_allocator.hpp:30</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1ArenaAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1ArenaAllocator.html">helios::mem::ArenaAllocator</a></div><div class="ttdoc">PMR arena allocator with lock-free hot allocation path.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00031">arena_allocator.hpp:31</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="frame-allocator"></a>
 Frame Allocator</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="frame__allocator_8hpp.html">helios/memory/frame_allocator.hpp</a>&gt;</span></div>
@@ -289,7 +291,7 @@ Pool Allocator</h1>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span>* obj = alloc.new_object&lt;MyStruct&gt;(args...);</div>
 <div class="line">alloc.delete_object(obj);</div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1PoolAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1PoolAllocator.html">helios::mem::PoolAllocator</a></div><div class="ttdoc">Lock-free PMR pool allocator for fixed-size blocks.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00034">pool_allocator.hpp:34</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1PoolAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1PoolAllocator.html">helios::mem::PoolAllocator</a></div><div class="ttdoc">Lock-free PMR pool allocator for fixed-size blocks.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00035">pool_allocator.hpp:35</a></div></div>
 <div class="ttc" id="apool__allocator_8hpp_html"><div class="ttname"><a href="pool__allocator_8hpp.html">pool_allocator.hpp</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="reference-counting-1"></a>
 Reference Counting</h1>

@@ -772,6 +772,7 @@ var hierarchy =
     [ "helios::app::Time", "structhelios_1_1app_1_1Time.html", null ],
     [ "helios::utils::Timer&lt; Clock &gt;", "classhelios_1_1utils_1_1Timer.html", null ],
     [ "helios::ecs::anonymous_namespace{scheduler.cpp}::TopoNode", "structhelios_1_1ecs_1_1anonymous__namespace_02scheduler_8cpp_03_1_1TopoNode.html", null ],
+    [ "helios::mem::TreiberStack", "classhelios_1_1mem_1_1TreiberStack.html", null ],
     [ "std::true_type", null, [
       [ "helios::utils::details::UniqueTypesHelper< T, Rest... >", "structhelios_1_1utils_1_1details_1_1UniqueTypesHelper_3_01T_00_01Rest_8_8_8_01_4.html", null ],
       [ "helios::ecs::details::HasStructBundleBuild< T >", "structhelios_1_1ecs_1_1details_1_1HasStructBundleBuild_3_01T_01_4.html", null ],
