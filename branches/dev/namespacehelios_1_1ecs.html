@@ -210,6 +210,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Async queue for managing multiple message types via lock-free concurrent queues.  <a href="classhelios_1_1ecs_1_1AsyncMessageQueue.html#details">More...</a><br /></td></tr>
 <tr class="memitem:AsyncMessageReader" id="r_AsyncMessageReader"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1AsyncMessageReader.html">AsyncMessageReader</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-safe, move-based reader for async messages.  <a href="classhelios_1_1ecs_1_1AsyncMessageReader.html#details">More...</a><br /></td></tr>
+<tr class="memitem:AsyncMessageStorage" id="r_AsyncMessageStorage"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1AsyncMessageStorage.html">AsyncMessageStorage</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for type-erased async message storage.  <a href="classhelios_1_1ecs_1_1AsyncMessageStorage.html#details">More...</a><br /></td></tr>
 <tr class="memitem:AsyncMessageWrapper" id="r_AsyncMessageWrapper"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1AsyncMessageWrapper.html">AsyncMessageWrapper</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A wrapper around an async message that provides convenient access to the message's data and type information.  <a href="classhelios_1_1ecs_1_1AsyncMessageWrapper.html#details">More...</a><br /></td></tr>
 <tr class="memitem:AsyncMessageWriter" id="r_AsyncMessageWriter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1AsyncMessageWriter.html">AsyncMessageWriter</a></td></tr>
@@ -443,6 +445,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to try remove resource (only if present).  <a href="structhelios_1_1ecs_1_1TryRemoveResourceCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TypedAsyncMessageStorage" id="r_TypedAsyncMessageStorage"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1TypedAsyncMessageStorage.html">TypedAsyncMessageStorage</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typed async message storage backed by a lock-free concurrent queue.  <a href="classhelios_1_1ecs_1_1TypedAsyncMessageStorage.html#details">More...</a><br /></td></tr>
+<tr class="memitem:With" id="r_With"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1With.html">With</a></td></tr>
+<tr class="memitem:Without" id="r_Without"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1Without.html">Without</a></td></tr>
 <tr class="memitem:World" id="r_World"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1World.html">World</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> class manages entities with their components and systems.  <a href="classhelios_1_1ecs_1_1World.html#details">More...</a><br /></td></tr>
 <tr class="memitem:WorldCmdBuffer" id="r_WorldCmdBuffer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">WorldCmdBuffer</a></td></tr>
@@ -482,6 +486,8 @@ Concepts</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for messages with custom clear policy. <br /></td></tr>
 <tr class="memitem:MessageWithNameTrait" id="r_MessageWithNameTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1MessageWithNameTrait.html">MessageWithNameTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for messages with custom names. <br /></td></tr>
+<tr class="memitem:QueryArg" id="r_QueryArg"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1QueryArg.html">QueryArg</a></td></tr>
+<tr class="memitem:QueryArgs" id="r_QueryArgs"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1QueryArgs.html">QueryArgs</a></td></tr>
 <tr class="memitem:ResourceTrait" id="r_ResourceTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1ResourceTrait.html">ResourceTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for valid resource types. <br /></td></tr>
 <tr class="memitem:ResourceWithInsertionCallbackTrait" id="r_ResourceWithInsertionCallbackTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1ResourceWithInsertionCallbackTrait.html">ResourceWithInsertionCallbackTrait</a></td></tr>
@@ -809,7 +815,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="async__queue_8hpp_source.html#l00045">45</a> of file <a class="el" href="async__queue_8hpp_source.html">async_queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__queue_8hpp_source.html#l00052">52</a> of file <a class="el" href="async__queue_8hpp_source.html">async_queue.hpp</a>.</p>
 
 </div>
 </div>
@@ -825,7 +831,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="async__queue_8hpp_source.html#l00044">44</a> of file <a class="el" href="async__queue_8hpp_source.html">async_queue.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__queue_8hpp_source.html#l00051">51</a> of file <a class="el" href="async__queue_8hpp_source.html">async_queue.hpp</a>.</p>
 
 </div>
 </div>
@@ -851,7 +857,7 @@ template&lt;AsyncResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html#l00058">58</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html#l00068">68</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>
@@ -869,7 +875,7 @@ template&lt;AsyncResourceTrait T&gt; </div>
 
 <p>Type id for components. </p>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00028">28</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00043">43</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -887,7 +893,7 @@ template&lt;AsyncResourceTrait T&gt; </div>
 
 <p>Type index for components. </p>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00025">25</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00040">40</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -905,7 +911,7 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dag_8hpp_source.html#l00027">27</a> of file <a class="el" href="dag_8hpp_source.html">dag.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dag_8hpp_source.html#l00037">37</a> of file <a class="el" href="dag_8hpp_source.html">dag.hpp</a>.</p>
 
 </div>
 </div>
@@ -923,7 +929,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type index for messages. </p>
 
-<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00013">13</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00024">24</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
@@ -951,10 +957,10 @@ template&lt;MessageTrait T&gt; </div>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> MySystem(<a class="code hl_typedef" href="#afedfd8d803e3e5dd106becf7eb138e74">MessageWriter&lt;DeathEvent&gt;</a> writer) {</div>
 <div class="line">  writer.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a9dbfbe347d334e51810a7f02bb897dcd">Write</a>(DeathEvent{...});</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html_a9dbfbe347d334e51810a7f02bb897dcd"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a9dbfbe347d334e51810a7f02bb897dcd">helios::ecs::BasicMessageWriter::Write</a></div><div class="ttdeci">constexpr void Write(U &amp;&amp;message) const</div><div class="ttdoc">Writes a single message to the local queue.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00048">writer.hpp:48</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_afedfd8d803e3e5dd106becf7eb138e74"><div class="ttname"><a href="#afedfd8d803e3e5dd106becf7eb138e74">helios::ecs::MessageWriter</a></div><div class="ttdeci">BasicMessageWriter&lt; T &gt; MessageWriter</div><div class="ttdoc">Canonical message writer type for system parameters.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00153">writer.hpp:153</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html_a9dbfbe347d334e51810a7f02bb897dcd"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a9dbfbe347d334e51810a7f02bb897dcd">helios::ecs::BasicMessageWriter::Write</a></div><div class="ttdeci">constexpr void Write(U &amp;&amp;message) const</div><div class="ttdoc">Writes a single message to the local queue.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00058">writer.hpp:58</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_afedfd8d803e3e5dd106becf7eb138e74"><div class="ttname"><a href="#afedfd8d803e3e5dd106becf7eb138e74">helios::ecs::MessageWriter</a></div><div class="ttdeci">BasicMessageWriter&lt; T &gt; MessageWriter</div><div class="ttdoc">Canonical message writer type for system parameters.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00163">writer.hpp:163</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00153">153</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="writer_8hpp_source.html#l00163">163</a> of file <a class="el" href="writer_8hpp_source.html">writer.hpp</a>.</p>
 
 </div>
 </div>
@@ -980,7 +986,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html#l00074">74</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html#l00084">84</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>
@@ -1006,7 +1012,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html#l00066">66</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html#l00076">76</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>
@@ -1031,12 +1037,13 @@ template&lt;QueryArg... Args&gt; </div>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> MySystem(<a class="code hl_typedef" href="#a165dce904fdd9fe821b8b48ec7faf8ff">Query</a>&lt;Transform&amp;, <span class="keyword">const</span> Velocity&amp;, With&lt;Player&gt;&gt; query) {</div>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> MySystem(<a class="code hl_typedef" href="#a165dce904fdd9fe821b8b48ec7faf8ff">Query</a>&lt;Transform&amp;, <span class="keyword">const</span> Velocity&amp;, <a class="code hl_struct" href="structhelios_1_1ecs_1_1With.html">With&lt;Player&gt;</a>&gt; query) {</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; [transform, velocity] : query) { ... }</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a165dce904fdd9fe821b8b48ec7faf8ff"><div class="ttname"><a href="#a165dce904fdd9fe821b8b48ec7faf8ff">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02079">query.hpp:2079</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a165dce904fdd9fe821b8b48ec7faf8ff"><div class="ttname"><a href="#a165dce904fdd9fe821b8b48ec7faf8ff">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02090">query.hpp:2090</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1With_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1With.html">helios::ecs::With</a></div><div class="ttdef"><b>Definition</b> <a href="args_8hpp_source.html#l00026">args.hpp:26</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02079">2079</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02090">2090</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1063,7 +1070,7 @@ template&lt;typename... Components&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00305">305</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00316">316</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -1090,7 +1097,7 @@ template&lt;typename... Components&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00767">767</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00778">778</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -1117,7 +1124,7 @@ template&lt;typename... Components&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00318">318</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00329">329</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -1136,7 +1143,7 @@ template&lt;typename... Components&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQueryWithEntityIter.html">BasicQueryWithEntityIter</a>&lt;<span class="keyword">true</span>, Components...&gt;</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQueryWithEntityIter_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQueryWithEntityIter.html">helios::ecs::BasicQueryWithEntityIter</a></div><div class="ttdoc">Iterator for query results including the entity.</div><div class="ttdef"><b>Definition</b> <a href="iterator_8hpp_source.html#l00331">iterator.hpp:333</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQueryWithEntityIter_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQueryWithEntityIter.html">helios::ecs::BasicQueryWithEntityIter</a></div><div class="ttdoc">Iterator for query results including the entity.</div><div class="ttdef"><b>Definition</b> <a href="iterator_8hpp_source.html#l00342">iterator.hpp:344</a></div></div>
 </div><!-- fragment -->
 <p>Read-only iterator for query results including the entity. </p>
 <p>Same as <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1BasicQueryIter.html" title="Iterator for query results without entity information.">BasicQueryIter</a></span> but each dereferenced value is a tuple starting with the <a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a>, followed by the requested component access values. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
@@ -1147,7 +1154,7 @@ template&lt;typename... Components&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00777">777</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00788">788</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -1165,7 +1172,7 @@ template&lt;typename... Components&gt; </div>
 
 <p>Type id for resources. </p>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00017">17</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00028">28</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -1183,7 +1190,7 @@ template&lt;typename... Components&gt; </div>
 
 <p>Type index for resources. </p>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00014">14</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00025">25</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -1201,7 +1208,7 @@ template&lt;typename... Components&gt; </div>
 
 <p>Type-erased run condition: returns bool, receives <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp; + local data. </p>
 
-<p class="definition">Definition at line <a class="el" href="run__condition_8hpp_source.html#l00025">25</a> of file <a class="el" href="run__condition_8hpp_source.html">run_condition.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__condition_8hpp_source.html#l00035">35</a> of file <a class="el" href="run__condition_8hpp_source.html">run_condition.hpp</a>.</p>
 
 </div>
 </div>
@@ -1221,7 +1228,7 @@ template&lt;typename T&gt; </div>
 
 <p>Result type for schedule operations that can fail. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00185">185</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00195">195</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1239,7 +1246,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type id for schedules. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00040">40</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00050">50</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1257,7 +1264,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type index for schedules. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00037">37</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00047">47</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1275,7 +1282,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type id for stages. </p>
 
-<p class="definition">Definition at line <a class="el" href="stage_8hpp_source.html#l00015">15</a> of file <a class="el" href="stage_8hpp_source.html">stage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stage_8hpp_source.html#l00026">26</a> of file <a class="el" href="stage_8hpp_source.html">stage.hpp</a>.</p>
 
 </div>
 </div>
@@ -1293,7 +1300,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type index for stages. </p>
 
-<p class="definition">Definition at line <a class="el" href="stage_8hpp_source.html#l00012">12</a> of file <a class="el" href="stage_8hpp_source.html">stage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stage_8hpp_source.html#l00023">23</a> of file <a class="el" href="stage_8hpp_source.html">stage.hpp</a>.</p>
 
 </div>
 </div>
@@ -1309,7 +1316,7 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="system__storage_8hpp_source.html#l00023">23</a> of file <a class="el" href="system__storage_8hpp_source.html">system_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__storage_8hpp_source.html#l00033">33</a> of file <a class="el" href="system__storage_8hpp_source.html">system_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -1327,7 +1334,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type id for system sets. </p>
 
-<p class="definition">Definition at line <a class="el" href="system__set_8hpp_source.html#l00026">26</a> of file <a class="el" href="system__set_8hpp_source.html">system_set.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__set_8hpp_source.html#l00037">37</a> of file <a class="el" href="system__set_8hpp_source.html">system_set.hpp</a>.</p>
 
 </div>
 </div>
@@ -1345,7 +1352,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type index for system sets. </p>
 
-<p class="definition">Definition at line <a class="el" href="system__set_8hpp_source.html#l00023">23</a> of file <a class="el" href="system__set_8hpp_source.html">system_set.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__set_8hpp_source.html#l00034">34</a> of file <a class="el" href="system__set_8hpp_source.html">system_set.hpp</a>.</p>
 
 </div>
 </div>
@@ -1363,7 +1370,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type id for systems. </p>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00020">20</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00161">161</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>
@@ -1381,7 +1388,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type index for systems. </p>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00023">23</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00164">164</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>
@@ -1414,7 +1421,7 @@ template&lt;typename T&gt; </div>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00031">31</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00046">46</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -1442,7 +1449,7 @@ template&lt;typename T&gt; </div>
 <tr><td class="fieldname"><a id="a298cd76dedf63f508844a10e01da7fcca69c0e03378d5ea08e7c7a0fa644e2b6e" name="a298cd76dedf63f508844a10e01da7fcca69c0e03378d5ea08e7c7a0fa644e2b6e"></a>kCycleDetected&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="dag_8hpp_source.html#l00015">15</a> of file <a class="el" href="dag_8hpp_source.html">dag.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dag_8hpp_source.html#l00025">25</a> of file <a class="el" href="dag_8hpp_source.html">dag.hpp</a>.</p>
 
 </div>
 </div>
@@ -1476,7 +1483,7 @@ template&lt;typename T&gt; </div>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2schedule_2executor_2executor_8hpp_source.html#l00011">11</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2schedule_2executor_2executor_8hpp_source.html">executor.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2schedule_2executor_2executor_8hpp_source.html#l00022">22</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2schedule_2executor_2executor_8hpp_source.html">executor.hpp</a>.</p>
 
 </div>
 </div>
@@ -1508,7 +1515,7 @@ template&lt;typename T&gt; </div>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00016">16</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00027">27</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
@@ -1541,7 +1548,7 @@ template&lt;typename T&gt; </div>
 <tr><td class="fieldname"><a id="abd1fa5ad164fafc85b0908aac3fbf20ba03fd5b5c9577b8248bfb9a2f39f770e4" name="abd1fa5ad164fafc85b0908aac3fbf20ba03fd5b5c9577b8248bfb9a2f39f770e4"></a>kUnknownNode&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00168">168</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00178">178</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1626,7 +1633,7 @@ template&lt;typename... Params&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The accumulated access policy </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="param__policy_8hpp_source.html#l00018">18</a> of file <a class="el" href="param__policy_8hpp_source.html">param_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="param__policy_8hpp_source.html#l00028">28</a> of file <a class="el" href="param__policy_8hpp_source.html">param_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -1664,7 +1671,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The accumulated access policy </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="param__policy_8hpp_source.html#l00031">31</a> of file <a class="el" href="param__policy_8hpp_source.html">param_policy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="param__policy_8hpp_source.html#l00041">41</a> of file <a class="el" href="param__policy_8hpp_source.html">param_policy.hpp</a>.</p>
 
 </div>
 </div>
@@ -1702,7 +1709,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Component name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00088">88</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00103">103</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -1746,7 +1753,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Component name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00103">103</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00118">118</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -1788,7 +1795,7 @@ template&lt;ComponentTrait T&gt; </div>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00117">117</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00132">132</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -1832,7 +1839,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Component storage type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00138">138</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00153">153</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
 
 </div>
 </div>
@@ -1875,7 +1882,7 @@ template&lt;typename... AccessTypes&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="access__decl_8hpp_source.html#l00052">52</a> of file <a class="el" href="access__decl_8hpp_source.html">access_decl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__decl_8hpp_source.html#l00063">63</a> of file <a class="el" href="access__decl_8hpp_source.html">access_decl.hpp</a>.</p>
 
 </div>
 </div>
@@ -1919,7 +1926,7 @@ requires utils::UniqueTypes&lt;Cs...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="access__decl_8hpp_source.html#l00031">31</a> of file <a class="el" href="access__decl_8hpp_source.html">access_decl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__decl_8hpp_source.html#l00042">42</a> of file <a class="el" href="access__decl_8hpp_source.html">access_decl.hpp</a>.</p>
 
 </div>
 </div>
@@ -1963,7 +1970,7 @@ requires utils::UniqueTypes&lt;Cs...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="access__decl_8hpp_source.html#l00042">42</a> of file <a class="el" href="access__decl_8hpp_source.html">access_decl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__decl_8hpp_source.html#l00053">53</a> of file <a class="el" href="access__decl_8hpp_source.html">access_decl.hpp</a>.</p>
 
 </div>
 </div>
@@ -2018,7 +2025,7 @@ template&lt;typename G&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if generation is alive and not invalid </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00158">158</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00169">169</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -2056,7 +2063,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if resource is thread-safe, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00120">120</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00131">131</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2100,7 +2107,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if resource is thread-safe, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00131">131</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00142">142</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2138,7 +2145,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Message clear policy </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00125">125</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00136">136</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
@@ -2182,7 +2189,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Message clear policy </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00142">142</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00153">153</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
@@ -2220,7 +2227,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Message name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00096">96</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00107">107</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
@@ -2264,7 +2271,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Message name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00112">112</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00123">123</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
 
 </div>
 </div>
@@ -2307,7 +2314,7 @@ template&lt;AnyMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Next generation encoding for the requested state </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00181">181</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00192">192</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -2356,7 +2363,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the output stream </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00377">377</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00388">388</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -2405,7 +2412,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the output stream </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00436">436</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00447">447</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -2446,7 +2453,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the output stream </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00488">488</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00499">499</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -2487,7 +2494,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the output stream </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00266">266</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00277">277</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -2528,7 +2535,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the output stream </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00318">318</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00329">329</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -2577,7 +2584,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the output stream </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00546">546</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00557">557</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -2626,7 +2633,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the output stream </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00604">604</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00615">615</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -2669,7 +2676,7 @@ template&lt;typename... Params&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="access__decl_8hpp_source.html#l00019">19</a> of file <a class="el" href="access__decl_8hpp_source.html">access_decl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="access__decl_8hpp_source.html#l00030">30</a> of file <a class="el" href="access__decl_8hpp_source.html">access_decl.hpp</a>.</p>
 
 </div>
 </div>
@@ -2717,7 +2724,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00143">143</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00154">154</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2765,7 +2772,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00156">156</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00167">167</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2803,7 +2810,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Name of the resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00093">93</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00104">104</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2847,7 +2854,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Name of the resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00109">109</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00120">120</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 
 </div>
 </div>
@@ -2891,7 +2898,7 @@ template&lt;ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Schedule.html" title="A collection of systems, sets, and run conditions with ordering constraints.">Schedule</a> name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00067">67</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00077">77</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -2935,7 +2942,7 @@ template&lt;StageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Stage name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stage_8hpp_source.html#l00042">42</a> of file <a class="el" href="stage_8hpp_source.html">stage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stage_8hpp_source.html#l00053">53</a> of file <a class="el" href="stage_8hpp_source.html">stage.hpp</a>.</p>
 
 </div>
 </div>
@@ -2973,7 +2980,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00222">222</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00233">233</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>
@@ -3017,7 +3024,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00237">237</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00248">248</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>
@@ -3055,7 +3062,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System set name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__set_8hpp_source.html#l00053">53</a> of file <a class="el" href="system__set_8hpp_source.html">system_set.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__set_8hpp_source.html#l00064">64</a> of file <a class="el" href="system__set_8hpp_source.html">system_set.hpp</a>.</p>
 
 </div>
 </div>
@@ -3099,7 +3106,7 @@ template&lt;SystemSetTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System set name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__set_8hpp_source.html#l00068">68</a> of file <a class="el" href="system__set_8hpp_source.html">system_set.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__set_8hpp_source.html#l00079">79</a> of file <a class="el" href="system__set_8hpp_source.html">system_set.hpp</a>.</p>
 
 </div>
 </div>
@@ -3144,7 +3151,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00362">362</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00373">373</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3189,7 +3196,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00421">421</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00432">432</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3226,7 +3233,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00475">475</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00486">486</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3263,7 +3270,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00253">253</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00264">264</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3300,7 +3307,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00305">305</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00316">316</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3345,7 +3352,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00531">531</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00542">542</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3390,7 +3397,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00589">589</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00600">600</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3434,7 +3441,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted settings string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00345">345</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00356">356</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3478,7 +3485,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted settings string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00404">404</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00415">415</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3514,7 +3521,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted settings string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00460">460</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00471">471</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3550,7 +3557,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00239">239</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00250">250</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3586,7 +3593,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00290">290</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00301">301</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3637,7 +3644,7 @@ requires std::output_iterator&lt;It, char&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The output iterator after writing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00333">333</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00344">344</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3688,7 +3695,7 @@ requires std::output_iterator&lt;It, char&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The output iterator after writing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00392">392</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00403">403</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3738,7 +3745,7 @@ requires std::output_iterator&lt;It, char&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The output iterator after writing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00450">450</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00461">461</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3788,7 +3795,7 @@ requires std::output_iterator&lt;It, char&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The output iterator after writing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00230">230</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00241">241</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3838,7 +3845,7 @@ requires std::output_iterator&lt;It, char&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The output iterator after writing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00280">280</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00291">291</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3889,7 +3896,7 @@ requires std::output_iterator&lt;It, char&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The output iterator after writing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00503">503</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00514">514</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3933,7 +3940,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted settings string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00514">514</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00525">525</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -3977,7 +3984,7 @@ template&lt;ResourceTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted settings string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00572">572</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00583">583</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -4028,7 +4035,7 @@ requires std::output_iterator&lt;It, char&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The output iterator after writing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00561">561</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="builtin__messages_8hpp_source.html#l00572">572</a> of file <a class="el" href="builtin__messages_8hpp_source.html">builtin_messages.hpp</a>.</p>
 
 </div>
 </div>
@@ -4099,7 +4106,7 @@ template&lt;ComponentTrait... Us&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__scope_8hpp_source.html#l00011">11</a> of file <a class="el" href="run__scope_8hpp_source.html">run_scope.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__scope_8hpp_source.html#l00021">21</a> of file <a class="el" href="run__scope_8hpp_source.html">run_scope.hpp</a>.</p>
 
 </div>
 </div>
@@ -4133,7 +4140,7 @@ template&lt;auto Fn&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00174">174</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00185">185</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>

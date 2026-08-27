@@ -6,6 +6,7 @@ var namespacehelios_1_1utils =
     [ "ChunkAdapter", "classhelios_1_1utils_1_1ChunkAdapter.html", "classhelios_1_1utils_1_1ChunkAdapter" ],
     [ "ChunkView", "classhelios_1_1utils_1_1ChunkView.html", "classhelios_1_1utils_1_1ChunkView" ],
     [ "Defer", "classhelios_1_1utils_1_1Defer.html", "classhelios_1_1utils_1_1Defer" ],
+    [ "DeferHelper", "structhelios_1_1utils_1_1DeferHelper.html", "structhelios_1_1utils_1_1DeferHelper" ],
     [ "DynamicLibrary", "classhelios_1_1utils_1_1DynamicLibrary.html", "classhelios_1_1utils_1_1DynamicLibrary" ],
     [ "EnumerateAdapter", "classhelios_1_1utils_1_1EnumerateAdapter.html", "classhelios_1_1utils_1_1EnumerateAdapter" ],
     [ "FastPimpl", "classhelios_1_1utils_1_1FastPimpl.html", "classhelios_1_1utils_1_1FastPimpl" ],

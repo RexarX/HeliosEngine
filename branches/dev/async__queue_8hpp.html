@@ -178,9 +178,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('async__queue_8
   <div class="headertitle"><div class="title">async_queue.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="compiler_2include_2helios_2config_8hpp_source.html">helios/config.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="flat__map_8hpp_source.html">helios/container/flat_map.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">helios/ecs/message/message.hpp</a>&gt;</code><br />
 <code>#include &lt;concurrentqueue/moodycamel/concurrentqueue.h&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;concepts&gt;</code><br />
@@ -189,13 +188,15 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('async__queue_8
 <code>#include &lt;limits&gt;</code><br />
 <code>#include &lt;ranges&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
+<code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">helios/ecs/message/message.hpp</a>&gt;</code><br />
 </div>
 <p><a href="async__queue_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Aecs_3A_3Adetails_3A_3AAsyncMessageStorage" id="r_helios_3A_3Aecs_3A_3Adetails_3A_3AAsyncMessageStorage"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1details_1_1AsyncMessageStorage.html">helios::ecs::details::AsyncMessageStorage</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for type-erased async message storage.  <a href="classhelios_1_1ecs_1_1details_1_1AsyncMessageStorage.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3AAsyncMessageStorage" id="r_helios_3A_3Aecs_3A_3AAsyncMessageStorage"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1AsyncMessageStorage.html">helios::ecs::AsyncMessageStorage</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for type-erased async message storage.  <a href="classhelios_1_1ecs_1_1AsyncMessageStorage.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Aecs_3A_3ATypedAsyncMessageStorage_3C_20T_20_3E" id="r_helios_3A_3Aecs_3A_3ATypedAsyncMessageStorage_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1TypedAsyncMessageStorage.html">helios::ecs::TypedAsyncMessageStorage&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typed async message storage backed by a lock-free concurrent queue.  <a href="classhelios_1_1ecs_1_1TypedAsyncMessageStorage.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Aecs_3A_3AAsyncMessageQueue" id="r_helios_3A_3Aecs_3A_3AAsyncMessageQueue"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1AsyncMessageQueue.html">helios::ecs::AsyncMessageQueue</a></td></tr>
@@ -205,7 +206,6 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Aecs" id="r_helios_3A_3Aecs"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html">helios::ecs</a></td></tr>
-<tr class="memitem:helios_3A_3Aecs_3A_3Adetails" id="r_helios_3A_3Aecs_3A_3Adetails"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">helios::ecs::details</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>

@@ -1,5 +1,13 @@
 var NAVTREEINDEX21 =
 {
+"classhelios_1_1input_1_1ButtonInput.html#a5d0cfaed05f85654b626eb21675e9d1c":[4,0,2,6,2,7],
+"classhelios_1_1input_1_1ButtonInput.html#a66535f6b146ebc83f7142841f65fc334":[2,0,3,7,3,0],
+"classhelios_1_1input_1_1ButtonInput.html#a66535f6b146ebc83f7142841f65fc334":[4,0,2,6,2,0],
+"classhelios_1_1input_1_1ButtonInput.html#a8b2253d8174eeca4341c3cb17325184e":[2,0,3,7,3,6],
+"classhelios_1_1input_1_1ButtonInput.html#a8b2253d8174eeca4341c3cb17325184e":[4,0,2,6,2,6],
+"classhelios_1_1input_1_1ButtonInput.html#aa48664b1c2c7b7c4b66f8b73a7844445":[2,0,3,7,3,2],
+"classhelios_1_1input_1_1ButtonInput.html#aa48664b1c2c7b7c4b66f8b73a7844445":[4,0,2,6,2,2],
+"classhelios_1_1input_1_1ButtonInput.html#afbac8f2e0887f18e2de433d86aef850a":[2,0,3,7,3,3],
 "classhelios_1_1input_1_1ButtonInput.html#afbac8f2e0887f18e2de433d86aef850a":[4,0,2,6,2,3],
 "classhelios_1_1input_1_1IndexedButtonInput.html":[2,0,3,7,23],
 "classhelios_1_1input_1_1IndexedButtonInput.html":[4,0,2,6,22],
@@ -241,13 +249,5 @@ var NAVTREEINDEX21 =
 "classhelios_1_1mem_1_1FixedPoolAllocator.html#a342f384d69f728586b9615d1c76bef9b":[4,0,2,8,8,18],
 "classhelios_1_1mem_1_1FixedPoolAllocator.html#a4420f5519dfefa433a4d31e34a243fe0":[2,0,3,9,9,2],
 "classhelios_1_1mem_1_1FixedPoolAllocator.html#a4420f5519dfefa433a4d31e34a243fe0":[4,0,2,8,8,2],
-"classhelios_1_1mem_1_1FixedPoolAllocator.html#a4a7ba0d8b3ac1bc04bdcd3fe75ad8675":[2,0,3,9,9,14],
-"classhelios_1_1mem_1_1FixedPoolAllocator.html#a4a7ba0d8b3ac1bc04bdcd3fe75ad8675":[4,0,2,8,8,14],
-"classhelios_1_1mem_1_1FixedPoolAllocator.html#a55421412ac3a0da18e86025661600f7b":[2,0,3,9,9,17],
-"classhelios_1_1mem_1_1FixedPoolAllocator.html#a55421412ac3a0da18e86025661600f7b":[4,0,2,8,8,17],
-"classhelios_1_1mem_1_1FixedPoolAllocator.html#a5ac6627e62765cad68e4d738d28a7b7b":[2,0,3,9,9,6],
-"classhelios_1_1mem_1_1FixedPoolAllocator.html#a5ac6627e62765cad68e4d738d28a7b7b":[4,0,2,8,8,6],
-"classhelios_1_1mem_1_1FixedPoolAllocator.html#a70fd0e1cdb7ac3a27a9ab0b2dba95881":[2,0,3,9,9,10],
-"classhelios_1_1mem_1_1FixedPoolAllocator.html#a70fd0e1cdb7ac3a27a9ab0b2dba95881":[4,0,2,8,8,10],
-"classhelios_1_1mem_1_1FixedPoolAllocator.html#a8339040e87047e5a298cdfa9c1435299":[2,0,3,9,9,12]
+"classhelios_1_1mem_1_1FixedPoolAllocator.html#a4a7ba0d8b3ac1bc04bdcd3fe75ad8675":[2,0,3,9,9,14]
 };

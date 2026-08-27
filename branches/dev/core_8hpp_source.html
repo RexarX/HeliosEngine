@@ -176,12 +176,19 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('core_8hpp_sour
 <div class="contents">
 <a href="core_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/assert.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="cstring__view_8hpp.html">helios/cstring_view.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="delegate_8hpp.html">helios/delegate.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="stacktrace_8hpp.html">helios/stacktrace.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="uuid_8hpp.html">helios/uuid.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="compiler_2include_2helios_2config_8hpp.html">helios/config.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#if defined(HELIOS_ENABLE_CPP_MODULES) &amp;&amp; defined(HELIOS_BUILDING_MODULE) &amp;&amp; \</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">    !defined(HELIOS_BUILDING_MODULE_CORE)</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/assert.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="cstring__view_8hpp.html">helios/cstring_view.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;<a class="code" href="delegate_8hpp.html">helios/delegate.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="stacktrace_8hpp.html">helios/stacktrace.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="uuid_8hpp.html">helios/uuid.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
+<div class="ttc" id="acompiler_2include_2helios_2config_8hpp_html"><div class="ttname"><a href="compiler_2include_2helios_2config_8hpp.html">config.hpp</a></div><div class="ttdoc">Dual header / C++20 named-module wrapping macros.</div></div>
 <div class="ttc" id="acstring__view_8hpp_html"><div class="ttname"><a href="cstring__view_8hpp.html">cstring_view.hpp</a></div></div>
 <div class="ttc" id="adelegate_8hpp_html"><div class="ttname"><a href="delegate_8hpp.html">delegate.hpp</a></div></div>
 <div class="ttc" id="astacktrace_8hpp_html"><div class="ttname"><a href="stacktrace_8hpp.html">stacktrace.hpp</a></div></div>

@@ -15,12 +15,14 @@ var searchData=
   ['joystickaxischangedmsg_12',['JoystickAxisChangedMsg',['../structhelios_1_1input_1_1JoystickAxisChangedMsg.html',1,'helios::input']]],
   ['joystickbuttoninputmsg_13',['JoystickButtonInputMsg',['../structhelios_1_1input_1_1JoystickButtonInputMsg.html',1,'helios::input']]],
   ['joystickconnectionmsg_14',['JoystickConnectionMsg',['../structhelios_1_1input_1_1JoystickConnectionMsg.html',1,'helios::input']]],
-  ['joystickhat_15',['JoystickHat',['../namespacehelios_1_1input.html#a59eecea55bb3884490df1e544a88cca9',1,'helios::input']]],
-  ['joystickhatchangedmsg_16',['JoystickHatChangedMsg',['../structhelios_1_1input_1_1JoystickHatChangedMsg.html',1,'helios::input']]],
-  ['joystickmessages_17',['JoystickMessages',['../structhelios_1_1input_1_1JoystickMessages.html',1,'helios::input']]],
-  ['joysticks_18',['Joysticks',['../structhelios_1_1input_1_1Joysticks.html',1,'helios::input']]],
-  ['joysticks_19',['joysticks',['../structhelios_1_1input_1_1State.html#a665a9376dbb665b83d4302769b940c8d',1,'helios::input::State::joysticks'],['../structhelios_1_1input_1_1StateView.html#acdf9400baed6f5acd341cd6496334808',1,'helios::input::StateView::joysticks']]],
-  ['joystickwriters_20',['JoystickWriters',['../structhelios_1_1input_1_1JoystickWriters.html',1,'helios::input']]],
-  ['justpressed_21',['JustPressed',['../classhelios_1_1input_1_1ButtonInput.html#afbac8f2e0887f18e2de433d86aef850a',1,'helios::input::ButtonInput::JustPressed()'],['../classhelios_1_1input_1_1IndexedButtonInput.html#a21f1f5cfc0c31bfcf8711ff2317c0e3d',1,'helios::input::IndexedButtonInput::JustPressed()']]],
-  ['justreleased_22',['JustReleased',['../classhelios_1_1input_1_1ButtonInput.html#a06f126a6053c5bc7ba914f7ca0061814',1,'helios::input::ButtonInput::JustReleased()'],['../classhelios_1_1input_1_1IndexedButtonInput.html#a9796b58e446c13608a3e4e9a67b232cb',1,'helios::input::IndexedButtonInput::JustReleased()']]]
+  ['joystickguid_15',['JoystickGuid',['../namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#a40dee29147bd0f99ed7742d60fa09ff4',1,'helios::glfw::anonymous_namespace{input.cpp}']]],
+  ['joystickhat_16',['JoystickHat',['../namespacehelios_1_1input.html#a59eecea55bb3884490df1e544a88cca9',1,'helios::input']]],
+  ['joystickhatchangedmsg_17',['JoystickHatChangedMsg',['../structhelios_1_1input_1_1JoystickHatChangedMsg.html',1,'helios::input']]],
+  ['joystickmessages_18',['JoystickMessages',['../structhelios_1_1input_1_1JoystickMessages.html',1,'helios::input']]],
+  ['joystickname_19',['JoystickName',['../namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#a9fad4052fd8abf13e3c50cb9825d4acd',1,'helios::glfw::anonymous_namespace{input.cpp}']]],
+  ['joysticks_20',['Joysticks',['../structhelios_1_1input_1_1Joysticks.html',1,'helios::input']]],
+  ['joysticks_21',['joysticks',['../structhelios_1_1input_1_1State.html#a665a9376dbb665b83d4302769b940c8d',1,'helios::input::State::joysticks'],['../structhelios_1_1input_1_1StateView.html#acdf9400baed6f5acd341cd6496334808',1,'helios::input::StateView::joysticks']]],
+  ['joystickwriters_22',['JoystickWriters',['../structhelios_1_1input_1_1JoystickWriters.html',1,'helios::input']]],
+  ['justpressed_23',['JustPressed',['../classhelios_1_1input_1_1ButtonInput.html#afbac8f2e0887f18e2de433d86aef850a',1,'helios::input::ButtonInput::JustPressed()'],['../classhelios_1_1input_1_1IndexedButtonInput.html#a21f1f5cfc0c31bfcf8711ff2317c0e3d',1,'helios::input::IndexedButtonInput::JustPressed()']]],
+  ['justreleased_24',['JustReleased',['../classhelios_1_1input_1_1ButtonInput.html#a06f126a6053c5bc7ba914f7ca0061814',1,'helios::input::ButtonInput::JustReleased()'],['../classhelios_1_1input_1_1IndexedButtonInput.html#a9796b58e446c13608a3e4e9a67b232cb',1,'helios::input::IndexedButtonInput::JustReleased()']]]
 ];

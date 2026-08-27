@@ -1,7 +1,6 @@
 var namespacehelios_1_1utils_1_1details =
 [
     [ "adapter_iterator_traits", "structhelios_1_1utils_1_1details_1_1adapter__iterator__traits.html", "structhelios_1_1utils_1_1details_1_1adapter__iterator__traits" ],
-    [ "DeferHelper", "structhelios_1_1utils_1_1details_1_1DeferHelper.html", "structhelios_1_1utils_1_1details_1_1DeferHelper" ],
     [ "FixedString", "structhelios_1_1utils_1_1details_1_1FixedString.html", "structhelios_1_1utils_1_1details_1_1FixedString" ],
     [ "folder_apply_result", "structhelios_1_1utils_1_1details_1_1folder__apply__result.html", null ],
     [ "folder_apply_result&lt; Folder, Accumulator, std::tuple&lt; TupleArgs... &gt; &gt;", "structhelios_1_1utils_1_1details_1_1folder__apply__result_3_01Folder_00_01Accumulator_00_01std_1ce2978c0f27b507bfe0e6e04cc632169.html", "structhelios_1_1utils_1_1details_1_1folder__apply__result_3_01Folder_00_01Accumulator_00_01std_1ce2978c0f27b507bfe0e6e04cc632169" ],

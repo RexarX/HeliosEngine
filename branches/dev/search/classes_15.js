@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['window_0',['Window',['../structhelios_1_1window_1_1Window.html',1,'helios::window']]],
-  ['windowplugin_1',['WindowPlugin',['../structhelios_1_1glfw_1_1WindowPlugin.html',1,'helios::glfw::WindowPlugin'],['../structhelios_1_1sdl3_1_1window_1_1WindowPlugin.html',1,'helios::sdl3::window::WindowPlugin']]],
-  ['windows_2',['Windows',['../structhelios_1_1window_1_1Windows.html',1,'helios::window']]],
-  ['windowstage_3',['WindowStage',['../structhelios_1_1window_1_1WindowStage.html',1,'helios::window']]],
-  ['windowsview_4',['WindowsView',['../structhelios_1_1window_1_1WindowsView.html',1,'helios::window']]],
-  ['world_5',['World',['../classhelios_1_1ecs_1_1World.html',1,'helios::ecs']]],
-  ['worldcmdbuffer_6',['WorldCmdBuffer',['../classhelios_1_1ecs_1_1WorldCmdBuffer.html',1,'helios::ecs']]],
-  ['worldview_7',['WorldView',['../classhelios_1_1ecs_1_1WorldView.html',1,'helios::ecs']]],
-  ['writers_8',['Writers',['../structhelios_1_1input_1_1Writers.html',1,'helios::input::Writers'],['../structhelios_1_1window_1_1Writers.html',1,'helios::window::Writers']]]
+  ['validworldcomponentaccessfromtuple_0',['ValidWorldComponentAccessFromTuple',['../structhelios_1_1ecs_1_1details_1_1ValidWorldComponentAccessFromTuple.html',1,'helios::ecs::details']]],
+  ['validworldcomponentaccessfromtuple_3c_20worldt_2c_20std_3a_3atuple_3c_20cs_2e_2e_2e_20_3e_20_3e_1',['ValidWorldComponentAccessFromTuple&lt; WorldT, std::tuple&lt; Cs... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1ValidWorldComponentAccessFromTuple_3_01WorldT_00_01std_1_1tuple_3_01Cs_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]],
+  ['videomode_2',['VideoMode',['../structhelios_1_1window_1_1VideoMode.html',1,'helios::window']]],
+  ['visibilitychangedmsg_3',['VisibilityChangedMsg',['../structhelios_1_1window_1_1VisibilityChangedMsg.html',1,'helios::window']]]
 ];

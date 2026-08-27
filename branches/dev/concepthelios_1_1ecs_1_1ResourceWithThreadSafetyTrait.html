@@ -184,15 +184,15 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('concepthelios_
 <div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1ecs_1_1ResourceWithThreadSafetyTrait.html">ResourceWithThreadSafetyTrait</a> = <a class="code hl_concept" href="concepthelios_1_1ecs_1_1ResourceTrait.html">ResourceTrait&lt;T&gt;</a> &amp;&amp; <span class="keyword">requires</span> {</div>
 <div class="line">  { std::remove_cvref_t&lt;T&gt;::kThreadSafe } -&gt; std::convertible_to&lt;bool&gt;;</div>
 <div class="line">}</div>
-<div class="ttc" id="aconcepthelios_1_1ecs_1_1ResourceTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1ResourceTrait.html">helios::ecs::ResourceTrait</a></div><div class="ttdoc">Concept for valid resource types.</div><div class="ttdef"><b>Definition</b> <a href="resource_8hpp_source.html#l00025">resource.hpp:25</a></div></div>
-<div class="ttc" id="aconcepthelios_1_1ecs_1_1ResourceWithThreadSafetyTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1ResourceWithThreadSafetyTrait.html">helios::ecs::ResourceWithThreadSafetyTrait</a></div><div class="ttdoc">Concept for resources that provide thread-safety trait.</div><div class="ttdef"><b>Definition</b> <a href="resource_8hpp_source.html#l00048">resource.hpp:48</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1ResourceTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1ResourceTrait.html">helios::ecs::ResourceTrait</a></div><div class="ttdoc">Concept for valid resource types.</div><div class="ttdef"><b>Definition</b> <a href="resource_8hpp_source.html#l00036">resource.hpp:36</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1ResourceWithThreadSafetyTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1ResourceWithThreadSafetyTrait.html">helios::ecs::ResourceWithThreadSafetyTrait</a></div><div class="ttdoc">Concept for resources that provide thread-safety trait.</div><div class="ttdef"><b>Definition</b> <a href="resource_8hpp_source.html#l00059">resource.hpp:59</a></div></div>
 </div><!-- fragment --><a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concept for resources that provide thread-safety trait. </p>
 <p>A resource with thread-safety trait must satisfy <span class="tt">ResourceTrait</span> and provide:</p><ul>
 <li><span class="tt">static constexpr bool kThreadSafe</span> variable </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00048">48</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00059">59</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

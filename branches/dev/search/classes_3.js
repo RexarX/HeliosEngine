@@ -13,7 +13,7 @@ var searchData=
   ['defaulthash_3c_20std_3a_3astring_5fview_20_3e_10',['DefaultHash&lt; std::string_view &gt;',['../structhelios_1_1container_1_1DefaultHash_3_01std_1_1string__view_01_4.html',1,'helios::container']]],
   ['defaultlogger_11',['DefaultLogger',['../structhelios_1_1log_1_1DefaultLogger.html',1,'helios::log']]],
   ['defer_12',['Defer',['../classhelios_1_1utils_1_1Defer.html',1,'helios::utils']]],
-  ['deferhelper_13',['DeferHelper',['../structhelios_1_1utils_1_1details_1_1DeferHelper.html',1,'helios::utils::details']]],
+  ['deferhelper_13',['DeferHelper',['../structhelios_1_1utils_1_1DeferHelper.html',1,'helios::utils']]],
   ['delegate_14',['Delegate',['../classhelios_1_1Delegate.html',1,'helios']]],
   ['delegate_3c_20returntype_28args_2e_2e_2e_29_3e_15',['Delegate&lt; ReturnType(Args...)&gt;',['../classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html',1,'helios']]],
   ['destroyclosedwindows_16',['DestroyClosedWindows',['../structhelios_1_1glfw_1_1DestroyClosedWindows.html',1,'helios::glfw::DestroyClosedWindows'],['../structhelios_1_1sdl3_1_1window_1_1DestroyClosedWindows.html',1,'helios::sdl3::window::DestroyClosedWindows']]],

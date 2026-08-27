@@ -18,6 +18,6 @@ var delegate_8hpp =
     [ "helios::details::SafeTemporaryCallable", "concepthelios_1_1details_1_1SafeTemporaryCallable.html", null ],
     [ "helios::MakeDelegate", "namespacehelios.html#a5e276a5c70bbb86023543f06d4c58d28", null ],
     [ "helios::MakeDelegate", "namespacehelios.html#ac0c351b2588d308233b80d64eea7c936", null ],
-    [ "helios::MakeDelegate", "namespacehelios.html#a210d77b53901e18a6c1eed11283e1094", null ],
+    [ "helios::MakeDelegate", "namespacehelios.html#a598ce59f51b3e1c31390738b22468a15", null ],
     [ "helios::MakeDelegate", "namespacehelios.html#aee35cc85a0c840f1488c6be990bca4f1", null ]
 ];

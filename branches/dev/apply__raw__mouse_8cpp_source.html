@@ -179,37 +179,38 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('apply__raw__mo
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="apply__raw__mouse_8hpp.html">helios/sdl3/input/systems/apply_raw_mouse.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp.html">helios/ecs/resource/params.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;SDL3/SDL.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="input_2include_2helios_2input_2resources_8hpp.html">helios/input/resources.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="sdl3__input_2include_2helios_2sdl3_2input_2state_8hpp.html">helios/sdl3/input/state.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1sdl3_1_1input.html">helios::sdl3::input</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;SDL3/SDL_hints.h&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html#afe4068b06c6b3fc58d347fb3453595df">   11</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html#afe4068b06c6b3fc58d347fb3453595df">ApplyRawMouseMotion::operator()</a>(</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_class" href="classhelios_1_1ecs_1_1Res.html">ecs::Res&lt;Context&gt;</a> context,</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="classhelios_1_1ecs_1_1Res.html">ecs::Res&lt;const helios::input::Settings&gt;</a> settings)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keywordflow">if</span> (!context-&gt;input_enabled) [[unlikely]] {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  }</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordflow">if</span> (context-&gt;raw_mouse_hint_set &amp;&amp;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>      context-&gt;last_raw_mouse_motion == settings-&gt;raw_mouse_motion) {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  }</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_SYSTEM_SCALE,</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>              settings-&gt;raw_mouse_motion ? <span class="stringliteral">&quot;0&quot;</span> : <span class="stringliteral">&quot;1&quot;</span>);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  context-&gt;raw_mouse_hint_set = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  context-&gt;last_raw_mouse_motion = settings-&gt;raw_mouse_motion;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
-</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}  <span class="comment">// namespace helios::sdl3::input</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1sdl3_1_1input.html">helios::sdl3::input</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">void</span> <a class="code hl_function" href="structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html#afe4068b06c6b3fc58d347fb3453595df">ApplyRawMouseMotion::operator()</a>(</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    ecs::Res&lt;Context&gt; context,</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    ecs::Res&lt;const helios::input::Settings&gt; settings)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordflow">if</span> (!context-&gt;input_enabled) [[unlikely]] {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  }</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keywordflow">if</span> (context-&gt;raw_mouse_hint_set &amp;&amp;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>      context-&gt;last_raw_mouse_motion == settings-&gt;raw_mouse_motion) {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  }</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_SYSTEM_SCALE,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>              settings-&gt;raw_mouse_motion ? <span class="stringliteral">&quot;0&quot;</span> : <span class="stringliteral">&quot;1&quot;</span>);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  context-&gt;raw_mouse_hint_set = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  context-&gt;last_raw_mouse_motion = settings-&gt;raw_mouse_motion;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}  <span class="comment">// namespace helios::sdl3::input</span></div>
 <div class="ttc" id="aapply__raw__mouse_8hpp_html"><div class="ttname"><a href="apply__raw__mouse_8hpp.html">apply_raw_mouse.hpp</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res</a></div><div class="ttdoc">Access to resource.</div><div class="ttdef"><b>Definition</b> <a href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html#l00022">params.hpp:22</a></div></div>
 <div class="ttc" id="aecs_2include_2helios_2ecs_2resource_2params_8hpp_html"><div class="ttname"><a href="ecs_2include_2helios_2ecs_2resource_2params_8hpp.html">params.hpp</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1sdl3_1_1input_html"><div class="ttname"><a href="namespacehelios_1_1sdl3_1_1input.html">helios::sdl3::input</a></div><div class="ttdef"><b>Definition</b> <a href="sdl3__input_2include_2helios_2sdl3_2input_2plugin_8hpp_source.html#l00011">plugin.hpp:11</a></div></div>
-<div class="ttc" id="astructhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion_html_afe4068b06c6b3fc58d347fb3453595df"><div class="ttname"><a href="structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html#afe4068b06c6b3fc58d347fb3453595df">helios::sdl3::input::ApplyRawMouseMotion::operator()</a></div><div class="ttdeci">void operator()(ecs::Res&lt; Context &gt; context, ecs::Res&lt; const helios::input::Settings &gt; settings) const</div><div class="ttdef"><b>Definition</b> <a href="#l00011">apply_raw_mouse.cpp:11</a></div></div>
+<div class="ttc" id="ainput_2include_2helios_2input_2resources_8hpp_html"><div class="ttname"><a href="input_2include_2helios_2input_2resources_8hpp.html">resources.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1sdl3_1_1input_html"><div class="ttname"><a href="namespacehelios_1_1sdl3_1_1input.html">helios::sdl3::input</a></div><div class="ttdef"><b>Definition</b> <a href="cursor__cache_8hpp_source.html#l00024">cursor_cache.hpp:24</a></div></div>
+<div class="ttc" id="asdl3__input_2include_2helios_2sdl3_2input_2state_8hpp_html"><div class="ttname"><a href="sdl3__input_2include_2helios_2sdl3_2input_2state_8hpp.html">state.hpp</a></div></div>
+<div class="ttc" id="astructhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion_html_afe4068b06c6b3fc58d347fb3453595df"><div class="ttname"><a href="structhelios_1_1sdl3_1_1input_1_1ApplyRawMouseMotion.html#afe4068b06c6b3fc58d347fb3453595df">helios::sdl3::input::ApplyRawMouseMotion::operator()</a></div><div class="ttdeci">void operator()(ecs::Res&lt; Context &gt; context, ecs::Res&lt; const helios::input::Settings &gt; settings) const</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00392">input.cpp:392</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

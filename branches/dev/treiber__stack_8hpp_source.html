@@ -176,148 +176,162 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('treiber__stack
 <div class="contents">
 <a href="treiber__stack_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1mem.html">helios::mem</a> {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"></span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> * @brief Lock-free intrusive Treiber stack.</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> * @details Nodes are untyped `void*` values. The first `sizeof(void*)` bytes of</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> * each node store the successor pointer and are accessed with</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> * `std::atomic_ref`. The stack head is a 128-bit `{pointer, tag}` word so the</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> * ABA tag is a full native integer and does not wrap after 65536 operations.</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * The stack never allocates or frees nodes. Callers own node storage for the</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * lifetime of every pointer currently in the stack.</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * @note `Push` and `Pop` are safe to call concurrently. `Clear` and move</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * operations require exclusive access.</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * @code</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * struct Node {</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> *   Node* next = nullptr;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> *   int value = 0;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * };</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * helios::mem::TreiberStack stack;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * Node a{.value = 1};</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * Node b{.value = 2};</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * stack.Push(&amp;a);</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * stack.Push(&amp;b);</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * Node* top = static_cast&lt;Node*&gt;(stack.Pop());</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> * @endcode</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> */</span></div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html">   35</a></span><span class="keyword">class </span><span class="keyword">alignas</span>(16) <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a> {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">   37</a></span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>() noexcept = default;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a9a9edb0e93a26763df9a16c1e596e23d">   38</a></span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>(const <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp;) = delete;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#ace85e0072a1ac14b783923c5514043ac">   39</a></span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>(<a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp;&amp; other) noexcept { Store(other.Exchange(Head{})); }</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a464e255bf6d1a68fe4f439c1e85c5b9b">   40</a></span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a464e255bf6d1a68fe4f439c1e85c5b9b">~TreiberStack</a>() noexcept = default;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#aa0d46be35fc0077a8e196293c2015477">   42</a></span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp; operator=(const <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp;) = delete;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp; operator=(<a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp;&amp; other) noexcept;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"></span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">   * @brief Pushes `node` as the new top.</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">   * @warning Triggers assertion when `node` is null or not aligned to</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">   * `alignof(void*)`.</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">   * @param node Node whose first word stores the intrusive next pointer</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a8c8815d6143a1ad6944b858e13b7b8cc">Push</a>(<span class="keywordtype">void</span>* node) noexcept;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">   * @brief Removes and returns the top node.</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">   * @return The previous top, or `nullptr` when the stack is empty</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  [[nodiscard]] <span class="keywordtype">void</span>* <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#ae24950170a43fe4cfa513bbc95b1dd05">Pop</a>() noexcept;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"></span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">   * @brief Drops the head without visiting or freeing nodes.</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">   * @warning Must not run concurrently with `Push` or `Pop`. Callers still own</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">   * every node that was in the stack.</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a3ea61c19978dbed7673da79320f1acf0">   64</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a3ea61c19978dbed7673da79320f1acf0">Clear</a>() noexcept { Store(Head{}); }</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">   * @brief Returns true when the stack has no nodes.</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">   * @return True if empty, false otherwise</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a2afbd627807182920a0125e15cacd640">   70</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a2afbd627807182920a0125e15cacd640">Empty</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#af03ce9017e13c3dbb566a7296092ae95">Top</a>() == <span class="keyword">nullptr</span>; }</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">   * @brief Returns the current top without removing it.</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">   * @return Top node, or `nullptr` when empty</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#af03ce9017e13c3dbb566a7296092ae95">   76</a></span>  [[nodiscard]] <span class="keywordtype">void</span>* <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#af03ce9017e13c3dbb566a7296092ae95">Top</a>() const noexcept { <span class="keywordflow">return</span> Load().ptr; }</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"></span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">   * @brief Returns the successor stored in `node`&#39;s first word.</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">   * @warning Triggers assertion when `node` is null or not aligned to</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">   * `alignof(void*)`.</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">   * @param node Node currently or previously linked in a Treiber stack</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">   * @return Successor pointer, or `nullptr` at the end of the chain</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  [[nodiscard]] <span class="keyword">static</span> <span class="keywordtype">void</span>* <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a6e805d6ade88c96b67a6403a12f29aa7">Next</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* node) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keyword">struct </span><span class="keyword">alignas</span>(16) Head {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordtype">void</span>* ptr = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    uintptr_t tag = 0;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  };</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>(Head) == 16,</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                <span class="stringliteral">&quot;TreiberStack::Head must be a 16-byte CAS word!&quot;</span>);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="keyword">static_assert</span>(</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      <span class="keyword">alignof</span>(Head) == 16,</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      <span class="stringliteral">&quot;TreiberStack::Head must be 16-byte aligned for lock-free CAS!&quot;</span>);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  [[nodiscard]] Head Load() const noexcept;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordtype">void</span> Store(Head head) noexcept;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  Head Exchange(Head head) noexcept;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="keywordtype">bool</span> CompareExchangeWeak(Head&amp; expected, Head desired,</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                           <a class="code hl_namespace" href="namespacestd.html">std</a>::memory_order success,</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                           <a class="code hl_namespace" href="namespacestd.html">std</a>::memory_order failure) noexcept;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="preprocessor">#ifdef __SIZEOF_INT128__</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <span class="keyword">using </span>Raw = <span class="keywordtype">unsigned</span> __int128;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  [[nodiscard]] <span class="keyword">static</span> Raw ToRaw(Head head) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  [[nodiscard]] <span class="keyword">static</span> Head FromRaw(Raw raw) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <span class="keyword">mutable</span> std::atomic&lt;Raw&gt; raw_{0};</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  [[nodiscard]] Head LoadSeqCst() const noexcept;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keywordtype">bool</span> CompareExchangeSeqCst(Head&amp; expected, Head desired) noexcept;</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="compiler_2include_2helios_2config_8hpp.html">helios/config.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#if HELIOS_MODULE_HEADER_IMPORT</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> helios.memory;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define HELIOS_MODULE_CONSUMER_SHIM</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef HELIOS_MODULE_CONSUMER_SHIM</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#ifndef HELIOS_BUILDING_MODULE</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><a class="code hl_define" href="compiler_2include_2helios_2config_8hpp.html#a9caf8264360e388df0e8f8837594e009">HELIOS_MODULE_EXPORT</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1mem.html">helios::mem</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * @brief Lock-free intrusive Treiber stack.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * @details Nodes are untyped `void*` values. The first `sizeof(void*)` bytes of</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * each node store the successor pointer and are accessed with</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * `std::atomic_ref`. The stack head is a 128-bit `{pointer, tag}` word so the</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * ABA tag is a full native integer and does not wrap after 65536 operations.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * The stack never allocates or frees nodes. Callers own node storage for the</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * lifetime of every pointer currently in the stack.</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * @note `Push` and `Pop` are safe to call concurrently. `Clear` and move</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * operations require exclusive access.</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * @code</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> * struct Node {</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> *   Node* next = nullptr;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> *   int value = 0;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * };</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> * helios::mem::TreiberStack stack;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> * Node a{.value = 1};</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> * Node b{.value = 2};</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> * stack.Push(&amp;a);</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> * stack.Push(&amp;b);</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> * Node* top = static_cast&lt;Node*&gt;(stack.Pop());</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> * @endcode</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="};">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html">   46</a></span><span class="keyword">class </span><span class="keyword">alignas</span>(16) <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a> {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">   48</a></span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>() noexcept = default;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a9a9edb0e93a26763df9a16c1e596e23d">   49</a></span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>(const <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp;) = delete;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#ace85e0072a1ac14b783923c5514043ac">   50</a></span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>(<a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp;&amp; other) noexcept { Store(other.Exchange(Head{})); }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a464e255bf6d1a68fe4f439c1e85c5b9b">   51</a></span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a464e255bf6d1a68fe4f439c1e85c5b9b">~TreiberStack</a>() noexcept = default;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#aa0d46be35fc0077a8e196293c2015477">   53</a></span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp; operator=(const <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp;) = delete;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp; operator=(<a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"></span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">   * @brief Pushes `node` as the new top.</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">   * @warning Triggers assertion when `node` is null or not aligned to</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">   * `alignof(void*)`.</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">   * @param node Node whose first word stores the intrusive next pointer</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a8c8815d6143a1ad6944b858e13b7b8cc">Push</a>(<span class="keywordtype">void</span>* node) noexcept;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">   * @brief Removes and returns the top node.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">   * @return The previous top, or `nullptr` when the stack is empty</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  [[nodiscard]] <span class="keywordtype">void</span>* <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#ae24950170a43fe4cfa513bbc95b1dd05">Pop</a>() noexcept;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">   * @brief Drops the head without visiting or freeing nodes.</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">   * @warning Must not run concurrently with `Push` or `Pop`. Callers still own</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">   * every node that was in the stack.</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a3ea61c19978dbed7673da79320f1acf0">   75</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a3ea61c19978dbed7673da79320f1acf0">Clear</a>() noexcept { Store(Head{}); }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">   * @brief Returns true when the stack has no nodes.</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">   * @return True if empty, false otherwise</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a2afbd627807182920a0125e15cacd640">   81</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a2afbd627807182920a0125e15cacd640">Empty</a>() const noexcept { <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#af03ce9017e13c3dbb566a7296092ae95">Top</a>() == <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"></span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">   * @brief Returns the current top without removing it.</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">   * @return Top node, or `nullptr` when empty</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#af03ce9017e13c3dbb566a7296092ae95">   87</a></span>  [[nodiscard]] <span class="keywordtype">void</span>* <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#af03ce9017e13c3dbb566a7296092ae95">Top</a>() const noexcept { <span class="keywordflow">return</span> Load().ptr; }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"></span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">   * @brief Returns the successor stored in `node`&#39;s first word.</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">   * @warning Triggers assertion when `node` is null or not aligned to</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">   * `alignof(void*)`.</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">   * @param node Node currently or previously linked in a Treiber stack</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">   * @return Successor pointer, or `nullptr` at the end of the chain</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  [[nodiscard]] <span class="keyword">static</span> <span class="keywordtype">void</span>* <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a6e805d6ade88c96b67a6403a12f29aa7">Next</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* node) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keyword">struct </span><span class="keyword">alignas</span>(16) Head {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">void</span>* ptr = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    uintptr_t tag = 0;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  };</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>(Head) == 16,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                <span class="stringliteral">&quot;TreiberStack::Head must be a 16-byte CAS word!&quot;</span>);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      <span class="keyword">alignof</span>(Head) == 16,</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      <span class="stringliteral">&quot;TreiberStack::Head must be 16-byte aligned for lock-free CAS!&quot;</span>);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  [[nodiscard]] Head Load() const noexcept;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordtype">void</span> Store(Head head) noexcept;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  Head Exchange(Head head) noexcept;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  <span class="keywordtype">bool</span> CompareExchangeWeak(Head&amp; expected, Head desired,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                           <a class="code hl_namespace" href="namespacestd.html">std</a>::memory_order success,</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                           <a class="code hl_namespace" href="namespacestd.html">std</a>::memory_order failure) noexcept;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  mutable volatile <span class="keywordtype">long</span> <span class="keywordtype">long</span> words_[2] = {};</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>};</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#ifdef __SIZEOF_INT128__</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keyword">using </span>Raw = <span class="keywordtype">unsigned</span> __int128;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  [[nodiscard]] <span class="keyword">static</span> Raw ToRaw(Head head) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  [[nodiscard]] <span class="keyword">static</span> Head FromRaw(Raw raw) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keyword">mutable</span> std::atomic&lt;Raw&gt; raw_{0};</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  [[nodiscard]] Head LoadSeqCst() const noexcept;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keywordtype">bool</span> CompareExchangeSeqCst(Head&amp; expected, Head desired) noexcept;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  mutable volatile <span class="keywordtype">long</span> <span class="keywordtype">long</span> words_[2] = {};</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>};</div>
 </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="foldopen" id="foldopen00121" data-start="{" data-end="}">
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a9789ad1319b53bd798dd8d6986d3140f">  121</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp; <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#aa0d46be35fc0077a8e196293c2015477">TreiberStack::operator=</a>(<a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  }</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  Store(other.Exchange(Head{}));</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>}</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classhelios_1_1mem_1_1TreiberStack.html#a9789ad1319b53bd798dd8d6986d3140f">  132</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp; <a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#aa0d46be35fc0077a8e196293c2015477">TreiberStack::operator=</a>(<a class="code hl_function" href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">TreiberStack</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  Store(other.Exchange(Head{}));</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}</div>
 </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}  <span class="comment">// namespace helios::mem</span></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a2afbd627807182920a0125e15cacd640"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a2afbd627807182920a0125e15cacd640">helios::mem::TreiberStack::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Returns true when the stack has no nodes.</div><div class="ttdef"><b>Definition</b> <a href="#l00070">treiber_stack.hpp:70</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a3ea61c19978dbed7673da79320f1acf0"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a3ea61c19978dbed7673da79320f1acf0">helios::mem::TreiberStack::Clear</a></div><div class="ttdeci">void Clear() noexcept</div><div class="ttdoc">Drops the head without visiting or freeing nodes.</div><div class="ttdef"><b>Definition</b> <a href="#l00064">treiber_stack.hpp:64</a></div></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>}  <span class="comment">// namespace helios::mem</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="preprocessor">#endif  </span><span class="comment">// HELIOS_MODULE_CONSUMER_SHIM</span></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a2afbd627807182920a0125e15cacd640"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a2afbd627807182920a0125e15cacd640">helios::mem::TreiberStack::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Returns true when the stack has no nodes.</div><div class="ttdef"><b>Definition</b> <a href="#l00081">treiber_stack.hpp:81</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a3ea61c19978dbed7673da79320f1acf0"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a3ea61c19978dbed7673da79320f1acf0">helios::mem::TreiberStack::Clear</a></div><div class="ttdeci">void Clear() noexcept</div><div class="ttdoc">Drops the head without visiting or freeing nodes.</div><div class="ttdef"><b>Definition</b> <a href="#l00075">treiber_stack.hpp:75</a></div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a464e255bf6d1a68fe4f439c1e85c5b9b"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a464e255bf6d1a68fe4f439c1e85c5b9b">helios::mem::TreiberStack::~TreiberStack</a></div><div class="ttdeci">~TreiberStack() noexcept=default</div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a51ce13fad82ccece327938836aa74ca1"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a51ce13fad82ccece327938836aa74ca1">helios::mem::TreiberStack::TreiberStack</a></div><div class="ttdeci">TreiberStack() noexcept=default</div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a6e805d6ade88c96b67a6403a12f29aa7"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a6e805d6ade88c96b67a6403a12f29aa7">helios::mem::TreiberStack::Next</a></div><div class="ttdeci">static void * Next(const void *node) noexcept</div><div class="ttdoc">Returns the successor stored in node&#39;s first word.</div><div class="ttdef"><b>Definition</b> <a href="treiber__stack_8cpp_source.html#l00062">treiber_stack.cpp:62</a></div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a8c8815d6143a1ad6944b858e13b7b8cc"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#a8c8815d6143a1ad6944b858e13b7b8cc">helios::mem::TreiberStack::Push</a></div><div class="ttdeci">void Push(void *node) noexcept</div><div class="ttdoc">Pushes node as the new top.</div><div class="ttdef"><b>Definition</b> <a href="treiber__stack_8cpp_source.html#l00031">treiber_stack.cpp:31</a></div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_aa0d46be35fc0077a8e196293c2015477"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#aa0d46be35fc0077a8e196293c2015477">helios::mem::TreiberStack::operator=</a></div><div class="ttdeci">TreiberStack &amp; operator=(const TreiberStack &amp;)=delete</div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_ae24950170a43fe4cfa513bbc95b1dd05"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#ae24950170a43fe4cfa513bbc95b1dd05">helios::mem::TreiberStack::Pop</a></div><div class="ttdeci">void * Pop() noexcept</div><div class="ttdoc">Removes and returns the top node.</div><div class="ttdef"><b>Definition</b> <a href="treiber__stack_8cpp_source.html#l00045">treiber_stack.cpp:45</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_af03ce9017e13c3dbb566a7296092ae95"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#af03ce9017e13c3dbb566a7296092ae95">helios::mem::TreiberStack::Top</a></div><div class="ttdeci">void * Top() const noexcept</div><div class="ttdoc">Returns the current top without removing it.</div><div class="ttdef"><b>Definition</b> <a href="#l00076">treiber_stack.hpp:76</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html"><div class="ttname"><a href="namespacehelios_1_1mem.html">helios::mem</a></div><div class="ttdef"><b>Definition</b> <a href="aligned__alloc_8hpp_source.html#l00005">aligned_alloc.hpp:5</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_af03ce9017e13c3dbb566a7296092ae95"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html#af03ce9017e13c3dbb566a7296092ae95">helios::mem::TreiberStack::Top</a></div><div class="ttdeci">void * Top() const noexcept</div><div class="ttdoc">Returns the current top without removing it.</div><div class="ttdef"><b>Definition</b> <a href="#l00087">treiber_stack.hpp:87</a></div></div>
+<div class="ttc" id="acompiler_2include_2helios_2config_8hpp_html"><div class="ttname"><a href="compiler_2include_2helios_2config_8hpp.html">config.hpp</a></div><div class="ttdoc">Dual header / C++20 named-module wrapping macros.</div></div>
+<div class="ttc" id="acompiler_2include_2helios_2config_8hpp_html_a9caf8264360e388df0e8f8837594e009"><div class="ttname"><a href="compiler_2include_2helios_2config_8hpp.html#a9caf8264360e388df0e8f8837594e009">HELIOS_MODULE_EXPORT</a></div><div class="ttdeci">#define HELIOS_MODULE_EXPORT</div><div class="ttdef"><b>Definition</b> <a href="compiler_2include_2helios_2config_8hpp_source.html#l00019">config.hpp:19</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html"><div class="ttname"><a href="namespacehelios_1_1mem.html">helios::mem</a></div><div class="ttdef"><b>Definition</b> <a href="aligned__alloc_8hpp_source.html#l00016">aligned_alloc.hpp:16</a></div></div>
 <div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdoc">STL namespace.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

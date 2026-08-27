@@ -10,5 +10,7 @@ var searchData=
   ['focus_7',['focus',['../structhelios_1_1window_1_1AppearanceMessages.html#a96796ca1d5c6e9758020319797069cc3',1,'helios::window::AppearanceMessages::focus'],['../structhelios_1_1window_1_1AppearanceWriters.html#a8ea8fc2bc1de3b6f8548f523cee7560d',1,'helios::window::AppearanceWriters::focus']]],
   ['focus_5fon_5fshow_8',['focus_on_show',['../structhelios_1_1window_1_1Properties.html#a32837aaee99ebf046e998f356207886b',1,'helios::window::Properties']]],
   ['focused_9',['focused',['../structhelios_1_1window_1_1FocusChangedMsg.html#a7185413d8d0445a67c46025032fa8cae',1,'helios::window::FocusChangedMsg::focused'],['../structhelios_1_1window_1_1Properties.html#ab1201aac02be227e8a420f66c9327e6b',1,'helios::window::Properties::focused']]],
-  ['frames_10',['frames',['../structanonymous__namespace_02stacktrace_8cpp_03_1_1CapturedFramesResult.html#a2efe4cfddf06cde8e4cc6d4e4fd1c8d6',1,'anonymous_namespace{stacktrace.cpp}::CapturedFramesResult']]]
+  ['frame_5fpump_10',['frame_pump',['../structhelios_1_1glfw_1_1Context.html#af5bee427b2dee6c222aac143f70902e6',1,'helios::glfw::Context::frame_pump'],['../structhelios_1_1sdl3_1_1Context.html#a66a69b772a8af034ed522e0e80b47c62',1,'helios::sdl3::Context::frame_pump']]],
+  ['frame_5fpump_5fuser_5fdata_11',['frame_pump_user_data',['../structhelios_1_1glfw_1_1Context.html#a88d79dd8732eb64676f0b18d95ec07be',1,'helios::glfw::Context::frame_pump_user_data'],['../structhelios_1_1sdl3_1_1Context.html#a0be653c292cc10103fd8757fefcbbae1',1,'helios::sdl3::Context::frame_pump_user_data']]],
+  ['frames_12',['frames',['../structanonymous__namespace_02stacktrace_8cpp_03_1_1CapturedFramesResult.html#a2efe4cfddf06cde8e4cc6d4e4fd1c8d6',1,'anonymous_namespace{stacktrace.cpp}::CapturedFramesResult']]]
 ];

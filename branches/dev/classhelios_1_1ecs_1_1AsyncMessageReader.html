@@ -232,7 +232,7 @@ class helios::ecs::AsyncMessageReader&lt; T &gt;</div><p>Type-safe, move-based r
 <div class="line"><span class="comment">// Or move all messages out:</span></div>
 <div class="line"><span class="keyword">auto</span> messages = reader.TakeAll();</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00034">34</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00044">44</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="abbe02f41f478e3c214d084eb8273fa09" name="abbe02f41f478e3c214d084eb8273fa09"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abbe02f41f478e3c214d084eb8273fa09">&#9670;&#160;</a></span>size_type</h2>
@@ -248,7 +248,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00036">36</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00046">46</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +286,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00042">42</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00052">52</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -324,7 +324,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00051">51</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00061">61</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -438,7 +438,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
 <p>Returns an approximate count of messages. </p>
 <dl class="section return"><dt>Returns</dt><dd>Message count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00110">110</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00120">120</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +470,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
 <p>Dequeues a single message from the queue. </p>
 <dl class="section return"><dt>Returns</dt><dd>Dequeued message or default-constructed <span class="tt">T</span> if the queue is empty </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00065">65</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00075">75</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -508,7 +508,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if an message was dequeued and stored in dest, false if the queue was empty (<span class="tt">dest</span> is unchanged) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00073">73</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00083">83</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -540,7 +540,7 @@ template&lt;AsyncMessageTrait T&gt; </div>
 <p>Checks if there are no messages. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the reader holds no messages, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00104">104</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00114">114</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -588,7 +588,7 @@ requires std::invocable&lt;Action, T&amp;&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00124">124</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00134">134</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -639,7 +639,7 @@ template&lt;std::output_iterator&lt; T &gt; It&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of messages actually dequeued </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00083">83</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="async__reader_8hpp_source.html#l00093">93</a> of file <a class="el" href="async__reader_8hpp_source.html">async_reader.hpp</a>.</p>
 
 </div>
 </div>

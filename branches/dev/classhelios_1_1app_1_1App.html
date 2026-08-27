@@ -338,7 +338,7 @@ Friends</h2></td></tr>
 <div class="textblock"><p>Application class. </p>
 <p>Manages the application lifecycle, including initialization, updating, and shutdown. </p><dl class="section note"><dt>Note</dt><dd>Partially thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00048">48</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00059">59</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a185f72b974ae60051fbb6ba25e6eeea0" name="a185f72b974ae60051fbb6ba25e6eeea0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a185f72b974ae60051fbb6ba25e6eeea0">&#9670;&#160;</a></span>ExtractFn</h2>
@@ -352,7 +352,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00056">56</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00067">67</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -368,7 +368,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00055">55</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00066">66</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -388,7 +388,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00038">38</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00039">39</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -423,7 +423,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00045">45</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00046">46</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -495,7 +495,7 @@ Friends</h2></td></tr>
 <p>Completes outstanding async work and runs plugin teardown. </p>
 <p>Waits for overlapping updates and executor tasks, then if the app was initialized runs shutdown systems and <span class="tt">Destroy</span> on loaded plugins so retained OS resources (e.g. SDL) are released. </p>
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00053">53</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00054">54</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -505,6 +505,9 @@ Friends</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">auto helios::app::App::AddDynamicPlugin </td>
@@ -517,6 +520,11 @@ Friends</h2></td></tr>
           <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1DynamicPlugin.html">DynamicPlugin</a></td>          <td class="paramname"><span class="paramname"><em>plugin</em></span>&#160;) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Adds a dynamic plugin instance, if a plugin of the same type is not already added. </p>
@@ -530,7 +538,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00757">757</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00768">768</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -571,7 +579,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00832">832</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00843">843</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -580,6 +588,9 @@ requires (sizeof...(Ts) &gt; 0)</div>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">auto helios::app::App::AddPlugin </td>
@@ -597,6 +608,11 @@ requires (sizeof...(Ts) &gt; 0)</div>
           <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1Plugin.html">Plugin</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>plugin</em></span>&#160;) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Adds a plugin instance, if a plugin of the same type is not already added. </p>
@@ -611,7 +627,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00681">681</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00692">692</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -661,7 +677,7 @@ template&lt;PluginGroupTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00733">733</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00744">744</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -712,7 +728,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00746">746</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00757">757</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -762,7 +778,7 @@ template&lt;PluginTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00695">695</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00706">706</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -813,7 +829,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00722">722</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00733">733</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -864,7 +880,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Ordering handle for configuring placement </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00792">792</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00803">803</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -899,7 +915,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Ordering handle for configuring placement </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00159">159</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00160">160</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -957,7 +973,7 @@ template&lt;ecs::ScheduleTrait L, ecs::FunctorSystemTrait S&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System configuration handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00314">314</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00325">325</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1021,7 +1037,7 @@ template&lt;ecs::ScheduleTrait L, ecs::SystemTrait S&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System configuration handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00335">335</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00346">346</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1074,7 +1090,7 @@ requires (sizeof...(Systems) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Handle for configuring the system group </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00356">356</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00367">367</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1097,7 +1113,7 @@ requires (sizeof...(Systems) &gt; 1)</div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if app is running. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00073">73</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00074">74</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -1148,7 +1164,7 @@ template&lt;ecs::ScheduleTrait L, ecs::SystemSetTrait S&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System set handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00370">370</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00381">381</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1205,7 +1221,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1Schedule
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00810">810</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00821">821</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1256,7 +1272,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00709">709</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00720">720</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1287,7 +1303,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the async executor </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00584">584</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00595">595</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1318,7 +1334,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the async executor </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00577">577</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00588">588</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1349,7 +1365,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the main sub-application </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00504">504</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00515">515</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1380,7 +1396,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the main sub-application </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00497">497</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00508">508</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1411,7 +1427,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the application frame scheduler </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00600">600</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00611">611</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1442,7 +1458,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the application frame scheduler </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00593">593</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00604">604</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1488,7 +1504,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the sub-app </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00870">870</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00881">881</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1534,7 +1550,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the sub-app </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00862">862</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00873">873</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1572,7 +1588,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the sub-app </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00855">855</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00866">866</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1610,7 +1626,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the sub-app </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00849">849</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00860">860</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1641,7 +1657,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the main sub-app's ECS world </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00618">618</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00629">629</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1672,7 +1688,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the main sub-app's ECS world </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00609">609</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00620">620</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1703,7 +1719,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the plugin exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00453">453</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00464">464</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1742,7 +1758,7 @@ template&lt;PluginTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the plugin exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00464">464</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00475">475</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1782,7 +1798,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether each plugin is exists </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00476">476</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00487">487</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1826,7 +1842,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the sub-app exists, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00488">488</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00499">499</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1850,7 +1866,7 @@ template&lt;SubAppTrait T&gt; </div>
 <p>Automaticly called in <span class="tt"><a class="el" href="#ae1bc7b5b668ca63cc91dfd87757e99be" title="Runs the application with the given arguments.">Run()</a></span>. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if app is already initialized or running. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00096">96</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00097">97</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -1900,7 +1916,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00802">802</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00813">813</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1950,7 +1966,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00817">817</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00828">828</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2006,7 +2022,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00770">770</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00781">781</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2037,7 +2053,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if initialized, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00437">437</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00448">448</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2068,7 +2084,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if running, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00444">444</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00455">455</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2098,7 +2114,7 @@ template&lt;SubAppTrait T&gt; </div>
 <p>Notifies the app that plugin readiness may have changed. </p>
 <p>Async plugins should call this after completing background setup so <span class="tt">WaitForPluginsReady</span> can resume without busy-waiting. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00152">152</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00153">153</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -2188,7 +2204,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if a sub-app was removed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00783">783</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00794">794</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2212,7 +2228,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if app is initialized or running. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Exit code of the application. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00127">127</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00128">128</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -2241,7 +2257,7 @@ template&lt;SubAppTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00145">145</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00146">146</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -2267,7 +2283,7 @@ template&lt;SubAppTrait T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2290,7 +2306,7 @@ Triggers assertion in next cases:<ul>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00838">838</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00849">849</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2321,7 +2337,7 @@ Triggers assertion in next cases:<ul>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Exit code when <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> is present, otherwise <span class="tt">std::nullopt</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00168">168</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00169">169</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -2366,7 +2382,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the schedule, or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00556">556</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00567">567</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2411,7 +2427,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the schedule, or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00568">568</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00579">579</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2461,7 +2477,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00824">824</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00835">835</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2484,7 +2500,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 <p>Walks <span class="tt"><a class="el" href="structhelios_1_1app_1_1MainFrameOrder.html" title="Stages run by App::Update() each frame.">MainFrameOrder</a></span> on the main sub-app (extract/sub-apps when that order includes <span class="tt"><a class="el" href="namespacehelios_1_1app.html#a02953d4591cfda9ffae4789a1205956f" title="Builtin stage for extraction.">kExtractStage</a></span>). Calls <span class="tt">helios::ResetAllTemporaryStorage()</span> in the beggining of the update to clear all temporary storage. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if app is not initialized. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00116">116</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8cpp_source.html#l00117">117</a> of file <a class="el" href="application_8cpp_source.html">application.cpp</a>.</p>
 
 </div>
 </div>
@@ -2509,7 +2525,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00677">677</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00688">688</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2533,7 +2549,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00678">678</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00689">689</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>

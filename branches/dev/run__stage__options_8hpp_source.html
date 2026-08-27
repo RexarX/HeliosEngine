@@ -176,24 +176,37 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('run__stage__op
 <div class="contents">
 <a href="run__stage__options_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs.html">helios::ecs</a> {</div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">/// @brief Options controlling how `Scheduler::RunStage` executes stage members.</span></div>
-<div class="foldopen" id="foldopen00006" data-start="{" data-end="};">
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="structhelios_1_1ecs_1_1RunStageOptions.html">    6</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structhelios_1_1ecs_1_1RunStageOptions.html">RunStageOptions</a> {<span class="comment"></span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">   * @brief When true, schedules already executing on this thread are skipped.</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">   * @details Enables nested stage pumps (for example during OS modal event</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">   * loops) without re-entering the schedule that triggered the pump.</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="structhelios_1_1ecs_1_1RunStageOptions.html#abd945954e88b2b099b20bf76c0330ff1">   12</a></span>  <span class="keywordtype">bool</span> <a class="code hl_variable" href="structhelios_1_1ecs_1_1RunStageOptions.html#abd945954e88b2b099b20bf76c0330ff1">skip_active_schedules</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>};</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="compiler_2include_2helios_2config_8hpp.html">helios/config.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#if HELIOS_MODULE_HEADER_IMPORT</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> helios.ecs;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define HELIOS_MODULE_CONSUMER_SHIM</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef HELIOS_MODULE_CONSUMER_SHIM</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><a class="code hl_define" href="compiler_2include_2helios_2config_8hpp.html#a9caf8264360e388df0e8f8837594e009">HELIOS_MODULE_EXPORT</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs.html">helios::ecs</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/// @brief Options controlling how `Scheduler::RunStage` executes stage members.</span></div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structhelios_1_1ecs_1_1RunStageOptions.html">   16</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structhelios_1_1ecs_1_1RunStageOptions.html">RunStageOptions</a> {<span class="comment"></span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">   * @brief When true, schedules already executing on this thread are skipped.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">   * @details Enables nested stage pumps (for example during OS modal event</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">   * loops) without re-entering the schedule that triggered the pump.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structhelios_1_1ecs_1_1RunStageOptions.html#abd945954e88b2b099b20bf76c0330ff1">   22</a></span>  <span class="keywordtype">bool</span> <a class="code hl_variable" href="structhelios_1_1ecs_1_1RunStageOptions.html#abd945954e88b2b099b20bf76c0330ff1">skip_active_schedules</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
 </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}  <span class="comment">// namespace helios::ecs</span></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00005">schedules.hpp:5</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1RunStageOptions_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1RunStageOptions.html">helios::ecs::RunStageOptions</a></div><div class="ttdoc">Options controlling how Scheduler::RunStage executes stage members.</div><div class="ttdef"><b>Definition</b> <a href="#l00006">run_stage_options.hpp:6</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1RunStageOptions_html_abd945954e88b2b099b20bf76c0330ff1"><div class="ttname"><a href="structhelios_1_1ecs_1_1RunStageOptions.html#abd945954e88b2b099b20bf76c0330ff1">helios::ecs::RunStageOptions::skip_active_schedules</a></div><div class="ttdeci">bool skip_active_schedules</div><div class="ttdoc">When true, schedules already executing on this thread are skipped.</div><div class="ttdef"><b>Definition</b> <a href="#l00012">run_stage_options.hpp:12</a></div></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}  <span class="comment">// namespace helios::ecs</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif  </span><span class="comment">// HELIOS_MODULE_CONSUMER_SHIM</span></div>
+<div class="ttc" id="acompiler_2include_2helios_2config_8hpp_html"><div class="ttname"><a href="compiler_2include_2helios_2config_8hpp.html">config.hpp</a></div><div class="ttdoc">Dual header / C++20 named-module wrapping macros.</div></div>
+<div class="ttc" id="acompiler_2include_2helios_2config_8hpp_html_a9caf8264360e388df0e8f8837594e009"><div class="ttname"><a href="compiler_2include_2helios_2config_8hpp.html#a9caf8264360e388df0e8f8837594e009">HELIOS_MODULE_EXPORT</a></div><div class="ttdeci">#define HELIOS_MODULE_EXPORT</div><div class="ttdef"><b>Definition</b> <a href="compiler_2include_2helios_2config_8hpp_source.html#l00019">config.hpp:19</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="app_2include_2helios_2app_2schedules_8hpp_source.html#l00016">schedules.hpp:16</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1RunStageOptions_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1RunStageOptions.html">helios::ecs::RunStageOptions</a></div><div class="ttdoc">Options controlling how Scheduler::RunStage executes stage members.</div><div class="ttdef"><b>Definition</b> <a href="#l00016">run_stage_options.hpp:16</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1RunStageOptions_html_abd945954e88b2b099b20bf76c0330ff1"><div class="ttname"><a href="structhelios_1_1ecs_1_1RunStageOptions.html#abd945954e88b2b099b20bf76c0330ff1">helios::ecs::RunStageOptions::skip_active_schedules</a></div><div class="ttdeci">bool skip_active_schedules</div><div class="ttdoc">When true, schedules already executing on this thread are skipped.</div><div class="ttdef"><b>Definition</b> <a href="#l00022">run_stage_options.hpp:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

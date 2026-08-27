@@ -185,8 +185,6 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacehelio
 Classes</h2></td></tr>
 <tr class="memitem:adapter_5Fiterator_5Ftraits" id="r_adapter_5Fiterator_5Ftraits"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1utils_1_1details_1_1adapter__iterator__traits.html">adapter_iterator_traits</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traits for <span class="tt">Iter</span>, selecting iterator concept from <span class="tt">Iter</span> if it has one, else forward.  <a href="structhelios_1_1utils_1_1details_1_1adapter__iterator__traits.html#details">More...</a><br /></td></tr>
-<tr class="memitem:DeferHelper" id="r_DeferHelper"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1utils_1_1details_1_1DeferHelper.html">DeferHelper</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper struct for the <span class="tt"><a class="el" href="defer_8hpp.html#a170e91546778eb9eceda22d3896b5ad0" title="Defers execution of an inline lambda until the end of the current scope.">HELIOS_DEFER</a></span> macro to enable inline lambda syntax.  <a href="structhelios_1_1utils_1_1details_1_1DeferHelper.html#details">More...</a><br /></td></tr>
 <tr class="memitem:FixedString" id="r_FixedString"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1utils_1_1details_1_1FixedString.html">FixedString</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A fixed-size string that can be constructed at compile time.  <a href="structhelios_1_1utils_1_1details_1_1FixedString.html#details">More...</a><br /></td></tr>
 <tr class="memitem:folder_5Fapply_5Fresult" id="r_folder_5Fapply_5Fresult"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1utils_1_1details_1_1folder__apply__result.html">folder_apply_result</a></td></tr>
@@ -286,11 +284,11 @@ template&lt;typename Iter&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><span class="keyword">typename</span> <a class="code hl_typedef" href="structhelios_1_1utils_1_1details_1_1adapter__iterator__traits.html#aacf2a0cf2dbd52619071a1e2634c6b41">adapter_iterator_traits&lt;Iter&gt;::iterator_category</a></div>
-<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1adapter__iterator__traits_html_aacf2a0cf2dbd52619071a1e2634c6b41"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1adapter__iterator__traits.html#aacf2a0cf2dbd52619071a1e2634c6b41">helios::utils::details::adapter_iterator_traits::iterator_category</a></div><div class="ttdeci">std::conditional_t&lt; IterYieldsReference&lt; Iter &gt;, std::forward_iterator_tag, std::input_iterator_tag &gt; iterator_category</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00047">functional_adapters.hpp:47</a></div></div>
+<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1adapter__iterator__traits_html_aacf2a0cf2dbd52619071a1e2634c6b41"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1adapter__iterator__traits.html#aacf2a0cf2dbd52619071a1e2634c6b41">helios::utils::details::adapter_iterator_traits::iterator_category</a></div><div class="ttdeci">std::conditional_t&lt; IterYieldsReference&lt; Iter &gt;, std::forward_iterator_tag, std::input_iterator_tag &gt; iterator_category</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00055">functional_adapters.hpp:55</a></div></div>
 </div><!-- fragment -->
 <p>Gets the iterator category from <span class="tt">Iter</span>. </p>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00059">59</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00067">67</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -309,11 +307,11 @@ template&lt;typename Iter&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><span class="keyword">typename</span> <a class="code hl_typedef" href="structhelios_1_1utils_1_1details_1_1adapter__iterator__traits.html#ac4ebfe3465d4d540f241107dc7092e3c">adapter_iterator_traits&lt;Iter&gt;::iterator_concept</a></div>
-<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1adapter__iterator__traits_html_ac4ebfe3465d4d540f241107dc7092e3c"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1adapter__iterator__traits.html#ac4ebfe3465d4d540f241107dc7092e3c">helios::utils::details::adapter_iterator_traits::iterator_concept</a></div><div class="ttdeci">std::conditional_t&lt; IterYieldsReference&lt; Iter &gt;, std::forward_iterator_tag, std::input_iterator_tag &gt; iterator_concept</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00041">functional_adapters.hpp:41</a></div></div>
+<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1adapter__iterator__traits_html_ac4ebfe3465d4d540f241107dc7092e3c"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1adapter__iterator__traits.html#ac4ebfe3465d4d540f241107dc7092e3c">helios::utils::details::adapter_iterator_traits::iterator_concept</a></div><div class="ttdeci">std::conditional_t&lt; IterYieldsReference&lt; Iter &gt;, std::forward_iterator_tag, std::input_iterator_tag &gt; iterator_concept</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00049">functional_adapters.hpp:49</a></div></div>
 </div><!-- fragment -->
 <p>Gets the iterator concept from <span class="tt">Iter</span>. </p>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00054">54</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00062">62</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -332,9 +330,9 @@ template&lt;typename Func, typename... Args&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><span class="keyword">typename</span> <span class="keyword">decltype</span>(<a class="code hl_function" href="#a309adc02aff2b6da6abcadf39440a554">GetCallOrApplyResultType</a>&lt;Func, Args...&gt;())::type</div>
-<div class="ttc" id="anamespacehelios_1_1utils_1_1details_html_a309adc02aff2b6da6abcadf39440a554"><div class="ttname"><a href="#a309adc02aff2b6da6abcadf39440a554">helios::utils::details::GetCallOrApplyResultType</a></div><div class="ttdeci">consteval auto GetCallOrApplyResultType() noexcept</div><div class="ttdoc">Helper to get the result type of either invoke or apply.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00103">functional_adapters.hpp:103</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_1_1details_html_a309adc02aff2b6da6abcadf39440a554"><div class="ttname"><a href="#a309adc02aff2b6da6abcadf39440a554">helios::utils::details::GetCallOrApplyResultType</a></div><div class="ttdeci">consteval auto GetCallOrApplyResultType() noexcept</div><div class="ttdoc">Helper to get the result type of either invoke or apply.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00111">functional_adapters.hpp:111</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00117">117</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00125">125</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -356,11 +354,11 @@ template&lt;typename Iter&gt; </div>
 <div class="line">   std::remove_reference_t&lt;std::iter_reference_t&lt;Iter&gt;&gt;*,  <span class="comment">// T* / const T*</span></div>
 <div class="line">   std::optional&lt;std::iter_value_t&lt;Iter&gt;&gt;                  <span class="comment">// owned copy</span></div>
 <div class="line">   &gt;</div>
-<div class="ttc" id="aconcepthelios_1_1utils_1_1details_1_1IterYieldsReference_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1details_1_1IterYieldsReference.html">helios::utils::details::IterYieldsReference</a></div><div class="ttdoc">Checks if the iterator yields a genuine reference (lvalue ref), not a proxy/value.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00024">functional_adapters.hpp:24</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1utils_1_1details_1_1IterYieldsReference_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1details_1_1IterYieldsReference.html">helios::utils::details::IterYieldsReference</a></div><div class="ttdoc">Checks if the iterator yields a genuine reference (lvalue ref), not a proxy/value.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00032">functional_adapters.hpp:32</a></div></div>
 </div><!-- fragment -->
 <p>Selects pointer vs optional depending on whether the iterator yields a real ref. </p>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00030">30</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00038">38</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -379,9 +377,9 @@ template&lt;typename Folder, typename Accumulator, typename Tuple&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><span class="keyword">typename</span> <a class="code hl_struct" href="structhelios_1_1utils_1_1details_1_1folder__apply__result.html">folder_apply_result&lt;Folder, Accumulator, Tuple&gt;::type</a></div>
-<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1folder__apply__result_html"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1folder__apply__result.html">helios::utils::details::folder_apply_result</a></div><div class="ttdoc">Helper to get the result type of folder applied with accumulator + tuple elements.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00090">functional_adapters.hpp:90</a></div></div>
+<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1folder__apply__result_html"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1folder__apply__result.html">helios::utils::details::folder_apply_result</a></div><div class="ttdoc">Helper to get the result type of folder applied with accumulator + tuple elements.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00098">functional_adapters.hpp:98</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00098">98</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00106">106</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -420,7 +418,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The computed hash value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00310">310</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00321">321</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -458,7 +456,7 @@ template&lt;auto Fn&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The extracted fully qualified function name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00235">235</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00244">244</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -505,7 +503,7 @@ template&lt;auto Fn&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Extracted signature fragment </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00036">36</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00045">45</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -543,7 +541,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The extracted type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00208">208</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00217">217</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -579,7 +577,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unqualified name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00075">75</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00084">84</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -610,7 +608,7 @@ template&lt;typename Func, typename... Args&gt; </div>
 
 <p>Helper to get the result type of either invoke or apply. </p>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00103">103</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00111">111</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -648,7 +646,7 @@ template&lt;auto Fn&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The fully qualified function name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00297">297</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00308">308</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -686,7 +684,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The fully qualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00277">277</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00286">286</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -724,7 +722,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to static null-terminated storage </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00267">267</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00276">276</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -762,7 +760,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The unqualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00287">287</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00298">298</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -800,7 +798,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> when <span class="tt">T</span> is an object type that is not a lambda </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00350">350</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00361">361</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -838,7 +836,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> when <span class="tt">T</span> is a lambda closure type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00323">323</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00334">334</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -874,7 +872,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Qualified function name without return type, address marker, or args </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00099">99</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00108">108</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -910,7 +908,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Fragment before the first alias exposition </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00059">59</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00068">68</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -938,10 +936,10 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">                                   =</div>
 <div class="line"><a class="code hl_struct" href="structhelios_1_1utils_1_1details_1_1FixedString.html">FixedString&lt;ExtractTypeName&lt;T&gt;</a>().size()&gt;(<a class="code hl_function" href="#af7c1921a6f5df0fc560b4ae8a6b9df6e">ExtractTypeName&lt;T&gt;</a>())</div>
-<div class="ttc" id="anamespacehelios_1_1utils_1_1details_html_af7c1921a6f5df0fc560b4ae8a6b9df6e"><div class="ttname"><a href="#af7c1921a6f5df0fc560b4ae8a6b9df6e">helios::utils::details::ExtractTypeName</a></div><div class="ttdeci">consteval std::string_view ExtractTypeName() noexcept</div><div class="ttdoc">Extracts the type name of T from the compiler-specific function signature.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00208">type_info.hpp:208</a></div></div>
-<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1FixedString_html"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1FixedString.html">helios::utils::details::FixedString</a></div><div class="ttdoc">A fixed-size string that can be constructed at compile time.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00190">type_info.hpp:190</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_1_1details_html_af7c1921a6f5df0fc560b4ae8a6b9df6e"><div class="ttname"><a href="#af7c1921a6f5df0fc560b4ae8a6b9df6e">helios::utils::details::ExtractTypeName</a></div><div class="ttdeci">consteval std::string_view ExtractTypeName() noexcept</div><div class="ttdoc">Extracts the type name of T from the compiler-specific function signature.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00217">type_info.hpp:217</a></div></div>
+<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1FixedString_html"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1FixedString.html">helios::utils::details::FixedString</a></div><div class="ttdoc">A fixed-size string that can be constructed at compile time.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00199">type_info.hpp:199</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00258">258</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00267">267</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>

@@ -16,5 +16,6 @@ var searchData=
   ['loggerconfigof_13',['LoggerConfigOf',['../namespacehelios_1_1log.html#a8142b0365811db503db54adfe84e1837',1,'helios::log']]],
   ['loggernameof_14',['LoggerNameOf',['../namespacehelios_1_1log.html#aa115d4ec2b4d7ffc26d6fb4adb172789',1,'helios::log']]],
   ['logpluginassertionhandler_15',['LogPluginAssertionHandler',['../namespacehelios_1_1details.html#ae8a3b4bbfc9cf2296127d58f340438c1',1,'helios::details']]],
-  ['lowerbound_16',['LowerBound',['../classhelios_1_1container_1_1FlatMap.html#ae9085a919edf5c2700ecbb260591f299',1,'helios::container::FlatMap::LowerBound(const K &amp;key) noexcept'],['../classhelios_1_1container_1_1FlatMap.html#a4f8f98671dd8c721d90d9834c33093f6',1,'helios::container::FlatMap::LowerBound(const K &amp;key) const noexcept']]]
+  ['logsdlerror_16',['LogSdlError',['../namespacehelios_1_1sdl3_1_1anonymous__namespace_02lifetime_8cpp_03.html#a68fc4b7c065fc50cd37d0c197d770205',1,'helios::sdl3::anonymous_namespace{lifetime.cpp}']]],
+  ['lowerbound_17',['LowerBound',['../classhelios_1_1container_1_1FlatMap.html#ae9085a919edf5c2700ecbb260591f299',1,'helios::container::FlatMap::LowerBound(const K &amp;key) noexcept'],['../classhelios_1_1container_1_1FlatMap.html#a4f8f98671dd8c721d90d9834c33093f6',1,'helios::container::FlatMap::LowerBound(const K &amp;key) const noexcept']]]
 ];

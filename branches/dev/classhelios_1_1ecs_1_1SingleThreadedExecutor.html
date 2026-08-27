@@ -214,7 +214,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Single-threaded executor that runs systems sequentially on a single thread. </p>
 <p>Uses an <span class="tt"><a class="el" href="classhelios_1_1async_1_1Executor.html" title="Manages worker threads and executes task graphs using work-stealing scheduling.">async::Executor</a></span> with a <span class="tt"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html" title="Represents a task dependency graph that can be executed by an Executor.">async::TaskGraph</a></span> where all tasks are linearized (each depends on the previous), guaranteeing sequential execution while still using the thread pool infrastructure. </p>
 
-<p class="definition">Definition at line <a class="el" href="single__threaded_8hpp_source.html#l00030">30</a> of file <a class="el" href="single__threaded_8hpp_source.html">single_threaded.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="single__threaded_8hpp_source.html#l00042">42</a> of file <a class="el" href="single__threaded_8hpp_source.html">single_threaded.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aea35ec1717f9a439ac504a238d5a9f8b" name="aea35ec1717f9a439ac504a238d5a9f8b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aea35ec1717f9a439ac504a238d5a9f8b">&#9670;&#160;</a></span>SingleThreadedExecutor() <span class="overload">[1/3]</span></h2>
@@ -247,7 +247,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="single__threaded_8hpp_source.html#l00037">37</a> of file <a class="el" href="single__threaded_8hpp_source.html">single_threaded.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="single__threaded_8hpp_source.html#l00049">49</a> of file <a class="el" href="single__threaded_8hpp_source.html">single_threaded.hpp</a>.</p>
 
 </div>
 </div>
@@ -405,7 +405,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classhelios_1_1ecs_1_1Executor.html#aad62de690a0b1cc2e13d3f4ef2cab313">helios::ecs::Executor</a>.</p>
+<p>Reimplemented from <a class="el" href="classhelios_1_1ecs_1_1Executor.html#a7b52355c489449a9ac3909ac8ee80643">helios::ecs::Executor</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="single__threaded_8cpp_source.html#l00089">89</a> of file <a class="el" href="single__threaded_8cpp_source.html">single_threaded.cpp</a>.</p>
 

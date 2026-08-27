@@ -176,26 +176,40 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('app_8hpp_sourc
 <div class="contents">
 <a href="app_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="application_8hpp.html">helios/app/application.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="app_2include_2helios_2app_2builtin_2executor_8hpp.html">helios/app/builtin/executor.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="frame__count_8hpp.html">helios/app/builtin/frame_count.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="frame__limiter_8hpp.html">helios/app/builtin/frame_limiter.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="time_8hpp.html">helios/app/builtin/time.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="dynamic__plugin_8hpp.html">helios/app/dynamic_plugin.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="app_2include_2helios_2app_2plugin_8hpp.html">helios/app/plugin.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;<a class="code" href="plugin__group_8hpp.html">helios/app/plugin_group.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="runners_8hpp.html">helios/app/runners.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="app_2include_2helios_2app_2scheduler_8hpp.html">helios/app/scheduler.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;<a class="code" href="app_2include_2helios_2app_2schedules_8hpp.html">helios/app/schedules.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;<a class="code" href="sub__app_8hpp.html">helios/app/sub_app.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="compiler_2include_2helios_2config_8hpp.html">helios/config.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#if HELIOS_MODULE_HEADER_IMPORT</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> helios.app;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define HELIOS_MODULE_CONSUMER_SHIM</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef HELIOS_MODULE_CONSUMER_SHIM</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="application_8hpp.html">helios/app/application.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="app__exit_8hpp.html">helios/app/builtin/app_exit.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;<a class="code" href="app_2include_2helios_2app_2builtin_2executor_8hpp.html">helios/app/builtin/executor.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;<a class="code" href="frame__count_8hpp.html">helios/app/builtin/frame_count.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;<a class="code" href="frame__limiter_8hpp.html">helios/app/builtin/frame_limiter.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;<a class="code" href="time_8hpp.html">helios/app/builtin/time.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;<a class="code" href="dynamic__plugin_8hpp.html">helios/app/dynamic_plugin.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;<a class="code" href="frame__order_8hpp.html">helios/app/frame_order.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;<a class="code" href="app_2include_2helios_2app_2plugin_8hpp.html">helios/app/plugin.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;<a class="code" href="plugin__group_8hpp.html">helios/app/plugin_group.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;<a class="code" href="runners_8hpp.html">helios/app/runners.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;<a class="code" href="app_2include_2helios_2app_2scheduler_8hpp.html">helios/app/scheduler.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;<a class="code" href="app_2include_2helios_2app_2schedules_8hpp.html">helios/app/schedules.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &lt;<a class="code" href="sub__app_8hpp.html">helios/app/sub_app.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif  </span><span class="comment">// HELIOS_MODULE_CONSUMER_SHIM</span></div>
 <div class="ttc" id="aapp_2include_2helios_2app_2builtin_2executor_8hpp_html"><div class="ttname"><a href="app_2include_2helios_2app_2builtin_2executor_8hpp.html">executor.hpp</a></div></div>
 <div class="ttc" id="aapp_2include_2helios_2app_2plugin_8hpp_html"><div class="ttname"><a href="app_2include_2helios_2app_2plugin_8hpp.html">plugin.hpp</a></div></div>
 <div class="ttc" id="aapp_2include_2helios_2app_2scheduler_8hpp_html"><div class="ttname"><a href="app_2include_2helios_2app_2scheduler_8hpp.html">scheduler.hpp</a></div></div>
 <div class="ttc" id="aapp_2include_2helios_2app_2schedules_8hpp_html"><div class="ttname"><a href="app_2include_2helios_2app_2schedules_8hpp.html">schedules.hpp</a></div></div>
+<div class="ttc" id="aapp__exit_8hpp_html"><div class="ttname"><a href="app__exit_8hpp.html">app_exit.hpp</a></div></div>
 <div class="ttc" id="aapplication_8hpp_html"><div class="ttname"><a href="application_8hpp.html">application.hpp</a></div></div>
+<div class="ttc" id="acompiler_2include_2helios_2config_8hpp_html"><div class="ttname"><a href="compiler_2include_2helios_2config_8hpp.html">config.hpp</a></div><div class="ttdoc">Dual header / C++20 named-module wrapping macros.</div></div>
 <div class="ttc" id="adynamic__plugin_8hpp_html"><div class="ttname"><a href="dynamic__plugin_8hpp.html">dynamic_plugin.hpp</a></div></div>
 <div class="ttc" id="aframe__count_8hpp_html"><div class="ttname"><a href="frame__count_8hpp.html">frame_count.hpp</a></div></div>
 <div class="ttc" id="aframe__limiter_8hpp_html"><div class="ttname"><a href="frame__limiter_8hpp.html">frame_limiter.hpp</a></div></div>
+<div class="ttc" id="aframe__order_8hpp_html"><div class="ttname"><a href="frame__order_8hpp.html">frame_order.hpp</a></div></div>
 <div class="ttc" id="aplugin__group_8hpp_html"><div class="ttname"><a href="plugin__group_8hpp.html">plugin_group.hpp</a></div></div>
 <div class="ttc" id="arunners_8hpp_html"><div class="ttname"><a href="runners_8hpp.html">runners.hpp</a></div></div>
 <div class="ttc" id="asub__app_8hpp_html"><div class="ttname"><a href="sub__app_8hpp.html">sub_app.hpp</a></div></div>

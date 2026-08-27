@@ -11,7 +11,7 @@ var searchData=
   ['_7earenaallocator_8',['~ArenaAllocator',['../classhelios_1_1mem_1_1ArenaAllocator.html#a2386439ea66f0464a85629c253dff34a',1,'helios::mem::ArenaAllocator']]],
   ['_7easyncmessagequeue_9',['~AsyncMessageQueue',['../classhelios_1_1ecs_1_1AsyncMessageQueue.html#a372659f8758ffd114236316aa9072cb0',1,'helios::ecs::AsyncMessageQueue']]],
   ['_7easyncmessagereader_10',['~AsyncMessageReader',['../classhelios_1_1ecs_1_1AsyncMessageReader.html#a61706b19cd13ae84833db17afc58813f',1,'helios::ecs::AsyncMessageReader']]],
-  ['_7easyncmessagestorage_11',['~AsyncMessageStorage',['../classhelios_1_1ecs_1_1details_1_1AsyncMessageStorage.html#a6bdb6984451b509436e81109dae130fb',1,'helios::ecs::details::AsyncMessageStorage']]],
+  ['_7easyncmessagestorage_11',['~AsyncMessageStorage',['../classhelios_1_1ecs_1_1AsyncMessageStorage.html#ad562ef0ed9c0c65a2570ef0d884fcc03',1,'helios::ecs::AsyncMessageStorage']]],
   ['_7easyncmessagewrapper_12',['~AsyncMessageWrapper',['../classhelios_1_1ecs_1_1AsyncMessageWrapper.html#ac0233d37b366ad44a17c23980c23d63e',1,'helios::ecs::AsyncMessageWrapper']]],
   ['_7easyncmessagewriter_13',['~AsyncMessageWriter',['../classhelios_1_1ecs_1_1AsyncMessageWriter.html#abbc561d206d99f51fd36085b19bbe665',1,'helios::ecs::AsyncMessageWriter']]],
   ['_7easynctask_14',['~AsyncTask',['../classhelios_1_1async_1_1AsyncTask.html#a1907ced6b57c26f8e35770ce5eb00af1',1,'helios::async::AsyncTask']]],

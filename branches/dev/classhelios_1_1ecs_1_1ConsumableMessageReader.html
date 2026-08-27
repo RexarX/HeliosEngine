@@ -319,11 +319,11 @@ class helios::ecs::ConsumableMessageReader&lt; T &gt;</div><p>Type-safe, zero-co
 <div class="line">    wrapper.Consume();</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1ConsumableMessageReader_html_a7d825ffb01a429d1fbf4278792927c8b"><div class="ttname"><a href="#a7d825ffb01a429d1fbf4278792927c8b">helios::ecs::ConsumableMessageReader::ConsumableMessageReader</a></div><div class="ttdeci">constexpr ConsumableMessageReader(const MessageManager &amp;manager, MessageCursor&lt; T &gt; &amp;cursor, ConsumedMessagesRegistry &amp;consumed_registry) noexcept</div><div class="ttdoc">Constructs a ConsumableMessageReader bound to a manager, cursor, and consumed registry.</div><div class="ttdef"><b>Definition</b> <a href="reader_8hpp_source.html#l01222">reader.hpp:1222</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html">helios::ecs::MessageCursor</a></div><div class="ttdoc">Per-reader cursor tracking which messages of type T have been seen.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00020">cursor.hpp:20</a></div></div>
-<div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html_acd31a920117583ae1c6db9fd24f1e57c"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html#acd31a920117583ae1c6db9fd24f1e57c">helios::ecs::MessageCursor::IncludeBacklog</a></div><div class="ttdeci">static constexpr MessageCursor IncludeBacklog() noexcept</div><div class="ttdoc">Creates a cursor that includes all currently retained messages.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00028">cursor.hpp:28</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1ConsumableMessageReader_html_a7d825ffb01a429d1fbf4278792927c8b"><div class="ttname"><a href="#a7d825ffb01a429d1fbf4278792927c8b">helios::ecs::ConsumableMessageReader::ConsumableMessageReader</a></div><div class="ttdeci">constexpr ConsumableMessageReader(const MessageManager &amp;manager, MessageCursor&lt; T &gt; &amp;cursor, ConsumedMessagesRegistry &amp;consumed_registry) noexcept</div><div class="ttdoc">Constructs a ConsumableMessageReader bound to a manager, cursor, and consumed registry.</div><div class="ttdef"><b>Definition</b> <a href="reader_8hpp_source.html#l01233">reader.hpp:1233</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html">helios::ecs::MessageCursor</a></div><div class="ttdoc">Per-reader cursor tracking which messages of type T have been seen.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00030">cursor.hpp:30</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html_acd31a920117583ae1c6db9fd24f1e57c"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html#acd31a920117583ae1c6db9fd24f1e57c">helios::ecs::MessageCursor::IncludeBacklog</a></div><div class="ttdeci">static constexpr MessageCursor IncludeBacklog() noexcept</div><div class="ttdoc">Creates a cursor that includes all currently retained messages.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00038">cursor.hpp:38</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01205">1205</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01216">1216</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a2cd68f7590ca28b9d3dd881c3720daf6" name="a2cd68f7590ca28b9d3dd881c3720daf6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2cd68f7590ca28b9d3dd881c3720daf6">&#9670;&#160;</a></span>const_iterator</h2>
@@ -339,7 +339,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01211">1211</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01222">1222</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -357,7 +357,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01212">1212</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01223">1223</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -375,7 +375,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01210">1210</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01221">1221</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -393,7 +393,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01209">1209</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01220">1220</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -442,7 +442,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01222">1222</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01233">1233</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -556,7 +556,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 <p>Returns an iterator to the first unread message. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator to the beginning of the unread range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01292">1292</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01303">1303</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -588,7 +588,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 <p>Skips all currently retained unread messages for this cursor. </p>
 <p>After <span class="tt"><a class="el" href="#aee2a8f91a0b5d18d774a004339b2c8f3" title="Skips all currently retained unread messages for this cursor.">Clear()</a></span>, <span class="tt"><a class="el" href="#a20ee80f05c52db8a6909817d37970497" title="Checks if there are no unread messages.">Empty()</a></span> is true until new messages are written. Does not mark messages as consumed. </p>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01261">1261</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01272">1272</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -619,7 +619,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 
 <p>Marks all unread messages as consumed by message id. </p>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01315">1315</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01326">1326</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -696,7 +696,7 @@ requires std::predicate&lt;Pred, const T&amp;&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01327">1327</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01338">1338</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -728,7 +728,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 <p>Returns the number of unread retained messages. </p>
 <dl class="section return"><dt>Returns</dt><dd>Unread message count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01276">1276</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01287">1287</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -760,7 +760,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 <p>Checks if there are no unread messages. </p>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> when <span class="tt"><a class="el" href="#a527f35cba1f7e7d46536cc088da8c6ef" title="Returns the number of unread retained messages.">Count()</a></span> is zero </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01284">1284</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01295">1295</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -792,7 +792,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 <p>Returns an iterator past the last unread message. </p>
 <p>Does not advance the cursor. </p><dl class="section return"><dt>Returns</dt><dd>Iterator to the end of the unread range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01301">1301</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01312">1312</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -824,7 +824,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 <p>Returns how many retained messages were dropped before this cursor caught up. </p>
 <dl class="section return"><dt>Returns</dt><dd>Count of ids older than the oldest retained message </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01268">1268</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01279">1279</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
@@ -910,7 +910,7 @@ template&lt;ConsumableMessageTrait T&gt; </div>
 <p>Returns an iterator range over unread messages. </p>
 <p>Equivalent to <span class="tt"><a class="el" href="#abce3ced9481a73b1e9606dc6be5b1231" title="Returns an iterator to the first unread message.">begin()</a></span>; provided for an explicit read API. </p><dl class="section return"><dt>Returns</dt><dd>Iterator to the first unread message </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01241">1241</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reader_8hpp_source.html#l01252">1252</a> of file <a class="el" href="reader_8hpp_source.html">reader.hpp</a>.</p>
 
 </div>
 </div>
