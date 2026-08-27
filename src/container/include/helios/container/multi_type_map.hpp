@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/container/flat_map.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.container;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/type_info.hpp>
 
 #include <algorithm>
@@ -10,7 +17,11 @@
 #include <memory_resource>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/assert.hpp>
+#include <helios/container/flat_map.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::container {
 
 /**
@@ -874,3 +885,4 @@ constexpr auto MultiTypeMap<Storage>::MakeStorage() const -> Storage {
 }
 
 }  // namespace helios::container
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -1,11 +1,22 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
+
+#include <string_view>
+#endif
 #include <helios/input/params.hpp>
 #include <helios/input/resources.hpp>
 
-#include <string_view>
-
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /// @brief Clears per-frame edge state and mouse deltas at the start of a frame.
@@ -93,3 +104,4 @@ struct UpdatePenState {
 };
 
 }  // namespace helios::input
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

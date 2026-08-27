@@ -1,14 +1,15 @@
 #pragma once
 
-#include <helios/app/builtin/app_exit.hpp>
-#include <helios/app/dynamic_plugin.hpp>
-#include <helios/app/plugin.hpp>
-#include <helios/app/plugin_group.hpp>
-#include <helios/app/scheduler.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/app/sub_app.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/async/executor.hpp>
-#include <helios/compiler/compiler.hpp>
 #include <helios/container/flat_map.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/resource/resource.hpp>
@@ -34,7 +35,17 @@
 #include <string_view>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/app/builtin/app_exit.hpp>
+#include <helios/app/dynamic_plugin.hpp>
+#include <helios/app/plugin.hpp>
+#include <helios/app/plugin_group.hpp>
+#include <helios/app/scheduler.hpp>
+#include <helios/app/schedules.hpp>
+#include <helios/app/sub_app.hpp>
+#include <helios/compiler/compiler.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 class FrameOrder;
@@ -678,8 +689,8 @@ private:
   friend class Scheduler;
 };
 
-auto App::AddPlugin(this auto&& self, PluginTypeId id,
-                    std::unique_ptr<Plugin> plugin)
+inline auto App::AddPlugin(this auto&& self, PluginTypeId id,
+                           std::unique_ptr<Plugin> plugin)
     -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(),
                 "Cannot add plugin after app initialization!");
@@ -754,7 +765,7 @@ inline auto App::AddPluginGroups(this auto&& self, Ts&&... plugin_groups)
   return std::forward<decltype(self)>(self);
 }
 
-auto App::AddDynamicPlugin(this auto&& self, DynamicPlugin plugin)
+inline auto App::AddDynamicPlugin(this auto&& self, DynamicPlugin plugin)
     -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(),
                 "Cannot add dynamic plugin after app initialization!");
@@ -835,7 +846,7 @@ inline auto App::AddMessages(this auto&& self)
   return std::forward<decltype(self)>(self);
 }
 
-auto App::SetRunner(this auto&& self, RunnerFn runner) noexcept
+inline auto App::SetRunner(this auto&& self, RunnerFn runner) noexcept
     -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(),
                 "Cannot set runner after app initialization!");
@@ -890,3 +901,4 @@ inline void App::ApplySubAppLabelTraits(SubApp& sub_app, const T& label) {
 }
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

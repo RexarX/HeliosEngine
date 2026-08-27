@@ -1,5 +1,14 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.log;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/type_info.hpp>
 
 #include <concepts>
@@ -7,7 +16,9 @@
 #include <cstdint>
 #include <string_view>
 #include <type_traits>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::log {
 
 /// @brief Log severity levels.
@@ -187,3 +198,4 @@ template <LoggerTrait T>
 }
 
 }  // namespace helios::log
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

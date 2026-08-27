@@ -1,14 +1,24 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <functional>
+#include <optional>
+#endif
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/system/access_policy.hpp>
 #include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
 
-#include <functional>
-#include <optional>
-
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -218,3 +228,4 @@ struct SystemParamTraits<Local<const T>> {
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

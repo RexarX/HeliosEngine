@@ -1,14 +1,24 @@
 #pragma once
 
-#include <helios/profile/common.hpp>
-#include <helios/profile/config.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.profile;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <array>
 #include <cstddef>
 #include <cstdint>
 #include <span>
 #include <string_view>
+#endif
+#include <helios/profile/common.hpp>
+#include <helios/profile/config.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::profile {
 
 /// @brief RAII scope zone that delegates to the active profiling backends.
@@ -68,3 +78,4 @@ private:
 };
 
 }  // namespace helios::profile
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

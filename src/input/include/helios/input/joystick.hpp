@@ -1,6 +1,14 @@
 #pragma once
 
-#include <helios/input/button_input.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/memory/temporary_storage.hpp>
 
 #include <array>
@@ -11,7 +19,10 @@
 #include <ostream>
 #include <string>
 #include <string_view>
+#endif
+#include <helios/input/button_input.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /// @brief Hat-switch bit flags (GLFW / SDL layout). Combinations are valid.
@@ -153,6 +164,7 @@ inline std::ostream& operator<<(std::ostream& os, const Joystick& stick) {
 
 }  // namespace helios::input
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -181,3 +193,4 @@ struct formatter<helios::input::Joystick> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

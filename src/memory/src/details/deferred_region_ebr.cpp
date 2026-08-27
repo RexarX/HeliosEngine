@@ -1,10 +1,9 @@
-#include <details/deferred_region_ebr.hpp>
-
 #include <helios/memory/aligned_alloc.hpp>
-#include <helios/memory/details/profile.hpp>
 
 #include <atomic>
 #include <cstdint>
+#include <details/deferred_region_ebr.hpp>
+#include <helios/memory/details/profile.hpp>
 #include <mutex>
 #include <thread>
 #include <vector>

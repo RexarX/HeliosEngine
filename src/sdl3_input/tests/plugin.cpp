@@ -1,13 +1,14 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/app/application.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/input/input.hpp>
-#include <helios/sdl3/details/lifetime.hpp>
-#include <helios/sdl3/input/details/cursor_cache.hpp>
-#include <helios/sdl3/input/details/input_state.hpp>
+#include <helios/sdl3/input/cursor_cache.hpp>
 #include <helios/sdl3/input/input.hpp>
+#include <helios/sdl3/input/state.hpp>
 #include <helios/sdl3/input/systems/poll_gamepads.hpp>
+#include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/plugin.hpp>
 #include <helios/window/window.hpp>
 
@@ -124,3 +125,4 @@ TEST_SUITE("helios::sdl3::input::InputPlugin") {
     }
   }
 }
+#endif

@@ -1,10 +1,21 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.utils;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <cstddef>
 #include <functional>
 #include <string>
 #include <string_view>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::utils {
 
 /**
@@ -264,3 +275,4 @@ struct StringLess {
 };
 
 }  // namespace helios::utils
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

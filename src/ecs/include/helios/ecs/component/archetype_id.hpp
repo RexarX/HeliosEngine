@@ -1,6 +1,14 @@
 #pragma once
 
-#include <helios/ecs/component/component.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/common_traits.hpp>
 
 #include <algorithm>
@@ -12,7 +20,10 @@
 #include <span>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/ecs/component/component.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -277,6 +288,7 @@ constexpr void ArchetypeId::ComputeHash() noexcept {
 
 }  // namespace helios::ecs
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -288,3 +300,4 @@ struct hash<helios::ecs::ArchetypeId> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.memory;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <atomic>
 #include <concepts>
 #include <cstddef>
@@ -9,7 +16,10 @@
 #include <memory>
 #include <memory_resource>
 #include <utility>
+#endif
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::mem {
 
 template <typename Derived>
@@ -682,3 +692,4 @@ template <typename T, typename... Args>
 }
 
 }  // namespace helios::mem
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

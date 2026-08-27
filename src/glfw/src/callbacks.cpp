@@ -1,15 +1,14 @@
 #include <pch.hpp>
 
-#include <helios/glfw/details/glfw_state.hpp>
+#include <helios/glfw/state.hpp>
 
 #include <helios/ecs/world.hpp>
-#include <helios/glfw/details/glfw_sync.hpp>
+#include <helios/glfw/sync.hpp>
 #include <helios/window/components.hpp>
 #include <helios/window/messages.hpp>
 #include <helios/window/resources.hpp>
 
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
-#include <helios/glfw/details/input_map.hpp>
 #include <helios/input/messages.hpp>
 #endif
 
@@ -19,6 +18,10 @@
 #include <optional>
 #include <string>
 #include <vector>
+
+#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#include <helios/glfw/details/input_map.hpp>
+#endif
 
 namespace helios::glfw {
 

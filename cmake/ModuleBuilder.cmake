@@ -8,6 +8,7 @@ include(Primitives)
 include(TargetUtils)
 include(Sanitizers)
 include(TestUtils)
+include(CppModules)
 
 function(_helios_is_source_file FILENAME OUTPUT_VAR)
   get_filename_component(_ext "${FILENAME}" EXT)
@@ -38,6 +39,7 @@ function(_helios_module_parse_args)
   set(multiValueArgs
       SOURCES
       HEADERS
+      MODULE_SOURCES
       DEPENDS
       OPTIONAL_DEPENDS
       DEPENDENCIES
@@ -56,7 +58,7 @@ function(_helios_module_parse_args)
   foreach(_var
       STATIC SHARED
       NAME VERSION DESCRIPTION DEFAULT PCH FOLDER OUTPUT_NAME TARGET_NAME
-      SOURCES HEADERS DEPENDS OPTIONAL_DEPENDS DEPENDENCIES USES
+      SOURCES HEADERS MODULE_SOURCES DEPENDS OPTIONAL_DEPENDS DEPENDENCIES USES
       COMPILE_DEFINITIONS COMPILE_OPTIONS INCLUDE_DIRECTORIES SUPPRESS_WARNINGS
       TEST_SOURCES TEST_DEPENDENCIES TESTS IMPLEMENTS)
     set(MODULE_${_var} "${MODULE_${_var}}" PARENT_SCOPE)
@@ -64,6 +66,13 @@ function(_helios_module_parse_args)
 endfunction()
 
 function(_helios_module_detect_header_only OUTPUT_VAR)
+  if(HELIOS_ENABLE_CPP_MODULES AND MODULE_MODULE_SOURCES)
+    # Named module interface units produce an object file; INTERFACE libraries
+    # cannot compile FILE_SET CXX_MODULES.
+    set(${OUTPUT_VAR} FALSE PARENT_SCOPE)
+    return()
+  endif()
+
   _helios_module_has_source_files("${MODULE_SOURCES}" _module_has_sources)
   if(_module_has_sources)
     set(${OUTPUT_VAR} FALSE PARENT_SCOPE)
@@ -189,6 +198,14 @@ function(_helios_module_create_target MODULE_HEADER_ONLY OUT_TARGET OUT_SCOPE OU
     set(_default_dep_visibility PUBLIC)
   endif()
 
+  if(HELIOS_ENABLE_CPP_MODULES AND MODULE_MODULE_SOURCES AND NOT MODULE_HEADER_ONLY
+      AND NOT _library_type)
+    _helios_module_has_source_files("${MODULE_SOURCES}" _has_cxx)
+    if(NOT _has_cxx)
+      set(_library_type STATIC)
+    endif()
+  endif()
+
   if(MODULE_HEADER_ONLY)
     add_library(${MODULE_TARGET_NAME} INTERFACE)
   elseif(_library_type)
@@ -271,12 +288,24 @@ function(_helios_module_apply_conventions TARGET MODULE_HEADER_ONLY)
     endif()
     if(EXISTS "${_resolved_pch}")
       helios_target_add_pch(${TARGET} "${_resolved_pch}")
+      if(HELIOS_ENABLE_CPP_MODULES AND MODULE_MODULE_SOURCES)
+        set(_pch_skip)
+        foreach(_ms IN LISTS MODULE_MODULE_SOURCES)
+          if(IS_ABSOLUTE "${_ms}")
+            list(APPEND _pch_skip "${_ms}")
+          else()
+            list(APPEND _pch_skip "${CMAKE_CURRENT_SOURCE_DIR}/${_ms}")
+          endif()
+        endforeach()
+        set_source_files_properties(${_pch_skip} PROPERTIES
+            SKIP_PRECOMPILE_HEADERS ON)
+      endif()
     else()
       message(WARNING "helios_module(${MODULE_NAME}): PCH file not found: ${_resolved_pch}")
     endif()
   endif()
 
-  if(HELIOS_ENABLE_UNITY_BUILD)
+  if(HELIOS_ENABLE_UNITY_BUILD AND NOT HELIOS_ENABLE_CPP_MODULES)
     set(_unity_excludes)
     if(_resolved_pch)
       list(APPEND _unity_excludes "${_resolved_pch}")
@@ -457,13 +486,24 @@ function(_helios_module_install TARGET)
     return()
   endif()
 
-  install(TARGETS ${TARGET}
-      EXPORT HeliosTargets
-      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-      LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-      RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-      INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-  )
+  if(HELIOS_ENABLE_CPP_MODULES)
+    install(TARGETS ${TARGET}
+        EXPORT HeliosTargets
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILE_SET CXX_MODULES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/helios/modules
+    )
+  else()
+    install(TARGETS ${TARGET}
+        EXPORT HeliosTargets
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    )
+  endif()
   install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
       DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
       FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h"
@@ -598,6 +638,7 @@ endfunction()
         [DEFAULT <ON|OFF>]
         [SOURCES <files...>]
         [HEADERS <files...>]
+        [MODULE_SOURCES <files...>]
         [DEPENDS <visibility> <module>...]
         [OPTIONAL_DEPENDS <visibility> <module>...]
         [USES <dep-file> [visibility] <target>...]
@@ -621,9 +662,10 @@ endfunction()
     Example:
         helios_module(
             NAME core
+            MODULE_SOURCES modules/helios.core.cppm
             DEPENDS PUBLIC compiler PUBLIC platform PUBLIC utils
             USES stduuid PUBLIC helios::lib::stduuid::stduuid
-            TEST_SOURCES tests/main.cpp
+            TEST_SOURCES tests/main.cpp tests/module_import.cpp
         )
 ]]
 function(_helios_module_impl)
@@ -647,6 +689,34 @@ function(_helios_module_impl)
       CACHE INTERNAL "Module ${MODULE_NAME} is header-only")
 
   _helios_module_create_target(${_module_header_only} _target _target_scope _default_dep_visibility)
+
+  if(HELIOS_ENABLE_CPP_MODULES)
+    if(NOT MODULE_MODULE_SOURCES)
+      message(FATAL_ERROR
+          "helios_module(${MODULE_NAME}): HELIOS_ENABLE_CPP_MODULES requires "
+          "MODULE_SOURCES (named-module interface units, e.g. "
+          "modules/helios.${MODULE_NAME}.cppm)")
+    endif()
+    helios_target_enable_cxx_modules(${_target} ${MODULE_MODULE_SOURCES})
+    string(REPLACE "_" "." _cxx_mod "${MODULE_NAME}")
+    set_target_properties(${_target} PROPERTIES
+        HELIOS_CXX_MODULE_NAME "helios.${_cxx_mod}")
+    # Implementation .cpp stay classic TUs: parse headers instead of `import`.
+    set(_impl_sources)
+    foreach(_src IN LISTS MODULE_SOURCES)
+      _helios_is_source_file("${_src}" _is_cxx)
+      if(_is_cxx)
+        list(APPEND _impl_sources "${_src}")
+      endif()
+    endforeach()
+    if(_impl_sources)
+      set_property(SOURCE ${_impl_sources} APPEND PROPERTY
+          COMPILE_DEFINITIONS HELIOS_MODULE_IMPLEMENTATION)
+      # Classic TUs: do not scan / inject `import` of this target's BMI.
+      set_property(SOURCE ${_impl_sources} PROPERTY CXX_SCAN_FOR_MODULES OFF)
+    endif()
+  endif()
+
   _helios_module_apply_conventions(${_target} ${_module_header_only})
   _helios_module_link_depends(${_target} ${_default_dep_visibility})
   _helios_module_apply_uses(${_target} ${_default_dep_visibility})
@@ -675,6 +745,7 @@ endfunction()
         [DEFAULT <ON|OFF>]
         [SOURCES <files...>]
         [HEADERS <files...>]
+        [MODULE_SOURCES <files...>]
         [DEPENDS <visibility> <module>...]
         [OPTIONAL_DEPENDS <visibility> <module>...]
         [USES <dep-file> [visibility] <target>...]
@@ -697,9 +768,10 @@ endfunction()
     Example:
         helios_module(
             NAME app
+            MODULE_SOURCES modules/helios.app.cppm
             DEPENDS PUBLIC async PUBLIC core PUBLIC ecs PUBLIC log PUBLIC utils
             OPTIONAL_DEPENDS PUBLIC profile
-            TEST_SOURCES tests/main.cpp
+            TEST_SOURCES tests/main.cpp tests/module_import.cpp
         )
 ]]
 macro(helios_module)

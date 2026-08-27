@@ -17,16 +17,21 @@ helios_module(
     SOURCES
         src/plugin.cpp
 
+    MODULE_SOURCES
+        modules/helios.window.cppm
+
     PCH src/pch.hpp
 
     DEPENDS
         PUBLIC app
+        PUBLIC compiler
         PUBLIC ecs
         PUBLIC memory
 
     TEST_SOURCES
         tests/components.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/native_handle.cpp
         tests/plugin.cpp
         tests/properties.cpp

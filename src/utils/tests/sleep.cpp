@@ -1,8 +1,8 @@
+#include <chrono>
+
 #include <doctest/doctest.h>
 
 #include <helios/utils/sleep.hpp>
-
-#include <chrono>
 
 using namespace helios::utils;
 using namespace std::chrono_literals;

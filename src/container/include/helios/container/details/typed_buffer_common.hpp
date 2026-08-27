@@ -1,5 +1,6 @@
 #pragma once
 
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/type_info.hpp>
 
 #include <concepts>
@@ -7,7 +8,9 @@
 #include <cstring>
 #include <memory>
 #include <type_traits>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::container {
 
 /**

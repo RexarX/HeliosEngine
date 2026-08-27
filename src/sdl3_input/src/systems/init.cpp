@@ -3,10 +3,12 @@
 #include <helios/sdl3/input/systems/init.hpp>
 
 #include <helios/ecs/resource/params.hpp>
-#include <helios/sdl3/details/lifetime.hpp>
-#include <helios/sdl3/input/details/event_handlers.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
+#include <helios/sdl3/input/event_handlers.hpp>
+#include <helios/sdl3/input/state.hpp>
+#include <helios/sdl3/lifetime.hpp>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_init.h>
 
 namespace helios::sdl3::input {
 

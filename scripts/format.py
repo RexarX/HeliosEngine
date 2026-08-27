@@ -129,7 +129,7 @@ def main() -> int:
         return 1
 
     # Define file extensions to process
-    extensions = ["cpp", "h", "hpp", "inl"]
+    extensions = ["cpp", "h", "hpp", "inl", "cppm"]
 
     # Define directories to exclude
     exclude_dirs = [project_root / "third-party"]

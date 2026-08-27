@@ -1,11 +1,21 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <cstddef>
+#endif
 #include <helios/ecs/message/id.hpp>
 #include <helios/ecs/message/manager.hpp>
 #include <helios/ecs/message/message.hpp>
 
-#include <cstddef>
-
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -80,3 +90,4 @@ struct MessageCursor {
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

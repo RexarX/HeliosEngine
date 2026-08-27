@@ -1,15 +1,25 @@
 #pragma once
 
-#include <helios/ecs/message/async_queue.hpp>
-#include <helios/ecs/message/manager.hpp>
-#include <helios/ecs/message/message.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <concepts>
 #include <functional>
 #include <iterator>
 #include <limits>
 #include <utility>
+#endif
+#include <helios/ecs/message/async_queue.hpp>
+#include <helios/ecs/message/manager.hpp>
+#include <helios/ecs/message/message.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -129,3 +139,4 @@ inline void AsyncMessageReader<T>::ForEach(const Action& action) const {
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

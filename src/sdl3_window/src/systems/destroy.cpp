@@ -9,15 +9,16 @@
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/ecs/world_view.hpp>
-#include <helios/sdl3/window/details/native_state.hpp>
-#include <helios/sdl3/window/details/window_map.hpp>
+#include <helios/sdl3/window/state.hpp>
+#include <helios/sdl3/window/window_map.hpp>
 #include <helios/window/components.hpp>
 #include <helios/window/messages.hpp>
 #include <helios/window/native_handle.hpp>
 #include <helios/window/params.hpp>
 #include <helios/window/resources.hpp>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_keyboard.h>
+#include <SDL3/SDL_video.h>
 
 namespace helios::sdl3::window {
 

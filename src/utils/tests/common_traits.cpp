@@ -1,10 +1,10 @@
-#include <doctest/doctest.h>
-
-#include <helios/utils/common_traits.hpp>
-
 #include <chrono>
 #include <cstdint>
 #include <string>
+
+#include <doctest/doctest.h>
+
+#include <helios/utils/common_traits.hpp>
 
 namespace {
 

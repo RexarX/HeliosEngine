@@ -2,15 +2,15 @@
 
 #include <helios/ecs/component/manager.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/ecs/component/archetype.hpp>
 #include <helios/ecs/component/archetype_id.hpp>
 #include <helios/ecs/component/component.hpp>
-#include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/entity/entity.hpp>
 
 #include <cstddef>
 #include <functional>
+#include <helios/assert.hpp>
+#include <helios/ecs/details/profile.hpp>
 #include <memory_resource>
 
 namespace helios::ecs {

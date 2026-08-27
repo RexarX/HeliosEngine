@@ -6,29 +6,32 @@ helios_module(
     IMPLEMENTS input
 
     HEADERS
-        include/helios/sdl3/input/details/cursor_cache.hpp
-        include/helios/sdl3/input/details/event_handlers.hpp
-        include/helios/sdl3/input/details/input_map.hpp
-        include/helios/sdl3/input/details/input_state.hpp
         include/helios/sdl3/input/systems/apply_cursors.hpp
         include/helios/sdl3/input/systems/apply_raw_mouse.hpp
         include/helios/sdl3/input/systems/init.hpp
         include/helios/sdl3/input/systems/poll_gamepads.hpp
+        include/helios/sdl3/input/cursor_cache.hpp
+        include/helios/sdl3/input/event_handlers.hpp
         include/helios/sdl3/input/input.hpp
         include/helios/sdl3/input/plugin.hpp
+        include/helios/sdl3/input/state.hpp
 
     SOURCES
-        src/details/event_handlers.cpp
         src/systems/apply_cursors.cpp
         src/systems/apply_raw_mouse.cpp
         src/systems/init.cpp
         src/systems/poll_gamepads.cpp
+        src/event_handlers.cpp
         src/plugin.cpp
+
+    MODULE_SOURCES
+        modules/helios.sdl3.input.cppm
 
     PCH src/pch.hpp
 
     DEPENDS
         PUBLIC app
+        PUBLIC compiler
         PUBLIC ecs
         PUBLIC log
         PUBLIC window
@@ -46,6 +49,7 @@ helios_module(
         tests/event_handlers.cpp
         tests/input_map.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/plugin.cpp
         tests/systems.cpp
 )

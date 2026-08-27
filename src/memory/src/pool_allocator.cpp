@@ -2,16 +2,16 @@
 
 #include <helios/memory/pool_allocator.hpp>
 
-#include <details/accumulate_peak.hpp>
-#include <helios/assert.hpp>
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
-#include <helios/memory/details/profile.hpp>
 
 #include <algorithm>
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
+#include <details/accumulate_peak.hpp>
+#include <helios/assert.hpp>
+#include <helios/memory/details/profile.hpp>
 #include <memory>
 #include <utility>
 

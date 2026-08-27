@@ -8,7 +8,7 @@
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/glfw/details/glfw_state.hpp>
-#include <helios/glfw/details/input_map.hpp>
+#include <helios/glfw/map.hpp>
 #include <helios/input/components.hpp>
 #include <helios/input/joystick.hpp>
 #include <helios/input/messages.hpp>
@@ -25,6 +25,7 @@
 #include <fstream>
 #include <iterator>
 #include <utility>
+#endif
 
 namespace helios::glfw {
 
@@ -421,5 +422,3 @@ void ApplyRawMouseMotion::operator()(
 }
 
 }  // namespace helios::glfw
-
-#endif  // HELIOS_MODULE_INPUT_AVAILABLE

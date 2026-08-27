@@ -6,36 +6,41 @@ helios_module(
     IMPLEMENTS window
 
     HEADERS
-        include/helios/sdl3/window/details/native_state.hpp
-        include/helios/sdl3/window/details/native_handle.hpp
-        include/helios/sdl3/window/details/event_handlers.hpp
-        include/helios/sdl3/window/details/sdl_sync.hpp
-        include/helios/sdl3/window/details/window_map.hpp
+
         include/helios/sdl3/window/systems/apply.hpp
         include/helios/sdl3/window/systems/create.hpp
         include/helios/sdl3/window/systems/destroy.hpp
         include/helios/sdl3/window/systems/init.hpp
         include/helios/sdl3/window/systems/poll.hpp
         include/helios/sdl3/window/systems/shutdown.hpp
-        include/helios/sdl3/window/window.hpp
+        include/helios/sdl3/window/event_handlers.hpp
+        include/helios/sdl3/window/native_handle.hpp
         include/helios/sdl3/window/plugin.hpp
+        include/helios/sdl3/window/state.hpp
+        include/helios/sdl3/window/sync.hpp
+        include/helios/sdl3/window/window.hpp
+        include/helios/sdl3/window/window_map.hpp
 
     SOURCES
-        src/details/event_handlers.cpp
-        src/details/sdl_sync.cpp
-        src/details/native_handle.cpp
         src/systems/apply.cpp
         src/systems/create.cpp
         src/systems/destroy.cpp
         src/systems/init.cpp
         src/systems/poll.cpp
         src/systems/shutdown.cpp
+        src/event_handlers.cpp
+        src/native_handle.cpp
         src/plugin.cpp
+        src/sync.cpp
+
+    MODULE_SOURCES
+        modules/helios.sdl3.window.cppm
 
     PCH src/pch.hpp
 
     DEPENDS
         PUBLIC app
+        PUBLIC compiler
         PUBLIC ecs
         PUBLIC memory
         PUBLIC log
@@ -52,10 +57,11 @@ helios_module(
         tests/available.hpp
         tests/event_handlers.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/native_handle.cpp
         tests/native_windows.cpp
         tests/plugin.cpp
-        tests/sdl_sync.cpp
+        tests/sync.cpp
         tests/systems.cpp
         tests/window_map.cpp
 )

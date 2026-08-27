@@ -1,3 +1,4 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/input/gamepad.hpp>
@@ -6,7 +7,12 @@
 #include <helios/input/pen.hpp>
 #include <helios/sdl3/input/details/input_map.hpp>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_gamepad.h>
+#include <SDL3/SDL_joystick.h>
+#include <SDL3/SDL_keycode.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3/SDL_pen.h>
+#include <SDL3/SDL_scancode.h>
 
 #include <cstdint>
 #include <optional>
@@ -239,3 +245,4 @@ TEST_SUITE("helios::sdl3::input::PenDeviceTypeFromSdl") {
     }
   }
 }
+#endif

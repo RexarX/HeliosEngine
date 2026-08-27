@@ -1,5 +1,14 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.utils;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <algorithm>
 #include <concepts>
 #include <cstddef>
@@ -13,10 +22,9 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#endif
 
-namespace helios::utils {
-
-namespace details {
+namespace helios::utils::details {
 
 /// @brief Checks if the iterator yields a genuine reference (lvalue ref), not a
 /// proxy/value.
@@ -129,7 +137,10 @@ concept CallableOrApplicableWithReturn =
     CallableOrApplicable<Func, Args...> &&
     std::convertible_to<call_or_apply_result_t<Func, Args...>, ReturnType>;
 
-}  // namespace details
+}  // namespace helios::utils::details
+
+HELIOS_MODULE_EXPORT
+namespace helios::utils {
 
 template <typename Derived>
 class FunctionalAdapterBase;
@@ -4711,3 +4722,4 @@ constexpr bool FunctionalAdapterBase<Derived>::All(
 }
 
 }  // namespace helios::utils
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

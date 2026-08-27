@@ -5,14 +5,20 @@
 #include <helios/ecs/resource/params.hpp>
 #include <helios/input/gamepad.hpp>
 #include <helios/input/joystick.hpp>
+#include <helios/input/params.hpp>
+#include <helios/input/resources.hpp>
 #include <helios/log/log.hpp>
-#include <helios/sdl3/input/details/input_map.hpp>
+#include <helios/sdl3/input/state.hpp>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_gamepad.h>
+#include <SDL3/SDL_guid.h>
+#include <SDL3/SDL_joystick.h>
+#include <SDL3/SDL_sensor.h>
 
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
+#include <helios/sdl3/input/details/input_map.hpp>
 #include <optional>
 #include <utility>
 

@@ -1,8 +1,9 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/ecs/world.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
-#include <helios/glfw/details/glfw_sync.hpp>
+#include <helios/glfw/state.hpp>
+#include <helios/glfw/sync.hpp>
 #include <helios/window/components.hpp>
 #include <helios/window/properties.hpp>
 #include <helios/window/resources.hpp>
@@ -141,3 +142,4 @@ TEST_SUITE("helios::glfw::ResolveCreationSize") {
     }
   }
 }
+#endif

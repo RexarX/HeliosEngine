@@ -1,12 +1,14 @@
 #pragma once
 
-#include <helios/input/axis.hpp>
-#include <helios/input/button_input.hpp>
-#include <helios/input/gamepad.hpp>
-#include <helios/input/joystick.hpp>
-#include <helios/input/keyboard.hpp>
-#include <helios/input/mouse.hpp>
-#include <helios/input/pen.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/memory/temporary_storage.hpp>
 
 #include <array>
@@ -19,7 +21,16 @@
 #include <string_view>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/input/axis.hpp>
+#include <helios/input/button_input.hpp>
+#include <helios/input/gamepad.hpp>
+#include <helios/input/joystick.hpp>
+#include <helios/input/keyboard.hpp>
+#include <helios/input/mouse.hpp>
+#include <helios/input/pen.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /// @brief Global input behavior settings.
@@ -686,6 +697,7 @@ inline std::ostream& operator<<(std::ostream& os,
 
 }  // namespace helios::input
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -771,3 +783,4 @@ struct formatter<helios::input::GamepadMappings> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

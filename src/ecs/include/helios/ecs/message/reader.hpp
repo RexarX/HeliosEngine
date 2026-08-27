@@ -1,12 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/ecs/message/consumed_registry.hpp>
-#include <helios/ecs/message/cursor.hpp>
-#include <helios/ecs/message/id.hpp>
-#include <helios/ecs/message/manager.hpp>
-#include <helios/ecs/message/message.hpp>
-#include <helios/ecs/message/wrapper.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/functional_adapters.hpp>
 
 #include <algorithm>
@@ -23,10 +25,16 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
+#include <helios/ecs/message/consumed_registry.hpp>
+#include <helios/ecs/message/cursor.hpp>
+#include <helios/ecs/message/id.hpp>
+#include <helios/ecs/message/manager.hpp>
+#include <helios/ecs/message/message.hpp>
+#include <helios/ecs/message/wrapper.hpp>
 
-namespace helios::ecs {
-
-namespace details {
+namespace helios::ecs::details {
 
 /**
  * @brief Returns the index of the first id >= `last_message_count`.
@@ -43,7 +51,10 @@ template <MessageTrait T>
   return static_cast<size_t>(it - ids.begin());
 }
 
-}  // namespace details
+}  // namespace helios::ecs::details
+
+HELIOS_MODULE_EXPORT
+namespace helios::ecs {
 
 /**
  * @brief Bidirectional iterator that yields `MessageWrapper<T>` for unread
@@ -1360,3 +1371,4 @@ constexpr auto ConsumableMessageReader<T>::MakeIterator(
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

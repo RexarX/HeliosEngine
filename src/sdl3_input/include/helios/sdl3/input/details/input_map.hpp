@@ -1,14 +1,21 @@
 #pragma once
 
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/input/gamepad.hpp>
 #include <helios/input/keyboard.hpp>
 #include <helios/input/mouse.hpp>
 #include <helios/input/pen.hpp>
 
+#include <SDL3/SDL_gamepad.h>
+#include <SDL3/SDL_joystick.h>
+#include <SDL3/SDL_keycode.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3/SDL_pen.h>
 #include <SDL3/SDL_scancode.h>
 
 #include <optional>
 #include <utility>
+#endif
 
 namespace helios::sdl3::input {
 

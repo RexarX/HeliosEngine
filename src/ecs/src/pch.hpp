@@ -23,6 +23,7 @@
 #include <ostream>
 #include <queue>
 #include <ranges>
+#include <source_location>
 #include <span>
 #include <string>
 #include <string_view>
@@ -33,3 +34,14 @@
 #include <vector>
 
 #include <concurrentqueue/moodycamel/concurrentqueue.h>
+
+#include <taskflow/algorithm/for_each.hpp>
+#include <taskflow/algorithm/reduce.hpp>
+#include <taskflow/algorithm/sort.hpp>
+#include <taskflow/algorithm/transform.hpp>
+#include <taskflow/core/async_task.hpp>
+#include <taskflow/core/executor.hpp>
+#include <taskflow/core/flow_builder.hpp>
+#include <taskflow/core/graph.hpp>
+#include <taskflow/core/task.hpp>
+#include <taskflow/core/taskflow.hpp>

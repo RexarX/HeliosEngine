@@ -50,9 +50,13 @@ helios_module(
         src/temporary_storage.cpp
         src/treiber_stack.cpp
 
+    MODULE_SOURCES
+        modules/helios.memory.cppm
+
     PCH src/pch.hpp
 
     DEPENDS
+        PUBLIC compiler
         PUBLIC core
         PUBLIC platform
 
@@ -79,6 +83,7 @@ helios_module(
         tests/frame_allocator.cpp
         tests/free_list_allocator.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/pool_allocator.cpp
         tests/ref_counted.cpp
         tests/stack_allocator.cpp
@@ -118,6 +123,8 @@ if(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC)
   if(HELIOS_MEMORY_USE_MIMALLOC)
     target_link_libraries(helios_memory_global_alloc PRIVATE helios::lib::mimalloc::static)
   endif()
+
+  helios_target_consume_cxx_modules(helios_memory_global_alloc)
 
   # Inject global operator new/delete for non-test consumers only. Test
   # executables use the system allocator to avoid mimalloc/LTO static-init

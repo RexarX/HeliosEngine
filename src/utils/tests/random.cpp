@@ -1,11 +1,12 @@
+#include <algorithm>
+#include <cmath>
+#include <random>
+#include <set>
+#include <vector>
+
 #include <doctest/doctest.h>
 
 #include <helios/utils/random.hpp>
-
-#include <algorithm>
-#include <cmath>
-#include <set>
-#include <vector>
 
 using namespace helios::utils;
 

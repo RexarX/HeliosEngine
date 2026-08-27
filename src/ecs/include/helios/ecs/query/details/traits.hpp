@@ -1,10 +1,11 @@
 #pragma once
 
-#include <helios/ecs/component/component.hpp>
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/common_traits.hpp>
 
-#include <concepts>
 #include <type_traits>
+#endif
+#include <helios/ecs/component/component.hpp>
 
 namespace helios::ecs {
 

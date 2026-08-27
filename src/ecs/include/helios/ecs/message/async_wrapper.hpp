@@ -1,11 +1,21 @@
 #pragma once
 
-#include <helios/ecs/message/message.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <string_view>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/ecs/message/message.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -109,3 +119,4 @@ private:
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

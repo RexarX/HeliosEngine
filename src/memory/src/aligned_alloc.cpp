@@ -2,9 +2,7 @@
 
 #include <helios/memory/aligned_alloc.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/memory/common.hpp>
-#include <helios/memory/details/profile.hpp>
 
 #include <cstddef>
 #include <cstdlib>
@@ -13,6 +11,8 @@
 #include <mimalloc.h>
 #define HELIOS_ALIGNED_ALLOC_USE_MIMALLOC
 #endif
+#include <helios/assert.hpp>
+#include <helios/memory/details/profile.hpp>
 
 namespace helios::mem {
 

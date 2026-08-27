@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/container/details/typed_buffer_common.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.container;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/type_info.hpp>
 
 #include <concepts>
@@ -14,7 +21,11 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
+#include <helios/container/details/typed_buffer_common.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::container {
 
 /**
@@ -555,3 +566,4 @@ constexpr void TypedBuffer::Destroy() noexcept {
 }
 
 }  // namespace helios::container
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

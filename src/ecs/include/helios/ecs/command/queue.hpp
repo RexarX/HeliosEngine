@@ -1,14 +1,25 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/container/callable_buffer_array.hpp>
-#include <helios/ecs/command/command.hpp>
-#include <helios/ecs/details/profile.hpp>
 
 #include <cstddef>
 #include <memory_resource>
 #include <ranges>
 #include <type_traits>
+#endif
+#include <helios/ecs/command/command.hpp>
+#include <helios/ecs/details/profile.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class World;
@@ -149,3 +160,4 @@ inline void CmdQueue::ExecuteAll(World& world) {
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

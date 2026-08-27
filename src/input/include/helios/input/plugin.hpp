@@ -1,10 +1,21 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/app/plugin.hpp>
-#include <helios/input/resources.hpp>
 
 #include <string_view>
+#endif
+#include <helios/input/resources.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /// @brief Registers input ECS resources, messages, and update systems.
@@ -27,3 +38,4 @@ struct Plugin final : public app::Plugin {
 };
 
 }  // namespace helios::input
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

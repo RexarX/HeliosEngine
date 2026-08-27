@@ -1,16 +1,26 @@
 #pragma once
 
-#include <helios/ecs/message/id.hpp>
-#include <helios/ecs/message/manager.hpp>
-#include <helios/ecs/message/message.hpp>
-#include <helios/ecs/message/queue.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <concepts>
 #include <functional>
 #include <ranges>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/ecs/message/id.hpp>
+#include <helios/ecs/message/manager.hpp>
+#include <helios/ecs/message/message.hpp>
+#include <helios/ecs/message/queue.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -153,3 +163,4 @@ template <MessageTrait T>
 using MessageWriter = BasicMessageWriter<T>;
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

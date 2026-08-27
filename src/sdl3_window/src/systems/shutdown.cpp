@@ -3,14 +3,16 @@
 #include <helios/sdl3/window/systems/shutdown.hpp>
 
 #include <helios/ecs/resource/params.hpp>
-#include <helios/sdl3/details/context.hpp>
-#include <helios/sdl3/details/lifetime.hpp>
-#include <helios/sdl3/window/details/native_state.hpp>
-#include <helios/sdl3/window/details/window_map.hpp>
+#include <helios/sdl3/context.hpp>
+#include <helios/sdl3/lifetime.hpp>
+#include <helios/sdl3/window/state.hpp>
+#include <helios/sdl3/window/window_map.hpp>
 #include <helios/window/components.hpp>
 #include <helios/window/native_handle.hpp>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_init.h>
+#include <SDL3/SDL_keyboard.h>
+#include <SDL3/SDL_video.h>
 
 namespace helios::sdl3::window {
 

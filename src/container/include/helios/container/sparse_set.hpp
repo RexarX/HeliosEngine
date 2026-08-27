@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.container;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <algorithm>
 #include <concepts>
 #include <cstddef>
@@ -11,7 +18,10 @@
 #include <string_view>
 #include <type_traits>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::container {
 
 /**
@@ -773,3 +783,4 @@ constexpr auto SparseSet<T, IndexType>::GetDenseIndex(
 }
 
 }  // namespace helios::container
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

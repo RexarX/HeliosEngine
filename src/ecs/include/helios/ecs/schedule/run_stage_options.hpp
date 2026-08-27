@@ -1,5 +1,15 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /// @brief Options controlling how `Scheduler::RunStage` executes stage members.
@@ -13,3 +23,4 @@ struct RunStageOptions {
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -1,9 +1,20 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.sdl3;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/app/plugin.hpp>
 
 #include <string_view>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::sdl3 {
 
 /// @brief Named set for `Init` on `app::kMainStartup`.
@@ -37,3 +48,4 @@ struct Plugin final : public app::Plugin {
 };
 
 }  // namespace helios::sdl3
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

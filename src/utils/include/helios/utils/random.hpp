@@ -1,14 +1,24 @@
 #pragma once
 
-#include <helios/utils/common_traits.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.utils;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <concepts>
 #include <cstdint>
 #include <functional>
 #include <limits>
 #include <random>
 #include <type_traits>
+#endif
+#include <helios/utils/common_traits.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::utils {
 
 /**
@@ -337,3 +347,4 @@ template <utils::ArithmeticTrait T, utils::ArithmeticTrait U>
 }
 
 }  // namespace helios::utils
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

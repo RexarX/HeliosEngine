@@ -1,14 +1,19 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.sdl3.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
 #include <helios/input/gamepad.hpp>
 #include <helios/input/joystick.hpp>
 #include <helios/input/params.hpp>
 #include <helios/input/resources.hpp>
-#include <helios/sdl3/input/details/input_state.hpp>
-
-#include <SDL3/SDL_gamepad.h>
-#include <SDL3/SDL_joystick.h>
 
 #include <array>
 #include <cstddef>
@@ -16,7 +21,13 @@
 #include <string>
 #include <string_view>
 #include <vector>
+#endif
+#include <helios/sdl3/input/state.hpp>
 
+HELIOS_MODULE_EXPORT struct SDL_Gamepad;
+HELIOS_MODULE_EXPORT struct SDL_Joystick;
+
+HELIOS_MODULE_EXPORT
 namespace helios::sdl3::input {
 
 /// @brief Cached previous SDL device slot state for edge detection.
@@ -93,3 +104,4 @@ struct ApplyGamepadOutputs {
 };
 
 }  // namespace helios::sdl3::input
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

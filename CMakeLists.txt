@@ -5,6 +5,20 @@ if(CMAKE_VERSION VERSION_GREATER_EQUAL "4.0")
   set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING "Minimum CMake policy version" FORCE)
 endif()
 
+option(HELIOS_ENABLE_CPP_MODULES
+    "Build Helios engine modules as C++20 named modules (import helios / import helios.*)"
+    OFF)
+
+if(HELIOS_ENABLE_CPP_MODULES AND CMAKE_VERSION VERSION_LESS "3.28")
+  message(FATAL_ERROR
+      "HELIOS_ENABLE_CPP_MODULES requires CMake 3.28+ (FILE_SET CXX_MODULES). "
+      "Current version: ${CMAKE_VERSION}")
+endif()
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(CppModules)
+helios_cpp_modules_set_experimental_gate()
+
 project(HeliosEngine
     VERSION 0.1.0
     DESCRIPTION "ECS based data-oriented game engine framework"
@@ -81,7 +95,6 @@ set(HELIOS_EXTRA_MODULE_DIRS "" CACHE STRING
     "Semicolon-separated list of extra directories to scan for Helios modules")
 
 # Include utilities
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/helpers")
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
@@ -90,7 +103,9 @@ helios_configure_clang_archiver()
 include(Linker)
 helios_configure_linker()
 
-if(HELIOS_ENABLE_UNITY_BUILD)
+helios_cpp_modules_configure()
+
+if(HELIOS_ENABLE_UNITY_BUILD AND NOT HELIOS_ENABLE_CPP_MODULES)
   set(CMAKE_UNITY_BUILD ON)
   set(CMAKE_UNITY_BUILD_BATCH_SIZE 16 CACHE STRING "Unity build batch size")
 endif()
@@ -198,6 +213,7 @@ helios_validate_module_backend_implementations()
 
 # Pass 2: Build enabled modules in topological order
 helios_build_discovered_modules()
+helios_add_umbrella_cxx_module()
 
 # Print summaries
 helios_print_modules()

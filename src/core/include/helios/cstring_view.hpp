@@ -1,7 +1,11 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
 
+#if defined(HELIOS_ENABLE_CPP_MODULES) && defined(HELIOS_BUILDING_MODULE) && \
+    !defined(HELIOS_BUILDING_MODULE_CORE)
+#else
+#ifndef HELIOS_BUILDING_MODULE
 #include <algorithm>
 #include <compare>
 #include <cstddef>
@@ -11,7 +15,10 @@
 #include <iterator>
 #include <string>
 #include <string_view>
+#endif
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios {
 
 /**
@@ -19,7 +26,7 @@ namespace helios {
  * @tparam CharT Character type
  * @tparam Traits Character traits type
  */
-template <typename CharT, typename Traits = std::char_traits<CharT>>
+template <typename CharT, typename Traits = std::char_traits<CharT> >
 class BasicCStringView {
 public:
   using traits_type = Traits;
@@ -619,6 +626,7 @@ inline auto operator<<(std::basic_ostream<CharT, Traits>& os,
 
 }  // namespace helios
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 /**
@@ -627,10 +635,10 @@ namespace std {
  * @tparam Traits Character traits
  */
 template <typename CharT, typename Traits>
-struct hash<helios::BasicCStringView<CharT, Traits>> {
+struct hash<helios::BasicCStringView<CharT, Traits> > {
   [[nodiscard]] constexpr size_t operator()(
       const helios::BasicCStringView<CharT, Traits>& str) const noexcept {
-    return hash<basic_string_view<CharT, Traits>>{}(str.View());
+    return hash<basic_string_view<CharT, Traits> >{}(str.View());
   }
 };
 
@@ -642,14 +650,16 @@ struct hash<helios::BasicCStringView<CharT, Traits>> {
  * @tparam Traits Character traits
  */
 template <typename CharT, typename Traits>
-struct formatter<helios::BasicCStringView<CharT, Traits>>
-    : formatter<basic_string_view<CharT, Traits>> {
+struct formatter<helios::BasicCStringView<CharT, Traits> >
+    : formatter<basic_string_view<CharT, Traits> > {
   /// @brief Format the `BasicCStringView` by delegating to
   /// `std::basic_string_view` formatter.
   auto format(const helios::BasicCStringView<CharT, Traits>& str,
               format_context& ctx) const {
-    return formatter<basic_string_view<CharT, Traits>>::format(str.View(), ctx);
+    return formatter<basic_string_view<CharT, Traits> >::format(str.View(),
+                                                                ctx);
   }
 };
 
 }  // namespace std
+#endif

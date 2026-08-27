@@ -1,13 +1,23 @@
 #pragma once
 
-#include <helios/memory/common.hpp>
-#include <helios/memory/details/profile.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.memory;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <memory_resource>
+#endif
+#include <helios/memory/common.hpp>
+#include <helios/memory/details/profile.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::mem {
 
 /**
@@ -163,3 +173,4 @@ inline AllocatorStats FixedStackAllocator::Stats() const noexcept {
 }
 
 }  // namespace helios::mem
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

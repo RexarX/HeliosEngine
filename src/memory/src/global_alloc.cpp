@@ -1,3 +1,13 @@
+#include <cstddef>
+#include <cstdlib>
+#include <new>
+
+// This TU must stay on classic headers: `import helios.profile` plus later
+// mimalloc/CRT includes collide with that module's GMF on MSVC (C2572).
+#ifdef HELIOS_ENABLE_CPP_MODULES
+#undef HELIOS_ENABLE_CPP_MODULES
+#endif
+
 #include <helios/memory/details/profile.hpp>
 
 // mimalloc global hooks bypass MSVC ASan-instrumented allocation. Route through
@@ -11,10 +21,6 @@
 #if defined(_MSC_VER) && defined(_DEBUG)
 #include <crtdbg.h>
 #endif
-
-#include <cstddef>
-#include <cstdlib>
-#include <new>
 
 // These replaceable operator new/delete overloads form a single atomic set:
 // once any of them is provided, every allocation must be paired with a

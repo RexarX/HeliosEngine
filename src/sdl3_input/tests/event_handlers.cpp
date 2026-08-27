@@ -1,20 +1,25 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
 
 #include <helios/app/application.hpp>
 #include <helios/input/input.hpp>
-#include <helios/sdl3/details/event_dispatcher.hpp>
-#include <helios/sdl3/input/details/event_handlers.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
+#include <helios/sdl3/input/event_handlers.hpp>
 #include <helios/sdl3/input/input.hpp>
 #include <helios/sdl3/plugin.hpp>
-#include <helios/sdl3/window/details/window_map.hpp>
 #include <helios/sdl3/window/window.hpp>
+#include <helios/sdl3/window/window_map.hpp>
 #include <helios/window/window.hpp>
 
 #include "available.hpp"
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_events.h>
+#include <SDL3/SDL_keycode.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3/SDL_scancode.h>
+#include <SDL3/SDL_video.h>
 
 using namespace helios;
 using namespace sdl3::input;
@@ -175,3 +180,4 @@ TEST_SUITE("helios::sdl3::input::RegisterEventHandlers") {
 }
 
 #endif  // HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#endif

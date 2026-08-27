@@ -1,10 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/async/common.hpp>
-#include <helios/async/details/profile.hpp>
-#include <helios/async/task.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.async;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <taskflow/algorithm/for_each.hpp>
 #include <taskflow/algorithm/reduce.hpp>
 #include <taskflow/algorithm/sort.hpp>
@@ -22,7 +26,13 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
+#include <helios/async/common.hpp>
+#include <helios/async/details/profile.hpp>
+#include <helios/async/task.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 /**
@@ -312,3 +322,4 @@ inline void TaskGraph::Name(std::string_view name) {
 }
 
 }  // namespace helios::async
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

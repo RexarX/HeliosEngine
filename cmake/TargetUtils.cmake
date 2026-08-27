@@ -14,6 +14,7 @@ include(Primitives)
 ]]
 function(helios_target_set_warnings TARGET)
   set(MSVC_WARNINGS
+      /utf-8           # Match spdlog/fmt; required for consistent named-module BMIs
       /W4              # High warning level
       /w14242          # Conversion warnings
       /w14254          # Operator conversion

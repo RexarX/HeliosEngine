@@ -1,7 +1,15 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.container;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
 #include <helios/compiler/compiler.hpp>
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/string_hash.hpp>
 
 #include <algorithm>
@@ -18,7 +26,10 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::container {
 
 /**
@@ -1063,3 +1074,4 @@ constexpr void FlatMap<Key, Value, Compare, Hash>::MergeSortedUniqueSteal(
 }
 
 }  // namespace helios::container
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

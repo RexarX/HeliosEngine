@@ -1,12 +1,20 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.glfw;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
 
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/query/params.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
 #include <helios/input/components.hpp>
 #include <helios/input/joystick.hpp>
 #include <helios/input/mouse.hpp>
@@ -19,9 +27,12 @@
 #include <cstdint>
 #include <string>
 #include <string_view>
+#endif
+#include <helios/glfw/state.hpp>
 
-struct GLFWcursor;
+HELIOS_MODULE_EXPORT struct GLFWcursor;
 
+HELIOS_MODULE_EXPORT
 namespace helios::glfw {
 
 /// @brief Number of GLFW mapped gamepad buttons (`GLFW_GAMEPAD_BUTTON_LAST+1`).
@@ -130,3 +141,4 @@ struct ApplyRawMouseMotion {
 }  // namespace helios::glfw
 
 #endif  // HELIOS_MODULE_INPUT_AVAILABLE
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

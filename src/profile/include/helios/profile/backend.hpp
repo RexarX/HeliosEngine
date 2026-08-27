@@ -1,7 +1,15 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.profile;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/cstring_view.hpp>
-#include <helios/profile/common.hpp>
 #include <helios/utils/type_info.hpp>
 
 #include <concepts>
@@ -12,7 +20,10 @@
 #include <span>
 #include <string_view>
 #include <type_traits>
+#endif
+#include <helios/profile/common.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::profile {
 
 /**
@@ -192,3 +203,4 @@ concept ProfilerBackendTrait =
     !std::is_abstract_v<std::remove_cvref_t<T>>;
 
 }  // namespace helios::profile
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

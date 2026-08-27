@@ -1,5 +1,13 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
 #include <helios/ecs/message/async_reader.hpp>
 #include <helios/ecs/message/async_writer.hpp>
 #include <helios/ecs/message/cursor.hpp>
@@ -10,6 +18,7 @@
 #include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class AccessPolicy;
@@ -85,3 +94,4 @@ struct SystemParamTraits<AsyncMessageWriter<T>> {
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

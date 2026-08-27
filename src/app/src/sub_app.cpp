@@ -3,14 +3,11 @@
 #include <helios/app/sub_app.hpp>
 
 #include <helios/app/app.hpp>
-#include <helios/app/details/profile.hpp>
 #include <helios/app/runners.hpp>
-#include <helios/assert.hpp>
 #include <helios/async/executor.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/schedule/stage.hpp>
 #include <helios/log/logger.hpp>
-#include <helios/utils/defer.hpp>
 
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
@@ -18,6 +15,9 @@
 #endif
 
 #include <atomic>
+#include <helios/app/details/profile.hpp>
+#include <helios/assert.hpp>
+#include <helios/utils/defer.hpp>
 #include <memory_resource>
 #include <mutex>
 #include <string>

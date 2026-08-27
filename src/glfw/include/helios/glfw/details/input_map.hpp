@@ -2,6 +2,7 @@
 
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
 
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/input/gamepad.hpp>
 #include <helios/input/keyboard.hpp>
 #include <helios/input/mouse.hpp>
@@ -9,6 +10,7 @@
 #include <GLFW/glfw3.h>
 
 #include <optional>
+#endif
 
 namespace helios::glfw {
 

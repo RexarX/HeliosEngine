@@ -6,8 +6,8 @@
 #include <helios/app/frame_order.hpp>
 #include <helios/app/schedules.hpp>
 #include <helios/ecs/resource/params.hpp>
-#include <helios/sdl3/details/context.hpp>
-#include <helios/sdl3/details/event_dispatcher.hpp>
+#include <helios/sdl3/context.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
 #include <helios/sdl3/systems/init.hpp>
 #include <helios/sdl3/systems/pump_events.hpp>
 #include <helios/sdl3/systems/shutdown.hpp>

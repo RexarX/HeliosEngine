@@ -6,8 +6,8 @@
 #include <helios/ecs/message/writer.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
-#include <helios/sdl3/window/details/native_state.hpp>
-#include <helios/sdl3/window/details/sdl_sync.hpp>
+#include <helios/sdl3/window/state.hpp>
+#include <helios/sdl3/window/sync.hpp>
 #include <helios/window/components.hpp>
 #include <helios/window/messages.hpp>
 #include <helios/window/params.hpp>

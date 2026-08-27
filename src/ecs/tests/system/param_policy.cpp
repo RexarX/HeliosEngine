@@ -348,133 +348,69 @@ TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
   }
 }
 
-TEST_SUITE("helios::ecs::SystemParamTraits::RegisterAccess") {
-  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::Query") {
+TEST_SUITE("helios::ecs::BuildPolicyFromSystem") {
+  TEST_CASE("helios::ecs::BuildPolicyFromSystem::Query") {
     SUBCASE("Query-only system produces component policy") {
-      AccessPolicyBuilder builder;
-      using Args = details::MemberFnArgs<
-          decltype(&QueryOnlySystem::operator())>::ArgsTuple;
-      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
-        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
-         ...);
-      }(static_cast<Args*>(nullptr), builder);
-
-      const auto policy = builder.Build();
+      const auto policy = BuildPolicyFromSystem<QueryOnlySystem>();
       CHECK(policy.HasReadComponent(ComponentTypeIndex::From<Position>()));
       CHECK(policy.HasWriteComponent(ComponentTypeIndex::From<Velocity>()));
       CHECK_FALSE(policy.HasResources());
     }
   }
 
-  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::Resources") {
+  TEST_CASE("helios::ecs::BuildPolicyFromSystem::Resources") {
     SUBCASE("Resource-only system produces resource policy") {
-      AccessPolicyBuilder builder;
-      using Args = details::MemberFnArgs<
-          decltype(&ResourceOnlySystem::operator())>::ArgsTuple;
-      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
-        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
-         ...);
-      }(static_cast<Args*>(nullptr), builder);
-
-      const auto policy = builder.Build();
+      const auto policy = BuildPolicyFromSystem<ResourceOnlySystem>();
       CHECK_FALSE(policy.HasComponents());
       CHECK(policy.HasReadResource(ResourceTypeIndex::From<Camera>()));
       CHECK(policy.HasWriteResource(ResourceTypeIndex::From<RenderSettings>()));
     }
   }
 
-  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::Local") {
+  TEST_CASE("helios::ecs::BuildPolicyFromSystem::Local") {
     SUBCASE("Local-only system produces empty policy") {
-      AccessPolicyBuilder builder;
-      using Args = details::MemberFnArgs<
-          decltype(&LocalOnlySystem::operator())>::ArgsTuple;
-      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
-        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
-         ...);
-      }(static_cast<Args*>(nullptr), builder);
-
-      const auto policy = builder.Build();
+      const auto policy = BuildPolicyFromSystem<LocalOnlySystem>();
       CHECK_FALSE(policy.HasComponents());
       CHECK_FALSE(policy.HasResources());
     }
   }
 
-  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::Commands") {
+  TEST_CASE("helios::ecs::BuildPolicyFromSystem::Commands") {
     SUBCASE("Commands-only system produces empty policy") {
-      AccessPolicyBuilder builder;
-      using Args = details::MemberFnArgs<
-          decltype(&CommandsOnlySystem::operator())>::ArgsTuple;
-      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
-        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
-         ...);
-      }(static_cast<Args*>(nullptr), builder);
-
-      const auto policy = builder.Build();
+      const auto policy = BuildPolicyFromSystem<CommandsOnlySystem>();
       CHECK_FALSE(policy.HasComponents());
       CHECK_FALSE(policy.HasResources());
     }
   }
 
-  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::WorldView") {
+  TEST_CASE("helios::ecs::BuildPolicyFromSystem::WorldView") {
     SUBCASE("WorldView-only system produces empty policy") {
-      AccessPolicyBuilder builder;
-      using Args = details::MemberFnArgs<
-          decltype(&WorldViewOnlySystem::operator())>::ArgsTuple;
-      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
-        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
-         ...);
-      }(static_cast<Args*>(nullptr), builder);
-
-      const auto policy = builder.Build();
+      const auto policy = BuildPolicyFromSystem<WorldViewOnlySystem>();
       CHECK_FALSE(policy.HasComponents());
       CHECK_FALSE(policy.HasResources());
     }
   }
 
-  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::World") {
+  TEST_CASE("helios::ecs::BuildPolicyFromSystem::World") {
     SUBCASE("World-only system produces exclusive policy") {
-      AccessPolicyBuilder builder;
-      using Args = details::MemberFnArgs<
-          decltype(&WorldOnlySystem::operator())>::ArgsTuple;
-      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
-        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
-         ...);
-      }(static_cast<Args*>(nullptr), builder);
-
-      const auto policy = builder.Build();
+      const auto policy = BuildPolicyFromSystem<WorldOnlySystem>();
       CHECK(policy.Exclusive());
       CHECK_FALSE(policy.HasComponents());
       CHECK_FALSE(policy.HasResources());
     }
   }
 
-  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::Messages") {
+  TEST_CASE("helios::ecs::BuildPolicyFromSystem::Messages") {
     SUBCASE("MessageReader-only system produces empty policy") {
-      AccessPolicyBuilder builder;
-      using Args = details::MemberFnArgs<
-          decltype(&MessageReaderOnlySystem::operator())>::ArgsTuple;
-      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
-        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
-         ...);
-      }(static_cast<Args*>(nullptr), builder);
-
-      const auto policy = builder.Build();
+      const auto policy = BuildPolicyFromSystem<MessageReaderOnlySystem>();
       CHECK_FALSE(policy.HasComponents());
       CHECK_FALSE(policy.HasResources());
     }
   }
 
-  TEST_CASE("helios::ecs::SystemParamTraits::RegisterAccess::mixed") {
+  TEST_CASE("helios::ecs::BuildPolicyFromSystem::mixed") {
     SUBCASE("Mixed Query and Resource system produces combined policy") {
-      AccessPolicyBuilder builder;
-      using Args = details::MemberFnArgs<
-          decltype(&MixedQueryResourceSystem::operator())>::ArgsTuple;
-      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
-        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
-         ...);
-      }(static_cast<Args*>(nullptr), builder);
-
-      const auto policy = builder.Build();
+      const auto policy = BuildPolicyFromSystem<MixedQueryResourceSystem>();
       CHECK(policy.HasReadComponent(ComponentTypeIndex::From<Position>()));
       CHECK(policy.HasWriteComponent(ComponentTypeIndex::From<Velocity>()));
       CHECK(policy.HasReadResource(ResourceTypeIndex::From<Camera>()));
@@ -482,29 +418,13 @@ TEST_SUITE("helios::ecs::SystemParamTraits::RegisterAccess") {
     }
 
     SUBCASE("All param types combined produce correct policy") {
-      AccessPolicyBuilder builder;
-      using Args = details::MemberFnArgs<
-          decltype(&MixedAllSystem::operator())>::ArgsTuple;
-      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
-        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
-         ...);
-      }(static_cast<Args*>(nullptr), builder);
-
-      const auto policy = builder.Build();
+      const auto policy = BuildPolicyFromSystem<MixedAllSystem>();
       CHECK(policy.HasReadComponent(ComponentTypeIndex::From<Position>()));
       CHECK(policy.HasReadResource(ResourceTypeIndex::From<Camera>()));
     }
 
     SUBCASE("Empty operator system produces empty policy") {
-      AccessPolicyBuilder builder;
-      using Args = details::MemberFnArgs<
-          decltype(&EmptyOperatorSystem::operator())>::ArgsTuple;
-      []<typename... Params>(std::tuple<Params...>*, AccessPolicyBuilder& b) {
-        (SystemParamTraits<std::remove_cvref_t<Params>>::RegisterAccess(b),
-         ...);
-      }(static_cast<Args*>(nullptr), builder);
-
-      const auto policy = builder.Build();
+      const auto policy = BuildPolicyFromSystem<EmptyOperatorSystem>();
       CHECK_FALSE(policy.HasComponents());
       CHECK_FALSE(policy.HasResources());
     }

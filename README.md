@@ -38,6 +38,7 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
   - <a href="#requirements">Requirements</a>
   - <a href="#installing-dependencies">Installing Dependencies</a>
   - <a href="#building">Building</a>
+  - <a href="#c20-modules">C++20 modules</a>
   - <a href="#linking">Linking</a>
   - <a href="#run-the-example">Run the Example</a>
 - <a href="#usage">Usage</a>
@@ -298,15 +299,70 @@ cmake --preset linux-gcc-relwithdebinfo \
   #-DHELIOS_DEVELOPER_MODE=ON \
 ```
 
-| Option                     | Default                    | Notes                                                |
-| -------------------------- | -------------------------- | ---------------------------------------------------- |
-| `HELIOS_BUILD_TESTS`       | ON (top-level)             | Module test suites                                   |
-| `HELIOS_BUILD_EXAMPLES`    | ON (top-level)             | Example applications                                 |
-| `HELIOS_DEVELOPER_MODE`    | OFF                        | Sanitizers and dev checks                            |
-| `HELIOS_DOWNLOAD_PACKAGES` | ON                         | CPM fallback for missing deps                        |
-| `HELIOS_BUILD_{MODULE}`    | module default             | Per-module toggle                                    |
-| `HELIOS_LINKER`            | AUTO (top-level) / DEFAULT | Fast linker: `AUTO`, `MOLD`, `LLD`, `RAD`, `DEFAULT` |
-| `HELIOS_MANAGE_TOOLCHAIN`  | ON (top-level) / OFF       | Set `CMAKE_LINKER` / `CMAKE_AR` project-wide         |
+| Option                      | Default                    | Notes                                                |
+| --------------------------- | -------------------------- | ---------------------------------------------------- |
+| `HELIOS_BUILD_TESTS`        | ON (top-level)             | Module test suites                                   |
+| `HELIOS_BUILD_EXAMPLES`     | ON (top-level)             | Example applications                                 |
+| `HELIOS_ENABLE_CPP_MODULES` | OFF                        | C++20 named modules (`import helios` / `helios.*`)   |
+| `HELIOS_DEVELOPER_MODE`     | OFF                        | Sanitizers and dev checks                            |
+| `HELIOS_DOWNLOAD_PACKAGES`  | ON                         | CPM fallback for missing deps                        |
+| `HELIOS_BUILD_{MODULE}`     | module default             | Per-module toggle                                    |
+| `HELIOS_LINKER`             | AUTO (top-level) / DEFAULT | Fast linker: `AUTO`, `MOLD`, `LLD`, `RAD`, `DEFAULT` |
+| `HELIOS_MANAGE_TOOLCHAIN`   | ON (top-level) / OFF       | Set `CMAKE_LINKER` / `CMAKE_AR` project-wide         |
+
+### C++20 modules
+
+Default builds stay **headers + PCH**. Named modules are opt-in.
+To enable them just provide `-DHELIOS_ENABLE_CPP_MODULES=ON` at configure time.
+
+Requires **CMake 3.28+** and **Ninja** or Visual Studio 17.4+. Unix Makefiles fail at configure. `import std` is probed separately (`HELIOS_ENABLE_IMPORT_STD`); it needs CMake 3.30+ and a toolchain that can compile `import std;`.
+
+> **Note:** Most of compilers still have incomplete C++20 module support, and some have bugs. Make sure to use latest compiler versions for better experience.
+
+**How it is implemented.** Each engine module still ships textual headers. When modules are on, a `.cppm` interface unit (`modules/helios.<name>.cppm`, listed in `MODULE_SOURCES`) wraps those headers in Boost-style `export extern "C++"` so declarations keep classic C++ ABI.
+`#include <helios/...>` and `import helios.X` name the same types and link the same library.
+Implementation `.cpp` files stay classic translation units (no `module helios.X;`).
+Named modules cannot export macros — `#include` `<helios/assert.hpp>`, `<helios/compiler/compiler.hpp>`, `<helios/platform/platform.hpp>`, or `<helios/utils/macro.hpp>` when you need those macros.
+
+| Consumer code                                      | Link                          |
+| -------------------------------------------------- | ----------------------------- |
+| `import helios.app;` (or `ecs`, `log`, ...)        | `helios::module::app`         |
+| `import helios.sdl3.window;`                       | `helios::module::sdl3_window` |
+| `import helios;` (re-exports every enabled module) | `helios::helios`              |
+
+On MSVC without `import std`, put standard-library `#include`s **before** `import`. Do not scan TUs that only `#include` Helios — MSVC injects `import` into every scanned file.
+
+A runnable `import` sample is configured only when this flag is on: [examples/cxx_modules](examples/cxx_modules).
+
+```bash
+cmake --build --preset linux-gcc-debug --target cxx_modules_example
+```
+
+**Using Helios modules from another project.** Enable the flag when Helios is configured, link the same `helios::module::*` targets, and scan only the sources that `import`:
+
+```cmake
+set(HELIOS_ENABLE_CPP_MODULES ON CACHE BOOL "" FORCE)
+set(HELIOS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+add_subdirectory(third_party/HeliosEngine)
+
+add_executable(my_game src/main.cpp)
+helios_link_modules(TARGET my_game MODULES PUBLIC app log)
+helios_source_scan_for_cxx_modules(my_game src/main.cpp)
+```
+
+```cpp
+import helios.app;
+
+int main() {
+  helios::app::App app;
+  return std::to_underlying(app.Run());
+}
+```
+
+`helios_link_modules()` already marks the consumer as a named-module client. `helios_source_scan_for_cxx_modules()` is required on each TU that contains `import`. Header-only TUs must stay unscanned.
+
+A full `App` loop with `#include` is in [examples/simple](examples/simple). Instantiating `App` after `import helios.app` currently fails on MSVC (Taskflow `C1116`); import still exposes other app types.
 
 ### Linking
 
@@ -355,7 +411,8 @@ cmake --build --preset linux-gcc-release --target simple_example
 ./bin/examples/debug-linux-x86_64/simple_example
 ```
 
-See [examples/simple/src/main.cpp](examples/simple/src/main.cpp) for schedules, system sets, sub-apps, and profiling.
+See [examples/simple/simple.cpp](examples/simple/simple.cpp) for schedules and plugins.
+With `-DHELIOS_ENABLE_CPP_MODULES=ON`, [examples/cxx_modules](examples/cxx_modules) shows `import helios.app` and `import helios.container`.
 
 <a href="#readme-top">↑ Back to Top</a>
 
@@ -462,6 +519,7 @@ Typical consumer settings when embedding:
 ```cmake
 set(HELIOS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+# set(HELIOS_ENABLE_CPP_MODULES ON CACHE BOOL "" FORCE)  # import helios.*
 # Optional overrides (safer defaults already apply when embedded):
 # set(HELIOS_ENABLE_LTO OFF CACHE BOOL "" FORCE)
 # set(HELIOS_ENABLE_LTO_RELWITHDEBINFO OFF CACHE BOOL "" FORCE)
@@ -636,6 +694,7 @@ examples/custom_module/
 ├── CMakeLists.txt            # helios_module(...) + demo target
 ├── README.md                 # Step-by-step guide
 ├── include/helios/greeting/  # Public headers
+├── modules/                  # Optional module sources (.cppm)
 ├── src/                      # Optional private sources
 └── tests/                    # doctest suite
 ```

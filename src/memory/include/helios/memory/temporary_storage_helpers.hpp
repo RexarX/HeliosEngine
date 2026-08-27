@@ -1,12 +1,23 @@
 #pragma once
 
-#include <helios/memory/temporary_storage.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.memory;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/format.hpp>
 
 #include <format>
 #include <string>
 #include <utility>
+#endif
+#include <helios/memory/temporary_storage.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::utils {
 
 /**
@@ -46,3 +57,4 @@ inline auto TempFormat(std::wformat_string<Args...> fmt, Args&&... args)
 }
 
 }  // namespace helios::utils
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

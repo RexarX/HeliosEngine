@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/input/axis.hpp>
-#include <helios/input/button_input.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/memory/temporary_storage.hpp>
 
 #include <cstdint>
@@ -11,7 +18,11 @@
 #include <string>
 #include <string_view>
 #include <utility>
+#endif
+#include <helios/input/axis.hpp>
+#include <helios/input/button_input.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /// @brief Pen barrel buttons (SDL buttons 1–5). Tip contact is not a button.
@@ -254,6 +265,7 @@ inline std::ostream& operator<<(std::ostream& os, const Pen& pen) {
 
 }  // namespace helios::input
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -306,3 +318,4 @@ struct formatter<helios::input::Pen> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

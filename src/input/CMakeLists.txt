@@ -23,11 +23,15 @@ helios_module(
         src/plugin.cpp
         src/systems.cpp
 
+    MODULE_SOURCES
+        modules/helios.input.cppm
+
     PCH
         src/pch.hpp
 
     DEPENDS
         PUBLIC app
+        PUBLIC compiler
         PUBLIC ecs
         PUBLIC log
         PUBLIC memory
@@ -39,6 +43,7 @@ helios_module(
         tests/gamepad.cpp
         tests/joystick.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/pen.cpp
         tests/plugin.cpp
         tests/resources.cpp

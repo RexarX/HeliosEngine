@@ -1,7 +1,18 @@
 #pragma once
 
-#include <cstdint>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <cstdint>
+#endif
+
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class Schedule;
@@ -43,7 +54,10 @@ public:
    * @param schedule Compiled schedule to execute
    * @param world World to pass to each system
    */
-  virtual void ExecuteAndWait(Schedule& schedule, World& world);
+  virtual void ExecuteAndWait(Schedule& schedule, World& world) {
+    Execute(schedule, world);
+    Wait();
+  }
 
   /**
    * @brief Blocks until the most recent Execute() completes.
@@ -52,9 +66,5 @@ public:
   virtual void Wait() {}
 };
 
-inline void Executor::ExecuteAndWait(Schedule& schedule, World& world) {
-  Execute(schedule, world);
-  Wait();
-}
-
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

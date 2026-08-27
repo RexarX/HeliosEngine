@@ -24,6 +24,9 @@ helios_module(
         src/dynamic_library.cpp
         src/sleep.cpp
 
+    MODULE_SOURCES
+        modules/helios.utils.cppm
+
     PCH src/pch.hpp
 
     DEPENDS
@@ -41,6 +44,7 @@ helios_module(
         tests/hash.cpp
         tests/macro.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/random.cpp
         tests/sleep.cpp
         tests/string_hash.cpp

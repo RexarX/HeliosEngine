@@ -1,13 +1,24 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.window;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/app/builtin/frame_limiter.hpp>
 #include <helios/app/plugin.hpp>
 #include <helios/ecs/resource/params.hpp>
+
+#include <string_view>
+#endif
 #include <helios/window/params.hpp>
 #include <helios/window/resources.hpp>
 
-#include <string_view>
-
+HELIOS_MODULE_EXPORT
 namespace helios::window {
 
 /// @brief Copies the active display refresh rate into `app::FrameLimiter`.
@@ -36,3 +47,4 @@ struct Plugin final : public app::Plugin {
 };
 
 }  // namespace helios::window
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

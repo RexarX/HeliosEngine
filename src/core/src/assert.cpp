@@ -1,6 +1,5 @@
 #include <pch.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/stacktrace.hpp>
 #include <helios/utils/filesystem.hpp>
 #include <helios/utils/format.hpp>
@@ -16,6 +15,8 @@
 #if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
 #include <print>
 #endif
+
+#include <helios/assert.hpp>
 
 namespace helios {
 
@@ -76,33 +77,6 @@ void DefaultAssertionHandler(std::string_view condition,
 #endif
   std::fflush(stderr);
   std::abort();
-}
-
-void HandleAssertion(std::string_view condition,
-                     const std::source_location& loc,
-                     std::string_view message) noexcept {
-  // Priority 1: Custom user handler
-  if (g_custom_assertion_handler != nullptr) {
-    g_custom_assertion_handler(condition, loc, message);
-    return;
-  }
-
-  // Priority 2: Log plugin handler (if available)
-#ifdef _MSC_VER
-  if (HasLogPluginHandler()) {
-    LogPluginAssertionHandler(condition, loc, message);
-    return;
-  }
-#else
-  if (HasLogPluginHandler != nullptr && LogPluginAssertionHandler != nullptr &&
-      HasLogPluginHandler()) {
-    LogPluginAssertionHandler(condition, loc, message);
-    return;
-  }
-#endif
-
-  // Priority 3: Default handler (printf/println to stderr)
-  DefaultAssertionHandler(condition, loc, message);
 }
 
 }  // namespace details
@@ -170,5 +144,33 @@ void LogPluginAssertionHandler(
 #endif  // !_MSC_VER
 
 }  // namespace details
+
+void HandleAssertion(std::string_view condition,
+                     const std::source_location& loc,
+                     std::string_view message) noexcept {
+  // Priority 1: Custom user handler
+  if (details::g_custom_assertion_handler != nullptr) {
+    details::g_custom_assertion_handler(condition, loc, message);
+    return;
+  }
+
+  // Priority 2: Log plugin handler (if available)
+#ifdef _MSC_VER
+  if (details::HasLogPluginHandler()) {
+    details::LogPluginAssertionHandler(condition, loc, message);
+    return;
+  }
+#else
+  if (details::HasLogPluginHandler != nullptr &&
+      details::LogPluginAssertionHandler != nullptr &&
+      details::HasLogPluginHandler()) {
+    details::LogPluginAssertionHandler(condition, loc, message);
+    return;
+  }
+#endif
+
+  // Priority 3: Default handler (printf/println to stderr)
+  details::DefaultAssertionHandler(condition, loc, message);
+}
 
 }  // namespace helios

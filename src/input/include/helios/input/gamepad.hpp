@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/input/axis.hpp>
-#include <helios/input/button_input.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/memory/temporary_storage.hpp>
 
 #include <array>
@@ -12,7 +19,11 @@
 #include <string>
 #include <string_view>
 #include <utility>
+#endif
+#include <helios/input/axis.hpp>
+#include <helios/input/button_input.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /// @brief Contiguous gamepad button identifiers (GLFW order).
@@ -815,6 +826,7 @@ inline std::ostream& operator<<(std::ostream& os, const Gamepad& pad) {
 
 }  // namespace helios::input
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -917,3 +929,4 @@ struct formatter<helios::input::Gamepad> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -6,7 +6,14 @@ helios_module(
     HEADERS
         include/helios/platform/platform.hpp
 
+    MODULE_SOURCES
+        modules/helios.platform.cppm
+
+    DEPENDS
+        PUBLIC compiler
+
     TEST_SOURCES
         tests/main.cpp
+        tests/module_import.cpp
         tests/platform.cpp
 )

@@ -6,6 +6,9 @@ endif()
 if(NOT COMMAND helios_link_modules)
   include(ModuleLinking)
 endif()
+if(NOT COMMAND helios_source_scan_for_cxx_modules)
+  include(CppModules)
+endif()
 if(NOT COMMAND helios_target_enable_sanitizers)
   include(Sanitizers)
 endif()
@@ -17,12 +20,13 @@ endif()
         [HEADERS ...]
         [MODULES app ecs log ...]
         [DISABLE_SANITIZERS]
+        [CXX_MODULES]                 # scan SOURCES for `import` (named modules)
     )
 ]]
 function(helios_add_example)
   cmake_parse_arguments(
     ARG
-    "DISABLE_SANITIZERS"
+    "DISABLE_SANITIZERS;CXX_MODULES"
     "NAME"
     "SOURCES;HEADERS;MODULES"
     ${ARGN}
@@ -30,6 +34,10 @@ function(helios_add_example)
 
   if(NOT ARG_NAME)
     message(FATAL_ERROR "helios_add_example: NAME is required")
+  endif()
+
+  if(ARG_CXX_MODULES AND NOT HELIOS_ENABLE_CPP_MODULES)
+    return()
   endif()
 
   set(_target "${ARG_NAME}_example")
@@ -51,5 +59,9 @@ function(helios_add_example)
 
   if(ARG_MODULES)
     helios_link_modules(TARGET ${_target} MODULES ${ARG_MODULES})
+  endif()
+
+  if(ARG_CXX_MODULES)
+    helios_source_scan_for_cxx_modules(${_target} ${ARG_SOURCES})
   endif()
 endfunction()

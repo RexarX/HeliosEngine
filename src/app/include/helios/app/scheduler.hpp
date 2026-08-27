@@ -1,6 +1,14 @@
 #pragma once
 
-#include <helios/app/schedules.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/async/future.hpp>
 #include <helios/async/task_graph.hpp>
 
@@ -11,13 +19,17 @@
 #include <future>
 #include <optional>
 #include <vector>
+#endif
+#include <helios/app/schedules.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 class Executor;
 
 }
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 class App;
@@ -148,3 +160,4 @@ private:
 };
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

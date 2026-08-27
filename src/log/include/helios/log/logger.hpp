@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/log/config.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.log;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <atomic>
 #include <format>
 #include <memory>
@@ -12,14 +19,19 @@
 #include <string_view>
 #include <unordered_map>
 #include <utility>
+#endif
+#include <helios/log/config.hpp>
 
+#ifndef HELIOS_BUILDING_MODULE
 namespace spdlog {
 
 // Forward declaration for spdlog::logger
 class logger;
 
 }  // namespace spdlog
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::log {
 
 /// @brief Default logger type.
@@ -700,6 +712,7 @@ inline void Critical(T logger, std::format_string<Args...> fmt,
 // the weak symbols from assert.cpp. This header only declares the
 // implementation function used by logger.cpp.
 
+HELIOS_MODULE_EXPORT
 namespace helios::log::details {
 
 /**
@@ -712,3 +725,4 @@ void LogAssertionViaLogger(std::string_view condition,
                            std::string_view message) noexcept;
 
 }  // namespace helios::log::details
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

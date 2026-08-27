@@ -2,10 +2,10 @@
 
 #include <helios/ecs/schedule/system_local_data.hpp>
 
-#include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/schedule/local_arena.hpp>
 #include <helios/ecs/world.hpp>
 
+#include <helios/ecs/details/profile.hpp>
 #include <memory>
 #include <utility>
 

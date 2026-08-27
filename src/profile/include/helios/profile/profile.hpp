@@ -1,5 +1,13 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.profile;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
 #include <helios/profile/backend.hpp>
 #include <helios/profile/common.hpp>
 #include <helios/profile/config.hpp>
@@ -15,3 +23,4 @@
 // AddBackend<>(), e.g. <helios/profile/backends/tracy.hpp>.
 // Lock profiling is Tracy-specific — include <helios/profile/tracy/lock.hpp>
 // only when needed.
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

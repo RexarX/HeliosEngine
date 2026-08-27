@@ -1,13 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/async/async_task.hpp>
-#include <helios/async/common.hpp>
-#include <helios/async/details/profile.hpp>
-#include <helios/async/future.hpp>
-#include <helios/async/task.hpp>
-#include <helios/async/task_graph.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.async;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <taskflow/algorithm/for_each.hpp>
 #include <taskflow/algorithm/reduce.hpp>
 #include <taskflow/algorithm/sort.hpp>
@@ -25,7 +26,15 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
+#include <helios/async/async_task.hpp>
+#include <helios/async/details/profile.hpp>
+#include <helios/async/future.hpp>
+#include <helios/async/task.hpp>
+#include <helios/async/task_graph.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 /**
@@ -707,3 +716,4 @@ inline void SubTaskGraph::CoRunUntil(Predicate&& predicate) {
 }
 
 }  // namespace helios::async
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

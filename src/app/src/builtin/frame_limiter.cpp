@@ -3,11 +3,9 @@
 #include <helios/app/builtin/frame_limiter.hpp>
 
 #include <helios/app/application.hpp>
-#include <helios/app/details/profile.hpp>
 #include <helios/app/frame_order.hpp>
 #include <helios/app/schedules.hpp>
 #include <helios/app/sub_app.hpp>
-#include <helios/assert.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/schedule/executor/executor.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
@@ -17,6 +15,8 @@
 #include <algorithm>
 #include <chrono>
 #include <cstdint>
+#include <helios/app/details/profile.hpp>
+#include <helios/assert.hpp>
 #include <utility>
 
 namespace helios::app {

@@ -1,12 +1,22 @@
 #pragma once
 
-#include <helios/compiler/compiler.hpp>
-#include <helios/utils/macro.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.utils;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <concepts>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/compiler/compiler.hpp>
+#include <helios/utils/macro.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::utils {
 
 /**
@@ -49,10 +59,7 @@ private:
   F func_;
 };
 
-namespace details {
-
-/// @brief Helper struct for the `HELIOS_DEFER` macro to enable inline lambda
-/// syntax.
+/// @brief Helper for the `HELIOS_DEFER` macro to enable inline lambda syntax.
 struct DeferHelper {
   template <std::invocable F>
   constexpr auto operator+(F&& func) noexcept(
@@ -61,8 +68,6 @@ struct DeferHelper {
     return Defer<std::remove_cvref_t<F>>(std::forward<F>(func));
   }
 };
-
-}  // namespace details
 
 }  // namespace helios::utils
 
@@ -79,9 +84,14 @@ struct DeferHelper {
  * };
  * @endcode
  */
+#endif  // HELIOS_MODULE_CONSUMER_SHIM
+
+#include <helios/compiler/compiler.hpp>
+#include <helios/utils/macro.hpp>
+
 #define HELIOS_DEFER                               \
   const auto HELIOS_CONCAT(_defer_, __COUNTER__) = \
-      ::helios::utils::details::DeferHelper() + [&] HELIOS_ALWAYS_INLINE()
+      ::helios::utils::DeferHelper() + [&] HELIOS_ALWAYS_INLINE()
 
 // NOLINTBEGIN(cppcoreguidelines-macro-usage)
 

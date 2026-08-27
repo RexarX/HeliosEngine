@@ -1,6 +1,6 @@
 #include <pch.hpp>
 
-#include <helios/glfw/details/native_handle.hpp>
+#include <helios/glfw/native_handle.hpp>
 
 #include <helios/window/native_handle.hpp>
 

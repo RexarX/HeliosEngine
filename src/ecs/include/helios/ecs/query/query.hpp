@@ -1,13 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/ecs/component/archetype.hpp>
-#include <helios/ecs/component/component.hpp>
-#include <helios/ecs/component/manager.hpp>
-#include <helios/ecs/entity/entity.hpp>
-#include <helios/ecs/query/details/query_args.hpp>
-#include <helios/ecs/query/details/traits.hpp>
-#include <helios/ecs/query/iterator.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/functional_adapters.hpp>
 
 #include <algorithm>
@@ -23,18 +24,17 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
+#include <helios/ecs/component/archetype.hpp>
+#include <helios/ecs/component/component.hpp>
+#include <helios/ecs/component/manager.hpp>
+#include <helios/ecs/entity/entity.hpp>
+#include <helios/ecs/query/args.hpp>
+#include <helios/ecs/query/details/traits.hpp>
+#include <helios/ecs/query/iterator.hpp>
 
-namespace helios::ecs {
-
-class World;
-
-template <typename WorldT, QueryArg... Args>
-class BasicQuery;
-
-template <typename WorldT, QueryArg... Args>
-class BasicQueryWithEntity;
-
-namespace details {
+namespace helios::ecs::details {
 
 template <typename... Cs>
 [[nodiscard]] bool EntityHasComponentsCheck(const ComponentManager& manager,
@@ -63,7 +63,18 @@ template <typename... Cs>
       FetchComponentConst<Cs>(archetype, entity, manager)...);
 }
 
-}  // namespace details
+}  // namespace helios::ecs::details
+
+HELIOS_MODULE_EXPORT
+namespace helios::ecs {
+
+class World;
+
+template <typename WorldT, QueryArg... Args>
+class BasicQuery;
+
+template <typename WorldT, QueryArg... Args>
+class BasicQueryWithEntity;
 
 /**
  * @brief Wrapper that provides entity-aware iteration over query results.
@@ -2079,3 +2090,4 @@ template <QueryArg... Args>
 using Query = BasicQuery<World, Args...>;
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

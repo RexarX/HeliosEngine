@@ -1,5 +1,20 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <functional>
+#include <string>
+#include <tuple>
+#include <type_traits>
+#include <utility>
+#endif
 #include <helios/compiler/compiler.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/system/access_policy.hpp>
@@ -7,12 +22,7 @@
 #include <helios/ecs/system/param_policy.hpp>
 #include <helios/ecs/system/system.hpp>
 
-#include <functional>
-#include <string>
-#include <tuple>
-#include <type_traits>
-#include <utility>
-
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class World;
@@ -193,3 +203,4 @@ inline SystemStorage SystemStorage::FromParamNamed(
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

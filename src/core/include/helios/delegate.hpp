@@ -1,5 +1,11 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if defined(HELIOS_ENABLE_CPP_MODULES) && defined(HELIOS_BUILDING_MODULE) && \
+    !defined(HELIOS_BUILDING_MODULE_CORE)
+#else
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/common_traits.hpp>
 
 #include <concepts>
@@ -9,16 +15,15 @@
 #include <tuple>
 #include <type_traits>
 #include <utility>
+#endif
 
-namespace helios {
-
-namespace details {
+namespace helios::details {
 
 template <typename T>
 struct TupleToFunctionSignature;
 
 template <typename R, typename... Args>
-struct TupleToFunctionSignature<std::tuple<R, Args...>> {
+struct TupleToFunctionSignature<std::tuple<R, Args...> > {
   using Type = R(Args...);
 };
 
@@ -124,12 +129,14 @@ template <typename R, typename ArgsTuple>
 struct PrependReturnType;
 
 template <typename R, typename... Args>
-struct PrependReturnType<R, std::tuple<Args...>> {
+struct PrependReturnType<R, std::tuple<Args...> > {
   using Type = std::tuple<R, Args...>;
 };
 
-}  // namespace details
+}  // namespace helios::details
 
+HELIOS_MODULE_EXPORT
+namespace helios {
 /**
  * @brief Type-erased, non-owning callable wrapper.
  * @details Delegate is a lightweight wrapper for:
@@ -184,7 +191,7 @@ public:
    */
   template <typename Callable>
     requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
-             details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             details::SafeTemporaryCallable<std::remove_cvref_t<Callable> > &&
              std::is_invocable_r_v<ReturnType, std::remove_cvref_t<Callable>&,
                                    Args...>)
   constexpr Delegate(Callable&& callable) noexcept {
@@ -201,7 +208,7 @@ public:
    */
   template <typename Callable>
     requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
-             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable> > &&
              std::is_invocable_r_v<
                  ReturnType, std::remove_reference_t<Callable>&, Args...> &&
              std::is_lvalue_reference_v<Callable>)
@@ -215,7 +222,7 @@ public:
    */
   template <typename Callable>
     requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
-             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable> > &&
              std::is_invocable_r_v<
                  ReturnType, std::remove_reference_t<Callable>&, Args...> &&
              !std::is_lvalue_reference_v<Callable>)
@@ -236,7 +243,7 @@ public:
    */
   template <typename Callable>
     requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
-             details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             details::SafeTemporaryCallable<std::remove_cvref_t<Callable> > &&
              std::is_invocable_r_v<ReturnType, std::remove_cvref_t<Callable>&,
                                    Args...>)
   constexpr Delegate& operator=(Callable&& callable) noexcept {
@@ -253,7 +260,7 @@ public:
    */
   template <typename Callable>
     requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
-             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable> > &&
              std::is_invocable_r_v<ReturnType, Callable&, Args...>)
   constexpr Delegate& operator=(Callable& callable) noexcept {
     BindStateful(callable);
@@ -265,7 +272,7 @@ public:
    */
   template <typename Callable>
     requires(!std::same_as<std::remove_cvref_t<Callable>, Delegate> &&
-             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable>> &&
+             !details::SafeTemporaryCallable<std::remove_cvref_t<Callable> > &&
              std::is_invocable_r_v<
                  ReturnType, std::remove_reference_t<Callable>&, Args...> &&
              !std::is_lvalue_reference_v<Callable>)
@@ -488,7 +495,7 @@ constexpr auto Delegate<ReturnType(Args...)>::From() noexcept -> Delegate {
   static_assert(
       []<size_t... I>(std::index_sequence<I...>) {
         return (... && utils::PolymorphicConvertible<
-                           Args, std::tuple_element_t<I, Arguments>>);
+                           Args, std::tuple_element_t<I, Arguments> >);
       }(std::make_index_sequence<sizeof...(Args)>{}),
       "Arguments must be convertible or have base-derived relationship");
 
@@ -499,12 +506,12 @@ constexpr auto Delegate<ReturnType(Args...)>::From() noexcept -> Delegate {
       -> ReturnType {
     if constexpr (std::is_void_v<ReturnType>) {
       std::invoke(Func,
-                  static_cast<typename std::tuple_element_t<0, Arguments>>(
+                  static_cast<typename std::tuple_element_t<0, Arguments> >(
                       call_args)...);
       return;
     } else {
       return std::invoke(
-          Func, static_cast<typename std::tuple_element_t<0, Arguments>>(
+          Func, static_cast<typename std::tuple_element_t<0, Arguments> >(
                     call_args)...);
     }
   };
@@ -527,7 +534,7 @@ constexpr auto Delegate<ReturnType(Args...)>::From() noexcept -> Delegate {
   static_assert(
       []<size_t... I>(std::index_sequence<I...>) {
         return (... && utils::PolymorphicConvertible<
-                           Args, std::tuple_element_t<I, Arguments>>);
+                           Args, std::tuple_element_t<I, Arguments> >);
       }(std::make_index_sequence<sizeof...(Args)>{}),
       "Arguments must be convertible or have base-derived relationship");
 
@@ -538,12 +545,12 @@ constexpr auto Delegate<ReturnType(Args...)>::From() noexcept -> Delegate {
       -> ReturnType {
     if constexpr (std::is_void_v<ReturnType>) {
       std::invoke(Func,
-                  static_cast<typename std::tuple_element_t<0, Arguments>>(
+                  static_cast<typename std::tuple_element_t<0, Arguments> >(
                       call_args)...);
       return;
     } else {
       return std::invoke(
-          Func, static_cast<typename std::tuple_element_t<0, Arguments>>(
+          Func, static_cast<typename std::tuple_element_t<0, Arguments> >(
                     call_args)...);
     }
   };
@@ -569,7 +576,7 @@ constexpr auto Delegate<ReturnType(Args...)>::From(
   static_assert(
       []<size_t... I>(std::index_sequence<I...>) {
         return (... && utils::PolymorphicConvertible<
-                           Args, std::tuple_element_t<I, Arguments>>);
+                           Args, std::tuple_element_t<I, Arguments> >);
       }(std::make_index_sequence<sizeof...(Args)>{}),
       "Arguments must be convertible or have base-derived relationship");
 
@@ -583,13 +590,13 @@ constexpr auto Delegate<ReturnType(Args...)>::From(
 
     if constexpr (std::is_void_v<ReturnType>) {
       std::invoke(Func, typed_instance,
-                  static_cast<typename std::tuple_element_t<0, Arguments>>(
+                  static_cast<typename std::tuple_element_t<0, Arguments> >(
                       call_args)...);
       return;
     } else {
       return std::invoke(
           Func, typed_instance,
-          static_cast<typename std::tuple_element_t<0, Arguments>>(
+          static_cast<typename std::tuple_element_t<0, Arguments> >(
               call_args)...);
     }
   };
@@ -615,7 +622,7 @@ constexpr auto Delegate<ReturnType(Args...)>::From(
   static_assert(
       []<size_t... I>(std::index_sequence<I...>) {
         return (... && utils::PolymorphicConvertible<
-                           Args, std::tuple_element_t<I, Arguments>>);
+                           Args, std::tuple_element_t<I, Arguments> >);
       }(std::make_index_sequence<sizeof...(Args)>{}),
       "Arguments must be convertible or have base-derived relationship");
 
@@ -628,14 +635,14 @@ constexpr auto Delegate<ReturnType(Args...)>::From(
     auto* typed_instance = static_cast<Class*>(instance_ptr);
     if constexpr (std::is_void_v<ReturnType>) {
       std::invoke(Func, typed_instance,
-                  static_cast<typename std::tuple_element_t<0, Arguments>>(
+                  static_cast<typename std::tuple_element_t<0, Arguments> >(
                       call_args)...);
 
       return;
     } else {
       return std::invoke(
           Func, typed_instance,
-          static_cast<typename std::tuple_element_t<0, Arguments>>(
+          static_cast<typename std::tuple_element_t<0, Arguments> >(
               call_args)...);
     }
   };
@@ -779,7 +786,7 @@ constexpr auto MakeDelegate() noexcept {
   return []<size_t... I>(std::index_sequence<I...>) {
     return Delegate<ReturnType(
         std::tuple_element_t<I, Args>...)>::template From<Func>();
-  }(std::make_index_sequence<std::tuple_size_v<Args>>{});
+  }(std::make_index_sequence<std::tuple_size_v<Args> >{});
 }
 
 /**
@@ -800,7 +807,7 @@ constexpr auto MakeDelegate(
   return []<size_t... I>(std::index_sequence<I...>, auto& inst) {
     return Delegate<ReturnType(
         std::tuple_element_t<I, Args>...)>::template From<Func>(inst);
-  }(std::make_index_sequence<std::tuple_size_v<Args>>{}, instance);
+  }(std::make_index_sequence<std::tuple_size_v<Args> >{}, instance);
 }
 
 /**
@@ -815,9 +822,9 @@ constexpr auto MakeDelegate(
  * @return Delegate bound to the given callable
  */
 template <typename Callable>
-  requires details::HasUnambiguousCallOperator<std::remove_cvref_t<Callable>>
+  requires details::HasUnambiguousCallOperator<std::remove_cvref_t<Callable> >
 constexpr auto MakeDelegate(Callable&& callable) noexcept {
-  using Traits = details::CallableTraits<std::remove_cvref_t<Callable>>;
+  using Traits = details::CallableTraits<std::remove_cvref_t<Callable> >;
   using ReturnType = typename Traits::ReturnType;
   using Arguments = typename Traits::Arguments;
   using Signature = typename details::TupleToFunctionSignature<
@@ -841,3 +848,4 @@ constexpr auto MakeDelegate(Callable&& callable) noexcept {
 }
 
 }  // namespace helios
+#endif

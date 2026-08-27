@@ -1,7 +1,8 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/ecs/entity/entity.hpp>
-#include <helios/sdl3/window/details/native_state.hpp>
+#include <helios/sdl3/window/state.hpp>
 
 using namespace helios;
 using namespace helios::sdl3::window;
@@ -115,3 +116,4 @@ TEST_SUITE("helios::sdl3::window::NativeWindows") {
     }
   }
 }
+#endif

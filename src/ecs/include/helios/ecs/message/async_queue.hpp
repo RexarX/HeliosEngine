@@ -1,8 +1,15 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/container/flat_map.hpp>
-#include <helios/ecs/message/message.hpp>
 
 #include <concurrentqueue/moodycamel/concurrentqueue.h>
 
@@ -13,10 +20,12 @@
 #include <limits>
 #include <ranges>
 #include <utility>
+#endif
+#include <helios/assert.hpp>
+#include <helios/ecs/message/message.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
-
-namespace details {
 
 /// @brief Base class for type-erased async message storage.
 class AsyncMessageStorage {
@@ -39,8 +48,6 @@ public:
   [[nodiscard]] virtual size_t SizeApprox() const noexcept = 0;
 };
 
-}  // namespace details
-
 using AsyncMessageQueueProducerToken = moodycamel::ProducerToken;
 using AsyncMessageQueueConsumerToken = moodycamel::ConsumerToken;
 
@@ -50,7 +57,7 @@ using AsyncMessageQueueConsumerToken = moodycamel::ConsumerToken;
  * @tparam T Async message type
  */
 template <AsyncMessageTrait T>
-class TypedAsyncMessageStorage final : public details::AsyncMessageStorage {
+class TypedAsyncMessageStorage final : public AsyncMessageStorage {
 public:
   TypedAsyncMessageStorage() = default;
   TypedAsyncMessageStorage(const TypedAsyncMessageStorage&) = delete;
@@ -513,8 +520,7 @@ public:
 
 private:
   /// Storage for async messages of different types
-  container::FlatMap<MessageTypeIndex,
-                     std::unique_ptr<details::AsyncMessageStorage>>
+  container::FlatMap<MessageTypeIndex, std::unique_ptr<AsyncMessageStorage>>
       messages_;
 };
 
@@ -606,3 +612,4 @@ inline auto AsyncMessageQueue::TypedStorage() const noexcept
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -1,9 +1,15 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/container/sparse_set.hpp>
-#include <helios/ecs/component/component.hpp>
-#include <helios/ecs/entity/entity.hpp>
 
 #include <concepts>
 #include <cstddef>
@@ -11,7 +17,12 @@
 #include <span>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/assert.hpp>
+#include <helios/ecs/component/component.hpp>
+#include <helios/ecs/entity/entity.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -306,3 +317,4 @@ constexpr bool SparseComponentStorage<T>::Contains(
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

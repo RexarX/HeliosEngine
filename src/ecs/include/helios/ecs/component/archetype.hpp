@@ -1,11 +1,16 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/container/flat_map.hpp>
 #include <helios/container/typed_buffer_array.hpp>
-#include <helios/ecs/component/archetype_id.hpp>
-#include <helios/ecs/component/component.hpp>
-#include <helios/ecs/entity/entity.hpp>
 #include <helios/utils/common_traits.hpp>
 
 #include <algorithm>
@@ -20,12 +25,17 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
-
 #ifdef HELIOS_ENABLE_ASSERTS
 #include <array>
 #include <functional>
 #endif
+#endif
+#include <helios/assert.hpp>
+#include <helios/ecs/component/archetype_id.hpp>
+#include <helios/ecs/component/component.hpp>
+#include <helios/ecs/entity/entity.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -612,3 +622,4 @@ inline bool Archetype::Contains(Entity entity) const noexcept {
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

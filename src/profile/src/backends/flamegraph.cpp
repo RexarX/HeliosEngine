@@ -2,13 +2,13 @@
 
 #include <helios/profile/backends/flamegraph.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/profile/config.hpp>
 
 #include <chrono>
 #include <concepts>
 #include <cstddef>
 #include <cstdint>
+#include <helios/assert.hpp>
 #include <ostream>
 #include <source_location>
 #include <span>

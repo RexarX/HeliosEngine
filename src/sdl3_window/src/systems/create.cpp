@@ -3,21 +3,22 @@
 #include <helios/sdl3/window/systems/create.hpp>
 
 #include <helios/ecs/entity/entity.hpp>
+#include <helios/ecs/query/params.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/log/log.hpp>
-#include <helios/sdl3/details/context.hpp>
-#include <helios/sdl3/window/details/native_handle.hpp>
-#include <helios/sdl3/window/details/native_state.hpp>
-#include <helios/sdl3/window/details/window_map.hpp>
+#include <helios/sdl3/context.hpp>
+#include <helios/sdl3/window/native_handle.hpp>
+#include <helios/sdl3/window/state.hpp>
+#include <helios/sdl3/window/sync.hpp>
+#include <helios/sdl3/window/window_map.hpp>
 #include <helios/window/components.hpp>
 #include <helios/window/native_handle.hpp>
 #include <helios/window/params.hpp>
 #include <helios/window/properties.hpp>
 
-#include <helios/sdl3/window/details/sdl_sync.hpp>
-
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_hints.h>
+#include <SDL3/SDL_video.h>
 
 #include <cstdint>
 #include <string>

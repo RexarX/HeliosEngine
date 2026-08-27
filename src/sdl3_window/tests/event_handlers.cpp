@@ -1,16 +1,18 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/app/application.hpp>
-#include <helios/sdl3/details/event_dispatcher.hpp>
-#include <helios/sdl3/window/details/event_handlers.hpp>
-#include <helios/sdl3/window/details/native_state.hpp>
-#include <helios/sdl3/window/details/window_map.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
+#include <helios/sdl3/window/event_handlers.hpp>
+#include <helios/sdl3/window/state.hpp>
 #include <helios/sdl3/window/window.hpp>
+#include <helios/sdl3/window/window_map.hpp>
 #include <helios/window/window.hpp>
 
 #include "available.hpp"
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_events.h>
+#include <SDL3/SDL_video.h>
 
 #include <string>
 
@@ -143,3 +145,4 @@ TEST_SUITE("helios::sdl3::window::RegisterEventHandlers") {
     }
   }
 }
+#endif

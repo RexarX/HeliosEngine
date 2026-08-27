@@ -1,6 +1,14 @@
 #pragma once
 
-#include <helios/ecs/component/component.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/common_traits.hpp>
 
 #include <array>
@@ -9,7 +17,10 @@
 #include <tuple>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/ecs/component/component.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -55,7 +66,9 @@ struct ComponentBundleTypes {
       (std::is_nothrow_move_assignable_v<Ts> && ...)) = default;
 };
 
-namespace details {
+}  // namespace helios::ecs
+
+namespace helios::ecs::details {
 
 template <typename T>
 struct IsComponentBundleTypes : std::false_type {};
@@ -161,7 +174,9 @@ public:
       Unique(LeafTypes{});
 };
 
-}  // namespace details
+}  // namespace helios::ecs::details
+
+namespace helios::ecs {
 
 /**
  * @brief Concept for a valid component bundle.
@@ -181,7 +196,9 @@ concept ComponentBundleTrait =
      details::ComponentBundleTypeInfo<
          typename std::remove_cvref_t<T>::ComponentTypes>::kValid);
 
-namespace details {
+}  // namespace helios::ecs
+
+namespace helios::ecs::details {
 
 template <typename Bundle>
 struct BundleTypeListImpl;
@@ -321,6 +338,5 @@ template <typename T>
 struct IsComponentBundle<T> : IsStructComponentBundle<std::remove_cvref_t<T>> {
 };
 
-}  // namespace details
-
-}  // namespace helios::ecs
+}  // namespace helios::ecs::details
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

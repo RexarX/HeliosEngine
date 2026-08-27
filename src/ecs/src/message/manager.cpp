@@ -2,7 +2,6 @@
 
 #include <helios/ecs/message/manager.hpp>
 
-#include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/message/consumed_registry.hpp>
 #include <helios/ecs/message/id.hpp>
 #include <helios/ecs/message/message.hpp>
@@ -11,6 +10,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <helios/ecs/details/profile.hpp>
 #include <memory_resource>
 #include <span>
 #include <vector>

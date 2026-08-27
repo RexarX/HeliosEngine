@@ -1,11 +1,21 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <cstddef>
+#include <optional>
+#endif
 #include <helios/assert.hpp>
 #include <helios/ecs/message/message.hpp>
 
-#include <cstddef>
-#include <optional>
-
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 struct AnyMessageId;
@@ -104,3 +114,4 @@ constexpr AnyMessageId MessageId<T>::ToAny() const noexcept {
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

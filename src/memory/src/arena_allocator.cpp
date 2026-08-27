@@ -2,14 +2,14 @@
 
 #include <helios/memory/arena_allocator.hpp>
 
-#include <details/accumulate_peak.hpp>
-#include <helios/assert.hpp>
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
-#include <helios/memory/details/profile.hpp>
 
 #include <atomic>
 #include <cstddef>
+#include <details/accumulate_peak.hpp>
+#include <helios/assert.hpp>
+#include <helios/memory/details/profile.hpp>
 #include <memory>
 #include <utility>
 

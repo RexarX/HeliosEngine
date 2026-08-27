@@ -6,9 +6,9 @@
 #include <helios/ecs/message/writer.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
-#include <helios/glfw/details/glfw_sync.hpp>
-#include <helios/glfw/details/native_handle.hpp>
+#include <helios/glfw/native_handle.hpp>
+#include <helios/glfw/state.hpp>
+#include <helios/glfw/sync.hpp>
 #include <helios/log/log.hpp>
 #include <helios/memory/ref_counted.hpp>
 #include <helios/window/components.hpp>

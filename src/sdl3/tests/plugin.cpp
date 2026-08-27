@@ -1,3 +1,4 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/app/application.hpp>
@@ -6,8 +7,8 @@
 #include <helios/ecs/message/params.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/ecs/system/system.hpp>
-#include <helios/sdl3/details/context.hpp>
-#include <helios/sdl3/details/event_dispatcher.hpp>
+#include <helios/sdl3/context.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
 #include <helios/sdl3/plugin.hpp>
 #include <helios/window/plugin.hpp>
 #include <helios/window/schedules.hpp>
@@ -116,3 +117,4 @@ TEST_SUITE("helios::sdl3::Plugin") {
     }
   }
 }
+#endif

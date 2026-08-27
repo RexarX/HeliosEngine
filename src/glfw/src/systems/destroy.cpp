@@ -9,7 +9,7 @@
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/ecs/world_view.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
+#include <helios/glfw/state.hpp>
 #include <helios/window/components.hpp>
 #include <helios/window/messages.hpp>
 #include <helios/window/native_handle.hpp>

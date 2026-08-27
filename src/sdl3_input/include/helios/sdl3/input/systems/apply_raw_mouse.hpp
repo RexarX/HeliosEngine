@@ -1,11 +1,22 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.sdl3.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
 #include <helios/input/resources.hpp>
-#include <helios/sdl3/input/details/input_state.hpp>
 
 #include <string_view>
+#endif
+#include <helios/sdl3/input/state.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::sdl3::input {
 
 /// @brief Applies the raw-mouse-motion setting to SDL relative mouse scaling.
@@ -18,3 +29,4 @@ struct ApplyRawMouseMotion {
 };
 
 }  // namespace helios::sdl3::input
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

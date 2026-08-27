@@ -1,5 +1,14 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.window;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/memory/temporary_storage.hpp>
 
 #include <algorithm>
@@ -12,7 +21,9 @@
 #include <string_view>
 #include <utility>
 #include <vector>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::window {
 
 /// @brief Window presentation mode.
@@ -691,6 +702,7 @@ inline std::ostream& operator<<(std::ostream& os,
 
 }  // namespace helios::window
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -777,3 +789,4 @@ struct formatter<helios::window::ExclusiveVideoMode> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

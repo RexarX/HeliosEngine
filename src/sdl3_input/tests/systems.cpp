@@ -1,3 +1,4 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/app/application.hpp>
@@ -7,10 +8,10 @@
 #include <helios/ecs/system/param_policy.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/input/input.hpp>
-#include <helios/sdl3/details/event_dispatcher.hpp>
-#include <helios/sdl3/input/details/cursor_cache.hpp>
-#include <helios/sdl3/input/details/input_state.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
+#include <helios/sdl3/input/cursor_cache.hpp>
 #include <helios/sdl3/input/input.hpp>
+#include <helios/sdl3/input/state.hpp>
 #include <helios/sdl3/input/systems/apply_cursors.hpp>
 #include <helios/sdl3/input/systems/apply_raw_mouse.hpp>
 #include <helios/sdl3/input/systems/init.hpp>
@@ -25,7 +26,7 @@
 #include <helios/sdl3/window/window.hpp>
 #endif
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_mouse.h>
 
 #include <string>
 
@@ -263,4 +264,5 @@ TEST_SUITE("helios::sdl3::input::ApplyCursors") {
     }
   }
 }
+#endif
 #endif

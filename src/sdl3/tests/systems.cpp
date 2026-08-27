@@ -1,11 +1,12 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/app/application.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/world.hpp>
-#include <helios/sdl3/details/context.hpp>
-#include <helios/sdl3/details/event_dispatcher.hpp>
-#include <helios/sdl3/details/lifetime.hpp>
+#include <helios/sdl3/context.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
+#include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/plugin.hpp>
 #include <helios/sdl3/systems/init.hpp>
 #include <helios/sdl3/systems/pump_events.hpp>
@@ -15,7 +16,8 @@
 
 #include "available.hpp"
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_events.h>
+#include <SDL3/SDL_init.h>
 
 #include <string_view>
 
@@ -164,3 +166,4 @@ TEST_SUITE("helios::sdl3::Shutdown") {
     }
   }
 }
+#endif

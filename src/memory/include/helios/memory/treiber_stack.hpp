@@ -1,8 +1,19 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.memory;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <atomic>
 #include <cstdint>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::mem {
 
 /**
@@ -128,3 +139,4 @@ inline TreiberStack& TreiberStack::operator=(TreiberStack&& other) noexcept {
 }
 
 }  // namespace helios::mem
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

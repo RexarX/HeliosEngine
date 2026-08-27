@@ -1,14 +1,25 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/message/params.hpp>
 #include <helios/ecs/message/reader.hpp>
 #include <helios/ecs/message/writer.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/composite_param.hpp>
 #include <helios/ecs/system/param.hpp>
+#endif
 #include <helios/input/messages.hpp>
 #include <helios/input/resources.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /// @brief Mutable keyboard, mouse, gamepad, joystick, and pen resources.
@@ -133,6 +144,7 @@ struct Writers {
 
 }  // namespace helios::input
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 template <>
@@ -245,3 +257,4 @@ struct SystemParamTraits<input::Writers>
                            input::JoystickWriters, input::PenWriters> {};
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

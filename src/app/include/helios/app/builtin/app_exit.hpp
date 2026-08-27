@@ -1,10 +1,21 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/message/message.hpp>
 
 #include <cstdint>
 #include <string_view>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 /// @brief Application exit codes.
@@ -80,3 +91,4 @@ struct AppExit {
 }
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

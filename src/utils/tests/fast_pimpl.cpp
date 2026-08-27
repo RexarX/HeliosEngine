@@ -1,10 +1,11 @@
+#include <cstddef>
+#include <memory>
+#include <string_view>
+#include <utility>
+
 #include <doctest/doctest.h>
 
 #include <helios/utils/fast_pimpl.hpp>
-
-#include <cstddef>
-#include <string_view>
-#include <utility>
 
 using namespace helios::utils;
 

@@ -1,10 +1,17 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.window;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/memory/temporary_storage.hpp>
-#include <helios/window/properties.hpp>
-#include <helios/window/resources.hpp>
 
 #include <cstdint>
 #include <format>
@@ -14,7 +21,11 @@
 #include <string_view>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/window/properties.hpp>
+#include <helios/window/resources.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::window {
 
 /// @brief Sent after a backend creates the OS window for an entity.
@@ -1588,6 +1599,7 @@ inline std::ostream& operator<<(std::ostream& os,
 
 }  // namespace helios::window
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -1879,3 +1891,4 @@ struct formatter<helios::window::MonitorDisconnectedMsg> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

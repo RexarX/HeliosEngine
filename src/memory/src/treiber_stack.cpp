@@ -2,7 +2,6 @@
 
 #include <helios/memory/treiber_stack.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/memory/common.hpp>
 
 #include <atomic>
@@ -10,6 +9,7 @@
 #if defined(_MSC_VER) && !defined(__SIZEOF_INT128__)
 #include <intrin.h>
 #endif
+#include <helios/assert.hpp>
 
 namespace helios::mem {
 

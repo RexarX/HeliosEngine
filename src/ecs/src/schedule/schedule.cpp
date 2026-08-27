@@ -2,12 +2,9 @@
 
 #include <helios/ecs/schedule/schedule.hpp>
 
-#include <helios/assert.hpp>
-#include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/schedule/system_set.hpp>
 #include <helios/ecs/world.hpp>
 #include <helios/log/logger.hpp>
-
 #if defined(HELIOS_ECS_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
 #include <helios/memory/temporary_storage_helpers.hpp>
@@ -16,6 +13,8 @@
 #include <cstddef>
 #include <expected>
 #include <format>
+#include <helios/assert.hpp>
+#include <helios/ecs/details/profile.hpp>
 #include <iterator>
 #include <ranges>
 #include <span>

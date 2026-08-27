@@ -1,6 +1,5 @@
 #include <pch.hpp>
 
-#include <helios/platform/platform.hpp>
 #include <helios/utils/sleep.hpp>
 
 #include <algorithm>
@@ -14,6 +13,14 @@
 #elif defined(HELIOS_PLATFORM_LINUX) || defined(HELIOS_PLATFORM_MACOS)
 #include <cerrno>
 #include <ctime>
+#endif
+
+#include <helios/platform/platform.hpp>
+
+#ifdef HELIOS_PLATFORM_WINDOWS
+#ifndef CREATE_WAITABLE_TIMER_HIGH_RESOLUTION
+#define CREATE_WAITABLE_TIMER_HIGH_RESOLUTION 0x00000002
+#endif
 #endif
 
 using namespace std::chrono_literals;

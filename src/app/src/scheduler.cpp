@@ -3,14 +3,11 @@
 #include <helios/app/scheduler.hpp>
 
 #include <helios/app/application.hpp>
-#include <helios/app/details/profile.hpp>
 #include <helios/app/frame_order.hpp>
 #include <helios/app/sub_app.hpp>
-#include <helios/assert.hpp>
 #include <helios/async/executor.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/world.hpp>
-#include <helios/utils/defer.hpp>
 
 #include <chrono>
 #include <cstddef>
@@ -20,6 +17,10 @@
 #ifdef HELIOS_ENABLE_ASSERTS
 #include <algorithm>
 #endif
+
+#include <helios/app/details/profile.hpp>
+#include <helios/assert.hpp>
+#include <helios/utils/defer.hpp>
 
 namespace helios::app {
 

@@ -1,11 +1,22 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.glfw;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
 #include <helios/window/resources.hpp>
 
 #include <string_view>
+#endif
+#include <helios/glfw/state.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::glfw {
 
 /// @brief Polls or waits for GLFW events on the main thread.
@@ -20,3 +31,4 @@ struct PollEvents {
 };
 
 }  // namespace helios::glfw
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

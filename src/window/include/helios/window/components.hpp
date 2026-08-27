@@ -1,11 +1,17 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.window;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/memory/temporary_storage.hpp>
-#include <helios/window/native_handle.hpp>
-#include <helios/window/properties.hpp>
-#include <helios/window/resources.hpp>
 
 #include <cstdint>
 #include <format>
@@ -16,7 +22,12 @@
 #include <string_view>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/window/native_handle.hpp>
+#include <helios/window/properties.hpp>
+#include <helios/window/resources.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::window {
 
 /// @brief Describes a logical window entity.
@@ -494,6 +505,7 @@ inline std::ostream& operator<<(std::ostream& os,
 
 }  // namespace helios::window
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -521,3 +533,4 @@ struct formatter<helios::window::NativeHandleComponent> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

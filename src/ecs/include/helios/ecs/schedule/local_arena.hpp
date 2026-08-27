@@ -1,12 +1,23 @@
 #pragma once
 
-#include <helios/ecs/resource/params.hpp>
-#include <helios/ecs/resource/resource.hpp>
-#include <helios/ecs/system/param.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/memory/arena_allocator.hpp>
 
 #include <functional>
+#endif
+#include <helios/ecs/resource/params.hpp>
+#include <helios/ecs/resource/resource.hpp>
+#include <helios/ecs/system/param.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class AccessPolicy;
@@ -87,3 +98,4 @@ struct SystemParamTraits<Local<LocalArena>> {
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

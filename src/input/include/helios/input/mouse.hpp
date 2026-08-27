@@ -1,5 +1,14 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/memory/temporary_storage.hpp>
 
 #include <cstdint>
@@ -10,7 +19,9 @@
 #include <string_view>
 #include <utility>
 #include <vector>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /// @brief Contiguous mouse button identifiers.
@@ -211,6 +222,7 @@ inline std::ostream& operator<<(std::ostream& os, const CursorImage& image) {
 
 }  // namespace helios::input
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -252,3 +264,4 @@ struct formatter<helios::input::CursorImage> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

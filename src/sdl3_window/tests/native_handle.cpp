@@ -1,12 +1,14 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
-#include <helios/sdl3/details/lifetime.hpp>
-#include <helios/sdl3/window/details/native_handle.hpp>
+#include <helios/sdl3/lifetime.hpp>
+#include <helios/sdl3/window/native_handle.hpp>
 #include <helios/window/native_handle.hpp>
 
 #include "available.hpp"
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_init.h>
+#include <SDL3/SDL_video.h>
 
 #include <variant>
 
@@ -60,7 +62,8 @@ TEST_SUITE("helios::sdl3::window::QueryNativeHandle") {
 #endif
 
       SDL_DestroyWindow(sdl_window);
-      helios::sdl3::Release(SDL_INIT_VIDEO);
+      sdl3::Release(SDL_INIT_VIDEO);
     }
   }
 }
+#endif

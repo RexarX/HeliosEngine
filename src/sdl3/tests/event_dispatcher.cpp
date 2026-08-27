@@ -1,7 +1,8 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/ecs/world.hpp>
-#include <helios/sdl3/details/event_dispatcher.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
 
 #include <SDL3/SDL_events.h>
 
@@ -75,3 +76,4 @@ TEST_SUITE("helios::sdl3::EventDispatcher") {
     }
   }
 }
+#endif

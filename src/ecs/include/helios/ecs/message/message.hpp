@@ -1,12 +1,23 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/type_info.hpp>
 
 #include <concepts>
 #include <cstdint>
 #include <string_view>
 #include <type_traits>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /// @brief Type index for messages.
@@ -145,3 +156,4 @@ template <AnyMessageTrait T>
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

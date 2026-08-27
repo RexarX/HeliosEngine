@@ -1,12 +1,23 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/schedule/stage.hpp>
 
 #include <algorithm>
 #include <span>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 /// @brief Ordered list of stages to run for one frame pass.
@@ -182,3 +193,4 @@ constexpr bool FrameOrder::TryPushFront(ecs::StageTypeIndex stage) {
 }
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

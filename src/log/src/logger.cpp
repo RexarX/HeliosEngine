@@ -2,7 +2,6 @@
 
 #include <helios/log/logger.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/container/static_string.hpp>
 #include <helios/log/config.hpp>
 
@@ -20,6 +19,7 @@
 #include <expected>
 #include <filesystem>
 #include <format>
+#include <helios/assert.hpp>
 #include <iterator>
 #include <memory>
 #include <mutex>

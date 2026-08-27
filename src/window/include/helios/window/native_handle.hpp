@@ -1,5 +1,14 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.window;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/memory/temporary_storage.hpp>
 
 #include <format>
@@ -8,7 +17,9 @@
 #include <string>
 #include <type_traits>
 #include <variant>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::window {
 
 #ifdef HELIOS_PLATFORM_WINDOWS
@@ -344,6 +355,7 @@ inline std::ostream& operator<<(std::ostream& os, const NativeHandle& handle) {
 
 }  // namespace helios::window
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 #ifdef HELIOS_PLATFORM_WINDOWS
@@ -411,3 +423,4 @@ struct formatter<helios::window::NativeHandle> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

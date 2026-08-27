@@ -1,11 +1,21 @@
 #pragma once
 
-#include <helios/ecs/system/access_policy.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <concepts>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/ecs/system/access_policy.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class World;
@@ -21,7 +31,9 @@ struct SystemLocalData;
 template <typename T>
 struct SystemParamTraits;
 
-namespace details {
+}  // namespace helios::ecs
+
+namespace helios::ecs::details {
 
 template <typename T>
 using SystemParamMakeResult =
@@ -34,7 +46,10 @@ concept SystemParamMakeResultMatches =
     std::same_as<SystemParamMakeResult<T>, std::remove_cvref_t<T>> ||
     std::same_as<SystemParamMakeResult<T>, std::remove_cvref_t<T>&>;
 
-}  // namespace details
+}  // namespace helios::ecs::details
+
+HELIOS_MODULE_EXPORT
+namespace helios::ecs {
 
 /**
  * @brief Concept for types usable as system function parameters.
@@ -51,3 +66,4 @@ concept SystemParam =
     };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

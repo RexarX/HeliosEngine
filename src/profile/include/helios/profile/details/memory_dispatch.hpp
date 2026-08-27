@@ -1,5 +1,8 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+HELIOS_MODULE_EXPORT
 namespace helios::profile::details {
 
 /**

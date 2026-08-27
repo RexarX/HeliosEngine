@@ -12,6 +12,7 @@
 #include <iterator>
 #include <memory>
 #include <mutex>
+#include <ostream>
 #include <shared_mutex>
 #include <source_location>
 #include <string>

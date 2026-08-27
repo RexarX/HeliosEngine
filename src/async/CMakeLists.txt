@@ -16,6 +16,9 @@ helios_module(
         include/helios/async/task.hpp
         include/helios/async/task_graph.hpp
 
+    MODULE_SOURCES
+        modules/helios.async.cppm
+
     DEPENDS
         PUBLIC core
 
@@ -35,6 +38,7 @@ helios_module(
         tests/executor.cpp
         tests/future.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/sub_task_graph.cpp
         tests/task.cpp
         tests/task_graph.cpp

@@ -34,6 +34,9 @@ helios_module(
         src/profiler.cpp
         src/zone.cpp
 
+    MODULE_SOURCES
+        modules/helios.profile.cppm
+
     PCH src/pch.hpp
 
     DEPENDS
@@ -58,6 +61,7 @@ helios_module(
         $<$<BOOL:HELIOS_PROFILE_BUNDLE_TRACY>:tests/backends/tracy.cpp>
         $<$<BOOL:HELIOS_PROFILE_BUNDLE_TRACY>:tests/tracy/lock.cpp>
         tests/main.cpp
+        tests/module_import.cpp
         tests/profile.cpp
         tests/zone.cpp
 )

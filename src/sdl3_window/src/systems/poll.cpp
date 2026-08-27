@@ -3,9 +3,9 @@
 #include <helios/sdl3/window/systems/poll.hpp>
 
 #include <helios/ecs/resource/params.hpp>
-#include <helios/sdl3/details/context.hpp>
-#include <helios/sdl3/window/details/native_state.hpp>
-#include <helios/sdl3/window/details/sdl_sync.hpp>
+#include <helios/sdl3/context.hpp>
+#include <helios/sdl3/window/state.hpp>
+#include <helios/sdl3/window/sync.hpp>
 
 namespace helios::sdl3::window {
 
