@@ -10,11 +10,12 @@
 #include <helios/ecs/system/system.hpp>
 #include <helios/ecs/world_view.hpp>
 #include <helios/glfw/state.hpp>
-#include <helios/window/components.hpp>
-#include <helios/window/messages.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
 #include <helios/window/native_handle.hpp>
 #include <helios/window/params.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/properties.hpp>
+#include <helios/window/settings.hpp>
 
 #include <GLFW/glfw3.h>
 

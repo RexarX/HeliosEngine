@@ -11,8 +11,9 @@ import helios.glfw;
 #ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
-#include <helios/window/components.hpp>
+#include <helios/window/native_handle.hpp>
 #include <helios/window/params.hpp>
+#include <helios/window/properties.hpp>
 
 #include <string_view>
 #endif

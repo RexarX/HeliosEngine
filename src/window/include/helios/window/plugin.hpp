@@ -15,8 +15,10 @@ import helios.window;
 
 #include <string_view>
 #endif
+#include <helios/window/monitor.hpp>
 #include <helios/window/params.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/properties.hpp>
+#include <helios/window/settings.hpp>
 
 HELIOS_MODULE_EXPORT
 namespace helios::window {
@@ -39,11 +41,12 @@ struct Plugin final : public app::Plugin {
    * @brief Constructs a window plugin with the given settings.
    * @param settings Global window behavior to insert when absent
    */
-  explicit Plugin(Settings settings = {}) : settings_(settings) {}
+  explicit Plugin(Settings settings = {}) : settings(settings) {}
 
   void Build(app::App& app) override;
 
-  Settings settings_;
+  /// @brief Settings inserted when the world has none yet.
+  Settings settings;
 };
 
 }  // namespace helios::window

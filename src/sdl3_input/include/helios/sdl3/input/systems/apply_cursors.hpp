@@ -11,7 +11,7 @@ import helios.sdl3.input;
 #ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/query/params.hpp>
 #include <helios/ecs/resource/params.hpp>
-#include <helios/input/components.hpp>
+#include <helios/input/mouse.hpp>
 #ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
 #include <helios/sdl3/window/window_map.hpp>
 #endif

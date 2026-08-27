@@ -6,10 +6,6 @@
 #include <helios/sdl3/window/window.hpp>
 #include <helios/window/window.hpp>
 
-#include <helios/profile/backends/tracy.hpp>
-#include <helios/profile/profile.hpp>
-
-#include <format>
 #include <utility>
 
 namespace happ = helios::app;
@@ -49,6 +45,22 @@ struct LogKeyboardInput {
     for (const auto msg : keyboard_messages.keys) {
       hlog::Info("{}", *msg);
     }
+
+    for (const auto msg : keyboard_messages.text) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : keyboard_messages.editing) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : keyboard_messages.candidates) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : keyboard_messages.connection) {
+      hlog::Info("{}", *msg);
+    }
   };
 };
 
@@ -70,7 +82,7 @@ struct LogMouseInput {
       hlog::Info("{}", *msg);
     }
 
-    for (const auto msg : mouse_messages.wheel) {
+    for (const auto msg : mouse_messages.connection) {
       hlog::Info("{}", *msg);
     }
   }
@@ -87,6 +99,10 @@ struct LogGamepadInput {
     }
 
     for (const auto msg : gamepad_messages.connection) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : gamepad_messages.touchpad) {
       hlog::Info("{}", *msg);
     }
   }
@@ -136,6 +152,26 @@ struct LogPenInput {
   }
 };
 
+struct LogTouchInput {
+  void operator()(hinput::TouchMessages touch_messages) const {
+    for (const auto msg : touch_messages.fingers) {
+      hlog::Info("{}", *msg);
+    }
+  }
+};
+
+struct LogSensorInput {
+  void operator()(hinput::SensorMessages sensor_messages) const {
+    for (const auto msg : sensor_messages.connection) {
+      hlog::Info("{}", *msg);
+    }
+
+    for (const auto msg : sensor_messages.samples) {
+      hlog::Info("{}", *msg);
+    }
+  }
+};
+
 struct RequestCloseOnEscape {
   void operator()(
       hecs::Query<hwindow::Window&, hecs::With<hwindow::Primary>> query,
@@ -159,6 +195,7 @@ int main() {
   app.AddSystem(happ::kStartup, SpawnWindowStartup{});
   app.AddSystems(happ::kUpdate, ChangeCursor{}, LogKeyboardInput{},
                  LogMouseInput{}, LogGamepadInput{}, LogJoystickInput{},
-                 LogPenInput{}, RequestCloseOnEscape{});
+                 LogPenInput{}, LogTouchInput{}, LogSensorInput{},
+                 RequestCloseOnEscape{});
   return std::to_underlying(app.Run());
 }

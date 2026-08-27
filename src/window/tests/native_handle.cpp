@@ -1,10 +1,11 @@
 #include <doctest/doctest.h>
 
-#include <helios/window/components.hpp>
+#include <helios/ecs/world.hpp>
 #include <helios/window/native_handle.hpp>
 
 #include <variant>
 
+using namespace helios::ecs;
 using namespace helios::window;
 
 TEST_SUITE("helios::window::NativeHandle") {
@@ -55,5 +56,16 @@ TEST_SUITE("helios::window::NativeHandle") {
       CHECK(std::holds_alternative<WaylandHandle>(handle));
     }
 #endif
+  }
+}
+
+TEST_SUITE("helios::window::NativeHandleComponent") {
+  TEST_CASE("helios::window::NativeHandleComponent") {
+    SUBCASE("Attaches as an archetype component") {
+      World world;
+      const auto entity = world.CreateEntity();
+      world.AddComponents(entity, NativeHandleComponent{});
+      CHECK(world.HasComponent<NativeHandleComponent>(entity));
+    }
   }
 }

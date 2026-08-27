@@ -4,8 +4,8 @@
 
 #include <helios/ecs/resource/params.hpp>
 #include <helios/glfw/state.hpp>
-#include <helios/window/components.hpp>
 #include <helios/window/native_handle.hpp>
+#include <helios/window/properties.hpp>
 
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
 #include <helios/glfw/systems/input.hpp>

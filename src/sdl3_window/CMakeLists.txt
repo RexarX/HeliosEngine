@@ -54,6 +54,12 @@ helios_module(
         SDL3 PRIVATE helios::lib::sdl3::sdl3
 
     TEST_SOURCES
+        tests/systems/apply.cpp
+        tests/systems/create.cpp
+        tests/systems/destroy.cpp
+        tests/systems/init.cpp
+        tests/systems/poll.cpp
+        tests/systems/shutdown.cpp
         tests/available.hpp
         tests/event_handlers.cpp
         tests/main.cpp
@@ -62,7 +68,6 @@ helios_module(
         tests/native_windows.cpp
         tests/plugin.cpp
         tests/sync.cpp
-        tests/systems.cpp
         tests/window_map.cpp
 )
 

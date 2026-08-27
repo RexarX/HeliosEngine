@@ -11,8 +11,10 @@ import helios.sdl3.window;
 #ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/message/writer.hpp>
 #include <helios/ecs/resource/params.hpp>
-#include <helios/window/messages.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
 #include <helios/window/params.hpp>
+#include <helios/window/properties.hpp>
 
 #include <string_view>
 #endif

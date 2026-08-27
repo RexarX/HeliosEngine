@@ -9,13 +9,13 @@
 #include <helios/ecs/system/system.hpp>
 #include <helios/glfw/details/glfw_state.hpp>
 #include <helios/glfw/map.hpp>
-#include <helios/input/components.hpp>
+#include <helios/input/gamepad.hpp>
+#include <helios/input/ids.hpp>
 #include <helios/input/joystick.hpp>
-#include <helios/input/messages.hpp>
 #include <helios/input/mouse.hpp>
 #include <helios/input/params.hpp>
-#include <helios/input/resources.hpp>
-#include <helios/window/components.hpp>
+#include <helios/input/settings.hpp>
+#include <helios/window/native_handle.hpp>
 #include <helios/window/properties.hpp>
 
 #include <GLFW/glfw3.h>
@@ -85,13 +85,22 @@ void EraseCustom(CursorCache& cache, ecs::Entity entity) {
   return name != nullptr ? name : "";
 }
 
+[[nodiscard]] input::GamepadId ToGamepadId(int jid) noexcept {
+  return static_cast<input::GamepadId>(jid);
+}
+
+[[nodiscard]] input::JoystickId ToJoystickId(int jid) noexcept {
+  return static_cast<input::JoystickId>(jid);
+}
+
 void DisconnectGamepad(int jid, GamepadSlotCache& slot,
                        input::GamepadWriters& writers) {
   if (!slot.connected) {
     return;
   }
-  writers.connection.Write(
-      {.id = jid, .connected = false, .name = std::move(slot.name)});
+  writers.connection.Write({.id = ToGamepadId(jid),
+                            .connected = false,
+                            .name = std::move(slot.name)});
   slot = {};
 }
 
@@ -100,8 +109,9 @@ void DisconnectJoystick(int jid, JoystickSlotCache& slot,
   if (!slot.connected) {
     return;
   }
-  writers.connection.Write(
-      {.name = std::move(slot.name), .id = jid, .connected = false});
+  writers.connection.Write({.name = std::move(slot.name),
+                            .id = ToJoystickId(jid),
+                            .connected = false});
   slot = {};
 }
 
@@ -118,7 +128,7 @@ void EmitGamepadState(int jid, const GLFWgamepadstate& state,
       continue;
     }
     writers.buttons.Write({
-        .id = jid,
+        .id = ToGamepadId(jid),
         .button = GamepadButtonFromGlfw(static_cast<int>(i)),
         .state = next == GLFW_PRESS ? input::ButtonState::kPressed
                                     : input::ButtonState::kReleased,
@@ -132,7 +142,7 @@ void EmitGamepadState(int jid, const GLFWgamepadstate& state,
     }
     slot.axes[i] = next;
     writers.axes.Write({
-        .id = jid,
+        .id = ToGamepadId(jid),
         .axis = GamepadAxisFromGlfw(static_cast<int>(i)),
         .value = next,
     });
@@ -146,7 +156,7 @@ void ConnectGamepad(int jid, GamepadSlotCache& slot,
   slot.name = name != nullptr ? name : "";
   slot.connected = true;
   writers.connection.Write({
-      .id = jid,
+      .id = ToGamepadId(jid),
       .connected = true,
       .name = slot.name,
       .guid = JoystickGuid(jid),
@@ -176,7 +186,7 @@ void EmitJoystickState(int jid, JoystickSlotCache& slot,
       continue;
     }
     slot.axes[i] = next;
-    writers.axes.Write({.id = jid, .axis = i, .value = next});
+    writers.axes.Write({.id = ToJoystickId(jid), .axis = i, .value = next});
   }
 
   int button_count = 0;
@@ -192,7 +202,7 @@ void EmitJoystickState(int jid, JoystickSlotCache& slot,
       continue;
     }
     writers.buttons.Write({
-        .id = jid,
+        .id = ToJoystickId(jid),
         .button = i,
         .state = next == GLFW_PRESS ? input::ButtonState::kPressed
                                     : input::ButtonState::kReleased,
@@ -209,7 +219,7 @@ void EmitJoystickState(int jid, JoystickSlotCache& slot,
       continue;
     }
     slot.hats[i] = static_cast<unsigned char>(next);
-    writers.hats.Write({.id = jid, .hat = i, .value = next});
+    writers.hats.Write({.id = ToJoystickId(jid), .hat = i, .value = next});
   }
 }
 
@@ -223,7 +233,7 @@ void ConnectJoystick(int jid, JoystickSlotCache& slot,
   writers.connection.Write({
       .name = slot.name,
       .guid = slot.guid,
-      .id = jid,
+      .id = ToJoystickId(jid),
       .axis_count = slot.axis_count,
       .button_count = slot.button_count,
       .hat_count = slot.hat_count,

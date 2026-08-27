@@ -1,13 +1,16 @@
 #ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
+#include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/world.hpp>
 #include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/window/state.hpp>
 #include <helios/sdl3/window/sync.hpp>
-#include <helios/window/components.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/native_handle.hpp>
 #include <helios/window/properties.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/settings.hpp>
 
 #include "available.hpp"
 
@@ -39,10 +42,6 @@ struct ScopedSdlVideo {
 
 TEST_SUITE("helios::sdl3::window::DisplayAtIndex") {
   TEST_CASE("helios::sdl3::window::DisplayAtIndex") {
-    SUBCASE("Rejects a negative index") {
-      CHECK_EQ(DisplayAtIndex(-1), 0U);
-    }
-
     SUBCASE("Returns the primary display at index 0") {
       HELIOS_SKIP_IF_NO_SDL_VIDEO();
       ScopedSdlVideo video;

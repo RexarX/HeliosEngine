@@ -21,7 +21,7 @@ helios_module(
         include/helios/glfw/sync.hpp
 
     SOURCES
-        src/details/glfw_sync.cpp
+        src/sync.cpp
         src/systems/apply.cpp
         src/systems/create.cpp
         src/systems/destroy.cpp

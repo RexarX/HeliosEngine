@@ -18,7 +18,7 @@
 
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
 #include <helios/glfw/systems/input.hpp>
-#include <helios/input/messages.hpp>
+#include <helios/input/keyboard.hpp>
 #endif
 
 namespace helios::glfw {

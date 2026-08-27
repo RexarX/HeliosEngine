@@ -10,7 +10,7 @@ import helios.sdl3.input;
 #ifndef HELIOS_MODULE_CONSUMER_SHIM
 #ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
-#include <helios/input/resources.hpp>
+#include <helios/input/settings.hpp>
 
 #include <string_view>
 #endif

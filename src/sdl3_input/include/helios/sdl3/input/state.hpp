@@ -25,6 +25,7 @@ struct Context {
   bool input_enabled = false;
   bool handlers_registered = false;
   bool gamepad_subsystem_retained = false;
+  bool sensor_subsystem_retained = false;
   bool raw_mouse_hint_set = false;
   bool last_raw_mouse_motion = false;
 };
@@ -41,6 +42,21 @@ struct PenCache {
   static constexpr size_t kSlotCount = 8;
 
   std::array<PenSlotCache, kSlotCount> slots = {};
+};
+
+/// @brief Cached SDL touch finger mapped to a `Touches` slot.
+struct TouchSlotCache {
+  uint64_t touch_id = 0;
+  uint64_t finger_id = 0;
+  bool connected = false;
+};
+
+/// @brief Open fingers keyed by slot `0..15`.
+struct TouchCache {
+  static constexpr std::string_view kName = "helios::sdl3::input::TouchCache";
+  static constexpr size_t kSlotCount = 16;
+
+  std::array<TouchSlotCache, kSlotCount> slots = {};
 };
 
 }  // namespace helios::sdl3::input

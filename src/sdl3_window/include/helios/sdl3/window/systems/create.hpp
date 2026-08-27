@@ -12,8 +12,9 @@ import helios.sdl3.window;
 #include <helios/ecs/query/params.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/sdl3/context.hpp>
-#include <helios/window/components.hpp>
+#include <helios/window/native_handle.hpp>
 #include <helios/window/params.hpp>
+#include <helios/window/properties.hpp>
 
 #include <string_view>
 #endif

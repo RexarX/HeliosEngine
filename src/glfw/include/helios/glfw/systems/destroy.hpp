@@ -15,8 +15,10 @@ import helios.glfw;
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/ecs/world_view.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
 #include <helios/window/params.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/settings.hpp>
 
 #include <string_view>
 #endif

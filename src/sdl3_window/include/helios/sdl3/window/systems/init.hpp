@@ -11,7 +11,9 @@ import helios.sdl3.window;
 #ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
 #include <helios/sdl3/event_dispatcher.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/settings.hpp>
 
 #include <string_view>
 #endif

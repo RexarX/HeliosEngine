@@ -12,8 +12,10 @@ import helios.sdl3.window;
 #include <helios/app/plugin.hpp>
 #include <helios/app/plugin_group.hpp>
 #include <helios/sdl3/plugin.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
 #include <helios/window/plugin.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/settings.hpp>
 
 #include <string_view>
 #endif

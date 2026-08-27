@@ -8,9 +8,12 @@
 #include <helios/sdl3/window/state.hpp>
 #include <helios/sdl3/window/sync.hpp>
 #include <helios/sdl3/window/window_map.hpp>
-#include <helios/window/components.hpp>
-#include <helios/window/messages.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/ids.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/native_handle.hpp>
+#include <helios/window/properties.hpp>
+#include <helios/window/settings.hpp>
 
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_events.h>
@@ -39,22 +42,23 @@ namespace {
   return entry->entity;
 }
 
-[[nodiscard]] int32_t DisplayIndex(SDL_DisplayID display_id) {
+[[nodiscard]] auto DisplayIndex(SDL_DisplayID display_id)
+    -> std::optional<::helios::window::MonitorId> {
   int count = 0;
   SDL_DisplayID* displays = SDL_GetDisplays(&count);
   if (displays == nullptr) [[unlikely]] {
-    return 0;
+    return std::nullopt;
   }
 
   for (int index = 0; index < count; ++index) {
     if (displays[index] == display_id) {
       SDL_free(displays);
-      return index;
+      return static_cast<::helios::window::MonitorId>(index);
     }
   }
 
   SDL_free(displays);
-  return 0;
+  return std::nullopt;
 }
 
 void HandleWindowEvent(const SDL_Event& event, ecs::World& world) {
@@ -232,7 +236,10 @@ void HandleDisplayEvent(const SDL_Event& event, ecs::World& world) {
     return;
   }
 
-  const int32_t monitor_index = DisplayIndex(event.display.displayID);
+  std::optional<::helios::window::MonitorId> monitor_id;
+  if (event.type == SDL_EVENT_DISPLAY_REMOVED) {
+    monitor_id = DisplayIndex(event.display.displayID);
+  }
 
   if (auto* layout = world.TryWriteResource<::helios::window::Monitors>();
       layout != nullptr) {
@@ -240,11 +247,17 @@ void HandleDisplayEvent(const SDL_Event& event, ecs::World& world) {
   }
 
   if (event.type == SDL_EVENT_DISPLAY_ADDED) {
-    world.WriteMessages<::helios::window::MonitorConnectedMsg>().Write(
-        {.index = monitor_index});
-  } else if (event.type == SDL_EVENT_DISPLAY_REMOVED) {
-    world.WriteMessages<::helios::window::MonitorDisconnectedMsg>().Write(
-        {.index = monitor_index});
+    monitor_id = DisplayIndex(event.display.displayID);
+  }
+
+  if (monitor_id.has_value()) {
+    if (event.type == SDL_EVENT_DISPLAY_ADDED) {
+      world.WriteMessages<::helios::window::MonitorConnectedMsg>().Write(
+          {.index = *monitor_id});
+    } else if (event.type == SDL_EVENT_DISPLAY_REMOVED) {
+      world.WriteMessages<::helios::window::MonitorDisconnectedMsg>().Write(
+          {.index = *monitor_id});
+    }
   }
 
   if (auto* native = world.TryWriteResource<NativeWindows>();

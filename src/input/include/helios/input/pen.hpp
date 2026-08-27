@@ -9,11 +9,16 @@ import helios.input;
 
 #ifndef HELIOS_MODULE_CONSUMER_SHIM
 #ifndef HELIOS_BUILDING_MODULE
+#include <helios/ecs/entity/entity.hpp>
+#include <helios/ecs/message/message.hpp>
 #include <helios/memory/temporary_storage.hpp>
 
+#include <array>
+#include <cstddef>
 #include <cstdint>
 #include <format>
 #include <iterator>
+#include <optional>
 #include <ostream>
 #include <string>
 #include <string_view>
@@ -21,6 +26,8 @@ import helios.input;
 #endif
 #include <helios/input/axis.hpp>
 #include <helios/input/button_input.hpp>
+#include <helios/input/ids.hpp>
+#include <helios/input/keyboard.hpp>
 
 HELIOS_MODULE_EXPORT
 namespace helios::input {
@@ -67,7 +74,7 @@ struct Pen {
   double delta_y = 0.0;
   Axis<PenAxis> axes;
   PenButtonInput buttons;
-  int32_t id = -1;
+  std::optional<PenId> id;
   PenDeviceType device_type = PenDeviceType::kUnknown;
   bool in_proximity = false;
   bool down = false;
@@ -100,13 +107,145 @@ inline void Pen::Reset() noexcept {
   delta_y = 0.0;
   axes.Clear();
   buttons.Reset();
-  id = -1;
+  id.reset();
   device_type = PenDeviceType::kUnknown;
   in_proximity = false;
   down = false;
   eraser = false;
   has_position = false;
 }
+
+/// @brief Fixed pen slot table (independent of gamepad / joystick ids).
+struct Pens {
+  static constexpr std::string_view kName = "helios::input::Pens";
+  static constexpr size_t kSlotCount = 8;
+
+  std::array<Pen, kSlotCount> pens = {};
+
+  /**
+   * @brief Looks up a mutable pen slot by id.
+   * @param id Pen slot id
+   * @return Pointer to the slot, or `nullptr` when out of range
+   */
+  [[nodiscard]] constexpr Pen* TryGet(PenId id) noexcept;
+
+  /**
+   * @brief Looks up a const pen slot by id.
+   * @param id Pen slot id
+   * @return Pointer to the slot, or `nullptr` when out of range
+   */
+  [[nodiscard]] constexpr const Pen* TryGet(PenId id) const noexcept;
+};
+
+constexpr Pen* Pens::TryGet(PenId id) noexcept {
+  if (static_cast<size_t>(id) >= pens.size()) {
+    return nullptr;
+  }
+  return &pens[static_cast<size_t>(id)];
+}
+
+constexpr const Pen* Pens::TryGet(PenId id) const noexcept {
+  if (static_cast<size_t>(id) >= pens.size()) {
+    return nullptr;
+  }
+  return &pens[static_cast<size_t>(id)];
+}
+
+/// @brief Pen proximity in / out notification for a window entity.
+struct PenProximityMsg {
+  static constexpr std::string_view kName = "helios::input::PenProximityMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  ecs::Entity entity;
+  PenId id = 0;
+  PenDeviceType device_type = PenDeviceType::kUnknown;
+  bool in_proximity = false;
+};
+
+/// @brief Pen tip down / up event for a window entity.
+struct PenTouchMsg {
+  static constexpr std::string_view kName = "helios::input::PenTouchMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  ecs::Entity entity;
+  double x = 0.0;
+  double y = 0.0;
+  PenId id = 0;
+  bool down = false;
+  bool eraser = false;
+
+  /**
+   * @brief Returns the pen position.
+   * @return Window-relative x and y
+   */
+  [[nodiscard]] constexpr auto GetPosition() const noexcept
+      -> std::pair<double, double> {
+    return {x, y};
+  }
+};
+
+/// @brief Pen barrel-button press / release event for a window entity.
+struct PenButtonInputMsg {
+  static constexpr std::string_view kName = "helios::input::PenButtonInputMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  ecs::Entity entity;
+  PenId id = 0;
+  PenButton button = PenButton::kBarrel1;
+  ButtonState state = ButtonState::kReleased;
+};
+
+/// @brief Absolute pen position change for a window entity.
+struct PenMovedMsg {
+  static constexpr std::string_view kName = "helios::input::PenMovedMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  ecs::Entity entity;
+  double x = 0.0;
+  double y = 0.0;
+  PenId id = 0;
+
+  /**
+   * @brief Returns the pen position.
+   * @return Window-relative x and y
+   */
+  [[nodiscard]] constexpr auto GetPosition() const noexcept
+      -> std::pair<double, double> {
+    return {x, y};
+  }
+};
+
+/// @brief Pen axis value change for a window entity.
+struct PenAxisChangedMsg {
+  static constexpr std::string_view kName = "helios::input::PenAxisChangedMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  ecs::Entity entity;
+  double x = 0.0;
+  double y = 0.0;
+  float value = 0.0F;
+  PenId id = 0;
+  PenAxis axis = PenAxis::kPressure;
+
+  /**
+   * @brief Returns the pen position.
+   * @return Window-relative x and y
+   */
+  [[nodiscard]] constexpr auto GetPosition() const noexcept
+      -> std::pair<double, double> {
+    return {x, y};
+  }
+};
 
 /**
  * @brief Returns the string name of a pen button.
@@ -218,11 +357,16 @@ inline std::ostream& operator<<(std::ostream& os, PenDeviceType type) {
 template <typename It>
   requires std::output_iterator<It, char>
 inline It ToString(It out, const Pen& pen) {
+  out = std::format_to(
+      out, "Pen{{position=({}, {}), delta=({}, {}), id=", pen.position_x,
+      pen.position_y, pen.delta_x, pen.delta_y);
+  if (pen.id.has_value()) {
+    out = std::format_to(out, "{}", *pen.id);
+  } else {
+    out = std::format_to(out, "none");
+  }
   return std::format_to(
-      out,
-      "Pen{{position=({}, {}), delta=({}, {}), id={}, device_type={}, "
-      "in_proximity={}, down={}, eraser={}}}",
-      pen.position_x, pen.position_y, pen.delta_x, pen.delta_y, pen.id,
+      out, ", device_type={}, in_proximity={}, down={}, eraser={}}}",
       ToString(pen.device_type), pen.in_proximity, pen.down, pen.eraser);
 }
 
@@ -260,6 +404,339 @@ inline It ToString(It out, const Pen& pen) {
  */
 inline std::ostream& operator<<(std::ostream& os, const Pen& pen) {
   ToString(std::ostreambuf_iterator<char>(os), pen);
+  return os;
+}
+
+/**
+ * @brief Formats a pen slot table using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param pens Pens resource
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const Pens& pens) {
+  out = std::format_to(out, "Pens{{sticks = [");
+
+  size_t cnt = 0;
+  for (const auto& pen : pens.pens) {
+    if (!pen.in_proximity) {
+      continue;
+    }
+
+    if (cnt++ > 0) [[likely]] {
+      out = std::format_to(out, ", ");
+    }
+    ToString(out, pen);
+  };
+
+  return std::format_to(out, "]}}");
+}
+
+/**
+ * @brief Formats a pen slot table as a string.
+ * @param pens Pens resource
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const Pens& pens) {
+  std::string result;
+  result.reserve(256);
+  ToString(std::back_inserter(result), pens);
+  return result;
+}
+
+/**
+ * @brief Formats a pen slot table as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param pens Pens resource
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Pens& pens) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), pens);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen slot table to an output stream.
+ * @param os Output stream
+ * @param pens Pens resource
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const Pens& pens) {
+  ToString(std::ostreambuf_iterator<char>(os), pens);
+  return os;
+}
+
+/**
+ * @brief Formats a pen proximity message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Pen proximity message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const PenProximityMsg& msg) {
+  return std::format_to(
+      out,
+      "PenProximityMsg{{entity={}, id={}, device_type={}, in_proximity={}}}",
+      msg.entity, msg.id, ToString(msg.device_type), msg.in_proximity);
+}
+
+/**
+ * @brief Formats a pen proximity message as a string.
+ * @param msg Pen proximity message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const PenProximityMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a pen proximity message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Pen proximity message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const PenProximityMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen proximity message to an output stream.
+ * @param os Output stream
+ * @param msg Pen proximity message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const PenProximityMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a pen touch message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Pen touch message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const PenTouchMsg& msg) {
+  return std::format_to(
+      out, "PenTouchMsg{{entity={}, x={}, y={}, id={}, down={}, eraser={}}}",
+      msg.entity, msg.x, msg.y, msg.id, msg.down, msg.eraser);
+}
+
+/**
+ * @brief Formats a pen touch message as a string.
+ * @param msg Pen touch message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const PenTouchMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a pen touch message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Pen touch message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const PenTouchMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen touch message to an output stream.
+ * @param os Output stream
+ * @param msg Pen touch message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const PenTouchMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a pen button message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Pen button message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const PenButtonInputMsg& msg) {
+  return std::format_to(out,
+                        "PenButtonInputMsg{{entity={}, id={}, button={}, "
+                        "state={}}}",
+                        msg.entity, msg.id, ToString(msg.button),
+                        ToString(msg.state));
+}
+
+/**
+ * @brief Formats a pen button input message as a string.
+ * @param msg Pen button message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const PenButtonInputMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a pen button input message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Pen button input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const PenButtonInputMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen button message to an output stream.
+ * @param os Output stream
+ * @param msg Pen button message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const PenButtonInputMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a pen moved message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Pen moved message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const PenMovedMsg& msg) {
+  return std::format_to(out, "PenMovedMsg{{entity={}, x={}, y={}, id={}}}",
+                        msg.entity, msg.x, msg.y, msg.id);
+}
+
+/**
+ * @brief Formats a pen moved message as a string.
+ * @param msg Pen moved message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const PenMovedMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a pen moved message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Pen moved message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const PenMovedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen moved message to an output stream.
+ * @param os Output stream
+ * @param msg Pen moved message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const PenMovedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a pen axis message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Pen axis message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const PenAxisChangedMsg& msg) {
+  return std::format_to(
+      out,
+      "PenAxisChangedMsg{{entity={}, x={}, y={}, value={}, id={}, axis={}}}",
+      msg.entity, msg.x, msg.y, msg.value, msg.id, ToString(msg.axis));
+}
+
+/**
+ * @brief Formats a pen axis message as a string.
+ * @param msg Pen axis message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const PenAxisChangedMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a pen axis message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Pen axis message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const PenAxisChangedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a pen axis message to an output stream.
+ * @param os Output stream
+ * @param msg Pen axis message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const PenAxisChangedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
   return os;
 }
 
@@ -314,6 +791,77 @@ struct formatter<helios::input::Pen> {
 
   static auto format(const helios::input::Pen& pen, format_context& ctx) {
     return helios::input::ToString(ctx.out(), pen);
+  }
+};
+
+template <>
+struct formatter<helios::input::Pens> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::Pens& pens, format_context& ctx) {
+    return helios::input::ToString(ctx.out(), pens);
+  }
+};
+
+template <>
+struct formatter<helios::input::PenProximityMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::PenProximityMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::PenTouchMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::PenTouchMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::PenButtonInputMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::PenButtonInputMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::PenMovedMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::PenMovedMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::PenAxisChangedMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::PenAxisChangedMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
   }
 };
 

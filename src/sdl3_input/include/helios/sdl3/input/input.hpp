@@ -16,4 +16,5 @@ import helios.sdl3.input;
 #include <helios/sdl3/input/systems/apply_raw_mouse.hpp>
 #include <helios/sdl3/input/systems/init.hpp>
 #include <helios/sdl3/input/systems/poll_gamepads.hpp>
+#include <helios/sdl3/input/systems/poll_sensors.hpp>
 #endif  // HELIOS_MODULE_CONSUMER_SHIM

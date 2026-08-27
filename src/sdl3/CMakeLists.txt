@@ -36,13 +36,15 @@ helios_module(
         SDL3 PRIVATE helios::lib::sdl3::sdl3
 
     TEST_SOURCES
+        tests/systems/init.cpp
+        tests/systems/pump_events.cpp
+        tests/systems/shutdown.cpp
         tests/available.hpp
         tests/event_dispatcher.cpp
         tests/lifetime.cpp
         tests/main.cpp
         tests/module_import.cpp
         tests/plugin.cpp
-        tests/systems.cpp
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")

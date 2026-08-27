@@ -8,7 +8,9 @@
 #include <helios/sdl3/window/event_handlers.hpp>
 #include <helios/sdl3/window/state.hpp>
 #include <helios/sdl3/window/sync.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/settings.hpp>
 
 #include <SDL3/SDL_init.h>
 

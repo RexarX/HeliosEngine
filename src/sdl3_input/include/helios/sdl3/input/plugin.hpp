@@ -12,7 +12,7 @@ import helios.sdl3.input;
 #include <helios/app/plugin.hpp>
 #include <helios/app/plugin_group.hpp>
 #include <helios/input/plugin.hpp>
-#include <helios/input/resources.hpp>
+#include <helios/input/settings.hpp>
 #include <helios/sdl3/plugin.hpp>
 
 #include <string_view>

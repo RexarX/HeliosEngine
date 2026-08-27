@@ -54,7 +54,9 @@ namespace helios::sdl3::window {
       const Sint64 x11_window =
           SDL_GetNumberProperty(props, SDL_PROP_WINDOW_X11_WINDOW_NUMBER, 0);
       return ::helios::window::XlibHandle{
-          .display = display, .window = static_cast<unsigned long>(x11_window)};
+          .display = display,
+          .window =
+              static_cast< ::helios::window::NativeXWindowId>(x11_window)};
     }
 #endif
   }

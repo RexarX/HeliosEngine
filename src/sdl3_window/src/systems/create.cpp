@@ -12,7 +12,6 @@
 #include <helios/sdl3/window/state.hpp>
 #include <helios/sdl3/window/sync.hpp>
 #include <helios/sdl3/window/window_map.hpp>
-#include <helios/window/components.hpp>
 #include <helios/window/native_handle.hpp>
 #include <helios/window/params.hpp>
 #include <helios/window/properties.hpp>

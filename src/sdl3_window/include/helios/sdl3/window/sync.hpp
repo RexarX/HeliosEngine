@@ -8,9 +8,12 @@ import helios.sdl3.window;
 #endif
 #ifndef HELIOS_MODULE_CONSUMER_SHIM
 #ifndef HELIOS_BUILDING_MODULE
-#include <helios/window/components.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/ids.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/native_handle.hpp>
 #include <helios/window/properties.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/settings.hpp>
 
 #include <cstdint>
 #include <span>
@@ -31,7 +34,7 @@ class World;
 HELIOS_MODULE_EXPORT
 namespace helios::sdl3::window {
 
-[[nodiscard]] SDL_DisplayID DisplayAtIndex(int32_t index);
+[[nodiscard]] SDL_DisplayID DisplayAtIndex(::helios::window::MonitorId index);
 
 [[nodiscard]] SDL_DisplayID ResolveDisplay(
     const ::helios::window::Properties& properties, SDL_Window& window);

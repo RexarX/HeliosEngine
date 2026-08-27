@@ -717,8 +717,8 @@ ctest --preset linux-gcc-release                            # tests
 
 ## Roadmap
 
-- Rendering module
-- Full window/input integration
+- `render` module (ECS contract for graphics)
+- `nvrhi_render` module (NVRHI backend for `render`)
 
 <a href="#readme-top">↑ Back to Top</a>
 

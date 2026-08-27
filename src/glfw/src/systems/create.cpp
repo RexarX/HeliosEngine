@@ -11,7 +11,6 @@
 #include <helios/glfw/sync.hpp>
 #include <helios/log/log.hpp>
 #include <helios/memory/ref_counted.hpp>
-#include <helios/window/components.hpp>
 #include <helios/window/native_handle.hpp>
 #include <helios/window/params.hpp>
 #include <helios/window/properties.hpp>

@@ -7,8 +7,8 @@
 #include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/window/state.hpp>
 #include <helios/sdl3/window/window_map.hpp>
-#include <helios/window/components.hpp>
 #include <helios/window/native_handle.hpp>
+#include <helios/window/properties.hpp>
 
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_keyboard.h>

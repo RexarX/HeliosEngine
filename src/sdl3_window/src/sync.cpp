@@ -4,10 +4,12 @@
 
 #include <helios/ecs/world.hpp>
 #include <helios/sdl3/window/state.hpp>
-#include <helios/window/components.hpp>
-#include <helios/window/messages.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/ids.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/native_handle.hpp>
 #include <helios/window/properties.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/settings.hpp>
 
 #include <SDL3/SDL_clipboard.h>
 #include <SDL3/SDL_mouse.h>
@@ -19,6 +21,7 @@
 #include <windows.h>
 #endif
 
+#include <cstddef>
 #include <cstdint>
 #include <helios/assert.hpp>
 #include <span>
@@ -113,14 +116,11 @@ SDL_DisplayID DisplayForWindow(SDL_Window& window) {
 
 }  // namespace
 
-SDL_DisplayID DisplayAtIndex(int32_t index) {
-  if (index < 0) [[unlikely]] {
-    return 0;
-  }
-
+SDL_DisplayID DisplayAtIndex(::helios::window::MonitorId index) {
   int count = 0;
   SDL_DisplayID* displays = SDL_GetDisplays(&count);
-  if (displays == nullptr || index >= count) [[unlikely]] {
+  if (displays == nullptr || static_cast<uint32_t>(index) >=
+                                 static_cast<uint32_t>(count)) [[unlikely]] {
     SDL_free(displays);
     return 0;
   }
@@ -157,7 +157,7 @@ void RefreshMonitors(::helios::window::Monitors& monitors) {
   for (int index = 0; index < count; ++index) {
     const SDL_DisplayID display_id = displays[index];
     ::helios::window::Monitor entry;
-    entry.index = index;
+    entry.index = static_cast<::helios::window::MonitorId>(index);
     entry.primary = display_id == primary;
 
     if (const char* name = SDL_GetDisplayName(display_id); name != nullptr) {

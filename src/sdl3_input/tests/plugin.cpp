@@ -8,6 +8,7 @@
 #include <helios/sdl3/input/input.hpp>
 #include <helios/sdl3/input/state.hpp>
 #include <helios/sdl3/input/systems/poll_gamepads.hpp>
+#include <helios/sdl3/input/systems/poll_sensors.hpp>
 #include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/plugin.hpp>
 #include <helios/window/window.hpp>
@@ -61,7 +62,9 @@ TEST_SUITE("helios::sdl3::input::Plugin") {
 
       CHECK(app.GetWorld().ReadResource<Context>().input_enabled);
       CHECK(app.GetWorld().HasResource<GamepadCache>());
+      CHECK(app.GetWorld().HasResource<SensorCache>());
       CHECK(app.GetWorld().HasResource<PenCache>());
+      CHECK(app.GetWorld().HasResource<TouchCache>());
       CHECK(app.GetWorld().HasResource<CursorCache>());
     }
 

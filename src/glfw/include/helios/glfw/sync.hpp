@@ -9,11 +9,15 @@ import helios.glfw;
 
 #ifndef HELIOS_MODULE_CONSUMER_SHIM
 #ifndef HELIOS_BUILDING_MODULE
-#include <helios/window/components.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/ids.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/native_handle.hpp>
 #include <helios/window/properties.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/settings.hpp>
 
 #include <cstdint>
+#include <span>
 #endif
 #include <helios/glfw/state.hpp>
 
@@ -23,7 +27,7 @@ HELIOS_MODULE_EXPORT struct GLFWwindow;
 HELIOS_MODULE_EXPORT
 namespace helios::glfw {
 
-[[nodiscard]] GLFWmonitor* MonitorAtIndex(int32_t index);
+[[nodiscard]] GLFWmonitor* MonitorAtIndex(window::MonitorId index);
 
 [[nodiscard]] GLFWmonitor* ResolveMonitor(const window::Properties& properties,
                                           GLFWwindow& window);

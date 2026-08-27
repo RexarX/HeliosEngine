@@ -2,7 +2,6 @@
 
 #include <helios/app/app.hpp>
 #include <helios/window/plugin.hpp>
-#include <helios/window/window.hpp>
 
 using namespace helios;
 using namespace helios::window;
@@ -11,9 +10,9 @@ TEST_SUITE("helios::window::Plugin") {
   TEST_CASE("helios::window::Plugin::ctor") {
     SUBCASE("Default settings use default exit triggers") {
       const Plugin plugin;
-      CHECK_EQ(plugin.settings_.exit_triggers, kExitTriggersDefault);
-      CHECK_EQ(plugin.settings_.event_mode, EventMode::kPoll);
-      CHECK_EQ(plugin.settings_.event_wait_timeout,
+      CHECK_EQ(plugin.settings.exit_triggers, kExitTriggersDefault);
+      CHECK_EQ(plugin.settings.event_mode, EventMode::kPoll);
+      CHECK_EQ(plugin.settings.event_wait_timeout,
                Settings::kDefaultEventWaitTimeout);
     }
 
@@ -21,9 +20,9 @@ TEST_SUITE("helios::window::Plugin") {
       const Plugin plugin{{.event_wait_timeout = 0.05,
                            .exit_triggers = kExitTriggersLastWindow,
                            .event_mode = EventMode::kWaitTimeout}};
-      CHECK_EQ(plugin.settings_.exit_triggers, kExitTriggersLastWindow);
-      CHECK_EQ(plugin.settings_.event_mode, EventMode::kWaitTimeout);
-      CHECK_EQ(plugin.settings_.event_wait_timeout, doctest::Approx(0.05));
+      CHECK_EQ(plugin.settings.exit_triggers, kExitTriggersLastWindow);
+      CHECK_EQ(plugin.settings.event_mode, EventMode::kWaitTimeout);
+      CHECK_EQ(plugin.settings.event_wait_timeout, doctest::Approx(0.05));
     }
   }
 
@@ -81,59 +80,6 @@ TEST_SUITE("helios::window::Plugin") {
 
       CHECK_EQ(app.GetWorld().ReadResource<Settings>().exit_triggers,
                kExitTriggersNone);
-    }
-  }
-}
-
-TEST_SUITE("helios::window::SyncFrameLimiterRefreshRate") {
-  TEST_CASE("helios::window::SyncFrameLimiterRefreshRate::operator()") {
-    SUBCASE("Does nothing when FrameLimiter is absent") {
-      app::App app;
-      app.AddPlugins(Plugin{});
-      app.Initialize();
-      app.Update();
-      CHECK_FALSE(app.GetWorld().HasResource<app::FrameLimiter>());
-    }
-
-    SUBCASE("Copies primary monitor refresh rate in Auto mode") {
-      app::App app;
-      app.AddPlugins(app::FrameLimiterPlugin{app::FrameLimiterSettings::Auto()},
-                     Plugin{});
-      app.Initialize();
-
-      auto& monitors = app.GetWorld().WriteResource<Monitors>();
-      monitors.monitors.push_back(Monitor{
-          .index = 0,
-          .current = VideoMode{.refresh_rate = 144},
-          .primary = true,
-      });
-
-      const auto entity = app.GetWorld().CreateEntity();
-      Window window;
-      window.SetMonitorIndex(0);
-      app.GetWorld().AddComponents(entity, std::move(window), Primary{});
-
-      app.Update();
-      CHECK_EQ(app.GetWorld().ReadResource<app::FrameLimiter>().RefreshRate(),
-               144U);
-    }
-
-    SUBCASE("Leaves refresh rate unchanged when limiter is not Auto") {
-      app::App app;
-      app.AddPlugins(
-          app::FrameLimiterPlugin{app::FrameLimiterSettings::FromFPS(60)},
-          Plugin{});
-      app.Initialize();
-
-      auto& monitors = app.GetWorld().WriteResource<Monitors>();
-      monitors.monitors.push_back(Monitor{
-          .index = 0,
-          .current = VideoMode{.refresh_rate = 75},
-          .primary = true,
-      });
-      app.Update();
-      CHECK_EQ(app.GetWorld().ReadResource<app::FrameLimiter>().RefreshRate(),
-               0U);
     }
   }
 }

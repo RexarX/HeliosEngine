@@ -8,6 +8,8 @@
 #include <helios/sdl3/event_dispatcher.hpp>
 #include <helios/sdl3/input/event_handlers.hpp>
 #include <helios/sdl3/input/input.hpp>
+#include <helios/sdl3/input/state.hpp>
+#include <helios/sdl3/input/systems/poll_sensors.hpp>
 #include <helios/sdl3/plugin.hpp>
 #include <helios/sdl3/window/window.hpp>
 #include <helios/sdl3/window/window_map.hpp>
@@ -19,6 +21,7 @@
 #include <SDL3/SDL_keycode.h>
 #include <SDL3/SDL_mouse.h>
 #include <SDL3/SDL_scancode.h>
+#include <SDL3/SDL_touch.h>
 #include <SDL3/SDL_video.h>
 
 using namespace helios;
@@ -175,6 +178,183 @@ TEST_SUITE("helios::sdl3::input::RegisterEventHandlers") {
       REQUIRE_EQ(wheels.size(), 1U);
       CHECK_EQ(wheels[0].x, doctest::Approx(-1.0));
       CHECK_EQ(wheels[0].y, doctest::Approx(3.0));
+    }
+
+    SUBCASE("Emits IME composition and candidate messages") {
+      HELIOS_SKIP_IF_NO_SDL_VIDEO();
+
+      app::App app;
+      AddInputPlugins(app);
+      app.Initialize();
+      test::ScopedShutdown shutdown{app};
+
+      auto& world = app.GetWorld();
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(
+          entity, window::Window::FromProperties(HiddenTestProperties()));
+      app.Update();
+      const SDL_WindowID window_id = WindowIdFor(world, entity);
+      auto& dispatcher = world.WriteResource<sdl3::EventDispatcher>();
+
+      const char* composition = "ni";
+      SDL_Event editing{};
+      editing.type = SDL_EVENT_TEXT_EDITING;
+      editing.edit.windowID = window_id;
+      editing.edit.text = composition;
+      editing.edit.start = 2;
+      editing.edit.length = 0;
+      dispatcher.Dispatch(editing, world);
+
+      const char* candidate0 = "you";
+      const char* candidate1 = "ni";
+      const char* candidates[] = {candidate0, candidate1};
+      SDL_Event list{};
+      list.type = SDL_EVENT_TEXT_EDITING_CANDIDATES;
+      list.edit_candidates.windowID = window_id;
+      list.edit_candidates.candidates = candidates;
+      list.edit_candidates.num_candidates = 2;
+      list.edit_candidates.selected_candidate = 0;
+      list.edit_candidates.horizontal = true;
+      dispatcher.Dispatch(list, world);
+
+      const auto edits =
+          world.Messages().CurrentMessages<helios::input::TextEditingMsg>();
+      REQUIRE_EQ(edits.size(), 1U);
+      CHECK_EQ(edits[0].entity, entity);
+      CHECK_EQ(edits[0].composition, "ni");
+      CHECK_EQ(edits[0].start, 2);
+      CHECK_EQ(edits[0].length, 0);
+
+      const auto lists =
+          world.Messages()
+              .CurrentMessages<helios::input::TextEditingCandidatesMsg>();
+      REQUIRE_EQ(lists.size(), 1U);
+      CHECK_EQ(lists[0].entity, entity);
+      REQUIRE_EQ(lists[0].candidates.size(), 2U);
+      CHECK_EQ(lists[0].candidates[0], "you");
+      CHECK_EQ(lists[0].candidates[1], "ni");
+      CHECK_EQ(lists[0].selected, 0);
+      CHECK(lists[0].horizontal);
+    }
+
+    SUBCASE("Emits keyboard and mouse connection messages") {
+      HELIOS_SKIP_IF_NO_SDL_VIDEO();
+
+      app::App app;
+      AddInputPlugins(app);
+      app.Initialize();
+      test::ScopedShutdown shutdown{app};
+
+      auto& world = app.GetWorld();
+      auto& dispatcher = world.WriteResource<sdl3::EventDispatcher>();
+
+      SDL_Event keyboard{};
+      keyboard.type = SDL_EVENT_KEYBOARD_ADDED;
+      keyboard.kdevice.which = 42;
+      dispatcher.Dispatch(keyboard, world);
+
+      SDL_Event mouse{};
+      mouse.type = SDL_EVENT_MOUSE_REMOVED;
+      mouse.mdevice.which = 7;
+      dispatcher.Dispatch(mouse, world);
+
+      const auto keyboards =
+          world.Messages()
+              .CurrentMessages<helios::input::KeyboardConnectionMsg>();
+      REQUIRE_EQ(keyboards.size(), 1U);
+      CHECK_EQ(keyboards[0].id, 42);
+      CHECK(keyboards[0].connected);
+
+      const auto mice =
+          world.Messages().CurrentMessages<helios::input::MouseConnectionMsg>();
+      REQUIRE_EQ(mice.size(), 1U);
+      CHECK_EQ(mice[0].id, 7);
+      CHECK_FALSE(mice[0].connected);
+    }
+
+    SUBCASE("Converts finger events into window-pixel TouchInputMsg") {
+      HELIOS_SKIP_IF_NO_SDL_VIDEO();
+
+      app::App app;
+      AddInputPlugins(app);
+      app.Initialize();
+      test::ScopedShutdown shutdown{app};
+
+      auto& world = app.GetWorld();
+      const ecs::Entity entity = world.CreateEntity();
+      world.AddComponents(
+          entity, window::Window::FromProperties(HiddenTestProperties()));
+      app.Update();
+      const SDL_WindowID window_id = WindowIdFor(world, entity);
+      auto& dispatcher = world.WriteResource<sdl3::EventDispatcher>();
+
+      SDL_Event down{};
+      down.type = SDL_EVENT_FINGER_DOWN;
+      down.tfinger.windowID = window_id;
+      down.tfinger.touchID = 1;
+      down.tfinger.fingerID = 2;
+      down.tfinger.x = 0.5F;
+      down.tfinger.y = 0.25F;
+      down.tfinger.dx = 0.0F;
+      down.tfinger.dy = 0.0F;
+      down.tfinger.pressure = 1.0F;
+      dispatcher.Dispatch(down, world);
+
+      SDL_Event up{};
+      up.type = SDL_EVENT_FINGER_UP;
+      up.tfinger.windowID = window_id;
+      up.tfinger.touchID = 1;
+      up.tfinger.fingerID = 2;
+      up.tfinger.x = 0.5F;
+      up.tfinger.y = 0.25F;
+      up.tfinger.dx = 0.0F;
+      up.tfinger.dy = 0.0F;
+      up.tfinger.pressure = 0.0F;
+      dispatcher.Dispatch(up, world);
+
+      const auto touches =
+          world.Messages().CurrentMessages<helios::input::TouchInputMsg>();
+      REQUIRE_EQ(touches.size(), 2U);
+      CHECK_EQ(touches[0].entity, entity);
+      CHECK_EQ(touches[0].id, 0);
+      CHECK_EQ(touches[0].phase, helios::input::TouchPhase::kStarted);
+      CHECK_EQ(touches[0].x, doctest::Approx(32.0));
+      CHECK_EQ(touches[0].y, doctest::Approx(16.0));
+      CHECK_EQ(touches[0].pressure, doctest::Approx(1.0F));
+      CHECK_EQ(touches[1].phase, helios::input::TouchPhase::kEnded);
+      CHECK_FALSE(world.ReadResource<TouchCache>().slots[0].connected);
+    }
+
+    SUBCASE("Emits SensorUpdateMsg for a cached instance id") {
+      HELIOS_SKIP_IF_NO_SDL_VIDEO();
+
+      app::App app;
+      AddInputPlugins(app);
+      app.Initialize();
+      test::ScopedShutdown shutdown{app};
+
+      auto& world = app.GetWorld();
+      auto& cache = world.WriteResource<SensorCache>();
+      cache.slots[0].instance_id = 9;
+      cache.slots[0].type = helios::input::SensorType::kAccel;
+      cache.slots[0].connected = true;
+
+      SDL_Event event{};
+      event.type = SDL_EVENT_SENSOR_UPDATE;
+      event.sensor.which = 9;
+      event.sensor.data[0] = 1.0F;
+      event.sensor.data[1] = 2.0F;
+      event.sensor.data[2] = 3.0F;
+      world.WriteResource<sdl3::EventDispatcher>().Dispatch(event, world);
+
+      const auto samples =
+          world.Messages().CurrentMessages<helios::input::SensorUpdateMsg>();
+      REQUIRE_EQ(samples.size(), 1U);
+      CHECK_EQ(samples[0].id, 0);
+      CHECK_EQ(samples[0].type, helios::input::SensorType::kAccel);
+      CHECK_EQ(samples[0].value[0], doctest::Approx(1.0F));
+      CHECK_EQ(samples[0].value[1], doctest::Approx(2.0F));
+      CHECK_EQ(samples[0].value[2], doctest::Approx(3.0F));
     }
   }
 }

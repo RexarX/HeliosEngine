@@ -3,7 +3,7 @@
 #include <helios/sdl3/input/systems/apply_raw_mouse.hpp>
 
 #include <helios/ecs/resource/params.hpp>
-#include <helios/input/resources.hpp>
+#include <helios/input/settings.hpp>
 #include <helios/sdl3/input/state.hpp>
 
 #include <SDL3/SDL_hints.h>

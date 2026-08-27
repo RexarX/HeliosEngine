@@ -5,13 +5,14 @@
 #include <helios/app/application.hpp>
 #include <helios/app/schedules.hpp>
 #include <helios/ecs/resource/params.hpp>
-#include <helios/input/messages.hpp>
+#include <helios/input/keyboard.hpp>
 #include <helios/sdl3/input/cursor_cache.hpp>
 #include <helios/sdl3/input/state.hpp>
 #include <helios/sdl3/input/systems/apply_cursors.hpp>
 #include <helios/sdl3/input/systems/apply_raw_mouse.hpp>
 #include <helios/sdl3/input/systems/init.hpp>
 #include <helios/sdl3/input/systems/poll_gamepads.hpp>
+#include <helios/sdl3/input/systems/poll_sensors.hpp>
 #include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/plugin.hpp>
 #include <helios/window/schedules.hpp>
@@ -47,11 +48,12 @@ void Plugin::Finish(app::App& app) {
     return;
   }
 
-  app.TryInsertResources(GamepadCache{}, CursorCache{}, PenCache{});
+  app.TryInsertResources(GamepadCache{}, SensorCache{}, CursorCache{},
+                         PenCache{}, TouchCache{});
   auto systems =
       app.AddSystems(::helios::window::kEvents, ApplyGamepadMappings{},
-                     PollGamepads{}, ApplyGamepadOutputs{}, ApplyCursors{},
-                     ApplyRawMouseMotion{})
+                     PollGamepads{}, PollSensors{}, ApplyGamepadOutputs{},
+                     ApplyCursors{}, ApplyRawMouseMotion{})
           .InSet(kApplySet)
           .AfterSet(sdl3::kEventPumpSet)
           .Sequence();
@@ -69,9 +71,17 @@ void Plugin::Destroy(app::App& app) {
         [[likely]] {
       DestroyGamepadCache(*cache);
     }
+    if (auto* cache = world.TryWriteResource<SensorCache>(); cache != nullptr)
+        [[likely]] {
+      DestroySensorCache(*cache);
+    }
     if (auto* cache = world.TryWriteResource<CursorCache>(); cache != nullptr)
         [[likely]] {
       DestroyCursorCache(*cache);
+    }
+    if (context->sensor_subsystem_retained) {
+      Release(SDL_INIT_SENSOR);
+      context->sensor_subsystem_retained = false;
     }
     if (context->gamepad_subsystem_retained) {
       Release(SDL_INIT_GAMEPAD);

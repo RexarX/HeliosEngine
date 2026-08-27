@@ -20,8 +20,8 @@ HELIOS_MODULE_EXPORT
 namespace helios::sdl3::input {
 
 /**
- * @brief Registers keyboard, mouse, and pen SDL event handlers on the
- * dispatcher.
+ * @brief Registers keyboard, mouse, pen, touch, and sensor SDL event handlers
+ * on the dispatcher.
  * @param dispatcher Shared SDL event dispatcher
  */
 void RegisterEventHandlers(EventDispatcher& dispatcher);

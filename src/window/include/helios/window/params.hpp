@@ -17,8 +17,9 @@ import helios.window;
 #include <helios/ecs/system/composite_param.hpp>
 #include <helios/ecs/system/param.hpp>
 #endif
-#include <helios/window/components.hpp>
-#include <helios/window/messages.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/properties.hpp>
 
 HELIOS_MODULE_EXPORT
 namespace helios::window {

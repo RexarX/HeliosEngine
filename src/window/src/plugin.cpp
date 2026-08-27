@@ -7,9 +7,11 @@
 #include <helios/app/plugin.hpp>
 #include <helios/app/schedules.hpp>
 #include <helios/ecs/resource/params.hpp>
-#include <helios/window/messages.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/ids.hpp>
+#include <helios/window/monitor.hpp>
 #include <helios/window/params.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/properties.hpp>
 
 #include <algorithm>
 #include <cstddef>
@@ -25,7 +27,7 @@ void SyncFrameLimiterRefreshRate::operator()(
     return;
   }
 
-  std::optional<int32_t> window_monitor;
+  std::optional<MonitorId> window_monitor;
   primaries.query.ForEach([&window_monitor](const Window& window) {
     if (!window_monitor.has_value()) {
       window_monitor = window.properties.monitor_index;
@@ -40,13 +42,13 @@ void SyncFrameLimiterRefreshRate::operator()(
 
   const Monitor* chosen = nullptr;
   if (window_monitor.has_value()) {
-    const int32_t index = *window_monitor;
+    const MonitorId index = *window_monitor;
     const auto by_index = std::ranges::find_if(
         list,
         [index](const Monitor& monitor) { return monitor.index == index; });
     if (by_index != list.end()) {
       chosen = &*by_index;
-    } else if (index >= 0 && static_cast<size_t>(index) < list.size()) {
+    } else if (static_cast<size_t>(index) < list.size()) {
       chosen = &list[static_cast<size_t>(index)];
     }
   }
@@ -65,7 +67,7 @@ void SyncFrameLimiterRefreshRate::operator()(
 }
 
 void Plugin::Build(app::App& app) {
-  app.TryInsertResources(settings_, Monitors{}, Clipboard{});
+  app.TryInsertResources(settings, Monitors{}, Clipboard{});
   app.AddMessages<CreatedMsg, ClosedMsg, ResizedMsg, ClientResizedMsg,
                   ContentScaleChangedMsg, PosChangedMsg, ModeChangedMsg,
                   CursorModeChangedMsg, VisibilityChangedMsg, FocusChangedMsg,

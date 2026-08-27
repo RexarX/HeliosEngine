@@ -2,6 +2,7 @@
 #include <doctest/doctest.h>
 
 #include <helios/app/application.hpp>
+#include <helios/ecs/entity/entity.hpp>
 #include <helios/sdl3/event_dispatcher.hpp>
 #include <helios/sdl3/window/event_handlers.hpp>
 #include <helios/sdl3/window/state.hpp>

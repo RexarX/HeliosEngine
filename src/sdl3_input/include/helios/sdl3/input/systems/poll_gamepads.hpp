@@ -13,7 +13,7 @@ import helios.sdl3.input;
 #include <helios/input/gamepad.hpp>
 #include <helios/input/joystick.hpp>
 #include <helios/input/params.hpp>
-#include <helios/input/resources.hpp>
+#include <helios/input/settings.hpp>
 
 #include <array>
 #include <cstddef>
@@ -39,9 +39,10 @@ struct GamepadSlotCache {
   std::array<float, static_cast<size_t>(helios::input::GamepadAxis::kCount)>
       pad_axes = {};
   std::array<float, helios::input::Joystick::kMaxAxes> joy_axes = {};
-  std::array<helios::input::GamepadTouchpadFinger,
-             helios::input::Gamepad::kMaxTouchpadFingers>
-      touchpad = {};
+  std::array<std::array<helios::input::GamepadTouchpadFinger,
+                        helios::input::Gamepad::kMaxTouchpadFingers>,
+             helios::input::Gamepad::kMaxTouchpads>
+      touchpads = {};
   std::array<bool, static_cast<size_t>(helios::input::GamepadButton::kCount)>
       pad_buttons = {};
   std::array<bool, helios::input::Joystick::kMaxButtons> joy_buttons = {};

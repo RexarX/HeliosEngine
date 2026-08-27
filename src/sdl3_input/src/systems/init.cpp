@@ -18,6 +18,10 @@ void Init::operator()(ecs::Res<Context> context,
     Retain(SDL_INIT_GAMEPAD);
     context->gamepad_subsystem_retained = true;
   }
+  if (!context->sensor_subsystem_retained) {
+    Retain(SDL_INIT_SENSOR);
+    context->sensor_subsystem_retained = true;
+  }
 
   if (!context->handlers_registered) {
     RegisterEventHandlers(*dispatcher);

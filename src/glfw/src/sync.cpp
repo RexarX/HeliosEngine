@@ -4,10 +4,12 @@
 
 #include <helios/ecs/world.hpp>
 #include <helios/glfw/state.hpp>
-#include <helios/window/components.hpp>
-#include <helios/window/messages.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/ids.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/native_handle.hpp>
 #include <helios/window/properties.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/settings.hpp>
 
 #include <GLFW/glfw3.h>
 
@@ -15,6 +17,7 @@
 #include <windows.h>
 #endif
 
+#include <cstddef>
 #include <cstdint>
 #include <helios/assert.hpp>
 #include <span>
@@ -84,14 +87,11 @@ void CaptureClipboardSequence(Context& context) noexcept {
 
 }  // namespace
 
-GLFWmonitor* MonitorAtIndex(int32_t index) {
-  if (index < 0) [[unlikely]] {
-    return nullptr;
-  }
-
+GLFWmonitor* MonitorAtIndex(window::MonitorId index) {
   int count = 0;
   GLFWmonitor** monitors = glfwGetMonitors(&count);
-  if (index >= count) [[unlikely]] {
+  if (static_cast<uint32_t>(index) >= static_cast<uint32_t>(count))
+      [[unlikely]] {
     return nullptr;
   }
 
@@ -124,7 +124,7 @@ void RefreshMonitors(window::Monitors& monitors) {
                      "Failed to query video mode for monitor {}!", index);
 
     window::Monitor entry;
-    entry.index = index;
+    entry.index = static_cast<window::MonitorId>(index);
     entry.primary = monitor == primary;
     glfwGetMonitorPos(monitor, &entry.x, &entry.y);
     entry.width = static_cast<uint32_t>(video_mode->width);

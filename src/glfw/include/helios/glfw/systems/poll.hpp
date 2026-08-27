@@ -10,7 +10,9 @@ import helios.glfw;
 #ifndef HELIOS_MODULE_CONSUMER_SHIM
 #ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/settings.hpp>
 
 #include <string_view>
 #endif

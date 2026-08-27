@@ -13,7 +13,7 @@ import helios.input;
 
 #include <string_view>
 #endif
-#include <helios/input/resources.hpp>
+#include <helios/input/settings.hpp>
 
 HELIOS_MODULE_EXPORT
 namespace helios::input {
@@ -26,7 +26,7 @@ struct Plugin final : public app::Plugin {
    * @brief Constructs an input plugin with the given settings.
    * @param settings Global input behavior to insert when absent
    */
-  explicit Plugin(Settings settings = {}) : settings_(settings) {}
+  explicit Plugin(Settings settings = {}) : settings(settings) {}
 
   /**
    * @brief Inserts resources, registers messages, and schedules systems.
@@ -34,7 +34,8 @@ struct Plugin final : public app::Plugin {
    */
   void Build(app::App& app) override;
 
-  Settings settings_;
+  /// @brief Settings inserted when the world has none yet.
+  Settings settings;
 };
 
 }  // namespace helios::input

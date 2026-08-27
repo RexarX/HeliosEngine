@@ -10,7 +10,9 @@
 #include <helios/sdl3/window/state.hpp>
 #include <helios/sdl3/window/window.hpp>
 #include <helios/sdl3/window/window_map.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/settings.hpp>
 #include <helios/window/window.hpp>
 
 #include "available.hpp"
