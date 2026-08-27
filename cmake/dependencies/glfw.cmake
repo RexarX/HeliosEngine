@@ -9,8 +9,6 @@ helios_dependency(
         brew glfw
         pkg_config glfw3
 
-    VENDORED_DIR ${HELIOS_THIRD_PARTY_DIR}/glfw
-
     CPM_REPOSITORY glfw/glfw
     CPM_GIT_TAG 3.5.1
     CPM_OPTIONS

@@ -92,9 +92,8 @@ inline constexpr auto kExitTriggersDefault =
 
 /// @brief How the window backend waits for OS events.
 enum class EventMode : uint8_t {
-  kPoll = 0,  ///< `glfwPollEvents` — return immediately (games).
-  kWaitTimeout =
-      1,  ///< `glfwWaitEventsTimeout` — idle up to `event_wait_timeout`.
+  kPoll = 0,         ///< return immediately (games).
+  kWaitTimeout = 1,  ///< idle up to `event_wait_timeout`.
 };
 
 /// @brief Global window behavior settings.

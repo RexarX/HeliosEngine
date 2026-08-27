@@ -178,9 +178,6 @@ if(HELIOS_DOCS_ONLY)
   return()
 endif()
 
-# Third-party libraries
-add_subdirectory(third-party)
-
 # ============================================================================
 # Dependency System Initialization
 # ============================================================================

@@ -57,10 +57,12 @@ struct CocoaHandle {
 };
 #endif
 
-/// @brief Backend-agnostic native window handle.
-/// @details Populated by whichever window backend plugin is active
-/// (`glfw`, future `window_win32`, ...). `std::monostate` means no
-/// native handle has been created yet.
+/**
+ * @brief Backend-agnostic native window handle.
+ * @details Populated by whichever window backend plugin is active.
+ * Contains possible win32, x11, wayland, cocoa handles; `std::monostate` means
+ * no native handle has been created yet.
+ */
 using NativeHandle = std::variant<std::monostate
 #ifdef HELIOS_PLATFORM_WINDOWS
                                   ,
