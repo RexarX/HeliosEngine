@@ -224,7 +224,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a9b5f09f02a85293e44e9593a97f8a817" id="r_a9b5f09f02a85293e44e9593a97f8a817"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9b5f09f02a85293e44e9593a97f8a817">RegisterMonitorCallback</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world)</td></tr>
 <tr class="memitem:a99a721d0df59fb81d8c06cbce6168694" id="r_a99a721d0df59fb81d8c06cbce6168694"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a99a721d0df59fb81d8c06cbce6168694">UnregisterMonitorCallback</a> ()</td></tr>
 <tr class="memitem:a58ffc1f756747ac93b9e000af96fbb1c" id="r_a58ffc1f756747ac93b9e000af96fbb1c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a58ffc1f756747ac93b9e000af96fbb1c">RegisterErrorCallback</a> ()</td></tr>
-<tr class="memitem:af14188e96a299298c6062dd3d39041e1" id="r_af14188e96a299298c6062dd3d39041e1"><td class="memItemLeft">GLFWmonitor *&#160;</td><td class="memItemRight"><a class="el" href="#af14188e96a299298c6062dd3d39041e1">MonitorAtIndex</a> (int32_t index)</td></tr>
+<tr class="memitem:a7ae7114089171fa3b4180482d5179b31" id="r_a7ae7114089171fa3b4180482d5179b31"><td class="memItemLeft">GLFWmonitor *&#160;</td><td class="memItemRight"><a class="el" href="#a7ae7114089171fa3b4180482d5179b31">MonitorAtIndex</a> (<a class="el" href="namespacehelios_1_1window.html#a457b222da4a0032551ae7254ebb0880c">window::MonitorId</a> index)</td></tr>
 <tr class="memitem:abbbf3b5ad8db5642a56ef2d4e0ddbad2" id="r_abbbf3b5ad8db5642a56ef2d4e0ddbad2"><td class="memItemLeft">GLFWmonitor *&#160;</td><td class="memItemRight"><a class="el" href="#abbbf3b5ad8db5642a56ef2d4e0ddbad2">ResolveMonitor</a> (const <a class="el" href="structhelios_1_1window_1_1Properties.html">window::Properties</a> &amp;properties, GLFWwindow &amp;window)</td></tr>
 <tr class="memitem:a180dea21452f13572f505bc482d259e3" id="r_a180dea21452f13572f505bc482d259e3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a180dea21452f13572f505bc482d259e3">RefreshMonitors</a> (<a class="el" href="structhelios_1_1window_1_1Monitors.html">window::Monitors</a> &amp;monitors)</td></tr>
 <tr class="memitem:aacc959a7b5330949bf6415ae772cca19" id="r_aacc959a7b5330949bf6415ae772cca19"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aacc959a7b5330949bf6415ae772cca19">MarkMonitorDependentDirty</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="structhelios_1_1glfw_1_1NativeWindows.html">NativeWindows</a> &amp;native)</td></tr>
@@ -533,7 +533,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00236">236</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00246">246</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -622,8 +622,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af14188e96a299298c6062dd3d39041e1" name="af14188e96a299298c6062dd3d39041e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af14188e96a299298c6062dd3d39041e1">&#9670;&#160;</a></span>MonitorAtIndex()</h2>
+<a id="a7ae7114089171fa3b4180482d5179b31" name="a7ae7114089171fa3b4180482d5179b31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ae7114089171fa3b4180482d5179b31">&#9670;&#160;</a></span>MonitorAtIndex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -634,7 +634,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">GLFWmonitor * helios::glfw::MonitorAtIndex </td>
           <td>(</td>
-          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1window.html#a457b222da4a0032551ae7254ebb0880c">window::MonitorId</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -645,7 +645,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="glfw_2src_2sync_8cpp_source.html#l00087">87</a> of file <a class="el" href="glfw_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="glfw_2src_2sync_8cpp_source.html#l00090">90</a> of file <a class="el" href="glfw_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -723,7 +723,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="callbacks_8cpp_source.html#l00389">389</a> of file <a class="el" href="callbacks_8cpp_source.html">callbacks.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="callbacks_8cpp_source.html#l00396">396</a> of file <a class="el" href="callbacks_8cpp_source.html">callbacks.cpp</a>.</p>
 
 </div>
 </div>
@@ -761,7 +761,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="callbacks_8cpp_source.html#l00413">413</a> of file <a class="el" href="callbacks_8cpp_source.html">callbacks.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="callbacks_8cpp_source.html#l00420">420</a> of file <a class="el" href="callbacks_8cpp_source.html">callbacks.cpp</a>.</p>
 
 </div>
 </div>
@@ -881,7 +881,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="callbacks_8cpp_source.html#l00418">418</a> of file <a class="el" href="callbacks_8cpp_source.html">callbacks.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="callbacks_8cpp_source.html#l00425">425</a> of file <a class="el" href="callbacks_8cpp_source.html">callbacks.cpp</a>.</p>
 
 </div>
 </div>

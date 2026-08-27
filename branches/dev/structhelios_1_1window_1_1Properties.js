@@ -29,7 +29,7 @@ var structhelios_1_1window_1_1Properties =
     [ "min_height", "structhelios_1_1window_1_1Properties.html#ae5442c89a75e2c0d51d30a8a7877d18e", null ],
     [ "min_width", "structhelios_1_1window_1_1Properties.html#ae84de3c6ef8ed3aefe615eba681e8ff0", null ],
     [ "mode", "structhelios_1_1window_1_1Properties.html#a4f4843469cd2f15498b52381b7afa348", null ],
-    [ "monitor_index", "structhelios_1_1window_1_1Properties.html#a5dd781bc9faa1c282296b2b7af20c558", null ],
+    [ "monitor_index", "structhelios_1_1window_1_1Properties.html#a0e2c1830ce07d4cb065fe7047f461659", null ],
     [ "mouse_passthrough", "structhelios_1_1window_1_1Properties.html#a031345c95b8f0301a1defabc2ca96d71", null ],
     [ "opacity", "structhelios_1_1window_1_1Properties.html#a95e8860600fdb1d5088facf8e218bb13", null ],
     [ "pos_x", "structhelios_1_1window_1_1Properties.html#aa0ce67644efd2e8c762da75ed82ce003", null ],

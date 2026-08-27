@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="structhelios_1_1input_1_1Keyboard.html" title="Aggregated keyboard state for the main window / app.">Keyboard</a> key and text input message readers.  
+<p><a class="el" href="structhelios_1_1input_1_1Keyboard.html" title="Aggregated keyboard state for the main window / app.">Keyboard</a> key, text, IME, and connection message readers.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>&gt;</code></p>
@@ -187,12 +187,63 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 Public Attributes</h2></td></tr>
 <tr class="memitem:a0b7d802d26e2559ea49fe7c67b2e37a2" id="r_a0b7d802d26e2559ea49fe7c67b2e37a2"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1MessageReader.html">ecs::MessageReader</a>&lt; <a class="el" href="structhelios_1_1input_1_1KeyboardInputMsg.html">KeyboardInputMsg</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0b7d802d26e2559ea49fe7c67b2e37a2">keys</a></td></tr>
 <tr class="memitem:ab4fa59c53fdd8fc6807e42d4747844bd" id="r_ab4fa59c53fdd8fc6807e42d4747844bd"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1MessageReader.html">ecs::MessageReader</a>&lt; <a class="el" href="structhelios_1_1input_1_1TextInputMsg.html">TextInputMsg</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab4fa59c53fdd8fc6807e42d4747844bd">text</a></td></tr>
+<tr class="memitem:ac8013a6831c28d63c0b08d96bbc468ee" id="r_ac8013a6831c28d63c0b08d96bbc468ee"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1MessageReader.html">ecs::MessageReader</a>&lt; <a class="el" href="structhelios_1_1input_1_1TextEditingMsg.html">TextEditingMsg</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac8013a6831c28d63c0b08d96bbc468ee">editing</a></td></tr>
+<tr class="memitem:a7b14f5532810c2aa25541649d774d535" id="r_a7b14f5532810c2aa25541649d774d535"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1MessageReader.html">ecs::MessageReader</a>&lt; <a class="el" href="structhelios_1_1input_1_1TextEditingCandidatesMsg.html">TextEditingCandidatesMsg</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a7b14f5532810c2aa25541649d774d535">candidates</a></td></tr>
+<tr class="memitem:af7669c942789916a00d27dd0c9d95f42" id="r_af7669c942789916a00d27dd0c9d95f42"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1MessageReader.html">ecs::MessageReader</a>&lt; <a class="el" href="structhelios_1_1input_1_1KeyboardConnectionMsg.html">KeyboardConnectionMsg</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af7669c942789916a00d27dd0c9d95f42">connection</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="structhelios_1_1input_1_1Keyboard.html" title="Aggregated keyboard state for the main window / app.">Keyboard</a> key and text input message readers. </p>
+<div class="textblock"><p><a class="el" href="structhelios_1_1input_1_1Keyboard.html" title="Aggregated keyboard state for the main window / app.">Keyboard</a> key, text, IME, and connection message readers. </p>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00044">44</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00055">55</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a7b14f5532810c2aa25541649d774d535" name="a7b14f5532810c2aa25541649d774d535"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b14f5532810c2aa25541649d774d535">&#9670;&#160;</a></span>candidates</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageReader.html">ecs::MessageReader</a>&lt;<a class="el" href="structhelios_1_1input_1_1TextEditingCandidatesMsg.html">TextEditingCandidatesMsg</a>&gt; helios::input::KeyboardMessages::candidates</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00059">59</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af7669c942789916a00d27dd0c9d95f42" name="af7669c942789916a00d27dd0c9d95f42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7669c942789916a00d27dd0c9d95f42">&#9670;&#160;</a></span>connection</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageReader.html">ecs::MessageReader</a>&lt;<a class="el" href="structhelios_1_1input_1_1KeyboardConnectionMsg.html">KeyboardConnectionMsg</a>&gt; helios::input::KeyboardMessages::connection</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00060">60</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac8013a6831c28d63c0b08d96bbc468ee" name="ac8013a6831c28d63c0b08d96bbc468ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8013a6831c28d63c0b08d96bbc468ee">&#9670;&#160;</a></span>editing</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1MessageReader.html">ecs::MessageReader</a>&lt;<a class="el" href="structhelios_1_1input_1_1TextEditingMsg.html">TextEditingMsg</a>&gt; helios::input::KeyboardMessages::editing</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00058">58</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a0b7d802d26e2559ea49fe7c67b2e37a2" name="a0b7d802d26e2559ea49fe7c67b2e37a2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0b7d802d26e2559ea49fe7c67b2e37a2">&#9670;&#160;</a></span>keys</h2>
 
@@ -205,7 +256,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00045">45</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00056">56</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>
@@ -221,7 +272,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00046">46</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00057">57</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>

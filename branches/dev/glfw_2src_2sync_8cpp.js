@@ -13,7 +13,7 @@ var glfw_2src_2sync_8cpp =
     [ "helios::glfw::ApplyWindowHints", "namespacehelios_1_1glfw.html#a0437ded2a868be23dd41e719ad8dc823", null ],
     [ "helios::glfw::ApplyWindowIcons", "namespacehelios_1_1glfw.html#a30ae5492f5c588e14ffdc1700ca9f3e0", null ],
     [ "helios::glfw::MarkMonitorDependentDirty", "namespacehelios_1_1glfw.html#aacc959a7b5330949bf6415ae772cca19", null ],
-    [ "helios::glfw::MonitorAtIndex", "namespacehelios_1_1glfw.html#af14188e96a299298c6062dd3d39041e1", null ],
+    [ "helios::glfw::MonitorAtIndex", "namespacehelios_1_1glfw.html#a7ae7114089171fa3b4180482d5179b31", null ],
     [ "helios::glfw::anonymous_namespace{sync.cpp}::MonitorContainingPoint", "namespacehelios_1_1glfw_1_1anonymous__namespace_02sync_8cpp_03.html#a4ec8ff766a28b6fd10d36879bed76cfc", null ],
     [ "helios::glfw::anonymous_namespace{sync.cpp}::MonitorForWindow", "namespacehelios_1_1glfw_1_1anonymous__namespace_02sync_8cpp_03.html#a3199e211789c45fec1bb0c8ba57e2ce0", null ],
     [ "helios::glfw::RefreshMonitors", "namespacehelios_1_1glfw.html#a180dea21452f13572f505bc482d259e3", null ],

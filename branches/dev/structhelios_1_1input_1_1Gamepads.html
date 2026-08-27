@@ -183,18 +183,18 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <p>Fixed gamepad slot table (GLFW joystick range 0..15).  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aaaf7c28f169c68b174214616775a6966" id="r_aaaf7c28f169c68b174214616775a6966"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> *&#160;</td><td class="memItemRight"><a class="el" href="#aaaf7c28f169c68b174214616775a6966">TryGet</a> (int32_t id) noexcept</td></tr>
-<tr class="memdesc:aaaf7c28f169c68b174214616775a6966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up a mutable gamepad slot by id.  <br /></td></tr>
-<tr class="memitem:aea18e9a2bba024317e3fdf1a92ae6d05" id="r_aea18e9a2bba024317e3fdf1a92ae6d05"><td class="memItemLeft">constexpr const <a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> *&#160;</td><td class="memItemRight"><a class="el" href="#aea18e9a2bba024317e3fdf1a92ae6d05">TryGet</a> (int32_t id) const noexcept</td></tr>
-<tr class="memdesc:aea18e9a2bba024317e3fdf1a92ae6d05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up a const gamepad slot by id.  <br /></td></tr>
-<tr class="memitem:a70f2f29fe98abe1021d105d1c1d0aef1" id="r_a70f2f29fe98abe1021d105d1c1d0aef1"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a70f2f29fe98abe1021d105d1c1d0aef1">TryGetFilter</a> (int32_t id) noexcept</td></tr>
-<tr class="memdesc:a70f2f29fe98abe1021d105d1c1d0aef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up mutable axis-filter state by id.  <br /></td></tr>
-<tr class="memitem:a71e966e636194853e4e90fd7f9593b77" id="r_a71e966e636194853e4e90fd7f9593b77"><td class="memItemLeft">constexpr const <a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a71e966e636194853e4e90fd7f9593b77">TryGetFilter</a> (int32_t id) const noexcept</td></tr>
-<tr class="memdesc:a71e966e636194853e4e90fd7f9593b77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up const axis-filter state by id.  <br /></td></tr>
+<tr class="memitem:a31f970246092a755de6defa62ab5103b" id="r_a31f970246092a755de6defa62ab5103b"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a31f970246092a755de6defa62ab5103b">TryGet</a> (<a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a> id) noexcept</td></tr>
+<tr class="memdesc:a31f970246092a755de6defa62ab5103b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up a mutable gamepad slot by id.  <br /></td></tr>
+<tr class="memitem:a51251d9fd68c0fbb2237423dafb2ac5c" id="r_a51251d9fd68c0fbb2237423dafb2ac5c"><td class="memItemLeft">constexpr const <a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a51251d9fd68c0fbb2237423dafb2ac5c">TryGet</a> (<a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a> id) const noexcept</td></tr>
+<tr class="memdesc:a51251d9fd68c0fbb2237423dafb2ac5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up a const gamepad slot by id.  <br /></td></tr>
+<tr class="memitem:ac56ea074e0f4215290243e27904ba604" id="r_ac56ea074e0f4215290243e27904ba604"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> *&#160;</td><td class="memItemRight"><a class="el" href="#ac56ea074e0f4215290243e27904ba604">TryGetFilter</a> (<a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a> id) noexcept</td></tr>
+<tr class="memdesc:ac56ea074e0f4215290243e27904ba604"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up mutable axis-filter state by id.  <br /></td></tr>
+<tr class="memitem:a2d29a3e562ebce5aba5c89504651720b" id="r_a2d29a3e562ebce5aba5c89504651720b"><td class="memItemLeft">constexpr const <a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a2d29a3e562ebce5aba5c89504651720b">TryGetFilter</a> (<a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a> id) const noexcept</td></tr>
+<tr class="memdesc:a2d29a3e562ebce5aba5c89504651720b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up const axis-filter state by id.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -210,10 +210,10 @@ Static Public Attributes</h2></td></tr>
 <div class="textblock"><p>Fixed gamepad slot table (GLFW joystick range 0..15). </p>
 <p><span class="tt"><a class="el" href="#a30c97d8e6c2279abb7402f6dd9341561">filters</a></span> is rest-center bookkeeping for <span class="tt"><a class="el" href="structhelios_1_1input_1_1UpdateGamepadState.html" title="Applies gamepad messages into the Gamepads resource.">UpdateGamepadState</a></span>. </p>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00109">109</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00414">414</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="aea18e9a2bba024317e3fdf1a92ae6d05" name="aea18e9a2bba024317e3fdf1a92ae6d05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea18e9a2bba024317e3fdf1a92ae6d05">&#9670;&#160;</a></span>TryGet() <span class="overload">[1/2]</span></h2>
+<a id="a51251d9fd68c0fbb2237423dafb2ac5c" name="a51251d9fd68c0fbb2237423dafb2ac5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51251d9fd68c0fbb2237423dafb2ac5c">&#9670;&#160;</a></span>TryGet() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,7 +224,7 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">const <a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> * helios::input::Gamepads::TryGet </td>
           <td>(</td>
-          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -244,12 +244,12 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the slot, or <span class="tt">nullptr</span> when out of range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00153">153</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00459">459</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aaaf7c28f169c68b174214616775a6966" name="aaaf7c28f169c68b174214616775a6966"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaaf7c28f169c68b174214616775a6966">&#9670;&#160;</a></span>TryGet() <span class="overload">[2/2]</span></h2>
+<a id="a31f970246092a755de6defa62ab5103b" name="a31f970246092a755de6defa62ab5103b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31f970246092a755de6defa62ab5103b">&#9670;&#160;</a></span>TryGet() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -260,7 +260,7 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structhelios_1_1input_1_1Gamepad.html">Gamepad</a> * helios::input::Gamepads::TryGet </td>
           <td>(</td>
-          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -280,12 +280,12 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the slot, or <span class="tt">nullptr</span> when out of range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00146">146</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00452">452</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a71e966e636194853e4e90fd7f9593b77" name="a71e966e636194853e4e90fd7f9593b77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71e966e636194853e4e90fd7f9593b77">&#9670;&#160;</a></span>TryGetFilter() <span class="overload">[1/2]</span></h2>
+<a id="a2d29a3e562ebce5aba5c89504651720b" name="a2d29a3e562ebce5aba5c89504651720b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d29a3e562ebce5aba5c89504651720b">&#9670;&#160;</a></span>TryGetFilter() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,7 +296,7 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">const <a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> * helios::input::Gamepads::TryGetFilter </td>
           <td>(</td>
-          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -316,12 +316,12 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the filter slot, or <span class="tt">nullptr</span> when out of range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00167">167</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00473">473</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a70f2f29fe98abe1021d105d1c1d0aef1" name="a70f2f29fe98abe1021d105d1c1d0aef1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70f2f29fe98abe1021d105d1c1d0aef1">&#9670;&#160;</a></span>TryGetFilter() <span class="overload">[2/2]</span></h2>
+<a id="ac56ea074e0f4215290243e27904ba604" name="ac56ea074e0f4215290243e27904ba604"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac56ea074e0f4215290243e27904ba604">&#9670;&#160;</a></span>TryGetFilter() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -332,7 +332,7 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structhelios_1_1input_1_1GamepadAxisFilter.html">GamepadAxisFilter</a> * helios::input::Gamepads::TryGetFilter </td>
           <td>(</td>
-          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -352,7 +352,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the filter slot, or <span class="tt">nullptr</span> when out of range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00160">160</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00466">466</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -369,7 +369,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00114">114</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00419">419</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -393,7 +393,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00110">110</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00415">415</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -417,7 +417,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00111">111</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00416">416</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -433,7 +433,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00113">113</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00418">418</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>

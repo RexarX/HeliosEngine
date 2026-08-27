@@ -5,7 +5,7 @@ var namespacehelios_1_1sdl3_1_1window =
     ] ],
     [ "anonymous_namespace{event_handlers.cpp}", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html", [
       [ "DispatchEvent", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html#aa3119aa0c0e0bd825e889bbbb45309a9", null ],
-      [ "DisplayIndex", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html#a0f35c059446c92a9ce657f8ed38ab2f1", null ],
+      [ "DisplayIndex", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html#a77b8e2355cdd8c91614d57dfef4c3531", null ],
       [ "EntityForWindowEvent", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html#a8831760da992cf8c1c3dc65dfc8faa6e", null ],
       [ "HandleClipboardEvent", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html#a10094ae9b1c564c98fe471da9583d827", null ],
       [ "HandleDisplayEvent", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html#abd40c72c0dd99afed970887e67b5e0eb", null ],
@@ -48,7 +48,7 @@ var namespacehelios_1_1sdl3_1_1window =
     [ "ApplySizeLimits", "namespacehelios_1_1sdl3_1_1window.html#a59084d28bbb14a9ef5a86e9896ae0a47", null ],
     [ "ApplyWindowIcons", "namespacehelios_1_1sdl3_1_1window.html#a84f8e6d92b73f36b1b0962e1e24f02ee", null ],
     [ "BuildCreationFlags", "namespacehelios_1_1sdl3_1_1window.html#a10faf1c2985cfb8dc39bee3238522e00", null ],
-    [ "DisplayAtIndex", "namespacehelios_1_1sdl3_1_1window.html#af53cf223d0ae81677dd347c2aca3c0bd", null ],
+    [ "DisplayAtIndex", "namespacehelios_1_1sdl3_1_1window.html#a389e63e20b59c128d300d44629408e07", null ],
     [ "FindEntry", "namespacehelios_1_1sdl3_1_1window.html#a9c0d240236cbac27688c93bfcf66949b", null ],
     [ "FindEntry", "namespacehelios_1_1sdl3_1_1window.html#a7a564e236a1768ac910d24270af055b5", null ],
     [ "FindWindowMapEntry", "namespacehelios_1_1sdl3_1_1window.html#a1add2e11741a2f202d173cb901f91389", null ],

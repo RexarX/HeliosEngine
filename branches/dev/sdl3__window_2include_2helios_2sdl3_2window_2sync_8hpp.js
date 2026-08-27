@@ -15,7 +15,7 @@ var sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp =
     [ "helios::sdl3::window::ApplySizeLimits", "namespacehelios_1_1sdl3_1_1window.html#a59084d28bbb14a9ef5a86e9896ae0a47", null ],
     [ "helios::sdl3::window::ApplyWindowIcons", "namespacehelios_1_1sdl3_1_1window.html#a84f8e6d92b73f36b1b0962e1e24f02ee", null ],
     [ "helios::sdl3::window::BuildCreationFlags", "namespacehelios_1_1sdl3_1_1window.html#a10faf1c2985cfb8dc39bee3238522e00", null ],
-    [ "helios::sdl3::window::DisplayAtIndex", "namespacehelios_1_1sdl3_1_1window.html#af53cf223d0ae81677dd347c2aca3c0bd", null ],
+    [ "helios::sdl3::window::DisplayAtIndex", "namespacehelios_1_1sdl3_1_1window.html#a389e63e20b59c128d300d44629408e07", null ],
     [ "helios::sdl3::window::MarkMonitorDependentDirty", "namespacehelios_1_1sdl3_1_1window.html#a1943e5ba7785f1848ed76a110595e361", null ],
     [ "helios::sdl3::window::RefreshMonitors", "namespacehelios_1_1sdl3_1_1window.html#a3d2cab5ad6a3d86d4febe909e6645da9", null ],
     [ "helios::sdl3::window::ResolveCreationSize", "namespacehelios_1_1sdl3_1_1window.html#a4ef832d2ed250ba2c43eb80b7a31b4be", null ],

@@ -182,12 +182,12 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <p>Clears per-frame edge state and mouse deltas at the start of a frame.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="systems_8hpp_source.html">systems.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="clear_8hpp_source.html">clear.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa71f428899ef5e2576114f30805600bb" id="r_aa71f428899ef5e2576114f30805600bb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa71f428899ef5e2576114f30805600bb">operator()</a> (<a class="el" href="structhelios_1_1input_1_1State.html">State</a> state) const</td></tr>
-<tr class="memdesc:aa71f428899ef5e2576114f30805600bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears just-pressed/released edges and mouse delta/scroll.  <br /></td></tr>
+<tr class="memdesc:aa71f428899ef5e2576114f30805600bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears just-pressed/released edges and mouse / touch deltas.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -196,7 +196,7 @@ Static Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Clears per-frame edge state and mouse deltas at the start of a frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="systems_8hpp_source.html#l00023">23</a> of file <a class="el" href="systems_8hpp_source.html">systems.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="clear_8hpp_source.html#l00022">22</a> of file <a class="el" href="clear_8hpp_source.html">clear.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="aa71f428899ef5e2576114f30805600bb" name="aa71f428899ef5e2576114f30805600bb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa71f428899ef5e2576114f30805600bb">&#9670;&#160;</a></span>operator()()</h2>
@@ -213,15 +213,15 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Clears just-pressed/released edges and mouse delta/scroll. </p>
+<p>Clears just-pressed/released edges and mouse / touch deltas. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>Mutable keyboard, mouse, gamepad, joystick, and pen resources </td></tr>
+    <tr><td class="paramname">state</td><td>Mutable keyboard, mouse, gamepad, joystick, pen, touch, and sensor resources </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00166">166</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="clear_8cpp_source.html#l00016">16</a> of file <a class="el" href="clear_8cpp_source.html">clear.cpp</a>.</p>
 
 </div>
 </div>
@@ -246,7 +246,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8hpp_source.html#l00024">24</a> of file <a class="el" href="systems_8hpp_source.html">systems.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="clear_8hpp_source.html#l00023">23</a> of file <a class="el" href="clear_8hpp_source.html">clear.hpp</a>.</p>
 
 </div>
 </div>

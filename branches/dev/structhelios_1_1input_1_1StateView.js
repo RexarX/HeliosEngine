@@ -4,5 +4,7 @@ var structhelios_1_1input_1_1StateView =
     [ "joysticks", "structhelios_1_1input_1_1StateView.html#acdf9400baed6f5acd341cd6496334808", null ],
     [ "keyboard", "structhelios_1_1input_1_1StateView.html#af76d9b3fb9d015eb6a6e450da74f60ac", null ],
     [ "mouse", "structhelios_1_1input_1_1StateView.html#ac7bea75579adcc3fe772016640b97c85", null ],
-    [ "pens", "structhelios_1_1input_1_1StateView.html#ab04de9784e082f1882de156ad5b80e78", null ]
+    [ "pens", "structhelios_1_1input_1_1StateView.html#ab04de9784e082f1882de156ad5b80e78", null ],
+    [ "sensors", "structhelios_1_1input_1_1StateView.html#ac10704e2f385054f1f77e0e911443525", null ],
+    [ "touches", "structhelios_1_1input_1_1StateView.html#af22ec43063d7cd2f83946030a2039ab6", null ]
 ];

@@ -13,7 +13,7 @@ var sdl3__window_2src_2sync_8cpp =
     [ "helios::sdl3::window::ApplySizeLimits", "namespacehelios_1_1sdl3_1_1window.html#a59084d28bbb14a9ef5a86e9896ae0a47", null ],
     [ "helios::sdl3::window::ApplyWindowIcons", "namespacehelios_1_1sdl3_1_1window.html#a84f8e6d92b73f36b1b0962e1e24f02ee", null ],
     [ "helios::sdl3::window::BuildCreationFlags", "namespacehelios_1_1sdl3_1_1window.html#a10faf1c2985cfb8dc39bee3238522e00", null ],
-    [ "helios::sdl3::window::DisplayAtIndex", "namespacehelios_1_1sdl3_1_1window.html#af53cf223d0ae81677dd347c2aca3c0bd", null ],
+    [ "helios::sdl3::window::DisplayAtIndex", "namespacehelios_1_1sdl3_1_1window.html#a389e63e20b59c128d300d44629408e07", null ],
     [ "helios::sdl3::window::anonymous_namespace{sync.cpp}::DisplayContainingPoint", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html#ab24b5a2c586d332066d7a2140c405d25", null ],
     [ "helios::sdl3::window::anonymous_namespace{sync.cpp}::DisplayForWindow", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html#a7b9fb770dd81af3659a346c8969c3156", null ],
     [ "helios::sdl3::window::anonymous_namespace{sync.cpp}::FindFullscreenMode", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html#a1526a86148a1f02fe7d8c08175857140", null ],

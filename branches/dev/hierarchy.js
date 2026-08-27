@@ -102,19 +102,19 @@ var hierarchy =
     [ "helios::ecs::CompositeSystemParam&lt; input::JoystickWriters, MessageWriter&lt; input::JoystickConnectionMsg &gt;, MessageWriter&lt; input::JoystickButtonInputMsg &gt;, MessageWriter&lt; input::JoystickAxisChangedMsg &gt;, MessageWriter&lt; input::JoystickHatChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
       [ "helios::ecs::SystemParamTraits< input::JoystickWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1JoystickWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; input::KeyboardMessages, MessageReader&lt; input::KeyboardInputMsg &gt;, MessageReader&lt; input::TextInputMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+    [ "helios::ecs::CompositeSystemParam&lt; input::KeyboardMessages, MessageReader&lt; input::KeyboardInputMsg &gt;, MessageReader&lt; input::TextInputMsg &gt;, MessageReader&lt; input::TextEditingMsg &gt;, MessageReader&lt; input::TextEditingCandidatesMsg &gt;, MessageReader&lt; input::KeyboardConnectionMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
       [ "helios::ecs::SystemParamTraits< input::KeyboardMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1KeyboardMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; input::KeyboardWriters, MessageWriter&lt; input::KeyboardInputMsg &gt;, MessageWriter&lt; input::TextInputMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+    [ "helios::ecs::CompositeSystemParam&lt; input::KeyboardWriters, MessageWriter&lt; input::KeyboardInputMsg &gt;, MessageWriter&lt; input::TextInputMsg &gt;, MessageWriter&lt; input::TextEditingMsg &gt;, MessageWriter&lt; input::TextEditingCandidatesMsg &gt;, MessageWriter&lt; input::KeyboardConnectionMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
       [ "helios::ecs::SystemParamTraits< input::KeyboardWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1KeyboardWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; input::Messages, input::KeyboardMessages, input::MouseMessages, input::GamepadMessages, input::JoystickMessages, input::PenMessages &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+    [ "helios::ecs::CompositeSystemParam&lt; input::Messages, input::KeyboardMessages, input::MouseMessages, input::GamepadMessages, input::JoystickMessages, input::PenMessages, input::TouchMessages, input::SensorMessages &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
       [ "helios::ecs::SystemParamTraits< input::Messages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1Messages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; input::MouseMessages, MessageReader&lt; input::MouseButtonInputMsg &gt;, MessageReader&lt; input::CursorMovedMsg &gt;, MessageReader&lt; input::MouseMotionMsg &gt;, MessageReader&lt; input::MouseWheelMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+    [ "helios::ecs::CompositeSystemParam&lt; input::MouseMessages, MessageReader&lt; input::MouseButtonInputMsg &gt;, MessageReader&lt; input::CursorMovedMsg &gt;, MessageReader&lt; input::MouseMotionMsg &gt;, MessageReader&lt; input::MouseWheelMsg &gt;, MessageReader&lt; input::MouseConnectionMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
       [ "helios::ecs::SystemParamTraits< input::MouseMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1MouseMessages_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; input::MouseWriters, MessageWriter&lt; input::MouseButtonInputMsg &gt;, MessageWriter&lt; input::CursorMovedMsg &gt;, MessageWriter&lt; input::MouseMotionMsg &gt;, MessageWriter&lt; input::MouseWheelMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+    [ "helios::ecs::CompositeSystemParam&lt; input::MouseWriters, MessageWriter&lt; input::MouseButtonInputMsg &gt;, MessageWriter&lt; input::CursorMovedMsg &gt;, MessageWriter&lt; input::MouseMotionMsg &gt;, MessageWriter&lt; input::MouseWheelMsg &gt;, MessageWriter&lt; input::MouseConnectionMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
       [ "helios::ecs::SystemParamTraits< input::MouseWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1MouseWriters_01_4.html", null ]
     ] ],
     [ "helios::ecs::CompositeSystemParam&lt; input::PenMessages, MessageReader&lt; input::PenProximityMsg &gt;, MessageReader&lt; input::PenTouchMsg &gt;, MessageReader&lt; input::PenButtonInputMsg &gt;, MessageReader&lt; input::PenMovedMsg &gt;, MessageReader&lt; input::PenAxisChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
@@ -123,13 +123,25 @@ var hierarchy =
     [ "helios::ecs::CompositeSystemParam&lt; input::PenWriters, MessageWriter&lt; input::PenProximityMsg &gt;, MessageWriter&lt; input::PenTouchMsg &gt;, MessageWriter&lt; input::PenButtonInputMsg &gt;, MessageWriter&lt; input::PenMovedMsg &gt;, MessageWriter&lt; input::PenAxisChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
       [ "helios::ecs::SystemParamTraits< input::PenWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1PenWriters_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; input::State, Res&lt; input::Keyboard &gt;, Res&lt; input::Mouse &gt;, Res&lt; input::Gamepads &gt;, Res&lt; input::Joysticks &gt;, Res&lt; input::Pens &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+    [ "helios::ecs::CompositeSystemParam&lt; input::SensorMessages, MessageReader&lt; input::SensorConnectionMsg &gt;, MessageReader&lt; input::SensorUpdateMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::SensorMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1SensorMessages_01_4.html", null ]
+    ] ],
+    [ "helios::ecs::CompositeSystemParam&lt; input::SensorWriters, MessageWriter&lt; input::SensorConnectionMsg &gt;, MessageWriter&lt; input::SensorUpdateMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::SensorWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1SensorWriters_01_4.html", null ]
+    ] ],
+    [ "helios::ecs::CompositeSystemParam&lt; input::State, Res&lt; input::Keyboard &gt;, Res&lt; input::Mouse &gt;, Res&lt; input::Gamepads &gt;, Res&lt; input::Joysticks &gt;, Res&lt; input::Pens &gt;, Res&lt; input::Touches &gt;, Res&lt; input::Sensors &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
       [ "helios::ecs::SystemParamTraits< input::State >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1State_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; input::StateView, Res&lt; const input::Keyboard &gt;, Res&lt; const input::Mouse &gt;, Res&lt; const input::Gamepads &gt;, Res&lt; const input::Joysticks &gt;, Res&lt; const input::Pens &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+    [ "helios::ecs::CompositeSystemParam&lt; input::StateView, Res&lt; const input::Keyboard &gt;, Res&lt; const input::Mouse &gt;, Res&lt; const input::Gamepads &gt;, Res&lt; const input::Joysticks &gt;, Res&lt; const input::Pens &gt;, Res&lt; const input::Touches &gt;, Res&lt; const input::Sensors &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
       [ "helios::ecs::SystemParamTraits< input::StateView >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1StateView_01_4.html", null ]
     ] ],
-    [ "helios::ecs::CompositeSystemParam&lt; input::Writers, input::KeyboardWriters, input::MouseWriters, input::GamepadWriters, input::JoystickWriters, input::PenWriters &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+    [ "helios::ecs::CompositeSystemParam&lt; input::TouchMessages, MessageReader&lt; input::TouchInputMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::TouchMessages >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1TouchMessages_01_4.html", null ]
+    ] ],
+    [ "helios::ecs::CompositeSystemParam&lt; input::TouchWriters, MessageWriter&lt; input::TouchInputMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
+      [ "helios::ecs::SystemParamTraits< input::TouchWriters >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1TouchWriters_01_4.html", null ]
+    ] ],
+    [ "helios::ecs::CompositeSystemParam&lt; input::Writers, input::KeyboardWriters, input::MouseWriters, input::GamepadWriters, input::JoystickWriters, input::PenWriters, input::TouchWriters, input::SensorWriters &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
       [ "helios::ecs::SystemParamTraits< input::Writers >", "structhelios_1_1ecs_1_1SystemParamTraits_3_01input_1_1Writers_01_4.html", null ]
     ] ],
     [ "helios::ecs::CompositeSystemParam&lt; window::AppearanceMessages, MessageReader&lt; window::ModeChangedMsg &gt;, MessageReader&lt; window::CursorModeChangedMsg &gt;, MessageReader&lt; window::VisibilityChangedMsg &gt;, MessageReader&lt; window::FocusChangedMsg &gt;, MessageReader&lt; window::MaximizedChangedMsg &gt;, MessageReader&lt; window::IconChangedMsg &gt;, MessageReader&lt; window::ResizableChangedMsg &gt;, MessageReader&lt; window::DecoratedChangedMsg &gt;, MessageReader&lt; window::OpacityChangedMsg &gt;, MessageReader&lt; window::FloatingChangedMsg &gt;, MessageReader&lt; window::HoverChangedMsg &gt;, MessageReader&lt; window::MousePassthroughChangedMsg &gt; &gt;", "structhelios_1_1ecs_1_1CompositeSystemParam.html", [
@@ -325,11 +337,13 @@ var hierarchy =
     [ "std::formatter&lt; helios::input::Joysticks &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Joysticks_01_4.html", null ],
     [ "std::formatter&lt; helios::input::Key &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Key_01_4.html", null ],
     [ "std::formatter&lt; helios::input::Keyboard &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Keyboard_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::KeyboardConnectionMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1KeyboardConnectionMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::input::KeyboardInputMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1KeyboardInputMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::input::Modifiers &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Modifiers_01_4.html", null ],
     [ "std::formatter&lt; helios::input::Mouse &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Mouse_01_4.html", null ],
     [ "std::formatter&lt; helios::input::MouseButton &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseButton_01_4.html", null ],
     [ "std::formatter&lt; helios::input::MouseButtonInputMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseButtonInputMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::MouseConnectionMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseConnectionMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::input::MouseMotionMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseMotionMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::input::MouseWheelMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1MouseWheelMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::input::Pen &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Pen_01_4.html", null ],
@@ -342,8 +356,20 @@ var hierarchy =
     [ "std::formatter&lt; helios::input::PenProximityMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1PenProximityMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::input::Pens &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Pens_01_4.html", null ],
     [ "std::formatter&lt; helios::input::PenTouchMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1PenTouchMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Sensor &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Sensor_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::SensorConnectionMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1SensorConnectionMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Sensors &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Sensors_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::SensorType &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1SensorType_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::SensorUpdateMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1SensorUpdateMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::input::Settings &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Settings_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::TextEditingCandidatesMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1TextEditingCandidatesMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::TextEditingMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1TextEditingMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::input::TextInputMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1TextInputMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::TouchDeviceType &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1TouchDeviceType_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::Touches &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1Touches_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::TouchFinger &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1TouchFinger_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::TouchInputMsg &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1TouchInputMsg_01_4.html", null ],
+    [ "std::formatter&lt; helios::input::TouchPhase &gt;", "structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html", null ],
     [ "std::formatter&lt; helios::window::ClientApi &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ClientApi_01_4.html", null ],
     [ "std::formatter&lt; helios::window::ClientResizedMsg &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1ClientResizedMsg_01_4.html", null ],
     [ "std::formatter&lt; helios::window::Clipboard &gt;", "structstd_1_1formatter_3_01helios_1_1window_1_1Clipboard_01_4.html", null ],
@@ -524,6 +550,7 @@ var hierarchy =
     [ "helios::input::Joysticks", "structhelios_1_1input_1_1Joysticks.html", null ],
     [ "helios::input::JoystickWriters", "structhelios_1_1input_1_1JoystickWriters.html", null ],
     [ "helios::input::Keyboard", "structhelios_1_1input_1_1Keyboard.html", null ],
+    [ "helios::input::KeyboardConnectionMsg", "structhelios_1_1input_1_1KeyboardConnectionMsg.html", null ],
     [ "helios::input::KeyboardInputMsg", "structhelios_1_1input_1_1KeyboardInputMsg.html", null ],
     [ "helios::input::KeyboardMessages", "structhelios_1_1input_1_1KeyboardMessages.html", null ],
     [ "helios::input::KeyboardWriters", "structhelios_1_1input_1_1KeyboardWriters.html", null ],
@@ -594,15 +621,22 @@ var hierarchy =
       [ "helios::ecs::MessageReader< helios::input::JoystickHatChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::KeyboardInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::TextInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::TextEditingMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::TextEditingCandidatesMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::KeyboardConnectionMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::MouseButtonInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::CursorMovedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::MouseMotionMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::MouseWheelMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::MouseConnectionMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::PenProximityMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::PenTouchMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::PenButtonInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::PenMovedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::input::PenAxisChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::SensorConnectionMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::SensorUpdateMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
+      [ "helios::ecs::MessageReader< helios::input::TouchInputMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::window::ModeChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::window::CursorModeChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
       [ "helios::ecs::MessageReader< helios::window::VisibilityChangedMsg >", "classhelios_1_1ecs_1_1MessageReader.html", null ],
@@ -639,6 +673,7 @@ var hierarchy =
     [ "helios::window::Monitors", "structhelios_1_1window_1_1Monitors.html", null ],
     [ "helios::input::Mouse", "structhelios_1_1input_1_1Mouse.html", null ],
     [ "helios::input::MouseButtonInputMsg", "structhelios_1_1input_1_1MouseButtonInputMsg.html", null ],
+    [ "helios::input::MouseConnectionMsg", "structhelios_1_1input_1_1MouseConnectionMsg.html", null ],
     [ "helios::input::MouseMessages", "structhelios_1_1input_1_1MouseMessages.html", null ],
     [ "helios::input::MouseMotionMsg", "structhelios_1_1input_1_1MouseMotionMsg.html", null ],
     [ "helios::window::MousePassthroughChangedMsg", "structhelios_1_1window_1_1MousePassthroughChangedMsg.html", null ],
@@ -685,6 +720,7 @@ var hierarchy =
     [ "helios::glfw::PollEvents", "structhelios_1_1glfw_1_1PollEvents.html", null ],
     [ "helios::sdl3::window::PollEvents", "structhelios_1_1sdl3_1_1window_1_1PollEvents.html", null ],
     [ "helios::sdl3::input::PollGamepads", "structhelios_1_1sdl3_1_1input_1_1PollGamepads.html", null ],
+    [ "helios::sdl3::input::PollSensors", "structhelios_1_1sdl3_1_1input_1_1PollSensors.html", null ],
     [ "helios::mem::PoolAllocatorOptions", "structhelios_1_1mem_1_1PoolAllocatorOptions.html", null ],
     [ "helios::window::PosChangedMsg", "structhelios_1_1window_1_1PosChangedMsg.html", null ],
     [ "helios::app::PostShutdown", "structhelios_1_1app_1_1PostShutdown.html", null ],
@@ -739,6 +775,14 @@ var hierarchy =
     [ "helios::ecs::ScheduleSystemId", "structhelios_1_1ecs_1_1ScheduleSystemId.html", null ],
     [ "helios::ecs::ScheduleSystemMetadata", "structhelios_1_1ecs_1_1ScheduleSystemMetadata.html", null ],
     [ "helios::profile::ScopedZone", "classhelios_1_1profile_1_1ScopedZone.html", null ],
+    [ "helios::input::Sensor", "structhelios_1_1input_1_1Sensor.html", null ],
+    [ "helios::sdl3::input::SensorCache", "structhelios_1_1sdl3_1_1input_1_1SensorCache.html", null ],
+    [ "helios::input::SensorConnectionMsg", "structhelios_1_1input_1_1SensorConnectionMsg.html", null ],
+    [ "helios::input::SensorMessages", "structhelios_1_1input_1_1SensorMessages.html", null ],
+    [ "helios::input::Sensors", "structhelios_1_1input_1_1Sensors.html", null ],
+    [ "helios::sdl3::input::SensorSlotCache", "structhelios_1_1sdl3_1_1input_1_1SensorSlotCache.html", null ],
+    [ "helios::input::SensorUpdateMsg", "structhelios_1_1input_1_1SensorUpdateMsg.html", null ],
+    [ "helios::input::SensorWriters", "structhelios_1_1input_1_1SensorWriters.html", null ],
     [ "helios::input::Settings", "structhelios_1_1input_1_1Settings.html", null ],
     [ "helios::window::Settings", "structhelios_1_1window_1_1Settings.html", null ],
     [ "helios::app::Shutdown", "structhelios_1_1app_1_1Shutdown.html", null ],
@@ -803,11 +847,20 @@ var hierarchy =
     [ "helios::async::Task", "classhelios_1_1async_1_1Task.html", null ],
     [ "helios::async::TaskGraph", "classhelios_1_1async_1_1TaskGraph.html", null ],
     [ "helios::mem::TemporaryStorage", "classhelios_1_1mem_1_1TemporaryStorage.html", null ],
+    [ "helios::input::TextEditingCandidatesMsg", "structhelios_1_1input_1_1TextEditingCandidatesMsg.html", null ],
+    [ "helios::input::TextEditingMsg", "structhelios_1_1input_1_1TextEditingMsg.html", null ],
     [ "helios::input::TextInputMsg", "structhelios_1_1input_1_1TextInputMsg.html", null ],
     [ "helios::mem::TemporaryStorage::ThreadBinding", "structhelios_1_1mem_1_1TemporaryStorage_1_1ThreadBinding.html", null ],
     [ "helios::app::Time", "structhelios_1_1app_1_1Time.html", null ],
     [ "helios::utils::Timer&lt; Clock &gt;", "classhelios_1_1utils_1_1Timer.html", null ],
     [ "helios::ecs::anonymous_namespace{scheduler.cpp}::TopoNode", "structhelios_1_1ecs_1_1anonymous__namespace_02scheduler_8cpp_03_1_1TopoNode.html", null ],
+    [ "helios::sdl3::input::TouchCache", "structhelios_1_1sdl3_1_1input_1_1TouchCache.html", null ],
+    [ "helios::input::Touches", "structhelios_1_1input_1_1Touches.html", null ],
+    [ "helios::input::TouchFinger", "structhelios_1_1input_1_1TouchFinger.html", null ],
+    [ "helios::input::TouchInputMsg", "structhelios_1_1input_1_1TouchInputMsg.html", null ],
+    [ "helios::input::TouchMessages", "structhelios_1_1input_1_1TouchMessages.html", null ],
+    [ "helios::sdl3::input::TouchSlotCache", "structhelios_1_1sdl3_1_1input_1_1TouchSlotCache.html", null ],
+    [ "helios::input::TouchWriters", "structhelios_1_1input_1_1TouchWriters.html", null ],
     [ "helios::mem::TreiberStack", "classhelios_1_1mem_1_1TreiberStack.html", null ],
     [ "std::true_type", null, [
       [ "helios::utils::details::UniqueTypesHelper< T, Rest... >", "structhelios_1_1utils_1_1details_1_1UniqueTypesHelper_3_01T_00_01Rest_8_8_8_01_4.html", null ],
@@ -840,8 +893,10 @@ var hierarchy =
     [ "helios::input::UpdateKeyboardState", "structhelios_1_1input_1_1UpdateKeyboardState.html", null ],
     [ "helios::input::UpdateMouseState", "structhelios_1_1input_1_1UpdateMouseState.html", null ],
     [ "helios::input::UpdatePenState", "structhelios_1_1input_1_1UpdatePenState.html", null ],
+    [ "helios::input::UpdateSensorState", "structhelios_1_1input_1_1UpdateSensorState.html", null ],
     [ "helios::app::UpdateStage", "structhelios_1_1app_1_1UpdateStage.html", null ],
     [ "helios::app::UpdateTime", "structhelios_1_1app_1_1UpdateTime.html", null ],
+    [ "helios::input::UpdateTouchState", "structhelios_1_1input_1_1UpdateTouchState.html", null ],
     [ "helios::Uuid", "classhelios_1_1Uuid.html", null ],
     [ "helios::UuidGenerator", "classhelios_1_1UuidGenerator.html", null ],
     [ "helios::ecs::details::ValidWorldComponentAccessFromTuple&lt; WorldT, Tuple &gt;", "structhelios_1_1ecs_1_1details_1_1ValidWorldComponentAccessFromTuple.html", null ],

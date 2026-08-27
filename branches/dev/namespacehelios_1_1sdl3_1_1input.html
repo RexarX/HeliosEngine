@@ -185,6 +185,7 @@ Namespaces</h2></td></tr>
 <tr class="memitem:anonymous_5Fnamespace_7Bapply_5Fcursors_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bapply_5Fcursors_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html">anonymous_namespace{apply_cursors.cpp}</a></td></tr>
 <tr class="memitem:anonymous_5Fnamespace_7Bevent_5Fhandlers_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bevent_5Fhandlers_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02event__handlers_8cpp_03.html">anonymous_namespace{event_handlers.cpp}</a></td></tr>
 <tr class="memitem:anonymous_5Fnamespace_7Bpoll_5Fgamepads_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bpoll_5Fgamepads_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02poll__gamepads_8cpp_03.html">anonymous_namespace{poll_gamepads.cpp}</a></td></tr>
+<tr class="memitem:anonymous_5Fnamespace_7Bpoll_5Fsensors_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bpoll_5Fsensors_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02poll__sensors_8cpp_03.html">anonymous_namespace{poll_sensors.cpp}</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -218,17 +219,29 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SDL3 backend that emits <span class="tt"><a class="el" href="namespacehelios_1_1input.html">helios::input</a></span> messages and applies cursors.  <a href="structhelios_1_1sdl3_1_1input_1_1Plugin.html#details">More...</a><br /></td></tr>
 <tr class="memitem:PollGamepads" id="r_PollGamepads"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1input_1_1PollGamepads.html">PollGamepads</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Polls open SDL gamepads and unmapped joysticks.  <a href="structhelios_1_1sdl3_1_1input_1_1PollGamepads.html#details">More...</a><br /></td></tr>
+<tr class="memitem:PollSensors" id="r_PollSensors"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1input_1_1PollSensors.html">PollSensors</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerates SDL sensors and emits connection / disconnect messages.  <a href="structhelios_1_1sdl3_1_1input_1_1PollSensors.html#details">More...</a><br /></td></tr>
+<tr class="memitem:SensorCache" id="r_SensorCache"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1input_1_1SensorCache.html">SensorCache</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open standalone sensors keyed by slot <span class="tt">0..7</span>.  <a href="structhelios_1_1sdl3_1_1input_1_1SensorCache.html#details">More...</a><br /></td></tr>
+<tr class="memitem:SensorSlotCache" id="r_SensorSlotCache"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1input_1_1SensorSlotCache.html">SensorSlotCache</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cached open SDL sensor mapped to a <span class="tt">Sensors</span> slot.  <a href="structhelios_1_1sdl3_1_1input_1_1SensorSlotCache.html#details">More...</a><br /></td></tr>
 <tr class="memitem:StartupSet" id="r_StartupSet"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1input_1_1StartupSet.html">StartupSet</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Named set for input <span class="tt"><a class="el" href="structhelios_1_1sdl3_1_1input_1_1Init.html" title="Retains the SDL gamepad subsystem and registers input event handlers.">Init</a></span> on <span class="tt"><a class="el" href="namespacehelios_1_1app.html#a089b3bb68338019f95afad425d0a8dd6" title="Builtin main-thread startup schedule.">app::kMainStartup</a></span>.  <a href="structhelios_1_1sdl3_1_1input_1_1StartupSet.html#details">More...</a><br /></td></tr>
+<tr class="memitem:TouchCache" id="r_TouchCache"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1input_1_1TouchCache.html">TouchCache</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open fingers keyed by slot <span class="tt">0..15</span>.  <a href="structhelios_1_1sdl3_1_1input_1_1TouchCache.html#details">More...</a><br /></td></tr>
+<tr class="memitem:TouchSlotCache" id="r_TouchSlotCache"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1input_1_1TouchSlotCache.html">TouchSlotCache</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cached SDL touch finger mapped to a <span class="tt">Touches</span> slot.  <a href="structhelios_1_1sdl3_1_1input_1_1TouchSlotCache.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a1e1370fad3eb1c1ef3ddaa6e600992d6" id="r_a1e1370fad3eb1c1ef3ddaa6e600992d6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1e1370fad3eb1c1ef3ddaa6e600992d6">DestroyCursorCache</a> (<a class="el" href="structhelios_1_1sdl3_1_1input_1_1CursorCache.html">CursorCache</a> &amp;cache)</td></tr>
 <tr class="memdesc:a1e1370fad3eb1c1ef3ddaa6e600992d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys all cached SDL cursor objects.  <br /></td></tr>
 <tr class="memitem:ac151b8925360e6e15db67c39dd6aab9f" id="r_ac151b8925360e6e15db67c39dd6aab9f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac151b8925360e6e15db67c39dd6aab9f">RegisterEventHandlers</a> (<a class="el" href="structhelios_1_1sdl3_1_1EventDispatcher.html">EventDispatcher</a> &amp;dispatcher)</td></tr>
-<tr class="memdesc:ac151b8925360e6e15db67c39dd6aab9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers keyboard, mouse, and pen SDL event handlers on the dispatcher.  <br /></td></tr>
+<tr class="memdesc:ac151b8925360e6e15db67c39dd6aab9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers keyboard, mouse, pen, touch, and sensor SDL event handlers on the dispatcher.  <br /></td></tr>
 <tr class="memitem:a702091b8cc3a4da04038b4cd6aba8a5f" id="r_a702091b8cc3a4da04038b4cd6aba8a5f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a702091b8cc3a4da04038b4cd6aba8a5f">DestroyGamepadCache</a> (<a class="el" href="structhelios_1_1sdl3_1_1input_1_1GamepadCache.html">GamepadCache</a> &amp;cache)</td></tr>
 <tr class="memdesc:a702091b8cc3a4da04038b4cd6aba8a5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes all open SDL devices and clears slot state.  <br /></td></tr>
+<tr class="memitem:a4f8896ce3364c6cccfd8215f719a7bb6" id="r_a4f8896ce3364c6cccfd8215f719a7bb6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4f8896ce3364c6cccfd8215f719a7bb6">DestroySensorCache</a> (<a class="el" href="structhelios_1_1sdl3_1_1input_1_1SensorCache.html">SensorCache</a> &amp;cache)</td></tr>
+<tr class="memdesc:a4f8896ce3364c6cccfd8215f719a7bb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes all open SDL sensors and clears slot state.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -259,7 +272,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="apply__cursors_8cpp_source.html#l00107">107</a> of file <a class="el" href="apply__cursors_8cpp_source.html">apply_cursors.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="apply__cursors_8cpp_source.html#l00105">105</a> of file <a class="el" href="apply__cursors_8cpp_source.html">apply_cursors.cpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +299,34 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8cpp_source.html#l00417">417</a> of file <a class="el" href="poll__gamepads_8cpp_source.html">poll_gamepads.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8cpp_source.html#l00426">426</a> of file <a class="el" href="poll__gamepads_8cpp_source.html">poll_gamepads.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4f8896ce3364c6cccfd8215f719a7bb6" name="a4f8896ce3364c6cccfd8215f719a7bb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f8896ce3364c6cccfd8215f719a7bb6">&#9670;&#160;</a></span>DestroySensorCache()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::input::DestroySensorCache </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1sdl3_1_1input_1_1SensorCache.html">SensorCache</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cache</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Closes all open SDL sensors and clears slot state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cache</td><td>Sensor cache to reset </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="poll__sensors_8cpp_source.html#l00113">113</a> of file <a class="el" href="poll__sensors_8cpp_source.html">poll_sensors.cpp</a>.</p>
 
 </div>
 </div>
@@ -305,7 +345,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Registers keyboard, mouse, and pen SDL event handlers on the dispatcher. </p>
+<p>Registers keyboard, mouse, pen, touch, and sensor SDL event handlers on the dispatcher. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dispatcher</td><td>Shared SDL event dispatcher </td></tr>
@@ -313,7 +353,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sdl3__input_2src_2event__handlers_8cpp_source.html#l00521">521</a> of file <a class="el" href="sdl3__input_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__input_2src_2event__handlers_8cpp_source.html#l00789">789</a> of file <a class="el" href="sdl3__input_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
 
 </div>
 </div>

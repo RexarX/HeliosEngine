@@ -9,7 +9,7 @@ var structhelios_1_1input_1_1Joystick =
     [ "guid", "structhelios_1_1input_1_1Joystick.html#a5907ff22035e70ed4d7b8ce29de0fece", null ],
     [ "hat_count", "structhelios_1_1input_1_1Joystick.html#a6e58872fea3d3187a50c74ada6fdca4e", null ],
     [ "hats", "structhelios_1_1input_1_1Joystick.html#a61363a10299aedfc46eaec04c6b63b4f", null ],
-    [ "id", "structhelios_1_1input_1_1Joystick.html#aa3e4b36d36d9b397976906739259a57f", null ],
+    [ "id", "structhelios_1_1input_1_1Joystick.html#a07fe7638a4e1b942fb8e654b03ed4b48", null ],
     [ "kMaxAxes", "structhelios_1_1input_1_1Joystick.html#a12249122eb426c12e8c09528b4c0e912", null ],
     [ "kMaxButtons", "structhelios_1_1input_1_1Joystick.html#adadc128cf913c9afa3cb7c2b221b78ef", null ],
     [ "kMaxHats", "structhelios_1_1input_1_1Joystick.html#a4f0d28b6185bec667e098584f3b30ba4", null ],

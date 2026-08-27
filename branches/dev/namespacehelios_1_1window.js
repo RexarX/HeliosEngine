@@ -56,6 +56,7 @@ var namespacehelios_1_1window =
     [ "WindowStage", "structhelios_1_1window_1_1WindowStage.html", "structhelios_1_1window_1_1WindowStage" ],
     [ "WindowsView", "structhelios_1_1window_1_1WindowsView.html", "structhelios_1_1window_1_1WindowsView" ],
     [ "Writers", "structhelios_1_1window_1_1Writers.html", "structhelios_1_1window_1_1Writers" ],
+    [ "MonitorId", "namespacehelios_1_1window.html#a457b222da4a0032551ae7254ebb0880c", null ],
     [ "NativeHandle", "namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77", null ],
     [ "ClientApi", "namespacehelios_1_1window.html#a5b7a7072f24b38f4eb9cf97a77703acf", [
       [ "kNone", "namespacehelios_1_1window.html#a5b7a7072f24b38f4eb9cf97a77703acfa35c3ace1970663a16e5c65baa5941b13", null ],

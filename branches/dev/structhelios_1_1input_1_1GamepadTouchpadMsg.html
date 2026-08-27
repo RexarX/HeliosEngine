@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <p>Touchpad finger sample for a gamepad slot.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -192,10 +192,11 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:abe4bd2fc5ec57dc338c0abea749f95ff" id="r_abe4bd2fc5ec57dc338c0abea749f95ff"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#abe4bd2fc5ec57dc338c0abea749f95ff">id</a> = -1</td></tr>
+<tr class="memitem:a75742dcf1b75783d6bfd37d21d7cb3c9" id="r_a75742dcf1b75783d6bfd37d21d7cb3c9"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a>&#160;</td><td class="memItemRight"><a class="el" href="#a75742dcf1b75783d6bfd37d21d7cb3c9">id</a> = 0</td></tr>
 <tr class="memitem:a320bcc935f1aba3e118b5371c9544fbe" id="r_a320bcc935f1aba3e118b5371c9544fbe"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a320bcc935f1aba3e118b5371c9544fbe">x</a> = 0.0F</td></tr>
 <tr class="memitem:a1a38a81de39820888419a04d28bba526" id="r_a1a38a81de39820888419a04d28bba526"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a1a38a81de39820888419a04d28bba526">y</a> = 0.0F</td></tr>
 <tr class="memitem:a1e58591ed2d881e0afc9111f119952a5" id="r_a1e58591ed2d881e0afc9111f119952a5"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a1e58591ed2d881e0afc9111f119952a5">pressure</a> = 0.0F</td></tr>
+<tr class="memitem:a6f1554b07b143f2169243fb76169d81b" id="r_a6f1554b07b143f2169243fb76169d81b"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a6f1554b07b143f2169243fb76169d81b">touchpad</a> = 0</td></tr>
 <tr class="memitem:a624a7b6f7cc6865149632ddcd2188c93" id="r_a624a7b6f7cc6865149632ddcd2188c93"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a624a7b6f7cc6865149632ddcd2188c93">finger</a> = 0</td></tr>
 <tr class="memitem:a383e7afa4cda093727cd729e94a3e9c4" id="r_a383e7afa4cda093727cd729e94a3e9c4"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a383e7afa4cda093727cd729e94a3e9c4">down</a> = false</td></tr>
 </table><table class="memberdecls">
@@ -209,7 +210,7 @@ Static Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Touchpad finger sample for a gamepad slot. </p>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00215">215</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00601">601</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a64664e7ffb77e2befb2419da5adfef62" name="a64664e7ffb77e2befb2419da5adfef62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64664e7ffb77e2befb2419da5adfef62">&#9670;&#160;</a></span>GetPosition()</h2>
@@ -237,7 +238,7 @@ Static Public Attributes</h2></td></tr>
 <p>Returns the finger position. </p>
 <dl class="section return"><dt>Returns</dt><dd>Normalized x and y coordinates </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00232">232</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00619">619</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -254,7 +255,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00226">226</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00613">613</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -270,23 +271,23 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00225">225</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00612">612</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
-<a id="abe4bd2fc5ec57dc338c0abea749f95ff" name="abe4bd2fc5ec57dc338c0abea749f95ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe4bd2fc5ec57dc338c0abea749f95ff">&#9670;&#160;</a></span>id</h2>
+<a id="a75742dcf1b75783d6bfd37d21d7cb3c9" name="a75742dcf1b75783d6bfd37d21d7cb3c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75742dcf1b75783d6bfd37d21d7cb3c9">&#9670;&#160;</a></span>id</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t helios::input::GamepadTouchpadMsg::id = -1</td>
+          <td class="memname"><a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a> helios::input::GamepadTouchpadMsg::id = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00221">221</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00607">607</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -310,7 +311,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00219">219</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00605">605</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -334,7 +335,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00217">217</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00603">603</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -358,7 +359,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00218">218</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00604">604</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -382,7 +383,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00216">216</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00602">602</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -398,7 +399,23 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00224">224</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00610">610</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6f1554b07b143f2169243fb76169d81b" name="a6f1554b07b143f2169243fb76169d81b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f1554b07b143f2169243fb76169d81b">&#9670;&#160;</a></span>touchpad</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t helios::input::GamepadTouchpadMsg::touchpad = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00611">611</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +431,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00222">222</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00608">608</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -430,7 +447,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00223">223</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00609">609</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>

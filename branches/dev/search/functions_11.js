@@ -35,7 +35,7 @@ var searchData=
   ['setmaxsize_32',['SetMaxSize',['../structhelios_1_1window_1_1Window.html#a824d431390d98e077e5afdf2608825db',1,'helios::window::Window']]],
   ['setminsize_33',['SetMinSize',['../structhelios_1_1window_1_1Window.html#a425ee29cbbeb909fad518cd14e6fcf50',1,'helios::window::Window']]],
   ['setmode_34',['SetMode',['../classhelios_1_1app_1_1FrameLimiter.html#a16634b52b3e1704ef21c37891c5cbcb0',1,'helios::app::FrameLimiter::SetMode()'],['../structhelios_1_1window_1_1Window.html#a76a5e7898227b588d794acaeb7ea0b26',1,'helios::window::Window::SetMode(Mode value) noexcept']]],
-  ['setmonitorindex_35',['SetMonitorIndex',['../structhelios_1_1window_1_1Window.html#a204bcc7f907a397beb74d2a5a50eaa3e',1,'helios::window::Window']]],
+  ['setmonitorindex_35',['SetMonitorIndex',['../structhelios_1_1window_1_1Window.html#ad7b97489aa0942cc2f38bdbd6ea1e6bc',1,'helios::window::Window']]],
   ['setmousepassthrough_36',['SetMousePassthrough',['../structhelios_1_1window_1_1Window.html#a7c4f9ec80593f5fd0fec1e85d6cda4c5',1,'helios::window::Window']]],
   ['setname_37',['SetName',['../classhelios_1_1app_1_1SubApp.html#ae003aecbd59559d815fa7c3e1459f6cd',1,'helios::app::SubApp::SetName()'],['../classhelios_1_1ecs_1_1Schedule.html#a1c45b84c4683d9a1bd0fed2827aad6eb',1,'helios::ecs::Schedule::SetName()'],['../classhelios_1_1profile_1_1ScopedZone.html#ae28df0bccdb52654c7bbb6e7e4dd31a0',1,'helios::profile::ScopedZone::SetName()']]],
   ['setopacity_38',['SetOpacity',['../structhelios_1_1window_1_1Window.html#aa3f692c9d1cb0262f2f56793fac912b0',1,'helios::window::Window']]],

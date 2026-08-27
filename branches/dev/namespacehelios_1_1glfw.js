@@ -19,7 +19,9 @@ var namespacehelios_1_1glfw =
       [ "EraseCustom", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#aa9a00f851cb6cb2e72e99eda39ba55a5", null ],
       [ "FindOrInsertCustom", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#a96a9264a19c88538ffeb2d23e5865a80", null ],
       [ "JoystickGuid", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#a40dee29147bd0f99ed7742d60fa09ff4", null ],
-      [ "JoystickName", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#a9fad4052fd8abf13e3c50cb9825d4acd", null ]
+      [ "JoystickName", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#a9fad4052fd8abf13e3c50cb9825d4acd", null ],
+      [ "ToGamepadId", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#ac661683ac73ce7091aac2b0e106a81ce", null ],
+      [ "ToJoystickId", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#af5a14a4d5bde61efbf4d5266125b4158", null ]
     ] ],
     [ "anonymous_namespace{sync.cpp}", "namespacehelios_1_1glfw_1_1anonymous__namespace_02sync_8cpp_03.html", [
       [ "MonitorContainingPoint", "namespacehelios_1_1glfw_1_1anonymous__namespace_02sync_8cpp_03.html#a4ec8ff766a28b6fd10d36879bed76cfc", null ],
@@ -53,7 +55,7 @@ var namespacehelios_1_1glfw =
     [ "FindEntry", "namespacehelios_1_1glfw.html#ab9227f9ca4a3c2614cb8138cfc86e108", null ],
     [ "FindEntry", "namespacehelios_1_1glfw.html#a919aa373ca1cdb2868ba5f0d55e0acaf", null ],
     [ "MarkMonitorDependentDirty", "namespacehelios_1_1glfw.html#aacc959a7b5330949bf6415ae772cca19", null ],
-    [ "MonitorAtIndex", "namespacehelios_1_1glfw.html#af14188e96a299298c6062dd3d39041e1", null ],
+    [ "MonitorAtIndex", "namespacehelios_1_1glfw.html#a7ae7114089171fa3b4180482d5179b31", null ],
     [ "QueryNativeHandle", "namespacehelios_1_1glfw.html#aedd530faab6199d9f5699ab0648fd6d1", null ],
     [ "RefreshMonitors", "namespacehelios_1_1glfw.html#a180dea21452f13572f505bc482d259e3", null ],
     [ "RegisterCallbacks", "namespacehelios_1_1glfw.html#af7e9e763422c3e4b2c2bd141c1420580", null ],

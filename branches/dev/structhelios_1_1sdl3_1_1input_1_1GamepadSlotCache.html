@@ -191,7 +191,7 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a62af98b2efd6ea8306cfa19955d8e1c4" id="r_a62af98b2efd6ea8306cfa19955d8e1c4"><td class="memItemLeft">SDL_Joystick *&#160;</td><td class="memItemRight"><a class="el" href="#a62af98b2efd6ea8306cfa19955d8e1c4">joystick</a> = nullptr</td></tr>
 <tr class="memitem:a57b7f99f3e85d9abf0fe6d66c3f95d07" id="r_a57b7f99f3e85d9abf0fe6d66c3f95d07"><td class="memItemLeft">std::array&lt; float, static_cast&lt; size_t &gt;(<a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74a5a162d352f3b3603e03fc9b2f043fb40">helios::input::GamepadAxis::kCount</a>)&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a57b7f99f3e85d9abf0fe6d66c3f95d07">pad_axes</a> = {}</td></tr>
 <tr class="memitem:a9cce7dc831f8b444b663c3bce2305ae5" id="r_a9cce7dc831f8b444b663c3bce2305ae5"><td class="memItemLeft">std::array&lt; float, <a class="el" href="structhelios_1_1input_1_1Joystick.html#a12249122eb426c12e8c09528b4c0e912">helios::input::Joystick::kMaxAxes</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9cce7dc831f8b444b663c3bce2305ae5">joy_axes</a> = {}</td></tr>
-<tr class="memitem:aa5b2db107098ae3596a2cefe72cef545" id="r_aa5b2db107098ae3596a2cefe72cef545"><td class="memItemLeft">std::array&lt; <a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">helios::input::GamepadTouchpadFinger</a>, <a class="el" href="structhelios_1_1input_1_1Gamepad.html#a70c4d0e25d6a015f1e289fc11ee7ab20">helios::input::Gamepad::kMaxTouchpadFingers</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa5b2db107098ae3596a2cefe72cef545">touchpad</a> = {}</td></tr>
+<tr class="memitem:a540b1ee47b108dfc0e39723b48a77e72" id="r_a540b1ee47b108dfc0e39723b48a77e72"><td class="memItemLeft">std::array&lt; std::array&lt; <a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">helios::input::GamepadTouchpadFinger</a>, <a class="el" href="structhelios_1_1input_1_1Gamepad.html#a70c4d0e25d6a015f1e289fc11ee7ab20">helios::input::Gamepad::kMaxTouchpadFingers</a> &gt;, <a class="el" href="structhelios_1_1input_1_1Gamepad.html#aedc22ec6961c5a052d82975724172a1d">helios::input::Gamepad::kMaxTouchpads</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a540b1ee47b108dfc0e39723b48a77e72">touchpads</a> = {}</td></tr>
 <tr class="memitem:a5147573fbddcc82dcc3d9bd16d83cfda" id="r_a5147573fbddcc82dcc3d9bd16d83cfda"><td class="memItemLeft">std::array&lt; bool, static_cast&lt; size_t &gt;(<a class="el" href="namespacehelios_1_1input.html#a2afd4c60228ffa9a64dfba530fd6019da5a162d352f3b3603e03fc9b2f043fb40">helios::input::GamepadButton::kCount</a>)&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a5147573fbddcc82dcc3d9bd16d83cfda">pad_buttons</a> = {}</td></tr>
 <tr class="memitem:a464ce7715d00f29a3128ff512219c354" id="r_a464ce7715d00f29a3128ff512219c354"><td class="memItemLeft">std::array&lt; bool, <a class="el" href="structhelios_1_1input_1_1Joystick.html#adadc128cf913c9afa3cb7c2b221b78ef">helios::input::Joystick::kMaxButtons</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a464ce7715d00f29a3128ff512219c354">joy_buttons</a> = {}</td></tr>
 <tr class="memitem:ac8d7c9114d93eb433a8e74ac1e8462f4" id="r_ac8d7c9114d93eb433a8e74ac1e8462f4"><td class="memItemLeft">std::array&lt; uint8_t, <a class="el" href="structhelios_1_1input_1_1Joystick.html#a4f0d28b6185bec667e098584f3b30ba4">helios::input::Joystick::kMaxHats</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac8d7c9114d93eb433a8e74ac1e8462f4">hats</a> = {}</td></tr>
@@ -221,7 +221,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00055">55</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00056">56</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>
@@ -269,7 +269,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00048">48</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00049">49</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>
@@ -285,7 +285,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00049">49</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00050">50</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>
@@ -301,7 +301,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00056">56</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00057">57</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>
@@ -333,7 +333,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00051">51</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00052">52</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>
@@ -349,7 +349,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00052">52</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00053">53</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>
@@ -365,7 +365,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00047">47</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00048">48</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>
@@ -381,7 +381,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00053">53</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00054">54</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>
@@ -445,7 +445,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00046">46</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00047">47</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>
@@ -461,23 +461,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00050">50</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aa5b2db107098ae3596a2cefe72cef545" name="aa5b2db107098ae3596a2cefe72cef545"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5b2db107098ae3596a2cefe72cef545">&#9670;&#160;</a></span>touchpad</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::array&lt;<a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">helios::input::GamepadTouchpadFinger</a>, <a class="el" href="structhelios_1_1input_1_1Gamepad.html#a70c4d0e25d6a015f1e289fc11ee7ab20">helios::input::Gamepad::kMaxTouchpadFingers</a>&gt; helios::sdl3::input::GamepadSlotCache::touchpad = {}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00044">44</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00051">51</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>
@@ -493,7 +477,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00054">54</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00055">55</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a540b1ee47b108dfc0e39723b48a77e72" name="a540b1ee47b108dfc0e39723b48a77e72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a540b1ee47b108dfc0e39723b48a77e72">&#9670;&#160;</a></span>touchpads</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::array&lt;std::array&lt;<a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">helios::input::GamepadTouchpadFinger</a>, <a class="el" href="structhelios_1_1input_1_1Gamepad.html#a70c4d0e25d6a015f1e289fc11ee7ab20">helios::input::Gamepad::kMaxTouchpadFingers</a>&gt;, <a class="el" href="structhelios_1_1input_1_1Gamepad.html#aedc22ec6961c5a052d82975724172a1d">helios::input::Gamepad::kMaxTouchpads</a>&gt; helios::sdl3::input::GamepadSlotCache::touchpads = {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="poll__gamepads_8hpp_source.html#l00045">45</a> of file <a class="el" href="poll__gamepads_8hpp_source.html">poll_gamepads.hpp</a>.</p>
 
 </div>
 </div>

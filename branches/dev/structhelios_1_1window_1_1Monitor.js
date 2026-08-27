@@ -7,7 +7,7 @@ var structhelios_1_1window_1_1Monitor =
     [ "GetWorkSize", "structhelios_1_1window_1_1Monitor.html#a3eb5a6237a37a30d8b60d9f2ace2e28d", null ],
     [ "current", "structhelios_1_1window_1_1Monitor.html#a5f55bad520ce5a10bc131ac9bc898d63", null ],
     [ "height", "structhelios_1_1window_1_1Monitor.html#a5c32cc2e65fad4cbde1466198f1b0024", null ],
-    [ "index", "structhelios_1_1window_1_1Monitor.html#a2f9adf72a20c985f8cae1971299dad15", null ],
+    [ "index", "structhelios_1_1window_1_1Monitor.html#a1439804082a13a407dd92d8dcf01c407", null ],
     [ "modes", "structhelios_1_1window_1_1Monitor.html#aee31f81ddce5dec04bba6c1a3c7e4102", null ],
     [ "name", "structhelios_1_1window_1_1Monitor.html#ac0979bda28bae742211ad300d8e57d7b", null ],
     [ "physical_height_mm", "structhelios_1_1window_1_1Monitor.html#a1d941f978881d8956e121b79c9c4f35a", null ],

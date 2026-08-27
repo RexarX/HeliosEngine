@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacehelio
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a8831760da992cf8c1c3dc65dfc8faa6e" id="r_a8831760da992cf8c1c3dc65dfc8faa6e"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a8831760da992cf8c1c3dc65dfc8faa6e">EntityForWindowEvent</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="window__map_8hpp.html#a58737e2ff3b858c841ea87127f2fcc5d">SDL_WindowID</a> window_id) -&gt; std::optional&lt; <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> &gt;</td></tr>
-<tr class="memitem:a0f35c059446c92a9ce657f8ed38ab2f1" id="r_a0f35c059446c92a9ce657f8ed38ab2f1"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#a0f35c059446c92a9ce657f8ed38ab2f1">DisplayIndex</a> (<a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html#a856b5282790a581c92fb5b7da822707c">SDL_DisplayID</a> display_id)</td></tr>
+<tr class="memitem:a77b8e2355cdd8c91614d57dfef4c3531" id="r_a77b8e2355cdd8c91614d57dfef4c3531"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a77b8e2355cdd8c91614d57dfef4c3531">DisplayIndex</a> (<a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html#a856b5282790a581c92fb5b7da822707c">SDL_DisplayID</a> display_id) -&gt; std::optional&lt;<a class="el" href="namespacehelios_1_1window.html#a457b222da4a0032551ae7254ebb0880c">::helios::window::MonitorId</a> &gt;</td></tr>
 <tr class="memitem:ad0b79c931650442f9fa6665f755a1d0d" id="r_ad0b79c931650442f9fa6665f755a1d0d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad0b79c931650442f9fa6665f755a1d0d">HandleWindowEvent</a> (const SDL_Event &amp;event, <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world)</td></tr>
 <tr class="memitem:ad76c4ee6868443f9befbda2c77c3f662" id="r_ad76c4ee6868443f9befbda2c77c3f662"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad76c4ee6868443f9befbda2c77c3f662">HandleDropEvent</a> (const SDL_Event &amp;event, <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world)</td></tr>
 <tr class="memitem:abd40c72c0dd99afed970887e67b5e0eb" id="r_abd40c72c0dd99afed970887e67b5e0eb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abd40c72c0dd99afed970887e67b5e0eb">HandleDisplayEvent</a> (const SDL_Event &amp;event, <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world)</td></tr>
@@ -208,12 +208,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00266">266</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00279">279</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a0f35c059446c92a9ce657f8ed38ab2f1" name="a0f35c059446c92a9ce657f8ed38ab2f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f35c059446c92a9ce657f8ed38ab2f1">&#9670;&#160;</a></span>DisplayIndex()</h2>
+<a id="a77b8e2355cdd8c91614d57dfef4c3531" name="a77b8e2355cdd8c91614d57dfef4c3531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77b8e2355cdd8c91614d57dfef4c3531">&#9670;&#160;</a></span>DisplayIndex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -222,10 +222,10 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t helios::sdl3::window::anonymous_namespace{event_handlers.cpp}::DisplayIndex </td>
+          <td class="memname">auto helios::sdl3::window::anonymous_namespace{event_handlers.cpp}::DisplayIndex </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html#a856b5282790a581c92fb5b7da822707c">SDL_DisplayID</a></td>          <td class="paramname"><span class="paramname"><em>display_id</em></span></td><td>)</td>
-          <td></td>
+          <td> -&gt; std::optional&lt;<a class="el" href="namespacehelios_1_1window.html#a457b222da4a0032551ae7254ebb0880c">::helios::window::MonitorId</a> &gt;</td>
         </tr>
       </table>
   </td>
@@ -235,7 +235,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00042">42</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00045">45</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
 
 </div>
 </div>
@@ -266,7 +266,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00026">26</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00029">29</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
 
 </div>
 </div>
@@ -289,7 +289,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00256">256</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00269">269</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
 
 </div>
 </div>
@@ -312,7 +312,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00229">229</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00233">233</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
 
 </div>
 </div>
@@ -335,7 +335,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00213">213</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00217">217</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
 
 </div>
 </div>
@@ -358,7 +358,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00289">289</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00302">302</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
 
 </div>
 </div>
@@ -381,7 +381,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00060">60</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00064">64</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
 
 </div>
 </div>

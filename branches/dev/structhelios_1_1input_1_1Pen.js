@@ -11,7 +11,7 @@ var structhelios_1_1input_1_1Pen =
     [ "down", "structhelios_1_1input_1_1Pen.html#aead970aad6613d66fd8aa62cd8b3840f", null ],
     [ "eraser", "structhelios_1_1input_1_1Pen.html#aa8202283ba9f83e96e4f0d91d255aae3", null ],
     [ "has_position", "structhelios_1_1input_1_1Pen.html#a9bca9fd52124092846060076f518216c", null ],
-    [ "id", "structhelios_1_1input_1_1Pen.html#a463963b0d7b2f6a147291b02bc1371c1", null ],
+    [ "id", "structhelios_1_1input_1_1Pen.html#a181f545531303a71e6a25b679f57997a", null ],
     [ "in_proximity", "structhelios_1_1input_1_1Pen.html#ae33984a9cb054c466a253ce10d15fff9", null ],
     [ "position_x", "structhelios_1_1input_1_1Pen.html#ad7a30a1117cfab41bc8f1573e9ab14bc", null ],
     [ "position_y", "structhelios_1_1input_1_1Pen.html#a96b5594ef0b569df7814bc7d741b07f5", null ]

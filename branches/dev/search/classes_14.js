@@ -10,8 +10,10 @@ var searchData=
   ['updatekeyboardstate_7',['UpdateKeyboardState',['../structhelios_1_1input_1_1UpdateKeyboardState.html',1,'helios::input']]],
   ['updatemousestate_8',['UpdateMouseState',['../structhelios_1_1input_1_1UpdateMouseState.html',1,'helios::input']]],
   ['updatepenstate_9',['UpdatePenState',['../structhelios_1_1input_1_1UpdatePenState.html',1,'helios::input']]],
-  ['updatestage_10',['UpdateStage',['../structhelios_1_1app_1_1UpdateStage.html',1,'helios::app']]],
-  ['updatetime_11',['UpdateTime',['../structhelios_1_1app_1_1UpdateTime.html',1,'helios::app']]],
-  ['uuid_12',['Uuid',['../classhelios_1_1Uuid.html',1,'helios']]],
-  ['uuidgenerator_13',['UuidGenerator',['../classhelios_1_1UuidGenerator.html',1,'helios']]]
+  ['updatesensorstate_10',['UpdateSensorState',['../structhelios_1_1input_1_1UpdateSensorState.html',1,'helios::input']]],
+  ['updatestage_11',['UpdateStage',['../structhelios_1_1app_1_1UpdateStage.html',1,'helios::app']]],
+  ['updatetime_12',['UpdateTime',['../structhelios_1_1app_1_1UpdateTime.html',1,'helios::app']]],
+  ['updatetouchstate_13',['UpdateTouchState',['../structhelios_1_1input_1_1UpdateTouchState.html',1,'helios::input']]],
+  ['uuid_14',['Uuid',['../classhelios_1_1Uuid.html',1,'helios']]],
+  ['uuidgenerator_15',['UuidGenerator',['../classhelios_1_1UuidGenerator.html',1,'helios']]]
 ];

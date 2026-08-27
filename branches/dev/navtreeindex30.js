@@ -1,5 +1,12 @@
 var NAVTREEINDEX30 =
 {
+"dir_7d8fa5ea6db827e5afcdaf7ed553be31.html":[5,0,2,3,0,0,0],
+"dir_82235fdfe7ac7388acbcfd1bfc75f929.html":[5,0,2,6,0,0,0],
+"dir_830648f4319c52d9dbd4b1fbbe24cd44.html":[5,0,2,5,0,0,0,2],
+"dir_8eb7cf60952dbf64a59640f8877f37a0.html":[5,0,2,14,0,0,0],
+"dir_8f49dd062eda24395df599c5385a3cb1.html":[5,0,2,4,0],
+"dir_946e86a51bb2a81823fd9934133c9b09.html":[5,0,2,12,1,0],
+"dir_94d7edf6f8f3d9af5fd63c44172da41c.html":[5,0,2,9],
 "dir_9b7e4834fb1cc97a3567962c5bf9875d.html":[5,0,2,13,1],
 "dir_9e038ca79bb49a4a4c6c78c9a4576b22.html":[5,0,2,5,0,0,0,0],
 "dir_a3b485c73c056e8b3e9a139538eb1412.html":[5,0,2,5,0,0,0,7],
@@ -31,6 +38,7 @@ var NAVTREEINDEX30 =
 "dir_e30c6f67fe133a20fd38c9c6d4f13dc1.html":[5,0,2,9,0,0,0],
 "dir_e5b869bbb88be282a86f54a154c56c0a.html":[5,0,2,8,1],
 "dir_e78f2b454c84d53f6eeebf2099505db2.html":[5,0,2,13,0,0,0,0],
+"dir_ed17844555b119939b1ba9f562bda606.html":[5,0,2,7,0,0,0,0],
 "dir_ee77fcf12c7a29aff3f404e2c8e89bfb.html":[5,0,2,12,0,0,0,0],
 "dir_efe3d36c8127beaa22cda24a5437cbee.html":[5,0,2,1,0,0],
 "dir_f13bc85843fa14191e0ad4a3a157cf60.html":[5,0,2,2],
@@ -228,6 +236,8 @@ var NAVTREEINDEX30 =
 "functions_~.html":[4,3,0,26],
 "future_8hpp.html":[5,0,2,1,0,0,0,4],
 "future_8hpp_source.html":[5,0,2,1,0,0,0,4],
+"gamepad_8cpp.html":[5,0,2,7,1,0,1],
+"gamepad_8cpp_source.html":[5,0,2,7,1,0,1],
 "gamepad_8hpp.html":[5,0,2,7,0,0,0,3],
 "gamepad_8hpp_source.html":[5,0,2,7,0,0,0,3],
 "glfw_2include_2helios_2glfw_2native__handle_8hpp.html":[5,0,2,6,0,0,0,2],
@@ -239,15 +249,5 @@ var NAVTREEINDEX30 =
 "glfw_2include_2helios_2glfw_2sync_8hpp.html":[5,0,2,6,0,0,0,5],
 "glfw_2include_2helios_2glfw_2sync_8hpp_source.html":[5,0,2,6,0,0,0,5],
 "glfw_2include_2helios_2glfw_2systems_2apply_8hpp.html":[5,0,2,6,0,0,0,0,0],
-"glfw_2include_2helios_2glfw_2systems_2apply_8hpp_source.html":[5,0,2,6,0,0,0,0,0],
-"glfw_2include_2helios_2glfw_2systems_2create_8hpp.html":[5,0,2,6,0,0,0,0,1],
-"glfw_2include_2helios_2glfw_2systems_2create_8hpp_source.html":[5,0,2,6,0,0,0,0,1],
-"glfw_2include_2helios_2glfw_2systems_2destroy_8hpp.html":[5,0,2,6,0,0,0,0,2],
-"glfw_2include_2helios_2glfw_2systems_2destroy_8hpp_source.html":[5,0,2,6,0,0,0,0,2],
-"glfw_2include_2helios_2glfw_2systems_2init_8hpp.html":[5,0,2,6,0,0,0,0,3],
-"glfw_2include_2helios_2glfw_2systems_2init_8hpp_source.html":[5,0,2,6,0,0,0,0,3],
-"glfw_2include_2helios_2glfw_2systems_2input_8hpp.html":[5,0,2,6,0,0,0,0,4],
-"glfw_2include_2helios_2glfw_2systems_2input_8hpp_source.html":[5,0,2,6,0,0,0,0,4],
-"glfw_2include_2helios_2glfw_2systems_2poll_8hpp.html":[5,0,2,6,0,0,0,0,5],
-"glfw_2include_2helios_2glfw_2systems_2poll_8hpp_source.html":[5,0,2,6,0,0,0,0,5]
+"glfw_2include_2helios_2glfw_2systems_2apply_8hpp_source.html":[5,0,2,6,0,0,0,0,0]
 };

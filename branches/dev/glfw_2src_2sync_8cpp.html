@@ -181,11 +181,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('glfw_2src_2syn
 <code>#include &lt;<a class="el" href="glfw_2include_2helios_2glfw_2sync_8hpp_source.html">helios/glfw/sync.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="world_8hpp_source.html">helios/ecs/world.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="glfw_2include_2helios_2glfw_2state_8hpp_source.html">helios/glfw/state.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="window_2include_2helios_2window_2components_8hpp_source.html">helios/window/components.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="window_2include_2helios_2window_2messages_8hpp_source.html">helios/window/messages.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="clipboard_8hpp_source.html">helios/window/clipboard.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="window_2include_2helios_2window_2ids_8hpp_source.html">helios/window/ids.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="monitor_8hpp_source.html">helios/window/monitor.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="window_2include_2helios_2window_2native__handle_8hpp_source.html">helios/window/native_handle.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="properties_8hpp_source.html">helios/window/properties.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="window_2include_2helios_2window_2resources_8hpp_source.html">helios/window/resources.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="window_2include_2helios_2window_2settings_8hpp_source.html">helios/window/settings.hpp</a>&gt;</code><br />
 <code>#include &lt;GLFW/glfw3.h&gt;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
 <code>#include &lt;span&gt;</code><br />
@@ -205,7 +208,7 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a4ec8ff766a28b6fd10d36879bed76cfc" id="r_a4ec8ff766a28b6fd10d36879bed76cfc"><td class="memItemLeft">GLFWmonitor *&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1glfw_1_1anonymous__namespace_02sync_8cpp_03.html#a4ec8ff766a28b6fd10d36879bed76cfc">helios::glfw::anonymous_namespace{sync.cpp}::MonitorContainingPoint</a> (int x, int y)</td></tr>
 <tr class="memitem:a3199e211789c45fec1bb0c8ba57e2ce0" id="r_a3199e211789c45fec1bb0c8ba57e2ce0"><td class="memItemLeft">GLFWmonitor *&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1glfw_1_1anonymous__namespace_02sync_8cpp_03.html#a3199e211789c45fec1bb0c8ba57e2ce0">helios::glfw::anonymous_namespace{sync.cpp}::MonitorForWindow</a> (GLFWwindow &amp;window)</td></tr>
-<tr class="memitem:af14188e96a299298c6062dd3d39041e1" id="r_af14188e96a299298c6062dd3d39041e1"><td class="memItemLeft">GLFWmonitor *&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1glfw.html#af14188e96a299298c6062dd3d39041e1">helios::glfw::MonitorAtIndex</a> (int32_t index)</td></tr>
+<tr class="memitem:a7ae7114089171fa3b4180482d5179b31" id="r_a7ae7114089171fa3b4180482d5179b31"><td class="memItemLeft">GLFWmonitor *&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1glfw.html#a7ae7114089171fa3b4180482d5179b31">helios::glfw::MonitorAtIndex</a> (<a class="el" href="namespacehelios_1_1window.html#a457b222da4a0032551ae7254ebb0880c">window::MonitorId</a> index)</td></tr>
 <tr class="memitem:abbbf3b5ad8db5642a56ef2d4e0ddbad2" id="r_abbbf3b5ad8db5642a56ef2d4e0ddbad2"><td class="memItemLeft">GLFWmonitor *&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1glfw.html#abbbf3b5ad8db5642a56ef2d4e0ddbad2">helios::glfw::ResolveMonitor</a> (const <a class="el" href="structhelios_1_1window_1_1Properties.html">window::Properties</a> &amp;properties, GLFWwindow &amp;window)</td></tr>
 <tr class="memitem:a180dea21452f13572f505bc482d259e3" id="r_a180dea21452f13572f505bc482d259e3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1glfw.html#a180dea21452f13572f505bc482d259e3">helios::glfw::RefreshMonitors</a> (<a class="el" href="structhelios_1_1window_1_1Monitors.html">window::Monitors</a> &amp;monitors)</td></tr>
 <tr class="memitem:aacc959a7b5330949bf6415ae772cca19" id="r_aacc959a7b5330949bf6415ae772cca19"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1glfw.html#aacc959a7b5330949bf6415ae772cca19">helios::glfw::MarkMonitorDependentDirty</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="structhelios_1_1glfw_1_1NativeWindows.html">NativeWindows</a> &amp;native)</td></tr>

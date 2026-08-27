@@ -4,7 +4,7 @@ var structhelios_1_1input_1_1PenTouchMsg =
     [ "down", "structhelios_1_1input_1_1PenTouchMsg.html#aef8d044fd9ff708f0015334d5f1420db", null ],
     [ "entity", "structhelios_1_1input_1_1PenTouchMsg.html#a4e0c8adcb443c2414ad875d8fd7a132a", null ],
     [ "eraser", "structhelios_1_1input_1_1PenTouchMsg.html#a192803c4c3d4257dbd0f1d5b37288aa6", null ],
-    [ "id", "structhelios_1_1input_1_1PenTouchMsg.html#a062d5c18e4158c574c26da218cc57f8e", null ],
+    [ "id", "structhelios_1_1input_1_1PenTouchMsg.html#aa05957cd7a4eee8e408640040e13ec00", null ],
     [ "kAsync", "structhelios_1_1input_1_1PenTouchMsg.html#a4e7d4b559a190e104679a23b889610c3", null ],
     [ "kClearPolicy", "structhelios_1_1input_1_1PenTouchMsg.html#ac519a0be3aa948741eb68d93ea1bedeb", null ],
     [ "kConsumable", "structhelios_1_1input_1_1PenTouchMsg.html#a5348edbdd863cb4ad1347e0894ad8e75", null ],

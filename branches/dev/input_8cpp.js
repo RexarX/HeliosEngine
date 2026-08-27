@@ -12,5 +12,7 @@ var input_8cpp =
     [ "helios::glfw::anonymous_namespace{input.cpp}::EraseCustom", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#aa9a00f851cb6cb2e72e99eda39ba55a5", null ],
     [ "helios::glfw::anonymous_namespace{input.cpp}::FindOrInsertCustom", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#a96a9264a19c88538ffeb2d23e5865a80", null ],
     [ "helios::glfw::anonymous_namespace{input.cpp}::JoystickGuid", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#a40dee29147bd0f99ed7742d60fa09ff4", null ],
-    [ "helios::glfw::anonymous_namespace{input.cpp}::JoystickName", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#a9fad4052fd8abf13e3c50cb9825d4acd", null ]
+    [ "helios::glfw::anonymous_namespace{input.cpp}::JoystickName", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#a9fad4052fd8abf13e3c50cb9825d4acd", null ],
+    [ "helios::glfw::anonymous_namespace{input.cpp}::ToGamepadId", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#ac661683ac73ce7091aac2b0e106a81ce", null ],
+    [ "helios::glfw::anonymous_namespace{input.cpp}::ToJoystickId", "namespacehelios_1_1glfw_1_1anonymous__namespace_02input_8cpp_03.html#af5a14a4d5bde61efbf4d5266125b4158", null ]
 ];
