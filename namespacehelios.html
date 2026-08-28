@@ -231,6 +231,8 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:aab391e11e7c9423a40ead9ce2c9abb1b" id="r_aab391e11e7c9423a40ead9ce2c9abb1b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aab391e11e7c9423a40ead9ce2c9abb1b">HandleAssertion</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
+<tr class="memdesc:aab391e11e7c9423a40ead9ce2c9abb1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified assertion handling function.  <br /></td></tr>
 <tr class="memitem:afc2e2d6e5d9076d42481c5837df0f6ba" id="r_afc2e2d6e5d9076d42481c5837df0f6ba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afc2e2d6e5d9076d42481c5837df0f6ba">SetAssertionHandler</a> (<a class="el" href="#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a> handler) noexcept</td></tr>
 <tr class="memdesc:afc2e2d6e5d9076d42481c5837df0f6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a custom assertion handler.  <br /></td></tr>
 <tr class="memitem:a7982e4af7b9267b962018d6cfd53c165" id="r_a7982e4af7b9267b962018d6cfd53c165"><td class="memItemLeft"><a class="el" href="#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7982e4af7b9267b962018d6cfd53c165">GetAssertionHandler</a> () noexcept</td></tr>
@@ -248,10 +250,10 @@ requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt;)</td></tr>
 requires std::is_member_function_pointer_v&lt;decltype(Func)&gt;</td></tr>
 <tr class="memitem:aee35cc85a0c840f1488c6be990bca4f1 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#aee35cc85a0c840f1488c6be990bca4f1">MakeDelegate</a> (typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; decltype(Func)&gt;::Class &amp;instance) noexcept</td></tr>
 <tr class="memdesc:aee35cc85a0c840f1488c6be990bca4f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to create delegate from member function pointer.  <br /></td></tr>
-<tr class="memitem:a210d77b53901e18a6c1eed11283e1094" id="r_a210d77b53901e18a6c1eed11283e1094"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
-requires details::HasUnambiguousCallOperator&lt;std::remove_cvref_t&lt;Callable&gt;&gt;</td></tr>
-<tr class="memitem:a210d77b53901e18a6c1eed11283e1094 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a210d77b53901e18a6c1eed11283e1094">MakeDelegate</a> (Callable &amp;&amp;callable) noexcept</td></tr>
-<tr class="memdesc:a210d77b53901e18a6c1eed11283e1094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a delegate from a callable, deducing the signature from <span class="tt">operator()</span>.  <br /></td></tr>
+<tr class="memitem:a598ce59f51b3e1c31390738b22468a15" id="r_a598ce59f51b3e1c31390738b22468a15"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
+requires details::HasUnambiguousCallOperator&lt;std::remove_cvref_t&lt;Callable&gt; &gt;</td></tr>
+<tr class="memitem:a598ce59f51b3e1c31390738b22468a15 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a598ce59f51b3e1c31390738b22468a15">MakeDelegate</a> (Callable &amp;&amp;callable) noexcept</td></tr>
+<tr class="memdesc:a598ce59f51b3e1c31390738b22468a15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a delegate from a callable, deducing the signature from <span class="tt">operator()</span>.  <br /></td></tr>
 <tr class="memitem:ac0c351b2588d308233b80d64eea7c936" id="r_ac0c351b2588d308233b80d64eea7c936"><td class="memTemplParams" colspan="2">template&lt;typename Signature, typename Callable&gt; </td></tr>
 <tr class="memitem:ac0c351b2588d308233b80d64eea7c936 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#ac0c351b2588d308233b80d64eea7c936">MakeDelegate</a> (Callable &amp;&amp;callable) noexcept</td></tr>
 <tr class="memdesc:ac0c351b2588d308233b80d64eea7c936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a delegate from a callable with an explicit signature.  <br /></td></tr>
@@ -288,7 +290,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00020">20</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00026">26</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>
@@ -306,7 +308,7 @@ Variables</h2></td></tr>
 
 <p>A view of a null-terminated C string. </p>
 
-<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00591">591</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00598">598</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
 
 </div>
 </div>
@@ -324,7 +326,7 @@ Variables</h2></td></tr>
 
 <p>A view of a null-terminated UTF-16 C string. </p>
 
-<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00600">600</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00607">607</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
 
 </div>
 </div>
@@ -342,7 +344,7 @@ Variables</h2></td></tr>
 
 <p>A view of a null-terminated UTF-32 C string. </p>
 
-<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00603">603</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00610">610</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
 
 </div>
 </div>
@@ -360,7 +362,7 @@ Variables</h2></td></tr>
 
 <p>A view of a null-terminated UTF-8 C string. </p>
 
-<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00597">597</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00604">604</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
 
 </div>
 </div>
@@ -378,7 +380,7 @@ Variables</h2></td></tr>
 
 <p>A view of a null-terminated wide C string. </p>
 
-<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00594">594</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00601">601</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +416,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00110">110</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00084">84</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
 
 </div>
 </div>
@@ -444,7 +446,58 @@ Variables</h2></td></tr>
 <p>Gets the current custom assertion handler. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current custom handler, or <span class="tt">nullptr</span> if using default behavior </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00179">179</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00185">185</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aab391e11e7c9423a40ead9ce2c9abb1b" name="aab391e11e7c9423a40ead9ce2c9abb1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab391e11e7c9423a40ead9ce2c9abb1b">&#9670;&#160;</a></span>HandleAssertion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::HandleAssertion </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>condition</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unified assertion handling function. </p>
+<p>Priority order:</p><ol type="1">
+<li>Custom handler (if set by user via SetAssertionHandler)</li>
+<li>Log plugin handler (if log module/plugin is available and linked)</li>
+<li>Default handler (prints to stderr)</li>
+</ol>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
+    <tr><td class="paramname">message</td><td>Additional message </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00148">148</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
 
 </div>
 </div>
@@ -483,7 +536,7 @@ requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt;)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased, non-owning callable wrapper.">Delegate</a> bound to the given free function. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00774">774</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00781">781</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -528,18 +581,18 @@ template&lt;typename Signature, typename Callable&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased, non-owning callable wrapper.">Delegate</a> bound to the given callable </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00839">839</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00846">846</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a210d77b53901e18a6c1eed11283e1094" name="a210d77b53901e18a6c1eed11283e1094"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a210d77b53901e18a6c1eed11283e1094">&#9670;&#160;</a></span>MakeDelegate() <span class="overload">[3/4]</span></h2>
+<a id="a598ce59f51b3e1c31390738b22468a15" name="a598ce59f51b3e1c31390738b22468a15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a598ce59f51b3e1c31390738b22468a15">&#9670;&#160;</a></span>MakeDelegate() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Callable&gt; <br />
-requires details::HasUnambiguousCallOperator&lt;std::remove_cvref_t&lt;Callable&gt;&gt;</div>
+requires details::HasUnambiguousCallOperator&lt;std::remove_cvref_t&lt;Callable&gt; &gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -574,7 +627,7 @@ requires details::HasUnambiguousCallOperator&lt;std::remove_cvref_t&lt;Callable&
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased, non-owning callable wrapper.">Delegate</a> bound to the given callable </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00819">819</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00826">826</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -619,7 +672,7 @@ requires std::is_member_function_pointer_v&lt;decltype(Func)&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased, non-owning callable wrapper.">Delegate</a> bound to the given member function and instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00793">793</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00800">800</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -669,7 +722,7 @@ template&lt;typename CharT, typename Traits&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the output stream </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00614">614</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cstring__view_8hpp_source.html#l00621">621</a> of file <a class="el" href="cstring__view_8hpp_source.html">cstring_view.hpp</a>.</p>
 
 </div>
 </div>
@@ -720,11 +773,11 @@ template&lt;typename CharT, typename Traits&gt; </div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Reset to default behavior</span></div>
 <div class="line"><a class="code hl_function" href="#afc2e2d6e5d9076d42481c5837df0f6ba">helios::SetAssertionHandler</a>(<a class="code hl_variable" href="#a5dd8e95e4cb808a93be15d4df228eb36">helios::kDefaultAssertionHandler</a>);</div>
-<div class="ttc" id="anamespacehelios_1_1log_html_aa232109b7f50968c0f15e2454664bb5e"><div class="ttname"><a href="namespacehelios_1_1log.html#aa232109b7f50968c0f15e2454664bb5e">helios::log::Critical</a></div><div class="ttdeci">void Critical(std::string_view message) noexcept</div><div class="ttdoc">Logs a critical message with the default logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00648">logger.hpp:648</a></div></div>
-<div class="ttc" id="anamespacehelios_html_a5dd8e95e4cb808a93be15d4df228eb36"><div class="ttname"><a href="#a5dd8e95e4cb808a93be15d4df228eb36">helios::kDefaultAssertionHandler</a></div><div class="ttdeci">constexpr AssertionHandler kDefaultAssertionHandler</div><div class="ttdoc">Default assertion handler (nullptr means use built-in default behavior).</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00026">assert.hpp:26</a></div></div>
-<div class="ttc" id="anamespacehelios_html_afc2e2d6e5d9076d42481c5837df0f6ba"><div class="ttname"><a href="#afc2e2d6e5d9076d42481c5837df0f6ba">helios::SetAssertionHandler</a></div><div class="ttdeci">void SetAssertionHandler(AssertionHandler handler) noexcept</div><div class="ttdoc">Sets a custom assertion handler.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00171">assert.hpp:171</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1log_html_aa232109b7f50968c0f15e2454664bb5e"><div class="ttname"><a href="namespacehelios_1_1log.html#aa232109b7f50968c0f15e2454664bb5e">helios::log::Critical</a></div><div class="ttdeci">void Critical(std::string_view message) noexcept</div><div class="ttdoc">Logs a critical message with the default logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00660">logger.hpp:660</a></div></div>
+<div class="ttc" id="anamespacehelios_html_a5dd8e95e4cb808a93be15d4df228eb36"><div class="ttname"><a href="#a5dd8e95e4cb808a93be15d4df228eb36">helios::kDefaultAssertionHandler</a></div><div class="ttdeci">constexpr AssertionHandler kDefaultAssertionHandler</div><div class="ttdoc">Default assertion handler (nullptr means use built-in default behavior).</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00032">assert.hpp:32</a></div></div>
+<div class="ttc" id="anamespacehelios_html_afc2e2d6e5d9076d42481c5837df0f6ba"><div class="ttname"><a href="#afc2e2d6e5d9076d42481c5837df0f6ba">helios::SetAssertionHandler</a></div><div class="ttdeci">void SetAssertionHandler(AssertionHandler handler) noexcept</div><div class="ttdoc">Sets a custom assertion handler.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00177">assert.hpp:177</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00171">171</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00177">177</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>
@@ -762,7 +815,7 @@ template&lt;typename CharT, typename Traits&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00166">166</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00174">174</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
 
 </div>
 </div>
@@ -789,7 +842,7 @@ template&lt;typename CharT, typename Traits&gt; </div>
 
 <p>Default assertion handler (<span class="tt">nullptr</span> means use built-in default behavior). </p>
 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00026">26</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00032">32</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>

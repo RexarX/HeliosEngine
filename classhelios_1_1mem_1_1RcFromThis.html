@@ -218,10 +218,10 @@ class helios::mem::RcFromThis&lt; Derived &gt;</div><p>CRTP base embedding a non
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> mesh = <a class="code hl_function" href="namespacehelios_1_1mem.html#a3739908b3ea624bbd6e990f5c0ebe5da">helios::mem::MakeRc&lt;Mesh&gt;</a>(42);</div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1RcFromThis_html"><div class="ttname"><a href="classhelios_1_1mem_1_1RcFromThis.html">helios::mem::RcFromThis</a></div><div class="ttdoc">CRTP base embedding a non-atomic intrusive reference counter.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l00038">ref_counted.hpp:38</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a3739908b3ea624bbd6e990f5c0ebe5da"><div class="ttname"><a href="namespacehelios_1_1mem.html#a3739908b3ea624bbd6e990f5c0ebe5da">helios::mem::MakeRc</a></div><div class="ttdeci">auto MakeRc(Args &amp;&amp;... args) -&gt; Rc&lt; T &gt;</div><div class="ttdoc">Allocates an object with the default PMR memory resource.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l00638">ref_counted.hpp:638</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1RcFromThis_html"><div class="ttname"><a href="classhelios_1_1mem_1_1RcFromThis.html">helios::mem::RcFromThis</a></div><div class="ttdoc">CRTP base embedding a non-atomic intrusive reference counter.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l00048">ref_counted.hpp:48</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a3739908b3ea624bbd6e990f5c0ebe5da"><div class="ttname"><a href="namespacehelios_1_1mem.html#a3739908b3ea624bbd6e990f5c0ebe5da">helios::mem::MakeRc</a></div><div class="ttdeci">auto MakeRc(Args &amp;&amp;... args) -&gt; Rc&lt; T &gt;</div><div class="ttdoc">Allocates an object with the default PMR memory resource.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l00648">ref_counted.hpp:648</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00038">38</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00048">48</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad731268ade4cbbe4e5c0e174cc9f8e26" name="ad731268ade4cbbe4e5c0e174cc9f8e26"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad731268ade4cbbe4e5c0e174cc9f8e26">&#9670;&#160;</a></span>RcFromThis() <span class="overload">[1/3]</span></h2>
@@ -275,7 +275,7 @@ template&lt;typename Derived&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00041">41</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00051">51</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -304,7 +304,7 @@ template&lt;typename Derived&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00042">42</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00052">52</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -361,7 +361,7 @@ template&lt;typename Derived&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00045">45</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00055">55</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -390,7 +390,7 @@ template&lt;typename Derived&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00046">46</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00056">56</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -422,7 +422,7 @@ template&lt;typename Derived&gt; </div>
 <p>Returns the current reference count. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of owning handles </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00052">52</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00062">62</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -451,7 +451,7 @@ template&lt;typename&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00056">56</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00066">66</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>

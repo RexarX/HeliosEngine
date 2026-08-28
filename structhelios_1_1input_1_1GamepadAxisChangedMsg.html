@@ -182,11 +182,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <p><a class="el" href="structhelios_1_1input_1_1Gamepad.html" title="Snapshot of one gamepad slot.">Gamepad</a> axis value change.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:afe70a0460e538b2aae9b2cb51336427c" id="r_afe70a0460e538b2aae9b2cb51336427c"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#afe70a0460e538b2aae9b2cb51336427c">id</a> = -1</td></tr>
+<tr class="memitem:a82476f7e67a40c92b2d2e3ac421e4618" id="r_a82476f7e67a40c92b2d2e3ac421e4618"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a>&#160;</td><td class="memItemRight"><a class="el" href="#a82476f7e67a40c92b2d2e3ac421e4618">id</a> = 0</td></tr>
 <tr class="memitem:a093d80cd464db80afd2ea8a973c60fdb" id="r_a093d80cd464db80afd2ea8a973c60fdb"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">GamepadAxis</a>&#160;</td><td class="memItemRight"><a class="el" href="#a093d80cd464db80afd2ea8a973c60fdb">axis</a> = <a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74a6f34c4ab25a9eaae98c6e7fd9ba4049e">GamepadAxis::kLeftX</a></td></tr>
 <tr class="memitem:a1b7919c22432f0c13e1f5a2663212dbe" id="r_a1b7919c22432f0c13e1f5a2663212dbe"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a1b7919c22432f0c13e1f5a2663212dbe">value</a> = 0.0F</td></tr>
 </table><table class="memberdecls">
@@ -201,7 +201,7 @@ Static Public Attributes</h2></td></tr>
 <div class="textblock"><p><a class="el" href="structhelios_1_1input_1_1Gamepad.html" title="Snapshot of one gamepad slot.">Gamepad</a> axis value change. </p>
 <p><span class="tt"><a class="el" href="#a1b7919c22432f0c13e1f5a2663212dbe">value</a></span> is the raw backend sample (GLFW gamepad range). Filtered stick / trigger values are applied to <span class="tt"><a class="el" href="structhelios_1_1input_1_1Gamepad.html#a2a0ade2b2cbd89fd88d5b7fb5a1cb20b">Gamepad::axes</a></span> by <span class="tt"><a class="el" href="structhelios_1_1input_1_1UpdateGamepadState.html" title="Applies gamepad messages into the Gamepads resource.">UpdateGamepadState</a></span>. </p>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00155">155</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00552">552</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a093d80cd464db80afd2ea8a973c60fdb" name="a093d80cd464db80afd2ea8a973c60fdb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a093d80cd464db80afd2ea8a973c60fdb">&#9670;&#160;</a></span>axis</h2>
@@ -215,23 +215,23 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00163">163</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00560">560</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afe70a0460e538b2aae9b2cb51336427c" name="afe70a0460e538b2aae9b2cb51336427c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe70a0460e538b2aae9b2cb51336427c">&#9670;&#160;</a></span>id</h2>
+<a id="a82476f7e67a40c92b2d2e3ac421e4618" name="a82476f7e67a40c92b2d2e3ac421e4618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82476f7e67a40c92b2d2e3ac421e4618">&#9670;&#160;</a></span>id</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t helios::input::GamepadAxisChangedMsg::id = -1</td>
+          <td class="memname"><a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a> helios::input::GamepadAxisChangedMsg::id = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00162">162</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00559">559</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -255,7 +255,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00160">160</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00557">557</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -279,7 +279,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00158">158</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00555">555</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -303,7 +303,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00159">159</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00556">556</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -329,7 +329,7 @@ Static Public Attributes</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line">                                    =</div>
 <div class="line"><span class="stringliteral">&quot;helios::input::GamepadAxisChangedMsg&quot;</span></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00156">156</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00553">553</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -345,7 +345,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html#l00164">164</a> of file <a class="el" href="input_2include_2helios_2input_2messages_8hpp_source.html">messages.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00561">561</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>

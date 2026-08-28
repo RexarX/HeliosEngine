@@ -229,7 +229,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
 <div class="textblock"><p>Command buffer for deferred <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span> operations. </p>
 <p>Collects commands and then pushes them into a queue. <a class="el" href="classhelios_1_1ecs_1_1Commands.html" title="Thin wrapper over command queue and world for deferred ECS operations.">Commands</a> are enqueued in the order they were added, ensuring predictable behavior. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00020">20</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00030">30</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a87e6069543fabcc24d3a07563d66efa6" name="a87e6069543fabcc24d3a07563d66efa6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87e6069543fabcc24d3a07563d66efa6">&#9670;&#160;</a></span>size_type</h2>
@@ -243,7 +243,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00022">22</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00032">32</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -284,7 +284,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00029">29</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00039">39</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -390,7 +390,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00038">38</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00048">48</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -421,7 +421,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
 <p>Clears all pending commands from the buffer. </p>
 <p>Removes all commands currently in the buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00047">47</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00057">57</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +470,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00169">169</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00179">179</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -500,7 +500,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
 <p>Checks if the buffer is empty. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if buffer is empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00113">113</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00123">123</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -530,7 +530,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.ht
 <p>Returns the memory resource used for command storage. </p>
 <dl class="section return"><dt>Returns</dt><dd>Memory resource passed to the constructor, or the default resource </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00129">129</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00139">139</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -578,7 +578,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00140">140</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00150">150</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -667,7 +667,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00154">154</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00164">164</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -702,7 +702,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00055">55</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00065">65</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -732,7 +732,7 @@ template&lt;ResourceTrait T&gt; </div>
 <p>Gets the number of commands in the buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of commands in buffer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00121">121</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00131">131</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -780,7 +780,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00147">147</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00157">157</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -818,7 +818,7 @@ template&lt;ResourceTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00161">161</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="world__buffer_8hpp_source.html#l00171">171</a> of file <a class="el" href="world__buffer_8hpp_source.html">world_buffer.hpp</a>.</p>
 
 </div>
 </div>

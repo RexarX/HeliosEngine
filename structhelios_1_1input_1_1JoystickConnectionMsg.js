@@ -5,7 +5,7 @@ var structhelios_1_1input_1_1JoystickConnectionMsg =
     [ "connected", "structhelios_1_1input_1_1JoystickConnectionMsg.html#aaf87d4f9d839880defa6e6f1f713cb0e", null ],
     [ "guid", "structhelios_1_1input_1_1JoystickConnectionMsg.html#a67ada57088d496fa2e758ced1aa29978", null ],
     [ "hat_count", "structhelios_1_1input_1_1JoystickConnectionMsg.html#afc763a310337447319dc2d4deb27ff1a", null ],
-    [ "id", "structhelios_1_1input_1_1JoystickConnectionMsg.html#a1ab5b59360ce26f245862c973fee1149", null ],
+    [ "id", "structhelios_1_1input_1_1JoystickConnectionMsg.html#afc93a3712ad1f96cc4b2ebb567a0746f", null ],
     [ "kAsync", "structhelios_1_1input_1_1JoystickConnectionMsg.html#a01a0f8e07d7d8e1231c158fd099fcb5b", null ],
     [ "kClearPolicy", "structhelios_1_1input_1_1JoystickConnectionMsg.html#a5c81649623a133e604e719a30b48aa08", null ],
     [ "kConsumable", "structhelios_1_1input_1_1JoystickConnectionMsg.html#ae4f6483e855f05cbc070d6583aaa1b1e", null ],

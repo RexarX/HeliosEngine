@@ -224,11 +224,11 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">stack.<a class="code hl_function" href="#a8c8815d6143a1ad6944b858e13b7b8cc">Push</a>(&amp;a);</div>
 <div class="line">stack.<a class="code hl_function" href="#a8c8815d6143a1ad6944b858e13b7b8cc">Push</a>(&amp;b);</div>
 <div class="line">Node* top = <span class="keyword">static_cast&lt;</span>Node*<span class="keyword">&gt;</span>(stack.<a class="code hl_function" href="#ae24950170a43fe4cfa513bbc95b1dd05">Pop</a>());</div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html">helios::mem::TreiberStack</a></div><div class="ttdoc">Lock-free intrusive Treiber stack.</div><div class="ttdef"><b>Definition</b> <a href="treiber__stack_8hpp_source.html#l00035">treiber_stack.hpp:35</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html"><div class="ttname"><a href="classhelios_1_1mem_1_1TreiberStack.html">helios::mem::TreiberStack</a></div><div class="ttdoc">Lock-free intrusive Treiber stack.</div><div class="ttdef"><b>Definition</b> <a href="treiber__stack_8hpp_source.html#l00046">treiber_stack.hpp:46</a></div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_a8c8815d6143a1ad6944b858e13b7b8cc"><div class="ttname"><a href="#a8c8815d6143a1ad6944b858e13b7b8cc">helios::mem::TreiberStack::Push</a></div><div class="ttdeci">void Push(void *node) noexcept</div><div class="ttdoc">Pushes node as the new top.</div><div class="ttdef"><b>Definition</b> <a href="treiber__stack_8cpp_source.html#l00031">treiber_stack.cpp:31</a></div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1TreiberStack_html_ae24950170a43fe4cfa513bbc95b1dd05"><div class="ttname"><a href="#ae24950170a43fe4cfa513bbc95b1dd05">helios::mem::TreiberStack::Pop</a></div><div class="ttdeci">void * Pop() noexcept</div><div class="ttdoc">Removes and returns the top node.</div><div class="ttdef"><b>Definition</b> <a href="treiber__stack_8cpp_source.html#l00045">treiber_stack.cpp:45</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00035">35</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00046">46</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a51ce13fad82ccece327938836aa74ca1" name="a51ce13fad82ccece327938836aa74ca1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51ce13fad82ccece327938836aa74ca1">&#9670;&#160;</a></span>TreiberStack() <span class="overload">[1/3]</span></h2>
@@ -303,7 +303,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00039">39</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00050">50</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
 
 </div>
 </div>
@@ -359,7 +359,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Drops the head without visiting or freeing nodes. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Must not run concurrently with <span class="tt"><a class="el" href="#a8c8815d6143a1ad6944b858e13b7b8cc" title="Pushes node as the new top.">Push</a></span> or <span class="tt"><a class="el" href="#ae24950170a43fe4cfa513bbc95b1dd05" title="Removes and returns the top node.">Pop</a></span>. Callers still own every node that was in the stack. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00064">64</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00075">75</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
 
 </div>
 </div>
@@ -389,7 +389,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Returns true when the stack has no nodes. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00070">70</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00081">81</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
 
 </div>
 </div>
@@ -478,7 +478,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00121">121</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00132">132</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
 
 </div>
 </div>
@@ -574,7 +574,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Returns the current top without removing it. </p>
 <dl class="section return"><dt>Returns</dt><dd>Top node, or <span class="tt">nullptr</span> when empty </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00076">76</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="treiber__stack_8hpp_source.html#l00087">87</a> of file <a class="el" href="treiber__stack_8hpp_source.html">treiber_stack.hpp</a>.</p>
 
 </div>
 </div>

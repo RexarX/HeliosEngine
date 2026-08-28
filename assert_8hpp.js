@@ -8,7 +8,7 @@ var assert_8hpp =
     [ "helios::details::DefaultAssertionHandler", "namespacehelios_1_1details.html#ac7257329ff9480b84750b75c7638f95a", null ],
     [ "helios::details::FormatAssertionMessage", "namespacehelios_1_1details.html#adb5b08a1efebd6763f5c5358aaccdea7", null ],
     [ "helios::GetAssertionHandler", "namespacehelios.html#a7982e4af7b9267b962018d6cfd53c165", null ],
-    [ "helios::details::HandleAssertion", "namespacehelios_1_1details.html#a271289d7b12e0f10ed7d0e53cf04d2e4", null ],
+    [ "helios::HandleAssertion", "namespacehelios.html#aab391e11e7c9423a40ead9ce2c9abb1b", null ],
     [ "helios::details::HasLogPluginHandler", "namespacehelios_1_1details.html#a3f3a0707dae4586fa9f88f9aeae11cdc", null ],
     [ "helios::details::LogPluginAssertionHandler", "namespacehelios_1_1details.html#ae8a3b4bbfc9cf2296127d58f340438c1", null ],
     [ "helios::SetAssertionHandler", "namespacehelios.html#afc2e2d6e5d9076d42481c5837df0f6ba", null ],

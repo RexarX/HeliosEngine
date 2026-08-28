@@ -179,9 +179,9 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('sdl3__window_2
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="sdl3__window_2include_2helios_2sdl3_2window_2systems_2poll_8hpp.html">helios/sdl3/window/systems/poll.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp.html">helios/ecs/resource/params.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;helios/sdl3/details/context.hpp&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;helios/sdl3/window/details/native_state.hpp&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;helios/sdl3/window/details/sdl_sync.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="context_8hpp.html">helios/sdl3/context.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="sdl3__window_2include_2helios_2sdl3_2window_2state_8hpp.html">helios/sdl3/window/state.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html">helios/sdl3/window/sync.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1sdl3_1_1window.html">helios::sdl3::window</a> {</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
@@ -193,14 +193,18 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('sdl3__window_2
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  }</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  SyncClipboard(*sdl_context-&gt;world, *native, *context);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <a class="code hl_function" href="namespacehelios_1_1sdl3_1_1window.html#a4ac57932f4be333e4353408fee049a5d">SyncClipboard</a>(*sdl_context-&gt;world, *native, *context);</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
 </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}  <span class="comment">// namespace helios::sdl3::window</span></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res</a></div><div class="ttdoc">Access to resource.</div><div class="ttdef"><b>Definition</b> <a href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html#l00022">params.hpp:22</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res</a></div><div class="ttdoc">Access to resource.</div><div class="ttdef"><b>Definition</b> <a href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html#l00032">params.hpp:32</a></div></div>
+<div class="ttc" id="acontext_8hpp_html"><div class="ttname"><a href="context_8hpp.html">context.hpp</a></div></div>
 <div class="ttc" id="aecs_2include_2helios_2ecs_2resource_2params_8hpp_html"><div class="ttname"><a href="ecs_2include_2helios_2ecs_2resource_2params_8hpp.html">params.hpp</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1sdl3_1_1window_html"><div class="ttname"><a href="namespacehelios_1_1sdl3_1_1window.html">helios::sdl3::window</a></div><div class="ttdef"><b>Definition</b> <a href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html#l00011">plugin.hpp:11</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1sdl3_1_1window_html"><div class="ttname"><a href="namespacehelios_1_1sdl3_1_1window.html">helios::sdl3::window</a></div><div class="ttdef"><b>Definition</b> <a href="sdl3__window_2include_2helios_2sdl3_2window_2event__handlers_8hpp_source.html#l00019">event_handlers.hpp:19</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1sdl3_1_1window_html_a4ac57932f4be333e4353408fee049a5d"><div class="ttname"><a href="namespacehelios_1_1sdl3_1_1window.html#a4ac57932f4be333e4353408fee049a5d">helios::sdl3::window::SyncClipboard</a></div><div class="ttdeci">void SyncClipboard(ecs::World &amp;world, const NativeWindows &amp;native, Context &amp;context)</div><div class="ttdef"><b>Definition</b> <a href="sdl3__window_2src_2sync_8cpp_source.html#l00559">sync.cpp:559</a></div></div>
+<div class="ttc" id="asdl3__window_2include_2helios_2sdl3_2window_2state_8hpp_html"><div class="ttname"><a href="sdl3__window_2include_2helios_2sdl3_2window_2state_8hpp.html">state.hpp</a></div></div>
+<div class="ttc" id="asdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp_html"><div class="ttname"><a href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html">sync.hpp</a></div></div>
 <div class="ttc" id="asdl3__window_2include_2helios_2sdl3_2window_2systems_2poll_8hpp_html"><div class="ttname"><a href="sdl3__window_2include_2helios_2sdl3_2window_2systems_2poll_8hpp.html">poll.hpp</a></div></div>
 <div class="ttc" id="astructhelios_1_1sdl3_1_1window_1_1PollEvents_html_a11ee1bb32369c52a7b5eda151757d0a2"><div class="ttname"><a href="structhelios_1_1sdl3_1_1window_1_1PollEvents.html#a11ee1bb32369c52a7b5eda151757d0a2">helios::sdl3::window::PollEvents::operator()</a></div><div class="ttdeci">void operator()(ecs::Res&lt; Context &gt; context, ecs::Res&lt; NativeWindows &gt; native, ecs::Res&lt; sdl3::Context &gt; sdl_context) const</div><div class="ttdef"><b>Definition</b> <a href="#l00012">poll.cpp:12</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

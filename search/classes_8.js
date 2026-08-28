@@ -17,5 +17,9 @@ var searchData=
   ['iscomponentbundletypes_3c_20componentbundletypes_3c_20ts_2e_2e_2e_20_3e_20_3e_14',['IsComponentBundleTypes&lt; ComponentBundleTypes&lt; Ts... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1IsComponentBundleTypes_3_01ComponentBundleTypes_3_01Ts_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]],
   ['isstructcomponentbundle_15',['IsStructComponentBundle',['../structhelios_1_1ecs_1_1details_1_1IsStructComponentBundle.html',1,'helios::ecs::details']]],
   ['isstructcomponentbundle_3c_20std_3a_3aremove_5fcvref_5ft_3c_20t_20_3e_20_3e_16',['IsStructComponentBundle&lt; std::remove_cvref_t&lt; T &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1IsStructComponentBundle.html',1,'helios::ecs::details']]],
-  ['isstructcomponentbundle_3c_20t_2c_20true_20_3e_17',['IsStructComponentBundle&lt; T, true &gt;',['../structhelios_1_1ecs_1_1details_1_1IsStructComponentBundle_3_01T_00_01true_01_4.html',1,'helios::ecs::details']]]
+  ['isstructcomponentbundle_3c_20t_2c_20true_20_3e_17',['IsStructComponentBundle&lt; T, true &gt;',['../structhelios_1_1ecs_1_1details_1_1IsStructComponentBundle_3_01T_00_01true_01_4.html',1,'helios::ecs::details']]],
+  ['iswithouttag_18',['IsWithoutTag',['../structhelios_1_1ecs_1_1details_1_1IsWithoutTag.html',1,'helios::ecs::details']]],
+  ['iswithouttag_3c_20without_3c_20ts_2e_2e_2e_20_3e_20_3e_19',['IsWithoutTag&lt; Without&lt; Ts... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1IsWithoutTag_3_01Without_3_01Ts_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]],
+  ['iswithtag_20',['IsWithTag',['../structhelios_1_1ecs_1_1details_1_1IsWithTag.html',1,'helios::ecs::details']]],
+  ['iswithtag_3c_20with_3c_20ts_2e_2e_2e_20_3e_20_3e_21',['IsWithTag&lt; With&lt; Ts... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1IsWithTag_3_01With_3_01Ts_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]]
 ];

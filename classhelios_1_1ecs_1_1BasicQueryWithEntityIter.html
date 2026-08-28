@@ -305,7 +305,7 @@ class helios::ecs::BasicQueryWithEntityIter&lt; IsConst, Components &gt;</div><p
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00331">331</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00342">342</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="aa8e278041030358c5491b8a2b304aeb8" name="aa8e278041030358c5491b8a2b304aeb8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa8e278041030358c5491b8a2b304aeb8">&#9670;&#160;</a></span>ComponentManagerType</h2>
@@ -323,7 +323,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line">std::conditional_t&lt;IsConst, const ComponentManager, ComponentManager&gt;</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00335">335</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00346">346</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -341,7 +341,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00344">344</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00355">355</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -359,7 +359,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00338">338</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00349">349</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -377,7 +377,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00339">339</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00350">350</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -395,7 +395,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00343">343</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00354">354</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -413,7 +413,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00342">342</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00353">353</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -433,7 +433,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line">std::tuple&lt;Entity, details::ComponentAccessType_t&lt;Components&gt;...&gt;</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00340">340</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00351">351</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -494,13 +494,13 @@ template&lt;bool IsConst, typename... Components&gt; </div>
     <tr><td class="paramname">components</td><td>Component manager for accessing component data </td></tr>
     <tr><td class="paramname">archetype_index</td><td>Starting archetype index </td></tr>
     <tr><td class="paramname">entity_index</td><td>Starting entity index within archetype </td></tr>
-    <tr><td class="paramname">with_types</td><td>Span of component types required by With filters </td></tr>
+    <tr><td class="paramname">with_types</td><td>Span of component types required by <a class="el" href="structhelios_1_1ecs_1_1With.html">With</a> filters </td></tr>
     <tr><td class="paramname">without_types</td><td>Span of component types to exclude (default empty) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00355">355</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00366">366</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -614,7 +614,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
 <p>Returns copy of this iterator as begin iterator (for range-based for). </p>
 <dl class="section return"><dt>Returns</dt><dd>Copy of this iterator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00425">425</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00436">436</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -646,7 +646,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
 <p>Returns end iterator for this query. </p>
 <dl class="section return"><dt>Returns</dt><dd>End iterator (points past the last valid entity) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00433">433</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00444">444</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -675,7 +675,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00415">415</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00426">426</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -709,7 +709,7 @@ requires details::UniqueComponentAccess&lt;Components...&gt; &amp;&amp; (details
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if iterator is at end or in invalid state. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Tuple of (<a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a>, component access values...) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00665">665</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00676">676</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -734,7 +734,7 @@ requires details::UniqueComponentAccess&lt;Components...&gt; &amp;&amp; (details
 <p>Advances iterator to next matching entity. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this iterator after advancement </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00609">609</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00620">620</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -759,7 +759,7 @@ requires details::UniqueComponentAccess&lt;Components...&gt; &amp;&amp; (details
 <p>Advances iterator to next matching entity (postfix). </p>
 <dl class="section return"><dt>Returns</dt><dd>Copy of iterator before advancement </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00619">619</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00630">630</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -784,7 +784,7 @@ requires details::UniqueComponentAccess&lt;Components...&gt; &amp;&amp; (details
 <p>Moves iterator to previous matching entity. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this iterator after moving backward </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00629">629</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00640">640</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -809,7 +809,7 @@ requires details::UniqueComponentAccess&lt;Components...&gt; &amp;&amp; (details
 <p>Moves iterator to previous matching entity (postfix). </p>
 <dl class="section return"><dt>Returns</dt><dd>Copy of iterator before moving backward </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00655">655</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00666">666</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -892,7 +892,7 @@ template&lt;bool IsConst, typename... Components&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00409">409</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8hpp_source.html#l00420">420</a> of file <a class="el" href="iterator_8hpp_source.html">iterator.hpp</a>.</p>
 
 </div>
 </div>

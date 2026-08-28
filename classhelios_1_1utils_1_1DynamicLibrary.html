@@ -246,10 +246,10 @@ Static Public Attributes</h2></td></tr>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_abacc87c4e5b1d85df0c8f75930a11aab"><div class="ttname"><a href="#abacc87c4e5b1d85df0c8f75930a11aab">helios::utils::DynamicLibrary::DynamicLibrary</a></div><div class="ttdeci">DynamicLibrary()=default</div></div>
-<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_ac2015f6f1a2e86cc3cf80e7559cfa5ec"><div class="ttname"><a href="#ac2015f6f1a2e86cc3cf80e7559cfa5ec">helios::utils::DynamicLibrary::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path) -&gt; DynamicLibraryResult&lt; void &gt;</div><div class="ttdoc">Loads a dynamic library from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00050">dynamic_library.cpp:50</a></div></div>
-<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_acd9b98f485c93f557d580dbfed9511d7"><div class="ttname"><a href="#acd9b98f485c93f557d580dbfed9511d7">helios::utils::DynamicLibrary::GetSymbol</a></div><div class="ttdeci">auto GetSymbol(std::string_view name) const -&gt; DynamicLibraryResult&lt; T &gt;</div><div class="ttdoc">Gets a typed function pointer from the library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00206">dynamic_library.hpp:206</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_ac2015f6f1a2e86cc3cf80e7559cfa5ec"><div class="ttname"><a href="#ac2015f6f1a2e86cc3cf80e7559cfa5ec">helios::utils::DynamicLibrary::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path) -&gt; DynamicLibraryResult&lt; void &gt;</div><div class="ttdoc">Loads a dynamic library from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00049">dynamic_library.cpp:49</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_acd9b98f485c93f557d580dbfed9511d7"><div class="ttname"><a href="#acd9b98f485c93f557d580dbfed9511d7">helios::utils::DynamicLibrary::GetSymbol</a></div><div class="ttdeci">auto GetSymbol(std::string_view name) const -&gt; DynamicLibraryResult&lt; T &gt;</div><div class="ttdoc">Gets a typed function pointer from the library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00217">dynamic_library.hpp:217</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00074">74</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00085">85</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a66a5e2a5513d86a01874fcb4264a2158" name="a66a5e2a5513d86a01874fcb4264a2158"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66a5e2a5513d86a01874fcb4264a2158">&#9670;&#160;</a></span>HandleType</h2>
@@ -265,7 +265,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Native handle type (void* on all platforms for ABI stability). </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00077">77</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00088">88</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -343,7 +343,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00193">193</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00204">204</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -372,7 +372,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Destructor that unloads the library if loaded. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00198">198</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00209">209</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -428,7 +428,7 @@ Static Public Attributes</h2></td></tr>
 <p>Gets the last platform-specific error message. </p>
 <dl class="section return"><dt>Returns</dt><dd>Error message string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00143">143</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00142">142</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
 
 </div>
 </div>
@@ -458,7 +458,7 @@ Static Public Attributes</h2></td></tr>
 <p>Gets the platform-specific file extension for dynamic libraries. </p>
 <dl class="section return"><dt>Returns</dt><dd>".dll" on Windows, ".so" on Linux, ".dylib" on macOS </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00166">166</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00177">177</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +488,7 @@ Static Public Attributes</h2></td></tr>
 <p>Gets the platform-specific library prefix. </p>
 <dl class="section return"><dt>Returns</dt><dd>Empty on Windows, "lib" on Unix-like systems </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00180">180</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00191">191</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -533,7 +533,7 @@ requires std::is_pointer_v&lt;T&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Expected with function pointer on success, or error on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00206">206</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00217">217</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -569,7 +569,7 @@ requires std::is_pointer_v&lt;T&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Expected with void pointer on success, or error on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00116">116</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00115">115</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
 
 </div>
 </div>
@@ -599,7 +599,7 @@ requires std::is_pointer_v&lt;T&gt;</div>
 <p>Gets the native handle of the loaded library. </p>
 <dl class="section return"><dt>Returns</dt><dd>Native handle, or <span class="tt"><a class="el" href="#aa808316f4be99328739518e23b53877d">kInvalidHandle</a></span> if not loaded </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00153">153</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00164">164</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -635,7 +635,7 @@ requires std::is_pointer_v&lt;T&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Expected with void on success, or error on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00050">50</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00049">49</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
 
 </div>
 </div>
@@ -665,7 +665,7 @@ requires std::is_pointer_v&lt;T&gt;</div>
 <p>Checks if a library is currently loaded. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if a library is loaded </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00137">137</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00148">148</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -717,7 +717,7 @@ requires std::is_pointer_v&lt;T&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00029">29</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00028">28</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
 
 </div>
 </div>
@@ -747,7 +747,7 @@ requires std::is_pointer_v&lt;T&gt;</div>
 <p>Gets the path of the loaded library. </p>
 <dl class="section return"><dt>Returns</dt><dd>Path to the library, or empty if not loaded </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00145">145</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00156">156</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -777,7 +777,7 @@ requires std::is_pointer_v&lt;T&gt;</div>
 <p>Reloads the library from the same path. </p>
 <p>Unloads the current library and loads it again. </p><dl class="section return"><dt>Returns</dt><dd>Expected with void on success, or error on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00101">101</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00100">100</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
 
 </div>
 </div>
@@ -807,7 +807,7 @@ requires std::is_pointer_v&lt;T&gt;</div>
 <p>Unloads the currently loaded library. </p>
 <dl class="section return"><dt>Returns</dt><dd>Expected with void on success, or error on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00077">77</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00076">76</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
 
 </div>
 </div>
@@ -832,7 +832,7 @@ requires std::is_pointer_v&lt;T&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00078">78</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00089">89</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>

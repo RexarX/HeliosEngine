@@ -180,10 +180,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('apply__cursors
 <div class="textblock"><code>#include &lt;pch.hpp&gt;</code><br />
 <code>#include &lt;<a class="el" href="apply__cursors_8hpp_source.html">helios/sdl3/input/systems/apply_cursors.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="entity_8hpp_source.html">helios/ecs/entity/entity.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="ecs_2include_2helios_2ecs_2query_2params_8hpp_source.html">helios/ecs/query/params.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="ecs_2include_2helios_2ecs_2resource_2params_8hpp_source.html">helios/ecs/resource/params.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="mouse_8hpp_source.html">helios/input/mouse.hpp</a>&gt;</code><br />
-<code>#include &lt;helios/sdl3/input/details/input_map.hpp&gt;</code><br />
-<code>#include &lt;SDL3/SDL.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="cursor__cache_8hpp_source.html">helios/sdl3/input/cursor_cache.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="sdl3__input_2include_2helios_2sdl3_2input_2state_8hpp_source.html">helios/sdl3/input/state.hpp</a>&gt;</code><br />
+<code>#include &lt;details/input_map.hpp&gt;</code><br />
+<code>#include &lt;SDL3/SDL_mouse.h&gt;</code><br />
+<code>#include &lt;SDL3/SDL_surface.h&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
@@ -200,11 +204,12 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afda4dde3bbbca6301ca2ea5f393812f6" id="r_afda4dde3bbbca6301ca2ea5f393812f6"><td class="memItemLeft">SDL_Cursor *&amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#afda4dde3bbbca6301ca2ea5f393812f6">helios::sdl3::input::anonymous_namespace{apply_cursors.cpp}::FindOrInsertCustom</a> (CursorCache &amp;cache, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity)</td></tr>
-<tr class="memitem:a37316aec6b9e199bce13ac8c7a82cd08" id="r_a37316aec6b9e199bce13ac8c7a82cd08"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#a37316aec6b9e199bce13ac8c7a82cd08">helios::sdl3::input::anonymous_namespace{apply_cursors.cpp}::EraseCustom</a> (CursorCache &amp;cache, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity)</td></tr>
-<tr class="memitem:a5d42348229cad6ed3e3aa941e6aa38e6" id="r_a5d42348229cad6ed3e3aa941e6aa38e6"><td class="memItemLeft">SDL_Cursor *&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#a5d42348229cad6ed3e3aa941e6aa38e6">helios::sdl3::input::anonymous_namespace{apply_cursors.cpp}::EnsureStandardCursor</a> (CursorCache &amp;cache, <a class="el" href="namespacehelios_1_1input.html#a937f55b9c1b0a9cfd795f799cd652958">helios::input::CursorIcon</a> icon)</td></tr>
+<tr class="memitem:afda4dde3bbbca6301ca2ea5f393812f6" id="r_afda4dde3bbbca6301ca2ea5f393812f6"><td class="memItemLeft">SDL_Cursor *&amp;&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#afda4dde3bbbca6301ca2ea5f393812f6">helios::sdl3::input::anonymous_namespace{apply_cursors.cpp}::FindOrInsertCustom</a> (<a class="el" href="structhelios_1_1sdl3_1_1input_1_1CursorCache.html">CursorCache</a> &amp;cache, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity)</td></tr>
+<tr class="memitem:a37316aec6b9e199bce13ac8c7a82cd08" id="r_a37316aec6b9e199bce13ac8c7a82cd08"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#a37316aec6b9e199bce13ac8c7a82cd08">helios::sdl3::input::anonymous_namespace{apply_cursors.cpp}::EraseCustom</a> (<a class="el" href="structhelios_1_1sdl3_1_1input_1_1CursorCache.html">CursorCache</a> &amp;cache, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity)</td></tr>
+<tr class="memitem:a5d42348229cad6ed3e3aa941e6aa38e6" id="r_a5d42348229cad6ed3e3aa941e6aa38e6"><td class="memItemLeft">SDL_Cursor *&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#a5d42348229cad6ed3e3aa941e6aa38e6">helios::sdl3::input::anonymous_namespace{apply_cursors.cpp}::EnsureStandardCursor</a> (<a class="el" href="structhelios_1_1sdl3_1_1input_1_1CursorCache.html">CursorCache</a> &amp;cache, <a class="el" href="namespacehelios_1_1input.html#a937f55b9c1b0a9cfd795f799cd652958">helios::input::CursorIcon</a> icon)</td></tr>
 <tr class="memitem:ae60d0357ca8df09648883ac792d63cd3" id="r_ae60d0357ca8df09648883ac792d63cd3"><td class="memItemLeft">SDL_Cursor *&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02apply__cursors_8cpp_03.html#ae60d0357ca8df09648883ac792d63cd3">helios::sdl3::input::anonymous_namespace{apply_cursors.cpp}::CreateCustomCursor</a> (const <a class="el" href="structhelios_1_1input_1_1CursorImage.html">helios::input::CursorImage</a> &amp;image)</td></tr>
-<tr class="memitem:a1e1370fad3eb1c1ef3ddaa6e600992d6" id="r_a1e1370fad3eb1c1ef3ddaa6e600992d6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input.html#a1e1370fad3eb1c1ef3ddaa6e600992d6">helios::sdl3::input::DestroyCursorCache</a> (CursorCache &amp;cache)</td></tr>
+<tr class="memitem:a1e1370fad3eb1c1ef3ddaa6e600992d6" id="r_a1e1370fad3eb1c1ef3ddaa6e600992d6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1input.html#a1e1370fad3eb1c1ef3ddaa6e600992d6">helios::sdl3::input::DestroyCursorCache</a> (<a class="el" href="structhelios_1_1sdl3_1_1input_1_1CursorCache.html">CursorCache</a> &amp;cache)</td></tr>
+<tr class="memdesc:a1e1370fad3eb1c1ef3ddaa6e600992d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys all cached SDL cursor objects.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

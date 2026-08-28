@@ -248,7 +248,7 @@ class helios::mem::FrameAllocator&lt; N &gt;</div><p>N-buffered PMR frame alloca
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00040">40</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00050">50</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae39384a1e4405239ba4ef013c0559791" name="ae39384a1e4405239ba4ef013c0559791"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae39384a1e4405239ba4ef013c0559791">&#9670;&#160;</a></span>FrameAllocator() <span class="overload">[1/4]</span></h2>
@@ -285,7 +285,7 @@ requires (N &gt;= 1)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00217">217</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00227">227</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -323,7 +323,7 @@ template&lt;size_t N = 2&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00055">55</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00065">65</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -387,7 +387,7 @@ template&lt;size_t N = 2&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00066">66</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00076">76</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -448,7 +448,7 @@ requires (N &gt;= 1)</div>
 <p>Advances to the next frame and resets its arena. </p>
 <p>Wraps the frame index modulo <span class="tt">N</span>. The newly current arena is soft-reset, reclaiming all prior allocations in that slot. </p><dl class="section warning"><dt>Warning</dt><dd>Must not be called concurrently with <span class="tt">allocate</span> or <span class="tt">deallocate</span>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00248">248</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00258">258</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -481,7 +481,7 @@ requires (N &gt;= 1)</div>
 <p>Returns aggregated stats across all frame arenas. </p>
 <dl class="section return"><dt>Returns</dt><dd>Summed allocator stats </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00269">269</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00279">279</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -521,7 +521,7 @@ requires (N &gt;= 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const arena reference </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00298">298</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00308">308</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -561,7 +561,7 @@ requires (N &gt;= 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Arena reference </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00291">291</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00301">301</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -593,7 +593,7 @@ template&lt;size_t N = 2&gt; </div>
 <p>Returns current arena block count. </p>
 <dl class="section return"><dt>Returns</dt><dd>Block count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00154">154</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00164">164</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -625,7 +625,7 @@ template&lt;size_t N = 2&gt; </div>
 <p>Returns true when current frame arena has no allocations. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if current arena is empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00100">100</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00110">110</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -657,7 +657,7 @@ template&lt;size_t N = 2&gt; </div>
 <p>Returns number of frame buffers. </p>
 <dl class="section return"><dt>Returns</dt><dd>N </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00126">126</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00136">136</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -689,7 +689,7 @@ template&lt;size_t N = 2&gt; </div>
 <p>Returns current frame index. </p>
 <dl class="section return"><dt>Returns</dt><dd>Current frame in range [0, N) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00120">120</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00130">130</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -721,7 +721,7 @@ template&lt;size_t N = 2&gt; </div>
 <p>Returns growth policy. </p>
 <dl class="section return"><dt>Returns</dt><dd>Growth policy </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00140">140</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00150">150</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -753,7 +753,7 @@ template&lt;size_t N = 2&gt; </div>
 <p>Returns per-arena initial capacity. </p>
 <dl class="section return"><dt>Returns</dt><dd>Capacity in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00132">132</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00142">142</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -819,7 +819,7 @@ requires (N &gt;= 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this allocator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00227">227</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00237">237</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -852,7 +852,7 @@ requires (N &gt;= 1)</div>
 <p>Resets all frame arenas and returns to frame zero. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Must not be called concurrently with <span class="tt">allocate</span> or <span class="tt">deallocate</span>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00258">258</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00268">268</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -884,7 +884,7 @@ template&lt;size_t N = 2&gt; </div>
 <p>Returns stats for current frame arena. </p>
 <dl class="section return"><dt>Returns</dt><dd>Allocator stats </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00106">106</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00116">116</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -916,7 +916,7 @@ template&lt;size_t N = 2&gt; </div>
 <p>Returns current arena total capacity. </p>
 <dl class="section return"><dt>Returns</dt><dd>Capacity in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00146">146</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00156">156</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>

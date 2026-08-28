@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacehelio
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">helios::sdl3::window Namespace Reference</div></div>
 </div><!--header-->
@@ -182,6 +183,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacehelio
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:anonymous_5Fnamespace_7Bapply_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bapply_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02apply_8cpp_03.html">anonymous_namespace{apply.cpp}</a></td></tr>
+<tr class="memitem:anonymous_5Fnamespace_7Bevent_5Fhandlers_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bevent_5Fhandlers_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html">anonymous_namespace{event_handlers.cpp}</a></td></tr>
+<tr class="memitem:anonymous_5Fnamespace_7Bsync_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bsync_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html">anonymous_namespace{sync.cpp}</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -189,6 +192,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies dirty window properties to native SDL windows.  <a href="structhelios_1_1sdl3_1_1window_1_1ApplyChanges.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ApplySet" id="r_ApplySet"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1ApplySet.html">ApplySet</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Named set for <span class="tt"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1PollEvents.html" title="Syncs clipboard state after SDL events have been pumped.">PollEvents</a></span> / <span class="tt"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1ApplyChanges.html" title="Applies dirty window properties to native SDL windows.">ApplyChanges</a></span> / <span class="tt"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1DestroyClosedWindows.html" title="Destroys native windows whose Window requested close.">DestroyClosedWindows</a></span>.  <a href="structhelios_1_1sdl3_1_1window_1_1ApplySet.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Context" id="r_Context"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1Context.html">Context</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-backend clipboard and initialization state.  <a href="structhelios_1_1sdl3_1_1window_1_1Context.html#details">More...</a><br /></td></tr>
 <tr class="memitem:CreateNativeWindows" id="r_CreateNativeWindows"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1CreateNativeWindows.html">CreateNativeWindows</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates native SDL windows for new <span class="tt"><a class="el" href="structhelios_1_1window_1_1Window.html" title="Describes a logical window entity.">helios::window::Window</a></span> entities.  <a href="structhelios_1_1sdl3_1_1window_1_1CreateNativeWindows.html#details">More...</a><br /></td></tr>
 <tr class="memitem:CreateSet" id="r_CreateSet"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1CreateSet.html">CreateSet</a></td></tr>
@@ -197,6 +202,10 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys native windows whose <span class="tt">Window</span> requested close.  <a href="structhelios_1_1sdl3_1_1window_1_1DestroyClosedWindows.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Init" id="r_Init"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1Init.html">Init</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes SDL video and registers window event handlers.  <a href="structhelios_1_1sdl3_1_1window_1_1Init.html#details">More...</a><br /></td></tr>
+<tr class="memitem:NativeEntry" id="r_NativeEntry"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeEntry.html">NativeEntry</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Native SDL window entry for a window entity.  <a href="structhelios_1_1sdl3_1_1window_1_1NativeEntry.html#details">More...</a><br /></td></tr>
+<tr class="memitem:NativeWindows" id="r_NativeWindows"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html">NativeWindows</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorted native <span class="tt">SDL_Window</span> handles keyed by window entity.  <a href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Plugin" id="r_Plugin"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1Plugin.html">Plugin</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SDL3 backend that synchronizes OS windows with <span class="tt"><a class="el" href="namespacehelios_1_1window.html">helios::window</a></span> ECS types.  <a href="structhelios_1_1sdl3_1_1window_1_1Plugin.html#details">More...</a><br /></td></tr>
 <tr class="memitem:PollEvents" id="r_PollEvents"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1PollEvents.html">PollEvents</a></td></tr>
@@ -207,8 +216,41 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Named set for window <span class="tt"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1Shutdown.html" title="Destroys native SDL windows and releases the video subsystem.">Shutdown</a></span> on <span class="tt"><a class="el" href="namespacehelios_1_1app.html#aa33288f42ce69be2089117e09e612c64" title="Builtin shutdown schedule.">app::kShutdown</a></span>.  <a href="structhelios_1_1sdl3_1_1window_1_1ShutdownSet.html#details">More...</a><br /></td></tr>
 <tr class="memitem:StartupSet" id="r_StartupSet"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1StartupSet.html">StartupSet</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Named set for window <span class="tt"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1Init.html" title="Initializes SDL video and registers window event handlers.">Init</a></span> on <span class="tt"><a class="el" href="namespacehelios_1_1app.html#a089b3bb68338019f95afad425d0a8dd6" title="Builtin main-thread startup schedule.">app::kMainStartup</a></span>.  <a href="structhelios_1_1sdl3_1_1window_1_1StartupSet.html#details">More...</a><br /></td></tr>
+<tr class="memitem:WindowMap" id="r_WindowMap"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1WindowMap.html">WindowMap</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps window entities to native SDL window handles.  <a href="structhelios_1_1sdl3_1_1window_1_1WindowMap.html#details">More...</a><br /></td></tr>
 <tr class="memitem:WindowPlugin" id="r_WindowPlugin"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1WindowPlugin.html">WindowPlugin</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A plugin group that includes the <span class="tt"><a class="el" href="structhelios_1_1window_1_1Plugin.html" title="Registers window ECS types without creating OS windows.">helios::window::Plugin</a></span>, <span class="tt"><a class="el" href="structhelios_1_1sdl3_1_1Plugin.html" title="Registers the process-global SDL3 runtime, event pump, and shutdown.">helios::sdl3::Plugin</a></span> and <span class="tt">helios::window::sdl3::Plugin</span>.  <a href="structhelios_1_1sdl3_1_1window_1_1WindowPlugin.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ac0035947ef6298127cb4f790d4e16cdd" id="r_ac0035947ef6298127cb4f790d4e16cdd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac0035947ef6298127cb4f790d4e16cdd">RegisterEventHandlers</a> (<a class="el" href="structhelios_1_1sdl3_1_1EventDispatcher.html">sdl3::EventDispatcher</a> &amp;dispatcher)</td></tr>
+<tr class="memdesc:ac0035947ef6298127cb4f790d4e16cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers SDL window and display event handlers on the dispatcher.  <br /></td></tr>
+<tr class="memitem:a0c02db9e06a9fd01b85292cd9532427a" id="r_a0c02db9e06a9fd01b85292cd9532427a"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77">::helios::window::NativeHandle</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0c02db9e06a9fd01b85292cd9532427a">QueryNativeHandle</a> (SDL_Window &amp;window)</td></tr>
+<tr class="memdesc:a0c02db9e06a9fd01b85292cd9532427a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queries the OS-native handle for an SDL window.  <br /></td></tr>
+<tr class="memitem:a7a564e236a1768ac910d24270af055b5" id="r_a7a564e236a1768ac910d24270af055b5"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a7a564e236a1768ac910d24270af055b5">FindEntry</a> (std::vector&lt; <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows_1_1Entry.html">NativeWindows::Entry</a> &gt; &amp;entries, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity)</td></tr>
+<tr class="memitem:a9c0d240236cbac27688c93bfcf66949b" id="r_a9c0d240236cbac27688c93bfcf66949b"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a9c0d240236cbac27688c93bfcf66949b">FindEntry</a> (const std::vector&lt; <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows_1_1Entry.html">NativeWindows::Entry</a> &gt; &amp;entries, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity)</td></tr>
+<tr class="memitem:a389e63e20b59c128d300d44629408e07" id="r_a389e63e20b59c128d300d44629408e07"><td class="memItemLeft"><a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html#a856b5282790a581c92fb5b7da822707c">SDL_DisplayID</a>&#160;</td><td class="memItemRight"><a class="el" href="#a389e63e20b59c128d300d44629408e07">DisplayAtIndex</a> (<a class="el" href="namespacehelios_1_1window.html#a457b222da4a0032551ae7254ebb0880c">::helios::window::MonitorId</a> index)</td></tr>
+<tr class="memitem:a974d7c83e005b75dbd0d176064604b9e" id="r_a974d7c83e005b75dbd0d176064604b9e"><td class="memItemLeft"><a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html#a856b5282790a581c92fb5b7da822707c">SDL_DisplayID</a>&#160;</td><td class="memItemRight"><a class="el" href="#a974d7c83e005b75dbd0d176064604b9e">ResolveDisplay</a> (const <a class="el" href="structhelios_1_1window_1_1Properties.html">::helios::window::Properties</a> &amp;properties, SDL_Window &amp;window)</td></tr>
+<tr class="memitem:a3d2cab5ad6a3d86d4febe909e6645da9" id="r_a3d2cab5ad6a3d86d4febe909e6645da9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3d2cab5ad6a3d86d4febe909e6645da9">RefreshMonitors</a> (<a class="el" href="structhelios_1_1window_1_1Monitors.html">::helios::window::Monitors</a> &amp;monitors)</td></tr>
+<tr class="memitem:a1943e5ba7785f1848ed76a110595e361" id="r_a1943e5ba7785f1848ed76a110595e361"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1943e5ba7785f1848ed76a110595e361">MarkMonitorDependentDirty</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html">NativeWindows</a> &amp;native)</td></tr>
+<tr class="memitem:a10faf1c2985cfb8dc39bee3238522e00" id="r_a10faf1c2985cfb8dc39bee3238522e00"><td class="memItemLeft"><a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html#a95a3d1b640d7c093bd83457cfe87fba9">SDL_WindowFlags</a>&#160;</td><td class="memItemRight"><a class="el" href="#a10faf1c2985cfb8dc39bee3238522e00">BuildCreationFlags</a> (const <a class="el" href="structhelios_1_1window_1_1Window.html">::helios::window::Window</a> &amp;window)</td></tr>
+<tr class="memitem:a1e3c5c6849d203ed5d108ae77cc1c4eb" id="r_a1e3c5c6849d203ed5d108ae77cc1c4eb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1e3c5c6849d203ed5d108ae77cc1c4eb">ApplyCursorMode</a> (SDL_Window &amp;native_window, <a class="el" href="namespacehelios_1_1window.html#a79d017571e4f91110c3c235fadf37fb7">::helios::window::CursorMode</a> mode)</td></tr>
+<tr class="memitem:a4ef832d2ed250ba2c43eb80b7a31b4be" id="r_a4ef832d2ed250ba2c43eb80b7a31b4be"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4ef832d2ed250ba2c43eb80b7a31b4be">ResolveCreationSize</a> (<a class="el" href="structhelios_1_1window_1_1Window.html">::helios::window::Window</a> &amp;window)</td></tr>
+<tr class="memitem:a4ea4e5bc1a76a7cee560ad1d2e536596" id="r_a4ea4e5bc1a76a7cee560ad1d2e536596"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4ea4e5bc1a76a7cee560ad1d2e536596">ApplyPresentationMode</a> (SDL_Window &amp;native_window, const <a class="el" href="structhelios_1_1window_1_1Window.html">::helios::window::Window</a> &amp;window)</td></tr>
+<tr class="memitem:aa3f985831420309119fc6a0fba7d4f78" id="r_aa3f985831420309119fc6a0fba7d4f78"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa3f985831420309119fc6a0fba7d4f78">ApplyMonitorPlacement</a> (SDL_Window &amp;native_window, <a class="el" href="structhelios_1_1window_1_1Window.html">::helios::window::Window</a> &amp;window)</td></tr>
+<tr class="memitem:aad2210c22891a8bc454878bd55ee3c55" id="r_aad2210c22891a8bc454878bd55ee3c55"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aad2210c22891a8bc454878bd55ee3c55">SyncWindowGeometry</a> (<a class="el" href="structhelios_1_1window_1_1Window.html">::helios::window::Window</a> &amp;window, SDL_Window &amp;native_window)</td></tr>
+<tr class="memitem:a84f8e6d92b73f36b1b0962e1e24f02ee" id="r_a84f8e6d92b73f36b1b0962e1e24f02ee"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a84f8e6d92b73f36b1b0962e1e24f02ee">ApplyWindowIcons</a> (SDL_Window &amp;native_window, std::span&lt; const <a class="el" href="structhelios_1_1window_1_1IconImage.html">::helios::window::IconImage</a> &gt; icons)</td></tr>
+<tr class="memitem:a38631c891479d21806d7ba00f43cd7a5" id="r_a38631c891479d21806d7ba00f43cd7a5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a38631c891479d21806d7ba00f43cd7a5">ApplyMaximized</a> (SDL_Window &amp;native_window, bool maximized)</td></tr>
+<tr class="memitem:a59084d28bbb14a9ef5a86e9896ae0a47" id="r_a59084d28bbb14a9ef5a86e9896ae0a47"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a59084d28bbb14a9ef5a86e9896ae0a47">ApplySizeLimits</a> (SDL_Window &amp;native_window, const <a class="el" href="structhelios_1_1window_1_1Properties.html">::helios::window::Properties</a> &amp;properties)</td></tr>
+<tr class="memitem:a74f1368ec5d9bf6043b4be14ed89a192" id="r_a74f1368ec5d9bf6043b4be14ed89a192"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a74f1368ec5d9bf6043b4be14ed89a192">ApplyAspectRatio</a> (SDL_Window &amp;native_window, const <a class="el" href="structhelios_1_1window_1_1Properties.html">::helios::window::Properties</a> &amp;properties)</td></tr>
+<tr class="memitem:a6acdeaabe0ab602eea09b76d1f21913a" id="r_a6acdeaabe0ab602eea09b76d1f21913a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6acdeaabe0ab602eea09b76d1f21913a">ApplyOpacity</a> (SDL_Window &amp;native_window, float opacity)</td></tr>
+<tr class="memitem:a805e575d195f2fcfae13a2c45fe41a75" id="r_a805e575d195f2fcfae13a2c45fe41a75"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a805e575d195f2fcfae13a2c45fe41a75">ApplyFloating</a> (SDL_Window &amp;native_window, bool floating)</td></tr>
+<tr class="memitem:ab4e501956794d529c0948dce31660a59" id="r_ab4e501956794d529c0948dce31660a59"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab4e501956794d529c0948dce31660a59">ApplyAutoIconify</a> (SDL_Window &amp;native_window, bool auto_iconify)</td></tr>
+<tr class="memitem:a868261822bd49f741137bcd7134ed08c" id="r_a868261822bd49f741137bcd7134ed08c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a868261822bd49f741137bcd7134ed08c">ApplyFocusOnShow</a> (bool focus_on_show)</td></tr>
+<tr class="memitem:a7a741fbf56e3c26be5b64b06c3fbed64" id="r_a7a741fbf56e3c26be5b64b06c3fbed64"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7a741fbf56e3c26be5b64b06c3fbed64">ApplyMousePassthrough</a> (SDL_Window &amp;native_window, bool passthrough)</td></tr>
+<tr class="memitem:a4ac57932f4be333e4353408fee049a5d" id="r_a4ac57932f4be333e4353408fee049a5d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4ac57932f4be333e4353408fee049a5d">SyncClipboard</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world, const <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html">NativeWindows</a> &amp;native, <a class="el" href="structhelios_1_1sdl3_1_1window_1_1Context.html">Context</a> &amp;context)</td></tr>
+<tr class="memitem:a439916c9524f05f2116733dd790f1a1a" id="r_a439916c9524f05f2116733dd790f1a1a"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a439916c9524f05f2116733dd790f1a1a">FindWindowMapEntry</a> (std::vector&lt; <a class="el" href="structhelios_1_1sdl3_1_1window_1_1WindowMap_1_1Entry.html">WindowMap::Entry</a> &gt; &amp;entries, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity)</td></tr>
+<tr class="memitem:a1add2e11741a2f202d173cb901f91389" id="r_a1add2e11741a2f202d173cb901f91389"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a1add2e11741a2f202d173cb901f91389">FindWindowMapEntry</a> (const std::vector&lt; <a class="el" href="structhelios_1_1sdl3_1_1window_1_1WindowMap_1_1Entry.html">WindowMap::Entry</a> &gt; &amp;entries, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -217,6 +259,663 @@ Variables</h2></td></tr>
 <tr class="memitem:a7b28f85071913badab36d84836b0209d" id="r_a7b28f85071913badab36d84836b0209d"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1sdl3_1_1window_1_1ApplySet.html">ApplySet</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7b28f85071913badab36d84836b0209d">kApplySet</a> {}</td></tr>
 <tr class="memitem:ac8bd072ed2fd9c81f9293e02d6bbebd5" id="r_ac8bd072ed2fd9c81f9293e02d6bbebd5"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1sdl3_1_1window_1_1ShutdownSet.html">ShutdownSet</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac8bd072ed2fd9c81f9293e02d6bbebd5">kShutdownSet</a> {}</td></tr>
 </table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a74f1368ec5d9bf6043b4be14ed89a192" name="a74f1368ec5d9bf6043b4be14ed89a192"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f1368ec5d9bf6043b4be14ed89a192">&#9670;&#160;</a></span>ApplyAspectRatio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyAspectRatio </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1window_1_1Properties.html">::helios::window::Properties</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>properties</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00493">493</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab4e501956794d529c0948dce31660a59" name="ab4e501956794d529c0948dce31660a59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4e501956794d529c0948dce31660a59">&#9670;&#160;</a></span>ApplyAutoIconify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyAutoIconify </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>auto_iconify</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00514">514</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1e3c5c6849d203ed5d108ae77cc1c4eb" name="a1e3c5c6849d203ed5d108ae77cc1c4eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e3c5c6849d203ed5d108ae77cc1c4eb">&#9670;&#160;</a></span>ApplyCursorMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyCursorMode </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1window.html#a79d017571e4f91110c3c235fadf37fb7">::helios::window::CursorMode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00264">264</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a805e575d195f2fcfae13a2c45fe41a75" name="a805e575d195f2fcfae13a2c45fe41a75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a805e575d195f2fcfae13a2c45fe41a75">&#9670;&#160;</a></span>ApplyFloating()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyFloating </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>floating</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00510">510</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a868261822bd49f741137bcd7134ed08c" name="a868261822bd49f741137bcd7134ed08c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a868261822bd49f741137bcd7134ed08c">&#9670;&#160;</a></span>ApplyFocusOnShow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyFocusOnShow </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>focus_on_show</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00518">518</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a38631c891479d21806d7ba00f43cd7a5" name="a38631c891479d21806d7ba00f43cd7a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38631c891479d21806d7ba00f43cd7a5">&#9670;&#160;</a></span>ApplyMaximized()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyMaximized </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>maximized</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00461">461</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa3f985831420309119fc6a0fba7d4f78" name="aa3f985831420309119fc6a0fba7d4f78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3f985831420309119fc6a0fba7d4f78">&#9670;&#160;</a></span>ApplyMonitorPlacement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyMonitorPlacement </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1window_1_1Window.html">::helios::window::Window</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00373">373</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7a741fbf56e3c26be5b64b06c3fbed64" name="a7a741fbf56e3c26be5b64b06c3fbed64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a741fbf56e3c26be5b64b06c3fbed64">&#9670;&#160;</a></span>ApplyMousePassthrough()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyMousePassthrough </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>passthrough</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00522">522</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6acdeaabe0ab602eea09b76d1f21913a" name="a6acdeaabe0ab602eea09b76d1f21913a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6acdeaabe0ab602eea09b76d1f21913a">&#9670;&#160;</a></span>ApplyOpacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyOpacity </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>opacity</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00506">506</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4ea4e5bc1a76a7cee560ad1d2e536596" name="a4ea4e5bc1a76a7cee560ad1d2e536596"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ea4e5bc1a76a7cee560ad1d2e536596">&#9670;&#160;</a></span>ApplyPresentationMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyPresentationMode </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1window_1_1Window.html">::helios::window::Window</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00318">318</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a59084d28bbb14a9ef5a86e9896ae0a47" name="a59084d28bbb14a9ef5a86e9896ae0a47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59084d28bbb14a9ef5a86e9896ae0a47">&#9670;&#160;</a></span>ApplySizeLimits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplySizeLimits </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1window_1_1Properties.html">::helios::window::Properties</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>properties</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00470">470</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a84f8e6d92b73f36b1b0962e1e24f02ee" name="a84f8e6d92b73f36b1b0962e1e24f02ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84f8e6d92b73f36b1b0962e1e24f02ee">&#9670;&#160;</a></span>ApplyWindowIcons()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ApplyWindowIcons </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structhelios_1_1window_1_1IconImage.html">::helios::window::IconImage</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>icons</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00427">427</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a10faf1c2985cfb8dc39bee3238522e00" name="a10faf1c2985cfb8dc39bee3238522e00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10faf1c2985cfb8dc39bee3238522e00">&#9670;&#160;</a></span>BuildCreationFlags()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html#a95a3d1b640d7c093bd83457cfe87fba9">SDL_WindowFlags</a> helios::sdl3::window::BuildCreationFlags </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1window_1_1Window.html">::helios::window::Window</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00232">232</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a389e63e20b59c128d300d44629408e07" name="a389e63e20b59c128d300d44629408e07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a389e63e20b59c128d300d44629408e07">&#9670;&#160;</a></span>DisplayAtIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html#a856b5282790a581c92fb5b7da822707c">SDL_DisplayID</a> helios::sdl3::window::DisplayAtIndex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1window.html#a457b222da4a0032551ae7254ebb0880c">::helios::window::MonitorId</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00119">119</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9c0d240236cbac27688c93bfcf66949b" name="a9c0d240236cbac27688c93bfcf66949b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c0d240236cbac27688c93bfcf66949b">&#9670;&#160;</a></span>FindEntry() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::sdl3::window::FindEntry </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows_1_1Entry.html">NativeWindows::Entry</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>entries</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2state_8hpp_source.html#l00123">123</a> of file <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2state_8hpp_source.html">state.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7a564e236a1768ac910d24270af055b5" name="a7a564e236a1768ac910d24270af055b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a564e236a1768ac910d24270af055b5">&#9670;&#160;</a></span>FindEntry() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::sdl3::window::FindEntry </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows_1_1Entry.html">NativeWindows::Entry</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>entries</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2state_8hpp_source.html#l00114">114</a> of file <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2state_8hpp_source.html">state.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1add2e11741a2f202d173cb901f91389" name="a1add2e11741a2f202d173cb901f91389"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1add2e11741a2f202d173cb901f91389">&#9670;&#160;</a></span>FindWindowMapEntry() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::sdl3::window::FindWindowMapEntry </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structhelios_1_1sdl3_1_1window_1_1WindowMap_1_1Entry.html">WindowMap::Entry</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>entries</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window__map_8hpp_source.html#l00119">119</a> of file <a class="el" href="window__map_8hpp_source.html">window_map.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a439916c9524f05f2116733dd790f1a1a" name="a439916c9524f05f2116733dd790f1a1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a439916c9524f05f2116733dd790f1a1a">&#9670;&#160;</a></span>FindWindowMapEntry() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::sdl3::window::FindWindowMapEntry </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structhelios_1_1sdl3_1_1window_1_1WindowMap_1_1Entry.html">WindowMap::Entry</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>entries</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window__map_8hpp_source.html#l00111">111</a> of file <a class="el" href="window__map_8hpp_source.html">window_map.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1943e5ba7785f1848ed76a110595e361" name="a1943e5ba7785f1848ed76a110595e361"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1943e5ba7785f1848ed76a110595e361">&#9670;&#160;</a></span>MarkMonitorDependentDirty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::MarkMonitorDependentDirty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>world</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html">NativeWindows</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>native</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00214">214</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0c02db9e06a9fd01b85292cd9532427a" name="a0c02db9e06a9fd01b85292cd9532427a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c02db9e06a9fd01b85292cd9532427a">&#9670;&#160;</a></span>QueryNativeHandle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1window.html#a1d9b279c97abfecbc857349ec2b13b77">helios::window::NativeHandle</a> helios::sdl3::window::QueryNativeHandle </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Queries the OS-native handle for an SDL window. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">window</td><td>SDL window </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Platform-specific native handle </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2native__handle_8cpp_source.html#l00020">20</a> of file <a class="el" href="sdl3__window_2src_2native__handle_8cpp_source.html">native_handle.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3d2cab5ad6a3d86d4febe909e6645da9" name="a3d2cab5ad6a3d86d4febe909e6645da9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d2cab5ad6a3d86d4febe909e6645da9">&#9670;&#160;</a></span>RefreshMonitors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::RefreshMonitors </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1window_1_1Monitors.html">::helios::window::Monitors</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>monitors</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00145">145</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac0035947ef6298127cb4f790d4e16cdd" name="ac0035947ef6298127cb4f790d4e16cdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0035947ef6298127cb4f790d4e16cdd">&#9670;&#160;</a></span>RegisterEventHandlers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::RegisterEventHandlers </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1sdl3_1_1EventDispatcher.html">sdl3::EventDispatcher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>dispatcher</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Registers SDL window and display event handlers on the dispatcher. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dispatcher</td><td>SDL event dispatcher from <span class="tt"><a class="el" href="namespacehelios_1_1sdl3.html">helios::sdl3</a></span> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html#l00308">308</a> of file <a class="el" href="sdl3__window_2src_2event__handlers_8cpp_source.html">event_handlers.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4ef832d2ed250ba2c43eb80b7a31b4be" name="a4ef832d2ed250ba2c43eb80b7a31b4be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ef832d2ed250ba2c43eb80b7a31b4be">&#9670;&#160;</a></span>ResolveCreationSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::ResolveCreationSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1window_1_1Window.html">::helios::window::Window</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00289">289</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a974d7c83e005b75dbd0d176064604b9e" name="a974d7c83e005b75dbd0d176064604b9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a974d7c83e005b75dbd0d176064604b9e">&#9670;&#160;</a></span>ResolveDisplay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2sync_8hpp.html#a856b5282790a581c92fb5b7da822707c">SDL_DisplayID</a> helios::sdl3::window::ResolveDisplay </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1window_1_1Properties.html">::helios::window::Properties</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>properties</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00133">133</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4ac57932f4be333e4353408fee049a5d" name="a4ac57932f4be333e4353408fee049a5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ac57932f4be333e4353408fee049a5d">&#9670;&#160;</a></span>SyncClipboard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::SyncClipboard </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>world</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html">NativeWindows</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>native</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1sdl3_1_1window_1_1Context.html">Context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>context</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00559">559</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aad2210c22891a8bc454878bd55ee3c55" name="aad2210c22891a8bc454878bd55ee3c55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad2210c22891a8bc454878bd55ee3c55">&#9670;&#160;</a></span>SyncWindowGeometry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::SyncWindowGeometry </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1window_1_1Window.html">::helios::window::Window</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00399">399</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="a7b28f85071913badab36d84836b0209d" name="a7b28f85071913badab36d84836b0209d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7b28f85071913badab36d84836b0209d">&#9670;&#160;</a></span>kApplySet</h2>
@@ -238,7 +937,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html#l00032">32</a> of file <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html#l00045">45</a> of file <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -262,7 +961,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html#l00025">25</a> of file <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html#l00038">38</a> of file <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +985,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html#l00039">39</a> of file <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html#l00052">52</a> of file <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>
@@ -310,7 +1009,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html#l00018">18</a> of file <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html#l00031">31</a> of file <a class="el" href="sdl3__window_2include_2helios_2sdl3_2window_2plugin_8hpp_source.html">plugin.hpp</a>.</p>
 
 </div>
 </div>

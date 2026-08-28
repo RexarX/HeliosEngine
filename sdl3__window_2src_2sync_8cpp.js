@@ -1,0 +1,27 @@
+var sdl3__window_2src_2sync_8cpp =
+[
+    [ "helios::sdl3::window::ApplyAspectRatio", "namespacehelios_1_1sdl3_1_1window.html#a74f1368ec5d9bf6043b4be14ed89a192", null ],
+    [ "helios::sdl3::window::ApplyAutoIconify", "namespacehelios_1_1sdl3_1_1window.html#ab4e501956794d529c0948dce31660a59", null ],
+    [ "helios::sdl3::window::ApplyCursorMode", "namespacehelios_1_1sdl3_1_1window.html#a1e3c5c6849d203ed5d108ae77cc1c4eb", null ],
+    [ "helios::sdl3::window::ApplyFloating", "namespacehelios_1_1sdl3_1_1window.html#a805e575d195f2fcfae13a2c45fe41a75", null ],
+    [ "helios::sdl3::window::ApplyFocusOnShow", "namespacehelios_1_1sdl3_1_1window.html#a868261822bd49f741137bcd7134ed08c", null ],
+    [ "helios::sdl3::window::ApplyMaximized", "namespacehelios_1_1sdl3_1_1window.html#a38631c891479d21806d7ba00f43cd7a5", null ],
+    [ "helios::sdl3::window::ApplyMonitorPlacement", "namespacehelios_1_1sdl3_1_1window.html#aa3f985831420309119fc6a0fba7d4f78", null ],
+    [ "helios::sdl3::window::ApplyMousePassthrough", "namespacehelios_1_1sdl3_1_1window.html#a7a741fbf56e3c26be5b64b06c3fbed64", null ],
+    [ "helios::sdl3::window::ApplyOpacity", "namespacehelios_1_1sdl3_1_1window.html#a6acdeaabe0ab602eea09b76d1f21913a", null ],
+    [ "helios::sdl3::window::ApplyPresentationMode", "namespacehelios_1_1sdl3_1_1window.html#a4ea4e5bc1a76a7cee560ad1d2e536596", null ],
+    [ "helios::sdl3::window::ApplySizeLimits", "namespacehelios_1_1sdl3_1_1window.html#a59084d28bbb14a9ef5a86e9896ae0a47", null ],
+    [ "helios::sdl3::window::ApplyWindowIcons", "namespacehelios_1_1sdl3_1_1window.html#a84f8e6d92b73f36b1b0962e1e24f02ee", null ],
+    [ "helios::sdl3::window::BuildCreationFlags", "namespacehelios_1_1sdl3_1_1window.html#a10faf1c2985cfb8dc39bee3238522e00", null ],
+    [ "helios::sdl3::window::DisplayAtIndex", "namespacehelios_1_1sdl3_1_1window.html#a389e63e20b59c128d300d44629408e07", null ],
+    [ "helios::sdl3::window::anonymous_namespace{sync.cpp}::DisplayContainingPoint", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html#ab24b5a2c586d332066d7a2140c405d25", null ],
+    [ "helios::sdl3::window::anonymous_namespace{sync.cpp}::DisplayForWindow", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html#a7b9fb770dd81af3659a346c8969c3156", null ],
+    [ "helios::sdl3::window::anonymous_namespace{sync.cpp}::FindFullscreenMode", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html#a1526a86148a1f02fe7d8c08175857140", null ],
+    [ "helios::sdl3::window::MarkMonitorDependentDirty", "namespacehelios_1_1sdl3_1_1window.html#a1943e5ba7785f1848ed76a110595e361", null ],
+    [ "helios::sdl3::window::RefreshMonitors", "namespacehelios_1_1sdl3_1_1window.html#a3d2cab5ad6a3d86d4febe909e6645da9", null ],
+    [ "helios::sdl3::window::anonymous_namespace{sync.cpp}::RefreshRateToHz", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html#a8bb5854225457f98535a3a7b0cb91c1f", null ],
+    [ "helios::sdl3::window::ResolveCreationSize", "namespacehelios_1_1sdl3_1_1window.html#a4ef832d2ed250ba2c43eb80b7a31b4be", null ],
+    [ "helios::sdl3::window::ResolveDisplay", "namespacehelios_1_1sdl3_1_1window.html#a974d7c83e005b75dbd0d176064604b9e", null ],
+    [ "helios::sdl3::window::SyncClipboard", "namespacehelios_1_1sdl3_1_1window.html#a4ac57932f4be333e4353408fee049a5d", null ],
+    [ "helios::sdl3::window::SyncWindowGeometry", "namespacehelios_1_1sdl3_1_1window.html#aad2210c22891a8bc454878bd55ee3c55", null ]
+];

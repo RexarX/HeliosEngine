@@ -190,41 +190,41 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad1e859c401e9f28289143db4ff14cbef" id="r_ad1e859c401e9f28289143db4ff14cbef"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> () noexcept=default</td></tr>
 <tr class="memdesc:ad1e859c401e9f28289143db4ff14cbef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructs an empty delegate.  <br /></td></tr>
-<tr class="memitem:ab7c84191a96800f18609a22e8cac4b8e" id="r_ab7c84191a96800f18609a22e8cac4b8e"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+<tr class="memitem:a408174b46d8bb7fc2bdbb72c868c018b" id="r_a408174b46d8bb7fc2bdbb72c868c018b"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt;ReturnType, std::remove_cvref_t&lt;Callable&gt;&amp;, Args...&gt;)</td></tr>
-<tr class="memitem:ab7c84191a96800f18609a22e8cac4b8e template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ab7c84191a96800f18609a22e8cac4b8e">Delegate</a> (Callable &amp;&amp;callable) noexcept</td></tr>
-<tr class="memdesc:ab7c84191a96800f18609a22e8cac4b8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from a capture-less lambda, empty functor, or function pointer.  <br /></td></tr>
-<tr class="memitem:ad2498cb5aa95e255925bfd3e05fdc64c" id="r_ad2498cb5aa95e255925bfd3e05fdc64c"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+<tr class="memitem:a408174b46d8bb7fc2bdbb72c868c018b template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a408174b46d8bb7fc2bdbb72c868c018b">Delegate</a> (Callable &amp;&amp;callable) noexcept</td></tr>
+<tr class="memdesc:a408174b46d8bb7fc2bdbb72c868c018b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from a capture-less lambda, empty functor, or function pointer.  <br /></td></tr>
+<tr class="memitem:abea3c2a1582fab6cc6371fe7fb8e4559" id="r_abea3c2a1582fab6cc6371fe7fb8e4559"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt; ReturnType, std::remove_reference_t&lt;Callable&gt;&amp;, Args...&gt; &amp;&amp; std::is_lvalue_reference_v&lt;Callable&gt;)</td></tr>
-<tr class="memitem:ad2498cb5aa95e255925bfd3e05fdc64c template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad2498cb5aa95e255925bfd3e05fdc64c">Delegate</a> (Callable &amp;&amp;callable) noexcept</td></tr>
-<tr class="memdesc:ad2498cb5aa95e255925bfd3e05fdc64c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from a named stateful callable (capturing lambda or functor).  <br /></td></tr>
-<tr class="memitem:ae345970259b31509781d02c2e348a9f2" id="r_ae345970259b31509781d02c2e348a9f2"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+<tr class="memitem:abea3c2a1582fab6cc6371fe7fb8e4559 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#abea3c2a1582fab6cc6371fe7fb8e4559">Delegate</a> (Callable &amp;&amp;callable) noexcept</td></tr>
+<tr class="memdesc:abea3c2a1582fab6cc6371fe7fb8e4559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from a named stateful callable (capturing lambda or functor).  <br /></td></tr>
+<tr class="memitem:ad1c99fb1033eff61cf1a0ae59f12033c" id="r_ad1c99fb1033eff61cf1a0ae59f12033c"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt; ReturnType, std::remove_reference_t&lt;Callable&gt;&amp;, Args...&gt; &amp;&amp; !std::is_lvalue_reference_v&lt;Callable&gt;)</td></tr>
-<tr class="memitem:ae345970259b31509781d02c2e348a9f2 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ae345970259b31509781d02c2e348a9f2">Delegate</a> (Callable &amp;&amp;) noexcept=delete</td></tr>
-<tr class="memdesc:ae345970259b31509781d02c2e348a9f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deleted: a stateful rvalue would leave a dangling pointer.  <br /></td></tr>
+<tr class="memitem:ad1c99fb1033eff61cf1a0ae59f12033c template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad1c99fb1033eff61cf1a0ae59f12033c">Delegate</a> (Callable &amp;&amp;) noexcept=delete</td></tr>
+<tr class="memdesc:ad1c99fb1033eff61cf1a0ae59f12033c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deleted: a stateful rvalue would leave a dangling pointer.  <br /></td></tr>
 <tr class="memitem:af59d832a9cce005f5670e90316001a26" id="r_af59d832a9cce005f5670e90316001a26"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#af59d832a9cce005f5670e90316001a26">Delegate</a> (const Delegate &amp;) noexcept=default</td></tr>
 <tr class="memitem:af2224ca207a1711e9ba5942169e94eef" id="r_af2224ca207a1711e9ba5942169e94eef"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#af2224ca207a1711e9ba5942169e94eef">Delegate</a> (Delegate &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:a363f2ab4a28f26b771b6a03e3b3cbf35" id="r_a363f2ab4a28f26b771b6a03e3b3cbf35"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a363f2ab4a28f26b771b6a03e3b3cbf35">~Delegate</a> () noexcept=default</td></tr>
 <tr class="memitem:ac081b36e541314ac443e4b79f6f2da41" id="r_ac081b36e541314ac443e4b79f6f2da41"><td class="memItemLeft">constexpr <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac081b36e541314ac443e4b79f6f2da41">operator=</a> (const <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> &amp;) noexcept=default</td></tr>
 <tr class="memitem:aee1aa9b86818b17ff6393d8257458c21" id="r_aee1aa9b86818b17ff6393d8257458c21"><td class="memItemLeft">constexpr <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aee1aa9b86818b17ff6393d8257458c21">operator=</a> (<a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a6131c0762c3ea5cdc355d399040a6204" id="r_a6131c0762c3ea5cdc355d399040a6204"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+<tr class="memitem:a7a18f48ff51761cdedda8d0024cbb3a0" id="r_a7a18f48ff51761cdedda8d0024cbb3a0"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt;ReturnType, std::remove_cvref_t&lt;Callable&gt;&amp;, Args...&gt;)</td></tr>
-<tr class="memitem:a6131c0762c3ea5cdc355d399040a6204 template"><td class="memItemLeft">constexpr <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6131c0762c3ea5cdc355d399040a6204">operator=</a> (Callable &amp;&amp;callable) noexcept</td></tr>
-<tr class="memdesc:a6131c0762c3ea5cdc355d399040a6204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a capture-less lambda, empty functor, or function pointer.  <br /></td></tr>
-<tr class="memitem:ac910b2ba16fc7ddc35b7188deb196505" id="r_ac910b2ba16fc7ddc35b7188deb196505"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+<tr class="memitem:a7a18f48ff51761cdedda8d0024cbb3a0 template"><td class="memItemLeft">constexpr <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7a18f48ff51761cdedda8d0024cbb3a0">operator=</a> (Callable &amp;&amp;callable) noexcept</td></tr>
+<tr class="memdesc:a7a18f48ff51761cdedda8d0024cbb3a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a capture-less lambda, empty functor, or function pointer.  <br /></td></tr>
+<tr class="memitem:ad162ccb5d655685e91e573cd8fc4e85e" id="r_ad162ccb5d655685e91e573cd8fc4e85e"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt;ReturnType, Callable&amp;, Args...&gt;)</td></tr>
-<tr class="memitem:ac910b2ba16fc7ddc35b7188deb196505 template"><td class="memItemLeft">constexpr <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac910b2ba16fc7ddc35b7188deb196505">operator=</a> (Callable &amp;callable) noexcept</td></tr>
-<tr class="memdesc:ac910b2ba16fc7ddc35b7188deb196505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a named stateful callable.  <br /></td></tr>
-<tr class="memitem:a44e2b27a84f633ef91a542551baa92ae" id="r_a44e2b27a84f633ef91a542551baa92ae"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+<tr class="memitem:ad162ccb5d655685e91e573cd8fc4e85e template"><td class="memItemLeft">constexpr <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad162ccb5d655685e91e573cd8fc4e85e">operator=</a> (Callable &amp;callable) noexcept</td></tr>
+<tr class="memdesc:ad162ccb5d655685e91e573cd8fc4e85e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a named stateful callable.  <br /></td></tr>
+<tr class="memitem:a8fa1995a79024b16d76eaf8895ecd9ba" id="r_a8fa1995a79024b16d76eaf8895ecd9ba"><td class="memTemplParams" colspan="2">template&lt;typename Callable&gt; <br />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt; ReturnType, std::remove_reference_t&lt;Callable&gt;&amp;, Args...&gt; &amp;&amp; !std::is_lvalue_reference_v&lt;Callable&gt;)</td></tr>
-<tr class="memitem:a44e2b27a84f633ef91a542551baa92ae template"><td class="memItemLeft">constexpr <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a44e2b27a84f633ef91a542551baa92ae">operator=</a> (Callable &amp;&amp;) noexcept=delete</td></tr>
-<tr class="memdesc:a44e2b27a84f633ef91a542551baa92ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deleted: assigning a stateful rvalue would dangle immediately.  <br /></td></tr>
+<tr class="memitem:a8fa1995a79024b16d76eaf8895ecd9ba template"><td class="memItemLeft">constexpr <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8fa1995a79024b16d76eaf8895ecd9ba">operator=</a> (Callable &amp;&amp;) noexcept=delete</td></tr>
+<tr class="memdesc:a8fa1995a79024b16d76eaf8895ecd9ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deleted: assigning a stateful rvalue would dangle immediately.  <br /></td></tr>
 <tr class="memitem:a2a79277a2475d59e80ee04de076cc535" id="r_a2a79277a2475d59e80ee04de076cc535"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a2a79277a2475d59e80ee04de076cc535">Reset</a> () noexcept</td></tr>
 <tr class="memdesc:a2a79277a2475d59e80ee04de076cc535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset delegate to empty state.  <br /></td></tr>
 <tr class="memitem:a5712bc43d01f21b9f4042a0abfcdba24" id="r_a5712bc43d01f21b9f4042a0abfcdba24"><td class="memItemLeft">constexpr ReturnType&#160;</td><td class="memItemRight"><a class="el" href="#a5712bc43d01f21b9f4042a0abfcdba24">Invoke</a> (Args &amp;&amp;... args) const noexcept(std::is_nothrow_invocable_v&lt; <a class="el" href="#a62a3c606a6398c5cd9d7cfcaf3518a29">FunctionType</a>, void *, Args &amp;&amp;... &gt;)</td></tr>
@@ -301,7 +301,7 @@ requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std:
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ReturnType, typename... Args&gt;<br />
 class helios::Delegate&lt; ReturnType(Args...)&gt;</div>
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00167">167</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00174">174</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a62a3c606a6398c5cd9d7cfcaf3518a29" name="a62a3c606a6398c5cd9d7cfcaf3518a29"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a62a3c606a6398c5cd9d7cfcaf3518a29">&#9670;&#160;</a></span>FunctionType</h2>
@@ -317,7 +317,7 @@ template&lt;typename ReturnType, typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00169">169</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00176">176</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -351,8 +351,8 @@ template&lt;typename ReturnType, typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="ab7c84191a96800f18609a22e8cac4b8e" name="ab7c84191a96800f18609a22e8cac4b8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7c84191a96800f18609a22e8cac4b8e">&#9670;&#160;</a></span>Delegate() <span class="overload">[2/6]</span></h2>
+<a id="a408174b46d8bb7fc2bdbb72c868c018b" name="a408174b46d8bb7fc2bdbb72c868c018b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a408174b46d8bb7fc2bdbb72c868c018b">&#9670;&#160;</a></span>Delegate() <span class="overload">[2/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -360,7 +360,7 @@ template&lt;typename ReturnType, typename... Args&gt; </div>
 template&lt;typename ReturnType, typename... Args&gt; </div>
 <div class="memtemplate">
 template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt;ReturnType, std::remove_cvref_t&lt;Callable&gt;&amp;, Args...&gt;)</div>
 <table class="mlabels">
   <tr>
@@ -394,12 +394,12 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &am
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00190">190</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00197">197</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad2498cb5aa95e255925bfd3e05fdc64c" name="ad2498cb5aa95e255925bfd3e05fdc64c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2498cb5aa95e255925bfd3e05fdc64c">&#9670;&#160;</a></span>Delegate() <span class="overload">[3/6]</span></h2>
+<a id="abea3c2a1582fab6cc6371fe7fb8e4559" name="abea3c2a1582fab6cc6371fe7fb8e4559"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abea3c2a1582fab6cc6371fe7fb8e4559">&#9670;&#160;</a></span>Delegate() <span class="overload">[3/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -407,7 +407,7 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &am
 template&lt;typename ReturnType, typename... Args&gt; </div>
 <div class="memtemplate">
 template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt; ReturnType, std::remove_reference_t&lt;Callable&gt;&amp;, Args...&gt; &amp;&amp; std::is_lvalue_reference_v&lt;Callable&gt;)</div>
 <table class="mlabels">
   <tr>
@@ -442,12 +442,12 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &am
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00208">208</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00215">215</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae345970259b31509781d02c2e348a9f2" name="ae345970259b31509781d02c2e348a9f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae345970259b31509781d02c2e348a9f2">&#9670;&#160;</a></span>Delegate() <span class="overload">[4/6]</span></h2>
+<a id="ad1c99fb1033eff61cf1a0ae59f12033c" name="ad1c99fb1033eff61cf1a0ae59f12033c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1c99fb1033eff61cf1a0ae59f12033c">&#9670;&#160;</a></span>Delegate() <span class="overload">[4/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -455,7 +455,7 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &am
 template&lt;typename ReturnType, typename... Args&gt; </div>
 <div class="memtemplate">
 template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, Delegate&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt; ReturnType, std::remove_reference_t&lt;Callable&gt;&amp;, Args...&gt; &amp;&amp; !std::is_lvalue_reference_v&lt;Callable&gt;)</div>
 <table class="mlabels">
   <tr>
@@ -675,7 +675,7 @@ requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; st
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00523">523</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00530">530</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -709,7 +709,7 @@ requires ( !std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; s
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00484">484</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00491">491</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -791,7 +791,7 @@ requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std:
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00562">562</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00569">569</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -874,7 +874,7 @@ requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std:
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00608">608</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00615">615</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -906,7 +906,7 @@ template&lt;typename ReturnType, typename... Args&gt; </div>
 <p>Get raw instance pointer stored inside delegate. </p>
 <p>For <span class="tt"><a class="el" href="#a967ac7ecaa2cc04d793f34b54b555e55" title="Create delegate from a free function pointer.">From</a></span> free functions and reconstructed empty callables this is nullptr. For member functions and stateful callables this points to the bound object. For function pointers bound via unary-plus decay, this holds the function pointer value. </p><dl class="section return"><dt>Returns</dt><dd>Raw instance pointer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00454">454</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00461">461</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -945,7 +945,7 @@ template&lt;typename ReturnType, typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Result of the invocation or default constructed value for empty delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00653">653</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00660">660</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -1023,7 +1023,7 @@ requires (sizeof...(UArgs) == sizeof...(Args)) &amp;&amp; (... &amp;&amp; utils:
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00677">677</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00684">684</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -1061,7 +1061,7 @@ template&lt;typename ReturnType, typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if not equal, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00434">434</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00441">441</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -1100,7 +1100,7 @@ template&lt;typename ReturnType, typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Result of the invocation or default constructed value for empty delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00394">394</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00401">401</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -1148,12 +1148,12 @@ requires (sizeof...(UArgs) == sizeof...(Args)) &amp;&amp; (... &amp;&amp; utils:
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Result of the invocation or default constructed value for empty delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00412">412</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00419">419</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a44e2b27a84f633ef91a542551baa92ae" name="a44e2b27a84f633ef91a542551baa92ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44e2b27a84f633ef91a542551baa92ae">&#9670;&#160;</a></span>operator=() <span class="overload">[1/5]</span></h2>
+<a id="a8fa1995a79024b16d76eaf8895ecd9ba" name="a8fa1995a79024b16d76eaf8895ecd9ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fa1995a79024b16d76eaf8895ecd9ba">&#9670;&#160;</a></span>operator=() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1161,7 +1161,7 @@ requires (sizeof...(UArgs) == sizeof...(Args)) &amp;&amp; (... &amp;&amp; utils:
 template&lt;typename ReturnType, typename... Args&gt; </div>
 <div class="memtemplate">
 template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt; ReturnType, std::remove_reference_t&lt;Callable&gt;&amp;, Args...&gt; &amp;&amp; !std::is_lvalue_reference_v&lt;Callable&gt;)</div>
 <table class="mlabels">
   <tr>
@@ -1185,8 +1185,8 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" hr
 
 </div>
 </div>
-<a id="a6131c0762c3ea5cdc355d399040a6204" name="a6131c0762c3ea5cdc355d399040a6204"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6131c0762c3ea5cdc355d399040a6204">&#9670;&#160;</a></span>operator=() <span class="overload">[2/5]</span></h2>
+<a id="a7a18f48ff51761cdedda8d0024cbb3a0" name="a7a18f48ff51761cdedda8d0024cbb3a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a18f48ff51761cdedda8d0024cbb3a0">&#9670;&#160;</a></span>operator=() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1194,7 +1194,7 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" hr
 template&lt;typename ReturnType, typename... Args&gt; </div>
 <div class="memtemplate">
 template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt;ReturnType, std::remove_cvref_t&lt;Callable&gt;&amp;, Args...&gt;)</div>
 <table class="mlabels">
   <tr>
@@ -1229,12 +1229,12 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" hr
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00242">242</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00249">249</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ac910b2ba16fc7ddc35b7188deb196505" name="ac910b2ba16fc7ddc35b7188deb196505"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac910b2ba16fc7ddc35b7188deb196505">&#9670;&#160;</a></span>operator=() <span class="overload">[3/5]</span></h2>
+<a id="ad162ccb5d655685e91e573cd8fc4e85e" name="ad162ccb5d655685e91e573cd8fc4e85e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad162ccb5d655685e91e573cd8fc4e85e">&#9670;&#160;</a></span>operator=() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1242,7 +1242,7 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" hr
 template&lt;typename ReturnType, typename... Args&gt; </div>
 <div class="memtemplate">
 template&lt;typename Callable&gt; <br />
-requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt;&gt; &amp;&amp;<br class="typebreak" />
+requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" href="#ad1e859c401e9f28289143db4ff14cbef">Delegate</a>&gt; &amp;&amp; !details::SafeTemporaryCallable&lt;std::remove_cvref_t&lt;Callable&gt; &gt; &amp;&amp;<br class="typebreak" />
  std::is_invocable_r_v&lt;ReturnType, Callable&amp;, Args...&gt;)</div>
 <table class="mlabels">
   <tr>
@@ -1278,7 +1278,7 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Callable&gt;, <a class="el" hr
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00258">258</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00265">265</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -1370,7 +1370,7 @@ template&lt;typename ReturnType, typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if equal, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00424">424</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00431">431</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -1401,7 +1401,7 @@ template&lt;typename ReturnType, typename... Args&gt; </div>
 
 <p>Reset delegate to empty state. </p>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00647">647</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00654">654</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -1433,7 +1433,7 @@ template&lt;typename ReturnType, typename... Args&gt; </div>
 <p>Check if delegate is bound to a callable. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if delegate is non-empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00442">442</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00449">449</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
 
 </div>
 </div>

@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <p>Applies mouse messages into the <span class="tt"><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a></span> resource.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="systems_8hpp_source.html">systems.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="systems_2mouse_8hpp_source.html">mouse.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -196,7 +196,7 @@ Static Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Applies mouse messages into the <span class="tt"><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a></span> resource. </p>
 
-<p class="definition">Definition at line <a class="el" href="systems_8hpp_source.html#l00036">36</a> of file <a class="el" href="systems_8hpp_source.html">systems.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_2mouse_8hpp_source.html#l00023">23</a> of file <a class="el" href="systems_2mouse_8hpp_source.html">mouse.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a9705a83c5da3e8f6fb787e477f7ec039" name="a9705a83c5da3e8f6fb787e477f7ec039"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9705a83c5da3e8f6fb787e477f7ec039">&#9670;&#160;</a></span>operator()()</h2>
@@ -218,15 +218,15 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Drains mouse messages into aggregated mouse state. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Connection messages are ignored (<span class="tt"><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a></span> stays process-global). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mouse</td><td><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a> resource </td></tr>
-    <tr><td class="paramname">messages</td><td><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a> button, cursor, motion, and wheel readers </td></tr>
+    <tr><td class="paramname">messages</td><td><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a> button, cursor, motion, wheel, and connection readers </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="systems_8cpp_source.html#l00197">197</a> of file <a class="el" href="systems_8cpp_source.html">systems.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mouse_8cpp_source.html#l00014">14</a> of file <a class="el" href="mouse_8cpp_source.html">mouse.cpp</a>.</p>
 
 </div>
 </div>
@@ -251,7 +251,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="systems_8hpp_source.html#l00037">37</a> of file <a class="el" href="systems_8hpp_source.html">systems.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="systems_2mouse_8hpp_source.html#l00024">24</a> of file <a class="el" href="systems_2mouse_8hpp_source.html">mouse.hpp</a>.</p>
 
 </div>
 </div>

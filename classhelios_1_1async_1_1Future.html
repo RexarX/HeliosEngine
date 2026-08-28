@@ -225,7 +225,7 @@ class helios::async::Future&lt; T &gt;</div><p>Wrapper around <span class="tt">t
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00022">22</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00032">32</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ade70cf53df1e25c667a6f6f191700812" name="ade70cf53df1e25c667a6f6f191700812"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ade70cf53df1e25c667a6f6f191700812">&#9670;&#160;</a></span>Future() <span class="overload">[1/3]</span></h2>
@@ -364,7 +364,7 @@ template&lt;typename T&gt; </div>
 <p>Attempts to cancel the associated task. </p>
 <p>May not succeed if the task has already started or completed. </p><dl class="section return"><dt>Returns</dt><dd>True if cancellation was successful, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00105">105</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00115">115</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
 
 </div>
 </div>
@@ -396,7 +396,7 @@ template&lt;typename T&gt; </div>
 <p>Blocks until the result is available and returns it. </p>
 <p>This method blocks the calling thread. Can only be called once. </p><dl class="section return"><dt>Returns</dt><dd>The result of the asynchronous operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00099">99</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00109">109</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
 
 </div>
 </div>
@@ -482,7 +482,7 @@ template&lt;typename T&gt; </div>
 <p>Checks if the future has a shared state. </p>
 <p>A future becomes invalid after <a class="el" href="#ab587bcde8e98c1f126d2040de37934c0" title="Blocks until the result is available and returns it.">Get()</a> is called or if it was default-constructed. </p><dl class="section return"><dt>Returns</dt><dd>True if the future is valid (has an associated task), false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00087">87</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00097">97</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
 
 </div>
 </div>
@@ -514,7 +514,7 @@ template&lt;typename T&gt; </div>
 <p>Blocks until the result is available. </p>
 <p>Unlike <span class="tt"><a class="el" href="#ab587bcde8e98c1f126d2040de37934c0" title="Blocks until the result is available and returns it.">Get()</a></span>, this doesn't retrieve the result and can be called multiple times. </p>
 
-<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00111">111</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00121">121</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
 
 </div>
 </div>
@@ -563,7 +563,7 @@ requires requires { typename std::chrono::duration&lt;Rep, Period&gt;; }</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Status indicating whether the result is ready, timeout occurred, or task was deferred </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00119">119</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00129">129</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
 
 </div>
 </div>
@@ -612,7 +612,7 @@ requires requires { typename std::chrono::time_point&lt;Clock, Duration&gt;; }</
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Status indicating whether the result is ready, timeout occurred, or task was deferred </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00128">128</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00138">138</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
 
 </div>
 </div>
@@ -639,7 +639,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00094">94</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00104">104</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
 
 </div>
 </div>
@@ -665,7 +665,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00095">95</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="future_8hpp_source.html#l00105">105</a> of file <a class="el" href="future_8hpp_source.html">future.hpp</a>.</p>
 
 </div>
 </div>

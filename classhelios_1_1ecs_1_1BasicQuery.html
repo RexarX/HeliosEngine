@@ -356,7 +356,7 @@ requires utils::PredicateFor&lt;Pred, <a class="el" href="#afa4357c115321e790f85
 <tr class="memitem:a666997499b3095c1d7fa75e85ca5356f" id="r_a666997499b3095c1d7fa75e85ca5356f"><td class="memItemLeft"><a class="el" href="#a97902a9bfd932e77ddfc7a10d3bc2ea3">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a666997499b3095c1d7fa75e85ca5356f">end</a> () const</td></tr>
 <tr class="memdesc:a666997499b3095c1d7fa75e85ca5356f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets iterator past the last matching entity and components.  <br /></td></tr>
 <tr class="memitem:ac23e2fdae9fad21934ed2f157733a436" id="r_ac23e2fdae9fad21934ed2f157733a436"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ac23e2fdae9fad21934ed2f157733a436">WithTypes</a> () const noexcept -&gt; std::span&lt; const <a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> &gt;</td></tr>
-<tr class="memdesc:ac23e2fdae9fad21934ed2f157733a436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets component type indices required by With filters.  <br /></td></tr>
+<tr class="memdesc:ac23e2fdae9fad21934ed2f157733a436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets component type indices required by <a class="el" href="structhelios_1_1ecs_1_1With.html">With</a> filters.  <br /></td></tr>
 <tr class="memitem:a5e0e0f9fe9585baf738b47ccfb9c7fd1" id="r_a5e0e0f9fe9585baf738b47ccfb9c7fd1"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a5e0e0f9fe9585baf738b47ccfb9c7fd1">WithoutTypes</a> () const noexcept -&gt; std::span&lt; const <a class="el" href="namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43">ComponentTypeIndex</a> &gt;</td></tr>
 <tr class="memdesc:a5e0e0f9fe9585baf738b47ccfb9c7fd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets excluded component type indices for this query.  <br /></td></tr>
 <tr class="memitem:afa67d7bb8a27c374c2646a703f0ca769" id="r_afa67d7bb8a27c374c2646a703f0ca769"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; <br />
@@ -383,7 +383,7 @@ class helios::ecs::BasicQuery&lt; WorldT, Args &gt;</div><p><a class="el" href="
   </dd>
 </dl>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> query = world.Query&lt;Transform&amp;, <span class="keyword">const</span> Velocity&amp;, <span class="keyword">const</span> Gravity*,</div>
-<div class="line">                         Health, With&lt;Player&gt;, Without&lt;Dead&gt;&gt;();</div>
+<div class="line">                         Health, <a class="code hl_struct" href="structhelios_1_1ecs_1_1With.html">With&lt;Player&gt;</a>, <a class="code hl_struct" href="structhelios_1_1ecs_1_1Without.html">Without&lt;Dead&gt;</a>&gt;();</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; [transform, velocity, gravity, health] : query) {</div>
 <div class="line">  transform.position += velocity.direction * velocity.speed;</div>
@@ -396,8 +396,10 @@ class helios::ecs::BasicQuery&lt; WorldT, Args &gt;</div><p><a class="el" href="
 <div class="line">                 <span class="keyword">const</span> Gravity* gravity, Health health) {</div>
 <div class="line">  <span class="comment">// ...</span></div>
 <div class="line">});</div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1With_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1With.html">helios::ecs::With</a></div><div class="ttdef"><b>Definition</b> <a href="args_8hpp_source.html#l00026">args.hpp:26</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1Without_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1Without.html">helios::ecs::Without</a></div><div class="ttdef"><b>Definition</b> <a href="args_8hpp_source.html#l00029">args.hpp:29</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00640">640</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00651">651</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a1ba93175ae1ac4eeb65e754952433337" name="a1ba93175ae1ac4eeb65e754952433337"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ba93175ae1ac4eeb65e754952433337">&#9670;&#160;</a></span>ComponentManagerType</h2>
@@ -413,7 +415,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00650">650</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00661">661</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -431,7 +433,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00655">655</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00666">666</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -449,7 +451,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00657">657</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00668">668</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -467,7 +469,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00654">654</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00665">665</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +487,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00658">658</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00669">669</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -503,7 +505,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00659">659</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00670">670</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -521,7 +523,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00656">656</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00667">667</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -540,9 +542,9 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><span class="keyword">typename</span> TypeInfo::template <a class="code hl_typedef" href="#a4994e319a960bf2de456080d666baf6c">WithEntityIterator&lt;kIsConst&gt;</a></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a4994e319a960bf2de456080d666baf6c"><div class="ttname"><a href="#a4994e319a960bf2de456080d666baf6c">helios::ecs::BasicQuery::WithEntityIterator</a></div><div class="ttdeci">typename TypeInfo::template WithEntityIterator&lt; kIsConst &gt; WithEntityIterator</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l00651">query.hpp:651</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a4994e319a960bf2de456080d666baf6c"><div class="ttname"><a href="#a4994e319a960bf2de456080d666baf6c">helios::ecs::BasicQuery::WithEntityIterator</a></div><div class="ttdeci">typename TypeInfo::template WithEntityIterator&lt; kIsConst &gt; WithEntityIterator</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l00662">query.hpp:662</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00651">651</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00662">662</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -577,7 +579,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Constructs a query with the given component manager. </p>
-<p>The With/Without component filters are derived at compile time from the template arguments (via With&lt;&gt; and Without&lt;&gt; filter types). </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The With/Without component filters are derived at compile time from the template arguments (via <a class="el" href="structhelios_1_1ecs_1_1With.html">With&lt;&gt;</a> and <a class="el" href="structhelios_1_1ecs_1_1Without.html">Without&lt;&gt;</a> filter types). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">components</td><td>Component manager reference </td></tr>
     <tr><td class="paramname">resource</td><td>Memory resource for internal matching storage </td></tr>
@@ -585,7 +587,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01243">1243</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01254">1254</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -746,7 +748,7 @@ requires utils::PredicateFor&lt; Pred, typename <a class="el" href="#a73e024514c
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if all results match </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01508">1508</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01519">1519</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -793,7 +795,7 @@ requires utils::PredicateFor&lt;Pred, <a class="el" href="#afa4357c115321e790f85
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if at least one result matches </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01137">1137</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01148">1148</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -825,7 +827,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <p>Gets iterator to the first matching entity and components. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator to the beginning of the query results </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01587">1587</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01598">1598</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -863,7 +865,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy chain view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00878">878</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00889">889</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -910,7 +912,7 @@ requires utils::ChainAdapterRequirements&lt;<a class="el" href="#a97902a9bfd932e
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy chain view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00906">906</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00917">917</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -962,7 +964,7 @@ requires utils::ChainAdapterRequirements&lt;<a class="el" href="#a97902a9bfd932e
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy chain view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00868">868</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00879">879</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1009,7 +1011,7 @@ requires utils::ChainAdapterRequirements&lt;<a class="el" href="#a97902a9bfd932e
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy chain view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00892">892</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00903">903</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1048,7 +1050,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy chunk view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00948">948</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00959">959</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1080,7 +1082,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <p>Collects all results into a vector. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector of tuples containing components </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00721">721</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00732">732</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1145,7 +1147,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector of results using provided allocator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01338">1338</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01349">1349</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1177,7 +1179,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <p>Gets the number of matching entities. </p>
 <p>O(A) where A is number of matching archetypes. </p><dl class="section return"><dt>Returns</dt><dd>Total count of entities matching the query </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01571">1571</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01582">1582</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1225,7 +1227,7 @@ requires utils::PredicateFor&lt; Pred, typename <a class="el" href="#a73e024514c
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of matching elements </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01527">1527</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01538">1538</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1257,7 +1259,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <p>Checks if query matches no entities. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if no entities match </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01565">1565</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01576">1576</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1289,7 +1291,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <p>Gets iterator past the last matching entity and components. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator to the end of the query results </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01187">1187</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01198">1198</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1321,7 +1323,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <p>Adds an index to each element. </p>
 <dl class="section return"><dt>Returns</dt><dd>Lazy enumerate view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01471">1471</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01482">1482</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1369,7 +1371,7 @@ requires utils::PredicateFor&lt; Pred, typename <a class="el" href="#a73e024514c
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy filter view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01398">1398</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01409">1409</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1416,7 +1418,7 @@ requires utils::PredicateFor&lt;Pred, <a class="el" href="#afa4357c115321e790f85
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>First matching element, or <span class="tt">std::nullopt</span> if none found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01026">1026</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01037">1037</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1470,7 +1472,7 @@ requires utils::FolderFor&lt;Func, T, typename <a class="el" href="#a73e024514cb
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Final accumulated value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01548">1548</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01559">1559</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1517,7 +1519,7 @@ requires utils::ActionFor&lt;Action, typename <a class="el" href="#a73e024514cb2
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01363">1363</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01374">1374</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1564,7 +1566,7 @@ requires utils::ActionFor&lt; Action, typename <a class="el" href="classhelios_1
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01377">1377</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01388">1388</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1602,7 +1604,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Tuple of component access types for the entity </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01254">1254</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01265">1265</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1682,7 +1684,7 @@ requires utils::TransformFor&lt; KeyExtractor, typename <a class="el" href="#a73
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Map from keys to vectors of matching elements </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01106">1106</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01117">1117</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1734,7 +1736,7 @@ requires utils::TransformFor&lt; KeyExtractor, typename <a class="el" href="#a73
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Map from keys to vectors of matching elements that use provided allocator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01121">1121</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01132">1132</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1782,7 +1784,7 @@ requires utils::InspectorFor&lt; Func, typename <a class="el" href="#a73e024514c
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy inspect view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01484">1484</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01495">1495</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1829,7 +1831,7 @@ requires std::output_iterator&lt; OutIt, typename <a class="el" href="#a73e02451
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01353">1353</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01364">1364</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1877,7 +1879,7 @@ requires utils::TransformFor&lt; Func, typename <a class="el" href="#a73e024514c
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy map view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01412">1412</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01423">1423</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1924,7 +1926,7 @@ requires utils::TransformFor&lt;KeyFunc, <a class="el" href="#afa4357c115321e790
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Element with maximum key, or <span class="tt">std::nullopt</span> if empty </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01079">1079</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01090">1090</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1971,7 +1973,7 @@ requires utils::TransformFor&lt;KeyFunc, <a class="el" href="#afa4357c115321e790
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Element with minimum key, or <span class="tt">std::nullopt</span> if empty </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01092">1092</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01103">1103</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2018,7 +2020,7 @@ requires utils::PredicateFor&lt;Pred, <a class="el" href="#afa4357c115321e790f85
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if no results match </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01160">1160</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01171">1171</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2152,7 +2154,7 @@ requires utils::PredicateFor&lt;Pred, <a class="el" href="#afa4357c115321e790f85
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pair of vectors: (matching, non-matching) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01050">1050</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01061">1061</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2203,7 +2205,7 @@ requires utils::PredicateFor&lt;Pred, <a class="el" href="#afa4357c115321e790f85
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pair of vectors: (matching, non-matching) that use provided allocator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01063">1063</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01074">1074</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2235,7 +2237,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <p>Reverses the order of iteration. </p>
 <dl class="section return"><dt>Returns</dt><dd>Lazy reverse view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00916">916</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00927">927</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2273,7 +2275,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy skip view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01433">1433</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01444">1444</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2305,7 +2307,7 @@ requires utils::PredicateFor&lt;Pred, typename <a class="el" href="#a73e024514cb
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01460">1460</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01471">1471</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2389,7 +2391,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>Lazy slide view </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>window_size must be greater than 0 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00926">926</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00937">937</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2427,7 +2429,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy step-by view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01495">1495</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01506">1506</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2466,7 +2468,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>Lazy stride view </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>stride must be greater than 0 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00937">937</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00948">948</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2504,7 +2506,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy take view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01423">1423</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01434">1434</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2536,7 +2538,7 @@ requires utils::PredicateFor&lt;Pred, typename <a class="el" href="#a73e024514cb
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01446">1446</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01457">1457</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2619,7 +2621,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Optional tuple of component access types for the entity </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01280">1280</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01291">1291</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2657,7 +2659,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Optional tuple of component access types for the entity </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01307">1307</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01318">1318</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2690,7 +2692,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Only callable on lvalue queries to prevent dangling references. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html" title="Wrapper that provides entity-aware iteration over query results.">BasicQueryWithEntity</a> wrapper for this query </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00685">685</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00696">696</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2722,7 +2724,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 <p>Gets excluded component type indices for this query. </p>
 <dl class="section return"><dt>Returns</dt><dd>Span of component type indices that are excluded by this query </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01210">1210</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01221">1221</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2751,10 +2753,10 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Gets component type indices required by With filters. </p>
+<p>Gets component type indices required by <a class="el" href="structhelios_1_1ecs_1_1With.html">With</a> filters. </p>
 <dl class="section return"><dt>Returns</dt><dd>Span of component type indices that are required by this query </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01201">1201</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01212">1212</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2792,7 +2794,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy zip view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00972">972</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00983">983</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2839,7 +2841,7 @@ requires utils::ZipAdapterRequirements&lt;<a class="el" href="#a97902a9bfd932e77
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy zip view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00999">999</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01010">1010</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2891,7 +2893,7 @@ requires utils::ZipAdapterRequirements&lt;<a class="el" href="#a97902a9bfd932e77
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy zip view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00962">962</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00973">973</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2938,7 +2940,7 @@ requires utils::ZipAdapterRequirements&lt;<a class="el" href="#a97902a9bfd932e77
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Lazy zip view </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00985">985</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00996">996</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -2965,7 +2967,7 @@ template&lt;typename WorldT, QueryArg... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01237">1237</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l01248">1248</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>

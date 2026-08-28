@@ -198,6 +198,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A non-owning view over a contiguous chunk of elements.  <a href="classhelios_1_1utils_1_1ChunkView.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Defer" id="r_Defer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1Defer.html">Defer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A utility class that defers the execution of a callable until the object goes out of scope.  <a href="classhelios_1_1utils_1_1Defer.html#details">More...</a><br /></td></tr>
+<tr class="memitem:DeferHelper" id="r_DeferHelper"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1utils_1_1DeferHelper.html">DeferHelper</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for the <span class="tt"><a class="el" href="defer_8hpp.html#a170e91546778eb9eceda22d3896b5ad0" title="Defers execution of an inline lambda until the end of the current scope.">HELIOS_DEFER</a></span> macro to enable inline lambda syntax.  <a href="structhelios_1_1utils_1_1DeferHelper.html#details">More...</a><br /></td></tr>
 <tr class="memitem:DynamicLibrary" id="r_DynamicLibrary"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cross-platform dynamic library loader.  <a href="classhelios_1_1utils_1_1DynamicLibrary.html#details">More...</a><br /></td></tr>
 <tr class="memitem:EnumerateAdapter" id="r_EnumerateAdapter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a></td></tr>
@@ -541,7 +543,7 @@ Variables</h2></td></tr>
 <p>Default engine type used by random utilities. </p>
 <p>Uses a 64-bit Mersenne Twister for quality pseudorandom numbers. </p>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00047">47</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00057">57</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -560,7 +562,7 @@ Variables</h2></td></tr>
 <p>Convenience alias for a generator using the default-quality engine. </p>
 <p>Uses thread-local <span class="tt"><a class="el" href="#ae412d06926f505f92866943e64611a72" title="Thread-local default-quality engine.">DefaultEngine()</a></span> as the underlying engine. </p>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00248">248</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00258">258</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -578,7 +580,7 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00053">53</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00064">64</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -597,7 +599,7 @@ template&lt;typename T&gt; </div>
 <p>Fast but lower-quality engine type used by random utilities. </p>
 <p>Uses a 32-bit linear congruential engine suitable for non-cryptographic, performance-critical scenarios. </p>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00054">54</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00064">64</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -616,7 +618,7 @@ template&lt;typename T&gt; </div>
 <p>Convenience alias for a generator using the fast engine. </p>
 <p>Uses thread-local <span class="tt"><a class="el" href="#a89028784f8decd2bf7a4801c250d0eb8" title="Thread-local fast engine.">FastEngineInstance()</a></span> as the underlying engine. </p>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00254">254</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00264">264</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -632,7 +634,7 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00009">9</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00020">20</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
 
 </div>
 </div>
@@ -675,7 +677,7 @@ template&lt;typename T&gt; </div>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00014">14</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00025">25</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -703,7 +705,7 @@ template&lt;typename T&gt; </div>
 <tr><td class="fieldname"><a id="aa8f8d89ee8389efd92330df687025d68a58d3b11e0fadcadf0990c58e19a8be7e" name="aa8f8d89ee8389efd92330df687025d68a58d3b11e0fadcadf0990c58e19a8be7e"></a>kReadError&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00014">14</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00025">25</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -830,7 +832,7 @@ requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
 <p>Thread-local default-quality engine. </p>
 <p>Uses Meyer's singleton pattern per thread to avoid global static initialization order issues while providing a convenient default. </p><dl class="section return"><dt>Returns</dt><dd>Reference to thread-local <span class="tt"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0" title="Default engine type used by random utilities.">DefaultRandomEngine</a></span> instance </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00109">109</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00119">119</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -898,7 +900,7 @@ template&lt;ExternalRange R&gt; </div>
 <p>Thread-local fast engine. </p>
 <p>Uses Meyer's singleton pattern per thread to avoid global static initialization order issues while providing a fast default. </p><dl class="section return"><dt>Returns</dt><dd>Reference to thread-local <span class="tt"><a class="el" href="#a82e57611045b81ffeda913f085c2131c" title="Fast but lower-quality engine type used by random utilities.">FastRandomEngine</a></span> instance </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00120">120</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00130">130</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -934,7 +936,7 @@ template&lt;ExternalRange R&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A string view representing the error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00021">21</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00032">32</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -1024,7 +1026,7 @@ template&lt;size_t N&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The computed FNV-1a hash of the input string literal. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00042">42</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00053">53</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
 
 </div>
 </div>
@@ -1065,7 +1067,7 @@ template&lt;size_t N&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The computed FNV-1a hash of the input string. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00027">27</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00038">38</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
 
 </div>
 </div>
@@ -1122,7 +1124,7 @@ template&lt;typename Traits, typename Allocator, typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An iterator to the end of the output string after appending the formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00023">23</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00034">34</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
 
 </div>
 </div>
@@ -1179,7 +1181,7 @@ template&lt;typename Traits, typename Allocator, typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An iterator to the end of the output string after appending the formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00051">51</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00062">62</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
 
 </div>
 </div>
@@ -1234,7 +1236,7 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A new string containing the formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00077">77</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00088">88</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
 
 </div>
 </div>
@@ -1289,7 +1291,7 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A new wide string containing the formatted string </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00095">95</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="format_8hpp_source.html#l00106">106</a> of file <a class="el" href="format_8hpp_source.html">format.hpp</a>.</p>
 
 </div>
 </div>
@@ -1308,7 +1310,7 @@ template&lt;typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00041">41</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8cpp_source.html#l00040">40</a> of file <a class="el" href="dynamic__library_8cpp_source.html">dynamic_library.cpp</a>.</p>
 
 </div>
 </div>
@@ -1346,7 +1348,7 @@ template&lt;auto Fn&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unqualified function name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00621">621</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00634">634</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1382,7 +1384,7 @@ template&lt;auto Fn&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The file extension, including the dot (e.g., ".txt"), or an empty string if none exists </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00122">122</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00133">133</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -1418,7 +1420,7 @@ template&lt;auto Fn&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The file name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00110">110</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00121">121</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -1494,7 +1496,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 <p>Creates a default-quality random engine seeded with <span class="tt">std::random_device</span>. </p>
 <p>Useful when the caller wants an engine instance but does not care a specific engine type beyond the default choice. </p><dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0" title="Default engine type used by random utilities.">DefaultRandomEngine</a></span> instance seeded with <span class="tt">std::random_device</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00088">88</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00098">98</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1524,7 +1526,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 <p>Creates a fast linear random engine seeded with <span class="tt">std::random_device</span>. </p>
 <p>Intended for performance-critical code where statistical quality is less important. Not suitable for cryptographic purposes. </p><dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="#a82e57611045b81ffeda913f085c2131c" title="Fast but lower-quality engine type used by random utilities.">FastRandomEngine</a></span> instance seeded with <span class="tt">std::random_device</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00098">98</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00108">108</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1611,7 +1613,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">std::strong_ordering</span> result of the comparison </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00543">543</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00556">556</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1652,7 +1654,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">std::strong_ordering</span> result of the comparison </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00565">565</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00578">578</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1693,7 +1695,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if the <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeId.html">TypeId</a></span> and <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">TypeIndex</a></span> refer to the same type, <span class="tt">false</span> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00533">533</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00546">546</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1734,7 +1736,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if the <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">TypeIndex</a></span> and <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeId.html">TypeId</a></span> refer to the same type, <span class="tt">false</span> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00555">555</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00568">568</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1766,7 +1768,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00196">196</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00203">203</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
 
 </div>
 </div>
@@ -1798,7 +1800,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00150">150</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00157">157</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
 
 </div>
 </div>
@@ -1836,7 +1838,7 @@ template&lt;auto Fn&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Fully qualified function name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00631">631</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00644">644</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1874,7 +1876,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Fully qualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00598">598</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00611">611</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1918,7 +1920,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Fully qualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00610">610</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00623">623</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1948,7 +1950,7 @@ template&lt;typename T&gt; </div>
 <p>Provides access to a thread-local default-quality random generator. </p>
 <p>Uses Meyer's singleton pattern per thread and avoids any static engine objects other than thread-local instances that are lazily initialized on first use. </p><dl class="section return"><dt>Returns</dt><dd>Reference to <span class="tt"><a class="el" href="#a371e8184717930153141198aee96e1cf" title="Convenience alias for a generator using the default-quality engine.">DefaultRandomGenerator</a></span> bound to <span class="tt"><a class="el" href="#ae412d06926f505f92866943e64611a72" title="Thread-local default-quality engine.">DefaultEngine()</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00263">263</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00273">273</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1978,7 +1980,7 @@ template&lt;typename T&gt; </div>
 <p>Internal helper to obtain seed from <span class="tt">std::random_device</span>. </p>
 <p>This function is intentionally small and header-only to avoid static initialization of engines in user code. </p><dl class="section return"><dt>Returns</dt><dd>64-bit seed value from <span class="tt">std::random_device</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00062">62</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00072">72</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2008,7 +2010,7 @@ template&lt;typename T&gt; </div>
 <p>Provides access to a thread-local fast random generator. </p>
 <p>Uses Meyer's singleton pattern per thread and avoids any static engine objects other than thread-local instances that are lazily initialized on first use. </p><dl class="section return"><dt>Returns</dt><dd>Reference to <span class="tt"><a class="el" href="#a851b4e170d6c739b36753930996cdd85" title="Convenience alias for a generator using the fast engine.">FastRandomGeneratorType</a></span> bound to <span class="tt"><a class="el" href="#a89028784f8decd2bf7a4801c250d0eb8" title="Thread-local fast engine.">FastEngineInstance()</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00276">276</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00286">286</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2046,7 +2048,7 @@ template&lt;utils::ArithmeticTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Randomly generated value of type <span class="tt">T</span> using the fast engine </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00318">318</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00328">328</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2096,7 +2098,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Random value of <span class="tt">std::common_type_t&lt;T, U&gt;</span> in [min, max] or [min, max) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00334">334</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00344">344</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2134,7 +2136,7 @@ template&lt;utils::ArithmeticTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Randomly generated value of type T </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00289">289</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00299">299</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2184,7 +2186,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Random value of <span class="tt">std::common_type_t&lt;T, U&gt;</span> in [min, max] or [min, max) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00305">305</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00315">315</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2220,7 +2222,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An expected containing the file contents or a <a class="el" href="#aa8f8d89ee8389efd92330df687025d68">FileError</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00074">74</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00085">85</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -2256,7 +2258,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An expected containing the file contents or a <a class="el" href="#aa8f8d89ee8389efd92330df687025d68">FileError</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00039">39</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00050">50</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -2413,7 +2415,7 @@ template&lt;ExternalRange R, typename Pred&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00123">123</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00130">130</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
 
 </div>
 </div>
@@ -2440,7 +2442,7 @@ template&lt;ExternalRange R, typename Pred&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00137">137</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sleep_8cpp_source.html#l00144">144</a> of file <a class="el" href="sleep_8cpp_source.html">sleep.cpp</a>.</p>
 
 </div>
 </div>
@@ -2724,7 +2726,7 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A formatted string, allocated from the calling thread's <span class="tt">TemporaryStorage</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage__helpers_8hpp_source.html#l00024">24</a> of file <a class="el" href="temporary__storage__helpers_8hpp_source.html">temporary_storage_helpers.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage__helpers_8hpp_source.html#l00035">35</a> of file <a class="el" href="temporary__storage__helpers_8hpp_source.html">temporary_storage_helpers.hpp</a>.</p>
 
 </div>
 </div>
@@ -2774,7 +2776,7 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A formatted wide string, allocated from the calling thread's <span class="tt">TemporaryStorage</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="temporary__storage__helpers_8hpp_source.html#l00042">42</a> of file <a class="el" href="temporary__storage__helpers_8hpp_source.html">temporary_storage_helpers.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="temporary__storage__helpers_8hpp_source.html#l00053">53</a> of file <a class="el" href="temporary__storage__helpers_8hpp_source.html">temporary_storage_helpers.hpp</a>.</p>
 
 </div>
 </div>
@@ -2810,7 +2812,7 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String description of the error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00029">29</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00040">40</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -2848,7 +2850,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unqualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00576">576</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00589">589</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -2892,7 +2894,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unqualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00587">587</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00600">600</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -2965,7 +2967,7 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::range
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00012">12</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00023">23</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
 
 </div>
 </div>
@@ -2989,7 +2991,7 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::range
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00013">13</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00024">24</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
 
 </div>
 </div>

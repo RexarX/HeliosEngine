@@ -222,11 +222,11 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a2a0ade2b2cbd89fd88d5b7fb5a1cb20b" id="r_a2a0ade2b2cbd89fd88d5b7fb5a1cb20b"><td class="memItemLeft"><a class="el" href="classhelios_1_1input_1_1Axis.html">Axis</a>&lt; <a class="el" href="namespacehelios_1_1input.html#a24be6c0a181c8c4c00eac3c960a74e74">GamepadAxis</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2a0ade2b2cbd89fd88d5b7fb5a1cb20b">axes</a></td></tr>
 <tr class="memitem:a293501a75aaf30aeb321f08a005266de" id="r_a293501a75aaf30aeb321f08a005266de"><td class="memItemLeft">std::array&lt; float, 3 &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a293501a75aaf30aeb321f08a005266de">gyro</a> = {}</td></tr>
 <tr class="memitem:ab3c54de375375e88ec8ac003f8cb186c" id="r_ab3c54de375375e88ec8ac003f8cb186c"><td class="memItemLeft">std::array&lt; float, 3 &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab3c54de375375e88ec8ac003f8cb186c">accel</a> = {}</td></tr>
-<tr class="memitem:aa60dbca369cf5c6dd6ede47eafabc153" id="r_aa60dbca369cf5c6dd6ede47eafabc153"><td class="memItemLeft">std::array&lt; <a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">GamepadTouchpadFinger</a>, <a class="el" href="#a70c4d0e25d6a015f1e289fc11ee7ab20">kMaxTouchpadFingers</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa60dbca369cf5c6dd6ede47eafabc153">touchpad</a> = {}</td></tr>
+<tr class="memitem:a14f9f5cda4e1cead7699fb142e6a6528" id="r_a14f9f5cda4e1cead7699fb142e6a6528"><td class="memItemLeft">std::array&lt; std::array&lt; <a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">GamepadTouchpadFinger</a>, <a class="el" href="#a70c4d0e25d6a015f1e289fc11ee7ab20">kMaxTouchpadFingers</a> &gt;, <a class="el" href="#aedc22ec6961c5a052d82975724172a1d">kMaxTouchpads</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a14f9f5cda4e1cead7699fb142e6a6528">touchpads</a> = {}</td></tr>
 <tr class="memitem:acf2761008317f12129b95ddfa6c68cab" id="r_acf2761008317f12129b95ddfa6c68cab"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1input.html#a2f0d6dcb03014725ee1d0c7c312d9180">GamepadButtonInput</a>&#160;</td><td class="memItemRight"><a class="el" href="#acf2761008317f12129b95ddfa6c68cab">buttons</a></td></tr>
 <tr class="memitem:a023c37f9ccb58db42e543020a94d3654" id="r_a023c37f9ccb58db42e543020a94d3654"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a023c37f9ccb58db42e543020a94d3654">rumble_duration_ms</a> = 0</td></tr>
 <tr class="memitem:a92fe0ede891d10bb03e5b705a23ad533" id="r_a92fe0ede891d10bb03e5b705a23ad533"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a92fe0ede891d10bb03e5b705a23ad533">trigger_rumble_duration_ms</a> = 0</td></tr>
-<tr class="memitem:ad86d37538ded48af2e4144b1b60f4e31" id="r_ad86d37538ded48af2e4144b1b60f4e31"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#ad86d37538ded48af2e4144b1b60f4e31">id</a> = -1</td></tr>
+<tr class="memitem:a688b301c1adf636bffed39a0e3abb668" id="r_a688b301c1adf636bffed39a0e3abb668"><td class="memItemLeft">std::optional&lt; <a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a688b301c1adf636bffed39a0e3abb668">id</a></td></tr>
 <tr class="memitem:ace722b59fca952b4104b851b988f92be" id="r_ace722b59fca952b4104b851b988f92be"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#ace722b59fca952b4104b851b988f92be">rumble_low</a> = 0</td></tr>
 <tr class="memitem:aff491f3ae1cca078ae3f8608f2e6661c" id="r_aff491f3ae1cca078ae3f8608f2e6661c"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#aff491f3ae1cca078ae3f8608f2e6661c">rumble_high</a> = 0</td></tr>
 <tr class="memitem:aa05638794c223ec374477adaa8154cd0" id="r_aa05638794c223ec374477adaa8154cd0"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#aa05638794c223ec374477adaa8154cd0">trigger_rumble_left</a> = 0</td></tr>
@@ -243,13 +243,14 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
+<tr class="memitem:aedc22ec6961c5a052d82975724172a1d" id="r_aedc22ec6961c5a052d82975724172a1d"><td class="memItemLeft">static constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#aedc22ec6961c5a052d82975724172a1d">kMaxTouchpads</a> = 2</td></tr>
 <tr class="memitem:a70c4d0e25d6a015f1e289fc11ee7ab20" id="r_a70c4d0e25d6a015f1e289fc11ee7ab20"><td class="memItemLeft">static constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a70c4d0e25d6a015f1e289fc11ee7ab20">kMaxTouchpadFingers</a> = 2</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Snapshot of one gamepad slot. </p>
 <p><span class="tt"><a class="el" href="#a2a0ade2b2cbd89fd88d5b7fb5a1cb20b">axes</a></span> holds filtered gameplay values (circular sticks, triggers remapped to <span class="tt">[0, 1]</span>). Raw backend samples live in <span class="tt"><a class="el" href="structhelios_1_1input_1_1Gamepads.html#a30c97d8e6c2279abb7402f6dd9341561">Gamepads::filters</a></span>. Rumble, LED, and sensor-enable fields are gameplay outputs consumed by backends. GLFW ignores rumble, LED, sensors, touchpad, and battery. </p>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00203">203</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00220">220</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="af54103050ee16fff7b2c5632f578c492" name="af54103050ee16fff7b2c5632f578c492"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af54103050ee16fff7b2c5632f578c492">&#9670;&#160;</a></span>ClearDirty() <span class="overload">[1/2]</span></h2>
@@ -276,7 +277,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Clears all dirty flags after backend synchronization. </p>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00227">227</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00245">245</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -311,7 +312,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00221">221</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00239">239</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -347,7 +348,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True when the flag is set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00274">274</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00292">292</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -377,7 +378,7 @@ Static Public Attributes</h2></td></tr>
 <p>Returns the requested LED color. </p>
 <dl class="section return"><dt>Returns</dt><dd>Red, green, and blue channels </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00300">300</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00318">318</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -407,7 +408,7 @@ Static Public Attributes</h2></td></tr>
 <p>Returns dual-motor rumble strengths. </p>
 <dl class="section return"><dt>Returns</dt><dd>Low-frequency and high-frequency motor strengths </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00282">282</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00300">300</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -437,7 +438,7 @@ Static Public Attributes</h2></td></tr>
 <p>Returns trigger rumble strengths. </p>
 <dl class="section return"><dt>Returns</dt><dd>Left and right trigger motor strengths </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00291">291</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00309">309</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -472,7 +473,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00213">213</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00231">231</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -501,7 +502,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Clears identity, buttons, axes, and extra device state. </p>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00331">331</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00351">351</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -536,7 +537,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00387">387</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00407">407</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -571,7 +572,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00382">382</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00402">402</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -617,7 +618,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00374">374</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00394">394</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -663,7 +664,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00358">358</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00378">378</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -709,7 +710,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00366">366</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00386">386</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -726,7 +727,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00310">310</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00328">328</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -742,7 +743,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00328">328</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00348">348</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -758,7 +759,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00308">308</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00326">326</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -774,7 +775,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00312">312</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00332">332</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -790,7 +791,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00326">326</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00346">346</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -806,7 +807,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00325">325</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00345">345</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -822,7 +823,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00306">306</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00324">324</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -838,7 +839,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00309">309</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00327">327</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -854,23 +855,23 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00327">327</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00347">347</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad86d37538ded48af2e4144b1b60f4e31" name="ad86d37538ded48af2e4144b1b60f4e31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad86d37538ded48af2e4144b1b60f4e31">&#9670;&#160;</a></span>id</h2>
+<a id="a688b301c1adf636bffed39a0e3abb668" name="a688b301c1adf636bffed39a0e3abb668"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a688b301c1adf636bffed39a0e3abb668">&#9670;&#160;</a></span>id</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t helios::input::Gamepad::id = -1</td>
+          <td class="memname">std::optional&lt;<a class="el" href="namespacehelios_1_1input.html#adbb9e80eb94c0fd4ae08080ebae6a20c">GamepadId</a>&gt; helios::input::Gamepad::id</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00315">315</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00335">335</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -894,7 +895,31 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00204">204</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00222">222</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aedc22ec6961c5a052d82975724172a1d" name="aedc22ec6961c5a052d82975724172a1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedc22ec6961c5a052d82975724172a1d">&#9670;&#160;</a></span>kMaxTouchpads</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::input::Gamepad::kMaxTouchpads = 2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00221">221</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -910,7 +935,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00324">324</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00344">344</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -926,7 +951,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00323">323</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00343">343</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -942,7 +967,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00322">322</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00342">342</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -958,7 +983,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00307">307</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00325">325</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -974,7 +999,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00305">305</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00323">323</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -990,7 +1015,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00320">320</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00340">340</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -1006,7 +1031,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00313">313</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00333">333</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -1022,7 +1047,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00317">317</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00337">337</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -1038,23 +1063,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00316">316</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aa60dbca369cf5c6dd6ede47eafabc153" name="aa60dbca369cf5c6dd6ede47eafabc153"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa60dbca369cf5c6dd6ede47eafabc153">&#9670;&#160;</a></span>touchpad</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::array&lt;<a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">GamepadTouchpadFinger</a>, <a class="el" href="#a70c4d0e25d6a015f1e289fc11ee7ab20">kMaxTouchpadFingers</a>&gt; helios::input::Gamepad::touchpad = {}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00311">311</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00336">336</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -1070,7 +1079,23 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00321">321</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00341">341</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a14f9f5cda4e1cead7699fb142e6a6528" name="a14f9f5cda4e1cead7699fb142e6a6528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14f9f5cda4e1cead7699fb142e6a6528">&#9670;&#160;</a></span>touchpads</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::array&lt;std::array&lt;<a class="el" href="structhelios_1_1input_1_1GamepadTouchpadFinger.html">GamepadTouchpadFinger</a>, <a class="el" href="#a70c4d0e25d6a015f1e289fc11ee7ab20">kMaxTouchpadFingers</a>&gt;, <a class="el" href="#aedc22ec6961c5a052d82975724172a1d">kMaxTouchpads</a>&gt; helios::input::Gamepad::touchpads = {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00331">331</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -1086,7 +1111,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00314">314</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00334">334</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -1102,7 +1127,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00318">318</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00338">338</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>
@@ -1118,7 +1143,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00319">319</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gamepad_8hpp_source.html#l00339">339</a> of file <a class="el" href="gamepad_8hpp_source.html">gamepad.hpp</a>.</p>
 
 </div>
 </div>

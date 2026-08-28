@@ -22,7 +22,6 @@ var namespacehelios_1_1details =
     [ "SafeTemporaryCallable", "concepthelios_1_1details_1_1SafeTemporaryCallable.html", null ],
     [ "DefaultAssertionHandler", "namespacehelios_1_1details.html#ac7257329ff9480b84750b75c7638f95a", null ],
     [ "FormatAssertionMessage", "namespacehelios_1_1details.html#adb5b08a1efebd6763f5c5358aaccdea7", null ],
-    [ "HandleAssertion", "namespacehelios_1_1details.html#a271289d7b12e0f10ed7d0e53cf04d2e4", null ],
     [ "HasLogPluginHandler", "namespacehelios_1_1details.html#a3f3a0707dae4586fa9f88f9aeae11cdc", null ],
     [ "LogPluginAssertionHandler", "namespacehelios_1_1details.html#ae8a3b4bbfc9cf2296127d58f340438c1", null ],
     [ "g_custom_assertion_handler", "namespacehelios_1_1details.html#a1f5914c59d5d990ec71ad9a7cf71ba84", null ],

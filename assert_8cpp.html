@@ -179,7 +179,6 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('assert_8cpp.ht
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="core_2src_2pch_8hpp_source.html">pch.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="stacktrace_8hpp_source.html">helios/stacktrace.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="filesystem_8hpp_source.html">helios/utils/filesystem.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="format_8hpp_source.html">helios/utils/format.hpp</a>&gt;</code><br />
@@ -190,6 +189,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('assert_8cpp.ht
 <code>#include &lt;source_location&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
 </div>
 <p><a href="assert_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -206,14 +206,14 @@ Functions</h2></td></tr>
 <tr class="memdesc:adb5b08a1efebd6763f5c5358aaccdea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a complete assertion failure message with source location and stack trace.  <br /></td></tr>
 <tr class="memitem:ac7257329ff9480b84750b75c7638f95a" id="r_ac7257329ff9480b84750b75c7638f95a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#ac7257329ff9480b84750b75c7638f95a">helios::details::DefaultAssertionHandler</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
 <tr class="memdesc:ac7257329ff9480b84750b75c7638f95a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default assertion handler that prints to stderr.  <br /></td></tr>
-<tr class="memitem:a271289d7b12e0f10ed7d0e53cf04d2e4" id="r_a271289d7b12e0f10ed7d0e53cf04d2e4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#a271289d7b12e0f10ed7d0e53cf04d2e4">helios::details::HandleAssertion</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
-<tr class="memdesc:a271289d7b12e0f10ed7d0e53cf04d2e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified assertion handling function.  <br /></td></tr>
 <tr class="memitem:a353d3912bb7ad37d555a2d43f9fcd02f" id="r_a353d3912bb7ad37d555a2d43f9fcd02f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#a353d3912bb7ad37d555a2d43f9fcd02f">helios::AbortWithStacktrace</a> (std::string_view message) noexcept</td></tr>
 <tr class="memdesc:a353d3912bb7ad37d555a2d43f9fcd02f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a message with stack trace and aborts the program execution.  <br /></td></tr>
 <tr class="memitem:a3f3a0707dae4586fa9f88f9aeae11cdc" id="r_a3f3a0707dae4586fa9f88f9aeae11cdc"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#a3f3a0707dae4586fa9f88f9aeae11cdc">helios::details::HasLogPluginHandler</a> () noexcept</td></tr>
 <tr class="memdesc:a3f3a0707dae4586fa9f88f9aeae11cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log plugin assertion handler (weak symbol).  <br /></td></tr>
 <tr class="memitem:ae8a3b4bbfc9cf2296127d58f340438c1" id="r_ae8a3b4bbfc9cf2296127d58f340438c1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#ae8a3b4bbfc9cf2296127d58f340438c1">helios::details::LogPluginAssertionHandler</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
 <tr class="memdesc:ae8a3b4bbfc9cf2296127d58f340438c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Weak symbol for log plugin assertion handler.  <br /></td></tr>
+<tr class="memitem:aab391e11e7c9423a40ead9ce2c9abb1b" id="r_aab391e11e7c9423a40ead9ce2c9abb1b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#aab391e11e7c9423a40ead9ce2c9abb1b">helios::HandleAssertion</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
+<tr class="memdesc:aab391e11e7c9423a40ead9ce2c9abb1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified assertion handling function.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

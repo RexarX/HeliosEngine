@@ -1,5 +1,6 @@
 var namespacehelios_1_1sdl3 =
 [
+    [ "anonymous_namespace{lifetime.cpp}", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02lifetime_8cpp_03.html", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02lifetime_8cpp_03" ],
     [ "anonymous_namespace{pump_events.cpp}", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02pump__events_8cpp_03.html", [
       [ "DispatchEvent", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02pump__events_8cpp_03.html#a2935ddede3096f16c6bd24d2e7b30281", null ],
       [ "DrainPolledEvents", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02pump__events_8cpp_03.html#a5248d883098d850edfa750b0ad3d566a", null ],
@@ -8,6 +9,8 @@ var namespacehelios_1_1sdl3 =
     ] ],
     [ "input", "namespacehelios_1_1sdl3_1_1input.html", "namespacehelios_1_1sdl3_1_1input" ],
     [ "window", "namespacehelios_1_1sdl3_1_1window.html", "namespacehelios_1_1sdl3_1_1window" ],
+    [ "Context", "structhelios_1_1sdl3_1_1Context.html", "structhelios_1_1sdl3_1_1Context" ],
+    [ "EventDispatcher", "structhelios_1_1sdl3_1_1EventDispatcher.html", "structhelios_1_1sdl3_1_1EventDispatcher" ],
     [ "EventPumpSet", "structhelios_1_1sdl3_1_1EventPumpSet.html", "structhelios_1_1sdl3_1_1EventPumpSet" ],
     [ "Init", "structhelios_1_1sdl3_1_1Init.html", "structhelios_1_1sdl3_1_1Init" ],
     [ "Plugin", "structhelios_1_1sdl3_1_1Plugin.html", "structhelios_1_1sdl3_1_1Plugin" ],
@@ -15,6 +18,10 @@ var namespacehelios_1_1sdl3 =
     [ "Shutdown", "structhelios_1_1sdl3_1_1Shutdown.html", "structhelios_1_1sdl3_1_1Shutdown" ],
     [ "ShutdownSet", "structhelios_1_1sdl3_1_1ShutdownSet.html", "structhelios_1_1sdl3_1_1ShutdownSet" ],
     [ "StartupSet", "structhelios_1_1sdl3_1_1StartupSet.html", "structhelios_1_1sdl3_1_1StartupSet" ],
+    [ "Initialized", "namespacehelios_1_1sdl3.html#a3dcceef73157ad696892404be1d18ead", null ],
+    [ "Probe", "namespacehelios_1_1sdl3.html#ab1808ed81e00da7974db2e3d924ab0d8", null ],
+    [ "Release", "namespacehelios_1_1sdl3.html#adb2a676084971e5c1a74c22240df83cb", null ],
+    [ "Retain", "namespacehelios_1_1sdl3.html#a2b53b410e5d334aeffce53c2be6972b2", null ],
     [ "kEventPumpSet", "namespacehelios_1_1sdl3.html#a756f971041a9a74a40ab8d80c04c72d3", null ],
     [ "kShutdownSet", "namespacehelios_1_1sdl3.html#a6c3b9b7482f2aa9088f2fd8cd6a843a5", null ],
     [ "kStartupSet", "namespacehelios_1_1sdl3.html#ae78b40e04fa1898c0c68fff3056e546e", null ]

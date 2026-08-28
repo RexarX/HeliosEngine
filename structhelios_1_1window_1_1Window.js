@@ -27,7 +27,7 @@ var structhelios_1_1window_1_1Window =
     [ "SetMaxSize", "structhelios_1_1window_1_1Window.html#a824d431390d98e077e5afdf2608825db", null ],
     [ "SetMinSize", "structhelios_1_1window_1_1Window.html#a425ee29cbbeb909fad518cd14e6fcf50", null ],
     [ "SetMode", "structhelios_1_1window_1_1Window.html#a76a5e7898227b588d794acaeb7ea0b26", null ],
-    [ "SetMonitorIndex", "structhelios_1_1window_1_1Window.html#a204bcc7f907a397beb74d2a5a50eaa3e", null ],
+    [ "SetMonitorIndex", "structhelios_1_1window_1_1Window.html#ad7b97489aa0942cc2f38bdbd6ea1e6bc", null ],
     [ "SetMousePassthrough", "structhelios_1_1window_1_1Window.html#a7c4f9ec80593f5fd0fec1e85d6cda4c5", null ],
     [ "SetOpacity", "structhelios_1_1window_1_1Window.html#aa3f692c9d1cb0262f2f56793fac912b0", null ],
     [ "SetPos", "structhelios_1_1window_1_1Window.html#ae7c5539e4caf5a33cba6e1b6f13e96c8", null ],

@@ -195,7 +195,7 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Settings that control how a stage behaves when run. </p>
 
-<p class="definition">Definition at line <a class="el" href="stage__settings_8hpp_source.html#l00006">6</a> of file <a class="el" href="stage__settings_8hpp_source.html">stage_settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stage__settings_8hpp_source.html#l00016">16</a> of file <a class="el" href="stage__settings_8hpp_source.html">stage_settings.hpp</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a1adfd3bb88b8decabb0c8fb1f235ab0a" name="a1adfd3bb88b8decabb0c8fb1f235ab0a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1adfd3bb88b8decabb0c8fb1f235ab0a">&#9670;&#160;</a></span>advance_messages</h2>
@@ -212,7 +212,7 @@ Public Attributes</h2></td></tr>
 <p>When true, call <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1MessageManager.html#a6ce0b615575ce07f514d20cb1fad7edd" title="Updates message lifecycle without any consumed message processing.">MessageManager::Update()</a></span> after the stage finishes. </p>
 <p>Swaps previous/current message queues. Does <b>not</b> call <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">World::Update()</a></span> (which also flushes). Independent of <span class="tt"><a class="el" href="#a2f291b0ad26a3c5e0b74d885ab770100" title="When true, flush reserved entities and apply deferred commands after the stage finishes.">apply_commands</a></span> and <span class="tt"><a class="el" href="#a4b4559ca954c5a42363c474e55f91fb9" title="When true, merge local message writes and apply consumed registries after the stage finishes.">merge_messages</a></span>. </p>
 
-<p class="definition">Definition at line <a class="el" href="stage__settings_8hpp_source.html#l00030">30</a> of file <a class="el" href="stage__settings_8hpp_source.html">stage_settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stage__settings_8hpp_source.html#l00040">40</a> of file <a class="el" href="stage__settings_8hpp_source.html">stage_settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -231,7 +231,7 @@ Public Attributes</h2></td></tr>
 <p>When true, flush reserved entities and apply deferred commands after the stage finishes. </p>
 <p>Runs <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html#a473fc38f99f63f6b356a8afe2793ba98" title="Flushes entity reservations and executes pending commands.">World::Flush()</a></span> and per-schedule <span class="tt">ExecuteCommands</span> for stage members (via <span class="tt">ApplyDeferred</span> with explicit flags). Independent of <span class="tt"><a class="el" href="#a4b4559ca954c5a42363c474e55f91fb9" title="When true, merge local message writes and apply consumed registries after the stage finishes.">merge_messages</a></span> and <span class="tt"><a class="el" href="#a1adfd3bb88b8decabb0c8fb1f235ab0a" title="When true, call MessageManager::Update() after the stage finishes.">advance_messages</a></span>. </p>
 
-<p class="definition">Definition at line <a class="el" href="stage__settings_8hpp_source.html#l00014">14</a> of file <a class="el" href="stage__settings_8hpp_source.html">stage_settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stage__settings_8hpp_source.html#l00024">24</a> of file <a class="el" href="stage__settings_8hpp_source.html">stage_settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -250,7 +250,7 @@ Public Attributes</h2></td></tr>
 <p>When true, merge local message writes and apply consumed registries after the stage finishes. </p>
 <p>Runs per-schedule <span class="tt">MergeMessages</span> for stage members. Does <b>not</b> swap previous/current message buffers — use <span class="tt"><a class="el" href="#a1adfd3bb88b8decabb0c8fb1f235ab0a" title="When true, call MessageManager::Update() after the stage finishes.">advance_messages</a></span> for that. </p>
 
-<p class="definition">Definition at line <a class="el" href="stage__settings_8hpp_source.html#l00022">22</a> of file <a class="el" href="stage__settings_8hpp_source.html">stage_settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stage__settings_8hpp_source.html#l00032">32</a> of file <a class="el" href="stage__settings_8hpp_source.html">stage_settings.hpp</a>.</p>
 
 </div>
 </div>

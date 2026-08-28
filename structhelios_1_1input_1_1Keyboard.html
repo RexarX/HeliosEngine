@@ -182,11 +182,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <p>Aggregated keyboard state for the main window / app.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="keyboard_8hpp_source.html">keyboard.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ad5ddfa89b6564cf1ceaba1911c6035df" id="r_ad5ddfa89b6564cf1ceaba1911c6035df"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1input.html#a8a0c3dc2dcaf65335d17a01fd209a7ef">KeyboardInput</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad5ddfa89b6564cf1ceaba1911c6035df">keys</a></td></tr>
+<tr class="memitem:ad6af13a2e8dec7fa44a6e82e8e37448c" id="r_ad6af13a2e8dec7fa44a6e82e8e37448c"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#ad6af13a2e8dec7fa44a6e82e8e37448c">composition</a></td></tr>
+<tr class="memitem:a0cf6dbc171d1d0cdba5b255571639384" id="r_a0cf6dbc171d1d0cdba5b255571639384"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#a0cf6dbc171d1d0cdba5b255571639384">composition_start</a> = 0</td></tr>
+<tr class="memitem:a1d9f5e822eb658926f254cdfd95b7690" id="r_a1d9f5e822eb658926f254cdfd95b7690"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#a1d9f5e822eb658926f254cdfd95b7690">composition_length</a> = 0</td></tr>
 <tr class="memitem:afa4baf32b515df9d350e41b4f5908c74" id="r_afa4baf32b515df9d350e41b4f5908c74"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3">Modifiers</a>&#160;</td><td class="memItemRight"><a class="el" href="#afa4baf32b515df9d350e41b4f5908c74">modifiers</a> = <a class="el" href="namespacehelios_1_1input.html#aa5c1a046baef08f4e1467d329581a4b3a35c3ace1970663a16e5c65baa5941b13">Modifiers::kNone</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
@@ -196,8 +199,56 @@ Static Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Aggregated keyboard state for the main window / app. </p>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00047">47</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="keyboard_8hpp_source.html#l00180">180</a> of file <a class="el" href="keyboard_8hpp_source.html">keyboard.hpp</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="ad6af13a2e8dec7fa44a6e82e8e37448c" name="ad6af13a2e8dec7fa44a6e82e8e37448c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6af13a2e8dec7fa44a6e82e8e37448c">&#9670;&#160;</a></span>composition</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string helios::input::Keyboard::composition</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="keyboard_8hpp_source.html#l00184">184</a> of file <a class="el" href="keyboard_8hpp_source.html">keyboard.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1d9f5e822eb658926f254cdfd95b7690" name="a1d9f5e822eb658926f254cdfd95b7690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d9f5e822eb658926f254cdfd95b7690">&#9670;&#160;</a></span>composition_length</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t helios::input::Keyboard::composition_length = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="keyboard_8hpp_source.html#l00186">186</a> of file <a class="el" href="keyboard_8hpp_source.html">keyboard.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0cf6dbc171d1d0cdba5b255571639384" name="a0cf6dbc171d1d0cdba5b255571639384"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cf6dbc171d1d0cdba5b255571639384">&#9670;&#160;</a></span>composition_start</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t helios::input::Keyboard::composition_start = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="keyboard_8hpp_source.html#l00185">185</a> of file <a class="el" href="keyboard_8hpp_source.html">keyboard.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ad5ddfa89b6564cf1ceaba1911c6035df" name="ad5ddfa89b6564cf1ceaba1911c6035df"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad5ddfa89b6564cf1ceaba1911c6035df">&#9670;&#160;</a></span>keys</h2>
 
@@ -210,7 +261,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00050">50</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="keyboard_8hpp_source.html#l00183">183</a> of file <a class="el" href="keyboard_8hpp_source.html">keyboard.hpp</a>.</p>
 
 </div>
 </div>
@@ -234,7 +285,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00048">48</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="keyboard_8hpp_source.html#l00181">181</a> of file <a class="el" href="keyboard_8hpp_source.html">keyboard.hpp</a>.</p>
 
 </div>
 </div>
@@ -250,7 +301,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html#l00051">51</a> of file <a class="el" href="input_2include_2helios_2input_2resources_8hpp_source.html">resources.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="keyboard_8hpp_source.html#l00187">187</a> of file <a class="el" href="keyboard_8hpp_source.html">keyboard.hpp</a>.</p>
 
 </div>
 </div>

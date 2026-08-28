@@ -238,7 +238,7 @@ Static Public Attributes</h2></td></tr>
 <p>Memory layout: 32-bit index + 32-bit generation = 64-bit total</p>
 <dl class="section note"><dt>Note</dt><dd>Individual <a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> value objects are safe to copy freely. Concurrent mutation of the same <a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> instance is not synchronized. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00026">26</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00037">37</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a40d8cd0e93ef835aeb26252597b23b90" name="a40d8cd0e93ef835aeb26252597b23b90"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a40d8cd0e93ef835aeb26252597b23b90">&#9670;&#160;</a></span>GenerationType</h2>
@@ -252,7 +252,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00029">29</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00040">40</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -268,7 +268,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00028">28</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00039">39</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -337,7 +337,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00054">54</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00065">65</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -443,7 +443,7 @@ Static Public Attributes</h2></td></tr>
 <p>Checks whether the generation encodes a living entity. </p>
 <p>Uses the alive bit in the generation encoding. This reflects the handle's generation value, not whether the entity is currently alive in an <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1EntityManager.html" title="Entity manager responsible for entity creation, destruction, and validation.">EntityManager</a></span> — use <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1EntityManager.html#ae142132888fb9323c171542864b4d104" title="Checks if an entity exists and is currently alive.">EntityManager::Validate()</a></span> for that. </p><dl class="section return"><dt>Returns</dt><dd>True if generation is alive-encoded and not the invalid sentinel </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00163">163</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00174">174</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -473,7 +473,7 @@ Static Public Attributes</h2></td></tr>
 <p>Gets the generation component of the entity. </p>
 <p>Returns the bit-encoded generation (alive bit + counter), not a raw reuse count. Stale handles keep their old encoding after recycling. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> generation, or <span class="tt"><a class="el" href="#a6c194172e2f3b0e5b68cba8554a0101c" title="Unreachable sentinel: counter mask with the alive bit set.">kInvalidGeneration</a></span> if entity is invalid </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00122">122</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00133">133</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -503,7 +503,7 @@ Static Public Attributes</h2></td></tr>
 <p>Generates a hash value for this entity. </p>
 <p>Combines index and generation into a 64-bit hash value. Invalid entities always return hash value of 0. </p><dl class="section return"><dt>Returns</dt><dd>Hash combining generation (high bits) and index (low bits) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00139">139</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00150">150</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -533,7 +533,7 @@ Static Public Attributes</h2></td></tr>
 <p>Gets the index component of the entity. </p>
 <p>The index identifies the entity's storage location in sparse arrays. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> index, or <span class="tt"><a class="el" href="#ac8fe4e3be98e6a424e70bd0eb2077f4d">kInvalidIndex</a></span> if entity is invalid </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00114">114</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00125">125</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -585,7 +585,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00132">132</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00143">143</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -690,7 +690,7 @@ Static Public Attributes</h2></td></tr>
 <p>Gets the reuse counter encoded in the generation. </p>
 <p>Masks off <span class="tt"><a class="el" href="#a1fdbfcb1516a2928e29f0d70ece28469" title="Top bit: set when the generation represents a living entity.">kAliveBit</a></span>. This is the 31-bit counter in bits 0–30, not the packed value returned by <span class="tt"><a class="el" href="#a3db9ebedcce587f5a77365d3f95decad" title="Gets the generation component of the entity.">Generation()</a></span>. Alive and free encodings of the same slot share this counter until the next destroy bump. </p><dl class="section return"><dt>Returns</dt><dd>Reuse counter, or <span class="tt"><a class="el" href="#a6e6d11703469bc7e2cbba9fbe4b0b647">kCounterMask</a></span> when generation is the invalid sentinel </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00104">104</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00115">115</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -720,7 +720,7 @@ Static Public Attributes</h2></td></tr>
 <p>Checks if the entity handle is structurally valid. </p>
 <p>An entity is structurally valid if both its index and generation are not the reserved invalid sentinels. This does <b>not</b> mean the entity is currently alive in an <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1EntityManager.html" title="Entity manager responsible for entity creation, destruction, and validation.">EntityManager</a></span> — use <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1EntityManager.html#ae142132888fb9323c171542864b4d104" title="Checks if an entity exists and is currently alive.">EntityManager::Validate()</a></span> for that. </p><dl class="section return"><dt>Returns</dt><dd>True if entity has usable index and generation fields </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00075">75</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00086">86</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -747,7 +747,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Top bit: set when the generation represents a living entity. </p>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00036">36</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00047">47</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -772,7 +772,7 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Low 31 bits: reuse counter. <span class="tt"><a class="el" href="#a6e6d11703469bc7e2cbba9fbe4b0b647">kCounterMask</a></span> itself is reserved so that <span class="tt"><a class="el" href="#a6c194172e2f3b0e5b68cba8554a0101c" title="Unreachable sentinel: counter mask with the alive bit set.">kInvalidGeneration</a></span> (<span class="tt"><a class="el" href="#a6e6d11703469bc7e2cbba9fbe4b0b647">kCounterMask</a> | <a class="el" href="#a1fdbfcb1516a2928e29f0d70ece28469" title="Top bit: set when the generation represents a living entity.">kAliveBit</a></span>) stays unreachable. </p>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00039">39</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00050">50</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -798,7 +798,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Initial alive generation assigned to brand-new entity indices. </p>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00041">41</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00052">52</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -826,7 +826,7 @@ Static Public Attributes</h2></td></tr>
 </div><!-- fragment -->
 <p>Unreachable sentinel: counter mask with the alive bit set. </p>
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00033">33</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00044">44</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>
@@ -850,7 +850,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00031">31</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00042">42</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>

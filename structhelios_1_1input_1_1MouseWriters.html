@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a> button, cursor, motion, and wheel message writers.  
+<p><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a> button, cursor, motion, wheel, and connection message writers.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>&gt;</code></p>
@@ -189,11 +189,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a1c274c222d53c93116f28a8a9d125b7f" id="r_a1c274c222d53c93116f28a8a9d125b7f"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1ecs.html#afedfd8d803e3e5dd106becf7eb138e74">ecs::MessageWriter</a>&lt; <a class="el" href="structhelios_1_1input_1_1CursorMovedMsg.html">CursorMovedMsg</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a1c274c222d53c93116f28a8a9d125b7f">cursor</a></td></tr>
 <tr class="memitem:a05dcc407979c015625132829282e879d" id="r_a05dcc407979c015625132829282e879d"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1ecs.html#afedfd8d803e3e5dd106becf7eb138e74">ecs::MessageWriter</a>&lt; <a class="el" href="structhelios_1_1input_1_1MouseMotionMsg.html">MouseMotionMsg</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a05dcc407979c015625132829282e879d">motion</a></td></tr>
 <tr class="memitem:ad60ec7c33d7c32db890f619eb80459b4" id="r_ad60ec7c33d7c32db890f619eb80459b4"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1ecs.html#afedfd8d803e3e5dd106becf7eb138e74">ecs::MessageWriter</a>&lt; <a class="el" href="structhelios_1_1input_1_1MouseWheelMsg.html">MouseWheelMsg</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ad60ec7c33d7c32db890f619eb80459b4">wheel</a></td></tr>
+<tr class="memitem:a966532f07d6980731362be5287c9a6ed" id="r_a966532f07d6980731362be5287c9a6ed"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1ecs.html#afedfd8d803e3e5dd106becf7eb138e74">ecs::MessageWriter</a>&lt; <a class="el" href="structhelios_1_1input_1_1MouseConnectionMsg.html">MouseConnectionMsg</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a966532f07d6980731362be5287c9a6ed">connection</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a> button, cursor, motion, and wheel message writers. </p>
+<div class="textblock"><p><a class="el" href="structhelios_1_1input_1_1Mouse.html" title="Aggregated mouse state for the main window / app.">Mouse</a> button, cursor, motion, wheel, and connection message writers. </p>
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00090">90</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00132">132</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="acaad4b178149905cee9628fb804423fb" name="acaad4b178149905cee9628fb804423fb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acaad4b178149905cee9628fb804423fb">&#9670;&#160;</a></span>buttons</h2>
@@ -207,7 +208,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00091">91</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00133">133</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a966532f07d6980731362be5287c9a6ed" name="a966532f07d6980731362be5287c9a6ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a966532f07d6980731362be5287c9a6ed">&#9670;&#160;</a></span>connection</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#afedfd8d803e3e5dd106becf7eb138e74">ecs::MessageWriter</a>&lt;<a class="el" href="structhelios_1_1input_1_1MouseConnectionMsg.html">MouseConnectionMsg</a>&gt; helios::input::MouseWriters::connection</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00137">137</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>
@@ -223,7 +240,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00092">92</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00134">134</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>
@@ -239,7 +256,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00093">93</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00135">135</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>
@@ -255,7 +272,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00094">94</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html#l00136">136</a> of file <a class="el" href="input_2include_2helios_2input_2params_8hpp_source.html">params.hpp</a>.</p>
 
 </div>
 </div>

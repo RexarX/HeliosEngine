@@ -19,6 +19,6 @@ var async_2include_2helios_2async_2common_8hpp =
       [ "helios::async::TaskType::kSubTask", "namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda699c0dae74a37998b4937ea8ea040835", null ],
       [ "helios::async::TaskType::kAsync", "namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda9f2b960005d2a3a5f35ac32809d84db7", null ]
     ] ],
-    [ "helios::async::details::ConvertTaskType", "namespacehelios_1_1async_1_1details.html#ae4bf6f03c0dfef8c6e6fb7938bd57d55", null ],
+    [ "helios::async::details::ConvertTaskType", "namespacehelios_1_1async_1_1details.html#a35830362a1c0a92184e1da0c19fa18d1", null ],
     [ "helios::async::ToString", "namespacehelios_1_1async.html#a39d83d17a98cd197bd3f3167bf38d32f", null ]
 ];

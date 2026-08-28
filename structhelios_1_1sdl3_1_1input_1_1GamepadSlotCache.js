@@ -16,6 +16,6 @@ var structhelios_1_1sdl3_1_1input_1_1GamepadSlotCache =
     [ "pad_axes", "structhelios_1_1sdl3_1_1input_1_1GamepadSlotCache.html#a57b7f99f3e85d9abf0fe6d66c3f95d07", null ],
     [ "pad_buttons", "structhelios_1_1sdl3_1_1input_1_1GamepadSlotCache.html#a5147573fbddcc82dcc3d9bd16d83cfda", null ],
     [ "power", "structhelios_1_1sdl3_1_1input_1_1GamepadSlotCache.html#a9ba8358053fbbd83794ff55a0a1d236f", null ],
-    [ "touchpad", "structhelios_1_1sdl3_1_1input_1_1GamepadSlotCache.html#aa5b2db107098ae3596a2cefe72cef545", null ],
-    [ "touchpad_count", "structhelios_1_1sdl3_1_1input_1_1GamepadSlotCache.html#a980c70d5299b395b4098befdb3881fa9", null ]
+    [ "touchpad_count", "structhelios_1_1sdl3_1_1input_1_1GamepadSlotCache.html#a980c70d5299b395b4098befdb3881fa9", null ],
+    [ "touchpads", "structhelios_1_1sdl3_1_1input_1_1GamepadSlotCache.html#a540b1ee47b108dfc0e39723b48a77e72", null ]
 ];

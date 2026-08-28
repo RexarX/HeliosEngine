@@ -49,6 +49,8 @@ var concepts =
         [ "MessageTrait", "concepthelios_1_1ecs_1_1MessageTrait.html", null ],
         [ "MessageWithClearPolicy", "concepthelios_1_1ecs_1_1MessageWithClearPolicy.html", null ],
         [ "MessageWithNameTrait", "concepthelios_1_1ecs_1_1MessageWithNameTrait.html", null ],
+        [ "QueryArg", "concepthelios_1_1ecs_1_1QueryArg.html", null ],
+        [ "QueryArgs", "concepthelios_1_1ecs_1_1QueryArgs.html", null ],
         [ "ResourceTrait", "concepthelios_1_1ecs_1_1ResourceTrait.html", null ],
         [ "ResourceWithInsertionCallbackTrait", "concepthelios_1_1ecs_1_1ResourceWithInsertionCallbackTrait.html", null ],
         [ "ResourceWithNameTrait", "concepthelios_1_1ecs_1_1ResourceWithNameTrait.html", null ],
