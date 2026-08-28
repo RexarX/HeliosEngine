@@ -67,7 +67,7 @@ void SyncFrameLimiterRefreshRate::operator()(
 }
 
 void Plugin::Build(app::App& app) {
-  app.TryInsertResources(settings, Monitors{}, Clipboard{});
+  app.TryInsertResources(settings_, Monitors{}, Clipboard{});
   app.AddMessages<CreatedMsg, ClosedMsg, ResizedMsg, ClientResizedMsg,
                   ContentScaleChangedMsg, PosChangedMsg, ModeChangedMsg,
                   CursorModeChangedMsg, VisibilityChangedMsg, FocusChangedMsg,

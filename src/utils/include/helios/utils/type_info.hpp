@@ -336,15 +336,14 @@ template <typename T>
   return std::meta::is_class(^^T) && !std::meta::has_identifier(^^T);
 #elif defined(__clang__)
   // clang-cl also defines _MSC_VER; Clang pretty-prints "(lambda at ...)".
-  constexpr auto name = GetUnqualifiedTypeName<T>();
-  return name.find("(lambda at") != std::string_view::npos;
+  constexpr auto name = ExtractTypeName<T>();
+  return name.contains("(lambda at");
 #elif defined(_MSC_VER)
-  constexpr auto name = GetUnqualifiedTypeName<T>();
-  return name.find("<lambda_") != std::string_view::npos;
+  constexpr auto name = ExtractTypeName<T>();
+  return name.contains("<lambda_");
 #elif defined(__GNUC__)
-  constexpr auto name = GetUnqualifiedTypeName<T>();
-  return name.find("<lambda(") != std::string_view::npos ||
-         name.find("<lambda>") != std::string_view::npos;
+  constexpr auto name = ExtractTypeName<T>();
+  return name.contains("<lambda(") || name.contains("<lambda>");
 #else
   return false;
 #endif
