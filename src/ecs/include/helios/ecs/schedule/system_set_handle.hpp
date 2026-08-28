@@ -1,5 +1,18 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <functional>
+#include <string>
+#include <type_traits>
+#endif
 #include <helios/ecs/schedule/run_condition.hpp>
 #include <helios/ecs/schedule/system_handle.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
@@ -7,10 +20,7 @@
 #include <helios/ecs/system/access_policy.hpp>
 #include <helios/ecs/system/system.hpp>
 
-#include <functional>
-#include <string>
-#include <type_traits>
-
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class Schedule;
@@ -247,3 +257,4 @@ private:
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -1,17 +1,24 @@
 #pragma once
 
-#include <helios/ecs/query/details/query_args.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <tuple>
+#endif
+#include <helios/ecs/query/args.hpp>
 #include <helios/ecs/query/query.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/system/access_policy.hpp>
 #include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
 
-#include <tuple>
-
-namespace helios::ecs {
-
-namespace details {
+namespace helios::ecs::details {
 
 /// @brief Helper to register query component access from a component tuple.
 template <typename Tuple>
@@ -24,7 +31,10 @@ struct RegisterQueryAccess<std::tuple<Cs...>> {
   }
 };
 
-}  // namespace details
+}  // namespace helios::ecs::details
+
+HELIOS_MODULE_EXPORT
+namespace helios::ecs {
 
 template <QueryArg... Args>
 struct SystemParamTraits<Query<Args...>> {
@@ -42,3 +52,4 @@ struct SystemParamTraits<Query<Args...>> {
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

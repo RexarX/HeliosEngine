@@ -1,10 +1,10 @@
-#include <doctest/doctest.h>
-
-#include <helios/utils/timer.hpp>
-
 #include <chrono>
 #include <cstdint>
 #include <thread>
+
+#include <doctest/doctest.h>
+
+#include <helios/utils/timer.hpp>
 
 using namespace helios::utils;
 

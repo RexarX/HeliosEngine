@@ -1,8 +1,14 @@
 #pragma once
 
-#include <helios/ecs/component/component.hpp>
-#include <helios/ecs/query/details/traits.hpp>
-#include <helios/ecs/resource/resource.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/common_traits.hpp>
 #include <helios/utils/type_info.hpp>
 
@@ -12,10 +18,12 @@
 #include <string_view>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/ecs/component/component.hpp>
+#include <helios/ecs/query/details/traits.hpp>
+#include <helios/ecs/resource/resource.hpp>
 
-namespace helios::ecs {
-
-namespace details {
+namespace helios::ecs::details {
 
 /**
  * @brief Checks if two sorted ranges have any common elements.
@@ -63,7 +71,10 @@ namespace details {
   return std::ranges::any_of(lhs, binary_search);
 }
 
-}  // namespace details
+}  // namespace helios::ecs::details
+
+HELIOS_MODULE_EXPORT
+namespace helios::ecs {
 
 /**
  * @brief Describes a single component access conflict between two policies.
@@ -138,14 +149,6 @@ public:
    * @param other Source policy to merge from
    */
   constexpr void Merge(const AccessPolicy& other);
-
-  /**
-   * @brief Merges data access declarations from another policy.
-   * @details Performs set-union merge for component and resource read/write
-   * sets while keeping them sorted and deduplicated.
-   * @param other Source policy to merge from
-   */
-  constexpr void Merge(AccessPolicy&& other);
 
   /**
    * @brief Returns all component conflicts between this policy and another.
@@ -353,10 +356,6 @@ constexpr void AccessPolicy::Merge(const AccessPolicy& other) {
   read_resources_ = std::move(merged_read_resources);
   write_resources_ = std::move(merged_write_resources);
   exclusive_ |= other.exclusive_;
-}
-
-constexpr void AccessPolicy::Merge(AccessPolicy&& other) {
-  Merge(static_cast<const AccessPolicy&>(other));
 }
 
 constexpr auto AccessPolicy::GetQueryConflictsWith(
@@ -713,3 +712,4 @@ constexpr void AccessPolicyBuilder::InsertSorted(
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

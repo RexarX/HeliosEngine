@@ -2,12 +2,12 @@
 
 #include <helios/profile/profiler.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/profile/zone.hpp>
 
 #include <atomic>
 #include <cstdint>
 #include <cstdlib>
+#include <helios/assert.hpp>
 #include <optional>
 #include <source_location>
 #include <span>

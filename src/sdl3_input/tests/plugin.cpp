@@ -1,13 +1,15 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/app/application.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/input/input.hpp>
-#include <helios/sdl3/details/lifetime.hpp>
-#include <helios/sdl3/input/details/cursor_cache.hpp>
-#include <helios/sdl3/input/details/input_state.hpp>
+#include <helios/sdl3/input/cursor_cache.hpp>
 #include <helios/sdl3/input/input.hpp>
+#include <helios/sdl3/input/state.hpp>
 #include <helios/sdl3/input/systems/poll_gamepads.hpp>
+#include <helios/sdl3/input/systems/poll_sensors.hpp>
+#include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/plugin.hpp>
 #include <helios/window/window.hpp>
 
@@ -60,7 +62,9 @@ TEST_SUITE("helios::sdl3::input::Plugin") {
 
       CHECK(app.GetWorld().ReadResource<Context>().input_enabled);
       CHECK(app.GetWorld().HasResource<GamepadCache>());
+      CHECK(app.GetWorld().HasResource<SensorCache>());
       CHECK(app.GetWorld().HasResource<PenCache>());
+      CHECK(app.GetWorld().HasResource<TouchCache>());
       CHECK(app.GetWorld().HasResource<CursorCache>());
     }
 
@@ -124,3 +128,4 @@ TEST_SUITE("helios::sdl3::input::InputPlugin") {
     }
   }
 }
+#endif

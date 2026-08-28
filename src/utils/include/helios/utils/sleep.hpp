@@ -1,7 +1,18 @@
 #pragma once
 
-#include <chrono>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.utils;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <chrono>
+#endif
+
+HELIOS_MODULE_EXPORT
 namespace helios::utils {
 
 /**
@@ -57,3 +68,4 @@ void PreciseSleepUntil(std::chrono::steady_clock::time_point deadline,
                        bool pinned_thread = true);
 
 }  // namespace helios::utils
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

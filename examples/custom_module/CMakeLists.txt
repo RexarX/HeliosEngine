@@ -9,6 +9,9 @@ helios_module(
     SOURCES
         src/greeting.cpp
 
+    MODULE_SOURCES
+        modules/helios.greeting.cppm
+
     DEPENDS
         PUBLIC core
         PUBLIC utils
@@ -16,6 +19,7 @@ helios_module(
     TEST_SOURCES
         tests/greeting.cpp
         tests/main.cpp
+        tests/module_import.cpp
 )
 
 add_executable(greeting_demo src/demo.cpp)

@@ -11,9 +11,13 @@ helios_module(
     SOURCES
         src/logger.cpp
 
+    MODULE_SOURCES
+        modules/helios.log.cppm
+
     PCH src/pch.hpp
 
     DEPENDS
+        PUBLIC compiler
         PUBLIC container
         PUBLIC core
         PUBLIC utils
@@ -32,4 +36,5 @@ helios_module(
         tests/config.cpp
         tests/logger.cpp
         tests/main.cpp
+        tests/module_import.cpp
 )

@@ -1,13 +1,19 @@
 #pragma once
 
 #include <helios/compiler/compiler.hpp>
+#include <helios/config.hpp>
 #include <helios/platform/platform.hpp>
 #include <helios/utils/macro.hpp>
 
+#if defined(HELIOS_ENABLE_CPP_MODULES) && defined(HELIOS_BUILDING_MODULE) && \
+    !defined(HELIOS_BUILDING_MODULE_CORE)
+#else
+#ifndef HELIOS_BUILDING_MODULE
 #include <format>
 #include <source_location>
 #include <string>
 #include <string_view>
+#endif
 
 namespace helios {
 
@@ -125,6 +131,8 @@ inline void LogPluginAssertionHandler(std::string_view condition,
 
 #endif
 
+}  // namespace details
+
 /**
  * @brief Unified assertion handling function.
  * @details Priority order:
@@ -139,8 +147,6 @@ inline void LogPluginAssertionHandler(std::string_view condition,
 void HandleAssertion(std::string_view condition,
                      const std::source_location& loc,
                      std::string_view message) noexcept;
-
-}  // namespace details
 
 /**
  * @brief Sets a custom assertion handler.
@@ -188,6 +194,7 @@ inline void SetAssertionHandler(AssertionHandler handler) noexcept {
 void AbortWithStacktrace(std::string_view message) noexcept;
 
 }  // namespace helios
+#endif
 
 // NOLINTBEGIN(cppcoreguidelines-avoid-do-while)
 // NOLINTBEGIN(cppcoreguidelines-macro-usage)
@@ -202,27 +209,27 @@ void AbortWithStacktrace(std::string_view message) noexcept;
  * @hideinitializer
  */
 #ifdef HELIOS_ENABLE_ASSERTS
-#define HELIOS_ASSERT(condition, ...)                                \
-  do {                                                               \
-    if constexpr (::helios::details::kEnableAssert) {                \
-      if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
-        if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
-          try {                                                      \
-            const auto msg = std::format("" __VA_ARGS__);            \
-            ::helios::details::HandleAssertion(                      \
-                #condition, ::std::source_location::current(), msg); \
-          } catch (...) {                                            \
-            ::helios::details::HandleAssertion(                      \
-                #condition, ::std::source_location::current(),       \
-                "Formatting error in assertion");                    \
-          }                                                          \
-        } else {                                                     \
-          ::helios::details::HandleAssertion(                        \
-              #condition, ::std::source_location::current(), "");    \
-        }                                                            \
-        HELIOS_DEBUG_BREAK();                                        \
-      }                                                              \
-    }                                                                \
+#define HELIOS_ASSERT(condition, ...)                                          \
+  do {                                                                         \
+    if constexpr (::helios::details::kEnableAssert) {                          \
+      if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {                    \
+        if constexpr (sizeof(#__VA_ARGS__) > 1) {                              \
+          try {                                                                \
+            const auto msg = std::format("" __VA_ARGS__);                      \
+            ::helios::HandleAssertion(#condition,                              \
+                                      ::std::source_location::current(), msg); \
+          } catch (...) {                                                      \
+            ::helios::HandleAssertion(#condition,                              \
+                                      ::std::source_location::current(),       \
+                                      "Formatting error in assertion");        \
+          }                                                                    \
+        } else {                                                               \
+          ::helios::HandleAssertion(#condition,                                \
+                                    ::std::source_location::current(), "");    \
+        }                                                                      \
+        HELIOS_DEBUG_BREAK();                                                  \
+      }                                                                        \
+    }                                                                          \
   } while (false)
 #else
 #define HELIOS_ASSERT(condition, ...) \
@@ -240,44 +247,44 @@ void AbortWithStacktrace(std::string_view message) noexcept;
  * @hideinitializer
  */
 #ifdef HELIOS_ENABLE_ASSERTS
-#define HELIOS_INVARIANT(condition, ...)                           \
-  do {                                                             \
-    if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
-      if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
-        try {                                                      \
-          const auto msg = std::format("" __VA_ARGS__);            \
-          ::helios::details::HandleAssertion(                      \
-              #condition, ::std::source_location::current(), msg); \
-        } catch (...) {                                            \
-          ::helios::details::HandleAssertion(                      \
-              #condition, ::std::source_location::current(),       \
-              "Formatting error in invariant");                    \
-        }                                                          \
-      } else {                                                     \
-        ::helios::details::HandleAssertion(                        \
-            #condition, ::std::source_location::current(), "");    \
-      }                                                            \
-      HELIOS_DEBUG_BREAK();                                        \
-    }                                                              \
+#define HELIOS_INVARIANT(condition, ...)                                     \
+  do {                                                                       \
+    if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {                    \
+      if constexpr (sizeof(#__VA_ARGS__) > 1) {                              \
+        try {                                                                \
+          const auto msg = std::format("" __VA_ARGS__);                      \
+          ::helios::HandleAssertion(#condition,                              \
+                                    ::std::source_location::current(), msg); \
+        } catch (...) {                                                      \
+          ::helios::HandleAssertion(#condition,                              \
+                                    ::std::source_location::current(),       \
+                                    "Formatting error in invariant");        \
+        }                                                                    \
+      } else {                                                               \
+        ::helios::HandleAssertion(#condition,                                \
+                                  ::std::source_location::current(), "");    \
+      }                                                                      \
+      HELIOS_DEBUG_BREAK();                                                  \
+    }                                                                        \
   } while (false)
 #else
-#define HELIOS_INVARIANT(condition, ...)                           \
-  do {                                                             \
-    if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
-      if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
-        try {                                                      \
-          const auto msg = std::format("" __VA_ARGS__);            \
-          ::helios::details::HandleAssertion(                      \
-              #condition, ::std::source_location::current(), msg); \
-        } catch (...) {                                            \
-          ::helios::details::HandleAssertion(                      \
-              #condition, ::std::source_location::current(), "");  \
-        }                                                          \
-      } else {                                                     \
-        ::helios::details::HandleAssertion(                        \
-            #condition, ::std::source_location::current(), "");    \
-      }                                                            \
-    }                                                              \
+#define HELIOS_INVARIANT(condition, ...)                                     \
+  do {                                                                       \
+    if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {                    \
+      if constexpr (sizeof(#__VA_ARGS__) > 1) {                              \
+        try {                                                                \
+          const auto msg = std::format("" __VA_ARGS__);                      \
+          ::helios::HandleAssertion(#condition,                              \
+                                    ::std::source_location::current(), msg); \
+        } catch (...) {                                                      \
+          ::helios::HandleAssertion(#condition,                              \
+                                    ::std::source_location::current(), "");  \
+        }                                                                    \
+      } else {                                                               \
+        ::helios::HandleAssertion(#condition,                                \
+                                  ::std::source_location::current(), "");    \
+      }                                                                      \
+    }                                                                        \
   } while (false)
 #endif
 
@@ -289,25 +296,25 @@ void AbortWithStacktrace(std::string_view message) noexcept;
  * @param ... Optional message (can be format string with arguments)
  * @hideinitializer
  */
-#define HELIOS_VERIFY(condition, ...)                              \
-  do {                                                             \
-    if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {          \
-      if constexpr (sizeof(#__VA_ARGS__) > 1) {                    \
-        try {                                                      \
-          const auto msg = std::format("" __VA_ARGS__);            \
-          ::helios::details::HandleAssertion(                      \
-              #condition, ::std::source_location::current(), msg); \
-        } catch (...) {                                            \
-          ::helios::details::HandleAssertion(                      \
-              #condition, ::std::source_location::current(),       \
-              "Formatting error in verify");                       \
-        }                                                          \
-      } else {                                                     \
-        ::helios::details::HandleAssertion(                        \
-            #condition, ::std::source_location::current(), "");    \
-      }                                                            \
-      HELIOS_DEBUG_BREAK();                                        \
-    }                                                              \
+#define HELIOS_VERIFY(condition, ...)                                        \
+  do {                                                                       \
+    if (HELIOS_EXPECT_FALSE(!(condition))) [[unlikely]] {                    \
+      if constexpr (sizeof(#__VA_ARGS__) > 1) {                              \
+        try {                                                                \
+          const auto msg = std::format("" __VA_ARGS__);                      \
+          ::helios::HandleAssertion(#condition,                              \
+                                    ::std::source_location::current(), msg); \
+        } catch (...) {                                                      \
+          ::helios::HandleAssertion(#condition,                              \
+                                    ::std::source_location::current(),       \
+                                    "Formatting error in verify");           \
+        }                                                                    \
+      } else {                                                               \
+        ::helios::HandleAssertion(#condition,                                \
+                                  ::std::source_location::current(), "");    \
+      }                                                                      \
+      HELIOS_DEBUG_BREAK();                                                  \
+    }                                                                        \
   } while (false)
 
 // NOLINTEND(cppcoreguidelines-macro-usage)

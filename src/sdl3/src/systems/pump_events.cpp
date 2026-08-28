@@ -4,12 +4,14 @@
 
 #include <helios/assert.hpp>
 #include <helios/ecs/resource/params.hpp>
-#include <helios/sdl3/details/context.hpp>
-#include <helios/sdl3/details/event_dispatcher.hpp>
-#include <helios/sdl3/details/lifetime.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/sdl3/context.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
+#include <helios/sdl3/lifetime.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/settings.hpp>
 
-#include <cmath>
+#include <SDL3/SDL_events.h>
 
 namespace helios::sdl3 {
 

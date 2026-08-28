@@ -1,16 +1,18 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/container/flat_map.hpp>
 #include <helios/container/multi_type_map.hpp>
 #include <helios/container/typed_buffer.hpp>
 #include <helios/container/typed_buffer_array.hpp>
-#include <helios/ecs/component/archetype.hpp>
-#include <helios/ecs/component/archetype_id.hpp>
-#include <helios/ecs/component/bundle.hpp>
-#include <helios/ecs/component/component.hpp>
-#include <helios/ecs/component/sparse_storage.hpp>
-#include <helios/ecs/entity/entity.hpp>
 #include <helios/utils/common_traits.hpp>
 
 #include <algorithm>
@@ -27,7 +29,16 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
+#include <helios/ecs/component/archetype.hpp>
+#include <helios/ecs/component/archetype_id.hpp>
+#include <helios/ecs/component/bundle.hpp>
+#include <helios/ecs/component/component.hpp>
+#include <helios/ecs/component/sparse_storage.hpp>
+#include <helios/ecs/entity/entity.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -1722,3 +1733,4 @@ inline auto ComponentManager::EnsureSparseStorage()
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

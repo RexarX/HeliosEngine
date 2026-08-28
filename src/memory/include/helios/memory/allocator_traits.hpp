@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/memory/common.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.memory;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <algorithm>
 #include <concepts>
 #include <cstddef>
@@ -9,7 +16,10 @@
 #include <limits>
 #include <memory_resource>
 #include <span>
+#endif
+#include <helios/memory/common.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::mem {
 
 /**
@@ -147,3 +157,4 @@ template <PmrAllocator Alloc>
 }
 
 }  // namespace helios::mem
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

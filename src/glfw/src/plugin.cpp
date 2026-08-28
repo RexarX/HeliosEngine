@@ -6,7 +6,7 @@
 #include <helios/app/frame_order.hpp>
 #include <helios/app/schedules.hpp>
 #include <helios/ecs/resource/params.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
+#include <helios/glfw/state.hpp>
 #include <helios/glfw/systems/apply.hpp>
 #include <helios/glfw/systems/create.hpp>
 #include <helios/glfw/systems/destroy.hpp>
@@ -18,7 +18,7 @@
 
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
 #include <helios/glfw/systems/input.hpp>
-#include <helios/input/messages.hpp>
+#include <helios/input/keyboard.hpp>
 #endif
 
 namespace helios::glfw {

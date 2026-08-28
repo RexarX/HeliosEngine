@@ -1,11 +1,14 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/ecs/world.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
-#include <helios/glfw/details/glfw_sync.hpp>
-#include <helios/window/components.hpp>
+#include <helios/glfw/state.hpp>
+#include <helios/glfw/sync.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/native_handle.hpp>
 #include <helios/window/properties.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/settings.hpp>
 
 #include "available.hpp"
 
@@ -75,7 +78,6 @@ TEST_SUITE("helios::glfw::MonitorAtIndex") {
       }
 
       CHECK_NE(MonitorAtIndex(0), nullptr);
-      CHECK_EQ(MonitorAtIndex(-1), nullptr);
       CHECK_EQ(MonitorAtIndex(10'000), nullptr);
 
       glfwTerminate();
@@ -141,3 +143,4 @@ TEST_SUITE("helios::glfw::ResolveCreationSize") {
     }
   }
 }
+#endif

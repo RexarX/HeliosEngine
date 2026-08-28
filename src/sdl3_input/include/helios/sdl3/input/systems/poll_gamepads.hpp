@@ -1,14 +1,19 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.sdl3.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
 #include <helios/input/gamepad.hpp>
 #include <helios/input/joystick.hpp>
 #include <helios/input/params.hpp>
-#include <helios/input/resources.hpp>
-#include <helios/sdl3/input/details/input_state.hpp>
-
-#include <SDL3/SDL_gamepad.h>
-#include <SDL3/SDL_joystick.h>
+#include <helios/input/settings.hpp>
 
 #include <array>
 #include <cstddef>
@@ -16,7 +21,13 @@
 #include <string>
 #include <string_view>
 #include <vector>
+#endif
+#include <helios/sdl3/input/state.hpp>
 
+HELIOS_MODULE_EXPORT struct SDL_Gamepad;
+HELIOS_MODULE_EXPORT struct SDL_Joystick;
+
+HELIOS_MODULE_EXPORT
 namespace helios::sdl3::input {
 
 /// @brief Cached previous SDL device slot state for edge detection.
@@ -28,9 +39,10 @@ struct GamepadSlotCache {
   std::array<float, static_cast<size_t>(helios::input::GamepadAxis::kCount)>
       pad_axes = {};
   std::array<float, helios::input::Joystick::kMaxAxes> joy_axes = {};
-  std::array<helios::input::GamepadTouchpadFinger,
-             helios::input::Gamepad::kMaxTouchpadFingers>
-      touchpad = {};
+  std::array<std::array<helios::input::GamepadTouchpadFinger,
+                        helios::input::Gamepad::kMaxTouchpadFingers>,
+             helios::input::Gamepad::kMaxTouchpads>
+      touchpads = {};
   std::array<bool, static_cast<size_t>(helios::input::GamepadButton::kCount)>
       pad_buttons = {};
   std::array<bool, helios::input::Joystick::kMaxButtons> joy_buttons = {};
@@ -93,3 +105,4 @@ struct ApplyGamepadOutputs {
 };
 
 }  // namespace helios::sdl3::input
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

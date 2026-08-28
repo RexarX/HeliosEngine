@@ -1,3 +1,4 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/app/app.hpp>
@@ -6,8 +7,8 @@
 #include <helios/ecs/message/writer.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/ecs/system/system.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
 #include <helios/glfw/glfw.hpp>
+#include <helios/glfw/state.hpp>
 #include <helios/window/window.hpp>
 
 #include "available.hpp"
@@ -182,3 +183,4 @@ TEST_SUITE("helios::glfw::Plugin") {
 #endif
   }
 }
+#endif

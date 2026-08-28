@@ -2,10 +2,10 @@
 
 #include <helios/ecs/component/archetype.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/entity/entity.hpp>
 
+#include <helios/assert.hpp>
 #include <memory_resource>
 #include <optional>
 #include <utility>

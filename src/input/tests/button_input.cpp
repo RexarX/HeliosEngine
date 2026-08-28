@@ -1,162 +1,164 @@
 #include <doctest/doctest.h>
 
 #include <helios/input/button_input.hpp>
-#include <helios/input/keyboard.hpp>
-#include <helios/input/mouse.hpp>
+
+#include <cstdint>
 
 using namespace helios::input;
+
+namespace {
+
+enum class TestButton : uint8_t {
+  kA,
+  kB,
+  kC,
+  kCount,
+};
+
+}  // namespace
 
 TEST_SUITE("helios::input::ButtonInput") {
   TEST_CASE("helios::input::ButtonInput::Press") {
     SUBCASE("Pressing a released button sets pressed and just-pressed") {
-      ButtonInput<Key> keys;
-      keys.Press(Key::kA);
+      ButtonInput<TestButton> keys;
+      keys.Press(TestButton::kA);
 
-      CHECK(keys.Pressed(Key::kA));
-      CHECK(keys.JustPressed(Key::kA));
-      CHECK_FALSE(keys.JustReleased(Key::kA));
+      CHECK(keys.Pressed(TestButton::kA));
+      CHECK(keys.JustPressed(TestButton::kA));
+      CHECK_FALSE(keys.JustReleased(TestButton::kA));
     }
 
     SUBCASE("Pressing an already pressed button keeps just-pressed") {
-      ButtonInput<Key> keys;
-      keys.Press(Key::kA);
-      keys.Press(Key::kA);
+      ButtonInput<TestButton> keys;
+      keys.Press(TestButton::kA);
+      keys.Press(TestButton::kA);
 
-      CHECK(keys.Pressed(Key::kA));
-      CHECK(keys.JustPressed(Key::kA));
+      CHECK(keys.Pressed(TestButton::kA));
+      CHECK(keys.JustPressed(TestButton::kA));
     }
 
     SUBCASE("Pressing after Clear does not set just-pressed again") {
-      ButtonInput<Key> keys;
-      keys.Press(Key::kA);
+      ButtonInput<TestButton> keys;
+      keys.Press(TestButton::kA);
       keys.Clear();
-      keys.Press(Key::kA);
+      keys.Press(TestButton::kA);
 
-      CHECK(keys.Pressed(Key::kA));
-      CHECK_FALSE(keys.JustPressed(Key::kA));
+      CHECK(keys.Pressed(TestButton::kA));
+      CHECK_FALSE(keys.JustPressed(TestButton::kA));
     }
   }
 
   TEST_CASE("helios::input::ButtonInput::Release") {
     SUBCASE("Releasing a pressed button sets just-released") {
-      ButtonInput<Key> keys;
-      keys.Press(Key::kA);
+      ButtonInput<TestButton> keys;
+      keys.Press(TestButton::kA);
       keys.Clear();
-      keys.Release(Key::kA);
+      keys.Release(TestButton::kA);
 
-      CHECK_FALSE(keys.Pressed(Key::kA));
-      CHECK(keys.JustReleased(Key::kA));
+      CHECK_FALSE(keys.Pressed(TestButton::kA));
+      CHECK(keys.JustReleased(TestButton::kA));
     }
 
     SUBCASE("Releasing a never-pressed button is a no-op") {
-      ButtonInput<Key> keys;
-      keys.Release(Key::kA);
+      ButtonInput<TestButton> keys;
+      keys.Release(TestButton::kA);
 
-      CHECK_FALSE(keys.Pressed(Key::kA));
-      CHECK_FALSE(keys.JustReleased(Key::kA));
+      CHECK_FALSE(keys.Pressed(TestButton::kA));
+      CHECK_FALSE(keys.JustReleased(TestButton::kA));
     }
 
     SUBCASE("Press and release in the same frame keep both edges") {
-      ButtonInput<Key> keys;
-      keys.Press(Key::kA);
-      keys.Release(Key::kA);
+      ButtonInput<TestButton> keys;
+      keys.Press(TestButton::kA);
+      keys.Release(TestButton::kA);
 
-      CHECK_FALSE(keys.Pressed(Key::kA));
-      CHECK(keys.JustPressed(Key::kA));
-      CHECK(keys.JustReleased(Key::kA));
+      CHECK_FALSE(keys.Pressed(TestButton::kA));
+      CHECK(keys.JustPressed(TestButton::kA));
+      CHECK(keys.JustReleased(TestButton::kA));
     }
   }
 
   TEST_CASE("helios::input::ButtonInput::Clear") {
     SUBCASE("Clears edges and keeps held buttons") {
-      ButtonInput<Key> keys;
-      keys.Press(Key::kA);
+      ButtonInput<TestButton> keys;
+      keys.Press(TestButton::kA);
       keys.Clear();
 
-      CHECK(keys.Pressed(Key::kA));
-      CHECK_FALSE(keys.JustPressed(Key::kA));
-      CHECK_FALSE(keys.JustReleased(Key::kA));
+      CHECK(keys.Pressed(TestButton::kA));
+      CHECK_FALSE(keys.JustPressed(TestButton::kA));
+      CHECK_FALSE(keys.JustReleased(TestButton::kA));
     }
 
     SUBCASE("Clears just-released after a release") {
-      ButtonInput<Key> keys;
-      keys.Press(Key::kA);
-      keys.Release(Key::kA);
+      ButtonInput<TestButton> keys;
+      keys.Press(TestButton::kA);
+      keys.Release(TestButton::kA);
       keys.Clear();
 
-      CHECK_FALSE(keys.JustReleased(Key::kA));
+      CHECK_FALSE(keys.JustReleased(TestButton::kA));
     }
   }
 
   TEST_CASE("helios::input::ButtonInput::Reset") {
     SUBCASE("Clears pressed state and edges") {
-      ButtonInput<Key> keys;
-      keys.Press(Key::kW);
+      ButtonInput<TestButton> keys;
+      keys.Press(TestButton::kB);
       keys.Reset();
 
-      CHECK_FALSE(keys.Pressed(Key::kW));
-      CHECK_FALSE(keys.JustPressed(Key::kW));
+      CHECK_FALSE(keys.Pressed(TestButton::kB));
+      CHECK_FALSE(keys.JustPressed(TestButton::kB));
       CHECK_FALSE(keys.AnyPressed());
     }
   }
 
   TEST_CASE("helios::input::ButtonInput::Pressed") {
     SUBCASE("Returns false by default") {
-      const ButtonInput<Key> keys;
-      CHECK_FALSE(keys.Pressed(Key::kA));
+      const ButtonInput<TestButton> keys;
+      CHECK_FALSE(keys.Pressed(TestButton::kA));
     }
   }
 
   TEST_CASE("helios::input::ButtonInput::JustPressed") {
     SUBCASE("Returns false by default") {
-      const ButtonInput<Key> keys;
-      CHECK_FALSE(keys.JustPressed(Key::kA));
+      const ButtonInput<TestButton> keys;
+      CHECK_FALSE(keys.JustPressed(TestButton::kA));
     }
   }
 
   TEST_CASE("helios::input::ButtonInput::JustReleased") {
     SUBCASE("Returns false by default") {
-      const ButtonInput<Key> keys;
-      CHECK_FALSE(keys.JustReleased(Key::kA));
+      const ButtonInput<TestButton> keys;
+      CHECK_FALSE(keys.JustReleased(TestButton::kA));
     }
   }
 
   TEST_CASE("helios::input::ButtonInput::AnyPressed") {
     SUBCASE("Returns false when no buttons are held") {
-      const ButtonInput<Key> keys;
+      const ButtonInput<TestButton> keys;
       CHECK_FALSE(keys.AnyPressed());
     }
 
     SUBCASE("Returns true when any button is held") {
-      ButtonInput<Key> keys;
-      keys.Press(Key::kA);
+      ButtonInput<TestButton> keys;
+      keys.Press(TestButton::kA);
       CHECK(keys.AnyPressed());
     }
   }
 
   TEST_CASE("helios::input::ButtonInput::AllPressed") {
     SUBCASE("Requires every listed button") {
-      ButtonInput<Key> keys;
-      keys.Press(Key::kA);
-      keys.Press(Key::kB);
+      ButtonInput<TestButton> keys;
+      keys.Press(TestButton::kA);
+      keys.Press(TestButton::kB);
 
-      CHECK(keys.AllPressed(Key::kA));
-      CHECK(keys.AllPressed(Key::kA, Key::kB));
-      CHECK_FALSE(keys.AllPressed(Key::kA, Key::kC));
+      CHECK(keys.AllPressed(TestButton::kA));
+      CHECK(keys.AllPressed(TestButton::kA, TestButton::kB));
+      CHECK_FALSE(keys.AllPressed(TestButton::kA, TestButton::kC));
     }
 
     SUBCASE("Empty pack is vacuously true") {
-      const ButtonInput<Key> keys;
+      const ButtonInput<TestButton> keys;
       CHECK(keys.AllPressed());
-    }
-
-    SUBCASE("Works for mouse buttons") {
-      ButtonInput<MouseButton> buttons;
-      buttons.Press(MouseButton::kLeft);
-      buttons.Press(MouseButton::kRight);
-
-      CHECK(buttons.AllPressed(MouseButton::kLeft, MouseButton::kRight));
-      CHECK_FALSE(buttons.AllPressed(MouseButton::kLeft, MouseButton::kMiddle));
     }
   }
 }

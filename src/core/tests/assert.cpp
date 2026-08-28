@@ -76,7 +76,7 @@ TEST_SUITE("helios::Assert") {
 
     SUBCASE("Custom handler receives correct condition") {
       constexpr auto loc = std::source_location::current();
-      details::HandleAssertion("test_condition", loc, "");
+      HandleAssertion("test_condition", loc, "");
 
       CHECK(g_tracker.called);
       CHECK_EQ(g_tracker.condition, "test_condition");
@@ -85,7 +85,7 @@ TEST_SUITE("helios::Assert") {
 
     SUBCASE("Custom handler receives correct message") {
       constexpr auto loc = std::source_location::current();
-      details::HandleAssertion("another_condition", loc, "Test message");
+      HandleAssertion("another_condition", loc, "Test message");
 
       CHECK(g_tracker.called);
       CHECK_EQ(g_tracker.condition, "another_condition");
@@ -97,7 +97,7 @@ TEST_SUITE("helios::Assert") {
       const auto expected_line = loc.line();
       const std::string expected_file = loc.file_name();
 
-      details::HandleAssertion("loc_test", loc, "");
+      HandleAssertion("loc_test", loc, "");
 
       CHECK(g_tracker.called);
       CHECK_EQ(g_tracker.location.line(), expected_line);

@@ -1,8 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/async/common.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.async;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <taskflow/core/task.hpp>
 
 #include <array>
@@ -12,7 +18,11 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
+#endif
+#include <helios/assert.hpp>
+#include <helios/async/common.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 /**
@@ -303,3 +313,4 @@ inline TaskType Task::Type() const {
 }
 
 }  // namespace helios::async
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -1,11 +1,16 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.profile;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/container/multi_type_map.hpp>
 #include <helios/cstring_view.hpp>
-#include <helios/profile/backend.hpp>
-#include <helios/profile/common.hpp>
-#include <helios/profile/details/memory_dispatch.hpp>
 #include <helios/utils/type_info.hpp>
 
 #include <cstddef>
@@ -15,7 +20,13 @@
 #include <source_location>
 #include <span>
 #include <string_view>
+#endif
+#include <helios/assert.hpp>
+#include <helios/profile/backend.hpp>
+#include <helios/profile/common.hpp>
+#include <helios/profile/details/memory_dispatch.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::profile {
 
 /**
@@ -80,7 +91,9 @@ public:
    * @tparam T Concrete backend type
    */
   template <ProfilerBackendTrait T>
-  void RemoveBackend() noexcept;
+  void RemoveBackend() noexcept {
+    RemoveBackend(BackendTypeIndex::From<T>());
+  }
 
   /**
    * @brief Removes a backend by type index.
@@ -429,11 +442,6 @@ inline T& Profiler::AddBackend(Args&&... args) noexcept {
   return static_cast<T&>(*it->second.backend);
 }
 
-template <ProfilerBackendTrait T>
-inline void Profiler::RemoveBackend() noexcept {
-  RemoveBackend(BackendTypeIndex::From<T>());
-}
-
 inline Backend& Profiler::Get(BackendTypeIndex index) noexcept {
   BackendEntry* const entry = backends_.TryGet(index);
   HELIOS_ASSERT(entry != nullptr, "Backend not found!");
@@ -469,27 +477,5 @@ inline const T* Profiler::TryGet() const noexcept {
                           : nullptr;
 }
 
-namespace details {
-
-/**
- * @brief Returns the zone storage byte offset assigned to backend type `T`.
- * @details Valid after `Finalize()`. For testing and diagnostics only.
- * @tparam T Concrete backend type
- * @return Storage offset in bytes
- */
-template <ProfilerBackendTrait T>
-[[nodiscard]] inline size_t BackendStorageOffset() noexcept {
-  return Profiler::Instance().StorageOffset<T>();
-}
-
-/**
- * @brief Returns the number of active backend slots after finalization.
- * @return Number of registered backends
- */
-[[nodiscard]] inline size_t ActiveBackendCount() noexcept {
-  return Profiler::Instance().BackendCount();
-}
-
-}  // namespace details
-
 }  // namespace helios::profile
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

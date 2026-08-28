@@ -1,20 +1,32 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/async/future.hpp>
 #include <helios/async/task.hpp>
 #include <helios/async/task_graph.hpp>
-#include <helios/ecs/schedule/executor/executor.hpp>
 
 #include <functional>
 #include <optional>
 #include <vector>
+#endif
+#include <helios/ecs/schedule/executor/executor.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 class Executor;
 
 }
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class World;
@@ -75,3 +87,4 @@ private:
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

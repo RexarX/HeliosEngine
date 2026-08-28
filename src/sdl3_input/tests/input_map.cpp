@@ -1,12 +1,22 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
+#include <details/input_map.hpp>
 #include <helios/input/gamepad.hpp>
 #include <helios/input/keyboard.hpp>
 #include <helios/input/mouse.hpp>
 #include <helios/input/pen.hpp>
-#include <helios/sdl3/input/details/input_map.hpp>
+#include <helios/input/sensor.hpp>
+#include <helios/input/touch.hpp>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_gamepad.h>
+#include <SDL3/SDL_joystick.h>
+#include <SDL3/SDL_keycode.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3/SDL_pen.h>
+#include <SDL3/SDL_scancode.h>
+#include <SDL3/SDL_sensor.h>
+#include <SDL3/SDL_touch.h>
 
 #include <cstdint>
 #include <optional>
@@ -67,6 +77,12 @@ TEST_SUITE("helios::sdl3::input::MouseButtonFromSdl") {
                input::MouseButton::kMiddle);
       CHECK_EQ(MouseButtonFromSdl(SDL_BUTTON_X1), input::MouseButton::kExtra1);
       CHECK_EQ(MouseButtonFromSdl(SDL_BUTTON_X2), input::MouseButton::kExtra2);
+    }
+
+    SUBCASE("Maps SDL mouse buttons 6 through 8") {
+      CHECK_EQ(MouseButtonFromSdl(6), input::MouseButton::kExtra3);
+      CHECK_EQ(MouseButtonFromSdl(7), input::MouseButton::kExtra4);
+      CHECK_EQ(MouseButtonFromSdl(8), input::MouseButton::kExtra5);
     }
 
     SUBCASE("Returns empty for out-of-range buttons") {
@@ -239,3 +255,38 @@ TEST_SUITE("helios::sdl3::input::PenDeviceTypeFromSdl") {
     }
   }
 }
+
+TEST_SUITE("helios::sdl3::input::TouchDeviceTypeFromSdl") {
+  TEST_CASE("helios::sdl3::input::TouchDeviceTypeFromSdl") {
+    SUBCASE("Maps direct, indirect, and invalid device types") {
+      CHECK_EQ(TouchDeviceTypeFromSdl(SDL_TOUCH_DEVICE_DIRECT),
+               input::TouchDeviceType::kDirect);
+      CHECK_EQ(TouchDeviceTypeFromSdl(SDL_TOUCH_DEVICE_INDIRECT_ABSOLUTE),
+               input::TouchDeviceType::kIndirectAbsolute);
+      CHECK_EQ(TouchDeviceTypeFromSdl(SDL_TOUCH_DEVICE_INDIRECT_RELATIVE),
+               input::TouchDeviceType::kIndirectRelative);
+      CHECK_EQ(TouchDeviceTypeFromSdl(SDL_TOUCH_DEVICE_INVALID),
+               input::TouchDeviceType::kUnknown);
+    }
+  }
+}
+
+TEST_SUITE("helios::sdl3::input::SensorTypeFromSdl") {
+  TEST_CASE("helios::sdl3::input::SensorTypeFromSdl") {
+    SUBCASE("Maps accel, gyro, and controller-side sensors") {
+      CHECK_EQ(SensorTypeFromSdl(SDL_SENSOR_ACCEL), input::SensorType::kAccel);
+      CHECK_EQ(SensorTypeFromSdl(SDL_SENSOR_GYRO), input::SensorType::kGyro);
+      CHECK_EQ(SensorTypeFromSdl(SDL_SENSOR_ACCEL_L),
+               input::SensorType::kAccelLeft);
+      CHECK_EQ(SensorTypeFromSdl(SDL_SENSOR_GYRO_L),
+               input::SensorType::kGyroLeft);
+      CHECK_EQ(SensorTypeFromSdl(SDL_SENSOR_ACCEL_R),
+               input::SensorType::kAccelRight);
+      CHECK_EQ(SensorTypeFromSdl(SDL_SENSOR_GYRO_R),
+               input::SensorType::kGyroRight);
+      CHECK_EQ(SensorTypeFromSdl(SDL_SENSOR_INVALID),
+               input::SensorType::kUnknown);
+    }
+  }
+}
+#endif

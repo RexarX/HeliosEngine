@@ -1,8 +1,14 @@
 #pragma once
 
-#include <helios/app/application.hpp>
-#include <helios/app/builtin/app_exit.hpp>
-#include <helios/app/sub_app.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/sleep.hpp>
 
 #include <algorithm>
@@ -10,7 +16,12 @@
 #include <cstddef>
 #include <optional>
 #include <thread>
+#endif
+#include <helios/app/application.hpp>
+#include <helios/app/builtin/app_exit.hpp>
+#include <helios/app/sub_app.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 /// @brief Configuration for fixed-timestep runners.
@@ -158,3 +169,4 @@ inline void RunOnceSubApp(SubApp& sub_app, async::Executor& executor) {
 }
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

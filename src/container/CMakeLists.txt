@@ -16,6 +16,9 @@ helios_module(
         include/helios/container/typed_buffer.hpp
         include/helios/container/typed_buffer_array.hpp
 
+    MODULE_SOURCES
+        modules/helios.container.cppm
+
     DEPENDS
         PUBLIC compiler
         PUBLIC core
@@ -26,6 +29,7 @@ helios_module(
         tests/callable_buffer_array.cpp
         tests/flat_map.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/multi_type_map.cpp
         tests/sparse_set.cpp
         tests/static_string.cpp

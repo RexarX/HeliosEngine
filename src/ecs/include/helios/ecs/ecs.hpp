@@ -1,5 +1,13 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
 #include <helios/ecs/builtin_commands.hpp>
 #include <helios/ecs/builtin_messages.hpp>
 #include <helios/ecs/command/command.hpp>
@@ -12,6 +20,7 @@
 #include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/component/manager.hpp>
+#include <helios/ecs/component/sparse_storage.hpp>
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/entity/manager.hpp>
 #include <helios/ecs/message/async_queue.hpp>
@@ -28,6 +37,8 @@
 #include <helios/ecs/message/reader.hpp>
 #include <helios/ecs/message/wrapper.hpp>
 #include <helios/ecs/message/writer.hpp>
+#include <helios/ecs/query/args.hpp>
+#include <helios/ecs/query/details/traits.hpp>
 #include <helios/ecs/query/iterator.hpp>
 #include <helios/ecs/query/params.hpp>
 #include <helios/ecs/query/query.hpp>
@@ -61,3 +72,4 @@
 #include <helios/ecs/system/system.hpp>
 #include <helios/ecs/world.hpp>
 #include <helios/ecs/world_view.hpp>
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

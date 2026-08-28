@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <memory_resource>
 #include <optional>
+#include <ostream>
 #include <span>
 #include <string>
 #include <string_view>

@@ -1,5 +1,14 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.window;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/message/params.hpp>
 #include <helios/ecs/message/reader.hpp>
 #include <helios/ecs/message/writer.hpp>
@@ -7,9 +16,12 @@
 #include <helios/ecs/query/query.hpp>
 #include <helios/ecs/system/composite_param.hpp>
 #include <helios/ecs/system/param.hpp>
-#include <helios/window/components.hpp>
-#include <helios/window/messages.hpp>
+#endif
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/properties.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::window {
 
 /// @brief Mutable query over all `Window` components.
@@ -261,3 +273,4 @@ struct SystemParamTraits<window::CreationWriters>
                            MessageWriter<window::CreationFailedMsg>> {};
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

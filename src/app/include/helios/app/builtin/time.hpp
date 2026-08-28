@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/app/plugin.hpp>
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
 #include <helios/utils/common_traits.hpp>
 
@@ -9,7 +16,11 @@
 #include <cstdint>
 #include <ratio>
 #include <string_view>
+#endif
+#include <helios/app/plugin.hpp>
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 /// @brief Application frame timing resource.
@@ -170,3 +181,4 @@ public:
 };
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

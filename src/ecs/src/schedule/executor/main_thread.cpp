@@ -2,12 +2,12 @@
 
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 
-#include <helios/assert.hpp>
-#include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/schedule/run_condition.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 
 #include <cstddef>
+#include <helios/assert.hpp>
+#include <helios/ecs/details/profile.hpp>
 
 namespace helios::ecs {
 

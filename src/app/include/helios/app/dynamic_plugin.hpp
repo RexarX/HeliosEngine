@@ -1,6 +1,14 @@
 #pragma once
 
-#include <helios/app/plugin.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/dynamic_library.hpp>
 
 #include <cstdint>
@@ -10,7 +18,10 @@
 #include <string_view>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/app/plugin.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 // Forward declaration
@@ -52,9 +63,7 @@ struct PluginTypeExport {
    */
   template <typename T>
   [[nodiscard]] static constexpr PluginTypeExport From() noexcept {
-    constexpr auto type_id = PluginTypeId::From<T>();
-    return {.hash = type_id.Index().Hash(),
-            .qualified_name = utils::details::GetFullTypeNameCString<T>()};
+    return From(PluginTypeId::From<T>());
   }
 
   /**
@@ -360,3 +369,4 @@ private:
 };
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

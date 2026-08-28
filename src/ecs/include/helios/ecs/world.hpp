@@ -1,5 +1,26 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <helios/utils/common_traits.hpp>
+
+#include <algorithm>
+#include <array>
+#include <concepts>
+#include <cstddef>
+#include <memory_resource>
+#include <ranges>
+#include <string>
+#include <type_traits>
+#include <utility>
+#endif
 #include <helios/assert.hpp>
 #include <helios/ecs/builtin_messages.hpp>
 #include <helios/ecs/command/command.hpp>
@@ -17,24 +38,14 @@
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/message/reader.hpp>
 #include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/query/details/query_args.hpp>
+#include <helios/ecs/query/args.hpp>
 #include <helios/ecs/query/query.hpp>
 #include <helios/ecs/resource/manager.hpp>
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/system/access_policy.hpp>
 #include <helios/ecs/system/param.hpp>
-#include <helios/utils/common_traits.hpp>
 
-#include <algorithm>
-#include <array>
-#include <concepts>
-#include <cstddef>
-#include <memory_resource>
-#include <ranges>
-#include <string>
-#include <type_traits>
-#include <utility>
-
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 struct SystemLocalData;
@@ -683,6 +694,16 @@ public:
   void ClearMessages();
 
   /**
+   * @brief Gets a reader for messages of type `T`.
+   * @note Thread-safe for retained message reads.
+   * @warning Triggers assertion if message type is not added.
+   * @tparam T Message type
+   * @return Message reader for type `T`
+   */
+  template <MessageTrait T>
+  [[nodiscard]] auto ReadMessages() const noexcept -> MessageReader<T>;
+
+  /**
    * @brief Gets a reader for unread messages of type `T`.
    * @note Thread-safe for retained message reads; cursor updates are not.
    * @warning Triggers assertion if message type is not added.
@@ -693,6 +714,19 @@ public:
   template <MessageTrait T>
   [[nodiscard]] auto ReadMessages(MessageCursor<T>& cursor) const noexcept
       -> MessageReader<T>;
+
+  /**
+   * @brief Gets a consumable reader messages of type `T`.
+   * @note Thread-safe for retained message reads.
+   * @warning Triggers assertion if message type is not added.
+   * @tparam T Consumable message type
+   * @param consumed_registry Per-system consumed-message registry
+   * @return Consumable message reader for type `T`
+   */
+  template <ConsumableMessageTrait T>
+  [[nodiscard]] auto ReadConsumableMessages(
+      ConsumedMessagesRegistry& consumed_registry) noexcept
+      -> ConsumableMessageReader<T>;
 
   /**
    * @brief Gets a consumable reader for unread messages of type `T`.
@@ -1341,11 +1375,29 @@ inline void World::ClearMessages() {
 }
 
 template <MessageTrait T>
+inline auto World::ReadMessages() const noexcept -> MessageReader<T> {
+  HELIOS_ASSERT(HasMessage<T>(), "Message of type '{}' is not registered!",
+                MessageNameOf<T>());
+  MessageCursor<T> cursor;
+  return MessageReader<T>(messages_, cursor);
+}
+
+template <MessageTrait T>
 inline auto World::ReadMessages(MessageCursor<T>& cursor) const noexcept
     -> MessageReader<T> {
   HELIOS_ASSERT(HasMessage<T>(), "Message of type '{}' is not registered!",
                 MessageNameOf<T>());
   return MessageReader<T>(messages_, cursor);
+}
+
+template <ConsumableMessageTrait T>
+inline auto World::ReadConsumableMessages(
+    ConsumedMessagesRegistry& consumed_registry) noexcept
+    -> ConsumableMessageReader<T> {
+  HELIOS_ASSERT(HasMessage<T>(), "Message of type '{}' is not registered!",
+                MessageNameOf<T>());
+  MessageCursor<T> cursor;
+  return ConsumableMessageReader<T>(messages_, cursor, consumed_registry);
 }
 
 template <ConsumableMessageTrait T>
@@ -1401,3 +1453,4 @@ struct SystemParamTraits<World> {
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

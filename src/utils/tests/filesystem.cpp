@@ -1,10 +1,10 @@
-#include <doctest/doctest.h>
-
-#include <helios/utils/filesystem.hpp>
-
 #include <filesystem>
 #include <fstream>
 #include <string_view>
+
+#include <doctest/doctest.h>
+
+#include <helios/utils/filesystem.hpp>
 
 using namespace helios::utils;
 

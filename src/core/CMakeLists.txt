@@ -15,6 +15,9 @@ helios_module(
         src/assert.cpp
         src/stacktrace.cpp
 
+    MODULE_SOURCES
+        modules/helios.core.cppm
+
     PCH src/pch.hpp
 
     DEPENDS
@@ -37,6 +40,7 @@ helios_module(
         tests/cstring_view.cpp
         tests/delegate.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/stacktrace.cpp
         tests/uuid.cpp
 )

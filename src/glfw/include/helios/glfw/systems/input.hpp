@@ -1,27 +1,39 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.glfw;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
 
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/query/params.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
-#include <helios/input/components.hpp>
+#include <helios/input/gamepad.hpp>
 #include <helios/input/joystick.hpp>
 #include <helios/input/mouse.hpp>
 #include <helios/input/params.hpp>
-#include <helios/input/resources.hpp>
-#include <helios/window/components.hpp>
+#include <helios/input/settings.hpp>
+#include <helios/window/native_handle.hpp>
+#include <helios/window/properties.hpp>
 
 #include <array>
 #include <cstddef>
 #include <cstdint>
 #include <string>
 #include <string_view>
+#endif
+#include <helios/glfw/state.hpp>
 
-struct GLFWcursor;
+HELIOS_MODULE_EXPORT struct GLFWcursor;
 
+HELIOS_MODULE_EXPORT
 namespace helios::glfw {
 
 /// @brief Number of GLFW mapped gamepad buttons (`GLFW_GAMEPAD_BUTTON_LAST+1`).
@@ -33,7 +45,7 @@ inline constexpr size_t kGlfwMappedAxisCount = 6;
 struct GamepadSlotCache {
   std::string name;
   std::array<float, kGlfwMappedAxisCount> axes = {};
-  std::array<unsigned char, kGlfwMappedButtonCount> buttons = {};
+  std::array<uint8_t, kGlfwMappedButtonCount> buttons = {};
   bool connected = false;
 };
 
@@ -42,8 +54,8 @@ struct JoystickSlotCache {
   std::string name;
   std::string guid;
   std::array<float, input::Joystick::kMaxAxes> axes = {};
-  std::array<unsigned char, input::Joystick::kMaxButtons> buttons = {};
-  std::array<unsigned char, input::Joystick::kMaxHats> hats = {};
+  std::array<uint8_t, input::Joystick::kMaxButtons> buttons = {};
+  std::array<uint8_t, input::Joystick::kMaxHats> hats = {};
   uint8_t axis_count = 0;
   uint8_t button_count = 0;
   uint8_t hat_count = 0;
@@ -130,3 +142,4 @@ struct ApplyRawMouseMotion {
 }  // namespace helios::glfw
 
 #endif  // HELIOS_MODULE_INPUT_AVAILABLE
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

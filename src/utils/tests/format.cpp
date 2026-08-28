@@ -1,11 +1,11 @@
-#include <doctest/doctest.h>
-
-#include <helios/utils/format.hpp>
-
 #include <iterator>
 #include <memory_resource>
 #include <string>
 #include <string_view>
+
+#include <doctest/doctest.h>
+
+#include <helios/utils/format.hpp>
 
 using namespace helios::utils;
 

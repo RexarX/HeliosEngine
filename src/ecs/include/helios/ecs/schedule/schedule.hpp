@@ -1,13 +1,14 @@
 #pragma once
 
-#include <helios/ecs/schedule/dag.hpp>
-#include <helios/ecs/schedule/executor/executor.hpp>
-#include <helios/ecs/schedule/run_condition.hpp>
-#include <helios/ecs/schedule/system_local_data.hpp>
-#include <helios/ecs/schedule/system_set.hpp>
-#include <helios/ecs/schedule/system_storage.hpp>
-#include <helios/ecs/system/access_policy.hpp>
-#include <helios/ecs/system/system.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/type_info.hpp>
 
 #include <algorithm>
@@ -24,11 +25,20 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
-
+#endif
+#include <helios/ecs/schedule/dag.hpp>
+#include <helios/ecs/schedule/executor/executor.hpp>
+#include <helios/ecs/schedule/run_condition.hpp>
 #include <helios/ecs/schedule/system_group_handle.hpp>
 #include <helios/ecs/schedule/system_handle.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
+#include <helios/ecs/schedule/system_set.hpp>
 #include <helios/ecs/schedule/system_set_handle.hpp>
+#include <helios/ecs/schedule/system_storage.hpp>
+#include <helios/ecs/system/access_policy.hpp>
+#include <helios/ecs/system/system.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class World;
@@ -966,3 +976,4 @@ constexpr auto SystemGroupHandle::Sequence(this auto&& self)
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -1,18 +1,35 @@
 #pragma once
 
-#include <helios/input/axis.hpp>
-#include <helios/input/button_input.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <helios/ecs/message/message.hpp>
 #include <helios/memory/temporary_storage.hpp>
 
 #include <array>
+#include <cstddef>
 #include <cstdint>
 #include <format>
 #include <iterator>
+#include <optional>
 #include <ostream>
 #include <string>
 #include <string_view>
 #include <utility>
+#include <vector>
+#endif
+#include <helios/input/axis.hpp>
+#include <helios/input/button_input.hpp>
+#include <helios/input/ids.hpp>
+#include <helios/input/keyboard.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /// @brief Contiguous gamepad button identifiers (GLFW order).
@@ -201,6 +218,7 @@ enum class GamepadDirtyFlags : uint8_t {
  * backends. GLFW ignores rumble, LED, sensors, touchpad, and battery.
  */
 struct Gamepad {
+  static constexpr size_t kMaxTouchpads = 2;
   static constexpr size_t kMaxTouchpadFingers = 2;
 
   /// @brief Clears identity, buttons, axes, and extra device state.
@@ -308,11 +326,13 @@ struct Gamepad {
   Axis<GamepadAxis> axes;
   std::array<float, 3> gyro = {};
   std::array<float, 3> accel = {};
-  std::array<GamepadTouchpadFinger, kMaxTouchpadFingers> touchpad = {};
+  std::array<std::array<GamepadTouchpadFinger, kMaxTouchpadFingers>,
+             kMaxTouchpads>
+      touchpads = {};
   GamepadButtonInput buttons;
   uint32_t rumble_duration_ms = 0;
   uint32_t trigger_rumble_duration_ms = 0;
-  int32_t id = -1;
+  std::optional<GamepadId> id;
   uint16_t rumble_low = 0;
   uint16_t rumble_high = 0;
   uint16_t trigger_rumble_left = 0;
@@ -337,7 +357,7 @@ constexpr void Gamepad::Reset() noexcept {
   power = {};
   gyro.fill(0.0F);
   accel.fill(0.0F);
-  touchpad = {};
+  touchpads = {};
   touchpad_count = 0;
   rumble_low = 0;
   rumble_high = 0;
@@ -348,7 +368,7 @@ constexpr void Gamepad::Reset() noexcept {
   led_r = 0;
   led_g = 0;
   led_b = 0;
-  id = -1;
+  id.reset();
   connected = false;
   gyro_enabled = false;
   accel_enabled = false;
@@ -388,6 +408,219 @@ constexpr void Gamepad::SetAccelEnabled(bool enabled) noexcept {
   accel_enabled = enabled;
   MarkDirty(GamepadDirtyFlags::kSensors);
 }
+
+/// @brief Fixed gamepad slot table (GLFW joystick range 0..15).
+/// @details `filters` is rest-center bookkeeping for `UpdateGamepadState`.
+struct Gamepads {
+  static constexpr std::string_view kName = "helios::input::Gamepads";
+  static constexpr size_t kSlotCount = 16;
+
+  std::array<Gamepad, kSlotCount> pads = {};
+  std::array<GamepadAxisFilter, kSlotCount> filters = {};
+
+  /**
+   * @brief Looks up a mutable gamepad slot by id.
+   * @param id Gamepad / joystick id
+   * @return Pointer to the slot, or `nullptr` when out of range
+   */
+  [[nodiscard]] constexpr Gamepad* TryGet(GamepadId id) noexcept;
+
+  /**
+   * @brief Looks up a const gamepad slot by id.
+   * @param id Gamepad / joystick id
+   * @return Pointer to the slot, or `nullptr` when out of range
+   */
+  [[nodiscard]] constexpr const Gamepad* TryGet(GamepadId id) const noexcept;
+
+  /**
+   * @brief Looks up mutable axis-filter state by id.
+   * @param id Gamepad / joystick id
+   * @return Pointer to the filter slot, or `nullptr` when out of range
+   */
+  [[nodiscard]] constexpr GamepadAxisFilter* TryGetFilter(
+      GamepadId id) noexcept;
+
+  /**
+   * @brief Looks up const axis-filter state by id.
+   * @param id Gamepad / joystick id
+   * @return Pointer to the filter slot, or `nullptr` when out of range
+   */
+  [[nodiscard]] constexpr const GamepadAxisFilter* TryGetFilter(
+      GamepadId id) const noexcept;
+};
+
+constexpr Gamepad* Gamepads::TryGet(GamepadId id) noexcept {
+  if (static_cast<size_t>(id) >= pads.size()) {
+    return nullptr;
+  }
+  return &pads[static_cast<size_t>(id)];
+}
+
+constexpr const Gamepad* Gamepads::TryGet(GamepadId id) const noexcept {
+  if (static_cast<size_t>(id) >= pads.size()) {
+    return nullptr;
+  }
+  return &pads[static_cast<size_t>(id)];
+}
+
+constexpr GamepadAxisFilter* Gamepads::TryGetFilter(GamepadId id) noexcept {
+  if (static_cast<size_t>(id) >= filters.size()) {
+    return nullptr;
+  }
+  return &filters[static_cast<size_t>(id)];
+}
+
+constexpr const GamepadAxisFilter* Gamepads::TryGetFilter(
+    GamepadId id) const noexcept {
+  if (static_cast<size_t>(id) >= filters.size()) {
+    return nullptr;
+  }
+  return &filters[static_cast<size_t>(id)];
+}
+
+/// @brief Pending SDL_GameControllerDB mapping lines and files for backends.
+struct GamepadMappings {
+  static constexpr std::string_view kName = "helios::input::GamepadMappings";
+
+  /**
+   * @brief Queues a mapping database line.
+   * @param mapping Single mapping string
+   */
+  void Add(std::string_view mapping);
+
+  /**
+   * @brief Queues a mapping database file path.
+   * @param path File containing mapping lines
+   */
+  void AddFromFile(std::string_view path);
+
+  /// @brief Clears queued mappings after a backend has consumed them.
+  void ClearPending() noexcept;
+
+  std::vector<std::string> pending_lines;
+  std::vector<std::string> pending_files;
+  bool dirty = false;
+};
+
+inline void GamepadMappings::Add(std::string_view mapping) {
+  pending_lines.emplace_back(mapping);
+  dirty = true;
+}
+
+inline void GamepadMappings::AddFromFile(std::string_view path) {
+  pending_files.emplace_back(path);
+  dirty = true;
+}
+
+inline void GamepadMappings::ClearPending() noexcept {
+  pending_lines.clear();
+  pending_files.clear();
+  dirty = false;
+}
+
+/// @brief Gamepad connect / disconnect notification.
+struct GamepadConnectionMsg {
+  static constexpr std::string_view kName =
+      "helios::input::GamepadConnectionMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  GamepadId id = 0;
+  bool connected = false;
+  std::string name;
+  std::string guid;
+};
+
+/// @brief Gamepad button press / release event.
+struct GamepadButtonInputMsg {
+  static constexpr std::string_view kName =
+      "helios::input::GamepadButtonInputMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  GamepadId id = 0;
+  GamepadButton button = GamepadButton::kA;
+  ButtonState state = ButtonState::kReleased;
+};
+
+/// @brief Gamepad axis value change.
+/// @details `value` is the raw backend sample (GLFW gamepad range). Filtered
+/// stick / trigger values are applied to `Gamepad::axes` by
+/// `UpdateGamepadState`.
+struct GamepadAxisChangedMsg {
+  static constexpr std::string_view kName =
+      "helios::input::GamepadAxisChangedMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  GamepadId id = 0;
+  GamepadAxis axis = GamepadAxis::kLeftX;
+  float value = 0.0F;
+};
+
+/// @brief Gamepad mapping string changed for a connected slot.
+struct GamepadRemappedMsg {
+  static constexpr std::string_view kName = "helios::input::GamepadRemappedMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  GamepadId id = 0;
+  std::string mapping;
+};
+
+/// @brief Gamepad battery / power snapshot change.
+struct GamepadPowerChangedMsg {
+  static constexpr std::string_view kName =
+      "helios::input::GamepadPowerChangedMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  GamepadId id = 0;
+  GamepadPower power;
+};
+
+/// @brief Latest gyro or accelerometer sample for a gamepad slot.
+struct GamepadSensorUpdateMsg {
+  static constexpr std::string_view kName =
+      "helios::input::GamepadSensorUpdateMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  GamepadId id = 0;
+  GamepadSensor sensor = GamepadSensor::kGyro;
+  std::array<float, 3> value = {};
+};
+
+/// @brief Touchpad finger sample for a gamepad slot.
+struct GamepadTouchpadMsg {
+  static constexpr std::string_view kName = "helios::input::GamepadTouchpadMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  GamepadId id = 0;
+  float x = 0.0F;
+  float y = 0.0F;
+  float pressure = 0.0F;
+  uint8_t touchpad = 0;
+  uint8_t finger = 0;
+  bool down = false;
+
+  /**
+   * @brief Returns the finger position.
+   * @return Normalized x and y coordinates
+   */
+  [[nodiscard]] constexpr auto GetPosition() const noexcept
+      -> std::pair<float, float> {
+    return {x, y};
+  }
+};
 
 /**
  * @brief Returns the string name of a gamepad button.
@@ -764,9 +997,14 @@ inline std::ostream& operator<<(std::ostream& os, GamepadDirtyFlags flags) {
 template <typename It>
   requires std::output_iterator<It, char>
 inline It ToString(It out, const Gamepad& pad) {
-  out = std::format_to(out,
-                       "Gamepad{{id={}, name=\"{}\", guid=\"{}\", connected={}",
-                       pad.id, pad.name, pad.guid, pad.connected);
+  out = std::format_to(out, "Gamepad{{id=");
+  if (pad.id.has_value()) {
+    out = std::format_to(out, "{}", *pad.id);
+  } else {
+    out = std::format_to(out, "none");
+  }
+  out = std::format_to(out, ", name=\"{}\", guid=\"{}\", connected={}",
+                       pad.name, pad.guid, pad.connected);
   out = std::format_to(out, ", power=");
   out = ToString(out, pad.power);
   out = std::format_to(out, ", dirty_flags=");
@@ -813,8 +1051,512 @@ inline std::ostream& operator<<(std::ostream& os, const Gamepad& pad) {
   return os;
 }
 
+/**
+ * @brief Formats a gamepad slot table using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param gamepads Gamepads resource
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const Gamepads& gamepads) {
+  out = std::format_to(out, "Gamepads{{pads = [");
+
+  size_t cnt = 0;
+  for (const auto& pad : gamepads.pads) {
+    if (!pad.connected) {
+      continue;
+    }
+
+    if (cnt++ > 0) [[likely]] {
+      out = std::format_to(out, ", ");
+    }
+    ToString(out, pad);
+  };
+
+  return std::format_to(out, "]}}");
+}
+
+/**
+ * @brief Formats a gamepad slot table as a string.
+ * @param gamepads Gamepads resource
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const Gamepads& gamepads) {
+  std::string result;
+  result.reserve(512);
+  ToString(std::back_inserter(result), gamepads);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad slot table as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param gamepads Gamepads resource
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Gamepads& gamepads) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(512);
+  ToString(std::back_inserter(result), gamepads);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad slot table to an output stream.
+ * @param os Output stream
+ * @param gamepads Gamepads resource
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const Gamepads& gamepads) {
+  ToString(std::ostreambuf_iterator<char>(os), gamepads);
+  return os;
+}
+
+/**
+ * @brief Formats a pending gamepad mappings using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param mappings Gamepad mappings resource
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const GamepadMappings& mappings) {
+  return std::format_to(
+      out, "GamepadMappings{{pending_lines={}, pending_files={}, dirty={}}}",
+      mappings.pending_lines.size(), mappings.pending_files.size(),
+      mappings.dirty);
+}
+
+/**
+ * @brief Formats a pending gamepad mappings as a string.
+ * @param mappings Gamepad mappings resource
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadMappings& mappings) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), mappings);
+  return result;
+}
+
+/**
+ * @brief Formats a pending gamepad mappings as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param mappings Gamepad mappings resource
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadMappings& mappings) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), mappings);
+  return result;
+}
+
+/**
+ * @brief Outputs a pending gamepad mappings to an output stream.
+ * @param os Output stream
+ * @param mappings Gamepad mappings resource
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadMappings& mappings) {
+  ToString(std::ostreambuf_iterator<char>(os), mappings);
+  return os;
+}
+
+/**
+ * @brief Formats a gamepad connection message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad connection message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const GamepadConnectionMsg& msg) {
+  return std::format_to(
+      out,
+      "GamepadConnectionMsg{{id={}, connected={}, name=\"{}\", guid=\"{}\"}}",
+      msg.id, msg.connected, msg.name, msg.guid);
+}
+
+/**
+ * @brief Formats a gamepad connection message as a string.
+ * @param msg Gamepad connection message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadConnectionMsg& msg) {
+  std::string result;
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad connection message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad connection message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadConnectionMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad connection message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad connection message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadConnectionMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a gamepad button message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad button message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const GamepadButtonInputMsg& msg) {
+  return std::format_to(out,
+                        "GamepadButtonInputMsg{{id={}, button={}, state={}}}",
+                        msg.id, ToString(msg.button), ToString(msg.state));
+}
+
+/**
+ * @brief Formats a gamepad button message as a string.
+ * @param msg Gamepad button message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadButtonInputMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad button input message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad button input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadButtonInputMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad button message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad button message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadButtonInputMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a gamepad axis message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad axis message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const GamepadAxisChangedMsg& msg) {
+  return std::format_to(out,
+                        "GamepadAxisChangedMsg{{id={}, axis={}, value={}}}",
+                        msg.id, ToString(msg.axis), msg.value);
+}
+
+/**
+ * @brief Formats a gamepad axis message as a string.
+ * @param msg Gamepad axis message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadAxisChangedMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad axis message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad axis message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadAxisChangedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad axis message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad axis message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadAxisChangedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a gamepad remap message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad remap message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const GamepadRemappedMsg& msg) {
+  return std::format_to(out, "GamepadRemappedMsg{{id={}, mapping=\"{}\"}}",
+                        msg.id, msg.mapping);
+}
+
+/**
+ * @brief Formats a gamepad remap message as a string.
+ * @param msg Gamepad remap message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadRemappedMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad remap message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad remap message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadRemappedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad remap message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad remap message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadRemappedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a gamepad power message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad power message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const GamepadPowerChangedMsg& msg) {
+  out = std::format_to(out, "GamepadPowerChangedMsg{{id={}, power=", msg.id);
+  out = ToString(out, msg.power);
+  return std::format_to(out, "}}");
+}
+
+/**
+ * @brief Formats a gamepad power message as a string.
+ * @param msg Gamepad power message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadPowerChangedMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad power message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad power message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadPowerChangedMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad power message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad power message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadPowerChangedMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a gamepad sensor message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad sensor message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const GamepadSensorUpdateMsg& msg) {
+  return std::format_to(
+      out, "GamepadSensorUpdateMsg{{id={}, sensor={}, value=({}, {}, {})}}",
+      msg.id, ToString(msg.sensor), msg.value[0], msg.value[1], msg.value[2]);
+}
+
+/**
+ * @brief Formats a gamepad sensor message as a string.
+ * @param msg Gamepad sensor message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadSensorUpdateMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad sensor message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad sensor message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadSensorUpdateMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad sensor message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad sensor message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadSensorUpdateMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a gamepad touchpad message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Gamepad touchpad message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const GamepadTouchpadMsg& msg) {
+  return std::format_to(out,
+                        "GamepadTouchpadMsg{{id={}, touchpad={}, finger={}, "
+                        "x={}, y={}, pressure={}, down={}}}",
+                        msg.id, msg.touchpad, msg.finger, msg.x, msg.y,
+                        msg.pressure, msg.down);
+}
+
+/**
+ * @brief Formats a gamepad touchpad message as a string.
+ * @param msg Gamepad touchpad message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const GamepadTouchpadMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a gamepad touchpad message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Gamepad touchpad message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const GamepadTouchpadMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a gamepad touchpad message to an output stream.
+ * @param os Output stream
+ * @param msg Gamepad touchpad message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const GamepadTouchpadMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
 }  // namespace helios::input
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -916,4 +1658,113 @@ struct formatter<helios::input::Gamepad> {
   }
 };
 
+template <>
+struct formatter<helios::input::Gamepads> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::Gamepads& gamepads,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), gamepads);
+  }
+};
+
+template <>
+struct formatter<helios::input::GamepadMappings> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::GamepadMappings& mappings,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), mappings);
+  }
+};
+
+template <>
+struct formatter<helios::input::GamepadConnectionMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::GamepadConnectionMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::GamepadButtonInputMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::GamepadButtonInputMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::GamepadAxisChangedMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::GamepadAxisChangedMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::GamepadRemappedMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::GamepadRemappedMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::GamepadPowerChangedMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::GamepadPowerChangedMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::GamepadSensorUpdateMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::GamepadSensorUpdateMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::GamepadTouchpadMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::GamepadTouchpadMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

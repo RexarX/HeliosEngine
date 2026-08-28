@@ -6,10 +6,7 @@ helios_module(
     IMPLEMENTS window input
 
     HEADERS
-        include/helios/glfw/details/glfw_state.hpp
-        include/helios/glfw/details/glfw_sync.hpp
         include/helios/glfw/details/input_map.hpp
-        include/helios/glfw/details/native_handle.hpp
         include/helios/glfw/systems/apply.hpp
         include/helios/glfw/systems/create.hpp
         include/helios/glfw/systems/destroy.hpp
@@ -18,10 +15,13 @@ helios_module(
         include/helios/glfw/systems/poll.hpp
         include/helios/glfw/systems/shutdown.hpp
         include/helios/glfw/glfw.hpp
+        include/helios/glfw/native_handle.hpp
         include/helios/glfw/plugin.hpp
+        include/helios/glfw/state.hpp
+        include/helios/glfw/sync.hpp
 
     SOURCES
-        src/details/glfw_sync.cpp
+        src/sync.cpp
         src/systems/apply.cpp
         src/systems/create.cpp
         src/systems/destroy.cpp
@@ -33,10 +33,14 @@ helios_module(
         src/native_handle.cpp
         src/plugin.cpp
 
+    MODULE_SOURCES
+        modules/helios.glfw.cppm
+
     PCH src/pch.hpp
 
     DEPENDS
         PUBLIC app
+        PUBLIC compiler
         PUBLIC ecs
         PUBLIC memory
         PUBLIC log
@@ -52,6 +56,7 @@ helios_module(
         tests/glfw_sync.cpp
         tests/input_map.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/native_handle.cpp
         tests/native_windows.cpp
         tests/plugin.cpp

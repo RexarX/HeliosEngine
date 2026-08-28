@@ -2,15 +2,19 @@
 
 #include <helios/sdl3/window/systems/init.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/ecs/resource/params.hpp>
-#include <helios/sdl3/details/event_dispatcher.hpp>
-#include <helios/sdl3/details/lifetime.hpp>
-#include <helios/sdl3/window/details/event_handlers.hpp>
-#include <helios/sdl3/window/details/native_state.hpp>
-#include <helios/sdl3/window/details/sdl_sync.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
+#include <helios/sdl3/lifetime.hpp>
+#include <helios/sdl3/window/event_handlers.hpp>
+#include <helios/sdl3/window/state.hpp>
+#include <helios/sdl3/window/sync.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/settings.hpp>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_init.h>
+
+#include <helios/assert.hpp>
 
 namespace helios::sdl3::window {
 

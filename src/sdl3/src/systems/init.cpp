@@ -4,7 +4,7 @@
 
 #include <helios/assert.hpp>
 #include <helios/ecs/resource/params.hpp>
-#include <helios/sdl3/details/context.hpp>
+#include <helios/sdl3/context.hpp>
 
 namespace helios::sdl3 {
 

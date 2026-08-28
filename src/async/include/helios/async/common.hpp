@@ -1,5 +1,14 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.async;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <taskflow/core/task.hpp>
 
 #include <concepts>
@@ -7,7 +16,9 @@
 #include <expected>
 #include <string_view>
 #include <type_traits>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 class SubTaskGraph;
@@ -67,7 +78,8 @@ template <typename C>
 concept StaticTask =
     std::invocable<C> && std::same_as<std::invoke_result_t<C>, void>;
 
-/// @brief Concept for sub-task callables that receive a SubTaskGraph reference.
+/// @brief Concept for sub-task callables that receive a SubTaskGraph
+/// reference.
 template <typename C>
 concept SubTask = std::invocable<C, SubTaskGraph&>;
 
@@ -75,15 +87,17 @@ concept SubTask = std::invocable<C, SubTaskGraph&>;
 template <typename C>
 concept AnyTask = StaticTask<C> || SubTask<C>;
 
-namespace details {
+}  // namespace helios::async
+
+HELIOS_MODULE_EXPORT
+namespace helios::async::details {
 
 /**
  * @brief Converts Taskflow task type to Helios task type.
  * @param type Taskflow task type
  * @return Corresponding Helios task type
  */
-[[nodiscard]] static constexpr TaskType ConvertTaskType(
-    tf::TaskType type) noexcept {
+[[nodiscard]] constexpr TaskType ConvertTaskType(tf::TaskType type) noexcept {
   switch (type) {
     using enum tf::TaskType;
     case STATIC:
@@ -97,6 +111,5 @@ namespace details {
   }
 }
 
-}  // namespace details
-
-}  // namespace helios::async
+}  // namespace helios::async::details
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -2,9 +2,7 @@
 
 #include <helios/app/dynamic_plugin.hpp>
 
-#include <helios/app/details/profile.hpp>
 #include <helios/app/plugin.hpp>
-#include <helios/assert.hpp>
 #include <helios/log/logger.hpp>
 #include <helios/utils/dynamic_library.hpp>
 
@@ -15,6 +13,8 @@
 
 #include <expected>
 #include <filesystem>
+#include <helios/app/details/profile.hpp>
+#include <helios/assert.hpp>
 #include <memory>
 #include <string_view>
 #include <system_error>

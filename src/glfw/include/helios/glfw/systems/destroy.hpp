@@ -1,17 +1,30 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.glfw;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/app/builtin/app_exit.hpp>
 #include <helios/ecs/command/commands.hpp>
 #include <helios/ecs/message/writer.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
 #include <helios/ecs/world_view.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
 #include <helios/window/params.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/settings.hpp>
 
 #include <string_view>
+#endif
+#include <helios/glfw/state.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::glfw {
 
 /// @brief Destroys native windows whose `Window` requested close.
@@ -29,3 +42,4 @@ struct DestroyClosedWindows {
 };
 
 }  // namespace helios::glfw
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

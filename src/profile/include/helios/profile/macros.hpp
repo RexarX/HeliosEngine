@@ -1,6 +1,13 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if defined(HELIOS_ENABLE_CPP_MODULES) && defined(HELIOS_BUILDING_MODULE) && \
+    !defined(HELIOS_BUILDING_MODULE_PROFILE)
+#else
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/cstring_view.hpp>
+#endif
 #include <helios/profile/common.hpp>
 #include <helios/profile/frame.hpp>
 #include <helios/profile/memory.hpp>
@@ -8,15 +15,19 @@
 #include <helios/profile/plot.hpp>
 #include <helios/profile/profiler.hpp>
 #include <helios/profile/zone.hpp>
-
+#endif
 #include <helios/utils/macro.hpp>
 
 // NOLINTBEGIN(cppcoreguidelines-macro-usage)
 
 #ifdef HELIOS_ENABLE_PROFILE
 
+#if !defined(HELIOS_BUILDING_MODULE) && !defined(HELIOS_ENABLE_CPP_MODULES)
+#ifndef HELIOS_ENABLE_IMPORT_STD
 #include <source_location>
 #include <string_view>
+#endif
+#endif
 
 #define HELIOS_PROFILE_DETAIL_SCOPE(...)                                \
   const ::helios::profile::ZoneSpec HELIOS_ANONYMOUS_VAR(_helios_spec){ \

@@ -1,9 +1,14 @@
 #pragma once
 
-#include <helios/ecs/schedule/run_condition.hpp>
-#include <helios/ecs/schedule/system_local_data.hpp>
-#include <helios/ecs/system/access_policy.hpp>
-#include <helios/ecs/system/system.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/type_info.hpp>
 
 #include <algorithm>
@@ -16,7 +21,13 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/ecs/schedule/run_condition.hpp>
+#include <helios/ecs/schedule/system_local_data.hpp>
+#include <helios/ecs/system/access_policy.hpp>
+#include <helios/ecs/system/system.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /// @brief Type index for system sets.
@@ -393,3 +404,4 @@ constexpr auto SystemSet::Sequence(this auto&& self)
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

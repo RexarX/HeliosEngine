@@ -1,13 +1,13 @@
-#include <doctest/doctest.h>
-
-#include <helios/utils/functional_adapters.hpp>
-
 #include <algorithm>
 #include <memory_resource>
 #include <optional>
 #include <string>
 #include <tuple>
 #include <vector>
+
+#include <doctest/doctest.h>
+
+#include <helios/utils/functional_adapters.hpp>
 
 using namespace helios::utils;
 

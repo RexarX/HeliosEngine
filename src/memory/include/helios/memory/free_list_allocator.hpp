@@ -1,15 +1,25 @@
 #pragma once
 
-#include <helios/memory/common.hpp>
-#include <helios/memory/details/profile.hpp>
-#include <helios/memory/treiber_stack.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.memory;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <memory_resource>
 #include <mutex>
+#endif
+#include <helios/memory/common.hpp>
+#include <helios/memory/details/profile.hpp>
+#include <helios/memory/treiber_stack.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::mem {
 
 /// @brief Configuration for `FreeListAllocator`.
@@ -207,3 +217,4 @@ inline AllocatorStats FreeListAllocator::Stats() const noexcept {
 }
 
 }  // namespace helios::mem
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

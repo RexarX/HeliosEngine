@@ -1,11 +1,22 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.utils;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <cstddef>
 #include <format>
 #include <memory_resource>
 #include <string>
 #include <utility>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::utils {
 
 /**
@@ -101,3 +112,4 @@ inline auto FormatWith(std::pmr::memory_resource* resource,
 }
 
 }  // namespace helios::utils
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

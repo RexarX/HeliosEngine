@@ -3,11 +3,20 @@
 #if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
 #define HELIOS_ENABLE_PROFILE
+#ifdef HELIOS_ENABLE_CPP_MODULES
+#include <helios/profile/macros.hpp>
+#ifndef HELIOS_BUILDING_MODULE
+#include <helios/profile/details/memory_dispatch.hpp>
+#endif
+#else
 #include <helios/profile/details/memory_dispatch.hpp>
 #include <helios/profile/macros.hpp>
+#endif
 
 #ifdef HELIOS_PROFILE_BUNDLE_TRACY
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <helios/profile/tracy/lock.hpp>
+#endif
 #endif
 
 #define HELIOS_MEMORY_PROFILE_SCOPE() HELIOS_PROFILE_SCOPE()

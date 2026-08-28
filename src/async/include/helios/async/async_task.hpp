@@ -1,12 +1,22 @@
 #pragma once
 
-#include <helios/async/common.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.async;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <taskflow/core/async_task.hpp>
 
 #include <cstddef>
 #include <utility>
+#endif
+#include <helios/async/common.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 /**
@@ -103,3 +113,4 @@ inline size_t AsyncTask::Hash() const {
 }
 
 }  // namespace helios::async
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

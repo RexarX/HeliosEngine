@@ -1,7 +1,7 @@
 #pragma once
 
 #include <helios/app/application.hpp>
-#include <helios/sdl3/details/lifetime.hpp>
+#include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/plugin.hpp>
 
 #include <SDL3/SDL_init.h>

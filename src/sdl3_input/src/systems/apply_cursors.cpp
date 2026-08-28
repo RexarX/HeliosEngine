@@ -3,11 +3,18 @@
 #include <helios/sdl3/input/systems/apply_cursors.hpp>
 
 #include <helios/ecs/entity/entity.hpp>
+#include <helios/ecs/query/params.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/input/mouse.hpp>
-#include <helios/sdl3/input/details/input_map.hpp>
+#include <helios/sdl3/input/cursor_cache.hpp>
+#include <helios/sdl3/input/state.hpp>
+#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#include <helios/sdl3/window/window_map.hpp>
+#endif
+#include <details/input_map.hpp>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3/SDL_surface.h>
 
 #include <algorithm>
 #include <cstddef>

@@ -1,8 +1,8 @@
+#include <string_view>
+
 #include <doctest/doctest.h>
 
 #include <helios/utils/type_info.hpp>
-
-#include <string_view>
 
 using namespace helios::utils;
 
@@ -367,6 +367,13 @@ TEST_SUITE("helios::utils::TypeId") {
     SUBCASE("Returns empty string for default-constructed TypeId") {
       constexpr TypeId id;
       CHECK(id.QualifiedName().empty());
+    }
+
+    SUBCASE("data() is a C string of the same length") {
+      constexpr auto id = TypeId::From<Foo>();
+      const char* cstr = id.QualifiedName().data();
+      REQUIRE_NE(cstr, nullptr);
+      CHECK_EQ(std::string_view{cstr}, id.QualifiedName());
     }
   }
 

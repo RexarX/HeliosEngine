@@ -1,68 +1,80 @@
 #include <doctest/doctest.h>
 
 #include <helios/input/axis.hpp>
-#include <helios/input/gamepad.hpp>
+
+#include <cstdint>
 
 using namespace helios::input;
+
+namespace {
+
+enum class TestAxis : uint8_t {
+  kX,
+  kY,
+  kTrigger,
+  kCount,
+};
+
+}  // namespace
 
 TEST_SUITE("helios::input::Axis") {
   TEST_CASE("helios::input::Axis::Set") {
     SUBCASE("Stores the axis value") {
-      Axis<GamepadAxis> axes;
-      axes.Set(GamepadAxis::kLeftX, 0.5F);
+      Axis<TestAxis> axes;
+      axes.Set(TestAxis::kX, 0.5F);
 
-      CHECK_EQ(axes.Get(GamepadAxis::kLeftX), doctest::Approx(0.5F));
-      CHECK_EQ(axes.Get(GamepadAxis::kLeftY), doctest::Approx(0.0F));
+      CHECK_EQ(axes.Get(TestAxis::kX), doctest::Approx(0.5F));
+      CHECK_EQ(axes.Get(TestAxis::kY), doctest::Approx(0.0F));
     }
   }
 
   TEST_CASE("helios::input::Axis::SetWithDeadzone") {
     SUBCASE("Zeros values strictly inside the deadzone") {
-      Axis<GamepadAxis> axes;
-      axes.SetWithDeadzone(GamepadAxis::kLeftX, 0.09F, 0.1F);
-      CHECK_EQ(axes.Get(GamepadAxis::kLeftX), doctest::Approx(0.0F));
+      Axis<TestAxis> axes;
+      axes.SetWithDeadzone(TestAxis::kX, 0.09F, 0.1F);
+      CHECK_EQ(axes.Get(TestAxis::kX), doctest::Approx(0.0F));
     }
 
     SUBCASE("Keeps values on the deadzone boundary") {
-      Axis<GamepadAxis> axes;
-      axes.SetWithDeadzone(GamepadAxis::kLeftX, 0.1F, 0.1F);
-      CHECK_EQ(axes.Get(GamepadAxis::kLeftX), doctest::Approx(0.1F));
+      Axis<TestAxis> axes;
+      axes.SetWithDeadzone(TestAxis::kX, 0.1F, 0.1F);
+      CHECK_EQ(axes.Get(TestAxis::kX), doctest::Approx(0.1F));
     }
 
     SUBCASE("Keeps values outside the deadzone") {
-      Axis<GamepadAxis> axes;
-      axes.SetWithDeadzone(GamepadAxis::kLeftX, -0.5F, 0.1F);
-      CHECK_EQ(axes.Get(GamepadAxis::kLeftX), doctest::Approx(-0.5F));
+      Axis<TestAxis> axes;
+      axes.SetWithDeadzone(TestAxis::kX, -0.5F, 0.1F);
+      CHECK_EQ(axes.Get(TestAxis::kX), doctest::Approx(-0.5F));
     }
   }
 
   TEST_CASE("helios::input::Axis::Clear") {
     SUBCASE("Zeros every axis") {
-      Axis<GamepadAxis> axes;
-      axes.Set(GamepadAxis::kLeftX, 1.0F);
-      axes.Set(GamepadAxis::kRightTrigger, 0.8F);
+      Axis<TestAxis> axes;
+      axes.Set(TestAxis::kX, 1.0F);
+      axes.Set(TestAxis::kTrigger, 0.8F);
       axes.Clear();
 
-      CHECK_EQ(axes.Get(GamepadAxis::kLeftX), doctest::Approx(0.0F));
-      CHECK_EQ(axes.Get(GamepadAxis::kRightTrigger), doctest::Approx(0.0F));
+      CHECK_EQ(axes.Get(TestAxis::kX), doctest::Approx(0.0F));
+      CHECK_EQ(axes.Get(TestAxis::kTrigger), doctest::Approx(0.0F));
     }
   }
 
   TEST_CASE("helios::input::Axis::Get") {
     SUBCASE("Returns zero for an unset axis") {
-      const Axis<GamepadAxis> axes;
-      CHECK_EQ(axes.Get(GamepadAxis::kRightY), doctest::Approx(0.0F));
+      const Axis<TestAxis> axes;
+      CHECK_EQ(axes.Get(TestAxis::kY), doctest::Approx(0.0F));
     }
   }
 
   TEST_CASE("helios::input::Axis::Values") {
     SUBCASE("Exposes a contiguous span of kSize values") {
-      Axis<GamepadAxis> axes;
-      axes.Set(GamepadAxis::kLeftTrigger, 0.25F);
+      Axis<TestAxis> axes;
+      axes.Set(TestAxis::kTrigger, 0.25F);
 
       const auto values = axes.Values();
-      CHECK_EQ(values.size(), Axis<GamepadAxis>::kSize);
-      CHECK_EQ(values[static_cast<size_t>(GamepadAxis::kLeftTrigger)],
+      CHECK_EQ(values.size(), Axis<TestAxis>::kSize);
+      CHECK_EQ(values[static_cast<size_t>(TestAxis::kTrigger)],
                doctest::Approx(0.25F));
     }
   }

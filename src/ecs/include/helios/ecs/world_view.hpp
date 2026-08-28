@@ -1,5 +1,20 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <helios/utils/common_traits.hpp>
+
+#include <array>
+#include <cstddef>
+#include <functional>
+#endif
 #include <helios/assert.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/entity/entity.hpp>
@@ -7,12 +22,8 @@
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/system/param.hpp>
 #include <helios/ecs/world.hpp>
-#include <helios/utils/common_traits.hpp>
 
-#include <array>
-#include <cstddef>
-#include <functional>
-
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class AccessPolicy;
@@ -173,3 +184,4 @@ struct SystemParamTraits<WorldView> {
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

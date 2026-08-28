@@ -1,9 +1,20 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.utils;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <cstddef>
 #include <cstdint>
 #include <string_view>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::utils {
 
 using HashType = size_t;
@@ -44,3 +55,4 @@ template <size_t N>
 }
 
 }  // namespace helios::utils
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -1,7 +1,18 @@
 #pragma once
 
-#include <string_view>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <string_view>
+#endif
+
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class World;
@@ -9,6 +20,7 @@ class Scheduler;
 
 }  // namespace helios::ecs
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 /// @brief Stage for one-time startup execution.
@@ -172,3 +184,4 @@ void RegisterBuiltinFrameOrders(ecs::World& world);
 void RegisterBuiltinSubAppSchedules(ecs::Scheduler& scheduler);
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

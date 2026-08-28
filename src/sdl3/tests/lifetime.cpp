@@ -1,10 +1,11 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
-#include <helios/sdl3/details/lifetime.hpp>
+#include <helios/sdl3/lifetime.hpp>
 
 #include "available.hpp"
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_init.h>
 
 using namespace helios::sdl3;
 
@@ -75,3 +76,4 @@ TEST_SUITE("helios::sdl3::Probe") {
     }
   }
 }
+#endif

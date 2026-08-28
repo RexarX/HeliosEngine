@@ -35,6 +35,9 @@ helios_module(
         src/schedules.cpp
         src/sub_app.cpp
 
+    MODULE_SOURCES
+        modules/helios.app.cppm
+
     PCH src/pch.hpp
 
     DEPENDS
@@ -63,6 +66,7 @@ helios_module(
         tests/dynamic_plugin.cpp
         tests/frame_order.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/plugin.cpp
         tests/plugin_group.cpp
         tests/runners.cpp
@@ -77,6 +81,8 @@ if(TARGET helios_app_tests AND HELIOS_BUILD_TESTS)
   helios_target_set_shared_lib_platform(helios_app_test_plugin)
   # Headers only: linking helios::module::app embeds a second TracyClient
   # (and mimalloc) in the .so, which AddressSanitizer reports as ODR on dlopen.
+  # Named-module `import` also requires that link, so this TU undefines
+  # HELIOS_ENABLE_CPP_MODULES and parses classic headers instead.
   target_link_libraries(helios_app_test_plugin PRIVATE helios::module::platform)
   target_include_directories(helios_app_test_plugin PRIVATE
       include

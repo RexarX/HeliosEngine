@@ -2,14 +2,13 @@
 
 #include <helios/memory/temporary_storage.hpp>
 
-#include <helios/assert.hpp>
-#include <helios/memory/details/profile.hpp>
-
 #include <array>
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <cstdlib>
+#include <helios/assert.hpp>
+#include <helios/memory/details/profile.hpp>
 #include <memory_resource>
 #include <optional>
 #include <thread>

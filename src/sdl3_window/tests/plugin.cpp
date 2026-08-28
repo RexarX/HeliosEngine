@@ -1,15 +1,18 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <functional>
 #include <helios/app/application.hpp>
 #include <helios/app/frame_order.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
-#include <helios/sdl3/details/context.hpp>
+#include <helios/sdl3/context.hpp>
 #include <helios/sdl3/plugin.hpp>
-#include <helios/sdl3/window/details/native_state.hpp>
-#include <helios/sdl3/window/details/window_map.hpp>
+#include <helios/sdl3/window/state.hpp>
 #include <helios/sdl3/window/window.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/sdl3/window/window_map.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/settings.hpp>
 #include <helios/window/window.hpp>
 
 #include "available.hpp"
@@ -97,3 +100,4 @@ TEST_SUITE("helios::sdl3::window::WindowPlugin") {
     }
   }
 }
+#endif

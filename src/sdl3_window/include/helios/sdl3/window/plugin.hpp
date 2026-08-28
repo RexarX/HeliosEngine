@@ -1,13 +1,26 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.sdl3.window;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/app/plugin.hpp>
 #include <helios/app/plugin_group.hpp>
 #include <helios/sdl3/plugin.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
 #include <helios/window/plugin.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/window/settings.hpp>
 
 #include <string_view>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::sdl3::window {
 
 /// @brief Named set for window `Init` on `app::kMainStartup`.
@@ -56,3 +69,4 @@ struct WindowPlugin final : public app::PluginGroup {
 };
 
 }  // namespace helios::sdl3::window
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

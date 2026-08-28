@@ -1,6 +1,14 @@
 #pragma once
 
-#include <helios/ecs/system/param.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/common_traits.hpp>
 #include <helios/utils/hash.hpp>
 #include <helios/utils/type_info.hpp>
@@ -13,16 +21,10 @@
 #include <tuple>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/ecs/system/param.hpp>
 
-namespace helios::ecs {
-
-/// @brief Type id for systems.
-using SystemTypeId = utils::TypeId;
-
-/// @brief Type index for systems.
-using SystemTypeIndex = utils::TypeIndex;
-
-namespace details {
+namespace helios::ecs::details {
 
 /// @brief Extracts the argument types of a member function pointer.
 template <typename F>
@@ -150,7 +152,16 @@ template <auto Fn, typename R, typename... Args>
 struct FreeFunctionSystemImpl<Fn, R (*)(Args...) noexcept>
     : FreeFunctionSystemImpl<Fn, R(Args...) noexcept> {};
 
-}  // namespace details
+}  // namespace helios::ecs::details
+
+HELIOS_MODULE_EXPORT
+namespace helios::ecs {
+
+/// @brief Type id for systems.
+using SystemTypeId = utils::TypeId;
+
+/// @brief Type index for systems.
+using SystemTypeIndex = utils::TypeIndex;
 
 /**
  * @brief Wraps a free function as an empty param-style system.
@@ -297,6 +308,7 @@ struct SystemId {
 
 }  // namespace helios::ecs
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -307,3 +319,4 @@ struct hash<helios::ecs::SystemId> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

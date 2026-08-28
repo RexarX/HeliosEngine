@@ -2,8 +2,6 @@
 
 #include <helios/utils/dynamic_library.hpp>
 
-#include <helios/platform/platform.hpp>
-
 #include <expected>
 #include <filesystem>
 #include <string>
@@ -23,6 +21,7 @@
 #else
 #error "Unsupported platform for dynamic library loading"
 #endif
+#include <helios/platform/platform.hpp>
 
 namespace helios::utils {
 

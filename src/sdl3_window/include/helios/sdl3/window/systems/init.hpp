@@ -1,12 +1,25 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.sdl3.window;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/resource/params.hpp>
-#include <helios/sdl3/details/event_dispatcher.hpp>
-#include <helios/sdl3/window/details/native_state.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/sdl3/event_dispatcher.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/settings.hpp>
 
 #include <string_view>
+#endif
+#include <helios/sdl3/window/state.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::sdl3::window {
 
 /// @brief Initializes SDL video and registers window event handlers.
@@ -19,3 +32,4 @@ struct Init {
 };
 
 }  // namespace helios::sdl3::window
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

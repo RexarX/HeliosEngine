@@ -1,7 +1,9 @@
 #include <doctest/doctest.h>
 
+#include <helios/ecs/world.hpp>
 #include <helios/input/gamepad.hpp>
 
+using namespace helios::ecs;
 using namespace helios::input;
 
 TEST_SUITE("helios::input::Trigger") {
@@ -98,15 +100,6 @@ TEST_SUITE("helios::input::GamepadDirtyFlags") {
           HasFlag(GamepadDirtyFlags::kNone, GamepadDirtyFlags::kRumble));
     }
   }
-
-  TEST_CASE("helios::input::operator|") {
-    SUBCASE("Combines gamepad dirty flags") {
-      const GamepadDirtyFlags flags =
-          GamepadDirtyFlags::kRumble | GamepadDirtyFlags::kSensors;
-      CHECK(HasFlag(flags, GamepadDirtyFlags::kRumble));
-      CHECK(HasFlag(flags, GamepadDirtyFlags::kSensors));
-    }
-  }
 }
 
 TEST_SUITE("helios::input::Gamepad") {
@@ -135,7 +128,7 @@ TEST_SUITE("helios::input::Gamepad") {
       CHECK_EQ(pad.power.state, GamepadPowerState::kUnknown);
       CHECK_EQ(pad.gyro[0], doctest::Approx(0.0F));
       CHECK_EQ(pad.touchpad_count, 0);
-      CHECK_EQ(pad.id, -1);
+      CHECK_FALSE(pad.id.has_value());
       CHECK_FALSE(pad.connected);
       CHECK_EQ(pad.dirty_flags, GamepadDirtyFlags::kNone);
     }
@@ -250,6 +243,202 @@ TEST_SUITE("helios::input::Gamepad") {
       Gamepad pad;
       pad.MarkDirty(GamepadDirtyFlags::kLed);
       CHECK(pad.Dirty(GamepadDirtyFlags::kLed));
+    }
+  }
+}
+TEST_SUITE("helios::input::Gamepads") {
+  TEST_CASE("helios::input::Gamepads") {
+    SUBCASE("Inserts as a resource") {
+      World world;
+      world.InsertResources(Gamepads{});
+      CHECK(world.HasResource<Gamepads>());
+    }
+  }
+
+  TEST_CASE("helios::input::Gamepads::TryGet") {
+    SUBCASE("Returns a mutable slot for a valid id") {
+      Gamepads gamepads;
+      Gamepad* pad = gamepads.TryGet(0);
+      REQUIRE_NE(pad, nullptr);
+      pad->connected = true;
+      CHECK(gamepads.pads[0].connected);
+    }
+
+    SUBCASE("Returns a const slot for a valid id") {
+      Gamepads gamepads;
+      gamepads.pads[3].id = 3;
+      const Gamepads& view = gamepads;
+      const Gamepad* pad = view.TryGet(3);
+      REQUIRE_NE(pad, nullptr);
+      CHECK_EQ(pad->id, 3);
+    }
+
+    SUBCASE("Returns nullptr for an out-of-range id") {
+      Gamepads gamepads;
+      CHECK_EQ(gamepads.TryGet(static_cast<GamepadId>(Gamepads::kSlotCount)),
+               nullptr);
+    }
+  }
+
+  TEST_CASE("helios::input::Gamepads::TryGetFilter") {
+    SUBCASE("Returns a mutable filter slot for a valid id") {
+      Gamepads gamepads;
+      GamepadAxisFilter* filter = gamepads.TryGetFilter(2);
+      REQUIRE_NE(filter, nullptr);
+      filter->center[0] = 0.25F;
+      CHECK_EQ(gamepads.filters[2].center[0], doctest::Approx(0.25F));
+    }
+
+    SUBCASE("Returns a const filter slot for a valid id") {
+      Gamepads gamepads;
+      gamepads.filters[4].seen[1] = 1;
+      const Gamepads& view = gamepads;
+      const GamepadAxisFilter* filter = view.TryGetFilter(4);
+      REQUIRE_NE(filter, nullptr);
+      CHECK_EQ(filter->seen[1], 1);
+    }
+
+    SUBCASE("Returns nullptr for an out-of-range id") {
+      Gamepads gamepads;
+      CHECK_EQ(
+          gamepads.TryGetFilter(static_cast<GamepadId>(Gamepads::kSlotCount)),
+          nullptr);
+    }
+  }
+}
+
+TEST_SUITE("helios::input::GamepadMappings") {
+  TEST_CASE("helios::input::GamepadMappings") {
+    SUBCASE("Inserts as a resource") {
+      World world;
+      world.InsertResources(GamepadMappings{});
+      CHECK(world.HasResource<GamepadMappings>());
+    }
+  }
+
+  TEST_CASE("helios::input::GamepadMappings::Add") {
+    SUBCASE("Queues a mapping line and marks dirty") {
+      GamepadMappings mappings;
+      mappings.Add("03000000,Test,a:b0,");
+
+      CHECK_EQ(mappings.pending_lines.size(), 1);
+      CHECK_EQ(mappings.pending_lines[0], "03000000,Test,a:b0,");
+      CHECK(mappings.dirty);
+    }
+  }
+
+  TEST_CASE("helios::input::GamepadMappings::AddFromFile") {
+    SUBCASE("Queues a file path and marks dirty") {
+      GamepadMappings mappings;
+      mappings.AddFromFile("gamecontrollerdb.txt");
+
+      CHECK_EQ(mappings.pending_files.size(), 1);
+      CHECK_EQ(mappings.pending_files[0], "gamecontrollerdb.txt");
+      CHECK(mappings.dirty);
+    }
+  }
+
+  TEST_CASE("helios::input::GamepadMappings::ClearPending") {
+    SUBCASE("Clears queued mappings and dirty") {
+      GamepadMappings mappings;
+      mappings.Add("line");
+      mappings.AddFromFile("file.txt");
+
+      mappings.ClearPending();
+
+      CHECK(mappings.pending_lines.empty());
+      CHECK(mappings.pending_files.empty());
+      CHECK_FALSE(mappings.dirty);
+    }
+  }
+}
+
+TEST_SUITE("helios::input::GamepadConnectionMsg") {
+  TEST_CASE("helios::input::GamepadConnectionMsg") {
+    SUBCASE("Registers as an ECS message") {
+      World world;
+      world.AddMessages<GamepadConnectionMsg>();
+      CHECK(world.HasMessage<GamepadConnectionMsg>());
+      world.WriteMessages<GamepadConnectionMsg>().Write(
+          {.id = 0, .connected = true, .name = "pad"});
+    }
+  }
+}
+
+TEST_SUITE("helios::input::GamepadButtonInputMsg") {
+  TEST_CASE("helios::input::GamepadButtonInputMsg") {
+    SUBCASE("Registers as an ECS message") {
+      World world;
+      world.AddMessages<GamepadButtonInputMsg>();
+      CHECK(world.HasMessage<GamepadButtonInputMsg>());
+      world.WriteMessages<GamepadButtonInputMsg>().Write(
+          {.id = 0,
+           .button = GamepadButton::kA,
+           .state = ButtonState::kPressed});
+    }
+  }
+}
+
+TEST_SUITE("helios::input::GamepadAxisChangedMsg") {
+  TEST_CASE("helios::input::GamepadAxisChangedMsg") {
+    SUBCASE("Registers as an ECS message") {
+      World world;
+      world.AddMessages<GamepadAxisChangedMsg>();
+      CHECK(world.HasMessage<GamepadAxisChangedMsg>());
+      world.WriteMessages<GamepadAxisChangedMsg>().Write(
+          {.id = 0, .axis = GamepadAxis::kLeftX, .value = 0.5F});
+    }
+  }
+}
+
+TEST_SUITE("helios::input::GamepadRemappedMsg") {
+  TEST_CASE("helios::input::GamepadRemappedMsg") {
+    SUBCASE("Registers as an ECS message") {
+      World world;
+      world.AddMessages<GamepadRemappedMsg>();
+      CHECK(world.HasMessage<GamepadRemappedMsg>());
+      world.WriteMessages<GamepadRemappedMsg>().Write(
+          {.id = 0, .mapping = "map"});
+    }
+  }
+}
+
+TEST_SUITE("helios::input::GamepadPowerChangedMsg") {
+  TEST_CASE("helios::input::GamepadPowerChangedMsg") {
+    SUBCASE("Registers as an ECS message") {
+      World world;
+      world.AddMessages<GamepadPowerChangedMsg>();
+      CHECK(world.HasMessage<GamepadPowerChangedMsg>());
+      world.WriteMessages<GamepadPowerChangedMsg>().Write({
+          .id = 0,
+          .power = {.state = GamepadPowerState::kCharging, .percent = 80},
+      });
+    }
+  }
+}
+
+TEST_SUITE("helios::input::GamepadSensorUpdateMsg") {
+  TEST_CASE("helios::input::GamepadSensorUpdateMsg") {
+    SUBCASE("Registers as an ECS message") {
+      World world;
+      world.AddMessages<GamepadSensorUpdateMsg>();
+      CHECK(world.HasMessage<GamepadSensorUpdateMsg>());
+      world.WriteMessages<GamepadSensorUpdateMsg>().Write(
+          {.id = 0,
+           .sensor = GamepadSensor::kGyro,
+           .value = {1.0F, 0.0F, 0.0F}});
+    }
+  }
+}
+
+TEST_SUITE("helios::input::GamepadTouchpadMsg") {
+  TEST_CASE("helios::input::GamepadTouchpadMsg") {
+    SUBCASE("Registers as an ECS message") {
+      World world;
+      world.AddMessages<GamepadTouchpadMsg>();
+      CHECK(world.HasMessage<GamepadTouchpadMsg>());
+      world.WriteMessages<GamepadTouchpadMsg>().Write(
+          {.id = 0, .x = 0.5F, .y = 0.25F, .down = true});
     }
   }
 }

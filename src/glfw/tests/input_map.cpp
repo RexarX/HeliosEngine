@@ -1,3 +1,4 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
@@ -202,3 +203,4 @@ TEST_SUITE("helios::glfw::GamepadSlotCache") {
 }
 
 #endif  // HELIOS_MODULE_INPUT_AVAILABLE
+#endif

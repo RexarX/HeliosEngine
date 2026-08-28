@@ -1,24 +1,32 @@
 #include <pch.hpp>
 
-#include <helios/glfw/details/glfw_state.hpp>
+#include <helios/glfw/state.hpp>
 
 #include <helios/ecs/world.hpp>
-#include <helios/glfw/details/glfw_sync.hpp>
-#include <helios/window/components.hpp>
-#include <helios/window/messages.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/glfw/sync.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/ids.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/native_handle.hpp>
+#include <helios/window/properties.hpp>
+#include <helios/window/settings.hpp>
 
 #ifdef HELIOS_MODULE_INPUT_AVAILABLE
-#include <helios/glfw/details/input_map.hpp>
-#include <helios/input/messages.hpp>
+#include <helios/input/keyboard.hpp>
+#include <helios/input/mouse.hpp>
 #endif
 
 #include <GLFW/glfw3.h>
 
+#include <cstddef>
 #include <cstdint>
 #include <optional>
 #include <string>
 #include <vector>
+
+#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#include <helios/glfw/details/input_map.hpp>
+#endif
 
 namespace helios::glfw {
 
@@ -250,10 +258,10 @@ void MonitorCallback(GLFWmonitor* monitor, int event) {
 
   int monitor_count = 0;
   GLFWmonitor** monitors = glfwGetMonitors(&monitor_count);
-  int monitor_index = 0;
+  std::optional<window::MonitorId> monitor_id;
   for (int index = 0; index < monitor_count; ++index) {
     if (monitors[index] == monitor) {
-      monitor_index = index;
+      monitor_id = static_cast<window::MonitorId>(index);
       break;
     }
   }
@@ -263,12 +271,14 @@ void MonitorCallback(GLFWmonitor* monitor, int event) {
     RefreshMonitors(*layout);
   }
 
-  if (event == GLFW_CONNECTED) {
-    world.WriteMessages<::helios::window::MonitorConnectedMsg>().Write(
-        {.index = monitor_index});
-  } else if (event == GLFW_DISCONNECTED) {
-    world.WriteMessages<::helios::window::MonitorDisconnectedMsg>().Write(
-        {.index = monitor_index});
+  if (monitor_id.has_value()) {
+    if (event == GLFW_CONNECTED) {
+      world.WriteMessages<::helios::window::MonitorConnectedMsg>().Write(
+          {.index = *monitor_id});
+    } else if (event == GLFW_DISCONNECTED) {
+      world.WriteMessages<::helios::window::MonitorDisconnectedMsg>().Write(
+          {.index = *monitor_id});
+    }
   }
 
   if (auto* native = world.TryWriteResource<NativeWindows>();

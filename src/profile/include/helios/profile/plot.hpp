@@ -1,11 +1,22 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.profile;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/cstring_view.hpp>
+
+#include <cstdint>
+#endif
 #include <helios/profile/common.hpp>
 #include <helios/profile/profiler.hpp>
 
-#include <cstdint>
-
+HELIOS_MODULE_EXPORT
 namespace helios::profile {
 
 /**
@@ -31,3 +42,4 @@ inline void PlotConfig(CStringView name, PlotFormat type, bool step, bool fill,
 }
 
 }  // namespace helios::profile
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

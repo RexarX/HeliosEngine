@@ -1,5 +1,14 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.window;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/app/schedules.hpp>
 #include <helios/ecs/schedule/executor/executor.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
@@ -7,7 +16,9 @@
 
 #include <string_view>
 #include <utility>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::window {
 
 /// @brief Stage for platform window event polling and synchronization.
@@ -52,3 +63,4 @@ inline void RegisterEventsSchedule(ecs::Scheduler& scheduler) {
 }
 
 }  // namespace helios::window
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

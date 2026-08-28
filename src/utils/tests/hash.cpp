@@ -1,9 +1,9 @@
+#include <string>
+#include <string_view>
+
 #include <doctest/doctest.h>
 
 #include <helios/utils/hash.hpp>
-
-#include <string>
-#include <string_view>
 
 using namespace helios::utils;
 

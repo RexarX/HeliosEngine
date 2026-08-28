@@ -1,11 +1,12 @@
+#include <functional>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <vector>
+
 #include <doctest/doctest.h>
 
 #include <helios/utils/defer.hpp>
-
-#include <functional>
-#include <memory>
-#include <string>
-#include <vector>
 
 TEST_SUITE("helios::utils::Defer") {
   TEST_CASE("HELIOS_DEFER: Basic inline execution") {

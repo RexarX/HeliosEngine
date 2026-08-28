@@ -1,5 +1,14 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/type_info.hpp>
 
 #include <concepts>
@@ -8,18 +17,24 @@
 #include <functional>
 #include <string_view>
 #include <type_traits>
+#endif
 
 namespace helios::ecs {
 
 template <typename... Ts>
 struct ComponentBundleTypes;
 
-namespace details {
+}
+
+namespace helios::ecs::details {
 
 template <typename T>
 struct IsComponentBundle : std::false_type {};
 
-}  // namespace details
+}  // namespace helios::ecs::details
+
+HELIOS_MODULE_EXPORT
+namespace helios::ecs {
 
 /// @brief Type index for components.
 using ComponentTypeIndex = utils::TypeIndex;
@@ -264,6 +279,7 @@ private:
 
 }  // namespace helios::ecs
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -275,3 +291,4 @@ struct hash<helios::ecs::ComponentTypeInfo> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

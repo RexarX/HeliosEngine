@@ -1,11 +1,22 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/type_info.hpp>
 
 #include <concepts>
 #include <string_view>
 #include <type_traits>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 class App;
@@ -113,3 +124,4 @@ template <PluginTrait T>
 }
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

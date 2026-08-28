@@ -2,13 +2,13 @@
 
 #include <helios/glfw/systems/init.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/world.hpp>
-#include <helios/glfw/details/glfw_sync.hpp>
+#include <helios/glfw/sync.hpp>
 #include <helios/log/log.hpp>
 
 #include <GLFW/glfw3.h>
+#include <helios/assert.hpp>
 
 namespace helios::glfw {
 

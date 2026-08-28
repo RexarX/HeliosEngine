@@ -3,8 +3,6 @@
 #include <helios/ecs/schedule/run_scope.hpp>
 #include <helios/ecs/schedule/scheduler.hpp>
 
-#include <helios/assert.hpp>
-#include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/schedule/executor/main_thread.hpp>
 #include <helios/ecs/schedule/executor/multi_threaded.hpp>
 #include <helios/ecs/schedule/executor/single_threaded.hpp>
@@ -16,6 +14,8 @@
 #include <cstddef>
 #include <expected>
 #include <format>
+#include <helios/assert.hpp>
+#include <helios/ecs/details/profile.hpp>
 #include <queue>
 #include <ranges>
 #include <unordered_map>

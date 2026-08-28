@@ -2,18 +2,26 @@
 
 #include <helios/sdl3/input/systems/poll_gamepads.hpp>
 
+#include <details/input_map.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/input/gamepad.hpp>
+#include <helios/input/ids.hpp>
 #include <helios/input/joystick.hpp>
+#include <helios/input/params.hpp>
+#include <helios/input/settings.hpp>
 #include <helios/log/log.hpp>
-#include <helios/sdl3/input/details/input_map.hpp>
+#include <helios/sdl3/input/state.hpp>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_gamepad.h>
+#include <SDL3/SDL_guid.h>
+#include <SDL3/SDL_joystick.h>
+#include <SDL3/SDL_sensor.h>
 
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
 #include <optional>
+#include <string>
 #include <utility>
 
 namespace helios::sdl3::input {
@@ -26,44 +34,47 @@ namespace {
   return buffer;
 }
 
-[[nodiscard]] int FindSlotByInstance(const GamepadCache& cache,
-                                     SDL_JoystickID instance_id) noexcept {
+[[nodiscard]] auto FindSlotByInstance(const GamepadCache& cache,
+                                      SDL_JoystickID instance_id) noexcept
+    -> std::optional<helios::input::GamepadId> {
   const auto id = static_cast<uint32_t>(instance_id);
   for (size_t index = 0; index < cache.slots.size(); ++index) {
     const GamepadSlotCache& slot = cache.slots[index];
     if (slot.connected && slot.instance_id == id) {
-      return static_cast<int>(index);
+      return static_cast<helios::input::GamepadId>(index);
     }
   }
-  return -1;
+  return std::nullopt;
 }
 
-[[nodiscard]] int ResolvePlayerSlot(SDL_JoystickID instance_id,
-                                    SDL_Gamepad* gamepad) {
+[[nodiscard]] auto ResolvePlayerSlot(SDL_JoystickID instance_id,
+                                     SDL_Gamepad* gamepad)
+    -> std::optional<helios::input::GamepadId> {
   int player_index = SDL_GetJoystickPlayerIndexForID(instance_id);
   if (player_index < 0 && gamepad != nullptr) {
     player_index = SDL_GetGamepadPlayerIndex(gamepad);
   }
   if (player_index < 0 ||
-      player_index >= static_cast<int>(GamepadCache::kSlotCount)) {
-    return -1;
+      static_cast<size_t>(player_index) >= GamepadCache::kSlotCount) {
+    return std::nullopt;
   }
-  return player_index;
+  return static_cast<helios::input::GamepadId>(player_index);
 }
 
-[[nodiscard]] int AllocateSlot(GamepadCache& cache, SDL_JoystickID instance_id,
-                               SDL_Gamepad* gamepad) {
-  const int existing = FindSlotByInstance(cache, instance_id);
-  if (existing >= 0) {
+[[nodiscard]] auto AllocateSlot(GamepadCache& cache, SDL_JoystickID instance_id,
+                                SDL_Gamepad* gamepad)
+    -> std::optional<helios::input::GamepadId> {
+  auto existing = FindSlotByInstance(cache, instance_id);
+  if (existing) {
     return existing;
   }
 
-  int slot_id = ResolvePlayerSlot(instance_id, gamepad);
-  if (slot_id < 0 || cache.slots[static_cast<size_t>(slot_id)].connected) {
-    slot_id = -1;
+  auto slot_id = ResolvePlayerSlot(instance_id, gamepad);
+  if (!slot_id.has_value() || cache.slots[*slot_id].connected) {
+    slot_id.reset();
     for (size_t free_index = 0; free_index < cache.slots.size(); ++free_index) {
       if (!cache.slots[free_index].connected) {
-        slot_id = static_cast<int>(free_index);
+        slot_id = static_cast<helios::input::GamepadId>(free_index);
         break;
       }
     }
@@ -131,7 +142,7 @@ void CloseSlot(GamepadSlotCache& slot) {
   slot = {};
 }
 
-void EmitGamepadState(int slot_id, GamepadSlotCache& slot,
+void EmitGamepadState(helios::input::GamepadId slot_id, GamepadSlotCache& slot,
                       helios::input::GamepadWriters& writers, bool seed) {
   SDL_Gamepad* gamepad = slot.gamepad;
   if (gamepad == nullptr) {
@@ -180,19 +191,20 @@ void EmitGamepadState(int slot_id, GamepadSlotCache& slot,
   }
 
   const int touchpads = SDL_GetNumGamepadTouchpads(gamepad);
-  if (touchpads > 0) {
-    int fingers = SDL_GetNumGamepadTouchpadFingers(gamepad, 0);
-    slot.touchpad_count =
-        ClampCount(fingers, helios::input::Gamepad::kMaxTouchpadFingers,
-                   "touchpad finger");
-    for (uint8_t finger = 0; finger < slot.touchpad_count; ++finger) {
+  slot.touchpad_count =
+      ClampCount(touchpads, helios::input::Gamepad::kMaxTouchpads, "touchpad");
+  for (uint8_t pad = 0; pad < slot.touchpad_count; ++pad) {
+    const uint8_t fingers = ClampCount(
+        SDL_GetNumGamepadTouchpadFingers(gamepad, pad),
+        helios::input::Gamepad::kMaxTouchpadFingers, "touchpad finger");
+    for (uint8_t finger = 0; finger < fingers; ++finger) {
       bool down = false;
       float x = 0.0F;
       float y = 0.0F;
       float pressure = 0.0F;
-      SDL_GetGamepadTouchpadFinger(gamepad, 0, finger, &down, &x, &y,
+      SDL_GetGamepadTouchpadFinger(gamepad, pad, finger, &down, &x, &y,
                                    &pressure);
-      auto& cached = slot.touchpad[finger];
+      auto& cached = slot.touchpads[pad][finger];
       if (!seed && cached.down == down && cached.x == x && cached.y == y &&
           cached.pressure == pressure) {
         continue;
@@ -203,6 +215,7 @@ void EmitGamepadState(int slot_id, GamepadSlotCache& slot,
           .x = x,
           .y = y,
           .pressure = pressure,
+          .touchpad = pad,
           .finger = finger,
           .down = down,
       });
@@ -210,7 +223,8 @@ void EmitGamepadState(int slot_id, GamepadSlotCache& slot,
   }
 }
 
-void EmitJoystickState(int slot_id, GamepadSlotCache& slot,
+void EmitJoystickState(helios::input::JoystickId slot_id,
+                       GamepadSlotCache& slot,
                        helios::input::JoystickWriters& writers, bool seed) {
   SDL_Joystick* joystick = slot.joystick;
   if (joystick == nullptr) {
@@ -267,7 +281,7 @@ void EmitJoystickState(int slot_id, GamepadSlotCache& slot,
 void OpenDevice(GamepadCache& cache, SDL_JoystickID instance_id,
                 helios::input::GamepadWriters& gamepads,
                 helios::input::JoystickWriters& sticks) {
-  if (FindSlotByInstance(cache, instance_id) >= 0) {
+  if (FindSlotByInstance(cache, instance_id)) {
     return;
   }
 
@@ -277,12 +291,12 @@ void OpenDevice(GamepadCache& cache, SDL_JoystickID instance_id,
     if (opened == nullptr) {
       return;
     }
-    const int slot_id = AllocateSlot(cache, instance_id, opened);
-    if (slot_id < 0) {
+    const auto slot_id = AllocateSlot(cache, instance_id, opened);
+    if (!slot_id) {
       SDL_CloseGamepad(opened);
       return;
     }
-    GamepadSlotCache& slot = cache.slots[static_cast<size_t>(slot_id)];
+    GamepadSlotCache& slot = cache.slots[*slot_id];
     const char* name = SDL_GetGamepadName(opened);
     const char* mapping = SDL_GetGamepadMapping(opened);
     slot = {};
@@ -293,15 +307,15 @@ void OpenDevice(GamepadCache& cache, SDL_JoystickID instance_id,
     slot.connected = true;
     slot.is_gamepad = true;
     gamepads.connection.Write({
-        .id = slot_id,
+        .id = *slot_id,
         .connected = true,
         .name = slot.name,
         .guid = slot.guid,
     });
     if (mapping != nullptr) {
-      gamepads.remapped.Write({.id = slot_id, .mapping = mapping});
+      gamepads.remapped.Write({.id = *slot_id, .mapping = mapping});
     }
-    EmitGamepadState(slot_id, slot, gamepads, true);
+    EmitGamepadState(*slot_id, slot, gamepads, true);
     return;
   }
 
@@ -309,12 +323,12 @@ void OpenDevice(GamepadCache& cache, SDL_JoystickID instance_id,
   if (opened == nullptr) {
     return;
   }
-  const int slot_id = AllocateSlot(cache, instance_id, nullptr);
-  if (slot_id < 0) {
+  const auto slot_id = AllocateSlot(cache, instance_id, nullptr);
+  if (!slot_id) {
     SDL_CloseJoystick(opened);
     return;
   }
-  GamepadSlotCache& slot = cache.slots[static_cast<size_t>(slot_id)];
+  GamepadSlotCache& slot = cache.slots[*slot_id];
   const char* name = SDL_GetJoystickName(opened);
   slot = {};
   slot.name = name != nullptr ? name : "";
@@ -323,11 +337,11 @@ void OpenDevice(GamepadCache& cache, SDL_JoystickID instance_id,
   slot.instance_id = static_cast<uint32_t>(instance_id);
   slot.connected = true;
   slot.is_gamepad = false;
-  EmitJoystickState(slot_id, slot, sticks, true);
+  EmitJoystickState(*slot_id, slot, sticks, true);
   sticks.connection.Write({
       .name = slot.name,
       .guid = slot.guid,
-      .id = slot_id,
+      .id = *slot_id,
       .axis_count = slot.joy_axis_count,
       .button_count = slot.joy_button_count,
       .hat_count = slot.joy_hat_count,
@@ -338,14 +352,15 @@ void OpenDevice(GamepadCache& cache, SDL_JoystickID instance_id,
 void RemoveDevice(GamepadCache& cache, SDL_JoystickID instance_id,
                   helios::input::GamepadWriters& gamepads,
                   helios::input::JoystickWriters& sticks) {
-  const int slot_id = FindSlotByInstance(cache, instance_id);
-  if (slot_id < 0) {
+  const auto slot_id = FindSlotByInstance(cache, instance_id);
+  if (!slot_id) {
     return;
   }
-  GamepadSlotCache& slot = cache.slots[static_cast<size_t>(slot_id)];
+
+  GamepadSlotCache& slot = cache.slots[*slot_id];
   if (slot.is_gamepad) {
     gamepads.connection.Write({
-        .id = slot_id,
+        .id = *slot_id,
         .connected = false,
         .name = std::move(slot.name),
         .guid = std::move(slot.guid),
@@ -354,7 +369,7 @@ void RemoveDevice(GamepadCache& cache, SDL_JoystickID instance_id,
     sticks.connection.Write({
         .name = std::move(slot.name),
         .guid = std::move(slot.guid),
-        .id = slot_id,
+        .id = *slot_id,
         .connected = false,
     });
   }
@@ -364,13 +379,13 @@ void RemoveDevice(GamepadCache& cache, SDL_JoystickID instance_id,
 void RemapDevice(GamepadCache& cache, SDL_JoystickID instance_id,
                  helios::input::GamepadWriters& gamepads,
                  helios::input::JoystickWriters& sticks) {
-  const int slot_id = FindSlotByInstance(cache, instance_id);
-  if (slot_id < 0) {
+  const auto slot_id = FindSlotByInstance(cache, instance_id);
+  if (!slot_id) {
     OpenDevice(cache, instance_id, gamepads, sticks);
     return;
   }
 
-  GamepadSlotCache& slot = cache.slots[static_cast<size_t>(slot_id)];
+  GamepadSlotCache& slot = cache.slots[*slot_id];
   const bool mapped = SDL_IsGamepad(instance_id);
   if (mapped && !slot.is_gamepad) {
     RemoveDevice(cache, instance_id, gamepads, sticks);
@@ -385,10 +400,10 @@ void RemapDevice(GamepadCache& cache, SDL_JoystickID instance_id,
   if (mapped && slot.gamepad != nullptr) {
     const char* mapping = SDL_GetGamepadMapping(slot.gamepad);
     gamepads.remapped.Write({
-        .id = slot_id,
+        .id = *slot_id,
         .mapping = mapping != nullptr ? mapping : "",
     });
-    EmitGamepadState(slot_id, slot, gamepads, true);
+    EmitGamepadState(*slot_id, slot, gamepads, true);
   }
 }
 
@@ -470,7 +485,7 @@ void PollGamepads::operator()(ecs::Res<const Context> context,
     if (!slot.connected) {
       continue;
     }
-    const int slot_id = static_cast<int>(slot_index);
+    const auto slot_id = static_cast<helios::input::GamepadId>(slot_index);
     if (slot.is_gamepad) {
       EmitGamepadState(slot_id, slot, gamepads, false);
     } else {

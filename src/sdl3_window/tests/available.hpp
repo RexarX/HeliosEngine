@@ -1,7 +1,7 @@
 #pragma once
 
 #include <helios/app/application.hpp>
-#include <helios/sdl3/details/lifetime.hpp>
+#include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/plugin.hpp>
 #include <helios/sdl3/window/plugin.hpp>
 
@@ -13,17 +13,17 @@ namespace helios::sdl3::window::test {
 
 [[nodiscard]] inline bool SdlVideoAvailable() {
   static const bool available = []() -> bool {
-    return helios::sdl3::Probe(SDL_INIT_VIDEO);
+    return sdl3::Probe(SDL_INIT_VIDEO);
   }();
   return available;
 }
 
 struct ScopedShutdown {
-  helios::app::App& app;
+  app::App& app;
 
   ~ScopedShutdown() {
-    helios::sdl3::window::Plugin{}.Destroy(app);
-    helios::sdl3::Plugin{}.Destroy(app);
+    Plugin{}.Destroy(app);
+    sdl3::Plugin{}.Destroy(app);
   }
 };
 

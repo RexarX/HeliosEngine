@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.container;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <algorithm>
 #include <array>
 #include <compare>
@@ -17,7 +24,10 @@
 #include <ranges>
 #include <string>
 #include <string_view>
+#endif
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::container {
 
 /**
@@ -1793,6 +1803,7 @@ inline auto operator>>(std::basic_istream<CharT, Traits>& is,
 
 }  // namespace helios::container
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 /**
@@ -1822,8 +1833,8 @@ template <size_t StrCapacity, typename CharT, typename Traits>
 struct formatter<
     helios::container::BasicStaticString<StrCapacity, CharT, Traits>>
     : formatter<basic_string_view<CharT, Traits>> {
-  /// @brief Format the BasicStaticString by delegating to
-  /// `std::basic_string_view` formatter.
+  // Format the BasicStaticString by delegating to `std::basic_string_view`
+  // formatter.
   auto format(const helios::container::BasicStaticString<StrCapacity, CharT,
                                                          Traits>& str,
               format_context& ctx) const {
@@ -1832,3 +1843,4 @@ struct formatter<
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

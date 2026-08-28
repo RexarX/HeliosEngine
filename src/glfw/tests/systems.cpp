@@ -1,9 +1,10 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/app/app.hpp>
 #include <helios/app/application.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
 #include <helios/glfw/glfw.hpp>
+#include <helios/glfw/state.hpp>
 #include <helios/glfw/systems/apply.hpp>
 #include <helios/glfw/systems/destroy.hpp>
 #include <helios/window/window.hpp>
@@ -15,7 +16,7 @@
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/system/param.hpp>
 #include <helios/ecs/system/param_policy.hpp>
-#include <helios/glfw/details/glfw_sync.hpp>
+#include <helios/glfw/sync.hpp>
 #include <helios/glfw/systems/input.hpp>
 #include <helios/input/input.hpp>
 #endif
@@ -581,4 +582,5 @@ TEST_SUITE("helios::glfw::ApplyGamepadOutputs") {
     }
   }
 }
+#endif
 #endif

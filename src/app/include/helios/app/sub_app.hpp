@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/app/schedules.hpp>
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
@@ -25,13 +32,18 @@
 #include <string_view>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/app/schedules.hpp>
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 class Executor;
 
 }
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 class App;
@@ -725,3 +737,4 @@ inline void SubApp::SetUpdateStage(const T& stage) noexcept {
 }
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

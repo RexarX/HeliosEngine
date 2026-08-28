@@ -1,16 +1,27 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <helios/memory/arena_allocator.hpp>
+
+#include <cstddef>
+#include <memory>
+#endif
 #include <helios/ecs/command/queue.hpp>
 #include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/message/consumed_registry.hpp>
 #include <helios/ecs/message/queue.hpp>
 #include <helios/ecs/resource/manager.hpp>
 #include <helios/ecs/resource/resource.hpp>
-#include <helios/memory/arena_allocator.hpp>
 
-#include <cstddef>
-#include <memory>
-
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class World;
@@ -146,3 +157,4 @@ private:
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -4,9 +4,11 @@
 
 #include <helios/assert.hpp>
 #include <helios/ecs/resource/params.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
-#include <helios/glfw/details/glfw_sync.hpp>
-#include <helios/window/resources.hpp>
+#include <helios/glfw/state.hpp>
+#include <helios/glfw/sync.hpp>
+#include <helios/window/clipboard.hpp>
+#include <helios/window/monitor.hpp>
+#include <helios/window/settings.hpp>
 
 #include <GLFW/glfw3.h>
 

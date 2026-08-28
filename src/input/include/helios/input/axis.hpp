@@ -1,6 +1,14 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/memory/temporary_storage.hpp>
 
 #include <algorithm>
@@ -15,7 +23,10 @@
 #include <string>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /**
@@ -112,7 +123,8 @@ constexpr void Axis<T>::SetWithDeadzone(T axis, float value,
 template <AxisTrait T>
 constexpr size_t Axis<T>::Index(T axis) noexcept {
   const auto underlying = std::to_underlying(axis);
-  HELIOS_ASSERT(underlying < std::to_underlying(T::kCount));
+  HELIOS_ASSERT(underlying < std::to_underlying(T::kCount),
+                "axis index out of range!");
   return static_cast<size_t>(underlying);
 }
 
@@ -284,6 +296,7 @@ inline std::ostream& operator<<(std::ostream& os, const AxisFilter& filter) {
 
 }  // namespace helios::input
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -299,3 +312,4 @@ struct formatter<helios::input::AxisFilter> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/container/details/callable_buffer_common.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.container;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <concepts>
 #include <cstddef>
 #include <cstdint>
@@ -14,7 +21,10 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/container/details/callable_buffer_common.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::container {
 
 /**
@@ -765,3 +775,4 @@ inline void* CallableBufferArray<Signatures...>::GetDataPtr(
 }
 
 }  // namespace helios::container
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

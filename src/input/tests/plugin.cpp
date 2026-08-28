@@ -1,7 +1,14 @@
 #include <doctest/doctest.h>
 
 #include <helios/app/app.hpp>
-#include <helios/input/input.hpp>
+#include <helios/input/gamepad.hpp>
+#include <helios/input/joystick.hpp>
+#include <helios/input/keyboard.hpp>
+#include <helios/input/mouse.hpp>
+#include <helios/input/pen.hpp>
+#include <helios/input/plugin.hpp>
+#include <helios/input/sensor.hpp>
+#include <helios/input/touch.hpp>
 
 using namespace helios;
 using namespace helios::input;
@@ -10,22 +17,22 @@ TEST_SUITE("helios::input::Plugin") {
   TEST_CASE("helios::input::Plugin::ctor") {
     SUBCASE("Default settings use stick and trigger filters") {
       const Plugin plugin;
-      CHECK_EQ(plugin.settings_.stick.deadzone,
+      CHECK_EQ(plugin.settings.stick.deadzone,
                doctest::Approx(AxisFilter::kDefaultDeadzone));
-      CHECK_EQ(plugin.settings_.trigger.deadzone,
+      CHECK_EQ(plugin.settings.trigger.deadzone,
                doctest::Approx(AxisFilter::kDefaultTriggerDeadzone));
-      CHECK_EQ(plugin.settings_.rest_frames, Settings::kDefaultRestFrames);
-      CHECK(plugin.settings_.auto_calibrate);
-      CHECK_FALSE(plugin.settings_.raw_mouse_motion);
+      CHECK_EQ(plugin.settings.rest_frames, Settings::kDefaultRestFrames);
+      CHECK(plugin.settings.auto_calibrate);
+      CHECK_FALSE(plugin.settings.raw_mouse_motion);
     }
 
     SUBCASE("Stores constructor-provided settings") {
       const Plugin plugin{{.stick = {.deadzone = 0.25F},
                            .auto_calibrate = false,
                            .raw_mouse_motion = true}};
-      CHECK_EQ(plugin.settings_.stick.deadzone, doctest::Approx(0.25F));
-      CHECK_FALSE(plugin.settings_.auto_calibrate);
-      CHECK(plugin.settings_.raw_mouse_motion);
+      CHECK_EQ(plugin.settings.stick.deadzone, doctest::Approx(0.25F));
+      CHECK_FALSE(plugin.settings.auto_calibrate);
+      CHECK(plugin.settings.raw_mouse_motion);
     }
   }
 
@@ -41,14 +48,20 @@ TEST_SUITE("helios::input::Plugin") {
       CHECK(app.GetWorld().HasResource<Gamepads>());
       CHECK(app.GetWorld().HasResource<Joysticks>());
       CHECK(app.GetWorld().HasResource<Pens>());
+      CHECK(app.GetWorld().HasResource<Touches>());
+      CHECK(app.GetWorld().HasResource<Sensors>());
       CHECK(app.GetWorld().HasResource<GamepadMappings>());
 
       CHECK(app.GetWorld().HasMessage<KeyboardInputMsg>());
       CHECK(app.GetWorld().HasMessage<TextInputMsg>());
+      CHECK(app.GetWorld().HasMessage<TextEditingMsg>());
+      CHECK(app.GetWorld().HasMessage<TextEditingCandidatesMsg>());
+      CHECK(app.GetWorld().HasMessage<KeyboardConnectionMsg>());
       CHECK(app.GetWorld().HasMessage<MouseButtonInputMsg>());
       CHECK(app.GetWorld().HasMessage<CursorMovedMsg>());
       CHECK(app.GetWorld().HasMessage<MouseMotionMsg>());
       CHECK(app.GetWorld().HasMessage<MouseWheelMsg>());
+      CHECK(app.GetWorld().HasMessage<MouseConnectionMsg>());
       CHECK(app.GetWorld().HasMessage<GamepadConnectionMsg>());
       CHECK(app.GetWorld().HasMessage<GamepadButtonInputMsg>());
       CHECK(app.GetWorld().HasMessage<GamepadAxisChangedMsg>());
@@ -65,6 +78,9 @@ TEST_SUITE("helios::input::Plugin") {
       CHECK(app.GetWorld().HasMessage<PenButtonInputMsg>());
       CHECK(app.GetWorld().HasMessage<PenMovedMsg>());
       CHECK(app.GetWorld().HasMessage<PenAxisChangedMsg>());
+      CHECK(app.GetWorld().HasMessage<TouchInputMsg>());
+      CHECK(app.GetWorld().HasMessage<SensorConnectionMsg>());
+      CHECK(app.GetWorld().HasMessage<SensorUpdateMsg>());
     }
 
     SUBCASE("Inserts constructor-provided settings") {

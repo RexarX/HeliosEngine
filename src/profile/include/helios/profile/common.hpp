@@ -1,9 +1,20 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.profile;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <cstdint>
 #include <source_location>
 #include <string_view>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::profile {
 
 /// @brief Plot value format for timeline plots.
@@ -30,3 +41,4 @@ struct ZoneSpec {
 };
 
 }  // namespace helios::profile
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

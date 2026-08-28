@@ -1,11 +1,21 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <algorithm>
 #include <cstddef>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 inline thread_local std::vector<size_t> g_active_schedule_stack;
@@ -56,3 +66,4 @@ inline bool ScheduleRunScope::IsActive(size_t schedule_hash) noexcept {
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

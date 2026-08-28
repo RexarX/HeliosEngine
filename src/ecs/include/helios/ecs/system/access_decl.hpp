@@ -1,11 +1,22 @@
 #pragma once
 
-#include <helios/ecs/component/component.hpp>
-#include <helios/ecs/system/param.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/utils/common_traits.hpp>
 
 #include <type_traits>
+#endif
+#include <helios/ecs/component/component.hpp>
+#include <helios/ecs/system/param.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class AccessPolicyBuilder;
@@ -54,3 +65,4 @@ constexpr void DeclareQueryAccess(AccessPolicyBuilder& builder) {
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

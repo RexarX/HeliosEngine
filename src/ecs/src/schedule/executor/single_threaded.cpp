@@ -2,15 +2,15 @@
 
 #include <helios/ecs/schedule/executor/single_threaded.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/async/executor.hpp>
 #include <helios/async/future.hpp>
-#include <helios/ecs/details/profile.hpp>
 #include <helios/ecs/schedule/run_condition.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
 
 #include <chrono>
 #include <cstddef>
+#include <helios/assert.hpp>
+#include <helios/ecs/details/profile.hpp>
 
 namespace helios::ecs {
 

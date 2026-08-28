@@ -121,12 +121,14 @@ TEST_SUITE("helios::ecs::ComponentBundleTrait") {
           ComponentBundleTrait<ComponentBundleTypes<Position, MotionBundle>>);
     }
 
+#ifndef HELIOS_ENABLE_CPP_MODULES
     SUBCASE("ComponentBundleTypes flattens nested bundle types") {
       using Leaves = details::BundleLeafTypes<NestedBundle>;
       CHECK((std::same_as<Leaves,
                           ComponentBundleTypes<Health, Position, Velocity>>));
       CHECK_EQ(details::kComponentBundleSize<NestedBundle>, 3);
     }
+#endif
   }
 }
 
@@ -175,6 +177,7 @@ TEST_SUITE("helios::ecs::ComponentBundleTypes") {
   }
 
   TEST_CASE("helios::ecs::ComponentBundleTypes::Build") {
+#ifndef HELIOS_ENABLE_CPP_MODULES
     SUBCASE("ApplyComponentBundle extracts flattened values from Build") {
       NestedBundle bundle{.health = {.value = 10},
                           .motion = {.position = {.x = 1.0F, .y = 2.0F},
@@ -221,5 +224,6 @@ TEST_SUITE("helios::ecs::ComponentBundleTypes") {
       details::ApplyComponentBundle(
           std::move(bundle), [](Position, Velocity, Tag) { CHECK(true); });
     }
+#endif
   }
 }

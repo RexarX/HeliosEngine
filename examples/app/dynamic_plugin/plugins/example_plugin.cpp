@@ -1,11 +1,11 @@
 #include "shared/plugin_types.hpp"
 
+#include <string_view>
+
 #include <helios/app/app.hpp>
 #include <helios/ecs/ecs.hpp>
 #include <helios/log/log.hpp>
 #include <helios/platform/platform.hpp>
-
-#include <string_view>
 
 namespace happ = helios::app;
 namespace hlog = helios::log;
@@ -34,17 +34,18 @@ struct ExampleDynamicPlugin final : public happ::Plugin {
 
 }  // namespace example_plugins
 
+HELIOS_EXPORT
 extern "C" {
 
 // Dynamic plugins expose a small C ABI. The host looks up this symbol and takes
 // ownership of the returned Plugin pointer.
-HELIOS_EXPORT happ::Plugin* helios_create_plugin() {
+happ::Plugin* helios_create_plugin() {
   return new example_plugins::ExampleDynamicPlugin();
 }
 
 // The type export lets the host identify this plugin without relying on C++
 // RTTI across the shared-library boundary.
-HELIOS_EXPORT const happ::PluginTypeExport* helios_plugin_type_id() {
+const happ::PluginTypeExport* helios_plugin_type_id() {
   static const auto kExport =
       happ::PluginTypeExport::From<example_plugins::ExampleDynamicPlugin>();
   return &kExport;

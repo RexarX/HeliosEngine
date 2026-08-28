@@ -1,6 +1,7 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
-#include <helios/glfw/details/native_handle.hpp>
+#include <helios/glfw/native_handle.hpp>
 #include <helios/window/native_handle.hpp>
 
 #include "available.hpp"
@@ -55,3 +56,4 @@ TEST_SUITE("helios::glfw::QueryNativeHandle") {
     }
   }
 }
+#endif

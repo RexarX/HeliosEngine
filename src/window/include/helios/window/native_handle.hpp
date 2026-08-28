@@ -1,14 +1,28 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.window;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <helios/ecs/component/component.hpp>
 #include <helios/memory/temporary_storage.hpp>
 
 #include <format>
 #include <iterator>
 #include <ostream>
 #include <string>
+#include <string_view>
 #include <type_traits>
 #include <variant>
+#endif
+#include <helios/window/ids.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::window {
 
 #ifdef HELIOS_PLATFORM_WINDOWS
@@ -23,7 +37,7 @@ struct Win32Handle {
 /// @brief X11 native window handle.
 struct XlibHandle {
   void* display = nullptr;
-  unsigned long window = 0;
+  NativeXWindowId window = 0;
 };
 #endif
 
@@ -43,10 +57,12 @@ struct CocoaHandle {
 };
 #endif
 
-/// @brief Backend-agnostic native window handle.
-/// @details Populated by whichever window backend plugin is active
-/// (`glfw`, future `window_win32`, ...). `std::monostate` means no
-/// native handle has been created yet.
+/**
+ * @brief Backend-agnostic native window handle.
+ * @details Populated by whichever window backend plugin is active.
+ * Contains possible win32, x11, wayland, cocoa handles; `std::monostate` means
+ * no native handle has been created yet.
+ */
 using NativeHandle = std::variant<std::monostate
 #ifdef HELIOS_PLATFORM_WINDOWS
                                   ,
@@ -65,6 +81,15 @@ using NativeHandle = std::variant<std::monostate
                                   CocoaHandle
 #endif
                                   >;
+
+/// @brief Sparse-set component holding the native handle for a window entity.
+struct NativeHandleComponent {
+  static constexpr std::string_view kName =
+      "helios::window::NativeHandleComponent";
+  static constexpr auto kStorageType = ecs::ComponentStorageType::kArchetype;
+
+  NativeHandle handle;
+};
 
 #ifdef HELIOS_PLATFORM_WINDOWS
 /**
@@ -342,8 +367,65 @@ inline std::ostream& operator<<(std::ostream& os, const NativeHandle& handle) {
   return os;
 }
 
+/**
+ * @brief Formats a native handle component using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param component Native handle component
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const NativeHandleComponent& component) {
+  out = std::format_to(out, "NativeHandleComponent{{handle=");
+  out = ToString(out, component.handle);
+  return std::format_to(out, "}}");
+}
+
+/**
+ * @brief Formats a native handle component as a string.
+ * @param component Native handle component
+ * @return Formatted native handle component string
+ */
+[[nodiscard]] inline std::string ToString(
+    const NativeHandleComponent& component) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), component);
+  return result;
+}
+
+/**
+ * @brief Formats a native handle component as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param component NativeHandleComponent
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const NativeHandleComponent& component) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), component);
+  return result;
+}
+
+/**
+ * @brief Outputs a native handle component to an output stream.
+ * @param os Output stream
+ * @param component Native handle component
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const NativeHandleComponent& component) {
+  ToString(std::ostreambuf_iterator<char>(os), component);
+  return os;
+}
+
 }  // namespace helios::window
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 #ifdef HELIOS_PLATFORM_WINDOWS
@@ -410,4 +492,17 @@ struct formatter<helios::window::NativeHandle> {
   }
 };
 
+template <>
+struct formatter<helios::window::NativeHandleComponent> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::window::NativeHandleComponent& component,
+                     format_context& ctx) {
+    return helios::window::ToString(ctx.out(), component);
+  }
+};
+
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

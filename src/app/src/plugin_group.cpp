@@ -1,8 +1,10 @@
 #include <pch.hpp>
 
-#include <helios/app/application.hpp>
-#include <helios/assert.hpp>
+#include <helios/app/plugin_group.hpp>
 
+#include <helios/app/application.hpp>
+
+#include <helios/assert.hpp>
 #include <ranges>
 #include <utility>
 

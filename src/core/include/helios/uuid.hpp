@@ -1,5 +1,11 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if defined(HELIOS_ENABLE_CPP_MODULES) && defined(HELIOS_BUILDING_MODULE) && \
+    !defined(HELIOS_BUILDING_MODULE_CORE)
+#else
+#ifndef HELIOS_BUILDING_MODULE
 #include <uuid.h>
 
 #include <algorithm>
@@ -12,7 +18,9 @@
 #include <span>
 #include <string>
 #include <string_view>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios {
 
 /// @brief A class representing a universally unique identifier (UUID).
@@ -208,6 +216,7 @@ inline Uuid UuidGenerator::Generate() {
 
 }  // namespace helios
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -218,3 +227,4 @@ struct hash<helios::Uuid> {
 };
 
 }  // namespace std
+#endif

@@ -1,13 +1,23 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <bitset>
 #include <concepts>
 #include <cstddef>
 #include <type_traits>
 #include <utility>
+#endif
+#include <helios/assert.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /**
@@ -144,7 +154,8 @@ constexpr void ButtonInput<T>::Reset() noexcept {
 template <ButtonTrait T>
 constexpr size_t ButtonInput<T>::Index(T button) noexcept {
   const auto underlying = std::to_underlying(button);
-  HELIOS_ASSERT(underlying < std::to_underlying(T::kCount));
+  HELIOS_ASSERT(underlying < std::to_underlying(T::kCount),
+                "button index out of range!");
   return static_cast<size_t>(underlying);
 }
 
@@ -263,8 +274,9 @@ constexpr void IndexedButtonInput<N>::Reset() noexcept {
 
 template <size_t N>
 constexpr size_t IndexedButtonInput<N>::CheckIndex(size_t index) noexcept {
-  HELIOS_ASSERT(index < N);
+  HELIOS_ASSERT(index < N, "button index out of range!");
   return index;
 }
 
 }  // namespace helios::input
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

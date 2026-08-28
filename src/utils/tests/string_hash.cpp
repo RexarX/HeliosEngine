@@ -1,11 +1,11 @@
-#include <doctest/doctest.h>
-
-#include <helios/utils/string_hash.hpp>
-
 #include <algorithm>
 #include <string>
 #include <string_view>
 #include <unordered_map>
+
+#include <doctest/doctest.h>
+
+#include <helios/utils/string_hash.hpp>
 
 using namespace helios::utils;
 

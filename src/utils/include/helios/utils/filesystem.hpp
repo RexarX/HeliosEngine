@@ -1,5 +1,14 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.utils;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <cstddef>
 #include <cstdint>
 #include <expected>
@@ -8,7 +17,9 @@
 #include <ios>
 #include <string>
 #include <string_view>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios::utils {
 
 enum class FileError : uint8_t { kCouldNotOpen, kReadError };
@@ -126,3 +137,4 @@ enum class FileError : uint8_t { kCouldNotOpen, kReadError };
 }
 
 }  // namespace helios::utils
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

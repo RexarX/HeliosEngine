@@ -1,7 +1,14 @@
 #pragma once
 
-#include <helios/utils/hash.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.utils;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <algorithm>
 #include <compare>
 #include <cstddef>
@@ -9,6 +16,8 @@
 #include <functional>
 #include <string_view>
 #include <type_traits>
+#endif
+#include <helios/utils/hash.hpp>
 
 // C++26 reflection support detection.
 // __cpp_impl_reflection guards the language feature (^^ operator),
@@ -16,15 +25,15 @@
 // Both must be present and the library version must meet the minimum revision.
 #if defined(__cpp_impl_reflection) && defined(__cpp_lib_reflection) && \
     __cpp_lib_reflection >= 202406L
+#ifndef HELIOS_BUILDING_MODULE
 #include <meta>
+#endif
 #define HELIOS_HAS_REFLECTION 1
 #else
 #define HELIOS_HAS_REFLECTION 0
 #endif
 
-namespace helios::utils {
-
-namespace details {
+namespace helios::utils::details {
 
 /**
  * @brief Extracts a template argument fragment from a compiler signature.
@@ -275,7 +284,9 @@ template <typename T>
  */
 template <typename T>
 [[nodiscard]] constexpr std::string_view GetFullTypeName() noexcept {
-  return ExtractTypeName<T>();
+  // Copy out of `__FUNCSIG__` so `.data()` is a C string. Dynamic plugins
+  // store only the pointer (`PluginTypeExport::qualified_name`).
+  return kTypeNameStorage<T>;
 }
 
 /**
@@ -325,15 +336,14 @@ template <typename T>
   return std::meta::is_class(^^T) && !std::meta::has_identifier(^^T);
 #elif defined(__clang__)
   // clang-cl also defines _MSC_VER; Clang pretty-prints "(lambda at ...)".
-  constexpr auto name = GetUnqualifiedTypeName<T>();
-  return name.find("(lambda at") != std::string_view::npos;
+  constexpr auto name = ExtractTypeName<T>();
+  return name.contains("(lambda at");
 #elif defined(_MSC_VER)
-  constexpr auto name = GetUnqualifiedTypeName<T>();
-  return name.find("<lambda_") != std::string_view::npos;
+  constexpr auto name = ExtractTypeName<T>();
+  return name.contains("<lambda_");
 #elif defined(__GNUC__)
-  constexpr auto name = GetUnqualifiedTypeName<T>();
-  return name.find("<lambda(") != std::string_view::npos ||
-         name.find("<lambda>") != std::string_view::npos;
+  constexpr auto name = ExtractTypeName<T>();
+  return name.contains("<lambda(") || name.contains("<lambda>");
 #else
   return false;
 #endif
@@ -351,7 +361,10 @@ template <typename T>
   return std::is_class_v<T> && !IsLambdaType<T>();
 }
 
-}  // namespace details
+}  // namespace helios::utils::details
+
+HELIOS_MODULE_EXPORT
+namespace helios::utils {
 
 class TypeId;
 
@@ -634,6 +647,7 @@ template <auto Fn>
 
 }  // namespace helios::utils
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -653,3 +667,4 @@ struct hash<helios::utils::TypeIndex> {
 };
 
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

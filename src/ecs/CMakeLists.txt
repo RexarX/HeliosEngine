@@ -32,8 +32,8 @@ helios_module(
         include/helios/ecs/message/reader.hpp
         include/helios/ecs/message/wrapper.hpp
         include/helios/ecs/message/writer.hpp
-        include/helios/ecs/query/details/query_args.hpp
         include/helios/ecs/query/details/traits.hpp
+        include/helios/ecs/query/args.hpp
         include/helios/ecs/query/iterator.hpp
         include/helios/ecs/query/params.hpp
         include/helios/ecs/query/query.hpp
@@ -86,6 +86,9 @@ helios_module(
         src/schedule/system_local_data.cpp
         src/world.cpp
 
+    MODULE_SOURCES
+        modules/helios.ecs.cppm
+
     PCH src/pch.hpp
 
     DEPENDS
@@ -134,7 +137,7 @@ helios_module(
         tests/message/wrapper.cpp
         tests/message/writer.cpp
         tests/query/details/traits.cpp
-        tests/query/details/query_args.cpp
+        tests/query/args.cpp
         tests/query/iterator.cpp
         tests/query/params.cpp
         tests/query/query.cpp
@@ -163,6 +166,7 @@ helios_module(
         tests/builtin_commands.cpp
         tests/builtin_messages.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/world.cpp
         tests/world_view.cpp
 )

@@ -1,12 +1,15 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/container/multi_type_map.hpp>
-#include <helios/ecs/details/profile.hpp>
-#include <helios/ecs/message/async_queue.hpp>
-#include <helios/ecs/message/id.hpp>
-#include <helios/ecs/message/message.hpp>
-#include <helios/ecs/message/queue.hpp>
 
 #include <algorithm>
 #include <array>
@@ -19,7 +22,15 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
+#include <helios/ecs/details/profile.hpp>
+#include <helios/ecs/message/async_queue.hpp>
+#include <helios/ecs/message/id.hpp>
+#include <helios/ecs/message/message.hpp>
+#include <helios/ecs/message/queue.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class ConsumedMessagesRegistry;
@@ -611,3 +622,4 @@ inline auto MessageManager::UnreadCount(
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

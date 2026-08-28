@@ -2,14 +2,14 @@
 
 #include <helios/memory/fixed_pool_allocator.hpp>
 
-#include <helios/assert.hpp>
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
-#include <helios/memory/details/profile.hpp>
 
 #include <algorithm>
 #include <atomic>
 #include <cstddef>
+#include <helios/assert.hpp>
+#include <helios/memory/details/profile.hpp>
 #include <utility>
 
 namespace helios::mem {

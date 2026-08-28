@@ -1,5 +1,13 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.memory;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/allocator_traits.hpp>
 #include <helios/memory/arena_allocator.hpp>
@@ -16,3 +24,4 @@
 #include <helios/memory/temporary_storage.hpp>
 #include <helios/memory/temporary_storage_helpers.hpp>
 #include <helios/memory/treiber_stack.hpp>
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

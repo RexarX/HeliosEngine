@@ -5,7 +5,9 @@
 #define HELIOS_ENABLE_PROFILE
 
 #include <helios/profile/macros.hpp>
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <helios/profile/tracy/lock.hpp>
+#endif
 
 #define HELIOS_APP_PROFILE_SCOPE() HELIOS_PROFILE_SCOPE()
 #define HELIOS_APP_PROFILE_SCOPE_N(name) HELIOS_PROFILE_SCOPE_N(name)

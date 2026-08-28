@@ -1,7 +1,16 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
 #include <helios/ecs/schedule/executor/executor.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /// @brief Main-thread executor that runs systems sequentially on the calling
@@ -23,3 +32,4 @@ public:
 };
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

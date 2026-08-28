@@ -3,7 +3,6 @@
 #include <helios/app/application.hpp>
 
 #include <helios/app/builtin/app_exit.hpp>
-#include <helios/app/details/profile.hpp>
 #include <helios/app/plugin.hpp>
 #include <helios/app/plugin_group.hpp>
 #include <helios/app/runners.hpp>
@@ -22,6 +21,8 @@
 #include <atomic>
 #include <chrono>
 #include <cstddef>
+#include <helios/app/details/profile.hpp>
+#include <helios/assert.hpp>
 #include <memory>
 #include <mutex>
 #include <string>

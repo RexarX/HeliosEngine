@@ -1,7 +1,8 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/ecs/entity/entity.hpp>
-#include <helios/sdl3/window/details/window_map.hpp>
+#include <helios/sdl3/window/window_map.hpp>
 
 #include <SDL3/SDL_video.h>
 
@@ -108,3 +109,4 @@ TEST_SUITE("helios::sdl3::window::WindowMap") {
     }
   }
 }
+#endif

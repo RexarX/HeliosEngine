@@ -1,3 +1,4 @@
+#ifndef HELIOS_ENABLE_CPP_MODULES
 #include <doctest/doctest.h>
 
 #include <helios/ecs/query/details/traits.hpp>
@@ -422,3 +423,4 @@ TEST_SUITE("helios::ecs::details::UniqueComponentAccess") {
     }
   }
 }
+#endif

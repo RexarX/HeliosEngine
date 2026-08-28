@@ -19,6 +19,7 @@ include_guard(GLOBAL)
 
 include(TargetUtils)
 include(Sanitizers)
+include(CppModules)
 
 # ============================================================================
 # Global State
@@ -301,6 +302,13 @@ function(helios_add_test_executable)
 
   if(TARGET helios::module::${TEST_MODULE})
     target_link_libraries(${TEST_NAME} PRIVATE helios::module::${TEST_MODULE})
+    helios_target_consume_cxx_modules(${TEST_NAME})
+    foreach(_src IN LISTS TEST_SOURCES)
+      get_filename_component(_src_name "${_src}" NAME)
+      if(_src_name STREQUAL "module_import.cpp")
+        helios_source_scan_for_cxx_modules(${TEST_NAME} "${_src}")
+      endif()
+    endforeach()
   endif()
 
   if(TEST_DEPENDENCIES)

@@ -1,9 +1,16 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/container/multi_type_map.hpp>
 #include <helios/container/typed_buffer.hpp>
-#include <helios/ecs/resource/resource.hpp>
 #include <helios/utils/common_traits.hpp>
 
 #include <array>
@@ -11,7 +18,11 @@
 #include <cstddef>
 #include <memory_resource>
 #include <type_traits>
+#endif
+#include <helios/assert.hpp>
+#include <helios/ecs/resource/resource.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -280,3 +291,4 @@ constexpr const T* ResourceManager::TryGet() const noexcept {
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

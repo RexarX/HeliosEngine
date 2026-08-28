@@ -1,5 +1,11 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if defined(HELIOS_ENABLE_CPP_MODULES) && defined(HELIOS_BUILDING_MODULE) && \
+    !defined(HELIOS_BUILDING_MODULE_CORE)
+#else
+#ifndef HELIOS_BUILDING_MODULE
 #include <cstddef>
 #include <cstdint>
 #include <source_location>
@@ -8,7 +14,9 @@
 #include <string_view>
 #include <utility>
 #include <vector>
+#endif
 
+HELIOS_MODULE_EXPORT
 namespace helios {
 
 /// @brief Configuration for stacktrace capture and formatting.
@@ -134,3 +142,4 @@ private:
 };
 
 }  // namespace helios
+#endif

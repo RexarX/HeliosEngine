@@ -1,17 +1,17 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/ecs/details/profile.hpp>
-#include <helios/ecs/schedule/executor/executor.hpp>
-#include <helios/ecs/schedule/run_stage_options.hpp>
-#include <helios/ecs/schedule/schedule.hpp>
-#include <helios/ecs/schedule/stage.hpp>
-#include <helios/ecs/schedule/stage_settings.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #if defined(HELIOS_ECS_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
 #include <helios/memory/temporary_storage_helpers.hpp>
-#endif
 
 #include <algorithm>
 #include <cstddef>
@@ -22,13 +22,24 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#endif
+#endif
+#include <helios/assert.hpp>
+#include <helios/ecs/details/profile.hpp>
+#include <helios/ecs/schedule/executor/executor.hpp>
+#include <helios/ecs/schedule/run_stage_options.hpp>
+#include <helios/ecs/schedule/schedule.hpp>
+#include <helios/ecs/schedule/stage.hpp>
+#include <helios/ecs/schedule/stage_settings.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 class Executor;
 
 }
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 class Scheduler;
@@ -496,3 +507,4 @@ inline auto ScheduleOrdering::InStage(this auto&& self, StageTypeIndex stage)
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

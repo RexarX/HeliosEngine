@@ -5,6 +5,7 @@
 include_guard(GLOBAL)
 
 include(Primitives)
+include(CppModules)
 
 function(_helios_defer_module_link TARGET VISIBILITY MODULE)
   set_property(GLOBAL APPEND PROPERTY HELIOS_DEFERRED_MODULE_LINKS
@@ -128,6 +129,8 @@ function(helios_link_modules)
       _helios_link_module_to_consumer(${ARG_TARGET} INTERFACE ${_module} FALSE)
     endforeach()
   endif()
+
+  helios_target_consume_cxx_modules(${ARG_TARGET})
 endfunction()
 
 #[[

@@ -1,12 +1,22 @@
 #pragma once
 
-#include <helios/async/details/profile.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.async;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <taskflow/core/taskflow.hpp>
 
 #include <chrono>
 #include <future>
+#endif
+#include <helios/async/details/profile.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 /**
@@ -132,3 +142,4 @@ inline std::future_status Future<T>::WaitUntil(
 }
 
 }  // namespace helios::async
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

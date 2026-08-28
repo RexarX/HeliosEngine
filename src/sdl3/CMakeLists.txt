@@ -4,26 +4,30 @@ helios_module(
     DESCRIPTION "SDL3 process-global runtime (lifetime, event pump)"
 
     HEADERS
-        include/helios/sdl3/details/context.hpp
-        include/helios/sdl3/details/event_dispatcher.hpp
-        include/helios/sdl3/details/lifetime.hpp
         include/helios/sdl3/systems/init.hpp
         include/helios/sdl3/systems/pump_events.hpp
         include/helios/sdl3/systems/shutdown.hpp
+        include/helios/sdl3/context.hpp
+        include/helios/sdl3/event_dispatcher.hpp
+        include/helios/sdl3/lifetime.hpp
         include/helios/sdl3/plugin.hpp
         include/helios/sdl3/sdl3.hpp
 
     SOURCES
-        src/details/lifetime.cpp
         src/systems/init.cpp
         src/systems/pump_events.cpp
         src/systems/shutdown.cpp
+        src/lifetime.cpp
         src/plugin.cpp
+
+    MODULE_SOURCES
+        modules/helios.sdl3.cppm
 
     PCH src/pch.hpp
 
     DEPENDS
         PUBLIC app
+        PUBLIC compiler
         PUBLIC ecs
         PUBLIC log
         PUBLIC window
@@ -32,12 +36,15 @@ helios_module(
         SDL3 PRIVATE helios::lib::sdl3::sdl3
 
     TEST_SOURCES
+        tests/systems/init.cpp
+        tests/systems/pump_events.cpp
+        tests/systems/shutdown.cpp
         tests/available.hpp
         tests/event_dispatcher.cpp
         tests/lifetime.cpp
         tests/main.cpp
+        tests/module_import.cpp
         tests/plugin.cpp
-        tests/systems.cpp
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")

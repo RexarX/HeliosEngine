@@ -1,9 +1,15 @@
 #pragma once
 
-#include <helios/assert.hpp>
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.ecs;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <helios/container/flat_map.hpp>
-#include <helios/ecs/message/id.hpp>
-#include <helios/ecs/message/message.hpp>
 
 #include <algorithm>
 #include <cstddef>
@@ -11,7 +17,12 @@
 #include <span>
 #include <utility>
 #include <vector>
+#endif
+#include <helios/assert.hpp>
+#include <helios/ecs/message/id.hpp>
+#include <helios/ecs/message/message.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::ecs {
 
 /**
@@ -269,3 +280,4 @@ inline auto ConsumedMessagesRegistry::ConsumedCount(
 }
 
 }  // namespace helios::ecs
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

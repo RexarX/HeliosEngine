@@ -1,14 +1,21 @@
 #pragma once
 
-#include <helios/utils/type_info.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.utils;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <chrono>
 #include <concepts>
 #include <type_traits>
+#endif
+#include <helios/utils/type_info.hpp>
 
-namespace helios::utils {
-
-namespace details {
+namespace helios::utils::details {
 
 // Helper: recursively check uniqueness after removing cv/ref.
 // Primary: empty pack => true
@@ -25,11 +32,11 @@ struct UniqueTypesHelper<T, Rest...>
           // and Rest themselves must be unique
           && UniqueTypesHelper<Rest...>::value> {};
 
-}  // namespace details
+}  // namespace helios::utils::details
 
-/**
- * @brief Concept for arithmetic types (integral or floating-point).
- */
+HELIOS_MODULE_EXPORT
+namespace helios::utils {
+/// @brief Concept for arithmetic types (integral or floating-point).
 template <typename T>
 concept ArithmeticTrait = std::integral<T> || std::floating_point<T>;
 
@@ -110,3 +117,4 @@ concept PolymorphicConvertible =
       std::derived_from<std::remove_cvref_t<To>, std::remove_cvref_t<From>>));
 
 }  // namespace helios::utils
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

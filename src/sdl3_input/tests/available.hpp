@@ -1,8 +1,8 @@
 #pragma once
 
 #include <helios/app/application.hpp>
-#include <helios/sdl3/details/lifetime.hpp>
 #include <helios/sdl3/input/plugin.hpp>
+#include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/plugin.hpp>
 
 #ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE

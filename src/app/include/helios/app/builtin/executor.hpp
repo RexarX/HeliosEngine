@@ -1,16 +1,27 @@
 #pragma once
 
-#include <helios/app/plugin.hpp>
+#include <helios/config.hpp>
 
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.app;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
 #include <functional>
 #include <string_view>
+#endif
+#include <helios/app/plugin.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::async {
 
 class Executor;
 
 }
 
+HELIOS_MODULE_EXPORT
 namespace helios::app {
 
 /// @brief Resource wrapper for the application async executor.
@@ -46,3 +57,4 @@ public:
 };
 
 }  // namespace helios::app
+#endif  // HELIOS_MODULE_CONSUMER_SHIM

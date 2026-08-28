@@ -1,15 +1,33 @@
 #pragma once
 
+#include <helios/config.hpp>
+
+#if HELIOS_MODULE_HEADER_IMPORT
+import helios.input;
+#define HELIOS_MODULE_CONSUMER_SHIM
+#endif
+
+#ifndef HELIOS_MODULE_CONSUMER_SHIM
+#ifndef HELIOS_BUILDING_MODULE
+#include <helios/ecs/entity/entity.hpp>
+#include <helios/ecs/message/message.hpp>
 #include <helios/memory/temporary_storage.hpp>
 
+#include <cstddef>
 #include <cstdint>
 #include <format>
 #include <iterator>
+#include <optional>
 #include <ostream>
 #include <string>
 #include <string_view>
 #include <utility>
+#include <vector>
+#endif
+#include <helios/input/button_input.hpp>
+#include <helios/input/ids.hpp>
 
+HELIOS_MODULE_EXPORT
 namespace helios::input {
 
 /// @brief Contiguous keyboard key identifiers (backend mapping is separate).
@@ -154,6 +172,85 @@ enum class ButtonState : uint8_t {
   kReleased = 0,
   kPressed = 1,
   kRepeat = 2,
+};
+
+using KeyboardInput = ButtonInput<Key>;
+
+/// @brief Aggregated keyboard state for the main window / app.
+struct Keyboard {
+  static constexpr std::string_view kName = "helios::input::Keyboard";
+
+  KeyboardInput keys;
+  std::string composition;
+  int32_t composition_start = 0;
+  int32_t composition_length = 0;
+  Modifiers modifiers = Modifiers::kNone;
+};
+
+/// @brief Keyboard key press / release / repeat event for a window entity.
+struct KeyboardInputMsg {
+  static constexpr std::string_view kName = "helios::input::KeyboardInputMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  ecs::Entity entity;
+  Key key = Key::kUnknown;
+  ButtonState state = ButtonState::kReleased;
+  Modifiers modifiers = Modifiers::kNone;
+};
+
+/// @brief Unicode text input event for a window entity.
+struct TextInputMsg {
+  static constexpr std::string_view kName = "helios::input::TextInputMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  ecs::Entity entity;
+  uint32_t codepoint = 0;
+};
+
+/// @brief IME preedit composition for a window entity.
+struct TextEditingMsg {
+  static constexpr std::string_view kName = "helios::input::TextEditingMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  ecs::Entity entity;
+  std::string composition;
+  int32_t start = 0;
+  int32_t length = 0;
+};
+
+/// @brief IME candidate list for a window entity.
+struct TextEditingCandidatesMsg {
+  static constexpr std::string_view kName =
+      "helios::input::TextEditingCandidatesMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  ecs::Entity entity;
+  std::vector<std::string> candidates;
+  std::optional<TextCandidateIndex> selected;
+  bool horizontal = false;
+};
+
+/// @brief Keyboard connect / disconnect notification.
+/// @details Update systems ignore this message. `Keyboard` stays
+/// process-global.
+struct KeyboardConnectionMsg {
+  static constexpr std::string_view kName =
+      "helios::input::KeyboardConnectionMsg";
+  static constexpr auto kClearPolicy = ecs::MessageClearPolicy::kAutomatic;
+  static constexpr bool kConsumable = false;
+  static constexpr bool kAsync = false;
+
+  std::string name;
+  KeyboardId id = 0;
+  bool connected = false;
 };
 
 /**
@@ -556,8 +653,346 @@ inline std::ostream& operator<<(std::ostream& os, ButtonState state) {
   return os << "ButtonState::" << ToString(state);
 }
 
+/**
+ * @brief Formats a keyboard state using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param keyboard Keyboard resource
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const Keyboard& keyboard) {
+  out = std::format_to(out, "Keyboard{{modifiers=");
+  out = ToString(out, keyboard.modifiers);
+  return std::format_to(
+      out,
+      ", composition=\"{}\", composition_start={}, composition_length={}}}",
+      keyboard.composition, keyboard.composition_start,
+      keyboard.composition_length);
+}
+
+/**
+ * @brief Formats a keyboard state as a string.
+ * @param keyboard Keyboard resource
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const Keyboard& keyboard) {
+  std::string result;
+  result.reserve(64);
+  ToString(std::back_inserter(result), keyboard);
+  return result;
+}
+
+/**
+ * @brief Formats a keyboard state as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Keyboard resource
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const Keyboard& keyboard) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), keyboard);
+  return result;
+}
+
+/**
+ * @brief Outputs a keyboard state to an output stream.
+ * @param os Output stream
+ * @param keyboard Keyboard resource
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const Keyboard& keyboard) {
+  ToString(std::ostreambuf_iterator<char>(os), keyboard);
+  return os;
+}
+
+/**
+ * @brief Formats a keyboard input message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Keyboard input message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const KeyboardInputMsg& msg) {
+  out = std::format_to(out, "KeyboardInputMsg{{entity={}, key={}, state={}",
+                       msg.entity, ToString(msg.key), ToString(msg.state));
+  out = std::format_to(out, ", modifiers=");
+  out = ToString(out, msg.modifiers);
+  return std::format_to(out, "}}");
+}
+
+/**
+ * @brief Formats a keyboard input message as a string.
+ * @param msg Keyboard input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const KeyboardInputMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a keyboard input message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Keyboard input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const KeyboardInputMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a keyboard input message to an output stream.
+ * @param os Output stream
+ * @param msg Keyboard input message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const KeyboardInputMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a text input message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Text input message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const TextInputMsg& msg) {
+  return std::format_to(out, "TextInputMsg{{entity={}, codepoint=U+{:04X}}}",
+                        msg.entity, msg.codepoint);
+}
+
+/**
+ * @brief Formats a text input message as a string.
+ * @param msg Text input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const TextInputMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a text input message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Text input message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const TextInputMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a text input message to an output stream.
+ * @param os Output stream
+ * @param msg Text input message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const TextInputMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a text editing message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Text editing message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const TextEditingMsg& msg) {
+  return std::format_to(
+      out,
+      "TextEditingMsg{{entity={}, composition=\"{}\", start={}, length={}}}",
+      msg.entity, msg.composition, msg.start, msg.length);
+}
+
+/**
+ * @brief Formats a text editing message as a string.
+ * @param msg Text editing message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const TextEditingMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a text editing message as a string using `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Text editing message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(const TextEditingMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a text editing message to an output stream.
+ * @param os Output stream
+ * @param msg Text editing message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os, const TextEditingMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a text editing candidates message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Text editing candidates message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const TextEditingCandidatesMsg& msg) {
+  out = std::format_to(out, "TextEditingCandidatesMsg{{entity={}, candidates=[",
+                       msg.entity);
+  for (size_t i = 0; i < msg.candidates.size(); ++i) {
+    if (i != 0) {
+      out = std::format_to(out, ", ");
+    }
+    out = std::format_to(out, "\"{}\"", msg.candidates[i]);
+  }
+  out = std::format_to(out, "], selected=");
+  if (msg.selected.has_value()) {
+    out = std::format_to(out, "{}", *msg.selected);
+  } else {
+    out = std::format_to(out, "none");
+  }
+  return std::format_to(out, ", horizontal={}}}", msg.horizontal);
+}
+
+/**
+ * @brief Formats a text editing candidates message as a string.
+ * @param msg Text editing candidates message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const TextEditingCandidatesMsg& msg) {
+  std::string result;
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a text editing candidates message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Text editing candidates message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const TextEditingCandidatesMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(256);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a text editing candidates message to an output stream.
+ * @param os Output stream
+ * @param msg Text editing candidates message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const TextEditingCandidatesMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
+/**
+ * @brief Formats a keyboard connection message using an output iterator.
+ * @tparam It Output iterator type
+ * @param out Output iterator to write the formatted string to
+ * @param msg Keyboard connection message
+ * @return The output iterator after writing
+ */
+template <typename It>
+  requires std::output_iterator<It, char>
+inline It ToString(It out, const KeyboardConnectionMsg& msg) {
+  return std::format_to(
+      out, "KeyboardConnectionMsg{{id={}, connected={}, name=\"{}\"}}", msg.id,
+      msg.connected, msg.name);
+}
+
+/**
+ * @brief Formats a keyboard connection message as a string.
+ * @param msg Keyboard connection message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::string ToString(const KeyboardConnectionMsg& msg) {
+  std::string result;
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Formats a keyboard connection message as a string using
+ * `TemporaryStorage`.
+ * @warning The returned string is only valid until the next call to
+ * `ResetTemporaryStorage()` on this thread.
+ * @param settings Keyboard connection message
+ * @return Formatted string
+ */
+[[nodiscard]] inline std::pmr::string TempToString(
+    const KeyboardConnectionMsg& msg) {
+  std::pmr::string result{&mem::GetTemporaryStorage()};
+  result.reserve(128);
+  ToString(std::back_inserter(result), msg);
+  return result;
+}
+
+/**
+ * @brief Outputs a keyboard connection message to an output stream.
+ * @param os Output stream
+ * @param msg Keyboard connection message
+ * @return Reference to the output stream
+ */
+inline std::ostream& operator<<(std::ostream& os,
+                                const KeyboardConnectionMsg& msg) {
+  ToString(std::ostreambuf_iterator<char>(os), msg);
+  return os;
+}
+
 }  // namespace helios::input
 
+HELIOS_MODULE_EXPORT
 namespace std {
 
 template <>
@@ -596,4 +1031,77 @@ struct formatter<helios::input::ButtonState> {
   }
 };
 
+template <>
+struct formatter<helios::input::Keyboard> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::Keyboard& keyboard,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), keyboard);
+  }
+};
+
+template <>
+struct formatter<helios::input::KeyboardInputMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::KeyboardInputMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::TextInputMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::TextInputMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::TextEditingMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::TextEditingMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::TextEditingCandidatesMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::TextEditingCandidatesMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
+template <>
+struct formatter<helios::input::KeyboardConnectionMsg> {
+  static constexpr auto parse(format_parse_context& ctx) noexcept {
+    return ctx.begin();
+  }
+
+  static auto format(const helios::input::KeyboardConnectionMsg& msg,
+                     format_context& ctx) {
+    return helios::input::ToString(ctx.out(), msg);
+  }
+};
+
 }  // namespace std
+#endif  // HELIOS_MODULE_CONSUMER_SHIM
