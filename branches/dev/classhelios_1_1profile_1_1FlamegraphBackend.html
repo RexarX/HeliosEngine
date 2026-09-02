@@ -233,10 +233,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa195c0e97a7b4028d986f3901164a602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a counter (plot) event with the given value.  <br /></td></tr>
 <tr class="memitem:a6eee63d1c0af7062b7a7f379542ee0d8" id="r_a6eee63d1c0af7062b7a7f379542ee0d8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6eee63d1c0af7062b7a7f379542ee0d8">PlotConfig</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a>, <a class="el" href="namespacehelios_1_1profile.html#a4028dc96634ea1fda3b42f975e840cbb">PlotFormat</a>, bool, bool, uint32_t) noexcept override</td></tr>
 <tr class="memdesc:a6eee63d1c0af7062b7a7f379542ee0d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plot configuration is not represented in the JSON format.  <br /></td></tr>
-<tr class="memitem:a3899a241829bb819c149e2e7f38eebee" id="r_a3899a241829bb819c149e2e7f38eebee"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3899a241829bb819c149e2e7f38eebee">Alloc</a> (const void *, size_t, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt;, int, std::source_location) noexcept override</td></tr>
-<tr class="memdesc:a3899a241829bb819c149e2e7f38eebee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory allocation events are not emitted in the JSON format.  <br /></td></tr>
-<tr class="memitem:a48b92f4a5223ecdcecb34df2d1583583" id="r_a48b92f4a5223ecdcecb34df2d1583583"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a48b92f4a5223ecdcecb34df2d1583583">Free</a> (const void *, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt;, int, std::source_location) noexcept override</td></tr>
-<tr class="memdesc:a48b92f4a5223ecdcecb34df2d1583583"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory deallocation events are not emitted in the JSON format.  <br /></td></tr>
+<tr class="memitem:ad834146963d85c5f423e3606632adc25" id="r_ad834146963d85c5f423e3606632adc25"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad834146963d85c5f423e3606632adc25">Alloc</a> (const void *, size_t, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt;, int, const std::source_location &amp;=std::source_location::current()) noexcept override</td></tr>
+<tr class="memdesc:ad834146963d85c5f423e3606632adc25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory allocation events are not emitted in the JSON format.  <br /></td></tr>
+<tr class="memitem:a171fecfee7a46312a4503520de2e11f1" id="r_a171fecfee7a46312a4503520de2e11f1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a171fecfee7a46312a4503520de2e11f1">Free</a> (const void *, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt;, int, const std::source_location &amp;=std::source_location::current()) noexcept override</td></tr>
+<tr class="memdesc:a171fecfee7a46312a4503520de2e11f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory deallocation events are not emitted in the JSON format.  <br /></td></tr>
 <tr class="memitem:a75e5aeb978963a2e82b7ea2326b0bda6" id="r_a75e5aeb978963a2e82b7ea2326b0bda6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a75e5aeb978963a2e82b7ea2326b0bda6">MemoryDiscard</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a>) noexcept override</td></tr>
 <tr class="memdesc:a75e5aeb978963a2e82b7ea2326b0bda6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory discard events are not emitted in the JSON format.  <br /></td></tr>
 <tr class="memitem:a5502f463efa7c780e1f08256cbf91c3e" id="r_a5502f463efa7c780e1f08256cbf91c3e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5502f463efa7c780e1f08256cbf91c3e">MemoryDiscard</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a>, int) noexcept override</td></tr>
@@ -363,8 +363,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a3899a241829bb819c149e2e7f38eebee" name="a3899a241829bb819c149e2e7f38eebee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3899a241829bb819c149e2e7f38eebee">&#9670;&#160;</a></span>Alloc()</h2>
+<a id="ad834146963d85c5f423e3606632adc25" name="ad834146963d85c5f423e3606632adc25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad834146963d85c5f423e3606632adc25">&#9670;&#160;</a></span>Alloc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -395,7 +395,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::source_location</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -417,7 +417,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a38a105e82c51f2fab5b56c44876cd9aa">helios::profile::Backend</a>.</p>
+<p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a421024a356f6e722d2c800d1ae474217">helios::profile::Backend</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="flamegraph_8hpp_source.html#l00206">206</a> of file <a class="el" href="flamegraph_8hpp_source.html">flamegraph.hpp</a>.</p>
 
@@ -644,8 +644,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a48b92f4a5223ecdcecb34df2d1583583" name="a48b92f4a5223ecdcecb34df2d1583583"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48b92f4a5223ecdcecb34df2d1583583">&#9670;&#160;</a></span>Free()</h2>
+<a id="a171fecfee7a46312a4503520de2e11f1" name="a171fecfee7a46312a4503520de2e11f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a171fecfee7a46312a4503520de2e11f1">&#9670;&#160;</a></span>Free()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -671,7 +671,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::source_location</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -692,9 +692,9 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a469d20934df8274fcf0e7c46581feecc">helios::profile::Backend</a>.</p>
+<p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a737d64c53d27749818e1b6c2e51ad396">helios::profile::Backend</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="flamegraph_8hpp_source.html#l00217">217</a> of file <a class="el" href="flamegraph_8hpp_source.html">flamegraph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="flamegraph_8hpp_source.html#l00218">218</a> of file <a class="el" href="flamegraph_8hpp_source.html">flamegraph.hpp</a>.</p>
 
 </div>
 </div>
@@ -731,7 +731,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a3f0dafd72836dc8eb3c6dcce4162baac">helios::profile::Backend</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="flamegraph_8hpp_source.html#l00224">224</a> of file <a class="el" href="flamegraph_8hpp_source.html">flamegraph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="flamegraph_8hpp_source.html#l00227">227</a> of file <a class="el" href="flamegraph_8hpp_source.html">flamegraph.hpp</a>.</p>
 
 </div>
 </div>
@@ -773,7 +773,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a4f86081fd441a991c1ce76f9b8f20a4d">helios::profile::Backend</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="flamegraph_8hpp_source.html#l00231">231</a> of file <a class="el" href="flamegraph_8hpp_source.html">flamegraph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="flamegraph_8hpp_source.html#l00234">234</a> of file <a class="el" href="flamegraph_8hpp_source.html">flamegraph.hpp</a>.</p>
 
 </div>
 </div>
@@ -847,7 +847,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a02a3a83d9bb9f4e3e2da746ecb3102e9">helios::profile::Backend</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="flamegraph_8hpp_source.html#l00237">237</a> of file <a class="el" href="flamegraph_8hpp_source.html">flamegraph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="flamegraph_8hpp_source.html#l00240">240</a> of file <a class="el" href="flamegraph_8hpp_source.html">flamegraph.hpp</a>.</p>
 
 </div>
 </div>

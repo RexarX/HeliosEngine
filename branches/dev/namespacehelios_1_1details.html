@@ -216,24 +216,24 @@ Concepts</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adb5b08a1efebd6763f5c5358aaccdea7" id="r_adb5b08a1efebd6763f5c5358aaccdea7"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#adb5b08a1efebd6763f5c5358aaccdea7">FormatAssertionMessage</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message)</td></tr>
-<tr class="memdesc:adb5b08a1efebd6763f5c5358aaccdea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a complete assertion failure message with source location and stack trace.  <br /></td></tr>
-<tr class="memitem:ac7257329ff9480b84750b75c7638f95a" id="r_ac7257329ff9480b84750b75c7638f95a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac7257329ff9480b84750b75c7638f95a">DefaultAssertionHandler</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
-<tr class="memdesc:ac7257329ff9480b84750b75c7638f95a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default assertion handler that prints to stderr.  <br /></td></tr>
+<tr class="memitem:a679314f279f8ea19a36495cd7ece1e57" id="r_a679314f279f8ea19a36495cd7ece1e57"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a679314f279f8ea19a36495cd7ece1e57">FormatAssertionMessage</a> (std::string_view condition, std::string_view message, const std::source_location &amp;loc=std::source_location::current())</td></tr>
+<tr class="memdesc:a679314f279f8ea19a36495cd7ece1e57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a complete assertion failure message with source location and stack trace.  <br /></td></tr>
+<tr class="memitem:acddaf3c15e136cdca1b748ce681b34a9" id="r_acddaf3c15e136cdca1b748ce681b34a9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acddaf3c15e136cdca1b748ce681b34a9">DefaultAssertionHandler</a> (std::string_view condition, std::string_view message, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:acddaf3c15e136cdca1b748ce681b34a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default assertion handler that prints to stderr.  <br /></td></tr>
 <tr class="memitem:a3f3a0707dae4586fa9f88f9aeae11cdc" id="r_a3f3a0707dae4586fa9f88f9aeae11cdc"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3f3a0707dae4586fa9f88f9aeae11cdc">HasLogPluginHandler</a> () noexcept</td></tr>
 <tr class="memdesc:a3f3a0707dae4586fa9f88f9aeae11cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log plugin assertion handler (weak symbol).  <br /></td></tr>
-<tr class="memitem:ae8a3b4bbfc9cf2296127d58f340438c1" id="r_ae8a3b4bbfc9cf2296127d58f340438c1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae8a3b4bbfc9cf2296127d58f340438c1">LogPluginAssertionHandler</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
-<tr class="memdesc:ae8a3b4bbfc9cf2296127d58f340438c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Weak symbol for log plugin assertion handler.  <br /></td></tr>
+<tr class="memitem:aab80b9a64cea79fe8c4a1aed41e7e0d1" id="r_aab80b9a64cea79fe8c4a1aed41e7e0d1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aab80b9a64cea79fe8c4a1aed41e7e0d1">LogPluginAssertionHandler</a> (std::string_view condition, std::string_view message, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:aab80b9a64cea79fe8c4a1aed41e7e0d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Weak symbol for log plugin assertion handler.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:af52cb2961ca77df7f242657ef0d3d13d" id="r_af52cb2961ca77df7f242657ef0d3d13d"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#af52cb2961ca77df7f242657ef0d3d13d">kEnableAssert</a> = false</td></tr>
-<tr class="memitem:a1f5914c59d5d990ec71ad9a7cf71ba84" id="r_a1f5914c59d5d990ec71ad9a7cf71ba84"><td class="memItemLeft"><a class="el" href="namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1f5914c59d5d990ec71ad9a7cf71ba84">g_custom_assertion_handler</a> = nullptr</td></tr>
+<tr class="memitem:a1f5914c59d5d990ec71ad9a7cf71ba84" id="r_a1f5914c59d5d990ec71ad9a7cf71ba84"><td class="memItemLeft"><a class="el" href="namespacehelios.html#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1f5914c59d5d990ec71ad9a7cf71ba84">g_custom_assertion_handler</a> = nullptr</td></tr>
 <tr class="memdesc:a1f5914c59d5d990ec71ad9a7cf71ba84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the custom assertion handler.  <br /></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="ac7257329ff9480b84750b75c7638f95a" name="ac7257329ff9480b84750b75c7638f95a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7257329ff9480b84750b75c7638f95a">&#9670;&#160;</a></span>DefaultAssertionHandler()</h2>
+<a id="acddaf3c15e136cdca1b748ce681b34a9" name="acddaf3c15e136cdca1b748ce681b34a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acddaf3c15e136cdca1b748ce681b34a9">&#9670;&#160;</a></span>DefaultAssertionHandler()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,12 +249,12 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span>, </td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -268,18 +268,18 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
-    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
     <tr><td class="paramname">message</td><td>Additional message </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00068">68</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00069">69</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
 
 </div>
 </div>
-<a id="adb5b08a1efebd6763f5c5358aaccdea7" name="adb5b08a1efebd6763f5c5358aaccdea7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb5b08a1efebd6763f5c5358aaccdea7">&#9670;&#160;</a></span>FormatAssertionMessage()</h2>
+<a id="a679314f279f8ea19a36495cd7ece1e57" name="a679314f279f8ea19a36495cd7ece1e57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a679314f279f8ea19a36495cd7ece1e57">&#9670;&#160;</a></span>FormatAssertionMessage()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -295,12 +295,12 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span>, </td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -314,14 +314,14 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
-    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
     <tr><td class="paramname">message</td><td>Additional message (may be empty) </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted assertion message </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00040">40</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00041">41</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
 
 </div>
 </div>
@@ -353,20 +353,20 @@ Variables</h2></td></tr>
 <p>This is defined as a weak symbol that defaults to <span class="tt">nullptr</span>. When the log plugin is linked, it will provide the real implementation. The implementation should log via the logger system with critical level. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
-    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
-    <tr><td class="paramname">message</td><td>Additional message</td></tr>
+    <tr><td class="paramname">message</td><td>Additional message </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the assertion</td></tr>
   </table>
   </dd>
 </dl>
 <p>Weak symbol for log plugin handler check.</p>
 <p>The log plugin provides the real implementation. </p><dl class="section return"><dt>Returns</dt><dd>true if the log plugin handler is available </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00131">131</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00133">133</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ae8a3b4bbfc9cf2296127d58f340438c1" name="ae8a3b4bbfc9cf2296127d58f340438c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8a3b4bbfc9cf2296127d58f340438c1">&#9670;&#160;</a></span>LogPluginAssertionHandler()</h2>
+<a id="aab80b9a64cea79fe8c4a1aed41e7e0d1" name="aab80b9a64cea79fe8c4a1aed41e7e0d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab80b9a64cea79fe8c4a1aed41e7e0d1">&#9670;&#160;</a></span>LogPluginAssertionHandler()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -382,12 +382,12 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span>, </td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -401,7 +401,7 @@ Variables</h2></td></tr>
 <p>Override weak symbol to provide log plugin assertion handling.</p>
 <p>The log plugin provides the real implementation. </p>
 
-<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00138">138</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00140">140</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
 
 </div>
 </div>
@@ -416,7 +416,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a> helios::details::g_custom_assertion_handler = nullptr</td>
+          <td class="memname"><a class="el" href="namespacehelios.html#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a> helios::details::g_custom_assertion_handler = nullptr</td>
         </tr>
       </table>
   </td>

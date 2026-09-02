@@ -1,7 +1,7 @@
 var classhelios_1_1profile_1_1Profiler =
 [
     [ "AddBackend", "classhelios_1_1profile_1_1Profiler.html#a767ec9de2b1cd597f6a066a936993562", null ],
-    [ "Alloc", "classhelios_1_1profile_1_1Profiler.html#a5d4d052b6f76bf8bd2248052f46f81f8", null ],
+    [ "Alloc", "classhelios_1_1profile_1_1Profiler.html#ad4f1436d226a9411f2ef879c3c67a45e", null ],
     [ "BackendCount", "classhelios_1_1profile_1_1Profiler.html#ae9b97e1c7f9f532612bdf2abb565ad30", null ],
     [ "BeginZone", "classhelios_1_1profile_1_1Profiler.html#ae075c59b0d8b74fbed2348c06dc6e5a7", null ],
     [ "Clear", "classhelios_1_1profile_1_1Profiler.html#a1e5fc67c08ea96293c2fbbe24ffec61b", null ],
@@ -14,7 +14,7 @@ var classhelios_1_1profile_1_1Profiler =
     [ "FrameMark", "classhelios_1_1profile_1_1Profiler.html#a8d776cd0adfb275a5cefdb91480b8682", null ],
     [ "FrameMarkEnd", "classhelios_1_1profile_1_1Profiler.html#a7f914ea6f8623fd17ce5a28d35d3a6e0", null ],
     [ "FrameMarkStart", "classhelios_1_1profile_1_1Profiler.html#a8422ed2ce877a1d3d13e2ca2796d1036", null ],
-    [ "Free", "classhelios_1_1profile_1_1Profiler.html#a443ff81d40f3ec34e6427b7503eee13a", null ],
+    [ "Free", "classhelios_1_1profile_1_1Profiler.html#a61b53cb532f2f3f953bb3eed79815de4", null ],
     [ "Get", "classhelios_1_1profile_1_1Profiler.html#a5f453a8a45d217b7af2c0b9c06d23a87", null ],
     [ "Get", "classhelios_1_1profile_1_1Profiler.html#aac20795b7dc327738bc9b9725a989716", null ],
     [ "Get", "classhelios_1_1profile_1_1Profiler.html#aee8c1864a917894ba49da21cdf914e81", null ],

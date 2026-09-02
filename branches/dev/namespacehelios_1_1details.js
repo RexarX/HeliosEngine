@@ -20,10 +20,10 @@ var namespacehelios_1_1details =
     [ "DecaysToFunctionPointer", "concepthelios_1_1details_1_1DecaysToFunctionPointer.html", null ],
     [ "EmptyDefaultCallable", "concepthelios_1_1details_1_1EmptyDefaultCallable.html", null ],
     [ "SafeTemporaryCallable", "concepthelios_1_1details_1_1SafeTemporaryCallable.html", null ],
-    [ "DefaultAssertionHandler", "namespacehelios_1_1details.html#ac7257329ff9480b84750b75c7638f95a", null ],
-    [ "FormatAssertionMessage", "namespacehelios_1_1details.html#adb5b08a1efebd6763f5c5358aaccdea7", null ],
+    [ "DefaultAssertionHandler", "namespacehelios_1_1details.html#acddaf3c15e136cdca1b748ce681b34a9", null ],
+    [ "FormatAssertionMessage", "namespacehelios_1_1details.html#a679314f279f8ea19a36495cd7ece1e57", null ],
     [ "HasLogPluginHandler", "namespacehelios_1_1details.html#a3f3a0707dae4586fa9f88f9aeae11cdc", null ],
-    [ "LogPluginAssertionHandler", "namespacehelios_1_1details.html#ae8a3b4bbfc9cf2296127d58f340438c1", null ],
+    [ "LogPluginAssertionHandler", "namespacehelios_1_1details.html#aab80b9a64cea79fe8c4a1aed41e7e0d1", null ],
     [ "g_custom_assertion_handler", "namespacehelios_1_1details.html#a1f5914c59d5d990ec71ad9a7cf71ba84", null ],
     [ "kEnableAssert", "namespacehelios_1_1details.html#af52cb2961ca77df7f242657ef0d3d13d", null ]
 ];

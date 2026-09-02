@@ -6,7 +6,7 @@ var namespacehelios_1_1log =
       [ "GenerateTimestamp", "namespacehelios_1_1log_1_1anonymous__namespace_02logger_8cpp_03.html#aa3c6c87f6ab8cdbbef412662d59901b1", null ]
     ] ],
     [ "details", "namespacehelios_1_1log_1_1details.html", [
-      [ "LogAssertionViaLogger", "namespacehelios_1_1log_1_1details.html#a201722f711a427b79a0f2c1d1be79762", null ]
+      [ "LogAssertionViaLogger", "namespacehelios_1_1log_1_1details.html#a7791abd8be18d736cad1b9d1397c3013", null ]
     ] ],
     [ "Config", "structhelios_1_1log_1_1Config.html", "structhelios_1_1log_1_1Config" ],
     [ "DefaultLogger", "structhelios_1_1log_1_1DefaultLogger.html", "structhelios_1_1log_1_1DefaultLogger" ],

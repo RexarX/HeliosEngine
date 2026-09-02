@@ -260,10 +260,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab88fc244d88177bf02e8fda0fd85365d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches a plot event to all registered backends.  <br /></td></tr>
 <tr class="memitem:a79b4385bcc92f1551bee6645d449e4b2" id="r_a79b4385bcc92f1551bee6645d449e4b2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a79b4385bcc92f1551bee6645d449e4b2">PlotConfig</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> name, <a class="el" href="namespacehelios_1_1profile.html#a4028dc96634ea1fda3b42f975e840cbb">PlotFormat</a> type, bool step, bool fill, uint32_t color) noexcept</td></tr>
 <tr class="memdesc:a79b4385bcc92f1551bee6645d449e4b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches a plot configuration event to all registered backends.  <br /></td></tr>
-<tr class="memitem:a5d4d052b6f76bf8bd2248052f46f81f8" id="r_a5d4d052b6f76bf8bd2248052f46f81f8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5d4d052b6f76bf8bd2248052f46f81f8">Alloc</a> (const void *ptr, size_t size, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, std::source_location loc) noexcept</td></tr>
-<tr class="memdesc:a5d4d052b6f76bf8bd2248052f46f81f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches an allocation event to all registered backends.  <br /></td></tr>
-<tr class="memitem:a443ff81d40f3ec34e6427b7503eee13a" id="r_a443ff81d40f3ec34e6427b7503eee13a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a443ff81d40f3ec34e6427b7503eee13a">Free</a> (const void *ptr, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, std::source_location loc) noexcept</td></tr>
-<tr class="memdesc:a443ff81d40f3ec34e6427b7503eee13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches a deallocation event to all registered backends.  <br /></td></tr>
+<tr class="memitem:ad4f1436d226a9411f2ef879c3c67a45e" id="r_ad4f1436d226a9411f2ef879c3c67a45e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad4f1436d226a9411f2ef879c3c67a45e">Alloc</a> (const void *ptr, size_t size, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:ad4f1436d226a9411f2ef879c3c67a45e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches an allocation event to all registered backends.  <br /></td></tr>
+<tr class="memitem:a61b53cb532f2f3f953bb3eed79815de4" id="r_a61b53cb532f2f3f953bb3eed79815de4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a61b53cb532f2f3f953bb3eed79815de4">Free</a> (const void *ptr, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:a61b53cb532f2f3f953bb3eed79815de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches a deallocation event to all registered backends.  <br /></td></tr>
 <tr class="memitem:a7283a6e2eb6624b43334aa4edebe4f8c" id="r_a7283a6e2eb6624b43334aa4edebe4f8c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7283a6e2eb6624b43334aa4edebe4f8c">MemoryDiscard</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> name) noexcept</td></tr>
 <tr class="memdesc:a7283a6e2eb6624b43334aa4edebe4f8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches a memory discard event to all registered backends.  <br /></td></tr>
 <tr class="memitem:a056f941421629f040b31a5fcb306fc16" id="r_a056f941421629f040b31a5fcb306fc16"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a056f941421629f040b31a5fcb306fc16">MemoryDiscard</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> name, int depth) noexcept</td></tr>
@@ -322,12 +322,12 @@ template&lt;ProfilerBackendTrait T, typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the registered backend </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00435">435</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00438">438</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a5d4d052b6f76bf8bd2248052f46f81f8" name="a5d4d052b6f76bf8bd2248052f46f81f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d4d052b6f76bf8bd2248052f46f81f8">&#9670;&#160;</a></span>Alloc()</h2>
+<a id="ad4f1436d226a9411f2ef879c3c67a45e" name="ad4f1436d226a9411f2ef879c3c67a45e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4f1436d226a9411f2ef879c3c67a45e">&#9670;&#160;</a></span>Alloc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -358,7 +358,7 @@ template&lt;ProfilerBackendTrait T, typename... Args&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::source_location</td>          <td class="paramname"><span class="paramname"><em>loc</em></span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -481,7 +481,7 @@ template&lt;ProfilerBackendTrait T, typename... Args&gt; </div>
 <p>Clears all registered backends and resets finalization state. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Not thread-safe. Call only when no zones are active. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00420">420</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00423">423</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -792,8 +792,8 @@ template&lt;ProfilerBackendTrait T&gt; </div>
 
 </div>
 </div>
-<a id="a443ff81d40f3ec34e6427b7503eee13a" name="a443ff81d40f3ec34e6427b7503eee13a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a443ff81d40f3ec34e6427b7503eee13a">&#9670;&#160;</a></span>Free()</h2>
+<a id="a61b53cb532f2f3f953bb3eed79815de4" name="a61b53cb532f2f3f953bb3eed79815de4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61b53cb532f2f3f953bb3eed79815de4">&#9670;&#160;</a></span>Free()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -819,7 +819,7 @@ template&lt;ProfilerBackendTrait T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::source_location</td>          <td class="paramname"><span class="paramname"><em>loc</em></span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -955,7 +955,7 @@ template&lt;ProfilerBackendTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the backend </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00451">451</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00454">454</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -992,7 +992,7 @@ template&lt;ProfilerBackendTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the backend </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00445">445</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00448">448</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -1022,7 +1022,7 @@ template&lt;ProfilerBackendTrait T&gt; </div>
 <p>Returns the singleton profiler instance. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the profiler </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00415">415</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00418">418</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -1309,7 +1309,7 @@ template&lt;ProfilerBackendTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00427">427</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00430">430</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -1482,7 +1482,7 @@ template&lt;ProfilerBackendTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to the backend, or <span class="tt">nullptr</span> if not registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00474">474</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00477">477</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -1521,7 +1521,7 @@ template&lt;ProfilerBackendTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the backend, or <span class="tt">nullptr</span> if not registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00468">468</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00471">471</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -1558,7 +1558,7 @@ template&lt;ProfilerBackendTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to the backend, or <span class="tt">nullptr</span> if not registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00462">462</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00465">465</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
 
 </div>
 </div>
@@ -1595,7 +1595,7 @@ template&lt;ProfilerBackendTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the backend, or <span class="tt">nullptr</span> if not registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00457">457</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profiler_8hpp_source.html#l00460">460</a> of file <a class="el" href="profiler_8hpp_source.html">profiler.hpp</a>.</p>
 
 </div>
 </div>

@@ -202,7 +202,7 @@ Public API</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">WCStringView</span>  </td><td class="markdownTableBodyNone">Wide-char variant. Also <span class="tt">U8CStringView</span>, <span class="tt">U16CStringView</span>, <span class="tt">U32CStringView</span>.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">AssertionHandler</span>  </td><td class="markdownTableBodyNone"><span class="tt">void(*)(std::string_view, std::source_location, std::string_view)</span> — custom handler.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">AssertionHandler</span>  </td><td class="markdownTableBodyNone"><span class="tt">void(*)(std::string_view, std::string_view, std::source_location)</span> — custom handler.  </td></tr>
 </table>
 <h1 class="doxsection"><a class="anchor" id="assert-system"></a>
 Assert System</h1>
@@ -215,14 +215,13 @@ Assert System</h1>
 <div class="line"><span class="comment">// With formatted message (uses std::format)</span></div>
 <div class="line"><a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size &lt;= capacity, <span class="stringliteral">&quot;Buffer overflow: {} &gt; {}&quot;</span>, size, capacity);</div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00235">assert.hpp:235</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a717b59a334b4e29f2d1bcd580de3d38f"><div class="ttname"><a href="assert_8hpp.html#a717b59a334b4e29f2d1bcd580de3d38f">HELIOS_INVARIANT</a></div><div class="ttdeci">#define HELIOS_INVARIANT(condition,...)</div><div class="ttdoc">Invariant check that asserts in debug builds and logs error in release.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00271">assert.hpp:271</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a8b8608656bafeab9911c16dce4827a04"><div class="ttname"><a href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a></div><div class="ttdeci">#define HELIOS_VERIFY(condition,...)</div><div class="ttdoc">Verify macro that always checks the condition.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00299">assert.hpp:299</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00237">assert.hpp:237</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a717b59a334b4e29f2d1bcd580de3d38f"><div class="ttname"><a href="assert_8hpp.html#a717b59a334b4e29f2d1bcd580de3d38f">HELIOS_INVARIANT</a></div><div class="ttdeci">#define HELIOS_INVARIANT(condition,...)</div><div class="ttdoc">Invariant check that asserts in debug builds and logs error in release.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00270">assert.hpp:270</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a8b8608656bafeab9911c16dce4827a04"><div class="ttname"><a href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a></div><div class="ttdeci">#define HELIOS_VERIFY(condition,...)</div><div class="ttdoc">Verify macro that always checks the condition.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00295">assert.hpp:295</a></div></div>
 </div><!-- fragment --><p>Priority-based handler dispatch: custom handler → log plugin (weak symbol) → default stderr.</p>
 <p>Custom assertion handler:</p>
-<div class="fragment"><div class="line">SetAssertionHandler([](std::string_view condition,</div>
-<div class="line">                       <span class="keyword">const</span> std::source_location&amp; loc,</div>
-<div class="line">                       std::string_view message) <span class="keyword">noexcept</span> {</div>
+<div class="fragment"><div class="line">SetAssertionHandler([](std::string_view condition, std::string_view message,</div>
+<div class="line">                       <span class="keyword">const</span> std::source_location&amp; loc) <span class="keyword">noexcept</span> {</div>
 <div class="line">  <span class="comment">// Custom logging / crash reporter</span></div>
 <div class="line">});</div>
 <div class="line">AbortWithStacktrace(<span class="stringliteral">&quot;Unrecoverable state detected&quot;</span>);</div>

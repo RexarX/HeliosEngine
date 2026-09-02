@@ -1,7 +1,7 @@
 var searchData=
 [
   ['handle_0',['Handle',['../classhelios_1_1utils_1_1DynamicLibrary.html#a322d8099dc47ca8755b7cbabdcf86809',1,'helios::utils::DynamicLibrary']]],
-  ['handleassertion_1',['HandleAssertion',['../namespacehelios.html#aab391e11e7c9423a40ead9ce2c9abb1b',1,'helios']]],
+  ['handleassertion_1',['HandleAssertion',['../namespacehelios.html#a34d25fe5cde9dc7bf269c27a878e2d42',1,'helios']]],
   ['handleclipboardevent_2',['HandleClipboardEvent',['../namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html#a10094ae9b1c564c98fe471da9583d827',1,'helios::sdl3::window::anonymous_namespace{event_handlers.cpp}']]],
   ['handledisplayevent_3',['HandleDisplayEvent',['../namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html#abd40c72c0dd99afed970887e67b5e0eb',1,'helios::sdl3::window::anonymous_namespace{event_handlers.cpp}']]],
   ['handledropevent_4',['HandleDropEvent',['../namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html#ad76c4ee6868443f9befbda2c77c3f662',1,'helios::sdl3::window::anonymous_namespace{event_handlers.cpp}']]],

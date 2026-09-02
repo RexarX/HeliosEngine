@@ -227,6 +227,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a309adc02aff2b6da6abcadf39440a554" id="r_a309adc02aff2b6da6abcadf39440a554"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename... Args&gt; </td></tr>
 <tr class="memitem:a309adc02aff2b6da6abcadf39440a554 template"><td class="memItemLeft">consteval auto&#160;</td><td class="memItemRight"><a class="el" href="#a309adc02aff2b6da6abcadf39440a554">GetCallOrApplyResultType</a> () noexcept</td></tr>
 <tr class="memdesc:a309adc02aff2b6da6abcadf39440a554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to get the result type of either invoke or apply.  <br /></td></tr>
+<tr class="memitem:ab8e73a38f76e2ca88918f5887a3bd3e7" id="r_ab8e73a38f76e2ca88918f5887a3bd3e7"><td class="memItemLeft">constexpr uint64_t&#160;</td><td class="memItemRight"><a class="el" href="#ab8e73a38f76e2ca88918f5887a3bd3e7">MurmurScramble64</a> (uint64_t num) noexcept</td></tr>
+<tr class="memdesc:ab8e73a38f76e2ca88918f5887a3bd3e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">MurmurHash3 finalizer; avalanches all bits of a 64-bit word.  <br /></td></tr>
+<tr class="memitem:acea68086b8acf4fee4625860e052838c" id="r_acea68086b8acf4fee4625860e052838c"><td class="memItemLeft">uint64_t&#160;</td><td class="memItemRight"><a class="el" href="#acea68086b8acf4fee4625860e052838c">ReadRandomDevice64</a> ()</td></tr>
+<tr class="memdesc:acea68086b8acf4fee4625860e052838c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads 64 bits from <span class="tt">std::random_device</span>, combining calls if needed.  <br /></td></tr>
+<tr class="memitem:a4280b1c265e8d3a99092d83c8d54d7f1" id="r_a4280b1c265e8d3a99092d83c8d54d7f1"><td class="memItemLeft">uint64_t&#160;</td><td class="memItemRight"><a class="el" href="#a4280b1c265e8d3a99092d83c8d54d7f1">CachedProcessEntropy</a> ()</td></tr>
+<tr class="memdesc:a4280b1c265e8d3a99092d83c8d54d7f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process-wide entropy captured once on first use.  <br /></td></tr>
+<tr class="memitem:abe53e6af940fd17e9f14c96cc010cf6e" id="r_abe53e6af940fd17e9f14c96cc010cf6e"><td class="memItemLeft">uint64_t&#160;</td><td class="memItemRight"><a class="el" href="#abe53e6af940fd17e9f14c96cc010cf6e">NextSeedSequence</a> () noexcept</td></tr>
+<tr class="memdesc:abe53e6af940fd17e9f14c96cc010cf6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Monotonic counter so recycled OS thread ids still get unique seeds.  <br /></td></tr>
 <tr class="memitem:ad30b4594360279456b39a818a2e2e0df" id="r_ad30b4594360279456b39a818a2e2e0df"><td class="memItemLeft">consteval std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#ad30b4594360279456b39a818a2e2e0df">ExtractSignatureArgument</a> (std::string_view function, std::string_view prefix, std::string_view suffix) noexcept</td></tr>
 <tr class="memdesc:ad30b4594360279456b39a818a2e2e0df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts a template argument fragment from a compiler signature.  <br /></td></tr>
 <tr class="memitem:a07c9e4f2149ebb314a95f1a6f51ebe6a" id="r_a07c9e4f2149ebb314a95f1a6f51ebe6a"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a07c9e4f2149ebb314a95f1a6f51ebe6a">StripGccAliasExposition</a> (std::string_view name) noexcept</td></tr>
@@ -384,6 +392,36 @@ template&lt;typename Folder, typename Accumulator, typename Tuple&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a4280b1c265e8d3a99092d83c8d54d7f1" name="a4280b1c265e8d3a99092d83c8d54d7f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4280b1c265e8d3a99092d83c8d54d7f1">&#9670;&#160;</a></span>CachedProcessEntropy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t helios::utils::details::CachedProcessEntropy </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Process-wide entropy captured once on first use. </p>
+<p>Function-local static (not a namespace-scope global) so initialization is thread-safe and avoids the static initialization order fiasco. Mixes <span class="tt">std::random_device</span> with a scrambled high-resolution clock because some platforms provide a weak <span class="tt">random_device</span>. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00065">65</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a08674f58d6aced25acd67c1ee913fb69" name="a08674f58d6aced25acd67c1ee913fb69"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a08674f58d6aced25acd67c1ee913fb69">&#9670;&#160;</a></span>ComputeTypeHash()</h2>
 
@@ -837,6 +875,93 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> when <span class="tt">T</span> is a lambda closure type </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00334">334</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab8e73a38f76e2ca88918f5887a3bd3e7" name="ab8e73a38f76e2ca88918f5887a3bd3e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8e73a38f76e2ca88918f5887a3bd3e7">&#9670;&#160;</a></span>MurmurScramble64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t helios::utils::details::MurmurScramble64 </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>num</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>MurmurHash3 finalizer; avalanches all bits of a 64-bit word. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00029">29</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abe53e6af940fd17e9f14c96cc010cf6e" name="abe53e6af940fd17e9f14c96cc010cf6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe53e6af940fd17e9f14c96cc010cf6e">&#9670;&#160;</a></span>NextSeedSequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t helios::utils::details::NextSeedSequence </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Monotonic counter so recycled OS thread ids still get unique seeds. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00078">78</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acea68086b8acf4fee4625860e052838c" name="acea68086b8acf4fee4625860e052838c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acea68086b8acf4fee4625860e052838c">&#9670;&#160;</a></span>ReadRandomDevice64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t helios::utils::details::ReadRandomDevice64 </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads 64 bits from <span class="tt">std::random_device</span>, combining calls if needed. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00039">39</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>

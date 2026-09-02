@@ -387,201 +387,204 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('flamegraph_8hp
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">   * @param loc Source location of the allocation</span></div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">   */</span></div>
 <div class="foldopen" id="foldopen00206" data-start="{" data-end="}">
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a3899a241829bb819c149e2e7f38eebee">  206</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a3899a241829bb819c149e2e7f38eebee">Alloc</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="comment">/*ptr*/</span>, <span class="keywordtype">size_t</span> <span class="comment">/*size*/</span>,</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="classhelios_1_1profile_1_1FlamegraphBackend.html#ad834146963d85c5f423e3606632adc25">  206</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1profile_1_1FlamegraphBackend.html#ad834146963d85c5f423e3606632adc25">Alloc</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="comment">/*ptr*/</span>, <span class="keywordtype">size_t</span> <span class="comment">/*size*/</span>,</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>             std::optional&lt;CStringView&gt; <span class="comment">/*name*/</span>, <span class="keywordtype">int</span> <span class="comment">/*depth*/</span>,</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>             std::source_location <span class="comment">/*loc*/</span>) <span class="keyword">noexcept</span> <span class="keyword">override</span> {}</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>             <span class="keyword">const</span> std::source_location&amp; <span class="comment">/*loc*/</span> =</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                 std::source_location::current()) noexcept<span class="keyword"> override </span>{}</div>
 </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment"></span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">   * @brief Memory deallocation events are not emitted in the JSON format.</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">   * @param ptr Pointer to freed memory</span></div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">   * @param name Optional pool name</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">   * @param depth Callstack depth</span></div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">   * @param loc Source location of the deallocation</span></div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">   */</span></div>
-<div class="foldopen" id="foldopen00217" data-start="{" data-end="}">
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a48b92f4a5223ecdcecb34df2d1583583">  217</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a48b92f4a5223ecdcecb34df2d1583583">Free</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="comment">/*ptr*/</span>, std::optional&lt;CStringView&gt; <span class="comment">/*name*/</span>,</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            <span class="keywordtype">int</span> <span class="comment">/*depth*/</span>, std::source_location <span class="comment">/*loc*/</span>) <span class="keyword">noexcept</span> <span class="keyword">override</span> {}</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment"></span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">   * @brief Memory deallocation events are not emitted in the JSON format.</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">   * @param ptr Pointer to freed memory</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">   * @param name Optional pool name</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">   * @param depth Callstack depth</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">   * @param loc Source location of the deallocation</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">   */</span></div>
+<div class="foldopen" id="foldopen00218" data-start="{" data-end="}">
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a171fecfee7a46312a4503520de2e11f1">  218</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a171fecfee7a46312a4503520de2e11f1">Free</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="comment">/*ptr*/</span>, std::optional&lt;CStringView&gt; <span class="comment">/*name*/</span>,</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            <span class="keywordtype">int</span> <span class="comment">/*depth*/</span>,</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="keyword">const</span> std::source_location&amp; <span class="comment">/*loc*/</span> =</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                std::source_location::current()) noexcept<span class="keyword"> override </span>{}</div>
 </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="comment"></span> </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment">   * @brief Memory discard events are not emitted in the JSON format.</span></div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="comment">   * @param name Pool name</span></div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno"><a class="line" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a75e5aeb978963a2e82b7ea2326b0bda6">  224</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a75e5aeb978963a2e82b7ea2326b0bda6">MemoryDiscard</a>(<a class="code hl_typedef" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> <span class="comment">/*name*/</span>) <span class="keyword">noexcept</span> <span class="keyword">override</span> {}</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment"></span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment">   * @brief Memory discard events are not emitted in the JSON format.</span></div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment">   * @param name Pool name</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment">   * @param depth Callstack depth</span></div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a5502f463efa7c780e1f08256cbf91c3e">  231</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a5502f463efa7c780e1f08256cbf91c3e">MemoryDiscard</a>(<a class="code hl_typedef" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> <span class="comment">/*name*/</span>, <span class="keywordtype">int</span> <span class="comment">/*depth*/</span>) <span class="keyword">noexcept</span> <span class="keyword">override</span> {}</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment"></span> </div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">   * @brief Returns the backend identifier.</span></div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment">   * @return `&quot;flamegraph&quot;`</span></div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment">   */</span></div>
-<div class="foldopen" id="foldopen00237" data-start="{" data-end="}">
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a7ebb4ca6c36a9f536e22c2cdc895d7d3">  237</a></span>  [[nodiscard]] std::string_view <a class="code hl_function" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a7ebb4ca6c36a9f536e22c2cdc895d7d3">Name</a>() const noexcept<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;flamegraph&quot;</span>;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="comment"></span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment">   * @brief Memory discard events are not emitted in the JSON format.</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">   * @param name Pool name</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a75e5aeb978963a2e82b7ea2326b0bda6">  227</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a75e5aeb978963a2e82b7ea2326b0bda6">MemoryDiscard</a>(<a class="code hl_typedef" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> <span class="comment">/*name*/</span>) <span class="keyword">noexcept</span> <span class="keyword">override</span> {}</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment"></span> </div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">   * @brief Memory discard events are not emitted in the JSON format.</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">   * @param name Pool name</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">   * @param depth Callstack depth</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno"><a class="line" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a5502f463efa7c780e1f08256cbf91c3e">  234</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a5502f463efa7c780e1f08256cbf91c3e">MemoryDiscard</a>(<a class="code hl_typedef" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> <span class="comment">/*name*/</span>, <span class="keywordtype">int</span> <span class="comment">/*depth*/</span>) <span class="keyword">noexcept</span> <span class="keyword">override</span> {}</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment"></span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment">   * @brief Returns the backend identifier.</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment">   * @return `&quot;flamegraph&quot;`</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment">   */</span></div>
+<div class="foldopen" id="foldopen00240" data-start="{" data-end="}">
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno"><a class="line" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a7ebb4ca6c36a9f536e22c2cdc895d7d3">  240</a></span>  [[nodiscard]] std::string_view <a class="code hl_function" href="classhelios_1_1profile_1_1FlamegraphBackend.html#a7ebb4ca6c36a9f536e22c2cdc895d7d3">Name</a>() const noexcept<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;flamegraph&quot;</span>;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  }</div>
 </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="keyword">private</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="comment">   * @brief Per-zone state stored in the zone storage slice.</span></div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="comment">   * @details Lives on the stack inside `ScopedZone::storage_` and is</span></div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="comment">   * placement-constructed / destroyed by `BeginZone` / `EndZone`.</span></div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  <span class="keyword">struct </span>ZoneState {</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    std::string_view name;</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    uint64_t start_ts = 0;</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    std::string_view text;</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    uint64_t value = 0;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    <span class="keywordtype">bool</span> has_value = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="keywordtype">bool</span> has_text = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>  };</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="comment"></span> </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="comment">   * @brief A completed zone event ready for JSON emission.</span></div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="comment">   * @details Emitted as a Chrome Tracing complete event (`ph: &quot;X&quot;`) with</span></div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="comment">   * duration computed from `end_ts - start_ts`.</span></div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>  <span class="keyword">struct </span>CompleteEvent {</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    std::string name;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    uint64_t start_ts = 0;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    uint64_t end_ts = 0;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    uint64_t tid = 0;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    std::string text;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    uint64_t value = 0;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordtype">bool</span> has_value = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordtype">bool</span> has_text = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>  };</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="comment"></span> </div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="comment">   * @brief An instant event (frame marks, messages).</span></div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="comment">   * @details Emitted as a Chrome Tracing instant event (`ph: &quot;i&quot;`).</span></div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>  <span class="keyword">struct </span>InstantEvent {</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    std::string name;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    uint64_t ts = 0;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    uint64_t tid = 0;</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    std::string scope;</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  };</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span><span class="comment"></span> </div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="comment">   * @brief A counter event (plot samples).</span></div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="comment">   * @details Emitted as a Chrome Tracing counter event (`ph: &quot;C&quot;`).</span></div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  <span class="keyword">struct </span>CounterEvent {</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    std::string name;</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    uint64_t ts = 0;</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="keywordtype">double</span> value = 0.0;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  };</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="comment"></span> </div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="comment">  /// @brief Variant covering all event types stored in the lock-free queue.</span></div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  <span class="keyword">using </span>FlamegraphEvent =</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>      std::variant&lt;CompleteEvent, InstantEvent, CounterEvent&gt;;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="comment"></span> </div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="comment">  /// @brief Lock-free concurrent queue type.</span></div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  <span class="keyword">using </span>EventQueue = moodycamel::ConcurrentQueue&lt;FlamegraphEvent&gt;;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="comment">   * @brief Per-zone state stored in the zone storage slice.</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="comment">   * @details Lives on the stack inside `ScopedZone::storage_` and is</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="comment">   * placement-constructed / destroyed by `BeginZone` / `EndZone`.</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>  <span class="keyword">struct </span>ZoneState {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    std::string_view name;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    uint64_t start_ts = 0;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    std::string_view text;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    uint64_t value = 0;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordtype">bool</span> has_value = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <span class="keywordtype">bool</span> has_text = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  };</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="comment"></span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="comment">   * @brief A completed zone event ready for JSON emission.</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">   * @details Emitted as a Chrome Tracing complete event (`ph: &quot;X&quot;`) with</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">   * duration computed from `end_ts - start_ts`.</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  <span class="keyword">struct </span>CompleteEvent {</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    std::string name;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    uint64_t start_ts = 0;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    uint64_t end_ts = 0;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    uint64_t tid = 0;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    std::string text;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    uint64_t value = 0;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="keywordtype">bool</span> has_value = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    <span class="keywordtype">bool</span> has_text = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>  };</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="comment"></span> </div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="comment">   * @brief An instant event (frame marks, messages).</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="comment">   * @details Emitted as a Chrome Tracing instant event (`ph: &quot;i&quot;`).</span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>  <span class="keyword">struct </span>InstantEvent {</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    std::string name;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    uint64_t ts = 0;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    uint64_t tid = 0;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    std::string scope;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>  };</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="comment"></span> </div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="comment">   * @brief A counter event (plot samples).</span></div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="comment">   * @details Emitted as a Chrome Tracing counter event (`ph: &quot;C&quot;`).</span></div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  <span class="keyword">struct </span>CounterEvent {</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    std::string name;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    uint64_t ts = 0;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    <span class="keywordtype">double</span> value = 0.0;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  };</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="comment"></span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="comment">  /// @brief Variant covering all event types stored in the lock-free queue.</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  <span class="keyword">using </span>FlamegraphEvent =</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>      std::variant&lt;CompleteEvent, InstantEvent, CounterEvent&gt;;</div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="comment"></span> </div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span><span class="comment">   * @brief Reinterprets a zone storage slice as ZoneState.</span></div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="comment">   * @param storage Byte span from the profiler</span></div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="comment">   * @return Pointer to the zone state</span></div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  [[nodiscard]] <span class="keyword">static</span> ZoneState* AsZoneState(</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>      std::span&lt;std::byte&gt; storage) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    <span class="keywordflow">return</span> std::launder(<span class="keyword">reinterpret_cast&lt;</span>ZoneState*<span class="keyword">&gt;</span>(storage.data()));</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  }</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="comment"></span> </div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="comment">   * @brief Returns the current time in microseconds since epoch.</span></div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span><span class="comment">   * @return Microsecond timestamp</span></div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  [[nodiscard]] <span class="keyword">static</span> uint64_t NowMicros() noexcept;</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="comment"></span> </div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span><span class="comment">   * @brief Returns a numeric hash of the current thread id.</span></div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="comment">   * @return Thread identifier for JSON `tid` field</span></div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  [[nodiscard]] static uint64_t ThreadId() noexcept;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="comment"></span> </div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span><span class="comment">   * @brief Writes a JSON-escaped string to the output stream.</span></div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="comment">   * @param os Output stream</span></div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="comment">   * @param str Raw string to escape and write</span></div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  static <span class="keywordtype">void</span> WriteJsonString(std::ostream&amp; os, std::string_view str) noexcept;</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="comment"></span> </div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="comment">   * @brief Writes a single event to the output file as a JSON object.</span></div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="comment">   * @param event Event to write</span></div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  <span class="keywordtype">void</span> WriteEvent(const FlamegraphEvent&amp; event) noexcept;</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment"></span> </div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="comment">   * @brief Dequeues and writes up to `count` events from the queue.</span></div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="comment">   * @details Acquires the flush lock to prevent concurrent writes to the</span></div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="comment">   * output file. If another thread is already flushing, returns</span></div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span><span class="comment">   * immediately.</span></div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span><span class="comment">   * @param count Maximum number of events to flush</span></div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  <span class="keywordtype">void</span> FlushBatch(<span class="keywordtype">size_t</span> count) noexcept;</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span><span class="comment"></span> </div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="comment">   * @brief Dequeues and writes all remaining events, then writes the JSON</span></div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="comment">   * array epilogue and closes the file.</span></div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="comment">   * @details Spins on the flush lock to ensure all concurrent flushes</span></div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="comment">   * complete before draining the queue. Only called from `Shutdown()`.</span></div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  <span class="keywordtype">void</span> FlushAll() noexcept;</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="comment"></span> </div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span><span class="comment">   * @brief Called after each event enqueue to check if a flush is needed.</span></div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><span class="comment">   * @details If `flush_threshold_ &gt; 0` and the approximate queue size</span></div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="comment">   * reaches the threshold, triggers a batch flush.</span></div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>  <span class="keywordtype">void</span> MaybeFlush() noexcept;</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span> </div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>  FlamegraphBackendConfig config_;</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  EventQueue event_queue_;</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  std::ofstream output_file_;</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  std::atomic_flag flush_lock_ = ATOMIC_FLAG_INIT;</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  <span class="keywordtype">bool</span> first_event_written_ = false;</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>  <span class="keywordtype">bool</span> file_open_ = false;</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  <span class="keywordtype">bool</span> started_ = false;</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>};</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="comment">  /// @brief Lock-free concurrent queue type.</span></div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  <span class="keyword">using </span>EventQueue = moodycamel::ConcurrentQueue&lt;FlamegraphEvent&gt;;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="comment"></span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="comment">   * @brief Reinterprets a zone storage slice as ZoneState.</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="comment">   * @param storage Byte span from the profiler</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="comment">   * @return Pointer to the zone state</span></div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  [[nodiscard]] <span class="keyword">static</span> ZoneState* AsZoneState(</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      std::span&lt;std::byte&gt; storage) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <span class="keywordflow">return</span> std::launder(<span class="keyword">reinterpret_cast&lt;</span>ZoneState*<span class="keyword">&gt;</span>(storage.data()));</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  }</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span><span class="comment"></span> </div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span><span class="comment">   * @brief Returns the current time in microseconds since epoch.</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="comment">   * @return Microsecond timestamp</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  [[nodiscard]] <span class="keyword">static</span> uint64_t NowMicros() noexcept;</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="comment"></span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span><span class="comment">   * @brief Returns a numeric hash of the current thread id.</span></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="comment">   * @return Thread identifier for JSON `tid` field</span></div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  [[nodiscard]] static uint64_t ThreadId() noexcept;</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="comment"></span> </div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span><span class="comment">   * @brief Writes a JSON-escaped string to the output stream.</span></div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span><span class="comment">   * @param os Output stream</span></div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="comment">   * @param str Raw string to escape and write</span></div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  static <span class="keywordtype">void</span> WriteJsonString(std::ostream&amp; os, std::string_view str) noexcept;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="comment"></span> </div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="comment">   * @brief Writes a single event to the output file as a JSON object.</span></div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment">   * @param event Event to write</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  <span class="keywordtype">void</span> WriteEvent(const FlamegraphEvent&amp; event) noexcept;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="comment"></span> </div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span><span class="comment">   * @brief Dequeues and writes up to `count` events from the queue.</span></div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span><span class="comment">   * @details Acquires the flush lock to prevent concurrent writes to the</span></div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="comment">   * output file. If another thread is already flushing, returns</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span><span class="comment">   * immediately.</span></div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span><span class="comment">   * @param count Maximum number of events to flush</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  <span class="keywordtype">void</span> FlushBatch(<span class="keywordtype">size_t</span> count) noexcept;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="comment"></span> </div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="comment">   * @brief Dequeues and writes all remaining events, then writes the JSON</span></div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="comment">   * array epilogue and closes the file.</span></div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span><span class="comment">   * @details Spins on the flush lock to ensure all concurrent flushes</span></div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="comment">   * complete before draining the queue. Only called from `Shutdown()`.</span></div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>  <span class="keywordtype">void</span> FlushAll() noexcept;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><span class="comment"></span> </div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span><span class="comment">   * @brief Called after each event enqueue to check if a flush is needed.</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="comment">   * @details If `flush_threshold_ &gt; 0` and the approximate queue size</span></div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span><span class="comment">   * reaches the threshold, triggers a batch flush.</span></div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  <span class="keywordtype">void</span> MaybeFlush() noexcept;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  FlamegraphBackendConfig config_;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  EventQueue event_queue_;</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>  std::ofstream output_file_;</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  std::atomic_flag flush_lock_ = ATOMIC_FLAG_INIT;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  <span class="keywordtype">bool</span> first_event_written_ = false;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  <span class="keywordtype">bool</span> file_open_ = false;</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  <span class="keywordtype">bool</span> started_ = false;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>};</div>
 </div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>}  <span class="comment">// namespace helios::profile</span></div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="preprocessor">#endif  </span><span class="comment">// HELIOS_MODULE_CONSUMER_SHIM</span></div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>}  <span class="comment">// namespace helios::profile</span></div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span><span class="preprocessor">#endif  </span><span class="comment">// HELIOS_MODULE_CONSUMER_SHIM</span></div>
 <div class="ttc" id="abackend_8hpp_html"><div class="ttname"><a href="backend_8hpp.html">backend.hpp</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1Backend_html"><div class="ttname"><a href="classhelios_1_1profile_1_1Backend.html">helios::profile::Backend</a></div><div class="ttdoc">Abstract profiler backend interface.</div><div class="ttdef"><b>Definition</b> <a href="backend_8hpp_source.html#l00041">backend.hpp:41</a></div></div>
+<div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a171fecfee7a46312a4503520de2e11f1"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a171fecfee7a46312a4503520de2e11f1">helios::profile::FlamegraphBackend::Free</a></div><div class="ttdeci">void Free(const void *, std::optional&lt; CStringView &gt;, int, const std::source_location &amp;=std::source_location::current()) noexcept override</div><div class="ttdoc">Memory deallocation events are not emitted in the JSON format.</div><div class="ttdef"><b>Definition</b> <a href="#l00218">flamegraph.hpp:218</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a18bd2d4a5feb06868b469c95b43e91e6"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a18bd2d4a5feb06868b469c95b43e91e6">helios::profile::FlamegraphBackend::~FlamegraphBackend</a></div><div class="ttdeci">~FlamegraphBackend() noexcept override=default</div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a1b59ee06e939d99b3c06b49ae53725cd"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a1b59ee06e939d99b3c06b49ae53725cd">helios::profile::FlamegraphBackend::ZoneText</a></div><div class="ttdeci">void ZoneText(std::span&lt; std::byte &gt; storage, std::string_view text) noexcept override</div><div class="ttdoc">Attaches a text annotation to the active zone.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00087">flamegraph.cpp:87</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a284c4a69be2488ea8e2a2f38cee5aaf1"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a284c4a69be2488ea8e2a2f38cee5aaf1">helios::profile::FlamegraphBackend::Shutdown</a></div><div class="ttdeci">void Shutdown() noexcept override</div><div class="ttdoc">Flushes all remaining events, writes the JSON array epilogue, and closes the output file.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00047">flamegraph.cpp:47</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a2929d08d496a7b2c27d8f2d1246dbf9d"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a2929d08d496a7b2c27d8f2d1246dbf9d">helios::profile::FlamegraphBackend::ZoneStorageSize</a></div><div class="ttdeci">size_t ZoneStorageSize() const noexcept override</div><div class="ttdoc">Returns the per-zone storage size in bytes.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00030">flamegraph.cpp:30</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a3010cb9897d165f85688ee648586020e"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a3010cb9897d165f85688ee648586020e">helios::profile::FlamegraphBackend::FrameMark</a></div><div class="ttdeci">void FrameMark() noexcept override</div><div class="ttdoc">Enqueues an unnamed frame-mark instant event.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00107">flamegraph.cpp:107</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a37035a348572b6b86b739ad63c4cc70b"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a37035a348572b6b86b739ad63c4cc70b">helios::profile::FlamegraphBackend::FlamegraphBackend</a></div><div class="ttdeci">FlamegraphBackend(const FlamegraphBackend &amp;)=delete</div></div>
-<div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a3899a241829bb819c149e2e7f38eebee"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a3899a241829bb819c149e2e7f38eebee">helios::profile::FlamegraphBackend::Alloc</a></div><div class="ttdeci">void Alloc(const void *, size_t, std::optional&lt; CStringView &gt;, int, std::source_location) noexcept override</div><div class="ttdoc">Memory allocation events are not emitted in the JSON format.</div><div class="ttdef"><b>Definition</b> <a href="#l00206">flamegraph.hpp:206</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a3d5dda6a8423b517fd82cef4aebb1502"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a3d5dda6a8423b517fd82cef4aebb1502">helios::profile::FlamegraphBackend::ZoneName</a></div><div class="ttdeci">void ZoneName(std::span&lt; std::byte &gt; storage, std::string_view name) noexcept override</div><div class="ttdoc">Overrides the name of the active zone.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00101">flamegraph.cpp:101</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a40aa023f57014f1e84fd2fa1a1573afb"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a40aa023f57014f1e84fd2fa1a1573afb">helios::profile::FlamegraphBackend::FlamegraphBackend</a></div><div class="ttdeci">FlamegraphBackend(FlamegraphBackendConfig config={}) noexcept</div><div class="ttdoc">Constructs with a custom configuration.</div><div class="ttdef"><b>Definition</b> <a href="#l00068">flamegraph.hpp:68</a></div></div>
-<div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a48b92f4a5223ecdcecb34df2d1583583"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a48b92f4a5223ecdcecb34df2d1583583">helios::profile::FlamegraphBackend::Free</a></div><div class="ttdeci">void Free(const void *, std::optional&lt; CStringView &gt;, int, std::source_location) noexcept override</div><div class="ttdoc">Memory deallocation events are not emitted in the JSON format.</div><div class="ttdef"><b>Definition</b> <a href="#l00217">flamegraph.hpp:217</a></div></div>
-<div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a5502f463efa7c780e1f08256cbf91c3e"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a5502f463efa7c780e1f08256cbf91c3e">helios::profile::FlamegraphBackend::MemoryDiscard</a></div><div class="ttdeci">void MemoryDiscard(CStringView, int) noexcept override</div><div class="ttdoc">Memory discard events are not emitted in the JSON format.</div><div class="ttdef"><b>Definition</b> <a href="#l00231">flamegraph.hpp:231</a></div></div>
+<div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a5502f463efa7c780e1f08256cbf91c3e"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a5502f463efa7c780e1f08256cbf91c3e">helios::profile::FlamegraphBackend::MemoryDiscard</a></div><div class="ttdeci">void MemoryDiscard(CStringView, int) noexcept override</div><div class="ttdoc">Memory discard events are not emitted in the JSON format.</div><div class="ttdef"><b>Definition</b> <a href="#l00234">flamegraph.hpp:234</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a55cd7212a0ed60c9396f2c7a180052fa"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a55cd7212a0ed60c9396f2c7a180052fa">helios::profile::FlamegraphBackend::ZoneValue</a></div><div class="ttdeci">void ZoneValue(std::span&lt; std::byte &gt; storage, uint64_t value) noexcept override</div><div class="ttdoc">Attaches a numeric value to the active zone.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00094">flamegraph.cpp:94</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a58925621014be5a20e1efb8f4884dacf"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a58925621014be5a20e1efb8f4884dacf">helios::profile::FlamegraphBackend::EndZone</a></div><div class="ttdeci">void EndZone(std::span&lt; std::byte &gt; storage) noexcept override</div><div class="ttdoc">Records the end of an instrumented zone and enqueues a completed event.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00063">flamegraph.cpp:63</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a65f86f2cbbe3557f5b43e82cc6453121"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a65f86f2cbbe3557f5b43e82cc6453121">helios::profile::FlamegraphBackend::Startup</a></div><div class="ttdeci">void Startup() noexcept override</div><div class="ttdoc">Opens the output file and writes the JSON array prologue.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00037">flamegraph.cpp:37</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a6eee63d1c0af7062b7a7f379542ee0d8"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a6eee63d1c0af7062b7a7f379542ee0d8">helios::profile::FlamegraphBackend::PlotConfig</a></div><div class="ttdeci">void PlotConfig(CStringView, PlotFormat, bool, bool, uint32_t) noexcept override</div><div class="ttdoc">Plot configuration is not represented in the JSON format.</div><div class="ttdef"><b>Definition</b> <a href="#l00195">flamegraph.hpp:195</a></div></div>
-<div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a75e5aeb978963a2e82b7ea2326b0bda6"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a75e5aeb978963a2e82b7ea2326b0bda6">helios::profile::FlamegraphBackend::MemoryDiscard</a></div><div class="ttdeci">void MemoryDiscard(CStringView) noexcept override</div><div class="ttdoc">Memory discard events are not emitted in the JSON format.</div><div class="ttdef"><b>Definition</b> <a href="#l00224">flamegraph.hpp:224</a></div></div>
-<div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a7ebb4ca6c36a9f536e22c2cdc895d7d3"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a7ebb4ca6c36a9f536e22c2cdc895d7d3">helios::profile::FlamegraphBackend::Name</a></div><div class="ttdeci">std::string_view Name() const noexcept override</div><div class="ttdoc">Returns the backend identifier.</div><div class="ttdef"><b>Definition</b> <a href="#l00237">flamegraph.hpp:237</a></div></div>
+<div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a75e5aeb978963a2e82b7ea2326b0bda6"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a75e5aeb978963a2e82b7ea2326b0bda6">helios::profile::FlamegraphBackend::MemoryDiscard</a></div><div class="ttdeci">void MemoryDiscard(CStringView) noexcept override</div><div class="ttdoc">Memory discard events are not emitted in the JSON format.</div><div class="ttdef"><b>Definition</b> <a href="#l00227">flamegraph.hpp:227</a></div></div>
+<div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a7ebb4ca6c36a9f536e22c2cdc895d7d3"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a7ebb4ca6c36a9f536e22c2cdc895d7d3">helios::profile::FlamegraphBackend::Name</a></div><div class="ttdeci">std::string_view Name() const noexcept override</div><div class="ttdoc">Returns the backend identifier.</div><div class="ttdef"><b>Definition</b> <a href="#l00240">flamegraph.hpp:240</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a8f5a5a75bc2a540e8494eb816b99212b"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a8f5a5a75bc2a540e8494eb816b99212b">helios::profile::FlamegraphBackend::SetThreadName</a></div><div class="ttdeci">void SetThreadName(CStringView) noexcept override</div><div class="ttdoc">Thread name events are not emitted in the JSON format.</div><div class="ttdef"><b>Definition</b> <a href="#l00177">flamegraph.hpp:177</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a980fe2ef9ac6fa9d9e853573c3f99e8f"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a980fe2ef9ac6fa9d9e853573c3f99e8f">helios::profile::FlamegraphBackend::BeginZone</a></div><div class="ttdeci">void BeginZone(const ZoneSpec &amp;spec, std::span&lt; std::byte &gt; storage) noexcept override</div><div class="ttdoc">Records the start of an instrumented zone.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00055">flamegraph.cpp:55</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_a9cf578e80c746721f3fabd83dca76fc4"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#a9cf578e80c746721f3fabd83dca76fc4">helios::profile::FlamegraphBackend::FlamegraphBackend</a></div><div class="ttdeci">FlamegraphBackend(FlamegraphBackend &amp;&amp;)=delete</div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_aa195c0e97a7b4028d986f3901164a602"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#aa195c0e97a7b4028d986f3901164a602">helios::profile::FlamegraphBackend::Plot</a></div><div class="ttdeci">void Plot(CStringView name, double value) noexcept override</div><div class="ttdoc">Enqueues a counter (plot) event with the given value.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00158">flamegraph.cpp:158</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_abff27229175c2e6d76b80a15f8ce4107"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#abff27229175c2e6d76b80a15f8ce4107">helios::profile::FlamegraphBackend::FrameMarkStart</a></div><div class="ttdeci">void FrameMarkStart(CStringView name) noexcept override</div><div class="ttdoc">Enqueues a frame-region-start instant event.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00127">flamegraph.cpp:127</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_acc1dcc68398b33a4854fea1ef3275716"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#acc1dcc68398b33a4854fea1ef3275716">helios::profile::FlamegraphBackend::FrameMarkEnd</a></div><div class="ttdeci">void FrameMarkEnd(CStringView name) noexcept override</div><div class="ttdoc">Enqueues a frame-region-end instant event.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00137">flamegraph.cpp:137</a></div></div>
+<div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_ad834146963d85c5f423e3606632adc25"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#ad834146963d85c5f423e3606632adc25">helios::profile::FlamegraphBackend::Alloc</a></div><div class="ttdeci">void Alloc(const void *, size_t, std::optional&lt; CStringView &gt;, int, const std::source_location &amp;=std::source_location::current()) noexcept override</div><div class="ttdoc">Memory allocation events are not emitted in the JSON format.</div><div class="ttdef"><b>Definition</b> <a href="#l00206">flamegraph.hpp:206</a></div></div>
 <div class="ttc" id="aclasshelios_1_1profile_1_1FlamegraphBackend_html_ade6733324b98fc7df3a589ceb58b8680"><div class="ttname"><a href="classhelios_1_1profile_1_1FlamegraphBackend.html#ade6733324b98fc7df3a589ceb58b8680">helios::profile::FlamegraphBackend::Message</a></div><div class="ttdeci">void Message(std::string_view text, uint32_t color) noexcept override</div><div class="ttdoc">Enqueues a message as an instant event.</div><div class="ttdef"><b>Definition</b> <a href="flamegraph_8cpp_source.html#l00147">flamegraph.cpp:147</a></div></div>
 <div class="ttc" id="acompiler_2include_2helios_2config_8hpp_html"><div class="ttname"><a href="compiler_2include_2helios_2config_8hpp.html">config.hpp</a></div><div class="ttdoc">Dual header / C++20 named-module wrapping macros.</div></div>
 <div class="ttc" id="acompiler_2include_2helios_2config_8hpp_html_a9caf8264360e388df0e8f8837594e009"><div class="ttname"><a href="compiler_2include_2helios_2config_8hpp.html#a9caf8264360e388df0e8f8837594e009">HELIOS_MODULE_EXPORT</a></div><div class="ttdeci">#define HELIOS_MODULE_EXPORT</div><div class="ttdef"><b>Definition</b> <a href="compiler_2include_2helios_2config_8hpp_source.html#l00019">config.hpp:19</a></div></div>

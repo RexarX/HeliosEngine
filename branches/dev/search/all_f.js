@@ -57,7 +57,7 @@ var searchData=
   ['log_20—_20logging_54',['`log` — Logging',['../dir_2241064965c8d9ca993f08b926076f7d.html#log--logging',1,'']]],
   ['log_2ehpp_55',['log.hpp',['../log_8hpp.html',1,'']]],
   ['log_5fdirectory_56',['log_directory',['../structhelios_1_1log_1_1Config.html#af2ba67ecf080a03bc15df1c01fe18eee',1,'helios::log::Config']]],
-  ['logassertionvialogger_57',['LogAssertionViaLogger',['../namespacehelios_1_1log_1_1details.html#a201722f711a427b79a0f2c1d1be79762',1,'helios::log::details']]],
+  ['logassertionvialogger_57',['LogAssertionViaLogger',['../namespacehelios_1_1log_1_1details.html#a7791abd8be18d736cad1b9d1397c3013',1,'helios::log::details']]],
   ['logger_58',['Logger',['../classhelios_1_1log_1_1Logger.html',1,'helios::log::Logger'],['../classhelios_1_1log_1_1Logger.html#a5a8282f17db409d68b86e4ecdb975531',1,'helios::log::Logger::Logger(const Logger &amp;)=delete'],['../classhelios_1_1log_1_1Logger.html#a1835c720d1a9403885b3f4abde7b682f',1,'helios::log::Logger::Logger(Logger &amp;&amp;)=delete']]],
   ['logger_20types_59',['Custom Logger Types',['../dir_2241064965c8d9ca993f08b926076f7d.html#custom-logger-types',1,'']]],
   ['logger_2ecpp_60',['logger.cpp',['../logger_8cpp.html',1,'']]],
@@ -69,7 +69,8 @@ var searchData=
   ['loggertypeindex_66',['LoggerTypeIndex',['../namespacehelios_1_1log.html#a344817756a6c68e671a220a24f75b6b6',1,'helios::log']]],
   ['loggerwithconfigtrait_67',['LoggerWithConfigTrait',['../concepthelios_1_1log_1_1LoggerWithConfigTrait.html',1,'helios::log']]],
   ['logging_68',['`log` — Logging',['../dir_2241064965c8d9ca993f08b926076f7d.html#log--logging',1,'']]],
-  ['logpluginassertionhandler_69',['LogPluginAssertionHandler',['../namespacehelios_1_1details.html#ae8a3b4bbfc9cf2296127d58f340438c1',1,'helios::details']]],
+  ['logpluginassertionhandler_69',['LogPluginAssertionHandler',['../namespacehelios_1_1details.html#aab80b9a64cea79fe8c4a1aed41e7e0d1',1,'helios::details']]],
   ['logsdlerror_70',['LogSdlError',['../namespacehelios_1_1sdl3_1_1anonymous__namespace_02lifetime_8cpp_03.html#a68fc4b7c065fc50cd37d0c197d770205',1,'helios::sdl3::anonymous_namespace{lifetime.cpp}']]],
-  ['lowerbound_71',['LowerBound',['../classhelios_1_1container_1_1FlatMap.html#ae9085a919edf5c2700ecbb260591f299',1,'helios::container::FlatMap::LowerBound(const K &amp;key) noexcept'],['../classhelios_1_1container_1_1FlatMap.html#a4f8f98671dd8c721d90d9834c33093f6',1,'helios::container::FlatMap::LowerBound(const K &amp;key) const noexcept']]]
+  ['longperiodrandomengine_71',['LongPeriodRandomEngine',['../namespacehelios_1_1utils.html#ab0b00ba264132644947d3cc0f599513a',1,'helios::utils']]],
+  ['lowerbound_72',['LowerBound',['../classhelios_1_1container_1_1FlatMap.html#ae9085a919edf5c2700ecbb260591f299',1,'helios::container::FlatMap::LowerBound(const K &amp;key) noexcept'],['../classhelios_1_1container_1_1FlatMap.html#a4f8f98671dd8c721d90d9834c33093f6',1,'helios::container::FlatMap::LowerBound(const K &amp;key) const noexcept']]]
 ];

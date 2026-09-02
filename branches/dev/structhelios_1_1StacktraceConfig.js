@@ -1,7 +1,7 @@
 var structhelios_1_1StacktraceConfig =
 [
     [ "FromSource", "structhelios_1_1StacktraceConfig.html#a4d19f26452ca4ead3b908569c81f1378", null ],
-    [ "FromSourceLocation", "structhelios_1_1StacktraceConfig.html#a834521894b6a49c1ed5c49744fa965e7", null ],
+    [ "FromSourceLocation", "structhelios_1_1StacktraceConfig.html#a094e3ff282256835c1038db9a60c3233", null ],
     [ "exclude_frames_containing", "structhelios_1_1StacktraceConfig.html#a8b674e4a504df440172cd20d1b028568", null ],
     [ "include_frames_containing", "structhelios_1_1StacktraceConfig.html#a9aa30bb365f05fa70b4d11d47e96c71a", null ],
     [ "max_depth", "structhelios_1_1StacktraceConfig.html#a9fd91cbcfed90539688efa9ed5b90561", null ],
