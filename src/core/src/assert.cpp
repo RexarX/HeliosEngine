@@ -25,7 +25,8 @@ namespace {
 constexpr size_t kDefaultAssertionStacktraceFrames = 10;
 
 [[nodiscard]] constexpr StacktraceConfig BuildAssertionStacktraceConfig(
-    const std::source_location& loc) noexcept {
+    const std::source_location& loc =
+        std::source_location::current()) noexcept {
   auto config = StacktraceConfig::FromSourceLocation(loc);
   config.start_frame = 1;
   config.max_frames = kDefaultAssertionStacktraceFrames;
@@ -38,8 +39,8 @@ constexpr size_t kDefaultAssertionStacktraceFrames = 10;
 namespace details {
 
 std::string FormatAssertionMessage(std::string_view condition,
-                                   const std::source_location& loc,
-                                   std::string_view message) {
+                                   std::string_view message,
+                                   const std::source_location& loc) {
   std::string result;
   result.reserve(256);
 
@@ -66,9 +67,9 @@ std::string FormatAssertionMessage(std::string_view condition,
 }
 
 void DefaultAssertionHandler(std::string_view condition,
-                             const std::source_location& loc,
-                             std::string_view message) noexcept {
-  const auto formatted = FormatAssertionMessage(condition, loc, message);
+                             std::string_view message,
+                             const std::source_location& loc) noexcept {
+  const auto formatted = FormatAssertionMessage(condition, message, loc);
 
 #if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
   std::println(stderr, "{}", formatted);
@@ -81,14 +82,15 @@ void DefaultAssertionHandler(std::string_view condition,
 
 }  // namespace details
 
-void AbortWithStacktrace(std::string_view message) noexcept {
+void AbortWithStacktrace(std::string_view message,
+                         const std::source_location& loc) noexcept {
 #if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
   std::println(stderr, "\n=== FATAL ERROR ===");
   std::println(stderr, "Message: {}", message);
 
 #ifdef HELIOS_ENABLE_STACKTRACE
-  const auto stacktrace = Stacktrace::Capture(
-      BuildAssertionStacktraceConfig(std::source_location::current()));
+  const auto stacktrace =
+      Stacktrace::Capture(BuildAssertionStacktraceConfig(loc));
   std::println(stderr, "\n{}", stacktrace.ToString());
 #else
   std::println(
@@ -103,8 +105,8 @@ void AbortWithStacktrace(std::string_view message) noexcept {
                message.data());
 
 #ifdef HELIOS_ENABLE_STACKTRACE
-  const auto stacktrace = Stacktrace::Capture(
-      BuildAssertionStacktraceConfig(std::source_location::current()));
+  const auto stacktrace =
+      Stacktrace::Capture(BuildAssertionStacktraceConfig(loc));
   const std::string text = stacktrace.ToString();
   std::fprintf(stderr, "\n%s\n", text.c_str());
 #else
@@ -137,40 +139,39 @@ bool HasLogPluginHandler() noexcept {
 #endif
 void LogPluginAssertionHandler(
     [[maybe_unused]] std::string_view condition,
-    [[maybe_unused]] const std::source_location& loc,
-    [[maybe_unused]] std::string_view message) noexcept {
+    [[maybe_unused]] std::string_view message,
+    [[maybe_unused]] const std::source_location& loc) noexcept {
 }
 
 #endif  // !_MSC_VER
 
 }  // namespace details
 
-void HandleAssertion(std::string_view condition,
-                     const std::source_location& loc,
-                     std::string_view message) noexcept {
+void HandleAssertion(std::string_view condition, std::string_view message,
+                     const std::source_location& loc) noexcept {
   // Priority 1: Custom user handler
   if (details::g_custom_assertion_handler != nullptr) {
-    details::g_custom_assertion_handler(condition, loc, message);
+    details::g_custom_assertion_handler(condition, message, loc);
     return;
   }
 
   // Priority 2: Log plugin handler (if available)
 #ifdef _MSC_VER
   if (details::HasLogPluginHandler()) {
-    details::LogPluginAssertionHandler(condition, loc, message);
+    details::LogPluginAssertionHandler(condition, message, loc);
     return;
   }
 #else
   if (details::HasLogPluginHandler != nullptr &&
       details::LogPluginAssertionHandler != nullptr &&
       details::HasLogPluginHandler()) {
-    details::LogPluginAssertionHandler(condition, loc, message);
+    details::LogPluginAssertionHandler(condition, message, loc);
     return;
   }
 #endif
 
   // Priority 3: Default handler (printf/println to stderr)
-  details::DefaultAssertionHandler(condition, loc, message);
+  details::DefaultAssertionHandler(condition, message, loc);
 }
 
 }  // namespace helios

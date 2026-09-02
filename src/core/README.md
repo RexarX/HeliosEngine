@@ -12,7 +12,7 @@ Foundational utilities used by every other module: assertions, UUIDs, stack trac
 | `StacktraceConfig` | Configuration for stack trace capture (frames, skip, filters).                             |
 | `CStringView`      | Null-terminated string view for APIs requiring `\0`.                                       |
 | `WCStringView`     | Wide-char variant. Also `U8CStringView`, `U16CStringView`, `U32CStringView`.               |
-| `AssertionHandler` | `void(*)(std::string_view, std::source_location, std::string_view)` — custom handler.      |
+| `AssertionHandler` | `void(*)(std::string_view, std::string_view, std::source_location)` — custom handler.      |
 
 ## Assert System
 
@@ -32,9 +32,8 @@ Priority-based handler dispatch: custom handler → log plugin (weak symbol) →
 Custom assertion handler:
 
 ```cpp
-SetAssertionHandler([](std::string_view condition,
-                       const std::source_location& loc,
-                       std::string_view message) noexcept {
+SetAssertionHandler([](std::string_view condition, std::string_view message,
+                       const std::source_location& loc) noexcept {
   // Custom logging / crash reporter
 });
 AbortWithStacktrace("Unrecoverable state detected");

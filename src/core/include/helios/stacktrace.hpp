@@ -65,7 +65,8 @@ struct StacktraceConfig {
   std::string_view exclude_frames_containing;
 
   [[nodiscard]] static constexpr StacktraceConfig FromSourceLocation(
-      const std::source_location& loc) noexcept {
+      const std::source_location& loc =
+          std::source_location::current()) noexcept {
     StacktraceConfig config;
     config.source_file = loc.file_name();
     config.source_line = loc.line();

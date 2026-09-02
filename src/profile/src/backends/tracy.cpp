@@ -132,7 +132,7 @@ void TracyBackend::PlotConfig(CStringView name, PlotFormat type, bool step,
 
 void TracyBackend::Alloc(const void* ptr, size_t size,
                          std::optional<CStringView> name, int depth,
-                         std::source_location /*loc*/) noexcept {
+                         const std::source_location& /*loc*/) noexcept {
   if (!name.has_value()) {
     if (depth > 0) {
       tracy::Profiler::MemAllocCallstack(ptr, size, depth, false);
@@ -153,7 +153,8 @@ void TracyBackend::Alloc(const void* ptr, size_t size,
 }
 
 void TracyBackend::Free(const void* ptr, std::optional<CStringView> name,
-                        int depth, std::source_location /*loc*/) noexcept {
+                        int depth,
+                        const std::source_location& /*loc*/) noexcept {
   if (!name.has_value()) {
     if (depth > 0) {
       tracy::Profiler::MemFreeCallstack(ptr, depth, false);

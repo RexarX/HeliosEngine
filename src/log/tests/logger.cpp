@@ -2,7 +2,6 @@
 
 #include <helios/log/logger.hpp>
 
-#include <source_location>
 #include <string>
 #include <string_view>
 
@@ -281,13 +280,12 @@ TEST_SUITE("helios::log::Logger") {
 
   TEST_CASE("helios::log::LogAssertionViaLogger: integration") {
     SUBCASE("LogAssertionViaLogger doesn't crash") {
-      CHECK_NOTHROW(details::LogAssertionViaLogger(
-          "test_condition", std::source_location::current(), ""));
+      CHECK_NOTHROW(details::LogAssertionViaLogger("test_condition", ""));
     }
 
     SUBCASE("LogAssertionViaLogger with message") {
-      CHECK_NOTHROW(details::LogAssertionViaLogger(
-          "test_condition", std::source_location::current(), "Test message"));
+      CHECK_NOTHROW(
+          details::LogAssertionViaLogger("test_condition", "Test message"));
     }
   }
 

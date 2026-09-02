@@ -1,7 +1,8 @@
-#include <algorithm>
-#include <cmath>
+#include <limits>
 #include <random>
 #include <set>
+#include <thread>
+#include <type_traits>
 #include <vector>
 
 #include <doctest/doctest.h>
@@ -20,6 +21,27 @@ TEST_SUITE("helios::utils::Random") {
       CHECK(RandomEngine<FastRandomEngine>);
     }
 
+    SUBCASE("SmallRandomEngine satisfies concept") {
+      CHECK(RandomEngine<SmallRandomEngine>);
+    }
+
+    SUBCASE("LongPeriodRandomEngine satisfies concept") {
+      CHECK(RandomEngine<LongPeriodRandomEngine>);
+    }
+
+    SUBCASE("Named xoshiro engines satisfy concept") {
+      CHECK(RandomEngine<Xoshiro256StarStar>);
+      CHECK(RandomEngine<Xoshiro256PlusPlus>);
+      CHECK(RandomEngine<Xoshiro256Plus>);
+      CHECK(RandomEngine<Xoroshiro128PlusPlus>);
+      CHECK(RandomEngine<Xoroshiro128StarStar>);
+      CHECK(RandomEngine<Xoroshiro128Plus>);
+      CHECK(RandomEngine<Xoshiro128StarStar>);
+      CHECK(RandomEngine<Xoshiro128PlusPlus>);
+      CHECK(RandomEngine<Xoshiro512StarStar>);
+      CHECK(RandomEngine<Xoroshiro1024StarStar>);
+    }
+
     SUBCASE("Standard engines satisfy concept") {
       CHECK(RandomEngine<std::mt19937>);
       CHECK(RandomEngine<std::mt19937_64>);
@@ -27,29 +49,106 @@ TEST_SUITE("helios::utils::Random") {
     }
   }
 
-  TEST_CASE("helios::utils::RandomDeviceSeed: seed generation") {
+  TEST_CASE("helios::utils::Random: engine role aliases") {
+    SUBCASE("Default is xoshiro256**") {
+      CHECK(std::is_same_v<DefaultRandomEngine, Xoshiro256StarStar>);
+    }
+
+    SUBCASE("Fast is xoroshiro128++") {
+      CHECK(std::is_same_v<FastRandomEngine, Xoroshiro128PlusPlus>);
+    }
+
+    SUBCASE("Small is xoshiro128**") {
+      CHECK(std::is_same_v<SmallRandomEngine, Xoshiro128StarStar>);
+    }
+
+    SUBCASE("Long-period is xoshiro512**") {
+      CHECK(std::is_same_v<LongPeriodRandomEngine, Xoshiro512StarStar>);
+    }
+  }
+
+  TEST_CASE("helios::utils::RandomDeviceSeed: process entropy") {
     SUBCASE("Generates non-zero seed") {
-      uint64_t seed = RandomDeviceSeed();
-      // While technically 0 is possible, it's astronomically unlikely
+      const uint64_t seed = RandomDeviceSeed();
       CHECK_NE(seed, 0);
     }
 
-    SUBCASE("Generates different seeds on successive calls") {
+    SUBCASE("Returns the same value on successive calls") {
+      const uint64_t first = RandomDeviceSeed();
+      const uint64_t second = RandomDeviceSeed();
+      CHECK_EQ(first, second);
+    }
+  }
+
+  TEST_CASE("helios::utils::MixThreadSeed: unique mixed seeds") {
+    SUBCASE("Generates non-zero seed") {
+      CHECK_NE(MixThreadSeed(), 0);
+    }
+
+    SUBCASE("Successive calls produce distinct seeds") {
       std::set<uint64_t> seeds;
-      for (int i = 0; i < 10; ++i) {
-        seeds.insert(RandomDeviceSeed());
+      for (int i = 0; i < 16; ++i) {
+        seeds.insert(MixThreadSeed());
       }
-      // Should have multiple unique seeds
-      CHECK_GT(seeds.size(), 1);
+      CHECK_EQ(seeds.size(), 16);
+    }
+
+    SUBCASE("Differs from the cached process seed") {
+      CHECK_NE(MixThreadSeed(), RandomDeviceSeed());
+    }
+  }
+
+  TEST_CASE("helios::utils::MakeEngine: engine creation") {
+    SUBCASE("Default template argument creates DefaultRandomEngine") {
+      auto engine = MakeEngine();
+      CHECK(std::is_same_v<decltype(engine), DefaultRandomEngine>);
+      const auto value = engine();
+      CHECK_GE(value, DefaultRandomEngine::min());
+      CHECK_LE(value, DefaultRandomEngine::max());
+    }
+
+    SUBCASE("Explicit seed is repeatable") {
+      constexpr DefaultRandomEngine::result_type kSeed = 0x123456789abcdef0ULL;
+      auto engine1 = MakeEngine(kSeed);
+      auto engine2 = MakeEngine(kSeed);
+      CHECK_EQ(engine1(), engine2());
+      CHECK_EQ(engine1(), engine2());
+    }
+
+    SUBCASE("Unseeded engines produce different sequences") {
+      auto engine1 = MakeEngine();
+      auto engine2 = MakeEngine();
+      CHECK_NE(engine1(), engine2());
+    }
+
+    SUBCASE("Fast engine template argument") {
+      auto engine = MakeEngine<FastRandomEngine>();
+      CHECK(std::is_same_v<decltype(engine), FastRandomEngine>);
+      const auto value = engine();
+      CHECK_GE(value, FastRandomEngine::min());
+      CHECK_LE(value, FastRandomEngine::max());
+    }
+
+    SUBCASE("Small 32-bit engine") {
+      auto engine = MakeEngine<SmallRandomEngine>();
+      CHECK(std::is_same_v<decltype(engine)::result_type, uint32_t>);
+      const auto value = engine();
+      CHECK_GE(value, SmallRandomEngine::min());
+      CHECK_LE(value, SmallRandomEngine::max());
+    }
+
+    SUBCASE("Long-period engine") {
+      auto engine = MakeEngine<LongPeriodRandomEngine>();
+      const auto value = engine();
+      CHECK_GE(value, LongPeriodRandomEngine::min());
+      CHECK_LE(value, LongPeriodRandomEngine::max());
     }
   }
 
   TEST_CASE("helios::utils::MakeDefaultEngine: engine creation") {
     SUBCASE("Creates valid engine") {
       auto engine = MakeDefaultEngine();
-      // Engine should produce valid output
-      auto value = engine();
-      // Just verify it doesn't crash and produces a value
+      const auto value = engine();
       CHECK_GE(value, DefaultRandomEngine::min());
       CHECK_LE(value, DefaultRandomEngine::max());
     }
@@ -57,21 +156,30 @@ TEST_SUITE("helios::utils::Random") {
     SUBCASE("Different engines produce different sequences") {
       auto engine1 = MakeDefaultEngine();
       auto engine2 = MakeDefaultEngine();
-
-      // Engines seeded differently should produce different values
-      auto value1 = engine1();
-      auto value2 = engine2();
-      // This could theoretically be equal, but astronomically unlikely
-      CHECK_NE(value1, value2);
+      CHECK_NE(engine1(), engine2());
     }
   }
 
   TEST_CASE("helios::utils::MakeFastEngine: engine creation") {
     SUBCASE("Creates valid engine") {
       auto engine = MakeFastEngine();
-      auto value = engine();
+      const auto value = engine();
       CHECK_GE(value, FastRandomEngine::min());
       CHECK_LE(value, FastRandomEngine::max());
+    }
+  }
+
+  TEST_CASE("helios::utils::ThreadLocalEngine: per-thread instance") {
+    SUBCASE("Returns the same instance on the same thread") {
+      auto& engine1 = ThreadLocalEngine<DefaultRandomEngine>();
+      auto& engine2 = ThreadLocalEngine<DefaultRandomEngine>();
+      CHECK_EQ(&engine1, &engine2);
+    }
+
+    SUBCASE("Different engine types have independent instances") {
+      auto& def = ThreadLocalEngine<DefaultRandomEngine>();
+      auto& fast = ThreadLocalEngine<FastRandomEngine>();
+      CHECK_NE(static_cast<void*>(&def), static_cast<void*>(&fast));
     }
   }
 
@@ -84,24 +192,55 @@ TEST_SUITE("helios::utils::Random") {
 
     SUBCASE("Engine produces valid output") {
       auto& engine = DefaultEngine();
-      auto value = engine();
+      const auto value = engine();
       CHECK_GE(value, DefaultRandomEngine::min());
       CHECK_LE(value, DefaultRandomEngine::max());
     }
+
+    SUBCASE("Matches ThreadLocalEngine<DefaultRandomEngine>") {
+      CHECK_EQ(&DefaultEngine(), &ThreadLocalEngine<DefaultRandomEngine>());
+    }
   }
 
-  TEST_CASE("helios::utils::FastEngineInstance: thread-local fast engine") {
+  TEST_CASE("helios::utils::FastEngine: thread-local fast engine") {
     SUBCASE("Returns reference to engine") {
-      auto& engine1 = FastEngineInstance();
-      auto& engine2 = FastEngineInstance();
+      auto& engine1 = FastEngine();
+      auto& engine2 = FastEngine();
       CHECK_EQ(&engine1, &engine2);
     }
 
     SUBCASE("Engine produces valid output") {
-      auto& engine = FastEngineInstance();
-      auto value = engine();
+      auto& engine = FastEngine();
+      const auto value = engine();
       CHECK_GE(value, FastRandomEngine::min());
       CHECK_LE(value, FastRandomEngine::max());
+    }
+  }
+
+  TEST_CASE(
+      "helios::utils::MakeEngine: parallel threads get distinct streams") {
+    SUBCASE("Two threads produce different first values") {
+      DefaultRandomEngine::result_type value_a = 0;
+      DefaultRandomEngine::result_type value_b = 0;
+
+      std::thread thread_a{[&] { value_a = MakeDefaultEngine()(); }};
+      std::thread thread_b{[&] { value_b = MakeDefaultEngine()(); }};
+      thread_a.join();
+      thread_b.join();
+
+      CHECK_NE(value_a, value_b);
+    }
+
+    SUBCASE("Thread-local engines are distinct objects") {
+      DefaultRandomEngine* ptr_a = nullptr;
+      DefaultRandomEngine* ptr_b = nullptr;
+
+      std::thread thread_a{[&] { ptr_a = &DefaultEngine(); }};
+      std::thread thread_b{[&] { ptr_b = &DefaultEngine(); }};
+      thread_a.join();
+      thread_b.join();
+
+      CHECK_NE(ptr_a, ptr_b);
     }
   }
 
@@ -134,14 +273,14 @@ TEST_SUITE("helios::utils::Random") {
 
     SUBCASE("Uniform int distribution") {
       std::uniform_int_distribution<int> dist(0, 100);
-      auto value = generator.Next(dist);
+      const auto value = generator.Next(dist);
       CHECK_GE(value, 0);
       CHECK_LE(value, 100);
     }
 
     SUBCASE("Uniform real distribution") {
       std::uniform_real_distribution<double> dist(0.0, 1.0);
-      auto value = generator.Next(dist);
+      const auto value = generator.Next(dist);
       CHECK_GE(value, 0.0);
       CHECK_LT(value, 1.0);
     }
@@ -152,15 +291,15 @@ TEST_SUITE("helios::utils::Random") {
     RandomGenerator<DefaultRandomEngine> generator(engine);
 
     SUBCASE("Integer types") {
-      auto int_val = generator.Value<int>();
+      const auto int_val = generator.Value<int>();
       CHECK_GE(int_val, std::numeric_limits<int>::min());
       CHECK_LE(int_val, std::numeric_limits<int>::max());
 
-      auto uint_val = generator.Value<unsigned int>();
+      const auto uint_val = generator.Value<unsigned int>();
       CHECK_GE(uint_val, std::numeric_limits<unsigned int>::min());
       CHECK_LE(uint_val, std::numeric_limits<unsigned int>::max());
 
-      auto short_val = generator.Value<short>();
+      const auto short_val = generator.Value<short>();
       CHECK_GE(short_val, std::numeric_limits<short>::min());
       CHECK_LE(short_val, std::numeric_limits<short>::max());
     }
@@ -170,17 +309,16 @@ TEST_SUITE("helios::utils::Random") {
       for (int i = 0; i < 100; ++i) {
         values.insert(generator.Value<bool>());
       }
-      // Should have generated both true and false
       CHECK_EQ(values.size(), 2);
     }
 
     SUBCASE("Floating point types in [0, 1)") {
       for (int i = 0; i < 100; ++i) {
-        auto float_val = generator.Value<float>();
-        CHECK_GE(float_val, 0.0f);
-        CHECK_LT(float_val, 1.0f);
+        const auto float_val = generator.Value<float>();
+        CHECK_GE(float_val, 0.0F);
+        CHECK_LT(float_val, 1.0F);
 
-        auto double_val = generator.Value<double>();
+        const auto double_val = generator.Value<double>();
         CHECK_GE(double_val, 0.0);
         CHECK_LT(double_val, 1.0);
       }
@@ -195,7 +333,7 @@ TEST_SUITE("helios::utils::Random") {
 
     SUBCASE("Integer range") {
       for (int i = 0; i < 100; ++i) {
-        auto value = generator.ValueFromRange(10, 20);
+        const auto value = generator.ValueFromRange(10, 20);
         CHECK_GE(value, 10);
         CHECK_LE(value, 20);
       }
@@ -203,7 +341,7 @@ TEST_SUITE("helios::utils::Random") {
 
     SUBCASE("Negative integer range") {
       for (int i = 0; i < 100; ++i) {
-        auto value = generator.ValueFromRange(-50, -10);
+        const auto value = generator.ValueFromRange(-50, -10);
         CHECK_GE(value, -50);
         CHECK_LE(value, -10);
       }
@@ -211,7 +349,7 @@ TEST_SUITE("helios::utils::Random") {
 
     SUBCASE("Mixed sign range") {
       for (int i = 0; i < 100; ++i) {
-        auto value = generator.ValueFromRange(-10, 10);
+        const auto value = generator.ValueFromRange(-10, 10);
         CHECK_GE(value, -10);
         CHECK_LE(value, 10);
       }
@@ -219,20 +357,20 @@ TEST_SUITE("helios::utils::Random") {
 
     SUBCASE("Floating point range") {
       for (int i = 0; i < 100; ++i) {
-        auto value = generator.ValueFromRange(5.0, 15.0);
+        const auto value = generator.ValueFromRange(5.0, 15.0);
         CHECK_GE(value, 5.0);
         CHECK_LT(value, 15.0);
       }
     }
 
     SUBCASE("Mixed types (int and float)") {
-      auto value = generator.ValueFromRange(0, 10.5);
+      const auto value = generator.ValueFromRange(0, 10.5);
       CHECK_GE(value, 0.0);
       CHECK_LT(value, 10.5);
     }
 
     SUBCASE("Single value range") {
-      auto value = generator.ValueFromRange(42, 42);
+      const auto value = generator.ValueFromRange(42, 42);
       CHECK_EQ(value, 42);
     }
   }
@@ -244,10 +382,8 @@ TEST_SUITE("helios::utils::Random") {
     auto& ref = generator.EngineRef();
     CHECK_EQ(&ref, &engine);
 
-    // Modify through reference
-    auto value_before = ref();
-    auto value_after = ref();
-    // Sequential calls should give different values
+    const auto value_before = ref();
+    const auto value_after = ref();
     CHECK_NE(value_before, value_after);
   }
 
@@ -260,8 +396,7 @@ TEST_SUITE("helios::utils::Random") {
 
     SUBCASE("Generator works correctly") {
       auto& gen = RandomDefault();
-      auto value = gen.Value<int>();
-      // Just verify it produces a value
+      const auto value = gen.Value<int>();
       CHECK_GE(value, std::numeric_limits<int>::min());
       CHECK_LE(value, std::numeric_limits<int>::max());
     }
@@ -276,7 +411,7 @@ TEST_SUITE("helios::utils::Random") {
 
     SUBCASE("Generator works correctly") {
       auto& gen = RandomFast();
-      auto value = gen.Value<int>();
+      const auto value = gen.Value<int>();
       CHECK_GE(value, std::numeric_limits<int>::min());
       CHECK_LE(value, std::numeric_limits<int>::max());
     }
@@ -284,16 +419,16 @@ TEST_SUITE("helios::utils::Random") {
 
   TEST_CASE("helios::utils::RandomValue: convenience function") {
     SUBCASE("Integer type") {
-      auto value = RandomValue<int>();
+      const auto value = RandomValue<int>();
       CHECK_GE(value, std::numeric_limits<int>::min());
       CHECK_LE(value, std::numeric_limits<int>::max());
     }
 
     SUBCASE("Float type in [0, 1)") {
       for (int i = 0; i < 100; ++i) {
-        auto value = RandomValue<float>();
-        CHECK_GE(value, 0.0f);
-        CHECK_LT(value, 1.0f);
+        const auto value = RandomValue<float>();
+        CHECK_GE(value, 0.0F);
+        CHECK_LT(value, 1.0F);
       }
     }
 
@@ -309,7 +444,7 @@ TEST_SUITE("helios::utils::Random") {
   TEST_CASE("helios::utils::RandomValueFromRange: convenience function") {
     SUBCASE("Integer range") {
       for (int i = 0; i < 100; ++i) {
-        auto value = RandomValueFromRange(1, 6);
+        const auto value = RandomValueFromRange(1, 6);
         CHECK_GE(value, 1);
         CHECK_LE(value, 6);
       }
@@ -317,7 +452,7 @@ TEST_SUITE("helios::utils::Random") {
 
     SUBCASE("Float range") {
       for (int i = 0; i < 100; ++i) {
-        auto value = RandomValueFromRange(0.0, 100.0);
+        const auto value = RandomValueFromRange(0.0, 100.0);
         CHECK_GE(value, 0.0);
         CHECK_LT(value, 100.0);
       }
@@ -326,16 +461,16 @@ TEST_SUITE("helios::utils::Random") {
 
   TEST_CASE("helios::utils::RandomFastValue: convenience function") {
     SUBCASE("Integer type") {
-      auto value = RandomFastValue<int>();
+      const auto value = RandomFastValue<int>();
       CHECK_GE(value, std::numeric_limits<int>::min());
       CHECK_LE(value, std::numeric_limits<int>::max());
     }
 
     SUBCASE("Float type in [0, 1)") {
       for (int i = 0; i < 100; ++i) {
-        auto value = RandomFastValue<float>();
-        CHECK_GE(value, 0.0f);
-        CHECK_LT(value, 1.0f);
+        const auto value = RandomFastValue<float>();
+        CHECK_GE(value, 0.0F);
+        CHECK_LT(value, 1.0F);
       }
     }
   }
@@ -343,7 +478,7 @@ TEST_SUITE("helios::utils::Random") {
   TEST_CASE("helios::utils::RandomFastValueFromRange: convenience function") {
     SUBCASE("Integer range") {
       for (int i = 0; i < 100; ++i) {
-        auto value = RandomFastValueFromRange(100, 200);
+        const auto value = RandomFastValueFromRange(100, 200);
         CHECK_GE(value, 100);
         CHECK_LE(value, 200);
       }
@@ -351,16 +486,14 @@ TEST_SUITE("helios::utils::Random") {
 
     SUBCASE("Float range") {
       for (int i = 0; i < 100; ++i) {
-        auto value = RandomFastValueFromRange(-10.0f, 10.0f);
-        CHECK_GE(value, -10.0f);
-        CHECK_LT(value, 10.0f);
+        const auto value = RandomFastValueFromRange(-10.0F, 10.0F);
+        CHECK_GE(value, -10.0F);
+        CHECK_LT(value, 10.0F);
       }
     }
   }
 
   TEST_CASE("helios::utils::Random: statistical distribution") {
-    // Very basic statistical test - values should be roughly uniformly
-    // distributed
     SUBCASE("Integer range distribution is reasonable") {
       constexpr int kMin = 0;
       constexpr int kMax = 9;
@@ -373,8 +506,6 @@ TEST_SUITE("helios::utils::Random") {
         ++counts[static_cast<size_t>(value - kMin)];
       }
 
-      // Each bucket should have roughly kSamples / kBuckets counts
-      // Allow for reasonable variance (within 50% of expected)
       const int expected = kSamples / kBuckets;
       const int tolerance = expected / 2;
 
@@ -394,7 +525,6 @@ TEST_SUITE("helios::utils::Random") {
         }
       }
 
-      // Should be roughly 50% (allow 10% variance)
       const int tolerance = kSamples / 10;
       CHECK_GT(true_count, kSamples / 2 - tolerance);
       CHECK_LT(true_count, kSamples / 2 + tolerance);
@@ -407,8 +537,8 @@ TEST_SUITE("helios::utils::Random") {
                            RandomGenerator<DefaultRandomEngine>>);
     }
 
-    SUBCASE("FastRandomGeneratorType is correct alias") {
-      CHECK(std::is_same_v<FastRandomGeneratorType,
+    SUBCASE("FastRandomGenerator is correct alias") {
+      CHECK(std::is_same_v<FastRandomGenerator,
                            RandomGenerator<FastRandomEngine>>);
     }
   }
@@ -418,36 +548,61 @@ TEST_SUITE("helios::utils::Random") {
     RandomGenerator<DefaultRandomEngine> generator(engine);
 
     SUBCASE("short type") {
-      auto value = generator.Value<short>();
+      const auto value = generator.Value<short>();
       CHECK_GE(value, std::numeric_limits<short>::min());
       CHECK_LE(value, std::numeric_limits<short>::max());
     }
 
     SUBCASE("unsigned short type") {
-      auto value = generator.Value<unsigned short>();
+      const auto value = generator.Value<unsigned short>();
       CHECK_GE(value, std::numeric_limits<unsigned short>::min());
       CHECK_LE(value, std::numeric_limits<unsigned short>::max());
     }
 
     SUBCASE("long type") {
-      auto value = generator.Value<long>();
+      const auto value = generator.Value<long>();
       CHECK_GE(value, std::numeric_limits<long>::min());
       CHECK_LE(value, std::numeric_limits<long>::max());
     }
 
     SUBCASE("long long type") {
-      auto value = generator.Value<long long>();
+      const auto value = generator.Value<long long>();
       CHECK_GE(value, std::numeric_limits<long long>::min());
       CHECK_LE(value, std::numeric_limits<long long>::max());
     }
 
     SUBCASE("long double type") {
       for (int i = 0; i < 100; ++i) {
-        auto value = generator.Value<long double>();
+        const auto value = generator.Value<long double>();
         CHECK_GE(value, 0.0L);
         CHECK_LT(value, 1.0L);
       }
     }
   }
 
+  TEST_CASE("helios::utils::RandomGenerator: additional engines") {
+    SUBCASE("Fast engine generator") {
+      auto engine = MakeFastEngine();
+      RandomGenerator<FastRandomEngine> generator(engine);
+      const auto value = generator.ValueFromRange(0, 10);
+      CHECK_GE(value, 0);
+      CHECK_LE(value, 10);
+    }
+
+    SUBCASE("Small engine generator") {
+      auto engine = MakeEngine<SmallRandomEngine>();
+      RandomGenerator<SmallRandomEngine> generator(engine);
+      const auto value = generator.ValueFromRange(1, 6);
+      CHECK_GE(value, 1);
+      CHECK_LE(value, 6);
+    }
+
+    SUBCASE("Long-period engine generator") {
+      auto engine = MakeEngine<LongPeriodRandomEngine>();
+      RandomGenerator<LongPeriodRandomEngine> generator(engine);
+      const auto value = generator.Value<float>();
+      CHECK_GE(value, 0.0F);
+      CHECK_LT(value, 1.0F);
+    }
+  }
 }  // TEST_SUITE

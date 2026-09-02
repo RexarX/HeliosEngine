@@ -29,9 +29,10 @@ namespace helios::profile {
  * @param loc The source location of the allocation, used for grouping in the
  * profiler
  */
-inline void Alloc(
-    const void* ptr, size_t size, std::optional<CStringView> name, int depth,
-    std::source_location loc = std::source_location::current()) noexcept {
+inline void Alloc(const void* ptr, size_t size, std::optional<CStringView> name,
+                  int depth,
+                  const std::source_location& loc =
+                      std::source_location::current()) noexcept {
   Profiler::Instance().Alloc(ptr, size, name, depth, loc);
 }
 
@@ -43,9 +44,9 @@ inline void Alloc(
  * @param loc The source location of the deallocation, used for grouping in the
  * profiler
  */
-inline void Free(
-    const void* ptr, std::optional<CStringView> name, int depth,
-    std::source_location loc = std::source_location::current()) noexcept {
+inline void Free(const void* ptr, std::optional<CStringView> name, int depth,
+                 const std::source_location& loc =
+                     std::source_location::current()) noexcept {
   Profiler::Instance().Free(ptr, name, depth, loc);
 }
 

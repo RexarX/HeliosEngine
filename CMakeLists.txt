@@ -65,6 +65,8 @@ if(PROJECT_IS_TOP_LEVEL)
   endif()
 endif()
 
+include(CMakeDependentOption)
+
 # Build options
 option(HELIOS_DEVELOPER_MODE "Enable developer-focused build features" OFF)
 if(DEFINED DEVELOPER_MODE AND NOT DEFINED HELIOS_DEVELOPER_MODE)
@@ -82,9 +84,8 @@ option(HELIOS_ENABLE_UNITY_BUILD "Enable Unity/Jumbo builds" OFF)
 # LTO default ON for standalone engine builds; OFF when embedded so consumers
 # are not forced into LTO bitcode without opting in.
 option(HELIOS_ENABLE_LTO "Enable Link Time Optimization" ${PROJECT_IS_TOP_LEVEL})
-option(HELIOS_ENABLE_LTO_RELWITHDEBINFO
-    "Enable LTO for RelWithDebInfo (requires HELIOS_ENABLE_LTO; off by default for faster links)"
-    OFF)
+cmake_dependent_option(HELIOS_ENABLE_LTO_RELWITHDEBINFO "Enable LTO for RelWithDebInfo" OFF
+                       "HELIOS_ENABLE_LTO" OFF)
 option(HELIOS_ENABLE_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 option(HELIOS_ENABLE_INSTALL "Enable installation rules" OFF)
 option(HELIOS_BUILD_ALL_MODULES "Build every discovered module regardless of DEFAULT value" OFF)

@@ -33,6 +33,9 @@ helios_module(
         PUBLIC compiler
         PUBLIC platform
 
+    USES
+        xoshiro PUBLIC helios::lib::xoshiro
+
     TEST_SOURCES
         tests/common_traits.cpp
         tests/defer.cpp
