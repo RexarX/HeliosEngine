@@ -1,5 +1,8 @@
 var NAVTREEINDEX38 =
 {
+"namespacehelios_1_1window.html#afdd2d17ed92c8d78f3b362a9ef9bddff":[2,0,3,13,222],
+"namespacemembers.html":[2,1,0],
+"namespacemembers.html":[2,1,0,0],
 "namespacemembers_b.html":[2,1,0,1],
 "namespacemembers_c.html":[2,1,0,2],
 "namespacemembers_d.html":[2,1,0,3],
@@ -246,8 +249,5 @@ var NAVTREEINDEX38 =
 "stage__settings_8hpp_source.html":[5,0,2,5,0,0,0,6,9],
 "static__string_8hpp.html":[5,0,2,3,0,0,0,6],
 "static__string_8hpp_source.html":[5,0,2,3,0,0,0,6],
-"string__hash_8hpp.html":[5,0,2,15,0,0,0,11],
-"string__hash_8hpp_source.html":[5,0,2,15,0,0,0,11],
-"structanonymous__namespace_02free__list__allocator_8cpp_03_1_1AllocationHeader.html":[2,0,0,0],
-"structanonymous__namespace_02free__list__allocator_8cpp_03_1_1AllocationHeader.html":[4,0,0,0]
+"string__hash_8hpp.html":[5,0,2,15,0,0,0,11]
 };

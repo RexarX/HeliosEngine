@@ -1,5 +1,8 @@
 var NAVTREEINDEX58 =
 {
+"structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html":[4,0,3,115],
+"structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html#a3aa57adaa554a706f7ab47659e149184":[2,0,5,115,1],
+"structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html#a3aa57adaa554a706f7ab47659e149184":[4,0,3,115,1],
 "structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html#a9bbb3bf5dab513371da0ecde7063454b":[2,0,5,115,0],
 "structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html#a9bbb3bf5dab513371da0ecde7063454b":[4,0,3,115,0],
 "structstd_1_1formatter_3_01helios_1_1window_1_1Window_01_4.html":[2,0,5,116],

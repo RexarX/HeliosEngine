@@ -1,5 +1,8 @@
 var NAVTREEINDEX45 =
 {
+"structhelios_1_1input_1_1Gamepad.html#ace722b59fca952b4104b851b988f92be":[4,0,2,6,7,33],
+"structhelios_1_1input_1_1Gamepad.html#acf2761008317f12129b95ddfa6c68cab":[2,0,3,7,10,16],
+"structhelios_1_1input_1_1Gamepad.html#acf2761008317f12129b95ddfa6c68cab":[4,0,2,6,7,16],
 "structhelios_1_1input_1_1Gamepad.html#ad55ccf094cf6bd04148ba7dd8a9a21c8":[2,0,3,7,10,3],
 "structhelios_1_1input_1_1Gamepad.html#ad55ccf094cf6bd04148ba7dd8a9a21c8":[4,0,2,6,7,3],
 "structhelios_1_1input_1_1Gamepad.html#ad99abfe3232807d075ae887281d508a9":[2,0,3,7,10,29],
@@ -246,8 +249,5 @@ var NAVTREEINDEX45 =
 "structhelios_1_1input_1_1Joystick.html#a07fe7638a4e1b942fb8e654b03ed4b48":[4,0,2,6,23,9],
 "structhelios_1_1input_1_1Joystick.html#a12249122eb426c12e8c09528b4c0e912":[2,0,3,7,26,10],
 "structhelios_1_1input_1_1Joystick.html#a12249122eb426c12e8c09528b4c0e912":[4,0,2,6,23,10],
-"structhelios_1_1input_1_1Joystick.html#a14edd422305262b0e455bc9b65d0934f":[2,0,3,7,26,1],
-"structhelios_1_1input_1_1Joystick.html#a14edd422305262b0e455bc9b65d0934f":[4,0,2,6,23,1],
-"structhelios_1_1input_1_1Joystick.html#a16cbaee2dbb5483e1ae3d1a6c945edbd":[2,0,3,7,26,5],
-"structhelios_1_1input_1_1Joystick.html#a16cbaee2dbb5483e1ae3d1a6c945edbd":[4,0,2,6,23,5]
+"structhelios_1_1input_1_1Joystick.html#a14edd422305262b0e455bc9b65d0934f":[2,0,3,7,26,1]
 };

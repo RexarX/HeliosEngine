@@ -1,5 +1,8 @@
 var NAVTREEINDEX47 =
 {
+"structhelios_1_1input_1_1MouseButtonInputMsg.html#a6fda12299c13e7c2b6c7863ba78fc941":[4,0,2,6,38,5],
+"structhelios_1_1input_1_1MouseButtonInputMsg.html#a773f4dd2c9a29654359c6d3abb61be24":[2,0,3,7,41,6],
+"structhelios_1_1input_1_1MouseButtonInputMsg.html#a773f4dd2c9a29654359c6d3abb61be24":[4,0,2,6,38,6],
 "structhelios_1_1input_1_1MouseButtonInputMsg.html#ae7f9a97e4aa6207555ba41eb8319b41c":[2,0,3,7,41,4],
 "structhelios_1_1input_1_1MouseButtonInputMsg.html#ae7f9a97e4aa6207555ba41eb8319b41c":[4,0,2,6,38,4],
 "structhelios_1_1input_1_1MouseConnectionMsg.html":[2,0,3,7,42],
@@ -246,8 +249,5 @@ var NAVTREEINDEX47 =
 "structhelios_1_1input_1_1Pens.html#a38f6627cd0c9b5cfa6953babd7fa74bf":[4,0,2,6,50,4],
 "structhelios_1_1input_1_1Pens.html#a5670efba427a5f7087b41da5d8fb9150":[2,0,3,7,53,2],
 "structhelios_1_1input_1_1Pens.html#a5670efba427a5f7087b41da5d8fb9150":[4,0,2,6,50,2],
-"structhelios_1_1input_1_1Pens.html#a89d13dd8aa0f7d022c4bbcf6af6cbcc2":[2,0,3,7,53,1],
-"structhelios_1_1input_1_1Pens.html#a89d13dd8aa0f7d022c4bbcf6af6cbcc2":[4,0,2,6,50,1],
-"structhelios_1_1input_1_1Pens.html#afaae9037c9acdf743803fcc298fe1d62":[2,0,3,7,53,0],
-"structhelios_1_1input_1_1Pens.html#afaae9037c9acdf743803fcc298fe1d62":[4,0,2,6,50,0]
+"structhelios_1_1input_1_1Pens.html#a89d13dd8aa0f7d022c4bbcf6af6cbcc2":[2,0,3,7,53,1]
 };

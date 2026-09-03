@@ -1,5 +1,8 @@
 var NAVTREEINDEX51 =
 {
+"structhelios_1_1sdl3_1_1input_1_1StartupSet.html":[4,0,2,10,1,18],
+"structhelios_1_1sdl3_1_1input_1_1StartupSet.html#a0719c7280259cfb4deff2364a332d50f":[2,0,3,11,2,22,0],
+"structhelios_1_1sdl3_1_1input_1_1StartupSet.html#a0719c7280259cfb4deff2364a332d50f":[4,0,2,10,1,18,0],
 "structhelios_1_1sdl3_1_1input_1_1TouchCache.html":[2,0,3,11,2,23],
 "structhelios_1_1sdl3_1_1input_1_1TouchCache.html":[4,0,2,10,1,19],
 "structhelios_1_1sdl3_1_1input_1_1TouchCache.html#a767c13ca4c8a041ff60fe385fd2607ff":[2,0,3,11,2,23,1],
@@ -246,8 +249,5 @@ var NAVTREEINDEX51 =
 "structhelios_1_1window_1_1AppearanceMessages.html":[4,0,2,12,0],
 "structhelios_1_1window_1_1AppearanceMessages.html#a1d9bb7ee7f55da030feda0c4de9a0c33":[2,0,3,13,0,4],
 "structhelios_1_1window_1_1AppearanceMessages.html#a1d9bb7ee7f55da030feda0c4de9a0c33":[4,0,2,12,0,4],
-"structhelios_1_1window_1_1AppearanceMessages.html#a1dc5222b1bc00fed055c0308e46d8a95":[2,0,3,13,0,1],
-"structhelios_1_1window_1_1AppearanceMessages.html#a1dc5222b1bc00fed055c0308e46d8a95":[4,0,2,12,0,1],
-"structhelios_1_1window_1_1AppearanceMessages.html#a3f9ecfa806f4bf79d454761eb4c9949d":[2,0,3,13,0,8],
-"structhelios_1_1window_1_1AppearanceMessages.html#a3f9ecfa806f4bf79d454761eb4c9949d":[4,0,2,12,0,8]
+"structhelios_1_1window_1_1AppearanceMessages.html#a1dc5222b1bc00fed055c0308e46d8a95":[2,0,3,13,0,1]
 };

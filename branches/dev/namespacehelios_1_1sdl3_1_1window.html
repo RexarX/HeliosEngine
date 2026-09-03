@@ -248,6 +248,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ab4e501956794d529c0948dce31660a59" id="r_ab4e501956794d529c0948dce31660a59"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab4e501956794d529c0948dce31660a59">ApplyAutoIconify</a> (SDL_Window &amp;native_window, bool auto_iconify)</td></tr>
 <tr class="memitem:a868261822bd49f741137bcd7134ed08c" id="r_a868261822bd49f741137bcd7134ed08c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a868261822bd49f741137bcd7134ed08c">ApplyFocusOnShow</a> (bool focus_on_show)</td></tr>
 <tr class="memitem:a7a741fbf56e3c26be5b64b06c3fbed64" id="r_a7a741fbf56e3c26be5b64b06c3fbed64"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7a741fbf56e3c26be5b64b06c3fbed64">ApplyMousePassthrough</a> (SDL_Window &amp;native_window, bool passthrough)</td></tr>
+<tr class="memitem:a3e9930cc6996d2aeccfaae08945ad616" id="r_a3e9930cc6996d2aeccfaae08945ad616"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3e9930cc6996d2aeccfaae08945ad616">PresentSoftwareSurface</a> (SDL_Window &amp;native_window)</td></tr>
+<tr class="memdesc:a3e9930cc6996d2aeccfaae08945ad616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attaches and presents a placeholder framebuffer when the window has no GPU client API.  <br /></td></tr>
+<tr class="memitem:a8b2da09df0f71825dc112856915604ec" id="r_a8b2da09df0f71825dc112856915604ec"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8b2da09df0f71825dc112856915604ec">PresentSoftwareSurfaces</a> (const <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html">NativeWindows</a> &amp;native)</td></tr>
+<tr class="memdesc:a8b2da09df0f71825dc112856915604ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Presents placeholder framebuffers for mapped software windows.  <br /></td></tr>
 <tr class="memitem:a4ac57932f4be333e4353408fee049a5d" id="r_a4ac57932f4be333e4353408fee049a5d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4ac57932f4be333e4353408fee049a5d">SyncClipboard</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world, const <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html">NativeWindows</a> &amp;native, <a class="el" href="structhelios_1_1sdl3_1_1window_1_1Context.html">Context</a> &amp;context)</td></tr>
 <tr class="memitem:a439916c9524f05f2116733dd790f1a1a" id="r_a439916c9524f05f2116733dd790f1a1a"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a439916c9524f05f2116733dd790f1a1a">FindWindowMapEntry</a> (std::vector&lt; <a class="el" href="structhelios_1_1sdl3_1_1window_1_1WindowMap_1_1Entry.html">WindowMap::Entry</a> &gt; &amp;entries, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity)</td></tr>
 <tr class="memitem:a1add2e11741a2f202d173cb901f91389" id="r_a1add2e11741a2f202d173cb901f91389"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a1add2e11741a2f202d173cb901f91389">FindWindowMapEntry</a> (const std::vector&lt; <a class="el" href="structhelios_1_1sdl3_1_1window_1_1WindowMap_1_1Entry.html">WindowMap::Entry</a> &gt; &amp;entries, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity)</td></tr>
@@ -279,7 +283,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00493">493</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00494">494</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -302,7 +306,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00514">514</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00515">515</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -325,7 +329,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00264">264</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00265">265</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -348,7 +352,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00510">510</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00511">511</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -367,7 +371,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00518">518</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00519">519</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -390,7 +394,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00461">461</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00462">462</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -413,7 +417,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00373">373</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00374">374</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -436,7 +440,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00522">522</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00523">523</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -459,7 +463,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00506">506</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00507">507</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -482,7 +486,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00318">318</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00319">319</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -505,7 +509,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00470">470</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00471">471</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -528,7 +532,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00427">427</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00428">428</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -555,7 +559,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00232">232</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00233">233</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -582,7 +586,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00119">119</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00120">120</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -729,7 +733,61 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00214">214</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00215">215</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3e9930cc6996d2aeccfaae08945ad616" name="a3e9930cc6996d2aeccfaae08945ad616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e9930cc6996d2aeccfaae08945ad616">&#9670;&#160;</a></span>PresentSoftwareSurface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::PresentSoftwareSurface </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window &amp;</td>          <td class="paramname"><span class="paramname"><em>native_window</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attaches and presents a placeholder framebuffer when the window has no GPU client API. </p>
+<p>Wayland compositors keep a surface unmapped until a buffer is attached. Hidden windows and OpenGL, Vulkan, or Metal windows are skipped. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">native_window</td><td>Native SDL window </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00545">545</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8b2da09df0f71825dc112856915604ec" name="a8b2da09df0f71825dc112856915604ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b2da09df0f71825dc112856915604ec">&#9670;&#160;</a></span>PresentSoftwareSurfaces()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::sdl3::window::PresentSoftwareSurfaces </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html">NativeWindows</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>native</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Presents placeholder framebuffers for mapped software windows. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">native</td><td>Native window table </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00564">564</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -784,7 +842,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00145">145</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00146">146</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -830,7 +888,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00289">289</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00290">290</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -861,7 +919,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00133">133</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00134">134</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -889,7 +947,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00559">559</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00589">589</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>
@@ -912,7 +970,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00399">399</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html#l00400">400</a> of file <a class="el" href="sdl3__window_2src_2sync_8cpp_source.html">sync.cpp</a>.</p>
 
 </div>
 </div>

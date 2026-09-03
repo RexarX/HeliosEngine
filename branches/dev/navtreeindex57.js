@@ -1,5 +1,8 @@
 var NAVTREEINDEX57 =
 {
+"structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html#a8272340eeca54bfbb211af85d1f68804":[4,0,3,74,1],
+"structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html#a9b9bd7da99ca5b2743b235a81414d062":[2,0,5,74,0],
+"structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html#a9b9bd7da99ca5b2743b235a81414d062":[4,0,3,74,0],
 "structstd_1_1formatter_3_01helios_1_1input_1_1Touches_01_4.html":[2,0,5,71],
 "structstd_1_1formatter_3_01helios_1_1input_1_1Touches_01_4.html":[4,0,3,71],
 "structstd_1_1formatter_3_01helios_1_1input_1_1Touches_01_4.html#ac69b60c7488ff999e9df10b84eb2a9ae":[2,0,5,71,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX57 =
 "structstd_1_1formatter_3_01helios_1_1window_1_1VideoMode_01_4.html#a1bb37fdf14909bcd1eec0227a7500341":[4,0,3,114,1],
 "structstd_1_1formatter_3_01helios_1_1window_1_1VideoMode_01_4.html#ab2ab374233eebc9a7669a5f8aec8167b":[2,0,5,114,0],
 "structstd_1_1formatter_3_01helios_1_1window_1_1VideoMode_01_4.html#ab2ab374233eebc9a7669a5f8aec8167b":[4,0,3,114,0],
-"structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html":[2,0,5,115],
-"structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html":[4,0,3,115],
-"structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html#a3aa57adaa554a706f7ab47659e149184":[2,0,5,115,1],
-"structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html#a3aa57adaa554a706f7ab47659e149184":[4,0,3,115,1]
+"structstd_1_1formatter_3_01helios_1_1window_1_1VisibilityChangedMsg_01_4.html":[2,0,5,115]
 };

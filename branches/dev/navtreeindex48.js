@@ -1,15 +1,18 @@
 var NAVTREEINDEX48 =
 {
+"structhelios_1_1input_1_1Pens.html#a89d13dd8aa0f7d022c4bbcf6af6cbcc2":[4,0,2,6,50,1],
+"structhelios_1_1input_1_1Pens.html#afaae9037c9acdf743803fcc298fe1d62":[2,0,3,7,53,0],
+"structhelios_1_1input_1_1Pens.html#afaae9037c9acdf743803fcc298fe1d62":[4,0,2,6,50,0],
 "structhelios_1_1input_1_1Plugin.html":[2,0,3,7,56],
 "structhelios_1_1input_1_1Plugin.html":[4,0,2,6,53],
-"structhelios_1_1input_1_1Plugin.html#a12bcebe52e86d89a97fb2b35fe53f2ff":[2,0,3,7,56,3],
-"structhelios_1_1input_1_1Plugin.html#a12bcebe52e86d89a97fb2b35fe53f2ff":[4,0,2,6,53,3],
 "structhelios_1_1input_1_1Plugin.html#a20a86a113fb43bdc1ac35d5800e50dcc":[2,0,3,7,56,1],
 "structhelios_1_1input_1_1Plugin.html#a20a86a113fb43bdc1ac35d5800e50dcc":[4,0,2,6,53,1],
 "structhelios_1_1input_1_1Plugin.html#a60f3e71f69af2379fef30223ae75aec5":[2,0,3,7,56,0],
 "structhelios_1_1input_1_1Plugin.html#a60f3e71f69af2379fef30223ae75aec5":[4,0,2,6,53,0],
 "structhelios_1_1input_1_1Plugin.html#a6d363a5df30e69707a4bc1eb62123eaa":[2,0,3,7,56,2],
 "structhelios_1_1input_1_1Plugin.html#a6d363a5df30e69707a4bc1eb62123eaa":[4,0,2,6,53,2],
+"structhelios_1_1input_1_1Plugin.html#aa4ea294c868cf81d5b73227f4a1fa6cb":[2,0,3,7,56,3],
+"structhelios_1_1input_1_1Plugin.html#aa4ea294c868cf81d5b73227f4a1fa6cb":[4,0,2,6,53,3],
 "structhelios_1_1input_1_1Sensor.html":[2,0,3,7,57],
 "structhelios_1_1input_1_1Sensor.html":[4,0,2,6,54],
 "structhelios_1_1input_1_1Sensor.html#a1f0f9f90066d073261880c985a287b39":[2,0,3,7,57,2],
@@ -246,8 +249,5 @@ var NAVTREEINDEX48 =
 "structhelios_1_1input_1_1TouchWriters.html":[4,0,2,6,70],
 "structhelios_1_1input_1_1TouchWriters.html#a85ee5c1b73a3c47a9c1ed4456e82614a":[2,0,3,7,73,0],
 "structhelios_1_1input_1_1TouchWriters.html#a85ee5c1b73a3c47a9c1ed4456e82614a":[4,0,2,6,70,0],
-"structhelios_1_1input_1_1Touches.html":[2,0,3,7,69],
-"structhelios_1_1input_1_1Touches.html":[4,0,2,6,66],
-"structhelios_1_1input_1_1Touches.html#a11a786fdc89a6f0b93123544acb608c6":[2,0,3,7,69,1],
-"structhelios_1_1input_1_1Touches.html#a11a786fdc89a6f0b93123544acb608c6":[4,0,2,6,66,1]
+"structhelios_1_1input_1_1Touches.html":[2,0,3,7,69]
 };

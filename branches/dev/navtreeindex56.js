@@ -1,5 +1,8 @@
 var NAVTREEINDEX56 =
 {
+"structstd_1_1formatter_3_01helios_1_1input_1_1Gamepad_01_4.html#ae588cd79eb98b2ebccee30fbc3f7f4c7":[4,0,3,16,1],
+"structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html":[2,0,5,28],
+"structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html":[4,0,3,28],
 "structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html#a087d8ee171fe368a8a7d2ba72b2b439d":[2,0,5,28,1],
 "structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html#a087d8ee171fe368a8a7d2ba72b2b439d":[4,0,3,28,1],
 "structstd_1_1formatter_3_01helios_1_1input_1_1Gamepads_01_4.html#a172b6d179314294b1dd5b4636fb2f8b0":[2,0,5,28,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX56 =
 "structstd_1_1formatter_3_01helios_1_1input_1_1TouchInputMsg_01_4.html#afef427d88ce22994d24d6c87e57c2e04":[4,0,3,73,1],
 "structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html":[2,0,5,74],
 "structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html":[4,0,3,74],
-"structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html#a8272340eeca54bfbb211af85d1f68804":[2,0,5,74,1],
-"structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html#a8272340eeca54bfbb211af85d1f68804":[4,0,3,74,1],
-"structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html#a9b9bd7da99ca5b2743b235a81414d062":[2,0,5,74,0],
-"structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html#a9b9bd7da99ca5b2743b235a81414d062":[4,0,3,74,0]
+"structstd_1_1formatter_3_01helios_1_1input_1_1TouchPhase_01_4.html#a8272340eeca54bfbb211af85d1f68804":[2,0,5,74,1]
 };
