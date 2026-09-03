@@ -182,4 +182,3 @@ TEST_SUITE("helios::input::Plugin") {
     }
   }
 }
-[14:58:38.885] [93866] [info] HELIOS: HoverChangedMsg{entity=Entity{index: 0, generation: 2147483649}, hovered=false}[14:58:38.885] [93866] [info] HELIOS: HoverChangedMsg{entity=Entity{index: 0, generation: 2147483649}, hovered=false}[14:58:38.885] [93866] [info] HELIOS: HoverChangedMsg{entity=Entity{index: 0, generation: 2147483649}, hovered=false}[14:58:38.885] [93866] [info] HELIOS: HoverChangedMsg{entity=Entity{index: 0, generation: 2147483649}, hovered=false}
