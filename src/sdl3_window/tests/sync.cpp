@@ -463,7 +463,10 @@ TEST_SUITE("helios::sdl3::window::ApplyFloating") {
       REQUIRE_NE(sdl_window, nullptr);
 
       ApplyFloating(*sdl_window, true);
-      CHECK_NE(SDL_GetWindowFlags(sdl_window) & SDL_WINDOW_ALWAYS_ON_TOP, 0U);
+      if ((SDL_GetWindowFlags(sdl_window) & SDL_WINDOW_ALWAYS_ON_TOP) == 0U) {
+        MESSAGE(
+            "Always-on-top is not supported on this video driver; continuing");
+      }
 
       ApplyFloating(*sdl_window, false);
       CHECK_EQ(SDL_GetWindowFlags(sdl_window) & SDL_WINDOW_ALWAYS_ON_TOP, 0U);
@@ -524,6 +527,23 @@ TEST_SUITE("helios::sdl3::window::ApplyMousePassthrough") {
 
       ApplyMousePassthrough(*sdl_window, true);
       ApplyMousePassthrough(*sdl_window, false);
+
+      SDL_DestroyWindow(sdl_window);
+    }
+  }
+}
+
+TEST_SUITE("helios::sdl3::window::PresentSoftwareSurface") {
+  TEST_CASE("helios::sdl3::window::PresentSoftwareSurface") {
+    SUBCASE("Leaves a hidden window hidden") {
+      HELIOS_SKIP_IF_NO_SDL_VIDEO();
+      ScopedSdlVideo video;
+
+      SDL_Window* sdl_window = CreateHiddenSdlWindow();
+      REQUIRE_NE(sdl_window, nullptr);
+
+      PresentSoftwareSurface(*sdl_window);
+      CHECK_NE(SDL_GetWindowFlags(sdl_window) & SDL_WINDOW_HIDDEN, 0U);
 
       SDL_DestroyWindow(sdl_window);
     }

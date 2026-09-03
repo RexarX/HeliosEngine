@@ -2,8 +2,10 @@
 
 #include <helios/sdl3/systems/pump_events.hpp>
 
+#include <helios/app/builtin/app_exit.hpp>
 #include <helios/assert.hpp>
 #include <helios/ecs/resource/params.hpp>
+#include <helios/ecs/world.hpp>
 #include <helios/sdl3/context.hpp>
 #include <helios/sdl3/event_dispatcher.hpp>
 #include <helios/sdl3/lifetime.hpp>
@@ -40,8 +42,20 @@ void RequestNestedFramePump(Context& context) {
   context.in_nested_pump = false;
 }
 
+void HandleQuitEvent(ecs::World& world) {
+  if (!world.HasMessage<app::AppExit>()) [[unlikely]] {
+    return;
+  }
+
+  world.WriteMessages<app::AppExit>().Write(app::AppExit::Success());
+}
+
 void DispatchEvent(EventDispatcher& dispatcher, Context& context,
                    const SDL_Event& event) {
+  if (event.type == SDL_EVENT_QUIT) {
+    HandleQuitEvent(*context.world);
+  }
+
   dispatcher.Dispatch(event, *context.world);
   if (ShouldRequestNestedPump(event)) {
     RequestNestedFramePump(context);

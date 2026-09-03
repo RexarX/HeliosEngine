@@ -23,7 +23,7 @@
 namespace helios::input {
 
 void Plugin::Build(app::App& app) {
-  app.TryInsertResources(settings, Keyboard{}, Mouse{}, Gamepads{}, Joysticks{},
+  app.TryInsertResources(settings_, Keyboard{}, Mouse{}, Gamepads{}, Joysticks{},
                          Pens{}, Touches{}, Sensors{}, GamepadMappings{});
   app.AddMessages<
       KeyboardInputMsg, TextInputMsg, TextEditingMsg, TextEditingCandidatesMsg,

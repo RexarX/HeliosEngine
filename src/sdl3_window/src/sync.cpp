@@ -15,6 +15,7 @@
 #include <SDL3/SDL_mouse.h>
 #include <SDL3/SDL_rect.h>
 #include <SDL3/SDL_stdinc.h>
+#include <SDL3/SDL_surface.h>
 #include <SDL3/SDL_video.h>
 
 #ifdef HELIOS_PLATFORM_WINDOWS
@@ -539,6 +540,35 @@ void ApplyMousePassthrough(SDL_Window& native_window, bool passthrough) {
   (void)native_window;
   (void)passthrough;
 #endif
+}
+
+void PresentSoftwareSurface(SDL_Window& native_window) {
+  constexpr SDL_WindowFlags kGpuClient =
+      SDL_WINDOW_OPENGL | SDL_WINDOW_VULKAN | SDL_WINDOW_METAL;
+  const SDL_WindowFlags flags = SDL_GetWindowFlags(&native_window);
+  if ((flags & (SDL_WINDOW_HIDDEN | kGpuClient)) != 0) {
+    return;
+  }
+
+  SDL_Surface* surface = SDL_GetWindowSurface(&native_window);
+  if (surface == nullptr) [[unlikely]] {
+    return;
+  }
+
+  SDL_SetWindowSurfaceVSync(&native_window, SDL_WINDOW_SURFACE_VSYNC_DISABLED);
+  const Uint32 color = SDL_MapSurfaceRGB(surface, 0, 0, 0);
+  SDL_FillSurfaceRect(surface, nullptr, color);
+  SDL_UpdateWindowSurface(&native_window);
+}
+
+void PresentSoftwareSurfaces(const NativeWindows& native) {
+  for (const NativeWindows::Entry& entry : native.entries) {
+    if (entry.native.window == nullptr) [[unlikely]] {
+      continue;
+    }
+
+    PresentSoftwareSurface(*entry.native.window);
+  }
 }
 
 #ifdef HELIOS_PLATFORM_WINDOWS

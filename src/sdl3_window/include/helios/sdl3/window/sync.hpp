@@ -81,6 +81,21 @@ void ApplyFocusOnShow(bool focus_on_show);
 
 void ApplyMousePassthrough(SDL_Window& native_window, bool passthrough);
 
+/**
+ * @brief Attaches and presents a placeholder framebuffer when the window has
+ * no GPU client API.
+ * @details Wayland compositors keep a surface unmapped until a buffer is
+ * attached. Hidden windows and OpenGL, Vulkan, or Metal windows are skipped.
+ * @param native_window Native SDL window
+ */
+void PresentSoftwareSurface(SDL_Window& native_window);
+
+/**
+ * @brief Presents placeholder framebuffers for mapped software windows.
+ * @param native Native window table
+ */
+void PresentSoftwareSurfaces(const NativeWindows& native);
+
 void SyncClipboard(ecs::World& world, const NativeWindows& native,
                    Context& context);
 
