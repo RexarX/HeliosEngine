@@ -339,11 +339,10 @@ void Logger::DropLoggerFromSpdlog(
 
 namespace details {
 
-void LogAssertionViaLogger(std::string_view condition,
-                           const std::source_location& loc,
-                           std::string_view message) noexcept {
+void LogAssertionViaLogger(std::string_view condition, std::string_view message,
+                           const std::source_location& loc) noexcept {
   const auto formatted =
-      helios::details::FormatAssertionMessage(condition, loc, message);
+      helios::details::FormatAssertionMessage(condition, message, loc);
   Logger::Instance().Log(Level::kCritical, formatted);
 }
 
@@ -360,10 +359,9 @@ namespace helios::details {
 // MSVC: Register the handler at static initialization time
 namespace {
 
-void MsvcLogPluginHandler(std::string_view condition,
-                          const std::source_location& loc,
-                          std::string_view message) noexcept {
-  helios::log::details::LogAssertionViaLogger(condition, loc, message);
+void MsvcLogPluginHandler(std::string_view condition, std::string_view message,
+                          const std::source_location& loc) noexcept {
+  helios::log::details::LogAssertionViaLogger(condition, message, loc);
 }
 
 struct LogPluginHandlerRegistrar {
@@ -388,9 +386,9 @@ bool HasLogPluginHandler() noexcept {
 
 /// @brief Override weak symbol to provide log plugin assertion handling.
 void LogPluginAssertionHandler(std::string_view condition,
-                               const std::source_location& loc,
-                               std::string_view message) noexcept {
-  helios::log::details::LogAssertionViaLogger(condition, loc, message);
+                               std::string_view message,
+                               const std::source_location& loc) noexcept {
+  helios::log::details::LogAssertionViaLogger(condition, message, loc);
 }
 
 #endif  // _MSC_VER

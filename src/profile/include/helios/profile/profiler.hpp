@@ -355,7 +355,9 @@ public:
    * @param loc Source location of the allocation event
    */
   void Alloc(const void* ptr, size_t size, std::optional<CStringView> name,
-             int depth, std::source_location loc) noexcept;
+             int depth,
+             const std::source_location& loc =
+                 std::source_location::current()) noexcept;
 
   /**
    * @brief Dispatches a deallocation event to all registered backends.
@@ -367,7 +369,8 @@ public:
    * @param loc Source location of the deallocation event
    */
   void Free(const void* ptr, std::optional<CStringView> name, int depth,
-            std::source_location loc) noexcept;
+            const std::source_location& loc =
+                std::source_location::current()) noexcept;
 
   /**
    * @brief Dispatches a memory discard event to all registered backends.

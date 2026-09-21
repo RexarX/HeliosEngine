@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <array>
+#include <atomic>
 #include <chrono>
 #include <cmath>
 #include <compare>
@@ -33,6 +34,8 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+
+#include <xoshiro.h>
 
 #ifdef HELIOS_PLATFORM_WINDOWS
 #ifndef WIN32_LEAN_AND_MEAN

@@ -24,7 +24,6 @@
 
 #if !defined(HELIOS_BUILDING_MODULE) && !defined(HELIOS_ENABLE_CPP_MODULES)
 #ifndef HELIOS_ENABLE_IMPORT_STD
-#include <source_location>
 #include <string_view>
 #endif
 #endif
@@ -35,25 +34,19 @@
   ::helios::profile::ScopedZone HELIOS_ANONYMOUS_VAR(_helios_zone)(     \
       HELIOS_ANONYMOUS_VAR(_helios_spec))
 
-#define HELIOS_PROFILE_SCOPE()                    \
-  HELIOS_PROFILE_DETAIL_SCOPE(std::string_view{}, \
-                              std::source_location::current(), 0U, true, 0)
+#define HELIOS_PROFILE_SCOPE() HELIOS_PROFILE_DETAIL_SCOPE()
 
-#define HELIOS_PROFILE_SCOPE_N(name)                                       \
-  HELIOS_PROFILE_DETAIL_SCOPE((name), std::source_location::current(), 0U, \
-                              true, 0)
+#define HELIOS_PROFILE_SCOPE_N(name) HELIOS_PROFILE_DETAIL_SCOPE((name))
 
 #define HELIOS_PROFILE_SCOPE_C(color) \
-  HELIOS_PROFILE_DETAIL_SCOPE(        \
-      std::string_view{}, std::source_location::current(), (color), true, 0)
+  HELIOS_PROFILE_DETAIL_SCOPE(std::string_view{}, (color))
 
-#define HELIOS_PROFILE_SCOPE_NC(name, color)                           \
-  HELIOS_PROFILE_DETAIL_SCOPE((name), std::source_location::current(), \
-                              (color), true, 0)
+#define HELIOS_PROFILE_SCOPE_NC(name, color) \
+  HELIOS_PROFILE_DETAIL_SCOPE((name), (color))
 
 #define HELIOS_PROFILE_SCOPE_IF(name, active_expr)                      \
   const ::helios::profile::ZoneSpec HELIOS_ANONYMOUS_VAR(_helios_spec){ \
-      (name), std::source_location::current(), 0U, true, 0};            \
+      (name)};                                                          \
   const bool HELIOS_ANONYMOUS_VAR(_helios_active) =                     \
       static_cast<bool>(active_expr);                                   \
   ::helios::profile::ScopedZone HELIOS_ANONYMOUS_VAR(_helios_zone)(     \
@@ -61,12 +54,10 @@
       HELIOS_ANONYMOUS_VAR(_helios_active))
 
 #define HELIOS_PROFILE_SCOPE_S(depth) \
-  HELIOS_PROFILE_DETAIL_SCOPE(        \
-      std::string_view{}, std::source_location::current(), 0U, true, (depth))
+  HELIOS_PROFILE_DETAIL_SCOPE(std::string_view{}, 0U, true, (depth))
 
-#define HELIOS_PROFILE_SCOPE_NS(name, depth)                               \
-  HELIOS_PROFILE_DETAIL_SCOPE((name), std::source_location::current(), 0U, \
-                              true, (depth))
+#define HELIOS_PROFILE_SCOPE_NS(name, depth) \
+  HELIOS_PROFILE_DETAIL_SCOPE((name), 0U, true, (depth))
 
 #define HELIOS_PROFILE_ZONE_TEXT(text)                                    \
   do {                                                                    \

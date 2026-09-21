@@ -9,14 +9,78 @@ import helios.utils;
 
 #ifndef HELIOS_MODULE_CONSUMER_SHIM
 #ifndef HELIOS_BUILDING_MODULE
+#include <xoshiro.h>
+
+#include <atomic>
+#include <chrono>
 #include <concepts>
 #include <cstdint>
 #include <functional>
 #include <limits>
 #include <random>
+#include <thread>
 #include <type_traits>
 #endif
 #include <helios/utils/common_traits.hpp>
+
+namespace helios::utils::details {
+
+/// @brief MurmurHash3 finalizer; avalanches all bits of a 64-bit word.
+[[nodiscard]] constexpr uint64_t MurmurScramble64(uint64_t num) noexcept {
+  num ^= num >> 33;
+  num *= 0xff51afd7ed558ccdULL;
+  num ^= num >> 33;
+  num *= 0xc4ceb9fe1a85ec53ULL;
+  num ^= num >> 33;
+  return num;
+}
+
+/// @brief Reads 64 bits from `std::random_device`, combining calls if needed.
+[[nodiscard]] inline uint64_t ReadRandomDevice64() {
+  std::random_device rd{};
+  using Result = std::random_device::result_type;
+  constexpr auto result_bits = sizeof(Result) * 8U;
+  constexpr auto target_bits = sizeof(uint64_t) * 8U;
+
+  if constexpr (result_bits >= target_bits) {
+    return static_cast<uint64_t>(rd());
+  } else {
+    uint64_t value = 0;
+    auto shift = 0U;
+    while (shift < target_bits) {
+      value |= static_cast<uint64_t>(rd()) << shift;
+      shift += result_bits;
+    }
+    return value;
+  }
+}
+
+/**
+ * @brief Process-wide entropy captured once on first use.
+ * @details Function-local static (not a namespace-scope global) so
+ * initialization is thread-safe and avoids the static initialization order
+ * fiasco. Mixes `std::random_device` with a scrambled high-resolution clock
+ * because some platforms provide a weak `random_device`.
+ */
+[[nodiscard]] inline uint64_t CachedProcessEntropy() {
+  static const uint64_t entropy = [] {
+    uint64_t value = ReadRandomDevice64();
+    using Clock = std::chrono::high_resolution_clock;
+    const auto ticks =
+        static_cast<uint64_t>(Clock::now().time_since_epoch().count());
+    value ^= MurmurScramble64(ticks);
+    return value == 0 ? 0x9e3779b97f4a7c15ULL : value;
+  }();
+  return entropy;
+}
+
+/// @brief Monotonic counter so recycled OS thread ids still get unique seeds.
+[[nodiscard]] inline uint64_t NextSeedSequence() noexcept {
+  static std::atomic<uint64_t> sequence{1};
+  return sequence.fetch_add(1, std::memory_order_relaxed);
+}
+
+}  // namespace helios::utils::details
 
 HELIOS_MODULE_EXPORT
 namespace helios::utils {
@@ -50,86 +114,168 @@ concept Distribution = requires(T&& dist, Engine engine) {
   } -> std::convertible_to<typename std::remove_cvref_t<T>::result_type>;
 };
 
+/// @brief xoshiro256** — all-purpose 64-bit generator (256 bits of state).
+using Xoshiro256StarStar = xso::xoshiro_4x64_star_star;
+
+/// @brief xoshiro256++ — slightly faster all-purpose 64-bit alternative.
+using Xoshiro256PlusPlus = xso::xoshiro_4x64_plus_plus;
+
+/// @brief xoshiro256+ — fastest 256-bit engine; weaker low bits.
+using Xoshiro256Plus = xso::xoshiro_4x64_plus;
+
+/// @brief xoroshiro128++ — fast 64-bit generator (128 bits of state).
+using Xoroshiro128PlusPlus = xso::xoroshiro_2x64_plus_plus;
+
+/// @brief xoroshiro128** — 128-bit-state alternative with a `**` scrambler.
+using Xoroshiro128StarStar = xso::xoroshiro_2x64_star_star;
+
+/// @brief xoroshiro128+ — smallest/fastest 64-bit engine; weaker low bits.
+using Xoroshiro128Plus = xso::xoroshiro_2x64_plus;
+
+/// @brief xoshiro128** — 32-bit output, 128 bits of state.
+using Xoshiro128StarStar = xso::xoshiro_4x32_star_star;
+
+/// @brief xoshiro128++ — 32-bit output alternative.
+using Xoshiro128PlusPlus = xso::xoshiro_4x32_plus_plus;
+
+/// @brief xoshiro512** — 512 bits of state for extra period / more streams.
+using Xoshiro512StarStar = xso::xoshiro_8x64_star_star;
+
+/// @brief xoroshiro1024** — 1024 bits of state for huge parallel workloads.
+using Xoroshiro1024StarStar = xso::xoroshiro_16x64_star_star;
+
 /**
  * @brief Default engine type used by random utilities.
- * @details Uses a 64-bit Mersenne Twister for quality pseudorandom numbers.
+ * @details xoshiro256** (`xso::rng`): 64-bit output, 256 bits of state,
+ * period 2^256-1. Best general-purpose choice in the xoshiro family, faster
+ * than `std::mt19937_64` with comparable statistical quality.
  */
-using DefaultRandomEngine = std::mt19937_64;
+using DefaultRandomEngine = Xoshiro256StarStar;
 
 /**
- * @brief Fast but lower-quality engine type used by random utilities.
- * @details Uses a 32-bit linear congruential engine suitable for
- * non-cryptographic, performance-critical scenarios.
+ * @brief Fast engine type used by random utilities.
+ * @details xoroshiro128++: 64-bit output, 128 bits of state. Smaller and
+ * faster than the default; still suitable for gameplay / sampling. Not for
+ * cryptography.
  */
-using FastRandomEngine = std::minstd_rand;
+using FastRandomEngine = Xoroshiro128PlusPlus;
 
 /**
- * @brief Internal helper to obtain seed from `std::random_device`.
- * @details This function is intentionally small and header-only to avoid static
- * initialization of engines in user code.
- * @return 64-bit seed value from `std::random_device`
+ * @brief Compact 32-bit engine.
+ * @details xoshiro128**: 32-bit output, 128 bits of state. Prefer this when
+ * `result_type` must be 32-bit or state size matters more than output width.
+ */
+using SmallRandomEngine = Xoshiro128StarStar;
+
+/**
+ * @brief Long-period engine for large parallel jobs.
+ * @details xoshiro512**: 64-bit output, 512 bits of state, period 2^512-1.
+ */
+using LongPeriodRandomEngine = Xoshiro512StarStar;
+
+/**
+ * @brief Returns the process-wide 64-bit entropy word.
+ * @details Captured once on first call from `std::random_device` mixed with
+ * a high-resolution clock. Subsequent calls are free and return the same
+ * value for the lifetime of the process. Prefer `MixThreadSeed()` when
+ * constructing engines so threads do not share a stream.
+ * @return Stable per-process 64-bit seed
  */
 [[nodiscard]] inline uint64_t RandomDeviceSeed() {
-  std::random_device rd{};
-  using result_type = std::random_device::result_type;
-  constexpr auto result_bits = sizeof(result_type) * 8U;
-  constexpr auto target_bits = sizeof(uint64_t) * 8U;
+  return details::CachedProcessEntropy();
+}
 
-  if constexpr (result_bits >= target_bits) {
-    return static_cast<uint64_t>(rd());
+/**
+ * @brief Mixes process entropy with the calling thread and a unique sequence.
+ * @details Combines `RandomDeviceSeed()`, `std::this_thread::get_id()`, and
+ * an atomic counter. The counter matters because OS thread ids can be reused
+ * after a thread exits. Each call returns a different 64-bit word, suitable
+ * as a `seed(word)` argument for xoshiro/xoroshiro (they expand it with
+ * SplitMix64 into the full state).
+ * @return Unique 64-bit seed for this call
+ */
+[[nodiscard]] inline uint64_t MixThreadSeed() {
+  const uint64_t thread_hash = static_cast<uint64_t>(
+      std::hash<std::thread::id>{}(std::this_thread::get_id()));
+  uint64_t state = details::CachedProcessEntropy();
+  state ^= details::MurmurScramble64(thread_hash);
+  state += details::NextSeedSequence() * 0x9e3779b97f4a7c15ULL;
+  const uint64_t mixed = details::MurmurScramble64(state);
+  return mixed == 0 ? thread_hash | 1U : mixed;
+}
+
+/**
+ * @brief Creates an engine seeded from process entropy, thread id, and
+ * sequence.
+ * @tparam Engine RandomEngine type to construct (defaults to
+ * `DefaultRandomEngine`)
+ * @return Engine instance with a unique mixed seed
+ */
+template <RandomEngine Engine = DefaultRandomEngine>
+[[nodiscard]] Engine MakeEngine() {
+  using Word = typename Engine::result_type;
+  const uint64_t seed = MixThreadSeed();
+  if constexpr (sizeof(Word) >= sizeof(uint64_t)) {
+    return Engine{static_cast<Word>(seed)};
   } else {
-    uint64_t value = 0;
-    auto shift = 0U;
-    while (shift < target_bits) {
-      value |= static_cast<uint64_t>(rd()) << shift;
-      shift += result_bits;
-    }
-    return value;
+    constexpr auto word_bits = sizeof(Word) * 8U;
+    return Engine{static_cast<Word>(seed ^ (seed >> word_bits))};
   }
 }
 
 /**
- * @brief Creates a default-quality random engine seeded with
- * `std::random_device`.
- * @details Useful when the caller wants an engine instance but does not care
- * a specific engine type beyond the default choice.
- * @return `DefaultRandomEngine` instance seeded with `std::random_device`
+ * @brief Creates an engine from an explicit seed for repeatable streams.
+ * @tparam Engine RandomEngine type to construct (defaults to
+ * `DefaultRandomEngine`)
+ * @param seed Seed word expanded into the engine state
+ * @return Engine instance seeded from `seed`
  */
-[[nodiscard]] inline DefaultRandomEngine MakeDefaultEngine() {
-  return DefaultRandomEngine{RandomDeviceSeed()};
+template <RandomEngine Engine = DefaultRandomEngine>
+[[nodiscard]] Engine MakeEngine(typename Engine::result_type seed) {
+  return Engine{seed};
 }
 
 /**
- * @brief Creates a fast linear random engine seeded with `std::random_device`.
- * @details Intended for performance-critical code where statistical quality is
- * less important. Not suitable for cryptographic purposes.
- * @return `FastRandomEngine` instance seeded with `std::random_device`
+ * @brief Creates a default-quality random engine with a unique mixed seed.
+ * @return `DefaultRandomEngine` instance
+ */
+[[nodiscard]] inline DefaultRandomEngine MakeDefaultEngine() {
+  return MakeEngine<DefaultRandomEngine>();
+}
+
+/**
+ * @brief Creates a fast random engine with a unique mixed seed.
+ * @return `FastRandomEngine` instance
  */
 [[nodiscard]] inline FastRandomEngine MakeFastEngine() {
-  return FastRandomEngine{
-      static_cast<FastRandomEngine::result_type>(RandomDeviceSeed())};
+  return MakeEngine<FastRandomEngine>();
+}
+
+/**
+ * @brief Thread-local engine of type `Engine`, seeded once per thread.
+ * @tparam Engine RandomEngine type stored in this thread
+ * @return Reference to the thread-local engine
+ */
+template <RandomEngine Engine>
+[[nodiscard]] Engine& ThreadLocalEngine() {
+  thread_local Engine engine = MakeEngine<Engine>();
+  return engine;
 }
 
 /**
  * @brief Thread-local default-quality engine.
- * @details Uses Meyer's singleton pattern per thread to avoid global static
- * initialization order issues while providing a convenient default.
- * @return Reference to thread-local `DefaultRandomEngine` instance
+ * @return Reference to thread-local `DefaultRandomEngine`
  */
 [[nodiscard]] inline DefaultRandomEngine& DefaultEngine() {
-  thread_local auto engine = MakeDefaultEngine();
-  return engine;
+  return ThreadLocalEngine<DefaultRandomEngine>();
 }
 
 /**
  * @brief Thread-local fast engine.
- * @details Uses Meyer's singleton pattern per thread to avoid global static
- * initialization order issues while providing a fast default.
- * @return Reference to thread-local `FastRandomEngine` instance
+ * @return Reference to thread-local `FastRandomEngine`
  */
-[[nodiscard]] inline FastRandomEngine& FastEngineInstance() {
-  thread_local auto engine = MakeFastEngine();
-  return engine;
+[[nodiscard]] inline FastRandomEngine& FastEngine() {
+  return ThreadLocalEngine<FastRandomEngine>();
 }
 
 /**
@@ -259,33 +405,35 @@ using DefaultRandomGenerator = RandomGenerator<DefaultRandomEngine>;
 
 /**
  * @brief Convenience alias for a generator using the fast engine.
- * @details Uses thread-local `FastEngineInstance()` as the underlying engine.
+ * @details Uses thread-local `FastEngine()` as the underlying engine.
  */
-using FastRandomGeneratorType = RandomGenerator<FastRandomEngine>;
+using FastRandomGenerator = RandomGenerator<FastRandomEngine>;
 
 /**
- * @brief Provides access to a thread-local default-quality random generator.
- * @details Uses Meyer's singleton pattern per thread and avoids any static
- * engine objects other than thread-local instances that are lazily initialized
- * on first use.
- * @return Reference to `DefaultRandomGenerator` bound to `DefaultEngine()`
+ * @brief Thread-local generator bound to `ThreadLocalEngine<Engine>()`.
+ * @tparam Engine RandomEngine type used by the generator
+ * @return Reference to the thread-local generator
  */
-[[nodiscard]] inline DefaultRandomGenerator& RandomDefault() {
-  thread_local DefaultRandomGenerator generator{DefaultEngine()};
+template <RandomEngine Engine>
+[[nodiscard]] auto ThreadLocalGenerator() -> RandomGenerator<Engine>& {
+  thread_local RandomGenerator<Engine> generator{ThreadLocalEngine<Engine>()};
   return generator;
 }
 
 /**
- * @brief Provides access to a thread-local fast random generator.
- * @details Uses Meyer's singleton pattern per thread and avoids any static
- * engine objects other than thread-local instances that are lazily initialized
- * on first use.
- * @return Reference to `FastRandomGeneratorType` bound to
- * `FastEngineInstance()`
+ * @brief Provides access to a thread-local default-quality random generator.
+ * @return Reference to `DefaultRandomGenerator` bound to `DefaultEngine()`
  */
-[[nodiscard]] inline FastRandomGeneratorType& RandomFast() {
-  thread_local FastRandomGeneratorType generator{FastEngineInstance()};
-  return generator;
+[[nodiscard]] inline DefaultRandomGenerator& RandomDefault() {
+  return ThreadLocalGenerator<DefaultRandomEngine>();
+}
+
+/**
+ * @brief Provides access to a thread-local fast random generator.
+ * @return Reference to `FastRandomGenerator` bound to `FastEngine()`
+ */
+[[nodiscard]] inline FastRandomGenerator& RandomFast() {
+  return ThreadLocalGenerator<FastRandomEngine>();
 }
 
 /**

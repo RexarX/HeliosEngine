@@ -2,6 +2,7 @@
 #include <doctest/doctest.h>
 
 #include <helios/app/application.hpp>
+#include <helios/app/builtin/app_exit.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/world.hpp>
 #include <helios/sdl3/context.hpp>
@@ -127,6 +128,35 @@ TEST_SUITE("helios::sdl3::PumpEvents") {
 
       CHECK(app.GetWorld().ReadResource<UserEventFlag>().seen);
       CHECK_FALSE(app.GetWorld().ReadResource<Context>().in_event_poll);
+    }
+
+    SUBCASE("Writes AppExit on SDL_EVENT_QUIT") {
+      HELIOS_SKIP_IF_NO_SDL_VIDEO();
+
+      app::App app;
+      window::Plugin{}.Build(app);
+      Plugin plugin;
+      plugin.Build(app);
+      plugin.Finish(app);
+      app.Initialize();
+      test::ScopedShutdown shutdown{app};
+      test::ScopedRetain retain{SDL_INIT_VIDEO};
+
+      SDL_Event event{};
+      event.type = SDL_EVENT_QUIT;
+      REQUIRE(SDL_PushEvent(&event));
+
+      auto& world = app.GetWorld();
+      PumpEvents{}(
+          ecs::Res<Context>(world.WriteResource<Context>()),
+          ecs::Res<EventDispatcher>(world.WriteResource<EventDispatcher>()),
+          ecs::Res<const window::Settings>(
+              world.ReadResource<window::Settings>()));
+
+      const auto exits = world.Messages().CurrentMessages<app::AppExit>();
+      REQUIRE_EQ(exits.size(), 1U);
+      CHECK_EQ(exits.front().code, app::ExitCode::kSuccess);
+      CHECK_FALSE(world.ReadResource<Context>().in_event_poll);
     }
   }
 }

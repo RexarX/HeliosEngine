@@ -122,9 +122,9 @@ public:
 
 private:
   enum class SubAppMode : uint8_t {
-    kBlocking = 0,
-    kOverlapping = 1,
-    kAsync = 2,
+    kBlocking,
+    kOverlapping,
+    kAsync,
   };
 
   struct SubAppFrameState {

@@ -26,9 +26,8 @@ struct AssertionTracker {
 
 thread_local AssertionTracker g_tracker;
 
-void TestAssertionHandler(std::string_view condition,
-                          const std::source_location& loc,
-                          std::string_view message) noexcept {
+void TestAssertionHandler(std::string_view condition, std::string_view message,
+                          const std::source_location& loc) noexcept {
   g_tracker.called = true;
   g_tracker.condition = std::string(condition);
   g_tracker.message = std::string(message);
@@ -75,8 +74,7 @@ TEST_SUITE("helios::Assert") {
     g_tracker.Reset();
 
     SUBCASE("Custom handler receives correct condition") {
-      constexpr auto loc = std::source_location::current();
-      HandleAssertion("test_condition", loc, "");
+      HandleAssertion("test_condition", "");
 
       CHECK(g_tracker.called);
       CHECK_EQ(g_tracker.condition, "test_condition");
@@ -84,8 +82,7 @@ TEST_SUITE("helios::Assert") {
     }
 
     SUBCASE("Custom handler receives correct message") {
-      constexpr auto loc = std::source_location::current();
-      HandleAssertion("another_condition", loc, "Test message");
+      HandleAssertion("another_condition", "Test message");
 
       CHECK(g_tracker.called);
       CHECK_EQ(g_tracker.condition, "another_condition");
@@ -97,7 +94,7 @@ TEST_SUITE("helios::Assert") {
       const auto expected_line = loc.line();
       const std::string expected_file = loc.file_name();
 
-      HandleAssertion("loc_test", loc, "");
+      HandleAssertion("loc_test", "", loc);
 
       CHECK(g_tracker.called);
       CHECK_EQ(g_tracker.location.line(), expected_line);
@@ -113,7 +110,7 @@ TEST_SUITE("helios::Assert") {
     SUBCASE("Includes condition and source location") {
       constexpr auto loc = std::source_location::current();
       const auto formatted =
-          details::FormatAssertionMessage("test_condition", loc, "");
+          details::FormatAssertionMessage("test_condition", "", loc);
 
       CHECK(formatted.starts_with("Assertion failed: test_condition"));
       CHECK(formatted.contains("["));
@@ -122,9 +119,8 @@ TEST_SUITE("helios::Assert") {
     }
 
     SUBCASE("Includes custom message") {
-      constexpr auto loc = std::source_location::current();
-      const auto formatted = details::FormatAssertionMessage(
-          "another_condition", loc, "Test message");
+      const auto formatted =
+          details::FormatAssertionMessage("another_condition", "Test message");
 
       CHECK(formatted.contains(
           "Assertion failed: another_condition | Test message"));
@@ -132,9 +128,7 @@ TEST_SUITE("helios::Assert") {
 
 #ifdef HELIOS_ENABLE_STACKTRACE
     SUBCASE("Includes stack trace header") {
-      constexpr auto loc = std::source_location::current();
-      const auto formatted =
-          details::FormatAssertionMessage("stack_test", loc, "");
+      const auto formatted = details::FormatAssertionMessage("stack_test", "");
 
       CHECK(formatted.contains("Stack trace:"));
     }

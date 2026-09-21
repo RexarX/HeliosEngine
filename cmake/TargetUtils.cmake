@@ -187,10 +187,8 @@ function(helios_target_set_optimization TARGET)
       >
       # MSVC and clang-cl (MSVC frontend)
       $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
-          $<$<CONFIG:Debug>:/Od>
-          $<$<CONFIG:Debug>:/Zi>
+          $<$<CONFIG:Debug>:/Od /Zi /MDd>
           ${_helios_msvc_debug_rtc}
-          $<$<CONFIG:Debug>:/MDd>
           # /Ob2 + /Zo: Release-like inlining with better optimized debugging
           $<$<CONFIG:RelWithDebInfo>:/O2 /Ob2 /Zi /Zo /DNDEBUG>
           $<$<CONFIG:Release>:/O2 /Ob2 /DNDEBUG>
@@ -199,11 +197,12 @@ function(helios_target_set_optimization TARGET)
       $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:
           $<$<CONFIG:Debug>:-Og -g3 -ggdb>
           # Match Release -O3 while keeping DWARF and usable backtraces
-          $<$<CONFIG:RelWithDebInfo>:-O3 -g -fno-omit-frame-pointer -ffunction-sections -fdata-sections -DNDEBUG>
-          $<$<CONFIG:Release>:-O3 -ffunction-sections -fdata-sections -DNDEBUG>
+          $<$<CONFIG:RelWithDebInfo>:-O3 -g -fno-omit-frame-pointer -ffunction-sections -fdata-sections -fno-math-errno -DNDEBUG>
+          $<$<CONFIG:Release>:-O3 -ffunction-sections -fdata-sections -fno-math-errno -DNDEBUG>
       >
       # Split DWARF: smaller link inputs, same debug experience (Linux ELF)
       $<$<AND:$<PLATFORM_ID:Linux>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>>:
+          $<$<CONFIG:Debug>:-gsplit-dwarf>
           $<$<CONFIG:RelWithDebInfo>:-gsplit-dwarf>
       >
       # Clang: richer line tables in heavily inlined -O3 code

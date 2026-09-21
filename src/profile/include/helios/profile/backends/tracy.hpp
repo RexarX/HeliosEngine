@@ -61,10 +61,13 @@ public:
                   uint32_t color) noexcept override;
 
   void Alloc(const void* ptr, size_t size, std::optional<CStringView> name,
-             int depth, std::source_location loc) noexcept override;
+             int depth,
+             const std::source_location& loc =
+                 std::source_location::current()) noexcept override;
 
   void Free(const void* ptr, std::optional<CStringView> name, int depth,
-            std::source_location loc) noexcept override;
+            const std::source_location& loc =
+                std::source_location::current()) noexcept override;
 
   void MemoryDiscard(CStringView name) noexcept override;
 

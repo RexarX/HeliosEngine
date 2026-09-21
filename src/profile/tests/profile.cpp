@@ -141,7 +141,9 @@ struct MockBackend final : public Backend {
   }
 
   void Alloc(const void* /*ptr*/, size_t size, std::optional<CStringView> name,
-             int depth, std::source_location /*loc*/) noexcept override {
+             int depth,
+             const std::source_location& /*loc*/ =
+                 std::source_location::current()) noexcept override {
     ++alloc_calls;
     last_alloc_size = size;
     last_alloc_name = name.has_value() ? std::string{name->View()} : "";
@@ -149,7 +151,9 @@ struct MockBackend final : public Backend {
   }
 
   void Free(const void* /*ptr*/, std::optional<CStringView> /*name*/,
-            int /*depth*/, std::source_location /*loc*/) noexcept override {
+            int /*depth*/,
+            const std::source_location& /*loc*/ =
+                std::source_location::current()) noexcept override {
     ++free_calls;
   }
 
@@ -187,9 +191,11 @@ struct LargeBackend final : public Backend {
   void PlotConfig(CStringView, PlotFormat, bool, bool,
                   uint32_t) noexcept override {}
   void Alloc(const void*, size_t, std::optional<CStringView>, int,
-             std::source_location) noexcept override {}
+             const std::source_location& =
+                 std::source_location::current()) noexcept override {}
   void Free(const void*, std::optional<CStringView>, int,
-            std::source_location) noexcept override {}
+            const std::source_location& =
+                std::source_location::current()) noexcept override {}
   void MemoryDiscard(CStringView) noexcept override {}
   void MemoryDiscard(CStringView, int) noexcept override {}
   [[nodiscard]] std::string_view Name() const noexcept override {
@@ -229,10 +235,10 @@ TEST_SUITE("helios::profile::ZoneSpec") {
     SUBCASE("ZoneSpec with fields stores given values") {
       const auto loc = std::source_location::current();
       const ZoneSpec spec{.name = "test_zone",
-                          .loc = loc,
                           .color = 0xFF0000,
                           .active = true,
-                          .callstack_depth = 3};
+                          .callstack_depth = 3,
+                          .loc = loc};
       CHECK_EQ(spec.name, "test_zone");
       CHECK_EQ(spec.loc.line(), loc.line());
       CHECK_EQ(spec.color, 0xFF0000);
@@ -419,7 +425,7 @@ TEST_SUITE("helios::profile::Backend") {
     SUBCASE("Alloc forwards pointer, size, and name") {
       MockBackend backend;
       int dummy = 0;
-      backend.Alloc(&dummy, 64, "Heap", 0, std::source_location::current());
+      backend.Alloc(&dummy, 64, "Heap", 0);
       CHECK_EQ(backend.alloc_calls, 1);
       CHECK_EQ(backend.last_alloc_size, 64);
       CHECK_EQ(backend.last_alloc_name, "Heap");
@@ -428,8 +434,7 @@ TEST_SUITE("helios::profile::Backend") {
     SUBCASE("Alloc with nullopt name sets empty string") {
       MockBackend backend;
       int dummy = 0;
-      backend.Alloc(&dummy, 32, std::nullopt, 0,
-                    std::source_location::current());
+      backend.Alloc(&dummy, 32, std::nullopt, 0);
       CHECK_EQ(backend.alloc_calls, 1);
       CHECK(backend.last_alloc_name.empty());
     }
@@ -437,7 +442,7 @@ TEST_SUITE("helios::profile::Backend") {
     SUBCASE("Free is called") {
       MockBackend backend;
       int dummy = 0;
-      backend.Free(&dummy, std::nullopt, 0, std::source_location::current());
+      backend.Free(&dummy, std::nullopt, 0);
       CHECK_EQ(backend.free_calls, 1);
     }
 
@@ -888,8 +893,7 @@ TEST_SUITE("helios::profile::Profiler") {
       Profiler::Instance().Finalize();
 
       int dummy = 0;
-      Profiler::Instance().Alloc(&dummy, 128, "Heap", 1,
-                                 std::source_location::current());
+      Profiler::Instance().Alloc(&dummy, 128, "Heap", 1);
       CHECK_EQ(mock.alloc_calls, 1);
       CHECK_EQ(mock.last_alloc_size, 128);
       CHECK_EQ(mock.last_alloc_name, "Heap");
@@ -905,8 +909,7 @@ TEST_SUITE("helios::profile::Profiler") {
       Profiler::Instance().Finalize();
 
       int dummy = 0;
-      Profiler::Instance().Free(&dummy, std::nullopt, 0,
-                                std::source_location::current());
+      Profiler::Instance().Free(&dummy, std::nullopt, 0);
       CHECK_EQ(mock.free_calls, 1);
 
       Profiler::Instance().Clear();

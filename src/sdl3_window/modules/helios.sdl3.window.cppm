@@ -10,6 +10,7 @@ module;
 #include <SDL3/SDL_properties.h>
 #include <SDL3/SDL_rect.h>
 #include <SDL3/SDL_stdinc.h>
+#include <SDL3/SDL_surface.h>
 #include <SDL3/SDL_video.h>
 #ifdef HELIOS_PLATFORM_WINDOWS
 #include <windows.h>

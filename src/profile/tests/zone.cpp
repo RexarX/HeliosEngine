@@ -5,6 +5,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <source_location>
 #include <span>
 #include <string_view>
 
@@ -70,9 +71,11 @@ struct MockBackend final : public Backend {
   void PlotConfig(CStringView, PlotFormat, bool, bool,
                   uint32_t) noexcept override {}
   void Alloc(const void*, size_t, std::optional<CStringView>, int,
-             std::source_location) noexcept override {}
+             const std::source_location& =
+                 std::source_location::current()) noexcept override {}
   void Free(const void*, std::optional<CStringView>, int,
-            std::source_location) noexcept override {}
+            const std::source_location& =
+                std::source_location::current()) noexcept override {}
   void MemoryDiscard(CStringView) noexcept override {}
   void MemoryDiscard(CStringView, int) noexcept override {}
   [[nodiscard]] std::string_view Name() const noexcept override {

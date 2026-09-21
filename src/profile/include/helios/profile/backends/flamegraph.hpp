@@ -205,7 +205,8 @@ public:
    */
   void Alloc(const void* /*ptr*/, size_t /*size*/,
              std::optional<CStringView> /*name*/, int /*depth*/,
-             std::source_location /*loc*/) noexcept override {}
+             const std::source_location& /*loc*/ =
+                 std::source_location::current()) noexcept override {}
 
   /**
    * @brief Memory deallocation events are not emitted in the JSON format.
@@ -215,7 +216,9 @@ public:
    * @param loc Source location of the deallocation
    */
   void Free(const void* /*ptr*/, std::optional<CStringView> /*name*/,
-            int /*depth*/, std::source_location /*loc*/) noexcept override {}
+            int /*depth*/,
+            const std::source_location& /*loc*/ =
+                std::source_location::current()) noexcept override {}
 
   /**
    * @brief Memory discard events are not emitted in the JSON format.

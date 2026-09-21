@@ -17,6 +17,7 @@ void PollEvents::operator()(ecs::Res<Context> context,
   }
 
   SyncClipboard(*sdl_context->world, *native, *context);
+  PresentSoftwareSurfaces(*native);
 }
 
 }  // namespace helios::sdl3::window

@@ -71,6 +71,11 @@ struct DeferHelper {
 
 }  // namespace helios::utils
 
+#endif  // HELIOS_MODULE_CONSUMER_SHIM
+
+#include <helios/compiler/compiler.hpp>
+#include <helios/utils/macro.hpp>
+
 /**
  * @brief Defers execution of an inline lambda until the end of the current
  * scope.
@@ -84,11 +89,6 @@ struct DeferHelper {
  * };
  * @endcode
  */
-#endif  // HELIOS_MODULE_CONSUMER_SHIM
-
-#include <helios/compiler/compiler.hpp>
-#include <helios/utils/macro.hpp>
-
 #define HELIOS_DEFER                               \
   const auto HELIOS_CONCAT(_defer_, __COUNTER__) = \
       ::helios::utils::DeferHelper() + [&] HELIOS_ALWAYS_INLINE()

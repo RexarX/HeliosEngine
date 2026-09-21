@@ -259,7 +259,7 @@ void Profiler::PlotConfig(CStringView name, PlotFormat type, bool step,
 
 void Profiler::Alloc(const void* ptr, size_t size,
                      std::optional<CStringView> name, int depth,
-                     std::source_location location) noexcept {
+                     const std::source_location& location) noexcept {
   if (!finalized_ || !details::IsProfilerMemoryDispatchEnabled() ||
       details::IsMemoryDispatchSuspended()) [[unlikely]] {
     return;
@@ -271,7 +271,7 @@ void Profiler::Alloc(const void* ptr, size_t size,
 }
 
 void Profiler::Free(const void* ptr, std::optional<CStringView> name, int depth,
-                    std::source_location location) noexcept {
+                    const std::source_location& location) noexcept {
   if (!finalized_ || !details::IsProfilerMemoryDispatchEnabled() ||
       details::IsMemoryDispatchSuspended()) [[unlikely]] {
     return;

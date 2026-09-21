@@ -5,26 +5,28 @@ if(CMAKE_VERSION VERSION_GREATER_EQUAL "4.0")
   set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING "Minimum CMake policy version" FORCE)
 endif()
 
-option(HELIOS_ENABLE_CPP_MODULES
-    "Build Helios engine modules as C++20 named modules (import helios / import helios.*)"
-    OFF)
-
-if(HELIOS_ENABLE_CPP_MODULES AND CMAKE_VERSION VERSION_LESS "3.28")
-  message(FATAL_ERROR
-      "HELIOS_ENABLE_CPP_MODULES requires CMake 3.28+ (FILE_SET CXX_MODULES). "
-      "Current version: ${CMAKE_VERSION}")
-endif()
-
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(CppModules)
-helios_cpp_modules_set_experimental_gate()
-
 project(HeliosEngine
     VERSION 0.1.0
     DESCRIPTION "ECS based data-oriented game engine framework"
     HOMEPAGE_URL "https://github.com/RexarX/HeliosEngine"
     LANGUAGES CXX
 )
+
+option(HELIOS_ENABLE_CPP_MODULES
+    "Build Helios engine modules as C++20 named modules (import helios / import helios.*)"
+    OFF
+)
+
+if(HELIOS_ENABLE_CPP_MODULES AND CMAKE_VERSION VERSION_LESS "3.28")
+  message(FATAL_ERROR
+      "HELIOS_ENABLE_CPP_MODULES requires CMake 3.28+ (FILE_SET CXX_MODULES). "
+      "Current version: ${CMAKE_VERSION}"
+  )
+endif()
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(CppModules)
+helios_cpp_modules_set_experimental_gate()
 
 # Project-wide defaults only when Helios is the top-level project.
 # When embedded via add_subdirectory / FetchContent, respect the parent.
@@ -54,16 +56,22 @@ if(PROJECT_IS_TOP_LEVEL)
   if(MSVC OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang"
       AND CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC"))
     set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/O2 /Ob2 /DNDEBUG /Zi"
-        CACHE STRING "Flags used by the CXX compiler during RELWITHDEBINFO builds." FORCE)
+        CACHE STRING "Flags used by the CXX compiler during RELWITHDEBINFO builds." FORCE
+    )
     set(CMAKE_C_FLAGS_RELWITHDEBINFO "/O2 /Ob2 /DNDEBUG /Zi"
-        CACHE STRING "Flags used by the C compiler during RELWITHDEBINFO builds." FORCE)
+        CACHE STRING "Flags used by the C compiler during RELWITHDEBINFO builds." FORCE
+    )
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
     set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O3 -g -DNDEBUG"
-        CACHE STRING "Flags used by the CXX compiler during RELWITHDEBINFO builds." FORCE)
+        CACHE STRING "Flags used by the CXX compiler during RELWITHDEBINFO builds." FORCE
+    )
     set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O3 -g -DNDEBUG"
-        CACHE STRING "Flags used by the C compiler during RELWITHDEBINFO builds." FORCE)
+        CACHE STRING "Flags used by the C compiler during RELWITHDEBINFO builds." FORCE
+    )
   endif()
 endif()
+
+include(CMakeDependentOption)
 
 # Build options
 option(HELIOS_DEVELOPER_MODE "Enable developer-focused build features" OFF)
@@ -82,9 +90,8 @@ option(HELIOS_ENABLE_UNITY_BUILD "Enable Unity/Jumbo builds" OFF)
 # LTO default ON for standalone engine builds; OFF when embedded so consumers
 # are not forced into LTO bitcode without opting in.
 option(HELIOS_ENABLE_LTO "Enable Link Time Optimization" ${PROJECT_IS_TOP_LEVEL})
-option(HELIOS_ENABLE_LTO_RELWITHDEBINFO
-    "Enable LTO for RelWithDebInfo (requires HELIOS_ENABLE_LTO; off by default for faster links)"
-    OFF)
+cmake_dependent_option(HELIOS_ENABLE_LTO_RELWITHDEBINFO "Enable LTO for RelWithDebInfo" OFF
+                       "HELIOS_ENABLE_LTO" OFF)
 option(HELIOS_ENABLE_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 option(HELIOS_ENABLE_INSTALL "Enable installation rules" OFF)
 option(HELIOS_BUILD_ALL_MODULES "Build every discovered module regardless of DEFAULT value" OFF)

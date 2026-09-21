@@ -6,7 +6,6 @@
 #include <array>
 #include <cstddef>
 #include <optional>
-#include <source_location>
 #include <span>
 #include <string_view>
 
@@ -144,14 +143,14 @@ TEST_SUITE("helios::profile::TracyBackend") {
     SUBCASE("Alloc does not crash") {
       TracyBackend backend;
       int dummy = 0;
-      backend.Alloc(&dummy, 64, "Heap", 0, std::source_location::current());
+      backend.Alloc(&dummy, 64, "Heap", 0);
       CHECK(true);
     }
 
     SUBCASE("Free does not crash") {
       TracyBackend backend;
       int dummy = 0;
-      backend.Free(&dummy, std::nullopt, 0, std::source_location::current());
+      backend.Free(&dummy, std::nullopt, 0);
       CHECK(true);
     }
 

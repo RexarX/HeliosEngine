@@ -31,13 +31,13 @@ enum class PlotFormat : uint8_t {
  * name means the backend should use @p loc.function_name().
  */
 struct ZoneSpec {
-  std::string_view name;
-  std::source_location loc = std::source_location::current();
+  std::string_view name{};
   uint32_t color = 0;
   bool active = true;
   /// Optional stack-capture depth hint. Backends that do not support callstack
   /// capture may ignore this field.
   int callstack_depth = 0;
+  std::source_location loc = std::source_location::current();
 };
 
 }  // namespace helios::profile

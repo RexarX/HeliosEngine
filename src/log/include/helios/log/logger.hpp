@@ -403,14 +403,14 @@ inline void Debug(std::string_view message) noexcept {
   Logger::Instance().Log(Level::kDebug, message);
 }
 
-template <typename... Args>
-  requires(sizeof...(Args) > 0)
 /**
  * @brief Logs a formatted debug message with the default logger.
  * @tparam Args Types of the format arguments
  * @param fmt Format string
  * @param args Arguments for the format string
  */
+template <typename... Args>
+  requires(sizeof...(Args) > 0)
 inline void Debug(std::format_string<Args...> fmt, Args&&... args) noexcept {
   Logger::Instance().Log(Level::kDebug, fmt, std::forward<Args>(args)...);
 }
@@ -720,9 +720,9 @@ namespace helios::log::details {
  * @details Logs the assertion failure via the log system with critical level.
  * This is called by the weak symbol overrides in logger.cpp.
  */
-void LogAssertionViaLogger(std::string_view condition,
-                           const std::source_location& loc,
-                           std::string_view message) noexcept;
+void LogAssertionViaLogger(
+    std::string_view condition, std::string_view message,
+    const std::source_location& loc = std::source_location::current()) noexcept;
 
 }  // namespace helios::log::details
 #endif  // HELIOS_MODULE_CONSUMER_SHIM

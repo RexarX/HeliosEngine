@@ -42,9 +42,11 @@ struct SecondBackend final : public Backend {
   void PlotConfig(helios::CStringView, PlotFormat, bool, bool,
                   uint32_t) noexcept override {}
   void Alloc(const void*, size_t, std::optional<helios::CStringView>, int,
-             std::source_location) noexcept override {}
+             const std::source_location& =
+                 std::source_location::current()) noexcept override {}
   void Free(const void*, std::optional<helios::CStringView>, int,
-            std::source_location) noexcept override {}
+            const std::source_location& =
+                std::source_location::current()) noexcept override {}
   void MemoryDiscard(helios::CStringView) noexcept override {}
   void MemoryDiscard(helios::CStringView, int) noexcept override {}
   [[nodiscard]] std::string_view Name() const noexcept override {
@@ -197,15 +199,14 @@ TEST_SUITE("helios::profile::FlamegraphBackend") {
     SUBCASE("Alloc is a no-op") {
       FlamegraphBackend backend;
       int dummy = 0;
-      backend.Alloc(&dummy, 128, std::nullopt, 0,
-                    std::source_location::current());
+      backend.Alloc(&dummy, 128, std::nullopt, 0);
       CHECK(true);
     }
 
     SUBCASE("Free is a no-op") {
       FlamegraphBackend backend;
       int dummy = 0;
-      backend.Free(&dummy, std::nullopt, 0, std::source_location::current());
+      backend.Free(&dummy, std::nullopt, 0);
       CHECK(true);
     }
 

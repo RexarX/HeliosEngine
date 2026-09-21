@@ -102,6 +102,9 @@ void CreateNativeWindows::operator()(
       ApplyMaximized(*sdl_window, true);
       SyncWindowGeometry(window, *sdl_window);
     }
+    if (window.properties.visible) {
+      PresentSoftwareSurface(*sdl_window);
+    }
 
     const SDL_WindowFlags window_flags = SDL_GetWindowFlags(sdl_window);
     window.properties.focused = (window_flags & SDL_WINDOW_INPUT_FOCUS) != 0;

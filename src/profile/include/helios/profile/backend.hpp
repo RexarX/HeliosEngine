@@ -155,7 +155,8 @@ public:
    */
   virtual void Alloc(const void* ptr, size_t size,
                      std::optional<CStringView> name, int depth,
-                     std::source_location loc) noexcept = 0;
+                     const std::source_location& loc =
+                         std::source_location::current()) noexcept = 0;
 
   /**
    * @brief Records a memory deallocation.
@@ -165,7 +166,8 @@ public:
    * @param loc Source location
    */
   virtual void Free(const void* ptr, std::optional<CStringView> name, int depth,
-                    std::source_location loc) noexcept = 0;
+                    const std::source_location& loc =
+                        std::source_location::current()) noexcept = 0;
 
   /**
    * @brief Discards tracked memory for a named pool.

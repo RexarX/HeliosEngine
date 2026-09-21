@@ -52,8 +52,7 @@ TEST_SUITE("helios::Stacktrace") {
   }
 
   TEST_CASE("helios::Stacktrace::Capture: max_frames respected") {
-    auto config =
-        StacktraceConfig::FromSourceLocation(std::source_location::current());
+    auto config = StacktraceConfig::FromSourceLocation();
     config.max_frames = 2;
     config.start_frame = 1;
     config.stop_before = "__libc_start_main";
@@ -63,8 +62,7 @@ TEST_SUITE("helios::Stacktrace") {
   }
 
   TEST_CASE("helios::Stacktrace::Capture: include/exclude filtering") {
-    auto base_config =
-        StacktraceConfig::FromSourceLocation(std::source_location::current());
+    auto base_config = StacktraceConfig::FromSourceLocation();
     base_config.max_frames = 16;
     base_config.start_frame = 1;
     base_config.stop_before = "__libc_start_main";

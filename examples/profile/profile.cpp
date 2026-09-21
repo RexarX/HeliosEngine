@@ -62,10 +62,13 @@ public:
 
   void Alloc(const void* /*ptr*/, size_t /*size*/,
              std::optional<helios::CStringView> /*text*/, int /*depth*/,
-             std::source_location /*loc*/) noexcept override {}
+             const std::source_location& /*loc*/ =
+                 std::source_location::current()) noexcept override {}
 
   void Free(const void* /*ptr*/, std::optional<helios::CStringView> /*text*/,
-            int /*depth*/, std::source_location /*loc*/) noexcept override {}
+            int /*depth*/,
+            const std::source_location& /*loc*/ =
+                std::source_location::current()) noexcept override {}
 
   void MemoryDiscard(helios::CStringView /*name*/) noexcept override {}
 

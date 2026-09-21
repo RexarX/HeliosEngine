@@ -5,6 +5,8 @@ module;
 #ifndef HELIOS_ENABLE_IMPORT_STD
 #include "../src/pch.hpp"
 #else
+#include <xoshiro.h>
+
 #ifdef HELIOS_PLATFORM_WINDOWS
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN

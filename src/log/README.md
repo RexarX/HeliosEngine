@@ -95,8 +95,8 @@ When the `log` module is linked, assertion failures route through the log plugin
 
 ```cpp
 helios::SetAssertionHandler(
-    [](std::string_view condition, const std::source_location& loc,
-       std::string_view message) noexcept {
+    [](std::string_view condition, std::string_view message,
+       const std::source_location& loc) noexcept {
       helios::log::Critical("Assert: {} | {} [{}:{}]", condition, message,
                             loc.file_name(), loc.line());
     });
