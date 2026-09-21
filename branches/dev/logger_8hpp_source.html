@@ -612,15 +612,15 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('logger_8hpp_so
 <div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacehelios_1_1log.html#a589dccda0174e0acc80b78d31bc0d63b">Debug</a>(std::string_view message) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>  <a class="code hl_function" href="classhelios_1_1log_1_1Logger.html#a34e5a8c9ec8bbd7aee23b7cc03637dbd">Logger::Instance</a>().<a class="code hl_function" href="classhelios_1_1log_1_1Logger.html#a54c19abfaf58467e3dada7ce0a12ec6b">Log</a>(<a class="code hl_enumvalue" href="namespacehelios_1_1log.html#addfd119fad8921232327088631b3aeb9abb53ce21b7c0b7c8a8f7860a41901d29">Level::kDebug</a>, message);</div>
 <div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>}</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Args) &gt; 0)<span class="comment"></span></div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span><span class="comment"> * @brief Logs a formatted debug message with the default logger.</span></div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span><span class="comment"> * @tparam Args Types of the format arguments</span></div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span><span class="comment"> * @param fmt Format string</span></div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="comment"> * @param args Arguments for the format string</span></div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span><span class="comment"></span> </div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span><span class="comment"> * @brief Logs a formatted debug message with the default logger.</span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span><span class="comment"> * @tparam Args Types of the format arguments</span></div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span><span class="comment"> * @param fmt Format string</span></div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span><span class="comment"> * @param args Arguments for the format string</span></div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Args) &gt; 0)</div>
 <div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacehelios_1_1log.html#a589dccda0174e0acc80b78d31bc0d63b">Debug</a>(std::format_string&lt;Args...&gt; fmt, Args&amp;&amp;... args) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>  <a class="code hl_function" href="classhelios_1_1log_1_1Logger.html#a34e5a8c9ec8bbd7aee23b7cc03637dbd">Logger::Instance</a>().<a class="code hl_function" href="classhelios_1_1log_1_1Logger.html#a54c19abfaf58467e3dada7ce0a12ec6b">Log</a>(<a class="code hl_enumvalue" href="namespacehelios_1_1log.html#addfd119fad8921232327088631b3aeb9abb53ce21b7c0b7c8a8f7860a41901d29">Level::kDebug</a>, fmt, std::forward&lt;Args&gt;(args)...);</div>
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>}</div>
