@@ -238,12 +238,12 @@ TEST_SUITE("helios::utils::Random") {
       std::latch ready{2};
       std::latch may_exit{1};
 
-      std::thread thread_a{[ptr_a, &ready, &may_exit] {
+      std::thread thread_a{[&ptr_a, &ready, &may_exit] {
         ptr_a = &DefaultEngine();
         ready.count_down();
         may_exit.wait();
       }};
-      std::thread thread_b{[ptr_a, &ready, &may_exit] {
+      std::thread thread_b{[&ptr_b, &ready, &may_exit] {
         ptr_b = &DefaultEngine();
         ready.count_down();
         may_exit.wait();
