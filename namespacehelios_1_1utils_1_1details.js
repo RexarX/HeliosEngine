@@ -18,6 +18,7 @@ var namespacehelios_1_1utils_1_1details =
     [ "call_or_apply_result_t", "namespacehelios_1_1utils_1_1details.html#afe105881999be52188e10bdcbfd7590e", null ],
     [ "find_result_t", "namespacehelios_1_1utils_1_1details.html#a8fe570bae888c6eabee42a6bb21639c0", null ],
     [ "folder_apply_result_t", "namespacehelios_1_1utils_1_1details.html#abb816378aaa50f126b032c31c4ca2226", null ],
+    [ "CachedProcessEntropy", "namespacehelios_1_1utils_1_1details.html#a4280b1c265e8d3a99092d83c8d54d7f1", null ],
     [ "ComputeTypeHash", "namespacehelios_1_1utils_1_1details.html#a08674f58d6aced25acd67c1ee913fb69", null ],
     [ "ExtractFunctionName", "namespacehelios_1_1utils_1_1details.html#a659de311ec87b5770ef335bfb24571eb", null ],
     [ "ExtractSignatureArgument", "namespacehelios_1_1utils_1_1details.html#ad30b4594360279456b39a818a2e2e0df", null ],
@@ -30,6 +31,9 @@ var namespacehelios_1_1utils_1_1details =
     [ "GetUnqualifiedTypeName", "namespacehelios_1_1utils_1_1details.html#a2c16cc078a6438ecd3f101efdbc1e9b0", null ],
     [ "IsFunctorType", "namespacehelios_1_1utils_1_1details.html#a29e3d3cf19bc1da9eaaccedd3a380c6f", null ],
     [ "IsLambdaType", "namespacehelios_1_1utils_1_1details.html#aa2df74705747920b7e9fa01a0bcd3bf2", null ],
+    [ "MurmurScramble64", "namespacehelios_1_1utils_1_1details.html#ab8e73a38f76e2ca88918f5887a3bd3e7", null ],
+    [ "NextSeedSequence", "namespacehelios_1_1utils_1_1details.html#abe53e6af940fd17e9f14c96cc010cf6e", null ],
+    [ "ReadRandomDevice64", "namespacehelios_1_1utils_1_1details.html#acea68086b8acf4fee4625860e052838c", null ],
     [ "StripFunctionNameDecorations", "namespacehelios_1_1utils_1_1details.html#a625ada1b40b6ef5a93afe9d31ff5f427", null ],
     [ "StripGccAliasExposition", "namespacehelios_1_1utils_1_1details.html#a07c9e4f2149ebb314a95f1a6f51ebe6a", null ],
     [ "kTypeNameStorage", "namespacehelios_1_1utils_1_1details.html#afbdfccb8f75933121d6d8d082f8907f1", null ]

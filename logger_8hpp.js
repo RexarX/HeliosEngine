@@ -18,7 +18,7 @@ var logger_8hpp =
     [ "helios::log::Info", "namespacehelios_1_1log.html#a5e0f2faa9710b7d3045802095b10d6de", null ],
     [ "helios::log::Info", "namespacehelios_1_1log.html#a8a82d9ec6321075889ba0e5960a1aa52", null ],
     [ "helios::log::Info", "namespacehelios_1_1log.html#a92e9754d96ce89fabe6c4de3d38631d9", null ],
-    [ "helios::log::details::LogAssertionViaLogger", "namespacehelios_1_1log_1_1details.html#a201722f711a427b79a0f2c1d1be79762", null ],
+    [ "helios::log::details::LogAssertionViaLogger", "namespacehelios_1_1log_1_1details.html#a7791abd8be18d736cad1b9d1397c3013", null ],
     [ "helios::log::Trace", "namespacehelios_1_1log.html#a09e6fd6d41ebe0ab0a501e48a909f1e2", null ],
     [ "helios::log::Trace", "namespacehelios_1_1log.html#af369f6c3b41ae150aa198b57020da7d9", null ],
     [ "helios::log::Trace", "namespacehelios_1_1log.html#ac611ea92f2134f1fb82daed3bdc48273", null ],

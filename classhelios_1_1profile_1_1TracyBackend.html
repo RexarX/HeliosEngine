@@ -222,10 +222,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a228f456d5c0c7e78a2fe3c0cb4ad9c48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Records a plot sample.  <br /></td></tr>
 <tr class="memitem:aa9e360f93291aea8b6a0a09df7df428c" id="r_aa9e360f93291aea8b6a0a09df7df428c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa9e360f93291aea8b6a0a09df7df428c">PlotConfig</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> name, <a class="el" href="namespacehelios_1_1profile.html#a4028dc96634ea1fda3b42f975e840cbb">PlotFormat</a> type, bool step, bool fill, uint32_t color) noexcept override</td></tr>
 <tr class="memdesc:aa9e360f93291aea8b6a0a09df7df428c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures a plot channel.  <br /></td></tr>
-<tr class="memitem:a40de9a6ed68fe75c89026c1e30f31527" id="r_a40de9a6ed68fe75c89026c1e30f31527"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a40de9a6ed68fe75c89026c1e30f31527">Alloc</a> (const void *ptr, size_t size, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, std::source_location loc) noexcept override</td></tr>
-<tr class="memdesc:a40de9a6ed68fe75c89026c1e30f31527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Records a memory allocation.  <br /></td></tr>
-<tr class="memitem:a10ac3850217bc4abd1befa006f196d72" id="r_a10ac3850217bc4abd1befa006f196d72"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a10ac3850217bc4abd1befa006f196d72">Free</a> (const void *ptr, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, std::source_location loc) noexcept override</td></tr>
-<tr class="memdesc:a10ac3850217bc4abd1befa006f196d72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Records a memory deallocation.  <br /></td></tr>
+<tr class="memitem:a1278848337cfa7daf21fc80552381f45" id="r_a1278848337cfa7daf21fc80552381f45"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1278848337cfa7daf21fc80552381f45">Alloc</a> (const void *ptr, size_t size, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, const std::source_location &amp;loc=std::source_location::current()) noexcept override</td></tr>
+<tr class="memdesc:a1278848337cfa7daf21fc80552381f45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Records a memory allocation.  <br /></td></tr>
+<tr class="memitem:a931fd7f33413af62e48c957cadf16a8b" id="r_a931fd7f33413af62e48c957cadf16a8b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a931fd7f33413af62e48c957cadf16a8b">Free</a> (const void *ptr, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, const std::source_location &amp;loc=std::source_location::current()) noexcept override</td></tr>
+<tr class="memdesc:a931fd7f33413af62e48c957cadf16a8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Records a memory deallocation.  <br /></td></tr>
 <tr class="memitem:ad58dfed3df86a2c46a3c1fad7745c6fe" id="r_ad58dfed3df86a2c46a3c1fad7745c6fe"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad58dfed3df86a2c46a3c1fad7745c6fe">MemoryDiscard</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> name) noexcept override</td></tr>
 <tr class="memdesc:ad58dfed3df86a2c46a3c1fad7745c6fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discards tracked memory for a named pool.  <br /></td></tr>
 <tr class="memitem:a32e6fa341378823a643d06e1b20da4ad" id="r_a32e6fa341378823a643d06e1b20da4ad"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a32e6fa341378823a643d06e1b20da4ad">MemoryDiscard</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> name, int depth) noexcept override</td></tr>
@@ -244,8 +244,8 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tracy_8hpp_source.html#l00028">28</a> of file <a class="el" href="tracy_8hpp_source.html">tracy.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a40de9a6ed68fe75c89026c1e30f31527" name="a40de9a6ed68fe75c89026c1e30f31527"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40de9a6ed68fe75c89026c1e30f31527">&#9670;&#160;</a></span>Alloc()</h2>
+<a id="a1278848337cfa7daf21fc80552381f45" name="a1278848337cfa7daf21fc80552381f45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1278848337cfa7daf21fc80552381f45">&#9670;&#160;</a></span>Alloc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -276,7 +276,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::source_location</td>          <td class="paramname"><span class="paramname"><em>loc</em></span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -298,7 +298,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a38a105e82c51f2fab5b56c44876cd9aa">helios::profile::Backend</a>.</p>
+<p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a421024a356f6e722d2c800d1ae474217">helios::profile::Backend</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="tracy_8cpp_source.html#l00133">133</a> of file <a class="el" href="tracy_8cpp_source.html">tracy.cpp</a>.</p>
 
@@ -525,8 +525,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a10ac3850217bc4abd1befa006f196d72" name="a10ac3850217bc4abd1befa006f196d72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10ac3850217bc4abd1befa006f196d72">&#9670;&#160;</a></span>Free()</h2>
+<a id="a931fd7f33413af62e48c957cadf16a8b" name="a931fd7f33413af62e48c957cadf16a8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a931fd7f33413af62e48c957cadf16a8b">&#9670;&#160;</a></span>Free()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -552,7 +552,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::source_location</td>          <td class="paramname"><span class="paramname"><em>loc</em></span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -573,7 +573,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a469d20934df8274fcf0e7c46581feecc">helios::profile::Backend</a>.</p>
+<p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a737d64c53d27749818e1b6c2e51ad396">helios::profile::Backend</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="tracy_8cpp_source.html#l00155">155</a> of file <a class="el" href="tracy_8cpp_source.html">tracy.cpp</a>.</p>
 
@@ -612,7 +612,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a3f0dafd72836dc8eb3c6dcce4162baac">helios::profile::Backend</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracy_8cpp_source.html#l00175">175</a> of file <a class="el" href="tracy_8cpp_source.html">tracy.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracy_8cpp_source.html#l00176">176</a> of file <a class="el" href="tracy_8cpp_source.html">tracy.cpp</a>.</p>
 
 </div>
 </div>
@@ -654,7 +654,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a4f86081fd441a991c1ce76f9b8f20a4d">helios::profile::Backend</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracy_8cpp_source.html#l00183">183</a> of file <a class="el" href="tracy_8cpp_source.html">tracy.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracy_8cpp_source.html#l00184">184</a> of file <a class="el" href="tracy_8cpp_source.html">tracy.cpp</a>.</p>
 
 </div>
 </div>
@@ -728,7 +728,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1profile_1_1Backend.html#a02a3a83d9bb9f4e3e2da746ecb3102e9">helios::profile::Backend</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracy_8hpp_source.html#l00073">73</a> of file <a class="el" href="tracy_8hpp_source.html">tracy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracy_8hpp_source.html#l00076">76</a> of file <a class="el" href="tracy_8hpp_source.html">tracy.hpp</a>.</p>
 
 </div>
 </div>

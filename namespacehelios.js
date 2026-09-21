@@ -1,7 +1,7 @@
 var namespacehelios =
 [
     [ "anonymous_namespace{assert.cpp}", "namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html", [
-      [ "BuildAssertionStacktraceConfig", "namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html#aa6cff68a01035a02dc6b3dee49b88f4e", null ],
+      [ "BuildAssertionStacktraceConfig", "namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html#a9a92c6ce06b1bb4a9d05d07a78d4e304", null ],
       [ "kDefaultAssertionStacktraceFrames", "namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html#a0189e7cd23efa9fad7846d01fe4b047d", null ]
     ] ],
     [ "app", "namespacehelios_1_1app.html", "namespacehelios_1_1app" ],
@@ -24,15 +24,15 @@ var namespacehelios =
     [ "StacktraceConfig", "structhelios_1_1StacktraceConfig.html", "structhelios_1_1StacktraceConfig" ],
     [ "Uuid", "classhelios_1_1Uuid.html", "classhelios_1_1Uuid" ],
     [ "UuidGenerator", "classhelios_1_1UuidGenerator.html", "classhelios_1_1UuidGenerator" ],
-    [ "AssertionHandler", "namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4", null ],
+    [ "AssertionHandler", "namespacehelios.html#a54960dc764b53d3485706f187e52fb35", null ],
     [ "CStringView", "namespacehelios.html#a27054e3c65ddee94a897de87b010255f", null ],
     [ "U16CStringView", "namespacehelios.html#a2e2ac7e78c9c7a539c7474a9bc7d0df9", null ],
     [ "U32CStringView", "namespacehelios.html#a972743e2f2714ec185e080de5028f319", null ],
     [ "U8CStringView", "namespacehelios.html#a2f8cda93d2cc7430b93197943023cb6b", null ],
     [ "WCStringView", "namespacehelios.html#a25d6b558f111a080d2d77ce5e9caa6c6", null ],
-    [ "AbortWithStacktrace", "namespacehelios.html#a353d3912bb7ad37d555a2d43f9fcd02f", null ],
+    [ "AbortWithStacktrace", "namespacehelios.html#aedf901dcce50a7df004a238abe47575e", null ],
     [ "GetAssertionHandler", "namespacehelios.html#a7982e4af7b9267b962018d6cfd53c165", null ],
-    [ "HandleAssertion", "namespacehelios.html#aab391e11e7c9423a40ead9ce2c9abb1b", null ],
+    [ "HandleAssertion", "namespacehelios.html#a34d25fe5cde9dc7bf269c27a878e2d42", null ],
     [ "MakeDelegate", "namespacehelios.html#a5e276a5c70bbb86023543f06d4c58d28", null ],
     [ "MakeDelegate", "namespacehelios.html#ac0c351b2588d308233b80d64eea7c936", null ],
     [ "MakeDelegate", "namespacehelios.html#a598ce59f51b3e1c31390738b22468a15", null ],

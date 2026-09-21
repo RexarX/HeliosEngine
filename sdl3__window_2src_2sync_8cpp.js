@@ -18,6 +18,8 @@ var sdl3__window_2src_2sync_8cpp =
     [ "helios::sdl3::window::anonymous_namespace{sync.cpp}::DisplayForWindow", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html#a7b9fb770dd81af3659a346c8969c3156", null ],
     [ "helios::sdl3::window::anonymous_namespace{sync.cpp}::FindFullscreenMode", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html#a1526a86148a1f02fe7d8c08175857140", null ],
     [ "helios::sdl3::window::MarkMonitorDependentDirty", "namespacehelios_1_1sdl3_1_1window.html#a1943e5ba7785f1848ed76a110595e361", null ],
+    [ "helios::sdl3::window::PresentSoftwareSurface", "namespacehelios_1_1sdl3_1_1window.html#a3e9930cc6996d2aeccfaae08945ad616", null ],
+    [ "helios::sdl3::window::PresentSoftwareSurfaces", "namespacehelios_1_1sdl3_1_1window.html#a8b2da09df0f71825dc112856915604ec", null ],
     [ "helios::sdl3::window::RefreshMonitors", "namespacehelios_1_1sdl3_1_1window.html#a3d2cab5ad6a3d86d4febe909e6645da9", null ],
     [ "helios::sdl3::window::anonymous_namespace{sync.cpp}::RefreshRateToHz", "namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02sync_8cpp_03.html#a8bb5854225457f98535a3a7b0cb91c1f", null ],
     [ "helios::sdl3::window::ResolveCreationSize", "namespacehelios_1_1sdl3_1_1window.html#a4ef832d2ed250ba2c43eb80b7a31b4be", null ],

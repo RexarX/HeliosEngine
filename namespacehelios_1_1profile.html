@@ -239,10 +239,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:a5a11d682765bbaa16912397f2361a7c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks the start of a named frame region.  <br /></td></tr>
 <tr class="memitem:a49f86eab820fafe6480b5e3b2c6818c4" id="r_a49f86eab820fafe6480b5e3b2c6818c4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a49f86eab820fafe6480b5e3b2c6818c4">FrameMarkEnd</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> name) noexcept</td></tr>
 <tr class="memdesc:a49f86eab820fafe6480b5e3b2c6818c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks the end of a named frame region.  <br /></td></tr>
-<tr class="memitem:a02dad78978ecc6423c4465c04308ba51" id="r_a02dad78978ecc6423c4465c04308ba51"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a02dad78978ecc6423c4465c04308ba51">Alloc</a> (const void *ptr, size_t size, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, std::source_location loc=std::source_location::current()) noexcept</td></tr>
-<tr class="memdesc:a02dad78978ecc6423c4465c04308ba51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Profile an allocation of memory.  <br /></td></tr>
-<tr class="memitem:a0ae020270f853294a8002859bd2464be" id="r_a0ae020270f853294a8002859bd2464be"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0ae020270f853294a8002859bd2464be">Free</a> (const void *ptr, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, std::source_location loc=std::source_location::current()) noexcept</td></tr>
-<tr class="memdesc:a0ae020270f853294a8002859bd2464be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Profile a deallocation of memory.  <br /></td></tr>
+<tr class="memitem:a1246cc175c0e42df4c4ecf5d1c3ff7dc" id="r_a1246cc175c0e42df4c4ecf5d1c3ff7dc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1246cc175c0e42df4c4ecf5d1c3ff7dc">Alloc</a> (const void *ptr, size_t size, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:a1246cc175c0e42df4c4ecf5d1c3ff7dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Profile an allocation of memory.  <br /></td></tr>
+<tr class="memitem:a6a1101b5d0790dec7623205b29439733" id="r_a6a1101b5d0790dec7623205b29439733"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6a1101b5d0790dec7623205b29439733">Free</a> (const void *ptr, std::optional&lt; <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> &gt; name, int depth, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:a6a1101b5d0790dec7623205b29439733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Profile a deallocation of memory.  <br /></td></tr>
 <tr class="memitem:af9a4c872c3aed6329f2203c029d30304" id="r_af9a4c872c3aed6329f2203c029d30304"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af9a4c872c3aed6329f2203c029d30304">MemoryDiscard</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> name) noexcept</td></tr>
 <tr class="memdesc:af9a4c872c3aed6329f2203c029d30304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Profile memory discard.  <br /></td></tr>
 <tr class="memitem:a6d489aaa8b22b8761938927a0cc8bc5f" id="r_a6d489aaa8b22b8761938927a0cc8bc5f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6d489aaa8b22b8761938927a0cc8bc5f">MemoryDiscardS</a> (<a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a> name, int depth) noexcept</td></tr>
@@ -275,7 +275,7 @@ Variables</h2></td></tr>
 
 <p>Type alias for profiler backend type IDs. </p>
 
-<p class="definition">Definition at line <a class="el" href="backend_8hpp_source.html#l00191">191</a> of file <a class="el" href="backend_8hpp_source.html">backend.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="backend_8hpp_source.html#l00193">193</a> of file <a class="el" href="backend_8hpp_source.html">backend.hpp</a>.</p>
 
 </div>
 </div>
@@ -293,7 +293,7 @@ Variables</h2></td></tr>
 
 <p>Type alias for profiler backend type indices. </p>
 
-<p class="definition">Definition at line <a class="el" href="backend_8hpp_source.html#l00194">194</a> of file <a class="el" href="backend_8hpp_source.html">backend.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="backend_8hpp_source.html#l00196">196</a> of file <a class="el" href="backend_8hpp_source.html">backend.hpp</a>.</p>
 
 </div>
 </div>
@@ -331,8 +331,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a02dad78978ecc6423c4465c04308ba51" name="a02dad78978ecc6423c4465c04308ba51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02dad78978ecc6423c4465c04308ba51">&#9670;&#160;</a></span>Alloc()</h2>
+<a id="a1246cc175c0e42df4c4ecf5d1c3ff7dc" name="a1246cc175c0e42df4c4ecf5d1c3ff7dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1246cc175c0e42df4c4ecf5d1c3ff7dc">&#9670;&#160;</a></span>Alloc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -363,7 +363,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::source_location</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -523,8 +523,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a0ae020270f853294a8002859bd2464be" name="a0ae020270f853294a8002859bd2464be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ae020270f853294a8002859bd2464be">&#9670;&#160;</a></span>Free()</h2>
+<a id="a6a1101b5d0790dec7623205b29439733" name="a6a1101b5d0790dec7623205b29439733"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a1101b5d0790dec7623205b29439733">&#9670;&#160;</a></span>Free()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -550,7 +550,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::source_location</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -571,7 +571,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html#l00046">46</a> of file <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html">memory.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html#l00047">47</a> of file <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html">memory.hpp</a>.</p>
 
 </div>
 </div>
@@ -606,7 +606,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html#l00056">56</a> of file <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html">memory.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html#l00057">57</a> of file <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html">memory.hpp</a>.</p>
 
 </div>
 </div>
@@ -646,7 +646,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html#l00066">66</a> of file <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html">memory.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html#l00067">67</a> of file <a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html">memory.hpp</a>.</p>
 
 </div>
 </div>

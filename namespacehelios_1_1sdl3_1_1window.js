@@ -54,6 +54,8 @@ var namespacehelios_1_1sdl3_1_1window =
     [ "FindWindowMapEntry", "namespacehelios_1_1sdl3_1_1window.html#a1add2e11741a2f202d173cb901f91389", null ],
     [ "FindWindowMapEntry", "namespacehelios_1_1sdl3_1_1window.html#a439916c9524f05f2116733dd790f1a1a", null ],
     [ "MarkMonitorDependentDirty", "namespacehelios_1_1sdl3_1_1window.html#a1943e5ba7785f1848ed76a110595e361", null ],
+    [ "PresentSoftwareSurface", "namespacehelios_1_1sdl3_1_1window.html#a3e9930cc6996d2aeccfaae08945ad616", null ],
+    [ "PresentSoftwareSurfaces", "namespacehelios_1_1sdl3_1_1window.html#a8b2da09df0f71825dc112856915604ec", null ],
     [ "QueryNativeHandle", "namespacehelios_1_1sdl3_1_1window.html#a0c02db9e06a9fd01b85292cd9532427a", null ],
     [ "RefreshMonitors", "namespacehelios_1_1sdl3_1_1window.html#a3d2cab5ad6a3d86d4febe909e6645da9", null ],
     [ "RegisterEventHandlers", "namespacehelios_1_1sdl3_1_1window.html#ac0035947ef6298127cb4f790d4e16cdd", null ],

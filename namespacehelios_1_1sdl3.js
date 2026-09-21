@@ -4,6 +4,7 @@ var namespacehelios_1_1sdl3 =
     [ "anonymous_namespace{pump_events.cpp}", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02pump__events_8cpp_03.html", [
       [ "DispatchEvent", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02pump__events_8cpp_03.html#a2935ddede3096f16c6bd24d2e7b30281", null ],
       [ "DrainPolledEvents", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02pump__events_8cpp_03.html#a5248d883098d850edfa750b0ad3d566a", null ],
+      [ "HandleQuitEvent", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02pump__events_8cpp_03.html#aa710f3dc77ac8ea27c8f23a3652ddec3", null ],
       [ "RequestNestedFramePump", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02pump__events_8cpp_03.html#a784e88bfb0fe827a2cb994973c698cdd", null ],
       [ "ShouldRequestNestedPump", "namespacehelios_1_1sdl3_1_1anonymous__namespace_02pump__events_8cpp_03.html#a2cfa43e8d490d96ff2f8edea0b42b3d3", null ]
     ] ],

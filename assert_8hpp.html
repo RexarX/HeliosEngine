@@ -207,34 +207,34 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a3cc4370a16e087a93b8545f2495c12c4" id="r_a3cc4370a16e087a93b8545f2495c12c4"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4">helios::AssertionHandler</a></td></tr>
-<tr class="memdesc:a3cc4370a16e087a93b8545f2495c12c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function signature for custom assertion handlers.  <br /></td></tr>
+<tr class="memitem:a54960dc764b53d3485706f187e52fb35" id="r_a54960dc764b53d3485706f187e52fb35"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#a54960dc764b53d3485706f187e52fb35">helios::AssertionHandler</a></td></tr>
+<tr class="memdesc:a54960dc764b53d3485706f187e52fb35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function signature for custom assertion handlers.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adb5b08a1efebd6763f5c5358aaccdea7" id="r_adb5b08a1efebd6763f5c5358aaccdea7"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#adb5b08a1efebd6763f5c5358aaccdea7">helios::details::FormatAssertionMessage</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message)</td></tr>
-<tr class="memdesc:adb5b08a1efebd6763f5c5358aaccdea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a complete assertion failure message with source location and stack trace.  <br /></td></tr>
-<tr class="memitem:ac7257329ff9480b84750b75c7638f95a" id="r_ac7257329ff9480b84750b75c7638f95a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#ac7257329ff9480b84750b75c7638f95a">helios::details::DefaultAssertionHandler</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
-<tr class="memdesc:ac7257329ff9480b84750b75c7638f95a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default assertion handler that prints to stderr.  <br /></td></tr>
+<tr class="memitem:a679314f279f8ea19a36495cd7ece1e57" id="r_a679314f279f8ea19a36495cd7ece1e57"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#a679314f279f8ea19a36495cd7ece1e57">helios::details::FormatAssertionMessage</a> (std::string_view condition, std::string_view message, const std::source_location &amp;loc=std::source_location::current())</td></tr>
+<tr class="memdesc:a679314f279f8ea19a36495cd7ece1e57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a complete assertion failure message with source location and stack trace.  <br /></td></tr>
+<tr class="memitem:acddaf3c15e136cdca1b748ce681b34a9" id="r_acddaf3c15e136cdca1b748ce681b34a9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#acddaf3c15e136cdca1b748ce681b34a9">helios::details::DefaultAssertionHandler</a> (std::string_view condition, std::string_view message, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:acddaf3c15e136cdca1b748ce681b34a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default assertion handler that prints to stderr.  <br /></td></tr>
 <tr class="memitem:a3f3a0707dae4586fa9f88f9aeae11cdc" id="r_a3f3a0707dae4586fa9f88f9aeae11cdc"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#a3f3a0707dae4586fa9f88f9aeae11cdc">helios::details::HasLogPluginHandler</a> () noexcept</td></tr>
 <tr class="memdesc:a3f3a0707dae4586fa9f88f9aeae11cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log plugin assertion handler (weak symbol).  <br /></td></tr>
-<tr class="memitem:ae8a3b4bbfc9cf2296127d58f340438c1" id="r_ae8a3b4bbfc9cf2296127d58f340438c1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#ae8a3b4bbfc9cf2296127d58f340438c1">helios::details::LogPluginAssertionHandler</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
-<tr class="memdesc:ae8a3b4bbfc9cf2296127d58f340438c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Weak symbol for log plugin assertion handler.  <br /></td></tr>
-<tr class="memitem:aab391e11e7c9423a40ead9ce2c9abb1b" id="r_aab391e11e7c9423a40ead9ce2c9abb1b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#aab391e11e7c9423a40ead9ce2c9abb1b">helios::HandleAssertion</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
-<tr class="memdesc:aab391e11e7c9423a40ead9ce2c9abb1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified assertion handling function.  <br /></td></tr>
-<tr class="memitem:afc2e2d6e5d9076d42481c5837df0f6ba" id="r_afc2e2d6e5d9076d42481c5837df0f6ba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#afc2e2d6e5d9076d42481c5837df0f6ba">helios::SetAssertionHandler</a> (<a class="el" href="namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a> handler) noexcept</td></tr>
+<tr class="memitem:aab80b9a64cea79fe8c4a1aed41e7e0d1" id="r_aab80b9a64cea79fe8c4a1aed41e7e0d1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#aab80b9a64cea79fe8c4a1aed41e7e0d1">helios::details::LogPluginAssertionHandler</a> (std::string_view condition, std::string_view message, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:aab80b9a64cea79fe8c4a1aed41e7e0d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Weak symbol for log plugin assertion handler.  <br /></td></tr>
+<tr class="memitem:a34d25fe5cde9dc7bf269c27a878e2d42" id="r_a34d25fe5cde9dc7bf269c27a878e2d42"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#a34d25fe5cde9dc7bf269c27a878e2d42">helios::HandleAssertion</a> (std::string_view condition, std::string_view message, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:a34d25fe5cde9dc7bf269c27a878e2d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified assertion handling function.  <br /></td></tr>
+<tr class="memitem:afc2e2d6e5d9076d42481c5837df0f6ba" id="r_afc2e2d6e5d9076d42481c5837df0f6ba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#afc2e2d6e5d9076d42481c5837df0f6ba">helios::SetAssertionHandler</a> (<a class="el" href="namespacehelios.html#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a> handler) noexcept</td></tr>
 <tr class="memdesc:afc2e2d6e5d9076d42481c5837df0f6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a custom assertion handler.  <br /></td></tr>
-<tr class="memitem:a7982e4af7b9267b962018d6cfd53c165" id="r_a7982e4af7b9267b962018d6cfd53c165"><td class="memItemLeft"><a class="el" href="namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#a7982e4af7b9267b962018d6cfd53c165">helios::GetAssertionHandler</a> () noexcept</td></tr>
+<tr class="memitem:a7982e4af7b9267b962018d6cfd53c165" id="r_a7982e4af7b9267b962018d6cfd53c165"><td class="memItemLeft"><a class="el" href="namespacehelios.html#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#a7982e4af7b9267b962018d6cfd53c165">helios::GetAssertionHandler</a> () noexcept</td></tr>
 <tr class="memdesc:a7982e4af7b9267b962018d6cfd53c165"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current custom assertion handler.  <br /></td></tr>
-<tr class="memitem:a353d3912bb7ad37d555a2d43f9fcd02f" id="r_a353d3912bb7ad37d555a2d43f9fcd02f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#a353d3912bb7ad37d555a2d43f9fcd02f">helios::AbortWithStacktrace</a> (std::string_view message) noexcept</td></tr>
-<tr class="memdesc:a353d3912bb7ad37d555a2d43f9fcd02f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a message with stack trace and aborts the program execution.  <br /></td></tr>
+<tr class="memitem:aedf901dcce50a7df004a238abe47575e" id="r_aedf901dcce50a7df004a238abe47575e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#aedf901dcce50a7df004a238abe47575e">helios::AbortWithStacktrace</a> (std::string_view message, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:aedf901dcce50a7df004a238abe47575e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a message with stack trace and aborts the program execution.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a5dd8e95e4cb808a93be15d4df228eb36" id="r_a5dd8e95e4cb808a93be15d4df228eb36"><td class="memItemLeft">constexpr <a class="el" href="namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#a5dd8e95e4cb808a93be15d4df228eb36">helios::kDefaultAssertionHandler</a> = nullptr</td></tr>
+<tr class="memitem:a5dd8e95e4cb808a93be15d4df228eb36" id="r_a5dd8e95e4cb808a93be15d4df228eb36"><td class="memItemLeft">constexpr <a class="el" href="namespacehelios.html#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html#a5dd8e95e4cb808a93be15d4df228eb36">helios::kDefaultAssertionHandler</a> = nullptr</td></tr>
 <tr class="memdesc:a5dd8e95e4cb808a93be15d4df228eb36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default assertion handler (<span class="tt">nullptr</span> means use built-in default behavior).  <br /></td></tr>
 <tr class="memitem:af52cb2961ca77df7f242657ef0d3d13d" id="r_af52cb2961ca77df7f242657ef0d3d13d"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#af52cb2961ca77df7f242657ef0d3d13d">helios::details::kEnableAssert</a> = false</td></tr>
-<tr class="memitem:a1f5914c59d5d990ec71ad9a7cf71ba84" id="r_a1f5914c59d5d990ec71ad9a7cf71ba84"><td class="memItemLeft"><a class="el" href="namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#a1f5914c59d5d990ec71ad9a7cf71ba84">helios::details::g_custom_assertion_handler</a> = nullptr</td></tr>
+<tr class="memitem:a1f5914c59d5d990ec71ad9a7cf71ba84" id="r_a1f5914c59d5d990ec71ad9a7cf71ba84"><td class="memItemLeft"><a class="el" href="namespacehelios.html#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1details.html#a1f5914c59d5d990ec71ad9a7cf71ba84">helios::details::g_custom_assertion_handler</a> = nullptr</td></tr>
 <tr class="memdesc:a1f5914c59d5d990ec71ad9a7cf71ba84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the custom assertion handler.  <br /></td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
@@ -266,7 +266,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00235">235</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00237">237</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>
@@ -298,7 +298,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00271">271</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00270">270</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>
@@ -330,7 +330,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00299">299</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00295">295</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>

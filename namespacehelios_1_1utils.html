@@ -326,14 +326,38 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a0e2db988335f2e50e437dd094ac6c974" id="r_a0e2db988335f2e50e437dd094ac6c974"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a0e2db988335f2e50e437dd094ac6c974 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a0e2db988335f2e50e437dd094ac6c974">DynamicLibraryResult</a> = std::expected&lt;T, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt;</td></tr>
 <tr class="memitem:ae6f12943a45b892bec3a5e117dfc5aea" id="r_ae6f12943a45b892bec3a5e117dfc5aea"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae6f12943a45b892bec3a5e117dfc5aea">HashType</a> = size_t</td></tr>
-<tr class="memitem:aa277c9bc6bdfb97423e88f6bc45686b0" id="r_aa277c9bc6bdfb97423e88f6bc45686b0"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0">DefaultRandomEngine</a> = std::mt19937_64</td></tr>
-<tr class="memdesc:aa277c9bc6bdfb97423e88f6bc45686b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default engine type used by random utilities.  <br /></td></tr>
-<tr class="memitem:a82e57611045b81ffeda913f085c2131c" id="r_a82e57611045b81ffeda913f085c2131c"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a82e57611045b81ffeda913f085c2131c">FastRandomEngine</a> = std::minstd_rand</td></tr>
-<tr class="memdesc:a82e57611045b81ffeda913f085c2131c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast but lower-quality engine type used by random utilities.  <br /></td></tr>
-<tr class="memitem:a371e8184717930153141198aee96e1cf" id="r_a371e8184717930153141198aee96e1cf"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a371e8184717930153141198aee96e1cf">DefaultRandomGenerator</a> = <a class="el" href="classhelios_1_1utils_1_1RandomGenerator.html">RandomGenerator</a>&lt;<a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0">DefaultRandomEngine</a>&gt;</td></tr>
+<tr class="memitem:ab1300ce674a713174a618fca493cfc90" id="r_ab1300ce674a713174a618fca493cfc90"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ab1300ce674a713174a618fca493cfc90">Xoshiro256StarStar</a> = xso::xoshiro_4x64_star_star</td></tr>
+<tr class="memdesc:ab1300ce674a713174a618fca493cfc90"><td class="mdescLeft">&#160;</td><td class="mdescRight">xoshiro256** — all-purpose 64-bit generator (256 bits of state).  <br /></td></tr>
+<tr class="memitem:aeec94b9882e08d270fe11fdadab0c9e8" id="r_aeec94b9882e08d270fe11fdadab0c9e8"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aeec94b9882e08d270fe11fdadab0c9e8">Xoshiro256PlusPlus</a> = xso::xoshiro_4x64_plus_plus</td></tr>
+<tr class="memdesc:aeec94b9882e08d270fe11fdadab0c9e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">xoshiro256++ — slightly faster all-purpose 64-bit alternative.  <br /></td></tr>
+<tr class="memitem:a9754ac891fa9c493a05d4caf6dc7a4b0" id="r_a9754ac891fa9c493a05d4caf6dc7a4b0"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a9754ac891fa9c493a05d4caf6dc7a4b0">Xoshiro256Plus</a> = xso::xoshiro_4x64_plus</td></tr>
+<tr class="memdesc:a9754ac891fa9c493a05d4caf6dc7a4b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">xoshiro256+ — fastest 256-bit engine; weaker low bits.  <br /></td></tr>
+<tr class="memitem:a1a9a07a68ce7bdce4e73b833e148d39b" id="r_a1a9a07a68ce7bdce4e73b833e148d39b"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a1a9a07a68ce7bdce4e73b833e148d39b">Xoroshiro128PlusPlus</a> = xso::xoroshiro_2x64_plus_plus</td></tr>
+<tr class="memdesc:a1a9a07a68ce7bdce4e73b833e148d39b"><td class="mdescLeft">&#160;</td><td class="mdescRight">xoroshiro128++ — fast 64-bit generator (128 bits of state).  <br /></td></tr>
+<tr class="memitem:acbd6537b0281319e325ace0bdcde654f" id="r_acbd6537b0281319e325ace0bdcde654f"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#acbd6537b0281319e325ace0bdcde654f">Xoroshiro128StarStar</a> = xso::xoroshiro_2x64_star_star</td></tr>
+<tr class="memdesc:acbd6537b0281319e325ace0bdcde654f"><td class="mdescLeft">&#160;</td><td class="mdescRight">xoroshiro128** — 128-bit-state alternative with a <span class="tt">**</span> scrambler.  <br /></td></tr>
+<tr class="memitem:a03dd3d9f4b61b1b9cf642bcb9d655732" id="r_a03dd3d9f4b61b1b9cf642bcb9d655732"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a03dd3d9f4b61b1b9cf642bcb9d655732">Xoroshiro128Plus</a> = xso::xoroshiro_2x64_plus</td></tr>
+<tr class="memdesc:a03dd3d9f4b61b1b9cf642bcb9d655732"><td class="mdescLeft">&#160;</td><td class="mdescRight">xoroshiro128+ — smallest/fastest 64-bit engine; weaker low bits.  <br /></td></tr>
+<tr class="memitem:ac3a884b9eacf2b660e9513724688b82a" id="r_ac3a884b9eacf2b660e9513724688b82a"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ac3a884b9eacf2b660e9513724688b82a">Xoshiro128StarStar</a> = xso::xoshiro_4x32_star_star</td></tr>
+<tr class="memdesc:ac3a884b9eacf2b660e9513724688b82a"><td class="mdescLeft">&#160;</td><td class="mdescRight">xoshiro128** — 32-bit output, 128 bits of state.  <br /></td></tr>
+<tr class="memitem:a690abfe9fbf03848f5cf6579c24185dd" id="r_a690abfe9fbf03848f5cf6579c24185dd"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a690abfe9fbf03848f5cf6579c24185dd">Xoshiro128PlusPlus</a> = xso::xoshiro_4x32_plus_plus</td></tr>
+<tr class="memdesc:a690abfe9fbf03848f5cf6579c24185dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">xoshiro128++ — 32-bit output alternative.  <br /></td></tr>
+<tr class="memitem:a3135f2eb9201f07232d09d5375fd771a" id="r_a3135f2eb9201f07232d09d5375fd771a"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a3135f2eb9201f07232d09d5375fd771a">Xoshiro512StarStar</a> = xso::xoshiro_8x64_star_star</td></tr>
+<tr class="memdesc:a3135f2eb9201f07232d09d5375fd771a"><td class="mdescLeft">&#160;</td><td class="mdescRight">xoshiro512** — 512 bits of state for extra period / more streams.  <br /></td></tr>
+<tr class="memitem:a7b4bf9e156512be144a31a26496a6060" id="r_a7b4bf9e156512be144a31a26496a6060"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a7b4bf9e156512be144a31a26496a6060">Xoroshiro1024StarStar</a> = xso::xoroshiro_16x64_star_star</td></tr>
+<tr class="memdesc:a7b4bf9e156512be144a31a26496a6060"><td class="mdescLeft">&#160;</td><td class="mdescRight">xoroshiro1024** — 1024 bits of state for huge parallel workloads.  <br /></td></tr>
+<tr class="memitem:a969b688d45f235c41c600600f9d03d95" id="r_a969b688d45f235c41c600600f9d03d95"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a969b688d45f235c41c600600f9d03d95">DefaultRandomEngine</a> = <a class="el" href="#ab1300ce674a713174a618fca493cfc90">Xoshiro256StarStar</a></td></tr>
+<tr class="memdesc:a969b688d45f235c41c600600f9d03d95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default engine type used by random utilities.  <br /></td></tr>
+<tr class="memitem:ad3ec641199727a92287008d0b8ccf885" id="r_ad3ec641199727a92287008d0b8ccf885"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ad3ec641199727a92287008d0b8ccf885">FastRandomEngine</a> = <a class="el" href="#a1a9a07a68ce7bdce4e73b833e148d39b">Xoroshiro128PlusPlus</a></td></tr>
+<tr class="memdesc:ad3ec641199727a92287008d0b8ccf885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast engine type used by random utilities.  <br /></td></tr>
+<tr class="memitem:a4ca027bba32e671b7ad6503bf756fdaf" id="r_a4ca027bba32e671b7ad6503bf756fdaf"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a4ca027bba32e671b7ad6503bf756fdaf">SmallRandomEngine</a> = <a class="el" href="#ac3a884b9eacf2b660e9513724688b82a">Xoshiro128StarStar</a></td></tr>
+<tr class="memdesc:a4ca027bba32e671b7ad6503bf756fdaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compact 32-bit engine.  <br /></td></tr>
+<tr class="memitem:ab0b00ba264132644947d3cc0f599513a" id="r_ab0b00ba264132644947d3cc0f599513a"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ab0b00ba264132644947d3cc0f599513a">LongPeriodRandomEngine</a> = <a class="el" href="#a3135f2eb9201f07232d09d5375fd771a">Xoshiro512StarStar</a></td></tr>
+<tr class="memdesc:ab0b00ba264132644947d3cc0f599513a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Long-period engine for large parallel jobs.  <br /></td></tr>
+<tr class="memitem:a371e8184717930153141198aee96e1cf" id="r_a371e8184717930153141198aee96e1cf"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a371e8184717930153141198aee96e1cf">DefaultRandomGenerator</a> = <a class="el" href="classhelios_1_1utils_1_1RandomGenerator.html">RandomGenerator</a>&lt;<a class="el" href="#a969b688d45f235c41c600600f9d03d95">DefaultRandomEngine</a>&gt;</td></tr>
 <tr class="memdesc:a371e8184717930153141198aee96e1cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience alias for a generator using the default-quality engine.  <br /></td></tr>
-<tr class="memitem:a851b4e170d6c739b36753930996cdd85" id="r_a851b4e170d6c739b36753930996cdd85"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a851b4e170d6c739b36753930996cdd85">FastRandomGeneratorType</a> = <a class="el" href="classhelios_1_1utils_1_1RandomGenerator.html">RandomGenerator</a>&lt;<a class="el" href="#a82e57611045b81ffeda913f085c2131c">FastRandomEngine</a>&gt;</td></tr>
-<tr class="memdesc:a851b4e170d6c739b36753930996cdd85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience alias for a generator using the fast engine.  <br /></td></tr>
+<tr class="memitem:a30f5ca72e6d2cd3306815dfbd56bf53e" id="r_a30f5ca72e6d2cd3306815dfbd56bf53e"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a30f5ca72e6d2cd3306815dfbd56bf53e">FastRandomGenerator</a> = <a class="el" href="classhelios_1_1utils_1_1RandomGenerator.html">RandomGenerator</a>&lt;<a class="el" href="#ad3ec641199727a92287008d0b8ccf885">FastRandomEngine</a>&gt;</td></tr>
+<tr class="memdesc:a30f5ca72e6d2cd3306815dfbd56bf53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience alias for a generator using the fast engine.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -461,19 +485,33 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;const R1&gt;, std:
 <tr class="memitem:aa4e61ba353a21a7cb01178936c5d956a template"><td class="memItemLeft">constexpr <a class="el" href="#ae6f12943a45b892bec3a5e117dfc5aea">HashType</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa4e61ba353a21a7cb01178936c5d956a">Fnv1aHash</a> (const char(&amp;array)[N]) noexcept</td></tr>
 <tr class="memdesc:aa4e61ba353a21a7cb01178936c5d956a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the FNV-1a hash of a string literal.  <br /></td></tr>
 <tr class="memitem:a877f3c904c91c4c12df9a0677b134e9a" id="r_a877f3c904c91c4c12df9a0677b134e9a"><td class="memItemLeft">uint64_t&#160;</td><td class="memItemRight"><a class="el" href="#a877f3c904c91c4c12df9a0677b134e9a">RandomDeviceSeed</a> ()</td></tr>
-<tr class="memdesc:a877f3c904c91c4c12df9a0677b134e9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal helper to obtain seed from <span class="tt">std::random_device</span>.  <br /></td></tr>
-<tr class="memitem:a6181881e2429f5e8a15d64a3e666a535" id="r_a6181881e2429f5e8a15d64a3e666a535"><td class="memItemLeft"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0">DefaultRandomEngine</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6181881e2429f5e8a15d64a3e666a535">MakeDefaultEngine</a> ()</td></tr>
-<tr class="memdesc:a6181881e2429f5e8a15d64a3e666a535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a default-quality random engine seeded with <span class="tt">std::random_device</span>.  <br /></td></tr>
-<tr class="memitem:adcca06685431c53242c449564e4da081" id="r_adcca06685431c53242c449564e4da081"><td class="memItemLeft"><a class="el" href="#a82e57611045b81ffeda913f085c2131c">FastRandomEngine</a>&#160;</td><td class="memItemRight"><a class="el" href="#adcca06685431c53242c449564e4da081">MakeFastEngine</a> ()</td></tr>
-<tr class="memdesc:adcca06685431c53242c449564e4da081"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a fast linear random engine seeded with <span class="tt">std::random_device</span>.  <br /></td></tr>
-<tr class="memitem:ae412d06926f505f92866943e64611a72" id="r_ae412d06926f505f92866943e64611a72"><td class="memItemLeft"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0">DefaultRandomEngine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae412d06926f505f92866943e64611a72">DefaultEngine</a> ()</td></tr>
+<tr class="memdesc:a877f3c904c91c4c12df9a0677b134e9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the process-wide 64-bit entropy word.  <br /></td></tr>
+<tr class="memitem:a232456fe150a8d225db6a5d1ba022168" id="r_a232456fe150a8d225db6a5d1ba022168"><td class="memItemLeft">uint64_t&#160;</td><td class="memItemRight"><a class="el" href="#a232456fe150a8d225db6a5d1ba022168">MixThreadSeed</a> ()</td></tr>
+<tr class="memdesc:a232456fe150a8d225db6a5d1ba022168"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixes process entropy with the calling thread and a unique sequence.  <br /></td></tr>
+<tr class="memitem:a3da5fbadb4ee6a4457f0e6ca35e0c78e" id="r_a3da5fbadb4ee6a4457f0e6ca35e0c78e"><td class="memTemplParams" colspan="2">template&lt;RandomEngine Engine = DefaultRandomEngine&gt; </td></tr>
+<tr class="memitem:a3da5fbadb4ee6a4457f0e6ca35e0c78e template"><td class="memItemLeft">Engine&#160;</td><td class="memItemRight"><a class="el" href="#a3da5fbadb4ee6a4457f0e6ca35e0c78e">MakeEngine</a> ()</td></tr>
+<tr class="memdesc:a3da5fbadb4ee6a4457f0e6ca35e0c78e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an engine seeded from process entropy, thread id, and sequence.  <br /></td></tr>
+<tr class="memitem:a68ad1ebe0d97f804bf589ec69e6aeb89" id="r_a68ad1ebe0d97f804bf589ec69e6aeb89"><td class="memTemplParams" colspan="2">template&lt;RandomEngine Engine = DefaultRandomEngine&gt; </td></tr>
+<tr class="memitem:a68ad1ebe0d97f804bf589ec69e6aeb89 template"><td class="memItemLeft">Engine&#160;</td><td class="memItemRight"><a class="el" href="#a68ad1ebe0d97f804bf589ec69e6aeb89">MakeEngine</a> (typename Engine::result_type seed)</td></tr>
+<tr class="memdesc:a68ad1ebe0d97f804bf589ec69e6aeb89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an engine from an explicit seed for repeatable streams.  <br /></td></tr>
+<tr class="memitem:a6181881e2429f5e8a15d64a3e666a535" id="r_a6181881e2429f5e8a15d64a3e666a535"><td class="memItemLeft"><a class="el" href="#a969b688d45f235c41c600600f9d03d95">DefaultRandomEngine</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6181881e2429f5e8a15d64a3e666a535">MakeDefaultEngine</a> ()</td></tr>
+<tr class="memdesc:a6181881e2429f5e8a15d64a3e666a535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a default-quality random engine with a unique mixed seed.  <br /></td></tr>
+<tr class="memitem:adcca06685431c53242c449564e4da081" id="r_adcca06685431c53242c449564e4da081"><td class="memItemLeft"><a class="el" href="#ad3ec641199727a92287008d0b8ccf885">FastRandomEngine</a>&#160;</td><td class="memItemRight"><a class="el" href="#adcca06685431c53242c449564e4da081">MakeFastEngine</a> ()</td></tr>
+<tr class="memdesc:adcca06685431c53242c449564e4da081"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a fast random engine with a unique mixed seed.  <br /></td></tr>
+<tr class="memitem:a3107d5def5c9d7396a941ed798ce45aa" id="r_a3107d5def5c9d7396a941ed798ce45aa"><td class="memTemplParams" colspan="2">template&lt;RandomEngine Engine&gt; </td></tr>
+<tr class="memitem:a3107d5def5c9d7396a941ed798ce45aa template"><td class="memItemLeft">Engine &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3107d5def5c9d7396a941ed798ce45aa">ThreadLocalEngine</a> ()</td></tr>
+<tr class="memdesc:a3107d5def5c9d7396a941ed798ce45aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread-local engine of type <span class="tt">Engine</span>, seeded once per thread.  <br /></td></tr>
+<tr class="memitem:ae412d06926f505f92866943e64611a72" id="r_ae412d06926f505f92866943e64611a72"><td class="memItemLeft"><a class="el" href="#a969b688d45f235c41c600600f9d03d95">DefaultRandomEngine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae412d06926f505f92866943e64611a72">DefaultEngine</a> ()</td></tr>
 <tr class="memdesc:ae412d06926f505f92866943e64611a72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread-local default-quality engine.  <br /></td></tr>
-<tr class="memitem:a89028784f8decd2bf7a4801c250d0eb8" id="r_a89028784f8decd2bf7a4801c250d0eb8"><td class="memItemLeft"><a class="el" href="#a82e57611045b81ffeda913f085c2131c">FastRandomEngine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a89028784f8decd2bf7a4801c250d0eb8">FastEngineInstance</a> ()</td></tr>
-<tr class="memdesc:a89028784f8decd2bf7a4801c250d0eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread-local fast engine.  <br /></td></tr>
+<tr class="memitem:a2e88dd6243f80e27226c9ce31302d24c" id="r_a2e88dd6243f80e27226c9ce31302d24c"><td class="memItemLeft"><a class="el" href="#ad3ec641199727a92287008d0b8ccf885">FastRandomEngine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2e88dd6243f80e27226c9ce31302d24c">FastEngine</a> ()</td></tr>
+<tr class="memdesc:a2e88dd6243f80e27226c9ce31302d24c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread-local fast engine.  <br /></td></tr>
+<tr class="memitem:aff8f34b569f2d0912940cae3a2b764e0" id="r_aff8f34b569f2d0912940cae3a2b764e0"><td class="memTemplParams" colspan="2">template&lt;RandomEngine Engine&gt; </td></tr>
+<tr class="memitem:aff8f34b569f2d0912940cae3a2b764e0 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aff8f34b569f2d0912940cae3a2b764e0">ThreadLocalGenerator</a> () -&gt; <a class="el" href="classhelios_1_1utils_1_1RandomGenerator.html">RandomGenerator</a>&lt; Engine &gt; &amp;</td></tr>
+<tr class="memdesc:aff8f34b569f2d0912940cae3a2b764e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread-local generator bound to <span class="tt"><a class="el" href="#a3107d5def5c9d7396a941ed798ce45aa" title="Thread-local engine of type Engine, seeded once per thread.">ThreadLocalEngine</a>&lt;Engine&gt;()</span>.  <br /></td></tr>
 <tr class="memitem:a476c4e7dd9fd61b596d9f8b62ce7f214" id="r_a476c4e7dd9fd61b596d9f8b62ce7f214"><td class="memItemLeft"><a class="el" href="#a371e8184717930153141198aee96e1cf">DefaultRandomGenerator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a476c4e7dd9fd61b596d9f8b62ce7f214">RandomDefault</a> ()</td></tr>
 <tr class="memdesc:a476c4e7dd9fd61b596d9f8b62ce7f214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a thread-local default-quality random generator.  <br /></td></tr>
-<tr class="memitem:a7105f6d561a4908a42ceed4c44a5232e" id="r_a7105f6d561a4908a42ceed4c44a5232e"><td class="memItemLeft"><a class="el" href="#a851b4e170d6c739b36753930996cdd85">FastRandomGeneratorType</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7105f6d561a4908a42ceed4c44a5232e">RandomFast</a> ()</td></tr>
-<tr class="memdesc:a7105f6d561a4908a42ceed4c44a5232e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a thread-local fast random generator.  <br /></td></tr>
+<tr class="memitem:a528b9e6a027b847fd741dad1f8a95e8a" id="r_a528b9e6a027b847fd741dad1f8a95e8a"><td class="memItemLeft"><a class="el" href="#a30f5ca72e6d2cd3306815dfbd56bf53e">FastRandomGenerator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a528b9e6a027b847fd741dad1f8a95e8a">RandomFast</a> ()</td></tr>
+<tr class="memdesc:a528b9e6a027b847fd741dad1f8a95e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a thread-local fast random generator.  <br /></td></tr>
 <tr class="memitem:af292c47cb42cb423e672cbeb5a2c355b" id="r_af292c47cb42cb423e672cbeb5a2c355b"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait T&gt; </td></tr>
 <tr class="memitem:af292c47cb42cb423e672cbeb5a2c355b template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#af292c47cb42cb423e672cbeb5a2c355b">RandomValue</a> ()</td></tr>
 <tr class="memdesc:af292c47cb42cb423e672cbeb5a2c355b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to generate a default-distribution value using the default engine.  <br /></td></tr>
@@ -528,22 +566,22 @@ Variables</h2></td></tr>
 <tr class="memitem:a6a807a5e43793d68355969b9e190a9dc" id="r_a6a807a5e43793d68355969b9e190a9dc"><td class="memItemLeft">constexpr <a class="el" href="#ae6f12943a45b892bec3a5e117dfc5aea">HashType</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6a807a5e43793d68355969b9e190a9dc">kFnvPrime</a> = 1099511628211ULL</td></tr>
 </table>
 <a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="aa277c9bc6bdfb97423e88f6bc45686b0" name="aa277c9bc6bdfb97423e88f6bc45686b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa277c9bc6bdfb97423e88f6bc45686b0">&#9670;&#160;</a></span>DefaultRandomEngine</h2>
+<a id="a969b688d45f235c41c600600f9d03d95" name="a969b688d45f235c41c600600f9d03d95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a969b688d45f235c41c600600f9d03d95">&#9670;&#160;</a></span>DefaultRandomEngine</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0">helios::utils::DefaultRandomEngine</a> = std::mt19937_64</td>
+          <td class="memname">using <a class="el" href="#a969b688d45f235c41c600600f9d03d95">helios::utils::DefaultRandomEngine</a> = <a class="el" href="#ab1300ce674a713174a618fca493cfc90">Xoshiro256StarStar</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Default engine type used by random utilities. </p>
-<p>Uses a 64-bit Mersenne Twister for quality pseudorandom numbers. </p>
+<p>xoshiro256** (<span class="tt">xso::rng</span>): 64-bit output, 256 bits of state, period 2^256-1. Best general-purpose choice in the xoshiro family, faster than <span class="tt">std::mt19937_64</span> with comparable statistical quality. </p>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00057">57</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00153">153</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -554,7 +592,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#a371e8184717930153141198aee96e1cf">helios::utils::DefaultRandomGenerator</a> = <a class="el" href="classhelios_1_1utils_1_1RandomGenerator.html">RandomGenerator</a>&lt;<a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0">DefaultRandomEngine</a>&gt;</td>
+          <td class="memname">using <a class="el" href="#a371e8184717930153141198aee96e1cf">helios::utils::DefaultRandomGenerator</a> = <a class="el" href="classhelios_1_1utils_1_1RandomGenerator.html">RandomGenerator</a>&lt;<a class="el" href="#a969b688d45f235c41c600600f9d03d95">DefaultRandomEngine</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -562,7 +600,7 @@ Variables</h2></td></tr>
 <p>Convenience alias for a generator using the default-quality engine. </p>
 <p>Uses thread-local <span class="tt"><a class="el" href="#ae412d06926f505f92866943e64611a72" title="Thread-local default-quality engine.">DefaultEngine()</a></span> as the underlying engine. </p>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00258">258</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00404">404</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -584,41 +622,41 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a82e57611045b81ffeda913f085c2131c" name="a82e57611045b81ffeda913f085c2131c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82e57611045b81ffeda913f085c2131c">&#9670;&#160;</a></span>FastRandomEngine</h2>
+<a id="ad3ec641199727a92287008d0b8ccf885" name="ad3ec641199727a92287008d0b8ccf885"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3ec641199727a92287008d0b8ccf885">&#9670;&#160;</a></span>FastRandomEngine</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#a82e57611045b81ffeda913f085c2131c">helios::utils::FastRandomEngine</a> = std::minstd_rand</td>
+          <td class="memname">using <a class="el" href="#ad3ec641199727a92287008d0b8ccf885">helios::utils::FastRandomEngine</a> = <a class="el" href="#a1a9a07a68ce7bdce4e73b833e148d39b">Xoroshiro128PlusPlus</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fast but lower-quality engine type used by random utilities. </p>
-<p>Uses a 32-bit linear congruential engine suitable for non-cryptographic, performance-critical scenarios. </p>
+<p>Fast engine type used by random utilities. </p>
+<p>xoroshiro128++: 64-bit output, 128 bits of state. Smaller and faster than the default; still suitable for gameplay / sampling. Not for cryptography. </p>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00064">64</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00161">161</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a851b4e170d6c739b36753930996cdd85" name="a851b4e170d6c739b36753930996cdd85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a851b4e170d6c739b36753930996cdd85">&#9670;&#160;</a></span>FastRandomGeneratorType</h2>
+<a id="a30f5ca72e6d2cd3306815dfbd56bf53e" name="a30f5ca72e6d2cd3306815dfbd56bf53e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30f5ca72e6d2cd3306815dfbd56bf53e">&#9670;&#160;</a></span>FastRandomGenerator</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#a851b4e170d6c739b36753930996cdd85">helios::utils::FastRandomGeneratorType</a> = <a class="el" href="classhelios_1_1utils_1_1RandomGenerator.html">RandomGenerator</a>&lt;<a class="el" href="#a82e57611045b81ffeda913f085c2131c">FastRandomEngine</a>&gt;</td>
+          <td class="memname">using <a class="el" href="#a30f5ca72e6d2cd3306815dfbd56bf53e">helios::utils::FastRandomGenerator</a> = <a class="el" href="classhelios_1_1utils_1_1RandomGenerator.html">RandomGenerator</a>&lt;<a class="el" href="#ad3ec641199727a92287008d0b8ccf885">FastRandomEngine</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Convenience alias for a generator using the fast engine. </p>
-<p>Uses thread-local <span class="tt"><a class="el" href="#a89028784f8decd2bf7a4801c250d0eb8" title="Thread-local fast engine.">FastEngineInstance()</a></span> as the underlying engine. </p>
+<p>Uses thread-local <span class="tt"><a class="el" href="#a2e88dd6243f80e27226c9ce31302d24c" title="Thread-local fast engine.">FastEngine()</a></span> as the underlying engine. </p>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00264">264</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00410">410</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -635,6 +673,224 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="hash_8hpp_source.html#l00020">20</a> of file <a class="el" href="hash_8hpp_source.html">hash.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab0b00ba264132644947d3cc0f599513a" name="ab0b00ba264132644947d3cc0f599513a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0b00ba264132644947d3cc0f599513a">&#9670;&#160;</a></span>LongPeriodRandomEngine</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#ab0b00ba264132644947d3cc0f599513a">helios::utils::LongPeriodRandomEngine</a> = <a class="el" href="#a3135f2eb9201f07232d09d5375fd771a">Xoshiro512StarStar</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Long-period engine for large parallel jobs. </p>
+<p>xoshiro512**: 64-bit output, 512 bits of state, period 2^512-1. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00174">174</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4ca027bba32e671b7ad6503bf756fdaf" name="a4ca027bba32e671b7ad6503bf756fdaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ca027bba32e671b7ad6503bf756fdaf">&#9670;&#160;</a></span>SmallRandomEngine</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a4ca027bba32e671b7ad6503bf756fdaf">helios::utils::SmallRandomEngine</a> = <a class="el" href="#ac3a884b9eacf2b660e9513724688b82a">Xoshiro128StarStar</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compact 32-bit engine. </p>
+<p>xoshiro128**: 32-bit output, 128 bits of state. Prefer this when <span class="tt">result_type</span> must be 32-bit or state size matters more than output width. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00168">168</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7b4bf9e156512be144a31a26496a6060" name="a7b4bf9e156512be144a31a26496a6060"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b4bf9e156512be144a31a26496a6060">&#9670;&#160;</a></span>Xoroshiro1024StarStar</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a7b4bf9e156512be144a31a26496a6060">helios::utils::Xoroshiro1024StarStar</a> = xso::xoroshiro_16x64_star_star</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>xoroshiro1024** — 1024 bits of state for huge parallel workloads. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00145">145</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a03dd3d9f4b61b1b9cf642bcb9d655732" name="a03dd3d9f4b61b1b9cf642bcb9d655732"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03dd3d9f4b61b1b9cf642bcb9d655732">&#9670;&#160;</a></span>Xoroshiro128Plus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a03dd3d9f4b61b1b9cf642bcb9d655732">helios::utils::Xoroshiro128Plus</a> = xso::xoroshiro_2x64_plus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>xoroshiro128+ — smallest/fastest 64-bit engine; weaker low bits. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00133">133</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1a9a07a68ce7bdce4e73b833e148d39b" name="a1a9a07a68ce7bdce4e73b833e148d39b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a9a07a68ce7bdce4e73b833e148d39b">&#9670;&#160;</a></span>Xoroshiro128PlusPlus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a1a9a07a68ce7bdce4e73b833e148d39b">helios::utils::Xoroshiro128PlusPlus</a> = xso::xoroshiro_2x64_plus_plus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>xoroshiro128++ — fast 64-bit generator (128 bits of state). </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00127">127</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acbd6537b0281319e325ace0bdcde654f" name="acbd6537b0281319e325ace0bdcde654f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbd6537b0281319e325ace0bdcde654f">&#9670;&#160;</a></span>Xoroshiro128StarStar</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#acbd6537b0281319e325ace0bdcde654f">helios::utils::Xoroshiro128StarStar</a> = xso::xoroshiro_2x64_star_star</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>xoroshiro128** — 128-bit-state alternative with a <span class="tt">**</span> scrambler. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00130">130</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a690abfe9fbf03848f5cf6579c24185dd" name="a690abfe9fbf03848f5cf6579c24185dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a690abfe9fbf03848f5cf6579c24185dd">&#9670;&#160;</a></span>Xoshiro128PlusPlus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a690abfe9fbf03848f5cf6579c24185dd">helios::utils::Xoshiro128PlusPlus</a> = xso::xoshiro_4x32_plus_plus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>xoshiro128++ — 32-bit output alternative. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00139">139</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac3a884b9eacf2b660e9513724688b82a" name="ac3a884b9eacf2b660e9513724688b82a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3a884b9eacf2b660e9513724688b82a">&#9670;&#160;</a></span>Xoshiro128StarStar</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#ac3a884b9eacf2b660e9513724688b82a">helios::utils::Xoshiro128StarStar</a> = xso::xoshiro_4x32_star_star</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>xoshiro128** — 32-bit output, 128 bits of state. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00136">136</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9754ac891fa9c493a05d4caf6dc7a4b0" name="a9754ac891fa9c493a05d4caf6dc7a4b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9754ac891fa9c493a05d4caf6dc7a4b0">&#9670;&#160;</a></span>Xoshiro256Plus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a9754ac891fa9c493a05d4caf6dc7a4b0">helios::utils::Xoshiro256Plus</a> = xso::xoshiro_4x64_plus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>xoshiro256+ — fastest 256-bit engine; weaker low bits. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00124">124</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aeec94b9882e08d270fe11fdadab0c9e8" name="aeec94b9882e08d270fe11fdadab0c9e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeec94b9882e08d270fe11fdadab0c9e8">&#9670;&#160;</a></span>Xoshiro256PlusPlus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#aeec94b9882e08d270fe11fdadab0c9e8">helios::utils::Xoshiro256PlusPlus</a> = xso::xoshiro_4x64_plus_plus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>xoshiro256++ — slightly faster all-purpose 64-bit alternative. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00121">121</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab1300ce674a713174a618fca493cfc90" name="ab1300ce674a713174a618fca493cfc90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1300ce674a713174a618fca493cfc90">&#9670;&#160;</a></span>Xoshiro256StarStar</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#ab1300ce674a713174a618fca493cfc90">helios::utils::Xoshiro256StarStar</a> = xso::xoshiro_4x64_star_star</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>xoshiro256** — all-purpose 64-bit generator (256 bits of state). </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00118">118</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3135f2eb9201f07232d09d5375fd771a" name="a3135f2eb9201f07232d09d5375fd771a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3135f2eb9201f07232d09d5375fd771a">&#9670;&#160;</a></span>Xoshiro512StarStar</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a3135f2eb9201f07232d09d5375fd771a">helios::utils::Xoshiro512StarStar</a> = xso::xoshiro_8x64_star_star</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>xoshiro512** — 512 bits of state for extra period / more streams. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00142">142</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -816,7 +1072,7 @@ requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0">DefaultRandomEngine</a> &amp; helios::utils::DefaultEngine </td>
+          <td class="memname"><a class="el" href="#a969b688d45f235c41c600600f9d03d95">DefaultRandomEngine</a> &amp; helios::utils::DefaultEngine </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -830,9 +1086,9 @@ requires ChunkAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
 </div><div class="memdoc">
 
 <p>Thread-local default-quality engine. </p>
-<p>Uses Meyer's singleton pattern per thread to avoid global static initialization order issues while providing a convenient default. </p><dl class="section return"><dt>Returns</dt><dd>Reference to thread-local <span class="tt"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0" title="Default engine type used by random utilities.">DefaultRandomEngine</a></span> instance </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to thread-local <span class="tt"><a class="el" href="#a969b688d45f235c41c600600f9d03d95" title="Default engine type used by random utilities.">DefaultRandomEngine</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00119">119</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00269">269</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -874,8 +1130,8 @@ template&lt;ExternalRange R&gt; </div>
 
 </div>
 </div>
-<a id="a89028784f8decd2bf7a4801c250d0eb8" name="a89028784f8decd2bf7a4801c250d0eb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89028784f8decd2bf7a4801c250d0eb8">&#9670;&#160;</a></span>FastEngineInstance()</h2>
+<a id="a2e88dd6243f80e27226c9ce31302d24c" name="a2e88dd6243f80e27226c9ce31302d24c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e88dd6243f80e27226c9ce31302d24c">&#9670;&#160;</a></span>FastEngine()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -884,7 +1140,7 @@ template&lt;ExternalRange R&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a82e57611045b81ffeda913f085c2131c">FastRandomEngine</a> &amp; helios::utils::FastEngineInstance </td>
+          <td class="memname"><a class="el" href="#ad3ec641199727a92287008d0b8ccf885">FastRandomEngine</a> &amp; helios::utils::FastEngine </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -898,9 +1154,9 @@ template&lt;ExternalRange R&gt; </div>
 </div><div class="memdoc">
 
 <p>Thread-local fast engine. </p>
-<p>Uses Meyer's singleton pattern per thread to avoid global static initialization order issues while providing a fast default. </p><dl class="section return"><dt>Returns</dt><dd>Reference to thread-local <span class="tt"><a class="el" href="#a82e57611045b81ffeda913f085c2131c" title="Fast but lower-quality engine type used by random utilities.">FastRandomEngine</a></span> instance </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to thread-local <span class="tt"><a class="el" href="#ad3ec641199727a92287008d0b8ccf885" title="Fast engine type used by random utilities.">FastRandomEngine</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00130">130</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00277">277</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1480,7 +1736,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0">DefaultRandomEngine</a> helios::utils::MakeDefaultEngine </td>
+          <td class="memname"><a class="el" href="#a969b688d45f235c41c600600f9d03d95">DefaultRandomEngine</a> helios::utils::MakeDefaultEngine </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1493,10 +1749,92 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Creates a default-quality random engine seeded with <span class="tt">std::random_device</span>. </p>
-<p>Useful when the caller wants an engine instance but does not care a specific engine type beyond the default choice. </p><dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0" title="Default engine type used by random utilities.">DefaultRandomEngine</a></span> instance seeded with <span class="tt">std::random_device</span> </dd></dl>
+<p>Creates a default-quality random engine with a unique mixed seed. </p>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="#a969b688d45f235c41c600600f9d03d95" title="Default engine type used by random utilities.">DefaultRandomEngine</a></span> instance </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00098">98</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00242">242</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3da5fbadb4ee6a4457f0e6ca35e0c78e" name="a3da5fbadb4ee6a4457f0e6ca35e0c78e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3da5fbadb4ee6a4457f0e6ca35e0c78e">&#9670;&#160;</a></span>MakeEngine() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;RandomEngine Engine = DefaultRandomEngine&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine helios::utils::MakeEngine </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates an engine seeded from process entropy, thread id, and sequence. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Engine</td><td><a class="el" href="concepthelios_1_1utils_1_1RandomEngine.html" title="Concept for random number engines compatible with std distributions.">RandomEngine</a> type to construct (defaults to <span class="tt"><a class="el" href="#a969b688d45f235c41c600600f9d03d95" title="Default engine type used by random utilities.">DefaultRandomEngine</a></span>) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Engine instance with a unique mixed seed </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00215">215</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a68ad1ebe0d97f804bf589ec69e6aeb89" name="a68ad1ebe0d97f804bf589ec69e6aeb89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68ad1ebe0d97f804bf589ec69e6aeb89">&#9670;&#160;</a></span>MakeEngine() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;RandomEngine Engine = DefaultRandomEngine&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine helios::utils::MakeEngine </td>
+          <td>(</td>
+          <td class="paramtype">typename Engine::result_type</td>          <td class="paramname"><span class="paramname"><em>seed</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates an engine from an explicit seed for repeatable streams. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Engine</td><td><a class="el" href="concepthelios_1_1utils_1_1RandomEngine.html" title="Concept for random number engines compatible with std distributions.">RandomEngine</a> type to construct (defaults to <span class="tt"><a class="el" href="#a969b688d45f235c41c600600f9d03d95" title="Default engine type used by random utilities.">DefaultRandomEngine</a></span>) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">seed</td><td>Seed word expanded into the engine state </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Engine instance seeded from <span class="tt">seed</span> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00234">234</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1510,7 +1848,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a82e57611045b81ffeda913f085c2131c">FastRandomEngine</a> helios::utils::MakeFastEngine </td>
+          <td class="memname"><a class="el" href="#ad3ec641199727a92287008d0b8ccf885">FastRandomEngine</a> helios::utils::MakeFastEngine </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1523,10 +1861,10 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Creates a fast linear random engine seeded with <span class="tt">std::random_device</span>. </p>
-<p>Intended for performance-critical code where statistical quality is less important. Not suitable for cryptographic purposes. </p><dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="#a82e57611045b81ffeda913f085c2131c" title="Fast but lower-quality engine type used by random utilities.">FastRandomEngine</a></span> instance seeded with <span class="tt">std::random_device</span> </dd></dl>
+<p>Creates a fast random engine with a unique mixed seed. </p>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="#ad3ec641199727a92287008d0b8ccf885" title="Fast engine type used by random utilities.">FastRandomEngine</a></span> instance </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00108">108</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00250">250</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1573,6 +1911,36 @@ template&lt;ExternalRange R, typename Func&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a232456fe150a8d225db6a5d1ba022168" name="a232456fe150a8d225db6a5d1ba022168"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a232456fe150a8d225db6a5d1ba022168">&#9670;&#160;</a></span>MixThreadSeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t helios::utils::MixThreadSeed </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mixes process entropy with the calling thread and a unique sequence. </p>
+<p>Combines <span class="tt"><a class="el" href="#a877f3c904c91c4c12df9a0677b134e9a" title="Returns the process-wide 64-bit entropy word.">RandomDeviceSeed()</a></span>, <span class="tt">std::this_thread::get_id()</span>, and an atomic counter. The counter matters because OS thread ids can be reused after a thread exits. Each call returns a different 64-bit word, suitable as a <span class="tt">seed(word)</span> argument for xoshiro/xoroshiro (they expand it with SplitMix64 into the full state). </p><dl class="section return"><dt>Returns</dt><dd>Unique 64-bit seed for this call </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00197">197</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1948,9 +2316,9 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>Provides access to a thread-local default-quality random generator. </p>
-<p>Uses Meyer's singleton pattern per thread and avoids any static engine objects other than thread-local instances that are lazily initialized on first use. </p><dl class="section return"><dt>Returns</dt><dd>Reference to <span class="tt"><a class="el" href="#a371e8184717930153141198aee96e1cf" title="Convenience alias for a generator using the default-quality engine.">DefaultRandomGenerator</a></span> bound to <span class="tt"><a class="el" href="#ae412d06926f505f92866943e64611a72" title="Thread-local default-quality engine.">DefaultEngine()</a></span> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to <span class="tt"><a class="el" href="#a371e8184717930153141198aee96e1cf" title="Convenience alias for a generator using the default-quality engine.">DefaultRandomGenerator</a></span> bound to <span class="tt"><a class="el" href="#ae412d06926f505f92866943e64611a72" title="Thread-local default-quality engine.">DefaultEngine()</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00273">273</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00427">427</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1977,15 +2345,15 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Internal helper to obtain seed from <span class="tt">std::random_device</span>. </p>
-<p>This function is intentionally small and header-only to avoid static initialization of engines in user code. </p><dl class="section return"><dt>Returns</dt><dd>64-bit seed value from <span class="tt">std::random_device</span> </dd></dl>
+<p>Returns the process-wide 64-bit entropy word. </p>
+<p>Captured once on first call from <span class="tt">std::random_device</span> mixed with a high-resolution clock. Subsequent calls are free and return the same value for the lifetime of the process. Prefer <span class="tt"><a class="el" href="#a232456fe150a8d225db6a5d1ba022168" title="Mixes process entropy with the calling thread and a unique sequence.">MixThreadSeed()</a></span> when constructing engines so threads do not share a stream. </p><dl class="section return"><dt>Returns</dt><dd>Stable per-process 64-bit seed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00072">72</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00184">184</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7105f6d561a4908a42ceed4c44a5232e" name="a7105f6d561a4908a42ceed4c44a5232e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7105f6d561a4908a42ceed4c44a5232e">&#9670;&#160;</a></span>RandomFast()</h2>
+<a id="a528b9e6a027b847fd741dad1f8a95e8a" name="a528b9e6a027b847fd741dad1f8a95e8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a528b9e6a027b847fd741dad1f8a95e8a">&#9670;&#160;</a></span>RandomFast()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1994,7 +2362,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a851b4e170d6c739b36753930996cdd85">FastRandomGeneratorType</a> &amp; helios::utils::RandomFast </td>
+          <td class="memname"><a class="el" href="#a30f5ca72e6d2cd3306815dfbd56bf53e">FastRandomGenerator</a> &amp; helios::utils::RandomFast </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -2008,9 +2376,9 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>Provides access to a thread-local fast random generator. </p>
-<p>Uses Meyer's singleton pattern per thread and avoids any static engine objects other than thread-local instances that are lazily initialized on first use. </p><dl class="section return"><dt>Returns</dt><dd>Reference to <span class="tt"><a class="el" href="#a851b4e170d6c739b36753930996cdd85" title="Convenience alias for a generator using the fast engine.">FastRandomGeneratorType</a></span> bound to <span class="tt"><a class="el" href="#a89028784f8decd2bf7a4801c250d0eb8" title="Thread-local fast engine.">FastEngineInstance()</a></span> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to <span class="tt"><a class="el" href="#a30f5ca72e6d2cd3306815dfbd56bf53e" title="Convenience alias for a generator using the fast engine.">FastRandomGenerator</a></span> bound to <span class="tt"><a class="el" href="#a2e88dd6243f80e27226c9ce31302d24c" title="Thread-local fast engine.">FastEngine()</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00286">286</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00435">435</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2040,7 +2408,7 @@ template&lt;utils::ArithmeticTrait T&gt; </div>
 </div><div class="memdoc">
 
 <p>Convenience function to generate a default-distribution value using the fast engine. </p>
-<p>Equivalent to <span class="tt"><a class="el" href="#a7105f6d561a4908a42ceed4c44a5232e" title="Provides access to a thread-local fast random generator.">RandomFast()</a>.Value&lt;T&gt;()</span>, but shorter to call. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Equivalent to <span class="tt"><a class="el" href="#a528b9e6a027b847fd741dad1f8a95e8a" title="Provides access to a thread-local fast random generator.">RandomFast()</a>.Value&lt;T&gt;()</span>, but shorter to call. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Arithmetic type to generate </td></tr>
   </table>
@@ -2048,7 +2416,7 @@ template&lt;utils::ArithmeticTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Randomly generated value of type <span class="tt">T</span> using the fast engine </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00328">328</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00476">476</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2082,7 +2450,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </div><div class="memdoc">
 
 <p>Convenience function to generate a value in range using the fast engine. </p>
-<p>Equivalent to <span class="tt"><a class="el" href="#a7105f6d561a4908a42ceed4c44a5232e" title="Provides access to a thread-local fast random generator.">RandomFast()</a>.ValueFromRange(min, max)</span>. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Equivalent to <span class="tt"><a class="el" href="#a528b9e6a027b847fd741dad1f8a95e8a" title="Provides access to a thread-local fast random generator.">RandomFast()</a>.ValueFromRange(min, max)</span>. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Arithmetic type </td></tr>
     <tr><td class="paramname">U</td><td>Arithmetic type </td></tr>
@@ -2098,7 +2466,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Random value of <span class="tt">std::common_type_t&lt;T, U&gt;</span> in [min, max] or [min, max) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00344">344</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00492">492</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2136,7 +2504,7 @@ template&lt;utils::ArithmeticTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Randomly generated value of type T </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00299">299</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00447">447</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2186,7 +2554,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Random value of <span class="tt">std::common_type_t&lt;T, U&gt;</span> in [min, max] or [min, max) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00315">315</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00463">463</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -2777,6 +3145,82 @@ template&lt;typename... Args&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>A formatted wide string, allocated from the calling thread's <span class="tt">TemporaryStorage</span> </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="temporary__storage__helpers_8hpp_source.html#l00053">53</a> of file <a class="el" href="temporary__storage__helpers_8hpp_source.html">temporary_storage_helpers.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3107d5def5c9d7396a941ed798ce45aa" name="a3107d5def5c9d7396a941ed798ce45aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3107d5def5c9d7396a941ed798ce45aa">&#9670;&#160;</a></span>ThreadLocalEngine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;RandomEngine Engine&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine &amp; helios::utils::ThreadLocalEngine </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Thread-local engine of type <span class="tt">Engine</span>, seeded once per thread. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Engine</td><td><a class="el" href="concepthelios_1_1utils_1_1RandomEngine.html" title="Concept for random number engines compatible with std distributions.">RandomEngine</a> type stored in this thread </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the thread-local engine </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00260">260</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aff8f34b569f2d0912940cae3a2b764e0" name="aff8f34b569f2d0912940cae3a2b764e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff8f34b569f2d0912940cae3a2b764e0">&#9670;&#160;</a></span>ThreadLocalGenerator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;RandomEngine Engine&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::utils::ThreadLocalGenerator </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1utils_1_1RandomGenerator.html">RandomGenerator</a>&lt; Engine &gt; &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Thread-local generator bound to <span class="tt"><a class="el" href="#a3107d5def5c9d7396a941ed798ce45aa" title="Thread-local engine of type Engine, seeded once per thread.">ThreadLocalEngine</a>&lt;Engine&gt;()</span>. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Engine</td><td><a class="el" href="concepthelios_1_1utils_1_1RandomEngine.html" title="Concept for random number engines compatible with std distributions.">RandomEngine</a> type used by the generator </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the thread-local generator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00418">418</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>

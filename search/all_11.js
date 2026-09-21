@@ -17,11 +17,12 @@ var searchData=
   ['next_14',['Next',['../classhelios_1_1mem_1_1TreiberStack.html#a6e805d6ade88c96b67a6403a12f29aa7',1,'helios::mem::TreiberStack::Next()'],['../classhelios_1_1utils_1_1RandomGenerator.html#a2b9ed14d7b9c848e7173a79543763cc9',1,'helios::utils::RandomGenerator::Next()']]],
   ['nextcapacity_15',['NextCapacity',['../structhelios_1_1mem_1_1GrowthPolicy.html#a0cf2f8a63f9f6417e49d0441c2d48c3b',1,'helios::mem::GrowthPolicy']]],
   ['nextgeneration_16',['NextGeneration',['../namespacehelios_1_1ecs.html#a3fd2a8f4805ddb81d85e7557052d579f',1,'helios::ecs']]],
-  ['nodenext_17',['NodeNext',['../namespacehelios_1_1mem_1_1anonymous__namespace_02treiber__stack_8cpp_03.html#aea778ad771e76e923803498116319bb2',1,'helios::mem::anonymous_namespace{treiber_stack.cpp}']]],
-  ['nodes_18',['Nodes',['../classhelios_1_1ecs_1_1Dag.html#a751b5787a048dd171ee31ad6f827e193',1,'helios::ecs::Dag']]],
-  ['non_20negotiable_19',['Non-negotiable',['../md_docs_2guidelines.html#non-negotiable',1,'']]],
-  ['none_20',['None',['../classhelios_1_1ecs_1_1MessageReaderBase.html#a1f601f646f1764a2ea747afcf51a1ff6',1,'helios::ecs::MessageReaderBase::None()'],['../classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a4ff3eb26da09af678f894d897e1538d3',1,'helios::ecs::BasicQueryWithEntity::None()'],['../classhelios_1_1ecs_1_1BasicQuery.html#af0159134ced35a9aff412eef2eb53794',1,'helios::ecs::BasicQuery::None()'],['../classhelios_1_1utils_1_1FunctionalAdapterBase.html#a791509606f43cb6011e5975d483d6589',1,'helios::utils::FunctionalAdapterBase::None()']]],
-  ['normalizepathseparators_21',['NormalizePathSeparators',['../namespaceanonymous__namespace_02stacktrace_8cpp_03.html#a68c657b10aabf35a67e8bbcc0225f480',1,'anonymous_namespace{stacktrace.cpp}']]],
-  ['notifypluginreadinesschanged_22',['NotifyPluginReadinessChanged',['../classhelios_1_1app_1_1App.html#ac34e107cb6fd9145d5a01ebf3024813a',1,'helios::app::App']]],
-  ['npos_23',['npos',['../classhelios_1_1container_1_1BasicStaticString.html#a26b134027161d0a6f3485321156c1cb4',1,'helios::container::BasicStaticString::npos'],['../classhelios_1_1BasicCStringView.html#a1ee3c40ac8abed5d4ff6df230983880b',1,'helios::BasicCStringView::npos']]]
+  ['nextseedsequence_17',['NextSeedSequence',['../namespacehelios_1_1utils_1_1details.html#abe53e6af940fd17e9f14c96cc010cf6e',1,'helios::utils::details']]],
+  ['nodenext_18',['NodeNext',['../namespacehelios_1_1mem_1_1anonymous__namespace_02treiber__stack_8cpp_03.html#aea778ad771e76e923803498116319bb2',1,'helios::mem::anonymous_namespace{treiber_stack.cpp}']]],
+  ['nodes_19',['Nodes',['../classhelios_1_1ecs_1_1Dag.html#a751b5787a048dd171ee31ad6f827e193',1,'helios::ecs::Dag']]],
+  ['non_20negotiable_20',['Non-negotiable',['../md_docs_2guidelines.html#non-negotiable',1,'']]],
+  ['none_21',['None',['../classhelios_1_1ecs_1_1MessageReaderBase.html#a1f601f646f1764a2ea747afcf51a1ff6',1,'helios::ecs::MessageReaderBase::None()'],['../classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a4ff3eb26da09af678f894d897e1538d3',1,'helios::ecs::BasicQueryWithEntity::None()'],['../classhelios_1_1ecs_1_1BasicQuery.html#af0159134ced35a9aff412eef2eb53794',1,'helios::ecs::BasicQuery::None()'],['../classhelios_1_1utils_1_1FunctionalAdapterBase.html#a791509606f43cb6011e5975d483d6589',1,'helios::utils::FunctionalAdapterBase::None()']]],
+  ['normalizepathseparators_22',['NormalizePathSeparators',['../namespaceanonymous__namespace_02stacktrace_8cpp_03.html#a68c657b10aabf35a67e8bbcc0225f480',1,'anonymous_namespace{stacktrace.cpp}']]],
+  ['notifypluginreadinesschanged_23',['NotifyPluginReadinessChanged',['../classhelios_1_1app_1_1App.html#ac34e107cb6fd9145d5a01ebf3024813a',1,'helios::app::App']]],
+  ['npos_24',['npos',['../classhelios_1_1container_1_1BasicStaticString.html#a26b134027161d0a6f3485321156c1cb4',1,'helios::container::BasicStaticString::npos'],['../classhelios_1_1BasicCStringView.html#a1ee3c40ac8abed5d4ff6df230983880b',1,'helios::BasicCStringView::npos']]]
 ];

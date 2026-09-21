@@ -191,6 +191,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('sdl3__window_2
 <code>#include &lt;SDL3/SDL_mouse.h&gt;</code><br />
 <code>#include &lt;SDL3/SDL_rect.h&gt;</code><br />
 <code>#include &lt;SDL3/SDL_stdinc.h&gt;</code><br />
+<code>#include &lt;SDL3/SDL_surface.h&gt;</code><br />
 <code>#include &lt;SDL3/SDL_video.h&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
@@ -234,6 +235,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ab4e501956794d529c0948dce31660a59" id="r_ab4e501956794d529c0948dce31660a59"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1window.html#ab4e501956794d529c0948dce31660a59">helios::sdl3::window::ApplyAutoIconify</a> (SDL_Window &amp;native_window, bool auto_iconify)</td></tr>
 <tr class="memitem:a868261822bd49f741137bcd7134ed08c" id="r_a868261822bd49f741137bcd7134ed08c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1window.html#a868261822bd49f741137bcd7134ed08c">helios::sdl3::window::ApplyFocusOnShow</a> (bool focus_on_show)</td></tr>
 <tr class="memitem:a7a741fbf56e3c26be5b64b06c3fbed64" id="r_a7a741fbf56e3c26be5b64b06c3fbed64"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1window.html#a7a741fbf56e3c26be5b64b06c3fbed64">helios::sdl3::window::ApplyMousePassthrough</a> (SDL_Window &amp;native_window, bool passthrough)</td></tr>
+<tr class="memitem:a3e9930cc6996d2aeccfaae08945ad616" id="r_a3e9930cc6996d2aeccfaae08945ad616"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1window.html#a3e9930cc6996d2aeccfaae08945ad616">helios::sdl3::window::PresentSoftwareSurface</a> (SDL_Window &amp;native_window)</td></tr>
+<tr class="memdesc:a3e9930cc6996d2aeccfaae08945ad616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attaches and presents a placeholder framebuffer when the window has no GPU client API.  <br /></td></tr>
+<tr class="memitem:a8b2da09df0f71825dc112856915604ec" id="r_a8b2da09df0f71825dc112856915604ec"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1window.html#a8b2da09df0f71825dc112856915604ec">helios::sdl3::window::PresentSoftwareSurfaces</a> (const <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html">NativeWindows</a> &amp;native)</td></tr>
+<tr class="memdesc:a8b2da09df0f71825dc112856915604ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Presents placeholder framebuffers for mapped software windows.  <br /></td></tr>
 <tr class="memitem:a4ac57932f4be333e4353408fee049a5d" id="r_a4ac57932f4be333e4353408fee049a5d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1sdl3_1_1window.html#a4ac57932f4be333e4353408fee049a5d">helios::sdl3::window::SyncClipboard</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world, const <a class="el" href="structhelios_1_1sdl3_1_1window_1_1NativeWindows.html">NativeWindows</a> &amp;native, <a class="el" href="structhelios_1_1sdl3_1_1window_1_1Context.html">Context</a> &amp;context)</td></tr>
 </table>
 </div><!-- contents -->

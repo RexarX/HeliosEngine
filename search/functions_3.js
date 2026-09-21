@@ -11,7 +11,7 @@ var searchData=
   ['declarewritecomponents_8',['DeclareWriteComponents',['../namespacehelios_1_1ecs.html#adbfff83241820f870e3f896a19ceb219',1,'helios::ecs']]],
   ['decodeutf8codepoint_9',['DecodeUtf8Codepoint',['../namespacehelios_1_1sdl3_1_1input_1_1anonymous__namespace_02event__handlers_8cpp_03.html#acd4cfe846d4a4ce4721e61968832d07e',1,'helios::sdl3::input::anonymous_namespace{event_handlers.cpp}']]],
   ['default_10',['Default',['../structhelios_1_1log_1_1Config.html#aac26f787681d6cd5975192f721842142',1,'helios::log::Config']]],
-  ['defaultassertionhandler_11',['DefaultAssertionHandler',['../namespacehelios_1_1details.html#ac7257329ff9480b84750b75c7638f95a',1,'helios::details']]],
+  ['defaultassertionhandler_11',['DefaultAssertionHandler',['../namespacehelios_1_1details.html#acddaf3c15e136cdca1b748ce681b34a9',1,'helios::details']]],
   ['defaultengine_12',['DefaultEngine',['../namespacehelios_1_1utils.html#ae412d06926f505f92866943e64611a72',1,'helios::utils']]],
   ['defaultsizeforscreen_13',['DefaultSizeForScreen',['../namespacehelios_1_1window.html#a7705551f8f0620fd2f3fa0a5fc353338',1,'helios::window']]],
   ['defer_14',['Defer',['../classhelios_1_1utils_1_1Defer.html#ae8a8dfdfd8fa404d2e35e01cf048e3bd',1,'helios::utils::Defer::Defer()=delete'],['../classhelios_1_1utils_1_1Defer.html#a81e4444f8073e203ad0d327198dc089e',1,'helios::utils::Defer::Defer(F func) noexcept(std::is_nothrow_move_constructible_v&lt; F &gt;)'],['../classhelios_1_1utils_1_1Defer.html#a99b554286eb47f909da8ade0471c7500',1,'helios::utils::Defer::Defer(Defer &amp;&amp;)=delete'],['../classhelios_1_1utils_1_1Defer.html#a8c2356ce952a9533071f7eaef15cc1a0',1,'helios::utils::Defer::Defer(const Defer &amp;)=delete']]],

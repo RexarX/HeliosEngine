@@ -216,8 +216,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a3cc4370a16e087a93b8545f2495c12c4" id="r_a3cc4370a16e087a93b8545f2495c12c4"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a></td></tr>
-<tr class="memdesc:a3cc4370a16e087a93b8545f2495c12c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function signature for custom assertion handlers.  <br /></td></tr>
+<tr class="memitem:a54960dc764b53d3485706f187e52fb35" id="r_a54960dc764b53d3485706f187e52fb35"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a></td></tr>
+<tr class="memdesc:a54960dc764b53d3485706f187e52fb35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function signature for custom assertion handlers.  <br /></td></tr>
 <tr class="memitem:a27054e3c65ddee94a897de87b010255f" id="r_a27054e3c65ddee94a897de87b010255f"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a27054e3c65ddee94a897de87b010255f">CStringView</a> = <a class="el" href="classhelios_1_1BasicCStringView.html">BasicCStringView</a>&lt;char&gt;</td></tr>
 <tr class="memdesc:a27054e3c65ddee94a897de87b010255f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A view of a null-terminated C string.  <br /></td></tr>
 <tr class="memitem:a25d6b558f111a080d2d77ce5e9caa6c6" id="r_a25d6b558f111a080d2d77ce5e9caa6c6"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a25d6b558f111a080d2d77ce5e9caa6c6">WCStringView</a> = <a class="el" href="classhelios_1_1BasicCStringView.html">BasicCStringView</a>&lt;wchar_t&gt;</td></tr>
@@ -231,14 +231,14 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aab391e11e7c9423a40ead9ce2c9abb1b" id="r_aab391e11e7c9423a40ead9ce2c9abb1b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aab391e11e7c9423a40ead9ce2c9abb1b">HandleAssertion</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
-<tr class="memdesc:aab391e11e7c9423a40ead9ce2c9abb1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified assertion handling function.  <br /></td></tr>
-<tr class="memitem:afc2e2d6e5d9076d42481c5837df0f6ba" id="r_afc2e2d6e5d9076d42481c5837df0f6ba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afc2e2d6e5d9076d42481c5837df0f6ba">SetAssertionHandler</a> (<a class="el" href="#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a> handler) noexcept</td></tr>
+<tr class="memitem:a34d25fe5cde9dc7bf269c27a878e2d42" id="r_a34d25fe5cde9dc7bf269c27a878e2d42"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a34d25fe5cde9dc7bf269c27a878e2d42">HandleAssertion</a> (std::string_view condition, std::string_view message, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:a34d25fe5cde9dc7bf269c27a878e2d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified assertion handling function.  <br /></td></tr>
+<tr class="memitem:afc2e2d6e5d9076d42481c5837df0f6ba" id="r_afc2e2d6e5d9076d42481c5837df0f6ba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afc2e2d6e5d9076d42481c5837df0f6ba">SetAssertionHandler</a> (<a class="el" href="#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a> handler) noexcept</td></tr>
 <tr class="memdesc:afc2e2d6e5d9076d42481c5837df0f6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a custom assertion handler.  <br /></td></tr>
-<tr class="memitem:a7982e4af7b9267b962018d6cfd53c165" id="r_a7982e4af7b9267b962018d6cfd53c165"><td class="memItemLeft"><a class="el" href="#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7982e4af7b9267b962018d6cfd53c165">GetAssertionHandler</a> () noexcept</td></tr>
+<tr class="memitem:a7982e4af7b9267b962018d6cfd53c165" id="r_a7982e4af7b9267b962018d6cfd53c165"><td class="memItemLeft"><a class="el" href="#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7982e4af7b9267b962018d6cfd53c165">GetAssertionHandler</a> () noexcept</td></tr>
 <tr class="memdesc:a7982e4af7b9267b962018d6cfd53c165"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current custom assertion handler.  <br /></td></tr>
-<tr class="memitem:a353d3912bb7ad37d555a2d43f9fcd02f" id="r_a353d3912bb7ad37d555a2d43f9fcd02f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a353d3912bb7ad37d555a2d43f9fcd02f">AbortWithStacktrace</a> (std::string_view message) noexcept</td></tr>
-<tr class="memdesc:a353d3912bb7ad37d555a2d43f9fcd02f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a message with stack trace and aborts the program execution.  <br /></td></tr>
+<tr class="memitem:aedf901dcce50a7df004a238abe47575e" id="r_aedf901dcce50a7df004a238abe47575e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aedf901dcce50a7df004a238abe47575e">AbortWithStacktrace</a> (std::string_view message, const std::source_location &amp;loc=std::source_location::current()) noexcept</td></tr>
+<tr class="memdesc:aedf901dcce50a7df004a238abe47575e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a message with stack trace and aborts the program execution.  <br /></td></tr>
 <tr class="memitem:a04eb3c74a31879c847aadb77c486305f" id="r_a04eb3c74a31879c847aadb77c486305f"><td class="memTemplParams" colspan="2">template&lt;typename CharT, typename Traits&gt; </td></tr>
 <tr class="memitem:a04eb3c74a31879c847aadb77c486305f template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a04eb3c74a31879c847aadb77c486305f">operator&lt;&lt;</a> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, const <a class="el" href="classhelios_1_1BasicCStringView.html">BasicCStringView</a>&lt; CharT, Traits &gt; &amp;str) -&gt; std::basic_ostream&lt; CharT, Traits &gt; &amp;</td></tr>
 <tr class="memdesc:a04eb3c74a31879c847aadb77c486305f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a <span class="tt"><a class="el" href="classhelios_1_1BasicCStringView.html" title="A view of a null-terminated C string.">BasicCStringView</a></span> to an output stream.  <br /></td></tr>
@@ -261,31 +261,31 @@ requires details::HasUnambiguousCallOperator&lt;std::remove_cvref_t&lt;Callable&
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a5dd8e95e4cb808a93be15d4df228eb36" id="r_a5dd8e95e4cb808a93be15d4df228eb36"><td class="memItemLeft">constexpr <a class="el" href="#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5dd8e95e4cb808a93be15d4df228eb36">kDefaultAssertionHandler</a> = nullptr</td></tr>
+<tr class="memitem:a5dd8e95e4cb808a93be15d4df228eb36" id="r_a5dd8e95e4cb808a93be15d4df228eb36"><td class="memItemLeft">constexpr <a class="el" href="#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5dd8e95e4cb808a93be15d4df228eb36">kDefaultAssertionHandler</a> = nullptr</td></tr>
 <tr class="memdesc:a5dd8e95e4cb808a93be15d4df228eb36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default assertion handler (<span class="tt">nullptr</span> means use built-in default behavior).  <br /></td></tr>
 </table>
 <a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="a3cc4370a16e087a93b8545f2495c12c4" name="a3cc4370a16e087a93b8545f2495c12c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cc4370a16e087a93b8545f2495c12c4">&#9670;&#160;</a></span>AssertionHandler</h2>
+<a id="a54960dc764b53d3485706f187e52fb35" name="a54960dc764b53d3485706f187e52fb35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54960dc764b53d3485706f187e52fb35">&#9670;&#160;</a></span>AssertionHandler</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#a3cc4370a16e087a93b8545f2495c12c4">helios::AssertionHandler</a></td>
+          <td class="memname">using <a class="el" href="#a54960dc764b53d3485706f187e52fb35">helios::AssertionHandler</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">void (*)(std::string_view condition,</div>
-<div class="line">                                 <span class="keyword">const</span> std::source_location&amp; loc,</div>
-<div class="line">                                 std::string_view message) noexcept</div>
+<div class="line">                                 std::string_view message,</div>
+<div class="line">                                 <span class="keyword">const</span> std::source_location&amp; loc) noexcept</div>
 </div><!-- fragment -->
 <p>Function signature for custom assertion handlers. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
-    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
     <tr><td class="paramname">message</td><td>Additional message (may be empty) </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
   </table>
   </dd>
 </dl>
@@ -385,8 +385,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a353d3912bb7ad37d555a2d43f9fcd02f" name="a353d3912bb7ad37d555a2d43f9fcd02f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a353d3912bb7ad37d555a2d43f9fcd02f">&#9670;&#160;</a></span>AbortWithStacktrace()</h2>
+<a id="aedf901dcce50a7df004a238abe47575e" name="aedf901dcce50a7df004a238abe47575e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedf901dcce50a7df004a238abe47575e">&#9670;&#160;</a></span>AbortWithStacktrace()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -397,8 +397,12 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void helios::AbortWithStacktrace </td>
           <td>(</td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -412,11 +416,12 @@ Variables</h2></td></tr>
 <p>Useful for placing in dead code branches or unreachable states. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">message</td><td>The message to print before aborting </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the abort </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00084">84</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00085">85</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
 
 </div>
 </div>
@@ -430,7 +435,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a> helios::GetAssertionHandler </td>
+          <td class="memname"><a class="el" href="#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a> helios::GetAssertionHandler </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -446,12 +451,12 @@ Variables</h2></td></tr>
 <p>Gets the current custom assertion handler. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current custom handler, or <span class="tt">nullptr</span> if using default behavior </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00185">185</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00187">187</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aab391e11e7c9423a40ead9ce2c9abb1b" name="aab391e11e7c9423a40ead9ce2c9abb1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab391e11e7c9423a40ead9ce2c9abb1b">&#9670;&#160;</a></span>HandleAssertion()</h2>
+<a id="a34d25fe5cde9dc7bf269c27a878e2d42" name="a34d25fe5cde9dc7bf269c27a878e2d42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34d25fe5cde9dc7bf269c27a878e2d42">&#9670;&#160;</a></span>HandleAssertion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -467,12 +472,12 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span>, </td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+          <td class="paramtype">const std::source_location &amp;</td>          <td class="paramname"><span class="paramname"><em>loc</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::source_location::current()</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -491,13 +496,13 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
-    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
     <tr><td class="paramname">message</td><td>Additional message </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00148">148</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00150">150</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
 
 </div>
 </div>
@@ -738,7 +743,7 @@ template&lt;typename CharT, typename Traits&gt; </div>
         <tr>
           <td class="memname">void helios::SetAssertionHandler </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -764,8 +769,8 @@ template&lt;typename CharT, typename Traits&gt; </div>
 </dl>
 <div class="fragment"><div class="line"><span class="comment">// Set custom handler</span></div>
 <div class="line"><a class="code hl_function" href="#afc2e2d6e5d9076d42481c5837df0f6ba">helios::SetAssertionHandler</a>(</div>
-<div class="line">    [](std::string_view condition, <span class="keyword">const</span> std::source_location&amp; loc,</div>
-<div class="line">       std::string_view message) <span class="keyword">noexcept</span> {</div>
+<div class="line">    [](std::string_view condition, std::string_view message,</div>
+<div class="line">       <span class="keyword">const</span> std::source_location&amp; loc) <span class="keyword">noexcept</span> {</div>
 <div class="line">  <span class="comment">// Your custom logging here</span></div>
 <div class="line">  <a class="code hl_function" href="namespacehelios_1_1log.html#aa232109b7f50968c0f15e2454664bb5e">helios::log::Critical</a>(<span class="stringliteral">&quot;Assert: {} | {} [{}:{}]&quot;</span>, condition, message,</div>
 <div class="line">                        loc.file_name(), loc.line());</div>
@@ -775,9 +780,9 @@ template&lt;typename CharT, typename Traits&gt; </div>
 <div class="line"><a class="code hl_function" href="#afc2e2d6e5d9076d42481c5837df0f6ba">helios::SetAssertionHandler</a>(<a class="code hl_variable" href="#a5dd8e95e4cb808a93be15d4df228eb36">helios::kDefaultAssertionHandler</a>);</div>
 <div class="ttc" id="anamespacehelios_1_1log_html_aa232109b7f50968c0f15e2454664bb5e"><div class="ttname"><a href="namespacehelios_1_1log.html#aa232109b7f50968c0f15e2454664bb5e">helios::log::Critical</a></div><div class="ttdeci">void Critical(std::string_view message) noexcept</div><div class="ttdoc">Logs a critical message with the default logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00660">logger.hpp:660</a></div></div>
 <div class="ttc" id="anamespacehelios_html_a5dd8e95e4cb808a93be15d4df228eb36"><div class="ttname"><a href="#a5dd8e95e4cb808a93be15d4df228eb36">helios::kDefaultAssertionHandler</a></div><div class="ttdeci">constexpr AssertionHandler kDefaultAssertionHandler</div><div class="ttdoc">Default assertion handler (nullptr means use built-in default behavior).</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00032">assert.hpp:32</a></div></div>
-<div class="ttc" id="anamespacehelios_html_afc2e2d6e5d9076d42481c5837df0f6ba"><div class="ttname"><a href="#afc2e2d6e5d9076d42481c5837df0f6ba">helios::SetAssertionHandler</a></div><div class="ttdeci">void SetAssertionHandler(AssertionHandler handler) noexcept</div><div class="ttdoc">Sets a custom assertion handler.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00177">assert.hpp:177</a></div></div>
+<div class="ttc" id="anamespacehelios_html_afc2e2d6e5d9076d42481c5837df0f6ba"><div class="ttname"><a href="#afc2e2d6e5d9076d42481c5837df0f6ba">helios::SetAssertionHandler</a></div><div class="ttdeci">void SetAssertionHandler(AssertionHandler handler) noexcept</div><div class="ttdoc">Sets a custom assertion handler.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00179">assert.hpp:179</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00177">177</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00179">179</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>
@@ -830,7 +835,7 @@ template&lt;typename CharT, typename Traits&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a3cc4370a16e087a93b8545f2495c12c4">AssertionHandler</a> helios::kDefaultAssertionHandler = nullptr</td>
+          <td class="memname"><a class="el" href="#a54960dc764b53d3485706f187e52fb35">AssertionHandler</a> helios::kDefaultAssertionHandler = nullptr</td>
         </tr>
       </table>
   </td>
