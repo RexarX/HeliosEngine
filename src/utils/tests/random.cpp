@@ -1,3 +1,4 @@
+#include <latch>
 #include <limits>
 #include <random>
 #include <set>
@@ -234,13 +235,26 @@ TEST_SUITE("helios::utils::Random") {
     SUBCASE("Thread-local engines are distinct objects") {
       DefaultRandomEngine* ptr_a = nullptr;
       DefaultRandomEngine* ptr_b = nullptr;
+      std::latch ready{2};
+      std::latch may_exit{1};
 
-      std::thread thread_a{[&] { ptr_a = &DefaultEngine(); }};
-      std::thread thread_b{[&] { ptr_b = &DefaultEngine(); }};
+      std::thread thread_a{[ptr_a, &ready, &may_exit] {
+        ptr_a = &DefaultEngine();
+        ready.count_down();
+        may_exit.wait();
+      }};
+      std::thread thread_b{[ptr_a, &ready, &may_exit] {
+        ptr_b = &DefaultEngine();
+        ready.count_down();
+        may_exit.wait();
+      }};
+
+      ready.wait();
+      CHECK_NE(ptr_a, ptr_b);
+      may_exit.count_down();
+
       thread_a.join();
       thread_b.join();
-
-      CHECK_NE(ptr_a, ptr_b);
     }
   }
 
