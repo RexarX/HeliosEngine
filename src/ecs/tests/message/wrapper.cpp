@@ -4,6 +4,7 @@
 #include <helios/ecs/message/wrapper.hpp>
 
 #include <memory_resource>
+#include <ostream>
 #include <string_view>
 
 using namespace helios::ecs;

@@ -15,6 +15,7 @@
 #include <helios/sdl3/window/plugin.hpp>
 #endif
 
+#include <SDL3/SDL_hints.h>
 #include <SDL3/SDL_mouse.h>
 
 #include <string>

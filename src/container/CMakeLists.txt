@@ -1,5 +1,6 @@
 helios_module(
-    NAME container
+    NAME helios_container
+    ALIAS helios::container
     VERSION 0.1.0
     DESCRIPTION "Container data structures module"
 
@@ -33,8 +34,7 @@ helios_module(
 
     DEPENDS
         PUBLIC
-            compiler
-            core
-            utils
-)
+            helios_compiler
+            helios_core
+            helios_utils
 )

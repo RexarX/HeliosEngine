@@ -1,6 +1,6 @@
 helios_module(
     NAME helios_sdl3_input
-    ALIAS helios::sdl3_input
+    ALIAS helios::sdl3::input
     VERSION 0.1.0
     DESCRIPTION "SDL3 backend for the helios_input ECS contract"
     DEFAULT ON
@@ -41,7 +41,6 @@ helios_module(
         tests/systems/poll_sensors.cpp
         tests/available.hpp
         tests/event_handlers.cpp
-        tests/input_map.cpp
         tests/main.cpp
         tests/module_import.cpp
         tests/plugin.cpp
@@ -55,7 +54,7 @@ helios_module(
     DEPENDS
         PUBLIC
             helios_app
-            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:helios_capi>
             helios_compiler
             helios_ecs
             helios_log

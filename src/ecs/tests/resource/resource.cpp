@@ -3,6 +3,7 @@
 #include <helios/ecs/resource/resource.hpp>
 
 #include <concepts>
+#include <ostream>
 #include <string_view>
 #include <type_traits>
 

@@ -48,6 +48,7 @@ function(helios_target_set_warnings TARGET)
       -Wdouble-promotion
       -Wformat=2
       -Wimplicit-fallthrough
+      -Wno-missing-field-initializers
   )
 
   set(GCC_WARNINGS
@@ -91,6 +92,7 @@ function(helios_target_set_warnings TARGET)
       -Wimplicit-fallthrough
       -Wstrict-prototypes
       -Wmissing-prototypes
+      -Wno-missing-field-initializers
   )
   set(GCC_C_WARNINGS
       ${CLANG_C_WARNINGS}
@@ -728,5 +730,4 @@ function(helios_copy_runtime_dependencies TARGET)
       endif()
     endif()
   endforeach()
-endfunction()
 endfunction()

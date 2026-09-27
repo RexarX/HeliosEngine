@@ -2,6 +2,7 @@
 
 #include <helios/version.hpp>
 
+#include <ostream>
 #include <string_view>
 
 using namespace helios;

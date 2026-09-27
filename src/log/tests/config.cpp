@@ -2,6 +2,7 @@
 
 #include <helios/log/config.hpp>
 
+#include <ostream>
 #include <string_view>
 #include <type_traits>
 
@@ -25,12 +26,12 @@ struct LoggerWithConfig {
 
 struct LoggerWithCustomConfig {
   static constexpr std::string_view kName = "CustomLogger";
-  static constexpr auto kConfig = Config{.log_directory = "custom_logs",
-                                         .max_file_size = 1024 * 1024,
-                                         .max_files = 5,
-                                         .enable_console = true,
-                                         .enable_file = true,
-                                         .async_logging = true};
+  static constexpr Config kConfig = {.log_directory = "custom_logs",
+                                     .max_file_size = 1024 * 1024,
+                                     .max_files = 5,
+                                     .enable_console = true,
+                                     .enable_file = true,
+                                     .async_logging = true};
 };
 
 // Non-logger type for negative testing

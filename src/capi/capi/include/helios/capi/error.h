@@ -33,7 +33,7 @@ HELIOS_C_BEGIN_DECLS
 /// @brief Returns the last error message set on this thread.
 /// @details Returned pointer is valid until the next Helios C API function call
 /// on this thread that uses error messages.
-/// @return A null-terminated string, empty when no error has been recorded.
+/// @return A null-terminated string, empty when no error has been recorded
 HELIOS_C_API const char* helios_last_error_message(void);
 
 /// @brief Stores an error message on this thread.

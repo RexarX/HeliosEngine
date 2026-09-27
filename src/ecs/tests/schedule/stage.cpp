@@ -2,6 +2,7 @@
 
 #include <helios/ecs/schedule/stage.hpp>
 
+#include <ostream>
 #include <string_view>
 
 using namespace helios::ecs;

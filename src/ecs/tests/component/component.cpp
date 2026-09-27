@@ -2,6 +2,7 @@
 
 #include <helios/ecs/component/component.hpp>
 
+#include <ostream>
 #include <string>
 #include <string_view>
 

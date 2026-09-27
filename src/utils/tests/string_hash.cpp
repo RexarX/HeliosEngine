@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <ostream>
 #include <string>
 #include <string_view>
 #include <unordered_map>

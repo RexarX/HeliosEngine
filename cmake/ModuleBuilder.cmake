@@ -474,6 +474,11 @@ function(_helios_module_apply_uses TARGET DEFAULT_VISIBILITY)
           _helios_link_with_cxx_usage(${TARGET} ${_link_visibility} ${_link_target})
         else()
           target_link_libraries(${TARGET} ${_link_visibility} ${_link_target})
+          if(_link_visibility STREQUAL "PRIVATE")
+            set_property(TARGET ${TARGET} APPEND PROPERTY
+                HELIOS_MODULE_PRIVATE_LINK_LIBS ${_link_target}
+            )
+          endif()
         endif()
       else()
         message(WARNING "USES target '${_link_target}' not found for dependency '${_dep_file}'")

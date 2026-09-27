@@ -1,5 +1,6 @@
 helios_module(
-    NAME core
+    NAME helios_core
+    ALIAS helios::core
     VERSION 0.1.0
     DESCRIPTION "Core engine module providing asserts, UUID, and other core functionality"
 
@@ -43,10 +44,10 @@ helios_module(
 
     DEPENDS
         PUBLIC
-            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
-            compiler
-            platform
-            utils
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:helios_capi>
+            helios_compiler
+            helios_platform
+            helios_utils
 
     USES
         stduuid PUBLIC helios::lib::stduuid::stduuid
@@ -64,7 +65,7 @@ configure_file(
     "${_helios_core_generated}/helios/version_macros.h"
     @ONLY
 )
-target_include_directories(helios_module_core PUBLIC
+target_include_directories(helios_core PUBLIC
     $<BUILD_INTERFACE:$<$<COMPILE_LANGUAGE:C,CXX>:${_helios_core_generated}>>
 )
 if(HELIOS_ENABLE_INSTALL)
@@ -75,7 +76,7 @@ endif()
 
 # Platform-specific configurations for stacktrace
 if(HELIOS_USE_STL_STACKTRACE)
-  message(STATUS "helios_module_core: Using C++23 STL stacktrace")
+  message(STATUS "helios_core: Using C++23 STL stacktrace")
 else()
   if(UNIX AND NOT APPLE)
     if(NOT DEFINED HELIOS_CORE_BACKTRACE_LIBRARY)
@@ -101,12 +102,12 @@ else()
 
     find_library(DL_LIBRARY NAMES dl)
     if(BACKTRACE_LIBRARY)
-      target_link_libraries(helios_module_core PRIVATE ${BACKTRACE_LIBRARY})
+      target_link_libraries(helios_core PRIVATE ${BACKTRACE_LIBRARY})
       if(DL_LIBRARY)
-        target_link_libraries(helios_module_core PRIVATE ${DL_LIBRARY})
+        target_link_libraries(helios_core PRIVATE ${DL_LIBRARY})
       endif()
       if(TARGET helios::lib::boost::stacktrace_backtrace)
-        target_link_libraries(helios_module_core PRIVATE helios::lib::boost::stacktrace_backtrace)
+        target_link_libraries(helios_core PRIVATE helios::lib::boost::stacktrace_backtrace)
       endif()
       get_filename_component(BACKTRACE_LIB_DIR "${BACKTRACE_LIBRARY}" DIRECTORY)
       get_filename_component(BACKTRACE_INCLUDE_DIR "${BACKTRACE_LIB_DIR}/include" ABSOLUTE)
@@ -122,28 +123,27 @@ else()
             COPYONLY
         )
         target_include_directories(
-            helios_module_core PRIVATE "${_helios_bt_wrap_dir}"
+            helios_core PRIVATE "${_helios_bt_wrap_dir}"
         )
       endif()
-      target_compile_definitions(helios_module_core PRIVATE BOOST_STACKTRACE_USE_BACKTRACE)
+      target_compile_definitions(helios_core PRIVATE BOOST_STACKTRACE_USE_BACKTRACE)
     else()
       if(TARGET helios::lib::boost::stacktrace_addr2line)
-        target_link_libraries(helios_module_core PRIVATE helios::lib::boost::stacktrace_addr2line)
+        target_link_libraries(helios_core PRIVATE helios::lib::boost::stacktrace_addr2line)
       endif()
       if(DL_LIBRARY)
-        target_link_libraries(helios_module_core PRIVATE ${DL_LIBRARY})
+        target_link_libraries(helios_core PRIVATE ${DL_LIBRARY})
       endif()
-      target_compile_definitions(helios_module_core PRIVATE
+      target_compile_definitions(helios_core PRIVATE
           BOOST_STACKTRACE_USE_ADDR2LINE
       )
-      message(STATUS "helios_module_core: libbacktrace not found, using Boost addr2line backend")
+      message(STATUS "helios_core: libbacktrace not found, using Boost addr2line backend")
     endif()
 
-    target_link_options(helios_module_core INTERFACE
+    target_link_options(helios_core INTERFACE
         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:-rdynamic>
     )
   elseif(WIN32)
-    target_compile_definitions(helios_module_core PRIVATE BOOST_STACKTRACE_USE_WINDBG)
+    target_compile_definitions(helios_core PRIVATE BOOST_STACKTRACE_USE_WINDBG)
   endif()
-endif()
 endif()

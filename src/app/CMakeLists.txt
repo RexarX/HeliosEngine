@@ -67,7 +67,7 @@ helios_module(
     DEPENDS
         PUBLIC
             helios_async
-            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:helios_capi>
             helios_compiler
             helios_container
             helios_core

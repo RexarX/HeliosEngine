@@ -39,7 +39,7 @@ helios_module(
 
     DEPENDS
         PUBLIC
-            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:helios_capi>
             helios_core
 
     OPTIONAL_DEPENDS

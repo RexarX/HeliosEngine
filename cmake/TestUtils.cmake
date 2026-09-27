@@ -303,6 +303,12 @@ function(helios_add_test_executable)
   helios_get_module_link_target(${TEST_MODULE} _module_link)
   if(TARGET ${_module_link})
     target_link_libraries(${TEST_NAME} PRIVATE ${_module_link})
+    get_target_property(_module_private_link_libs ${_module_link}
+        HELIOS_MODULE_PRIVATE_LINK_LIBS)
+    if(_module_private_link_libs AND NOT _module_private_link_libs STREQUAL
+        "_module_private_link_libs-NOTFOUND")
+      target_link_libraries(${TEST_NAME} PRIVATE ${_module_private_link_libs})
+    endif()
     helios_target_consume_cxx_modules(${TEST_NAME})
     foreach(_src IN LISTS TEST_SOURCES)
       get_filename_component(_src_name "${_src}" NAME)

@@ -2,6 +2,7 @@
 
 #include <helios/log/logger.hpp>
 
+#include <ostream>
 #include <string>
 #include <string_view>
 
