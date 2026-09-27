@@ -16,7 +16,7 @@
 #include <helios/window/plugin.hpp>
 #include <helios/window/schedules.hpp>
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 #include <helios/glfw/systems/input.hpp>
 #include <helios/input/keyboard.hpp>
 #endif
@@ -40,9 +40,9 @@ void Plugin::Build(app::App& app) {
 void Plugin::Finish(app::App& app) {
   auto& world = app.GetWorld();
   auto& context = world.WriteResource<Context>();
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
   // WindowInputPlugin builds glfw before input; detect input after all Builds.
-  // HELIOS_MODULE_INPUT_AVAILABLE only means the module is linked.
+  // HELIOS_INPUT_AVAILABLE only means the module is linked.
   // WindowPlugin apps must not run systems that require input::Settings.
   context.input_enabled = world.HasMessage<input::KeyboardInputMsg>();
   if (context.input_enabled) {

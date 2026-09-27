@@ -48,7 +48,7 @@ if(NOT DEFINED HELIOS_DEPENDENCY_OVERRIDE_PATHS)
 endif()
 
 #[[
-    _helios_resolve_vendored_path(<input> <out_var>)
+    _helios_resolve_vendored_path(<helios_input> <out_var>)
 
     Resolves VENDORED_DIR to an absolute path. Absolute inputs are normalized
     as-is; relative inputs are joined with HELIOS_THIRD_PARTY_DIR.

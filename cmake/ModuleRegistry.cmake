@@ -27,8 +27,8 @@ include(Primitives)
         helios_register_module(
             NAME app
             DEFAULT ON
-            DEPENDS PUBLIC async PUBLIC core PUBLIC ecs
-            OPTIONAL_DEPENDS PUBLIC profile
+            DEPENDS PUBLIC helios_async PUBLIC helios_core PUBLIC helios_ecs
+            OPTIONAL_DEPENDS PUBLIC helios_profile
         )
 ]]
 function(helios_register_module)
@@ -82,22 +82,22 @@ function(helios_register_module)
     option(${_option_name} "${MODULE_DESCRIPTION}" ${MODULE_DEFAULT})
   endif()
 
-  set(HELIOS_MODULE_${_upper_name}_REGISTERED TRUE CACHE INTERNAL "Module ${MODULE_NAME} is registered")
-  set(HELIOS_MODULE_${_upper_name}_DEPENDS "${_depends_stripped}" CACHE INTERNAL "Dependencies for ${MODULE_NAME}")
-  set(HELIOS_MODULE_${_upper_name}_OPTIONAL_DEPENDS "${_optional_depends_stripped}" CACHE INTERNAL "Optional dependencies for ${MODULE_NAME}")
-  set(HELIOS_MODULE_${_upper_name}_VERSION "${MODULE_VERSION}" CACHE INTERNAL "Version of ${MODULE_NAME}")
+  set(${_upper_name}_REGISTERED TRUE CACHE INTERNAL "Module ${MODULE_NAME} is registered")
+  set(${_upper_name}_DEPENDS "${_depends_stripped}" CACHE INTERNAL "Dependencies for ${MODULE_NAME}")
+  set(${_upper_name}_OPTIONAL_DEPENDS "${_optional_depends_stripped}" CACHE INTERNAL "Optional dependencies for ${MODULE_NAME}")
+  set(${_upper_name}_VERSION "${MODULE_VERSION}" CACHE INTERNAL "Version of ${MODULE_NAME}")
 
   if(MODULE_HEADER_ONLY)
-    set(HELIOS_MODULE_${_upper_name}_HEADER_ONLY TRUE CACHE INTERNAL "Module ${MODULE_NAME} is header-only")
+    set(${_upper_name}_HEADER_ONLY TRUE CACHE INTERNAL "Module ${MODULE_NAME} is header-only")
   else()
-    set(HELIOS_MODULE_${_upper_name}_HEADER_ONLY FALSE CACHE INTERNAL "Module ${MODULE_NAME} is header-only")
+    set(${_upper_name}_HEADER_ONLY FALSE CACHE INTERNAL "Module ${MODULE_NAME} is header-only")
   endif()
 
   if(MODULE_IMPLEMENTS)
-    set(HELIOS_MODULE_${_upper_name}_IMPLEMENTS "${MODULE_IMPLEMENTS}"
+    set(${_upper_name}_IMPLEMENTS "${MODULE_IMPLEMENTS}"
         CACHE INTERNAL "Backend tags implemented by ${MODULE_NAME}")
   else()
-    set(HELIOS_MODULE_${_upper_name}_IMPLEMENTS "" CACHE INTERNAL
+    set(${_upper_name}_IMPLEMENTS "" CACHE INTERNAL
         "Backend tags implemented by ${MODULE_NAME}")
   endif()
 
@@ -136,11 +136,57 @@ endfunction()
 function(helios_module_is_header_only NAME OUTPUT_VAR)
   string(TOUPPER "${NAME}" _upper_name)
 
-  if(DEFINED HELIOS_MODULE_${_upper_name}_HEADER_ONLY AND HELIOS_MODULE_${_upper_name}_HEADER_ONLY)
+  if(DEFINED ${_upper_name}_HEADER_ONLY AND ${_upper_name}_HEADER_ONLY)
     set(${OUTPUT_VAR} TRUE PARENT_SCOPE)
   else()
     set(${OUTPUT_VAR} FALSE PARENT_SCOPE)
   endif()
+endfunction()
+
+#[[
+    helios_get_module_target(<name> <output_var>)
+
+    Returns the concrete build-tree target for a module. That is the module
+    NAME (for example helios_async), not a name derived from ALIAS.
+]]
+function(helios_get_module_target NAME OUTPUT_VAR)
+  string(TOUPPER "${NAME}" _upper_name)
+  if(DEFINED ${_upper_name}_TARGET AND NOT "${${_upper_name}_TARGET}" STREQUAL "")
+    set(${OUTPUT_VAR} "${${_upper_name}_TARGET}" PARENT_SCOPE)
+  else()
+    set(${OUTPUT_VAR} "${NAME}" PARENT_SCOPE)
+  endif()
+endfunction()
+
+#[[
+    helios_get_module_alias(<name> <output_var>)
+
+    Returns the module alias when helios_module(ALIAS ...) set one, otherwise
+    the concrete target name.
+]]
+function(helios_get_module_alias NAME OUTPUT_VAR)
+  string(TOUPPER "${NAME}" _upper_name)
+  if(DEFINED ${_upper_name}_ALIAS AND NOT "${${_upper_name}_ALIAS}" STREQUAL "")
+    set(${OUTPUT_VAR} "${${_upper_name}_ALIAS}" PARENT_SCOPE)
+  else()
+    helios_get_module_target(${NAME} _target)
+    set(${OUTPUT_VAR} "${_target}" PARENT_SCOPE)
+  endif()
+endfunction()
+
+#[[
+    helios_get_module_link_target(<name> <output_var>)
+
+    Returns the alias when that target exists, otherwise the concrete target.
+]]
+function(helios_get_module_link_target NAME OUTPUT_VAR)
+  helios_get_module_alias(${NAME} _alias)
+  if(TARGET "${_alias}")
+    set(${OUTPUT_VAR} "${_alias}" PARENT_SCOPE)
+    return()
+  endif()
+  helios_get_module_target(${NAME} _target)
+  set(${OUTPUT_VAR} "${_target}" PARENT_SCOPE)
 endfunction()
 
 #[[
@@ -168,7 +214,7 @@ function(helios_resolve_module_dependencies)
       endif()
 
       string(TOUPPER "${_module}" _upper_name)
-      foreach(_dep IN LISTS HELIOS_MODULE_${_upper_name}_DEPENDS)
+      foreach(_dep IN LISTS ${_upper_name}_DEPENDS)
         helios_module_enabled(${_dep} _dep_enabled)
         if(NOT _dep_enabled)
           string(TOUPPER "${_dep}" _dep_upper)
@@ -201,7 +247,7 @@ function(helios_validate_module_dependencies)
     endif()
 
     string(TOUPPER "${_module}" _upper_name)
-    foreach(_dep IN LISTS HELIOS_MODULE_${_upper_name}_DEPENDS)
+    foreach(_dep IN LISTS ${_upper_name}_DEPENDS)
       helios_module_enabled(${_dep} _dep_enabled)
       if(NOT _dep_enabled)
         string(TOUPPER "${_dep}" _upper_dep)
@@ -229,7 +275,7 @@ function(helios_validate_module_backend_implementations)
     endif()
 
     string(TOUPPER "${_module}" _upper_name)
-    foreach(_tag IN LISTS HELIOS_MODULE_${_upper_name}_IMPLEMENTS)
+    foreach(_tag IN LISTS ${_upper_name}_IMPLEMENTS)
       if(DEFINED _tag_to_module_${_tag})
         message(FATAL_ERROR
             "Module '${_module}' and module '${_tag_to_module_${_tag}}' both "
@@ -339,7 +385,7 @@ function(helios_print_module_build_options)
         set(_type_option "HELIOS_BUILD_OPTION_${_upper_name}")
         if(DEFINED ${_type_option})
           set(_has_type_options TRUE)
-          set(_spec "${HELIOS_MODULE_${_upper_name}_SPECIFICATION}")
+          set(_spec "${${_upper_name}_SPECIFICATION}")
           if(NOT _spec)
             set(_spec "AUTO")
           endif()
@@ -405,8 +451,8 @@ function(helios_get_module_path)
   endif()
 
   string(TOUPPER "${ARG_NAME}" _upper_name)
-  if(DEFINED HELIOS_MODULE_${_upper_name}_PATH)
-    set(${ARG_OUTPUT_VAR} "${HELIOS_MODULE_${_upper_name}_PATH}" PARENT_SCOPE)
+  if(DEFINED ${_upper_name}_PATH)
+    set(${ARG_OUTPUT_VAR} "${${_upper_name}_PATH}" PARENT_SCOPE)
   else()
     set(${ARG_OUTPUT_VAR} "" PARENT_SCOPE)
   endif()

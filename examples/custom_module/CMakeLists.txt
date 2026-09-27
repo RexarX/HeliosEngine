@@ -1,7 +1,8 @@
 helios_module(
-    NAME greeting
+    NAME helios_greeting
+    ALIAS helios::greeting
     VERSION 0.1.0
-    DESCRIPTION "Example custom Helios module (greeting utilities)"
+    DESCRIPTION "Example custom Helios module (helios_greeting utilities)"
 
     HEADERS
         include/helios/greeting/greeting.hpp
@@ -13,8 +14,8 @@ helios_module(
         modules/helios.greeting.cppm
 
     DEPENDS
-        PUBLIC core
-        PUBLIC utils
+        PUBLIC helios_core
+        PUBLIC helios_utils
 
     TEST_SOURCES
         tests/greeting.cpp
@@ -33,6 +34,6 @@ helios_target_set_output_dirs(greeting_demo CUSTOM_FOLDER examples)
 helios_link_modules(
     TARGET greeting_demo
     MODULES
-        PUBLIC greeting
-        PUBLIC log
+        PUBLIC helios_greeting
+        PUBLIC helios_log
 )

@@ -19,7 +19,7 @@ import helios.ecs;
 import helios.log;
 import helios.memory;
 import helios.window;
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 import helios.input;
 #endif
 HELIOS_BEGIN_MODULE_EXPORT

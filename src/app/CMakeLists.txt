@@ -1,7 +1,8 @@
-option(HELIOS_APP_ENABLE_PROFILE "Enable profiling in the app module if profile module is available" ON)
+option(HELIOS_APP_ENABLE_PROFILE "Enable profiling in the helios_app module if helios_profile module is available" ON)
 
 helios_module(
-    NAME app
+    NAME helios_app
+    ALIAS helios::app
     VERSION 0.1.0
     DESCRIPTION "Application framework module"
 
@@ -40,23 +41,6 @@ helios_module(
 
     PCH src/pch.hpp
 
-    DEPENDS
-        PUBLIC async
-        PUBLIC compiler
-        PUBLIC container
-        PUBLIC core
-        PUBLIC ecs
-        PUBLIC log
-        PUBLIC memory
-        PUBLIC utils
-
-    OPTIONAL_DEPENDS
-        PUBLIC profile
-
-    COMPILE_DEFINITIONS
-        PUBLIC
-            $<$<BOOL:HELIOS_APP_ENABLE_PROFILE>:HELIOS_APP_ENABLE_PROFILE>
-
     TEST_SOURCES
         tests/builtin/executor.cpp
         tests/builtin/frame_count.cpp
@@ -73,21 +57,47 @@ helios_module(
         tests/scheduler.cpp
         tests/schedules.cpp
         tests/sub_app.cpp
+
+    C_HEADERS
+        capi/include/helios/app/app.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
+    DEPENDS
+        PUBLIC
+            helios_async
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_compiler
+            helios_container
+            helios_core
+            helios_ecs
+            helios_log
+            helios_memory
+            helios_platform
+            helios_utils
+
+    OPTIONAL_DEPENDS
+        PUBLIC helios_profile
+
+    COMPILE_DEFINITIONS
+        PUBLIC
+            $<$<BOOL:HELIOS_APP_ENABLE_PROFILE>:HELIOS_APP_ENABLE_PROFILE>
 )
 
 if(TARGET helios_app_tests AND HELIOS_BUILD_TESTS)
   add_library(helios_app_test_plugin SHARED tests/plugins/test_plugin.cpp)
   helios_apply_conventions(helios_app_test_plugin)
   helios_target_set_shared_lib_platform(helios_app_test_plugin)
-  # Headers only: linking helios::module::app embeds a second TracyClient
+  # Headers only: linking helios::app embeds a second TracyClient
   # (and mimalloc) in the .so, which AddressSanitizer reports as ODR on dlopen.
   # Named-module `import` also requires that link, so this TU undefines
   # HELIOS_ENABLE_CPP_MODULES and parses classic headers instead.
-  target_link_libraries(helios_app_test_plugin PRIVATE helios::module::platform)
+  target_link_libraries(helios_app_test_plugin PRIVATE helios::platform)
   target_include_directories(helios_app_test_plugin PRIVATE
       include
-      $<TARGET_PROPERTY:helios_module_app,INTERFACE_INCLUDE_DIRECTORIES>
-      $<TARGET_PROPERTY:helios_module_utils,INTERFACE_INCLUDE_DIRECTORIES>
+      $<TARGET_PROPERTY:helios_app,INTERFACE_INCLUDE_DIRECTORIES>
+      $<TARGET_PROPERTY:helios_utils,INTERFACE_INCLUDE_DIRECTORIES>
   )
   set_target_properties(helios_app_tests PROPERTIES ENABLE_EXPORTS ON)
   set_target_properties(helios_app_test_plugin PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -101,5 +111,6 @@ if(TARGET helios_app_tests AND HELIOS_BUILD_TESTS)
 
   add_dependencies(helios_app_tests helios_app_test_plugin)
   target_compile_definitions(helios_app_tests PRIVATE
-        HELIOS_TEST_PLUGIN_PATH="$<TARGET_FILE:helios_app_test_plugin>")
+      HELIOS_TEST_PLUGIN_PATH="$<TARGET_FILE:helios_app_test_plugin>"
+  )
 endif()

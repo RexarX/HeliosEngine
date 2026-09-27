@@ -16,7 +16,7 @@
 #include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/plugin.hpp>
 #include <helios/window/schedules.hpp>
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 #include <helios/sdl3/window/plugin.hpp>
 #endif
 
@@ -27,7 +27,7 @@ namespace helios::sdl3::input {
 void Plugin::Build(app::App& app) {
   app.TryInsertResources(Context{});
 
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
   app.ConfigureSet(app::kMainStartup, window::kStartupSet);
   app.ConfigureSet(::helios::window::kEvents, window::kApplySet);
 #endif
@@ -35,7 +35,7 @@ void Plugin::Build(app::App& app) {
   auto init = app.AddSystem(app::kMainStartup, Init{})
                   .InSet(kStartupSet)
                   .AfterSet(sdl3::kStartupSet);
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
   init.AfterSet(window::kStartupSet);
 #endif
 }
@@ -57,7 +57,7 @@ void Plugin::Finish(app::App& app) {
           .InSet(kApplySet)
           .AfterSet(sdl3::kEventPumpSet)
           .Sequence();
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
   systems.BeforeSet(window::kApplySet);
 #endif
 }

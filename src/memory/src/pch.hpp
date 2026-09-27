@@ -31,9 +31,8 @@
 #include <mimalloc.h>
 #endif
 
-#if defined(HELIOS_MEMORY_ENABLE_PROFILE) &&    \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE) && \
-    defined(HELIOS_PROFILE_BUNDLE_TRACY)
+#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
+    defined(HELIOS_PROFILE_AVAILABLE) && defined(HELIOS_PROFILE_BUNDLE_TRACY)
 #ifndef TRACY_CALLSTACK
 #define TRACY_CALLSTACK 0
 #endif

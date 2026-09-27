@@ -17,8 +17,7 @@ namespace helios::mem {
 
 namespace {
 
-#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE)
 /// @brief Sits between a `monotonic_buffer_resource` and its true upstream,
 /// profiling only the allocations the monotonic resource makes when it grow.
 class TemporaryStorageUpstream final : public std::pmr::memory_resource {
@@ -51,15 +50,13 @@ private:
 struct Block {
   alignas(std::max_align_t)
       std::array<std::byte, TemporaryStorage::kInitialBlockSize> buffer = {};
-#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE)
   TemporaryStorageUpstream profiled_upstream{std::pmr::new_delete_resource()};
 #endif
   std::optional<std::pmr::monotonic_buffer_resource> resource;
 
   void Construct() noexcept {
-#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE)
     resource.emplace(buffer.data(), buffer.size(), &profiled_upstream);
 #else
     resource.emplace(buffer.data(), buffer.size(),

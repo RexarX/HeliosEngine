@@ -1,5 +1,6 @@
 helios_module(
-    NAME window
+    NAME helios_window
+    ALIAS helios::window
     VERSION 0.1.0
     DESCRIPTION "Window ECS contract module"
 
@@ -23,12 +24,6 @@ helios_module(
 
     PCH src/pch.hpp
 
-    DEPENDS
-        PUBLIC app
-        PUBLIC compiler
-        PUBLIC ecs
-        PUBLIC memory
-
     TEST_SOURCES
         tests/main.cpp
         tests/module_import.cpp
@@ -39,10 +34,25 @@ helios_module(
         tests/schedules.cpp
         tests/settings.cpp
         tests/systems/sync_frame_limiter.cpp
+
+    C_HEADERS
+        capi/include/helios/window/window.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
+    DEPENDS
+        PUBLIC
+            helios_app
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_compiler
+            helios_ecs
+            helios_memory
+            helios_platform
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  target_compile_definitions(helios_module_window PUBLIC
+  target_compile_definitions(helios_window PUBLIC
       HELIOS_PLATFORM_LINUX_X11 HELIOS_PLATFORM_LINUX_WAYLAND
   )
 endif()

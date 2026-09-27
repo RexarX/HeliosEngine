@@ -497,7 +497,7 @@ function(helios_target_apply_linker TARGET)
       endif()
     endif()
     target_link_options(${TARGET} PRIVATE
-        $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>:-fuse-ld=${HELIOS_ACTIVE_LINKER}>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<C_COMPILER_ID:GNU>,$<C_COMPILER_ID:Clang,AppleClang>>>:-fuse-ld=${HELIOS_ACTIVE_LINKER}>
     )
   endif()
 endfunction()
@@ -525,25 +525,25 @@ function(helios_configure_lto_mode)
 
   if(HELIOS_ENABLE_LTO_RELWITHDEBINFO AND HELIOS_MANAGE_TOOLCHAIN)
     add_compile_options(
-        $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
-        $<$<AND:$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
+        $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
+        $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
     )
     add_link_options(
-        $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
-        $<$<AND:$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
-        $<$<AND:$<CXX_COMPILER_ID:MSVC>,$<CONFIG:RelWithDebInfo>>:/LTCG:INCREMENTAL>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:MSVC>,$<CONFIG:RelWithDebInfo>>:/LTCG:INCREMENTAL>
     )
     if(WIN32)
       add_link_options(
-          $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:RelWithDebInfo>>:/lldltocache:${_lto_cache_dir}>
+          $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang>,$<CONFIG:RelWithDebInfo>>:/lldltocache:${_lto_cache_dir}>
       )
     elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
       add_link_options(
-          $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,-cache_path_lto,${_lto_cache_dir}>
+          $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,-cache_path_lto,${_lto_cache_dir}>
       )
     else()
       add_link_options(
-          $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,--thinlto-cache-dir=${_lto_cache_dir}>
+          $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,--thinlto-cache-dir=${_lto_cache_dir}>
       )
     endif()
   endif()
@@ -584,26 +584,26 @@ function(helios_target_apply_lto_mode TARGET)
   endif()
 
   target_compile_options(${TARGET} PRIVATE
-      $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
-      $<$<AND:$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
   )
   target_link_options(${TARGET} PRIVATE
-      $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
-      $<$<AND:$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
-      $<$<AND:$<CXX_COMPILER_ID:MSVC>,$<CONFIG:RelWithDebInfo>>:/LTCG:INCREMENTAL>
+      $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
+      $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
+      $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:MSVC>,$<CONFIG:RelWithDebInfo>>:/LTCG:INCREMENTAL>
   )
 
   if(WIN32)
     target_link_options(${TARGET} PRIVATE
-        $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:RelWithDebInfo>>:/lldltocache:${HELIOS_LTO_CACHE_DIR}>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang>,$<CONFIG:RelWithDebInfo>>:/lldltocache:${HELIOS_LTO_CACHE_DIR}>
     )
   elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     target_link_options(${TARGET} PRIVATE
-        $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,-cache_path_lto,${HELIOS_LTO_CACHE_DIR}>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,-cache_path_lto,${HELIOS_LTO_CACHE_DIR}>
     )
   else()
     target_link_options(${TARGET} PRIVATE
-        $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,--thinlto-cache-dir=${HELIOS_LTO_CACHE_DIR}>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,--thinlto-cache-dir=${HELIOS_LTO_CACHE_DIR}>
     )
   endif()
 endfunction()

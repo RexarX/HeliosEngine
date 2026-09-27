@@ -39,7 +39,7 @@ export module helios.async;
 import std;
 #endif
 import helios.core;
-#ifdef HELIOS_MODULE_PROFILE_AVAILABLE
+#ifdef HELIOS_PROFILE_AVAILABLE
 import helios.profile;
 #endif
 HELIOS_BEGIN_MODULE_EXPORT

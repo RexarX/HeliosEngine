@@ -1,5 +1,6 @@
 helios_module(
-    NAME log
+    NAME helios_log
+    ALIAS helios::log
     VERSION 0.1.0
     DESCRIPTION "Logging module built on spdlog"
 
@@ -16,11 +17,26 @@ helios_module(
 
     PCH src/pch.hpp
 
+    TEST_SOURCES
+        tests/config.cpp
+        tests/logger.cpp
+        tests/main.cpp
+        tests/module_import.cpp
+
+    C_HEADERS
+        capi/include/helios/log/log.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
     DEPENDS
-        PUBLIC compiler
-        PUBLIC container
-        PUBLIC core
-        PUBLIC utils
+        PUBLIC
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_compiler
+            helios_container
+            helios_core
+            helios_platform
+            helios_utils
 
     USES
         spdlog PRIVATE helios::lib::spdlog::spdlog_header_only
@@ -31,10 +47,4 @@ helios_module(
 
     TEST_DEPENDENCIES
         helios::lib::spdlog::spdlog_header_only
-
-    TEST_SOURCES
-        tests/config.cpp
-        tests/logger.cpp
-        tests/main.cpp
-        tests/module_import.cpp
 )

@@ -29,11 +29,11 @@ function(_helios_installed_parse_visibility INPUT_VAR OUT_PUBLIC OUT_PRIVATE OUT
 endfunction()
 
 function(_helios_installed_link_one TARGET VISIBILITY MODULE REQUIRED)
-  if(TARGET helios::module::${MODULE})
-    target_link_libraries(${TARGET} ${VISIBILITY} helios::module::${MODULE})
+  if(TARGET helios::${MODULE})
+    target_link_libraries(${TARGET} ${VISIBILITY} helios::${MODULE})
   elseif(REQUIRED)
     message(FATAL_ERROR
-        "helios_link_modules: installed module target 'helios::module::${MODULE}' not found")
+        "helios_link_modules: installed module target 'helios::${MODULE}' not found")
   endif()
 endfunction()
 
@@ -86,21 +86,21 @@ endfunction()
     Returns the exported target name for an installed Helios module.
 
     Example:
-        helios_get_module_target(core core_target)
+        helios_get_module_target(helios_core core_target)
 ]]
 function(helios_get_module_target NAME OUTPUT_VAR)
-  set(${OUTPUT_VAR} "helios::module::${NAME}" PARENT_SCOPE)
+  set(${OUTPUT_VAR} "helios::${NAME}" PARENT_SCOPE)
 endfunction()
 
 #[[
     helios_get_module_alias(<name> <out-var>)
 
     Returns the canonical alias for an installed Helios module. Installed
-    exports use the same helios::module::<name> spelling as the build tree.
+    exports use the same helios::<name> spelling as a build-tree ALIAS.
 
     Example:
-        helios_get_module_alias(core core_alias)
+        helios_get_module_alias(helios_core core_alias)
 ]]
 function(helios_get_module_alias NAME OUTPUT_VAR)
-  set(${OUTPUT_VAR} "helios::module::${NAME}" PARENT_SCOPE)
+  set(${OUTPUT_VAR} "helios::${NAME}" PARENT_SCOPE)
 endfunction()

@@ -4,7 +4,7 @@
 
 | Artifact        | Target / output                                      |
 | --------------- | ---------------------------------------------------- |
-| Module library  | `helios::module::greeting`                           |
+| Module library  | `helios::greeting`                                   |
 | Unit tests      | `helios_greeting_tests` when `HELIOS_BUILD_TESTS=ON` |
 | Demo executable | `greeting_demo`                                      |
 
@@ -28,7 +28,7 @@ custom_module/
 
 ```cmake
 helios_module(
-    NAME greeting
+    NAME helios_greeting
     VERSION 0.1.0
     DESCRIPTION "Example custom Helios module (greeting utilities)"
 
@@ -39,8 +39,8 @@ helios_module(
         src/greeting.cpp
 
     DEPENDS
-        PUBLIC core
-        PUBLIC utils
+        PUBLIC helios_core
+        PUBLIC helios_utils
 
     TEST_SOURCES
         tests/greeting.cpp
@@ -52,8 +52,8 @@ add_executable(greeting_demo src/demo.cpp)
 helios_link_modules(
     TARGET greeting_demo
     MODULES
-        PUBLIC greeting
-        PUBLIC log
+        PUBLIC helios_greeting
+        PUBLIC helios_log
 )
 ```
 

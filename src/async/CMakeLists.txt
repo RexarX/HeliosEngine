@@ -1,7 +1,8 @@
-option(HELIOS_ASYNC_ENABLE_PROFILE "Enable profiling in the async module if profile module is available" ON)
+option(HELIOS_ASYNC_ENABLE_PROFILE "Enable profiling in the helios_async module if helios_profile module is available" ON)
 
 helios_module(
-    NAME async
+    NAME helios_async
+    ALIAS helios::async
     VERSION 0.1.0
     DESCRIPTION "Asynchronous task execution module built on Taskflow"
 
@@ -19,19 +20,6 @@ helios_module(
     MODULE_SOURCES
         modules/helios.async.cppm
 
-    DEPENDS
-        PUBLIC core
-
-    OPTIONAL_DEPENDS
-        PUBLIC profile
-
-    USES
-        Taskflow PUBLIC helios::lib::taskflow::taskflow
-
-    COMPILE_DEFINITIONS
-        PUBLIC
-            $<$<BOOL:HELIOS_ASYNC_ENABLE_PROFILE>:HELIOS_ASYNC_ENABLE_PROFILE>
-
     TEST_SOURCES
         tests/async_task.cpp
         tests/common.cpp
@@ -42,11 +30,32 @@ helios_module(
         tests/sub_task_graph.cpp
         tests/task.cpp
         tests/task_graph.cpp
+
+    C_HEADERS
+        capi/include/helios/async/async.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
+    DEPENDS
+        PUBLIC
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_core
+
+    OPTIONAL_DEPENDS
+        PUBLIC helios_profile
+
+    USES
+        Taskflow PUBLIC helios::lib::taskflow::taskflow
+
+    COMPILE_DEFINITIONS
+        PUBLIC
+            $<$<BOOL:HELIOS_ASYNC_ENABLE_PROFILE>:HELIOS_ASYNC_ENABLE_PROFILE>
 )
 
 # Link TBB on Linux with GCC — required for libstdc++ parallel STL backend
 helios_require_dependency(TBB)
 if(HELIOS_HAS_SYSTEM_TBB)
-  target_link_libraries(helios_module_async INTERFACE helios::lib::tbb::tbb)
-  message(STATUS "helios_module_async: Linking TBB for libstdc++ parallel STL support")
+  target_link_libraries(helios_async INTERFACE helios::lib::tbb::tbb)
+  message(STATUS "helios_async: Linking TBB for libstdc++ parallel STL support")
 endif()

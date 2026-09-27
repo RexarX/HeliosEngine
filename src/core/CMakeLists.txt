@@ -10,30 +10,17 @@ helios_module(
         include/helios/delegate.hpp
         include/helios/stacktrace.hpp
         include/helios/uuid.hpp
+        include/helios/version.hpp
 
     SOURCES
         src/assert.cpp
         src/stacktrace.cpp
+        src/version.cpp
 
     MODULE_SOURCES
         modules/helios.core.cppm
 
     PCH src/pch.hpp
-
-    DEPENDS
-        PUBLIC compiler
-        PUBLIC platform
-        PUBLIC utils
-
-    USES
-        stduuid PUBLIC helios::lib::stduuid::stduuid
-        Boost PRIVATE helios::lib::boost::stacktrace
-
-    COMPILE_DEFINITIONS
-        PUBLIC
-            $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:
-                HELIOS_ENABLE_ASSERTS;HELIOS_ENABLE_STACKTRACE
-            >
 
     TEST_SOURCES
         tests/assert.cpp
@@ -43,7 +30,48 @@ helios_module(
         tests/module_import.cpp
         tests/stacktrace.cpp
         tests/uuid.cpp
+        tests/version.cpp
+
+    C_HEADERS
+        capi/include/helios/version.h
+
+    C_SOURCES
+        capi/src/version.cpp
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
+    DEPENDS
+        PUBLIC
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            compiler
+            platform
+            utils
+
+    USES
+        stduuid PUBLIC helios::lib::stduuid::stduuid
+        Boost PRIVATE helios::lib::boost::stacktrace
+
+    COMPILE_DEFINITIONS
+        PUBLIC
+            $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:HELIOS_ENABLE_ASSERTS>
+            $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:HELIOS_ENABLE_STACKTRACE>
 )
+
+set(_helios_core_generated "${CMAKE_CURRENT_BINARY_DIR}/generated")
+configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/helios/version_macros.h.in"
+    "${_helios_core_generated}/helios/version_macros.h"
+    @ONLY
+)
+target_include_directories(helios_module_core PUBLIC
+    $<BUILD_INTERFACE:$<$<COMPILE_LANGUAGE:C,CXX>:${_helios_core_generated}>>
+)
+if(HELIOS_ENABLE_INSTALL)
+  install(FILES "${_helios_core_generated}/helios/version_macros.h"
+      DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/helios"
+  )
+endif()
 
 # Platform-specific configurations for stacktrace
 if(HELIOS_USE_STL_STACKTRACE)
@@ -117,4 +145,5 @@ else()
   elseif(WIN32)
     target_compile_definitions(helios_module_core PRIVATE BOOST_STACKTRACE_USE_WINDBG)
   endif()
+endif()
 endif()

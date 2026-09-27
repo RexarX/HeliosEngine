@@ -1,7 +1,8 @@
 helios_module(
-    NAME compiler
+    NAME helios_compiler
+    ALIAS helios::compiler
     VERSION 0.1.0
-    DESCRIPTION "Compiler engine module providing compiler specific functionality"
+    DESCRIPTION "Compiler engine module providing helios_compiler specific functionality"
 
     HEADERS
         include/helios/config.hpp

@@ -3,7 +3,7 @@
 #include <helios/config.hpp>
 
 #if defined(HELIOS_ENABLE_CPP_MODULES) && defined(HELIOS_BUILDING_MODULE) && \
-    !defined(HELIOS_BUILDING_MODULE_PROFILE)
+    !defined(HELIOS_BUILDING_MODULE_HELIOS_PROFILE)
 #else
 #ifndef HELIOS_BUILDING_MODULE
 #include <helios/cstring_view.hpp>

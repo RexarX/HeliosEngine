@@ -1,5 +1,6 @@
 helios_module(
-    NAME input
+    NAME helios_input
+    ALIAS helios::input
     VERSION 0.1.0
     DESCRIPTION "Input ECS contract (keyboard, mouse, cursor, gamepad, pen)"
 
@@ -44,13 +45,6 @@ helios_module(
     PCH
         src/pch.hpp
 
-    DEPENDS
-        PUBLIC app
-        PUBLIC compiler
-        PUBLIC ecs
-        PUBLIC log
-        PUBLIC memory
-
     TEST_SOURCES
         tests/systems/clear.cpp
         tests/systems/gamepad.cpp
@@ -73,4 +67,20 @@ helios_module(
         tests/plugin.cpp
         tests/sensor.cpp
         tests/touch.cpp
+
+    C_HEADERS
+        capi/include/helios/input/input.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
+    DEPENDS
+        PUBLIC
+            helios_app
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_compiler
+            helios_ecs
+            helios_log
+            helios_memory
+            helios_platform
 )

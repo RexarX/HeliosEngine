@@ -1,5 +1,6 @@
 helios_module(
-    NAME utils
+    NAME helios_utils
+    ALIAS helios::utils
     VERSION 0.1.0
     DESCRIPTION "Utility module providing common helpers and utilities"
 
@@ -29,13 +30,6 @@ helios_module(
 
     PCH src/pch.hpp
 
-    DEPENDS
-        PUBLIC compiler
-        PUBLIC platform
-
-    USES
-        xoshiro PUBLIC helios::lib::xoshiro
-
     TEST_SOURCES
         tests/common_traits.cpp
         tests/defer.cpp
@@ -53,4 +47,19 @@ helios_module(
         tests/string_hash.cpp
         tests/timer.cpp
         tests/type_info.cpp
+
+    DEPENDS
+        PUBLIC
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_compiler
+            helios_platform
+
+    USES
+        xoshiro PUBLIC helios::lib::xoshiro
+
+    C_HEADERS
+        capi/include/helios/utils/utils.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
 )

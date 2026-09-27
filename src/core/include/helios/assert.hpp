@@ -6,7 +6,7 @@
 #include <helios/utils/macro.hpp>
 
 #if defined(HELIOS_ENABLE_CPP_MODULES) && defined(HELIOS_BUILDING_MODULE) && \
-    !defined(HELIOS_BUILDING_MODULE_CORE)
+    !defined(HELIOS_BUILDING_MODULE_HELIOS_CORE)
 #else
 #ifndef HELIOS_BUILDING_MODULE
 #include <format>

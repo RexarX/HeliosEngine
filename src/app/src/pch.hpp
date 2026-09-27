@@ -30,8 +30,7 @@
 #include <utility>
 #include <vector>
 
-#if defined(HELIOS_APP_ENABLE_PROFILE) &&       \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE) && \
+#if defined(HELIOS_APP_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE) && \
     defined(HELIOS_PROFILE_BUNDLE_TRACY)
 #ifndef TRACY_CALLSTACK
 #define TRACY_CALLSTACK 0

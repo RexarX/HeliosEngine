@@ -11,7 +11,7 @@
 
 #include "available.hpp"
 
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 #include <helios/sdl3/input/systems/apply_cursors.hpp>
 #include <helios/sdl3/window/plugin.hpp>
 #include <helios/sdl3/window/window.hpp>
@@ -38,7 +38,7 @@ TEST_SUITE("helios::sdl3::input::DestroyCursorCache") {
   }
 }
 
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 namespace {
 
 [[nodiscard]] window::Properties HiddenTestProperties() {

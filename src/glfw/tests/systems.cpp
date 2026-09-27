@@ -11,7 +11,7 @@
 
 #include "available.hpp"
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/system/param.hpp>
@@ -392,7 +392,7 @@ TEST_SUITE("helios::glfw::Shutdown") {
   }
 }
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 TEST_SUITE("helios::glfw::ApplyCursorMode") {
   TEST_CASE("helios::glfw::ApplyCursorMode") {
     SUBCASE("Sets captured cursor mode on a native window") {

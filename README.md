@@ -324,11 +324,11 @@ Requires **CMake 3.28+** and **Ninja** or Visual Studio 17.4+. Unix Makefiles fa
 Implementation `.cpp` files stay classic translation units (no `module helios.X;`).
 Named modules cannot export macros — `#include` `<helios/assert.hpp>`, `<helios/compiler/compiler.hpp>`, `<helios/platform/platform.hpp>`, or `<helios/utils/macro.hpp>` when you need those macros.
 
-| Consumer code                                      | Link                          |
-| -------------------------------------------------- | ----------------------------- |
-| `import helios.app;` (or `ecs`, `log`, ...)        | `helios::module::app`         |
-| `import helios.sdl3.window;`                       | `helios::module::sdl3_window` |
-| `import helios;` (re-exports every enabled module) | `helios::helios`              |
+| Consumer code                                      | Link                  |
+| -------------------------------------------------- | --------------------- |
+| `import helios.app;` (or `ecs`, `log`, ...)        | `helios::app`         |
+| `import helios.sdl3.window;`                       | `helios::sdl3_window` |
+| `import helios;` (re-exports every enabled module) | `helios::helios`      |
 
 On MSVC without `import std`, put standard-library `#include`s **before** `import`. Do not scan TUs that only `#include` Helios — MSVC injects `import` into every scanned file.
 
@@ -338,7 +338,7 @@ A runnable `import` sample is configured only when this flag is on: [examples/cx
 cmake --build --preset linux-gcc-debug --target cxx_modules_example
 ```
 
-**Using Helios modules from another project.** Enable the flag when Helios is configured, link the same `helios::module::*` targets, and scan only the sources that `import`:
+**Using Helios modules from another project.** Enable the flag when Helios is configured, link the same `helios::*` targets, and scan only the sources that `import`:
 
 ```cmake
 set(HELIOS_ENABLE_CPP_MODULES ON CACHE BOOL "" FORCE)
@@ -347,7 +347,7 @@ set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(third_party/HeliosEngine)
 
 add_executable(my_game src/main.cpp)
-helios_link_modules(TARGET my_game MODULES PUBLIC app log)
+helios_link_modules(TARGET my_game MODULES PUBLIC helios_app helios_log)
 helios_source_scan_for_cxx_modules(my_game src/main.cpp)
 ```
 
@@ -512,7 +512,7 @@ By default, `MainStartup` and `Shutdown` use the main-thread schedule executor; 
 
 ## Using as a Dependency
 
-Helios can be consumed from another CMake project in several ways. All methods expose targets as `helios::module::<name>` and the helper `helios_link_modules()`.
+Helios can be consumed from another CMake project in several ways. All methods expose targets as `helios::<name>` and the helper `helios_link_modules()`.
 
 Typical consumer settings when embedding:
 
@@ -545,7 +545,7 @@ add_executable(my_game src/main.cpp)
 # helios_apply_conventions(my_game)
 helios_link_modules(
     TARGET my_game
-    MODULES PUBLIC app
+    MODULES PUBLIC helios_app
 )
 ```
 
@@ -571,7 +571,7 @@ FetchContent_MakeAvailable(HeliosEngine)
 add_executable(my_game src/main.cpp)
 helios_link_modules(
     TARGET my_game
-    MODULES PUBLIC app
+    MODULES PUBLIC helios_app
 )
 ```
 
@@ -595,7 +595,7 @@ CPMAddPackage(
 add_executable(my_game src/main.cpp)
 helios_link_modules(
     TARGET my_game
-    MODULES PUBLIC app
+    MODULES PUBLIC helios_app
 )
 ```
 
@@ -616,7 +616,7 @@ find_package(Helios REQUIRED CONFIG)
 add_executable(my_game src/main.cpp)
 helios_link_modules(
     TARGET my_game
-    MODULES PUBLIC app
+    MODULES PUBLIC helios_app
 )
 ```
 
@@ -699,7 +699,7 @@ examples/custom_module/
 └── tests/                    # doctest suite
 ```
 
-Link it from your executable with `helios_link_modules(TARGET … MODULES PUBLIC greeting)`.
+Link it from your executable with `helios_link_modules(TARGET … MODULES PUBLIC helios_greeting)`.
 
 See also [docs/guidelines.md](docs/guidelines.md) for module conventions.
 

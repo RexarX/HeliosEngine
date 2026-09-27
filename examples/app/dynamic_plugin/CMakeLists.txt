@@ -1,7 +1,7 @@
 helios_add_example(
     NAME dynamic_plugin
     SOURCES src/main.cpp
-    MODULES app ecs log
+    MODULES helios_app helios_ecs helios_log
 )
 
 target_include_directories(dynamic_plugin_example PRIVATE
@@ -18,7 +18,7 @@ helios_target_set_output_dirs(example_dynamic_plugin CUSTOM_FOLDER examples)
 helios_target_set_folder(example_dynamic_plugin "Examples")
 helios_link_modules(
     TARGET example_dynamic_plugin
-    MODULES app log platform
+    MODULES helios_app helios_log helios_platform
 )
 
 set_target_properties(example_dynamic_plugin PROPERTIES

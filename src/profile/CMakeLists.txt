@@ -6,7 +6,8 @@ if(HELIOS_PROFILE_BUNDLE_TRACY)
 endif()
 
 helios_module(
-    NAME profile
+    NAME helios_profile
+    ALIAS helios::profile
     VERSION 0.1.0
     DESCRIPTION "Profiling module with composable backends"
     DEFAULT ON
@@ -39,12 +40,29 @@ helios_module(
 
     PCH src/pch.hpp
 
+    TEST_SOURCES
+        tests/backends/flamegraph.cpp
+        $<$<BOOL:HELIOS_PROFILE_BUNDLE_TRACY>:tests/backends/tracy.cpp>
+        $<$<BOOL:HELIOS_PROFILE_BUNDLE_TRACY>:tests/tracy/lock.cpp>
+        tests/main.cpp
+        tests/module_import.cpp
+        tests/profile.cpp
+        tests/zone.cpp
+
+    C_HEADERS
+        capi/include/helios/profile/profile.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
     DEPENDS
-        PUBLIC compiler
-        PUBLIC container
-        PUBLIC core
-        PUBLIC platform
-        PUBLIC utils
+        PUBLIC
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_compiler
+            helios_container
+            helios_core
+            helios_platform
+            helios_utils
 
     USES
         concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
@@ -55,13 +73,4 @@ helios_module(
             $<$<BOOL:HELIOS_PROFILE_BUNDLE_TRACY>:HELIOS_PROFILE_BUNDLE_TRACY>
         PRIVATE
             $<$<BOOL:HELIOS_PROFILE_BUNDLE_TRACY>:TRACY_ENABLE>
-
-    TEST_SOURCES
-        tests/backends/flamegraph.cpp
-        $<$<BOOL:HELIOS_PROFILE_BUNDLE_TRACY>:tests/backends/tracy.cpp>
-        $<$<BOOL:HELIOS_PROFILE_BUNDLE_TRACY>:tests/tracy/lock.cpp>
-        tests/main.cpp
-        tests/module_import.cpp
-        tests/profile.cpp
-        tests/zone.cpp
 )

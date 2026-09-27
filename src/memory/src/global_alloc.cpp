@@ -46,8 +46,7 @@
 
 namespace {
 
-#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE)
 thread_local bool g_in_global_alloc_hook = false;
 #endif
 
@@ -102,8 +101,7 @@ void RawAlignedFree(void* ptr) noexcept {
 
 void ProfileAlloc([[maybe_unused]] const void* ptr,
                   [[maybe_unused]] size_t size) noexcept {
-#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE)
   if (ptr == nullptr || g_in_global_alloc_hook) {
     return;
   }
@@ -115,8 +113,7 @@ void ProfileAlloc([[maybe_unused]] const void* ptr,
 }
 
 void ProfileFree([[maybe_unused]] const void* ptr) noexcept {
-#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE)
   if (ptr == nullptr || g_in_global_alloc_hook) {
     return;
   }

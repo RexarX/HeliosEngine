@@ -8,7 +8,7 @@
 #include <helios/input/mouse.hpp>
 #include <helios/sdl3/input/cursor_cache.hpp>
 #include <helios/sdl3/input/state.hpp>
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 #include <helios/sdl3/window/window_map.hpp>
 #endif
 #include <details/input_map.hpp>
@@ -121,7 +121,7 @@ void DestroyCursorCache(CursorCache& cache) {
 
 void ApplyCursors::operator()(
     ecs::Res<const Context> context,
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
     ecs::OptRes<const window::WindowMap> windows,
 #endif
     ecs::Res<CursorCache> cache,
@@ -130,7 +130,7 @@ void ApplyCursors::operator()(
     return;
   }
 
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
   if (!windows.has_value()) [[unlikely]] {
     return;
   }
@@ -141,7 +141,7 @@ void ApplyCursors::operator()(
       continue;
     }
 
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
     const window::WindowMap::Entry* entry = (*windows)->TryGet(entity);
     if (entry == nullptr || entry->window == nullptr) [[unlikely]] {
       continue;

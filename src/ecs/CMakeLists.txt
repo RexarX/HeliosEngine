@@ -1,7 +1,8 @@
-option(HELIOS_ECS_ENABLE_PROFILE "Enable profiling in the ecs module if profile module is available" ON)
+option(HELIOS_ECS_ENABLE_PROFILE "Enable profiling in the helios_ecs module if helios_profile module is available" ON)
 
 helios_module(
-    NAME ecs
+    NAME helios_ecs
+    ALIAS helios::ecs
     VERSION 0.1.0
     DESCRIPTION "Entity Component System module"
 
@@ -91,25 +92,6 @@ helios_module(
 
     PCH src/pch.hpp
 
-    DEPENDS
-        PUBLIC async
-        PUBLIC compiler
-        PUBLIC container
-        PUBLIC core
-        PUBLIC log
-        PUBLIC memory
-        PUBLIC utils
-
-    OPTIONAL_DEPENDS
-        PUBLIC profile
-
-    USES
-        concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
-
-    COMPILE_DEFINITIONS
-        PUBLIC
-            $<$<BOOL:HELIOS_ECS_ENABLE_PROFILE>:HELIOS_ECS_ENABLE_PROFILE>
-
     TEST_SOURCES
         tests/command/command.cpp
         tests/command/commands.cpp
@@ -169,7 +151,35 @@ helios_module(
         tests/module_import.cpp
         tests/world.cpp
         tests/world_view.cpp
+
+    C_HEADERS
+        capi/include/helios/ecs/ecs.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
+    DEPENDS
+        PUBLIC
+            helios_async
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_compiler
+            helios_container
+            helios_core
+            helios_log
+            helios_memory
+            helios_platform
+            helios_utils
+
+    OPTIONAL_DEPENDS
+        PUBLIC helios_profile
+
+    USES
+        concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
+
+    COMPILE_DEFINITIONS
+        PUBLIC
+            $<$<BOOL:HELIOS_ECS_ENABLE_PROFILE>:HELIOS_ECS_ENABLE_PROFILE>
 )
 
 include(SimdUtils)
-helios_simd_apply_to_target(TARGET helios_module_ecs)
+helios_simd_apply_to_target(TARGET helios_ecs)

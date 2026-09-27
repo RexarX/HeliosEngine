@@ -17,7 +17,7 @@
 #include <helios/sdl3/input/systems/poll_gamepads.hpp>
 #include <helios/sdl3/input/systems/poll_sensors.hpp>
 
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 #include <helios/sdl3/window/window_map.hpp>
 #endif
 
@@ -46,7 +46,7 @@ namespace {
 [[nodiscard]] auto TryGetEntity([[maybe_unused]] ecs::World& world,
                                 [[maybe_unused]] SDL_WindowID window_id)
     -> std::optional<ecs::Entity> {
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
   const auto* window_map = world.TryReadResource<window::WindowMap>();
   if (window_map == nullptr) [[unlikely]] {
     return std::nullopt;

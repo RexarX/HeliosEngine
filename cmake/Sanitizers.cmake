@@ -147,11 +147,11 @@ if(HELIOS_MANAGE_TOOLCHAIN AND HELIOS_ENABLE_SANITIZERS)
     separate_arguments(_helios_dir_sanitizer_compile_list
         UNIX_COMMAND "${_helios_dir_sanitizer_compile}")
     foreach(_flag IN LISTS _helios_dir_sanitizer_compile_list)
-      add_compile_options("$<$<CONFIG:Debug>:${_flag}>")
+      add_compile_options("$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C,CXX>>:${_flag}>")
     endforeach()
   endif()
   if(_helios_dir_sanitizer_link)
-    add_link_options("$<$<CONFIG:Debug>:SHELL:${_helios_dir_sanitizer_link}>")
+    add_link_options("$<$<AND:$<CONFIG:Debug>,$<LINK_LANGUAGE:C,CXX>>:SHELL:${_helios_dir_sanitizer_link}>")
   endif()
 endif()
 
@@ -200,12 +200,16 @@ function(helios_target_enable_sanitizers TARGET)
   if(_compile_flags)
     separate_arguments(_compile_flags_list UNIX_COMMAND "${_compile_flags}")
     foreach(_flag IN LISTS _compile_flags_list)
-      target_compile_options(${TARGET} PRIVATE "$<$<CONFIG:Debug>:${_flag}>")
+      target_compile_options(${TARGET} PRIVATE
+          "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C,CXX>>:${_flag}>"
+      )
     endforeach()
   endif()
 
   if(_link_flags)
-    target_link_options(${TARGET} PRIVATE "$<$<CONFIG:Debug>:SHELL:${_link_flags}>")
+    target_link_options(${TARGET} PRIVATE
+        "$<$<AND:$<CONFIG:Debug>,$<LINK_LANGUAGE:C,CXX>>:SHELL:${_link_flags}>"
+    )
   endif()
 
   set_target_properties(${TARGET} PROPERTIES HELIOS_SANITIZERS_APPLIED TRUE)

@@ -1,7 +1,8 @@
 helios_module(
-    NAME sdl3_input
+    NAME helios_sdl3_input
+    ALIAS helios::sdl3_input
     VERSION 0.1.0
-    DESCRIPTION "SDL3 backend for the input ECS contract"
+    DESCRIPTION "SDL3 backend for the helios_input ECS contract"
     DEFAULT ON
     IMPLEMENTS input
 
@@ -32,21 +33,6 @@ helios_module(
 
     PCH src/pch.hpp
 
-    DEPENDS
-        PUBLIC app
-        PUBLIC compiler
-        PUBLIC ecs
-        PUBLIC log
-        PUBLIC window
-        PUBLIC input
-        PUBLIC sdl3
-
-    OPTIONAL_DEPENDS
-        PUBLIC sdl3_window
-
-    USES
-        SDL3 PRIVATE helios::lib::sdl3::sdl3
-
     TEST_SOURCES
         tests/systems/apply_cursors.cpp
         tests/systems/apply_raw_mouse.cpp
@@ -59,6 +45,30 @@ helios_module(
         tests/main.cpp
         tests/module_import.cpp
         tests/plugin.cpp
+
+    C_HEADERS
+        capi/include/helios/sdl3/input/input.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
+    DEPENDS
+        PUBLIC
+            helios_app
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_compiler
+            helios_ecs
+            helios_log
+            helios_window
+            helios_input
+            helios_platform
+            helios_sdl3
+
+    OPTIONAL_DEPENDS
+        PUBLIC helios_sdl3_window
+
+    USES
+        SDL3 PRIVATE helios::lib::sdl3::sdl3
 )
 
 if(TARGET helios_sdl3_input_tests AND UNIX AND HELIOS_ENABLE_SANITIZERS AND

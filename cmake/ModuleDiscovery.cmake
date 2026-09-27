@@ -67,14 +67,14 @@ function(_helios_discover_module_at_path MODULE_PATH)
   list(GET _new_modules 0 _module_name)
   string(TOUPPER "${_module_name}" _upper_name)
 
-  if(DEFINED HELIOS_MODULE_${_upper_name}_PATH AND NOT
-     "${HELIOS_MODULE_${_upper_name}_PATH}" STREQUAL "${MODULE_PATH}")
+  if(DEFINED ${_upper_name}_PATH AND NOT
+     "${${_upper_name}_PATH}" STREQUAL "${MODULE_PATH}")
     message(FATAL_ERROR
         "Module '${_module_name}' already registered from "
-        "${HELIOS_MODULE_${_upper_name}_PATH}; duplicate at ${MODULE_PATH}")
+        "${${_upper_name}_PATH}; duplicate at ${MODULE_PATH}")
   endif()
 
-  set(HELIOS_MODULE_${_upper_name}_PATH "${MODULE_PATH}" CACHE INTERNAL
+  set(${_upper_name}_PATH "${MODULE_PATH}" CACHE INTERNAL
       "Path for ${_module_name}")
 
   get_property(_discovered GLOBAL PROPERTY HELIOS_DISCOVERED)
@@ -94,7 +94,7 @@ endfunction()
         [EXCLUDE <names...>]
     )
 
-    Runs Pass 1A module registration. DIRECTORY may be a module container such
+    Runs Pass 1A module registration. DIRECTORY may be a module helios_container such
     as src/ or a single module root such as examples/custom_module/.
 ]]
 function(helios_discover_modules)
@@ -146,7 +146,7 @@ function(helios_discover_modules)
       helios_module_enabled(${_module} _already_enabled)
       if(_already_enabled)
         string(TOUPPER "${_module}" _upper)
-        foreach(_tag IN LISTS HELIOS_MODULE_${_upper}_IMPLEMENTS)
+        foreach(_tag IN LISTS ${_upper}_IMPLEMENTS)
           if(NOT _tag IN_LIST _claimed_impl_tags)
             list(APPEND _claimed_impl_tags ${_tag})
           endif()
@@ -162,7 +162,7 @@ function(helios_discover_modules)
 
       string(TOUPPER "${_module}" _upper)
       set(_collides FALSE)
-      foreach(_tag IN LISTS HELIOS_MODULE_${_upper}_IMPLEMENTS)
+      foreach(_tag IN LISTS ${_upper}_IMPLEMENTS)
         if(_tag IN_LIST _claimed_impl_tags)
           set(_collides TRUE)
           break()
@@ -175,7 +175,7 @@ function(helios_discover_modules)
       endif()
 
       set(HELIOS_BUILD_${_upper} ON CACHE BOOL "Build the ${_module} module" FORCE)
-      foreach(_tag IN LISTS HELIOS_MODULE_${_upper}_IMPLEMENTS)
+      foreach(_tag IN LISTS ${_upper}_IMPLEMENTS)
         if(NOT _tag IN_LIST _claimed_impl_tags)
           list(APPEND _claimed_impl_tags ${_tag})
         endif()
@@ -195,7 +195,7 @@ function(_helios_topological_sort INPUT_LIST OUTPUT_VAR)
 
   foreach(_node IN LISTS ${INPUT_LIST})
     string(TOUPPER "${_node}" _upper)
-    foreach(_dep IN LISTS HELIOS_MODULE_${_upper}_DEPENDS)
+    foreach(_dep IN LISTS ${_upper}_DEPENDS)
       if(_dep IN_LIST ${INPUT_LIST})
         math(EXPR _new_count "${_in_degree_${_node}} + 1")
         set(_in_degree_${_node} ${_new_count})
@@ -278,7 +278,7 @@ function(helios_build_discovered_modules)
 
   message(STATUS "--- Linking Optional Module Dependencies (Pass 2B) ---")
   foreach(_module IN LISTS _sorted_modules)
-    set(_target "helios_module_${_module}")
+    helios_get_module_target(${_module} _target)
     if(NOT TARGET ${_target})
       continue()
     endif()
@@ -290,7 +290,8 @@ function(helios_build_discovered_modules)
       endif()
 
       foreach(_dep IN LISTS _opt_deps)
-        if(TARGET helios::module::${_dep})
+        helios_get_module_link_target(${_dep} _dep_link)
+        if(TARGET ${_dep_link})
           _helios_link_helios_module(${_target} ${_dep} ${_visibility})
           message(STATUS "  -> Optional link: ${_module} -> ${_dep} (${_visibility})")
         endif()

@@ -9,6 +9,7 @@ include(TargetUtils)
 include(Sanitizers)
 include(TestUtils)
 include(CppModules)
+include(CApi)
 
 function(_helios_is_source_file FILENAME OUTPUT_VAR)
   get_filename_component(_ext "${FILENAME}" EXT)
@@ -35,7 +36,7 @@ endfunction()
 
 function(_helios_module_parse_args)
   set(options STATIC SHARED)
-  set(oneValueArgs NAME VERSION DESCRIPTION DEFAULT PCH FOLDER OUTPUT_NAME TARGET_NAME)
+  set(oneValueArgs NAME VERSION DESCRIPTION DEFAULT PCH FOLDER OUTPUT_NAME TARGET_NAME ALIAS C_STANDARD)
   set(multiValueArgs
       SOURCES
       HEADERS
@@ -52,15 +53,19 @@ function(_helios_module_parse_args)
       TEST_DEPENDENCIES
       TESTS
       IMPLEMENTS
+      C_SOURCES
+      C_HEADERS
+      C_TEST_SOURCES
   )
   cmake_parse_arguments(MODULE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   foreach(_var
       STATIC SHARED
-      NAME VERSION DESCRIPTION DEFAULT PCH FOLDER OUTPUT_NAME TARGET_NAME
+      NAME VERSION DESCRIPTION DEFAULT PCH FOLDER OUTPUT_NAME TARGET_NAME ALIAS C_STANDARD
       SOURCES HEADERS MODULE_SOURCES DEPENDS OPTIONAL_DEPENDS DEPENDENCIES USES
       COMPILE_DEFINITIONS COMPILE_OPTIONS INCLUDE_DIRECTORIES SUPPRESS_WARNINGS
-      TEST_SOURCES TEST_DEPENDENCIES TESTS IMPLEMENTS)
+      TEST_SOURCES TEST_DEPENDENCIES TESTS IMPLEMENTS
+      C_SOURCES C_HEADERS C_TEST_SOURCES)
     set(MODULE_${_var} "${MODULE_${_var}}" PARENT_SCOPE)
   endforeach()
 endfunction()
@@ -91,6 +96,18 @@ function(_helios_module_validate)
         "helios_module(${MODULE_NAME}): Conflicting library type specifications: STATIC, SHARED. "
         "Only one of STATIC or SHARED can be specified.")
   endif()
+
+endfunction()
+
+# The CMake target is NAME. ALIAS only adds an alias; it does not rename the target.
+function(_helios_module_apply_identity)
+  if(MODULE_ALIAS AND NOT MODULE_ALIAS MATCHES "^[A-Za-z_][A-Za-z0-9_]*::[A-Za-z0-9_:]+$")
+    message(FATAL_ERROR
+        "helios_module(${MODULE_NAME}): ALIAS '${MODULE_ALIAS}' must look like helios::async")
+  endif()
+  if(NOT MODULE_TARGET_NAME)
+    set(MODULE_TARGET_NAME "${MODULE_NAME}" PARENT_SCOPE)
+  endif()
 endfunction()
 
 function(_helios_module_register MODULE_HEADER_ONLY)
@@ -119,6 +136,15 @@ function(_helios_module_register MODULE_HEADER_ONLY)
   endif()
 
   helios_register_module(${_register_args})
+
+  string(TOUPPER "${MODULE_NAME}" _upper_name)
+  set(${_upper_name}_TARGET "${MODULE_TARGET_NAME}" CACHE INTERNAL
+      "CMake target for module ${MODULE_NAME}")
+  set(${_upper_name}_ALIAS "${MODULE_ALIAS}" CACHE INTERNAL
+      "Alias for module ${MODULE_NAME}")
+  string(TOUPPER "${MODULE_TARGET_NAME}" _target_upper)
+  set(${_upper_name}_AVAILABLE_DEF "${_target_upper}_AVAILABLE" CACHE INTERNAL
+      "Availability macro for module ${MODULE_NAME}")
 endfunction()
 
 function(_helios_expand_compiler_shorthands RAW_OPTS OUT_VAR)
@@ -162,7 +188,7 @@ function(_helios_module_create_target MODULE_HEADER_ONLY OUT_TARGET OUT_SCOPE OU
     set(MODULE_VERSION "0.1.0")
   endif()
   if(NOT MODULE_TARGET_NAME)
-    set(MODULE_TARGET_NAME "helios_module_${MODULE_NAME}")
+    set(MODULE_TARGET_NAME "${MODULE_NAME}")
   endif()
 
   if(MODULE_HEADER_ONLY)
@@ -182,7 +208,7 @@ function(_helios_module_create_target MODULE_HEADER_ONLY OUT_TARGET OUT_SCOPE OU
     set(${_build_option_name} "${_default_build_type}" CACHE STRING
         "Library type for ${MODULE_NAME} module (AUTO, STATIC, SHARED)")
     set_property(CACHE ${_build_option_name} PROPERTY STRINGS "AUTO" "STATIC" "SHARED")
-    set(HELIOS_MODULE_${_upper_name}_SPECIFICATION "${_default_build_type}" CACHE INTERNAL
+    set(${_upper_name}_SPECIFICATION "${_default_build_type}" CACHE INTERNAL
         "Original specification for ${MODULE_NAME} module")
 
     set(_build_type_value "${${_build_option_name}}")
@@ -214,15 +240,25 @@ function(_helios_module_create_target MODULE_HEADER_ONLY OUT_TARGET OUT_SCOPE OU
     add_library(${MODULE_TARGET_NAME} ${MODULE_SOURCES} ${MODULE_HEADERS})
   endif()
 
-  add_library(helios::module::${MODULE_NAME} ALIAS ${MODULE_TARGET_NAME})
+  if(MODULE_ALIAS)
+    add_library(${MODULE_ALIAS} ALIAS ${MODULE_TARGET_NAME})
+  endif()
+
+  if(MODULE_ALIAS MATCHES "^helios::(.+)$")
+    set(_export_name "${CMAKE_MATCH_1}")
+  else()
+    set(_export_name "${MODULE_NAME}")
+  endif()
+
+  string(TOUPPER "${MODULE_TARGET_NAME}" _target_upper)
   set_target_properties(${MODULE_TARGET_NAME} PROPERTIES
-      EXPORT_NAME "module::${MODULE_NAME}"
+      EXPORT_NAME "${_export_name}"
       HELIOS_MODULE_NAME "${MODULE_NAME}"
       HELIOS_MODULE_VERSION "${MODULE_VERSION}"
   )
 
   target_compile_definitions(${MODULE_TARGET_NAME} ${_target_scope}
-      HELIOS_MODULE_${_upper_name}_AVAILABLE)
+      "$<$<COMPILE_LANGUAGE:CXX>:${_target_upper}_AVAILABLE>")
 
   set(${OUT_TARGET} "${MODULE_TARGET_NAME}" PARENT_SCOPE)
   set(${OUT_SCOPE} "${_target_scope}" PARENT_SCOPE)
@@ -322,19 +358,27 @@ function(_helios_module_apply_conventions TARGET MODULE_HEADER_ONLY)
 endfunction()
 
 function(_helios_link_helios_module TARGET MODULE_NAME LINK_VISIBILITY)
-  if(NOT TARGET helios::module::${MODULE_NAME})
+  helios_get_module_link_target(${MODULE_NAME} _link_target)
+  if(NOT TARGET ${_link_target})
     return()
   endif()
 
   string(TOUPPER "${MODULE_NAME}" _module_upper)
+  set(_available_def "${${_module_upper}_AVAILABLE_DEF}")
+  if(NOT _available_def)
+    helios_get_module_target(${MODULE_NAME} _concrete)
+    string(TOUPPER "${_concrete}" _concrete_upper)
+    set(_available_def "${_concrete_upper}_AVAILABLE")
+  endif()
+
   get_target_property(_target_type ${TARGET} TYPE)
   if(_target_type STREQUAL "INTERFACE_LIBRARY")
     set(LINK_VISIBILITY INTERFACE)
   endif()
 
-  target_link_libraries(${TARGET} ${LINK_VISIBILITY} helios::module::${MODULE_NAME})
+  target_link_libraries(${TARGET} ${LINK_VISIBILITY} ${_link_target})
   target_compile_definitions(${TARGET} ${LINK_VISIBILITY}
-      HELIOS_MODULE_${_module_upper}_AVAILABLE)
+      "$<$<COMPILE_LANGUAGE:CXX>:${_available_def}>")
 endfunction()
 
 function(_helios_module_link_depends TARGET DEFAULT_VISIBILITY)
@@ -426,7 +470,11 @@ function(_helios_module_apply_uses TARGET DEFAULT_VISIBILITY)
       endif()
 
       if(TARGET ${_link_target})
-        target_link_libraries(${TARGET} ${_link_visibility} ${_link_target})
+        if(_link_visibility STREQUAL "PUBLIC" OR _link_visibility STREQUAL "INTERFACE")
+          _helios_link_with_cxx_usage(${TARGET} ${_link_visibility} ${_link_target})
+        else()
+          target_link_libraries(${TARGET} ${_link_visibility} ${_link_target})
+        endif()
       else()
         message(WARNING "USES target '${_link_target}' not found for dependency '${_dep_file}'")
       endif()
@@ -438,12 +486,22 @@ function(_helios_module_apply_uses TARGET DEFAULT_VISIBILITY)
   endforeach()
 endfunction()
 
+function(_helios_wrap_cxx_usage ITEMS OUT_VAR)
+  set(_wrapped)
+  foreach(_item IN LISTS ITEMS)
+    list(APPEND _wrapped "$<$<COMPILE_LANGUAGE:CXX>:${_item}>")
+  endforeach()
+  set(${OUT_VAR} "${_wrapped}" PARENT_SCOPE)
+endfunction()
+
 function(_helios_module_apply_interface TARGET TARGET_SCOPE DEFAULT_VISIBILITY MODULE_HEADER_ONLY)
-  target_include_directories(${TARGET}
-      ${TARGET_SCOPE}
-          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-          $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-  )
+  if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include")
+    target_include_directories(${TARGET}
+        ${TARGET_SCOPE}
+            $<BUILD_INTERFACE:$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/include>>
+            $<INSTALL_INTERFACE:$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_INSTALL_INCLUDEDIR}>>
+    )
+  endif()
 
   if(NOT MODULE_HEADER_ONLY)
     target_include_directories(${TARGET} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -455,9 +513,32 @@ function(_helios_module_apply_interface TARGET TARGET_SCOPE DEFAULT_VISIBILITY M
   helios_target_apply(TARGET ${TARGET} KIND INCLUDES
       ITEMS ${MODULE_INCLUDE_DIRECTORIES}
       DEFAULT ${DEFAULT_VISIBILITY})
-  helios_target_apply(TARGET ${TARGET} KIND DEFINITIONS
-      ITEMS ${MODULE_COMPILE_DEFINITIONS}
-      DEFAULT ${DEFAULT_VISIBILITY})
+  if(MODULE_COMPILE_DEFINITIONS)
+    helios_parse_visibility(
+        INPUT ${MODULE_COMPILE_DEFINITIONS}
+        PUBLIC_VAR _pub_defs
+        PRIVATE_VAR _priv_defs
+        INTERFACE_VAR _iface_defs
+        DEFAULT ${DEFAULT_VISIBILITY}
+    )
+    _helios_wrap_cxx_usage("${_pub_defs}" _pub_defs)
+    _helios_wrap_cxx_usage("${_iface_defs}" _iface_defs)
+    set(_def_items)
+    if(_pub_defs)
+      list(APPEND _def_items PUBLIC ${_pub_defs})
+    endif()
+    if(_priv_defs)
+      list(APPEND _def_items PRIVATE ${_priv_defs})
+    endif()
+    if(_iface_defs)
+      list(APPEND _def_items INTERFACE ${_iface_defs})
+    endif()
+    if(_def_items)
+      helios_target_apply(TARGET ${TARGET} KIND DEFINITIONS
+          ITEMS ${_def_items}
+          DEFAULT ${DEFAULT_VISIBILITY})
+    endif()
+  endif()
 
   if(MODULE_COMPILE_OPTIONS)
     _helios_expand_compiler_shorthands(MODULE_COMPILE_OPTIONS _expanded_opts)
@@ -467,15 +548,18 @@ function(_helios_module_apply_interface TARGET TARGET_SCOPE DEFAULT_VISIBILITY M
   endif()
 
   if(PROJECT_IS_TOP_LEVEL)
-    target_include_directories(${TARGET}
-        SYSTEM ${TARGET_SCOPE} ${PROJECT_SOURCE_DIR}/third-party)
+    target_include_directories(${TARGET} SYSTEM ${TARGET_SCOPE}
+        "$<$<COMPILE_LANGUAGE:CXX>:${PROJECT_SOURCE_DIR}/third-party>"
+    )
   endif()
 
   if(MODULE_SUPPRESS_WARNINGS AND NOT MODULE_HEADER_ONLY)
     foreach(_warn IN LISTS MODULE_SUPPRESS_WARNINGS)
       target_compile_options(${TARGET} PRIVATE
-          $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:/wd${_warn}>
-          $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:-Wno-${_warn}>
+          $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>>:/wd${_warn}>
+          $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:-Wno-${_warn}>
+          $<$<AND:$<COMPILE_LANGUAGE:C>,$<OR:$<C_COMPILER_ID:MSVC>,$<AND:$<C_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>>:/wd${_warn}>
+          $<$<AND:$<COMPILE_LANGUAGE:C>,$<OR:$<C_COMPILER_ID:GNU>,$<C_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:-Wno-${_warn}>
       )
     endforeach()
   endif()
@@ -504,18 +588,20 @@ function(_helios_module_install TARGET)
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
   endif()
-  install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
-      DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
-      FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h"
-  )
+  if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include")
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+        FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h"
+    )
+  endif()
 endfunction()
 
-function(_helios_module_add_test_suite MODULE_NAME SUITE_NAME SOURCES DEPENDENCIES DEFINITIONS LABELS REUSE_PCH)
+function(_helios_module_add_test_suite MODULE_NAME MODULE_TARGET SUITE_NAME SOURCES DEPENDENCIES DEFINITIONS LABELS REUSE_PCH)
   if(NOT SOURCES)
     return()
   endif()
 
-  set(_target "helios_${MODULE_NAME}_${SUITE_NAME}_tests")
+  set(_target "${MODULE_TARGET}_${SUITE_NAME}_tests")
   set(_args
       NAME ${_target}
       MODULE ${MODULE_NAME}
@@ -531,7 +617,7 @@ function(_helios_module_add_test_suite MODULE_NAME SUITE_NAME SOURCES DEPENDENCI
   helios_add_test_executable(${_args})
 endfunction()
 
-function(_helios_module_add_rich_tests MODULE_NAME REUSE_PCH)
+function(_helios_module_add_rich_tests MODULE_NAME MODULE_TARGET REUSE_PCH)
   set(_suite_name "")
   set(_suite_sources)
   set(_suite_deps)
@@ -545,6 +631,7 @@ function(_helios_module_add_rich_tests MODULE_NAME REUSE_PCH)
       if(_suite_count GREATER 0)
         _helios_module_add_test_suite(
             ${MODULE_NAME}
+            ${MODULE_TARGET}
             ${_suite_name}
             "${_suite_sources}"
             "${_suite_deps}"
@@ -587,6 +674,7 @@ function(_helios_module_add_rich_tests MODULE_NAME REUSE_PCH)
   if(_suite_count GREATER 0)
     _helios_module_add_test_suite(
         ${MODULE_NAME}
+        ${MODULE_TARGET}
         ${_suite_name}
         "${_suite_sources}"
         "${_suite_deps}"
@@ -599,7 +687,7 @@ endfunction()
 
 function(_helios_module_add_tests TARGET MODULE_HEADER_ONLY)
   string(TOUPPER "${MODULE_NAME}" _upper_name)
-  set(_test_option_name "HELIOS_MODULE_${_upper_name}_BUILD_TESTS")
+  set(_test_option_name "${_upper_name}_BUILD_TESTS")
   option(${_test_option_name} "Build tests for ${MODULE_NAME} module" ${HELIOS_BUILD_TESTS})
 
   if(NOT ${_test_option_name} OR NOT HELIOS_BUILD_TESTS)
@@ -613,10 +701,10 @@ function(_helios_module_add_tests TARGET MODULE_HEADER_ONLY)
   endif()
 
   if(MODULE_TESTS)
-    _helios_module_add_rich_tests(${MODULE_NAME} ${_reuse_pch})
+    _helios_module_add_rich_tests(${MODULE_NAME} ${TARGET} ${_reuse_pch})
   elseif(MODULE_TEST_SOURCES)
     set(_args
-        NAME helios_${MODULE_NAME}_tests
+        NAME ${TARGET}_tests
         MODULE ${MODULE_NAME}
         TYPE unit
         SOURCES ${MODULE_TEST_SOURCES}
@@ -647,11 +735,16 @@ endfunction()
         [COMPILE_OPTIONS <visibility> <opts...>]
         [INCLUDE_DIRECTORIES <visibility> <dirs...>]
         [PCH <file>]
+        [ALIAS <alias>]
         [STATIC|SHARED]
         [SUPPRESS_WARNINGS <warning-name>...]
         [TEST_SOURCES <files...>]
         [TEST_DEPENDENCIES <targets...>]
         [TESTS SUITE <name> SOURCES <files...> ...]
+        [C_STANDARD <version>]
+        [C_SOURCES <files...>]
+        [C_HEADERS <files...>]
+        [C_TEST_SOURCES <files...>]
     )
 
     Defines a Helios module. During the registration pass it records only graph
@@ -661,16 +754,19 @@ endfunction()
 
     Example:
         helios_module(
-            NAME core
+            NAME helios_core
+            ALIAS helios::core
             MODULE_SOURCES modules/helios.core.cppm
-            DEPENDS PUBLIC compiler PUBLIC platform PUBLIC utils
+            DEPENDS PUBLIC helios_compiler PUBLIC helios_platform PUBLIC helios_utils
             USES stduuid PUBLIC helios::lib::stduuid::stduuid
             TEST_SOURCES tests/main.cpp tests/module_import.cpp
         )
 ]]
 function(_helios_module_impl)
   _helios_module_parse_args(${ARGN})
+  _helios_module_prepare_c_api()
   _helios_module_validate()
+  _helios_module_apply_identity()
   _helios_module_detect_header_only(_module_header_only)
 
   string(TOUPPER "${MODULE_NAME}" _upper_name)
@@ -685,7 +781,7 @@ function(_helios_module_impl)
     return()
   endif()
 
-  set(HELIOS_MODULE_${_upper_name}_HEADER_ONLY ${_module_header_only}
+  set(${_upper_name}_HEADER_ONLY ${_module_header_only}
       CACHE INTERNAL "Module ${MODULE_NAME} is header-only")
 
   _helios_module_create_target(${_module_header_only} _target _target_scope _default_dep_visibility)
@@ -721,6 +817,7 @@ function(_helios_module_impl)
   _helios_module_link_depends(${_target} ${_default_dep_visibility})
   _helios_module_apply_uses(${_target} ${_default_dep_visibility})
   _helios_module_apply_interface(${_target} ${_target_scope} ${_default_dep_visibility} ${_module_header_only})
+  _helios_module_apply_c_api(${_target})
   _helios_module_install(${_target})
 
   set_property(GLOBAL APPEND PROPERTY HELIOS_MODULES ${_target})
@@ -735,6 +832,7 @@ function(_helios_module_impl)
   endif()
 
   _helios_module_add_tests(${_target} ${_module_header_only})
+  _helios_module_add_c_tests(${_target})
 endfunction()
 
 #[[
@@ -754,25 +852,46 @@ endfunction()
         [COMPILE_OPTIONS <visibility> <opts...>]
         [INCLUDE_DIRECTORIES <visibility> <dirs...>]
         [PCH <file>]
+        [ALIAS <alias>]
         [STATIC|SHARED]
         [SUPPRESS_WARNINGS <warning-name>...]
         [TEST_SOURCES <files...>]
         [TEST_DEPENDENCIES <targets...>]
         [TESTS SUITE <name> SOURCES <files...> ...]
+        [C_STANDARD <version>]
+        [C_SOURCES <files...>]
+        [C_HEADERS <files...>]
+        [C_TEST_SOURCES <files...>]
     )
 
     Public module declaration macro. The registration pass records dependency
     metadata and returns from the including CMakeLists.txt; the build pass
     creates and configures the actual target.
 
+    The CMake target name is NAME. Nothing is prepended to it. `ALIAS helios::async`
+    only creates that alias. Per-module cache variables use `<NAME>_*`.
+    Tests are `<target>_tests` and `<target>_c_tests`.
+
     Example:
         helios_module(
-            NAME app
+            NAME helios_app
+            ALIAS helios::app
             MODULE_SOURCES modules/helios.app.cppm
-            DEPENDS PUBLIC async PUBLIC core PUBLIC ecs PUBLIC log PUBLIC utils
-            OPTIONAL_DEPENDS PUBLIC profile
+            DEPENDS PUBLIC helios_async PUBLIC helios_core PUBLIC helios_ecs PUBLIC helios_log PUBLIC helios_utils
+            OPTIONAL_DEPENDS PUBLIC helios_profile
             TEST_SOURCES tests/main.cpp tests/module_import.cpp
         )
+
+    Visibility lists (DEPENDS, OPTIONAL_DEPENDS, COMPILE_DEFINITIONS, ...)
+    accept generator expressions. Conditions that are boolean constants are
+    folded while configuring. `$<BOOL>` does not look up a variable, so test
+    an option by substituting it first:
+
+        DEPENDS $<$<BOOL:${HELIOS_BUILD_C_API}>:PUBLIC helios_capi> PUBLIC helios_core
+
+    Unquoted `$<...>` arguments are split on spaces; they are joined again
+    before evaluation. Expressions such as `$<CONFIG:Debug>` stay intact for
+    the generator.
 ]]
 macro(helios_module)
   _helios_module_impl(${ARGN})

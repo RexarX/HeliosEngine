@@ -34,7 +34,7 @@ import helios.memory;
 import helios.sdl3;
 import helios.utils;
 import helios.window;
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 import helios.sdl3.window;
 #endif
 HELIOS_BEGIN_MODULE_EXPORT

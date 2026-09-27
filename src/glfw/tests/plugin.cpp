@@ -13,7 +13,7 @@
 
 #include "available.hpp"
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 #include <helios/glfw/systems/input.hpp>
 #include <helios/input/input.hpp>
 #endif
@@ -64,13 +64,13 @@ TEST_SUITE("helios::glfw::Plugin") {
       Plugin{}.Finish(app);
 
       CHECK_FALSE(app.GetWorld().ReadResource<Context>().input_enabled);
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
       CHECK_FALSE(app.GetWorld().HasResource<input::Settings>());
 #endif
       CHECK_NE(app.GetWorld().ReadResource<Context>().frame_pump, nullptr);
     }
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
     SUBCASE("Enables input systems after the input plugin builds") {
       app::App app;
       Plugin{}.Build(app);
@@ -112,7 +112,7 @@ TEST_SUITE("helios::glfw::WindowPlugin") {
   }
 }
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 TEST_SUITE("helios::glfw::WindowInputPlugin") {
   TEST_CASE("helios::glfw::WindowInputPlugin") {
     SUBCASE("Adds glfw, window, and input plugins") {
@@ -164,7 +164,7 @@ TEST_SUITE("helios::glfw::Plugin") {
       events->RunAndWait(app.GetWorld(), executor);
     }
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
     SUBCASE("Events schedule runs with input systems enabled") {
       app::App app;
       Plugin{}.Build(app);

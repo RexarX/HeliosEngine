@@ -1,5 +1,6 @@
 helios_module(
-    NAME sdl3
+    NAME helios_sdl3
+    ALIAS helios::sdl3
     VERSION 0.1.0
     DESCRIPTION "SDL3 process-global runtime (lifetime, event pump)"
 
@@ -25,16 +26,6 @@ helios_module(
 
     PCH src/pch.hpp
 
-    DEPENDS
-        PUBLIC app
-        PUBLIC compiler
-        PUBLIC ecs
-        PUBLIC log
-        PUBLIC window
-
-    USES
-        SDL3 PRIVATE helios::lib::sdl3::sdl3
-
     TEST_SOURCES
         tests/systems/init.cpp
         tests/systems/pump_events.cpp
@@ -45,6 +36,25 @@ helios_module(
         tests/main.cpp
         tests/module_import.cpp
         tests/plugin.cpp
+
+    C_HEADERS
+        capi/include/helios/sdl3/sdl3.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
+    DEPENDS
+        PUBLIC
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_app
+            helios_compiler
+            helios_ecs
+            helios_log
+            helios_platform
+            helios_window
+
+    USES
+        SDL3 PRIVATE helios::lib::sdl3::sdl3
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -66,13 +76,13 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
   if(HELIOS_SDL3_FORCE_WAYLAND AND HELIOS_SDL3_FORCE_X11)
     message(FATAL_ERROR
-        "sdl3: HELIOS_SDL3_FORCE_WAYLAND and HELIOS_SDL3_FORCE_X11 are mutually exclusive")
+        "helios_sdl3: HELIOS_SDL3_FORCE_WAYLAND and HELIOS_SDL3_FORCE_X11 are mutually exclusive")
   endif()
 
   if(HELIOS_SDL3_FORCE_WAYLAND)
-    target_compile_definitions(helios_module_sdl3 PUBLIC HELIOS_SDL3_FORCE_WAYLAND)
+    target_compile_definitions(helios_sdl3 PUBLIC HELIOS_SDL3_FORCE_WAYLAND)
   elseif(HELIOS_SDL3_FORCE_X11)
-    target_compile_definitions(helios_module_sdl3 PUBLIC HELIOS_SDL3_FORCE_X11)
+    target_compile_definitions(helios_sdl3 PUBLIC HELIOS_SDL3_FORCE_X11)
   endif()
 endif()
 

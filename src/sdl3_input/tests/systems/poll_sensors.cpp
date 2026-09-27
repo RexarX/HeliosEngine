@@ -10,7 +10,7 @@
 
 #include "available.hpp"
 
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 #include <helios/sdl3/window/plugin.hpp>
 #endif
 
@@ -21,7 +21,7 @@ namespace {
 
 void AddInputPlugins(app::App& app) {
   app.AddPlugins(sdl3::Plugin{}, window::Plugin{},
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
                  sdl3::window::Plugin{},
 #endif
                  input::Plugin{}, Plugin{});

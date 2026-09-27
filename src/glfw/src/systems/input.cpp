@@ -2,7 +2,7 @@
 
 #include <helios/glfw/systems/input.hpp>
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/resource/params.hpp>

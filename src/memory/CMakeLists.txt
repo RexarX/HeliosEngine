@@ -1,5 +1,5 @@
-option(HELIOS_MEMORY_ENABLE_PROFILE "Enable profiling in the memory module if profile module is available" ON)
-option(HELIOS_MEMORY_USE_MIMALLOC "Use mimalloc for memory module backing allocations" ON)
+option(HELIOS_MEMORY_ENABLE_PROFILE "Enable profiling in the helios_memory module if helios_profile module is available" ON)
+option(HELIOS_MEMORY_USE_MIMALLOC "Use mimalloc for helios_memory module backing allocations" ON)
 option(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC
        "Override global operator new/delete when linking the memory module"
        ON)
@@ -10,7 +10,8 @@ if(HELIOS_MEMORY_USE_MIMALLOC)
 endif()
 
 helios_module(
-    NAME memory
+    NAME helios_memory
+    ALIAS helios::memory
     VERSION 0.1.0
     DESCRIPTION "Memory module"
 
@@ -55,22 +56,6 @@ helios_module(
 
     PCH src/pch.hpp
 
-    DEPENDS
-        PUBLIC compiler
-        PUBLIC core
-        PUBLIC platform
-
-    OPTIONAL_DEPENDS
-        PUBLIC profile
-
-    USES
-        ${_helios_memory_uses}
-
-    COMPILE_DEFINITIONS
-        PUBLIC
-            $<$<BOOL:HELIOS_MEMORY_ENABLE_PROFILE>:HELIOS_MEMORY_ENABLE_PROFILE>
-            $<$<BOOL:HELIOS_MEMORY_USE_MIMALLOC>:HELIOS_MEMORY_USE_MIMALLOC>
-
     TEST_SOURCES
         tests/aligned_alloc.cpp
         tests/allocator_traits.cpp
@@ -90,6 +75,30 @@ helios_module(
         tests/temporary_storage.cpp
         tests/temporary_storage_helpers.cpp
         tests/treiber_stack.cpp
+
+    C_HEADERS
+        capi/include/helios/memory/memory.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
+    DEPENDS
+        PUBLIC
+            $<$<BOOL:HELIOS_BUILD_C_API>:capi>
+            helios_compiler
+            helios_core
+            helios_platform
+
+    OPTIONAL_DEPENDS
+        PUBLIC helios_profile
+
+    USES
+        ${_helios_memory_uses}
+
+    COMPILE_DEFINITIONS
+        PUBLIC
+            $<$<BOOL:HELIOS_MEMORY_ENABLE_PROFILE>:HELIOS_MEMORY_ENABLE_PROFILE>
+            $<$<BOOL:HELIOS_MEMORY_USE_MIMALLOC>:HELIOS_MEMORY_USE_MIMALLOC>
 )
 
 if(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC)
@@ -113,11 +122,11 @@ if(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC)
   target_compile_definitions(helios_memory_global_alloc PRIVATE
       $<$<BOOL:HELIOS_MEMORY_USE_MIMALLOC>:HELIOS_MEMORY_USE_MIMALLOC>
       $<$<BOOL:HELIOS_MEMORY_ENABLE_PROFILE>:HELIOS_MEMORY_ENABLE_PROFILE>
-      $<$<AND:$<BOOL:HELIOS_MEMORY_ENABLE_PROFILE>,$<TARGET_EXISTS:helios::module::profile>>:HELIOS_MODULE_PROFILE_AVAILABLE>
+      $<$<AND:$<BOOL:HELIOS_MEMORY_ENABLE_PROFILE>,$<TARGET_EXISTS:helios::profile>>:HELIOS_PROFILE_AVAILABLE>
   )
 
   target_link_libraries(helios_memory_global_alloc PRIVATE
-      $<$<AND:$<BOOL:HELIOS_MEMORY_ENABLE_PROFILE>,$<TARGET_EXISTS:helios::module::profile>>:helios::module::profile>
+      $<$<AND:$<BOOL:HELIOS_MEMORY_ENABLE_PROFILE>,$<TARGET_EXISTS:helios::profile>>:helios::profile>
   )
 
   if(HELIOS_MEMORY_USE_MIMALLOC)
@@ -129,11 +138,11 @@ if(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC)
   # Inject global operator new/delete for non-test consumers only. Test
   # executables use the system allocator to avoid mimalloc/LTO static-init
   # issues on some platforms (notably macOS release + AppleClang).
-  set_target_properties(helios_module_memory PROPERTIES
+  set_target_properties(helios_memory PROPERTIES
       INTERFACE_LINK_LIBRARIES_DIRECT
           "$<$<NOT:$<BOOL:$<TARGET_PROPERTY:HELIOS_TEST_TARGET>>>:helios_memory_global_alloc>"
   )
-  target_compile_definitions(helios_module_memory PUBLIC
-      HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC
+  target_compile_definitions(helios_memory PUBLIC
+      "$<$<COMPILE_LANGUAGE:CXX>:HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC>"
   )
 endif()

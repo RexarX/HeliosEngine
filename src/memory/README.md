@@ -22,23 +22,23 @@ Namespace: `helios::mem`.
 
 ### Reference Counting
 
-| Type                                  | Purpose                                                     |
-| ------------------------------------- | ----------------------------------------------------------- |
-| `Rc<T>`                               | Non-atomic reference-counted handle (`RefCounted` alias).   |
-| `Arc<T>`                              | Atomic reference-counted handle (`AtomicRefCounted` alias). |
-| `RcFromThis<T>` / `ArcFromThis<T>`    | CRTP bases embedding ref counters.                          |
-| `MakeRc<T>(args...)`                  | Factory using the default PMR resource.                     |
-| `MakeArc<T>(args...)`                 | Atomic factory using the default PMR resource.              |
-| `MakeRcWith<T>(resource, args...)`    | Factory with a specific PMR resource.                       |
-| `MakeArcWith<T>(resource, args...)`   | Atomic factory with a specific PMR resource.                |
+| Type                                | Purpose                                                     |
+| ----------------------------------- | ----------------------------------------------------------- |
+| `Rc<T>`                             | Non-atomic reference-counted handle (`RefCounted` alias).   |
+| `Arc<T>`                            | Atomic reference-counted handle (`AtomicRefCounted` alias). |
+| `RcFromThis<T>` / `ArcFromThis<T>`  | CRTP bases embedding ref counters.                          |
+| `MakeRc<T>(args...)`                | Factory using the default PMR resource.                     |
+| `MakeArc<T>(args...)`               | Atomic factory using the default PMR resource.              |
+| `MakeRcWith<T>(resource, args...)`  | Factory with a specific PMR resource.                       |
+| `MakeArcWith<T>(resource, args...)` | Atomic factory with a specific PMR resource.                |
 
 ### Utilities
 
-| Type / Function                | Purpose                                              |
-| ------------------------------ | ---------------------------------------------------- |
-| `GrowthPolicy`                 | Growable allocator policy (`Linear` or `Geometric`). |
-| `AllocatorStats`               | Snapshot of allocation counters and capacity.        |
-| `AlignedAlloc` / `AlignedFree` | Cross-platform aligned allocation.                   |
+| Type / Function                | Purpose                                               |
+| ------------------------------ | ----------------------------------------------------- |
+| `GrowthPolicy`                 | Growable allocator policy (`Linear` or `Geometric`).  |
+| `AllocatorStats`               | Snapshot of allocation counters and capacity.         |
+| `AlignedAlloc` / `AlignedFree` | Cross-platform aligned allocation.                    |
 | `TreiberStack`                 | Lock-free intrusive LIFO stack with a 64-bit ABA tag. |
 
 ## mimalloc and global allocation
@@ -49,7 +49,7 @@ Namespace: `helios::mem`.
 | `HELIOS_MEMORY_ENABLE_PROFILE`        | ON      | Enables memory-module profile macros when profile module is linked  |
 | `HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC` | ON      | Inherits global `operator new`/`delete` hooks when linking memory   |
 
-Global `operator new`/`delete` hooks are inherited automatically when you link `helios::module::memory`. The hook implementation lives in the memory module and reports allocations to the profiler when the profile module is linked and `HELIOS_MEMORY_ENABLE_PROFILE=ON`. Disable with `-DHELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=OFF`.
+Global `operator new`/`delete` hooks are inherited automatically when you link `helios::memory`. The hook implementation lives in the memory module and reports allocations to the profiler when the profile module is linked and `HELIOS_MEMORY_ENABLE_PROFILE=ON`. Disable with `-DHELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=OFF`.
 
 ## Arena Allocator
 

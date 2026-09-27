@@ -12,6 +12,7 @@ project(HeliosEngine
     LANGUAGES CXX
 )
 
+option(HELIOS_BUILD_C_API "Build the C API into engine modules" OFF)
 option(HELIOS_ENABLE_CPP_MODULES
     "Build Helios engine modules as C++20 named modules (import helios / import helios.*)"
     OFF
@@ -214,6 +215,10 @@ helios_discover_extra_module_dirs()
 helios_resolve_module_dependencies()
 helios_validate_module_dependencies()
 helios_validate_module_backend_implementations()
+
+if(HELIOS_BUILD_C_API)
+  enable_language(C)
+endif()
 
 # Pass 2: Build enabled modules in topological order
 helios_build_discovered_modules()

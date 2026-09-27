@@ -48,28 +48,37 @@ included again during the build pass through `add_subdirectory`.
 option(HELIOS_FOO_ENABLE_PROFILE "Enable profiling in foo" ON)
 
 helios_module(
-    NAME foo
+    NAME helios_foo
+    ALIAS helios::foo
     VERSION 0.1.0
     DESCRIPTION "Foo module"
+
     HEADERS
         include/helios/foo/foo.hpp
+
     SOURCES
         src/foo.cpp
+
     PCH src/pch.hpp
-    DEPENDS
-        PUBLIC core
-        PUBLIC utils
-    OPTIONAL_DEPENDS
-        PUBLIC profile
-    USES
-        spdlog PRIVATE helios::lib::spdlog::spdlog_header_only
+
     TEST_SOURCES
         tests/main.cpp
         tests/foo.cpp
+
+    DEPENDS
+        PUBLIC
+            helios_core
+            helios_utils
+
+    OPTIONAL_DEPENDS
+        PUBLIC helios_profile
+
+    USES
+        spdlog PRIVATE helios::lib::spdlog::spdlog_header_only
 )
 
 # Build-pass-only logic goes below helios_module().
-target_compile_definitions(helios_module_foo PRIVATE HELIOS_FOO_IMPL)
+target_compile_definitions(helios_foo PRIVATE HELIOS_FOO_IMPL)
 ```
 
 Only idempotent setup, such as `option()` and plain variable assembly, should

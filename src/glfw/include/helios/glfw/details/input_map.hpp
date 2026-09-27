@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 
 #ifndef HELIOS_BUILDING_MODULE
 #include <helios/input/gamepad.hpp>
@@ -645,4 +645,4 @@ namespace helios::glfw {
 
 }  // namespace helios::glfw
 
-#endif  // HELIOS_MODULE_INPUT_AVAILABLE
+#endif  // HELIOS_INPUT_AVAILABLE

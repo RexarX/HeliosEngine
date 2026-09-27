@@ -15,12 +15,12 @@ Coding standards, module layout, testing, and tooling for HeliosEngine developme
 - **Include what you use** — every file includes exactly what it needs.
 - **Priority order:** performance → simplicity → scalability.
 - **Avoid locks in hot paths** — prefer atomics and lock-free structures.
+- **Instead of lvalue refereces (only non-const) use raw pointers and force non-nullptr invariant using `APERTURE_ASSERT`. This is needed for more clear ownership semantics. You are still free to use const lvalue references for read-only parameters.**
 
 ### Types and APIs
 
 - `std::span` over raw pointer + size for array parameters.
 - `std::string_view` for read-only string parameters.
-- `std::reference_wrapper` can be used instead of raw pointers or references to existing objects.
 - `auto` when the type is obvious, or when the return type exceeds ~30 characters — use trailing return type in that case.
 - `explicit` on single-arg constructors and conversion operators; conditional `explicit` when it depends on a template parameter.
 - `final` on all non-base classes; `override` (not `virtual`) in derived classes.
@@ -71,7 +71,14 @@ Omit tags that do not apply:
 @brief → @details → @note → @warning → @tparam → @param → @return → @throw → @code / @endcode
 ```
 
-- If a function triggers `HELIOS_ASSERT`, document the triggering condition in `@warning`.
+- If a function triggers `HELIOS_ASSERT`, document the triggering condition in `@warning`. If there are multiple conditions or multiple assertions in one function/ctor/etc. then it be commented in this way:
+
+```@warning Asserts in next cases:
+- If ...
+- If ...
+- ...
+```
+
 - Use `@code` / `@endcode` for inline usage examples (do not prefix with `@example` — Doxygen treats `@example` as an external file reference and will discard the doc block).
 
 ---
@@ -93,15 +100,15 @@ src/<module>/
 
 ```cmake
 helios_module(
-    NAME ecs
+    NAME helios_ecs
     VERSION 0.1.0
     DESCRIPTION "Entity Component System module"
     HEADERS ...
     SOURCES ...
     PCH src/pch.hpp
     DEPENDS
-        PUBLIC async
-        PUBLIC core
+        PUBLIC helios_async
+        PUBLIC helios_core
         ...
     USES
         concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
@@ -113,7 +120,7 @@ helios_module(
 
 - `DEFAULT ON/OFF` — whether the module builds unless explicitly overridden.
 - `DEPENDS` — required Helios modules (auto-enabled).
-- `OPTIONAL_DEPENDS` — integrated when present (e.g. `profile`).
+- `OPTIONAL_DEPENDS` — integrated when present (e.g. `helios_profile`).
 
 External dependencies are declared per-module via `USES` and resolved from `cmake/dependencies/`. Most engine libraries are vendored under `HELIOS_THIRD_PARTY_DIR` (defaults to `third-party/`); use `-DHELIOS_THIRD_PARTY_DIR=...`, `HELIOS_FORCE_DOWNLOAD_<PKG>`, or `HELIOS_USE_SYSTEM_<PKG>` to relocate or opt into CPM/system packages. Remaining deps (e.g. Boost, TBB) still use system packages first with CPM fallback.
 
@@ -135,7 +142,7 @@ cmake --preset linux-gcc-debug -DHELIOS_BUILD_PROFILE=ON
 ### Structure
 
 ```cpp
-TEST_SUITE("helios::module::ClassName") {
+TEST_SUITE("helios::ClassName") {
   TEST_CASE("ClassName::methodName") {
     SUBCASE("description") {
       ...

@@ -19,11 +19,6 @@ helios_module(
     MODULE_SOURCES
         modules/helios.container.cppm
 
-    DEPENDS
-        PUBLIC compiler
-        PUBLIC core
-        PUBLIC utils
-
     TEST_SOURCES
         tests/callable_buffer.cpp
         tests/callable_buffer_array.cpp
@@ -35,4 +30,11 @@ helios_module(
         tests/static_string.cpp
         tests/typed_buffer.cpp
         tests/typed_buffer_array.cpp
+
+    DEPENDS
+        PUBLIC
+            compiler
+            core
+            utils
+)
 )

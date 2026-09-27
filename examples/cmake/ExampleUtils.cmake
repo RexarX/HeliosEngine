@@ -18,7 +18,7 @@ endif()
         NAME <example_name>           # target becomes <name>_example
         SOURCES src/main.cpp ...
         [HEADERS ...]
-        [MODULES app ecs log ...]
+        [MODULES helios_app helios_ecs helios_log ...]
         [DISABLE_SANITIZERS]
         [CXX_MODULES]                 # scan SOURCES for `import` (named modules)
     )

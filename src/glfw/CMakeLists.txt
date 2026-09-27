@@ -1,7 +1,8 @@
 helios_module(
-    NAME glfw
+    NAME helios_glfw
+    ALIAS helios::glfw
     VERSION 0.1.0
-    DESCRIPTION "GLFW backend for the window ECS contract"
+    DESCRIPTION "GLFW backend for the helios_window ECS contract"
     DEFAULT OFF
     IMPLEMENTS window input
 
@@ -38,20 +39,6 @@ helios_module(
 
     PCH src/pch.hpp
 
-    DEPENDS
-        PUBLIC app
-        PUBLIC compiler
-        PUBLIC ecs
-        PUBLIC memory
-        PUBLIC log
-        PUBLIC window
-
-    OPTIONAL_DEPENDS
-        PUBLIC input
-
-    USES
-        glfw PRIVATE helios::lib::glfw::glfw
-
     TEST_SOURCES
         tests/glfw_sync.cpp
         tests/input_map.cpp
@@ -61,6 +48,22 @@ helios_module(
         tests/native_windows.cpp
         tests/plugin.cpp
         tests/systems.cpp
+
+    DEPENDS
+        PUBLIC
+            helios_app
+            helios_compiler
+            helios_ecs
+            helios_memory
+            helios_platform
+            helios_log
+            helios_window
+
+    OPTIONAL_DEPENDS
+        PUBLIC helios_input
+
+    USES
+        helios_glfw PRIVATE helios::lib::glfw::glfw
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -82,18 +85,18 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
   if(HELIOS_GLFW_FORCE_WAYLAND AND HELIOS_GLFW_FORCE_X11)
     message(FATAL_ERROR
-        "glfw: HELIOS_GLFW_FORCE_WAYLAND and HELIOS_GLFW_FORCE_X11 are mutually exclusive")
+        "helios_glfw: HELIOS_GLFW_FORCE_WAYLAND and HELIOS_GLFW_FORCE_X11 are mutually exclusive")
   endif()
 
   if(HELIOS_GLFW_FORCE_WAYLAND)
-    target_compile_definitions(helios_module_glfw PUBLIC HELIOS_GLFW_FORCE_WAYLAND)
+    target_compile_definitions(helios_glfw PUBLIC HELIOS_GLFW_FORCE_WAYLAND)
   elseif(HELIOS_GLFW_FORCE_X11)
-    target_compile_definitions(helios_module_glfw PUBLIC HELIOS_GLFW_FORCE_X11)
+    target_compile_definitions(helios_glfw PUBLIC HELIOS_GLFW_FORCE_X11)
   else()
-    target_compile_definitions(helios_module_glfw PUBLIC HELIOS_GLFW_PREFER_WAYLAND)
+    target_compile_definitions(helios_glfw PUBLIC HELIOS_GLFW_PREFER_WAYLAND)
   endif()
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  target_compile_definitions(helios_module_glfw PUBLIC HELIOS_GLFW_WIN32_SUPPORT)
+  target_compile_definitions(helios_glfw PUBLIC HELIOS_GLFW_WIN32_SUPPORT)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-  target_compile_definitions(helios_module_glfw PUBLIC HELIOS_GLFW_COCOA_SUPPORT)
+  target_compile_definitions(helios_glfw PUBLIC HELIOS_GLFW_COCOA_SUPPORT)
 endif()

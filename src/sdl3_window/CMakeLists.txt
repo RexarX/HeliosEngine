@@ -1,7 +1,8 @@
 helios_module(
-    NAME sdl3_window
+    NAME helios_sdl3_window
+    ALIAS helios::sdl3_window
     VERSION 0.1.0
-    DESCRIPTION "SDL3 backend for the window ECS contract"
+    DESCRIPTION "SDL3 backend for the helios_window ECS contract"
     DEFAULT ON
     IMPLEMENTS window
 
@@ -38,21 +39,6 @@ helios_module(
 
     PCH src/pch.hpp
 
-    DEPENDS
-        PUBLIC app
-        PUBLIC compiler
-        PUBLIC ecs
-        PUBLIC memory
-        PUBLIC log
-        PUBLIC window
-        PUBLIC sdl3
-
-    OPTIONAL_DEPENDS
-        PUBLIC input
-
-    USES
-        SDL3 PRIVATE helios::lib::sdl3::sdl3
-
     TEST_SOURCES
         tests/systems/apply.cpp
         tests/systems/create.cpp
@@ -69,6 +55,30 @@ helios_module(
         tests/plugin.cpp
         tests/sync.cpp
         tests/window_map.cpp
+
+    C_HEADERS
+        capi/include/helios/sdl3/window/window.h
+
+    C_TEST_SOURCES
+        capi/tests/c_smoke.c
+
+    DEPENDS
+        PUBLIC
+            helios_app
+            $<$<BOOL:${HELIOS_BUILD_C_API}>:capi>
+            helios_compiler
+            helios_ecs
+            helios_log
+            helios_memory
+            helios_platform
+            helios_sdl3
+            helios_window
+
+    OPTIONAL_DEPENDS
+        PUBLIC helios_input
+
+    USES
+        SDL3 PRIVATE helios::lib::sdl3::sdl3
 )
 
 if(TARGET helios_sdl3_window_tests AND UNIX AND HELIOS_ENABLE_SANITIZERS AND

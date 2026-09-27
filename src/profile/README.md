@@ -88,7 +88,7 @@ All macros are no-ops when `HELIOS_ENABLE_PROFILE` is undefined.
 
 ### Memory in Tracy
 
-Open the **Memory** tab in the Tracy GUI. Link `helios::module::memory` (with `HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=ON`) to hook `new`/`delete`, or use `HELIOS_PROFILE_ALLOC` / `HELIOS_MEMORY_PROFILE_*` on custom allocators. Global hooks fan out through `Profiler::Alloc` / `Free` like all other memory events. Call `Profiler::Finalize()` before the workload you want to profile.
+Open the **Memory** tab in the Tracy GUI. Link `helios::memory` (with `HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=ON`) to hook `new`/`delete`, or use `HELIOS_PROFILE_ALLOC` / `HELIOS_MEMORY_PROFILE_*` on custom allocators. Global hooks fan out through `Profiler::Alloc` / `Free` like all other memory events. Call `Profiler::Finalize()` before the workload you want to profile.
 
 ## Multi-Backend
 

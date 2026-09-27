@@ -43,7 +43,7 @@ app.AddPluginGroups(helios::glfw::WindowInputPlugin{});
 ## Dependencies
 
 - Required: `window`, `app`, GLFW
-- Optional: `input` (`HELIOS_MODULE_INPUT_AVAILABLE`)
+- Optional: `input` (`HELIOS_INPUT_AVAILABLE`)
 
 ## System packages
 
