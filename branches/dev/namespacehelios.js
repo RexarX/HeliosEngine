@@ -24,6 +24,7 @@ var namespacehelios =
     [ "StacktraceConfig", "structhelios_1_1StacktraceConfig.html", "structhelios_1_1StacktraceConfig" ],
     [ "Uuid", "classhelios_1_1Uuid.html", "classhelios_1_1Uuid" ],
     [ "UuidGenerator", "classhelios_1_1UuidGenerator.html", "classhelios_1_1UuidGenerator" ],
+    [ "Version", "structhelios_1_1Version.html", "structhelios_1_1Version" ],
     [ "AssertionHandler", "namespacehelios.html#a54960dc764b53d3485706f187e52fb35", null ],
     [ "CStringView", "namespacehelios.html#a27054e3c65ddee94a897de87b010255f", null ],
     [ "U16CStringView", "namespacehelios.html#a2e2ac7e78c9c7a539c7474a9bc7d0df9", null ],
@@ -31,8 +32,12 @@ var namespacehelios =
     [ "U8CStringView", "namespacehelios.html#a2f8cda93d2cc7430b93197943023cb6b", null ],
     [ "WCStringView", "namespacehelios.html#a25d6b558f111a080d2d77ce5e9caa6c6", null ],
     [ "AbortWithStacktrace", "namespacehelios.html#aedf901dcce50a7df004a238abe47575e", null ],
+    [ "Compatible", "namespacehelios.html#acf4f26e293adbd336ab5943b94ef695a", null ],
+    [ "CompatibleWithHeaders", "namespacehelios.html#a35cd2a68bb9fb762948f9fb624fcffed", null ],
     [ "GetAssertionHandler", "namespacehelios.html#a7982e4af7b9267b962018d6cfd53c165", null ],
     [ "HandleAssertion", "namespacehelios.html#a34d25fe5cde9dc7bf269c27a878e2d42", null ],
+    [ "HeaderVersion", "namespacehelios.html#a0a4bc36fcebd41607086c23ea2dab49b", null ],
+    [ "LinkedVersion", "namespacehelios.html#ae46f3f8b7044070bb79e7ff1c6704905", null ],
     [ "MakeDelegate", "namespacehelios.html#a5e276a5c70bbb86023543f06d4c58d28", null ],
     [ "MakeDelegate", "namespacehelios.html#ac0c351b2588d308233b80d64eea7c936", null ],
     [ "MakeDelegate", "namespacehelios.html#a598ce59f51b3e1c31390738b22468a15", null ],
@@ -40,5 +45,6 @@ var namespacehelios =
     [ "operator<<", "namespacehelios.html#a04eb3c74a31879c847aadb77c486305f", null ],
     [ "SetAssertionHandler", "namespacehelios.html#afc2e2d6e5d9076d42481c5837df0f6ba", null ],
     [ "swap", "namespacehelios.html#aabbe60de1a1418914b5b0ddb38623a3b", null ],
+    [ "VersionString", "namespacehelios.html#a3f9b97a9dccb3ef8aa67fa120642ac4f", null ],
     [ "kDefaultAssertionHandler", "namespacehelios.html#a5dd8e95e4cb808a93be15d4df228eb36", null ]
 ];

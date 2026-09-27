@@ -58,5 +58,14 @@ var searchData=
   ['haswork_55',['HasWork',['../classhelios_1_1async_1_1Task.html#af38cc48187463e54736c41433274f690',1,'helios::async::Task']]],
   ['haswritecomponent_56',['HasWriteComponent',['../classhelios_1_1ecs_1_1AccessPolicy.html#acf2cff4541e6705ac260c934453b31ee',1,'helios::ecs::AccessPolicy']]],
   ['haswriteresource_57',['HasWriteResource',['../classhelios_1_1ecs_1_1AccessPolicy.html#ae24dd4e8a066fc03ebdecb3754793882',1,'helios::ecs::AccessPolicy']]],
-  ['hintposition_58',['HintPosition',['../classhelios_1_1container_1_1FlatMap.html#a2d898360c24f3307ba3d6e6378ba64ab',1,'helios::container::FlatMap']]]
+  ['headerversion_58',['HeaderVersion',['../namespacehelios.html#a0a4bc36fcebd41607086c23ea2dab49b',1,'helios']]],
+  ['helios_5fcompatible_5fwith_5fheaders_59',['helios_compatible_with_headers',['../version_8h.html#abb47aa1e8a25e2a2cbb54a641c5ba0bf',1,'version.h']]],
+  ['helios_5ferror_5fto_5fstring_60',['helios_error_to_string',['../error_8h.html#a535f5106904ce9f93f6d79549791aa5b',1,'error.h']]],
+  ['helios_5fheader_5fversion_61',['helios_header_version',['../version_8h.html#adf23c5b913dea38b840a0a756f04f9fd',1,'version.h']]],
+  ['helios_5flast_5ferror_5fmessage_62',['helios_last_error_message',['../error_8h.html#ae94234636759ca04c631d6001d94e0eb',1,'helios_last_error_message(void):&#160;error.cpp'],['../capi_2src_2error_8cpp.html#a46802161e66e3e1661889bb71cadf524',1,'helios_last_error_message(void):&#160;error.cpp'],['../platform_2capi_2src_2error_8cpp.html#a46802161e66e3e1661889bb71cadf524',1,'helios_last_error_message(void):&#160;error.cpp']]],
+  ['helios_5flinked_5fversion_63',['helios_linked_version',['../version_8h.html#af6cab27b1cbe3a9b814a63f2545c01e8',1,'helios_linked_version(void):&#160;version.cpp'],['../capi_2src_2version_8cpp.html#a17721755c7c26263e676fa0845fb711c',1,'helios_linked_version(void):&#160;version.cpp']]],
+  ['helios_5fset_5flast_5ferror_64',['helios_set_last_error',['../error_8h.html#a261c0694cc1689b91069bc1497666912',1,'helios_set_last_error(const char *message):&#160;error.cpp'],['../capi_2src_2error_8cpp.html#a805c0405fd92410f50609ea417896ce3',1,'helios_set_last_error(const char *message):&#160;error.cpp'],['../platform_2capi_2src_2error_8cpp.html#a805c0405fd92410f50609ea417896ce3',1,'helios_set_last_error(const char *message):&#160;error.cpp']]],
+  ['helios_5fversion_5fstring_65',['helios_version_string',['../version_8h.html#a28fd205d0646eef60f69e0692ccb09c8',1,'helios_version_string(void):&#160;version.cpp'],['../capi_2src_2version_8cpp.html#afb3fb9845b3d958300cf33a4ff99869c',1,'helios_version_string(void):&#160;version.cpp']]],
+  ['helios_5fversions_5fcompatible_66',['helios_versions_compatible',['../version_8h.html#a07f204ce64e6bdd00a75820517268e28',1,'version.h']]],
+  ['hintposition_67',['HintPosition',['../classhelios_1_1container_1_1FlatMap.html#a2d898360c24f3307ba3d6e6378ba64ab',1,'helios::container::FlatMap']]]
 ];

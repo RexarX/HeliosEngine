@@ -177,6 +177,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_2730ace12c
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
+<tr class="memitem:capi" id="r_capi"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_c4ac4ab080a43f195542404fdf889a16.html">capi</a></td></tr>
 <tr class="memitem:include" id="r_include"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_fd2f52a434d066483196153b8190227b.html">include</a></td></tr>
 <tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_3896a04b32b30f3dd53d629057e4f290.html">src</a></td></tr>
 </table>
@@ -298,7 +299,7 @@ Macro Reference</h1>
 <p>All macros are no-ops when <span class="tt">HELIOS_ENABLE_PROFILE</span> is undefined.</p>
 <h2 class="doxsection"><a class="anchor" id="memory-in-tracy"></a>
 Memory in Tracy</h2>
-<p>Open the <b>Memory</b> tab in the Tracy GUI. Link <span class="tt">helios::module::memory</span> (with <span class="tt">HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=ON</span>) to hook <span class="tt">new</span>/<span class="tt">delete</span>, or use <span class="tt"><a class="el" href="macros_8hpp.html#a72be86f7388e764bb7a71c4157bfec0c">HELIOS_PROFILE_ALLOC</a></span> / <span class="tt">HELIOS_MEMORY_PROFILE_*</span> on custom allocators. Global hooks fan out through <span class="tt">Profiler::Alloc</span> / <span class="tt">Free</span> like all other memory events. Call <span class="tt">Profiler::Finalize()</span> before the workload you want to profile.</p>
+<p>Open the <b>Memory</b> tab in the Tracy GUI. Link <span class="tt">helios::memory</span> (with <span class="tt">HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=ON</span>) to hook <span class="tt">new</span>/<span class="tt">delete</span>, or use <span class="tt"><a class="el" href="macros_8hpp.html#a72be86f7388e764bb7a71c4157bfec0c">HELIOS_PROFILE_ALLOC</a></span> / <span class="tt">HELIOS_MEMORY_PROFILE_*</span> on custom allocators. Global hooks fan out through <span class="tt">Profiler::Alloc</span> / <span class="tt">Free</span> like all other memory events. Call <span class="tt">Profiler::Finalize()</span> before the workload you want to profile.</p>
 <h1 class="doxsection"><a class="anchor" id="multi-backend"></a>
 Multi-Backend</h1>
 <div class="fragment"><div class="line">profiler.AddBackend&lt;TracyBackend&gt;();</div>

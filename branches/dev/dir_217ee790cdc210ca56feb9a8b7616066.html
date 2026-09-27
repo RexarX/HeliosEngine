@@ -183,7 +183,7 @@ What You Get</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Artifact  </th><th class="markdownTableHeadNone">Target / output  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Module library  </td><td class="markdownTableBodyNone"><span class="tt">helios::module::greeting</span>  </td></tr>
+<td class="markdownTableBodyNone">Module library  </td><td class="markdownTableBodyNone"><span class="tt">helios::greeting</span>  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Unit tests  </td><td class="markdownTableBodyNone"><span class="tt">helios_greeting_tests</span> when <span class="tt">HELIOS_BUILD_TESTS=ON</span>  </td></tr>
 <tr class="markdownTableRowOdd">
@@ -205,7 +205,7 @@ Layout</h1>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="module-definition"></a>
 Module Definition</h1>
 <div class="fragment"><div class="line">helios_module(</div>
-<div class="line">    NAME greeting</div>
+<div class="line">    NAME helios_greeting</div>
 <div class="line">    VERSION 0.1.0</div>
 <div class="line">    DESCRIPTION &quot;Example custom Helios module (greeting utilities)&quot;</div>
 <div class="line"> </div>
@@ -216,8 +216,8 @@ Module Definition</h1>
 <div class="line">        src/greeting.cpp</div>
 <div class="line"> </div>
 <div class="line">    DEPENDS</div>
-<div class="line">        PUBLIC core</div>
-<div class="line">        PUBLIC utils</div>
+<div class="line">        PUBLIC helios_core</div>
+<div class="line">        PUBLIC helios_utils</div>
 <div class="line"> </div>
 <div class="line">    TEST_SOURCES</div>
 <div class="line">        tests/greeting.cpp</div>
@@ -229,8 +229,8 @@ Module Definition</h1>
 <div class="line">helios_link_modules(</div>
 <div class="line">    TARGET greeting_demo</div>
 <div class="line">    MODULES</div>
-<div class="line">        PUBLIC greeting</div>
-<div class="line">        PUBLIC log</div>
+<div class="line">        PUBLIC helios_greeting</div>
+<div class="line">        PUBLIC helios_log</div>
 <div class="line">)</div>
 </div><!-- fragment --><p>During module discovery Helios includes this file with <span class="tt">HELIOS_REGISTRATION_PASS=ON</span>. The <span class="tt">helios_module()</span> macro records module metadata and returns from the file, so the <span class="tt">greeting_demo</span> target is created only during the build pass.</p>
 <p>Authoring rule:</p>

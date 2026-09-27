@@ -11,9 +11,14 @@ var searchData=
   ['values_8',['Values',['../classhelios_1_1input_1_1Axis.html#a1564abdd089d6dfa088b210350bb42ae',1,'helios::input::Axis']]],
   ['values_9',['values',['../structhelios_1_1ecs_1_1ComponentBundleTypes.html#a852b888bc35bc5100f514b2b1f21e7d5',1,'helios::ecs::ComponentBundleTypes']]],
   ['valuetype_10',['ValueType',['../structhelios_1_1ecs_1_1details_1_1QueryTypeInfo_3_01WorldT_00_01std_1_1tuple_3_01Cs_8_8_8_01_4_01_4.html#a5eaaad5841c2a8cdbda2d9a78495ebd2',1,'helios::ecs::details::QueryTypeInfo&lt; WorldT, std::tuple&lt; Cs... &gt; &gt;']]],
-  ['videomode_11',['VideoMode',['../structhelios_1_1window_1_1VideoMode.html',1,'helios::window']]],
-  ['view_12',['View',['../classhelios_1_1container_1_1BasicStaticString.html#ac19b3b663dcb00de68249799b94d887f',1,'helios::container::BasicStaticString::View()'],['../classhelios_1_1BasicCStringView.html#a57ea1bd451ca26eb56a3dcc79c536ccb',1,'helios::BasicCStringView::View()']]],
-  ['visibility_13',['visibility',['../structhelios_1_1window_1_1AppearanceMessages.html#a8f41c5f9686a9f3f9197a5aeec919d64',1,'helios::window::AppearanceMessages::visibility'],['../structhelios_1_1window_1_1AppearanceWriters.html#aff7e9f6403f7427fbd90b537e4d6113c',1,'helios::window::AppearanceWriters::visibility']]],
-  ['visibilitychangedmsg_14',['VisibilityChangedMsg',['../structhelios_1_1window_1_1VisibilityChangedMsg.html',1,'helios::window']]],
-  ['visible_15',['visible',['../structhelios_1_1window_1_1Properties.html#a4f2495bc1f29da4b2d4f8080377fa3f7',1,'helios::window::Properties::visible'],['../structhelios_1_1window_1_1VisibilityChangedMsg.html#af92bb2cfb0d74cf79bff3d3862a095cb',1,'helios::window::VisibilityChangedMsg::visible']]]
+  ['version_11',['Version',['../structhelios_1_1Version.html',1,'helios']]],
+  ['version_2ecpp_12',['version.cpp',['../capi_2src_2version_8cpp.html',1,'(Global Namespace)'],['../src_2version_8cpp.html',1,'(Global Namespace)']]],
+  ['version_2eh_13',['version.h',['../version_8h.html',1,'']]],
+  ['version_2ehpp_14',['version.hpp',['../version_8hpp.html',1,'']]],
+  ['versionstring_15',['VersionString',['../namespacehelios.html#a3f9b97a9dccb3ef8aa67fa120642ac4f',1,'helios']]],
+  ['videomode_16',['VideoMode',['../structhelios_1_1window_1_1VideoMode.html',1,'helios::window']]],
+  ['view_17',['View',['../classhelios_1_1container_1_1BasicStaticString.html#ac19b3b663dcb00de68249799b94d887f',1,'helios::container::BasicStaticString::View()'],['../classhelios_1_1BasicCStringView.html#a57ea1bd451ca26eb56a3dcc79c536ccb',1,'helios::BasicCStringView::View()']]],
+  ['visibility_18',['visibility',['../structhelios_1_1window_1_1AppearanceMessages.html#a8f41c5f9686a9f3f9197a5aeec919d64',1,'helios::window::AppearanceMessages::visibility'],['../structhelios_1_1window_1_1AppearanceWriters.html#aff7e9f6403f7427fbd90b537e4d6113c',1,'helios::window::AppearanceWriters::visibility']]],
+  ['visibilitychangedmsg_19',['VisibilityChangedMsg',['../structhelios_1_1window_1_1VisibilityChangedMsg.html',1,'helios::window']]],
+  ['visible_20',['visible',['../structhelios_1_1window_1_1Properties.html#a4f2495bc1f29da4b2d4f8080377fa3f7',1,'helios::window::Properties::visible'],['../structhelios_1_1window_1_1VisibilityChangedMsg.html#af92bb2cfb0d74cf79bff3d3862a095cb',1,'helios::window::VisibilityChangedMsg::visible']]]
 ];

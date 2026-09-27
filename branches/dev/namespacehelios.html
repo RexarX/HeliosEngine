@@ -213,6 +213,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class representing a universally unique identifier (UUID).  <a href="classhelios_1_1Uuid.html#details">More...</a><br /></td></tr>
 <tr class="memitem:UuidGenerator" id="r_UuidGenerator"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class for generating random UUIDs using a specified random number generator.  <a href="classhelios_1_1UuidGenerator.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Version" id="r_Version"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1Version.html">Version</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Semantic library / header version.  <a href="structhelios_1_1Version.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -258,6 +260,16 @@ requires details::HasUnambiguousCallOperator&lt;std::remove_cvref_t&lt;Callable&
 <tr class="memitem:ac0c351b2588d308233b80d64eea7c936 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#ac0c351b2588d308233b80d64eea7c936">MakeDelegate</a> (Callable &amp;&amp;callable) noexcept</td></tr>
 <tr class="memdesc:ac0c351b2588d308233b80d64eea7c936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a delegate from a callable with an explicit signature.  <br /></td></tr>
 <tr class="memitem:aabbe60de1a1418914b5b0ddb38623a3b" id="r_aabbe60de1a1418914b5b0ddb38623a3b"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#aabbe60de1a1418914b5b0ddb38623a3b">swap</a> (<a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;lhs, <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;rhs)</td></tr>
+<tr class="memitem:a0a4bc36fcebd41607086c23ea2dab49b" id="r_a0a4bc36fcebd41607086c23ea2dab49b"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1Version.html">Version</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0a4bc36fcebd41607086c23ea2dab49b">HeaderVersion</a> () noexcept</td></tr>
+<tr class="memdesc:a0a4bc36fcebd41607086c23ea2dab49b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the version of the headers visible to this translation unit.  <br /></td></tr>
+<tr class="memitem:ae46f3f8b7044070bb79e7ff1c6704905" id="r_ae46f3f8b7044070bb79e7ff1c6704905"><td class="memItemLeft"><a class="el" href="structhelios_1_1Version.html">Version</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae46f3f8b7044070bb79e7ff1c6704905">LinkedVersion</a> () noexcept</td></tr>
+<tr class="memdesc:ae46f3f8b7044070bb79e7ff1c6704905"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the version baked into the linked Helios binary.  <br /></td></tr>
+<tr class="memitem:a3f9b97a9dccb3ef8aa67fa120642ac4f" id="r_a3f9b97a9dccb3ef8aa67fa120642ac4f"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#a3f9b97a9dccb3ef8aa67fa120642ac4f">VersionString</a> () noexcept</td></tr>
+<tr class="memdesc:a3f9b97a9dccb3ef8aa67fa120642ac4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets <span class="tt">"major.minor.patch"</span> for <span class="tt"><a class="el" href="#ae46f3f8b7044070bb79e7ff1c6704905" title="Gets the version baked into the linked Helios binary.">LinkedVersion()</a></span>.  <br /></td></tr>
+<tr class="memitem:acf4f26e293adbd336ab5943b94ef695a" id="r_acf4f26e293adbd336ab5943b94ef695a"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#acf4f26e293adbd336ab5943b94ef695a">Compatible</a> (<a class="el" href="structhelios_1_1Version.html">Version</a> header, <a class="el" href="structhelios_1_1Version.html">Version</a> linked) noexcept</td></tr>
+<tr class="memdesc:acf4f26e293adbd336ab5943b94ef695a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether a binary at <span class="tt">linked</span> can satisfy headers at <span class="tt">header</span>.  <br /></td></tr>
+<tr class="memitem:a35cd2a68bb9fb762948f9fb624fcffed" id="r_a35cd2a68bb9fb762948f9fb624fcffed"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a35cd2a68bb9fb762948f9fb624fcffed">CompatibleWithHeaders</a> () noexcept</td></tr>
+<tr class="memdesc:a35cd2a68bb9fb762948f9fb624fcffed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks <span class="tt"><a class="el" href="#acf4f26e293adbd336ab5943b94ef695a" title="Whether a binary at linked can satisfy headers at header.">Compatible</a>(<a class="el" href="#a0a4bc36fcebd41607086c23ea2dab49b" title="Gets the version of the headers visible to this translation unit.">HeaderVersion()</a>, <a class="el" href="#ae46f3f8b7044070bb79e7ff1c6704905" title="Gets the version baked into the linked Helios binary.">LinkedVersion()</a>)</span>.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -425,6 +437,77 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="acf4f26e293adbd336ab5943b94ef695a" name="acf4f26e293adbd336ab5943b94ef695a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf4f26e293adbd336ab5943b94ef695a">&#9670;&#160;</a></span>Compatible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::Compatible </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1Version.html">Version</a></td>          <td class="paramname"><span class="paramname"><em>header</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1Version.html">Version</a></td>          <td class="paramname"><span class="paramname"><em>linked</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Whether a binary at <span class="tt">linked</span> can satisfy headers at <span class="tt">header</span>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">header</td><td><a class="el" href="structhelios_1_1Version.html" title="Semantic library / header version.">Version</a> of the headers the caller compiled against </td></tr>
+    <tr><td class="paramname">linked</td><td><a class="el" href="structhelios_1_1Version.html" title="Semantic library / header version.">Version</a> of the Helios binary being used </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if majors match and <span class="tt">linked.minor &gt;= header.minor</span> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="version_8hpp_source.html#l00067">67</a> of file <a class="el" href="version_8hpp_source.html">version.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a35cd2a68bb9fb762948f9fb624fcffed" name="a35cd2a68bb9fb762948f9fb624fcffed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35cd2a68bb9fb762948f9fb624fcffed">&#9670;&#160;</a></span>CompatibleWithHeaders()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::CompatibleWithHeaders </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks <span class="tt"><a class="el" href="#acf4f26e293adbd336ab5943b94ef695a" title="Whether a binary at linked can satisfy headers at header.">Compatible</a>(<a class="el" href="#a0a4bc36fcebd41607086c23ea2dab49b" title="Gets the version of the headers visible to this translation unit.">HeaderVersion()</a>, <a class="el" href="#ae46f3f8b7044070bb79e7ff1c6704905" title="Gets the version baked into the linked Helios binary.">LinkedVersion()</a>)</span>. </p>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if the linked binary is compatible with the headers </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="version_8hpp_source.html#l00076">76</a> of file <a class="el" href="version_8hpp_source.html">version.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a7982e4af7b9267b962018d6cfd53c165" name="a7982e4af7b9267b962018d6cfd53c165"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7982e4af7b9267b962018d6cfd53c165">&#9670;&#160;</a></span>GetAssertionHandler()</h2>
 
@@ -503,6 +586,66 @@ Variables</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00150">150</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0a4bc36fcebd41607086c23ea2dab49b" name="a0a4bc36fcebd41607086c23ea2dab49b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a4bc36fcebd41607086c23ea2dab49b">&#9670;&#160;</a></span>HeaderVersion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1Version.html">Version</a> helios::HeaderVersion </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the version of the headers visible to this translation unit. </p>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="structhelios_1_1Version.html" title="Semantic library / header version.">Version</a></span> with <span class="tt">major</span>, <span class="tt">minor</span>, and <span class="tt">patch</span> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="version_8hpp_source.html#l00039">39</a> of file <a class="el" href="version_8hpp_source.html">version.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae46f3f8b7044070bb79e7ff1c6704905" name="ae46f3f8b7044070bb79e7ff1c6704905"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae46f3f8b7044070bb79e7ff1c6704905">&#9670;&#160;</a></span>LinkedVersion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1Version.html">Version</a> helios::LinkedVersion </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the version baked into the linked Helios binary. </p>
+<p>Differs from <span class="tt"><a class="el" href="#a0a4bc36fcebd41607086c23ea2dab49b" title="Gets the version of the headers visible to this translation unit.">HeaderVersion()</a></span> when an application is compiled against newer or older headers than the loaded shared library. </p><dl class="section return"><dt>Returns</dt><dd>Linked binary <span class="tt">major</span>, <span class="tt">minor</span>, and <span class="tt">patch</span> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="src_2version_8cpp_source.html#l00007">7</a> of file <a class="el" href="src_2version_8cpp_source.html">version.cpp</a>.</p>
 
 </div>
 </div>
@@ -821,6 +964,36 @@ template&lt;typename CharT, typename Traits&gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00174">174</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3f9b97a9dccb3ef8aa67fa120642ac4f" name="a3f9b97a9dccb3ef8aa67fa120642ac4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f9b97a9dccb3ef8aa67fa120642ac4f">&#9670;&#160;</a></span>VersionString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * helios::VersionString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets <span class="tt">"major.minor.patch"</span> for <span class="tt"><a class="el" href="#ae46f3f8b7044070bb79e7ff1c6704905" title="Gets the version baked into the linked Helios binary.">LinkedVersion()</a></span>. </p>
+<dl class="section return"><dt>Returns</dt><dd>Null-terminated version string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="src_2version_8cpp_source.html#l00011">11</a> of file <a class="el" href="src_2version_8cpp_source.html">version.cpp</a>.</p>
 
 </div>
 </div>

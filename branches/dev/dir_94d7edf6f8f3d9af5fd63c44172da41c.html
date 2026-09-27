@@ -177,6 +177,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_94d7edf6f8
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
+<tr class="memitem:capi" id="r_capi"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_d5d0d2bd98fcbc52f65d654f111ea8a0.html">capi</a></td></tr>
 <tr class="memitem:include" id="r_include"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_67f22e4a1c1ff5a63fdff07a6ca5ef93.html">include</a></td></tr>
 <tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_6aa18a6b3f9b43fee914b8c78dd7fd0c.html">src</a></td></tr>
 </table>
@@ -257,7 +258,7 @@ mimalloc and global allocation</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC</span>  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone">Inherits global <span class="tt">operator new</span>/<span class="tt">delete</span> hooks when linking memory  </td></tr>
 </table>
-<p>Global <span class="tt">operator new</span>/<span class="tt">delete</span> hooks are inherited automatically when you link <span class="tt">helios::module::memory</span>. The hook implementation lives in the memory module and reports allocations to the profiler when the profile module is linked and <span class="tt">HELIOS_MEMORY_ENABLE_PROFILE=ON</span>. Disable with <span class="tt">-DHELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=OFF</span>.</p>
+<p>Global <span class="tt">operator new</span>/<span class="tt">delete</span> hooks are inherited automatically when you link <span class="tt">helios::memory</span>. The hook implementation lives in the memory module and reports allocations to the profiler when the profile module is linked and <span class="tt">HELIOS_MEMORY_ENABLE_PROFILE=ON</span>. Disable with <span class="tt">-DHELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=OFF</span>.</p>
 <h1 class="doxsection"><a class="anchor" id="arena-allocator"></a>
 Arena Allocator</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="arena__allocator_8hpp.html">helios/memory/arena_allocator.hpp</a>&gt;</span></div>

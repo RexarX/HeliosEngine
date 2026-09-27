@@ -432,23 +432,23 @@ C++20 modules</h3>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Consumer code  </th><th class="markdownTableHeadNone">Link  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">import <a class="el" href="namespacehelios_1_1app.html">helios.app</a>;</span> (or <span class="tt">ecs</span>, <span class="tt">log</span>, ...)  </td><td class="markdownTableBodyNone"><span class="tt">helios::module::app</span>  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">import <a class="el" href="namespacehelios_1_1app.html">helios.app</a>;</span> (or <span class="tt">ecs</span>, <span class="tt">log</span>, ...)  </td><td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacehelios_1_1app.html">helios::app</a></span>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">import <a class="el" href="namespacehelios_1_1sdl3_1_1window.html">helios.sdl3.window</a>;</span>  </td><td class="markdownTableBodyNone"><span class="tt">helios::module::sdl3_window</span>  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">import <a class="el" href="namespacehelios_1_1sdl3_1_1window.html">helios.sdl3.window</a>;</span>  </td><td class="markdownTableBodyNone"><span class="tt">helios::sdl3_window</span>  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">import <a class="el" href="namespacehelios.html">helios</a>;</span> (re-exports every enabled module)  </td><td class="markdownTableBodyNone"><span class="tt">helios::helios</span>  </td></tr>
 </table>
 <p>On MSVC without <span class="tt">import <a class="el" href="namespacestd.html" title="STL namespace.">std</a></span>, put standard-library <span class="tt">#include</span>s <b>before</b> <span class="tt">import</span>. Do not scan TUs that only <span class="tt">#include</span> Helios — MSVC injects <span class="tt">import</span> into every scanned file.</p>
 <p>A runnable <span class="tt">import</span> sample is configured only when this flag is on: <a href="examples/cxx_modules">examples/cxx_modules</a>.</p>
 <div class="fragment"><div class="line">cmake --build --preset linux-gcc-debug --target cxx_modules_example</div>
-</div><!-- fragment --><p><b>Using Helios modules from another project.</b> Enable the flag when Helios is configured, link the same <span class="tt">helios::module::*</span> targets, and scan only the sources that <span class="tt">import</span>:</p>
+</div><!-- fragment --><p><b>Using Helios modules from another project.</b> Enable the flag when Helios is configured, link the same <span class="tt"><a class="el" href="namespacehelios.html">helios</a>::*</span> targets, and scan only the sources that <span class="tt">import</span>:</p>
 <div class="fragment"><div class="line">set(HELIOS_ENABLE_CPP_MODULES ON CACHE BOOL &quot;&quot; FORCE)</div>
 <div class="line">set(HELIOS_BUILD_TESTS OFF CACHE BOOL &quot;&quot; FORCE)</div>
 <div class="line">set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL &quot;&quot; FORCE)</div>
 <div class="line">add_subdirectory(third_party/HeliosEngine)</div>
 <div class="line"> </div>
 <div class="line">add_executable(my_game src/main.cpp)</div>
-<div class="line">helios_link_modules(TARGET my_game MODULES PUBLIC app log)</div>
+<div class="line">helios_link_modules(TARGET my_game MODULES PUBLIC helios_app helios_log)</div>
 <div class="line">helios_source_scan_for_cxx_modules(my_game src/main.cpp)</div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">import</span> helios.app;</div>
 <div class="line"> </div>
@@ -457,7 +457,7 @@ C++20 modules</h3>
 <div class="line">  <span class="keywordflow">return</span> std::to_underlying(app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">Run</a>());</div>
 <div class="line">}</div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00059">application.hpp:59</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae1bc7b5b668ca63cc91dfd87757e99be"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">helios::app::App::Run</a></div><div class="ttdeci">ExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00128">application.cpp:128</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae1bc7b5b668ca63cc91dfd87757e99be"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">helios::app::App::Run</a></div><div class="ttdeci">ExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00127">application.cpp:127</a></div></div>
 </div><!-- fragment --><p><span class="tt">helios_link_modules()</span> already marks the consumer as a named-module client. <span class="tt">helios_source_scan_for_cxx_modules()</span> is required on each TU that contains <span class="tt">import</span>. Header-only TUs must stay unscanned.</p>
 <p>A full <span class="tt">App</span> loop with <span class="tt">#include</span> is in <a href="examples/simple">examples/simple</a>. Instantiating <span class="tt">App</span> after <span class="tt">import <a class="el" href="namespacehelios_1_1app.html">helios.app</a></span> currently fails on MSVC (Taskflow <span class="tt">C1116</span>); import still exposes other app types.</p>
 <h3 class="doxsection"><a class="anchor" id="linking"></a>
@@ -612,7 +612,7 @@ Usage</h2>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="using-as-a-dependency"></a>
 Using as a Dependency</h2>
-<p>Helios can be consumed from another CMake project in several ways. All methods expose targets as <span class="tt">helios::module::&lt;name&gt;</span> and the helper <span class="tt">helios_link_modules()</span>.</p>
+<p>Helios can be consumed from another CMake project in several ways. All methods expose targets as <span class="tt"><a class="el" href="namespacehelios.html">helios</a>::&lt;name&gt;</span> and the helper <span class="tt">helios_link_modules()</span>.</p>
 <p>Typical consumer settings when embedding:</p>
 <div class="fragment"><div class="line">set(HELIOS_BUILD_TESTS OFF CACHE BOOL &quot;&quot; FORCE)</div>
 <div class="line">set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL &quot;&quot; FORCE)</div>
@@ -638,7 +638,7 @@ Method 1: <span class="tt">add_subdirectory</span></h3>
 <div class="line"># helios_apply_conventions(my_game)</div>
 <div class="line">helios_link_modules(</div>
 <div class="line">    TARGET my_game</div>
-<div class="line">    MODULES PUBLIC app</div>
+<div class="line">    MODULES PUBLIC helios_app</div>
 <div class="line">)</div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-2-fetchcontent"></a>
 Method 2: <span class="tt">FetchContent</span></h3>
@@ -660,7 +660,7 @@ Method 2: <span class="tt">FetchContent</span></h3>
 <div class="line">add_executable(my_game src/main.cpp)</div>
 <div class="line">helios_link_modules(</div>
 <div class="line">    TARGET my_game</div>
-<div class="line">    MODULES PUBLIC app</div>
+<div class="line">    MODULES PUBLIC helios_app</div>
 <div class="line">)</div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-3-cpm"></a>
 Method 3: CPM</h3>
@@ -680,7 +680,7 @@ Method 3: CPM</h3>
 <div class="line">add_executable(my_game src/main.cpp)</div>
 <div class="line">helios_link_modules(</div>
 <div class="line">    TARGET my_game</div>
-<div class="line">    MODULES PUBLIC app</div>
+<div class="line">    MODULES PUBLIC helios_app</div>
 <div class="line">)</div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-4-installed-package-find_package"></a>
 Method 4: Installed Package (<span class="tt">find_package</span>)</h3>
@@ -694,7 +694,7 @@ Method 4: Installed Package (<span class="tt">find_package</span>)</h3>
 <div class="line">add_executable(my_game src/main.cpp)</div>
 <div class="line">helios_link_modules(</div>
 <div class="line">    TARGET my_game</div>
-<div class="line">    MODULES PUBLIC app</div>
+<div class="line">    MODULES PUBLIC helios_app</div>
 <div class="line">)</div>
 </div><!-- fragment --><p>Installed artifacts: <span class="tt">HeliosConfig.cmake</span>, <span class="tt">HeliosConfigVersion.cmake</span>, <span class="tt">HeliosTargets.cmake</span> (see <a href="cmake/Install.cmake"><span class="tt">cmake/Install.cmake</span></a>).</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
@@ -754,7 +754,7 @@ Creating a Custom Module</h3>
 <div class="line">├── modules/                  # Optional module sources (.cppm)</div>
 <div class="line">├── src/                      # Optional private sources</div>
 <div class="line">└── tests/                    # doctest suite</div>
-</div><!-- fragment --><p>Link it from your executable with <span class="tt">helios_link_modules(TARGET … MODULES PUBLIC greeting)</span>.</p>
+</div><!-- fragment --><p>Link it from your executable with <span class="tt">helios_link_modules(TARGET … MODULES PUBLIC helios_greeting)</span>.</p>
 <p>See also <a class="el" href="md_docs_2guidelines.html" title="Project Guidelines">docs/guidelines.md</a> for module conventions.</p>
 <h3 class="doxsection"><a class="anchor" id="other-scripts"></a>
 Other scripts</h3>

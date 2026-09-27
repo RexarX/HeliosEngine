@@ -1,5 +1,9 @@
 var namespaces_dup =
 [
+    [ "anonymous_namespace{error.cpp}", "namespaceanonymous__namespace_02error_8cpp_03.html", [
+      [ "g_last_error", "namespaceanonymous__namespace_02error_8cpp_03.html#a6c4bd15c4cfc83a0a1253442d9221f73", null ],
+      [ "kLastErrorCapacity", "namespaceanonymous__namespace_02error_8cpp_03.html#a3cb3c5699872b0fe265029374894a088", null ]
+    ] ],
     [ "anonymous_namespace{free_list_allocator.cpp}", "namespaceanonymous__namespace_02free__list__allocator_8cpp_03.html", "namespaceanonymous__namespace_02free__list__allocator_8cpp_03" ],
     [ "anonymous_namespace{global_alloc.cpp}", "namespaceanonymous__namespace_02global__alloc_8cpp_03.html", [
       [ "ProfileAlloc", "namespaceanonymous__namespace_02global__alloc_8cpp_03.html#a47f5b87000e7122ad4d0f10ce00ca73b", null ],
