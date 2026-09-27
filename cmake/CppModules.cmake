@@ -269,7 +269,8 @@ function(helios_add_umbrella_cxx_module)
 
   set(_anchor "${CMAKE_BINARY_DIR}/helios_umbrella.cpp")
   file(WRITE "${_anchor}"
-      "namespace helios::details {\nvoid HeliosUmbrellaAnchor() {}\n}\n")
+      "namespace helios::details {\nvoid HeliosUmbrellaAnchor() {}\n}\n"
+  )
 
   if(_library_type)
     add_library(helios_module_helios ${_library_type} "${_anchor}")
@@ -393,5 +394,4 @@ function(helios_add_umbrella_cxx_module)
   endif()
 
   message(STATUS "Helios Module: helios (umbrella, ${HELIOS_BUILD_OPTION_HELIOS})")
-endfunction()
 endfunction()
