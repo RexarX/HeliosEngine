@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from .manifest import ManifestError, Module, scan_private_macros
+from .manifest import Module, scan_private_macros
 
 
 class ResolveError(Exception):

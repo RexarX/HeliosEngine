@@ -176,7 +176,9 @@ linker_file = "libhelios.so"
             )
             self.assertIn('config = "Release"', sdk_toml)
             self.assertIn("asserts = false", sdk_toml)
-            pc = (prefix / "lib" / "pkgconfig" / "helios.pc").read_text(encoding="utf-8")
+            pc = (prefix / "lib" / "pkgconfig" / "helios.pc").read_text(
+                encoding="utf-8"
+            )
             self.assertIn("Cflags: -I${prefix}/include\n", pc)
             self.assertNotIn("HELIOS_ENABLE_ASSERTS", pc)
             header = (prefix / "include" / "helios" / "sdk_checks.hpp").read_text(
