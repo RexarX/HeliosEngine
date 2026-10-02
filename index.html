@@ -226,19 +226,19 @@ About The Project</h2>
 <h3 class="doxsection"><a class="anchor" id="key-features"></a>
 Key Features</h3>
 <ul>
-<li><b>ECS</b> — archetype and sparse-set storage, deferred <span class="tt">Commands</span>, rich query iterators</li>
-<li><b>Parallel scheduling</b> — access-conflict detection, topological execution, Taskflow-backed executors</li>
-<li><b>Application layer</b> — <span class="tt">App</span> / <span class="tt">SubApp</span> lifecycle, builtin schedules, static and dynamic plugins</li>
-<li><b>Modular build</b> — independent modules; enable only what you need</li>
-<li><b>Modern C++23</b> — concepts, ranges, <span class="tt">std::expected</span>, PMR allocators</li>
-<li><b>Flexible dependencies</b> — system packages first, <a href="https://github.com/cpm-cmake/CPM.cmake">CPM</a> download as fallback</li>
+<li><b>ECS</b> &ndash; archetype and sparse-set storage, deferred <span class="tt">Commands</span>, rich query iterators</li>
+<li><b>Parallel scheduling</b> &ndash; access-conflict detection, topological execution, Taskflow-backed executors</li>
+<li><b>Application layer</b> &ndash; <span class="tt">App</span> / <span class="tt">SubApp</span> lifecycle, builtin schedules, static and dynamic plugins</li>
+<li><b>Modular build</b> &ndash; independent modules; enable only what you need</li>
+<li><b>Modern C++23</b> &ndash; concepts, ranges, <span class="tt">std::expected</span>, PMR allocators</li>
+<li><b>Flexible dependencies</b> &ndash; system packages first, <a href="https://github.com/cpm-cmake/CPM.cmake">CPM</a> download as fallback</li>
 </ul>
 <h3 class="doxsection"><a class="anchor" id="design-philosophy"></a>
 Design Philosophy</h3>
 <ol type="1">
-<li><b>Data-oriented design</b> — components stored contiguously for cache-friendly iteration</li>
-<li><b>Composability</b> — behavior emerges from systems operating on component data</li>
-<li><b>Explicitness</b> — data access declared through system parameter types; schedules resolve ordering</li>
+<li><b>Data-oriented design</b> &ndash; components stored contiguously for cache-friendly iteration</li>
+<li><b>Composability</b> &ndash; behavior emerges from systems operating on component data</li>
+<li><b>Explicitness</b> &ndash; data access declared through system parameter types; schedules resolve ordering</li>
 </ol>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
@@ -297,9 +297,7 @@ Requirements</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>C++ compiler</b>  </td><td class="markdownTableBodyNone">GCC 14+, Clang 19+, MSVC 19.34+  </td><td class="markdownTableBodyNone">GCC 15+, Clang 21+  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Generator</b>  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">Ninja  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Python</b>  </td><td class="markdownTableBodyNone">3.8+  </td><td class="markdownTableBodyNone">3.10+ (scripts, pre-commit)  </td></tr>
+<td class="markdownTableBodyNone"><b>Python</b>  </td><td class="markdownTableBodyNone">3.11+  </td><td class="markdownTableBodyNone">3.11+  </td></tr>
 </table>
 <div class="fragment"><div class="line">git clone https://github.com/RexarX/HeliosEngine.git</div>
 <div class="line">cd HeliosEngine</div>
@@ -311,8 +309,8 @@ Installing Dependencies</h3>
 <p>Helios resolves dependencies per module: <b>system packages are tried first</b>, then <b>CPM download</b> if missing (<span class="tt">HELIOS_DOWNLOAD_PACKAGES=ON</span>, default). Pre-installing system packages speeds up configuration and avoids network fetches.</p>
 <p>Some packages need extra OS development libraries. On Linux, vendored <span class="tt">glfw</span> and <span class="tt">sdl3</span> both require X11/Wayland headers. SDL3 also needs Xfixes, XScrnSaver, and XTest (<span class="tt">libxfixes-dev</span>, <span class="tt">libxss-dev</span>, <span class="tt">libxtst-dev</span>); configure fails if those are missing. Windows and macOS need no extra packages for these backends.</p>
 <p>Package names below match <span class="tt">INSTALL_HINTS</span> in <a href="cmake/dependencies/"><span class="tt">cmake/dependencies/</span></a>.</p>
-<h4 class="doxsection"><a class="anchor" id="all-platforms--build-tools"></a>
-All platforms — build tools</h4>
+<h4 class="doxsection"><a class="anchor" id="all-platforms----build-tools"></a>
+All platforms &ndash; build tools</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Tool  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
@@ -323,10 +321,10 @@ All platforms — build tools</h4>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">clang-format  </td><td class="markdownTableBodyNone">Code formatting (<span class="tt">scripts/format.py</span>)  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Doxygen  </td><td class="markdownTableBodyNone">API docs (<span class="tt">scripts/docs.py</span>) — optional  </td></tr>
+<td class="markdownTableBodyNone">Doxygen  </td><td class="markdownTableBodyNone">API docs (<span class="tt">scripts/docs.py</span>) &ndash; optional  </td></tr>
 </table>
-<h4 class="doxsection"><a class="anchor" id="linux-apt--ubuntu--debian"></a>
-Linux (APT — Ubuntu / Debian)</h4>
+<h4 class="doxsection"><a class="anchor" id="linux-apt----ubuntu--debian"></a>
+Linux (APT &ndash; Ubuntu / Debian)</h4>
 <div class="fragment"><div class="line">sudo apt-get update</div>
 <div class="line">sudo apt-get install -y ninja-build libboost-all-dev libtbb-dev</div>
 </div><!-- fragment --><p>Additional tools:</p>
@@ -335,8 +333,8 @@ Linux (APT — Ubuntu / Debian)</h4>
 <div class="fragment"><div class="line">sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \</div>
 <div class="line">  libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxext-dev \</div>
 <div class="line">  libxfixes-dev libxss-dev libxtst-dev</div>
-</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="linux-dnf--fedora"></a>
-Linux (DNF — Fedora)</h4>
+</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="linux-dnf----fedora"></a>
+Linux (DNF &ndash; Fedora)</h4>
 <div class="fragment"><div class="line">sudo dnf install -y ninja-build  boost-devel tbb-devel</div>
 </div><!-- fragment --><p>Additional tools:</p>
 <div class="fragment"><div class="line">sudo dnf install -y clang-tools-extra doxygen</div>
@@ -344,8 +342,8 @@ Linux (DNF — Fedora)</h4>
 <div class="fragment"><div class="line">sudo dnf install -y wayland-devel libxkbcommon-devel libX11-devel \</div>
 <div class="line">  libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel libXext-devel \</div>
 <div class="line">  libXfixes-devel libXScrnSaver-devel libXtst-devel</div>
-</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="linux-pacman--arch"></a>
-Linux (Pacman — Arch)</h4>
+</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="linux-pacman----arch"></a>
+Linux (Pacman &ndash; Arch)</h4>
 <div class="fragment"><div class="line">sudo pacman -S --needed ninja boost tbb</div>
 </div><!-- fragment --><p>Additional tools:</p>
 <div class="fragment"><div class="line">sudo pacman -S --needed clang doxygen</div>
@@ -363,7 +361,7 @@ macOS (Homebrew)</h4>
 </blockquote>
 <h4 class="doxsection"><a class="anchor" id="windows-msvc"></a>
 Windows (MSVC)</h4>
-<p>No system packages required for a minimal build — MSVC + Ninja (via Visual Studio) is sufficient; missing libraries are fetched by CPM.</p>
+<p>No system packages required for a minimal build &ndash; MSVC + Ninja (via Visual Studio) is sufficient; missing libraries are fetched by CPM.</p>
 <div class="fragment"><div class="line"># Optional: LLVM clang-format for local formatting and clang-tidy for linting</div>
 <div class="line">choco install llvm</div>
 <div class="line"># Or use clang-format and clang-tidy bundled with Visual Studio 2022</div>
@@ -427,28 +425,28 @@ C++20 modules</h3>
 <blockquote class="doxtable">
 <p><b>Note:</b> Most of compilers still have incomplete C++20 module support, and some have bugs. Make sure to use latest compiler versions for better experience. </p>
 </blockquote>
-<p><b>How it is implemented.</b> Each engine module still ships textual headers. When modules are on, a <span class="tt">.cppm</span> interface unit (<span class="tt">modules/helios.&lt;name&gt;.cppm</span>, listed in <span class="tt">MODULE_SOURCES</span>) wraps those headers in Boost-style <span class="tt">export extern "C++"</span> so declarations keep classic C++ ABI. <span class="tt">#include &lt;helios/...&gt;</span> and <span class="tt">import helios.X</span> name the same types and link the same library. Implementation <span class="tt">.cpp</span> files stay classic translation units (no <span class="tt">module helios.X;</span>). Named modules cannot export macros — <span class="tt">#include</span> <span class="tt">&lt;<a class="el" href="assert_8hpp.html">helios/assert.hpp</a>&gt;</span>, <span class="tt">&lt;<a class="el" href="compiler_8hpp.html">helios/compiler/compiler.hpp</a>&gt;</span>, <span class="tt">&lt;<a class="el" href="platform_8hpp.html">helios/platform/platform.hpp</a>&gt;</span>, or <span class="tt">&lt;<a class="el" href="macro_8hpp.html">helios/utils/macro.hpp</a>&gt;</span> when you need those macros.</p>
+<p><b>How it is implemented.</b> Each engine module still ships textual headers. When modules are on, a <span class="tt">.cppm</span> interface unit (<span class="tt">modules/helios.&lt;name&gt;.cppm</span>, listed in <span class="tt">MODULE_SOURCES</span>) wraps those headers in Boost-style <span class="tt">export extern "C++"</span> so declarations keep classic C++ ABI. <span class="tt">#include &lt;helios/...&gt;</span> and <span class="tt">import helios.X</span> name the same types and link the same library. Implementation <span class="tt">.cpp</span> files stay classic translation units (no <span class="tt">module helios.X;</span>). Named modules cannot export macros &ndash; <span class="tt">#include</span> <span class="tt">&lt;<a class="el" href="assert_8hpp.html">helios/assert.hpp</a>&gt;</span>, <span class="tt">&lt;<a class="el" href="compiler_8hpp.html">helios/compiler/compiler.hpp</a>&gt;</span>, <span class="tt">&lt;<a class="el" href="platform_8hpp.html">helios/platform/platform.hpp</a>&gt;</span>, or <span class="tt">&lt;<a class="el" href="macro_8hpp.html">helios/utils/macro.hpp</a>&gt;</span> when you need those macros.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Consumer code  </th><th class="markdownTableHeadNone">Link  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">import <a class="el" href="namespacehelios_1_1app.html">helios.app</a>;</span> (or <span class="tt">ecs</span>, <span class="tt">log</span>, ...)  </td><td class="markdownTableBodyNone"><span class="tt">helios::module::app</span>  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">import <a class="el" href="namespacehelios_1_1app.html">helios.app</a>;</span> (or <span class="tt">ecs</span>, <span class="tt">log</span>, ...)  </td><td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacehelios_1_1app.html">helios::app</a></span>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">import <a class="el" href="namespacehelios_1_1sdl3_1_1window.html">helios.sdl3.window</a>;</span>  </td><td class="markdownTableBodyNone"><span class="tt">helios::module::sdl3_window</span>  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">import <a class="el" href="namespacehelios_1_1sdl3_1_1window.html">helios.sdl3.window</a>;</span>  </td><td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacehelios_1_1sdl3_1_1window.html">helios::sdl3::window</a></span>  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">import <a class="el" href="namespacehelios.html">helios</a>;</span> (re-exports every enabled module)  </td><td class="markdownTableBodyNone"><span class="tt">helios::helios</span>  </td></tr>
 </table>
-<p>On MSVC without <span class="tt">import <a class="el" href="namespacestd.html" title="STL namespace.">std</a></span>, put standard-library <span class="tt">#include</span>s <b>before</b> <span class="tt">import</span>. Do not scan TUs that only <span class="tt">#include</span> Helios — MSVC injects <span class="tt">import</span> into every scanned file.</p>
-<p>A runnable <span class="tt">import</span> sample is configured only when this flag is on: <a href="examples/cxx_modules">examples/cxx_modules</a>.</p>
+<p>On MSVC without <span class="tt">import <a class="el" href="namespacestd.html" title="STL namespace.">std</a></span>, put standard-library <span class="tt">#include</span>s <b>before</b> <span class="tt">import</span>. Do not scan TUs that only <span class="tt">#include</span> Helios &ndash; MSVC injects <span class="tt">import</span> into every scanned file.</p>
+<p>A runnable <span class="tt">import</span> sample is configured only when this flag is on: <a href="examples/cxx-modules">examples/cxx-modules</a>.</p>
 <div class="fragment"><div class="line">cmake --build --preset linux-gcc-debug --target cxx_modules_example</div>
-</div><!-- fragment --><p><b>Using Helios modules from another project.</b> Enable the flag when Helios is configured, link the same <span class="tt">helios::module::*</span> targets, and scan only the sources that <span class="tt">import</span>:</p>
+</div><!-- fragment --><p><b>Using Helios modules from another project.</b> Enable the flag when Helios is configured, link the same <span class="tt"><a class="el" href="namespacehelios.html">helios</a>::*</span> targets, and scan only the sources that <span class="tt">import</span>:</p>
 <div class="fragment"><div class="line">set(HELIOS_ENABLE_CPP_MODULES ON CACHE BOOL &quot;&quot; FORCE)</div>
 <div class="line">set(HELIOS_BUILD_TESTS OFF CACHE BOOL &quot;&quot; FORCE)</div>
 <div class="line">set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL &quot;&quot; FORCE)</div>
 <div class="line">add_subdirectory(third_party/HeliosEngine)</div>
 <div class="line"> </div>
 <div class="line">add_executable(my_game src/main.cpp)</div>
-<div class="line">helios_link_modules(TARGET my_game MODULES PUBLIC app log)</div>
+<div class="line">helios_link_modules(TARGET my_game MODULES PUBLIC helios_app helios_log)</div>
 <div class="line">helios_source_scan_for_cxx_modules(my_game src/main.cpp)</div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">import</span> helios.app;</div>
 <div class="line"> </div>
@@ -457,7 +455,7 @@ C++20 modules</h3>
 <div class="line">  <span class="keywordflow">return</span> std::to_underlying(app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">Run</a>());</div>
 <div class="line">}</div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00059">application.hpp:59</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae1bc7b5b668ca63cc91dfd87757e99be"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">helios::app::App::Run</a></div><div class="ttdeci">ExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00128">application.cpp:128</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae1bc7b5b668ca63cc91dfd87757e99be"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">helios::app::App::Run</a></div><div class="ttdeci">ExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00127">application.cpp:127</a></div></div>
 </div><!-- fragment --><p><span class="tt">helios_link_modules()</span> already marks the consumer as a named-module client. <span class="tt">helios_source_scan_for_cxx_modules()</span> is required on each TU that contains <span class="tt">import</span>. Header-only TUs must stay unscanned.</p>
 <p>A full <span class="tt">App</span> loop with <span class="tt">#include</span> is in <a href="examples/simple">examples/simple</a>. Instantiating <span class="tt">App</span> after <span class="tt">import <a class="el" href="namespacehelios_1_1app.html">helios.app</a></span> currently fails on MSVC (Taskflow <span class="tt">C1116</span>); import still exposes other app types.</p>
 <h3 class="doxsection"><a class="anchor" id="linking"></a>
@@ -481,7 +479,7 @@ Linking</h3>
 <ul>
 <li><b>Linux (ELF):</b> <a href="https://github.com/rui314/mold">mold</a> if found, otherwise lld, otherwise the system linker.</li>
 <li><b>macOS:</b> mold is skipped (it does not link Mach-O). lld is used if <span class="tt">ld.lld</span> is on <span class="tt">PATH</span>; otherwise Apple <span class="tt">ld</span>.</li>
-<li><b>Windows (MSVC):</b> <a href="https://github.com/EpicGames/raddebugger">RAD Linker</a> for Debug and non-LTO RelWithDebInfo when <span class="tt">radlink</span> is available, then <span class="tt">lld-link</span>, then <span class="tt">link.exe</span>. <b>clang-cl</b> prefers <span class="tt">lld-link</span> (RAD can fail on some clang-cl C++ COMDATs). Release LTO (MSVC LTCG) and RelWithDebInfo with <span class="tt">HELIOS_ENABLE_LTO_RELWITHDEBINFO=ON</span> keep <span class="tt">link.exe</span>; clang-cl LTO uses <span class="tt">lld-link</span>. RAD is not used with MSVC AddressSanitizer (<span class="tt">HELIOS_DEVELOPER_MODE=ON</span>).</li>
+<li><b>Windows (MSVC):</b> <a href="https://github.com/EpicGames/raddebugger">RAD Linker</a> for Debug and non-LTO RelWithDebInfo when <span class="tt">radlink</span> is available, then <span class="tt">lld-link</span>, then <span class="tt">link.exe</span>. <b>clang-cl</b> prefers <span class="tt">lld-link</span> (RAD can fail on some clang-cl C++ COMDATs). Release LTO (MSVC LTCG) and RelWithDebInfo with <span class="tt">HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO=ON</span> or <span class="tt">HELIOS_ENABLE_LTO_RELWITHDEBINFO=ON</span> keep <span class="tt">link.exe</span>; clang-cl LTO uses <span class="tt">lld-link</span>. RAD is not used with MSVC AddressSanitizer (<span class="tt">HELIOS_DEVELOPER_MODE=ON</span>).</li>
 </ul>
 <p>Override at configure time (must be on <span class="tt">PATH</span>, or for RAD also <span class="tt">$RAD_ROOT</span>):</p>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_LINKER=MOLD</div>
@@ -498,12 +496,12 @@ Run the Example</h3>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_BUILD_EXAMPLES=ON</div>
 <div class="line">cmake --build --preset linux-gcc-release --target simple_example</div>
 <div class="line">./bin/examples/debug-linux-x86_64/simple_example</div>
-</div><!-- fragment --><p>See <a href="examples/simple/simple.cpp">examples/simple/simple.cpp</a> for schedules and plugins. With <span class="tt">-DHELIOS_ENABLE_CPP_MODULES=ON</span>, <a href="examples/cxx_modules">examples/cxx_modules</a> shows <span class="tt">import <a class="el" href="namespacehelios_1_1app.html">helios.app</a></span> and <span class="tt">import <a class="el" href="namespacehelios_1_1container.html">helios.container</a></span>.</p>
+</div><!-- fragment --><p>See <a href="examples/simple/simple.cpp">examples/simple/simple.cpp</a> for schedules and plugins. With <span class="tt">-DHELIOS_ENABLE_CPP_MODULES=ON</span>, <a href="examples/cxx-modules">examples/cxx-modules</a> shows <span class="tt">import <a class="el" href="namespacehelios_1_1app.html">helios.app</a></span> and <span class="tt">import <a class="el" href="namespacehelios_1_1container.html">helios.container</a></span>.</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="usage-6"></a>
 Usage</h2>
-<p>Systems are plain structs — <span class="tt">operator()</span> parameters declare data access or regular C++ lambdas. <span class="tt">App</span> owns the main world, executor, and frame scheduler.</p>
+<p>Systems are plain structs &ndash; <span class="tt">operator()</span> parameters declare data access or regular C++ lambdas. <span class="tt">App</span> owns the main world, executor, and frame scheduler.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="app_8hpp.html">helios/app/app.hpp</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="ecs_8hpp.html">helios/ecs/ecs.hpp</a>&gt;</span></div>
 <div class="line"> </div>
@@ -612,7 +610,7 @@ Usage</h2>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="using-as-a-dependency"></a>
 Using as a Dependency</h2>
-<p>Helios can be consumed from another CMake project in several ways. All methods expose targets as <span class="tt">helios::module::&lt;name&gt;</span> and the helper <span class="tt">helios_link_modules()</span>.</p>
+<p>Helios can be consumed from another CMake project in several ways. All methods expose targets as <span class="tt"><a class="el" href="namespacehelios.html">helios</a>::&lt;name&gt;</span> and the helper <span class="tt">helios_link_modules()</span>.</p>
 <p>Typical consumer settings when embedding:</p>
 <div class="fragment"><div class="line">set(HELIOS_BUILD_TESTS OFF CACHE BOOL &quot;&quot; FORCE)</div>
 <div class="line">set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL &quot;&quot; FORCE)</div>
@@ -638,7 +636,7 @@ Method 1: <span class="tt">add_subdirectory</span></h3>
 <div class="line"># helios_apply_conventions(my_game)</div>
 <div class="line">helios_link_modules(</div>
 <div class="line">    TARGET my_game</div>
-<div class="line">    MODULES PUBLIC app</div>
+<div class="line">    MODULES PUBLIC helios_app</div>
 <div class="line">)</div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-2-fetchcontent"></a>
 Method 2: <span class="tt">FetchContent</span></h3>
@@ -660,7 +658,7 @@ Method 2: <span class="tt">FetchContent</span></h3>
 <div class="line">add_executable(my_game src/main.cpp)</div>
 <div class="line">helios_link_modules(</div>
 <div class="line">    TARGET my_game</div>
-<div class="line">    MODULES PUBLIC app</div>
+<div class="line">    MODULES PUBLIC helios_app</div>
 <div class="line">)</div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-3-cpm"></a>
 Method 3: CPM</h3>
@@ -680,7 +678,7 @@ Method 3: CPM</h3>
 <div class="line">add_executable(my_game src/main.cpp)</div>
 <div class="line">helios_link_modules(</div>
 <div class="line">    TARGET my_game</div>
-<div class="line">    MODULES PUBLIC app</div>
+<div class="line">    MODULES PUBLIC helios_app</div>
 <div class="line">)</div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-4-installed-package-find_package"></a>
 Method 4: Installed Package (<span class="tt">find_package</span>)</h3>
@@ -694,7 +692,7 @@ Method 4: Installed Package (<span class="tt">find_package</span>)</h3>
 <div class="line">add_executable(my_game src/main.cpp)</div>
 <div class="line">helios_link_modules(</div>
 <div class="line">    TARGET my_game</div>
-<div class="line">    MODULES PUBLIC app</div>
+<div class="line">    MODULES PUBLIC helios_app</div>
 <div class="line">)</div>
 </div><!-- fragment --><p>Installed artifacts: <span class="tt">HeliosConfig.cmake</span>, <span class="tt">HeliosConfigVersion.cmake</span>, <span class="tt">HeliosTargets.cmake</span> (see <a href="cmake/Install.cmake"><span class="tt">cmake/Install.cmake</span></a>).</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
@@ -705,10 +703,10 @@ Documentation</h2>
 API reference (Doxygen)</h3>
 <div class="fragment"><div class="line">python scripts/docs.py</div>
 <div class="line"># → docs/doxygen/html/index.html</div>
-</div><!-- fragment --><p>Config: <a href="docs/doxygen/Doxyfile.in"><span class="tt">docs/doxygen/Doxyfile.in</span></a> — version from <span class="tt">project(VERSION …)</span> via CMake (<span class="tt">cmake --preset docs</span>, <span class="tt">cmake --build --preset docs</span>) or <span class="tt">scripts/docs.py</span>.</p>
+</div><!-- fragment --><p>Config: <a href="docs/doxygen/Doxyfile.in"><span class="tt">docs/doxygen/Doxyfile.in</span></a> &ndash; version from the root [<span class="tt">VERSION</span>](VERSION) file via CMake (<span class="tt">cmake --preset docs</span>, <span class="tt">cmake --build --preset docs</span>) or <span class="tt">scripts/docs.py</span>.</p>
 <h3 class="doxsection"><a class="anchor" id="project-guidelines"></a>
 Project guidelines</h3>
-<p><a class="el" href="md_docs_2guidelines.html" title="Project Guidelines">docs/guidelines.md</a> — code style, module layout, testing, build options.</p>
+<p><a class="el" href="md_docs_2guidelines.html" title="Project Guidelines">docs/guidelines.md</a> &ndash; code style, module layout, testing, build options.</p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="development"></a>
 Development</h2>
@@ -719,9 +717,9 @@ Code formatting</h3>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">When  </th><th class="markdownTableHeadNone">Mechanism  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Every commit</b> (local)  </td><td class="markdownTableBodyNone"><span class="tt">pre-commit install</span> — runs <span class="tt">python scripts/format.py</span> (auto-fix)  </td></tr>
+<td class="markdownTableBodyNone"><b>Every commit</b> (local)  </td><td class="markdownTableBodyNone"><span class="tt">pre-commit install</span> &ndash; runs <span class="tt">python scripts/format.py</span> (auto-fix)  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Every push / PR</b>  </td><td class="markdownTableBodyNone">CI — <span class="tt">python scripts/format.py --check</span>  </td></tr>
+<td class="markdownTableBodyNone"><b>Every push / PR</b>  </td><td class="markdownTableBodyNone">CI &ndash; <span class="tt">python scripts/format.py --check</span>  </td></tr>
 </table>
 <div class="fragment"><div class="line"># Format all sources</div>
 <div class="line">python scripts/format.py</div>
@@ -735,8 +733,8 @@ Code formatting</h3>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="creating-a-custom-module"></a>
 Creating a Custom Module</h3>
 <p>Helios modules live under <span class="tt">src/</span> by default. Register additional search paths with <span class="tt">helios_add_extra_module_dirs()</span> (before discovery) or <span class="tt">HELIOS_EXTRA_MODULE_DIRS</span>. The <span class="tt">greeting</span> example path is registered automatically when <span class="tt">HELIOS_BUILD_EXAMPLES=ON</span>. See the full walkthrough:</p>
-<p><b><a class="el" href="dir_217ee790cdc210ca56feb9a8b7616066.html" title="/home/runner/work/HeliosEngine/HeliosEngine/examples/custom_module/README.md">examples/custom_module/README.md</a></b></p>
-<p>That example defines a minimal <span class="tt">greeting</span> module (registration, build target, tests, and a demo executable) under <span class="tt">examples/custom_module/</span>, discovered through the extra module path mechanism.</p>
+<p><b><a class="el" href="dir_973e7e8017d32bfba2c58cb8c774caa4.html" title="/home/runner/work/HeliosEngine/HeliosEngine/examples/custom-module/README.md">examples/custom-module/README.md</a></b></p>
+<p>That example defines a minimal <span class="tt">greeting</span> module (registration, build target, tests, and a demo executable) under <span class="tt">examples/custom-module/</span>, discovered through the extra module path mechanism.</p>
 <div class="fragment"><div class="line"># From a parent CMake project (before add_subdirectory(HeliosEngine)):</div>
 <div class="line"># list(APPEND CMAKE_MODULE_PATH &quot;.../HeliosEngine/cmake&quot;)</div>
 <div class="line"># include(ModuleRegistry)</div>
@@ -745,16 +743,17 @@ Creating a Custom Module</h3>
 <div class="line"># Or via cache variable:</div>
 <div class="line">cmake --preset linux-gcc-release \</div>
 <div class="line">  -DHELIOS_EXTRA_MODULE_DIRS=&quot;/path/to/my/modules&quot;</div>
-</div><!-- fragment --><p>When <span class="tt">HELIOS_BUILD_EXAMPLES=ON</span>, Helios calls <span class="tt">helios_add_extra_module_dirs(examples/custom_module)</span> before discovery.</p>
+</div><!-- fragment --><p>When <span class="tt">HELIOS_BUILD_EXAMPLES=ON</span>, Helios calls <span class="tt">helios_add_extra_module_dirs(examples/custom-module)</span> before discovery.</p>
 <p>Quick layout:</p>
-<div class="fragment"><div class="line">examples/custom_module/</div>
-<div class="line">├── CMakeLists.txt            # helios_module(...) + demo target</div>
+<div class="fragment"><div class="line">examples/custom-module/</div>
+<div class="line">├── CMakeLists.txt            # library sources and demo target</div>
+<div class="line">├── module.toml               # module metadata</div>
 <div class="line">├── README.md                 # Step-by-step guide</div>
 <div class="line">├── include/helios/greeting/  # Public headers</div>
 <div class="line">├── modules/                  # Optional module sources (.cppm)</div>
 <div class="line">├── src/                      # Optional private sources</div>
 <div class="line">└── tests/                    # doctest suite</div>
-</div><!-- fragment --><p>Link it from your executable with <span class="tt">helios_link_modules(TARGET … MODULES PUBLIC greeting)</span>.</p>
+</div><!-- fragment --><p>Link it from your executable with <span class="tt">helios_link_modules(TARGET … MODULES PUBLIC helios_greeting)</span>.</p>
 <p>See also <a class="el" href="md_docs_2guidelines.html" title="Project Guidelines">docs/guidelines.md</a> for module conventions.</p>
 <h3 class="doxsection"><a class="anchor" id="other-scripts"></a>
 Other scripts</h3>
@@ -783,7 +782,7 @@ License</h2>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="contact"></a>
 Contact</h2>
-<p><b>RexarX</b> — <a href="#" onclick="location.href='mai'+'lto:'+'who'+'72'+'7ca'+'re'+'s@g'+'ma'+'il.'+'co'+'m'; return false;">who72<span class="obfuscator">.nosp@m.</span>7car<span class="obfuscator">.nosp@m.</span>es@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a></p>
+<p><b>RexarX</b> &ndash; <a href="#" onclick="location.href='mai'+'lto:'+'who'+'72'+'7ca'+'re'+'s@g'+'ma'+'il.'+'co'+'m'; return false;">who72<span class="obfuscator">.nosp@m.</span>7car<span class="obfuscator">.nosp@m.</span>es@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a></p>
 <p><b>Project:</b> <a href="https://github.com/RexarX/HeliosEngine">github.com/RexarX/HeliosEngine</a></p>
 <p><a href="#readme-top">↑ Back to Top</a> </p>
 </div></div><!-- PageDoc -->

@@ -177,25 +177,26 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_4826e48e68
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
+<tr class="memitem:capi" id="r_capi"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_1e1b304ea8452ad1a1cda7319a7da2e6.html">capi</a></td></tr>
 <tr class="memitem:include" id="r_include"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_c130d266fefab1ccfb00f92a8f448d48.html">include</a></td></tr>
 <tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_c3caad782870c60b1ddcde9e974822ab.html">src</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="sdl3--sdl3-process-runtime"></a>
-`sdl3` — SDL3 Process Runtime</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="sdl3----sdl3-process-runtime"></a>
+`sdl3` -- SDL3 Process Runtime</h1>
 <p>Process-global SDL3 lifetime, event pump, and handler registry. Window and input backends share this module instead of calling <span class="tt">SDL_Init</span> or <span class="tt">SDL_PollEvent</span> independently.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api-12"></a>
 Public API</h1>
 <p><span class="tt">#include &lt;<a class="el" href="sdl3_8hpp.html">helios/sdl3/sdl3.hpp</a>&gt;</span> (and <span class="tt">plugin.hpp</span>) does <b>not</b> include <span class="tt">&lt;SDL3/SDL.h&gt;</span>. SDL types live in <span class="tt">details/</span> headers; include those explicitly when you need them. SDL3 is a private link dependency.</p>
 <ul>
-<li><span class="tt">Retain</span> / <span class="tt">Release</span> — refcounted subsystem init (<span class="tt"><a class="el" href="lifetime_8hpp.html#a34662686d85d454a1f3b2df40e9d5949">SDL_InitFlags</a></span>)</li>
-<li><span class="tt">Context</span> — world pointer and nested frame-pump state</li>
-<li><span class="tt">EventDispatcher</span> — ordered <span class="tt">void(*)(const SDL_Event&amp;, World&amp;)</span> handlers</li>
-<li><span class="tt">StartupSet</span> / <span class="tt">EventPumpSet</span> / <span class="tt">ShutdownSet</span> — named sets for ordering</li>
-<li><span class="tt">Init</span> — stores the main world pointer on <span class="tt">kMainStartup</span></li>
-<li><span class="tt">PumpEvents</span> — main-thread poll / wait-timeout on <span class="tt">window::kEvents</span></li>
-<li><span class="tt">Shutdown</span> — clears runtime pointers on <span class="tt">kShutdown</span></li>
-<li><span class="tt">Plugin</span> — inserts resources and adds <span class="tt">Init</span>, <span class="tt">PumpEvents</span>, and <span class="tt">Shutdown</span></li>
+<li><span class="tt">Retain</span> / <span class="tt">Release</span> &ndash; refcounted subsystem init (<span class="tt"><a class="el" href="lifetime_8hpp.html#a34662686d85d454a1f3b2df40e9d5949">SDL_InitFlags</a></span>)</li>
+<li><span class="tt">Context</span> &ndash; world pointer and nested frame-pump state</li>
+<li><span class="tt">EventDispatcher</span> &ndash; ordered <span class="tt">void(*)(const SDL_Event&amp;, World&amp;)</span> handlers</li>
+<li><span class="tt">StartupSet</span> / <span class="tt">EventPumpSet</span> / <span class="tt">ShutdownSet</span> &ndash; named sets for ordering</li>
+<li><span class="tt">Init</span> &ndash; stores the main world pointer on <span class="tt">kMainStartup</span></li>
+<li><span class="tt">PumpEvents</span> &ndash; main-thread poll / wait-timeout on <span class="tt">window::kEvents</span></li>
+<li><span class="tt">Shutdown</span> &ndash; clears runtime pointers on <span class="tt">kShutdown</span></li>
+<li><span class="tt">Plugin</span> &ndash; inserts resources and adds <span class="tt">Init</span>, <span class="tt">PumpEvents</span>, and <span class="tt">Shutdown</span></li>
 </ul>
 <p><span class="tt">PumpEvents</span> honors <span class="tt">window::Settings::event_mode</span>. Wait-timeout waits once, then drains the queue with <span class="tt">SDL_PollEvent</span> so a single event cannot stall the frame. Size / move / scale events request a nested <span class="tt">FramePumpOrder</span> while polling (same rule as GLFW).</p>
 <h1 class="doxsection"><a class="anchor" id="usage-3"></a>

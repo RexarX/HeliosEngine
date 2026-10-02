@@ -177,12 +177,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_ddca5f149c
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
+<tr class="memitem:capi" id="r_capi"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_a5a7b27475e95e4588f369f235d0da9a.html">capi</a></td></tr>
 <tr class="memitem:include" id="r_include"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_357f20ec14403b481784d625e30c945c.html">include</a></td></tr>
 <tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_d015487a2ba28be54c409dcc0dee8f6e.html">src</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="ecs--entity-component-system"></a>
-`ecs` — Entity Component System</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="ecs----entity-component-system"></a>
+`ecs` -- Entity Component System</h1>
 <p>Data-oriented ECS with deferred commands, double-buffered messages, archetype-based component storage, and parallel schedule execution. The heart of the engine.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api-5"></a>
 Public API</h1>
@@ -327,7 +328,7 @@ Custom System Parameters</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">Make(World&amp;, SystemLocalData&amp;, const AccessPolicy&amp;)</span>  </td><td class="markdownTableBodyNone">Construct the parameter at system invocation time  </td></tr>
 </table>
-<p><span class="tt">World</span> registers exclusive access and conflicts with component/resource access. <span class="tt">Commands</span>, <span class="tt">Local&lt;T&gt;</span>, <span class="tt">WorldView</span>, and message params register no scheduling access — they never participate in conflict detection.</p>
+<p><span class="tt">World</span> registers exclusive access and conflicts with component/resource access. <span class="tt">Commands</span>, <span class="tt">Local&lt;T&gt;</span>, <span class="tt">WorldView</span>, and message params register no scheduling access &ndash; they never participate in conflict detection.</p>
 <h3 class="doxsection"><a class="anchor" id="aggregate-parameters-compositesystemparam"></a>
 Aggregate parameters (<span class="tt">CompositeSystemParam</span>)</h3>
 <p>Bundle multiple built-in params into one struct; field types must match the template list exactly:</p>
@@ -404,7 +405,7 @@ Fully custom parameters</h3>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a14e4f63a8fc72bd6ce40adae7a1824a5"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a14e4f63a8fc72bd6ce40adae7a1824a5">helios::ecs::World::ReadResource</a></div><div class="ttdeci">const T &amp; ReadResource() const noexcept</div><div class="ttdoc">Gets const reference to a resource.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01323">world.hpp:1323</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a330cfbeeb34358489307d82437867b2a"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a330cfbeeb34358489307d82437867b2a">helios::ecs::World::WriteResource</a></div><div class="ttdeci">T &amp; WriteResource() noexcept</div><div class="ttdoc">Gets reference to a resource.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01316">world.hpp:1316</a></div></div>
 </div><!-- fragment --><p>Use <span class="tt">DeclareReadComponents</span>, <span class="tt">DeclareWriteComponents</span>, or <span class="tt">DeclareQueryAccess</span> from <span class="tt"><a class="el" href="access__decl_8hpp.html">helios/ecs/system/access_decl.hpp</a></span> when you need finer-grained component declarations inside <span class="tt">RegisterAccess</span>.</p>
-<p>After specialization, pass the type to <span class="tt">Schedule::Add</span> like any other system — access policy and parallel ordering are deduced automatically.</p>
+<p>After specialization, pass the type to <span class="tt">Schedule::Add</span> like any other system &ndash; access policy and parallel ordering are deduced automatically.</p>
 <h2 class="doxsection"><a class="anchor" id="ordering"></a>
 Ordering</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="ecs_8hpp.html">helios/ecs/ecs.hpp</a>&gt;</span></div>
@@ -415,8 +416,8 @@ Ordering</h2>
 <div class="line">schedule.Add(SpawnSystem{}, MoveSystem{}).InSet(MovementSet{}).Sequence();</div>
 <div class="line">schedule.Set&lt;SpawnSet&gt;().Sequence();</div>
 <div class="line">schedule.Add(RenderSystem{}).Before&lt;MoveSystem&gt;();</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="commands--deferred-mutations"></a>
-Commands — Deferred Mutations</h1>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="commands----deferred-mutations"></a>
+Commands &ndash; Deferred Mutations</h1>
 <p>Systems never mutate the world directly during parallel execution. All structural changes go through <span class="tt">Commands</span>:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="ecs_8hpp.html">helios/ecs/ecs.hpp</a>&gt;</span></div>
 <div class="line"> </div>
@@ -490,7 +491,7 @@ Messages</h1>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_ac9ee38ab084af8be76caaec9bfbc67fb"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#ac9ee38ab084af8be76caaec9bfbc67fb">helios::ecs::World::AddMessage</a></div><div class="ttdeci">void AddMessage()</div><div class="ttdoc">Registers an message type for use.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01330">world.hpp:1330</a></div></div>
 <div class="ttc" id="astructhelios_1_1ecs_1_1MessageCursor_html_acd31a920117583ae1c6db9fd24f1e57c"><div class="ttname"><a href="structhelios_1_1ecs_1_1MessageCursor.html#acd31a920117583ae1c6db9fd24f1e57c">helios::ecs::MessageCursor::IncludeBacklog</a></div><div class="ttdeci">static constexpr MessageCursor IncludeBacklog() noexcept</div><div class="ttdoc">Creates a cursor that includes all currently retained messages.</div><div class="ttdef"><b>Definition</b> <a href="cursor_8hpp_source.html#l00038">cursor.hpp:38</a></div></div>
 </div><!-- fragment --><p>Consumable messages record stable ids on <span class="tt">Consume()</span> and remove globally when deferred merges apply; independent readers still each see the message once beforehand.</p>
-<p>Async messages (<span class="tt">kAsync = true</span>) use a lock-free queue and are not managed by <span class="tt">MessageManager::Update()</span> — clear explicitly.</p>
+<p>Async messages (<span class="tt">kAsync = true</span>) use a lock-free queue and are not managed by <span class="tt">MessageManager::Update()</span> &ndash; clear explicitly.</p>
 <h1 class="doxsection"><a class="anchor" id="components"></a>
 Components</h1>
 <p>Two storage models, chosen per component type:</p>
@@ -506,7 +507,7 @@ Components</h1>
 <h2 class="doxsection"><a class="anchor" id="component-bundles"></a>
 Component Bundles</h2>
 <p><span class="tt">ComponentBundleTypes&lt;Ts...&gt;</span> declares component and nested-bundle types at compile time and stores their values. Nested types are flattened depth-first, left-to-right for add/remove.</p>
-<p><b>Leaf bundle</b> — use <span class="tt">ComponentBundleTypes</span> directly:</p>
+<p><b>Leaf bundle</b> &ndash; use <span class="tt">ComponentBundleTypes</span> directly:</p>
 <div class="fragment"><div class="line"><span class="keyword">using </span>MovementBundle = <a class="code hl_struct" href="structhelios_1_1ecs_1_1ComponentBundleTypes.html">helios::ecs::ComponentBundleTypes&lt;Position, Velocity&gt;</a>;</div>
 <div class="line"> </div>
 <div class="line">world.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a488046461f1b3a548d296dc1a3d206f3">AddBundle</a>(entity, MovementBundle{pos, vel});</div>
@@ -514,7 +515,7 @@ Component Bundles</h2>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a488046461f1b3a548d296dc1a3d206f3"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a488046461f1b3a548d296dc1a3d206f3">helios::ecs::World::AddBundle</a></div><div class="ttdeci">void AddBundle(Entity entity, B &amp;&amp;bundle)</div><div class="ttdoc">Adds all components in a bundle to the entity.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01069">world.hpp:1069</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a66e51d5b208ae92453cd02b40c46861e"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a66e51d5b208ae92453cd02b40c46861e">helios::ecs::World::RemoveBundle</a></div><div class="ttdeci">void RemoveBundle(Entity entity)</div><div class="ttdoc">Removes all components in a bundle from the entity.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l01167">world.hpp:1167</a></div></div>
 <div class="ttc" id="astructhelios_1_1ecs_1_1ComponentBundleTypes_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1ComponentBundleTypes.html">helios::ecs::ComponentBundleTypes</a></div><div class="ttdoc">Component and nested-bundle values for a bundle operation.</div><div class="ttdef"><b>Definition</b> <a href="bundle_8hpp_source.html#l00034">bundle.hpp:34</a></div></div>
-</div><!-- fragment --><p><b>Struct bundle</b> — named fields plus <span class="tt">Build() &amp;&amp;</span> returning <span class="tt">ComponentTypes</span>:</p>
+</div><!-- fragment --><p><b>Struct bundle</b> &ndash; named fields plus <span class="tt">Build() &amp;&amp;</span> returning <span class="tt">ComponentTypes</span>:</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>PlayerBundle {</div>
 <div class="line">  <span class="keyword">using </span>ComponentTypes =</div>
 <div class="line">      <a class="code hl_struct" href="structhelios_1_1ecs_1_1ComponentBundleTypes.html">helios::ecs::ComponentBundleTypes&lt;Player, MovementBundle, Health&gt;</a>;</div>
@@ -569,8 +570,8 @@ Builtin Types</h1>
 <h1 class="doxsection"><a class="anchor" id="dependencies-4"></a>
 Dependencies</h1>
 <ul>
-<li><span class="tt">async</span> — parallel schedule execution</li>
-<li><span class="tt">container</span> — sparse sets, typed buffers, multi-type maps</li>
+<li><span class="tt">async</span> &ndash; parallel schedule execution</li>
+<li><span class="tt">container</span> &ndash; sparse sets, typed buffers, multi-type maps</li>
 <li><span class="tt">core</span>, <span class="tt">compiler</span>, <span class="tt">memory</span>, <span class="tt">utils</span>, <span class="tt">log</span></li>
 <li>External: Boost <span class="tt">flat_map</span>, moodycamel <span class="tt">ConcurrentQueue</span> </li>
 </ul>

@@ -5,5 +5,6 @@ var searchData=
   ['value_2',['Value',['../classhelios_1_1container_1_1TypedBuffer.html#adf0f78a7e53e718fae88cbb7b102aa89',1,'helios::container::TypedBuffer::Value() noexcept'],['../classhelios_1_1container_1_1TypedBuffer.html#acbdce3abd1f3c7c392aad75c39349fec',1,'helios::container::TypedBuffer::Value() const noexcept'],['../classhelios_1_1utils_1_1RandomGenerator.html#ab0db0436e2d6ee8b47a0bc257b87e18f',1,'helios::utils::RandomGenerator::Value()']]],
   ['valuefromrange_3',['ValueFromRange',['../classhelios_1_1utils_1_1RandomGenerator.html#a04b15b83113df07aa659866a4ff5e504',1,'helios::utils::RandomGenerator']]],
   ['values_4',['Values',['../classhelios_1_1input_1_1Axis.html#a1564abdd089d6dfa088b210350bb42ae',1,'helios::input::Axis']]],
-  ['view_5',['View',['../classhelios_1_1container_1_1BasicStaticString.html#ac19b3b663dcb00de68249799b94d887f',1,'helios::container::BasicStaticString::View()'],['../classhelios_1_1BasicCStringView.html#a57ea1bd451ca26eb56a3dcc79c536ccb',1,'helios::BasicCStringView::View()']]]
+  ['versionstring_5',['VersionString',['../namespacehelios.html#a3f9b97a9dccb3ef8aa67fa120642ac4f',1,'helios']]],
+  ['view_6',['View',['../classhelios_1_1container_1_1BasicStaticString.html#ac19b3b663dcb00de68249799b94d887f',1,'helios::container::BasicStaticString::View()'],['../classhelios_1_1BasicCStringView.html#a57ea1bd451ca26eb56a3dcc79c536ccb',1,'helios::BasicCStringView::View()']]]
 ];

@@ -177,12 +177,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_5194e5fea3
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
+<tr class="memitem:capi" id="r_capi"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_0001c011dd84c332cde66b65d482dcc7.html">capi</a></td></tr>
 <tr class="memitem:include" id="r_include"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_7c2f2d2d99654f8da238c9d6523cfb31.html">include</a></td></tr>
 <tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_2fc95bd087e09d964df8e9d0b1c0661a.html">src</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="app--application-framework"></a>
-`app` — Application Framework</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="app----application-framework"></a>
+`app` -- Application Framework</h1>
 <p>High-level application layer that wires together the ECS, async executor, plugins, and frame scheduling. Owns the main game loop, builtin schedules, and optional sub-apps for parallel or background worlds.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api"></a>
 Public API</h1>
@@ -244,7 +245,7 @@ Builtin Stages &amp; Schedules (<span class="tt">schedules.hpp</span>)</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">kShutdownStage</span>  </td><td class="markdownTableBodyNone"><span class="tt">kPreShutdown</span>, <span class="tt">kShutdown</span>, <span class="tt">kPostShutdown</span>  </td></tr>
 </table>
-<p>Stages are grouping namespaces only — they are never run directly. Call <span class="tt">RegisterBuiltinSchedules(scheduler)</span> to wire default ordering and executor kinds.</p>
+<p>Stages are grouping namespaces only &ndash; they are never run directly. Call <span class="tt">RegisterBuiltinSchedules(scheduler)</span> to wire default ordering and executor kinds.</p>
 <p>Default executor kinds:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -316,7 +317,7 @@ Quick Start</h1>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00059">application.hpp:59</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html_acfc8a4af0224ded97cdd0a522269f3d9"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#acfc8a4af0224ded97cdd0a522269f3d9">helios::app::App::InsertResources</a></div><div class="ttdeci">auto InsertResources(this auto &amp;&amp;self, Ts &amp;&amp;... resources) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Inserts or replaces resources in the main world.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00828">application.hpp:828</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad88147a9c541ed672401349ccb6d42fd"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd">helios::app::App::AddSystems</a></div><div class="ttdeci">ecs::SystemGroupHandle AddSystems(const L &amp;label, Systems &amp;&amp;... systems)</div><div class="ttdoc">Adds multiple functor systems to the same main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00367">application.hpp:367</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae1bc7b5b668ca63cc91dfd87757e99be"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">helios::app::App::Run</a></div><div class="ttdeci">ExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00128">application.cpp:128</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae1bc7b5b668ca63cc91dfd87757e99be"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">helios::app::App::Run</a></div><div class="ttdeci">ExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00127">application.cpp:127</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html_a9dbfbe347d334e51810a7f02bb897dcd"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a9dbfbe347d334e51810a7f02bb897dcd">helios::ecs::BasicMessageWriter::Write</a></div><div class="ttdeci">constexpr void Write(U &amp;&amp;message) const</div><div class="ttdoc">Writes a single message to the local queue.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00058">writer.hpp:58</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a0ad7c672365863c684a142d796aa9220"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a0ad7c672365863c684a142d796aa9220">helios::ecs::BasicQuery::ForEach</a></div><div class="ttdeci">void ForEach(const Action &amp;action) const</div><div class="ttdoc">Executes an action for each matching entity&#39;s components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01374">query.hpp:1374</a></div></div>
 <div class="ttc" id="aecs_8hpp_html"><div class="ttname"><a href="ecs_8hpp.html">ecs.hpp</a></div></div>
@@ -328,9 +329,9 @@ Quick Start</h1>
 Lifecycle</h1>
 <div class="fragment"><div class="line">Run() → Initialize() → runner_(*this) → CleanUp()</div>
 </div><!-- fragment --><ol type="1">
-<li><b>Initialize</b> — builds plugins, waits for readiness, finishes plugins, builds scheduler, runs startup.</li>
-<li><b>Runner</b> — defaults to <span class="tt">RunDefault</span> (calls <span class="tt">Update()</span> each frame until <span class="tt">AppExit</span>).</li>
-<li><b>CleanUp</b> — shutdown schedules, plugin destruction, waits for async work.</li>
+<li><b>Initialize</b> &ndash; builds plugins, waits for readiness, finishes plugins, builds scheduler, runs startup.</li>
+<li><b>Runner</b> &ndash; defaults to <span class="tt">RunDefault</span> (calls <span class="tt">Update()</span> each frame until <span class="tt">AppExit</span>).</li>
+<li><b>CleanUp</b> &ndash; shutdown schedules, plugin destruction, waits for async work.</li>
 </ol>
 <p><span class="tt">ShouldExit()</span> reads <span class="tt">AppExit</span> from the main world. Systems write it via <span class="tt">MessageWriter&lt;AppExit&gt;</span>.</p>
 <h1 class="doxsection"><a class="anchor" id="frame-lifecycle"></a>
@@ -339,9 +340,9 @@ Frame Lifecycle</h1>
 <ol type="1">
 <li>Reset extract flags.</li>
 <li>For each stage in <span class="tt">MainFrameOrder</span> (default Update -&gt; Extract): run schedules (<span class="tt">ApplyDeferred</span> per schedule), optional stage <span class="tt">apply_commands</span> / <span class="tt">merge_messages</span>, then <span class="tt">MessageManager::Update()</span> when the stage is last in the order and has <span class="tt">advance_messages</span> (Extract on main).</li>
-<li><b>Extract stage</b> — main extract schedules, then sub-app extraction (mode-dependent).</li>
-<li><b>Launch sub-app updates</b> — blocking sub-apps in parallel; overlapping only when fresh extract exists.</li>
-<li><b>WaitForSubApps</b> — joins blocking sub-apps.</li>
+<li><b>Extract stage</b> &ndash; main extract schedules, then sub-app extraction (mode-dependent).</li>
+<li><b>Launch sub-app updates</b> &ndash; blocking sub-apps in parallel; overlapping only when fresh extract exists.</li>
+<li><b>WaitForSubApps</b> &ndash; joins blocking sub-apps.</li>
 </ol>
 <p>Nested <span class="tt">FramePumpOrder</span> pumps (Update only) advance message buffers on <span class="tt">kUpdateStage</span>. <span class="tt">FrameLimiterPlugin</span> prepends <span class="tt">kFramePaceStage</span> on <span class="tt">MainFrameOrder</span> only, so nested pumps and window polling are not delayed by the cap. See <span class="tt">examples/app/frame_limit.cpp</span>.</p>
 <h1 class="doxsection"><a class="anchor" id="frame-limiter"></a>
@@ -404,18 +405,18 @@ Custom Runner</h1>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">return</span> app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#a026d2fec7457f4c87f17183e73dc2736">ShouldExit</a>().value_or(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a4825c33ecb12c84774fbf8af4424743ea8c632159fa131f09d04f94e3cbcd8782">helios::app::ExitCode::kSuccess</a>);</div>
 <div class="line">});</div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a026d2fec7457f4c87f17183e73dc2736"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a026d2fec7457f4c87f17183e73dc2736">helios::app::App::ShouldExit</a></div><div class="ttdeci">auto ShouldExit() const noexcept -&gt; std::optional&lt; ExitCode &gt;</div><div class="ttdoc">Returns an exit code if an AppExit message was written this frame.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00169">application.cpp:169</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a026d2fec7457f4c87f17183e73dc2736"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a026d2fec7457f4c87f17183e73dc2736">helios::app::App::ShouldExit</a></div><div class="ttdeci">auto ShouldExit() const noexcept -&gt; std::optional&lt; ExitCode &gt;</div><div class="ttdoc">Returns an exit code if an AppExit message was written this frame.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00168">application.cpp:168</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html_a768fbfe09eff0c53e35f4328ae8b5b42"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a768fbfe09eff0c53e35f4328ae8b5b42">helios::app::App::SetRunner</a></div><div class="ttdeci">auto SetRunner(this auto &amp;&amp;self, RunnerFn runner) noexcept -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Sets runner function for the application.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00849">application.hpp:849</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad9c41ded54e87910d24f1a592f9350d4"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4">helios::app::App::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">Updates the application and its subsystems.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00117">application.cpp:117</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad9c41ded54e87910d24f1a592f9350d4"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4">helios::app::App::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">Updates the application and its subsystems.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00116">application.cpp:116</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a4825c33ecb12c84774fbf8af4424743e"><div class="ttname"><a href="namespacehelios_1_1app.html#a4825c33ecb12c84774fbf8af4424743e">helios::app::ExitCode</a></div><div class="ttdeci">ExitCode</div><div class="ttdoc">Application exit codes.</div><div class="ttdef"><b>Definition</b> <a href="app__exit_8hpp_source.html#l00022">app_exit.hpp:22</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a4825c33ecb12c84774fbf8af4424743ea8c632159fa131f09d04f94e3cbcd8782"><div class="ttname"><a href="namespacehelios_1_1app.html#a4825c33ecb12c84774fbf8af4424743ea8c632159fa131f09d04f94e3cbcd8782">helios::app::ExitCode::kSuccess</a></div><div class="ttdeci">@ kSuccess</div><div class="ttdoc">Successful execution.</div><div class="ttdef"><b>Definition</b> <a href="app__exit_8hpp_source.html#l00023">app_exit.hpp:23</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="dependencies"></a>
 Dependencies</h1>
 <ul>
-<li><span class="tt">async</span> — work-stealing executor</li>
-<li><span class="tt">ecs</span> — world, schedules, systems</li>
-<li><span class="tt">log</span> — logging</li>
-<li><span class="tt">utils</span> — type info, traits </li>
+<li><span class="tt">async</span> &ndash; work-stealing executor</li>
+<li><span class="tt">ecs</span> &ndash; world, schedules, systems</li>
+<li><span class="tt">log</span> &ndash; logging</li>
+<li><span class="tt">utils</span> &ndash; type info, traits </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- doc-content -->

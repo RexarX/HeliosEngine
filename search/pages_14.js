@@ -1,19 +1,18 @@
 var searchData=
 [
   ['random_0',['Random',['../dir_313caf1132e152dd9b58bea13a4052ca.html#random',1,'']]],
-  ['reading_1',['Further Reading',['../dir_217ee790cdc210ca56feb9a8b7616066.html#further-reading-1',1,'']]],
-  ['reading_2',['Further reading',['../md_docs_2guidelines.html#further-reading',1,'']]],
-  ['recommended_20developer_20flags_3',['Recommended developer flags',['../index.html#recommended-developer-flags',1,'']]],
-  ['reference_4',['Macro Reference',['../dir_2730ace12cf03b0ba989133b5ac743ea.html#macro-reference',1,'']]],
-  ['reference_20counting_5',['Reference Counting',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#memory--pmr-allocators--reference-counting',1,'`memory` — PMR Allocators &amp;amp; Reference Counting'],['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#reference-counting',1,'Reference Counting'],['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#reference-counting-1',1,'Reference Counting']]],
-  ['reference_20doxygen_6',['API reference (Doxygen)',['../index.html#api-reference-doxygen',1,'']]],
-  ['requirements_7',['Requirements',['../index.html#requirements',1,'']]],
-  ['resources_20plugins_20messages_8',['Builtin Resources, Plugins &amp;amp; Messages',['../dir_5194e5fea318fda12687127c23f8aba1.html#builtin-resources-plugins--messages',1,'']]],
-  ['roadmap_9',['Roadmap',['../index.html#roadmap',1,'']]],
-  ['rules_10',['Code rules',['../md_docs_2guidelines.html#code-rules',1,'']]],
-  ['run_20the_20example_11',['Run the Example',['../index.html#run-the-example',1,'']]],
-  ['runner_12',['Custom Runner',['../dir_5194e5fea318fda12687127c23f8aba1.html#custom-runner',1,'']]],
-  ['running_20tests_13',['Running tests',['../md_docs_2guidelines.html#running-tests',1,'']]],
-  ['runtime_14',['`sdl3` — SDL3 Process Runtime',['../dir_4826e48e68cc38af5b9c29b11756ca6f.html#sdl3--sdl3-process-runtime',1,'']]],
-  ['runtime_20control_15',['Runtime Control',['../dir_2241064965c8d9ca993f08b926076f7d.html#runtime-control',1,'']]]
+  ['reading_1',['Further reading',['../md_docs_2guidelines.html#further-reading',1,'']]],
+  ['recommended_20developer_20flags_2',['Recommended developer flags',['../index.html#recommended-developer-flags',1,'']]],
+  ['reference_3',['Macro Reference',['../dir_2730ace12cf03b0ba989133b5ac743ea.html#macro-reference',1,'']]],
+  ['reference_20counting_4',['Reference Counting',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#memory----pmr-allocators--reference-counting',1,'`memory` -- PMR Allocators &amp;amp; Reference Counting'],['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#reference-counting',1,'Reference Counting'],['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#reference-counting-1',1,'Reference Counting']]],
+  ['reference_20doxygen_5',['API reference (Doxygen)',['../index.html#api-reference-doxygen',1,'']]],
+  ['requirements_6',['Requirements',['../index.html#requirements',1,'']]],
+  ['resources_20plugins_20messages_7',['Builtin Resources, Plugins &amp;amp; Messages',['../dir_5194e5fea318fda12687127c23f8aba1.html#builtin-resources-plugins--messages',1,'']]],
+  ['roadmap_8',['Roadmap',['../index.html#roadmap',1,'']]],
+  ['rules_9',['Code rules',['../md_docs_2guidelines.html#code-rules',1,'']]],
+  ['run_20the_20example_10',['Run the Example',['../index.html#run-the-example',1,'']]],
+  ['runner_11',['Custom Runner',['../dir_5194e5fea318fda12687127c23f8aba1.html#custom-runner',1,'']]],
+  ['running_20tests_12',['Running tests',['../md_docs_2guidelines.html#running-tests',1,'']]],
+  ['runtime_13',['`sdl3` -- SDL3 Process Runtime',['../dir_4826e48e68cc38af5b9c29b11756ca6f.html#sdl3----sdl3-process-runtime',1,'']]],
+  ['runtime_20control_14',['Runtime Control',['../dir_2241064965c8d9ca993f08b926076f7d.html#runtime-control',1,'']]]
 ];

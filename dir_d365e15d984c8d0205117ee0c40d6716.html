@@ -177,12 +177,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_d365e15d98
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
+<tr class="memitem:capi" id="r_capi"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_dfae78e87812de3cb71e26e833aa99d2.html">capi</a></td></tr>
 <tr class="memitem:include" id="r_include"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_2cea99d34ac972c04b6a090cb4f81695.html">include</a></td></tr>
 <tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_566702e2364ca4a9bb2e4fe748a23c49.html">src</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="input--input-ecs-contract"></a>
-`input` — Input ECS Contract</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="input----input-ecs-contract"></a>
+`input` -- Input ECS Contract</h1>
 <p>Public ECS interface for keyboard, mouse, cursor, pen, and gamepad state without OS dependencies.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api-7"></a>
 Public API</h1>
@@ -198,7 +199,7 @@ Public API</h1>
 <li>Input messages (<span class="tt">KeyboardInputMsg</span>, <span class="tt">MouseButtonInputMsg</span>, <span class="tt">PenMovedMsg</span>, ...)</li>
 <li>Composite params: <span class="tt">State</span>, <span class="tt">StateView</span>, <span class="tt">Messages</span>, <span class="tt">Writers</span>, and per-device <span class="tt">*Messages</span> / <span class="tt">*Writers</span> groups</li>
 <li><span class="tt">ClearInputState</span>, <span class="tt">UpdateKeyboardState</span>, <span class="tt">UpdateMouseState</span>, <span class="tt">UpdateGamepadState</span>, <span class="tt">UpdateJoystickState</span>, <span class="tt">UpdatePenState</span></li>
-<li><span class="tt">Plugin</span> — registers ECS types and frame systems</li>
+<li><span class="tt">Plugin</span> &ndash; registers ECS types and frame systems</li>
 </ul>
 <p><span class="tt">Gamepad::axes</span> is filtered (circular sticks, triggers in <span class="tt">[0, 1]</span>). <span class="tt">GamepadAxisChangedMsg</span> carries raw backend values. <span class="tt">Settings::stick</span> / <span class="tt">Settings::trigger</span> configure deadzone, livezone, and rescale; <span class="tt">auto_calibrate</span> tracks rest center. Pen axes are raw SDL samples (pressure 0..1, tilt/rotation in degrees). GLFW has no tablet API; a stylus still arrives as mouse there.</p>
 <h1 class="doxsection"><a class="anchor" id="backends"></a>

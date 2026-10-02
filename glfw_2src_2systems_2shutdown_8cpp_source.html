@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('glfw_2src_2sys
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="window_2include_2helios_2window_2native__handle_8hpp.html">helios/window/native_handle.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="properties_8hpp.html">helios/window/properties.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifdef HELIOS_MODULE_INPUT_AVAILABLE</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifdef HELIOS_INPUT_AVAILABLE</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="glfw_2include_2helios_2glfw_2systems_2input_8hpp.html">helios/glfw/systems/input.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('glfw_2src_2sys
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  native-&gt;entries.clear();</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#ifdef HELIOS_MODULE_INPUT_AVAILABLE</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#ifdef HELIOS_INPUT_AVAILABLE</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordflow">if</span> (context-&gt;world != <span class="keyword">nullptr</span>) [[likely]] {</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">if</span> (<span class="keyword">auto</span>* cache = context-&gt;world-&gt;TryWriteResource&lt;CursorCache&gt;();</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        cache != <span class="keyword">nullptr</span>) {</div>
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('glfw_2src_2sys
 <div class="ttc" id="aglfw_2include_2helios_2glfw_2systems_2input_8hpp_html"><div class="ttname"><a href="glfw_2include_2helios_2glfw_2systems_2input_8hpp.html">input.hpp</a></div></div>
 <div class="ttc" id="aglfw_2include_2helios_2glfw_2systems_2shutdown_8hpp_html"><div class="ttname"><a href="glfw_2include_2helios_2glfw_2systems_2shutdown_8hpp.html">shutdown.hpp</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1glfw_html"><div class="ttname"><a href="namespacehelios_1_1glfw.html">helios::glfw</a></div><div class="ttdef"><b>Definition</b> <a href="glfw_2include_2helios_2glfw_2native__handle_8hpp_source.html#l00018">native_handle.hpp:18</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1glfw_html_a7d00ced75a604a0fcfdefaef6055c757"><div class="ttname"><a href="namespacehelios_1_1glfw.html#a7d00ced75a604a0fcfdefaef6055c757">helios::glfw::DestroyCursorCache</a></div><div class="ttdeci">void DestroyCursorCache(CursorCache &amp;cache)</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00246">input.cpp:246</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1glfw_html_a7d00ced75a604a0fcfdefaef6055c757"><div class="ttname"><a href="namespacehelios_1_1glfw.html#a7d00ced75a604a0fcfdefaef6055c757">helios::glfw::DestroyCursorCache</a></div><div class="ttdeci">void DestroyCursorCache(CursorCache &amp;cache)</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00245">input.cpp:245</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1glfw_html_a99a721d0df59fb81d8c06cbce6168694"><div class="ttname"><a href="namespacehelios_1_1glfw.html#a99a721d0df59fb81d8c06cbce6168694">helios::glfw::UnregisterMonitorCallback</a></div><div class="ttdeci">void UnregisterMonitorCallback()</div><div class="ttdef"><b>Definition</b> <a href="callbacks_8cpp_source.html#l00425">callbacks.cpp:425</a></div></div>
 <div class="ttc" id="aproperties_8hpp_html"><div class="ttname"><a href="properties_8hpp.html">properties.hpp</a></div></div>
 <div class="ttc" id="astructhelios_1_1glfw_1_1Shutdown_html_a9158557dae47ce42d99f8b210a4ff884"><div class="ttname"><a href="structhelios_1_1glfw_1_1Shutdown.html#a9158557dae47ce42d99f8b210a4ff884">helios::glfw::Shutdown::operator()</a></div><div class="ttdeci">void operator()(ecs::Res&lt; Context &gt; context, ecs::Res&lt; NativeWindows &gt; native) const</div><div class="ttdef"><b>Definition</b> <a href="#l00018">shutdown.cpp:18</a></div></div>

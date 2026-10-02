@@ -177,12 +177,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_aebb8dcc11
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
+<tr class="memitem:capi" id="r_capi"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_b0aaaa45164294d66787c6edb6a199bb.html">capi</a></td></tr>
 <tr class="memitem:include" id="r_include"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></td></tr>
 <tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_50643da02713768bc4ccc4077eca1147.html">src</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="core--core-engine-primitives"></a>
-`core` — Core Engine Primitives</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="core----core-engine-primitives"></a>
+`core` -- Core Engine Primitives</h1>
 <p>Foundational utilities used by every other module: assertions, UUIDs, stack traces, null-terminated string views.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api-4"></a>
 Public API</h1>
@@ -202,22 +203,22 @@ Public API</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">WCStringView</span>  </td><td class="markdownTableBodyNone">Wide-char variant. Also <span class="tt">U8CStringView</span>, <span class="tt">U16CStringView</span>, <span class="tt">U32CStringView</span>.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">AssertionHandler</span>  </td><td class="markdownTableBodyNone"><span class="tt">void(*)(std::string_view, std::string_view, std::source_location)</span> — custom handler.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">AssertionHandler</span>  </td><td class="markdownTableBodyNone"><span class="tt">void(*)(std::string_view, std::string_view, std::source_location)</span> &ndash; custom handler.  </td></tr>
 </table>
 <h1 class="doxsection"><a class="anchor" id="assert-system"></a>
 Assert System</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/assert.hpp</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(ptr != <span class="keyword">nullptr</span>);        <span class="comment">// debug-only (no-op in release)</span></div>
-<div class="line"><a class="code hl_define" href="assert_8hpp.html#a717b59a334b4e29f2d1bcd580de3d38f">HELIOS_INVARIANT</a>(count &gt; 0);          <span class="comment">// debug: assert; release: still checks</span></div>
-<div class="line"><a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(fclose(f));             <span class="comment">// always evaluates (both debug/release)</span></div>
+<div class="line"><a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(ptr != <span class="keyword">nullptr</span>);  <span class="comment">// on for Debug, RelWithDebInfo, and a checked SDK</span></div>
+<div class="line"><a class="code hl_define" href="assert_8hpp.html#a717b59a334b4e29f2d1bcd580de3d38f">HELIOS_INVARIANT</a>(count &gt; 0);    <span class="comment">// debug: assert; release: still checks</span></div>
+<div class="line"><a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(fclose(f));       <span class="comment">// always evaluates (both debug/release)</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// With formatted message (uses std::format)</span></div>
 <div class="line"><a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size &lt;= capacity, <span class="stringliteral">&quot;Buffer overflow: {} &gt; {}&quot;</span>, size, capacity);</div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00237">assert.hpp:237</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a717b59a334b4e29f2d1bcd580de3d38f"><div class="ttname"><a href="assert_8hpp.html#a717b59a334b4e29f2d1bcd580de3d38f">HELIOS_INVARIANT</a></div><div class="ttdeci">#define HELIOS_INVARIANT(condition,...)</div><div class="ttdoc">Invariant check that asserts in debug builds and logs error in release.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00270">assert.hpp:270</a></div></div>
-<div class="ttc" id="aassert_8hpp_html_a8b8608656bafeab9911c16dce4827a04"><div class="ttname"><a href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a></div><div class="ttdeci">#define HELIOS_VERIFY(condition,...)</div><div class="ttdoc">Verify macro that always checks the condition.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00295">assert.hpp:295</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution when API checks are enabled.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00240">assert.hpp:240</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a717b59a334b4e29f2d1bcd580de3d38f"><div class="ttname"><a href="assert_8hpp.html#a717b59a334b4e29f2d1bcd580de3d38f">HELIOS_INVARIANT</a></div><div class="ttdeci">#define HELIOS_INVARIANT(condition,...)</div><div class="ttdoc">Invariant check that asserts in debug builds and logs error in release.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00273">assert.hpp:273</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a8b8608656bafeab9911c16dce4827a04"><div class="ttname"><a href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a></div><div class="ttdeci">#define HELIOS_VERIFY(condition,...)</div><div class="ttdoc">Verify macro that always checks the condition.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00298">assert.hpp:298</a></div></div>
 </div><!-- fragment --><p>Priority-based handler dispatch: custom handler → log plugin (weak symbol) → default stderr.</p>
 <p>Custom assertion handler:</p>
 <div class="fragment"><div class="line">SetAssertionHandler([](std::string_view condition, std::string_view message,</div>
@@ -229,26 +230,26 @@ Assert System</h1>
 UUID</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="uuid_8hpp.html">helios/uuid.hpp</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line">Uuid <span class="keywordtype">id</span> = Uuid::Generate();           <span class="comment">// thread-local random UUID</span></div>
-<div class="line">Uuid invalid;                         <span class="comment">// default = invalid (all zeros)</span></div>
+<div class="line">Uuid <span class="keywordtype">id</span> = Uuid::Generate();  <span class="comment">// thread-local random UUID</span></div>
+<div class="line">Uuid invalid;                <span class="comment">// default = invalid (all zeros)</span></div>
 <div class="line">Uuid from_str = Uuid(<span class="stringliteral">&quot;550e8400-e29b-41d4-a716-446655440000&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">CHECK(<span class="keywordtype">id</span>.Valid());</div>
 <div class="line">CHECK_NE(<span class="keywordtype">id</span>, invalid);</div>
-<div class="line">CHECK_LT(<span class="keywordtype">id</span>, other);                  <span class="comment">// ordered comparison (for maps)</span></div>
-<div class="line">CHECK_EQ(<span class="keywordtype">id</span>.Hash(), other.Hash());    <span class="comment">// hashing</span></div>
+<div class="line">CHECK_LT(<span class="keywordtype">id</span>, other);                <span class="comment">// ordered comparison (for maps)</span></div>
+<div class="line">CHECK_EQ(<span class="keywordtype">id</span>.Hash(), other.Hash());  <span class="comment">// hashing</span></div>
 <div class="line"> </div>
-<div class="line">std::string str = <span class="keywordtype">id</span>.ToString();      <span class="comment">// canonical string representation</span></div>
+<div class="line">std::string str = <span class="keywordtype">id</span>.ToString();    <span class="comment">// canonical string representation</span></div>
 <div class="ttc" id="auuid_8hpp_html"><div class="ttname"><a href="uuid_8hpp.html">uuid.hpp</a></div></div>
 </div><!-- fragment --><p>Thread-local Mersenne Twister 19937 ensures lock-free generation. Use <span class="tt">UuidGenerator</span> for explicit generator instances.</p>
 <h1 class="doxsection"><a class="anchor" id="stacktrace"></a>
 Stacktrace</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="stacktrace_8hpp.html">helios/stacktrace.hpp</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">auto</span> trace = Stacktrace::Capture();   <span class="comment">// static factory with default config</span></div>
+<div class="line"><span class="keyword">auto</span> trace = Stacktrace::Capture();  <span class="comment">// static factory with default config</span></div>
 <div class="line">std::string output = trace.ToString();</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">auto</span> filtered = Stacktrace::Capture(StacktraceConfig{</div>
+<div class="line"><span class="keyword">auto</span> filtered = Stacktrace::Capture({</div>
 <div class="line">    .max_frames = 32,</div>
 <div class="line">    .skip_frames = 2,</div>
 <div class="line">});</div>
@@ -281,7 +282,7 @@ Delegate</h1>
 <div class="line">    <a class="code hl_class" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt;void(<span class="keywordtype">int</span>)&gt;::FromFunction&lt;&amp;Handler::OnEvent&gt;(h);</div>
 <div class="line">member(42);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// optional helpers — deduce signature from the function pointer</span></div>
+<div class="line"><span class="comment">// optional helpers - deduce signature from the function pointer</span></div>
 <div class="line"><span class="keyword">auto</span> deduced = helios::DelegateFromFunction&lt;&amp;FreeFn&gt;();</div>
 <div class="line"> </div>
 <div class="line">CHECK(free.Valid());</div>
@@ -293,9 +294,9 @@ Delegate</h1>
 <h1 class="doxsection"><a class="anchor" id="dependencies-3"></a>
 Dependencies</h1>
 <ul>
-<li><span class="tt">compiler</span> — intrinsics</li>
-<li><span class="tt">platform</span> — platform detection</li>
-<li><span class="tt">utils</span> — macros, type utilities</li>
+<li><span class="tt">compiler</span> &ndash; intrinsics</li>
+<li><span class="tt">platform</span> &ndash; platform detection</li>
+<li><span class="tt">utils</span> &ndash; macros, type utilities</li>
 <li>External: stduuid, Boost.Stacktrace fallback when needed </li>
 </ul>
 </div></div><!-- contents -->

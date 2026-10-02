@@ -624,7 +624,8 @@ var annotated_dup =
       [ "Stacktrace", "classhelios_1_1Stacktrace.html", "classhelios_1_1Stacktrace" ],
       [ "StacktraceConfig", "structhelios_1_1StacktraceConfig.html", "structhelios_1_1StacktraceConfig" ],
       [ "Uuid", "classhelios_1_1Uuid.html", "classhelios_1_1Uuid" ],
-      [ "UuidGenerator", "classhelios_1_1UuidGenerator.html", "classhelios_1_1UuidGenerator" ]
+      [ "UuidGenerator", "classhelios_1_1UuidGenerator.html", "classhelios_1_1UuidGenerator" ],
+      [ "Version", "structhelios_1_1Version.html", "structhelios_1_1Version" ]
     ] ],
     [ "std", "namespacestd.html", [
       [ "formatter&lt; helios::BasicCStringView&lt; CharT, Traits &gt; &gt;", "structstd_1_1formatter_3_01helios_1_1BasicCStringView_3_01CharT_00_01Traits_01_4_01_4.html", "structstd_1_1formatter_3_01helios_1_1BasicCStringView_3_01CharT_00_01Traits_01_4_01_4" ],
@@ -753,5 +754,6 @@ var annotated_dup =
       [ "hash&lt; helios::utils::TypeId &gt;", "structstd_1_1hash_3_01helios_1_1utils_1_1TypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1utils_1_1TypeId_01_4" ],
       [ "hash&lt; helios::utils::TypeIndex &gt;", "structstd_1_1hash_3_01helios_1_1utils_1_1TypeIndex_01_4.html", "structstd_1_1hash_3_01helios_1_1utils_1_1TypeIndex_01_4" ],
       [ "hash&lt; helios::Uuid &gt;", "structstd_1_1hash_3_01helios_1_1Uuid_01_4.html", "structstd_1_1hash_3_01helios_1_1Uuid_01_4" ]
-    ] ]
+    ] ],
+    [ "HeliosVersion", "structHeliosVersion.html", "structHeliosVersion" ]
 ];
