@@ -1,8 +1,5 @@
 var NAVTREEINDEX45 =
 {
-"structhelios_1_1glfw_1_1PollEvents.html#a8523c8f7b401a014afeb995f4ce4daf1":[2,0,4,6,14,0],
-"structhelios_1_1glfw_1_1PollEvents.html#a8523c8f7b401a014afeb995f4ce4daf1":[4,0,2,5,10,0],
-"structhelios_1_1glfw_1_1PollEvents.html#ab75cc5a0cbb5af145ec3b67560c12fca":[2,0,4,6,14,1],
 "structhelios_1_1glfw_1_1PollEvents.html#ab75cc5a0cbb5af145ec3b67560c12fca":[4,0,2,5,10,1],
 "structhelios_1_1glfw_1_1Shutdown.html":[2,0,4,6,15],
 "structhelios_1_1glfw_1_1Shutdown.html":[4,0,2,5,11],
@@ -249,5 +246,8 @@ var NAVTREEINDEX45 =
 "structhelios_1_1input_1_1GamepadMappings.html#a16723d5d91f4e3eb5c36fec4fbba39a4":[2,0,4,7,15,0],
 "structhelios_1_1input_1_1GamepadMappings.html#a16723d5d91f4e3eb5c36fec4fbba39a4":[4,0,2,6,12,0],
 "structhelios_1_1input_1_1GamepadMappings.html#a4b8f29cc6aaaba25868710d55ea9188d":[2,0,4,7,15,4],
-"structhelios_1_1input_1_1GamepadMappings.html#a4b8f29cc6aaaba25868710d55ea9188d":[4,0,2,6,12,4]
+"structhelios_1_1input_1_1GamepadMappings.html#a4b8f29cc6aaaba25868710d55ea9188d":[4,0,2,6,12,4],
+"structhelios_1_1input_1_1GamepadMappings.html#a81b996a9a76fb85403ae823bca6c7124":[2,0,4,7,15,6],
+"structhelios_1_1input_1_1GamepadMappings.html#a81b996a9a76fb85403ae823bca6c7124":[4,0,2,6,12,6],
+"structhelios_1_1input_1_1GamepadMappings.html#ad92b4fe393c8c8087c5af34c7d9665d3":[2,0,4,7,15,1]
 };

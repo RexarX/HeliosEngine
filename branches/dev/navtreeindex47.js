@@ -1,8 +1,5 @@
 var NAVTREEINDEX47 =
 {
-"structhelios_1_1input_1_1JoystickMessages.html#a3efcfc16d0a883dcddfbedcde5bce95a":[2,0,4,7,31,1],
-"structhelios_1_1input_1_1JoystickMessages.html#a3efcfc16d0a883dcddfbedcde5bce95a":[4,0,2,6,28,1],
-"structhelios_1_1input_1_1JoystickMessages.html#a675ab8189e2afab39d72a43cf9300a6a":[2,0,4,7,31,2],
 "structhelios_1_1input_1_1JoystickMessages.html#a675ab8189e2afab39d72a43cf9300a6a":[4,0,2,6,28,2],
 "structhelios_1_1input_1_1JoystickMessages.html#ae32f5e87bc3e496f5b22a4a9d4a8a65c":[2,0,4,7,31,0],
 "structhelios_1_1input_1_1JoystickMessages.html#ae32f5e87bc3e496f5b22a4a9d4a8a65c":[4,0,2,6,28,0],
@@ -249,5 +246,8 @@ var NAVTREEINDEX47 =
 "structhelios_1_1input_1_1Pen.html#a5b563e59c2ff897f2283093edb0206d3":[2,0,4,7,47,0],
 "structhelios_1_1input_1_1Pen.html#a5b563e59c2ff897f2283093edb0206d3":[4,0,2,6,44,0],
 "structhelios_1_1input_1_1Pen.html#a7f5b35bdada96fc29b52a9b8d74da023":[2,0,4,7,47,6],
-"structhelios_1_1input_1_1Pen.html#a7f5b35bdada96fc29b52a9b8d74da023":[4,0,2,6,44,6]
+"structhelios_1_1input_1_1Pen.html#a7f5b35bdada96fc29b52a9b8d74da023":[4,0,2,6,44,6],
+"structhelios_1_1input_1_1Pen.html#a96b5594ef0b569df7814bc7d741b07f5":[2,0,4,7,47,14],
+"structhelios_1_1input_1_1Pen.html#a96b5594ef0b569df7814bc7d741b07f5":[4,0,2,6,44,14],
+"structhelios_1_1input_1_1Pen.html#a9bca9fd52124092846060076f518216c":[2,0,4,7,47,10]
 };

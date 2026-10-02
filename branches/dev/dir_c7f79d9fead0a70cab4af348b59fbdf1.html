@@ -182,8 +182,8 @@ Directories</h2></td></tr>
 <tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_6b218999d7695d8fe1f69e019a561746.html">src</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="window--window-ecs-contract"></a>
-`window` — Window ECS Contract</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="window----window-ecs-contract"></a>
+`window` -- Window ECS Contract</h1>
 <p>Public ECS interface for window management without OS dependencies.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api-16"></a>
 Public API</h1>
@@ -192,7 +192,7 @@ Public API</h1>
 <li><span class="tt">Settings</span>, <span class="tt">kEvents</span>, <span class="tt">RegisterEventsSchedule</span></li>
 <li>Lifecycle and property event messages (<span class="tt">ResizedMsg</span>, <span class="tt">CreationFailedMsg</span>, ...)</li>
 <li>Composite params: <span class="tt">Windows</span>, <span class="tt">Messages</span>, <span class="tt">Writers</span>, <span class="tt">CreationWriters</span>, and lifecycle / geometry / appearance / platform groups</li>
-<li><span class="tt">Plugin</span> — registers ECS types; does not create OS windows</li>
+<li><span class="tt">Plugin</span> &ndash; registers ECS types; does not create OS windows</li>
 </ul>
 <p>Creation-time extras: <span class="tt">transparent_framebuffer</span>, <span class="tt">scale_to_monitor</span>, <span class="tt">scale_framebuffer</span>, <span class="tt">mouse_passthrough</span>. Runtime: <span class="tt">RequestFocus()</span>, <span class="tt">SetMousePassthrough()</span>.</p>
 <p>Failed OS window creation tags the entity with <span class="tt">CreationFailed</span> and emits <span class="tt">CreationFailedMsg</span> instead of aborting the process.</p>

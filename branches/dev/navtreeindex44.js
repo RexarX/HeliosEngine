@@ -1,8 +1,5 @@
 var NAVTREEINDEX44 =
 {
-"structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_4.html":[2,0,4,5,3,15],
-"structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_4.html":[4,0,2,4,1,15],
-"structhelios_1_1ecs_1_1details_1_1HasStructBundleBuild.html":[2,0,4,5,3,18],
 "structhelios_1_1ecs_1_1details_1_1HasStructBundleBuild.html":[4,0,2,4,1,18],
 "structhelios_1_1ecs_1_1details_1_1HasStructBundleBuild_3_01T_01_4.html":[2,0,4,5,3,19],
 "structhelios_1_1ecs_1_1details_1_1HasStructBundleBuild_3_01T_01_4.html":[4,0,2,4,1,19],
@@ -249,5 +246,8 @@ var NAVTREEINDEX44 =
 "structhelios_1_1glfw_1_1Plugin.html#afb8fc96b152f048f2db9843624320d1f":[2,0,4,6,13,3],
 "structhelios_1_1glfw_1_1Plugin.html#afb8fc96b152f048f2db9843624320d1f":[4,0,2,5,9,3],
 "structhelios_1_1glfw_1_1PollEvents.html":[2,0,4,6,14],
-"structhelios_1_1glfw_1_1PollEvents.html":[4,0,2,5,10]
+"structhelios_1_1glfw_1_1PollEvents.html":[4,0,2,5,10],
+"structhelios_1_1glfw_1_1PollEvents.html#a8523c8f7b401a014afeb995f4ce4daf1":[2,0,4,6,14,0],
+"structhelios_1_1glfw_1_1PollEvents.html#a8523c8f7b401a014afeb995f4ce4daf1":[4,0,2,5,10,0],
+"structhelios_1_1glfw_1_1PollEvents.html#ab75cc5a0cbb5af145ec3b67560c12fca":[2,0,4,6,14,1]
 };

@@ -182,8 +182,8 @@ Directories</h2></td></tr>
 <tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_e5b869bbb88be282a86f54a154c56c0a.html">src</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="log--logging"></a>
-`log` — Logging</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="log----logging"></a>
+`log` -- Logging</h1>
 <p>Type-tagged logging built on <a href="https://github.com/gabime/spdlog">spdlog</a>. Singleton <span class="tt">Logger</span> with per-type logger registration, console + file output, async mode, and rotation. Integrates with the assert system via a weak-symbol handler when linked.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api-8"></a>
 Public API</h1>
@@ -230,7 +230,7 @@ Quick Start</h1>
 <div class="line"><a class="code hl_function" href="namespacehelios_1_1log.html#a173df16cba4f24a87e3550c3fbbdd55b">helios::log::Warn</a>(<span class="stringliteral">&quot;Low memory: {} MB free&quot;</span>, free_mb);</div>
 <div class="line"><a class="code hl_function" href="namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b">helios::log::Error</a>(<span class="stringliteral">&quot;Failed to load &#39;{}&#39;&quot;</span>, path);</div>
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
-</div><!-- fragment --><p>No explicit initialization required — the default logger is created on first use with <span class="tt">Config::Debug()</span> (debug) or <span class="tt">Config::Release()</span> (release).</p>
+</div><!-- fragment --><p>No explicit initialization required &ndash; the default logger is created on first use with <span class="tt">Config::Debug()</span> (debug) or <span class="tt">Config::Release()</span> (release).</p>
 <h1 class="doxsection"><a class="anchor" id="custom-logger-types"></a>
 Custom Logger Types</h1>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>RenderLogger {</div>
@@ -292,9 +292,9 @@ Assert Integration</h1>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="dependencies-7"></a>
 Dependencies</h1>
 <ul>
-<li><span class="tt">container</span> — <span class="tt">MultiTypeMap</span> for logger registry</li>
-<li><span class="tt">core</span> — asserts</li>
-<li><span class="tt">utils</span> — <span class="tt">TypeIndex</span></li>
+<li><span class="tt">container</span> &ndash; <span class="tt">MultiTypeMap</span> for logger registry</li>
+<li><span class="tt">core</span> &ndash; asserts</li>
+<li><span class="tt">utils</span> &ndash; <span class="tt">TypeIndex</span></li>
 <li>External: spdlog </li>
 </ul>
 </div></div><!-- contents -->

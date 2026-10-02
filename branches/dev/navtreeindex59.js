@@ -1,8 +1,5 @@
 var NAVTREEINDEX59 =
 {
-"timer_8hpp.html":[5,0,2,16,1,0,0,12],
-"timer_8hpp_source.html":[5,0,2,16,1,0,0,12],
-"touch_8cpp.html":[5,0,2,8,2,0,7],
 "touch_8cpp_source.html":[5,0,2,8,2,0,7],
 "touch_8hpp.html":[5,0,2,8,1,0,0,14],
 "touch_8hpp_source.html":[5,0,2,8,1,0,0,14],

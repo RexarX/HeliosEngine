@@ -8,7 +8,7 @@ var searchData=
   ['fastrandomengine_5',['FastRandomEngine',['../namespacehelios_1_1utils.html#ad3ec641199727a92287008d0b8ccf885',1,'helios::utils']]],
   ['fastrandomgenerator_6',['FastRandomGenerator',['../namespacehelios_1_1utils.html#a30f5ca72e6d2cd3306815dfbd56bf53e',1,'helios::utils']]],
   ['features_7',['Key Features',['../index.html#key-features',1,'']]],
-  ['fedora_8',['Linux (DNF — Fedora)',['../index.html#linux-dnf--fedora',1,'']]],
+  ['fedora_8',['Linux (DNF &amp;ndash; Fedora)',['../index.html#linux-dnf----fedora',1,'']]],
   ['fetchcomponent_9',['FetchComponent',['../namespacehelios_1_1ecs_1_1details.html#a6d73d5266b781da86a87aa4b38f05ac7',1,'helios::ecs::details']]],
   ['fetchcomponentconst_10',['FetchComponentConst',['../namespacehelios_1_1ecs_1_1details.html#ac284fbb030a46e7e45f2e520c2984cfa',1,'helios::ecs::details']]],
   ['fetchcomponentsconst_11',['FetchComponentsConst',['../namespacehelios_1_1ecs_1_1details.html#a2883d36960653314eef20cb253e33462',1,'helios::ecs::details']]],
@@ -268,7 +268,7 @@ var searchData=
   ['framepumporder_265',['FramePumpOrder',['../structhelios_1_1app_1_1FramePumpOrder.html',1,'helios::app']]],
   ['frames_266',['Frames',['../classhelios_1_1Stacktrace.html#a4595e3d7469f45f203c147869fda2fff',1,'helios::Stacktrace']]],
   ['frames_267',['frames',['../structanonymous__namespace_02stacktrace_8cpp_03_1_1CapturedFramesResult.html#a2efe4cfddf06cde8e4cc6d4e4fd1c8d6',1,'anonymous_namespace{stacktrace.cpp}::CapturedFramesResult']]],
-  ['framework_268',['`app` — Application Framework',['../dir_5194e5fea318fda12687127c23f8aba1.html#app--application-framework',1,'']]],
+  ['framework_268',['`app` -- Application Framework',['../dir_5194e5fea318fda12687127c23f8aba1.html#app----application-framework',1,'']]],
   ['free_269',['Free',['../classhelios_1_1profile_1_1Backend.html#a737d64c53d27749818e1b6c2e51ad396',1,'helios::profile::Backend::Free()'],['../classhelios_1_1profile_1_1FlamegraphBackend.html#a171fecfee7a46312a4503520de2e11f1',1,'helios::profile::FlamegraphBackend::Free()'],['../classhelios_1_1profile_1_1TracyBackend.html#a931fd7f33413af62e48c957cadf16a8b',1,'helios::profile::TracyBackend::Free()'],['../classhelios_1_1profile_1_1Profiler.html#a61b53cb532f2f3f953bb3eed79815de4',1,'helios::profile::Profiler::Free()'],['../namespacehelios_1_1profile.html#a6a1101b5d0790dec7623205b29439733',1,'helios::profile::Free()']]],
   ['free_20functions_270',['Free Functions',['../dir_2241064965c8d9ca993f08b926076f7d.html#free-functions',1,'Free Functions'],['../dir_2730ace12cf03b0ba989133b5ac743ea.html#free-functions-1',1,'Free Functions']]],
   ['free_5flist_5fallocator_2ecpp_271',['free_list_allocator.cpp',['../free__list__allocator_8cpp.html',1,'']]],
@@ -329,9 +329,8 @@ var searchData=
   ['functiontype_326',['FunctionType',['../classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a62a3c606a6398c5cd9d7cfcaf3518a29',1,'helios::Delegate&lt; ReturnType(Args...)&gt;']]],
   ['functorsystemtrait_327',['FunctorSystemTrait',['../concepthelios_1_1ecs_1_1FunctorSystemTrait.html',1,'helios::ecs']]],
   ['functortrait_328',['FunctorTrait',['../concepthelios_1_1utils_1_1FunctorTrait.html',1,'helios::utils']]],
-  ['further_20reading_329',['Further Reading',['../dir_217ee790cdc210ca56feb9a8b7616066.html#further-reading-1',1,'']]],
-  ['further_20reading_330',['Further reading',['../md_docs_2guidelines.html#further-reading',1,'']]],
-  ['future_331',['Future',['../classhelios_1_1async_1_1Future.html',1,'helios::async::Future&lt; T &gt;'],['../classhelios_1_1async_1_1Future.html#ade70cf53df1e25c667a6f6f191700812',1,'helios::async::Future::Future()=default'],['../classhelios_1_1async_1_1Future.html#a2e1e93628a63fd28c325762a3352eadb',1,'helios::async::Future::Future(const Future &amp;)=delete'],['../classhelios_1_1async_1_1Future.html#a8358db580c50e96eee22417a168b06ee',1,'helios::async::Future::Future(Future &amp;&amp;other) noexcept=default']]],
-  ['future_2ehpp_332',['future.hpp',['../future_8hpp.html',1,'']]],
-  ['futureonly_333',['FutureOnly',['../structhelios_1_1ecs_1_1MessageCursor.html#ace9faa1ffd686618fd68714eea651219',1,'helios::ecs::MessageCursor']]]
+  ['further_20reading_329',['Further reading',['../md_docs_2guidelines.html#further-reading',1,'']]],
+  ['future_330',['Future',['../classhelios_1_1async_1_1Future.html',1,'helios::async::Future&lt; T &gt;'],['../classhelios_1_1async_1_1Future.html#ade70cf53df1e25c667a6f6f191700812',1,'helios::async::Future::Future()=default'],['../classhelios_1_1async_1_1Future.html#a2e1e93628a63fd28c325762a3352eadb',1,'helios::async::Future::Future(const Future &amp;)=delete'],['../classhelios_1_1async_1_1Future.html#a8358db580c50e96eee22417a168b06ee',1,'helios::async::Future::Future(Future &amp;&amp;other) noexcept=default']]],
+  ['future_2ehpp_331',['future.hpp',['../future_8hpp.html',1,'']]],
+  ['futureonly_332',['FutureOnly',['../structhelios_1_1ecs_1_1MessageCursor.html#ace9faa1ffd686618fd68714eea651219',1,'helios::ecs::MessageCursor']]]
 ];

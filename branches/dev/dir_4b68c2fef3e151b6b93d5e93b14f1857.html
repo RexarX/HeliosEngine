@@ -181,22 +181,22 @@ Directories</h2></td></tr>
 <tr class="memitem:include" id="r_include"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_f522a3de144b4c8ae87ff795abacf224.html">include</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="platform--platform-detection--api-macros"></a>
-`platform` — Platform Detection &amp; API Macros</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="platform----platform-detection--api-macros"></a>
+`platform` -- Platform Detection &amp; API Macros</h1>
 <p>Header-only module providing platform identification and DLL visibility macros. Leaf module with no dependencies.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api-10"></a>
 Public API</h1>
-<p>Macros only — no classes, structs, or functions.</p>
+<p>Macros only &ndash; no classes, structs, or functions.</p>
 <h1 class="doxsection"><a class="anchor" id="usage-2"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="platform_8hpp.html">helios/platform/platform.hpp</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">class </span><a class="code hl_define" href="platform_8hpp.html#af82a8ce6d0033191eafb5eff2173159c">HELIOS_API</a> MyClass { };             <span class="comment">// DLL export/import</span></div>
+<div class="line"><span class="keyword">class </span><a class="code hl_define" href="platform_8hpp.html#af82a8ce6d0033191eafb5eff2173159c">HELIOS_API</a> MyClass { }; <span class="comment">// DLL export/import</span></div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_define" href="platform_8hpp.html#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK</a>();                     <span class="comment">// architecture-specific breakpoint</span></div>
-<div class="line"><a class="code hl_define" href="platform_8hpp.html#add6cedf0b0fe9ba6f9a8e8fa90ed24e2">HELIOS_PAUSE_CPU</a>();                       <span class="comment">// busy-wait pause hint (SDL3-derived)</span></div>
+<div class="line"><a class="code hl_define" href="platform_8hpp.html#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK</a>(); <span class="comment">// architecture-specific breakpoint</span></div>
+<div class="line"><a class="code hl_define" href="platform_8hpp.html#add6cedf0b0fe9ba6f9a8e8fa90ed24e2">HELIOS_PAUSE_CPU</a>();   <span class="comment">// busy-wait pause hint (SDL3-derived)</span></div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor">#if defined(HELIOS_PLATFORM_WINDOWS)</span></div>
+<div class="line"><span class="preprocessor">#ifdef HELIOS_PLATFORM_WINDOWS</span></div>
 <div class="line">  <span class="comment">// Windows-specific code</span></div>
 <div class="line"><span class="preprocessor">#elif defined(HELIOS_PLATFORM_LINUX)</span></div>
 <div class="line">  <span class="comment">// Linux-specific code</span></div>

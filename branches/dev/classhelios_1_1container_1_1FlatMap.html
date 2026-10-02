@@ -756,7 +756,7 @@ requires (FlatMapCompare&lt;Compare, Key&gt; &amp;&amp; FlatMapHash&lt;Hash, Key
 </div><div class="memdoc">
 
 <p>Constructs an empty map backed by <span class="tt">resource</span>. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Triggers <span class="tt"><a class="el" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc" title="Assertion macro that aborts execution in debug builds.">HELIOS_ASSERT</a></span> if <span class="tt">resource</span> is <span class="tt">nullptr</span>. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers <span class="tt"><a class="el" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc" title="Assertion macro that aborts execution when API checks are enabled.">HELIOS_ASSERT</a></span> if <span class="tt">resource</span> is <span class="tt">nullptr</span>. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resource</td><td>Memory resource used for all allocations. Must outlive the map </td></tr>
@@ -909,7 +909,7 @@ requires FlatMapLookupKey&lt;Compare, Key, K&gt;</div>
 </div><div class="memdoc">
 
 <p>Accesses the value for <span class="tt">key</span>. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Triggers <span class="tt"><a class="el" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc" title="Assertion macro that aborts execution in debug builds.">HELIOS_ASSERT</a></span> if <span class="tt">key</span> is not present. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers <span class="tt"><a class="el" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc" title="Assertion macro that aborts execution when API checks are enabled.">HELIOS_ASSERT</a></span> if <span class="tt">key</span> is not present. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">K</td><td><span class="tt">Key</span>, or any type comparable against <span class="tt">Key</span> when <span class="tt">Compare</span> is transparent </td></tr>
@@ -958,7 +958,7 @@ requires FlatMapLookupKey&lt;Compare, Key, K&gt;</div>
 </div><div class="memdoc">
 
 <p>Accesses the value for <span class="tt">key</span>. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Triggers <span class="tt"><a class="el" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc" title="Assertion macro that aborts execution in debug builds.">HELIOS_ASSERT</a></span> if <span class="tt">key</span> is not present. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers <span class="tt"><a class="el" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc" title="Assertion macro that aborts execution when API checks are enabled.">HELIOS_ASSERT</a></span> if <span class="tt">key</span> is not present. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">K</td><td><span class="tt">Key</span>, or any type comparable against <span class="tt">Key</span> when <span class="tt">Compare</span> is transparent </td></tr>
@@ -2956,7 +2956,7 @@ requires (FlatMapCompare&lt;Compare, Key&gt; &amp;&amp; FlatMapHash&lt;Hash, Key
 </div><div class="memdoc">
 
 <p>Swaps contents with <span class="tt">other</span>. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Triggers <span class="tt"><a class="el" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc" title="Assertion macro that aborts execution in debug builds.">HELIOS_ASSERT</a></span> if <span class="tt">other</span> uses a different memory resource - <span class="tt">std::pmr::polymorphic_allocator</span> does not propagate on swap, so swapping storage across resources would leave allocations outliving their owning resource. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers <span class="tt"><a class="el" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc" title="Assertion macro that aborts execution when API checks are enabled.">HELIOS_ASSERT</a></span> if <span class="tt">other</span> uses a different memory resource - <span class="tt">std::pmr::polymorphic_allocator</span> does not propagate on swap, so swapping storage across resources would leave allocations outliving their owning resource. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">other</td><td>Map to swap contents with </td></tr>

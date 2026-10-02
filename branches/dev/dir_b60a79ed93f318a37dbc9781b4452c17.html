@@ -179,11 +179,10 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dir_b60a79ed93
 Directories</h2></td></tr>
 <tr class="memitem:capi" id="r_capi"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_800aa24fad051133d57cf45b76c6603b.html">capi</a></td></tr>
 <tr class="memitem:include" id="r_include"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_d2aeb36cee5dcef22fd62c1ec7e86047.html">include</a></td></tr>
-<tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_e28ee2c9e05b1b8147416a5e6da7896c.html">src</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="async--task-based-parallelism"></a>
-`async` — Task-Based Parallelism</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="async----task-based-parallelism"></a>
+`async` -- Task-Based Parallelism</h1>
 <p>Work-stealing thread pool and task dependency graphs built on <a href="https://taskflow.github.io/taskflow/">Taskflow</a>. Used by the ECS scheduler and the <span class="tt">app</span> module for parallel system execution.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api-1"></a>
 Public API</h1>
@@ -197,7 +196,7 @@ Public API</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">Task</span>  </td><td class="markdownTableBodyNone">Handle within a graph. <span class="tt">Precede</span> / <span class="tt">Succeed</span> for ordering, <span class="tt">Work</span> to assign callables.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">SubTaskGraph</span>  </td><td class="markdownTableBodyNone">Dynamic subflow — create tasks from within a running task. <span class="tt">Join()</span> signals completion.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">SubTaskGraph</span>  </td><td class="markdownTableBodyNone">Dynamic subflow &ndash; create tasks from within a running task. <span class="tt">Join()</span> signals completion.  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">AsyncTask</span>  </td><td class="markdownTableBodyNone">Handle to an independently scheduled task. <span class="tt">Done()</span> checks completion.  </td></tr>
 <tr class="markdownTableRowEven">
@@ -257,10 +256,10 @@ Parallel Algorithms</h1>
 <div class="line">graph.Sort(data, std::less&lt;&gt;{});</div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="independent-async-tasks"></a>
 Independent Async Tasks</h1>
-<div class="fragment"><div class="line"><span class="comment">// Returns std::future — use when you need the result</span></div>
+<div class="fragment"><div class="line"><span class="comment">// Returns std::future - use when you need the result</span></div>
 <div class="line"><span class="keyword">auto</span> result = executor.Async([] { <span class="keywordflow">return</span> 42; });</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Fire-and-forget — lower overhead</span></div>
+<div class="line"><span class="comment">// Fire-and-forget - lower overhead</span></div>
 <div class="line">executor.SilentAsync([] { DoBackgroundWork(); });</div>
 <div class="line"> </div>
 <div class="line">executor.WaitForAll();</div>
@@ -282,8 +281,8 @@ Dynamic Subflows</h1>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="dispatch-paths"></a>
 Dispatch Paths</h1>
 <ol type="1">
-<li><b>Task graph</b> — explicit DAG submitted via <span class="tt">Run()</span> / <span class="tt">RunN()</span> / <span class="tt">RunUntil()</span>.</li>
-<li><b>Independent async</b> — fire-and-forget via <span class="tt">Async()</span> / <span class="tt">SilentAsync()</span> / <span class="tt">DependentAsync()</span>.</li>
+<li><b>Task graph</b> &ndash; explicit DAG submitted via <span class="tt">Run()</span> / <span class="tt">RunN()</span> / <span class="tt">RunUntil()</span>.</li>
+<li><b>Independent async</b> &ndash; fire-and-forget via <span class="tt">Async()</span> / <span class="tt">SilentAsync()</span> / <span class="tt">DependentAsync()</span>.</li>
 </ol>
 <p><span class="tt">CoRun(TaskGraph&amp;)</span> lets a worker thread participate directly in graph execution (must already be a pool worker).</p>
 <h1 class="doxsection"><a class="anchor" id="thread-safety"></a>
@@ -299,8 +298,8 @@ Thread Safety</h1>
 <h1 class="doxsection"><a class="anchor" id="dependencies-1"></a>
 Dependencies</h1>
 <ul>
-<li><span class="tt">core</span> — asserts</li>
-<li><span class="tt">compiler</span>, <span class="tt">platform</span> — via core</li>
+<li><span class="tt">core</span> &ndash; asserts</li>
+<li><span class="tt">compiler</span>, <span class="tt">platform</span> &ndash; via core</li>
 <li>External: Taskflow (header-only), TBB (Linux/GCC parallel STL backend) </li>
 </ul>
 </div></div><!-- contents -->

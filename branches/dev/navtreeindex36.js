@@ -1,8 +1,5 @@
 var NAVTREEINDEX36 =
 {
-"namespacehelios_1_1input_1_1anonymous__namespace_02pen_8cpp_03.html#ac5301f0b7625bc78f8781be0180807f2":[2,0,4,7,1,0],
-"namespacehelios_1_1input_1_1anonymous__namespace_02touch_8cpp_03.html":[2,0,4,7,2],
-"namespacehelios_1_1input_1_1anonymous__namespace_02touch_8cpp_03.html#aabbe30d0f23fa9a296a594a29e40864d":[2,0,4,7,2,0],
 "namespacehelios_1_1log.html":[2,0,4,8],
 "namespacehelios_1_1log.html#a09e6fd6d41ebe0ab0a501e48a909f1e2":[2,0,4,8,28],
 "namespacehelios_1_1log.html#a167cd90b4cdc6eb96fe6c1cd1f15e7a1":[2,0,4,8,36],
@@ -249,5 +246,8 @@ var NAVTREEINDEX36 =
 "namespacehelios_1_1sdl3_1_1window.html#ac0035947ef6298127cb4f790d4e16cdd":[2,0,4,11,3,42],
 "namespacehelios_1_1sdl3_1_1window.html#ac8bd072ed2fd9c81f9293e02d6bbebd5":[2,0,4,11,3,49],
 "namespacehelios_1_1sdl3_1_1window.html#ad2c7a6c4fec368aa906c4446fb52ec64":[2,0,4,11,3,50],
-"namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02apply_8cpp_03.html":[2,0,4,11,3,0]
+"namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02apply_8cpp_03.html":[2,0,4,11,3,0],
+"namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02apply_8cpp_03.html#a4d4d3d6c4ea58ddf5d025016384df0b4":[2,0,4,11,3,0,0],
+"namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html":[2,0,4,11,3,1],
+"namespacehelios_1_1sdl3_1_1window_1_1anonymous__namespace_02event__handlers_8cpp_03.html#a10094ae9b1c564c98fe471da9583d827":[2,0,4,11,3,1,3]
 };

@@ -1,8 +1,5 @@
 var NAVTREEINDEX57 =
 {
-"structstd_1_1formatter_3_01helios_1_1input_1_1MouseMotionMsg_01_4.html":[2,0,6,49],
-"structstd_1_1formatter_3_01helios_1_1input_1_1MouseMotionMsg_01_4.html":[4,0,3,49],
-"structstd_1_1formatter_3_01helios_1_1input_1_1MouseMotionMsg_01_4.html#a40467033354ed6e25e84812a61e8e8ca":[2,0,6,49,0],
 "structstd_1_1formatter_3_01helios_1_1input_1_1MouseMotionMsg_01_4.html#a40467033354ed6e25e84812a61e8e8ca":[4,0,3,49,0],
 "structstd_1_1formatter_3_01helios_1_1input_1_1MouseMotionMsg_01_4.html#ac4f0b9c0610556bd12a8cb8515a8b6df":[2,0,6,49,1],
 "structstd_1_1formatter_3_01helios_1_1input_1_1MouseMotionMsg_01_4.html#ac4f0b9c0610556bd12a8cb8515a8b6df":[4,0,3,49,1],
@@ -249,5 +246,8 @@ var NAVTREEINDEX57 =
 "structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html":[2,0,6,89],
 "structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html":[4,0,3,89],
 "structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html#a97158be89e24dbf583ed657dad7ad171":[2,0,6,89,1],
-"structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html#a97158be89e24dbf583ed657dad7ad171":[4,0,3,89,1]
+"structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html#a97158be89e24dbf583ed657dad7ad171":[4,0,3,89,1],
+"structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html#ae30c3bcbd471d63a00b58adf8472e4db":[2,0,6,89,0],
+"structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html#ae30c3bcbd471d63a00b58adf8472e4db":[4,0,3,89,0],
+"structstd_1_1formatter_3_01helios_1_1window_1_1ExclusiveVideoMode_01_4.html":[2,0,6,90]
 };

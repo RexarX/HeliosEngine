@@ -1,9 +1,5 @@
 var NAVTREEINDEX28 =
 {
-"classhelios_1_1utils_1_1TakeWhileAdapter.html#a5e1923f3d0347b83fe115fe16f7098b0":[4,0,2,11,26,14],
-"classhelios_1_1utils_1_1TakeWhileAdapter.html#a72bb354d27dd31d4838667afb174b50c":[2,0,4,12,27,12],
-"classhelios_1_1utils_1_1TakeWhileAdapter.html#a72bb354d27dd31d4838667afb174b50c":[4,0,2,11,26,12],
-"classhelios_1_1utils_1_1TakeWhileAdapter.html#a836ca84d59c9078ce9b4fb770ea6b359":[2,0,4,12,27,20],
 "classhelios_1_1utils_1_1TakeWhileAdapter.html#a836ca84d59c9078ce9b4fb770ea6b359":[4,0,2,11,26,20],
 "classhelios_1_1utils_1_1TakeWhileAdapter.html#a86cbf37426dfedd76931f68685fcdd1c":[2,0,4,12,27,8],
 "classhelios_1_1utils_1_1TakeWhileAdapter.html#a86cbf37426dfedd76931f68685fcdd1c":[4,0,2,11,26,8],
@@ -249,5 +245,9 @@ var NAVTREEINDEX28 =
 "concepthelios_1_1details_1_1DecaysToFunctionPointer.html":[3,0,3,1],
 "concepthelios_1_1details_1_1EmptyDefaultCallable.html":[2,0,4,4,18],
 "concepthelios_1_1details_1_1EmptyDefaultCallable.html":[3,0,3,2],
-"concepthelios_1_1details_1_1HasUnambiguousCallOperator.html":[2,0,4,4,16]
+"concepthelios_1_1details_1_1HasUnambiguousCallOperator.html":[2,0,4,4,16],
+"concepthelios_1_1details_1_1HasUnambiguousCallOperator.html":[3,0,3,0],
+"concepthelios_1_1details_1_1SafeTemporaryCallable.html":[2,0,4,4,19],
+"concepthelios_1_1details_1_1SafeTemporaryCallable.html":[3,0,3,3],
+"concepthelios_1_1ecs_1_1AnyMessageTrait.html":[2,0,4,5,163]
 };

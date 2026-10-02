@@ -199,7 +199,7 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a242b112c1c22a1166b0873f5dbcaa5fc" id="r_a242b112c1c22a1166b0873f5dbcaa5fc"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(condition, ...)</td></tr>
-<tr class="memdesc:a242b112c1c22a1166b0873f5dbcaa5fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assertion macro that aborts execution in debug builds.  <br /></td></tr>
+<tr class="memdesc:a242b112c1c22a1166b0873f5dbcaa5fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assertion macro that aborts execution when API checks are enabled.  <br /></td></tr>
 <tr class="memitem:a717b59a334b4e29f2d1bcd580de3d38f" id="r_a717b59a334b4e29f2d1bcd580de3d38f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a717b59a334b4e29f2d1bcd580de3d38f">HELIOS_INVARIANT</a>(condition, ...)</td></tr>
 <tr class="memdesc:a717b59a334b4e29f2d1bcd580de3d38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invariant check that asserts in debug builds and logs error in release.  <br /></td></tr>
 <tr class="memitem:a8b8608656bafeab9911c16dce4827a04" id="r_a8b8608656bafeab9911c16dce4827a04"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(condition, ...)</td></tr>
@@ -257,8 +257,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Assertion macro that aborts execution in debug builds. </p>
-<p>Does nothing in release builds. Uses the configured assertion handler (custom -&gt; log plugin -&gt; default). Supports format strings and arguments. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Assertion macro that aborts execution when API checks are enabled. </p>
+<p>Compiled in for Debug and RelWithDebInfo. A checked SDK install defines <span class="tt">HELIOS_ENABLE_ASSERTS</span> for every consumer. A shipping SDK leaves it unset; define it to check inline API misuse. Checks inside that shared library stay off. Does nothing when the macro is unset. Uses the configured assertion handler (custom -&gt; log plugin -&gt; default). Supports format strings and arguments. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">condition</td><td>The condition to check </td></tr>
     <tr><td class="paramname">...</td><td>Optional message (can be format string with arguments) </td></tr>
@@ -266,7 +266,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00237">237</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00240">240</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>
@@ -298,7 +298,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00270">270</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00273">273</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>
@@ -330,7 +330,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00295">295</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00298">298</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
 
 </div>
 </div>

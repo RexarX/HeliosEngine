@@ -182,8 +182,8 @@ Directories</h2></td></tr>
 <tr class="memitem:src" id="r_src"><td class="memItemLeft"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight"><a class="el" href="dir_2fc95bd087e09d964df8e9d0b1c0661a.html">src</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="app--application-framework"></a>
-`app` — Application Framework</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="app----application-framework"></a>
+`app` -- Application Framework</h1>
 <p>High-level application layer that wires together the ECS, async executor, plugins, and frame scheduling. Owns the main game loop, builtin schedules, and optional sub-apps for parallel or background worlds.</p>
 <h1 class="doxsection"><a class="anchor" id="public-api"></a>
 Public API</h1>
@@ -245,7 +245,7 @@ Builtin Stages &amp; Schedules (<span class="tt">schedules.hpp</span>)</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">kShutdownStage</span>  </td><td class="markdownTableBodyNone"><span class="tt">kPreShutdown</span>, <span class="tt">kShutdown</span>, <span class="tt">kPostShutdown</span>  </td></tr>
 </table>
-<p>Stages are grouping namespaces only — they are never run directly. Call <span class="tt">RegisterBuiltinSchedules(scheduler)</span> to wire default ordering and executor kinds.</p>
+<p>Stages are grouping namespaces only &ndash; they are never run directly. Call <span class="tt">RegisterBuiltinSchedules(scheduler)</span> to wire default ordering and executor kinds.</p>
 <p>Default executor kinds:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -329,9 +329,9 @@ Quick Start</h1>
 Lifecycle</h1>
 <div class="fragment"><div class="line">Run() → Initialize() → runner_(*this) → CleanUp()</div>
 </div><!-- fragment --><ol type="1">
-<li><b>Initialize</b> — builds plugins, waits for readiness, finishes plugins, builds scheduler, runs startup.</li>
-<li><b>Runner</b> — defaults to <span class="tt">RunDefault</span> (calls <span class="tt">Update()</span> each frame until <span class="tt">AppExit</span>).</li>
-<li><b>CleanUp</b> — shutdown schedules, plugin destruction, waits for async work.</li>
+<li><b>Initialize</b> &ndash; builds plugins, waits for readiness, finishes plugins, builds scheduler, runs startup.</li>
+<li><b>Runner</b> &ndash; defaults to <span class="tt">RunDefault</span> (calls <span class="tt">Update()</span> each frame until <span class="tt">AppExit</span>).</li>
+<li><b>CleanUp</b> &ndash; shutdown schedules, plugin destruction, waits for async work.</li>
 </ol>
 <p><span class="tt">ShouldExit()</span> reads <span class="tt">AppExit</span> from the main world. Systems write it via <span class="tt">MessageWriter&lt;AppExit&gt;</span>.</p>
 <h1 class="doxsection"><a class="anchor" id="frame-lifecycle"></a>
@@ -340,9 +340,9 @@ Frame Lifecycle</h1>
 <ol type="1">
 <li>Reset extract flags.</li>
 <li>For each stage in <span class="tt">MainFrameOrder</span> (default Update -&gt; Extract): run schedules (<span class="tt">ApplyDeferred</span> per schedule), optional stage <span class="tt">apply_commands</span> / <span class="tt">merge_messages</span>, then <span class="tt">MessageManager::Update()</span> when the stage is last in the order and has <span class="tt">advance_messages</span> (Extract on main).</li>
-<li><b>Extract stage</b> — main extract schedules, then sub-app extraction (mode-dependent).</li>
-<li><b>Launch sub-app updates</b> — blocking sub-apps in parallel; overlapping only when fresh extract exists.</li>
-<li><b>WaitForSubApps</b> — joins blocking sub-apps.</li>
+<li><b>Extract stage</b> &ndash; main extract schedules, then sub-app extraction (mode-dependent).</li>
+<li><b>Launch sub-app updates</b> &ndash; blocking sub-apps in parallel; overlapping only when fresh extract exists.</li>
+<li><b>WaitForSubApps</b> &ndash; joins blocking sub-apps.</li>
 </ol>
 <p>Nested <span class="tt">FramePumpOrder</span> pumps (Update only) advance message buffers on <span class="tt">kUpdateStage</span>. <span class="tt">FrameLimiterPlugin</span> prepends <span class="tt">kFramePaceStage</span> on <span class="tt">MainFrameOrder</span> only, so nested pumps and window polling are not delayed by the cap. See <span class="tt">examples/app/frame_limit.cpp</span>.</p>
 <h1 class="doxsection"><a class="anchor" id="frame-limiter"></a>
@@ -413,10 +413,10 @@ Custom Runner</h1>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="dependencies"></a>
 Dependencies</h1>
 <ul>
-<li><span class="tt">async</span> — work-stealing executor</li>
-<li><span class="tt">ecs</span> — world, schedules, systems</li>
-<li><span class="tt">log</span> — logging</li>
-<li><span class="tt">utils</span> — type info, traits </li>
+<li><span class="tt">async</span> &ndash; work-stealing executor</li>
+<li><span class="tt">ecs</span> &ndash; world, schedules, systems</li>
+<li><span class="tt">log</span> &ndash; logging</li>
+<li><span class="tt">utils</span> &ndash; type info, traits </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,8 +1,5 @@
 var NAVTREEINDEX43 =
 {
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01const_01T_01_4_01_4.html#af5bae9fe97cdca0aae801dc59eb7fdaf":[2,0,4,5,123,1],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01OptRes_3_01const_01T_01_4_01_4.html#af5bae9fe97cdca0aae801dc59eb7fdaf":[4,0,2,4,121,1],
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01Query_3_01Args_8_8_8_01_4_01_4.html":[2,0,4,5,125],
 "structhelios_1_1ecs_1_1SystemParamTraits_3_01Query_3_01Args_8_8_8_01_4_01_4.html":[4,0,2,4,123],
 "structhelios_1_1ecs_1_1SystemParamTraits_3_01Query_3_01Args_8_8_8_01_4_01_4.html#a017cd67f8d597b5178d042f505584108":[2,0,4,5,125,2],
 "structhelios_1_1ecs_1_1SystemParamTraits_3_01Query_3_01Args_8_8_8_01_4_01_4.html#a017cd67f8d597b5178d042f505584108":[4,0,2,4,123,2],
@@ -249,5 +246,8 @@ var NAVTREEINDEX43 =
 "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07Args_8_8_8_08_4.html#a0f45b5f04da2563aca0d8a2f8a1c6b16":[2,0,4,5,3,17,0],
 "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07Args_8_8_8_08_4.html#a0f45b5f04da2563aca0d8a2f8a1c6b16":[4,0,2,4,1,17,0],
 "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_01noexcept_01_4.html":[2,0,4,5,3,14],
-"structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_01noexcept_01_4.html":[4,0,2,4,1,14]
+"structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_01noexcept_01_4.html":[4,0,2,4,1,14],
+"structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_4.html":[2,0,4,5,3,15],
+"structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_4.html":[4,0,2,4,1,15],
+"structhelios_1_1ecs_1_1details_1_1HasStructBundleBuild.html":[2,0,4,5,3,18]
 };

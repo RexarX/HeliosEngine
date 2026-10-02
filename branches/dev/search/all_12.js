@@ -37,7 +37,7 @@ var searchData=
   ['order_34',['Tag order',['../md_docs_2guidelines.html#tag-order',1,'']]],
   ['ordering_35',['Ordering',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#ordering',1,'']]],
   ['orderstage_36',['OrderStage',['../classhelios_1_1ecs_1_1Scheduler.html#adf69f6adbc318d0d06faa7bd1aa5751a',1,'helios::ecs::Scheduler::OrderStage(StageTypeIndex index)'],['../classhelios_1_1ecs_1_1Scheduler.html#aabd6cf5df1b9d9d5db2d9bdb7b845ead',1,'helios::ecs::Scheduler::OrderStage(const T &amp;stage={})']]],
-  ['oriented_20containers_37',['`container` — Data-Oriented Containers',['../dir_1b313d86a3cedf427c8a82c0995b1bb6.html#container--data-oriented-containers',1,'']]],
+  ['oriented_20containers_37',['`container` -- Data-Oriented Containers',['../dir_1b313d86a3cedf427c8a82c0995b1bb6.html#container----data-oriented-containers',1,'']]],
   ['other_20scripts_38',['Other scripts',['../index.html#other-scripts',1,'']]],
   ['output_5fpath_39',['output_path',['../structhelios_1_1profile_1_1FlamegraphBackendConfig.html#a3899e2c69f33fc28bdfad21d1eac335f',1,'helios::profile::FlamegraphBackendConfig']]],
   ['overlappingupdatessubapptrait_40',['OverlappingUpdatesSubAppTrait',['../concepthelios_1_1app_1_1OverlappingUpdatesSubAppTrait.html',1,'helios::app']]],

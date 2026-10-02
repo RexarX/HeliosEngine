@@ -1,8 +1,5 @@
 var NAVTREEINDEX31 =
 {
-"functions_func_j.html":[4,3,1,9],
-"functions_func_l.html":[4,3,1,10],
-"functions_func_m.html":[4,3,1,11],
 "functions_func_n.html":[4,3,1,12],
 "functions_func_o.html":[4,3,1,13],
 "functions_func_p.html":[4,3,1,14],
@@ -174,7 +171,7 @@ var NAVTREEINDEX31 =
 "index.html":[],
 "index.html#about-the-project":[0,1],
 "index.html#acknowledgments":[0,9],
-"index.html#all-platforms--build-tools":[0,3,1,0],
+"index.html#all-platforms----build-tools":[0,3,1,0],
 "index.html#api-reference-doxygen":[0,6,0],
 "index.html#building":[0,3,2],
 "index.html#c20-modules":[0,3,3],
@@ -190,11 +187,11 @@ var NAVTREEINDEX31 =
 "index.html#key-features":[0,1,0],
 "index.html#license":[0,10],
 "index.html#linking":[0,3,4],
-"index.html#linux-apt--ubuntu--debian":[0,3,1,1],
+"index.html#linux-apt----ubuntu--debian":[0,3,1,1],
 "index.html#linux-clang":[0,3,2,1],
-"index.html#linux-dnf--fedora":[0,3,1,2],
+"index.html#linux-dnf----fedora":[0,3,1,2],
 "index.html#linux-gcc":[0,3,2,0],
-"index.html#linux-pacman--arch":[0,3,1,3],
+"index.html#linux-pacman----arch":[0,3,1,3],
 "index.html#macos-clang":[0,3,2,3],
 "index.html#macos-homebrew":[0,3,1,4],
 "index.html#method-1-add_subdirectory":[0,5,0],
@@ -249,5 +246,8 @@ var NAVTREEINDEX31 =
 "local__arena_8hpp.html":[5,0,2,6,1,0,0,6,2],
 "local__arena_8hpp_source.html":[5,0,2,6,1,0,0,6,2],
 "lock_8hpp.html":[5,0,2,12,1,0,0,1,0],
-"lock_8hpp.html#a08f7e47912c8224115b7dd266874e06c":[5,0,2,12,1,0,0,1,0,0]
+"lock_8hpp.html#a08f7e47912c8224115b7dd266874e06c":[5,0,2,12,1,0,0,1,0,0],
+"lock_8hpp.html#a14157793a586de40d1212e01a49858f9":[5,0,2,12,1,0,0,1,0,1],
+"lock_8hpp.html#a1bd99bebb832b5756c6114cf6993002f":[5,0,2,12,1,0,0,1,0,4],
+"lock_8hpp.html#a41ca23bd0d3e13b01f3d7fd84a0596f6":[5,0,2,12,1,0,0,1,0,3]
 };

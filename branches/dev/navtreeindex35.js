@@ -1,8 +1,5 @@
 var NAVTREEINDEX35 =
 {
-"namespacehelios_1_1input.html#a9428ae91737625870558a82a3612d997a25c2dc47991b3df171ed5192bcf70390":[2,0,4,7,104,0],
-"namespacehelios_1_1input.html#a9428ae91737625870558a82a3612d997a26b4b47bba823097bbd605c4f5877fde":[2,0,4,7,104,11],
-"namespacehelios_1_1input.html#a9428ae91737625870558a82a3612d997a27963ec968c1e151c78a1d7c8a97b178":[2,0,4,7,104,41],
 "namespacehelios_1_1input.html#a9428ae91737625870558a82a3612d997a2d5fde1d924910a2a01ecd8e70a87c28":[2,0,4,7,104,58],
 "namespacehelios_1_1input.html#a9428ae91737625870558a82a3612d997a2dd2b017192f8a09367d48c7648213c9":[2,0,4,7,104,57],
 "namespacehelios_1_1input.html#a9428ae91737625870558a82a3612d997a2e4b5626d52f8ce6e31680b40f2c9778":[2,0,4,7,104,24],
@@ -249,5 +246,8 @@ var NAVTREEINDEX35 =
 "namespacehelios_1_1input_1_1anonymous__namespace_02gamepad_8cpp_03.html#a7799c3fdc804737040b87aa9ad4e682e":[2,0,4,7,0,2],
 "namespacehelios_1_1input_1_1anonymous__namespace_02gamepad_8cpp_03.html#af31b0301ee67c85bc9d719691f63e814":[2,0,4,7,0,0],
 "namespacehelios_1_1input_1_1anonymous__namespace_02gamepad_8cpp_03.html#afcf20a0c7a602094d7cbb17e9625ac15":[2,0,4,7,0,5],
-"namespacehelios_1_1input_1_1anonymous__namespace_02pen_8cpp_03.html":[2,0,4,7,1]
+"namespacehelios_1_1input_1_1anonymous__namespace_02pen_8cpp_03.html":[2,0,4,7,1],
+"namespacehelios_1_1input_1_1anonymous__namespace_02pen_8cpp_03.html#ac5301f0b7625bc78f8781be0180807f2":[2,0,4,7,1,0],
+"namespacehelios_1_1input_1_1anonymous__namespace_02touch_8cpp_03.html":[2,0,4,7,2],
+"namespacehelios_1_1input_1_1anonymous__namespace_02touch_8cpp_03.html#aabbe30d0f23fa9a296a594a29e40864d":[2,0,4,7,2,0]
 };

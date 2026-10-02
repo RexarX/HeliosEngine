@@ -1,8 +1,5 @@
 var NAVTREEINDEX58 =
 {
-"structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html#ae30c3bcbd471d63a00b58adf8472e4db":[2,0,6,89,0],
-"structstd_1_1formatter_3_01helios_1_1window_1_1EventMode_01_4.html#ae30c3bcbd471d63a00b58adf8472e4db":[4,0,3,89,0],
-"structstd_1_1formatter_3_01helios_1_1window_1_1ExclusiveVideoMode_01_4.html":[2,0,6,90],
 "structstd_1_1formatter_3_01helios_1_1window_1_1ExclusiveVideoMode_01_4.html":[4,0,3,90],
 "structstd_1_1formatter_3_01helios_1_1window_1_1ExclusiveVideoMode_01_4.html#ab4ed5883695510c68855071dd49f912f":[2,0,6,90,1],
 "structstd_1_1formatter_3_01helios_1_1window_1_1ExclusiveVideoMode_01_4.html#ab4ed5883695510c68855071dd49f912f":[4,0,3,90,1],
@@ -249,5 +246,8 @@ var NAVTREEINDEX58 =
 "time_8cpp.html":[5,0,2,0,2,0,3],
 "time_8cpp_source.html":[5,0,2,0,2,0,3],
 "time_8hpp.html":[5,0,2,0,1,0,0,0,4],
-"time_8hpp_source.html":[5,0,2,0,1,0,0,0,4]
+"time_8hpp_source.html":[5,0,2,0,1,0,0,0,4],
+"timer_8hpp.html":[5,0,2,16,1,0,0,12],
+"timer_8hpp_source.html":[5,0,2,16,1,0,0,12],
+"touch_8cpp.html":[5,0,2,8,2,0,7]
 };
