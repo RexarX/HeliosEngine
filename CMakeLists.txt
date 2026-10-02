@@ -5,8 +5,10 @@ if(CMAKE_VERSION VERSION_GREATER_EQUAL "4.0")
   set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING "Minimum CMake policy version" FORCE)
 endif()
 
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/ProjectVersion.cmake")
+
 project(HeliosEngine
-    VERSION 0.1.0
+    VERSION ${HELIOS_PROJECT_VERSION}
     DESCRIPTION "ECS based data-oriented game engine framework"
     HOMEPAGE_URL "https://github.com/RexarX/HeliosEngine"
     LANGUAGES CXX
@@ -91,8 +93,12 @@ option(HELIOS_ENABLE_UNITY_BUILD "Enable Unity/Jumbo builds" OFF)
 # LTO default ON for standalone engine builds; OFF when embedded so consumers
 # are not forced into LTO bitcode without opting in.
 option(HELIOS_ENABLE_LTO "Enable Link Time Optimization" ${PROJECT_IS_TOP_LEVEL})
-cmake_dependent_option(HELIOS_ENABLE_LTO_RELWITHDEBINFO "Enable LTO for RelWithDebInfo" OFF
-                       "HELIOS_ENABLE_LTO" OFF)
+cmake_dependent_option(HELIOS_ENABLE_LTO_RELWITHDEBINFO
+    "ThinLTO / parallel WHOPR / incremental LTCG for RelWithDebInfo" OFF
+    "HELIOS_ENABLE_LTO" OFF)
+cmake_dependent_option(HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO
+    "Full LTO for RelWithDebInfo, the same IPO mode as Release" OFF
+    "HELIOS_ENABLE_LTO" OFF)
 option(HELIOS_ENABLE_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 option(HELIOS_ENABLE_INSTALL "Enable installation rules" OFF)
 option(HELIOS_BUILD_ALL_MODULES "Build every discovered module regardless of DEFAULT value" OFF)
@@ -201,33 +207,29 @@ message(STATUS "========================================")
 message(STATUS "Configuring Helios Modules...")
 message(STATUS "========================================")
 
-if(HELIOS_BUILD_EXAMPLES)
-  helios_add_extra_module_dirs("${CMAKE_CURRENT_SOURCE_DIR}/examples/custom_module")
-endif()
-
-# Pass 1: Discover and register all modules (two-pass: registration scan + ALL_MODULES)
-helios_discover_modules(
-    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
-helios_discover_extra_module_dirs()
-
-# Pass 1C-E: Resolve and validate
-helios_resolve_module_dependencies()
-helios_validate_module_dependencies()
-helios_validate_module_backend_implementations()
-
 if(HELIOS_BUILD_C_API)
   enable_language(C)
 endif()
 
-# Pass 2: Build enabled modules in topological order
-helios_build_discovered_modules()
-helios_add_umbrella_cxx_module()
+if(HELIOS_BUILD_EXAMPLES)
+  helios_add_extra_module_dirs("${CMAKE_CURRENT_SOURCE_DIR}/examples/custom-module")
+endif()
 
-# Print summaries
-helios_print_modules()
-helios_print_module_build_options()
-helios_print_dependency_summary()
+include(cmake/ModuleGraph.cmake)
+include(cmake/Sdk.cmake)
+helios_write_abi_header()
+helios_configure_module_graph()
+helios_add_umbrella_cxx_module()
+helios_write_sdk_artifacts()
+
+if(HELIOS_BUILD_TESTS)
+  find_package(Python3 3.11 REQUIRED COMPONENTS Interpreter)
+  add_test(
+      NAME helios_modules_unit
+      COMMAND ${Python3_EXECUTABLE} -m unittest helios_modules.tests.test_resolve helios_modules.tests.test_sdk
+      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/scripts"
+  )
+endif()
 
 # ============================================================================
 # Testing

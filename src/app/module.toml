@@ -1,0 +1,24 @@
+[module]
+name = "helios_app"
+version = "0.1.0"
+description = "Application framework module"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_async", "helios_compiler", "helios_container", "helios_core", "helios_ecs", "helios_log", "helios_memory", "helios_platform", "helios_utils"]
+private = []
+
+[dependencies.optional]
+public = ["helios_profile"]
+private = []
+
+[features.enable_profile]
+default = true
+abi = false
+description = "Enable profiling in the helios_app module if helios_profile module is available"

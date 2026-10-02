@@ -7,6 +7,6 @@ include_guard(GLOBAL)
 
 include(Primitives)
 include(ModuleRegistry)
-include(ModuleDiscovery)
-include(ModuleBuilder)
+include(ModuleDeclarations)
+include(ModuleFinalize)
 include(ModuleLinking)

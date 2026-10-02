@@ -65,18 +65,18 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 ### Key Features
 
-- **ECS** — archetype and sparse-set storage, deferred `Commands`, rich query iterators
-- **Parallel scheduling** — access-conflict detection, topological execution, Taskflow-backed executors
-- **Application layer** — `App` / `SubApp` lifecycle, builtin schedules, static and dynamic plugins
-- **Modular build** — independent modules; enable only what you need
-- **Modern C++23** — concepts, ranges, `std::expected`, PMR allocators
-- **Flexible dependencies** — system packages first, [CPM](https://github.com/cpm-cmake/CPM.cmake) download as fallback
+- **ECS** -- archetype and sparse-set storage, deferred `Commands`, rich query iterators
+- **Parallel scheduling** -- access-conflict detection, topological execution, Taskflow-backed executors
+- **Application layer** -- `App` / `SubApp` lifecycle, builtin schedules, static and dynamic plugins
+- **Modular build** -- independent modules; enable only what you need
+- **Modern C++23** -- concepts, ranges, `std::expected`, PMR allocators
+- **Flexible dependencies** -- system packages first, [CPM](https://github.com/cpm-cmake/CPM.cmake) download as fallback
 
 ### Design Philosophy
 
-1. **Data-oriented design** — components stored contiguously for cache-friendly iteration
-2. **Composability** — behavior emerges from systems operating on component data
-3. **Explicitness** — data access declared through system parameter types; schedules resolve ordering
+1. **Data-oriented design** -- components stored contiguously for cache-friendly iteration
+2. **Composability** -- behavior emerges from systems operating on component data
+3. **Explicitness** -- data access declared through system parameter types; schedules resolve ordering
 
 <a href="#readme-top">↑ Back to Top</a>
 
@@ -116,12 +116,11 @@ cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW
 
 ### Requirements
 
-| Tool             | Minimum                         | Recommended                 |
-| ---------------- | ------------------------------- | --------------------------- |
-| **CMake**        | 3.25+                           | 3.28+                       |
-| **C++ compiler** | GCC 14+, Clang 19+, MSVC 19.34+ | GCC 15+, Clang 21+          |
-| **Generator**    | —                               | Ninja                       |
-| **Python**       | 3.8+                            | 3.10+ (scripts, pre-commit) |
+| Tool             | Minimum                         | Recommended        |
+| ---------------- | ------------------------------- | ------------------ |
+| **CMake**        | 3.25+                           | 3.28+              |
+| **C++ compiler** | GCC 14+, Clang 19+, MSVC 19.34+ | GCC 15+, Clang 21+ |
+| **Python**       | 3.11+                           | 3.11+              |
 
 ```bash
 git clone https://github.com/RexarX/HeliosEngine.git
@@ -146,16 +145,16 @@ are missing. Windows and macOS need no extra packages for these backends.
 
 Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/dependencies/).
 
-#### All platforms — build tools
+#### All platforms -- build tools
 
-| Tool         | Purpose                                 |
-| ------------ | --------------------------------------- |
-| CMake ≥ 3.25 | Configure and build                     |
-| Ninja        | Recommended generator (used by presets) |
-| clang-format | Code formatting (`scripts/format.py`)   |
-| Doxygen      | API docs (`scripts/docs.py`) — optional |
+| Tool         | Purpose                                  |
+| ------------ | ---------------------------------------- |
+| CMake ≥ 3.25 | Configure and build                      |
+| Ninja        | Recommended generator (used by presets)  |
+| clang-format | Code formatting (`scripts/format.py`)    |
+| Doxygen      | API docs (`scripts/docs.py`) -- optional |
 
-#### Linux (APT — Ubuntu / Debian)
+#### Linux (APT -- Ubuntu / Debian)
 
 ```bash
 sudo apt-get update
@@ -176,7 +175,7 @@ sudo apt-get install -y libwayland-dev libxkbcommon-dev libx11-dev \
   libxfixes-dev libxss-dev libxtst-dev
 ```
 
-#### Linux (DNF — Fedora)
+#### Linux (DNF -- Fedora)
 
 ```bash
 sudo dnf install -y ninja-build  boost-devel tbb-devel
@@ -197,7 +196,7 @@ sudo dnf install -y wayland-devel libxkbcommon-devel libX11-devel \
   libXfixes-devel libXScrnSaver-devel libXtst-devel
 ```
 
-#### Linux (Pacman — Arch)
+#### Linux (Pacman -- Arch)
 
 ```bash
 sudo pacman -S --needed ninja boost tbb
@@ -234,7 +233,7 @@ brew install clang-format doxygen
 
 #### Windows (MSVC)
 
-No system packages required for a minimal build — MSVC + Ninja (via Visual Studio) is sufficient; missing libraries are fetched by CPM.
+No system packages required for a minimal build -- MSVC + Ninja (via Visual Studio) is sufficient; missing libraries are fetched by CPM.
 
 ```bat
 # Optional: LLVM clang-format for local formatting and clang-tidy for linting
@@ -322,17 +321,17 @@ Requires **CMake 3.28+** and **Ninja** or Visual Studio 17.4+. Unix Makefiles fa
 **How it is implemented.** Each engine module still ships textual headers. When modules are on, a `.cppm` interface unit (`modules/helios.<name>.cppm`, listed in `MODULE_SOURCES`) wraps those headers in Boost-style `export extern "C++"` so declarations keep classic C++ ABI.
 `#include <helios/...>` and `import helios.X` name the same types and link the same library.
 Implementation `.cpp` files stay classic translation units (no `module helios.X;`).
-Named modules cannot export macros — `#include` `<helios/assert.hpp>`, `<helios/compiler/compiler.hpp>`, `<helios/platform/platform.hpp>`, or `<helios/utils/macro.hpp>` when you need those macros.
+Named modules cannot export macros -- `#include` `<helios/assert.hpp>`, `<helios/compiler/compiler.hpp>`, `<helios/platform/platform.hpp>`, or `<helios/utils/macro.hpp>` when you need those macros.
 
-| Consumer code                                      | Link                  |
-| -------------------------------------------------- | --------------------- |
-| `import helios.app;` (or `ecs`, `log`, ...)        | `helios::app`         |
-| `import helios.sdl3.window;`                       | `helios::sdl3_window` |
-| `import helios;` (re-exports every enabled module) | `helios::helios`      |
+| Consumer code                                      | Link                   |
+| -------------------------------------------------- | ---------------------- |
+| `import helios.app;` (or `ecs`, `log`, ...)        | `helios::app`          |
+| `import helios.sdl3.window;`                       | `helios::sdl3::window` |
+| `import helios;` (re-exports every enabled module) | `helios::helios`       |
 
-On MSVC without `import std`, put standard-library `#include`s **before** `import`. Do not scan TUs that only `#include` Helios — MSVC injects `import` into every scanned file.
+On MSVC without `import std`, put standard-library `#include`s **before** `import`. Do not scan TUs that only `#include` Helios -- MSVC injects `import` into every scanned file.
 
-A runnable `import` sample is configured only when this flag is on: [examples/cxx_modules](examples/cxx_modules).
+A runnable `import` sample is configured only when this flag is on: [examples/cxx-modules](examples/cxx-modules).
 
 ```bash
 cmake --build --preset linux-gcc-debug --target cxx_modules_example
@@ -380,7 +379,7 @@ Helios picks a faster linker when one is installed (`cmake/helpers/Linker.cmake`
 
 - **Linux (ELF):** [mold](https://github.com/rui314/mold) if found, otherwise lld, otherwise the system linker.
 - **macOS:** mold is skipped (it does not link Mach-O). lld is used if `ld.lld` is on `PATH`; otherwise Apple `ld`.
-- **Windows (MSVC):** [RAD Linker](https://github.com/EpicGames/raddebugger) for Debug and non-LTO RelWithDebInfo when `radlink` is available, then `lld-link`, then `link.exe`. **clang-cl** prefers `lld-link` (RAD can fail on some clang-cl C++ COMDATs). Release LTO (MSVC LTCG) and RelWithDebInfo with `HELIOS_ENABLE_LTO_RELWITHDEBINFO=ON` keep `link.exe`; clang-cl LTO uses `lld-link`. RAD is not used with MSVC AddressSanitizer (`HELIOS_DEVELOPER_MODE=ON`).
+- **Windows (MSVC):** [RAD Linker](https://github.com/EpicGames/raddebugger) for Debug and non-LTO RelWithDebInfo when `radlink` is available, then `lld-link`, then `link.exe`. **clang-cl** prefers `lld-link` (RAD can fail on some clang-cl C++ COMDATs). Release LTO (MSVC LTCG) and RelWithDebInfo with `HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO=ON` or `HELIOS_ENABLE_LTO_RELWITHDEBINFO=ON` keep `link.exe`; clang-cl LTO uses `lld-link`. RAD is not used with MSVC AddressSanitizer (`HELIOS_DEVELOPER_MODE=ON`).
 
 Override at configure time (must be on `PATH`, or for RAD also `$RAD_ROOT`):
 
@@ -412,7 +411,7 @@ cmake --build --preset linux-gcc-release --target simple_example
 ```
 
 See [examples/simple/simple.cpp](examples/simple/simple.cpp) for schedules and plugins.
-With `-DHELIOS_ENABLE_CPP_MODULES=ON`, [examples/cxx_modules](examples/cxx_modules) shows `import helios.app` and `import helios.container`.
+With `-DHELIOS_ENABLE_CPP_MODULES=ON`, [examples/cxx-modules](examples/cxx-modules) shows `import helios.app` and `import helios.container`.
 
 <a href="#readme-top">↑ Back to Top</a>
 
@@ -420,7 +419,7 @@ With `-DHELIOS_ENABLE_CPP_MODULES=ON`, [examples/cxx_modules](examples/cxx_modul
 
 ## Usage
 
-Systems are plain structs — `operator()` parameters declare data access or regular C++ lambdas.
+Systems are plain structs -- `operator()` parameters declare data access or regular C++ lambdas.
 `App` owns the main world, executor, and frame scheduler.
 
 ```cpp
@@ -635,11 +634,11 @@ python scripts/docs.py
 # → docs/doxygen/html/index.html
 ```
 
-Config: [`docs/doxygen/Doxyfile.in`](docs/doxygen/Doxyfile.in) — version from `project(VERSION …)` via CMake (`cmake --preset docs`, `cmake --build --preset docs`) or `scripts/docs.py`.
+Config: [`docs/doxygen/Doxyfile.in`](docs/doxygen/Doxyfile.in) -- version from the root [`VERSION`](VERSION) file via CMake (`cmake --preset docs`, `cmake --build --preset docs`) or `scripts/docs.py`.
 
 ### Project guidelines
 
-[docs/guidelines.md](docs/guidelines.md) — code style, module layout, testing, build options.
+[docs/guidelines.md](docs/guidelines.md) -- code style, module layout, testing, build options.
 
 ---
 
@@ -649,10 +648,10 @@ Config: [`docs/doxygen/Doxyfile.in`](docs/doxygen/Doxyfile.in) — version from 
 
 Formatting runs automatically on every local commit (via [pre-commit](https://pre-commit.com/)) and is verified on every push / PR ([`.github/workflows/format.yaml`](.github/workflows/format.yaml)). Unformatted code cannot land on `main` if hooks and CI are used.
 
-| When                     | Mechanism                                                         |
-| ------------------------ | ----------------------------------------------------------------- |
-| **Every commit** (local) | `pre-commit install` — runs `python scripts/format.py` (auto-fix) |
-| **Every push / PR**      | CI — `python scripts/format.py --check`                           |
+| When                     | Mechanism                                                          |
+| ------------------------ | ------------------------------------------------------------------ |
+| **Every commit** (local) | `pre-commit install` -- runs `python scripts/format.py` (auto-fix) |
+| **Every push / PR**      | CI -- `python scripts/format.py --check`                           |
 
 ```bash
 # Format all sources
@@ -670,9 +669,9 @@ pre-commit install
 
 Helios modules live under `src/` by default. Register additional search paths with `helios_add_extra_module_dirs()` (before discovery) or `HELIOS_EXTRA_MODULE_DIRS`. The `greeting` example path is registered automatically when `HELIOS_BUILD_EXAMPLES=ON`. See the full walkthrough:
 
-**[examples/custom_module/README.md](examples/custom_module/README.md)**
+**[examples/custom-module/README.md](examples/custom-module/README.md)**
 
-That example defines a minimal `greeting` module (registration, build target, tests, and a demo executable) under `examples/custom_module/`, discovered through the extra module path mechanism.
+That example defines a minimal `greeting` module (registration, build target, tests, and a demo executable) under `examples/custom-module/`, discovered through the extra module path mechanism.
 
 ```bash
 # From a parent CMake project (before add_subdirectory(HeliosEngine)):
@@ -685,13 +684,14 @@ cmake --preset linux-gcc-release \
   -DHELIOS_EXTRA_MODULE_DIRS="/path/to/my/modules"
 ```
 
-When `HELIOS_BUILD_EXAMPLES=ON`, Helios calls `helios_add_extra_module_dirs(examples/custom_module)` before discovery.
+When `HELIOS_BUILD_EXAMPLES=ON`, Helios calls `helios_add_extra_module_dirs(examples/custom-module)` before discovery.
 
 Quick layout:
 
 ```
-examples/custom_module/
-├── CMakeLists.txt            # helios_module(...) + demo target
+examples/custom-module/
+├── CMakeLists.txt            # library sources and demo target
+├── module.toml               # module metadata
 ├── README.md                 # Step-by-step guide
 ├── include/helios/greeting/  # Public headers
 ├── modules/                  # Optional module sources (.cppm)
@@ -742,7 +742,7 @@ Distributed under the MIT License. See [LICENSE][license-url] for details.
 
 ## Contact
 
-**RexarX** — who727cares@gmail.com
+**RexarX** -- who727cares@gmail.com
 
 **Project:** [github.com/RexarX/HeliosEngine](https://github.com/RexarX/HeliosEngine)
 

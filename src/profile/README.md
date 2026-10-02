@@ -1,4 +1,4 @@
-# `profile` — CPU/Memory/Lock Profiling
+# `profile` -- CPU/Memory/Lock Profiling
 
 Composable profiling with a backend-neutral public API. Tracy is the primary
 backend; custom backends plug in via the `Backend` interface. **Opt-in module**
@@ -19,17 +19,17 @@ backend; custom backends plug in via the `Backend` interface. **Opt-in module**
 ### Free Functions
 
 ```cpp
-FrameMark();                              // frame mark (default name)
-FrameMarkNamed("Render");                 // named frame
-FrameMarkStart("Physics");               // split region start
-FrameMarkEnd("Physics");                 // split region end
-Message("Event!", 0x00FF00);             // timeline message with color
-SetThreadName("Worker-3");               // label a thread
-Plot("FrameTime", 16.6F);                // plot a value
+FrameMark();                  // frame mark (default name)
+FrameMarkNamed("Render");     // named frame
+FrameMarkStart("Physics");    // split region start
+FrameMarkEnd("Physics");      // split region end
+Message("Event!", 0x00FF00);  // timeline message with color
+SetThreadName("Worker-3");    // label a thread
+Plot("FrameTime", 16.6F);     // plot a value
 PlotConfig("FPS", kNumber, /*step=*/true, /*fill=*/false, /*color=*/0);
-Alloc(ptr, size);                        // track allocation
-Free(ptr);                               // track deallocation
-MemoryDiscard("FrameArena");             // arena/pool discard
+Alloc(ptr, size);             // track allocation
+Free(ptr);                    // track deallocation
+MemoryDiscard("FrameArena");  // arena/pool discard
 ```
 
 ## Quick Start
@@ -96,7 +96,7 @@ Open the **Memory** tab in the Tracy GUI. Link `helios::memory` (with `HELIOS_ME
 profiler.AddBackend<TracyBackend>();
 profiler.AddBackend<FlamegraphBackend>();  // Chrome trace JSON
 profiler.Finalize();
-// Both backends receive all profiling events — macro usage unchanged.
+// Both backends receive all profiling events - macro usage unchanged.
 ```
 
 Typed backend access:
@@ -174,9 +174,9 @@ Tracy is auto-fetched via CPM if not installed system-wide.
 
 ## Dependencies
 
-- `compiler` — intrinsics
-- `container` — MultiTypeMap
-- `core` — asserts, CStringView
-- `platform` — platform detection
-- `utils` — type info, macros
+- `compiler` -- intrinsics
+- `container` -- MultiTypeMap
+- `core` -- asserts, CStringView
+- `platform` -- platform detection
+- `utils` -- type info, macros
 - External: Tracy

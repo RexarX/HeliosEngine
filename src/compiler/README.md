@@ -1,10 +1,10 @@
-# `compiler` — Compiler Detection & Intrinsics
+# `compiler` -- Compiler Detection & Intrinsics
 
 Header-only module providing compiler-specific macros and feature-detection.
 
 ## Public API
 
-Macros only — no classes, structs, or functions.
+Macros only -- no classes, structs, or functions.
 
 ## Usage
 
@@ -24,14 +24,14 @@ if (HELIOS_EXPECT_TRUE(ptr != nullptr)) {
 
 ## Macros
 
-| Macro                                | Purpose                                                         |
-| ------------------------------------ | --------------------------------------------------------------- |
-| `HELIOS_EXPECT_TRUE(x)`              | Branch-predictor hint for likely-true paths.                    |
-| `HELIOS_EXPECT_FALSE(x)`             | Branch-predictor hint for likely-false paths.                   |
-| `HELIOS_FORCE_INLINE`                | Always inline (equivalent to `__attribute__((always_inline))`). |
-| `HELIOS_ALWAYS_INLINE`               | Same as HELIOS_FORCE_INLINE.                                    |
-| `HELIOS_NO_INLINE`                   | Prevent inlining.                                               |
+| Macro                                | Purpose                                                                   |
+| ------------------------------------ | ------------------------------------------------------------------------- |
+| `HELIOS_EXPECT_TRUE(x)`              | Branch-predictor hint for likely-true paths.                              |
+| `HELIOS_EXPECT_FALSE(x)`             | Branch-predictor hint for likely-false paths.                             |
+| `HELIOS_FORCE_INLINE`                | Always inline (equivalent to `__attribute__((always_inline))`).           |
+| `HELIOS_ALWAYS_INLINE`               | Same as HELIOS_FORCE_INLINE.                                              |
+| `HELIOS_NO_INLINE`                   | Prevent inlining.                                                         |
 | `HELIOS_NO_UNIQUE_ADDRESS`           | Empty-base/allocator overlay (`[[msvc::no_unique_address]]` on MSVC ABI). |
-| `HELIOS_MOVEONLY_FUNCTION_AVAILABLE` | Feature-test for `std::move_only_function`.                     |
-| `HELIOS_CONTAINERS_RANGES_AVAILABLE` | Feature-test for C++23 `<ranges>` on containers.                |
-| `HELIOS_FLAT_MAP_CONSTEXPR`          | `constexpr` when STL `flat_map` is used; empty on Boost.        |
+| `HELIOS_MOVEONLY_FUNCTION_AVAILABLE` | Feature-test for `std::move_only_function`.                               |
+| `HELIOS_CONTAINERS_RANGES_AVAILABLE` | Feature-test for C++23 `<ranges>` on containers.                          |
+| `HELIOS_FLAT_MAP_CONSTEXPR`          | `constexpr` when STL `flat_map` is used; empty on Boost.                  |

@@ -284,28 +284,29 @@ function(helios_add_umbrella_cxx_module)
     if(_name STREQUAL "helios")
       continue()
     endif()
-    if(NOT TARGET helios::module::${_name})
+    helios_get_module_link_target(${_name} _mod)
+    helios_get_module_target(${_name} _concrete)
+    if(NOT TARGET "${_mod}")
       continue()
     endif()
-    set(_mod helios::module::${_name})
-    get_target_property(_mod_type helios_module_${_name} TYPE)
+    get_target_property(_mod_type ${_concrete} TYPE)
 
     if(HELIOS_BUILD_OPTION_HELIOS STREQUAL "SHARED" AND _mod_type STREQUAL "STATIC_LIBRARY")
       target_link_libraries(helios_module_helios PRIVATE
           $<LINK_LIBRARY:WHOLE_ARCHIVE,${_mod}>)
       target_include_directories(helios_module_helios PUBLIC
-          $<TARGET_PROPERTY:helios_module_${_name},INTERFACE_INCLUDE_DIRECTORIES>)
+          $<TARGET_PROPERTY:${_concrete},INTERFACE_INCLUDE_DIRECTORIES>)
     elseif(HELIOS_BUILD_OPTION_HELIOS STREQUAL "SHARED")
       target_link_libraries(helios_module_helios PRIVATE ${_mod})
       target_include_directories(helios_module_helios PUBLIC
-          $<TARGET_PROPERTY:helios_module_${_name},INTERFACE_INCLUDE_DIRECTORIES>)
+          $<TARGET_PROPERTY:${_concrete},INTERFACE_INCLUDE_DIRECTORIES>)
     else()
       target_link_libraries(helios_module_helios PUBLIC ${_mod})
     endif()
 
-    get_target_property(_has_named helios_module_${_name} HELIOS_HAS_NAMED_MODULE)
+    get_target_property(_has_named ${_concrete} HELIOS_HAS_NAMED_MODULE)
     if(HELIOS_ENABLE_CPP_MODULES AND _has_named)
-      get_target_property(_cxx_name helios_module_${_name} HELIOS_CXX_MODULE_NAME)
+      get_target_property(_cxx_name ${_concrete} HELIOS_CXX_MODULE_NAME)
       if(NOT _cxx_name OR _cxx_name STREQUAL "_cxx_name-NOTFOUND")
         string(REPLACE "_" "." _cxx_name "${_name}")
         set(_cxx_name "helios.${_cxx_name}")
@@ -367,12 +368,12 @@ function(helios_add_umbrella_cxx_module)
     endif()
   endif()
 
-  if(HELIOS_BUILD_C_API AND HELIOS_BUILD_TESTS AND TARGET helios::module::core)
+  if(HELIOS_BUILD_C_API AND HELIOS_BUILD_TESTS AND TARGET helios::core)
     set(_c_test_src "${CMAKE_BINARY_DIR}/helios_c_api_link_test.c")
     file(WRITE "${_c_test_src}"
         "#include <helios/version.h>\n"
-        "#ifdef HELIOS_MODULE_CORE_AVAILABLE\n"
-        "#error \"C translation unit received HELIOS_MODULE_CORE_AVAILABLE\"\n"
+        "#ifdef HELIOS_CORE_AVAILABLE\n"
+        "#error \"C translation unit received HELIOS_CORE_AVAILABLE\"\n"
         "#endif\n"
         "int main(void) {\n"
         "  return helios_compatible_with_headers() ? 0 : 1;\n"

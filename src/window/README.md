@@ -1,4 +1,4 @@
-# `window` — Window ECS Contract
+# `window` -- Window ECS Contract
 
 Public ECS interface for window management without OS dependencies.
 
@@ -9,7 +9,7 @@ Public ECS interface for window management without OS dependencies.
 - Lifecycle and property event messages (`ResizedMsg`, `CreationFailedMsg`, ...)
 - Composite params: `Windows`, `Messages`, `Writers`, `CreationWriters`, and
   lifecycle / geometry / appearance / platform groups
-- `Plugin` — registers ECS types; does not create OS windows
+- `Plugin` -- registers ECS types; does not create OS windows
 
 Creation-time extras: `transparent_framebuffer`, `scale_to_monitor`,
 `scale_framebuffer`, `mouse_passthrough`. Runtime: `RequestFocus()`,

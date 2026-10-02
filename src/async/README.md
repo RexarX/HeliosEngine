@@ -1,4 +1,4 @@
-# `async` — Task-Based Parallelism
+# `async` -- Task-Based Parallelism
 
 Work-stealing thread pool and task dependency graphs built on [Taskflow](https://taskflow.github.io/taskflow/). Used by the ECS scheduler and the `app` module for parallel system execution.
 
@@ -9,7 +9,7 @@ Work-stealing thread pool and task dependency graphs built on [Taskflow](https:/
 | `Executor`     | Thread pool. Runs `TaskGraph`s, fires independent async tasks, drains pending work.       |
 | `TaskGraph`    | DAG of tasks. `EmplaceTask`, `ForEach`, `Reduce`, `Sort`, `Compose`, `Dump` (DOT export). |
 | `Task`         | Handle within a graph. `Precede` / `Succeed` for ordering, `Work` to assign callables.    |
-| `SubTaskGraph` | Dynamic subflow — create tasks from within a running task. `Join()` signals completion.   |
+| `SubTaskGraph` | Dynamic subflow -- create tasks from within a running task. `Join()` signals completion.  |
 | `AsyncTask`    | Handle to an independently scheduled task. `Done()` checks completion.                    |
 | `Future<T>`    | Move-only result handle wrapping `tf::Future`. `Get()`, `Wait()`, `Cancel()`.             |
 
@@ -61,10 +61,10 @@ graph.Sort(data, std::less<>{});
 ## Independent Async Tasks
 
 ```cpp
-// Returns std::future — use when you need the result
+// Returns std::future - use when you need the result
 auto result = executor.Async([] { return 42; });
 
-// Fire-and-forget — lower overhead
+// Fire-and-forget - lower overhead
 executor.SilentAsync([] { DoBackgroundWork(); });
 
 executor.WaitForAll();
@@ -85,8 +85,8 @@ graph.EmplaceTask([](helios::async::SubTaskGraph& subflow) {
 
 ## Dispatch Paths
 
-1. **Task graph** — explicit DAG submitted via `Run()` / `RunN()` / `RunUntil()`.
-2. **Independent async** — fire-and-forget via `Async()` / `SilentAsync()` / `DependentAsync()`.
+1. **Task graph** -- explicit DAG submitted via `Run()` / `RunN()` / `RunUntil()`.
+2. **Independent async** -- fire-and-forget via `Async()` / `SilentAsync()` / `DependentAsync()`.
 
 `CoRun(TaskGraph&)` lets a worker thread participate directly in graph execution (must already be a pool worker).
 
@@ -99,6 +99,6 @@ graph.EmplaceTask([](helios::async::SubTaskGraph& subflow) {
 
 ## Dependencies
 
-- `core` — asserts
-- `compiler`, `platform` — via core
+- `core` -- asserts
+- `compiler`, `platform` -- via core
 - External: Taskflow (header-only), TBB (Linux/GCC parallel STL backend)

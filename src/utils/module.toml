@@ -1,0 +1,19 @@
+[module]
+name = "helios_utils"
+version = "0.1.0"
+description = "Utility module providing common helpers and utilities"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_compiler", "helios_platform"]
+private = []
+
+[dependencies.optional]
+public = []
+private = []

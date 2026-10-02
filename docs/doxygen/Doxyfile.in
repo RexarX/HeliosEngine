@@ -5,7 +5,7 @@
 PROJECT_NAME           = "Helios Engine"
 PROJECT_BRIEF          = "A modular ECS based data-oriented C++23 game engine framework"
 PROJECT_LOGO           = @HELIOS_SOURCE_DIR@/docs/img/logo.png
-# PROJECT_NUMBER comes from project(VERSION ...) via cmake/Doxygen.cmake
+# PROJECT_NUMBER comes from the root VERSION file via cmake/Doxygen.cmake
 PROJECT_NUMBER         = @HELIOS_DOXYGEN_PROJECT_NUMBER@
 
 OUTPUT_DIRECTORY       = @HELIOS_DOXYGEN_OUTPUT_DIR@
@@ -18,7 +18,7 @@ CREATE_SUBDIRS         = NO
 INPUT                  = @HELIOS_SOURCE_DIR@/src \
                          @HELIOS_SOURCE_DIR@/README.md \
                          @HELIOS_SOURCE_DIR@/docs/guidelines.md \
-                         @HELIOS_SOURCE_DIR@/examples/custom_module/README.md
+                         @HELIOS_SOURCE_DIR@/examples/custom-module/README.md
 FILE_PATTERNS          = *.hpp *.inl *.h *.cpp *.cxx *.c *.md
 RECURSIVE              = YES
 EXCLUDE_PATTERNS       = */tests/* \

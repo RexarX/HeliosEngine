@@ -1,28 +1,27 @@
-helios_module(
-    NAME helios_platform
-    ALIAS helios::platform
-    VERSION 0.1.0
-    DESCRIPTION "Platform module providing helios_platform specific functionality"
+helios_header_only_library(helios_platform
+    CPP_MODULE modules/helios.platform.cppm
+)
 
-    HEADERS
+target_sources(helios_platform ${HELIOS_CURRENT_MODULE_SCOPE}
+    FILE_SET HEADERS BASE_DIRS include FILES
         include/helios/platform/detail/platform.h
         include/helios/platform/platform.hpp
-
-    MODULE_SOURCES
-        modules/helios.platform.cppm
-
-    TEST_SOURCES
-        tests/main.cpp
-        tests/module_import.cpp
-        tests/platform.cpp
-
-    C_HEADERS
-        include/helios/platform/detail/platform.h
-        capi/include/helios/platform/platform.h
-
-    C_TEST_SOURCES
-        capi/tests/c_smoke.c
-
-    DEPENDS
-        PUBLIC helios_compiler
 )
+
+if(HELIOS_BUILD_C_API)
+  target_sources(helios_platform ${HELIOS_CURRENT_MODULE_SCOPE}
+      FILE_SET c_headers TYPE HEADERS BASE_DIRS capi/include FILES
+          capi/include/helios/platform/platform.h
+  )
+endif()
+
+if(HELIOS_CURRENT_MODULE_BUILD_TESTS)
+  helios_add_module_tests(helios_platform
+      SOURCES
+          tests/main.cpp
+          tests/module_import.cpp
+          tests/platform.cpp
+      C_SOURCES
+          capi/tests/c_smoke.c
+  )
+endif()

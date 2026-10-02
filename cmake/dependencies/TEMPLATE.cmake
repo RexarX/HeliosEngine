@@ -1,6 +1,6 @@
-# TEMPLATE.cmake — Minimal dependency file template for helios_dependency
+# TEMPLATE.cmake - Minimal dependency file template for helios_dependency
 #
-# Copy this file to cmake/dependencies/<name>.cmake and fill in the fields.
+# Copy this file to cmake/dependencies/<PascalName>.cmake and fill in the fields.
 #
 # The helios_require_dependency mechanism automatically includes this file
 # when a module declares USES <name> ... or calls helios_require_dependency(<name>).

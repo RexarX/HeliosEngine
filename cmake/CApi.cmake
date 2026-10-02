@@ -71,13 +71,13 @@ macro(_helios_module_apply_c_api TARGET)
           CXX_VISIBILITY_PRESET hidden
           VISIBILITY_INLINES_HIDDEN ON
       )
-      target_compile_definitions(${TARGET} PRIVATE HELIOS_C_BUILDING)
     endif()
     set_target_properties(${TARGET} PROPERTIES HELIOS_HAS_C_API TRUE)
 
     # Consumers of a static or header-only module see an empty HELIOS_C_API.
-    # The library itself keeps HELIOS_C_BUILDING so a SHARED umbrella can
-    # whole-archive these objects and export them.
+    # Implementation TUs keep HELIOS_C_BUILDING so a SHARED umbrella can
+    # whole-archive these objects and export them. The macro is per source,
+    # not target-wide: the module PCH is C++ and tests REUSE_FROM it.
     if(_lib_type STREQUAL "STATIC_LIBRARY" OR _lib_type STREQUAL "INTERFACE_LIBRARY")
       target_compile_definitions(${TARGET} INTERFACE HELIOS_C_STATIC)
     endif()
@@ -124,11 +124,16 @@ macro(_helios_module_apply_c_api TARGET)
       foreach(_src IN LISTS _sources)
         get_filename_component(_ext "${_src}" LAST_EXT)
         string(TOLOWER "${_ext}" _ext)
-        if(_ext STREQUAL ".c")
-          set_source_files_properties("${_src}" PROPERTIES
-              SKIP_UNITY_BUILD_INCLUSION ON
-              SKIP_PRECOMPILE_HEADERS ON
-          )
+        if(_ext STREQUAL ".c" OR _ext STREQUAL ".cc" OR _ext STREQUAL ".cpp" OR _ext STREQUAL ".cxx")
+          string(REPLACE "\\" "/" _norm "${_src}")
+          if(_norm MATCHES "(^|/)capi/")
+            set_property(SOURCE "${_src}" APPEND PROPERTY
+                COMPILE_DEFINITIONS HELIOS_C_BUILDING)
+            set_source_files_properties("${_src}" PROPERTIES
+                SKIP_UNITY_BUILD_INCLUSION ON
+                SKIP_PRECOMPILE_HEADERS ON
+            )
+          endif()
         endif()
       endforeach()
     endif()

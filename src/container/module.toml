@@ -1,0 +1,19 @@
+[module]
+name = "helios_container"
+version = "0.1.0"
+description = "Container data structures module"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = false
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_compiler", "helios_core", "helios_utils"]
+private = []
+
+[dependencies.optional]
+public = []
+private = []

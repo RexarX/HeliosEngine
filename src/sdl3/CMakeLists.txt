@@ -1,61 +1,57 @@
-helios_module(
-    NAME helios_sdl3
-    ALIAS helios::sdl3
-    VERSION 0.1.0
-    DESCRIPTION "SDL3 process-global runtime (lifetime, event pump)"
+add_library(helios_sdl3)
 
-    HEADERS
-        include/helios/sdl3/systems/init.hpp
-        include/helios/sdl3/systems/pump_events.hpp
-        include/helios/sdl3/systems/shutdown.hpp
-        include/helios/sdl3/context.hpp
-        include/helios/sdl3/event_dispatcher.hpp
-        include/helios/sdl3/lifetime.hpp
-        include/helios/sdl3/plugin.hpp
-        include/helios/sdl3/sdl3.hpp
-
-    SOURCES
-        src/systems/init.cpp
-        src/systems/pump_events.cpp
-        src/systems/shutdown.cpp
-        src/lifetime.cpp
-        src/plugin.cpp
-
-    MODULE_SOURCES
-        modules/helios.sdl3.cppm
-
-    PCH src/pch.hpp
-
-    TEST_SOURCES
-        tests/systems/init.cpp
-        tests/systems/pump_events.cpp
-        tests/systems/shutdown.cpp
-        tests/available.hpp
-        tests/event_dispatcher.cpp
-        tests/lifetime.cpp
-        tests/main.cpp
-        tests/module_import.cpp
-        tests/plugin.cpp
-
-    C_HEADERS
-        capi/include/helios/sdl3/sdl3.h
-
-    C_TEST_SOURCES
-        capi/tests/c_smoke.c
-
-    DEPENDS
-        PUBLIC
-            $<$<BOOL:${HELIOS_BUILD_C_API}>:helios_capi>
-            helios_app
-            helios_compiler
-            helios_ecs
-            helios_log
-            helios_platform
-            helios_window
-
-    USES
-        SDL3 PRIVATE helios::lib::sdl3::sdl3
+target_sources(helios_sdl3 PUBLIC FILE_SET HEADERS BASE_DIRS include FILES
+    include/helios/sdl3/systems/init.hpp
+    include/helios/sdl3/systems/pump_events.hpp
+    include/helios/sdl3/systems/shutdown.hpp
+    include/helios/sdl3/context.hpp
+    include/helios/sdl3/event_dispatcher.hpp
+    include/helios/sdl3/lifetime.hpp
+    include/helios/sdl3/plugin.hpp
+    include/helios/sdl3/sdl3.hpp
 )
+
+target_sources(helios_sdl3 PRIVATE
+    src/systems/init.cpp
+    src/systems/pump_events.cpp
+    src/systems/shutdown.cpp
+    src/lifetime.cpp
+    src/plugin.cpp
+)
+
+if(HELIOS_BUILD_C_API)
+  target_sources(helios_sdl3 PUBLIC
+      FILE_SET c_headers TYPE HEADERS BASE_DIRS capi/include FILES
+          capi/include/helios/sdl3/sdl3.h
+  )
+endif()
+
+helios_require_dependency(SDL3)
+target_link_libraries(helios_sdl3 PRIVATE helios::lib::sdl3::sdl3)
+
+helios_apply_conventions(helios_sdl3)
+helios_target_set_folder(helios_sdl3 "Helios/Modules")
+helios_target_set_output_dirs(helios_sdl3)
+helios_target_precompile_headers(helios_sdl3 src/pch.hpp)
+helios_target_cpp_module_sources(helios_sdl3 modules/helios.sdl3.cppm)
+
+if(HELIOS_CURRENT_MODULE_BUILD_TESTS)
+  helios_add_module_tests(helios_sdl3
+      SOURCES
+          tests/systems/init.cpp
+          tests/systems/pump_events.cpp
+          tests/systems/shutdown.cpp
+          tests/available.hpp
+          tests/event_dispatcher.cpp
+          tests/lifetime.cpp
+          tests/main.cpp
+          tests/module_import.cpp
+          tests/plugin.cpp
+
+      C_SOURCES
+          capi/tests/c_smoke.c
+  )
+endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   include(CMakeDependentOption)
@@ -76,7 +72,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
   if(HELIOS_SDL3_FORCE_WAYLAND AND HELIOS_SDL3_FORCE_X11)
     message(FATAL_ERROR
-        "helios_sdl3: HELIOS_SDL3_FORCE_WAYLAND and HELIOS_SDL3_FORCE_X11 are mutually exclusive")
+        "helios_sdl3: HELIOS_SDL3_FORCE_WAYLAND and HELIOS_SDL3_FORCE_X11 are mutually exclusive"
+    )
   endif()
 
   if(HELIOS_SDL3_FORCE_WAYLAND)
@@ -89,5 +86,6 @@ endif()
 if(TARGET helios_sdl3_tests AND UNIX AND HELIOS_ENABLE_SANITIZERS AND
     HELIOS_SANITIZER_ADDRESS)
   set_property(TEST helios_sdl3_tests APPEND PROPERTY ENVIRONMENT
-      "LSAN_OPTIONS=suppressions=${HELIOS_ROOT_DIR}/cmake/sdl3_lsan.supp:print_suppressions=0")
+      "LSAN_OPTIONS=suppressions=${HELIOS_ROOT_DIR}/cmake/sdl3_lsan.supp:print_suppressions=0"
+  )
 endif()

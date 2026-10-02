@@ -1,50 +1,49 @@
-helios_module(
-    NAME helios_log
-    ALIAS helios::log
-    VERSION 0.1.0
-    DESCRIPTION "Logging module built on spdlog"
+add_library(helios_log)
 
-    HEADERS
-        include/helios/log/log.hpp
-        include/helios/log/config.hpp
-        include/helios/log/logger.hpp
-
-    SOURCES
-        src/logger.cpp
-
-    MODULE_SOURCES
-        modules/helios.log.cppm
-
-    PCH src/pch.hpp
-
-    TEST_SOURCES
-        tests/config.cpp
-        tests/logger.cpp
-        tests/main.cpp
-        tests/module_import.cpp
-
-    C_HEADERS
-        capi/include/helios/log/log.h
-
-    C_TEST_SOURCES
-        capi/tests/c_smoke.c
-
-    DEPENDS
-        PUBLIC
-            $<$<BOOL:${HELIOS_BUILD_C_API}>:helios_capi>
-            helios_compiler
-            helios_container
-            helios_core
-            helios_platform
-            helios_utils
-
-    USES
-        spdlog PRIVATE helios::lib::spdlog::spdlog_header_only
-
-    COMPILE_DEFINITIONS
-        PRIVATE
-            SPDLOG_HEADER_ONLY
-
-    TEST_DEPENDENCIES
-        helios::lib::spdlog::spdlog_header_only
+target_sources(helios_log PUBLIC FILE_SET HEADERS BASE_DIRS include FILES
+    include/helios/log/log.hpp
+    include/helios/log/config.hpp
+    include/helios/log/logger.hpp
 )
+
+target_sources(helios_log PRIVATE
+    src/logger.cpp
+)
+
+if(HELIOS_BUILD_C_API)
+  target_sources(helios_log PUBLIC
+      FILE_SET c_headers TYPE HEADERS BASE_DIRS capi/include FILES
+          capi/include/helios/log/log.h
+  )
+endif()
+
+helios_require_dependency(spdlog)
+target_link_libraries(helios_log PRIVATE
+    helios::lib::spdlog::spdlog_header_only
+)
+
+target_compile_definitions(helios_log PRIVATE
+    SPDLOG_HEADER_ONLY
+)
+
+helios_apply_conventions(helios_log)
+helios_target_set_folder(helios_log "Helios/Modules")
+helios_target_set_output_dirs(helios_log)
+helios_target_precompile_headers(helios_log src/pch.hpp)
+helios_target_cpp_module_sources(helios_log modules/helios.log.cppm)
+
+if(HELIOS_CURRENT_MODULE_BUILD_TESTS)
+  helios_add_module_tests(helios_log
+      SOURCES
+          tests/config.cpp
+          tests/logger.cpp
+          tests/main.cpp
+          tests/module_import.cpp
+
+      C_SOURCES
+          capi/tests/c_smoke.c
+
+      DEPENDENCIES
+          helios::lib::spdlog::spdlog_header_only
+  )
+endif()

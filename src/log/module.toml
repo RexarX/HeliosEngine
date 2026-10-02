@@ -1,0 +1,19 @@
+[module]
+name = "helios_log"
+version = "0.1.0"
+description = "Logging module built on spdlog"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_compiler", "helios_container", "helios_core", "helios_platform", "helios_utils"]
+private = []
+
+[dependencies.optional]
+public = []
+private = []

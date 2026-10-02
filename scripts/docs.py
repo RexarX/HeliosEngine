@@ -4,7 +4,7 @@ HeliosEngine Documentation Builder
 
 Builds Doxygen HTML via the CMake target ``helios_docs`` when available,
 or configures docs/doxygen/Doxyfile.in into the build tree and runs Doxygen
-directly. Version comes from project(VERSION ...) in CMakeLists.txt.
+directly. Version comes from the repository root VERSION file.
 """
 
 import argparse
@@ -32,6 +32,7 @@ from common import (
     print_success as _print_success,
 )
 from edition_selector import (
+    read_project_version,
     render_branch_selector_html,
     render_version_selector_html,
     write_selector_js,
@@ -119,22 +120,6 @@ def count_warnings(output: str) -> int:
     return output.lower().count("warning:")
 
 
-def read_project_version(root_dir: Path) -> str:
-    """Read project VERSION from the root CMakeLists.txt."""
-
-    cmake_file = root_dir / "CMakeLists.txt"
-    text = cmake_file.read_text(encoding="utf-8")
-    match = re.search(
-        r"project\s*\(\s*HeliosEngine\s+VERSION\s+([\d.]+)",
-        text,
-        re.IGNORECASE | re.DOTALL,
-    )
-    if not match:
-        print_warning(f"Could not parse VERSION from {cmake_file}; using 0.0.0")
-        return "0.0.0"
-    return match.group(1)
-
-
 def detect_docs_label() -> str:
     """Resolve documentation edition label from env or current git branch."""
 
@@ -171,7 +156,14 @@ def resolve_project_number(root_dir: Path) -> str:
     env_number = os.environ.get("HELIOS_DOXYGEN_PROJECT_NUMBER", "").strip()
     if env_number:
         return env_number
-    return format_project_number(read_project_version(root_dir))
+    version = format_project_number(read_project_version(root_dir))
+    if version == "0.0.0":
+        version_file = root_dir / "VERSION"
+        if not version_file.is_file():
+            print_warning(f"Missing VERSION file at {version_file}; using 0.0.0")
+        else:
+            print_warning(f"Could not parse VERSION from {version_file}; using 0.0.0")
+    return version
 
 
 def cmake_path(path: Path) -> str:

@@ -8,12 +8,10 @@ larger functions read as recipes made from those smaller pieces.
 
 Module authoring:
 
-- `helios_module(...)`
-- `helios_register_module(...)`
-- `helios_add_extra_module_dirs(...)`
-- `helios_discover_modules(...)`
-- `helios_discover_extra_module_dirs(...)`
-- `helios_build_discovered_modules()`
+- `module.toml` plus `helios_declare_module` / `_helios_finalize_module` (generated)
+- `helios_add_extra_module_dirs(...)` in `HeliosPrelude.cmake`
+- `helios_add_modules(...)` for an installed Helios
+- `helios_apply_conventions(...)`, `helios_header_only_library(...)`
 - `helios_link_modules(...)`
 
 Dependencies:
@@ -39,51 +37,20 @@ Primitives:
 
 ## Adding A Module
 
-Each module is declared in one `CMakeLists.txt`. There is no `Module.cmake`.
-Discovery includes the file once with `HELIOS_REGISTRATION_PASS=ON`; the public
-`helios_module` macro registers metadata and returns from the file. The file is
-included again during the build pass through `add_subdirectory`.
+Put `module.toml` next to `CMakeLists.txt`. The tool resolves the graph. CMake creates the target and calls opt-in helpers. See `agents/modules/manifest.md`.
 
 ```cmake
-option(HELIOS_FOO_ENABLE_PROFILE "Enable profiling in foo" ON)
-
-helios_module(
-    NAME helios_foo
-    ALIAS helios::foo
-    VERSION 0.1.0
-    DESCRIPTION "Foo module"
-
-    HEADERS
+add_library(helios_foo)
+target_sources(helios_foo
+    PRIVATE src/foo.cpp
+    PUBLIC FILE_SET HEADERS BASE_DIRS include FILES
         include/helios/foo/foo.hpp
-
-    SOURCES
-        src/foo.cpp
-
-    PCH src/pch.hpp
-
-    TEST_SOURCES
-        tests/main.cpp
-        tests/foo.cpp
-
-    DEPENDS
-        PUBLIC
-            helios_core
-            helios_utils
-
-    OPTIONAL_DEPENDS
-        PUBLIC helios_profile
-
-    USES
-        spdlog PRIVATE helios::lib::spdlog::spdlog_header_only
 )
-
-# Build-pass-only logic goes below helios_module().
-target_compile_definitions(helios_foo PRIVATE HELIOS_FOO_IMPL)
+helios_require_dependency(spdlog)
+target_link_libraries(helios_foo PRIVATE helios::lib::spdlog::spdlog_header_only)
+helios_apply_conventions(helios_foo)
+helios_target_precompile_headers(helios_foo src/pch.hpp)
 ```
-
-Only idempotent setup, such as `option()` and plain variable assembly, should
-appear above `helios_module()`. Any dependency loading, target mutation, custom
-targets, or generated files must appear below it.
 
 ## Adding A Dependency
 

@@ -1,185 +1,172 @@
-option(HELIOS_ECS_ENABLE_PROFILE "Enable profiling in the helios_ecs module if helios_profile module is available" ON)
+add_library(helios_ecs)
 
-helios_module(
-    NAME helios_ecs
-    ALIAS helios::ecs
-    VERSION 0.1.0
-    DESCRIPTION "Entity Component System module"
-
-    HEADERS
-        include/helios/ecs/command/command.hpp
-        include/helios/ecs/command/commands.hpp
-        include/helios/ecs/command/entity_buffer.hpp
-        include/helios/ecs/command/queue.hpp
-        include/helios/ecs/command/world_buffer.hpp
-        include/helios/ecs/component/archetype.hpp
-        include/helios/ecs/component/archetype_id.hpp
-        include/helios/ecs/component/bundle.hpp
-        include/helios/ecs/component/component.hpp
-        include/helios/ecs/component/manager.hpp
-        include/helios/ecs/component/sparse_storage.hpp
-        include/helios/ecs/details/profile.hpp
-        include/helios/ecs/entity/entity.hpp
-        include/helios/ecs/entity/manager.hpp
-        include/helios/ecs/message/async_queue.hpp
-        include/helios/ecs/message/async_reader.hpp
-        include/helios/ecs/message/async_wrapper.hpp
-        include/helios/ecs/message/async_writer.hpp
-        include/helios/ecs/message/consumed_registry.hpp
-        include/helios/ecs/message/manager.hpp
-        include/helios/ecs/message/message.hpp
-        include/helios/ecs/message/params.hpp
-        include/helios/ecs/message/queue.hpp
-        include/helios/ecs/message/reader.hpp
-        include/helios/ecs/message/wrapper.hpp
-        include/helios/ecs/message/writer.hpp
-        include/helios/ecs/query/details/traits.hpp
-        include/helios/ecs/query/args.hpp
-        include/helios/ecs/query/iterator.hpp
-        include/helios/ecs/query/params.hpp
-        include/helios/ecs/query/query.hpp
-        include/helios/ecs/resource/manager.hpp
-        include/helios/ecs/resource/params.hpp
-        include/helios/ecs/resource/resource.hpp
-        include/helios/ecs/system/access_decl.hpp
-        include/helios/ecs/system/access_policy.hpp
-        include/helios/ecs/system/composite_param.hpp
-        include/helios/ecs/system/param_policy.hpp
-        include/helios/ecs/system/system.hpp
-        include/helios/ecs/system/param.hpp
-        include/helios/ecs/schedule/executor/executor.hpp
-        include/helios/ecs/schedule/executor/main_thread.hpp
-        include/helios/ecs/schedule/executor/multi_threaded.hpp
-        include/helios/ecs/schedule/executor/single_threaded.hpp
-        include/helios/ecs/schedule/dag.hpp
-        include/helios/ecs/schedule/local_arena.hpp
-        include/helios/ecs/schedule/run_condition.hpp
-        include/helios/ecs/schedule/run_scope.hpp
-        include/helios/ecs/schedule/run_stage_options.hpp
-        include/helios/ecs/schedule/schedule.hpp
-        include/helios/ecs/schedule/scheduler.hpp
-        include/helios/ecs/schedule/stage.hpp
-        include/helios/ecs/schedule/stage_settings.hpp
-        include/helios/ecs/schedule/system_group_handle.hpp
-        include/helios/ecs/schedule/system_handle.hpp
-        include/helios/ecs/schedule/system_local_data.hpp
-        include/helios/ecs/schedule/system_set.hpp
-        include/helios/ecs/schedule/system_set_handle.hpp
-        include/helios/ecs/schedule/system_storage.hpp
-        include/helios/ecs/builtin_commands.hpp
-        include/helios/ecs/builtin_messages.hpp
-        include/helios/ecs/ecs.hpp
-        include/helios/ecs/world.hpp
-        include/helios/ecs/world_view.hpp
-
-    SOURCES
-        src/component/archetype.cpp
-        src/component/manager.cpp
-        src/entity/manager.cpp
-        src/message/consumed_registry.cpp
-        src/message/manager.cpp
-        src/schedule/executor/main_thread.cpp
-        src/schedule/executor/multi_threaded.cpp
-        src/schedule/executor/single_threaded.cpp
-        src/schedule/dag.cpp
-        src/schedule/schedule.cpp
-        src/schedule/scheduler.cpp
-        src/schedule/system_local_data.cpp
-        src/world.cpp
-
-    MODULE_SOURCES
-        modules/helios.ecs.cppm
-
-    PCH src/pch.hpp
-
-    TEST_SOURCES
-        tests/command/command.cpp
-        tests/command/commands.cpp
-        tests/command/entity_buffer.cpp
-        tests/command/queue.cpp
-        tests/command/world_buffer.cpp
-        tests/component/archetype.cpp
-        tests/component/archetype_id.cpp
-        tests/component/bundle.cpp
-        tests/component/component.cpp
-        tests/component/manager.cpp
-        tests/component/sparse_storage.cpp
-        tests/entity/entity.cpp
-        tests/entity/manager.cpp
-        tests/message/async_queue.cpp
-        tests/message/async_reader.cpp
-        tests/message/async_wrapper.cpp
-        tests/message/async_writer.cpp
-        tests/message/consumed_registry.cpp
-        tests/message/manager.cpp
-        tests/message/message.cpp
-        tests/message/params.cpp
-        tests/message/queue.cpp
-        tests/message/reader.cpp
-        tests/message/wrapper.cpp
-        tests/message/writer.cpp
-        tests/query/details/traits.cpp
-        tests/query/args.cpp
-        tests/query/iterator.cpp
-        tests/query/params.cpp
-        tests/query/query.cpp
-        tests/resource/manager.cpp
-        tests/resource/params.cpp
-        tests/resource/resource.cpp
-        tests/system/access_decl.cpp
-        tests/system/access_policy.cpp
-        tests/system/composite_param.cpp
-        tests/system/param_policy.cpp
-        tests/system/system.cpp
-        tests/schedule/dag.cpp
-        tests/schedule/run_condition.cpp
-        tests/schedule/schedule.cpp
-        tests/schedule/scheduler.cpp
-        tests/schedule/stage.cpp
-        tests/schedule/system_group_handle.cpp
-        tests/schedule/system_handle.cpp
-        tests/schedule/system_local_data.cpp
-        tests/schedule/system_set.cpp
-        tests/schedule/system_set_handle.cpp
-        tests/schedule/system_storage.cpp
-        tests/schedule/executor/main_thread.cpp
-        tests/schedule/executor/multi_threaded.cpp
-        tests/schedule/executor/single_threaded.cpp
-        tests/builtin_commands.cpp
-        tests/builtin_messages.cpp
-        tests/main.cpp
-        tests/module_import.cpp
-        tests/world.cpp
-        tests/world_view.cpp
-
-    C_HEADERS
-        capi/include/helios/ecs/ecs.h
-
-    C_TEST_SOURCES
-        capi/tests/c_smoke.c
-
-    DEPENDS
-        PUBLIC
-            helios_async
-            $<$<BOOL:${HELIOS_BUILD_C_API}>:helios_capi>
-            helios_compiler
-            helios_container
-            helios_core
-            helios_log
-            helios_memory
-            helios_platform
-            helios_utils
-
-    OPTIONAL_DEPENDS
-        PUBLIC helios_profile
-
-    USES
-        concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
-
-    COMPILE_DEFINITIONS
-        PUBLIC
-            $<$<BOOL:HELIOS_ECS_ENABLE_PROFILE>:HELIOS_ECS_ENABLE_PROFILE>
+target_sources(helios_ecs PUBLIC FILE_SET HEADERS BASE_DIRS include FILES
+    include/helios/ecs/command/command.hpp
+    include/helios/ecs/command/commands.hpp
+    include/helios/ecs/command/entity_buffer.hpp
+    include/helios/ecs/command/queue.hpp
+    include/helios/ecs/command/world_buffer.hpp
+    include/helios/ecs/component/archetype.hpp
+    include/helios/ecs/component/archetype_id.hpp
+    include/helios/ecs/component/bundle.hpp
+    include/helios/ecs/component/component.hpp
+    include/helios/ecs/component/manager.hpp
+    include/helios/ecs/component/sparse_storage.hpp
+    include/helios/ecs/details/profile.hpp
+    include/helios/ecs/entity/entity.hpp
+    include/helios/ecs/entity/manager.hpp
+    include/helios/ecs/message/async_queue.hpp
+    include/helios/ecs/message/async_reader.hpp
+    include/helios/ecs/message/async_wrapper.hpp
+    include/helios/ecs/message/async_writer.hpp
+    include/helios/ecs/message/consumed_registry.hpp
+    include/helios/ecs/message/manager.hpp
+    include/helios/ecs/message/message.hpp
+    include/helios/ecs/message/params.hpp
+    include/helios/ecs/message/queue.hpp
+    include/helios/ecs/message/reader.hpp
+    include/helios/ecs/message/wrapper.hpp
+    include/helios/ecs/message/writer.hpp
+    include/helios/ecs/query/details/traits.hpp
+    include/helios/ecs/query/args.hpp
+    include/helios/ecs/query/iterator.hpp
+    include/helios/ecs/query/params.hpp
+    include/helios/ecs/query/query.hpp
+    include/helios/ecs/resource/manager.hpp
+    include/helios/ecs/resource/params.hpp
+    include/helios/ecs/resource/resource.hpp
+    include/helios/ecs/system/access_decl.hpp
+    include/helios/ecs/system/access_policy.hpp
+    include/helios/ecs/system/composite_param.hpp
+    include/helios/ecs/system/param_policy.hpp
+    include/helios/ecs/system/system.hpp
+    include/helios/ecs/system/param.hpp
+    include/helios/ecs/schedule/executor/executor.hpp
+    include/helios/ecs/schedule/executor/main_thread.hpp
+    include/helios/ecs/schedule/executor/multi_threaded.hpp
+    include/helios/ecs/schedule/executor/single_threaded.hpp
+    include/helios/ecs/schedule/dag.hpp
+    include/helios/ecs/schedule/local_arena.hpp
+    include/helios/ecs/schedule/run_condition.hpp
+    include/helios/ecs/schedule/run_scope.hpp
+    include/helios/ecs/schedule/run_stage_options.hpp
+    include/helios/ecs/schedule/schedule.hpp
+    include/helios/ecs/schedule/scheduler.hpp
+    include/helios/ecs/schedule/stage.hpp
+    include/helios/ecs/schedule/stage_settings.hpp
+    include/helios/ecs/schedule/system_group_handle.hpp
+    include/helios/ecs/schedule/system_handle.hpp
+    include/helios/ecs/schedule/system_local_data.hpp
+    include/helios/ecs/schedule/system_set.hpp
+    include/helios/ecs/schedule/system_set_handle.hpp
+    include/helios/ecs/schedule/system_storage.hpp
+    include/helios/ecs/builtin_commands.hpp
+    include/helios/ecs/builtin_messages.hpp
+    include/helios/ecs/ecs.hpp
+    include/helios/ecs/world.hpp
+    include/helios/ecs/world_view.hpp
 )
+
+target_sources(helios_ecs PRIVATE
+    src/component/archetype.cpp
+    src/component/manager.cpp
+    src/entity/manager.cpp
+    src/message/consumed_registry.cpp
+    src/message/manager.cpp
+    src/schedule/executor/main_thread.cpp
+    src/schedule/executor/multi_threaded.cpp
+    src/schedule/executor/single_threaded.cpp
+    src/schedule/dag.cpp
+    src/schedule/schedule.cpp
+    src/schedule/scheduler.cpp
+    src/schedule/system_local_data.cpp
+    src/world.cpp
+)
+
+if(HELIOS_BUILD_C_API)
+  target_sources(helios_ecs PUBLIC
+      FILE_SET c_headers TYPE HEADERS BASE_DIRS capi/include FILES
+          capi/include/helios/ecs/ecs.h
+  )
+endif()
+
+helios_require_dependency(concurrentqueue)
+target_link_libraries(helios_ecs PUBLIC
+    helios::lib::concurrentqueue::concurrentqueue
+)
+
+helios_apply_conventions(helios_ecs)
+helios_target_set_folder(helios_ecs "Helios/Modules")
+helios_target_set_output_dirs(helios_ecs)
+helios_target_precompile_headers(helios_ecs src/pch.hpp)
+helios_target_cpp_module_sources(helios_ecs modules/helios.ecs.cppm)
+
+if(HELIOS_CURRENT_MODULE_BUILD_TESTS)
+  helios_add_module_tests(helios_ecs
+      SOURCES
+          tests/command/command.cpp
+          tests/command/commands.cpp
+          tests/command/entity_buffer.cpp
+          tests/command/queue.cpp
+          tests/command/world_buffer.cpp
+          tests/component/archetype.cpp
+          tests/component/archetype_id.cpp
+          tests/component/bundle.cpp
+          tests/component/component.cpp
+          tests/component/manager.cpp
+          tests/component/sparse_storage.cpp
+          tests/entity/entity.cpp
+          tests/entity/manager.cpp
+          tests/message/async_queue.cpp
+          tests/message/async_reader.cpp
+          tests/message/async_wrapper.cpp
+          tests/message/async_writer.cpp
+          tests/message/consumed_registry.cpp
+          tests/message/manager.cpp
+          tests/message/message.cpp
+          tests/message/params.cpp
+          tests/message/queue.cpp
+          tests/message/reader.cpp
+          tests/message/wrapper.cpp
+          tests/message/writer.cpp
+          tests/query/details/traits.cpp
+          tests/query/args.cpp
+          tests/query/iterator.cpp
+          tests/query/params.cpp
+          tests/query/query.cpp
+          tests/resource/manager.cpp
+          tests/resource/params.cpp
+          tests/resource/resource.cpp
+          tests/system/access_decl.cpp
+          tests/system/access_policy.cpp
+          tests/system/composite_param.cpp
+          tests/system/param_policy.cpp
+          tests/system/system.cpp
+          tests/schedule/dag.cpp
+          tests/schedule/run_condition.cpp
+          tests/schedule/schedule.cpp
+          tests/schedule/scheduler.cpp
+          tests/schedule/stage.cpp
+          tests/schedule/system_group_handle.cpp
+          tests/schedule/system_handle.cpp
+          tests/schedule/system_local_data.cpp
+          tests/schedule/system_set.cpp
+          tests/schedule/system_set_handle.cpp
+          tests/schedule/system_storage.cpp
+          tests/schedule/executor/main_thread.cpp
+          tests/schedule/executor/multi_threaded.cpp
+          tests/schedule/executor/single_threaded.cpp
+          tests/builtin_commands.cpp
+          tests/builtin_messages.cpp
+          tests/main.cpp
+          tests/module_import.cpp
+          tests/world.cpp
+          tests/world_view.cpp
+
+      C_SOURCES
+          capi/tests/c_smoke.c
+  )
+endif()
 
 include(SimdUtils)
 helios_simd_apply_to_target(TARGET helios_ecs)

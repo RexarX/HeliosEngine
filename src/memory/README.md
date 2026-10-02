@@ -1,4 +1,4 @@
-# `memory` — PMR Allocators & Reference Counting
+# `memory` -- PMR Allocators & Reference Counting
 
 Custom `std::pmr::memory_resource` allocators for frame-scoped, arena, pool, and general-purpose allocation, plus `Rc`/`Arc` smart pointers.
 
@@ -60,7 +60,7 @@ helios::mem::ArenaAllocator arena(64 * 1024);
 std::pmr::polymorphic_allocator<std::byte> alloc(&arena);
 
 auto* block = alloc.allocate(256);
-// no individual deallocate — memory reclaimed on Reset() or destruction
+// no individual deallocate - memory reclaimed on Reset() or destruction
 arena.Reset();
 ```
 
@@ -97,7 +97,9 @@ alloc.delete_object(obj);
 class Mesh final : public helios::mem::RcFromThis<Mesh> {
 public:
   explicit Mesh(int id) : id_(id) {}
+
   int Id() const { return id_; }
+
 private:
   int id_ = 0;
 };
@@ -114,6 +116,6 @@ auto tex = helios::mem::MakeArc<Texture>();  // thread-safe ref count
 
 ## Dependencies
 
-- `core` — asserts
-- `mimalloc` (default ON) — backing heap via `helios::lib::mimalloc::static`
-- `profile` (optional) — Tracy scope/zone/lock and backing ALLOC/FREE macros
+- `core` -- asserts
+- `mimalloc` (default ON) -- backing heap via `helios::lib::mimalloc::static`
+- `profile` (optional) -- Tracy scope/zone/lock and backing ALLOC/FREE macros

@@ -29,11 +29,12 @@ function(_helios_installed_parse_visibility INPUT_VAR OUT_PUBLIC OUT_PRIVATE OUT
 endfunction()
 
 function(_helios_installed_link_one TARGET VISIBILITY MODULE REQUIRED)
-  if(TARGET helios::${MODULE})
-    target_link_libraries(${TARGET} ${VISIBILITY} helios::${MODULE})
+  helios_get_module_alias(${MODULE} _alias)
+  if(TARGET "${_alias}")
+    target_link_libraries(${TARGET} ${VISIBILITY} ${_alias})
   elseif(REQUIRED)
     message(FATAL_ERROR
-        "helios_link_modules: installed module target 'helios::${MODULE}' not found")
+        "helios_link_modules: installed module target '${_alias}' not found")
   endif()
 endfunction()
 
@@ -89,18 +90,31 @@ endfunction()
         helios_get_module_target(helios_core core_target)
 ]]
 function(helios_get_module_target NAME OUTPUT_VAR)
-  set(${OUTPUT_VAR} "helios::${NAME}" PARENT_SCOPE)
+  helios_get_module_alias(${NAME} _alias)
+  set(${OUTPUT_VAR} "${_alias}" PARENT_SCOPE)
 endfunction()
 
 #[[
     helios_get_module_alias(<name> <out-var>)
 
-    Returns the canonical alias for an installed Helios module. Installed
-    exports use the same helios::<name> spelling as a build-tree ALIAS.
+    Returns the installed target name. That is the module alias: helios_app
+    is helios::app and helios_sdl3_window is helios::sdl3::window.
+    HeliosAliases.cmake records aliases from the installed graph; otherwise
+    the name is split on the first underscore and further underscores become ::.
 
     Example:
-        helios_get_module_alias(helios_core core_alias)
+        helios_get_module_alias(helios_app app_alias)
 ]]
 function(helios_get_module_alias NAME OUTPUT_VAR)
-  set(${OUTPUT_VAR} "helios::${NAME}" PARENT_SCOPE)
+  string(TOUPPER "${NAME}" _upper)
+  if(DEFINED ${_upper}_ALIAS AND NOT "${${_upper}_ALIAS}" STREQUAL "")
+    set(${OUTPUT_VAR} "${${_upper}_ALIAS}" PARENT_SCOPE)
+    return()
+  endif()
+  if("${NAME}" MATCHES "^([^_]+)_(.+)$")
+    string(REPLACE "_" "::" _rest "${CMAKE_MATCH_2}")
+    set(${OUTPUT_VAR} "${CMAKE_MATCH_1}::${_rest}" PARENT_SCOPE)
+    return()
+  endif()
+  set(${OUTPUT_VAR} "${NAME}" PARENT_SCOPE)
 endfunction()

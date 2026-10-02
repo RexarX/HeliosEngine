@@ -1,23 +1,21 @@
-helios_module(
-    NAME helios_capi
-    ALIAS helios::capi
-    VERSION 0.1.0
-    DESCRIPTION "Shared C API linkage, error codes, and the last-error buffer"
+add_library(helios_capi)
 
-    MODULE_SOURCES
-        modules/helios.capi.cppm
+target_sources(helios_capi PRIVATE src/error.cpp)
 
-    C_HEADERS
-        capi/include/helios/capi/capi.h
-        capi/include/helios/capi/decl.h
-        capi/include/helios/capi/error.h
+if(HELIOS_BUILD_C_API)
+  target_sources(helios_capi PUBLIC
+      FILE_SET c_headers TYPE HEADERS BASE_DIRS capi/include FILES
+          capi/include/helios/capi/capi.h
+          capi/include/helios/capi/decl.h
+          capi/include/helios/capi/error.h
+  )
+endif()
 
-    C_SOURCES
-        src/error.cpp
+helios_apply_conventions(helios_capi)
+helios_target_set_folder(helios_capi "Helios/Modules")
+helios_target_set_output_dirs(helios_capi)
+helios_target_cpp_module_sources(helios_capi modules/helios.capi.cppm)
 
-    C_TEST_SOURCES
-        tests/c_smoke.c
-
-    DEPENDS
-        PUBLIC helios_platform
-)
+if(HELIOS_CURRENT_MODULE_BUILD_TESTS)
+  helios_add_module_tests(helios_capi C_SOURCES tests/c_smoke.c)
+endif()

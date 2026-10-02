@@ -8,20 +8,20 @@ Coding standards, module layout, testing, and tooling for HeliosEngine developme
 
 ### Non-negotiable
 
-- **C++23** throughout — use standard library features aggressively.
-- **Google Style Guide** — naming, formatting, and organizational conventions (enforced via `.clang-format`).
-- **No exceptions** — use `HELIOS_ASSERT` for invariants; `std::expected<T, ErrorEnum>` or `std::optional` for recoverable failures.
-- **No backward-compat debt** — change or remove deprecated code freely.
-- **Include what you use** — every file includes exactly what it needs.
+- **C++23** throughout -- use standard library features aggressively.
+- **Google Style Guide** -- naming, formatting, and organizational conventions (enforced via `.clang-format`).
+- **No exceptions** -- use `HELIOS_ASSERT` for invariants; `std::expected<T, ErrorEnum>` or `std::optional` for recoverable failures.
+- **No backward-compat debt** -- change or remove deprecated code freely.
+- **Include what you use** -- every file includes exactly what it needs.
 - **Priority order:** performance → simplicity → scalability.
-- **Avoid locks in hot paths** — prefer atomics and lock-free structures.
+- **Avoid locks in hot paths** -- prefer atomics and lock-free structures.
 - **Instead of lvalue refereces (only non-const) use raw pointers and force non-nullptr invariant using `APERTURE_ASSERT`. This is needed for more clear ownership semantics. You are still free to use const lvalue references for read-only parameters.**
 
 ### Types and APIs
 
 - `std::span` over raw pointer + size for array parameters.
 - `std::string_view` for read-only string parameters.
-- `auto` when the type is obvious, or when the return type exceeds ~30 characters — use trailing return type in that case.
+- `auto` when the type is obvious, or when the return type exceeds ~30 characters -- use trailing return type in that case.
 - `explicit` on single-arg constructors and conversion operators; conditional `explicit` when it depends on a template parameter.
 - `final` on all non-base classes; `override` (not `virtual`) in derived classes.
 - Template constraints: concepts > `static_assert` > SFINAE.
@@ -55,7 +55,7 @@ Keep related methods together unless doing so would violate the order above.
 ## Method implementation
 
 - If a method body exceeds 1 line, declare it in the class and define it outside.
-- Header-file out-of-line definitions → add `inline` (or `constexpr`, which is implicitly inline — do not combine both).
+- Header-file out-of-line definitions → add `inline` (or `constexpr`, which is implicitly inline -- do not combine both).
 
 ---
 
@@ -79,7 +79,7 @@ Omit tags that do not apply:
 - ...
 ```
 
-- Use `@code` / `@endcode` for inline usage examples (do not prefix with `@example` — Doxygen treats `@example` as an external file reference and will discard the doc block).
+- Use `@code` / `@endcode` for inline usage examples (do not prefix with `@example` -- Doxygen treats `@example` as an external file reference and will discard the doc block).
 
 ---
 
@@ -89,7 +89,8 @@ Every module under `src/` follows this layout:
 
 ```
 src/<module>/
-├── CMakeLists.txt           # helios_module(...) call
+├── CMakeLists.txt           # library sources; metadata is module.toml
+├── module.toml              # name, dependencies, features, languages
 ├── README.md                # Module overview and usage
 ├── include/helios/<module>/ # Public headers
 ├── src/                     # Private sources + pch.hpp
@@ -99,28 +100,21 @@ src/<module>/
 ### Build definition (`CMakeLists.txt`)
 
 ```cmake
-helios_module(
-    NAME helios_ecs
-    VERSION 0.1.0
-    DESCRIPTION "Entity Component System module"
-    HEADERS ...
-    SOURCES ...
-    PCH src/pch.hpp
-    DEPENDS
-        PUBLIC helios_async
-        PUBLIC helios_core
-        ...
-    USES
-        concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
-    TEST_SOURCES
-        tests/main.cpp
-        ...
+add_library(helios_ecs)
+target_sources(helios_ecs
+    PRIVATE src/schedule/schedule.cpp
+    PUBLIC FILE_SET HEADERS BASE_DIRS include FILES
+        include/helios/ecs/ecs.hpp
 )
+helios_apply_conventions(helios_ecs)
+helios_target_precompile_headers(helios_ecs src/pch.hpp)
 ```
 
-- `DEFAULT ON/OFF` — whether the module builds unless explicitly overridden.
-- `DEPENDS` — required Helios modules (auto-enabled).
-- `OPTIONAL_DEPENDS` — integrated when present (e.g. `helios_profile`).
+Dependencies, features, and the alias are declared in `module.toml`. See `agents/modules/manifest.md`.
+
+- `DEFAULT ON/OFF` -- whether the module builds unless explicitly overridden.
+- `DEPENDS` -- required Helios modules (auto-enabled).
+- `OPTIONAL_DEPENDS` -- integrated when present (e.g. `helios_profile`).
 
 External dependencies are declared per-module via `USES` and resolved from `cmake/dependencies/`. Most engine libraries are vendored under `HELIOS_THIRD_PARTY_DIR` (defaults to `third-party/`); use `-DHELIOS_THIRD_PARTY_DIR=...`, `HELIOS_FORCE_DOWNLOAD_<PKG>`, or `HELIOS_USE_SYSTEM_<PKG>` to relocate or opt into CPM/system packages. Remaining deps (e.g. Boost, TBB) still use system packages first with CPM fallback.
 
@@ -135,7 +129,7 @@ cmake --preset linux-gcc-debug -DHELIOS_BUILD_PROFILE=ON
 
 ## Testing
 
-- **Framework:** doctest — one test binary per module, driven by `tests/main.cpp`.
+- **Framework:** doctest -- one test binary per module, driven by `tests/main.cpp`.
 - Test files mirror source layout under each module's `tests/` directory.
 - Write tests only for non-trivial behavior (avoid getters, setters, etc.).
 
@@ -191,7 +185,7 @@ ctest --preset linux-gcc-debug
 
 ### CMake presets
 
-Primary workflow — pattern: `{os}-{compiler}-{build_type}`
+Primary workflow -- pattern: `{os}-{compiler}-{build_type}`
 
 ```bash
 cmake --list-presets
@@ -207,7 +201,7 @@ ctest --preset linux-gcc-debug
 | Script      | Purpose                                                  |
 | ----------- | -------------------------------------------------------- |
 | `format.py` | `clang-format` on `src/`, `examples/` (`--check` for CI) |
-| `lint.py`   | `clang-tidy` — requires `compile_commands.json`          |
+| `lint.py`   | `clang-tidy` -- requires `compile_commands.json`         |
 | `docs.py`   | Build Doxygen HTML documentation (`docs/doxygen/html/`)  |
 
 Theme: [doxygen-awesome-css](https://github.com/jothepro/doxygen-awesome-css) base layout with dark mode, copy buttons, interactive TOC, and Markdown tabs. Build after submodule init: `git submodule update --init third-party/doxygen-awesome-css`.
@@ -220,10 +214,10 @@ python scripts/docs.py
 
 ### Formatting enforcement
 
-| When          | Mechanism                                                                   |
-| ------------- | --------------------------------------------------------------------------- |
-| Local commits | `pre-commit install` — runs `python scripts/format.py` (auto-fixes sources) |
-| Push / PR     | `.github/workflows/format.yaml` — `python scripts/format.py --check`        |
+| When          | Mechanism                                                                    |
+| ------------- | ---------------------------------------------------------------------------- |
+| Local commits | `pre-commit install` -- runs `python scripts/format.py` (auto-fixes sources) |
+| Push / PR     | `.github/workflows/format.yaml` -- `python scripts/format.py --check`        |
 
 ```bash
 pip install pre-commit

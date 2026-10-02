@@ -1,4 +1,4 @@
-# `log` — Logging
+# `log` -- Logging
 
 Type-tagged logging built on [spdlog](https://github.com/gabime/spdlog). Singleton `Logger` with per-type logger registration, console + file output, async mode, and rotation. Integrates with the assert system via a weak-symbol handler when linked.
 
@@ -41,7 +41,7 @@ helios::log::Warn("Low memory: {} MB free", free_mb);
 helios::log::Error("Failed to load '{}'", path);
 ```
 
-No explicit initialization required — the default logger is created on first use with `Config::Debug()` (debug) or `Config::Release()` (release).
+No explicit initialization required -- the default logger is created on first use with `Config::Debug()` (debug) or `Config::Release()` (release).
 
 ## Custom Logger Types
 
@@ -104,7 +104,7 @@ helios::SetAssertionHandler(
 
 ## Dependencies
 
-- `container` — `MultiTypeMap` for logger registry
-- `core` — asserts
-- `utils` — `TypeIndex`
+- `container` -- `MultiTypeMap` for logger registry
+- `core` -- asserts
+- `utils` -- `TypeIndex`
 - External: spdlog

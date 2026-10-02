@@ -1,0 +1,19 @@
+[module]
+name = "helios_input"
+version = "0.1.0"
+description = "Input ECS contract (keyboard, mouse, cursor, gamepad, pen)"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_app", "helios_compiler", "helios_ecs", "helios_log", "helios_memory", "helios_platform"]
+private = []
+
+[dependencies.optional]
+public = []
+private = []

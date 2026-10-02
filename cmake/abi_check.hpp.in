@@ -1,0 +1,37 @@
+#pragma once
+// Generated for this Helios build. Include <helios/config.hpp> before other
+// project headers so a compiler mismatch is reported on the first Helios include.
+
+#ifndef HELIOS_ABI_EXPECT_COMPILER_MAJOR
+#define HELIOS_ABI_EXPECT_COMPILER_MAJOR @HELIOS_ABI_COMPILER_MAJOR@
+#endif
+
+#ifdef __clang__
+#if __clang_major__ != HELIOS_ABI_EXPECT_COMPILER_MAJOR
+#error "Helios was built with a different Clang major version."
+#endif
+#elif defined(_MSC_VER)
+#if (_MSC_VER / 100) != HELIOS_ABI_EXPECT_COMPILER_MAJOR
+#error "Helios was built with a different MSVC major version."
+#endif
+#elif defined(__GNUC__)
+#if __GNUC__ != HELIOS_ABI_EXPECT_COMPILER_MAJOR
+#error "Helios was built with a different GCC major version."
+#endif
+#else
+#error "Helios ABI check: unrecognized compiler."
+#endif
+
+@HELIOS_ABI_STDLIB_CHECK@
+
+#ifdef _MSVC_LANG
+#if _MSVC_LANG < @HELIOS_ABI_CXX_STANDARD@
+#error "This translation unit is below the C++ standard Helios was built with."
+#endif
+#elif __cplusplus < @HELIOS_ABI_CXX_STANDARD@
+#error "This translation unit is below the C++ standard Helios was built with."
+#endif
+
+#ifdef _MSC_VER
+#pragma detect_mismatch("helios_abi", "@HELIOS_ABI_FINGERPRINT@")
+#endif

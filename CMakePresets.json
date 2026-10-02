@@ -246,6 +246,67 @@
       "displayName": "macOS Clang Release",
       "description": "macOS release build with Clang",
       "inherits": ["macos-base", "clang", "release-config"]
+    },
+    {
+      "name": "sdk-config",
+      "hidden": true,
+      "cacheVariables": {
+        "HELIOS_ENABLE_INSTALL": "ON",
+        "HELIOS_BUILD_C_API": "ON",
+        "HELIOS_BUILD_OPTION_HELIOS": "SHARED",
+        "HELIOS_BUILD_TESTS": "OFF",
+        "HELIOS_BUILD_EXAMPLES": "OFF"
+      }
+    },
+    {
+      "name": "sdk-checked-config",
+      "hidden": true,
+      "inherits": ["relwithdebinfo-config", "sdk-config"],
+      "cacheVariables": {
+        "HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO": "ON"
+      }
+    },
+    {
+      "name": "windows-msvc-sdk",
+      "displayName": "Windows MSVC SDK",
+      "description": "Installable shared SDK with the C API enabled and API checks off",
+      "inherits": ["windows-ninja-base", "msvc", "release-config", "sdk-config"],
+      "installDir": "${sourceDir}/install/sdk"
+    },
+    {
+      "name": "windows-msvc-sdk-checked",
+      "displayName": "Windows MSVC SDK (checked)",
+      "description": "Installable shared SDK with API checks, stack traces, and full LTO",
+      "inherits": ["windows-ninja-base", "msvc", "sdk-checked-config"],
+      "installDir": "${sourceDir}/install/sdk-checked"
+    },
+    {
+      "name": "windows-vs-sdk",
+      "displayName": "Windows Visual Studio SDK",
+      "description": "Installable shared SDK with the C API enabled and API checks off",
+      "inherits": ["windows-base", "msvc", "release-config", "sdk-config"],
+      "installDir": "${sourceDir}/install/sdk"
+    },
+    {
+      "name": "windows-vs-sdk-checked",
+      "displayName": "Windows Visual Studio SDK (checked)",
+      "description": "Installable shared SDK with API checks, stack traces, and full LTO",
+      "inherits": ["windows-base", "msvc", "sdk-checked-config"],
+      "installDir": "${sourceDir}/install/sdk-checked"
+    },
+    {
+      "name": "linux-gcc-sdk",
+      "displayName": "Linux GCC SDK",
+      "description": "Installable shared SDK with the C API enabled and API checks off",
+      "inherits": ["linux-base", "gcc", "release-config", "sdk-config"],
+      "installDir": "${sourceDir}/install/sdk"
+    },
+    {
+      "name": "linux-gcc-sdk-checked",
+      "displayName": "Linux GCC SDK (checked)",
+      "description": "Installable shared SDK with API checks, stack traces, and full LTO",
+      "inherits": ["linux-base", "gcc", "sdk-checked-config"],
+      "installDir": "${sourceDir}/install/sdk-checked"
     }
   ],
   "buildPresets": [
@@ -366,6 +427,44 @@
       "configurePreset": "macos-clang-release",
       "displayName": "Build macOS Clang Release",
       "description": "Build macOS release with Clang"
+    },
+    {
+      "name": "windows-msvc-sdk",
+      "configurePreset": "windows-msvc-sdk",
+      "displayName": "Build Windows MSVC SDK",
+      "description": "Build the installable Windows SDK"
+    },
+    {
+      "name": "windows-vs-sdk",
+      "configurePreset": "windows-vs-sdk",
+      "displayName": "Build Windows Visual Studio SDK",
+      "description": "Build the installable Visual Studio SDK",
+      "configuration": "Release"
+    },
+    {
+      "name": "linux-gcc-sdk",
+      "configurePreset": "linux-gcc-sdk",
+      "displayName": "Build Linux GCC SDK",
+      "description": "Build the installable Linux SDK"
+    },
+    {
+      "name": "windows-msvc-sdk-checked",
+      "configurePreset": "windows-msvc-sdk-checked",
+      "displayName": "Build Windows MSVC SDK (checked)",
+      "description": "Build the installable Windows SDK with API checks"
+    },
+    {
+      "name": "windows-vs-sdk-checked",
+      "configurePreset": "windows-vs-sdk-checked",
+      "displayName": "Build Windows Visual Studio SDK (checked)",
+      "description": "Build the installable Visual Studio SDK with API checks",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "linux-gcc-sdk-checked",
+      "configurePreset": "linux-gcc-sdk-checked",
+      "displayName": "Build Linux GCC SDK (checked)",
+      "description": "Build the installable Linux SDK with API checks"
     }
   ],
   "testPresets": [

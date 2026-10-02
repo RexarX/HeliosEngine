@@ -1,89 +1,73 @@
-option(HELIOS_APP_ENABLE_PROFILE "Enable profiling in the helios_app module if helios_profile module is available" ON)
+add_library(helios_app)
 
-helios_module(
-    NAME helios_app
-    ALIAS helios::app
-    VERSION 0.1.0
-    DESCRIPTION "Application framework module"
-
-    HEADERS
-        include/helios/app/builtin/app_exit.hpp
-        include/helios/app/builtin/executor.hpp
-        include/helios/app/builtin/frame_count.hpp
-        include/helios/app/builtin/frame_limiter.hpp
-        include/helios/app/builtin/time.hpp
-        include/helios/app/details/profile.hpp
-        include/helios/app/app.hpp
-        include/helios/app/application.hpp
-        include/helios/app/dynamic_plugin.hpp
-        include/helios/app/frame_order.hpp
-        include/helios/app/plugin.hpp
-        include/helios/app/plugin_group.hpp
-        include/helios/app/runners.hpp
-        include/helios/app/scheduler.hpp
-        include/helios/app/schedules.hpp
-        include/helios/app/sub_app.hpp
-
-    SOURCES
-        src/builtin/executor.cpp
-        src/builtin/frame_count.cpp
-        src/builtin/frame_limiter.cpp
-        src/builtin/time.cpp
-        src/application.cpp
-        src/dynamic_plugin.cpp
-        src/plugin_group.cpp
-        src/scheduler.cpp
-        src/schedules.cpp
-        src/sub_app.cpp
-
-    MODULE_SOURCES
-        modules/helios.app.cppm
-
-    PCH src/pch.hpp
-
-    TEST_SOURCES
-        tests/builtin/executor.cpp
-        tests/builtin/frame_count.cpp
-        tests/builtin/frame_limiter.cpp
-        tests/builtin/time.cpp
-        tests/application.cpp
-        tests/dynamic_plugin.cpp
-        tests/frame_order.cpp
-        tests/main.cpp
-        tests/module_import.cpp
-        tests/plugin.cpp
-        tests/plugin_group.cpp
-        tests/runners.cpp
-        tests/scheduler.cpp
-        tests/schedules.cpp
-        tests/sub_app.cpp
-
-    C_HEADERS
-        capi/include/helios/app/app.h
-
-    C_TEST_SOURCES
-        capi/tests/c_smoke.c
-
-    DEPENDS
-        PUBLIC
-            helios_async
-            $<$<BOOL:${HELIOS_BUILD_C_API}>:helios_capi>
-            helios_compiler
-            helios_container
-            helios_core
-            helios_ecs
-            helios_log
-            helios_memory
-            helios_platform
-            helios_utils
-
-    OPTIONAL_DEPENDS
-        PUBLIC helios_profile
-
-    COMPILE_DEFINITIONS
-        PUBLIC
-            $<$<BOOL:HELIOS_APP_ENABLE_PROFILE>:HELIOS_APP_ENABLE_PROFILE>
+target_sources(helios_app PUBLIC FILE_SET HEADERS BASE_DIRS include FILES
+    include/helios/app/builtin/app_exit.hpp
+    include/helios/app/builtin/executor.hpp
+    include/helios/app/builtin/frame_count.hpp
+    include/helios/app/builtin/frame_limiter.hpp
+    include/helios/app/builtin/time.hpp
+    include/helios/app/details/profile.hpp
+    include/helios/app/app.hpp
+    include/helios/app/application.hpp
+    include/helios/app/dynamic_plugin.hpp
+    include/helios/app/frame_order.hpp
+    include/helios/app/plugin.hpp
+    include/helios/app/plugin_group.hpp
+    include/helios/app/runners.hpp
+    include/helios/app/scheduler.hpp
+    include/helios/app/schedules.hpp
+    include/helios/app/sub_app.hpp
 )
+
+target_sources(helios_app PRIVATE
+    src/builtin/executor.cpp
+    src/builtin/frame_count.cpp
+    src/builtin/frame_limiter.cpp
+    src/builtin/time.cpp
+    src/application.cpp
+    src/dynamic_plugin.cpp
+    src/plugin_group.cpp
+    src/scheduler.cpp
+    src/schedules.cpp
+    src/sub_app.cpp
+)
+
+if(HELIOS_BUILD_C_API)
+  target_sources(helios_app PUBLIC
+      FILE_SET c_headers TYPE HEADERS BASE_DIRS capi/include FILES
+          capi/include/helios/app/app.h
+  )
+endif()
+
+helios_apply_conventions(helios_app)
+helios_target_set_folder(helios_app "Helios/Modules")
+helios_target_set_output_dirs(helios_app)
+helios_target_precompile_headers(helios_app src/pch.hpp)
+helios_target_cpp_module_sources(helios_app modules/helios.app.cppm)
+
+if(HELIOS_CURRENT_MODULE_BUILD_TESTS)
+  helios_add_module_tests(helios_app
+      SOURCES
+          tests/builtin/executor.cpp
+          tests/builtin/frame_count.cpp
+          tests/builtin/frame_limiter.cpp
+          tests/builtin/time.cpp
+          tests/application.cpp
+          tests/dynamic_plugin.cpp
+          tests/frame_order.cpp
+          tests/main.cpp
+          tests/module_import.cpp
+          tests/plugin.cpp
+          tests/plugin_group.cpp
+          tests/runners.cpp
+          tests/scheduler.cpp
+          tests/schedules.cpp
+          tests/sub_app.cpp
+
+      C_SOURCES
+          capi/tests/c_smoke.c
+  )
+endif()
 
 if(TARGET helios_app_tests AND HELIOS_BUILD_TESTS)
   add_library(helios_app_test_plugin SHARED tests/plugins/test_plugin.cpp)
@@ -100,7 +84,9 @@ if(TARGET helios_app_tests AND HELIOS_BUILD_TESTS)
       $<TARGET_PROPERTY:helios_utils,INTERFACE_INCLUDE_DIRECTORIES>
   )
   set_target_properties(helios_app_tests PROPERTIES ENABLE_EXPORTS ON)
-  set_target_properties(helios_app_test_plugin PROPERTIES POSITION_INDEPENDENT_CODE ON)
+  set_target_properties(helios_app_test_plugin PROPERTIES
+      POSITION_INDEPENDENT_CODE ON
+  )
   set_target_properties(helios_app_test_plugin PROPERTIES
       OUTPUT_NAME "helios_app_test_plugin"
       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/tests"

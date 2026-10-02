@@ -1,63 +1,65 @@
-helios_module(
-    NAME helios_core
-    ALIAS helios::core
-    VERSION 0.1.0
-    DESCRIPTION "Core engine module providing asserts, UUID, and other core functionality"
+add_library(helios_core)
 
-    HEADERS
-        include/helios/core/core.hpp
-        include/helios/assert.hpp
-        include/helios/cstring_view.hpp
-        include/helios/delegate.hpp
-        include/helios/stacktrace.hpp
-        include/helios/uuid.hpp
-        include/helios/version.hpp
-
-    SOURCES
-        src/assert.cpp
-        src/stacktrace.cpp
-        src/version.cpp
-
-    MODULE_SOURCES
-        modules/helios.core.cppm
-
-    PCH src/pch.hpp
-
-    TEST_SOURCES
-        tests/assert.cpp
-        tests/cstring_view.cpp
-        tests/delegate.cpp
-        tests/main.cpp
-        tests/module_import.cpp
-        tests/stacktrace.cpp
-        tests/uuid.cpp
-        tests/version.cpp
-
-    C_HEADERS
-        capi/include/helios/version.h
-
-    C_SOURCES
-        capi/src/version.cpp
-
-    C_TEST_SOURCES
-        capi/tests/c_smoke.c
-
-    DEPENDS
-        PUBLIC
-            $<$<BOOL:${HELIOS_BUILD_C_API}>:helios_capi>
-            helios_compiler
-            helios_platform
-            helios_utils
-
-    USES
-        stduuid PUBLIC helios::lib::stduuid::stduuid
-        Boost PRIVATE helios::lib::boost::stacktrace
-
-    COMPILE_DEFINITIONS
-        PUBLIC
-            $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:HELIOS_ENABLE_ASSERTS>
-            $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:HELIOS_ENABLE_STACKTRACE>
+target_sources(helios_core PUBLIC FILE_SET HEADERS BASE_DIRS include FILES
+    include/helios/core/core.hpp
+    include/helios/assert.hpp
+    include/helios/cstring_view.hpp
+    include/helios/delegate.hpp
+    include/helios/stacktrace.hpp
+    include/helios/uuid.hpp
+    include/helios/version.hpp
 )
+
+target_sources(helios_core PRIVATE
+    src/assert.cpp
+    src/stacktrace.cpp
+    src/version.cpp
+)
+
+if(HELIOS_BUILD_C_API)
+  target_sources(helios_core PUBLIC
+      FILE_SET c_headers TYPE HEADERS BASE_DIRS capi/include FILES
+          capi/include/helios/version.h
+  )
+  target_sources(helios_core PRIVATE capi/src/version.cpp)
+endif()
+
+helios_require_dependency(stduuid)
+target_link_libraries(helios_core PUBLIC helios::lib::stduuid::stduuid)
+
+helios_require_dependency(Boost)
+target_link_libraries(helios_core PRIVATE helios::lib::boost::stacktrace)
+
+# In-tree only. An installed SDK bakes the same macros from the config that
+# was installed (see HeliosSdkChecks.cmake), so a Release game can still link
+# the checked library and keep API checks.
+target_compile_definitions(helios_core PUBLIC
+    $<BUILD_INTERFACE:$<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:HELIOS_ENABLE_ASSERTS>>
+    $<BUILD_INTERFACE:$<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:HELIOS_ENABLE_STACKTRACE>>
+)
+
+helios_apply_conventions(helios_core)
+helios_target_set_folder(helios_core "Helios/Modules")
+helios_target_set_output_dirs(helios_core)
+helios_target_precompile_headers(helios_core src/pch.hpp)
+helios_target_cpp_module_sources(helios_core modules/helios.core.cppm)
+
+if(HELIOS_CURRENT_MODULE_BUILD_TESTS)
+  helios_add_module_tests(helios_core
+      SOURCES
+          tests/assert.cpp
+          tests/cstring_view.cpp
+          tests/delegate.cpp
+          tests/main.cpp
+          tests/module_import.cpp
+          tests/stacktrace.cpp
+          tests/uuid.cpp
+          tests/version.cpp
+
+      C_SOURCES
+          capi/tests/c_smoke.c
+  )
+endif()
 
 set(_helios_core_generated "${CMAKE_CURRENT_BINARY_DIR}/generated")
 configure_file(
@@ -115,7 +117,8 @@ else()
         # GCC ships backtrace.h next to a stddef.h that breaks clang -stdlib=libc++
         # when added via -I/-isystem. Expose only backtrace.h through a wrap dir.
         set(_helios_bt_wrap_dir
-            "${CMAKE_CURRENT_BINARY_DIR}/helios_backtrace_include")
+            "${CMAKE_CURRENT_BINARY_DIR}/helios_backtrace_include"
+        )
         file(MAKE_DIRECTORY "${_helios_bt_wrap_dir}")
         configure_file(
             "${BACKTRACE_INCLUDE_DIR}/backtrace.h"

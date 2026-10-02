@@ -1,22 +1,22 @@
-# `platform` — Platform Detection & API Macros
+# `platform` -- Platform Detection & API Macros
 
 Header-only module providing platform identification and DLL visibility macros. Leaf module with no dependencies.
 
 ## Public API
 
-Macros only — no classes, structs, or functions.
+Macros only -- no classes, structs, or functions.
 
 ## Usage
 
 ```cpp
 #include <helios/platform/platform.hpp>
 
-class HELIOS_API MyClass { };             // DLL export/import
+class HELIOS_API MyClass { }; // DLL export/import
 
-HELIOS_DEBUG_BREAK();                     // architecture-specific breakpoint
-HELIOS_PAUSE_CPU();                       // busy-wait pause hint (SDL3-derived)
+HELIOS_DEBUG_BREAK(); // architecture-specific breakpoint
+HELIOS_PAUSE_CPU();   // busy-wait pause hint (SDL3-derived)
 
-#if defined(HELIOS_PLATFORM_WINDOWS)
+#ifdef HELIOS_PLATFORM_WINDOWS
   // Windows-specific code
 #elif defined(HELIOS_PLATFORM_LINUX)
   // Linux-specific code

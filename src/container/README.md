@@ -1,4 +1,4 @@
-# `container` — Data-Oriented Containers
+# `container` -- Data-Oriented Containers
 
 Header-only containers used throughout the engine: sparse sets for ECS storage, type-indexed maps for plugin/resource registries, and type-erased buffers for commands and resources.
 
@@ -21,15 +21,15 @@ Header-only containers used throughout the engine: sparse sets for ECS storage, 
 
 helios::container::SparseSet<int> set;
 
-set.Insert(42, 100);          // index 42 → value 100
+set.Insert(42, 100);  // index 42 -> value 100
 set.Insert(7, 200);
 
 CHECK(set.Contains(42));
 CHECK_EQ(set.Get(42), 100);
 
-set.Remove(42);               // O(1) swap-and-pop
+set.Remove(42);  // O(1) swap-and-pop
 
-for (int value : set) {       // cache-friendly dense iteration
+for (int value : set) {  // cache-friendly dense iteration
   // ...
 }
 ```
@@ -89,14 +89,14 @@ multi.Invoke<1>(logger);
 ```cpp
 #include <helios/container/static_string.hpp>
 
-helios::container::StaticString<64> name("Player");
+helios::container::StaticString<64> name = "Player";
 CHECK_EQ(name.Size(), 6);
-CHECK(name == "Player");
+CHECK_EQ(name, "Player");
 ```
 
-No heap allocation — storage lives on the stack.
+No heap allocation -- storage lives on the stack.
 
 ## Dependencies
 
-- `core` — asserts
-- `utils` — `TypeIndex` for `MultiTypeMap`
+- `core` -- asserts
+- `utils` -- `TypeIndex` for `MultiTypeMap`

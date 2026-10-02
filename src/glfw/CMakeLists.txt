@@ -1,70 +1,56 @@
-helios_module(
-    NAME helios_glfw
-    ALIAS helios::glfw
-    VERSION 0.1.0
-    DESCRIPTION "GLFW backend for the helios_window ECS contract"
-    DEFAULT OFF
-    IMPLEMENTS window input
+add_library(helios_glfw)
 
-    HEADERS
-        include/helios/glfw/details/input_map.hpp
-        include/helios/glfw/systems/apply.hpp
-        include/helios/glfw/systems/create.hpp
-        include/helios/glfw/systems/destroy.hpp
-        include/helios/glfw/systems/init.hpp
-        include/helios/glfw/systems/input.hpp
-        include/helios/glfw/systems/poll.hpp
-        include/helios/glfw/systems/shutdown.hpp
-        include/helios/glfw/glfw.hpp
-        include/helios/glfw/native_handle.hpp
-        include/helios/glfw/plugin.hpp
-        include/helios/glfw/state.hpp
-        include/helios/glfw/sync.hpp
-
-    SOURCES
-        src/sync.cpp
-        src/systems/apply.cpp
-        src/systems/create.cpp
-        src/systems/destroy.cpp
-        src/systems/init.cpp
-        src/systems/input.cpp
-        src/systems/poll.cpp
-        src/systems/shutdown.cpp
-        src/callbacks.cpp
-        src/native_handle.cpp
-        src/plugin.cpp
-
-    MODULE_SOURCES
-        modules/helios.glfw.cppm
-
-    PCH src/pch.hpp
-
-    TEST_SOURCES
-        tests/glfw_sync.cpp
-        tests/input_map.cpp
-        tests/main.cpp
-        tests/module_import.cpp
-        tests/native_handle.cpp
-        tests/native_windows.cpp
-        tests/plugin.cpp
-        tests/systems.cpp
-
-    DEPENDS
-        PUBLIC
-            helios_app
-            helios_compiler
-            helios_ecs
-            helios_memory
-            helios_platform
-            helios_log
-            helios_window
-
-    OPTIONAL_DEPENDS
-        PUBLIC helios_input
-
-    USES
-        helios_glfw PRIVATE helios::lib::glfw::glfw
+target_sources(helios_glfw PUBLIC FILE_SET HEADERS BASE_DIRS include FILES
+    include/helios/glfw/details/input_map.hpp
+    include/helios/glfw/systems/apply.hpp
+    include/helios/glfw/systems/create.hpp
+    include/helios/glfw/systems/destroy.hpp
+    include/helios/glfw/systems/init.hpp
+    include/helios/glfw/systems/input.hpp
+    include/helios/glfw/systems/poll.hpp
+    include/helios/glfw/systems/shutdown.hpp
+    include/helios/glfw/glfw.hpp
+    include/helios/glfw/native_handle.hpp
+    include/helios/glfw/plugin.hpp
+    include/helios/glfw/state.hpp
+    include/helios/glfw/sync.hpp
 )
+
+target_sources(helios_glfw PRIVATE
+    src/sync.cpp
+    src/systems/apply.cpp
+    src/systems/create.cpp
+    src/systems/destroy.cpp
+    src/systems/init.cpp
+    src/systems/input.cpp
+    src/systems/poll.cpp
+    src/systems/shutdown.cpp
+    src/callbacks.cpp
+    src/native_handle.cpp
+    src/plugin.cpp
+)
+
+helios_require_dependency(glfw)
+target_link_libraries(helios_glfw PRIVATE helios::lib::glfw::glfw)
+
+helios_apply_conventions(helios_glfw)
+helios_target_set_folder(helios_glfw "Helios/Modules")
+helios_target_set_output_dirs(helios_glfw)
+helios_target_precompile_headers(helios_glfw src/pch.hpp)
+helios_target_cpp_module_sources(helios_glfw modules/helios.glfw.cppm)
+
+if(HELIOS_CURRENT_MODULE_BUILD_TESTS)
+  helios_add_module_tests(helios_glfw SOURCES
+      tests/glfw_sync.cpp
+      tests/input_map.cpp
+      tests/main.cpp
+      tests/module_import.cpp
+      tests/native_handle.cpp
+      tests/native_windows.cpp
+      tests/plugin.cpp
+      tests/systems.cpp
+  )
+endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   include(CMakeDependentOption)
@@ -85,7 +71,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
   if(HELIOS_GLFW_FORCE_WAYLAND AND HELIOS_GLFW_FORCE_X11)
     message(FATAL_ERROR
-        "helios_glfw: HELIOS_GLFW_FORCE_WAYLAND and HELIOS_GLFW_FORCE_X11 are mutually exclusive")
+        "helios_glfw: HELIOS_GLFW_FORCE_WAYLAND and HELIOS_GLFW_FORCE_X11 are mutually exclusive"
+    )
   endif()
 
   if(HELIOS_GLFW_FORCE_WAYLAND)

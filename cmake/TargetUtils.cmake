@@ -122,6 +122,28 @@ function(helios_target_set_warnings TARGET)
   )
 endfunction()
 
+# Removes MSVC /W* flags already set by third-party targets (e.g. SDL /W3) so
+# Helios suppression does not trigger D9025 override warnings.
+function(_helios_strip_msvc_warning_flags TARGET)
+  if(NOT MSVC)
+    return()
+  endif()
+
+  get_target_property(_opts ${TARGET} COMPILE_OPTIONS)
+  if(NOT _opts OR _opts STREQUAL "_opts-NOTFOUND")
+    return()
+  endif()
+
+  set(_filtered)
+  foreach(_opt IN LISTS _opts)
+    if(_opt MATCHES "^/W[0-4xX]$" OR _opt MATCHES "^/w$" OR _opt MATCHES ":/W[0-4xX]>")
+      continue()
+    endif()
+    list(APPEND _filtered "${_opt}")
+  endforeach()
+  set_target_properties(${TARGET} PROPERTIES COMPILE_OPTIONS "${_filtered}")
+endfunction()
+
 #[[
     helios_target_suppress_warnings(<target>)
 
@@ -143,6 +165,8 @@ function(helios_target_suppress_warnings TARGET)
   if(_type STREQUAL "INTERFACE_LIBRARY" OR _type STREQUAL "UTILITY")
     return()
   endif()
+
+  _helios_strip_msvc_warning_flags(${_actual_target})
 
   target_compile_options(${_actual_target} PRIVATE
       $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<OR:$<CXX_COMPILER_ID:GNU>,$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>>>:-w>
@@ -311,9 +335,10 @@ endfunction()
 #[[
     helios_target_enable_lto(<target>)
 
-    Enables IPO/LTO for Release when supported. RelWithDebInfo LTO is opt-in
-    via HELIOS_ENABLE_LTO_RELWITHDEBINFO (ThinLTO / parallel LTO / incremental
-    LTCG via helios_target_apply_lto_mode()).
+    Enables IPO/LTO for Release when supported. RelWithDebInfo full LTO
+    (HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO) uses the same IPO flags as Release.
+    HELIOS_ENABLE_LTO_RELWITHDEBINFO instead selects ThinLTO / parallel LTO /
+    incremental LTCG via helios_target_apply_lto_mode(). Full wins if both are on.
 ]]
 function(helios_target_enable_lto TARGET)
   if(NOT HELIOS_ENABLE_LTO)
@@ -331,7 +356,7 @@ function(helios_target_enable_lto TARGET)
     set_target_properties(${TARGET} PROPERTIES
         INTERPROCEDURAL_OPTIMIZATION_RELEASE ON
     )
-    if(HELIOS_ENABLE_LTO_RELWITHDEBINFO)
+    if(HELIOS_ENABLE_LTO_RELWITHDEBINFO OR HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO)
       set_target_properties(${TARGET} PROPERTIES
           INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON
       )
@@ -427,6 +452,7 @@ function(helios_apply_conventions TARGET)
   if(NOT ARG_NO_LTO AND HELIOS_ENABLE_LTO)
     helios_target_enable_lto(${TARGET})
   endif()
+  set_target_properties(${TARGET} PROPERTIES HELIOS_CONVENTIONS_APPLIED TRUE)
 endfunction()
 
 # ============================================================================
@@ -589,6 +615,28 @@ function(helios_target_enable_unity_build TARGET)
   endif()
 endfunction()
 
+function(helios_target_unity_build TARGET)
+  helios_target_enable_unity_build(${TARGET} ${ARGN})
+endfunction()
+
+function(helios_target_warnings TARGET)
+  helios_target_set_warnings(${TARGET})
+endfunction()
+
+function(helios_target_lto TARGET)
+  helios_target_enable_lto(${TARGET})
+endfunction()
+
+function(helios_target_linker TARGET)
+  if(COMMAND helios_target_apply_linker)
+    helios_target_apply_linker(${TARGET})
+  endif()
+endfunction()
+
+function(helios_target_compile_options TARGET)
+  target_compile_options(${TARGET} ${ARGN})
+endfunction()
+
 # ============================================================================
 # Precompiled Headers
 # ============================================================================
@@ -637,7 +685,10 @@ endfunction()
     Reuses or mirrors a module target's PCH setup on a consumer target.
 ]]
 function(helios_target_reuse_module_pch CONSUMER_TARGET MODULE_NAME)
-  set(_module_target "helios_module_${MODULE_NAME}")
+  set(_module_target "${MODULE_NAME}")
+  if(COMMAND helios_get_module_target)
+    helios_get_module_target(${MODULE_NAME} _module_target)
+  endif()
   if(NOT TARGET ${_module_target})
     return()
   endif()

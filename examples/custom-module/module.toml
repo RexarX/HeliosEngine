@@ -1,0 +1,20 @@
+[module]
+name = "example_greeting"
+version = "0.1.0"
+description = "Example custom Helios module (helios_greeting utilities)"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = false
+
+[build]
+system = "cmake"
+
+
+[dependencies]
+public = ["helios_core", "helios_utils"]
+private = []
+
+[dependencies.optional]
+public = []
+private = []

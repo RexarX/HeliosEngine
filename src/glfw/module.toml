@@ -1,0 +1,19 @@
+[module]
+name = "helios_glfw"
+version = "0.1.0"
+description = "GLFW backend for the helios_window ECS contract"
+languages = ["cpp"]
+default = false
+implements = ["window", "input"]
+c_api = false
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_app", "helios_compiler", "helios_ecs", "helios_memory", "helios_platform", "helios_log", "helios_window"]
+private = []
+
+[dependencies.optional]
+public = ["helios_input"]
+private = []

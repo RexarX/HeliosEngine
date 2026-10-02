@@ -1,0 +1,24 @@
+[module]
+name = "helios_async"
+version = "0.1.0"
+description = "Asynchronous task execution module built on Taskflow"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_core"]
+private = []
+
+[dependencies.optional]
+public = ["helios_profile"]
+private = []
+
+[features.enable_profile]
+default = true
+abi = false
+description = "Enable profiling in the helios_async module if helios_profile module is available"
