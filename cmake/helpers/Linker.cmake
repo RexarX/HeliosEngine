@@ -14,6 +14,9 @@ include_guard(GLOBAL)
 if(NOT DEFINED HELIOS_ENABLE_LTO_RELWITHDEBINFO)
   set(HELIOS_ENABLE_LTO_RELWITHDEBINFO OFF)
 endif()
+if(NOT DEFINED HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO)
+  set(HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO OFF)
+endif()
 
 if(NOT DEFINED HELIOS_LINKER)
   if(PROJECT_IS_TOP_LEVEL)
@@ -49,7 +52,8 @@ function(_helios_config_needs_lto OUT_VAR CONFIG)
   if(HELIOS_ENABLE_LTO AND HELIOS_IPO_SUPPORTED)
     if(CONFIG STREQUAL "Release")
       set(_needs TRUE)
-    elseif(CONFIG STREQUAL "RelWithDebInfo" AND HELIOS_ENABLE_LTO_RELWITHDEBINFO)
+    elseif(CONFIG STREQUAL "RelWithDebInfo"
+        AND (HELIOS_ENABLE_LTO_RELWITHDEBINFO OR HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO))
       set(_needs TRUE)
     endif()
   endif()
@@ -497,7 +501,7 @@ function(helios_target_apply_linker TARGET)
       endif()
     endif()
     target_link_options(${TARGET} PRIVATE
-        $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>:-fuse-ld=${HELIOS_ACTIVE_LINKER}>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<C_COMPILER_ID:GNU>,$<C_COMPILER_ID:Clang,AppleClang>>>:-fuse-ld=${HELIOS_ACTIVE_LINKER}>
     )
   endif()
 endfunction()
@@ -523,36 +527,39 @@ function(helios_configure_lto_mode)
   file(MAKE_DIRECTORY "${_lto_cache_dir}")
   set(HELIOS_LTO_CACHE_DIR "${_lto_cache_dir}" CACHE INTERNAL "ThinLTO cache directory")
 
-  if(HELIOS_ENABLE_LTO_RELWITHDEBINFO AND HELIOS_MANAGE_TOOLCHAIN)
+  if(HELIOS_ENABLE_LTO_RELWITHDEBINFO AND NOT HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO
+      AND HELIOS_MANAGE_TOOLCHAIN)
     add_compile_options(
-        $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
-        $<$<AND:$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
+        $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
+        $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
     )
     add_link_options(
-        $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
-        $<$<AND:$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
-        $<$<AND:$<CXX_COMPILER_ID:MSVC>,$<CONFIG:RelWithDebInfo>>:/LTCG:INCREMENTAL>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:MSVC>,$<CONFIG:RelWithDebInfo>>:/LTCG:INCREMENTAL>
     )
     if(WIN32)
       add_link_options(
-          $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:RelWithDebInfo>>:/lldltocache:${_lto_cache_dir}>
+          $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang>,$<CONFIG:RelWithDebInfo>>:/lldltocache:${_lto_cache_dir}>
       )
     elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
       add_link_options(
-          $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,-cache_path_lto,${_lto_cache_dir}>
+          $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,-cache_path_lto,${_lto_cache_dir}>
       )
     else()
       add_link_options(
-          $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,--thinlto-cache-dir=${_lto_cache_dir}>
+          $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,--thinlto-cache-dir=${_lto_cache_dir}>
       )
     endif()
   endif()
 
   set(HELIOS_LTO_MODE_CACHED TRUE CACHE INTERNAL "RelWithDebInfo LTO mode configured")
-  if(HELIOS_ENABLE_LTO_RELWITHDEBINFO)
+  if(HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO)
+    message(STATUS "LTO mode: Release and RelWithDebInfo use full LTO")
+  elseif(HELIOS_ENABLE_LTO_RELWITHDEBINFO)
     message(STATUS "LTO mode: RelWithDebInfo uses ThinLTO/parallel LTO (cache: ${_lto_cache_dir}); Release uses full LTO")
   else()
-    message(STATUS "LTO mode: Release uses full LTO; RelWithDebInfo LTO is off (set HELIOS_ENABLE_LTO_RELWITHDEBINFO=ON to enable)")
+    message(STATUS "LTO mode: Release uses full LTO; RelWithDebInfo LTO is off (set HELIOS_ENABLE_LTO_RELWITHDEBINFO=ON or HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO=ON)")
   endif()
 endfunction()
 
@@ -564,7 +571,9 @@ endfunction()
     Release keeps CMake's full IPO flags from INTERPROCEDURAL_OPTIMIZATION.
 ]]
 function(helios_target_apply_lto_mode TARGET)
-  if(NOT HELIOS_ENABLE_LTO OR NOT HELIOS_IPO_SUPPORTED OR NOT HELIOS_ENABLE_LTO_RELWITHDEBINFO)
+  if(NOT HELIOS_ENABLE_LTO OR NOT HELIOS_IPO_SUPPORTED
+      OR NOT HELIOS_ENABLE_LTO_RELWITHDEBINFO
+      OR HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO)
     return()
   endif()
   if(HELIOS_MANAGE_TOOLCHAIN)
@@ -584,26 +593,26 @@ function(helios_target_apply_lto_mode TARGET)
   endif()
 
   target_compile_options(${TARGET} PRIVATE
-      $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
-      $<$<AND:$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
   )
   target_link_options(${TARGET} PRIVATE
-      $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
-      $<$<AND:$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
-      $<$<AND:$<CXX_COMPILER_ID:MSVC>,$<CONFIG:RelWithDebInfo>>:/LTCG:INCREMENTAL>
+      $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-flto=thin>
+      $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:GNU>,$<CONFIG:RelWithDebInfo>>:-flto=auto>
+      $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:MSVC>,$<CONFIG:RelWithDebInfo>>:/LTCG:INCREMENTAL>
   )
 
   if(WIN32)
     target_link_options(${TARGET} PRIVATE
-        $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:RelWithDebInfo>>:/lldltocache:${HELIOS_LTO_CACHE_DIR}>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang>,$<CONFIG:RelWithDebInfo>>:/lldltocache:${HELIOS_LTO_CACHE_DIR}>
     )
   elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     target_link_options(${TARGET} PRIVATE
-        $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,-cache_path_lto,${HELIOS_LTO_CACHE_DIR}>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,-cache_path_lto,${HELIOS_LTO_CACHE_DIR}>
     )
   else()
     target_link_options(${TARGET} PRIVATE
-        $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,--thinlto-cache-dir=${HELIOS_LTO_CACHE_DIR}>
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<CONFIG:RelWithDebInfo>>:-Wl,--thinlto-cache-dir=${HELIOS_LTO_CACHE_DIR}>
     )
   endif()
 endfunction()

@@ -1,4 +1,4 @@
-# `utils` — Common Utilities
+# `utils` -- Common Utilities
 
 Header-only helpers shared across modules: compile-time type identification, type-erased delegates, scope guards, timers, random number generation, filesystem I/O, and lazy iterator adapters.
 
@@ -117,5 +117,5 @@ Other adapters include `SkipAdapter`, `EnumerateAdapter`, `StepByAdapter`, `Reve
 
 ## Dependencies
 
-- `compiler` — intrinsics, feature detection
-- `platform` — platform macros
+- `compiler` -- intrinsics, feature detection
+- `platform` -- platform macros

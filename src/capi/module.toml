@@ -1,0 +1,19 @@
+[module]
+name = "helios_capi"
+version = "0.1.0"
+description = "Shared C API linkage, error codes, and the last-error buffer"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_platform"]
+private = []
+
+[dependencies.optional]
+public = []
+private = []

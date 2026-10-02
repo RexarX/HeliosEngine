@@ -1,0 +1,24 @@
+[module]
+name = "helios_profile"
+version = "0.1.0"
+description = "Profiling module with composable backends"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_compiler", "helios_container", "helios_core", "helios_platform", "helios_utils"]
+private = []
+
+[dependencies.optional]
+public = []
+private = []
+
+[features.bundle_tracy]
+default = true
+abi = false
+description = "Bundle Tracy profiler"

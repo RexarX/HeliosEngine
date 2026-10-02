@@ -9,18 +9,9 @@ import re
 from pathlib import Path
 from typing import Optional, Sequence, Tuple
 
+from helios_modules.version import read_project_version
+
 SEMVER_DIR = re.compile(r"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
-
-
-def read_project_version(repo_root: Path) -> str:
-    cmake_file = repo_root / "CMakeLists.txt"
-    text = cmake_file.read_text(encoding="utf-8")
-    match = re.search(
-        r"project\s*\(\s*HeliosEngine\s+VERSION\s+([\d.]+)",
-        text,
-        re.IGNORECASE | re.DOTALL,
-    )
-    return match.group(1) if match else "0.0.0"
 
 
 def normalize_docs_label(label: str) -> str:

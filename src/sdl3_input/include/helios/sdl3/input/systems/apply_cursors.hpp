@@ -12,7 +12,7 @@ import helios.sdl3.input;
 #include <helios/ecs/query/params.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/input/mouse.hpp>
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 #include <helios/sdl3/window/window_map.hpp>
 #endif
 
@@ -30,7 +30,7 @@ struct ApplyCursors {
   static constexpr std::string_view kName = "helios::sdl3::input::ApplyCursors";
 
   void operator()(ecs::Res<const Context> context,
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
                   ecs::OptRes<const window::WindowMap> windows,
 #endif
                   ecs::Res<CursorCache> cache,

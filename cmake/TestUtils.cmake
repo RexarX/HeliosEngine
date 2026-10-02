@@ -40,9 +40,9 @@ set(HELIOS_TEST_INFRASTRUCTURE_INITIALIZED FALSE CACHE INTERNAL "Test infrastruc
     CMakeLists.txt before any tests are added.
 
     Creates:
-        - all_tests: Build all test executables
-        - unit_tests: Build all unit test executables
-        - integration_tests: Build all integration test executables
+        - helios_all_tests: Build all test executables
+        - helios_unit_tests: Build all unit test executables
+        - helios_integration_tests: Build all integration test executables
 
     Also defines global properties for tracking tests.
 ]]
@@ -54,20 +54,20 @@ function(helios_init_test_infrastructure)
   message(STATUS "[Test] Initializing test infrastructure...")
 
   # Create global aggregate targets
-  if(NOT TARGET all_tests)
-    add_custom_target(all_tests
+  if(NOT TARGET helios_all_tests)
+    add_custom_target(helios_all_tests
             COMMENT "Build all test executables"
         )
   endif()
 
-  if(NOT TARGET unit_tests)
-    add_custom_target(unit_tests
+  if(NOT TARGET helios_unit_tests)
+    add_custom_target(helios_unit_tests
             COMMENT "Build all unit test executables"
         )
   endif()
 
-  if(NOT TARGET integration_tests)
-    add_custom_target(integration_tests
+  if(NOT TARGET helios_integration_tests)
+    add_custom_target(helios_integration_tests
             COMMENT "Build all integration test executables"
         )
   endif()
@@ -91,7 +91,7 @@ function(helios_init_test_infrastructure)
 
   set(HELIOS_TEST_INFRASTRUCTURE_INITIALIZED TRUE CACHE INTERNAL "Test infrastructure initialized")
 
-  message(STATUS "[Test] Infrastructure ready (targets: all_tests, unit_tests, integration_tests)")
+  message(STATUS "[Test] Infrastructure ready (targets: helios_all_tests, helios_unit_tests, helios_integration_tests)")
 endfunction()
 
 # ============================================================================
@@ -148,37 +148,37 @@ function(_helios_register_test_target TARGET_NAME MODULE_NAME TEST_TYPE)
   _helios_ensure_module_test_targets(${MODULE_NAME})
 
   # Add to global all_tests
-  if(TARGET all_tests)
-    add_dependencies(all_tests ${TARGET_NAME})
+  if(TARGET helios_all_tests)
+    add_dependencies(helios_all_tests ${TARGET_NAME})
   endif()
 
   # Add to type-specific global target
   if(TEST_TYPE STREQUAL "unit")
-    if(TARGET unit_tests)
-      add_dependencies(unit_tests ${TARGET_NAME})
+    if(TARGET helios_unit_tests)
+      add_dependencies(helios_unit_tests ${TARGET_NAME})
     endif()
-    if(TARGET ${MODULE_NAME}_unit_tests)
+    if(TARGET ${MODULE_NAME}_unit_tests AND NOT TARGET_NAME STREQUAL "${MODULE_NAME}_unit_tests")
       add_dependencies(${MODULE_NAME}_unit_tests ${TARGET_NAME})
     endif()
     set_property(GLOBAL APPEND PROPERTY HELIOS_UNIT_TESTS ${TARGET_NAME})
   elseif(TEST_TYPE STREQUAL "integration")
-    if(TARGET integration_tests)
-      add_dependencies(integration_tests ${TARGET_NAME})
+    if(TARGET helios_integration_tests)
+      add_dependencies(helios_integration_tests ${TARGET_NAME})
     endif()
-    if(TARGET ${MODULE_NAME}_integration_tests)
+    if(TARGET ${MODULE_NAME}_integration_tests AND NOT TARGET_NAME STREQUAL "${MODULE_NAME}_integration_tests")
       add_dependencies(${MODULE_NAME}_integration_tests ${TARGET_NAME})
     endif()
     set_property(GLOBAL APPEND PROPERTY HELIOS_INTEGRATION_TESTS ${TARGET_NAME})
   endif()
 
   # Add to module-specific target
-  if(TARGET ${MODULE_NAME}_tests)
+  if(TARGET ${MODULE_NAME}_tests AND NOT TARGET_NAME STREQUAL "${MODULE_NAME}_tests")
     add_dependencies(${MODULE_NAME}_tests ${TARGET_NAME})
   endif()
 
   # Track in global list
   set_property(GLOBAL APPEND PROPERTY HELIOS_ALL_TESTS ${TARGET_NAME})
-  set_property(GLOBAL APPEND PROPERTY HELIOS_MODULE_TESTS_${MODULE_NAME} ${TARGET_NAME})
+  set_property(GLOBAL APPEND PROPERTY TEST_TARGETS_${MODULE_NAME} ${TARGET_NAME})
 endfunction()
 
 # ============================================================================
@@ -264,7 +264,7 @@ endfunction()
     Example:
         helios_add_test_executable(
             NAME helios_core_tests
-            MODULE core
+            MODULE helios_core
             SOURCES tests/main.cpp tests/assert.cpp
             LABELS unit
             REUSE_PCH
@@ -300,8 +300,15 @@ function(helios_add_test_executable)
 
   _helios_link_test_framework(${TEST_NAME})
 
-  if(TARGET helios::module::${TEST_MODULE})
-    target_link_libraries(${TEST_NAME} PRIVATE helios::module::${TEST_MODULE})
+  helios_get_module_link_target(${TEST_MODULE} _module_link)
+  if(TARGET ${_module_link})
+    target_link_libraries(${TEST_NAME} PRIVATE ${_module_link})
+    get_target_property(_module_private_link_libs ${_module_link}
+        HELIOS_MODULE_PRIVATE_LINK_LIBS)
+    if(_module_private_link_libs AND NOT _module_private_link_libs STREQUAL
+        "_module_private_link_libs-NOTFOUND")
+      target_link_libraries(${TEST_NAME} PRIVATE ${_module_private_link_libs})
+    endif()
     helios_target_consume_cxx_modules(${TEST_NAME})
     foreach(_src IN LISTS TEST_SOURCES)
       get_filename_component(_src_name "${_src}" NAME)
@@ -361,18 +368,18 @@ endfunction()
         COMPILE_DEFINITIONS - Optional. Additional compile definitions
 
     Creates:
-        - Test executable: helios_<module>_<type>
+        - Test executable: <module-target>_<type>_tests
         - CTest test with labels: <module>, <type>
         - Auto-registers with global and module test targets
 
     Example:
         helios_add_module_test(
-            MODULE_NAME core
+            MODULE_NAME helios_core
             TYPE unit
             SOURCES
                 unit/main.cpp
                 unit/core_test.cpp
-            DEPENDENCIES helios::module::core
+            DEPENDENCIES helios::core
         )
 ]]
 function(helios_add_module_test)
@@ -413,13 +420,14 @@ function(helios_add_module_test)
   endif()
 
   # Check per-module test option
-  set(_module_test_option "HELIOS_MODULE_${_upper_name}_BUILD_TESTS")
+  set(_module_test_option "${_upper_name}_BUILD_TESTS")
   if(DEFINED ${_module_test_option} AND NOT ${_module_test_option})
     message(STATUS "[Test] Skipping ${TEST_TYPE} tests for ${TEST_MODULE_NAME} (${_module_test_option}=OFF)")
     return()
   endif()
 
-  set(_target_name "helios_${TEST_MODULE_NAME}_${TEST_TYPE}")
+  helios_get_module_target(${TEST_MODULE_NAME} _module_target)
+  set(_target_name "${_module_target}_${TEST_TYPE}_tests")
   helios_add_test_executable(
       NAME ${_target_name}
       MODULE ${TEST_MODULE_NAME}
@@ -461,7 +469,7 @@ endfunction()
             SOURCES
                 integration/main.cpp
                 integration/ecs_workflow_test.cpp
-            MODULES core ecs window
+            MODULES helios_core helios_ecs helios_window
         )
 ]]
 function(helios_add_integration_test)
@@ -497,8 +505,9 @@ function(helios_add_integration_test)
   set(_module_deps)
   if(TEST_MODULES)
     foreach(_module ${TEST_MODULES})
-      if(TARGET helios::module::${_module})
-        list(APPEND _module_deps helios::module::${_module})
+      helios_get_module_link_target(${_module} _module_link)
+      if(TARGET ${_module_link})
+        list(APPEND _module_deps ${_module_link})
         list(APPEND _test_labels ${_module})
       else()
         message(WARNING "[Test] Module ${_module} not found for integration test ${TEST_NAME}")
@@ -592,12 +601,12 @@ function(helios_print_test_commands)
   message(STATUS "  ctest -L integration")
   message(STATUS "")
   message(STATUS "Run by module:")
-  message(STATUS "  ctest -L core")
-  message(STATUS "  ctest -L window")
+  message(STATUS "  ctest -L helios_core")
+  message(STATUS "  ctest -L helios_window")
   message(STATUS "")
   message(STATUS "Build test targets:")
-  message(STATUS "  cmake --build . --target all_tests")
-  message(STATUS "  cmake --build . --target unit_tests")
+  message(STATUS "  cmake --build . --target helios_all_tests")
+  message(STATUS "  cmake --build . --target helios_unit_tests")
   message(STATUS "  cmake --build . --target core_tests")
   message(STATUS "  cmake --build . --target core_unit_tests")
   message(STATUS "")
@@ -625,6 +634,67 @@ endfunction()
     Gets a list of test targets for a specific module.
 ]]
 function(helios_get_module_test_targets MODULE_NAME OUTPUT_VAR)
-  get_property(_module_tests GLOBAL PROPERTY HELIOS_MODULE_TESTS_${MODULE_NAME})
+  get_property(_module_tests GLOBAL PROPERTY TEST_TARGETS_${MODULE_NAME})
   set(${OUTPUT_VAR} "${_module_tests}" PARENT_SCOPE)
+endfunction()
+
+#[[
+    helios_add_module_tests(<target>
+        SOURCES <files...>
+        [C_SOURCES <files...>]
+        [DEPENDENCIES <targets...>]
+    )
+
+    Doctest executable <target>_tests and optional C smoke test <target>_c_tests.
+]]
+function(helios_add_module_tests TARGET)
+  cmake_parse_arguments(ARG "" "" "SOURCES;C_SOURCES;DEPENDENCIES" ${ARGN})
+  if(NOT HELIOS_CURRENT_MODULE)
+    message(FATAL_ERROR "helios_add_module_tests: HELIOS_CURRENT_MODULE is not set")
+  endif()
+  set(_reuse)
+  get_target_property(_applied ${TARGET} HELIOS_CONVENTIONS_APPLIED)
+  get_target_property(_has_pch ${TARGET} HELIOS_HAS_PCH)
+  if(_applied AND _has_pch)
+    set(_reuse REUSE_PCH)
+  endif()
+  if(ARG_SOURCES)
+    helios_add_test_executable(
+        NAME ${TARGET}_tests
+        MODULE ${HELIOS_CURRENT_MODULE}
+        TYPE unit
+        SOURCES ${ARG_SOURCES}
+        DEPENDENCIES ${ARG_DEPENDENCIES}
+        LABELS unit
+        ${_reuse}
+    )
+  endif()
+  if(ARG_C_SOURCES AND HELIOS_BUILD_C_API)
+    set(_c_target ${TARGET}_c_tests)
+    add_executable(${_c_target} ${ARG_C_SOURCES})
+    _helios_configure_test_target(${_c_target})
+    helios_target_set_folder(${_c_target} "Helios/Tests/${HELIOS_CURRENT_MODULE}")
+    helios_get_module_link_target(${HELIOS_CURRENT_MODULE} _module_link)
+    if(TARGET ${_module_link})
+      target_link_libraries(${_c_target} PRIVATE ${_module_link})
+      get_target_property(_module_private_link_libs ${_module_link}
+          HELIOS_MODULE_PRIVATE_LINK_LIBS)
+      if(_module_private_link_libs AND NOT _module_private_link_libs STREQUAL
+          "_module_private_link_libs-NOTFOUND")
+        target_link_libraries(${_c_target} PRIVATE ${_module_private_link_libs})
+      endif()
+    else()
+      target_link_libraries(${_c_target} PRIVATE ${TARGET})
+    endif()
+    set_target_properties(${_c_target} PROPERTIES
+        C_STANDARD 11
+        C_STANDARD_REQUIRED ON
+        C_EXTENSIONS OFF
+        LINKER_LANGUAGE CXX
+    )
+    add_test(NAME ${_c_target} COMMAND ${_c_target})
+    if(COMMAND _helios_register_test_target)
+      _helios_register_test_target(${_c_target} ${HELIOS_CURRENT_MODULE} unit)
+    endif()
+  endif()
 endfunction()

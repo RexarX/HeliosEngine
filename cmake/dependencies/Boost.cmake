@@ -146,9 +146,9 @@ else()
     helios_dep_log(DOWNLOAD "Boost not found in system, downloading via CPM...")
 
     if(HELIOS_USE_STL_STACKTRACE)
-      set(_boost_include_libs "container;unordered")
+      set(_boost_include_libs "helios_container;unordered")
     else()
-      set(_boost_include_libs "container;stacktrace;unordered")
+      set(_boost_include_libs "helios_container;stacktrace;unordered")
     endif()
 
     # BOOST_INCLUDE_LIBRARIES is semicolon-separated; CPM must iterate OPTIONS with
@@ -202,9 +202,9 @@ else()
         else()
           target_link_libraries(helios::lib::boost::container INTERFACE helios::lib::boost::boost)
         endif()
-        if(Boost_SOURCE_DIR AND EXISTS "${Boost_SOURCE_DIR}/libs/container/include")
+        if(Boost_SOURCE_DIR AND EXISTS "${Boost_SOURCE_DIR}/libs/helios_container/include")
           target_include_directories(helios::lib::boost::container SYSTEM INTERFACE
-                        "${Boost_SOURCE_DIR}/libs/container/include")
+                        "${Boost_SOURCE_DIR}/libs/helios_container/include")
         endif()
       endif()
     endif()
@@ -231,9 +231,9 @@ if(NOT TARGET helios::lib::boost)
   add_library(helios::lib::boost ALIAS _helios_boost_all)
 endif()
 
-# Boost.Stacktrace platform requirements for core's own translation units (PCH,
+# Boost.Stacktrace platform requirements for helios_core's own translation units (PCH,
 # stacktrace.cpp). Applied on the imported target so PRIVATE module USES still
-# pick them up when compiling helios_module_core.
+# pick them up when compiling helios_core.
 if(NOT HELIOS_USE_STL_STACKTRACE AND TARGET helios::lib::boost::stacktrace AND APPLE)
   target_compile_definitions(helios::lib::boost::stacktrace INTERFACE
       BOOST_STACKTRACE_GNU_SOURCE_NOT_REQUIRED

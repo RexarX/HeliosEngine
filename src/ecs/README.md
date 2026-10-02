@@ -1,4 +1,4 @@
-# `ecs` — Entity Component System
+# `ecs` -- Entity Component System
 
 Data-oriented ECS with deferred commands, double-buffered messages, archetype-based component storage, and parallel schedule execution. The heart of the engine.
 
@@ -112,7 +112,7 @@ A type models the `SystemParam` concept when the specialization provides:
 | `RegisterAccess(AccessPolicyBuilder&)`                | Declare component/resource accesses for parallel scheduling |
 | `Make(World&, SystemLocalData&, const AccessPolicy&)` | Construct the parameter at system invocation time           |
 
-`World` registers exclusive access and conflicts with component/resource access. `Commands`, `Local<T>`, `WorldView`, and message params register no scheduling access — they never participate in conflict detection.
+`World` registers exclusive access and conflicts with component/resource access. `Commands`, `Local<T>`, `WorldView`, and message params register no scheduling access -- they never participate in conflict detection.
 
 #### Aggregate parameters (`CompositeSystemParam`)
 
@@ -194,7 +194,7 @@ struct PhysicsSystem {
 
 Use `DeclareReadComponents`, `DeclareWriteComponents`, or `DeclareQueryAccess` from `helios/ecs/system/access_decl.hpp` when you need finer-grained component declarations inside `RegisterAccess`.
 
-After specialization, pass the type to `Schedule::Add` like any other system — access policy and parallel ordering are deduced automatically.
+After specialization, pass the type to `Schedule::Add` like any other system -- access policy and parallel ordering are deduced automatically.
 
 ### Ordering
 
@@ -209,7 +209,7 @@ schedule.Set<SpawnSet>().Sequence();
 schedule.Add(RenderSystem{}).Before<MoveSystem>();
 ```
 
-## Commands — Deferred Mutations
+## Commands -- Deferred Mutations
 
 Systems never mutate the world directly during parallel execution. All structural changes go through `Commands`:
 
@@ -283,7 +283,7 @@ for (const auto msg : world.ReadMessages(cursor)) {
 
 Consumable messages record stable ids on `Consume()` and remove globally when deferred merges apply; independent readers still each see the message once beforehand.
 
-Async messages (`kAsync = true`) use a lock-free queue and are not managed by `MessageManager::Update()` — clear explicitly.
+Async messages (`kAsync = true`) use a lock-free queue and are not managed by `MessageManager::Update()` -- clear explicitly.
 
 ## Components
 
@@ -302,7 +302,7 @@ Override with `static constexpr ComponentStorageType kStorageType = ...` in the 
 compile time and stores their values. Nested types are flattened depth-first,
 left-to-right for add/remove.
 
-**Leaf bundle** — use `ComponentBundleTypes` directly:
+**Leaf bundle** -- use `ComponentBundleTypes` directly:
 
 ```cpp
 using MovementBundle = helios::ecs::ComponentBundleTypes<Position, Velocity>;
@@ -311,7 +311,7 @@ world.AddBundle(entity, MovementBundle{pos, vel});
 world.RemoveBundle<MovementBundle>(entity);
 ```
 
-**Struct bundle** — named fields plus `Build() &&` returning `ComponentTypes`:
+**Struct bundle** -- named fields plus `Build() &&` returning `ComponentTypes`:
 
 ```cpp
 struct PlayerBundle {
@@ -369,7 +369,7 @@ q.ForEachWithEntity([](helios::ecs::Entity e, Transform& t,
 
 ## Dependencies
 
-- `async` — parallel schedule execution
-- `container` — sparse sets, typed buffers, multi-type maps
+- `async` -- parallel schedule execution
+- `container` -- sparse sets, typed buffers, multi-type maps
 - `core`, `compiler`, `memory`, `utils`, `log`
 - External: Boost `flat_map`, moodycamel `ConcurrentQueue`

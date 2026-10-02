@@ -1,11 +1,10 @@
 #pragma once
 
-#if defined(HELIOS_APP_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#if defined(HELIOS_APP_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE)
 #define HELIOS_ENABLE_PROFILE
 
 #include <helios/profile/macros.hpp>
-#ifndef HELIOS_ENABLE_CPP_MODULES
+#if defined(HELIOS_PROFILE_BUNDLE_TRACY) && !defined(HELIOS_ENABLE_CPP_MODULES)
 #include <helios/profile/tracy/lock.hpp>
 #endif
 

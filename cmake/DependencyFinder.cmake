@@ -48,7 +48,7 @@ if(NOT DEFINED HELIOS_DEPENDENCY_OVERRIDE_PATHS)
 endif()
 
 #[[
-    _helios_resolve_vendored_path(<input> <out_var>)
+    _helios_resolve_vendored_path(<helios_input> <out_var>)
 
     Resolves VENDORED_DIR to an absolute path. Absolute inputs are normalized
     as-is; relative inputs are joined with HELIOS_THIRD_PARTY_DIR.
@@ -203,7 +203,7 @@ function(_helios_resolve_dep_file DEP_NAME OUT_PATH)
   # 1. HELIOS_DEPENDENCY_OVERRIDE_PATHS (consumer overrides, checked first)
   # 2. ${HELIOS_ROOT_DIR}/cmake/dependencies/ (engine built-ins)
   # 3. HELIOS_DEPENDENCY_PATHS (consumer extensions)
-  # 4. Case-folded retry of each path above
+  # 4. PascalCase, then lowercase, retry of each path above
 
   set(_candidates "")
 
@@ -220,14 +220,20 @@ function(_helios_resolve_dep_file DEP_NAME OUT_PATH)
     list(APPEND _candidates "${_dir}/${DEP_NAME}.cmake")
   endforeach()
 
-  # Case-folded retry (lowercase)
+  # PascalCase file names (glfw -> Glfw.cmake), then a lowercase retry.
+  string(SUBSTRING "${DEP_NAME}" 0 1 _dep_first)
+  string(TOUPPER "${_dep_first}" _dep_first)
+  string(SUBSTRING "${DEP_NAME}" 1 -1 _dep_rest)
+  set(_dep_pascal "${_dep_first}${_dep_rest}")
   string(TOLOWER "${DEP_NAME}" _dep_lower)
-  foreach(_dir ${HELIOS_DEPENDENCY_OVERRIDE_PATHS})
-    list(APPEND _candidates "${_dir}/${_dep_lower}.cmake")
-  endforeach()
-  list(APPEND _candidates "${HELIOS_ROOT_DIR}/cmake/dependencies/${_dep_lower}.cmake")
-  foreach(_dir ${HELIOS_DEPENDENCY_PATHS})
-    list(APPEND _candidates "${_dir}/${_dep_lower}.cmake")
+  foreach(_dep_file ${_dep_pascal} ${_dep_lower})
+    foreach(_dir ${HELIOS_DEPENDENCY_OVERRIDE_PATHS})
+      list(APPEND _candidates "${_dir}/${_dep_file}.cmake")
+    endforeach()
+    list(APPEND _candidates "${HELIOS_ROOT_DIR}/cmake/dependencies/${_dep_file}.cmake")
+    foreach(_dir ${HELIOS_DEPENDENCY_PATHS})
+      list(APPEND _candidates "${_dir}/${_dep_file}.cmake")
+    endforeach()
   endforeach()
 
   foreach(_cand ${_candidates})

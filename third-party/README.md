@@ -42,5 +42,5 @@ If both force-download and use-system are set, force-download wins.
 
 1. Download the release/tag archive from GitHub.
 2. Replace `<HELIOS_THIRD_PARTY_DIR>/<dir>/` with the extracted sources (keep the directory name).
-3. Update `CPM_GIT_TAG` / `CPM_VERSION` in `cmake/dependencies/<name>.cmake` to match.
+3. Update `CPM_GIT_TAG` / `CPM_VERSION` in `cmake/dependencies/<PascalName>.cmake` to match.
 4. Update the pin in this README.

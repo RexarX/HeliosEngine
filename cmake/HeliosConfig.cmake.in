@@ -1,14 +1,24 @@
 # HeliosConfig.cmake — CMake package config for Helios Engine
 #
 # Provides:
-#   helios::module::<name>    — per-module targets
-#   helios_link_modules(...)  — consumer helper
+#   helios::<alias>           - per-module targets (helios_app is helios::app)
+#   helios_link_modules(...)  - consumer helper
 
 @PACKAGE_INIT@
 
-include("${CMAKE_CURRENT_LIST_DIR}/HeliosTargets.cmake")
+list(APPEND CMAKE_MODULE_PATH
+    "${CMAKE_CURRENT_LIST_DIR}"
+    "${CMAKE_CURRENT_LIST_DIR}/helpers"
+)
 
-include("${CMAKE_CURRENT_LIST_DIR}/HeliosModuleLinking.cmake" OPTIONAL)
-if(NOT COMMAND helios_link_modules)
-    include("${CMAKE_CURRENT_LIST_DIR}/HeliosModuleUtils.cmake" OPTIONAL)
+include("${CMAKE_CURRENT_LIST_DIR}/HeliosTargets.cmake")
+if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/HeliosAliases.cmake")
+  include("${CMAKE_CURRENT_LIST_DIR}/HeliosAliases.cmake")
 endif()
+if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/HeliosSdkChecks.cmake")
+  include("${CMAKE_CURRENT_LIST_DIR}/HeliosSdkChecks.cmake")
+endif()
+include("${CMAKE_CURRENT_LIST_DIR}/Sanitizers.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/ModuleDeclarations.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/ModuleFinalize.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/ModuleLinking.cmake")

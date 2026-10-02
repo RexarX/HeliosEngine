@@ -1,7 +1,6 @@
 #pragma once
 
-#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#if defined(HELIOS_MEMORY_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE)
 #define HELIOS_ENABLE_PROFILE
 #ifdef HELIOS_ENABLE_CPP_MODULES
 #include <helios/profile/macros.hpp>

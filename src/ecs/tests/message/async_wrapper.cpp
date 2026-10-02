@@ -2,6 +2,7 @@
 
 #include <helios/ecs/message/async_wrapper.hpp>
 
+#include <ostream>
 #include <string_view>
 #include <utility>
 

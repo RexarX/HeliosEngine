@@ -11,7 +11,7 @@
 #include <helios/window/properties.hpp>
 #include <helios/window/settings.hpp>
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 #include <helios/input/keyboard.hpp>
 #include <helios/input/mouse.hpp>
 #endif
@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 #include <helios/glfw/details/input_map.hpp>
 #endif
 
@@ -287,7 +287,7 @@ void MonitorCallback(GLFWmonitor* monitor, int event) {
   }
 }
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 
 [[nodiscard]] bool InputEnabled(ecs::World& world) noexcept {
   const auto* ctx = world.TryReadResource<Context>();
@@ -389,7 +389,7 @@ void ScrollCallback(GLFWwindow* glfw_window, double x, double y) {
   });
 }
 
-#endif  // HELIOS_MODULE_INPUT_AVAILABLE
+#endif  // HELIOS_INPUT_AVAILABLE
 
 }  // namespace
 
@@ -408,7 +408,7 @@ void RegisterCallbacks(GLFWwindow& window, NativeUserData& user_data) {
   // No glfwSetWindowRefreshCallback: nested FramePumpOrder runs from size /
   // pos / scale only. WM_PAINT would nest Update inside every compositor paint
   // processed by glfwPollEvents.
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
   glfwSetKeyCallback(&window, KeyCallback);
   glfwSetCharCallback(&window, CharCallback);
   glfwSetMouseButtonCallback(&window, MouseButtonCallback);

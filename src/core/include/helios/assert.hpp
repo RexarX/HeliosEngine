@@ -6,7 +6,7 @@
 #include <helios/utils/macro.hpp>
 
 #if defined(HELIOS_ENABLE_CPP_MODULES) && defined(HELIOS_BUILDING_MODULE) && \
-    !defined(HELIOS_BUILDING_MODULE_CORE)
+    !defined(HELIOS_BUILDING_MODULE_HELIOS_CORE)
 #else
 #ifndef HELIOS_BUILDING_MODULE
 #include <format>
@@ -205,8 +205,11 @@ void AbortWithStacktrace(
 // NOLINTBEGIN(cppcoreguidelines-macro-usage)
 
 /**
- * @brief Assertion macro that aborts execution in debug builds.
- * @details Does nothing in release builds.
+ * @brief Assertion macro that aborts execution when API checks are enabled.
+ * @details Compiled in for Debug and RelWithDebInfo. A checked SDK install
+ * defines `HELIOS_ENABLE_ASSERTS` for every consumer. A shipping SDK leaves it
+ * unset; define it to check inline API misuse. Checks inside that shared
+ * library stay off. Does nothing when the macro is unset.
  * Uses the configured assertion handler (custom -> log plugin -> default).
  * Supports format strings and arguments.
  * @param condition The condition to check

@@ -1,5 +1,5 @@
 // Named-module imports require linking the providing target. This plugin is
-// compiled against app headers only (no helios::module::app) so a second
+// compiled against app headers only (no helios::app) so a second
 // TracyClient / mimalloc is not embedded on dlopen. Parse classic headers.
 #ifdef HELIOS_ENABLE_CPP_MODULES
 #undef HELIOS_ENABLE_CPP_MODULES

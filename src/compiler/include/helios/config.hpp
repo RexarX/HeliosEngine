@@ -33,3 +33,14 @@
 // Mixing works because interface units wrap headers in
 // `HELIOS_BEGIN_MODULE_EXPORT` (classic ABI).
 #define HELIOS_MODULE_HEADER_IMPORT 0
+
+// Installed SDK only. In-tree builds use the HELIOS_ENABLE_ASSERTS generator
+// expression instead, so this header is absent from the build include path.
+#ifdef __has_include
+#if __has_include(<helios/sdk_checks.hpp>)
+#include <helios/sdk_checks.hpp>
+#endif
+#if __has_include(<helios/abi_check.hpp>)
+#include <helios/abi_check.hpp>
+#endif
+#endif

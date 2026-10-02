@@ -48,6 +48,7 @@ function(helios_target_set_warnings TARGET)
       -Wdouble-promotion
       -Wformat=2
       -Wimplicit-fallthrough
+      -Wno-missing-field-initializers
   )
 
   set(GCC_WARNINGS
@@ -65,14 +66,82 @@ function(helios_target_set_warnings TARGET)
     list(APPEND GCC_WARNINGS -Werror)
   endif()
 
+  set(MSVC_C_WARNINGS
+      /utf-8
+      /W4
+      /w14242
+      /w14287
+      /w14296
+      /w14311
+      /w14545 /w14546 /w14547 /w14549 /w14555
+      /w14619
+      /w14826
+  )
+  set(CLANG_C_WARNINGS
+      -Wall
+      -Wextra
+      -Wpedantic
+      -Wshadow
+      -Wcast-align
+      -Wunused
+      -Wconversion
+      -Wsign-conversion
+      -Wnull-dereference
+      -Wdouble-promotion
+      -Wformat=2
+      -Wimplicit-fallthrough
+      -Wstrict-prototypes
+      -Wmissing-prototypes
+      -Wno-missing-field-initializers
+  )
+  set(GCC_C_WARNINGS
+      ${CLANG_C_WARNINGS}
+      -Wmisleading-indentation
+      -Wduplicated-cond
+      -Wduplicated-branches
+      -Wlogical-op
+  )
+
+  if(HELIOS_ENABLE_WARNINGS_AS_ERRORS)
+    list(APPEND MSVC_C_WARNINGS /WX)
+    list(APPEND CLANG_C_WARNINGS -Werror)
+    list(APPEND GCC_C_WARNINGS -Werror)
+  endif()
+
   target_compile_options(${TARGET} PRIVATE
       # MSVC and clang-cl (MSVC frontend) use MSVC-style warnings
-      $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:${MSVC_WARNINGS}>
+      $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>>:${MSVC_WARNINGS}>
       # Clang / AppleClang on Unix-like systems
-      $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>:${CLANG_WARNINGS}>
+      $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>:${CLANG_WARNINGS}>
       # GCC
-      $<$<CXX_COMPILER_ID:GNU>:${GCC_WARNINGS}>
+      $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:GNU>>:${GCC_WARNINGS}>
+      # C: no C++-only diagnostics (-Wnon-virtual-dtor, /w14263, ...).
+      $<$<AND:$<COMPILE_LANGUAGE:C>,$<OR:$<C_COMPILER_ID:MSVC>,$<AND:$<C_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>>:${MSVC_C_WARNINGS}>
+      $<$<AND:$<COMPILE_LANGUAGE:C>,$<C_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>:${CLANG_C_WARNINGS}>
+      $<$<AND:$<COMPILE_LANGUAGE:C>,$<C_COMPILER_ID:GNU>>:${GCC_C_WARNINGS}>
   )
+endfunction()
+
+# Removes MSVC /W* flags already set by third-party targets (e.g. SDL /W3) so
+# Helios suppression does not trigger D9025 override warnings.
+function(_helios_strip_msvc_warning_flags TARGET)
+  if(NOT MSVC)
+    return()
+  endif()
+
+  get_target_property(_opts ${TARGET} COMPILE_OPTIONS)
+  if(NOT _opts OR _opts STREQUAL "_opts-NOTFOUND")
+    return()
+  endif()
+
+  set(_filtered)
+  foreach(_opt IN LISTS _opts)
+    if(_opt MATCHES "^/W[0-4xX]$" OR _opt MATCHES "^/w$" OR _opt MATCHES ":/W[0-4xX]>")
+      continue()
+    endif()
+    list(APPEND _filtered "${_opt}")
+  endforeach()
+  set_target_properties(${TARGET} PROPERTIES COMPILE_OPTIONS "${_filtered}")
 endfunction()
 
 #[[
@@ -97,9 +166,13 @@ function(helios_target_suppress_warnings TARGET)
     return()
   endif()
 
+  _helios_strip_msvc_warning_flags(${_actual_target})
+
   target_compile_options(${_actual_target} PRIVATE
-      $<$<OR:$<CXX_COMPILER_ID:GNU>,$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>>:-w>
-      $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:/W0>
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<OR:$<CXX_COMPILER_ID:GNU>,$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>>>:-w>
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>>:/W0>
+      $<$<AND:$<COMPILE_LANGUAGE:C>,$<OR:$<C_COMPILER_ID:GNU>,$<AND:$<C_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>>>:-w>
+      $<$<AND:$<COMPILE_LANGUAGE:C>,$<OR:$<C_COMPILER_ID:MSVC>,$<AND:$<C_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>>:/W0>
   )
 endfunction()
 
@@ -137,12 +210,12 @@ function(helios_target_set_test_warnings TARGET)
 
   # doctest SUBCASE blocks routinely shadow outer locals; suppress in tests only.
   target_compile_options(${TARGET} PRIVATE
-      $<$<OR:$<CXX_COMPILER_ID:GNU>,$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>>:
+      $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<OR:$<CXX_COMPILER_ID:GNU>,$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>>>:
           -Wno-shadow
           -Wno-unused-variable
           -Wno-unused-const-variable
       >
-      $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:/wd4456>
+      $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>>:/wd4456>
   )
 
   # Clang-only: doctest uses __COUNTER__ (c2y) and emits #warning for <ciso646>.
@@ -151,12 +224,12 @@ function(helios_target_set_test_warnings TARGET)
   # Extra Clang diagnostics that GCC does not emit (or emits far less) in tests.
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32)
     target_compile_options(${TARGET} PRIVATE
-        -Wno-c2y-extensions
-        "SHELL:-Wno-#warnings"
-        -Wno-unused-lambda-capture
-        -Wno-unneeded-internal-declaration
-        -Wno-self-assign-overloaded
-        -Wno-tautological-pointer-compare
+        $<$<COMPILE_LANGUAGE:CXX>:-Wno-c2y-extensions>
+        "$<$<COMPILE_LANGUAGE:CXX>:SHELL:-Wno-#warnings>"
+        $<$<COMPILE_LANGUAGE:CXX>:-Wno-unused-lambda-capture>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wno-unneeded-internal-declaration>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wno-self-assign-overloaded>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wno-tautological-pointer-compare>
     )
   endif()
 endfunction()
@@ -181,12 +254,12 @@ function(helios_target_set_optimization TARGET)
   target_compile_options(${TARGET} PRIVATE
       # MSVC-only: clang-cl does not implement /Zc:preprocessor or /MP
       # (Ninja already parallelizes compiles).
-      $<$<CXX_COMPILER_ID:MSVC>:
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:MSVC>>:
           /Zc:preprocessor
           /MP
       >
       # MSVC and clang-cl (MSVC frontend)
-      $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>>:
           $<$<CONFIG:Debug>:/Od /Zi /MDd>
           ${_helios_msvc_debug_rtc}
           # /Ob2 + /Zo: Release-like inlining with better optimized debugging
@@ -194,25 +267,25 @@ function(helios_target_set_optimization TARGET)
           $<$<CONFIG:Release>:/O2 /Ob2 /DNDEBUG>
       >
       # GCC and Clang on Unix-like systems
-      $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:
           $<$<CONFIG:Debug>:-Og -g3 -ggdb>
           # Match Release -O3 while keeping DWARF and usable backtraces
           $<$<CONFIG:RelWithDebInfo>:-O3 -g -fno-omit-frame-pointer -ffunction-sections -fdata-sections -fno-math-errno -DNDEBUG>
           $<$<CONFIG:Release>:-O3 -ffunction-sections -fdata-sections -fno-math-errno -DNDEBUG>
       >
       # Split DWARF: smaller link inputs, same debug experience (Linux ELF)
-      $<$<AND:$<PLATFORM_ID:Linux>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>>:
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<PLATFORM_ID:Linux>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>>:
           $<$<CONFIG:Debug>:-gsplit-dwarf>
           $<$<CONFIG:RelWithDebInfo>:-gsplit-dwarf>
       >
       # Clang: richer line tables in heavily inlined -O3 code
-      $<$<AND:$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>:
+      $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CXX_COMPILER_ID:Clang,AppleClang>,$<NOT:$<PLATFORM_ID:Windows>>>:
           $<$<CONFIG:RelWithDebInfo>:-fdebug-info-for-profiling>
       >
   )
 
   target_link_options(${TARGET} PRIVATE
-      $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:
+      $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>,$<NOT:$<PLATFORM_ID:Windows>>>:
           $<$<CONFIG:Debug>:
               -rdynamic
           >
@@ -221,11 +294,11 @@ function(helios_target_set_optimization TARGET)
           >
       >
       # ELF: COMDAT GC pairs with -ffunction-sections / -fdata-sections
-      $<$<AND:$<PLATFORM_ID:Linux>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>>:
+      $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<PLATFORM_ID:Linux>,$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang,AppleClang>>>:
           $<$<CONFIG:RelWithDebInfo>:-Wl,--gc-sections>
       >
       # Mach-O: strip unreferenced sections at link time
-      $<$<AND:$<PLATFORM_ID:Darwin>,$<OR:$<CXX_COMPILER_ID:Clang,AppleClang>>>:
+      $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<PLATFORM_ID:Darwin>,$<OR:$<CXX_COMPILER_ID:Clang,AppleClang>>>:
           $<$<CONFIG:RelWithDebInfo>:-Wl,-dead_strip>
       >
   )
@@ -234,7 +307,7 @@ function(helios_target_set_optimization TARGET)
   get_target_property(_target_type ${TARGET} TYPE)
   if(_target_type STREQUAL "EXECUTABLE" OR _target_type STREQUAL "SHARED_LIBRARY")
     target_link_options(${TARGET} PRIVATE
-        $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
+        $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>>:
             $<$<CONFIG:Debug>:/INCREMENTAL>
             $<$<NOT:$<CONFIG:Debug>>:/INCREMENTAL:NO>
         >
@@ -242,7 +315,7 @@ function(helios_target_set_optimization TARGET)
     # RAD Linker does not implement /opt:ref yet.
     if(NOT HELIOS_LINKER_RELWITHDEBINFO STREQUAL "rad")
       target_link_options(${TARGET} PRIVATE
-          $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
+          $<$<AND:$<LINK_LANGUAGE:C,CXX>,$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>>:
               $<$<CONFIG:RelWithDebInfo>:/OPT:REF /OPT:ICF>
           >
       )
@@ -253,16 +326,19 @@ function(helios_target_set_optimization TARGET)
   # See: https://github.com/llvm/llvm-project/issues/64029
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang"
       AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS "21.0")
-    target_compile_options(${TARGET} PRIVATE -fno-builtin-std-forward_like)
+    target_compile_options(${TARGET} PRIVATE
+        $<$<COMPILE_LANGUAGE:CXX>:-fno-builtin-std-forward_like>
+    )
   endif()
 endfunction()
 
 #[[
     helios_target_enable_lto(<target>)
 
-    Enables IPO/LTO for Release when supported. RelWithDebInfo LTO is opt-in
-    via HELIOS_ENABLE_LTO_RELWITHDEBINFO (ThinLTO / parallel LTO / incremental
-    LTCG via helios_target_apply_lto_mode()).
+    Enables IPO/LTO for Release when supported. RelWithDebInfo full LTO
+    (HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO) uses the same IPO flags as Release.
+    HELIOS_ENABLE_LTO_RELWITHDEBINFO instead selects ThinLTO / parallel LTO /
+    incremental LTCG via helios_target_apply_lto_mode(). Full wins if both are on.
 ]]
 function(helios_target_enable_lto TARGET)
   if(NOT HELIOS_ENABLE_LTO)
@@ -280,7 +356,7 @@ function(helios_target_enable_lto TARGET)
     set_target_properties(${TARGET} PROPERTIES
         INTERPROCEDURAL_OPTIMIZATION_RELEASE ON
     )
-    if(HELIOS_ENABLE_LTO_RELWITHDEBINFO)
+    if(HELIOS_ENABLE_LTO_RELWITHDEBINFO OR HELIOS_ENABLE_FULL_LTO_RELWITHDEBINFO)
       set_target_properties(${TARGET} PROPERTIES
           INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON
       )
@@ -299,6 +375,25 @@ endfunction()
 # Consumer conventions (opt-in)
 # ============================================================================
 
+function(helios_target_languages TARGET OUT_HAS_C OUT_HAS_CXX)
+  get_target_property(_sources ${TARGET} SOURCES)
+  set(_has_c FALSE)
+  set(_has_cxx FALSE)
+  if(_sources AND NOT _sources STREQUAL "_sources-NOTFOUND")
+    foreach(_src IN LISTS _sources)
+      get_filename_component(_ext "${_src}" LAST_EXT)
+      string(TOLOWER "${_ext}" _ext)
+      if(_ext STREQUAL ".c")
+        set(_has_c TRUE)
+      elseif(_ext MATCHES "\\.(cpp|cxx|cc|c\\+\\+|cppm|ixx)$")
+        set(_has_cxx TRUE)
+      endif()
+    endforeach()
+  endif()
+  set(${OUT_HAS_C} ${_has_c} PARENT_SCOPE)
+  set(${OUT_HAS_CXX} ${_has_cxx} PARENT_SCOPE)
+endfunction()
+
 #[[
     helios_apply_conventions(<target>
         [NO_WARNINGS] [NO_OPTIMIZATION] [NO_LTO] [NO_SANITIZERS]
@@ -307,6 +402,9 @@ endfunction()
 
     Opt-in Helios build conventions for a consumer target (game executable,
     plugin, etc.). Linking helios::module::* alone does not apply these flags.
+    Targets that compile C sources get C11 and the C warning set. C++ standard
+    and C++ warnings apply when the target has C++ sources, or when it has no
+    sources yet.
 
     Example:
         helios_apply_conventions(my_game)
@@ -328,7 +426,13 @@ function(helios_apply_conventions TARGET)
     set(ARG_STANDARD 23)
   endif()
 
-  helios_target_set_cxx_standard(${TARGET} STANDARD ${ARG_STANDARD})
+  helios_target_languages(${TARGET} _has_c _has_cxx)
+  if(_has_cxx OR NOT _has_c)
+    helios_target_set_cxx_standard(${TARGET} STANDARD ${ARG_STANDARD})
+  endif()
+  if(_has_c)
+    helios_target_set_c_standard(${TARGET} STANDARD 11)
+  endif()
 
   if(NOT ARG_NO_PLATFORM)
     helios_target_set_platform(${TARGET})
@@ -348,6 +452,7 @@ function(helios_apply_conventions TARGET)
   if(NOT ARG_NO_LTO AND HELIOS_ENABLE_LTO)
     helios_target_enable_lto(${TARGET})
   endif()
+  set_target_properties(${TARGET} PROPERTIES HELIOS_CONVENTIONS_APPLIED TRUE)
 endfunction()
 
 # ============================================================================
@@ -429,6 +534,26 @@ endfunction()
 # ============================================================================
 
 #[[
+    helios_target_set_c_standard(<target> [STANDARD <version>])
+
+    Sets C_STANDARD, C_STANDARD_REQUIRED, and disables extensions.
+    The Helios default is C11.
+]]
+function(helios_target_set_c_standard TARGET)
+  cmake_parse_arguments(ARG "" "STANDARD" "" ${ARGN})
+
+  if(NOT ARG_STANDARD)
+    set(ARG_STANDARD 11)
+  endif()
+
+  set_target_properties(${TARGET} PROPERTIES
+      C_STANDARD ${ARG_STANDARD}
+      C_STANDARD_REQUIRED ON
+      C_EXTENSIONS OFF
+  )
+endfunction()
+
+#[[
     helios_target_set_cxx_standard(<target> [STANDARD <version>])
 
     Sets CXX_STANDARD, CXX_STANDARD_REQUIRED, and disables extensions.
@@ -490,6 +615,28 @@ function(helios_target_enable_unity_build TARGET)
   endif()
 endfunction()
 
+function(helios_target_unity_build TARGET)
+  helios_target_enable_unity_build(${TARGET} ${ARGN})
+endfunction()
+
+function(helios_target_warnings TARGET)
+  helios_target_set_warnings(${TARGET})
+endfunction()
+
+function(helios_target_lto TARGET)
+  helios_target_enable_lto(${TARGET})
+endfunction()
+
+function(helios_target_linker TARGET)
+  if(COMMAND helios_target_apply_linker)
+    helios_target_apply_linker(${TARGET})
+  endif()
+endfunction()
+
+function(helios_target_compile_options TARGET)
+  target_compile_options(${TARGET} ${ARGN})
+endfunction()
+
 # ============================================================================
 # Precompiled Headers
 # ============================================================================
@@ -538,7 +685,10 @@ endfunction()
     Reuses or mirrors a module target's PCH setup on a consumer target.
 ]]
 function(helios_target_reuse_module_pch CONSUMER_TARGET MODULE_NAME)
-  set(_module_target "helios_module_${MODULE_NAME}")
+  set(_module_target "${MODULE_NAME}")
+  if(COMMAND helios_get_module_target)
+    helios_get_module_target(${MODULE_NAME} _module_target)
+  endif()
   if(NOT TARGET ${_module_target})
     return()
   endif()

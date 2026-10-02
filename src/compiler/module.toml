@@ -1,0 +1,19 @@
+[module]
+name = "helios_compiler"
+version = "0.1.0"
+description = "Compiler engine module providing helios_compiler specific functionality"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = false
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = []
+private = []
+
+[dependencies.optional]
+public = []
+private = []

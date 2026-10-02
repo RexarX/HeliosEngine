@@ -2,13 +2,12 @@
 
 #include <helios/glfw/systems/input.hpp>
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/resource/params.hpp>
 #include <helios/ecs/system/system.hpp>
-#include <helios/glfw/details/glfw_state.hpp>
-#include <helios/glfw/map.hpp>
+#include <helios/glfw/details/input_map.hpp>
 #include <helios/input/gamepad.hpp>
 #include <helios/input/ids.hpp>
 #include <helios/input/joystick.hpp>

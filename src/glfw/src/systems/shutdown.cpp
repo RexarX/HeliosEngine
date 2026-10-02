@@ -7,7 +7,7 @@
 #include <helios/window/native_handle.hpp>
 #include <helios/window/properties.hpp>
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 #include <helios/glfw/systems/input.hpp>
 #endif
 
@@ -34,7 +34,7 @@ void Shutdown::operator()(ecs::Res<Context> context,
 
   native->entries.clear();
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
   if (context->world != nullptr) [[likely]] {
     if (auto* cache = context->world->TryWriteResource<CursorCache>();
         cache != nullptr) {

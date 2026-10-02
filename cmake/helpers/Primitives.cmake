@@ -4,6 +4,8 @@
 
 include_guard(GLOBAL)
 
+include("${CMAKE_CURRENT_LIST_DIR}/ConfigureGenex.cmake")
+
 #[[
     helios_parse_visibility(
         INPUT <items...>
@@ -16,7 +18,9 @@ include_guard(GLOBAL)
 
     Splits a visibility-tagged list into PUBLIC, PRIVATE, and INTERFACE lists.
     Untagged items use DEFAULT, which defaults to PUBLIC. STRIP_VAR receives all
-    non-visibility items in their original order.
+    non-visibility items in their original order. Configure-time generator
+    expressions are expanded before visibility tags are read; see
+    helios_expand_configure_genex().
 
     Example:
         helios_parse_visibility(
@@ -44,7 +48,9 @@ function(helios_parse_visibility)
   set(_interface_items)
   set(_stripped_items)
 
-  foreach(_item IN LISTS ARG_INPUT)
+  helios_expand_configure_genex(INPUT ${ARG_INPUT} OUTPUT _expanded_input)
+
+  foreach(_item IN LISTS _expanded_input)
     if(_item STREQUAL "PUBLIC" OR _item STREQUAL "PRIVATE" OR _item STREQUAL "INTERFACE")
       set(_current_visibility "${_item}")
       continue()

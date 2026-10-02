@@ -1,0 +1,19 @@
+[module]
+name = "helios_sdl3"
+version = "0.1.0"
+description = "SDL3 process-global runtime (lifetime, event pump)"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_app", "helios_compiler", "helios_ecs", "helios_log", "helios_platform", "helios_window"]
+private = []
+
+[dependencies.optional]
+public = []
+private = []

@@ -30,7 +30,7 @@ import helios.core;
 import helios.log;
 import helios.memory;
 import helios.utils;
-#ifdef HELIOS_MODULE_PROFILE_AVAILABLE
+#ifdef HELIOS_PROFILE_AVAILABLE
 import helios.profile;
 #endif
 HELIOS_BEGIN_MODULE_EXPORT

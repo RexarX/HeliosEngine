@@ -9,8 +9,7 @@ import helios.ecs;
 
 #ifndef HELIOS_MODULE_CONSUMER_SHIM
 #ifndef HELIOS_BUILDING_MODULE
-#if defined(HELIOS_ECS_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#if defined(HELIOS_ECS_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE)
 #include <helios/memory/temporary_storage_helpers.hpp>
 
 #include <algorithm>

@@ -8,7 +8,7 @@ import helios.glfw;
 #endif
 
 #ifndef HELIOS_MODULE_CONSUMER_SHIM
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 
 #ifndef HELIOS_BUILDING_MODULE
 #include <helios/ecs/entity/entity.hpp>
@@ -141,5 +141,5 @@ struct ApplyRawMouseMotion {
 
 }  // namespace helios::glfw
 
-#endif  // HELIOS_MODULE_INPUT_AVAILABLE
+#endif  // HELIOS_INPUT_AVAILABLE
 #endif  // HELIOS_MODULE_CONSUMER_SHIM

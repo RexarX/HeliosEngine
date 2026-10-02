@@ -14,7 +14,7 @@ import helios.glfw;
 #include <helios/window/plugin.hpp>
 #endif
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 #ifndef HELIOS_BUILDING_MODULE
 #include <helios/input/plugin.hpp>
 #endif
@@ -43,7 +43,7 @@ struct WindowPlugin final : public app::PluginGroup {
   WindowPlugin() : PluginGroup(Plugin{}, window::Plugin{}) {}
 };
 
-#ifdef HELIOS_MODULE_INPUT_AVAILABLE
+#ifdef HELIOS_INPUT_AVAILABLE
 /// @brief Window + GLFW + input plugin group for interactive applications.
 struct WindowInputPlugin final : public app::PluginGroup {
   WindowInputPlugin()

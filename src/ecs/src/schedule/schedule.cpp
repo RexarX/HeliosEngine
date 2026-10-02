@@ -5,10 +5,7 @@
 #include <helios/ecs/schedule/system_set.hpp>
 #include <helios/ecs/world.hpp>
 #include <helios/log/logger.hpp>
-#if defined(HELIOS_ECS_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
 #include <helios/memory/temporary_storage_helpers.hpp>
-#endif
 
 #include <cstddef>
 #include <expected>

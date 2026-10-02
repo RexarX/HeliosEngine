@@ -6,8 +6,7 @@
 #include <helios/log/logger.hpp>
 #include <helios/utils/dynamic_library.hpp>
 
-#if defined(HELIOS_APP_ENABLE_PROFILE) && \
-    defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#if defined(HELIOS_APP_ENABLE_PROFILE) && defined(HELIOS_PROFILE_AVAILABLE)
 #include <helios/memory/temporary_storage_helpers.hpp>
 #endif
 

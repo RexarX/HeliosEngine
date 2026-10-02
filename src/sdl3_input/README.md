@@ -1,10 +1,10 @@
-# `sdl3_input` — SDL3 Input Backend
+# `sdl3_input` -- SDL3 Input Backend
 
 SDL3 implementation of the `input` ECS contract under `helios::sdl3::input`.
 
 ## Public API
 
-- `Plugin` — input event handlers plus gamepad / cursor systems on `kEvents`
+- `Plugin` -- input event handlers plus gamepad / cursor systems on `kEvents`
 
 `#include <helios/sdl3/input/input.hpp>` (and `plugin.hpp`) does **not** include
 `<SDL3/SDL.h>`. Details headers such as `input_map.hpp` use SDL types and may

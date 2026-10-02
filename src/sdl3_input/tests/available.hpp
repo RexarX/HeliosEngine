@@ -5,7 +5,7 @@
 #include <helios/sdl3/lifetime.hpp>
 #include <helios/sdl3/plugin.hpp>
 
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 #include <helios/sdl3/window/plugin.hpp>
 #endif
 
@@ -34,7 +34,7 @@ struct ScopedShutdown {
 
   ~ScopedShutdown() {
     helios::sdl3::input::Plugin{}.Destroy(app);
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
     helios::sdl3::window::Plugin{}.Destroy(app);
 #endif
     helios::sdl3::Plugin{}.Destroy(app);
@@ -59,7 +59,7 @@ struct ScopedShutdown {
     }                                                          \
   } while (false)
 
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 #define HELIOS_SKIP_IF_NO_SDL_RUNTIME() \
   do {                                  \
     HELIOS_SKIP_IF_NO_SDL_VIDEO();      \

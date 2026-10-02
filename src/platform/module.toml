@@ -1,0 +1,19 @@
+[module]
+name = "helios_platform"
+version = "0.1.0"
+description = "Platform module providing helios_platform specific functionality"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_compiler"]
+private = []
+
+[dependencies.optional]
+public = []
+private = []

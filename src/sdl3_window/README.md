@@ -1,10 +1,10 @@
-# `sdl3_window` — SDL3 Window Backend
+# `sdl3_window` -- SDL3 Window Backend
 
 SDL3 implementation of the `window` ECS contract under `helios::sdl3::window`.
 
 ## Public API
 
-- `Plugin` — window backend systems on `kEvents` and startup/shutdown
+- `Plugin` -- window backend systems on `kEvents` and startup/shutdown
 
 `#include <helios/sdl3/window/window.hpp>` (and `plugin.hpp`) does **not**
 include `<SDL3/SDL.h>`. Details headers such as `sdl_sync.hpp` and

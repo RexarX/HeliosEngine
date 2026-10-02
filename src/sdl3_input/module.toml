@@ -1,0 +1,19 @@
+[module]
+name = "helios_sdl3_input"
+version = "0.1.0"
+description = "SDL3 backend for the helios_input ECS contract"
+languages = ["cpp"]
+default = true
+implements = ["input"]
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_app", "helios_compiler", "helios_ecs", "helios_log", "helios_window", "helios_input", "helios_platform", "helios_sdl3"]
+private = []
+
+[dependencies.optional]
+public = ["helios_sdl3_window"]
+private = []

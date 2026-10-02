@@ -1,0 +1,34 @@
+[module]
+name = "helios_memory"
+version = "0.1.0"
+description = "Memory module"
+languages = ["cpp"]
+default = true
+implements = []
+c_api = true
+
+[build]
+system = "cmake"
+
+[dependencies]
+public = ["helios_compiler", "helios_core", "helios_platform"]
+private = []
+
+[dependencies.optional]
+public = ["helios_profile"]
+private = []
+
+[features.enable_profile]
+default = true
+abi = false
+description = "Enable profiling in the helios_memory module if helios_profile module is available"
+
+[features.use_mimalloc]
+default = true
+abi = false
+description = "Use mimalloc for helios_memory module backing allocations"
+
+[features.override_global_alloc]
+default = true
+abi = false
+description = "Override global operator new/delete when linking the memory module"

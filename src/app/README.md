@@ -1,31 +1,31 @@
-# `app` — Application Framework
+# `app` -- Application Framework
 
 High-level application layer that wires together the ECS, async executor, plugins, and frame scheduling. Owns the main game loop, builtin schedules, and optional sub-apps for parallel or background worlds.
 
 ## Public API
 
-| Type / Function    | Purpose                                                                                   |
-| ------------------ | ----------------------------------------------------------------------------------------- |
-| `App`              | Central owner: executor, scheduler, main sub-app, plugins, sub-apps.                      |
-| `SubApp`           | Independent ECS world + scheduler; supports blocking, overlapping, or async update modes. |
-| `Scheduler`        | Frame orchestrator: startup, update, extract, shutdown stages.                            |
-| `Plugin`           | Static plugin base (`Build`, `Finish`, `Destroy`, `Poll`, `IsReady`).                     |
-| `DynamicPlugin`    | Runtime-loaded plugin wrapper around a shared library.                                    |
-| `ExitCode`         | `kSuccess`, `kFailure`.                                                                   |
-| `AppExit`          | Message that requests application shutdown (`kManual` clear policy).                      |
-| `Time`             | Resource with `steady_clock` `delta_time` and `elapsed` durations.                        |
-| `FrameCount`       | Resource with the current frame count.                                                    |
-| `Executor`         | Resource wrapper around the app's `async::Executor`.                                      |
-| `TimePlugin`       | Adds `Time` and updates it in `kFirst`.                                                   |
-| `FrameCountPlugin` | Adds `FrameCount` and increments it in `kLast`.                                           |
-| `ExecutorPlugin`   | Adds `Executor`.                                                                          |
-| `FrameLimiter`     | Per-world FPS cap (`Off` / `Manual` / `Auto`).                                            |
-| `FrameLimiterPlugin` | Paces the main loop via `kFramePaceStage` at the front of `MainFrameOrder`.            |
-| `InstallFrameLimiter` | Installs a limiter on `App` or a (non-overlapping) `SubApp`.                           |
-| `RunDefault`       | Runner: loop `Update()` until `AppExit`.                                                  |
-| `RunFixed`         | Fixed-timestep runner via `FixedRunnerConfig` (optional if using `FrameLimiterPlugin`).   |
-| `RunOnce`          | Single-frame runner.                                                                      |
-| `RunDefaultSubApp` | Default async sub-app runner.                                                             |
+| Type / Function       | Purpose                                                                                   |
+| --------------------- | ----------------------------------------------------------------------------------------- |
+| `App`                 | Central owner: executor, scheduler, main sub-app, plugins, sub-apps.                      |
+| `SubApp`              | Independent ECS world + scheduler; supports blocking, overlapping, or async update modes. |
+| `Scheduler`           | Frame orchestrator: startup, update, extract, shutdown stages.                            |
+| `Plugin`              | Static plugin base (`Build`, `Finish`, `Destroy`, `Poll`, `IsReady`).                     |
+| `DynamicPlugin`       | Runtime-loaded plugin wrapper around a shared library.                                    |
+| `ExitCode`            | `kSuccess`, `kFailure`.                                                                   |
+| `AppExit`             | Message that requests application shutdown (`kManual` clear policy).                      |
+| `Time`                | Resource with `steady_clock` `delta_time` and `elapsed` durations.                        |
+| `FrameCount`          | Resource with the current frame count.                                                    |
+| `Executor`            | Resource wrapper around the app's `async::Executor`.                                      |
+| `TimePlugin`          | Adds `Time` and updates it in `kFirst`.                                                   |
+| `FrameCountPlugin`    | Adds `FrameCount` and increments it in `kLast`.                                           |
+| `ExecutorPlugin`      | Adds `Executor`.                                                                          |
+| `FrameLimiter`        | Per-world FPS cap (`Off` / `Manual` / `Auto`).                                            |
+| `FrameLimiterPlugin`  | Paces the main loop via `kFramePaceStage` at the front of `MainFrameOrder`.               |
+| `InstallFrameLimiter` | Installs a limiter on `App` or a (non-overlapping) `SubApp`.                              |
+| `RunDefault`          | Runner: loop `Update()` until `AppExit`.                                                  |
+| `RunFixed`            | Fixed-timestep runner via `FixedRunnerConfig` (optional if using `FrameLimiterPlugin`).   |
+| `RunOnce`             | Single-frame runner.                                                                      |
+| `RunDefaultSubApp`    | Default async sub-app runner.                                                             |
 
 ### Builtin Stages & Schedules (`schedules.hpp`)
 
@@ -36,24 +36,24 @@ High-level application layer that wires together the ECS, async executor, plugin
 | `kExtractStage`  | `kExtract`                                                |
 | `kShutdownStage` | `kPreShutdown`, `kShutdown`, `kPostShutdown`              |
 
-Stages are grouping namespaces only — they are never run directly. Call `RegisterBuiltinSchedules(scheduler)` to wire default ordering and executor kinds.
+Stages are grouping namespaces only -- they are never run directly. Call `RegisterBuiltinSchedules(scheduler)` to wire default ordering and executor kinds.
 
 Default executor kinds:
 
 | Executor kind  | Builtin schedules                                                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Main thread    | `kMainStartup`, `kShutdown`, plus plugin-owned `kFramePace` when installed                 |
+| Main thread    | `kMainStartup`, `kShutdown`, plus plugin-owned `kFramePace` when installed                                                                        |
 | Multi-threaded | `kPreStartup`, `kStartup`, `kPostStartup`, `kFirst`, `kPreUpdate`, `kUpdate`, `kPostUpdate`, `kLast`, `kExtract`, `kPreShutdown`, `kPostShutdown` |
 
 Sub-app schedulers use the same defaults except they do not register `kExtract`.
 
 ### Builtin Resources, Plugins & Messages
 
-| Kind      | Names                                              | Notes                                                         |
-| --------- | -------------------------------------------------- | ------------------------------------------------------------- |
-| Resources | `Time`, `FrameCount`, `Executor`, `FrameLimiter` | Added by their matching plugins / `InstallFrameLimiter`. |
+| Kind      | Names                                                                    | Notes                                                         |
+| --------- | ------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| Resources | `Time`, `FrameCount`, `Executor`, `FrameLimiter`                         | Added by their matching plugins / `InstallFrameLimiter`.      |
 | Plugins   | `TimePlugin`, `FrameCountPlugin`, `ExecutorPlugin`, `FrameLimiterPlugin` | Register builtin resources and maintenance systems as needed. |
-| Messages  | `AppExit`                                          | Registered automatically by `App`; write it to request exit.  |
+| Messages  | `AppExit`                                                                | Registered automatically by `App`; write it to request exit.  |
 
 ### Sub-App Label Traits
 
@@ -113,9 +113,9 @@ int main() {
 Run() → Initialize() → runner_(*this) → CleanUp()
 ```
 
-1. **Initialize** — builds plugins, waits for readiness, finishes plugins, builds scheduler, runs startup.
-2. **Runner** — defaults to `RunDefault` (calls `Update()` each frame until `AppExit`).
-3. **CleanUp** — shutdown schedules, plugin destruction, waits for async work.
+1. **Initialize** -- builds plugins, waits for readiness, finishes plugins, builds scheduler, runs startup.
+2. **Runner** -- defaults to `RunDefault` (calls `Update()` each frame until `AppExit`).
+3. **CleanUp** -- shutdown schedules, plugin destruction, waits for async work.
 
 `ShouldExit()` reads `AppExit` from the main world. Systems write it via `MessageWriter<AppExit>`.
 
@@ -125,9 +125,9 @@ Each `Update()` runs one frame through `Scheduler::RunFrame`:
 
 1. Reset extract flags.
 2. For each stage in `MainFrameOrder` (default Update -> Extract): run schedules (`ApplyDeferred` per schedule), optional stage `apply_commands` / `merge_messages`, then `MessageManager::Update()` when the stage is last in the order and has `advance_messages` (Extract on main).
-3. **Extract stage** — main extract schedules, then sub-app extraction (mode-dependent).
-4. **Launch sub-app updates** — blocking sub-apps in parallel; overlapping only when fresh extract exists.
-5. **WaitForSubApps** — joins blocking sub-apps.
+3. **Extract stage** -- main extract schedules, then sub-app extraction (mode-dependent).
+4. **Launch sub-app updates** -- blocking sub-apps in parallel; overlapping only when fresh extract exists.
+5. **WaitForSubApps** -- joins blocking sub-apps.
 
 Nested `FramePumpOrder` pumps (Update only) advance message buffers on `kUpdateStage`.
 `FrameLimiterPlugin` prepends `kFramePaceStage` on `MainFrameOrder` only, so nested
@@ -199,7 +199,7 @@ app.SetRunner([](helios::app::App& app) -> helios::app::ExitCode {
 
 ## Dependencies
 
-- `async` — work-stealing executor
-- `ecs` — world, schedules, systems
-- `log` — logging
-- `utils` — type info, traits
+- `async` -- work-stealing executor
+- `ecs` -- world, schedules, systems
+- `log` -- logging
+- `utils` -- type info, traits

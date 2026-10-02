@@ -1,15 +1,15 @@
-# `glfw` — GLFW Window Backend
+# `glfw` -- GLFW Window Backend
 
 GLFW implementation of the `window` ECS contract, with optional `input`
 integration via `OPTIONAL_DEPENDS`.
 
 ## Public API
 
-- `Plugin` — registers GLFW systems on `kEvents` and startup/shutdown schedules
+- `Plugin` -- registers GLFW systems on `kEvents` and startup/shutdown schedules
   (`CreateNativeWindows`, `PollEvents`, `ApplyChanges`, `DestroyClosedWindows`,
   plus input systems when the `input` plugin is present)
-- `WindowPlugin` — bundles `glfw::Plugin` + `window::Plugin`
-- `WindowInputPlugin` — bundles window + glfw + `input::Plugin` (when `input`
+- `WindowPlugin` -- bundles `glfw::Plugin` + `window::Plugin`
+- `WindowInputPlugin` -- bundles window + glfw + `input::Plugin` (when `input`
   is linked)
 
 `PollGamepads` only emits mapped Xbox-style gamepads. On connect it writes a
@@ -43,7 +43,7 @@ app.AddPluginGroups(helios::glfw::WindowInputPlugin{});
 ## Dependencies
 
 - Required: `window`, `app`, GLFW
-- Optional: `input` (`HELIOS_MODULE_INPUT_AVAILABLE`)
+- Optional: `input` (`HELIOS_INPUT_AVAILABLE`)
 
 ## System packages
 

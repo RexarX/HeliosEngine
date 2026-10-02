@@ -13,7 +13,7 @@
 #include <helios/sdl3/plugin.hpp>
 #include <helios/window/window.hpp>
 
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
 #include <helios/sdl3/window/plugin.hpp>
 #endif
 
@@ -52,7 +52,7 @@ TEST_SUITE("helios::sdl3::input::Plugin") {
     SUBCASE("Enables input systems after the input plugin builds") {
       app::App app;
       sdl3::Plugin{}.Build(app);
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
       sdl3::window::Plugin{}.Build(app);
 #endif
       window::Plugin{}.Build(app);
@@ -73,7 +73,7 @@ TEST_SUITE("helios::sdl3::input::Plugin") {
 
       app::App app;
       sdl3::Plugin{}.Build(app);
-#ifdef HELIOS_MODULE_SDL3_WINDOW_AVAILABLE
+#ifdef HELIOS_SDL3_WINDOW_AVAILABLE
       sdl3::window::Plugin{}.Build(app);
 #endif
       window::Plugin{}.Build(app);

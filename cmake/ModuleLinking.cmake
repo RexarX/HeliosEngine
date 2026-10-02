@@ -5,6 +5,7 @@
 include_guard(GLOBAL)
 
 include(Primitives)
+include(ModuleRegistry)
 include(CppModules)
 
 function(_helios_defer_module_link TARGET VISIBILITY MODULE)
@@ -32,15 +33,16 @@ function(helios_flush_deferred_module_links)
     list(GET _parts 1 _visibility)
     list(GET _parts 2 _module)
 
-    if(NOT TARGET helios::module::${_module})
+    helios_get_module_link_target(${_module} _link_target)
+    if(NOT TARGET ${_link_target})
       message(FATAL_ERROR
-          "helios_link_modules: Module target 'helios::module::${_module}' not found")
+          "helios_link_modules: Module target '${_link_target}' not found")
     endif()
 
-    target_link_libraries(${_target} ${_visibility} helios::module::${_module})
+    target_link_libraries(${_target} ${_visibility} ${_link_target})
     message(STATUS "  -> Deferred link: ${_target} -> ${_module} (${_visibility})")
 
-    set(_module_target "helios_module_${_module}")
+    helios_get_module_target(${_module} _module_target)
     helios_copy_shared_lib(CONSUMER ${_target} PROVIDER ${_module_target})
   endforeach()
 
@@ -61,9 +63,11 @@ function(_helios_link_module_to_consumer TARGET VISIBILITY MODULE REQUIRED)
     return()
   endif()
 
-  if(TARGET helios::module::${MODULE})
-    target_link_libraries(${TARGET} ${VISIBILITY} helios::module::${MODULE})
-    helios_copy_shared_lib(CONSUMER ${TARGET} PROVIDER helios_module_${MODULE})
+  helios_get_module_link_target(${MODULE} _link_target)
+  helios_get_module_target(${MODULE} _module_target)
+  if(TARGET ${_link_target})
+    target_link_libraries(${TARGET} ${VISIBILITY} ${_link_target})
+    helios_copy_shared_lib(CONSUMER ${TARGET} PROVIDER ${_module_target})
   elseif(REQUIRED)
     _helios_defer_module_link(${TARGET} ${VISIBILITY} ${MODULE})
   endif()
@@ -83,8 +87,8 @@ endfunction()
     Example:
         helios_link_modules(
             TARGET game
-            MODULES PRIVATE app ecs
-            OPTIONAL PRIVATE profile
+            MODULES PRIVATE helios_app helios_ecs
+            OPTIONAL PRIVATE helios_profile
         )
 ]]
 function(helios_link_modules)
@@ -131,22 +135,4 @@ function(helios_link_modules)
   endif()
 
   helios_target_consume_cxx_modules(${ARG_TARGET})
-endfunction()
-
-#[[
-    helios_get_module_target(<name> <output_var>)
-
-    Returns the concrete build-tree target name for a module.
-]]
-function(helios_get_module_target NAME OUTPUT_VAR)
-  set(${OUTPUT_VAR} "helios_module_${NAME}" PARENT_SCOPE)
-endfunction()
-
-#[[
-    helios_get_module_alias(<name> <output_var>)
-
-    Returns the public alias target name for a module.
-]]
-function(helios_get_module_alias NAME OUTPUT_VAR)
-  set(${OUTPUT_VAR} "helios::module::${NAME}" PARENT_SCOPE)
 endfunction()

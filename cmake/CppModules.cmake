@@ -242,84 +242,157 @@ endfunction()
 #[[
     helios_add_umbrella_cxx_module()
 
-    Generates export module helios; re-exporting every enabled named module.
+    Creates helios::helios (output name helios), linking every enabled module.
+    When HELIOS_ENABLE_CPP_MODULES is on, the same target owns export module helios.
 ]]
 function(helios_add_umbrella_cxx_module)
-  if(NOT HELIOS_ENABLE_CPP_MODULES)
+  if(TARGET helios_module_helios)
     return()
   endif()
 
-  get_property(_targets GLOBAL PROPERTY HELIOS_MODULES)
-  if(NOT _targets)
-    return()
+  helios_get_enabled_modules(_modules)
+
+  set(_build_type "AUTO")
+  if(DEFINED HELIOS_BUILD_OPTION_HELIOS AND NOT HELIOS_BUILD_OPTION_HELIOS STREQUAL "")
+    set(_build_type "${HELIOS_BUILD_OPTION_HELIOS}")
+  endif()
+  set(HELIOS_BUILD_OPTION_HELIOS "${_build_type}" CACHE STRING
+      "Library type for the helios umbrella (AUTO, STATIC, SHARED)")
+  set_property(CACHE HELIOS_BUILD_OPTION_HELIOS PROPERTY STRINGS "AUTO" "STATIC" "SHARED")
+
+  set(_library_type)
+  if(HELIOS_BUILD_OPTION_HELIOS STREQUAL "STATIC")
+    set(_library_type STATIC)
+  elseif(HELIOS_BUILD_OPTION_HELIOS STREQUAL "SHARED")
+    set(_library_type SHARED)
+  endif()
+
+  set(_anchor "${CMAKE_BINARY_DIR}/helios_umbrella.cpp")
+  file(WRITE "${_anchor}"
+      "namespace helios::details {\nvoid HeliosUmbrellaAnchor() {}\n}\n"
+  )
+
+  if(_library_type)
+    add_library(helios_module_helios ${_library_type} "${_anchor}")
+  else()
+    add_library(helios_module_helios "${_anchor}")
   endif()
 
   set(_imports)
-  set(_link_libs)
-  foreach(_target IN LISTS _targets)
-    if(NOT TARGET ${_target})
-      continue()
-    endif()
-    get_target_property(_name ${_target} HELIOS_MODULE_NAME)
-    if(NOT _name OR _name STREQUAL "_name-NOTFOUND")
-      continue()
-    endif()
+  set(_has_named_module FALSE)
+  foreach(_name IN LISTS _modules)
     if(_name STREQUAL "helios")
       continue()
     endif()
-    get_target_property(_has_named ${_target} HELIOS_HAS_NAMED_MODULE)
-    if(NOT _has_named)
+    helios_get_module_link_target(${_name} _mod)
+    helios_get_module_target(${_name} _concrete)
+    if(NOT TARGET "${_mod}")
       continue()
     endif()
-    get_target_property(_cxx_name ${_target} HELIOS_CXX_MODULE_NAME)
-    if(NOT _cxx_name OR _cxx_name STREQUAL "_cxx_name-NOTFOUND")
-      string(REPLACE "_" "." _cxx_name "${_name}")
-      set(_cxx_name "helios.${_cxx_name}")
+    get_target_property(_mod_type ${_concrete} TYPE)
+
+    if(HELIOS_BUILD_OPTION_HELIOS STREQUAL "SHARED" AND _mod_type STREQUAL "STATIC_LIBRARY")
+      target_link_libraries(helios_module_helios PRIVATE
+          $<LINK_LIBRARY:WHOLE_ARCHIVE,${_mod}>)
+      target_include_directories(helios_module_helios PUBLIC
+          $<TARGET_PROPERTY:${_concrete},INTERFACE_INCLUDE_DIRECTORIES>)
+    elseif(HELIOS_BUILD_OPTION_HELIOS STREQUAL "SHARED")
+      target_link_libraries(helios_module_helios PRIVATE ${_mod})
+      target_include_directories(helios_module_helios PUBLIC
+          $<TARGET_PROPERTY:${_concrete},INTERFACE_INCLUDE_DIRECTORIES>)
+    else()
+      target_link_libraries(helios_module_helios PUBLIC ${_mod})
     endif()
-    string(APPEND _imports "export import ${_cxx_name};\n")
-    list(APPEND _link_libs helios::module::${_name})
+
+    get_target_property(_has_named ${_concrete} HELIOS_HAS_NAMED_MODULE)
+    if(HELIOS_ENABLE_CPP_MODULES AND _has_named)
+      get_target_property(_cxx_name ${_concrete} HELIOS_CXX_MODULE_NAME)
+      if(NOT _cxx_name OR _cxx_name STREQUAL "_cxx_name-NOTFOUND")
+        string(REPLACE "_" "." _cxx_name "${_name}")
+        set(_cxx_name "helios.${_cxx_name}")
+      endif()
+      string(APPEND _imports "export import ${_cxx_name};\n")
+      set(_has_named_module TRUE)
+    endif()
   endforeach()
 
-  set(_cppm "${CMAKE_BINARY_DIR}/helios.cppm")
-  file(WRITE "${_cppm}" "export module helios;\n${_imports}")
+  if(_has_named_module)
+    set(_cppm "${CMAKE_BINARY_DIR}/helios.cppm")
+    file(WRITE "${_cppm}" "export module helios;\n${_imports}")
+    target_sources(helios_module_helios PUBLIC
+        FILE_SET CXX_MODULES
+        TYPE CXX_MODULES
+        BASE_DIRS "${CMAKE_BINARY_DIR}"
+        FILES "${_cppm}"
+    )
+    set_target_properties(helios_module_helios PROPERTIES
+        CXX_SCAN_FOR_MODULES ON
+    )
+    target_compile_definitions(helios_module_helios PUBLIC
+        "$<$<COMPILE_LANGUAGE:CXX>:HELIOS_ENABLE_CPP_MODULES>")
+    if(HELIOS_ENABLE_IMPORT_STD)
+      set_target_properties(helios_module_helios PROPERTIES CXX_MODULE_STD ON)
+      target_compile_definitions(helios_module_helios PUBLIC
+          "$<$<COMPILE_LANGUAGE:CXX>:HELIOS_ENABLE_IMPORT_STD>")
+    endif()
+  endif()
 
-  add_library(helios_module_helios STATIC)
-  target_sources(helios_module_helios PUBLIC
-      FILE_SET CXX_MODULES
-      TYPE CXX_MODULES
-      BASE_DIRS "${CMAKE_BINARY_DIR}"
-      FILES "${_cppm}"
-  )
   set_target_properties(helios_module_helios PROPERTIES
       EXPORT_NAME "helios"
+      OUTPUT_NAME "helios"
       HELIOS_MODULE_NAME "helios"
-      CXX_SCAN_FOR_MODULES ON
-      CXX_STANDARD 23
-      CXX_STANDARD_REQUIRED ON
-      CXX_EXTENSIONS OFF
       FOLDER "Helios/Modules"
   )
-  if(HELIOS_ENABLE_IMPORT_STD)
-    set_target_properties(helios_module_helios PROPERTIES CXX_MODULE_STD ON)
-  endif()
-  target_compile_definitions(helios_module_helios PUBLIC HELIOS_ENABLE_CPP_MODULES)
-  if(HELIOS_ENABLE_IMPORT_STD)
-    target_compile_definitions(helios_module_helios PUBLIC HELIOS_ENABLE_IMPORT_STD)
-  endif()
-  if(_link_libs)
-    target_link_libraries(helios_module_helios PUBLIC ${_link_libs})
+  helios_apply_conventions(helios_module_helios)
+  if(COMMAND helios_target_set_output_dirs)
+    helios_target_set_output_dirs(helios_module_helios)
   endif()
   add_library(helios::helios ALIAS helios_module_helios)
 
   if(HELIOS_ENABLE_INSTALL)
-    install(TARGETS helios_module_helios
-        EXPORT HeliosTargets
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        FILE_SET CXX_MODULES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/helios/modules
-    )
+    if(_has_named_module)
+      install(TARGETS helios_module_helios
+          EXPORT HeliosTargets
+          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+          RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+          FILE_SET CXX_MODULES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/helios/modules
+      )
+    else()
+      install(TARGETS helios_module_helios
+          EXPORT HeliosTargets
+          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+          RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+      )
+    endif()
   endif()
 
-  message(STATUS "Helios Module: helios (umbrella named module)")
+  if(HELIOS_BUILD_C_API AND HELIOS_BUILD_TESTS AND TARGET helios::core)
+    set(_c_test_src "${CMAKE_BINARY_DIR}/helios_c_api_link_test.c")
+    file(WRITE "${_c_test_src}"
+        "#include <helios/version.h>\n"
+        "#ifdef HELIOS_CORE_AVAILABLE\n"
+        "#error \"C translation unit received HELIOS_CORE_AVAILABLE\"\n"
+        "#endif\n"
+        "int main(void) {\n"
+        "  return helios_compatible_with_headers() ? 0 : 1;\n"
+        "}\n")
+    add_executable(helios_c_api_link_test "${_c_test_src}")
+    target_link_libraries(helios_c_api_link_test PRIVATE helios::helios)
+    set_target_properties(helios_c_api_link_test PROPERTIES
+        C_STANDARD 11
+        C_STANDARD_REQUIRED ON
+        C_EXTENSIONS OFF
+        LINKER_LANGUAGE CXX
+        FOLDER "Helios/Tests"
+    )
+    helios_apply_conventions(helios_c_api_link_test)
+    if(COMMAND helios_target_set_output_dirs)
+      helios_target_set_output_dirs(helios_c_api_link_test)
+    endif()
+    add_test(NAME helios_c_api_link_test COMMAND helios_c_api_link_test)
+  endif()
+
+  message(STATUS "Helios Module: helios (umbrella, ${HELIOS_BUILD_OPTION_HELIOS})")
 endfunction()

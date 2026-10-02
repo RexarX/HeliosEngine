@@ -1,4 +1,4 @@
-# `sdl3` — SDL3 Process Runtime
+# `sdl3` -- SDL3 Process Runtime
 
 Process-global SDL3 lifetime, event pump, and handler registry.
 Window and input backends share this module instead of calling `SDL_Init` or
@@ -10,14 +10,14 @@ Window and input backends share this module instead of calling `SDL_Init` or
 `<SDL3/SDL.h>`. SDL types live in `details/` headers; include those explicitly
 when you need them. SDL3 is a private link dependency.
 
-- `Retain` / `Release` — refcounted subsystem init (`SDL_InitFlags`)
-- `Context` — world pointer and nested frame-pump state
-- `EventDispatcher` — ordered `void(*)(const SDL_Event&, World&)` handlers
-- `StartupSet` / `EventPumpSet` / `ShutdownSet` — named sets for ordering
-- `Init` — stores the main world pointer on `kMainStartup`
-- `PumpEvents` — main-thread poll / wait-timeout on `window::kEvents`
-- `Shutdown` — clears runtime pointers on `kShutdown`
-- `Plugin` — inserts resources and adds `Init`, `PumpEvents`, and `Shutdown`
+- `Retain` / `Release` -- refcounted subsystem init (`SDL_InitFlags`)
+- `Context` -- world pointer and nested frame-pump state
+- `EventDispatcher` -- ordered `void(*)(const SDL_Event&, World&)` handlers
+- `StartupSet` / `EventPumpSet` / `ShutdownSet` -- named sets for ordering
+- `Init` -- stores the main world pointer on `kMainStartup`
+- `PumpEvents` -- main-thread poll / wait-timeout on `window::kEvents`
+- `Shutdown` -- clears runtime pointers on `kShutdown`
+- `Plugin` -- inserts resources and adds `Init`, `PumpEvents`, and `Shutdown`
 
 `PumpEvents` honors `window::Settings::event_mode`. Wait-timeout waits once,
 then drains the queue with `SDL_PollEvent` so a single event cannot stall the

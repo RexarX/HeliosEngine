@@ -1,4 +1,4 @@
-# `input` — Input ECS Contract
+# `input` -- Input ECS Contract
 
 Public ECS interface for keyboard, mouse, cursor, pen, and gamepad state
 without OS dependencies.
@@ -18,7 +18,7 @@ without OS dependencies.
   `*Messages` / `*Writers` groups
 - `ClearInputState`, `UpdateKeyboardState`, `UpdateMouseState`,
   `UpdateGamepadState`, `UpdateJoystickState`, `UpdatePenState`
-- `Plugin` — registers ECS types and frame systems
+- `Plugin` -- registers ECS types and frame systems
 
 `Gamepad::axes` is filtered (circular sticks, triggers in `[0, 1]`).
 `GamepadAxisChangedMsg` carries raw backend values. `Settings::stick` /
